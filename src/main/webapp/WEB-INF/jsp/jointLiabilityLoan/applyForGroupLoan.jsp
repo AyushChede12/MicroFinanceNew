@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Group Loan Application</h1>
+			<h1>Joint Liability Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-person-bounding-box"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Group Loan Application</li>
+					<li class="breadcrumb-item action">Apply For Group Loan</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,14 +56,14 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Details</li>
+							<li class="breadcrumb-item action">Data Search Panel</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Serach BY GroupID*</label>
+								<label>Find by Group Code*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -95,13 +95,13 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Group Details</li>
+							<li class="breadcrumb-item action">Group Profile</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Loan Date*</label> <input type="date"
+								<label for="vehicalNo">Loan Application Date*</label> <input type="date"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -109,7 +109,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Group Name* </label> <input type="text"
+								<label for=""> Name of Group* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -117,7 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Assign Employee* </label> <input type="text"
+								<label for=""> Assigned Loan Officer* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -126,7 +126,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Loan Branch*</label>
+								<label>Branch Name*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -149,35 +149,35 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Collection Day* </label> <input type="text"
+								<label for=""> Weekly Collection Day* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Group Leader Name* </label> <input type="text"
+								<label for="">	Group Leader* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Collection Type* </label> <input type="text"
+								<label for=""> Mode of Collection* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Mobile No.* </label> <input type="text"
+								<label for="">	Contact Number* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Loan Purpose.* </label> <input type="text"
+								<label for=""> Purpose of Loan* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -191,13 +191,13 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Deduction Details</li>
+							<li class="breadcrumb-item action">Financial Deductions</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Processing Fees* </label> <input type="text"
+								<label for=""> Loan Processing Fee* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -205,13 +205,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> GST* </label> <input type="text" name="location"
+								<label for=""> 	GST Amount* </label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Legal Amt* </label> <input type="text"
+								<label for=""> 	Legal Charges* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -227,7 +227,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Stamp Duty* </label> <input type="text"
+								<label for=""> Legal Charges* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -241,35 +241,35 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> SMS Charge/EMI * </label> <input type="text"
+								<label for=""> EMI SMS Service Charge * </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Fuel Charge/EMI* </label> <input type="text"
+								<label for=""> 	Transportation Cost per EMI* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Maintenance Charge* </label> <input type="text"
+								<label for=""> Loan Maintenance Fee* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Overdue Interest Charge* </label> <input
+								<label for=""> Overdue Interest (Total)* </label> <input
 									type="text" name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Overdue Interest Charge* </label> <input
+								<label for=""> Additional Overdue Interest* </label> <input
 									type="text" name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -277,7 +277,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Stationary Charge/EMI* </label> <input
+								<label for=""> Stationery Fee per EMI* </label> <input
 									type="text" name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -285,7 +285,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Collection Charge/EMI* </label> <input
+								<label for="">	Collection Handling Fee per EMI* </label> <input
 									type="text" name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -293,14 +293,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Advisor Collector Code* </label> <input
+								<label for=""> Advisor/Collector ID* </label> <input
 									type="text" name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Advisor/Collector Name* </label> <input
+								<label for="">Advisor/Collector Full Name* </label> <input
 									type="text" name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
