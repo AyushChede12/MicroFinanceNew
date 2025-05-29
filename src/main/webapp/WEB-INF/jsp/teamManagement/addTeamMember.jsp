@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Employee Section</h1>
+			<h1>Team Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-person-workspace"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Add Employee</li>
+					<li class="breadcrumb-item action">Add Team Member</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,7 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Employee Details</li>
+							<li class="breadcrumb-item action">Team Member Details</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -85,17 +85,17 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">EMP CODE</label> <input type="text" id="empcode"
+								<label for="">Team Member CODE</label> <input type="text" id="empcode"
 									name="empcode" required="required"
-									placeholder="Enter Employee Code">
+									placeholder="Enter Team Member Code">
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="joiningDate">Joining Date</label> <input type="date"
+								<label for="joiningDate">Sign-Up Date</label> <input type="date"
 									name="joiningDate" id="joiningDate" required="required"
-									placeholder="Enter Joining Date"
+									placeholder="Enter Sign-Up Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -113,16 +113,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Employee Name </label> <input type="text"
+								<label for="">Team Member Name </label> <input type="text"
 									name="empName" id="empName" required="required"
-									placeholder="Enter Employee Name" />
+									placeholder="Enter Team Member Name" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="dob">DOB</label> <input type="date" name="dob"
+								<label for="dob">Date Of Birth</label> <input type="date" name="dob"
 									id="dob" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
@@ -137,20 +137,20 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relative Name</label> <input type="text"
+								<label for="">Family Member Name </label> <input type="text"
 									name="relativeName" id="relativeName" required="required"
-									placeholder="Enter Relative Name" />
+									placeholder="Enter Family Member Name" />
 							</div>
 						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relative Relation </label> <select
+								<label for="">Relation to Applicant </label> <select
 									id="relativeRelation" name="relativeRelation"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Relative Relation</option>
+									<option value="">Select Relation to Applicant</option>
 									<option value="Blue">Sister</option>
 								</select>
 							</div>
@@ -159,7 +159,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Mobile No</label> <input type="text"
+								<label for="">Contact No</label> <input type="text"
 									name="mobileNo" id="mobileNo" required="required"
 									placeholder="Enter Mobile No" />
 							</div>
@@ -183,11 +183,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relation </label> <select id="relation"
+								<label for="">Relation with Nominee</label> <select id="relation"
 									name="relation" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation</option>
-									<option value="Blue">Sister</option>
+									<option value="Blue">Mother</option>
 								</select>
 							</div>
 						</div>
@@ -232,9 +232,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Qualification</label> <input type="text"
-									name="qualification" id="qualification" required="required"
-									placeholder="Enter Qualification" />
+								<label for="">Educational Background</label> <input type="text"
+									name="edubackground" id="edubackground" required="required"
+									placeholder="Enter Educational Background" />
 							</div>
 						</div>
 
@@ -288,7 +288,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">SB Account No. </label> <input type="text"
+								<label for="">Saving Account No. </label> <input type="text"
 									name="accNo" id="accNo" required="required"
 									placeholder="Enter SB Account No." />
 							</div>
@@ -318,8 +318,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment By </label> <select id="paymentBy"
-									name="PaymentBy" required="required"
+								<label for="">Mode of Payment  </label> <select id="modeofpayment"
+									name="modeofpayment" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Blue">Cash</option>
@@ -329,7 +329,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Remarks </label> <input type="text" name="remarks"
+								<label for="">Comments </label> <input type="text" name="remarks"
 									id="remarks" required="required" placeholder="Enter Remarks" />
 							</div>
 						</div>
@@ -339,7 +339,7 @@ pageEncoding="ISO-8859-1"%> -->
 								class=" h-100 d-flex justify-content-start align-items-center">
 								<div
 									class="d-flex justify-content-start align-items-center formFields">
-									<label style="margin-left: 20px;" class="mb-2">Member
+									<label style="margin-left: 20px;" class="mb-2">Customer
 										Status</label>
 									<div class="cont">
 										<div class="toggle">
