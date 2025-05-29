@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Report Section</h1>
+			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Advisor Collection Report</li>
+					<li class="breadcrumb-item action">Finicial Collection Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,7 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Information</li>
+							<li class="breadcrumb-item action">Find Information</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -76,7 +76,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Advisor Code </label> <select id="advisorCode"
+								<label for="">Finicial Code </label> <select id="advisorCode"
 									name="advisorCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -113,7 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="searchBtn" class="btnStyle bg-warning">Search</button>
+							<button id="searchBtn" class="btnStyle bg-warning">Fine</button>
 						</div>
 					</div>
 
@@ -126,10 +126,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-							<h5 class="card-title">Search Result</h5>
+							<h5 class="card-title">Find Result</h5>
 
 							<h6 class="card-title" style="text-align: center; color: black;">
-								Advisor Collection Report</h6>
+								Agent/Collector Report</h6>
 
 
 							<table class="table table-borderless datatable overflow-scroll">

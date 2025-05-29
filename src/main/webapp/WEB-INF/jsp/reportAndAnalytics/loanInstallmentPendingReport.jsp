@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Report Section</h1>
+			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Loan Outstanding Report</li>
+					<li class="breadcrumb-item action">Loan Installment Pending Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,7 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Box</li>
+							<li class="breadcrumb-item action">Find Box</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -77,7 +77,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Plan </label> <select id="plan" name="plan"
+								<label for="">Policy </label> <select id="plan" name="plan"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
@@ -90,7 +90,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Advisor Code</label> <input type="text"
+								<label for="">Finicial Code</label> <input type="text"
 									name="tDate" id="tDate" required="required"
 									placeholder="Enter Advisor Code"
 									style="text-transform: uppercase;" />
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Till Date</label> <input type="date" name="tDate"
+								<label for="">To Date</label> <input type="date" name="tDate"
 									id="tDate" required="required" placeholder="Enter tDate"
 									style="text-transform: uppercase;" />
 							</div>
@@ -109,7 +109,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="searchBtn" class="btnStyle bg-warning">Search</button>
+							<button id="searchBtn" class="btnStyle bg-warning">Find</button>
 						</div>
 					</div>
 
@@ -122,10 +122,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-							<h5 class="card-title">Search Result</h5>
+							<h5 class="card-title">Find Result</h5>
 
 							<h6 class="card-title" style="text-align: center; color: black;">
-								LOAN Outstanding REPORT</h6>
+								Loan Balance Report</h6>
 
 
 
