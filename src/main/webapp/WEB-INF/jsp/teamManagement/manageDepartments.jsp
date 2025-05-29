@@ -64,7 +64,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Department Name </label> <input type="text"
-									name="deptname" id="deptname" required="required"
+									name="departmentName" id="departmentName" required="required"
 									placeholder="Enter Department" />
 							</div>
 						</div>
@@ -72,7 +72,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="saveBtn" class="btnStyle bg-success">Save</button>
+							<button id="saveDepartmentBtn" class="btnStyle bg-success">Save</button>
 							<button id="clearBtn" class="btnStyle bg-secondary">Clear</button>
 						</div>
 					</div>
