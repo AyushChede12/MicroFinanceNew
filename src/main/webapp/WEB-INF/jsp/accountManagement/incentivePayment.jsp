@@ -40,11 +40,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Account Section</h1>
+			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Incentive Payment</li>
 				</ol>
@@ -62,7 +62,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Month Name</label> <select id="Branch"
+								<label for="">Incentive Month</label> <select id="Branch"
 									name="Branch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Month Name</option>
@@ -73,7 +73,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Code</label> <input type="text" name="age"
+								<label for="">Agent Code</label> <input type="text" name="age"
 									id="age" required="required" placeholder="Enter Code" />
 							</div>
 						</div>
@@ -97,35 +97,35 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Name</label> <input type="text" name="age" id="age"
+					<label for="">Full Name</label> <input type="text" name="age" id="age"
 						required="required" placeholder="Enter Name" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Position</label> <input type="text" name="age"
+					<label for="">Designation</label> <input type="text" name="age"
 						id="age" required="required" placeholder="Enter position" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Self Business</label> <input type="text" name="age"
+					<label for="">Personal Sales</label> <input type="text" name="age"
 						id="age" required="required" placeholder="Enter Self Business" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Team Business</label> <input type="text" name="age"
+					<label for=""> Group Sales</label> <input type="text" name="age"
 						id="age" required="required" placeholder="Enter Team Business" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Total Business</label> <input type="text" name="age"
+					<label for="">Overall Sales</label> <input type="text" name="age"
 						id="age" required="required" placeholder="Enter Total Business" />
 				</div>
 			</div>
@@ -133,21 +133,21 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Total Incentive</label> <input type="text" name="age"
+					<label for="">Total Earnings</label> <input type="text" name="age"
 						id="age" required="required" placeholder="Enter Total Incentive" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">TDS(-)</label> <input type="text" name="age" id="age"
+					<label for="">Tax Deducted</label> <input type="text" name="age" id="age"
 						required="required" placeholder="Enter TDS" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Service Charge(-)</label> <input type="text"
+					<label for="">Service Deduction</label> <input type="text"
 						name="age" id="age" required="required"
 						placeholder="Enter Service Charge" />
 				</div>
@@ -155,7 +155,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Allowance(If Any)</label> <input type="text"
+					<label for="">Extra Allowance</label> <input type="text"
 						name="age" id="age" required="required"
 						placeholder="Enter Allowance" />
 				</div>
@@ -163,7 +163,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Net Payable</label> <input type="text" name="age"
+					<label for="">Final Payout</label> <input type="text" name="age"
 						id="age" required="required" placeholder="Enter Net Payable" />
 				</div>
 			</div>
@@ -179,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-					<label for="">Pay Branch</label> <select id="Branch" name="Branch"
+					<label for=""> Branch of Payment</label> <select id="Branch" name="Branch"
 						required="required" class="form-control selectField"
 						style="height: 30px;">
 						<option value="">Select Pay Branch</option>
@@ -190,7 +190,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Pay Date</label> <input type="date"
+					<label for=""> Date of Payment</label> <input type="date"
 						name="registrationDate" id="registrationDate" required="required"
 						placeholder="Enter Pay Date" />
 				</div>
@@ -198,7 +198,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-					<label for="">Payment By </label> <select id="Branch" name="Branch"
+					<label for="">Mode of Payment</label> <select id="Branch" name="Branch"
 						required="required" class="form-control selectField"
 						style="height: 30px;">
 						<option value="">Select</option>

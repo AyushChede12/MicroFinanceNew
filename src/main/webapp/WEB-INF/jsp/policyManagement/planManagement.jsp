@@ -44,7 +44,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bibi-piggy-bank"></i>
+							class="bi bi-piggy-bank"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Plan Management</li>
 				</ol>
