@@ -144,9 +144,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="familymember" id="familymember" required="required"
-									placeholder="Enter Family Member Name" />
+								<label for="">Relation Name</label> <input type="text"
+									name="relationName" id="relationName" required="required"
+									placeholder="Enter Relation Name" />
 							</div>
 						</div>
 
@@ -271,7 +271,7 @@ pageEncoding="ISO-8859-1"%> -->
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
+									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike1imagePreview" />
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
@@ -291,7 +291,7 @@ pageEncoding="ISO-8859-1"%> -->
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
+									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
