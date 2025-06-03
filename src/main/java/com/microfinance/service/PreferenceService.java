@@ -1,6 +1,7 @@
 package com.microfinance.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,40 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		return branchModuleRepo.findAll();
 	}
+	
+	public Optional<BranchModule> findBranchDataById(Long id) {
+		// TODO Auto-generated method stub
+		return branchModuleRepo.findById(id);
+	}
+	
+	public BranchModule updateAllBranchModule(BranchModule branchModule) {
+		// TODO Auto-generated method stub
+		Optional<BranchModule> existingOptional=branchModuleRepo.findById(branchModule.getId());
+		if(existingOptional.isPresent()) {
+			BranchModule existing=existingOptional.get();
+			existing.setBranchCode(branchModule.getBranchCode());
+			existing.setBranchName(branchModule.getBranchName());
+			existing.setOpeningDate(branchModule.getOpeningDate());
+			existing.setAddress(branchModule.getAddress());
+			existing.setPin(branchModule.getPin());
+			existing.setState(branchModule.getState());
+			existing.setPrimaryContact(branchModule.getPrimaryContact());
+			existing.setContact(branchModule.getContact());
+			return branchModuleRepo.save(existing);
+		}
+		else
+			return null;	
+	}
+	
+	public boolean deleteBranchModule(long id) {
+	    if (branchModuleRepo.existsById(id)) {
+	        branchModuleRepo.deleteById(id);
+	        return true;
+	    }
+	    return false;
+	}
+	
+	
 
 	//Bank Module
 	public BankModule saveAllBankModule(BankModule bankModule) {
@@ -59,6 +94,36 @@ public class PreferenceService {
 	public List<BankModule> fetchAllBankModule() {
 		// TODO Auto-generated method stub
 		return bankModuleRepo.findAll();
+	}
+	
+	public Optional<BankModule> findBankDataById(Long id) {
+		// TODO Auto-generated method stub
+		return bankModuleRepo.findById(id);
+	}
+	
+	public BankModule updateBankModuleById(BankModule bankModule) {
+		// TODO Auto-generated method stub
+		Optional<BankModule> existingOptional=bankModuleRepo.findById(bankModule.getId());
+		if(existingOptional.isPresent()) {
+			BankModule existing=existingOptional.get();
+			existing.setBankName(bankModule.getBankName());
+			existing.setAccountNo(bankModule.getAccountNo());
+			existing.setContactNo(bankModule.getContactNo());
+			existing.setAddress(bankModule.getAddress());
+			existing.setOpeningDate(bankModule.getOpeningDate());
+			existing.setOpeningBalance(bankModule.getOpeningBalance());		
+			return bankModuleRepo.save(existing);
+		}
+		else
+			return null;	
+	}
+	
+	public boolean deleteBankModule(long id) {
+	    if (bankModuleRepo.existsById(id)) {
+	    	bankModuleRepo.deleteById(id);
+	        return true;
+	    }
+	    return false;
 	}
 
 	//Relative Module
@@ -104,6 +169,16 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		return financialYearRepo.findAll();
 	}
+
+	
+
+	
+
+	
+
+	
+
+	
 
 	
 	

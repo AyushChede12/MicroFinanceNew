@@ -87,7 +87,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch Code</label> <input type="text"
 									name="branchCode" id="branchCode" required="required"
