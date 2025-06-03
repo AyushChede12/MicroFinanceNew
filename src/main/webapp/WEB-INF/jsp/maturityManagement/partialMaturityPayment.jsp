@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Maturity Section</h1>
+			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-calendar-check"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Maturity Part Payment</li>
+					<li class="breadcrumb-item action">Partial Maturity Payment</li>
 				</ol>
 			</nav>
 		</div>
@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No.</label> <select id="colour"
+								<label for="">Policy Id.</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -144,7 +144,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No:</label> <input type="text"
+								<label for="">Policy Id:</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -152,7 +152,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Applicant Name:</label> <input
+								<label for="vehicalNo">Client Name :</label> <input
 									type="text" name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -161,7 +161,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Plan Name:</label> <input type="text" name="vehicalNo"
+								<label>Policy Name:</label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
@@ -169,7 +169,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">plan code:</label> <input type="text"
+								<label for="">Policy code:</label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="" />
 							</div>
@@ -179,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Term:</label> <input type="text" name="price" id="price"
+								<label>Duration:</label> <input type="text" name="price" id="price"
 									required="required" placeholder="" />
 
 							</div>
@@ -258,7 +258,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch:</label> <input type="text" name="price"
+								<label>Approval Branch Name:</label> <input type="text" name="price"
 									id="price" required="required" placeholder="" />
 
 							</div>
@@ -278,7 +278,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve Remarks:</label> <input type="text" name="price"
+								<label>Approve Comment:</label> <input type="text" name="price"
 									id="price" required="required" placeholder="" />
 
 							</div>
@@ -303,7 +303,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Payable Deatil</li>
+							<li class="breadcrumb-item action">Payable Detail</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -366,7 +366,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Payment Deatil</li>
+							<li class="breadcrumb-item action">Payment Detail</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -414,7 +414,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Pay Remark:</label> <input type="text" name="vehicalNo"
+								<label>Pay Comment:</label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
@@ -422,7 +422,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment By*</label> <select id="colour"
+								<label for="">Mode of Payment*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>

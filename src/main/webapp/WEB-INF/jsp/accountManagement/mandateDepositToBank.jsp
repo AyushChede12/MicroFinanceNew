@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Account Section</h1>
+			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-wallet2"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Unencumbered Team Deposit</li>
+					<li class="breadcrumb-item action">Mandate Deposit To Bank</li>
 				</ol>
 			</nav>
 		</div>
@@ -63,23 +63,23 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">From Date</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date"
+								<label for="vehicalNo">Start Date</label> <input type="date"
+									name="startDate" id="startDate" required="required"
+									
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">To Date</label> <input type="date"
-									name="toDate" id="toDate" required="required"
+								<label for="vehicalNo">End Date</label> <input type="date"
+									name="endDate" id="endDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-4 text-left mt-3">
-							<button id="saveBtn" class="btnStyle"
+							<button id="serachBtn" class="btnStyle"
 								style="background-color: #FFA500;">Search</button>
 						</div>
 					</div>
@@ -97,159 +97,159 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">FD Deposit</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Fixed Deposit </label> <input type="text" name="fixedDeposit"
+						id="fixedDeposit" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">MIS Deposit</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Monthly Income Scheme Deposit</label> <input type="text" name="monthlyIncomeSchemeDeposit"
+						id="monthlyIncomeSchemeDeposit" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">RD/DRD Deposit</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Recurring Deposit / DD Deposit</label> <input type="text" name="recurringDeposit"
+						id="recurringDeposit" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Savings Deposit</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Savings Account Deposit</label> <input type="text" name="savingsAccountDeposit"
+						id="savingsAccountDeposit" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Savings Withdrawal</label> <input type="text"
-						name="age" id="age" required="required" placeholder="" />
+					<label for=""> Savings Payout</label> <input type="text"
+						name="savingsPayout" id="savingsPayout" required="required" placeholder="" />
 				</div>
 			</div>
 
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Flexi Deposit</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Flexible Deposit </label> <input type="text" name="flexibleDeposit"
+						id="flexibleDeposit" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Flexi Withdrawal</label> <input type="text"
-						name="age" id="age" required="required" placeholder="" />
+					<label for="">Flexible Withdrawal </label> <input type="text"
+						name="flexibleWithdrawal" id="flexibleWithdrawal" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Maturity Principal</label> <input type="text"
-						name="age" id="age" required="required" placeholder="" />
+					<label for=""> Maturity Capital</label> <input type="text"
+						name="maturityCapital" id="maturityCapital" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Total Deposit</label> <input type="text" name="age"
-						id="age" required="required" placeholder="Total Deposit" />
+					<label for="">Aggregate Deposit </label> <input type="text" name="aggregateDeposit"
+						id="aggregateDeposit" required="required" placeholder="Total Deposit" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for=""></label>Total Withdrawal <input type="text"
-						name="age" id="age" required="required"
+					<label for="">Aggregate Withdrawal </label> <input type="text"
+						name="aggregateWithdrawal" id="aggregateWithdrawal" required="required"
 						placeholder="Total Withdrawal" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for=""></label>Total Balance<input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Net Balance</label>	<input type="text" name="netBalance"
+						id="netBalance" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for=""></label>Previous FD Deposited<input type="text"
-						name="age" id="age" required="required" placeholder="" />
+					<label for="">Last FD Amount</label><input type="text"
+						name="lastFDAmount" id="lastFDAmount" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Unencumbered(10%)</label> <input type="text"
-						name="age" id="age" required="required" placeholder="" />
+					<label for=""> Unpledged Funds (10%)</label> <input type="text"
+						name="unpledgedFunds(10%)" id="unpledgedFunds(10%)" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Unencumbered Amount(10%)</label> <input type="text"
-						name="age" id="age" required="required" placeholder="" />
+					<label for="">Available Funds (10%)</label> <input type="text"
+						name="availableFunds" id="availableFunds" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Bank Name</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Name of Bank </label> <input type="text" name="BankName"
+						id="BankName" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Bank Address</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Branch Address label <input type="text" name="branchAddresslabel"
+						id="branchAddresslabel" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">FD No.</label> <input type="text" name="age" id="age"
+					<label for="">FD Number</label> <input type="text" name="fDNumber" id="fDNumber"
 						required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">FD Amount</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Fixed Deposit Amount </label> <input type="text" name="fixedDepositAmount "
+						id="fixedDepositAmount" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Maturity Amount</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Amount on Maturity</label> <input type="text" name="amountOnMaturity"
+						id="amountOnMaturity" required="required" placeholder="" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-					<label for="vehicalNo">FD Date</label> <input type="date"
-						name="fromDate" id="fromDate" required="required"
+					<label for="vehicalNo">FD Initiation Date</label> <input type="date"
+						name="fDInitiationDate" id="fDInitiationDate" required="required"
+						 style="text-transform: uppercase;" />
+				</div>
+			</div>
+
+			<div class="col-lg-3">
+				<div class="d-flex flex-column formFields">
+					<label for="vehicalNo">Maturity Due Date </label> <input type="date"
+						name="maturityDueDate" id="maturityDueDate" required="required"
 						placeholder="Enter From Date" style="text-transform: uppercase;" />
 				</div>
 			</div>
 
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields">
-					<label for="vehicalNo">Maturity Date</label> <input type="date"
-						name="fromDate" id="fromDate" required="required"
-						placeholder="Enter From Date" style="text-transform: uppercase;" />
-				</div>
-			</div>
-
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-					<label for="">Payment By </label> <select id="Branch" name="Branch"
+					<label for="">Mode of Payment </label> <select id="modeOfPayment" name="modeOfPayment"
 						required="required" class="form-control selectField"
 						style="height: 30px;">
 						<option value="">Select</option>
@@ -263,8 +263,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Remarks</label> <input type="text" name="age"
-						id="age" required="required" placeholder="" />
+					<label for="">Remarks</label> <input type="text" name="remarks"
+						id="remarks" required="required" placeholder="" />
 				</div>
 			</div>
 		</div>

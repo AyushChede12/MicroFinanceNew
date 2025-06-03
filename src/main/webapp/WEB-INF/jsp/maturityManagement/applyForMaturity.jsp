@@ -41,13 +41,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Maturity Section</h1>
+			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-calendar-check"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Maturity Application</li>
+					<li class="breadcrumb-item action">Apply For Maturity</li>
 				</ol>
 			</nav>
 		</div>
@@ -85,7 +85,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No*</label> <select id="colour"
+								<label for="">Policy ID*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select</option>
@@ -96,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Member Name*</label> <input type="text"
+								<label for="vehicalNo">Customer Name*</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
@@ -124,7 +124,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Remark</label> <input type="text" name="price" id="price"
+								<label>commet</label> <input type="text" name="price" id="price"
 									required="required" placeholder="Enter Remark" />
 
 							</div>

@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Maturity Section</h1>
+			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-calendar-check"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Maturity configure</li>
+					<li class="breadcrumb-item action">Maturity Scheme Master</li>
 				</ol>
 			</nav>
 		</div>
@@ -84,10 +84,10 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Plan Code*</label> <select id="colour"
+								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">DRD ADVANTEGE</option>
+									<option value="">Select Policy Code</option>
 
 								</select>
 							</div>
@@ -113,7 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">ROI*</label> <input type="text" name="location"
+								<label for="">Interest Rate*</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -122,7 +122,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
+								<label>Deduction </label> <input type="text" name="price"
 									id="price" required="required" placeholder="Enter Deduction" />
 
 							</div>
@@ -178,7 +178,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Plan Code*</label> <select id="colour"
+								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">GROW</option>
@@ -207,7 +207,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">ROI*</label> <input type="text" name="location"
+								<label for="">Interest Rate *</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -265,7 +265,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Plan Code*</label> <select id="colour"
+								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ROYAL FI</option>
@@ -295,7 +295,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">ROI*</label> <input type="text" name="location"
+								<label for="">Interest Rate*</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -355,7 +355,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Plan Code*</label> <select id="colour"
+								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ALL</option>
@@ -385,7 +385,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">ROI*</label> <input type="text" name="location"
+								<label for="">Interest Rate*</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
