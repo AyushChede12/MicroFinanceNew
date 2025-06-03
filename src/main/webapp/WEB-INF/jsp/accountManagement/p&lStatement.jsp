@@ -74,8 +74,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Start Date</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date"
+									name="startDate" id="startDate" required="required"
+									
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -83,8 +83,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">End Date</label> <input type="date"
-									name="toDate" id="toDate" required="required"
-									placeholder="Enter To Date" style="text-transform: uppercase;" />
+									name="endDate" id="endDate" required="required"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 					</div>
@@ -93,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="searchBtn" class="btnStyle"
 					style="background-color: #FFA500;">Search</button>
 			</div>
 		</div>

@@ -63,7 +63,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Start Date</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
+									name="startDate" id="startDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -71,8 +71,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Source Branch</label> <select id="Branch"
-									name="Branch" required="required"
+								<label for="">Source Branch</label> <select id="sourceBranch"
+									name="sourceBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select From Branch</option>
 									<option value="Blue">Blue</option>
@@ -82,8 +82,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Receiving branch</label> <select id="Branch"
-									name="Branch" required="required"
+								<label for="">Receiving branch</label> <select id="receivingbranch"
+									name="receivingbranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select To Branch</option>
 									<option value="Blue">Blue</option>
@@ -93,8 +93,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Total Amount</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Amount" />
+								<label for=""> Total Amount</label> <input type="text" name="totalAmount"
+									id="totalAmount" required="required" placeholder="Enter Amount" />
 							</div>
 						</div>
 					</div>

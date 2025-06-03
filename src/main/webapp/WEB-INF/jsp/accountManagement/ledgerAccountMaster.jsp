@@ -63,14 +63,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Account Title</label> <input type="text"
-									name="location" id="location" required="required"
+									name="accountTitle" id="accountTitle" required="required"
 									placeholder="Enter Ledger name" />
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="Branch" name="Branch"
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Bank A/C</option>
@@ -82,7 +82,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-4 text-center mt-3">
 							<button id="saveBtn" class="btnStyle"
 								style="background-color: #FFA500;">Save</button>
-							<button id="saveBtn" class="btnStyle bg-primary">Clear</button>
+							<button id="clearBtn" class="btnStyle bg-primary">Clear</button>
 						</div>
 					</div>
 				</div>
