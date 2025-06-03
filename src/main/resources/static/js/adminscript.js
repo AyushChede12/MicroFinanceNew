@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 const handleToggleSidebar = () => {
 	document.body.classList.toggle('toggle-sidebar');
 }
@@ -13,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // view image from image upload
 
-const dropArea = document.getElementById("drop-area");
+/*const dropArea = document.getElementById("drop-area");
 const inputFile = document.getElementById("input-file");
 const imgView = document.getElementById("img-view");
 const text = document.getElementById("upload-text");
@@ -83,4 +85,65 @@ document.addEventListener('DOMContentLoaded', () => {
 			label.style.backgroundColor = '#ccc'; // Gray OFF
 		}
 	}
+}); */
+
+const wrapper = document.querySelector('.wrapper');
+selectBtn = wrapper.querySelector('.select-btn');
+optionsdropbtn = wrapper.querySelector(".options");
+dropBtnSearchInput = wrapper.querySelector(".dropsearchinp")
+
+/*const countries = [
+	"Afghanistan", "Algeria", "Argentina", "Australia", "Austria", "Bangladesh", "Botswana", "Brazil", "Cabo Verde", "Cambodia", "Cameroon", "Canada",
+	"Chad", "Chile", "China", "Colombia", "Costa Rica", "Croatia", "Czech Republic", "Denmark", "Ecuador", "Egypt", "Fiji", "Finland", "France", "Georgia", "Germany", "Ghana", "Greece", "Hungary", "Iceland",
+	"India", "Indonesia", "Italy", "Japan", "Jordan", "Kazakhstan", "Kenya", "Malawi", "Malaysia", "Maldives",
+	"Nepal", "Netherlands", "New Zealand", "Oman", "Pakistan", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
+	"Russia", "Saudi Arabia", "South Africa", "South Korea", "Spain", "Sri Lanka", "Switzerland", "Syria", "Thailand",
+	"Turkey", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+];
+
+function addCountry(selectedopt) {
+	optionsdropbtn.innerHTML = ""
+	countries.forEach(count => {
+		let isSelected = count == selectedopt ? "selected" : ""
+		let li = `<li onclick="updateName(this)" class="${isSelected}" >${count}</li>`;
+		optionsdropbtn.insertAdjacentHTML("beforeend", li)
+	})
+}
+addCountry()
+*/
+const major = [
+	"Mr","Ms","Mrs"
+];
+
+function addmajor(selectedopt) {
+	optionsdropbtn.innerHTML = ""
+	major.forEach(count => {
+		let isSelected = count == selectedopt ? "selected" : ""
+		let li = `<li onclick="updateName(this)" class="${isSelected}" >${count}</li>`;
+		optionsdropbtn.insertAdjacentHTML("beforeend", li)
+	})
+}
+addmajor()
+
+function updateName(selectedLi) {
+	dropBtnSearchInput.value = "";
+	addCountry(selectedLi.innerText)
+	wrapper.classList.remove("active");
+	selectBtn.firstElementChild.innerText = selectedLi.innerText;
+}
+
+dropBtnSearchInput.addEventListener("keyup", ()=>{
+	let arr = [];
+	let searchVal = dropBtnSearchInput.value.toLowerCase();
+	arr = countries.filter(data => {
+		return data.toLowerCase().startsWith(searchVal);
+
+	}).map(data =>`<li onclick="updateName(this)">${data}</li>`).join("")
+	optionsdropbtn.innerHTML = arr ? arr : `<p>Oops! Country not found</p>`;
+})
+
+selectBtn.addEventListener("click", () => {
+	wrapper.classList.toggle("active");
+})
+
 });
