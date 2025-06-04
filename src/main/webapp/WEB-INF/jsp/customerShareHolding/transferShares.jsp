@@ -62,8 +62,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Find By Code</label> <select id="FindByCode"
-									name="colour" required="required"
+								<label for="">Find By Code</label> <select id="findByCode"
+									name="findByCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select </option>
 									
@@ -75,7 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Customer Name</label> <input type="text"
-									name="location" id="CustomerName" required="required"
+									name="customerName" id="customerName" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
@@ -83,7 +83,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Start Date</label> <input type="date"
-									name="vehicalNo" id="StartDate" required="required"
+									name="startDate" id="startDate" required="required"
 									placeholder="Enter"
 									style="text-transform: uppercase;" />
 							</div>
@@ -93,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Previous Account Balance</label> <input type="text"
-									name="price" id="PreviousBalance" required="required"
+									name="previousAccountBalance" id="previousAccountBalance" required="required"
 									placeholder="Enter Relative Name" />
 							</div>
 						</div>
@@ -101,22 +101,22 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Previous Share Count</label> <input type="text"
-									name="price" id="PreviousShareCount" required="required"
+									name="previousShareCount" id="previousShareCount" required="required"
+									placeholder="Enter Relative Name" />
+							</div>
+						</div>
+
+						<div class="col-lg-3"baseValue>
+							<div class="d-flex flex-column formFields">
+								<label for="">Base Value</label> <input type="text" name="baseValue"
+									id="baseValue" required="required"
 									placeholder="Enter Relative Name" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Base Value</label> <input type="text" name="price"
-									id="BaseValue" required="required"
-									placeholder="Enter Relative Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="branch" name="colour"
+								<label for="">Branch</label> <select id="branch" name="branch"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select </option>
@@ -127,7 +127,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="vehicalNo">Date of Transfer</label> <input type="date"
-									name="vehicalNo" id="TransferDate" required="required"
+									name="dateOfTransfer" id="dateOfTransfer" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -135,8 +135,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Shares Issued By</label> <select id="SharesIssuedBy"
-									name="colour" required="required"
+								<label for="">Shares Issued By</label> <select id="shareIssuedBy"
+									name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select </option>
 								</select>
@@ -146,7 +146,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Share Count</label> <input type="text"
-									name="price" id="ShareCount" required="required"
+									name="shareCount" id="ShareCount" required="required"
 									placeholder="Enter Relative Name" />
 							</div>
 						</div>
@@ -154,7 +154,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Amount Transferred</label> <input type="text"
-									name="price" id="AmountTransferred" required="required"
+									name="amountTransferred" id="amountTransferred" required="required"
 									placeholder="Enter Relative Name" />
 							</div>
 						</div>
@@ -162,7 +162,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Shares Count</label> <input type="text"
-									name="price" id="SharesCount" required="required"
+									name="sharesCount" id="sharesCount" required="required"
 									placeholder="Enter Relative Name" />
 							</div>
 						</div>
@@ -178,8 +178,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Mode of Payment </label> <select id="Payment"
-										name="colour" required="required"
+									<label for="">Mode of Payment </label> <select id="modeOfPayment"
+										name="modeOfPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
 										<option value="">Select </option>
 
@@ -190,7 +190,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
 									<label for="">Comments</label>
-									<textarea name="" id=""
+									<textarea name="comments" id="comments"
 										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>

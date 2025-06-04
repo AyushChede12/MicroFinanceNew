@@ -85,8 +85,8 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Team Member CODE</label> <input type="text" id="empcode"
-									name="empcode" required="required"
+								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
+									name="teamMemberCode" required="required"
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -94,7 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="joiningDate">Sign-Up Date</label> <input type="date"
-									name="joiningDate" id="joiningDate" required="required"
+									name="signUpDate" id="signUpDate" required="required"
 									placeholder="Enter Sign-Up Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -114,7 +114,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Team Member Name </label> <input type="text"
-									name="empName" id="empName" required="required"
+									name="teamMemberName" id="teamMemberName" required="required"
 									placeholder="Enter Team Member Name" />
 							</div>
 						</div>
@@ -122,8 +122,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="dob">Date Of Birth</label> <input type="date" name="dob"
-									id="dob" required="required" placeholder="Enter DateOfBirth"
+								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
+									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -138,7 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Family Member Name </label> <input type="text"
-									name="relativeName" id="relativeName" required="required"
+									name="familyMemberName" id="familyMemberName" required="required"
 									placeholder="Enter Family Member Name" />
 							</div>
 						</div>
@@ -147,7 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relation to Applicant </label> <select
-									id="relativeRelation" name="relativeRelation"
+									id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
@@ -160,8 +160,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Contact No</label> <input type="text"
-									name="mobileNo" id="mobileNo" required="required"
-									placeholder="Enter Mobile No" />
+									name="contactNo" id="contactNo" required="required"
+									placeholder="Enter Contact No" />
 							</div>
 						</div>
 
@@ -183,8 +183,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relation with Nominee</label> <select id="relation"
-									name="relation" required="required"
+								<label for="">Relation with Nominee</label> <select id="relationWithNominee"
+									name="relationWithNominee" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation</option>
 									<option value="Blue">Mother</option>
@@ -197,7 +197,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Address</label>
-								<textarea name="" id=""
+								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
@@ -218,22 +218,22 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">IFSC Code</label> <input type="text" name="ifsc"
-									id="ifsc" required="required" placeholder="Enter IFSC Code" />
+								<label for="">IFSC Code</label> <input type="text" name="ifscCode"
+									id="ifscCode" required="required" placeholder="Enter IFSC Code" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Exp. Details</label> <input type="text" name="exp"
-									id="exp" required="required" placeholder="Enter Exp. Details" />
+								<label for="">Exp. Details</label> <input type="text" name="expDetails"
+									id="expDetails" required="required" placeholder="Enter Exp. Details" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Educational Background</label> <input type="text"
-									name="edubackground" id="edubackground" required="required"
+									name="educationalBackground" id="educationalBackground" required="required"
 									placeholder="Enter Educational Background" />
 							</div>
 						</div>
@@ -257,7 +257,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Designation </label> <select id="desg" name="desg"
+								<label for="">Designation </label> <select id="designation" name="designation"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
@@ -270,7 +270,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Department </label> <select id="dept" name="dept"
+								<label for="">Department </label> <select id="department" name="department"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
@@ -289,7 +289,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Saving Account No. </label> <input type="text"
-									name="accNo" id="accNo" required="required"
+									name="savingAccNo" id="savingAccNo" required="required"
 									placeholder="Enter SB Account No." />
 							</div>
 						</div>
@@ -329,8 +329,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comments </label> <input type="text" name="remarks"
-									id="remarks" required="required" placeholder="Enter Remarks" />
+								<label for="">Comments </label> <input type="text" name="comments"
+									id="comments" required="required" placeholder="Enter Remarks" />
 							</div>
 						</div>
 
@@ -343,7 +343,7 @@ pageEncoding="ISO-8859-1"%> -->
 										Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-member-status"
+											<input type="checkbox" id="customerStatus" name="customerStatus"
 												class="toggle__input" data-toggle-type="member-status">
 											<label for="toggle-member-status" class="toggle__label"></label>
 										</div>
@@ -360,8 +360,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row">
 					<div class="col-12">
-						<button id="saveBtn" class="btnStyle bg-success">Save</button>
-						<button id="saveBtn" class="btnStyle"
+						<button id="TeamMemberSaveBtn" class="btnStyle bg-success">Save</button>
+						<button id="newBtn" class="btnStyle"
 							style="background-color: #FFA500;">New</button>
 					</div>
 			</form>

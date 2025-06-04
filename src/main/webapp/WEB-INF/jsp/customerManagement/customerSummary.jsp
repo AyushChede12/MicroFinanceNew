@@ -57,8 +57,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Select by Code</label> <select id="selectMember"
-									name="selectMember" required="required"
+								<label for="">Select by Code</label> <select id="selectByCode"
+									name="selectByCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Criteria</option>
 									<option value="Blue">Blue</option>
@@ -79,7 +79,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Client Code</label> <input type="text"
-									name="memberCode" id="memberCode" required="required"
+									name="clientCode" id="clientCode" required="required"
 									placeholder="Enter Member Code" disabled />
 							</div>
 						</div>
@@ -87,7 +87,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Client Name</label> <input type="text"
-									name="memberName" id="memberName" required="required"
+									name="clientName" id="clientName" required="required"
 									placeholder="Enter Member Name" disabled />
 							</div>
 						</div>
@@ -120,8 +120,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> PinCode</label> <input type="text" name="pincode"
-									id="pincode" required="required" placeholder="Enter pincode"
+								<label for=""> PinCode</label> <input type="text" name="pinCode"
+									id="pinCode" required="required" placeholder="Enter pincode"
 									disabled />
 							</div>
 						</div>
@@ -137,7 +137,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Mobile No.</label> <input type="text"
-									name="mobileno" id="mobileno" required="required"
+									name="mobileNo" id="mobileNo" required="required"
 									placeholder="Enter mobileno" disabled />
 							</div>
 						</div>

@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Account Section</h1>
+			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-wallet2"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Profit & Loss</li>
+					<li class="breadcrumb-item action">P&L Statement</li>
 				</ol>
 			</nav>
 		</div>
@@ -62,7 +62,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Select Branch</label> <select id="Branch"
+								<label for="">Branch Name</label> <select id="Branch"
 									name="Branch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -73,18 +73,18 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">From Date</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date"
+								<label for="vehicalNo">Start Date</label> <input type="date"
+									name="startDate" id="startDate" required="required"
+									
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">To Date</label> <input type="date"
-									name="toDate" id="toDate" required="required"
-									placeholder="Enter To Date" style="text-transform: uppercase;" />
+								<label for="vehicalNo">End Date</label> <input type="date"
+									name="endDate" id="endDate" required="required"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 					</div>
@@ -93,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="searchBtn" class="btnStyle"
 					style="background-color: #FFA500;">Search</button>
 			</div>
 		</div>
