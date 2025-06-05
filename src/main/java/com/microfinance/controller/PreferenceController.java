@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.microfinance.model.BankModule;
@@ -43,6 +45,33 @@ public class PreferenceController {
 		return list;
 	}
 	
+	@GetMapping("/getBranchModuleById")
+	@ResponseBody
+	public Optional<BranchModule> findBranchModuleById(@RequestParam("id") Long id) {
+		Optional<BranchModule> branch=preferenceService.findBranchDataById(id);
+		return branch;
+	}
+	
+	@PostMapping("/updateBranchModuleById")
+	@ResponseBody
+	public ResponseEntity<String> updateBranchModule(@RequestBody BranchModule branchModule) {
+		BranchModule updateBranch=preferenceService.updateAllBranchModule(branchModule);
+		if(updateBranch!=null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("failure");
+	}
+	
+	@PostMapping("/deleteBranchModuleById")
+	@ResponseBody
+	public ResponseEntity<String> deleteBranchModule(@RequestParam("id") Long id) {
+		Boolean deleteBranch=preferenceService.deleteBranchModule(id);
+		if(deleteBranch!=null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("failure");
+	}
+	
 	
 	//Bank Module
 	@PostMapping("/saveAllBankModule")
@@ -60,6 +89,33 @@ public class PreferenceController {
 	public List<BankModule> fetchAllBankModule(){
 		List<BankModule> list = preferenceService.fetchAllBankModule();
 		return list;
+	}
+	
+	@GetMapping("/getBankModuleById")
+	@ResponseBody
+	public Optional<BankModule> findBankModuleById(@RequestParam("id") Long id) {
+		Optional<BankModule> bank=preferenceService.findBankDataById(id);
+		return bank;
+	}
+	
+	@PostMapping("/updateBankModuleById")
+	@ResponseBody
+	public ResponseEntity<String> updateBankModule(@RequestBody BankModule bankModule) {
+		BankModule updateBank=preferenceService.updateBankModuleById(bankModule);
+		if(updateBank!=null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("failure");
+	}
+	
+	@PostMapping("/deleteBankModuleById")
+	@ResponseBody
+	public ResponseEntity<String> deleteBankModule(@RequestParam("id") Long id) {
+		Boolean deleteBank=preferenceService.deleteBankModule(id);
+		if(deleteBank!=null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("failure");
 	}
 	
 	//Relative Module

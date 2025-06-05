@@ -40,6 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Team Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +48,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-person-workspace"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Manage Department</li>
+=======
+			<h1>Employee Section</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Add Department</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -64,7 +74,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Department Name </label> <input type="text"
+<<<<<<< HEAD
 									name="departmentName" id="departmentName" required="required"
+=======
+									name="deptname" id="deptname" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Department" />
 							</div>
 						</div>
@@ -72,7 +86,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
+<<<<<<< HEAD
 							<button id="saveDepartmentBtn" class="btnStyle bg-success">Save</button>
+=======
+							<button id="saveBtn" class="btnStyle bg-success">Save</button>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							<button id="clearBtn" class="btnStyle bg-secondary">Clear</button>
 						</div>
 					</div>

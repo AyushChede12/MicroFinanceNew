@@ -40,6 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +48,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Maturity Scheme Master</li>
+=======
+			<h1>Maturity Section</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Maturity configure</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -84,10 +94,17 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Policy Code</option>
+=======
+								<label for="">Plan Code*</label> <select id="colour"
+									name="colour" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">DRD ADVANTEGE</option>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 
 								</select>
 							</div>
@@ -113,7 +130,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate*</label> <input type="text" name="location"
+=======
+								<label for="">ROI*</label> <input type="text" name="location"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -122,7 +143,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
 								<label>Deduction </label> <input type="text" name="price"
+=======
+								<label>Deduction</label> <input type="text" name="price"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="price" required="required" placeholder="Enter Deduction" />
 
 							</div>
@@ -178,7 +203,11 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
+=======
+								<label for="">Plan Code*</label> <select id="colour"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">GROW</option>
@@ -207,7 +236,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate *</label> <input type="text" name="location"
+=======
+								<label for="">ROI*</label> <input type="text" name="location"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -265,7 +298,11 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
+=======
+								<label for="">Plan Code*</label> <select id="colour"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ROYAL FI</option>
@@ -295,7 +332,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate*</label> <input type="text" name="location"
+=======
+								<label for="">ROI*</label> <input type="text" name="location"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -355,7 +396,11 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
+=======
+								<label for="">Plan Code*</label> <select id="colour"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ALL</option>
@@ -385,7 +430,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate*</label> <input type="text" name="location"
+=======
+								<label for="">ROI*</label> <input type="text" name="location"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="location" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>

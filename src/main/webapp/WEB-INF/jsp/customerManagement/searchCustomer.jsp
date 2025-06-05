@@ -91,15 +91,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Customer Name</label> <input type="text"
-									name="memberName" id="memberName" required="required"
+									name="customerName" id="customerName" required="required"
 									placeholder="Enter Member Name" disabled />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Customer Code</label> <select id="custCode"
-									name="custCode" required="required"
+								<label for="">Customer Code</label> <select id="customerCode"
+									name="customerCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Code</option>
 									<option value="Blue">Blue</option>
@@ -110,7 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for=""> Contact No.</label> <input type="text"
-									name="mobileNo" id="mobileNo" required="required"
+									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter mobile No " disabled />
 							</div>
 						</div>
@@ -125,8 +125,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">PAN No.</label> <input type="text" name="pan"
-									id="pan" required="required" placeholder="Enter PAN No"
+								<label for="">PAN No.</label> <input type="text" name="panNo"
+									id="panNo" required="required" placeholder="Enter PAN No"
 									disabled />
 							</div>
 						</div>

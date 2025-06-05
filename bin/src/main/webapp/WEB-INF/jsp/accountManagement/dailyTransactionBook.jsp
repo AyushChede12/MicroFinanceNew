@@ -40,6 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +48,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Daily Transaction Book</li>
+=======
+			<h1>Account Section</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Regular Statement (DayBook)</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -62,7 +72,11 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">branch Name</label> <select id="Branch"
+=======
+								<label for="">Select Branch</label> <select id="Branch"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="Branch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -73,7 +87,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Choose Ledger</label> <select id="Branch"
+=======
+								<label for="">Select Ledger</label> <select id="Branch"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="Branch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Ledger</option>
@@ -84,7 +102,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="vehicalNo">Start Date</label> <input type="date"
+=======
+								<label for="vehicalNo">From Date</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
@@ -93,7 +115,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="vehicalNo">End Date</label> <input type="date"
+=======
+								<label for="vehicalNo">To Date</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="toDate" id="toDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>

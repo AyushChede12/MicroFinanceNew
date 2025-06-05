@@ -40,6 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Joint Liability Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +48,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-person-bounding-box"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Completed Loan Records</li>
+=======
+			<h1>Serach Loan</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Group Loan Serach</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,14 +66,22 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
 							<li class="breadcrumb-item action">Loan Search</li>
+=======
+							<li class="breadcrumb-item action">Search Box</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
 								<label>Loan Branch*</label>
+=======
+								<label>Branch*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -86,7 +104,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="vehicalNo">Start Date</label> <input type="date"
+=======
+								<label for="vehicalNo">From Date</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -95,7 +117,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="vehicalNo">End Date </label> <input type="date"
+=======
+								<label for="vehicalNo">To Date</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />

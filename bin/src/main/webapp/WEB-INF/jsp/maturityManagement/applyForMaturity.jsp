@@ -41,6 +41,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,6 +49,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Apply For Maturity</li>
+=======
+			<h1>Maturity Section</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Maturity Application</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -85,7 +95,11 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy ID*</label> <select id="colour"
+=======
+								<label for="">Policy No*</label> <select id="colour"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select</option>
@@ -96,7 +110,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="vehicalNo">Customer Name*</label> <input type="text"
+=======
+								<label for="vehicalNo">Member Name*</label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
@@ -124,7 +142,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
 								<label>commet</label> <input type="text" name="price" id="price"
+=======
+								<label>Remark</label> <input type="text" name="price" id="price"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									required="required" placeholder="Enter Remark" />
 
 							</div>

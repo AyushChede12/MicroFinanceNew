@@ -40,6 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Team Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +48,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-person-workspace"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Add Team Member</li>
+=======
+			<h1>Employee Section</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Add Employee</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,7 +66,11 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
 							<li class="breadcrumb-item action">Team Member Details</li>
+=======
+							<li class="breadcrumb-item action">Employee Details</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
@@ -85,17 +99,29 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
+<<<<<<< HEAD
 								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
 									name="teamMemberCode" required="required"
 									placeholder="Enter Team Member Code">
+=======
+								<label for="">EMP CODE</label> <input type="text" id="empcode"
+									name="empcode" required="required"
+									placeholder="Enter Employee Code">
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="joiningDate">Sign-Up Date</label> <input type="date"
 									name="signUpDate" id="signUpDate" required="required"
 									placeholder="Enter Sign-Up Date"
+=======
+								<label for="joiningDate">Joining Date</label> <input type="date"
+									name="joiningDate" id="joiningDate" required="required"
+									placeholder="Enter Joining Date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -113,17 +139,28 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Team Member Name </label> <input type="text"
 									name="teamMemberName" id="teamMemberName" required="required"
 									placeholder="Enter Team Member Name" />
+=======
+								<label for="">Employee Name </label> <input type="text"
+									name="empName" id="empName" required="required"
+									placeholder="Enter Employee Name" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
+<<<<<<< HEAD
 								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
 									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
+=======
+								<label for="dob">DOB</label> <input type="date" name="dob"
+									id="dob" required="required" placeholder="Enter DateOfBirth"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -137,20 +174,34 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Family Member Name </label> <input type="text"
 									name="familyMemberName" id="familyMemberName" required="required"
 									placeholder="Enter Family Member Name" />
+=======
+								<label for="">Relative Name</label> <input type="text"
+									name="relativeName" id="relativeName" required="required"
+									placeholder="Enter Relative Name" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Relation to Applicant </label> <select
 									id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
+=======
+								<label for="">Relative Relation </label> <select
+									id="relativeRelation" name="relativeRelation"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Relative Relation</option>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									<option value="Blue">Sister</option>
 								</select>
 							</div>
@@ -159,9 +210,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
+<<<<<<< HEAD
 								<label for="">Contact No</label> <input type="text"
 									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No" />
+=======
+								<label for="">Mobile No</label> <input type="text"
+									name="mobileNo" id="mobileNo" required="required"
+									placeholder="Enter Mobile No" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
@@ -183,11 +240,19 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Relation with Nominee</label> <select id="relationWithNominee"
 									name="relationWithNominee" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation</option>
 									<option value="Blue">Mother</option>
+=======
+								<label for="">Relation </label> <select id="relation"
+									name="relation" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Relation</option>
+									<option value="Blue">Sister</option>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								</select>
 							</div>
 						</div>
@@ -197,7 +262,11 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Address</label>
+<<<<<<< HEAD
 								<textarea name="address" id="address"
+=======
+								<textarea name="" id=""
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
@@ -218,23 +287,39 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">IFSC Code</label> <input type="text" name="ifscCode"
 									id="ifscCode" required="required" placeholder="Enter IFSC Code" />
+=======
+								<label for="">IFSC Code</label> <input type="text" name="ifsc"
+									id="ifsc" required="required" placeholder="Enter IFSC Code" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Exp. Details</label> <input type="text" name="expDetails"
 									id="expDetails" required="required" placeholder="Enter Exp. Details" />
+=======
+								<label for="">Exp. Details</label> <input type="text" name="exp"
+									id="exp" required="required" placeholder="Enter Exp. Details" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Educational Background</label> <input type="text"
 									name="educationalBackground" id="educationalBackground" required="required"
 									placeholder="Enter Educational Background" />
+=======
+								<label for="">Qualification</label> <input type="text"
+									name="qualification" id="qualification" required="required"
+									placeholder="Enter Qualification" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
@@ -257,7 +342,11 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Designation </label> <select id="designation" name="designation"
+=======
+								<label for="">Designation </label> <select id="desg" name="desg"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
@@ -270,7 +359,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Department </label> <select id="department" name="department"
+=======
+								<label for="">Department </label> <select id="dept" name="dept"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
@@ -288,8 +381,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Saving Account No. </label> <input type="text"
 									name="savingAccNo" id="savingAccNo" required="required"
+=======
+								<label for="">SB Account No. </label> <input type="text"
+									name="accNo" id="accNo" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter SB Account No." />
 							</div>
 						</div>
@@ -318,8 +416,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Mode of Payment  </label> <select id="modeofpayment"
 									name="modeofpayment" required="required"
+=======
+								<label for="">Payment By </label> <select id="paymentBy"
+									name="PaymentBy" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Blue">Cash</option>
@@ -329,8 +432,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Comments </label> <input type="text" name="comments"
 									id="comments" required="required" placeholder="Enter Remarks" />
+=======
+								<label for="">Remarks </label> <input type="text" name="remarks"
+									id="remarks" required="required" placeholder="Enter Remarks" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
@@ -339,11 +447,19 @@ pageEncoding="ISO-8859-1"%> -->
 								class=" h-100 d-flex justify-content-start align-items-center">
 								<div
 									class="d-flex justify-content-start align-items-center formFields">
+<<<<<<< HEAD
 									<label style="margin-left: 20px;" class="mb-2">Customer
 										Status</label>
 									<div class="cont">
 										<div class="toggle">
 											<input type="checkbox" id="customerStatus" name="customerStatus"
+=======
+									<label style="margin-left: 20px;" class="mb-2">Member
+										Status</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="toggle-member-status"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 												class="toggle__input" data-toggle-type="member-status">
 											<label for="toggle-member-status" class="toggle__label"></label>
 										</div>
@@ -360,8 +476,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row">
 					<div class="col-12">
+<<<<<<< HEAD
 						<button id="TeamMemberSaveBtn" class="btnStyle bg-success">Save</button>
 						<button id="newBtn" class="btnStyle"
+=======
+						<button id="saveBtn" class="btnStyle bg-success">Save</button>
+						<button id="saveBtn" class="btnStyle"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							style="background-color: #FFA500;">New</button>
 					</div>
 			</form>

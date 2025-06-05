@@ -60,7 +60,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-6">
 					<div class="d-flex flex-column formFields">
 						<label for="">Select Decision Maker :</label> <select
-							id="DecisionMaker" name="colour" required="required"
+							id="selectDecisionMaker" name="selectDecisionMaker" required="required"
 							class="form-control selectField mb-4" style="height: 30px;">
 							<option value="">Select</option>
 						</select>

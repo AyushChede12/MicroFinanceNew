@@ -40,6 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
 			<h1>Team Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +48,15 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-person-workspace"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Generate Team ID Card</li>
+=======
+			<h1>Employee Section</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-house-door"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Employee ID Card</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -63,9 +73,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Team Member Code </label> <input type="text"
 									name="empCode" id="teamcode" required="required"
 									placeholder="Enter Team Member Code" />
+=======
+								<label for="">Employee Code </label> <input type="text"
+									name="empCode" id="empCode" required="required"
+									placeholder="Enter Employee Code" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 					</div>
@@ -91,11 +107,19 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">ID</th>
+<<<<<<< HEAD
 										<th scope="col">Team Member Name</th>
 										<th scope="col">Branch Name</th>
 										<th scope="col">Sign-Up Date</th>
 										<th scope="col">Date Of Birth</th>
 										<th scope="col">Contact No.</th>
+=======
+										<th scope="col">Employee Name</th>
+										<th scope="col">Branch Name</th>
+										<th scope="col">Date Of Joining</th>
+										<th scope="col">Date Of Birth</th>
+										<th scope="col">Mobile No.</th>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 										<th scope="col">Address</th>
 										<th scope="col">Department</th>
 									</tr>
