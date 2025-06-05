@@ -297,7 +297,7 @@ pageEncoding="ISO-8859-1"%> -->
 									hidden="hidden" onchange="bike1Preview();"
 									style="background-size: cover; background-repeat: no-repeat" />
 									<div id="img-view">
-										<img src="./upload.png" alt="upload_icon"
+										<img src="../images/upload/upload.png" alt="upload_icon"
 											id="bike1imagePreview" />
 										<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
@@ -317,7 +317,7 @@ pageEncoding="ISO-8859-1"%> -->
 									hidden="hidden" onchange="bike2Preview();"
 									style="background-size: cover; background-repeat: no-repeat" />
 									<div id="img-view">
-										<img src="./upload.png" alt="upload_icon"
+										<img src="../images/upload/upload.png	" alt="upload_icon"
 											id="bike2imagePreview" />
 										<!-- <p
                     style="font-size: 12px; margin-top: 15px"

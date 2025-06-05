@@ -41,13 +41,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Maturity Section</h1>
+			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-calendar-check"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Maturity Payment</li>
+					<li class="breadcrumb-item action">Full Payment Status</li>
 				</ol>
 			</nav>
 		</div>

@@ -1,5 +1,7 @@
 package com.microfinance.ceconfig;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.*;
@@ -10,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.*;
 
 import com.microfinance.service.UserService;
 
@@ -39,18 +42,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http.csrf().configure(getHttp());
+////            .antMatchers("/auth/**").permitAll()
+////            .antMatchers("/admin/**").hasRole("ADMIN")
+////            .antMatchers("/customer/**").hasRole("CUSTOMER")
+////            .anyRequest().authenticated()
+////            .and()
+////            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//    }
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().configure(http);
+        http
+            .cors() // Enable CORS
+            .and()
+            .csrf().disable();
 //            .authorizeRequests()
-//            .antMatchers("/auth/**").permitAll()
-//            .antMatchers("/admin/**").hasRole("ADMIN")
-//            .antMatchers("/customer/**").hasRole("CUSTOMER")
-//            .anyRequest().authenticated()
+//                .antMatchers("/auth/**").permitAll() // Public endpoints for login/register
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/customer/**").hasRole("CUSTOMER")
+//                .anyRequest().authenticated()
 //            .and()
-//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+//            .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // Use JWT, no sessions
+//
+//        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
-
+    
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:8080")); // Frontend URL
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        configuration.setExposedHeaders(List.of("Authorization"));
+        configuration.setAllowCredentials(true); // Required if cookies/token are used
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 }

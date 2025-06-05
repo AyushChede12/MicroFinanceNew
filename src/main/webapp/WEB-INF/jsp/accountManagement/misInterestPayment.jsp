@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Account Section</h1>
+			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-wallet2"></i>
 					</a></li>
-					<li class="breadcrumb-item action">MIS INT. Payment</li>
+					<li class="breadcrumb-item action">MIS Interest Payment</li>
 				</ol>
 			</nav>
 		</div>
@@ -65,64 +65,64 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Policy No.</label> <input type="text" name="age"
-								id="age" required="required" placeholder="Enter Policy No." />
+							<label for="">Policy ID</label> <input type="text" name="policyID"
+								id="policyID" required="required" placeholder="Enter Policy No." />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Applicant Name</label> <input type="text"
-								name="age" id="age" required="required"
-								placeholder="Enter Applicant Name" disabled />
+							<label for="">Policy Holder</label> <input type="text" name="policyHolder"
+								id="policyHolder" required="required" placeholder="Enter Applicant Name"
+								disabled />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Policy Date</label> <input type="date"
-								name="registrationDate" id="registrationDate"
+							<label for=""> Issue Date</label> <input type="date"
+								name="issueDate" id="issueDate"
 								required="required" placeholder="" />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Policy Amount</label> <input type="text" name="age"
-								id="age" required="required" placeholder="Enter policy amt"
+							<label for="">Insured Amount</label> <input type="text"
+								name="insuredAmount" id="insuredAmount" required="required"
+								placeholder="Enter Insured amt" disabled />
+						</div>
+					</div>
+
+					<div class="col-lg-3">
+						<div class="d-flex flex-column formFields mb-4">
+							<label for="">Accrued Interest</label> <input type="text"
+								name="accruedInterest" id="accruedInterest" required="required"
+								placeholder="Enter Accrued Amount" disabled />
+						</div>
+					</div>
+
+
+					<div class="col-lg-3">
+						<div class="d-flex flex-column formFields mb-4">
+							<label for="">Scheme Title</label> <input type="schemeTitle" name="schemeTitle"
+								id="age" required="required" placeholder="Enter Scheme Title"
 								disabled />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Interest Amount </label> <input type="text"
-								name="age" id="age" required="required"
-								placeholder="Enter Interest Amount" disabled />
-						</div>
-					</div>
-
-
-					<div class="col-lg-3">
-						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Scheme Name</label> <input type="text" name="age"
-								id="age" required="required" placeholder="Enter Scheme Name "
+							<label for="">Branch Name </label> <input type="text" name="branchName"
+								id="branchName" required="required" placeholder="Enter policy branch"
 								disabled />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Policy Branch</label> <input type="text" name="age"
-								id="age" required="required" placeholder="Enter policy branch"
-								disabled />
-						</div>
-					</div>
-
-					<div class="col-lg-3">
-						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Member Code</label> <input type="text" name="age"
-								id="age" required="required" placeholder="Enter Member Code"
+							<label for="">Client Code </label> <input type="text" name="clientCode"
+								id="clientCode" required="required" placeholder="Enter Client Code"
 								disabled />
 						</div>
 					</div>
@@ -139,16 +139,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Pay Amount</label> <input type="text" name="age"
-								id="age" required="required" placeholder="Enter pay amt"
+							<label for="">Pay Amount</label> <input type="text" name="payAmount"
+								id="age" required="required" placeholder="Enter Pay Amount"
 								disabled />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields">
-							<label for="">Pay Branch</label> <select id="Branch"
-								name="Branch" required="required"
+							<label for="">Paying Branch</label> <select id="payingBranch"
+								name="payingBranch" required="required"
 								class="form-control selectField" style="height: 30px;">
 								<option value="">Select Pay Branch</option>
 								<option value="Blue">Blue</option>
@@ -158,16 +158,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Pay Date</label> <input type="date"
-								name="registrationDate" id="registrationDate"
+							<label for="">Date of Payment</label> <input type="date"
+								name="dateOfPayment" id="dateOfPayment"
 								required="required" placeholder="Enter Pay Date" />
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields">
-							<label for="">Payment By </label> <select id="Branch"
-								name="Branch" required="required"
+							<label for="">Payment Mode </label> <select id="paymentMode"
+								name="paymentMode" required="required"
 								class="form-control selectField" style="height: 30px;">
 								<option value="">Select</option>
 								<option value="Blue">Cash</option>
@@ -181,7 +181,7 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 				<div class="row">
 					<div class="col-12 text-right mt-3">
-						<button id="saveBtn" class="btnStyle"
+						<button id="payBtn" class="btnStyle"
 							style="background-color: #FFA500;">Pay</button>
 					</div>
 				</div>
