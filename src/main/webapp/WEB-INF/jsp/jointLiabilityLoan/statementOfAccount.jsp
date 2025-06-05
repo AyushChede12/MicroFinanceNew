@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Loan Statment</h1>
+			<h1>Joint Liability Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-person-bounding-box"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Regular EMI Statment</li>
+					<li class="breadcrumb-item action">Statement Of Account </li>
 				</ol>
 			</nav>
 		</div>

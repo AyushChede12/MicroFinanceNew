@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Report Section</h1>
+			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Investment Report</li>
+					<li class="breadcrumb-item action">Investment Transaction Report</li>
 				</ol>
 			</nav>
 		</div>

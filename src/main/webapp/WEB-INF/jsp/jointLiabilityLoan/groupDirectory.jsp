@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Group Loan Plan Create</h1>
+			<h1>Joint Liability Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-person-bounding-box"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Group Master</li>
+					<li class="breadcrumb-item action">Group Directory</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,13 +56,13 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Group Details</li>
+							<li class="breadcrumb-item action">Group Info	</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Group Name* </label> <input type="text"
+								<label for=""> Community Name* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -70,7 +70,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">OP.Date*</label> <input type="date"
+								<label for="vehicalNo">Opening Date*</label> <input type="date"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -79,7 +79,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Group Branch*</label>
+								<label>Assigned Branch*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -102,7 +102,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Group Leader Name* </label> <input type="text"
+								<label for=""> Community Leader* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -110,7 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Mobile No* </label> <input type="text"
+								<label for=""> Contact No.* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -120,7 +120,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Group Address* </label> <input type="text"
+								<label for=""> Community Address* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -129,7 +129,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Assign Employee*</label>
+								<label>Allocated Staff*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -152,7 +152,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Collcetion Days*</label>
+								<label>Scheduled Collection Days*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -176,7 +176,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Collection Time*</label>
+								<label>Scheduled Time*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select

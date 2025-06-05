@@ -40,20 +40,20 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Report Section</h1>
+			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Loan Sheet Print</li>
+					<li class="breadcrumb-item action">Loan Confirmation Document</li>
 				</ol>
 			</nav>
 		</div>
 		<div>
 			<nav>
 				<ol class="breadcrumb breadcrumb-title">
-					<li class="breadcrumb-item action">Search Box</li>
+					<li class="breadcrumb-item action">Find Box</li>
 				</ol>
 			</nav>
 			<div class="row">
@@ -70,14 +70,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Advisor Code</label> <input type="text" name="price"
+						<label for="">Finicial Code</label> <input type="text" name="price"
 							id="price" required="required" placeholder="Enter Pincode" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="vehicalNo">Till Date</label> <input type="date"
+						<label for="vehicalNo">To Date</label> <input type="date"
 							name="vehicalNo" id="vehicalNo" required="required"
 							placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
 					</div>
@@ -100,10 +100,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card-body table-responsive">
 						<div class="">
 							<h5 class="card-title">
-								Search Result <span></span>
+								Find Result <span></span>
 							</h5>
 							<div class="text-center col-lg-12">
-								<label class="font-weight-bold">Collection Sheet</label>
+								<label class="font-weight-bold">Collection Record</label>
 							</div>
 
 							<div>
