@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Joint Liability Loan</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-person-bounding-box"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Statement Of Account </li>
+=======
 			<h1>Loan Statment</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Regular EMI Statment</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>

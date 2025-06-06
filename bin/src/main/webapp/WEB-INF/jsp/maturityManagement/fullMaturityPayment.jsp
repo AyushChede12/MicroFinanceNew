@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
@@ -40,6 +44,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Maturity Management</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-calendar-check"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Full Maturity Payment</li>
+=======
 			<h1>Maturity Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +60,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Maturity Payment</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,11 +70,23 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+							<li class="breadcrumb-item action">Serach box</li>
+=======
 							<li class="breadcrumb-item action">Search Box</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+<<<<<<< HEAD
+
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch</label> <select id="colour" name="colour"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">All Branch</option>
+=======
 							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
                 <label>Verify With</label>
                 <div class="position-relative">
@@ -88,11 +114,41 @@ pageEncoding="ISO-8859-1"%> -->
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 
 								</select>
 							</div>
 						</div>
 
+<<<<<<< HEAD
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="vehicalNo">From Date :</label> <input type="date"
+									name="vehicalNo" id="vehicalNo" required="required"
+									placeholder="Enter Member Name"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4"
+								style="margin-bottom: 30px">
+								<label>To Date :</label> <input type="date" name="vehicalNo"
+									id="vehicalNo" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+
+					</div>
+					<div class="row">
+						<div class="col-12 text-left">
+							<button id="saveBtn" class="btn btn-warning">Search</button>
+
+						</div>
+					</div>
+				</div>
+=======
 
 					</div>
 
@@ -362,10 +418,62 @@ pageEncoding="ISO-8859-1"%> -->
 									</select>
 								</div>
 							</div>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 
 
 
 
+<<<<<<< HEAD
+
+
+				<div class="row mt-5">
+					<div class="col-12">
+						<div class="card recent-sales">
+
+							<div class="card-body table-responsive">
+								<h5 class="card-title">
+									<center>Marurity Payment Report</center>
+									<span>|</span>
+								</h5>
+
+								<table class="table table-borderless datatable overflow-scroll">
+									<thead class="table-light">
+										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">slno</th>
+											<th scope="col">Policy No.</th>
+											<th scope="col">Application name</th>
+											<th scope="col">Pay Branch</th>
+											<th scope="col">Pay Date</th>
+											<th scope="col">Approval Date</th>
+											<th scope="col">Amount</th>
+											<th scope="col">Principal</th>
+											<th scope="col">Interest</th>
+											<th scope="col">Paymodel</th>
+											<th scope="col">SB Account</th>
+											<th scope="col">Pay Remarks</th>
+										</tr>
+									</thead>
+									<tbody>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+
+=======
 						</div>
 
 						<div class="row">
@@ -374,6 +482,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 			</form>
 
 

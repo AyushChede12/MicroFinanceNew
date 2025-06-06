@@ -39,6 +39,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Reports & Analytics</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-file-earmark-text"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Tax Deduction At Source Summary</li>
+=======
 			<h1>Report Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -46,13 +55,18 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">TDS Report</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
 		<div>
 			<nav>
 				<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+					<li class="breadcrumb-item action">Find Box</li>
+=======
 					<li class="breadcrumb-item action">Search Box</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 			<div class="row">
@@ -69,7 +83,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+						<label for="">Finicial Code</label> <input type="text" name="price"
+=======
 						<label for="">Advisor Code</label> <input type="text" name="price"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							id="price" required="required" placeholder="Enter Pincode" />
 					</div>
 				</div>
@@ -80,7 +98,11 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="col-3">
 				<button id="saveBtn" class="btnStyle"
 					style="background-color: #FFA500;">
+<<<<<<< HEAD
+					<i class="bi bi-search"></i> Find
+=======
 					<i class="bi bi-search"></i> Search
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</button>
 			</div>
 		</div>
@@ -91,7 +113,11 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card-body table-responsive">
 						<div class="d-flex justify-content-between align-items-center">
 							<h5 class="card-title">
+<<<<<<< HEAD
+								Find Result <span></span>
+=======
 								Search Result <span></span>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</h5>
 						</div>
 						<div style="overflow-x: auto; white-space: nowrap;">

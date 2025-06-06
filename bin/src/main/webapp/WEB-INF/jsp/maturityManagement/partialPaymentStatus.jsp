@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Maturity Management</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-calendar-check"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Partial Payment Status</li>
+=======
 			<h1>Maturity Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Maturity Part Payment</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>

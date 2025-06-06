@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Financial Consultant</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-briefcase text-blue"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Consultant Promotion Management</li>
+=======
 			<h1>Advisor Collector Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Advisor Promotion</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,11 +66,21 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+							<li class="breadcrumb-item action">Financial Consultant Promotion</li>
+=======
 							<li class="breadcrumb-item action">Advisor Promotion</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+<<<<<<< HEAD
+							
+							<div class="d-flex flex-column formFields">
+								<label for="">Select Code</label> <select id="agentcode"
+									name="agentcode" required="required"
+=======
 							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
                 <label>Verify With</label>
                 <div class="position-relative">
@@ -86,6 +106,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Select Code</label> <select id="colour"
 									name="colour" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Code</option>
 									<option value="Blue">Blue</option>
@@ -95,8 +116,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="position">Position</label> <input type="text"
+									name="position" id="position" required="required"
+=======
 								<label for="vehicalNo">Position</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Position" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -105,8 +131,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Branch</label> <input type="text" name="Branch"
+									id="Branch" required="required" placeholder="Enter Branch"
+=======
 								<label>Branch</label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder="Enter Branch"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -114,7 +145,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Senior Code</label> <input type="text"
+<<<<<<< HEAD
+									name="seniorcode" id="seniorcode" required="required"
+=======
 									name="vehicalNo" id="vehicalNo" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Senior Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -124,8 +159,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Position</label> <input type="text" name="Position2"
+									id="Position" required="required" placeholder="Enter Senior Position"
+=======
 								<label>Position</label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder="Enter Position"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -133,7 +173,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Immidiate Sr.</label> <input type="text"
+<<<<<<< HEAD
+									name="immidiateSr" id="immidiateSr" required="required"
+=======
 									name="price" id="price" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Immidiate Sr" />
 							</div>
 						</div>
@@ -141,8 +185,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Sr.Position</label> <input type="text" name="srPosition"
+									id="srPosition" required="required" placeholder="Enter Sr. Position" />
+=======
 								<label>Sr.Position</label> <input type="text" name="price"
 									id="price" required="required" placeholder="Enter Sr. Position" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
@@ -151,7 +200,11 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label for="">Immidiate Jr.</label> <input type="text"
+<<<<<<< HEAD
+									name="immidiatejr" id="immidiatejr" required="required"
+=======
 									name="price" id="price" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Immidiate Jr." />
 							</div>
 						</div>
@@ -159,15 +212,24 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Jr. Position</label> <input type="text"
+<<<<<<< HEAD
+									name="jrPosition" id="jrPosition" required="required"
+=======
 									name="price" id="price" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Jr. Position" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Select Branch</label> <select id="Branch"
+									name="Branch" required="required"
+=======
 								<label for="">Select Branch</label> <select id="colour"
 									name="colour" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 									<option value="Blue">Blue</option>
@@ -178,7 +240,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>New Position</label> <select id="newPosition" name="newPosition"
+=======
 								<label>New Position</label> <select id="colour" name="colour"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">New Position</option>
@@ -189,23 +255,37 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">New Senior</label> <input type="text" name="newsenior"
+									id="newsenior" required="required" placeholder="Enter New Senior" />
+=======
 								<label for="">New Senior</label> <input type="text" name="price"
 									id="price" required="required" placeholder="Enter New Senior" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Senior Name</label> <input type="text" name="newseniorname"
+									id="newseniorname" required="required" placeholder="Enter Senior Name" />
+=======
 								<label>Senior Name</label> <input type="text" name="price"
 									id="price" required="required" placeholder="Enter Senior Name" />
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Senior Position</label> <input type="text"
+<<<<<<< HEAD
+									name="newseniorposition" id="newseniorposition" required="required"
+=======
 									name="price" id="price" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter New Senior Position" />
 							</div>
 						</div>
@@ -224,6 +304,8 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 			</form>
 
+<<<<<<< HEAD
+=======
 			<!-- <div class="row mt-5">
         <div class="col-12">
           <div class="card recent-sales">
@@ -325,6 +407,7 @@ pageEncoding="ISO-8859-1"%> -->
         </div>
       </div> -->
 
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 		</div>
 
 

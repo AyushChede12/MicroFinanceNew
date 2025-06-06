@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Joint Liability Loan</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-person-bounding-box"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Group Directory</li>
+=======
 			<h1>Group Loan Plan Create</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Group Master</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,13 +66,21 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+							<li class="breadcrumb-item action">Group Info	</li>
+=======
 							<li class="breadcrumb-item action">Group Details</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Community Name* </label> <input type="text"
+=======
 								<label for=""> Group Name* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -70,7 +88,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="vehicalNo">Opening Date*</label> <input type="date"
+=======
 								<label for="vehicalNo">OP.Date*</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -79,7 +101,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Assigned Branch*</label>
+=======
 								<label>Group Branch*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -102,7 +128,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Community Leader* </label> <input type="text"
+=======
 								<label for=""> Group Leader Name* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -110,7 +140,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Contact No.* </label> <input type="text"
+=======
 								<label for=""> Mobile No* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -120,7 +154,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Community Address* </label> <input type="text"
+=======
 								<label for=""> Group Address* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -129,7 +167,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Allocated Staff*</label>
+=======
 								<label>Assign Employee*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -152,7 +194,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Scheduled Collection Days*</label>
+=======
 								<label>Collcetion Days*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -176,7 +222,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Scheduled Time*</label>
+=======
 								<label>Collection Time*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select

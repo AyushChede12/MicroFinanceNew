@@ -41,13 +41,21 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Maturity Management</h1>
+=======
 			<h1>Maturity Section</h1>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-house-door"></i>
 					</a></li>
+<<<<<<< HEAD
+					<li class="breadcrumb-item action">Print Maturity Receipt</li>
+=======
 					<li class="breadcrumb-item action">Maturity Payment</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -64,7 +72,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
+<<<<<<< HEAD
+								<label for="">Select by policy ID.*</label> <select id="colour"
+=======
 								<label for="">Select by policy No.*</label> <select id="colour"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">All</option>

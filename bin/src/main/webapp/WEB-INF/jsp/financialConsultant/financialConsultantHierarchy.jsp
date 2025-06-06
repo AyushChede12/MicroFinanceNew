@@ -40,6 +40,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Financial Consultant</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i class="bi bi-briefcase text-blue"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Financial Consultant Hierarchy</li>
+=======
 			<h1>Advisor Collector Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +55,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Advisor Tree</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,11 +65,21 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+							<li class="breadcrumb-item action">Search</li>
+=======
 							<li class="breadcrumb-item action">Search Box</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+<<<<<<< HEAD
+				
+							<div class="d-flex flex-column formFields">
+								<label for="">Financial Consultant Code</label> <input type="text"
+									name="agentcode" id="agentcode" required="required"
+=======
 							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
                 <label>Verify With</label>
                 <div class="position-relative">
@@ -86,6 +105,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Advisor Code</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Advisor Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -93,8 +113,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="agentname">Financial Consultant Name</label> <input type="text"
+									name="agentname" id="agentname" required="required"
+=======
 								<label for="vehicalNo">Advisor Name</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									placeholder="Enter Advisor Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -104,8 +129,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Position</label> <input type="text" name="position"
+									id="position" required="required" placeholder="Enter Position"
+=======
 								<label>Position</label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder="Enter Position"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -142,6 +172,9 @@ pageEncoding="ISO-8859-1"%> -->
 									</tr>
 								</thead>
 								<tbody>
+<<<<<<< HEAD
+									
+=======
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="row"><a href="#">1</a></th>
 										<td>Arun Kumar</td>
@@ -219,6 +252,7 @@ pageEncoding="ISO-8859-1"%> -->
 											</button>
 										</td>
 									</tr>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								</tbody>
 							</table>
 						</div>

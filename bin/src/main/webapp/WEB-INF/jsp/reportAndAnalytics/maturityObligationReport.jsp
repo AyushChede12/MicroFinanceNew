@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Reports & Analytics</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-file-earmark-text"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Maturity Obligation Report</li>
+=======
 			<h1>Report Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,13 +56,18 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Maturity Liability Report</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
 		<div>
 			<nav>
 				<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+					<li class="breadcrumb-item action">Find Box</li>
+=======
 					<li class="breadcrumb-item action">Search Box</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 			<div class="row">

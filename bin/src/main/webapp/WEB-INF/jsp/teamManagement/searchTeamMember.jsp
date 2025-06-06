@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Team Management</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-person-workspace"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Team Search</li>
+=======
 			<h1>Employee Section</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Search Employee</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -75,7 +85,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="vehicalNo">Date From :</label> <input type="date"
+=======
 								<label for="vehicalNo">From Date :</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="fDate" id="fDate" required="required"
 									placeholder="Enter fDate" style="text-transform: uppercase;" />
 							</div>
@@ -83,7 +97,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="vehicalNo">Date To :</label> <input type="date"
+=======
 								<label for="vehicalNo">TO Date :</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="tDate" id="tDate" required="required"
 									placeholder="Enter tDate" style="text-transform: uppercase;" />
 							</div>
@@ -91,7 +109,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Team Member Name </label> <input type="text"
+=======
 								<label for="">Employee Name </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="empName" id="empName" required="required"
 									placeholder="Enter Employee Name" />
 							</div>
@@ -99,7 +121,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Team Member Code </label> <input type="text"
+=======
 								<label for="">Employee Code </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="empCode" id="empCode" required="required"
 									placeholder="Enter Employee Code" />
 							</div>
@@ -107,7 +133,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Contact Number </label> <input type="text"
+=======
 								<label for="">Mobile Number </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="mobileNo" id="mobileNo" required="required"
 									placeholder="Enter Employee Name" />
 							</div>

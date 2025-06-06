@@ -40,6 +40,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
+<<<<<<< HEAD
+			<h1>Joint Liability Loan</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-person-bounding-box"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Installment Re-Payment</li>
+=======
 			<h1>Group Loan Approval</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -47,6 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Regular EMI Repayment</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -56,7 +66,11 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
+<<<<<<< HEAD
+							<li class="breadcrumb-item action">Loan Info</li>
+=======
 							<li class="breadcrumb-item action">Loan Details</li>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
@@ -101,7 +115,11 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="vehicalNo">Loan Issue Date*</label> <input type="date"
+=======
 								<label for="vehicalNo">Loan Date*</label> <input type="date"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -109,7 +127,11 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Scheme Name* </label> <input type="text"
+=======
 								<label for=""> Plan Name* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -117,7 +139,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Interest Type* </label> <input type="text"
+=======
 								<label for=""> ROI Type* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -128,76 +154,120 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Customer Id & Name* </label> <input type="text"
+=======
 								<label for=""> Code & Name* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Loan Tenure* </label> <input type="text" name="location"
+=======
 								<label for=""> Term* </label> <input type="text" name="location"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="location" required="required" placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> EMI Value* </label> <input type="text"
+=======
 								<label for=""> EMI Amount* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Nominee Info* </label> <input type="text"
+=======
 								<label for=""> Relative Details* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Interest Amount* </label> <input type="text"
+=======
 								<label for=""> Total Interest* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Contact NO* </label> <input type="text"
+=======
 								<label for=""> Mobile NO* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Principal Amount* </label> <input type="text"
+=======
 								<label for=""> Loan Amount* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Total Calulated Principal* </label> <input type="text"
+=======
 								<label for=""> Total Principal* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Loan Branch* </label> <input type="text"
+=======
 								<label for=""> Branch Name* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Rate Of Interest* </label> <input type="text"
+=======
 								<label for=""> Loan Roi* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Full Payable Amount* </label> <input type="text"
+=======
 								<label for=""> Total Payable* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -217,28 +287,44 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Pending Interest* </label> <input type="text"
+=======
 								<label for=""> Interst Due* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Payment Date* </label> <input type="text"
+=======
 								<label for=""> Pay Date* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Agent Code* </label> <input type="text"
+=======
 								<label for=""> Advisor Code* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Due Principal Amount* </label> <input type="text"
+=======
 								<label for=""> Principal Due* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -247,7 +333,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Fine Deduction*</label>
+=======
 								<label>Deduct Fine*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -269,28 +359,44 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Agent Name* </label> <input type="text"
+=======
 								<label for=""> Advisor Name* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  ">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Total OutStanding Amount* </label> <input type="text"
+=======
 								<label for=""> Total Due Amt* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  ">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Amount Paid* </label> <input type="text"
+=======
 								<label for=""> Pay Amount* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Payment Remark* </label> <input type="text"
+=======
 								<label for=""> Remark* </label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -298,14 +404,22 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Insatllment Due Date*</label> <input type="text"
+=======
 								<label for=""> Due Date*</label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Net Payable*</label> <input type="text"
+=======
 								<label for=""> Net Amount*</label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -313,7 +427,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for=""> Payment Branch*</label> <input type="text"
+=======
 								<label for=""> Pay Branch*</label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -328,7 +446,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Paid By*</label>
+=======
 								<label>Pay By*</label>
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -352,7 +474,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Prepaid Amount*</label> <input type="text"
+=======
 								<label for=""> Advance Paid*</label> <input type="text"
+>>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
