@@ -40,7 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,15 +47,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
 					<li class="breadcrumb-item action">EMI Collection Summary</li>
-=======
-			<h1>Report Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Regular EMI Report</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -66,11 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-<<<<<<< HEAD
 							<li class="breadcrumb-item action">Find Box</li>
-=======
-							<li class="breadcrumb-item action">Search Box</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
@@ -108,11 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-<<<<<<< HEAD
 							<button id="searchBtn" class="btnStyle bg-warning">Find</button>
-=======
-							<button id="searchBtn" class="btnStyle bg-warning">Search</button>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</div>
 					</div>
 
@@ -125,11 +107,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-<<<<<<< HEAD
 							<h5 class="card-title">Find Result</h5>
-=======
-							<h5 class="card-title">Search Result</h5>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 
 							<h6 class="card-title" style="text-align: center; color: black;">
 								REGULAR EMI REPORT</h6>

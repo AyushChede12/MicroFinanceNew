@@ -40,7 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,15 +47,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Cheque Clearing Processing</li>
-=======
-			<h1>Account Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Cheque Clear</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -72,11 +62,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">Type of Loan</label> <select id="Branch" name="Branch"
-=======
-								<label for="">Type</label> <select id="Branch" name="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
+								<label for="">Type of Loan</label> <select id="typeOflone" name="typeOflone"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
@@ -87,11 +73,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">Branch Name</label> <select id="Branch" name="Branch"
-=======
-								<label for="">Branch</label> <select id="Branch" name="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -102,33 +84,24 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">Start Date</label> <input type="date"
-=======
-								<label for="vehicalNo">From Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date"
-									style="text-transform: uppercase;" />
+									name="startDate" id="startDate" required="required"
+								style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">End Date</label> <input type="date"
-=======
-								<label for="vehicalNo">To Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="toDate" id="toDate" required="required"
-									placeholder="Enter To Date" style="text-transform: uppercase;" />
+									name="endDate" id="endDate" required="required"
+									 style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Cheque No.</label> <input type="text" name="age"
-									id="age" required="required" placeholder="Enter Cheque No."
+								<label for="">Cheque No.</label> <input type="text" name="chequeNo"
+									id="chequeNo" required="required" placeholder="Enter Cheque No."
 									disabled />
 							</div>
 						</div>
@@ -138,7 +111,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="searchBtn" class="btnStyle"
 					style="background-color: #FFA500;">Search</button>
 			</div>
 		</div>

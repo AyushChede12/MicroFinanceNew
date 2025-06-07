@@ -33,6 +33,9 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -86,8 +89,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="d-flex flex-column formFields">
 								<label for="">Financial Year Name</label> <input type="text"
-									name="fyyearname" id="fyyearname" required="required"
-									placeholder="Enter Financial Year Name"
+									name="financialYearName" id="financialYearName"
+									required="required" placeholder="Enter Financial Year Name"
 									style="text-transform: uppercase;" />
 							</div>
 
@@ -96,9 +99,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date From</label> <input type="date" name="datef"
-									id="datef" required="required"
-									placeholder="Enter Date From"
+								<label>Date From</label> <input type="date" name="dateFrom"
+									id="dateFrom" required="required" placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -106,9 +108,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date To</label> <input type="date" name="datet"
-									id="datet" required="required"
-									placeholder="Enter Date To"
+								<label>Date To</label> <input type="date" name="dateTo"
+									id="dateTo" required="required" placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -116,7 +117,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3" style="margin-top: 15px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning">Add</button>
+								<button id="saveBtn" class="btnStyle bg-warning"
+									onclick="saveFinancialYear()">Add</button>
 							</div>
 						</div>
 
@@ -132,99 +134,22 @@ pageEncoding="ISO-8859-1"%> -->
 
 									<div class="card-body table-responsive">
 										<h5 class="card-title">
-											Recent Sales <span>| Today</span>
+											Financial Year Data <span>| Table View</span>
 										</h5>
 
 										<table
 											class="table table-borderless datatable overflow-scroll">
 											<thead class="table-light">
 												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="col">#</th>
-													<th scope="col">Customer</th>
-													<th scope="col">Product</th>
-													<th scope="col">Price</th>
-													<th scope="col">Status</th>
-													<th scope="col">Action</th>
+													<th scope="col">Sr No</th>
+													<th scope="col">Financial Year Name</th>
+													<th scope="col">Date From</th>
+													<th scope="col">Date To</th>
+
 												</tr>
 											</thead>
-											<tbody>
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="row"><a href="#">1</a></th>
-													<td>Arun Kumar</td>
-													<td><a href="#" className="text-primary">Milk</a></td>
-													<td>$29</td>
-													<td><span class="badge bg-success text-white">Approved</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
+											<tbody id="tableBody">
 
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -246,6 +171,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/financialYear.js"></script>
 </body>
 
 </html>

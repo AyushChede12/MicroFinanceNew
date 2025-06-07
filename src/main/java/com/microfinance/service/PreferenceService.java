@@ -10,12 +10,14 @@ import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
+import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.CasteModuleRepo;
 import com.microfinance.repository.CategoryModuleRepo;
+import com.microfinance.repository.ExecutiveFounderRepo;
 import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
 
@@ -39,6 +41,9 @@ public class PreferenceService {
 	
 	@Autowired
 	FinancialYearRepo financialYearRepo;
+	
+	@Autowired
+	ExecutiveFounderRepo executiveFounderRepo;
 
 	//Branch Module
 	public BranchModule saveAllBranchModule(BranchModule branchModule) {
@@ -168,6 +173,12 @@ public class PreferenceService {
 	public List<FinancialYear> fetchAllFinancialYear() {
 		// TODO Auto-generated method stub
 		return financialYearRepo.findAll();
+	}
+
+	public ExecutiveFounder saveExecutiveFounder(ExecutiveFounder founder) {
+		// TODO Auto-generated method stub
+		return executiveFounderRepo.save(founder);
+		
 	}
 
 	

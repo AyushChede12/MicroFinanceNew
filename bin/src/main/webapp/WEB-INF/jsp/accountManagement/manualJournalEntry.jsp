@@ -40,7 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,15 +47,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Manual Journal Entry</li>
-=======
-			<h1>Account Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Journal Voucher</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -72,12 +62,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for=""> Branch Name</label> <select id="Branch"
-=======
-								<label for="">Select Branch</label> <select id="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="Branch" required="required"
+								<label for=""> Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 									<option value="Blue">Blue</option>
@@ -87,12 +73,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">Start Date</label> <input type="date"
-=======
-								<label for="vehicalNo">From Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="fromDate" id="fromDate" required="required"
+									name="startDate" id="startDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -100,12 +82,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">End Date</label> <input type="date"
-=======
-								<label for="vehicalNo">To Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="toDate" id="toDate" required="required"
+									name="endDate" id="endDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -115,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-right mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="serachBtn" class="btnStyle"
 					style="background-color: #FFA500;">Search</button>
 			</div>
 		</div>
@@ -131,12 +109,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-					<label for="">Branch Name</label> <select id="Branch"
-=======
-					<label for="">Select Branch</label> <select id="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-						name="Branch" required="required" class="form-control selectField"
+					<label for="">Branch Name</label> <select id="branchName"
+						name="branchName" required="required" class="form-control selectField"
 						style="height: 30px;">
 						<option value="">Select Branch</option>
 						<option value="Blue">Blue</option>
@@ -146,36 +120,24 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-<<<<<<< HEAD
 					<label for="">Generated Receipt ID</label> <input type="text"
-=======
-					<label for="">Receipt No.(Auto)</label> <input type="text"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-						name="age" id="age" required="required"
+						name="generatedReceiptID" id="generatedReceiptID" required="required"
 						placeholder="Enter receipt no." disabled />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-<<<<<<< HEAD
 					<label for="">Date of Entry</label> <input type="date"
-=======
-					<label for="">Txn Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-						name="registrationDate" id="registrationDate" required="required"
+						name="dateOfEntry" id="dateOfEntry" required="required"
 						placeholder="Enter Registration Date" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-					<label for="">Choose Credit Ledger</label> <select id="Branch"
-=======
-					<label for="">Select Cr. Ledger</label> <select id="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-						name="Branch" required="required" class="form-control selectField"
+					<label for="">Choose Credit Ledger</label> <select id="creditLedger"
+						name="creditLedger" required="required" class="form-control selectField"
 						style="height: 30px;">
 						<option value="">Select Cr. ledger</option>
 						<option value="Blue">Blue</option>
@@ -185,12 +147,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-					<label for="">Choose Debit Ledger</label> <select id="Branch"
-=======
-					<label for="">Select Dr. Ledger</label> <select id="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-						name="Branch" required="required" class="form-control selectField"
+					<label for="">Choose Debit Ledger</label> <select id="debitLedger"
+						name="debitLedger" required="required" class="form-control selectField"
 						style="height: 30px;">
 						<option value="">--Select Dr. Ledger--</option>
 						<option value="Blue">Blue</option>
@@ -201,23 +159,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields mb-4">
-<<<<<<< HEAD
-					<label for="">Transaction Amount</label> <input type="text" name="age" id="age"
-=======
-					<label for="">Amount</label> <input type="text" name="age" id="age"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
+					<label for="">Transaction Amount</label> <input type="text" name="transactionAmount" id="transactionAmount"
 						required="required" placeholder="Enter Amount" />
 				</div>
 			</div>
 
 			<div class="col-lg-3">
 				<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 					<label for="">Remarks</label>
-=======
-					<label for="">remarks(if any)</label>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-					<textarea name="" id=""
+					<textarea name="remarks" id="remarks"
 						style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 				</div>
 			</div>

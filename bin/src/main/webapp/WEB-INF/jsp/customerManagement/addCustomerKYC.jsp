@@ -64,7 +64,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Select by Code</label> <select id="selectMember"
-									name="selectMember" required="required"
+									name="selectByCode" required="selectByCode"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Criteria</option>
 									<option value="Blue">Blue</option>
@@ -91,7 +91,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Customer Name</label> <input type="text"
-									name="custName" id="custName" required="required"
+									name="customerName" id="customerName" required="required"
 									placeholder="Enter Customer Name" disabled />
 							</div>
 						</div>
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Customer Code</label> <input type="text"
-									name="custCode" id="custCode" required="required"
+									name="customerCode" id="customerCode" required="required"
 									placeholder="Enter Customer Code" disabled />
 							</div>
 						</div>
@@ -107,7 +107,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Contact No.</label> <input type="text"
-									name="contactno" id="contactno" required="required"
+									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No" disabled />
 							</div>
 						</div>
@@ -115,7 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Sign-up Date</label> <input type="date"
-									name="signup" id="signup"
+									name="singupDate" id="singupDate"
 									required="required" placeholder="Enter Sign-up Date"
 									disabled />
 							</div>
@@ -140,7 +140,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Voter No.</label> <input type="text"
-									name="voterno" id="voterno" required="required"
+									name="voterNo" id="voterNo" required="required"
 									placeholder="Enter Voter No." />
 							</div>
 						</div>
@@ -148,15 +148,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Ration Card No.</label> <input type="text"
-									name="rationcardno" id="rationcardno" required="required"
+									name="rationCardNo" id="rationCardNo" required="required"
 									placeholder="Ration Card No." />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Driving License No.</label> <input type="text" name="dlNo"
-									id="dlNo" required="required" placeholder="Enter Driving License No." />
+								<label for="">Driving License No.</label> <input type="text" name="drivingLicenseNo"
+									id="drivingLicenseNo" required="required" placeholder="Enter Driving License No." />
 							</div>
 						</div>
 					</div>
@@ -181,7 +181,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Customer
 								Photo </label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
+								type="file" accept="image/*" name="customerPhoto" id="customerPhoto"
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -201,7 +201,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
+								type="file" accept="image/*" name="signature" id="signature"
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -221,8 +221,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Aadhar Front photo</label> <label for="bike2image" id="drop-area">
-								<input type="file" accept="image/*" name="bike2image"
-								id="bike2image" hidden="hidden" onchange="bike2Preview();"
+								<input type="file" accept="image/*" name="aadharFrontPhoto"
+								id="aadharFrontPhoto" hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -241,8 +241,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Aadhar Back Photo</label> <label for="bike2image" id="drop-area">
-								<input type="file" accept="image/*" name="bike2image"
-								id="bike2image" hidden="hidden" onchange="bike2Preview();"
+								<input type="file" accept="image/*" name="aadharBackPhoto"
+								id="aadharBackPhoto" hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -261,7 +261,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								PAN Photo</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
+								type="file" accept="image/*" name="panPhoto" id="panPhoto"
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -291,7 +291,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Bank Name </label> <input type="text"
-									name="location" id="location" required="required"
+									name="bankName" id="bankName" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
@@ -299,7 +299,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Bank Branch </label> <input type="text"
-									name="location" id="location" required="required"
+									name="bankBranch" id="bankBranch" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
@@ -307,7 +307,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Account No. </label> <input type="text"
-									name="location" id="location" required="required"
+									name="acountNo" id="acountNo" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
@@ -315,7 +315,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">IFSC Code </label> <input type="text"
-									name="location" id="location" required="required"
+									name="ifscCode" id="ifscCode" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>

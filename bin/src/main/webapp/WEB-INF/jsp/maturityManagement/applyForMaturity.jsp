@@ -41,7 +41,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -49,15 +48,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Apply For Maturity</li>
-=======
-			<h1>Maturity Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Maturity Application</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -95,14 +85,10 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">Policy ID*</label> <select id="colour"
-=======
-								<label for="">Policy No*</label> <select id="colour"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="colour" required="required"
+								<label for="">Policy ID*</label> <select id="policyId"
+									name="policyId" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">select</option>
+									<option value="">select Policy ID</option>
 
 								</select>
 							</div>
@@ -110,13 +96,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">Customer Name*</label> <input type="text"
-=======
-								<label for="vehicalNo">Member Name*</label> <input type="text"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Member Name"
+									name="customerName" id="customerName" required="required"
+									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -124,8 +106,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Policy Date*</label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>Policy Date*</label> <input type="date" name="policyDate"
+									id="policyDate" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -133,7 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Application Date*</label> <input type="date"
-									name="location" id="location" required="required"
+									name="applicationDate" id="applicationDate" required="required"
 									placeholder="" />
 							</div>
 						</div>
@@ -142,12 +124,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-<<<<<<< HEAD
-								<label>commet</label> <input type="text" name="price" id="price"
-=======
-								<label>Remark</label> <input type="text" name="price" id="price"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									required="required" placeholder="Enter Remark" />
+								<label>Comment</label> <input type="text" name="comment" id="comment"
+									required="required" placeholder="Enter Commet"  />
 
 							</div>
 						</div>
@@ -155,8 +133,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-right">
-							<button id="saveBtn" class="btn btn-warning" color:black">View
-								Policy Detail</button>
+							<button id="saveBtn" class="btn btn-warning" color:black">
+							View Policy Detail</button>
 							<button id="Add" class="btn btn-warning" color:black">Add</button>
 						</div>
 					</div>

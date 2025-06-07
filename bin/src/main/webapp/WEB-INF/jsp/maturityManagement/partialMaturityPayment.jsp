@@ -40,7 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,15 +47,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Partial Maturity Payment</li>
-=======
-			<h1>Maturity Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Maturity Part Payment</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -94,12 +84,8 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">Policy Id.</label> <select id="colour"
-=======
-								<label for="">Policy No.</label> <select id="colour"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="colour" required="required"
+								<label for="">Policy Id.</label> <select id="policyID"
+									name="policyID" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -158,11 +144,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="">Policy Id:</label> <input type="text"
-=======
-								<label for="">Policy No:</label> <input type="text"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -170,12 +152,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">Client Name :</label> <input
-=======
-								<label for="vehicalNo">Applicant Name:</label> <input
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="clientName" id="clientName" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -183,24 +161,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-<<<<<<< HEAD
-								<label>Policy Name:</label> <input type="text" name="vehicalNo"
-=======
-								<label>Plan Name:</label> <input type="text" name="vehicalNo"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									id="vehicalNo" required="required" placeholder=""
+								<label>Policy Name:</label> <input type="text" name="policyName"
+									id="policyName" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="">Policy code:</label> <input type="text"
-=======
-								<label for="">plan code:</label> <input type="text"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="location" id="location" required="required"
+									name="policyCode" id="policyCode" required="required"
 									placeholder="" />
 							</div>
 						</div>
@@ -209,11 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-<<<<<<< HEAD
-								<label>Duration:</label> <input type="text" name="price" id="price"
-=======
-								<label>Term:</label> <input type="text" name="price" id="price"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
+								<label>Duration:</label> <input type="text" name="duration" id="duration"
 									required="required" placeholder="" />
 
 							</div>
@@ -223,8 +189,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Policy Amount:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Policy Amount:</label> <input type="text" name="policyAmount"
+									id="policyAmount" required="required" placeholder="" />
 
 							</div>
 
@@ -233,8 +199,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Actual Maturity:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Actual Maturity:</label> <input type="text" name="actualMaturity"
+									id="actualMaturity" required="required" placeholder="" />
 
 							</div>
 
@@ -243,8 +209,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Maturity Date:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Maturity Date:</label> <input type="text" name="maturityDate"
+									id="maturityDate" required="required" placeholder="" />
 
 							</div>
 
@@ -252,18 +218,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Sys.Payable:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
-
-							</div>
-
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Deduction(-):</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Sys.Payable:</label> <input type="text" name="sysPayable"
+									id="sysPayable" required="required" placeholder="" />
 
 							</div>
 
@@ -272,8 +228,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Adjeustment(+):</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Deduction(-):</label> <input type="text" name="deduction"
+									id="deduction" required="required" placeholder="" />
 
 							</div>
 
@@ -282,8 +238,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Net Payable:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
+									id="adjeustment" required="required" placeholder="" />
 
 							</div>
 
@@ -292,12 +248,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-<<<<<<< HEAD
-								<label>Approval Branch Name:</label> <input type="text" name="price"
-=======
-								<label>Approval Branch:</label> <input type="text" name="price"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									id="price" required="required" placeholder="" />
+								<label>Net Payable:</label> <input type="text" name="netPayable"
+									id="netPayable" required="required" placeholder="" />
 
 							</div>
 
@@ -306,8 +258,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Date:</label> <input type="date" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Approval Branch Name:</label> <input type="text" name="approvalBranchName"
+									id="approvalBranchName" required="required" placeholder="" />
 
 							</div>
 
@@ -316,12 +268,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-<<<<<<< HEAD
-								<label>Approve Comment:</label> <input type="text" name="price"
-=======
-								<label>Approve Remarks:</label> <input type="text" name="price"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									id="price" required="required" placeholder="" />
+								<label>Approval Date:</label> <input type="date" name="approvalDate"
+									id="approvalDate" required="required" placeholder="" />
+
+							</div>
+
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Approve Comment:</label> <input type="text" name="approveComment"
+									id="approveComment" required="required" placeholder="" />
 
 							</div>
 
@@ -331,8 +289,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve User:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Approve User:</label> <input type="text" name="approveUser"
+									id="approveUser" required="required" placeholder="" />
 
 							</div>
 
@@ -345,11 +303,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-<<<<<<< HEAD
 							<li class="breadcrumb-item action">Payable Detail</li>
-=======
-							<li class="breadcrumb-item action">Payable Deatil</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
@@ -378,7 +332,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Amount:</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="amount" id="amount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -386,7 +340,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount:</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="paidAmount" id="paidAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -394,8 +348,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Due Amount:</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>Due Amount:</label> <input type="text" name="dueAmount"
+									id="dueAmount" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -412,11 +366,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-<<<<<<< HEAD
 							<li class="breadcrumb-item action">Payment Detail</li>
-=======
-							<li class="breadcrumb-item action">Payment Deatil</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
@@ -445,15 +395,15 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Payment Date:</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="paymentDate" id="paymentDate" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch:</label> <select id="colour"
-									name="colour" required="required"
+								<label for="vehicalNo">Pay Branch:</label> <select id="payBranch"
+									name="payBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -464,24 +414,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-<<<<<<< HEAD
-								<label>Pay Comment:</label> <input type="text" name="vehicalNo"
-=======
-								<label>Pay Remark:</label> <input type="text" name="vehicalNo"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									id="vehicalNo" required="required" placeholder=""
+								<label>Pay Comment:</label> <input type="text" name="payComment"
+									id="payComment" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">Mode of Payment*</label> <select id="colour"
-=======
-								<label for="">Payment By*</label> <select id="colour"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="colour" required="required"
+								<label for="">Mode of Payment*</label> <select id="modeofPayment"
+									name="modeofPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 

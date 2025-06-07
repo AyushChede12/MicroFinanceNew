@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
@@ -44,7 +41,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -52,15 +48,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Full Maturity Payment</li>
-=======
-			<h1>Maturity Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Maturity Payment</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -70,61 +57,26 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-<<<<<<< HEAD
 							<li class="breadcrumb-item action">Serach box</li>
-=======
-							<li class="breadcrumb-item action">Search Box</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-<<<<<<< HEAD
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="colour" name="colour"
+								<label for="">Branch</label> <select id="branch" name="branch"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Branch</option>
-=======
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-							<div class="d-flex flex-column formFields">
-								<label for="">Policy No.</label> <select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 
 								</select>
 							</div>
 						</div>
 
-<<<<<<< HEAD
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">From Date :</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -133,8 +85,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4"
 								style="margin-bottom: 30px">
-								<label>To Date :</label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>To Date :</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -148,282 +100,10 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div>
-=======
 
-					</div>
 
 
 
-
-
-
-
-
-
-
-
-					<div class="mt-5">
-						<nav>
-							<ol class="breadcrumb breadcrumb-title">
-								<li class="breadcrumb-item action">Policy Details</li>
-							</ol>
-						</nav>
-						<div class="row">
-							<div class="col-lg-3">
-								<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-								<div class="d-flex flex-column formFields">
-									<label for="">Policy No:</label> <input type="text"
-										name="vehicalNo" id="vehicalNo" required="required"
-										placeholder="" style="text-transform: uppercase;" />
-								</div>
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="vehicalNo">Applicant Name:</label> <input
-										type="text" name="vehicalNo" id="vehicalNo"
-										required="required" placeholder=""
-										style="text-transform: uppercase;" />
-								</div>
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Plan Name:</label> <input type="text" name="vehicalNo"
-										id="vehicalNo" required="required" placeholder=""
-										style="text-transform: uppercase;" />
-								</div>
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">plan code:</label> <input type="text"
-										name="location" id="location" required="required"
-										placeholder="" />
-								</div>
-							</div>
-
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Term:</label> <input type="text" name="price" id="price"
-										required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Policy Amount:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Actual Maturity:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Maturity Date:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Sys.Payable:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Deduction(-):</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Adjeustment(+):</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Net Payable:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Approval Branch:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Approval Date:</label> <input type="date" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Approve Remarks:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Approve User:</label> <input type="text" name="price"
-										id="price" required="required" placeholder="" />
-
-								</div>
-
-							</div>
-
-						</div>
-					</div>
-
-
-
-					<div class="mt-5">
-						<nav>
-							<ol class="breadcrumb breadcrumb-title">
-								<li class="breadcrumb-item action">Payment Deatil</li>
-							</ol>
-						</nav>
-						<div class="row">
-							<div class="col-lg-3">
-								<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-								<div class="d-flex flex-column formFields">
-									<label for="">Payment Date:</label> <input type="date"
-										name="vehicalNo" id="vehicalNo" required="required"
-										placeholder="" style="text-transform: uppercase;" />
-								</div>
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="vehicalNo">Pay Branch:</label> <select id="colour"
-										name="colour" required="required"
-										class="form-control selectField" style="height: 30px;">
-										<option value="">Select</option>
-
-									</select>
-								</div>
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Pay Remark:</label> <input type="text" name="vehicalNo"
-										id="vehicalNo" required="required" placeholder=""
-										style="text-transform: uppercase;" />
-								</div>
-							</div>
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">Payment By*</label> <select id="colour"
-										name="colour" required="required"
-										class="form-control selectField" style="height: 30px;">
-										<option value="">Select</option>
-
-									</select>
-								</div>
-							</div>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-
-
-
-
-<<<<<<< HEAD
 
 
 				<div class="row mt-5">
@@ -473,16 +153,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-=======
-						</div>
-
-						<div class="row">
-							<div class="col-12 text-right">
-								<button id="saveBtn" class="btn btn-warning" sty>Update</button>
-							</div>
-						</div>
-					</div>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 			</form>
 
 

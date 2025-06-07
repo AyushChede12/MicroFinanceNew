@@ -40,7 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,15 +47,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Daily Transaction Book</li>
-=======
-			<h1>Account Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Regular Statement (DayBook)</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -72,12 +62,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">branch Name</label> <select id="Branch"
-=======
-								<label for="">Select Branch</label> <select id="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="Branch" required="required"
+								<label for="">branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 									<option value="Blue">Blue</option>
@@ -87,12 +73,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
-								<label for="">Choose Ledger</label> <select id="Branch"
-=======
-								<label for="">Select Ledger</label> <select id="Branch"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="Branch" required="required"
+								<label for="">Choose Ledger</label> <select id="chooseLedger"
+									name="chooseLedger" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Ledger</option>
 									<option value="Blue">Blue</option>
@@ -102,12 +84,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">Start Date</label> <input type="date"
-=======
-								<label for="vehicalNo">From Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="fromDate" id="fromDate" required="required"
+									name="startDate" id="startDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -115,12 +93,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="vehicalNo">End Date</label> <input type="date"
-=======
-								<label for="vehicalNo">To Date</label> <input type="date"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
-									name="toDate" id="toDate" required="required"
+									name="endDate" id="endDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -130,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="serachBtn" class="btnStyle"
 					style="background-color: #FFA500;">Search</button>
 			</div>
 		</div>
