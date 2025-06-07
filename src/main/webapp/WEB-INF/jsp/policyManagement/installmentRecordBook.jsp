@@ -84,26 +84,18 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 
-							<div class="d-flex flex-column formFields">
-								<label for="">Find by Policy Number *</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+						
 
-										</ul>
-									</div>
-								</div>
+						<div class="col-lg-12 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Find by Policy Number*</label> <select
+									id="findByPolicyNumber" name="findByPolicyNumber" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+									
+								</select>
 							</div>
+						</div>
 
 
 
@@ -113,12 +105,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row" style="margin-top: 20px; margin-left: 450px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning">Find</button>
-								<button id="saveBtn" class="btnStyle"
-									style="background-color: orange; color: white;">Front
+								<button id="saveBtn" class="btn btn-dark">Find</button>
+								<button id="saveBtn" class="btn btn-dark"
+									>Front
 									Page</button>
-								<button id="saveBtn" class="btnStyle bg-primary">Transaction</button>
-								<button id="saveBtn" class="btnStyle bg-danger">Heading</button>
+								<button id="saveBtn" class="btn btn-dark">Transaction</button>
+								<button id="saveBtn" class="btn btn-dark">Heading</button>
 							</div>
 						</div>
 

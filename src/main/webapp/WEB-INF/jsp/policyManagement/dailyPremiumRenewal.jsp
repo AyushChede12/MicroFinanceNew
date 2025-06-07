@@ -60,51 +60,18 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+
+
+
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID.*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								<label for="">Policy ID*</label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Policy Name" />
 							</div>
 						</div>
+
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -116,32 +83,16 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
-
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+								<label for="">Relation</label> <select id="relation"
+									name="relation" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
 
-										</ul>
-									</div>
-								</div>
+								</select>
 							</div>
 						</div>
-
-
 					</div>
 
 
@@ -152,211 +103,191 @@ pageEncoding="ISO-8859-1"%> -->
 							</ol>
 						</nav>
 						<div class="row">
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Policy Date*</label> <input type="date" name="vehicalNo"
-										id="vehicalNo" required="required"
-										placeholder="Enter Vehicle No"
-										style="text-transform: uppercase;" />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields"
+										style="margin-bottom: 30px">
+										<label>Policy Date*</label> <input type="date"
+											name="policyDate" id="policyDate" required="required"
+											placeholder="Enter Policy Date"
+											style="text-transform: uppercase;" />
+									</div>
 								</div>
-							</div>
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">Maturity Date*</label> <input type="date"
-										name="vehicalNo" id="vehicalNo" required="required"
-										placeholder="Enter Vehicle No"
-										style="text-transform: uppercase;" />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields">
+										<label for="">Maturity Date*</label> <input type="date"
+											name="maturityDate" id="maturityDate" required="required"
+											placeholder="Enter Maturity Date"
+											style="text-transform: uppercase;" />
+									</div>
 								</div>
-							</div>
 
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">Customer Code* </label> <input type="text"
-										name="location" id="location" required="required"
-										placeholder="Enter Advisor/Collector Code" />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields">
+										<label for="">Customer Code* </label> <input type="text"
+											name="customerCode" id="customerCode" required="required"
+											placeholder="Enter Customer Code" />
+									</div>
 								</div>
-							</div>
 
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">Client Name*</label> <input type="text"
-										name="location" id="location" required="required"
-										placeholder="Enter Relative Name" />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields">
+										<label for="">Client Name*</label> <input type="text"
+											name="clientName" id="clientName" required="required"
+											placeholder="Enter Client Name" />
+									</div>
 								</div>
-							</div>
 
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">Contact Number*</label> <input type="text"
-										name="location" id="location" required="required"
-										placeholder="Enter Mobile No." />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields">
+										<label for="">Contact Number*</label> <input type="text"
+											name="contactNumber" id="contactNumber" required="required"
+											placeholder="Enter Contact Number" />
+									</div>
 								</div>
-							</div>
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-									<label for="">Policy Amount*</label> <input type="text"
-										name="location" id="location" required="required"
-										placeholder="Enter Nominee Name" />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields">
+										<label for="">Policy Amount*</label> <input type="text"
+											name="policyAmount" id="policyAmount" required="required"
+											placeholder="Enter Policy Amount" />
+									</div>
 								</div>
-							</div>
 
 
 
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Policy Type</label> <input type="text" name="location"
-										id="location" required="required"
-										placeholder="Enter Nominee Name" />
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields"
+										style="margin-bottom: 30px">
+										<label>Policy Type</label> <input type="text" name="policyType"
+											id="policyType" required="required"
+											placeholder="Enter Policy Type" />
+									</div>
 								</div>
-							</div>
+
 
 
 							<!-- in this two text fieldds are required -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Policy Term </label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="policyTerm">Policy Term</label> <input type="text"
+										name="policyTerm" id="policyTerm" required
 										placeholder="Enter Education" />
 								</div>
 							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Maturity Amt.*</label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="maturityAmt">Maturity Amt.*</label> <input
+										type="text" name="maturityAmt" id="maturityAmt" required
 										placeholder="Enter Education" />
 								</div>
 							</div>
 
-
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Total Deposits*</label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="totalDeposits">Total Deposits*</label> <input
+										type="text" name="totalDeposits" id="totalDeposits" required
 										placeholder="Enter Education" />
 								</div>
 							</div>
 
-
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Payment Due*</label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="paymentDue">Payment Due*</label> <input type="text"
+										name="paymentDue" id="paymentDue" required
 										placeholder="Enter Education" />
 								</div>
 							</div>
 
-
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Notification Status*</label> <input type="text"
-										name="price" id="price" required="required"
-										placeholder="Enter Education" />
+									<label for="notificationStatus">Notification Status*</label> <input
+										type="text" name="notificationStatus" id="notificationStatus"
+										required placeholder="Enter Education" />
 								</div>
 							</div>
 
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Finicial Code  *</label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="financialCode">Financial Code *</label> <input
+										type="text" name="financialCode" id="financialCode" required
 										placeholder="Enter Education" />
 								</div>
 							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Last Payment Date*</label> <input type="text"
-										name="price" id="price" required="required"
-										placeholder="Enter Education" />
+									<label for="lastPaymentDate">Last Payment Date*</label> <input
+										type="text" name="lastPaymentDate" id="lastPaymentDate"
+										required placeholder="Enter Education" />
 								</div>
 							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Due Date*</label> <input type="date"
-										name="vehicalNo" id="vehicalNo" required="required"
+									<label for="dueDate">Due Date*</label> <input type="date"
+										name="dueDate" id="dueDate" required
 										placeholder="Enter Vehicle No"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
 
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mt-4">
+									<label for="penaltyFee">Penalty Fee*</label> <input type="text"
+										name="penaltyFee" id="penaltyFee" required
+										placeholder="Enter Education" />
+								</div>
+							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">	Penalty Fee*</label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="installmentsCompleted">Installments
+										Completed*</label> <input type="text" name="installmentsCompleted"
+										id="installmentsCompleted" required
 										placeholder="Enter Education" />
 								</div>
 							</div>
 
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Installments Completed*</label> <input type="text"
-										name="price" id="price" required="required"
-										placeholder="Enter Education" />
+							<div class="col-lg-3 mt-4">
+								<div class="d-flex flex-column formFields">
+									<label for="modeOfPayment">Mode of Payment</label> <select
+										id="modeOfPayment" name="modeOfPayment" required
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Select Branch Name</option>
+									</select>
 								</div>
 							</div>
 
-
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Mode of Payment*</label>
-									<div class="position-relative">
-										<div class="select-btn1" style="cursor: pointer;">
-											<span name="cityName" id="cityNameId"
-												style="font-size: 12px;">Select Code</span> <i
-												class="fa-solid fa-angle-down"></i>
-										</div>
-										<div class="content" id="contentCityName"
-											style="display: none;">
-											<div class="search">
-												<input type="text" id="city-search" class="m-0"
-													placeholder="Search" />
-											</div>
-											<ul class="options" id="city-options">
-
-											</ul>
-										</div>
-									</div>
+									<label for="agentCollectorName">Agent/Collector Name*</label> <input
+										type="text" name="agentCollectorName" id="agentCollectorName"
+										required placeholder="Enter Education" />
 								</div>
 							</div>
 
-
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Agent/Collector Name*</label> <input type="text"
-										name="price" id="price" required="required"
-										placeholder="Enter Education" />
+									<label for="name">Name*</label> <input type="text" name="name"
+										id="name" required placeholder="Enter Education" />
 								</div>
 							</div>
 
-
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Name*</label> <input type="text" name="price"
-										id="price" required="required" placeholder="Enter Education" />
-								</div>
-							</div>
-
-
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Comments*</label>
-									<textarea name="" id=""
+									<label for="comments">Comments*</label>
+									<textarea name="comments" id="comments"
 										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>
-
 						</div>
 					</div>
 
@@ -409,9 +340,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row" style="margin-left: 80%;">
 					<div class="col-12 text-center">
-						<button id="saveBtn" class="btnStyle bg-danger">View
+						<button id="saveBtn" class="btn btn-primary">View
 							Installment</button>
-						<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+						<button id="saveBtn" class="btn btn-info">Save</button>
 					</div>
 				</div>
 			</form>
