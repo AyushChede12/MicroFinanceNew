@@ -64,8 +64,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Month Name</label>
-								<select id="month"
-									name="month" required="required"
+								<select id="monthName"
+									name="monthName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Month</option>
 									<option value="Blue">2</option>
@@ -77,16 +77,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields ">
-								<label for="">Code </label> <input type="text" name="location"
-									id="location" required="required" placeholder="" />
+								<label for="">Code </label> <input type="text" name="code"
+									id="code" required="required" placeholder="" />
 							</div>
 							   
 						</div>
 					</div>
 					<div class="row">
 						<div class=" col-lg-3">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update</button>
+							<button id="saveBtn" class="btn btn-success"
+								>Update</button>
 						</div>
 					</div>
 					<div class="row mt-5">

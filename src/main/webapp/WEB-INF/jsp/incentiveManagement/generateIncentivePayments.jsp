@@ -35,7 +35,6 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 
-
 <body>
 
 	<main id="main" class="main">
@@ -62,8 +61,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Incentive Month</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Incentive Month</label> <select id="incentiveMonth"
+									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Blue">January</option>
@@ -75,7 +74,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="vehicalNo">Date From</label> <input type="date"
-									name="datef" id="datef" required="required"
+									name="dateFrom" id="dateFrom" required="required"
 									placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -84,7 +83,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="vehicalNo">Date To</label> <input type="date"
-									name="datet" id="datet" required="required"
+									name="dateTo" id="dateTo" required="required"
 									placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
 							</div>
@@ -93,11 +92,11 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class=" col-lg-3">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Generate</button>
+							<button id="saveBtn" class="btn btn-outline-danger"
+								>Generate</button>
 						</div>
 					</div>
-				</div>
+				</div>       
 		</div>
 		</div>
 

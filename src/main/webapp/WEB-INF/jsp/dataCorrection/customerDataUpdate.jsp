@@ -612,10 +612,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
-							<button id="printBtn" class="btnStyle bg-success">Print</button>
-							<button id="updateBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update</button>
-							<button id="deleteBtn" class="btnStyle bg-primary">Delete</button>
+							<button id="printBtn" class="btn btn-warning">Print</button>
+							<button id="updateBtn" class="btn btn-success"
+								>Update</button>
+							<button id="deleteBtn" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 				</div>

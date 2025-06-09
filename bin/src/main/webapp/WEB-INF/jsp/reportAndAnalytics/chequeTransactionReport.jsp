@@ -40,7 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-<<<<<<< HEAD
 			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
@@ -48,15 +47,6 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Cheque Transaction Report</li>
-=======
-			<h1>Report Section</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Cheque Clear</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 				</ol>
 			</nav>
 		</div>
@@ -66,11 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-<<<<<<< HEAD
 							<li class="breadcrumb-item action">Find Box</li>
-=======
-							<li class="breadcrumb-item action">Search Box</li>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</ol>
 					</nav>
 					<div class="row">
@@ -118,11 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-<<<<<<< HEAD
 								<label for="">Check Number.</label> <input type="text"
-=======
-								<label for="">Cheque No.</label> <input type="text"
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 									id="chequeNo" name="chequeNo" required="required"
 									style="height: 30px;" placeholder="Enter Cheque No.">
 
@@ -135,11 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-<<<<<<< HEAD
 							<button id="searchBtn" class="btnStyle bg-warning">Find</button>
-=======
-							<button id="searchBtn" class="btnStyle bg-warning">Search</button>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 						</div>
 					</div>
 
@@ -152,11 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-<<<<<<< HEAD
 							<h5 class="card-title"> Search list Detail</h5>
-=======
-							<h5 class="card-title">Detail Search list</h5>
->>>>>>> 3fd3afd3695257db684c438722ac0a343f53ce55
 
 
 

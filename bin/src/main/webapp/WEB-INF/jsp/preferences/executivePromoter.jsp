@@ -95,8 +95,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Branch Name</label> <select id="branchName"
-									name="branchName" required="required"
+								<label for="vehicalNo">Branch Name</label> <select
+									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 									<option value="Blue">Blue</option>
@@ -119,8 +119,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Date Of Birth</label> <input type="date" name="dob"
-									id="dob" required="required"
+								<label for="">Date Of Birth</label> <input type="date"
+									name="dob" id="dob" required="required"
 									placeholder="Enter Date Of Birth" />
 							</div>
 						</div>
@@ -144,9 +144,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="familymember" id="familymember" required="required"
-									placeholder="Enter Family Member Name" />
+								<label for="">Relation Name</label> <input type="text"
+									name="relationName" id="relationName" required="required"
+									placeholder="Enter Relation Name" />
 							</div>
 						</div>
 
@@ -154,8 +154,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label>
-								<select id="colour"
+								<label>Relation to Applicant</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation To Applicant</option>
@@ -183,10 +182,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>State</label>
-								<select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label>State</label> <select id="colour" name="colour"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select State</option>
 									<option value="Blue">MH</option>
 								</select>
@@ -219,8 +217,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Contact No</label> <input type="text" name="contactNo"
-									id="contactNo" required="required" placeholder="Enter Contact No" />
+								<label for="">Contact No</label> <input type="text"
+									name="contactNo" id="contactNo" required="required"
+									placeholder="Enter Contact No" />
 							</div>
 						</div>
 
@@ -235,8 +234,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Base Value</label> <input type="text" name="baseValue"
-									id="baseValue" required="required"
+								<label for="">Base Value</label> <input type="text"
+									name="baseValue" id="baseValue" required="required"
 									placeholder="Enter Base Value" />
 							</div>
 						</div>
@@ -271,7 +270,7 @@ pageEncoding="ISO-8859-1"%> -->
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
+									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike1imagePreview" />
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
@@ -291,7 +290,7 @@ pageEncoding="ISO-8859-1"%> -->
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
+									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
@@ -317,26 +316,24 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deposit Acc</label>
-								<select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label>Deposit Acc</label> <select id="colour" name="colour"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Deposit Acc</option>
 									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
-
-						<div class="row">
-							<div class="col-12 text-center mt-3" style="margin-left: 450px;">
-								<button id="saveBtn" class="btnStyle bg-success">Show</button>
-								<button id="saveBtn" class="btnStyle"
-									style="background-color: #FFA500;">Hide</button>
-								<button id="saveBtn" class="btnStyle bg-primary">Save</button>
-							</div>
+					</div>
+					<div class="row" style="margin-top: 30px;">
+						<div class="col-12 text-center">
+							<button type="button" id="showBtn" class="btnStyle bg-primary"
+								onclick="showTableData()">Show</button>
+							<button type="button" id="hideBtn" class="btnStyle bg-success"
+								onclick="hideTableData()">Hide</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning"
+								onclick="saveBranch()">Save</button>
 						</div>
-
-
 					</div>
 			</form>
 

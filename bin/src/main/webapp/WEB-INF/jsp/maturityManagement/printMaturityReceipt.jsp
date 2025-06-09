@@ -41,13 +41,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Maturity Section</h1>
+			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-house-door"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Maturity Payment</li>
+					<li class="breadcrumb-item action">Print Maturity Receipt</li>
 				</ol>
 			</nav>
 		</div>
@@ -64,8 +64,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Select by policy No.*</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Select by policy ID.*</label> <select id="policyID"
+									name="policyID" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">All</option>
 
