@@ -109,7 +109,7 @@ pageEncoding="ISO-8859-1"%> -->
 				
 						<div class="row" style="margin-left: 45%;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-primary">Save
+								<button id="saveBtn" class="btn btn-info ">Save
 								</button>
 							</div>
 						</div>
