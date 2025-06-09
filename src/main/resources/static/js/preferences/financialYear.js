@@ -1,9 +1,11 @@
 function saveFinancialYear() {
 	const formData = {
 		financialYearName: $('input[name="financialYearName"]').val(),
-		dateFrom: $('input[name="dateFrom"]').val(),
-		dateTo: $('input[name="dateTo"]').val(),
+		dateFrom: $('date[name="dateFrom"]').val(),
+		dateTo: $('date[name="dateTo"]').val(),
 	};
+	alert(formData.datadateFrom);
+	alert(formData.dateTo);
 
 	$.ajax({
 		type: "POST",

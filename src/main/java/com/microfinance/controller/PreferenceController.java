@@ -11,12 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
@@ -198,71 +201,89 @@ public class PreferenceController {
 		return list;
 	}
 	
-	//Executive Founder - Ayush
-	@PostMapping("/saveExecutiveFounder")           
+//	//Executive Founder - Ayush
+//	@PostMapping("/saveExecutiveFounder")           
+//	@ResponseBody
+//	public ResponseEntity<String> saveExecutiveFounderData(@RequestParam String type, @RequestParam String branchName,
+//			@RequestParam String fullName, @RequestParam String dateOfBirth, @RequestParam String promoterNo,
+//			@RequestParam String appointmentDate, @RequestParam String relationName,
+//			@RequestParam String relationToApplicant, @RequestParam String address, @RequestParam String district,
+//			@RequestParam String state, @RequestParam String pinCode, @RequestParam String aadharNo,
+//			@RequestParam String panNo, @RequestParam String contactNo, @RequestParam String emailId,
+//			@RequestParam String baseValue, @RequestParam String shareCount, @RequestParam String shareAmount,
+//			@RequestParam String depositAcc, @RequestParam("photoName") MultipartFile photo,
+//			@RequestParam("signatureName") MultipartFile signature) {
+//
+//		try {
+//			String photoPath = saveFile(photo);
+//			String signaturePath = saveFile(signature);
+//
+//			ExecutiveFounder founder = new ExecutiveFounder();
+//			founder.setType(type);
+//			founder.setBranchName(branchName);
+//			founder.setFullName(fullName);
+//			founder.setDateOfBirth(dateOfBirth);
+//			founder.setPromoterNo(promoterNo);
+//			founder.setAppointmentDate(appointmentDate);
+//			founder.setRelationName(relationName);
+//			founder.setRelationToApplicant(relationToApplicant);
+//			founder.setAddress(address);
+//			founder.setDistrict(district);
+//			founder.setState(state);
+//			founder.setPinCode(pinCode);
+//			founder.setAadharNo(aadharNo);
+//			founder.setPanNo(panNo);
+//			founder.setContactNo(contactNo);
+//			founder.setEmailId(emailId);
+//			founder.setBaseValue(baseValue);
+//			founder.setShareCount(shareCount);
+//			founder.setShareAmount(shareAmount);
+//			founder.setDepositAcc(depositAcc);
+//			founder.setPhotoPath(photoPath);
+//			founder.setSignaturePath(signaturePath);
+//
+//			preferenceService.saveExecutiveFounder(founder);
+//
+//			return ResponseEntity.ok("success");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving data");
+//		}
+//	}
+//
+//	private String saveFile(MultipartFile file) throws IOException {
+//		if (file.isEmpty()) {
+//			return null;
+//		}
+//
+//		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+//		File destFile = new File(uploadDirectory + File.separator + fileName);
+//
+//		// Ensure directory exists
+//		destFile.getParentFile().mkdirs();
+//
+//		file.transferTo(destFile);
+//
+//		return fileName;
+//	}
+	
 	@ResponseBody
-	public ResponseEntity<String> saveExecutiveFounderData(@RequestParam String type, @RequestParam String branchName,
-			@RequestParam String fullName, @RequestParam String dateOfBirth, @RequestParam String promoterNo,
-			@RequestParam String appointmentDate, @RequestParam String relationName,
-			@RequestParam String relationToApplicant, @RequestParam String address, @RequestParam String district,
-			@RequestParam String state, @RequestParam String pinCode, @RequestParam String aadharNo,
-			@RequestParam String panNo, @RequestParam String contactNo, @RequestParam String emailId,
-			@RequestParam String baseValue, @RequestParam String shareCount, @RequestParam String shareAmount,
-			@RequestParam String depositAcc, @RequestParam("photoName") MultipartFile photo,
-			@RequestParam("signatureName") MultipartFile signature) {
-
-		try {
-			String photoPath = saveFile(photo);
-			String signaturePath = saveFile(signature);
-
-			ExecutiveFounder founder = new ExecutiveFounder();
-			founder.setType(type);
-			founder.setBranchName(branchName);
-			founder.setFullName(fullName);
-			founder.setDateOfBirth(dateOfBirth);
-			founder.setPromoterNo(promoterNo);
-			founder.setAppointmentDate(appointmentDate);
-			founder.setRelationName(relationName);
-			founder.setRelationToApplicant(relationToApplicant);
-			founder.setAddress(address);
-			founder.setDistrict(district);
-			founder.setState(state);
-			founder.setPinCode(pinCode);
-			founder.setAadharNo(aadharNo);
-			founder.setPanNo(panNo);
-			founder.setContactNo(contactNo);
-			founder.setEmailId(emailId);
-			founder.setBaseValue(baseValue);
-			founder.setShareCount(shareCount);
-			founder.setShareAmount(shareAmount);
-			founder.setDepositAcc(depositAcc);
-			founder.setPhotoPath(photoPath);
-			founder.setSignaturePath(signaturePath);
-
-			preferenceService.saveExecutiveFounder(founder);
-
-			return ResponseEntity.ok("success");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving data");
-		}
-	}
-
-	private String saveFile(MultipartFile file) throws IOException {
-		if (file.isEmpty()) {
-			return null;
-		}
-
-		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-		File destFile = new File(uploadDirectory + File.separator + fileName);
-
-		// Ensure directory exists
-		destFile.getParentFile().mkdirs();
-
-		file.transferTo(destFile);
-
-		return fileName;
+	@PostMapping("saveExecutiveFounder")
+	public ResponseEntity<ApiResponse<ExecutiveFounder>> saveExecutiveFounderData(
+	        @ModelAttribute ExecutiveFounderDto executiveFounderDto,
+	        @RequestParam(value = "photo", required = false) MultipartFile photo, @RequestParam(value = "signature", required = false) MultipartFile signature) {	 
+		
+		if (photo != null) {
+	        System.out.println("Received photo: " + photo.getOriginalFilename());
+	    }
+		if (signature != null) {
+	        System.out.println("Received signature: " + signature.getOriginalFilename());
+	    }
+	    
+	    ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo, signature);
+	    //return new ResponseEntity<>(response, response.getStatus());
+	    return ResponseEntity.ok(new ApiResponse<ExecutiveFounder>("OK", executiveFounderDto.getId() != 0 ? "Data updated successfully" : "Data saved successfully", response));
 	}
 	
 
