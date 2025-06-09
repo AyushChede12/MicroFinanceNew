@@ -85,7 +85,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="colour" name="colour"
+								<label for="">Branch <span id="star">*</span></label> <select id="colour" name="colour"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Branch</option>
@@ -96,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">From Date :</label> <input type="date"
+								<label for="vehicalNo">From Date <span id="star">*</span> :</label> <input type="date"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
@@ -106,7 +106,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields md-4"
 								style="margin-bottom: 30px">
-								<label>To Date :</label> <input type="date" name="vehicalNo"
+								<label>To Date <span id="star">*</span> :</label> <input type="date" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
@@ -115,8 +115,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 					<div class="row">
-						<div class="col-12 text-left">
-							<button id="saveBtn" class="btn btn-warning" color:black">Search</button>
+						<div class="col-12 text-center">
+							<button id="saveBtn" class="btn btn-dark" color:black">Find</button>
 
 						</div>
 					</div>

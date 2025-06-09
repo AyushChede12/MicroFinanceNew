@@ -59,8 +59,8 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Referral Code Entry</label> <select id="code"
-							name="colour" required="required"
+						<label for="">Referral Code Entry</label> <select id="referralCodeEntry"
+							name="referralCodeEntry" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select</option>
 						</select>

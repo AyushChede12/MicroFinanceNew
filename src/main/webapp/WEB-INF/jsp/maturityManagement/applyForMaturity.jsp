@@ -85,7 +85,9 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID*</label> <select id="colour"
+								<label for="">Policy ID <span id="star">*</span></label> 
+								
+								<select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select</option>
@@ -96,7 +98,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Customer Name*</label> <input type="text"
+								<label for="vehicalNo">Customer Name <span id="star">*</span></label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
@@ -106,7 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Policy Date*</label> <input type="date" name="vehicalNo"
+								<label>Policy Date <span id="star">*</span></label> <input type="date" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
@@ -114,7 +116,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Application Date*</label> <input type="date"
+								<label for="">Application Date <span id="star">*</span></label> <input type="date"
 									name="location" id="location" required="required"
 									placeholder="" />
 							</div>
@@ -132,10 +134,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 					<div class="row">
-						<div class="col-12 text-right">
-							<button id="saveBtn" class="btn btn-warning" color:black">View
-								Policy Detail</button>
-							<button id="Add" class="btn btn-warning" color:black">Add</button>
+						<div class="col-12 text-center">
+							<button type="button" class="btn btn-primary">View Policy Detail</button>
+							<button type="button" id="saveBtn" class="btn btn-info">Save</button>
 						</div>
 					</div>
 				</div>

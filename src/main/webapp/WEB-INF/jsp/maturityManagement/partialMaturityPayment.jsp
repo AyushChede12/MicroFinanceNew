@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Id.</label> <select id="colour"
+								<label for="">Policy Id. <span id="star">*</span></label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -97,21 +97,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 					<div class="row">
-						<div class="col-12 text-right">
-							<button id="saveBtn" class="btn btn-warning">Update</button>
+						<div class="col-12 text-center">
+							<button id="saveBtn" class="btn btn-success">Update</button>
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-
-
 
 				<div class="mt-5">
 					<nav>
@@ -331,7 +321,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount:</label> <input type="date"
+								<label for="">Amount <span id="star">*</span> : </label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -339,7 +329,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Paid Amount:</label> <input type="text"
+								<label for="vehicalNo">Paid Amount <span id="star">*</span> :</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -394,7 +384,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment Date:</label> <input type="date"
+								<label for="">Payment Date <span id="star">*</span> :</label> <input type="date"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -402,7 +392,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch:</label> <select id="colour"
+								<label for="vehicalNo">Pay Branch <span id="star">*</span>:</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -414,7 +404,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Pay Comment:</label> <input type="text" name="vehicalNo"
+								<label>Pay Comment <span id="star">*</span> :</label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
@@ -422,7 +412,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Mode of Payment*</label> <select id="colour"
+								<label for="">Mode of Payment <span id="star">*</span></label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -437,8 +427,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 					<div class="row">
-						<div class="col-12 text-right">
-							<button id="saveBtn" class="btn btn-warning">Approve</button>
+						<div class="col-12 text-center">
+							<button id="saveBtn" style="color: #fff; background-color: #AA5486;border: none;" class="btn btn-warning">Approve</button>
 						</div>
 					</div>
 				</div>

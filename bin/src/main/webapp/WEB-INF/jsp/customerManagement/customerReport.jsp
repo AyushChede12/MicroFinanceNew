@@ -62,7 +62,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="Branch" name="Branch"
+								<label for="">Branch</label> <select id="branch" name="branch"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>

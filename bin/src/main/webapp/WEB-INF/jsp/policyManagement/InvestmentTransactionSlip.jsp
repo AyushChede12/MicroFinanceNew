@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>New Policy Receipt</h1>
+			<h1>Policy Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-piggy-bank"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Investment Section</li>
+					<li class="breadcrumb-item action">Investment Transaction Slip</li>
 				</ol>
 			</nav>
 		</div>

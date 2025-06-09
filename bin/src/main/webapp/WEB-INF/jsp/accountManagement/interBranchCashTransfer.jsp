@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Account Section</h1>
+			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-wallet2"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Branch Cash Transfer</li>
+					<li class="breadcrumb-item action">Inter Branch Cash Transfer</li>
 				</ol>
 			</nav>
 		</div>
@@ -62,8 +62,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">From Date</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
+								<label for="vehicalNo">Start Date</label> <input type="date"
+									name="startDate" id="startDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -71,8 +71,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">From Branch</label> <select id="Branch"
-									name="Branch" required="required"
+								<label for="">Source Branch</label> <select id="sourceBranch"
+									name="sourceBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select From Branch</option>
 									<option value="Blue">Blue</option>
@@ -82,8 +82,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">To Branch</label> <select id="Branch"
-									name="Branch" required="required"
+								<label for="">Receiving branch</label> <select id="receivingbranch"
+									name="receivingbranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select To Branch</option>
 									<option value="Blue">Blue</option>
@@ -93,8 +93,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Amount" />
+								<label for=""> Total Amount</label> <input type="text" name="totalAmount"
+									id="totalAmount" required="required" placeholder="Enter Amount" />
 							</div>
 						</div>
 					</div>

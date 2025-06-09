@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -87,14 +91,14 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Add Relation</label> <input type="text"
 									name="relation" id="relation" required="required"
-									placeholder="Enter  Relation"
-									style="text-transform: uppercase;" />
+									placeholder="Enter Relation" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="row" style="margin-top: 15px; margin-left: 10px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning">Add</button>
+								<button id="saveBtn" class="btnStyle bg-warning"
+									onclick="saveRelative()">Add</button>
 							</div>
 						</div>
 
@@ -133,39 +137,18 @@ pageEncoding="ISO-8859-1"%> -->
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">Sr No</th>
 													<th scope="col">Relation</th>
-													</tr>
+												</tr>
 											</thead>
-											<tbody>
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="row"><a href="#">1</a></th>
-													<td>Arun Kumar</td>
-													
-												</tr>
+											<tbody id="tableBody">
 
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													
-												</tr>
 											</tbody>
 										</table>
 									</div>
 								</div>
 							</div>
 						</div>
+						</div>
 			</form>
-
-
 
 		</div>
 
@@ -173,6 +156,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/relative.js"></script>
 </body>
 
 </html>
