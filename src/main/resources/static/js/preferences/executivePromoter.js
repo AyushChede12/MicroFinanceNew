@@ -1,63 +1,6 @@
 //Ayush
-function saveExecutive() {
-	alert("Function Called");
-
-	const formData = new FormData();
-
-	// Add each field from form
-	formData.append('type', $('#type').val());
-	formData.append('branchName', $('#branchName').val());
-	formData.append('fullName', $('#fullName').val());
-	formData.append('dateOfBirth', $('#dateOfBirth').val());
-	formData.append('promoterNo', $('#promoterNo').val());
-	formData.append('appointmentDate', $('#appointmentDate').val());
-	formData.append('relationName', $('#relationName').val());
-	formData.append('relationToApplicant', $('#relationToApplicant').val());
-	formData.append('address', $('#address').val());
-	formData.append('district', $('#district').val());
-	formData.append('state', $('#state').val());
-	formData.append('pinCode', $('#pinCode').val());
-	formData.append('aadharNo', $('#aadharNo').val());
-	formData.append('panNo', $('#panNo').val());
-	formData.append('contactNo', $('#contactNo').val());
-	formData.append('emailId', $('#emailId').val());
-	formData.append('baseValue', $('#baseValue').val());
-	formData.append('shareCount', $('#shareCount').val());
-	formData.append('shareAmount', $('#shareAmount').val());
-	formData.append('depositAcc', $('#depositAcc').val());
-
-	// Add files
-	const photoFile = $('#photoName')[0].files[0];
-	const signatureFile = $('#signatureName')[0].files[0];
-
-	if (photoFile) {
-		formData.append('photoName', photoFile);
-	}
-
-	if (signatureFile) {
-		formData.append('signatureName', signatureFile);
-	}
-
-	$.ajax({
-		url: '/saveExecutiveFounder',
-		type: 'POST',
-		data: formData,
-		contentType: false,
-		processData: false,
-		success: function(response) {
-			alert('Data Saved Successfully!');
-			location.reload(); // Or redirect as needed
-		},
-		error: function(xhr) {
-			alert('Error occurred: ' + xhr.responseText);
-		}
-	});
-}
-
-
-//Ayush
 function bike1Preview() {
-	const file = document.getElementById("photoName").files[0];
+	const file = document.getElementById("photo").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -72,7 +15,7 @@ function bike1Preview() {
 
 //Ayush
 function bike2Preview() {
-	const file = document.getElementById("signatureName").files[0];
+	const file = document.getElementById("signature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -116,4 +59,74 @@ $(document).ready(function() {
 			alert("Failed to load dropdown data.");
 		}
 	});
+	
+	//Save Code - Ayush
+	$('#saveBtn').click(function(event) {
+			event.preventDefault();
+
+			// Create FormData object to send data and files
+			var formData = new FormData();
+
+			// Append all form data (text values)
+			formData.append("type", $('#type').val());
+			formData.append("branchName", $('#branchName').val());
+			formData.append("fullName", $('#fullName').val());
+			formData.append("dateOfBirth", $('#dateOfBirth').val());
+			formData.append("promoterNo", $('#promoterNo').val());
+			formData.append("appointmentDate", $('#appointmentDate').val());
+			formData.append("relationName", $('#relationName').val());
+			formData.append("relationToApplicant", $('#relationToApplicant').val());
+			formData.append("address", $('#address').val());
+			formData.append("district", $('#district').val());
+			formData.append("state", $('#state').val());
+			formData.append("pinCode", $('#pinCode').val());
+			formData.append("aadharNo", $('#aadharNo').val());
+			formData.append("panNo", $('#panNo').val());
+			formData.append("contactNo", $('#contactNo').val());
+			formData.append("emailId", $('#emailId').val());
+			formData.append("baseValue", $('#baseValue').val());
+			formData.append("shareCount", $('#shareCount').val());
+			formData.append("shareAmount", $('#shareAmount').val());
+			formData.append("depositAcc", $('#depositAcc').val());
+			
+			// Handle file uploads
+			var photo = $('#photo')[0].files[0]; // Match 'photoWithAadhar' with backend
+			if (photo) formData.append("photo", photo);
+			
+			// Handle file uploads
+	        var signature = $('#signature')[0].files[0];
+	        if (signature) {
+	            formData.append("signature", signature);
+	        }
+
+			// Debugging: Log FormData to check entries
+			for (var pair of formData.entries()) {
+				console.log(pair[0] + ':', pair[1]);
+			}
+			console.log(formData);
+
+			// Make the AJAX request to your API
+			$.ajax({
+				type: 'POST',
+				url: 'saveExecutiveFounder', // Update URL if necessary
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(response) {
+					if (response.status === "OK" || response.status === "CREATED") {
+						alert("Data Saved Successfully"); // Message includes the Member Code
+						location.reload(); // Reload the page
+					} else {
+						alert("Error: " + response.message);
+					}
+				},
+				error: function(xhr, status, error) {
+					console.error("Error: ", xhr.responseText); // Log the error details
+					alert('An error occurred while saving the data. Please try again.');
+				}
+			});
+		});
+		
 });
+
+

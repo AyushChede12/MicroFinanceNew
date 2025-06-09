@@ -269,7 +269,7 @@ public class PreferenceController {
 //	}
 	
 	@ResponseBody
-	@PostMapping("saveExecutiveFounder")
+	@PostMapping("/saveExecutiveFounder")
 	public ResponseEntity<ApiResponse<ExecutiveFounder>> saveExecutiveFounderData(
 	        @ModelAttribute ExecutiveFounderDto executiveFounderDto,
 	        @RequestParam(value = "photo", required = false) MultipartFile photo, @RequestParam(value = "signature", required = false) MultipartFile signature) {	 

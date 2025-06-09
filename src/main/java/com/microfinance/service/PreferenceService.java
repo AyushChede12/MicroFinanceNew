@@ -224,6 +224,8 @@ public class PreferenceService {
 	    executiveFounder.setEmailId(executiveFounderDto.getEmailId());
 	    executiveFounder.setBaseValue(executiveFounderDto.getBaseValue());
 	    executiveFounder.setShareCount(executiveFounderDto.getShareCount());
+	    executiveFounder.setShareAmount(executiveFounderDto.getShareAmount());
+	    executiveFounder.setDepositAcc(executiveFounderDto.getDepositAcc());
 	    
 	    // Handle photo upload
 	    if (photo != null && !photo.isEmpty()) {
@@ -238,7 +240,7 @@ public class PreferenceService {
 	    // Handle signature upload
 	    if (signature != null && !signature.isEmpty()) {
 	        try {
-	            String fileName1 = saveFile(signature);  // Save the signature
+	            String fileName1 = saveFile1(signature);  // Save the signature
 	            executiveFounder.setSignature(fileName1);
 	        } catch (IOException e) {
 	            return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
