@@ -639,8 +639,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update Payment</button>
+							<button id="saveBtn" class="btn btn-success"
+								>Update Payment</button>
 							<!-- <button id="saveBtn" class="btnStyle" style="background-color: #FFA500;">Update</button>
                             <button id="saveBtn" class="btnStyle bg-primary">Print</button> -->
 						</div>

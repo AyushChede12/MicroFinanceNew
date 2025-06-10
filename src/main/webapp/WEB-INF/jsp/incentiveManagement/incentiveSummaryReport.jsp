@@ -62,8 +62,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Month Name</label> <select id="colour"
-									name="colour" required="required"
+								<label for=""> Month Name</label> <select id="monthName"
+									name="monthName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">--SELECT MONTH NAME--</option>
 									<option value="Blue">January</option>
@@ -75,8 +75,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Branch Name</label>
-								<select id="colour"
-									name="colour" required="required"
+								<select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 									<option value="Blue">Reshimbagh</option>
@@ -88,16 +88,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields ">
-								<label for="">Code </label> <input type="text" name="location"
-									id="location" required="required" placeholder="" />
+								<label for="">Code </label> <input type="text" name="code"
+									id="code" required="required" placeholder="" />
 							</div>
 							   
 						</div>
 					</div>
 					<div class="row">
 						<div class=" col-lg-3">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Search</button>
+							<button id="saveBtn" class="btn btn-dark"
+							>Find</button>
 						</div>
 					</div>
 					<div class="row mt-5">

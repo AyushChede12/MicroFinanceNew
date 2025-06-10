@@ -85,12 +85,10 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID <span id="star">*</span></label> 
-								
-								<select id="colour"
-									name="colour" required="required"
+								<label for="">Policy ID<span id="star"> *</span></label> <select id="policyId"
+									name="policyId" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">select</option>
+									<option value="">select Policy ID</option>
 
 								</select>
 							</div>
@@ -98,9 +96,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Customer Name <span id="star">*</span></label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Member Name"
+								<label for="vehicalNo">Customer Name <span id="star"> *</span></label> <input type="text"
+									name="customerName" id="customerName" required="required"
+									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -108,16 +106,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Policy Date <span id="star">*</span></label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>Policy Date <span id="star"> *</span></label> <input type="date" name="policyDate"
+									id="policyDate" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Application Date <span id="star">*</span></label> <input type="date"
-									name="location" id="location" required="required"
+								<label for="">Application Date <span id="star"> *</span></label> <input type="date"
+									name="applicationDate" id="applicationDate" required="required"
 									placeholder="" />
 							</div>
 						</div>
@@ -126,8 +124,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>commet</label> <input type="text" name="price" id="price"
-									required="required" placeholder="Enter Remark" />
+								<label>Comment</label> <input type="text" name="comment" id="comment"
+									required="required" placeholder="Enter Commet"  />
 
 							</div>
 						</div>
@@ -135,8 +133,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button type="button" class="btn btn-primary">View Policy Detail</button>
-							<button type="button" id="saveBtn" class="btn btn-info">Save</button>
+							<button id="saveBtn" class="btn btn-primary" color:black"> View Policy Detail</button>
+							<button id="Add" class="btn btn-info" color:black">Save</button>
 						</div>
 					</div>
 				</div>
@@ -164,73 +162,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</tr>
 							</thead>
 							<tbody>
-								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="row"><a href="#">1</a></th>
-									<td>Arun Kumar</td>
-									<td><a href="#" className="text-primary">Milk</a></td>
-									<td>$29</td>
-									<td><span class="badge bg-success text-white">Approved</span>
-									</td>
-
-								</tr>
-
-								<tr>
-									<th scope="row"><a href="#">2</a></th>
-									<td>Deepak Dalwe</td>
-									<td><a href="#" className="text-primary">Ghee</a></td>
-									<td>$16.5</td>
-									<td><span class="badge bg-danger text-white">Rejected</span>
-									</td>
-									<td class="d-flex" style="gap: .7rem;">
-										<button class="iconbutton">
-											<i class="fa-solid fa-pen-to-square text-success"></i>
-										</button>
-										<button class="iconbutton">
-											<i class="fa-solid fa-eye text-primary"></i>
-										</button>
-										<button class="iconbutton">
-											<i class="fa-solid fa-trash text-danger"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row"><a href="#">2</a></th>
-									<td>Deepak Dalwe</td>
-									<td><a href="#" className="text-primary">Ghee</a></td>
-									<td>$16.5</td>
-									<td><span class="badge bg-danger text-white">Rejected</span>
-									</td>
-									<td class="d-flex" style="gap: .7rem;">
-										<button class="iconbutton">
-											<i class="fa-solid fa-pen-to-square text-success"></i>
-										</button>
-										<button class="iconbutton">
-											<i class="fa-solid fa-eye text-primary"></i>
-										</button>
-										<button class="iconbutton">
-											<i class="fa-solid fa-trash text-danger"></i>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row"><a href="#">2</a></th>
-									<td>Deepak Dalwe</td>
-									<td><a href="#" className="text-primary">Ghee</a></td>
-									<td>$16.5</td>
-									<td><span class="badge bg-danger text-white">Rejected</span>
-									</td>
-									<td class="d-flex" style="gap: .7rem;">
-										<button class="iconbutton">
-											<i class="fa-solid fa-pen-to-square text-success"></i>
-										</button>
-										<button class="iconbutton">
-											<i class="fa-solid fa-eye text-primary"></i>
-										</button>
-										<button class="iconbutton">
-											<i class="fa-solid fa-trash text-danger"></i>
-										</button>
-									</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>

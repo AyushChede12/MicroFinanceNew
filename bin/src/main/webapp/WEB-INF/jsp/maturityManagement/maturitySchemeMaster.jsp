@@ -84,11 +84,19 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Policy Code</option>
 
+=======
+								<label for="">Policy Code*</label>
+								<select id="ddPolicyCode"
+									name="ddPolicyCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Policy Code</option>
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 								</select>
 							</div>
 						</div>
@@ -96,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Inst.From*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="ddInstFrom" id="ddInstFrom" required="required"
 									placeholder="Enter Inst.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -105,16 +113,21 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Inst. To*</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Inst.To"
+								<label>Inst. To*</label> <input type="text" name="ddInstTo"
+									id="ddInstTo" required="required" placeholder="Enter Inst.To"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate*</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
+=======
+								<label for="">Interest Rate*</label> <input type="text" name="ddInterestRate"
+									id="ddInterestRate" required="required" placeholder="Enter ROI" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 							</div>
 						</div>
 
@@ -122,8 +135,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
 								<label>Deduction </label> <input type="text" name="price"
 									id="price" required="required" placeholder="Enter Deduction" />
+=======
+								<label>Deduction </label> <input type="text" name="ddDeduction"
+									id="ddDeduction" required="required" placeholder="Enter Deduction" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 
 							</div>
 						</div>
@@ -178,8 +196,13 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
+=======
+								<label for="">Policy Code*</label> <select id="rdPolicyCode"
+									name="rdPolicyCode" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">GROW</option>
 
@@ -190,7 +213,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Inst.From*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="rdInstFrom" id="rdInstFrom" required="required"
 									placeholder="Enter Inst.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -199,16 +222,21 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Inst. To*</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Inst.To"
+								<label>Inst. To*</label> <input type="text" name="rdInstTo"
+									id="rdInstTo" required="required" placeholder="Enter Inst.To"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate *</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
+=======
+								<label for="">Interest Rate *</label> <input type="text" name="rdInterestRate"
+									id="rdInterestRate" required="required" placeholder="Enter ROI" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 							</div>
 						</div>
 
@@ -216,8 +244,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction</label> <input type="text" name="rdDeduction"
+									id="rdDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 
@@ -265,8 +293,13 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
+=======
+								<label for="">Policy Code*</label> <select id="fdPolicyCode"
+									name="fdPolicyCode" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ROYAL FI</option>
 
@@ -277,7 +310,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Months From*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="fdMonthsFrom" id="fdMonthsFrom" required="required"
 									placeholder="Enter Months.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -286,8 +319,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Months To*</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Months To*</label> <input type="text" name="fdMonthsTo"
+									id="fdMonthsTo" required="required"
 									placeholder="Enter Months.To"
 									style="text-transform: uppercase;" />
 							</div>
@@ -295,8 +328,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate*</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
+=======
+								<label for="">Interest Rate*</label> <input type="text" name="fdInterestRate"
+									id="fdInterestRate" required="required" placeholder="Enter ROI" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 							</div>
 						</div>
 
@@ -304,8 +342,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction</label> <input type="text" name="fdDeduction"
+									id="fdDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 
@@ -355,8 +393,13 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Policy Code*</label> <select id="colour"
 									name="colour" required="required"
+=======
+								<label for="">Policy Code*</label> <select id="misPolicyCode"
+									name="misPolicyCode" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ALL</option>
 
@@ -367,7 +410,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Months From*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="misMonthsFrom" id="misMonthsFrom" required="required"
 									placeholder="Enter Months.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -376,8 +419,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Months To*</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Months To*</label> <input type="text" name="misMonthsTo"
+									id="misMonthsTo" required="required"
 									placeholder="Enter Months.To"
 									style="text-transform: uppercase;" />
 							</div>
@@ -385,8 +428,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Interest Rate*</label> <input type="text" name="location"
 									id="location" required="required" placeholder="Enter ROI" />
+=======
+								<label for="">Interest Rate*</label> <input type="text" name="misInterestRate"
+									id="misInterestRate" required="required" placeholder="Enter ROI" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 							</div>
 						</div>
 
@@ -394,8 +442,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction</label> <input type="text" name="misDeduction"
+									id="misDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 

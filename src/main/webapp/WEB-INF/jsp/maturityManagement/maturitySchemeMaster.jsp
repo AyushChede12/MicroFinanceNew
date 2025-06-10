@@ -61,42 +61,21 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code <span id="star">*</span></label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Policy Code <span id="star"> *</span></label>
+								<select id="ddPolicyCode"
+									name="ddPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Policy Code</option>
-
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Inst.From <span id="star">*</span></label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Inst.From <span id="star"> *</span></label> <input type="text"
+									name="ddInstFrom" id="ddInstFrom" required="required"
 									placeholder="Enter Inst.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -105,16 +84,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Inst. To <span id="star">*</span></label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Inst.To"
+								<label>Inst. To <span id="star"> *</span></label> <input type="text" name="ddInstTo"
+									id="ddInstTo" required="required" placeholder="Enter Inst.To"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star">*</span></label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter ROI" />
+								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="ddInterestRate"
+									id="ddInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
 
@@ -122,8 +101,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction </label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction </label> <input type="text" name="ddDeduction"
+									id="ddDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 						</div>
@@ -131,8 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-						<button type="button" id="saveBtn" class="btn btn-info">Save</button>
-							<!-- <button  class="btnStyle bg-success">Save</button> -->
+							<button id="saveBtn" class="btnStyle bg-info">Save</button>
 						</div>
 					</div>
 				</div>
@@ -156,31 +134,10 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code <span id="star">*</span></label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Policy Code <span id="star"> *</span></label> <select id="rdPolicyCode"
+									name="rdPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">GROW</option>
 
@@ -190,8 +147,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Inst.From <span id="star">*</span></label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Inst.From <span id="star"> *</span></label> <input type="text"
+									name="rdInstFrom" id="rdInstFrom" required="required"
 									placeholder="Enter Inst.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -200,16 +157,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Inst. To <span id="star">*</span></label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Inst.To"
+								<label>Inst. To <span id="star"> *</span></label> <input type="text" name="rdInstTo"
+									id="rdInstTo" required="required" placeholder="Enter Inst.To"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star">*</span></label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter ROI" />
+								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="rdInterestRate"
+									id="rdInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
 
@@ -217,8 +174,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction</label> <input type="text" name="rdDeduction"
+									id="rdDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 
@@ -228,7 +185,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button type="button" id="saveBtn" class="btn btn-info">Save</button>
+							<button id="saveBtn" class="btnStyle bg-info">Save</button>
 						</div>
 					</div>
 				</div>
@@ -243,31 +200,10 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code <span id="star">*</span></label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Policy Code <span id="star"> *</span></label> <select id="fdPolicyCode"
+									name="fdPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ROYAL FI</option>
 
@@ -277,8 +213,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Months From <span id="star">*</span></label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Months From <span id="star"> *</span></label> <input type="text"
+									name="fdMonthsFrom" id="fdMonthsFrom" required="required"
 									placeholder="Enter Months.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -287,8 +223,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Months To <span id="star">*</span></label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Months To <span id="star"> *</span></label> <input type="text" name="fdMonthsTo"
+									id="fdMonthsTo" required="required"
 									placeholder="Enter Months.To"
 									style="text-transform: uppercase;" />
 							</div>
@@ -296,8 +232,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star">*</span></label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter ROI" />
+								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="fdInterestRate"
+									id="fdInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
 
@@ -305,8 +241,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction</label> <input type="text" name="fdDeduction"
+									id="fdDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 
@@ -316,7 +252,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button type="button" id="saveBtn" class="btn btn-info">Save</button>
+							<button id="saveBtn" class="btnStyle bg-info">Save</button>
 						</div>
 					</div>
 				</div>
@@ -333,31 +269,10 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code <span id="star">*</span></label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Policy Code <span id="star"> *</span></label> <select id="misPolicyCode"
+									name="misPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ALL</option>
 
@@ -367,8 +282,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Months From <span id="star">*</span></label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Months From <span id="star"> *</span></label> <input type="text"
+									name="misMonthsFrom" id="misMonthsFrom" required="required"
 									placeholder="Enter Months.From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -377,8 +292,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Months To <span id="star">*</span></label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Months To <span id="star"> *</span></label> <input type="text" name="misMonthsTo"
+									id="misMonthsTo" required="required"
 									placeholder="Enter Months.To"
 									style="text-transform: uppercase;" />
 							</div>
@@ -386,8 +301,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star">*</span></label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter ROI" />
+								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="misInterestRate"
+									id="misInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
 
@@ -395,8 +310,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Deduction" />
+								<label>Deduction</label> <input type="text" name="misDeduction"
+									id="misDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
 
@@ -406,7 +321,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button type="button" id="saveBtn" class="btn btn-info">Save</button>
+							<button id="saveBtn" class="btnStyle bg-info">Save</button>
 						</div>
 					</div>
 				</div>

@@ -61,31 +61,10 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No. <span id="star">*</span></label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Policy No. <span id="star"> *</span> </label> <select id="policyNo"
+									name="policyNo" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -121,31 +100,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-							<div class="d-flex flex-column formFields">
+								<div class="d-flex flex-column formFields">
 								<label for="">Policy No:</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="policyNo" id="policyNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -153,7 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Applicant Name:</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="applicantName" id="applicantName" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -161,8 +118,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Plan Name:</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>Plan Name:</label> <input type="text" name="planName"
+									id="planName" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -170,7 +127,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">plan code:</label> <input type="text"
-									name="location" id="location" required="required"
+									name="planCode" id="planCode" required="required"
 									placeholder="" />
 							</div>
 						</div>
@@ -179,7 +136,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Term:</label> <input type="text" name="price" id="price"
+								<label>Term:</label> <input type="text" name="term" id="term"
 									required="required" placeholder="" />
 
 							</div>
@@ -189,8 +146,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Policy Amount:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Policy Amount:</label> <input type="text" name="policyAmount"
+									id="policyAmount" required="required" placeholder="" />
 
 							</div>
 
@@ -199,8 +156,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Actual Maturity:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Actual Maturity:</label> <input type="text" name="actualMaturity"
+									id="actualMaturity" required="required" placeholder="" />
 
 							</div>
 
@@ -209,8 +166,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Maturity Date:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Maturity Date:</label> <input type="text" name="maturityDate"
+									id="maturityDate" required="required" placeholder="" />
 
 							</div>
 
@@ -218,18 +175,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Sys.Payable:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
-
-							</div>
-
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Deduction(-):</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Sys.Payable:</label> <input type="text" name="sysPayable"
+									id="sysPayable" required="required" placeholder="" />
 
 							</div>
 
@@ -238,8 +185,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Adjeustment(+):</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Deduction(-):</label> <input type="text" name="deduction"
+									id="deduction" required="required" placeholder="" />
 
 							</div>
 
@@ -248,8 +195,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Net Payable:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
+									id="adjeustment" required="required" placeholder="" />
 
 							</div>
 
@@ -258,8 +205,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Net Payable:</label> <input type="text" name="netPayable"
+									id="netPayable" required="required" placeholder="" />
 
 							</div>
 
@@ -268,8 +215,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Date:</label> <input type="date" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Approval Branch:</label> <input type="text" name="approvalBranch"
+									id="approvalBranch" required="required" placeholder="" />
 
 							</div>
 
@@ -278,8 +225,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve Remarks:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Approval Date:</label> <input type="date" name="approvalDate"
+									id="approvalDate" required="required" placeholder="" />
+
+							</div>
+
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Approve Remarks:</label> <input type="text" name="approveRemarks"
+									id="approveRemarks" required="required" placeholder="" />
 
 							</div>
 
@@ -289,8 +246,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve User:</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label>Approve User:</label> <input type="text" name="approveUser"
+									id="approveUser" required="required" placeholder="" />
 
 							</div>
 
@@ -308,39 +265,18 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount <span id="star">*</span> :</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="">Amount: <span id="star"> *</span></label> <input type="date"
+									name="amount" id="amount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Paid Amount <span id="star">*</span> :</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
+									name="paidAmount" id="paidAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -348,8 +284,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Due Amount:</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>Due Amount:</label> <input type="text" name="dueAmount"
+									id="dueAmount" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -366,44 +302,23 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Payment Deatil</li>
+							<li class="breadcrumb-item action">Payment Detail</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment Date <span id="star">*</span> :</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="">Payment Date: <span id="star"> *</span></label> <input type="date"
+									name="paymentDate" id="paymentDate" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch <span id="star">*</span> :</label> <select id="colour"
-									name="colour" required="required"
+								<label for="vehicalNo">Pay Branch:<span id="star"> *</span></label> <select id="payBranch"
+									name="payBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -414,16 +329,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Pay Remark:</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>Pay Remark:</label> <input type="text" name="payRemark"
+									id="payRemark" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment By <span id="star">*</span></label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Payment By <span id="star"> *</span></label> <select id="paymentBy"
+									name="paymentBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -438,11 +353,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							
-							<button id="saveBtn" style="color: #fff; background-color: #AA5486;border: none;" class="btn btn-warning">Approve</button>
+							<button id="saveBtn" style="color: white; background-color: #B33791 ; border: none;" class="btn btn-warning">Approve</button>
 						</div>
 					</div>
-					
 				</div>
 
 

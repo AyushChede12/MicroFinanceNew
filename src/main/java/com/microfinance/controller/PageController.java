@@ -411,9 +411,9 @@ public class PageController {
 		return "accountManagement/incomingReceiptEntry";
 	}
 
-	@GetMapping("/contraEntry")
+	@GetMapping("/bankCashTransferEntry")
 	public String getContraEntryAccountSection() {
-		return "accountManagement/contraEntry";
+		return "accountManagement/bankCashTransferEntry";
 	}
 
 	@GetMapping("/manualJournalEntry")

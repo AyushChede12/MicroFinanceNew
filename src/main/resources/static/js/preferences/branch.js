@@ -114,6 +114,7 @@ function editData(id) {
 		data: JSON.stringify(payload),
 		success: function(response) {
 			alert("Update Branch successfully!");
+			location.reload();
 			// Optionally refresh table or redirect
 		},
 		error: function(xhr, status, error) {

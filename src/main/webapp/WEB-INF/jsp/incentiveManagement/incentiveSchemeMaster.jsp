@@ -63,7 +63,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Incentive Month </label> <input type="text"
-									name="location" id="location" required="required"
+									name="incentiveMonth" id="incentiveMonth" required="required"
 									placeholder="Enter Incentive Month " />
 							</div>
 						</div>
@@ -71,7 +71,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="vehicalNo">Date From</label> <input type="date"
-									name="datef" id="datef" required="required"
+									name="dateFrom" id="dateFrom" required="required"
 									placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -80,7 +80,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="vehicalNo">Date To</label> <input type="date"
-									name="datet" id="datet" required="required"
+									name="dateTo" id="dateTo" required="required"
 									placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
 							</div>
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Comments </label> <input type="text"
-									name="commments" id="comments" required="required"
+									name="comments" id="comments" required="required"
 									placeholder="Enter Comments" />
 							</div>
 							          
@@ -109,7 +109,7 @@ pageEncoding="ISO-8859-1"%> -->
 				
 						<div class="row" style="margin-left: 45%;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-primary">Save
+								<button id="saveBtn" class="btn btn-info ">Save
 								</button>
 							</div>
 						</div>

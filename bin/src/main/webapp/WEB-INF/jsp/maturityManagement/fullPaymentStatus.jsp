@@ -64,7 +64,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="colour" name="colour"
+								<label for="">Branch</label> <select id="branch" name="branch"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Branch</option>
@@ -76,7 +76,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">From Date :</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -85,8 +85,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4"
 								style="margin-bottom: 30px">
-								<label>To Date :</label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder=""
+								<label>To Date :</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
