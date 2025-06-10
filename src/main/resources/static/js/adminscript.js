@@ -4,7 +4,6 @@ const handleToggleSidebar = () => {
 	document.body.classList.toggle('toggle-sidebar');
 }
 
-document.addEventListener('DOMContentLoaded', () => {
 	const toggleSidebarBtn = document.querySelector('.toggle-sidebar-btn');
 	if (toggleSidebarBtn) {
 		toggleSidebarBtn.addEventListener('click', handleToggleSidebar);
@@ -145,5 +144,3 @@ dropBtnSearchInput.addEventListener("keyup", ()=>{
 selectBtn.addEventListener("click", () => {
 	wrapper.classList.toggle("active");
 })
-
-});

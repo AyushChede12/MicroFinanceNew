@@ -59,74 +59,70 @@ $(document).ready(function() {
 			alert("Failed to load dropdown data.");
 		}
 	});
-	
+
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
-			event.preventDefault();
+		event.preventDefault();
 
-			// Create FormData object to send data and files
-			var formData = new FormData();
+		// Create FormData object to send data and files
+		var formData = new FormData();
 
-			// Append all form data (text values)
-			formData.append("type", $('#type').val());
-			formData.append("branchName", $('#branchName').val());
-			formData.append("fullName", $('#fullName').val());
-			formData.append("dateOfBirth", $('#dateOfBirth').val());
-			formData.append("promoterNo", $('#promoterNo').val());
-			formData.append("appointmentDate", $('#appointmentDate').val());
-			formData.append("relationName", $('#relationName').val());
-			formData.append("relationToApplicant", $('#relationToApplicant').val());
-			formData.append("address", $('#address').val());
-			formData.append("district", $('#district').val());
-			formData.append("state", $('#state').val());
-			formData.append("pinCode", $('#pinCode').val());
-			formData.append("aadharNo", $('#aadharNo').val());
-			formData.append("panNo", $('#panNo').val());
-			formData.append("contactNo", $('#contactNo').val());
-			formData.append("emailId", $('#emailId').val());
-			formData.append("baseValue", $('#baseValue').val());
-			formData.append("shareCount", $('#shareCount').val());
-			formData.append("shareAmount", $('#shareAmount').val());
-			formData.append("depositAcc", $('#depositAcc').val());
-			
-			// Handle file uploads
-			var photo = $('#photo')[0].files[0]; // Match 'photoWithAadhar' with backend
-			if (photo) formData.append("photo", photo);
-			
-			// Handle file uploads
-	        var signature = $('#signature')[0].files[0];
-	        if (signature) {
-	            formData.append("signature", signature);
-	        }
+		// Append all form data (text values)
+		formData.append("type", $('#type').val());
+		formData.append("branchName", $('#branchName').val());
+		formData.append("fullName", $('#fullName').val());
+		formData.append("dateOfBirth", $('#dateOfBirth').val());
+		formData.append("promoterNo", $('#promoterNo').val());
+		formData.append("appointmentDate", $('#appointmentDate').val());
+		formData.append("relationName", $('#relationName').val());
+		formData.append("relationToApplicant", $('#relationToApplicant').val());
+		formData.append("address", $('#address').val());
+		formData.append("district", $('#district').val());
+		formData.append("state", $('#state').val());
+		formData.append("pinCode", $('#pinCode').val());
+		formData.append("aadharNo", $('#aadharNo').val());
+		formData.append("panNo", $('#panNo').val());
+		formData.append("contactNo", $('#contactNo').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("baseValue", $('#baseValue').val());
+		formData.append("shareCount", $('#shareCount').val());
+		formData.append("shareAmount", $('#shareAmount').val());
+		formData.append("depositAcc", $('#depositAcc').val());
 
-			// Debugging: Log FormData to check entries
-			for (var pair of formData.entries()) {
-				console.log(pair[0] + ':', pair[1]);
+		// Handle file uploads
+		var photo = $('#photo')[0].files[0]; // Match 'photoWithAadhar' with backend
+		if (photo) formData.append("photo", photo);
+
+		// Handle file uploads
+		var signature = $('#signature')[0].files[0];
+		if (signature) {
+			formData.append("signature", signature);
+		}
+
+		// Debugging: Log FormData to check entries
+		for (var pair of formData.entries()) {
+			console.log(pair[0] + ':', pair[1]);
+		}
+		console.log(formData);
+
+		// Make the AJAX request to your API
+		$.ajax({
+			type: 'POST',
+			url: 'saveExecutiveFounder', // Update URL if necessary
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response) {
+				alert("Data Saved Successfully"); // Message includes the Member Code
+				location.reload(); // Reload the page
+			},
+			error: function(xhr, status, error) {
+				console.error("Error: ", xhr.responseText); // Log the error details
+				alert('An error occurred while saving the data. Please try again.');
 			}
-			console.log(formData);
-
-			// Make the AJAX request to your API
-			$.ajax({
-				type: 'POST',
-				url: 'saveExecutiveFounder', // Update URL if necessary
-				data: formData,
-				processData: false,
-				contentType: false,
-				success: function(response) {
-					if (response.status === "OK" || response.status === "CREATED") {
-						alert("Data Saved Successfully"); // Message includes the Member Code
-						location.reload(); // Reload the page
-					} else {
-						alert("Error: " + response.message);
-					}
-				},
-				error: function(xhr, status, error) {
-					console.error("Error: ", xhr.responseText); // Log the error details
-					alert('An error occurred while saving the data. Please try again.');
-				}
-			});
 		});
-		
+	});
+
 });
 
 

@@ -356,6 +356,41 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 		</div>
+		
+		<!-- <div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
+
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Branch Data <span>| Table View</span>
+						</h5>
+
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Branch Code</th>
+									<th scope="col">Branch Name</th>
+									<th scope="col">Opening Date</th>
+									<th scope="col">Address</th>
+									<th scope="col">Pin Code</th>
+									<th scope="col">State</th>
+									<th scope="col">Primary Contact</th>
+									<th scope="col">Contact</th>
+									<th scope="col">Edit</th>
+									<th scope="col">View</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody id="tableBody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div> -->
 
 
 	</main>
