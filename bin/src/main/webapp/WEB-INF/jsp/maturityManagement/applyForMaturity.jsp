@@ -85,8 +85,13 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Policy ID*</label> <select id="colour"
+									name="colour" required="required"
+=======
 								<label for="">Policy ID*</label> <select id="policyId"
 									name="policyId" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select Policy ID</option>
 
@@ -97,8 +102,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Customer Name*</label> <input type="text"
+<<<<<<< HEAD
+									name="vehicalNo" id="vehicalNo" required="required"
+									placeholder="Enter Member Name"
+=======
 									name="customerName" id="customerName" required="required"
 									placeholder="Enter Customer Name"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -124,8 +134,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>commet</label> <input type="text" name="price" id="price"
+									required="required" placeholder="Enter Remark" />
+=======
 								<label>Comment</label> <input type="text" name="comment" id="comment"
 									required="required" placeholder="Enter Commet"  />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 
 							</div>
 						</div>

@@ -61,30 +61,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No.</label> <select id="policyNo"
+								<label for="">Policy No. <span id="star"> *</span> </label> <select id="policyNo"
 									name="policyNo" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -97,8 +76,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 					<div class="row">
-						<div class="col-12 text-right">
-							<button id="saveBtn" class="btn btn-warning">Update</button>
+						<div class="col-12 text-center">
+							<button id="saveBtn" class="btn btn-success">Update</button>
 						</div>
 					</div>
 				</div>
@@ -121,29 +100,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-							<div class="d-flex flex-column formFields">
+								<div class="d-flex flex-column formFields">
 								<label for="">Policy No:</label> <input type="text"
 									name="policyNo" id="policyNo" required="required"
 									placeholder="" style="text-transform: uppercase;" />
@@ -308,30 +265,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount:</label> <input type="date"
+								<label for="">Amount: <span id="star"> *</span></label> <input type="date"
 									name="amount" id="amount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -339,7 +275,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Paid Amount:</label> <input type="text"
+								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
 									name="paidAmount" id="paidAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -366,35 +302,14 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Payment Deatil</li>
+							<li class="breadcrumb-item action">Payment Detail</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment Date:</label> <input type="date"
+								<label for="">Payment Date: <span id="star"> *</span></label> <input type="date"
 									name="paymentDate" id="paymentDate" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
@@ -402,7 +317,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch:</label> <select id="payBranch"
+								<label for="vehicalNo">Pay Branch:<span id="star"> *</span></label> <select id="payBranch"
 									name="payBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -422,7 +337,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment By*</label> <select id="paymentBy"
+								<label for="">Payment By <span id="star"> *</span></label> <select id="paymentBy"
 									name="paymentBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -437,8 +352,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 					<div class="row">
-						<div class="col-12 text-right">
-							<button id="saveBtn" class="btn btn-warning">Approve</button>
+						<div class="col-12 text-center">
+							<button id="saveBtn" style="color: white; background-color: #B33791 ; border: none;" class="btn btn-warning">Approve</button>
 						</div>
 					</div>
 				</div>

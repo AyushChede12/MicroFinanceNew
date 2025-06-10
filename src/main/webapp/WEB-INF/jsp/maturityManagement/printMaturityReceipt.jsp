@@ -64,7 +64,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Select by policy ID.*</label> <select id="policyID"
+								<label for="">Select by policy ID.<span id="star"> *</span></label> <select id="policyID"
 									name="policyID" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">All</option>
@@ -74,14 +74,11 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-
-
-
 					</div>
 
 					<div class="row">
-						<div class="col-lg-3">
-							<button id="saveBtn" class="btn btn-warning"color: "black">Search</button>
+						<div class="col-lg-12 text-center">
+							<button id="saveBtn" class="btn btn-dark"color: "black">Find</button>
 
 						</div>
 					</div>
