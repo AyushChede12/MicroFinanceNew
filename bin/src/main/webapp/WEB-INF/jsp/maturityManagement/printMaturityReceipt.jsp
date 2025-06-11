@@ -64,8 +64,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
+<<<<<<< HEAD
+								<label for="">Select by policy ID.*</label> <select id="colour"
+									name="colour" required="required"
+=======
 								<label for="">Select by policy ID.*</label> <select id="policyID"
 									name="policyID" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">All</option>
 

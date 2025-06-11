@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -106,7 +108,6 @@ pageEncoding="ISO-8859-1"%> -->
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch Name</option>
-									<option value="Blue">Umrer</option>
 								</select>
 							</div>
 						</div>
@@ -151,7 +152,6 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
-									<option value="Blue">Sister</option>
 								</select>
 							</div>
 						</div>
@@ -187,7 +187,6 @@ pageEncoding="ISO-8859-1"%> -->
 									name="relationWithNominee" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation</option>
-									<option value="Blue">Mother</option>
 								</select>
 							</div>
 						</div>
@@ -260,8 +259,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Designation </label> <select id="designation" name="designation"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Developer</option>
+									<option value="">Select</option>									
 								</select>
 							</div>
 						</div>
@@ -274,7 +272,6 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">HR</option>
 								</select>
 							</div>
 						</div>
@@ -371,6 +368,15 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/TeamManagement/addTeamMember.js"></script>
+	<script>
+	$(document).ready(function() {
+		DesignationDropdown();
+		DepartmentDropdown();
+		BranchNameDropdown();
+		RelationDropdown();
+	});
+	</script>
 </body>
 
 </html>

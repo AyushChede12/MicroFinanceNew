@@ -84,8 +84,13 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Policy Id.</label> <select id="colour"
+									name="colour" required="required"
+=======
 								<label for="">Policy Id.</label> <select id="policyID"
 									name="policyID" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -153,7 +158,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Client Name :</label> <input
+<<<<<<< HEAD
+									type="text" name="vehicalNo" id="vehicalNo" required="required"
+=======
 									type="text" name="clientName" id="clientName" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -161,8 +170,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Policy Name:</label> <input type="text" name="vehicalNo"
+									id="vehicalNo" required="required" placeholder=""
+=======
 								<label>Policy Name:</label> <input type="text" name="policyName"
 									id="policyName" required="required" placeholder=""
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -170,7 +184,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Policy code:</label> <input type="text"
+<<<<<<< HEAD
+									name="location" id="location" required="required"
+=======
 									name="policyCode" id="policyCode" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									placeholder="" />
 							</div>
 						</div>
@@ -179,7 +197,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Duration:</label> <input type="text" name="price" id="price"
+=======
 								<label>Duration:</label> <input type="text" name="duration" id="duration"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									required="required" placeholder="" />
 
 							</div>
@@ -258,8 +280,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Approval Branch Name:</label> <input type="text" name="price"
+									id="price" required="required" placeholder="" />
+=======
 								<label>Approval Branch Name:</label> <input type="text" name="approvalBranchName"
 									id="approvalBranchName" required="required" placeholder="" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 
 							</div>
 
@@ -278,8 +305,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Approve Comment:</label> <input type="text" name="price"
+									id="price" required="required" placeholder="" />
+=======
 								<label>Approve Comment:</label> <input type="text" name="approveComment"
 									id="approveComment" required="required" placeholder="" />
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 
 							</div>
 
@@ -414,16 +446,26 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+<<<<<<< HEAD
+								<label>Pay Comment:</label> <input type="text" name="vehicalNo"
+									id="vehicalNo" required="required" placeholder=""
+=======
 								<label>Pay Comment:</label> <input type="text" name="payComment"
 									id="payComment" required="required" placeholder=""
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
+								<label for="">Mode of Payment*</label> <select id="colour"
+									name="colour" required="required"
+=======
 								<label for="">Mode of Payment*</label> <select id="modeofPayment"
 									name="modeofPayment" required="required"
+>>>>>>> 0f68f1573cd5c98d83f9b124ae212502906ebbad
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 

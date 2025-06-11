@@ -46,7 +46,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Investment Projection Report</li>
+					<li class="breadcrumb-item action">Investment Projection
+						Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -70,9 +71,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Policy Name:</label> <select id="colour" name="colour"
-							required="required" class="form-control selectField mb-4"
-							style="height: 30px;">
+						<label for="">Policy Name:</label> <select id="colour"
+							name="colour" required="required"
+							class="form-control selectField mb-4" style="height: 30px;">
 							<option value="">Select Colour</option>
 							<option value="Blue">Blue</option>
 						</select>
@@ -98,11 +99,8 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-3">
-				<button id="saveBtn" class="btnStyle"
-					style="background-color: #FFA500;">
-					<i class="bi bi-search"></i> Find
-				</button>
+			<div class="col-4 text-start mt-3">
+				<button id="findBtn" class="btn btn-dark">Find</button>
 			</div>
 		</div>
 
