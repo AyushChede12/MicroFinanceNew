@@ -201,7 +201,7 @@ public class PreferenceController {
 		return list;
 	}
 	
-//	//Executive Founder - Ayush
+//	//Executive Founder(Without DTO) - Ayush
 //	@PostMapping("/saveExecutiveFounder")           
 //	@ResponseBody
 //	public ResponseEntity<String> saveExecutiveFounderData(@RequestParam String type, @RequestParam String branchName,
@@ -268,8 +268,9 @@ public class PreferenceController {
 //		return fileName;
 //	}
 	
+	//Executive Founder(With DTO) - Ayush
 	@ResponseBody
-	@PostMapping("saveExecutiveFounder")
+	@PostMapping("/saveExecutiveFounder")
 	public ResponseEntity<ApiResponse<ExecutiveFounder>> saveExecutiveFounderData(
 	        @ModelAttribute ExecutiveFounderDto executiveFounderDto,
 	        @RequestParam(value = "photo", required = false) MultipartFile photo, @RequestParam(value = "signature", required = false) MultipartFile signature) {	 
@@ -284,6 +285,31 @@ public class PreferenceController {
 	    ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo, signature);
 	    //return new ResponseEntity<>(response, response.getStatus());
 	    return ResponseEntity.ok(new ApiResponse<ExecutiveFounder>("OK", executiveFounderDto.getId() != 0 ? "Data updated successfully" : "Data saved successfully", response));
+	}
+	
+	@ResponseBody
+	@PostMapping("/fetchAllExecutiveFounder")
+	public List<ExecutiveFounder> getAllExecutiveFounderData() {
+		List<ExecutiveFounder> list = preferenceService.fetchAllExecutiveFounder();
+		return list;
+	}
+	
+	@ResponseBody
+	@PostMapping("/deleteExecutiveFounder")
+	public ResponseEntity<String> deleteDirectorPromoter(@RequestParam long id) {
+		boolean bool = preferenceService.deleteExecutiveFounder(id);
+		if (bool) {
+			return ResponseEntity.ok("Data Deleted Successfully!!");
+		} else
+			return ResponseEntity.badRequest().body("Data Not Found");
+	}
+	
+	@ResponseBody
+	@PostMapping("/fetchExecutiveFounderById")
+	public ExecutiveFounder getExecutiveFounderById(@RequestParam long id){
+		ExecutiveFounder exeFounder = preferenceService.fetchExecutiveById(id);
+		return exeFounder;
+			
 	}
 	
 

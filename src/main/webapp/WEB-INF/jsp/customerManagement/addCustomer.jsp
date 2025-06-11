@@ -1,4 +1,4 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
 <html>
@@ -80,7 +80,17 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">(Mr/Ms)</label> <select
+									id="major" name="major" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>	
+								</select>
+							</div>
+						</div>
+						
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="major_name">(Mr/Ms)</label>
 								<div class="wrapper">
@@ -99,7 +109,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 							      
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">

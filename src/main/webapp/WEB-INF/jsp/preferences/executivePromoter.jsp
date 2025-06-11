@@ -39,17 +39,18 @@ pageEncoding="ISO-8859-1"%> -->
 
 </head>
 <style>
-    #img-view img {
-      width: 100%;
-      max-height: 150px;
-      object-fit: cover;
-      border: 1px dashed #ccc;
-      padding: 5px;
-    }
-    label {
-      cursor: pointer;
-    }
-  </style>
+#img-view img {
+	width: 100%;
+	max-height: 150px;
+	object-fit: cover;
+	border: 1px dashed #ccc;
+	padding: 5px;
+}
+
+label {
+	cursor: pointer;
+}
+</style>
 
 <body>
 
@@ -133,8 +134,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Date Of Birth</label> <input type="date"
-									name="dateOfBirth" id="dateOfBirth" required="required"
-									placeholder="Enter Date Of Birth" />
+									name="dateOfBirth" id="dateOfBirth" required="required" />
 							</div>
 						</div>
 
@@ -142,15 +142,14 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">DIN/Promoter No </label> <input type="text"
 									name="promoterNo" id="promoterNo" required="required"
-									placeholder="Enter Location" />
+									placeholder="Enter Promoter No" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Appointment Date</label> <input type="date"
-									name="appointmentDate" id="appointmentDate" required="required"
-									placeholder="Enter Relative Name" />
+									name="appointmentDate" id="appointmentDate" required="required" />
 							</div>
 						</div>
 
@@ -215,7 +214,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Aadhar No.</label> <input type="text"
 									name="aadharNo" id="aadharNo" required="required"
-									placeholder="Enter Adhar No" />
+									placeholder="Enter Aadhar No" />
 							</div>
 						</div>
 
@@ -266,7 +265,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Share Amount</label> <input type="text"
 									name="shareAmount" id="shareAmount" required="required"
-									placeholder="Enter Email id" />
+									placeholder="Enter Share Amount" />
 							</div>
 						</div>
 
@@ -279,13 +278,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="photoName" id="drop-area"> <input
-								type="file" accept="image/*" name="photoName" id="photoName"
+								Photo</label> <label for="photo" id="drop-area"> <input
+								type="file" accept="image/*" name="photo" id="photo"
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" />
+										id="photoPreview" /><input type="hidden" name="photoHidden" id="photoHidden">
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -299,13 +298,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="signatureName" id="drop-area"> <input
-								type="file" accept="image/*" name="signatureName" id="signatureName"
+								Signature</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="signature" id="signature"
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="signaturePreview" />
+										id="signaturePreview" /><input type="hidden" name="signatureHidden" id="signatureHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -345,8 +344,7 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="showTableData()">Show</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
-							<button type="button" id="saveBtn" class="btnStyle bg-warning"
-								onclick="saveExecutive()">Save</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
 						</div>
 					</div>
 			</form>
@@ -355,6 +353,39 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 		</div>
 
+		</div>
+
+		<div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
+
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Executive Founder Data <span>| Table View</span>
+						</h5>
+
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Name</th>
+									<th scope="col">Branch Name</th>
+									<th scope="col">Appointment Date</th>
+									<th scope="col">Address</th>
+									<th scope="col">Email</th>
+									<th scope="col">Contact</th>
+									<th scope="col">Edit</th>
+									<th scope="col">View</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody id="tableBody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 
 

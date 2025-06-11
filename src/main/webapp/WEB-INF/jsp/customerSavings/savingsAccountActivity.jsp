@@ -40,7 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
               <i class="bi bi-bank text-blue"></i>
             </a>
           </li>
-          <li class="breadcrumb-item action">Saving Transaction</li>
+          <li class="breadcrumb-item action">Saving Account Activity</li>
         </ol>
       </nav>
     </div>
@@ -57,7 +57,7 @@ pageEncoding="ISO-8859-1"%> -->
             <div class="col-lg-3">
              
               <div class="d-flex flex-column formFields  mb-4">
-                <label for="">Select Saving Transaction Id</label> <select id="colour" name="colour" required="required"
+                <label for="">Select Saving Transaction Id</label> <select id="selectSavingTransactionId" name="selectSavingTransactionId" required="required"
                   class="form-control selectField" style="height: 30px;">
                   <option value=""> Select Colour</option>
                   <option value="Blue">Blue</option>
@@ -68,36 +68,26 @@ pageEncoding="ISO-8859-1"%> -->
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
                 <label for="vehicalNo">Transaction Date</label>
-                <input type="date" name="vehicalNo" id="vehicalNo" required="required" placeholder="Enter Vehicle No"
+                <input type="date" name="transactionDate" id="transactionDate" required="required" placeholder="Enter Vehicle No"
                   style="text-transform: uppercase;" />
               </div>
             </div>
              
                 <div class="col-lg-3">
-                    <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                      <label>Select Branch Name</label>
-                      <div class="position-relative">
-                        <div class="select-btn1" style="cursor: pointer;">
-                          <span name="cityName" id="cityNameId" style="font-size: 12px;">Select Branch Name</span> <i
-                            class="fa-solid fa-angle-down"></i>
-                        </div>
-                        <div class="content" id="contentCityName" style="display: none;">
-                          <div class="search">
-                            <input type="text" id="city-search" class="m-0" placeholder="Search" />
-                          </div>
-                          <ul class="options" id="city-options">
-                            <!-- Options will be dynamically added here -->
-      
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+             
+                <div class="d-flex flex-column formFields mb-4">
+                  <label for="">Select Branch Name</label> <select id="selectBranchName" name="selectBranchName" required="required"
+                    class="form-control selectField" style="height: 30px;">
+                    <option value=""> Select Colour</option>
+                    <option value="Blue">Blue</option>
+                  </select>
+                </div>
+              </div>
 
               <div class="col-lg-3">
              
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Account Number</label> <select id="colour" name="colour" required="required"
+                  <label for="">Account Number</label> <select id="accountNumber" name="accountNumber" required="required"
                     class="form-control selectField" style="height: 30px;">
                     <option value=""> Select Colour</option>
                     <option value="Blue">Blue</option>
@@ -107,35 +97,35 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Customer Code</label> <input type="text" name="price" id="price" required="required"
+                <label for="">Customer Code</label> <input type="text" name="customerCode" id="customerCode" required="required"
                   placeholder="Member Code" />
               </div>
             </div>
 
             <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Customer Name</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Customer Name</label> <input type="text" name="customerName" id="customerName" required="required"
                     placeholder="Enter A/C Holder Name" />
                 </div>
               </div>
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Contact Number</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Contact Number</label> <input type="text" name="contactNumber" id="contactNumber" required="required"
                     placeholder="" />
                 </div>
               </div>
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Joint Holder Name</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Joint Holder Name</label> <input type="text" name="jointHolderName" id="jointHolderName" required="required"
                     placeholder="" />
                 </div>
               </div>
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Saving Plan Name</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Saving Plan Name</label> <input type="text" name="savingPlanName" id="savingPlanName" required="required"
                     placeholder="" />
                 </div>
               </div>
@@ -154,21 +144,21 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Average Balance</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Average Balance</label> <input type="text" name="averageBalance" id="averageBalance" required="required"
                     placeholder="" />
                 </div>
               </div>
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Transaction For</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Transaction For</label> <input type="text" name="transactionFor" id="transactionFor" required="required"
                     placeholder="" />
                 </div>
               </div>
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Comments</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Comments</label> <input type="text" name="comments" id="comments" required="required"
                     placeholder="" />
                 </div>
               </div>
@@ -177,7 +167,7 @@ pageEncoding="ISO-8859-1"%> -->
               <div class="col-lg-3">
              
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Transaction Type</label> <select id="colour" name="colour" required="required"
+                  <label for="">Transaction Type</label> <select id="transactionType" name="transactionType" required="required"
                     class="form-control selectField" style="height: 30px;">
                     <option value=""> Select Colour</option>
                     <option value="Blue">Blue</option>
@@ -187,7 +177,7 @@ pageEncoding="ISO-8859-1"%> -->
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Transaction Amount</label> <input type="text" name="price" id="price" required="required"
+                  <label for="">Transaction Amount</label> <input type="text" name="transactionAmount" id="transactionAmount" required="required"
                     placeholder="" />
                 </div>
               </div>
@@ -195,7 +185,7 @@ pageEncoding="ISO-8859-1"%> -->
               <div class="col-lg-3">
              
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Pay By</label> <select id="colour" name="colour" required="required"
+                  <label for="">Pay By</label> <select id="payBy" name="payBy" required="required"
                     class="form-control selectField" style="height: 30px;">
                     <option value=""> Select Colour</option>
                     <option value="Blue">Blue</option>

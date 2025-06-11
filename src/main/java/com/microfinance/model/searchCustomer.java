@@ -74,6 +74,5 @@ public class searchCustomer {
 	public void setPanNo(String panNo) {
 		this.panNo = panNo;
 	}
-
 	
 }

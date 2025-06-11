@@ -62,7 +62,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 				
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Consultant Code</label> <input type="text"
+								<label for="">Financial Consultant Code <span id="star">*</span></label> <input type="text"
 									name="agentcode" id="agentcode" required="required"
 									placeholder="Enter Advisor Code"
 									style="text-transform: uppercase;" />
