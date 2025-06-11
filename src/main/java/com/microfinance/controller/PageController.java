@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -111,7 +112,10 @@ public class PageController {
 	}
 
 	@GetMapping("/addTeamMember")
-	public String getAddTeamMember() {
+	public String getAddTeamMember(Model model) {
+		//long maxId = employeeRepo.getMaxId();
+	    //String empUniqueNo = "EMC" + "00" + (maxId + 1);
+		//model.addAttribute("empUniqueNo", empUniqueNo);
 		return "teamManagement/addTeamMember";
 	}
 
