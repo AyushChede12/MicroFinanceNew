@@ -406,9 +406,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row" style="margin-left: 80%;">
 					<div class="col-12 text-center">
-						<button id="saveBtn" class="btnStyle bg-danger">View
+						<button id="saveBtn" class="btn btn-primary">View
 							Installment</button>
-						<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+						<button id="saveBtn" class="btn btn-info">Save</button>
 					</div>
 				</div>
 			</form>

@@ -479,10 +479,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
-							<button id="updateBtn" class="btnStyle bg-warning">Update</button>
-							<button id="newBtn" class="btnStyle bg-info"
-								style="background-color: #FFA500;">New</button>
-							<button id="deleteBtn" class="btnStyle bg-danger">Delete</button>
+							<button id="updateBtn" class="btn btn-success">Update</button>
+							<button id="newBtn" class="btn btn-secondary"
+							>New</button>
+							<button id="deleteBtn" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 			</form>
