@@ -24,6 +24,7 @@ import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
+import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.RelativeModule;
 import com.microfinance.model.FinancialYear;
@@ -308,9 +309,28 @@ public class PreferenceController {
 	@PostMapping("/fetchExecutiveFounderById")
 	public ExecutiveFounder getExecutiveFounderById(@RequestParam long id){
 		ExecutiveFounder exeFounder = preferenceService.fetchExecutiveById(id);
-		return exeFounder;
-			
+		return exeFounder;		
 	}
+	
+	//Customer Administration - Ayush
+	@ResponseBody
+	@PostMapping("/fetchAllCompanyAdministration")
+	public List<CompanyAdministration> getCompanyAdministrationData() {
+		List<CompanyAdministration> companyAdmin = preferenceService.fetchAllCompanyAdministration();
+		return companyAdmin;
+	}
+	
+	@ResponseBody
+	@PostMapping("/updateDataOfCompanyAdministration")
+	public ResponseEntity<String> updateCompanyAdministration(@RequestBody CompanyAdministration companyAdministration){
+		int i=preferenceService.updateCompanyAdministration(companyAdministration);
+		if(i>0)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("Failure");
+	}
+	
+	
 	
 
 }

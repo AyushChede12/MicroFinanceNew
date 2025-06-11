@@ -13,6 +13,7 @@ public class addCustomer {
 	private long id;
 
 //Customer Details
+	private String memberCode;
 	private String authenticateFor;
 	private String signupDate;
 	private String major;
@@ -44,34 +45,15 @@ public class addCustomer {
 
 //Nominee Details
 
-	private String nomineeAuthenticatefor;
-	private String nomineeSignupDate;
-	private String nomineeMajor;
 	private String nomineeName;
-	private String nomineeMinor;
-	private String nomineeMemberName;
 	private String nomineeRelationToApplicant;
-	private String nomineeGender;
-	private String nomineeDob;
 	private String nomineeAge;
-	private String nomineeRelationshipStatus;
-	private String NomineeAddress;
-	private String nomineeState;
-	private String nomineeDistrict;
-	private String nomineeAadharNo;
-	private String nomineePinCode;
-	private String nomineeBranchName;
+	private String nomineeAddress;
 	private String nomineePanNo;
-	private String nomineeVoterNo;
-	private String nomineeDrivingLicenceNo;
-	private String nomineeReferralCode;
-	private String nomineeReferralName;
-	private String nomineeContactNo;
-	private String nomineeEmailId;
-	private String nomineeProfession;
-	private String nomineeAcademicBackground;
-	private String nomineePhoto;
-	private String nomineeSignature;
+	private String nomineeKycNo;
+	private String nomineeKycType;
+	private String nomineeMobileNo;
+	
 
 	public long getId() {
 		return id;
@@ -305,29 +287,9 @@ public class addCustomer {
 		this.customerSignature = customerSignature;
 	}
 
-	public String getNomineeAuthenticatefor() {
-		return nomineeAuthenticatefor;
-	}
-
-	public void setNomineeAuthenticatefor(String nomineeAuthenticatefor) {
-		this.nomineeAuthenticatefor = nomineeAuthenticatefor;
-	}
-
-	public String getNomineeSignupDate() {
-		return nomineeSignupDate;
-	}
-
-	public void setNomineeSignupDate(String nomineeSignupDate) {
-		this.nomineeSignupDate = nomineeSignupDate;
-	}
-
-	public String getNomineeMajor() {
-		return nomineeMajor;
-	}
-
-	public void setNomineeMajor(String nomineeMajor) {
-		this.nomineeMajor = nomineeMajor;
-	}
+	
+	
+	
 
 	public String getNomineeName() {
 		return nomineeName;
@@ -335,22 +297,6 @@ public class addCustomer {
 
 	public void setNomineeName(String nomineeName) {
 		this.nomineeName = nomineeName;
-	}
-
-	public String getNomineeMinor() {
-		return nomineeMinor;
-	}
-
-	public void setNomineeMinor(String nomineeMinor) {
-		this.nomineeMinor = nomineeMinor;
-	}
-
-	public String getNomineeMemberName() {
-		return nomineeMemberName;
-	}
-
-	public void setNomineeMemberName(String nomineeMemberName) {
-		this.nomineeMemberName = nomineeMemberName;
 	}
 
 	public String getNomineeRelationToApplicant() {
@@ -361,22 +307,6 @@ public class addCustomer {
 		this.nomineeRelationToApplicant = nomineeRelationToApplicant;
 	}
 
-	public String getNomineeGender() {
-		return nomineeGender;
-	}
-
-	public void setNomineeGender(String nomineeGender) {
-		this.nomineeGender = nomineeGender;
-	}
-
-	public String getNomineeDob() {
-		return nomineeDob;
-	}
-
-	public void setNomineeDob(String nomineeDob) {
-		this.nomineeDob = nomineeDob;
-	}
-
 	public String getNomineeAge() {
 		return nomineeAge;
 	}
@@ -385,60 +315,12 @@ public class addCustomer {
 		this.nomineeAge = nomineeAge;
 	}
 
-	public String getNomineeRelationshipStatus() {
-		return nomineeRelationshipStatus;
-	}
-
-	public void setNomineeRelationshipStatus(String nomineeRelationshipStatus) {
-		this.nomineeRelationshipStatus = nomineeRelationshipStatus;
-	}
-
 	public String getNomineeAddress() {
-		return NomineeAddress;
+		return nomineeAddress;
 	}
 
 	public void setNomineeAddress(String nomineeAddress) {
-		NomineeAddress = nomineeAddress;
-	}
-
-	public String getNomineeState() {
-		return nomineeState;
-	}
-
-	public void setNomineeState(String nomineeState) {
-		this.nomineeState = nomineeState;
-	}
-
-	public String getNomineeDistrict() {
-		return nomineeDistrict;
-	}
-
-	public void setNomineeDistrict(String nomineeDistrict) {
-		this.nomineeDistrict = nomineeDistrict;
-	}
-
-	public String getNomineeAadharNo() {
-		return nomineeAadharNo;
-	}
-
-	public void setNomineeAadharNo(String nomineeAadharNo) {
-		this.nomineeAadharNo = nomineeAadharNo;
-	}
-
-	public String getNomineePinCode() {
-		return nomineePinCode;
-	}
-
-	public void setNomineePinCode(String nomineePinCode) {
-		this.nomineePinCode = nomineePinCode;
-	}
-
-	public String getNomineeBranchName() {
-		return nomineeBranchName;
-	}
-
-	public void setNomineeBranchName(String nomineeBranchName) {
-		this.nomineeBranchName = nomineeBranchName;
+		this.nomineeAddress = nomineeAddress;
 	}
 
 	public String getNomineePanNo() {
@@ -449,84 +331,38 @@ public class addCustomer {
 		this.nomineePanNo = nomineePanNo;
 	}
 
-	public String getNomineeVoterNo() {
-		return nomineeVoterNo;
+	public String getNomineeKycNo() {
+		return nomineeKycNo;
 	}
 
-	public void setNomineeVoterNo(String nomineeVoterNo) {
-		this.nomineeVoterNo = nomineeVoterNo;
+	public void setNomineeKycNo(String nomineeKycNo) {
+		this.nomineeKycNo = nomineeKycNo;
 	}
 
-	public String getNomineeDrivingLicenceNo() {
-		return nomineeDrivingLicenceNo;
+	public String getNomineeKycType() {
+		return nomineeKycType;
 	}
 
-	public void setNomineeDrivingLicenceNo(String nomineeDrivingLicenceNo) {
-		this.nomineeDrivingLicenceNo = nomineeDrivingLicenceNo;
+	public void setNomineeKycType(String nomineeKycType) {
+		this.nomineeKycType = nomineeKycType;
 	}
 
-	public String getNomineeReferralCode() {
-		return nomineeReferralCode;
+	public String getMemberCode() {
+		return memberCode;
 	}
 
-	public void setNomineeReferralCode(String nomineeReferralCode) {
-		this.nomineeReferralCode = nomineeReferralCode;
+	public void setMemberCode(String memberCode) {
+		this.memberCode = memberCode;
 	}
 
-	public String getNomineeReferralName() {
-		return nomineeReferralName;
+	public String getNomineeMobileNo() {
+		return nomineeMobileNo;
 	}
 
-	public void setNomineeReferralName(String nomineeReferralName) {
-		this.nomineeReferralName = nomineeReferralName;
+	public void setNomineeMobileNo(String nomineeMobileNo) {
+		this.nomineeMobileNo = nomineeMobileNo;
 	}
-
-	public String getNomineeContactNo() {
-		return nomineeContactNo;
-	}
-
-	public void setNomineeContactNo(String nomineeContactNo) {
-		this.nomineeContactNo = nomineeContactNo;
-	}
-
-	public String getNomineeEmailId() {
-		return nomineeEmailId;
-	}
-
-	public void setNomineeEmailId(String nomineeEmailId) {
-		this.nomineeEmailId = nomineeEmailId;
-	}
-
-	public String getNomineeAcademicBackground() {
-		return nomineeAcademicBackground;
-	}
-
-	public void setNomineeAcademicBackground(String nomineeAcademicBackground) {
-		this.nomineeAcademicBackground = nomineeAcademicBackground;
-	}
-
-	public String getNomineePhoto() {
-		return nomineePhoto;
-	}
-
-	public void setNomineePhoto(String nomineePhoto) {
-		this.nomineePhoto = nomineePhoto;
-	}
-
-	public String getNomineeSignature() {
-		return nomineeSignature;
-	}
-
-	public void setNomineeSignature(String nomineeSignature) {
-		this.nomineeSignature = nomineeSignature;
-	}
-
-	public String getNomineeProfession() {
-		return nomineeProfession;
-	}
-
-	public void setNomineeProfession(String nomineeProfession) {
-		this.nomineeProfession = nomineeProfession;
-	}
+	
+	
 
 }

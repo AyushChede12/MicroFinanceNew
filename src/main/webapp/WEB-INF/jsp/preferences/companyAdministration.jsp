@@ -29,10 +29,18 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -46,9 +54,19 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-gear"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Company Administration </li>
+					<li class="breadcrumb-item action">Company Administration</li>
 				</ol>
 			</nav>
+
+		</div>
+
+		<div class="row">
+			<div class="col-12 d-flex justify-content-end">
+				<button type="button" id="editBtn" class="btn btn-outline-secondary"
+					data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+					<i class="bi bi-pen-fill"></i>
+				</button>
+			</div>
 		</div>
 
 		<div>
@@ -83,11 +101,11 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Company Name:</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Company Name"
+									readonly="readonly" name="companyName" id="companyName"
+									required="required" placeholder="Enter Company Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -95,8 +113,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Short Name:</label> <input type="Text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Short Name:</label> <input type="Text" name="shortName"
+									readonly="readonly" id="shortName" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -106,8 +124,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Sign-Up Date:</label> <input type="Date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Sign-Up Date"
+									readonly="readonly" name="signUpDate" id="signUpDate"
+									required="required" placeholder="Enter Sign-Up Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -115,8 +133,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>CIN No.:</label> <input type="Text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>CIN No.:</label> <input type="Text" name="cinNo"
+									readonly="readonly" id="cinNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -125,8 +143,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>PAN:</label> <input type="Text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>PAN:</label> <input type="Text" name="pan" id="pan"
+									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -135,8 +153,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>TAN:</label> <input type="Text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>TAN</label> <input type="Text" name="tan" id="tan"
+									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -145,8 +163,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>GSTIN:</label> <input type="Text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>GSTIN</label> <input type="Text" name="gstin" id="gstin"
+									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -157,7 +175,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Declared Value:</label> <input type="Text"
 									name="declaredValue" id="declaredValue" required="required"
-									placeholder="Enter Declared Value "
+									readonly="readonly" placeholder="Enter Declared Value "
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -166,27 +184,24 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Address:</label>
-								<textarea name="" id=""
+								<textarea name="address" id="address" readonly="readonly"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Colour</option>
-									<option value="Blue">Blue</option>
-								</select>
+								<label for="">State</label> <input type="text"
+									readonly="readonly" name="state" id="state" required="required"
+									placeholder="Enter State " style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Pin Code:</label> <input type="Terxt" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Pin Code:</label> <input type="text" name="pinCode"
+									readonly="readonly" id="pinCode" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -195,8 +210,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Email ID:</label> <input type="Terxt" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Email ID:</label> <input type="text" name="emailId"
+									readonly="readonly" id="emailId" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -205,8 +220,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Authorized Share Capital:</label> <input type="Terxt"
-									name="authorizedcapital" id="authorizedcapital" required="required"
+								<label>Authorized Share Capital:</label> <input type="text"
+									readonly="readonly" name="authorizedShareCapital"
+									id="authorizedShareCapital" required="required"
 									placeholder="Authorized Share Capital"
 									style="text-transform: uppercase;" />
 							</div>
@@ -215,9 +231,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Paid Up Capital:</label> <input type="Terxt"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+								<label>Paid Up Capital:</label> <input type="text"
+									readonly="readonly" name="paidUpCapital" id="paidUpCapital"
+									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -225,18 +241,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>NOF:</label> <input type="Terxt" name="vehicalNo"
-									id="vehicalNo" required="required"
-									placeholder="Enter NOF "
-									style="text-transform: uppercase;" />
+								<label>NOF</label> <input type="text" name="nof" id="nof"
+									readonly="readonly" required="required"
+									placeholder="Enter NOF " style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Contact No:</label> <input type="Terxt" name="contactno"
-									id="contactno" required="required"
+								<label>Contact No:</label> <input type="Terxt" name="contactNo"
+									readonly="readonly" id="contactNo" required="required"
 									placeholder="Enter Contact No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -245,9 +260,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>TDS (With PAN):</label> <input type="Terxt"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter TDS"
+								<label>TDS (With PAN):</label> <input type="text"
+									readonly="readonly" name="tdsWithPan" id="tdsWithPan"
+									required="required" placeholder="Enter TDS"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -255,9 +270,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>TDS (Without PAN):</label> <input type="Terxt"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+								<label>TDS (Without PAN):</label> <input type="text"
+									readonly="readonly" name="tdsWithoutPan" id="tdsWithoutPan"
+									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -265,9 +280,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Tax Deduction:</label> <input type="Terxt"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+								<label>Tax Deduction:</label> <input type="text"
+									readonly="readonly" name="taxDeduction" id="taxDeduction"
+									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -275,14 +290,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Senior Citizen Tax Deduction:</label> <input type="Terxt"
-									name="taxdeduction" id="taxdeduction" required="required"
+								<label>Senior Citizen Tax Deduction:</label> <input type="text"
+									readonly="readonly" name="seniorCitizenTaxDeduction"
+									id="seniorCitizenTaxDeduction" required="required"
 									placeholder="Enter Senior Citizen Tax Deduction"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						
+
 					</div>
 
 
@@ -293,7 +309,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for=""
 									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 									Photo</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="bike1image" id="bike1image"
+									type="file" accept="image/*" name="photo" id="photo"
 									hidden="hidden" onchange="bike1Preview();"
 									style="background-size: cover; background-repeat: no-repeat" />
 									<div id="img-view">
@@ -313,7 +329,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for=""
 									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 									Signature</label> <label for="bike2image" id="drop-area"> <input
-									type="file" accept="image/*" name="bike2image" id="bike2image"
+									type="file" accept="image/*" name="signature" id="signature"
 									hidden="hidden" onchange="bike2Preview();"
 									style="background-size: cover; background-repeat: no-repeat" />
 									<div id="img-view">
@@ -328,14 +344,15 @@ pageEncoding="ISO-8859-1"%> -->
 									</div>
 								</label>
 							</div>
-							
-							<div class="row" style="margin-left: 45%;">
-							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-primary">Update
-								</button>
-							</div>
-						</div>
 
+
+
+						</div>
+					</div>
+
+					<div class="row" style="margin-top: 30px;">
+						<div class="col-12 text-center">
+							<button type="button" id="updateBtn" class="btn btn-success" disabled>Update</button>
 						</div>
 					</div>
 			</form>
@@ -348,6 +365,9 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/companyAdministration.js"></script>
+
+
 </body>
 
 </html>
