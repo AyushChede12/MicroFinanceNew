@@ -603,7 +603,7 @@ public class PageController {
 		return "incentiveManagement/incentiveSummaryReport";
 	}
 
-	// Investment Section
+	// Policy Management
 	@GetMapping("/planManagement")
 	public String getPlanManagement() {
 		return "policyManagement/planManagement";
