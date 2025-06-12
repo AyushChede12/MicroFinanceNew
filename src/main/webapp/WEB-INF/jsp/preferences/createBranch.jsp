@@ -172,10 +172,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row" style="margin-top: 30px;">
 						<div class="col-12 text-center">
-							<button type="button" id="showBtn" class="btnStyle bg-primary" onclick="showTableData()">Show</button>
-							<button type="button" id="hideBtn" class="btnStyle bg-success" onclick="hideTableData()" >Hide</button>
+							<button type="button" id="showBtn" class="btnStyle bg-primary"
+								onclick="showTableData()">Show</button>
+							<button type="button" id="hideBtn" class="btnStyle bg-success"
+								onclick="hideTableData()">Hide</button>
 							<button type="button" id="saveBtn" class="btnStyle bg-warning"
 								onclick="saveBranch()">Save</button>
+							<button type="button" id="updateBtn" class="btnStyle bg-success"
+								onclick="updateBranch()">Update</button>
 						</div>
 					</div>
 			</form>
@@ -207,7 +211,6 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Primary Contact</th>
 									<th scope="col">Contact</th>
 									<th scope="col">Edit</th>
-									<th scope="col">View</th>
 									<th scope="col">Delete</th>
 								</tr>
 							</thead>

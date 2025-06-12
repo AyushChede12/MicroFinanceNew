@@ -27,6 +27,7 @@ function saveBank() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
+	$("#updateBtn").hide();
 	$.ajax({
 		url: "/getAllBankModule",
 		type: "GET",
@@ -44,8 +45,7 @@ $(document).ready(function() {
               <td>${item.address || ''}</td>
               <td>${item.openingDate || ''}</td>
               <td>${item.openingBalance || ''}</td>
-              <td><button class="iconbutton" onclick="editData(${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square text-success"></i></button></td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-eye text-primary"></i></button></td>
+			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
 			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
             </tr>`;
 				tbody.append(row);
@@ -67,6 +67,10 @@ function hideTableData() {
 }
 
 function viewData(id) {
+	$("#updateBtn").show();
+	$("#saveBtn").hide();
+	$("#hideBtn").hide();
+	$("#showBtn").hide();
 	$.ajax({
 		url: "/getBankModuleById",
 		type: "GET",
@@ -87,9 +91,28 @@ function viewData(id) {
 
 }
 
-function editData(id) {
+function deleteData(id) {
+	if (confirm("Are you sure you want to delete this bank?")) {
+		$.ajax({
+			url: "/deleteBankModuleById", // or "/deleteAllBranchModule" if you're sending full object
+			type: "POST",
+			data: { id: id }, // if using @RequestParam long id
+			success: function(response) {
+				alert("Bank deleted successfully.");
+				// Refresh the table or page here
+				location.reload(); // example method to reload your data
+			},
+			error: function(xhr, status, error) {
+				alert("Failed to delete bank.");
+				console.error(error);
+			}
+		});
+	}
+}
+
+function updateBank() {
 	let payload = {
-		id: id,
+		id: $("#id").val(),
 		bankName: $("#bankName").val(),
 		accountNo: $("#accountNo").val(),
 		contactNo: $("#contactNo").val(),
@@ -111,23 +134,4 @@ function editData(id) {
 			alert("Update failed: " + xhr.responseText);
 		}
 	});
-}
-
-function deleteData(id) {
-	if (confirm("Are you sure you want to delete this bank?")) {
-		$.ajax({
-			url: "/deleteBankModuleById", // or "/deleteAllBranchModule" if you're sending full object
-			type: "POST",
-			data: { id: id }, // if using @RequestParam long id
-			success: function(response) {
-				alert("Bank deleted successfully.");
-				// Refresh the table or page here
-				location.reload(); // example method to reload your data
-			},
-			error: function(xhr, status, error) {
-				alert("Failed to delete bank.");
-				console.error(error);
-			}
-		});
-	}
 }
