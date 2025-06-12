@@ -21,6 +21,7 @@ import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
+import com.microfinance.model.states;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.CasteModuleRepo;
@@ -29,6 +30,7 @@ import com.microfinance.repository.CompanyAdministrationRepo;
 import com.microfinance.repository.ExecutiveFounderRepo;
 import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
+import com.microfinance.repository.Staterepo;
 
 @Service
 public class PreferenceService {
@@ -56,6 +58,9 @@ public class PreferenceService {
 	
 	@Autowired
 	CompanyAdministrationRepo companyAdministrationRepo;
+	
+	@Autowired
+	Staterepo stateRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -373,6 +378,11 @@ public class PreferenceService {
             return 0; // failure
         }
     }
+
+	public List<states> getAllStates() {
+		// TODO Auto-generated method stub
+		return stateRepo.findAll();
+	}
 	
 
 }
