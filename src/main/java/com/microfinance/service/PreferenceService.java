@@ -17,6 +17,7 @@ import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
+import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
@@ -24,6 +25,7 @@ import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.CasteModuleRepo;
 import com.microfinance.repository.CategoryModuleRepo;
+import com.microfinance.repository.CompanyAdministrationRepo;
 import com.microfinance.repository.ExecutiveFounderRepo;
 import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
@@ -51,6 +53,9 @@ public class PreferenceService {
 
 	@Autowired
 	ExecutiveFounderRepo executiveFounderRepo;
+	
+	@Autowired
+	CompanyAdministrationRepo companyAdministrationRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -327,5 +332,47 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		return executiveFounderRepo.findById(id).orElse(null);
 	}
+
+	//Company Administration - Ayush
+	public List<CompanyAdministration> fetchAllCompanyAdministration() {
+		// TODO Auto-generated method stub
+		return companyAdministrationRepo.findAll();
+	}
+
+	public int updateCompanyAdministration(CompanyAdministration companyAdministration) {
+		// TODO Auto-generated method stub
+		Optional<CompanyAdministration> optional = companyAdministrationRepo.findById(companyAdministration.getId());
+
+        if (optional.isPresent()) {
+            CompanyAdministration company = optional.get();
+
+            company.setCompanyName(companyAdministration.getCompanyName());
+            company.setShortName(companyAdministration.getShortName()); 
+            company.setSignUpDate(companyAdministration.getSignUpDate());
+            company.setCinNo(companyAdministration.getCinNo());
+            company.setPan(companyAdministration.getPan());
+            company.setTan(companyAdministration.getTan());
+            company.setGstin(companyAdministration.getGstin());
+            company.setDeclaredValue(companyAdministration.getDeclaredValue());
+            company.setAddress(companyAdministration.getAddress());
+            company.setState(companyAdministration.getState());
+            company.setPinCode(companyAdministration.getPinCode());
+            company.setEmailId(companyAdministration.getEmailId());
+            company.setAuthorizedShareCapital(companyAdministration.getAuthorizedShareCapital());
+            company.setPaidUpCapital(companyAdministration.getPaidUpCapital());
+            company.setNof(companyAdministration.getNof());
+            company.setContactNo(companyAdministration.getContactNo());
+            company.setTdsWithPan(companyAdministration.getTdsWithPan());
+            company.setTdsWithoutPan(companyAdministration.getTdsWithoutPan());
+            company.setTaxDeduction(companyAdministration.getTaxDeduction());
+            company.setSeniorCitizenTaxDeduction(companyAdministration.getSeniorCitizenTaxDeduction());
+
+            companyAdministrationRepo.save(company);
+            return 1; // success
+        } else {
+            return 0; // failure
+        }
+    }
+	
 
 }
