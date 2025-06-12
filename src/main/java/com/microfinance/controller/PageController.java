@@ -118,7 +118,10 @@ public class PageController {
 	}
 
 	@GetMapping("/addTeamMember")
-	public String getAddTeamMember() {
+	public String getAddTeamMember(Model model) {
+		//long maxId = employeeRepo.getMaxId();
+	    //String empUniqueNo = "EMC" + "00" + (maxId + 1);
+		//model.addAttribute("empUniqueNo", empUniqueNo);
 		return "teamManagement/addTeamMember";
 	}
 
