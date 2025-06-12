@@ -1,11 +1,17 @@
 package com.microfinance.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.CustomerRepo;
+
 @Controller
 public class PageController {
+	
+	@Autowired
+	CustomerRepo customerRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -309,7 +315,10 @@ public class PageController {
 
 	// Customer Management
 	@GetMapping("/addCustomer")
-	public String getAddClient() {
+	public String getAddClient(Model model) {
+		long maxId = customerRepo.getMaxId();
+		String memberCode = "M" + "0000" + (maxId + 1);
+		model.addAttribute("memberCode", memberCode);
 		return "customerManagement/addCustomer";
 	}
 

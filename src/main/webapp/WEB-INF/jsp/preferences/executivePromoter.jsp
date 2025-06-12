@@ -38,19 +38,6 @@ pageEncoding="ISO-8859-1"%> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-<style>
-#img-view img {
-	width: 100%;
-	max-height: 150px;
-	object-fit: cover;
-	border: 1px dashed #ccc;
-	padding: 5px;
-}
-
-label {
-	cursor: pointer;
-}
-</style>
 
 <body>
 
@@ -99,6 +86,7 @@ label {
                   </div>
                 </div>
               </div> -->
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Type</label> <select id="type" name="type"
 									required="required" class="form-control selectField"
@@ -280,11 +268,12 @@ label {
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo</label> <label for="photo" id="drop-area"> <input
 								type="file" accept="image/*" name="photo" id="photo"
-								hidden="hidden" onchange="bike1Preview();"
+								hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" /><input type="hidden" name="photoHidden" id="photoHidden">
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -300,11 +289,12 @@ label {
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature</label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="bike2Preview();"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="signaturePreview" /><input type="hidden" name="signatureHidden" id="signatureHidden">
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -333,7 +323,7 @@ label {
 									name="depositAcc" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Deposit Acc</option>
-									<option value="Blue">Blue</option>
+									<option value="Blue">9542512445211</option>
 								</select>
 							</div>
 						</div>
@@ -345,6 +335,8 @@ label {
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
 							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
+							<button type="button" id="updateBtn" class="btnStyle bg-success"
+								onclick="updateBranch()">Update</button>
 						</div>
 					</div>
 			</form>
@@ -375,7 +367,6 @@ label {
 									<th scope="col">Email</th>
 									<th scope="col">Contact</th>
 									<th scope="col">Edit</th>
-									<th scope="col">View</th>
 									<th scope="col">Delete</th>
 								</tr>
 							</thead>
