@@ -31,6 +31,7 @@ function saveBranch() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
+	$("#updateBtn").hide();
 	$.ajax({
 		url: "/getAllBranchModule",
 		type: "GET",
@@ -46,12 +47,11 @@ $(document).ready(function() {
               <td><a href="#" class="text-primary">${item.branchName || ''}</a></td>
               <td>${item.openingDate || ''}</td>
               <td>${item.address || ''}</td>
-              <td>${item.pinCode || ''}</td>
+              <td>${item.pin || ''}</td>
               <td>${item.state || ''}</td>
               <td>${item.primaryContact || ''}</td>
               <td>${item.contact || ''}</td>
-              <td><button class="iconbutton" onclick="editData(${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square text-success"></i></button></td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-eye text-primary"></i></button></td>
+			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
 			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
             </tr>`;
 				tbody.append(row);
@@ -73,6 +73,10 @@ function hideTableData() {
 }
 
 function viewData(id) {
+	$("#updateBtn").show();
+	$("#saveBtn").hide();
+	$("#hideBtn").hide();
+	$("#showBtn").hide();
 	$.ajax({
 		url: "/getBranchModuleById",
 		type: "GET",
@@ -95,34 +99,6 @@ function viewData(id) {
 
 }
 
-function editData(id) {
-	let payload = {
-		id: id,
-		branchCode: $("#branchCode").val(),
-		branchName: $("#branchName").val(),
-		openingDate: $("#openingDate").val(),
-		address: $("#address").val(),
-		pin: $("#pin").val(),
-		state: $("#state").val(),
-		primaryContact: $("#primaryContact").val(),
-		contact: $("#contact").val()
-	};
-	$.ajax({
-		url: "/updateBranchModuleById",
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(payload),
-		success: function(response) {
-			alert("Update Branch successfully!");
-			location.reload();
-			// Optionally refresh table or redirect
-		},
-		error: function(xhr, status, error) {
-			alert("Update failed: " + xhr.responseText);
-		}
-	});
-}
-
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
@@ -141,3 +117,57 @@ function deleteData(id) {
 		});
 	}
 }
+
+
+function updateBranch(){
+	let payload = {
+			id: $("#id").val(),
+			branchCode: $("#branchCode").val(),
+			branchName: $("#branchName").val(),
+			openingDate: $("#openingDate").val(),
+			address: $("#address").val(),
+			pin: $("#pin").val(),
+			state: $("#state").val(),
+			primaryContact: $("#primaryContact").val(),
+			contact: $("#contact").val()
+		};
+		$.ajax({
+			url: "/updateBranchModuleById",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(payload),
+			success: function(response) {
+				alert("Update Branch successfully!");
+				location.reload();
+				// Optionally refresh table or redirect
+			},
+			error: function(xhr, status, error) {
+				alert("Update failed: " + xhr.responseText);
+			}
+		});
+}
+
+
+$(document).ready(function () {
+    // Fetch all branches and populate the dropdown
+    $.ajax({
+        url: "getAllBranchModule",
+        method: "GET",
+        success: function (data) {
+            console.log("Fetched Branches:", data);
+            data.forEach(function (branch) {
+                $('#branchName').append(
+                    $('<option>', {
+                        value: branch.branchName,
+                        text: branch.branchName
+                    })
+                );
+            });
+        },
+        error: function (err) {
+            console.error("Error fetching branches:", err);
+        }
+    });
+});
+
+

@@ -88,14 +88,13 @@ public class CustomerManagementService {
 	        }
 	    }
 	    
-	 // Handle signature upload
 	    if (customerSignature != null && !customerSignature.isEmpty()) {
 	    	try {
-	        String fileName1 = saveFile1(customerSignature);  // Save the signature
-	        addcustomer.getCustomerSignature();
+	    	    String fileName1 = saveFile1(customerSignature);  // Save the signature
+	    	    addcustomer.setCustomerSignature(fileName1); // ✅ Correctly set it in entity
 	    	} catch (IOException e) {
-	            return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
-	        } 
+	    	    return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+	    	}
 	    }
 
 	    // Save entity to the database

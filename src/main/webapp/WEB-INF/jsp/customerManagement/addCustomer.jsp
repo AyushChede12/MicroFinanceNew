@@ -60,6 +60,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					
+					  <div class="col-lg-0">
+							<div class="d-none flex-column formFields" >
+								<label for="" >Customer Code </label> <input 
+									name="memberCode" id="memberCode" value="${memberCode}" required="required"
+									placeholder="Enter Customer Name" />
+							</div>
+						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Authenticate for</label> <select
@@ -67,6 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="aadhar">Aadhar</option>
+									<option value="aadhar">Without Aadhar</option>
 								</select>
 							</div>
 						</div>
@@ -85,31 +94,14 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">(Mr/Ms)</label> <select
 									id="major" name="major" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>	
+									<option value="">Mr</option>
+									<option value="">Mrs</option>
+										
 								</select>
 							</div>
 						</div>
 						
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="major_name">(Mr/Ms)</label>
-								<div class="wrapper">
-									<div class="select-btn">
-										<span>Select</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fa-solid fa-magnifying-glass"></i> <input
-												class="dropsearchinp" type="text" name="major" id="major"
-												placeholder="Search...">
-										</div>
-										<ul class="options">
-										</ul>
-									</div>
-								</div>
-							</div>
-							      
-						</div> -->
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -125,7 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="minor" name="minor" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Yes(Below 18)</option>
-									
+									<option value="">No(Above 18)</option>
 								</select>
 							</div>
 						</div>
@@ -163,7 +155,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Gender</label> <select
-									id="gender" name="gender" required="required"
+									id="customerGender" name="customerGender" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Gender</option>
 									<option value="">Male</option>
@@ -174,33 +166,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Gender</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="customerGender" id="customerGender"
-											style="font-size: 12px;">Select Gender</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
-						
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Age</label> <input type="text" name="customerAge"
@@ -208,49 +173,22 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="guardianName" id="guardianName" required="required"
-									placeholder="Enter Family Member Name" />
-							</div>
-						</div>
+						
 						
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relationship Status</label> <select
 									id="relationshipStatus" name="relationshipStatus" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Relationship Status</option>
+									<option value="">Single</option>
+									<option value="">Married</option>
+									<option value="">Divorced</option>
 									
 								</select>
 							</div>
 						</div>
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relationship Status </label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="relationshipStatus" id="relationshipStatus"
-											style="font-size: 12px;">Select Relationship Status</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -260,51 +198,29 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<div class="col-lg-3 ">
+						<div class="col-lg-3 mb-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">State</label> <select
 									id="state" name="state" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select State</option>
-									<option value="">Maharashtra</option>
-									<option value="">up</option>
-									
+								
 								</select>
 							</div>
 						</div>
 						
-
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>State</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="state" id="state" style="font-size: 12px;">Select
-											State</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
-						<div class="col-lg-3">
+						
+						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text"
-									name="district" id="district" required="required"
-									placeholder="Enter District" />
+								<label for="">District</label> <select
+									id="district" name="district" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select District</option>
+								
+								</select>
 							</div>
 						</div>
+					
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -333,31 +249,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						
 
-
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="branchName" id="branchName"
-											style="font-size: 12px;">Select Branch Name</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -394,29 +285,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Referral Code</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="referralCode" id="referralCode"
-											style="font-size: 12px;">Select Code</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentreferralcode"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -462,19 +330,20 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+<<<<<<< HEAD
 								Photo</label> <label for="bike1image" id="drop-area"> <input type="file"
 							 accept="image/*" name="customerPhoto"
 								id="customerPhoto" hidden="" onchange="bike1Preview();"
+=======
+								Photo</label> <label for="customerPhoto" id="drop-area"> <input
+								type="file" accept="image/*" name="customerPhoto"
+								id="customerPhoto" hidden="hidden" onchange="photopreview();"
+>>>>>>> 2362ca23a29acbd4174f9349b88cb77fbdfabbb0
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+									
 								</div>
 							</label>
 						</div>
@@ -482,20 +351,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
+								Signature</label> <label for="customerSignature" id="drop-area"> <input
 								type="file" accept="image/*" name="customerSignature"
 								id="customerSignature" hidden="hidden"
-								onchange="bike2Preview();"
+								onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+									
 								</div>
 							</label>
 						</div>
@@ -731,6 +595,8 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="js/addCustomer.js"></script>
+<script src="./js/preferences/relative.js"></script>
+<script src="./js/preferences/branch.js"></script>
 </body>
 
 </html>
