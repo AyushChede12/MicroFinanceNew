@@ -330,15 +330,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-<<<<<<< HEAD
-								Photo</label> <label for="bike1image" id="drop-area"> <input type="file"
-							 accept="image/*" name="customerPhoto"
-								id="customerPhoto" hidden="" onchange="bike1Preview();"
-=======
 								Photo</label> <label for="customerPhoto" id="drop-area"> <input
 								type="file" accept="image/*" name="customerPhoto"
 								id="customerPhoto" hidden="hidden" onchange="photopreview();"
->>>>>>> 2362ca23a29acbd4174f9349b88cb77fbdfabbb0
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
