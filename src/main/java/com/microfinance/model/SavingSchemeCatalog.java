@@ -1,14 +1,16 @@
 package com.microfinance.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class SavingSchemeCatalog {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
 	private String PolicyName;
 	private String YearlyROI;
 	private String CustomerName;
@@ -29,10 +31,11 @@ public class SavingSchemeCatalog {
 	private String MonthlyCardLimit;
 	private String YearlyCardLimit;
 	
-	public int getId() {
+	
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getPolicyName() {
