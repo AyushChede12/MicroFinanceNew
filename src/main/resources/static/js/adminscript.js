@@ -144,3 +144,4 @@ dropBtnSearchInput.addEventListener("keyup", ()=>{
 selectBtn.addEventListener("click", () => {
 	wrapper.classList.toggle("active");
 })
+
