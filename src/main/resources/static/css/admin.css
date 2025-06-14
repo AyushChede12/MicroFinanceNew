@@ -178,6 +178,10 @@ h6 {
     padding: 0px 20px 20px 20px;
 }
 
+.star{
+	color: red;
+}
+
 .card-img-overlay {
     background-color: rgba(255, 255, 255, 0.6);
 }
