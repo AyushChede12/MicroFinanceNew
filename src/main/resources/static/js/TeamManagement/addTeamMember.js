@@ -168,6 +168,7 @@ $(document).ready(function () {
             branchName: $('#branchName').val(),
             teamMemberName: $('#teamMemberName').val(),
             dateOfBirth: $('#dateOfBirth').val(),
+            age: $('#age').val(),
             familyMemberName: $('#familyMemberName').val(),
             relationToApplicant: $('#relationToApplicant').val(),
             contactNo: $('#contactNo').val(),
