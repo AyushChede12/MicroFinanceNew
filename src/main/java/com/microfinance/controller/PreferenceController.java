@@ -2,7 +2,9 @@ package com.microfinance.controller;
 
 import java.io.IOException;
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +29,9 @@ import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.RelativeModule;
+import com.microfinance.model.Statedistricts;
+import com.microfinance.model.states;
+import com.microfinance.repository.StateDistrictRepo;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.service.PreferenceService;
 
@@ -35,6 +40,9 @@ public class PreferenceController {
 	
 	@Autowired
 	PreferenceService preferenceService;
+	
+	@Autowired
+	StateDistrictRepo stateDistrictRepo;
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -148,6 +156,22 @@ public class PreferenceController {
 		return list;
 	}
 	
+	@GetMapping("/getAllStates")                       //Niraj
+	@ResponseBody
+	public List<states> getAllStates(){
+		List<states> list = preferenceService.getAllStates();
+		return list;
+	}
+	
+	
+	@GetMapping("/getAllDistrictsByStateId")
+	@ResponseBody
+	public Map<String, List<Statedistricts>> getAllDistrictsByStateId(@RequestParam("stateId") int stateId) {
+	    List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
+	    Map<String, List<Statedistricts>> response = new HashMap<>();
+	    response.put("allDistricts", data);
+	    return response;
+	}
 	
 	//Caste Module - Ayush
 	@PostMapping("/saveAllCasteModule")
@@ -184,7 +208,7 @@ public class PreferenceController {
 		List<CategoryModule> list = preferenceService.fetchAllCategoryModule();
 		return list;
 	}
-	
+	// ayush branch
 	//Financial Year - Ayush
 	@PostMapping("/saveFinancialYear")
 	public ResponseEntity<String> saveFinancialYearData(@RequestBody FinancialYear financialyear) {
@@ -201,73 +225,7 @@ public class PreferenceController {
 		List<FinancialYear> list = preferenceService.fetchAllFinancialYear();
 		return list;
 	}
-	
-//	//Executive Founder(Without DTO) - Ayush
-//	@PostMapping("/saveExecutiveFounder")           
-//	@ResponseBody
-//	public ResponseEntity<String> saveExecutiveFounderData(@RequestParam String type, @RequestParam String branchName,
-//			@RequestParam String fullName, @RequestParam String dateOfBirth, @RequestParam String promoterNo,
-//			@RequestParam String appointmentDate, @RequestParam String relationName,
-//			@RequestParam String relationToApplicant, @RequestParam String address, @RequestParam String district,
-//			@RequestParam String state, @RequestParam String pinCode, @RequestParam String aadharNo,
-//			@RequestParam String panNo, @RequestParam String contactNo, @RequestParam String emailId,
-//			@RequestParam String baseValue, @RequestParam String shareCount, @RequestParam String shareAmount,
-//			@RequestParam String depositAcc, @RequestParam("photoName") MultipartFile photo,
-//			@RequestParam("signatureName") MultipartFile signature) {
-//
-//		try {
-//			String photoPath = saveFile(photo);
-//			String signaturePath = saveFile(signature);
-//
-//			ExecutiveFounder founder = new ExecutiveFounder();
-//			founder.setType(type);
-//			founder.setBranchName(branchName);
-//			founder.setFullName(fullName);
-//			founder.setDateOfBirth(dateOfBirth);
-//			founder.setPromoterNo(promoterNo);
-//			founder.setAppointmentDate(appointmentDate);
-//			founder.setRelationName(relationName);
-//			founder.setRelationToApplicant(relationToApplicant);
-//			founder.setAddress(address);
-//			founder.setDistrict(district);
-//			founder.setState(state);
-//			founder.setPinCode(pinCode);
-//			founder.setAadharNo(aadharNo);
-//			founder.setPanNo(panNo);
-//			founder.setContactNo(contactNo);
-//			founder.setEmailId(emailId);
-//			founder.setBaseValue(baseValue);
-//			founder.setShareCount(shareCount);
-//			founder.setShareAmount(shareAmount);
-//			founder.setDepositAcc(depositAcc);
-//			founder.setPhotoPath(photoPath);
-//			founder.setSignaturePath(signaturePath);
-//
-//			preferenceService.saveExecutiveFounder(founder);
-//
-//			return ResponseEntity.ok("success");
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error saving data");
-//		}
-//	}
-//
-//	private String saveFile(MultipartFile file) throws IOException {
-//		if (file.isEmpty()) {
-//			return null;
-//		}
-//
-//		String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-//		File destFile = new File(uploadDirectory + File.separator + fileName);
-//
-//		// Ensure directory exists
-//		destFile.getParentFile().mkdirs();
-//
-//		file.transferTo(destFile);
-//
-//		return fileName;
-//	}
+
 	
 	//Executive Founder(With DTO) - Ayush
 	@ResponseBody
@@ -320,7 +278,7 @@ public class PreferenceController {
 		return companyAdmin;
 	}
 	
-	@ResponseBody
+	@ResponseBody               //Ayush
 	@PostMapping("/updateDataOfCompanyAdministration")
 	public ResponseEntity<String> updateCompanyAdministration(@RequestBody CompanyAdministration companyAdministration){
 		int i=preferenceService.updateCompanyAdministration(companyAdministration);

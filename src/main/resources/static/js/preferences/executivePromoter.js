@@ -1,10 +1,17 @@
 //Ayush
-function bike1Preview() {
+function photoUpload() {
 	const file = document.getElementById("photo").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			document.getElementById("photoPreview").src = e.target.result;
+			const previewimg = document.getElementById("photoPreview");
+			document.getElementById("photoPreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -14,12 +21,19 @@ function bike1Preview() {
 
 
 //Ayush
-function bike2Preview() {
+function signatureUpload() {
 	const file = document.getElementById("signature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			document.getElementById("signaturePreview").src = e.target.result;
+			const previewimg = document.getElementById("signaturePreview");
+			document.getElementById("signaturePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -128,6 +142,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
+	$("#updateBtn").hide();
 	$.ajax({
 		url: "fetchAllExecutiveFounder",
 		type: "POST",
@@ -145,7 +160,6 @@ $(document).ready(function() {
               <td>${item.address || ''}</td>
               <td>${item.emailId || ''}</td>
 			  <td>${item.contactNo || ''}</td>
-              <td><button class="iconbutton" onclick="editData(${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square text-success"></i></button></td>
 			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-eye text-primary"></i></button></td>
 			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
             </tr>`;
@@ -184,13 +198,17 @@ function hideTableData() {
 }
 
 function viewData(id) {
-	
+	$("#updateBtn").show();
+	$("#saveBtn").hide();
+	$("#hideBtn").hide();
+	$("#showBtn").hide();
 	$.ajax({
 		url: '/fetchExecutiveFounderById',
 		type: 'POST',
 		data: { id: id },
 		success: function(response) {
 			// Example: populate form fields with the fetched data
+			$('#id').val(response.id);
 			$('#type').val(response.type);
 			$('#branchName').val(response.branchName);
 			$('#fullName').val(response.fullName);
@@ -235,12 +253,12 @@ function viewData(id) {
 	});
 }
 
-function editData(id) {
 
+function updateBranch() {
 	let formData = new FormData();
 
 	// Append all fields from the form
-	formData.append("id", id); // Hidden input for update
+	formData.append("id", $("#id").val()); // Hidden input for update
 	formData.append("type", $("#type").val());
 	formData.append("branchName", $("#branchName").val());
 	formData.append("fullName", $("#fullName").val());
@@ -290,5 +308,5 @@ function editData(id) {
 			alert("Error: " + xhr.responseText);
 		}
 	});
-
 }
+
