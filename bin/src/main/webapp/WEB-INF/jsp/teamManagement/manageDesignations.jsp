@@ -33,6 +33,9 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -68,14 +71,16 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Designation" />
 							</div>
 						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-4 text-start mt-3">
-							<button id="saveDesignationBtn" class="btnStyle bg-success">Save</button>
-							<button id="clearBtn" class="btnStyle bg-secondary">Clear</button>
+						<div class="row" style="margin-top: 15px; margin-left: 10px;">
+							<div class="col-12 text-center">
+								<button id="saveDesignationBtn" class="btnStyle bg-warning" onclick="saveDesignation()">Save</button>
+								<!-- <button id="clearBtn" class="btnStyle bg-secondary">Clear</button> -->
+							</div>
 						</div>
 					</div>
+
+					
 
 				</div>
 
@@ -92,45 +97,11 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">S/N</th>
-										<th scope="col">ID</th>
 										<th scope="col">Designation</th>
-										<th scope="col">Action</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row">1</th>
-										<td>1</td>
-										<td>Developer</td>
-										<td>ACT</td>
-
-
-									</tr>
-
-									<tr>
-										<th scope="row">2</th>
-										<td>2</td>
-										<td>Tester</td>
-										<td>ACT</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>3</td>
-										<td>Manager</td>
-										<td>ACT</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>4</td>
-										<td>HR</td>
-										<td>ACT</td>
-
-
-									</tr>
+								<tbody id="tableBody">
+									
 								</tbody>
 							</table>
 						</div>
@@ -143,6 +114,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
+	<script src="./js/TeamManagement/addDesignation.js"></script>
 	<script src="./js/adminscript.js"></script>
 </body>
 

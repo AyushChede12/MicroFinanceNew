@@ -2,8 +2,10 @@ function saveFinancialYear() {
 	const formData = {
 		financialYearName: $('input[name="financialYearName"]').val(),
 		dateFrom: $('input[name="dateFrom"]').val(),
-		dateTo: $('input[name="dateTo"]').val(),
+		dateTo: $('input[name="dateTo"]').val()
 	};
+	alert(formData.dateFrom);
+	alert(formData.dateTo);
 
 	$.ajax({
 		type: "POST",
@@ -34,7 +36,7 @@ $(document).ready(function() {
 			$.each(data, function(index, item) {
 				var row = `<tr style="font-family: 'Poppins', sans-serif;">
               <th scope="row"><a href="#">${index + 1}</a></th>
-              <td>${item.caste || ''}</td>
+              <td>${item.financialYearName || ''}</td>
               
             </tr>`;
 				tbody.append(row);

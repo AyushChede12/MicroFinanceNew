@@ -11,6 +11,7 @@ public class ManageDesignation {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
 	private String designationName;
+	
 	public long getId() {
 		return id;
 	}
@@ -23,6 +24,5 @@ public class ManageDesignation {
 	public void setDesignationName(String designationName) {
 		this.designationName = designationName;
 	}
-	
 
 }

@@ -33,6 +33,9 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -68,12 +71,12 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Department" />
 							</div>
 						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-4 text-start mt-3">
-							<button id="saveDepartmentBtn" class="btnStyle bg-success">Save</button>
-							<button id="clearBtn" class="btnStyle bg-secondary">Clear</button>
+						<div class="row" style="margin-top: 15px; margin-left: 10px;">
+							<div class="col-12 text-center">
+								<button id="saveDepartmentBtn" class="btnStyle bg-warning"
+									onclick="saveDepartment()">Save</button>
+								<!-- <button id="clearBtn" class="btnStyle bg-secondary">Clear</button> -->
+							</div>
 						</div>
 					</div>
 
@@ -92,42 +95,11 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">S/N</th>
-										<th scope="col">Department Code</th>
 										<th scope="col">Department Name</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row">1</th>
-										<td>001</td>
-										<td>IT</td>
-
-
-
-									</tr>
-
-									<tr>
-										<th scope="row">2</th>
-										<td>002</td>
-										<td>ETC</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>003</td>
-										<td>MECH</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>004</td>
-										<td>CSE</td>
-
-
-
-									</tr>
+								<tbody id="tableBody">
+									
 								</tbody>
 							</table>
 						</div>
@@ -141,6 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/TeamManagement/addDepartment.js"></script>
 </body>
 
 </html>

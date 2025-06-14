@@ -24,7 +24,7 @@ function saveRelative() {
 
 $(document).ready(function() {
 	$.ajax({
-		url: "/getAllRelativeModule",
+		url: "getAllRelativeModule",
 		type: "GET",
 		contentType: "application/json",
 		success: function(data) {
@@ -45,3 +45,20 @@ $(document).ready(function() {
 		}
 	});
 });
+
+window.onload = function() {
+    fetch('getAllRelativeModule')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById("relationToApplicant");
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.relation;  // Use item.id if needed
+                option.text = item.relation;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading relations:", error);
+        });
+};

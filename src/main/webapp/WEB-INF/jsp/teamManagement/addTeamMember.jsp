@@ -33,10 +33,19 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
 <body>
+<script type="text/javascript">
+   function calculateAge() {
+	   const dob = new Date(document.getElementById("dateOfBirth").value); // get DOB from the date input field
+	   const age = Math.floor((Date.now() - dob) / (365.25 * 24 * 60 * 60 * 1000)); // calculate age
+	   document.getElementById("age").value = age; // set the calculated age in the age input field
+	 }
+</script>
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -86,7 +95,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
-									name="teamMemberCode" required="required"
+									name="teamMemberCode" value="${empUniqueNo}" required="required"
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -106,7 +115,6 @@ pageEncoding="ISO-8859-1"%> -->
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch Name</option>
-									<option value="Blue">Umrer</option>
 								</select>
 							</div>
 						</div>
@@ -122,7 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
+								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth" onchange="calculateAge()"
 									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
@@ -130,7 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Age</label> <input type="text" name="age" id="age"
+								<label for="">Age</label> <input type="text" name="age" id="age" 
 									required="required" placeholder="Enter Age" />
 							</div>
 						</div>
@@ -151,7 +159,6 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
-									<option value="Blue">Sister</option>
 								</select>
 							</div>
 						</div>
@@ -187,7 +194,6 @@ pageEncoding="ISO-8859-1"%> -->
 									name="relationWithNominee" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation</option>
-									<option value="Blue">Mother</option>
 								</select>
 							</div>
 						</div>
@@ -260,8 +266,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Designation </label> <select id="designation" name="designation"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Developer</option>
+									<option value="">Select</option>									
 								</select>
 							</div>
 						</div>
@@ -274,7 +279,6 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">HR</option>
 								</select>
 							</div>
 						</div>
@@ -371,6 +375,15 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/TeamManagement/addTeamMember.js"></script>
+	<script>
+	$(document).ready(function() {
+		DesignationDropdown();
+		DepartmentDropdown();
+		BranchNameDropdown();
+		RelationDropdown();
+	});
+	</script>
 </body>
 
 </html>

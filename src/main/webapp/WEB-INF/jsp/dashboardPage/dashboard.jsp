@@ -63,13 +63,13 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Action</h6>
+											<h6>Customer</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-plus"></i> <span>Add</span>
+										<li><a href="addCustomer" class="dropdown-item"> <i
+												class="fa-solid fa-eye"></i> <span>Manage</span>
 										</a></li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-eye"></i> <span>View</span>
+										<li><a href="searchCustomer" class="dropdown-item"> <i
+												class="fa-solid fa-search"></i> <span>Search</span>
 										</a></li>
 									</ul>
 								</div>
@@ -97,13 +97,13 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Action</h6>
+											<h6>Share</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-plus"></i> <span>Add</span>
+										<li><a href="transferShares" class="dropdown-item"> <i
+												class="fa-solid fa-plus"></i> <span>Transfer</span>
 										</a></li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-eye"></i> <span>View</span>
+										<li><a href="generateShareCertificate" class="dropdown-item"> <i
+												class="fa-solid fa-eye"></i> <span>Generate Certificate</span>
 										</a></li>
 									</ul>
 								</div>
@@ -131,13 +131,13 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Action</h6>
+											<h6>Finance</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-plus"></i> <span>Add</span>
+										<li><a href="addFinancialConsultant" class="dropdown-item"> <i
+												class="fa-solid fa-plus"></i> <span>Add Finance</span>
 										</a></li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-eye"></i> <span>View</span>
+										<li><a href="consultantIDCardGenerator" class="dropdown-item"> <i
+												class="fa-solid fa-eye"></i> <span>Generate ID Card</span>
 										</a></li>
 									</ul>
 								</div>
@@ -165,13 +165,13 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Action</h6>
+											<h6>Account</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-plus"></i> <span>Add</span>
+										<li><a href="incomingReceiptEntry" class="dropdown-item"> <i
+												class="fa-solid fa-plus"></i> <span>Receipt</span>
 										</a></li>
-										<li><a href="#" class="dropdown-item"> <i
-												class="fa-solid fa-eye"></i> <span>View</span>
+										<li><a href="incentivePayment" class="dropdown-item"> <i
+												class="fa-solid fa-eye"></i> <span>Payment</span>
 										</a></li>
 									</ul>
 								</div>
@@ -199,15 +199,15 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Filter</h6>
+											<h6>Loan</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> Today </a></li>
-										<li><a href="#" class="dropdown-item"> This Month </a></li>
-										<li><a href="#" class="dropdown-item"> This Year </a></li>
+										<li><a href="newLoanApplication" class="dropdown-item"> Apply </a></li>
+										<li><a href="emiLoanCalculator" class="dropdown-item"> Calculator </a></li>
+										<li><a href="generateNOCCertificateLoanManagement" class="dropdown-item"> NOC Certificate </a></li>
 									</ul>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Sales</h5>
+									<h5 class="card-title">Loan Application</h5>
 
 									<div class="d-flex align-items-center" style="gap: 0.6rem">
 										<div
@@ -233,15 +233,15 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Filter</h6>
+											<h6>Report</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> Today </a></li>
-										<li><a href="#" class="dropdown-item"> This Month </a></li>
-										<li><a href="#" class="dropdown-item"> This Year </a></li>
+										<li><a href="investmentTransactionReport" class="dropdown-item"> Investment </a></li>
+										<li><a href="chequeTransactionReport" class="dropdown-item"> Cheque Transaction </a></li>
+										<li><a href="approvedLoanReport" class="dropdown-item"> Approved Loan </a></li>
 									</ul>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Expense</h5>
+									<h5 class="card-title">Report</h5>
 
 									<div class="d-flex align-items-center" style="gap: 0.6rem">
 										<div
@@ -267,15 +267,15 @@ pageEncoding="ISO-8859-1"%> -->
 									</a>
 									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<li class="dropdown-header text-start">
-											<h6>Filter</h6>
+											<h6>Policy</h6>
 										</li>
-										<li><a href="#" class="dropdown-item"> Today </a></li>
-										<li><a href="#" class="dropdown-item"> This Month </a></li>
-										<li><a href="#" class="dropdown-item"> This Year </a></li>
+										<li><a href="addNewInvestment" class="dropdown-item"> New Policy </a></li>
+										<li><a href="installmentRecordBook" class="dropdown-item"> Policy Passbook </a></li>
+										<li><a href="investmentDataSearch" class="dropdown-item"> Search Policy </a></li>
 									</ul>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Wallet</h5>
+									<h5 class="card-title">Policy</h5>
 
 									<div class="d-flex align-items-center" style="gap: 0.6rem">
 										<div

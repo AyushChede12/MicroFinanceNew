@@ -1,4 +1,4 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
 <html>
@@ -60,6 +60,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					
+					  <div class="col-lg-0">
+							<div class="d-none flex-column formFields" >
+								<label for="" >Customer Code </label> <input 
+									name="memberCode" id="memberCode" value="${memberCode}" required="required"
+									placeholder="Enter Customer Name" />
+							</div>
+						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Authenticate for</label> <select
@@ -67,6 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="aadhar">Aadhar</option>
+									<option value="aadhar">Without Aadhar</option>
 								</select>
 							</div>
 						</div>
@@ -80,26 +89,19 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="major_name">(Mr/Ms)</label>
-								<div class="wrapper">
-									<div class="select-btn">
-										<span>Select</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fa-solid fa-magnifying-glass"></i> <input
-												class="dropsearchinp" type="text" name="major" id="major"
-												placeholder="Search...">
-										</div>
-										<ul class="options">
-										</ul>
-									</div>
-								</div>
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">(Mr/Ms)</label> <select
+									id="major" name="major" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Mr</option>
+									<option value="">Mrs</option>
+										
+								</select>
 							</div>
-							      
 						</div>
+						
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -115,34 +117,12 @@ pageEncoding="ISO-8859-1"%> -->
 									id="minor" name="minor" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Yes(Below 18)</option>
-									
+									<option value="">No(Above 18)</option>
 								</select>
 							</div>
 						</div>
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Minor</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Yes(Below
-											18)</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -163,30 +143,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="relationToApplicant" id="relationToApplicant"
-											style="font-size: 12px;">Select Relation to Applicant</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentrelationToApplicant"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="applicant" class="m-0"
-												placeholder="Search Relation" />
-										</div>
-										<ul class="options" id="relation-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
+						
 						
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
@@ -198,7 +155,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Gender</label> <select
-									id="gender" name="gender" required="required"
+									id="customerGender" name="customerGender" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Gender</option>
 									<option value="">Male</option>
@@ -209,33 +166,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Gender</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="customerGender" id="customerGender"
-											style="font-size: 12px;">Select Gender</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
-						
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Age</label> <input type="text" name="customerAge"
@@ -243,49 +173,22 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="guardianName" id="guardianName" required="required"
-									placeholder="Enter Family Member Name" />
-							</div>
-						</div>
+						
 						
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relationship Status</label> <select
 									id="relationshipStatus" name="relationshipStatus" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Relationship Status</option>
+									<option value="">Single</option>
+									<option value="">Married</option>
+									<option value="">Divorced</option>
 									
 								</select>
 							</div>
 						</div>
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relationship Status </label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="relationshipStatus" id="relationshipStatus"
-											style="font-size: 12px;">Select Relationship Status</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -295,51 +198,29 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<div class="col-lg-3 ">
+						<div class="col-lg-3 mb-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">State</label> <select
 									id="state" name="state" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select State</option>
-									<option value="">Maharashtra</option>
-									<option value="">up</option>
-									
+								
 								</select>
 							</div>
 						</div>
 						
-
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>State</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="state" id="state" style="font-size: 12px;">Select
-											State</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
-						<div class="col-lg-3">
+						
+						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text"
-									name="district" id="district" required="required"
-									placeholder="Enter District" />
+								<label for="">District</label> <select
+									id="district" name="district" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select District</option>
+								
+								</select>
 							</div>
 						</div>
+					
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -368,31 +249,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						
 
-
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="branchName" id="branchName"
-											style="font-size: 12px;">Select Branch Name</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -429,29 +285,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Referral Code</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="referralCode" id="referralCode"
-											style="font-size: 12px;">Select Code</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentreferralcode"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -497,19 +330,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
+								Photo</label> <label for="customerPhoto" id="drop-area"> <input
 								type="file" accept="image/*" name="customerPhoto"
-								id="customerPhoto" hidden="hidden" onchange="bike1Preview();"
+								id="customerPhoto" hidden="hidden" onchange="photopreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+									
 								</div>
 							</label>
 						</div>
@@ -517,20 +345,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
+								Signature</label> <label for="customerSignature" id="drop-area"> <input
 								type="file" accept="image/*" name="customerSignature"
 								id="customerSignature" hidden="hidden"
-								onchange="bike2Preview();"
+								onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+									
 								</div>
 							</label>
 						</div>
@@ -546,68 +369,12 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Authenticate for</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeAuthenticatefor"
-											id="nomineeAuthenticatefor" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+						
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Sign-up Date</label> <input type="date"
-									name="nomineeSignupDate" id="nomineeSignupDate"
-									required="required" placeholder="Enter Sign-up Date"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>(Mr/Ms)</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeMajor" id="nomineeMajor"
-											style="font-size: 12px;">Select</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Customer Name </label> <input type="text"
+								<label for="">Nominee Name </label> <input type="text"
 									name="nomineeName" id="nomineeName" required="required"
 									placeholder="Enter Customer Name" />
 							</div>
@@ -617,40 +384,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Minor</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeMinor" id="nomineeMinor"
-											style="font-size: 12px;">Yes(Below 18)</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="nomineeMemberName" id="nomineeMemberName"
-									required="required" placeholder="Enter Family Member Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label>
+								<label>Nominee  Applicant</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="nomineeRelationToApplicant"
@@ -673,155 +407,32 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Gender</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeGender" id="nomineeGender"
-											style="font-size: 12px;">Select Gender</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Date Of Birth</label> <input type="text"
-									name="nomineeDob" id="nomineeDob" required="required"
-									placeholder="Enter DOB" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Age</label> <input type="text" name="nomineeAge"
+								<label for=""> Nominee Age</label> <input type="text" name="nomineeAge"
 									id="nomineeAge" required="required" placeholder="Enter Age" />
 							</div>
 						</div>
-
+						
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relationship Status </label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeRelationshipStatus"
-											id="nomineeRelationshipStatus" style="font-size: 12px;">Select
-											Relationship Status</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for=""> Nominee Mobile No</label> <input type="text" name="nomineeMobileNo"
+									id="nomineeMobileNo" required="required" placeholder="Enter Age" />
 							</div>
 						</div>
+
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Address</label>
-								<textarea name="NomineeAddress" id="NomineeAddress"
+								<textarea name="nomineeAddress" id="nomineeAddress"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>State</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeState" id="nomineeState"
-											style="font-size: 12px;">Select State</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text"
-									name="nomineeDistrict" id="nomineeDistrict" required="required"
-									placeholder="Enter District" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Aadhar No</label> <input type="text"
-									name="nomineeAadharNo" id="nomineeAadharNo" required="required"
-									placeholder="Enter Adhar No" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text"
-									name="nomineePinCode" id="nomineePinCode" required="required"
-									placeholder="Enter Pincode" />
-							</div>
-						</div>
-
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeBranchName" id="nomineeBranchName"
-											style="font-size: 12px;">Select Branch Name</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">PAN No</label> <input type="text"
@@ -829,138 +440,37 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter PAN No" />
 							</div>
 						</div>
-
+  
+                          
+                          <div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Nominee Kyc No</label> <input type="text"
+									name="nomineeKycNo" id="nomineeKycNo" required="required"
+									placeholder="Enter PAN No" />
+							</div>
+						</div>
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Voter No</label> <input type="text"
-									name="nomineeVoterNo" id="nomineeVoterNo" required="required"
-									placeholder="Enter Voter No" />
+								<label for="">Nominee Kyc Type</label> <input type="text"
+									name="nomineeKycType" id="nomineeKycType" required="required"
+									placeholder="Enter PAN No" />
 							</div>
 						</div>
+						
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Driving Licence No</label> <input type="text"
-									name="nomineeDrivingLicenceNo" id="nomineeDrivingLicenceNo"
-									required="required" placeholder="Enter Licence No" />
-							</div>
-						</div>
+						
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Referral Code</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeReferralCode" id="nomineeReferralCode"
-											style="font-size: 12px;">Select Referral Code</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Referral Name</label> <input type="text"
-									name="nomineeReferralName" id="nomineeReferralName"
-									required="required" placeholder="Enter Referral Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Contact No</label> <input type="text"
-									name="nomineeContactNo" id="nomineeContactNo"
-									required="required" placeholder="Enter Mobile No" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Email id</label> <input type="text"
-									name="nomineeEmailId" id="nomineeEmailId" required="required"
-									placeholder="Enter Email id" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Profession</label> <input type="text"
-									name="nomineeProfession" id="nomineeProfession"
-									required="required" placeholder="Enter Profession" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Academic background</label> <input type="text"
-									name="nomineeAcademicBackground" id="nomineeAcademicBackground"
-									required="required" placeholder="Enter Academic background
-" />
-							</div>
-						</div>
+						
 					</div>
 
-					<div class="row mt-4">
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="nomineeProfession"
-								id="nomineeProfession" hidden="hidden"
-								onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="nomineeSignature"
-								id="nomineeSignature" hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-
-					</div>
+					
 				</div>
 
 				<div class="row">
 					<div class="col-12 text-center">
-						<button id="saveBtn" class="btnStyle bg-success">Save</button>
-						<button id="saveBtn" class="btnStyle"
+						<button id="saveBtn"  name="saveBtn" class="btnStyle bg-success">Save</button>
+						<button id="" class="btnStyle"
 							style="background-color: #FFA500;">Update</button>
 						<button id="saveBtn" class="btnStyle bg-primary">Print</button>
 					</div>
@@ -1077,7 +587,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script src="./js/adminscript.js"></script>
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/addCustomer.js"></script>
+<script src="./js/preferences/relative.js"></script>
+<script src="./js/preferences/branch.js"></script>
 </body>
 
 </html>

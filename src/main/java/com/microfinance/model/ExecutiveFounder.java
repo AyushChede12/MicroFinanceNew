@@ -10,8 +10,7 @@ public class ExecutiveFounder {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private long id;
     private String type;
     private String branchName;
     private String fullName;
@@ -33,16 +32,16 @@ public class ExecutiveFounder {
     private String shareAmount;
     private String depositAcc;
 
-    private String photoPath;
-    private String signaturePath;
+    private String photo;
+    private String signature;
 
     // Getters and Setters
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -206,20 +205,22 @@ public class ExecutiveFounder {
         this.depositAcc = depositAcc;
     }
 
-    public String getPhotoPath() {
-        return photoPath;
-    }
+	public String getPhoto() {
+		return photo;
+	}
 
-    public void setPhotoPath(String photoPath) {
-        this.photoPath = photoPath;
-    }
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
 
-    public String getSignaturePath() {
-        return signaturePath;
-    }
+	public String getSignature() {
+		return signature;
+	}
 
-    public void setSignaturePath(String signaturePath) {
-        this.signaturePath = signaturePath;
-    }
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+
+    
 
 }

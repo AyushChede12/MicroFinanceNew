@@ -86,13 +86,10 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-3">
-				<button id="saveBtn" class="btnStyle"
-					style="background-color: #FFA500;">
-					<i class="bi bi-search"></i> Search
-				</button>
-			</div>
-		</div>
+						<div class="col-4 text-start mt-3">
+							<button id="findBtn" class="btn btn-dark">Find</button>
+						</div>
+					</div>
 
 		<div class="row mt-5">
 			<div class="col-12">

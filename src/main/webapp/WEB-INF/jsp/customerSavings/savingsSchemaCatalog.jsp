@@ -40,7 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
               <i class="bi bi-bank text-blue"></i>
             </a>
           </li>
-          <li class="breadcrumb-item action">Saving Plan Master</li>
+          <li class="breadcrumb-item action">Savings Scheme Catalog</li>
         </ol>
       </nav>
     </div>
@@ -56,56 +56,56 @@ pageEncoding="ISO-8859-1"%> -->
           <div class="row">
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Policy Name </label> <input type="text" name="location" id="location" required="required"
-                  placeholder="Enter Location" />
+                <label for="">Policy Name </label> <input type="text" name="PolicyName" id="PolicyName" required="required"
+                  placeholder="Enter Policy Name" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Yearly ROI(%) </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Yearly ROI(%) </label> <input type="text" name="YearlyROI" id="YearlyROI"
+                  required="required" placeholder="Enter Yearly ROI" />
               </div>
             </div>
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Customer Name </label> <input type="text" name="location" id="location" required="required"
-                  placeholder="Enter Location" />
+                <label for="">Customer Name </label> <input type="text" name="CustomerName" id="CustomerName" required="required"
+                  placeholder="Enter Customer Name" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Initial Deposite </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Initial Deposite </label> <input type="text" name="InitialDeposite" id="InitialDeposite"
+                  required="required" placeholder="Enter Initial Deposite" />
               </div>
             </div>
 
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields  mb-4">
-                <label for="">Monthly Minimum Balance </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Monthly Minimum Balance </label> <input type="text" name="MonthlyMinimumBalance" id="MonthlyMinimumBalance"
+                  required="required" placeholder="Enter Monthly Minimum Balance" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Reserved Funds </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Reserved Funds </label> <input type="text" name="ReservedFunds" id="ReservedFunds"
+                  required="required" placeholder="Enter Reserved Funds" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Messaging Fees </label> <input type="text" name="location" id="location" required="required"
-                  placeholder="Enter Location" />
+                <label for="">Messaging Fees </label> <input type="text" name="MessagingFees" id="MessagingFees" required="required"
+                  placeholder="Enter Messaging Fees" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Messaging Interval</label> <select id="colour" name="colour" required="required"
+                <label for="">Messaging Interval</label> <select id="MessagingInterval" name="MessagingInterval" required="required"
                   class="form-control selectField" style="height: 30px;">
                   <option value=""> Select Colour</option>
                   <option value="Blue">Blue</option>
@@ -115,57 +115,57 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Monthly Free IFSC Transactions </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Monthly Free IFSC Transactions </label> <input type="text" name="MonthlyFreeIFSCTransactions" id="MonthlyFreeIFSCTransactions"
+                  required="required" placeholder="Enter Monthly Free IFSC Transactions" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields  mb-4">
-                <label for="">Free Money Transfers / Month</label> <input type="text" name="location" id="location"
+                <label for="">Free Money Transfers / Month</label> <input type="text" name="FreeMoneyTransfers" id="FreeMoneyTransfers"
                   required="required" placeholder="Enter Location" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Limit per Transaction</label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Limit per Transaction</label> <input type="text" name="LimitperTransaction" id="LimitperTransaction"
+                  required="required" placeholder="Enter Limit per Transaction" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Daily Limit </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Daily Limit </label> <input type="text" name="DailyLimit" id="DailyLimit"
+                  required="required" placeholder="Enter Daily Limit" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Weekly Limit </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Weekly Limit </label> <input type="text" name="WeeklyLimit" id="WeeklyLimit"
+                  required="required" placeholder="Enter Weekly Limit" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Monthly Limit </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Monthly Limit </label> <input type="text" name="MonthlyLimit" id="MonthlyLimit"
+                  required="required" placeholder="Enter Monthly Limit" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Service Fee</label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Service Fee</label> <input type="text" name="ServiceFee" id="ServiceFee"
+                  required="required" placeholder="Enter Service Fee" />
               </div>
             </div>
 
             <div class="col-lg-3">
 
             <div class="d-flex flex-column formFields mb-4">
-              <label for="">Billing Cycle</label> <select id="colour" name="colour" required="required"
+              <label for="">Billing Cycle</label> <select id="BillingCycle" name="BillingCycle" required="required"
                 class="form-control selectField" style="height: 30px;">
                 <option value=""> Select Colour</option>
                 <option value="Blue">Blue</option>
@@ -175,22 +175,22 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Card Fee</label> <input type="text" name="location" id="location" required="required"
-                  placeholder="Enter Location" />
+                <label for="">Card Fee</label> <input type="text" name="CardFee" id="CardFee" required="required"
+                  placeholder="Enter Card Fee" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Monthly Card Limit </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Monthly Card Limit </label> <input type="text" name="MonthlyCardLimit" id="MonthlyCardLimit"
+                  required="required" placeholder="Enter Monthly Card Limit" />
               </div>
             </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Yearly Card Limit </label> <input type="text" name="location" id="location"
-                  required="required" placeholder="Enter Location" />
+                <label for="">Yearly Card Limit </label> <input type="text" name="YearlyCardLimit" id="YearlyCardLimit"
+                  required="required" placeholder="Enter Yearly Card Limit" />
               </div>
             </div>
 
@@ -219,91 +219,7 @@ pageEncoding="ISO-8859-1"%> -->
               </h5>
 
               <table class="table table-borderless datatable overflow-scroll">
-                <thead class="table-light">
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="col">#</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="row">
-                      <a href="#">1</a>
-                    </th>
-                    <td>Arun Kumar</td>
-                    <td>
-                      <a href="#" className="text-primary">Milk</a>
-                    </td>
-                    <td>$29</td>
-                    <td>
-                      <span class="badge bg-success text-white">Approved</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
+                
               </table>
             </div>
           </div>

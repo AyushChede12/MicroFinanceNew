@@ -85,8 +85,8 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="joiningDate">Joining Date</label> <input type="date"
-									name="joiningDate" id="joiningDate" required="required"
+								<label for="joiningDate">Joining Date<span id="star">*</span></label> <input type="date"
+									name="joiningDate" id="joiningDate" required
 									placeholder="Enter Joining Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -94,7 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="selectCustomer">Select Customer</label> <select id="selectCustomer"
+								<label for="selectCustomer">Select Customer <span id="star">*</span></label> <select id="selectCustomer"
 									name="selectCustomer" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Customer</option>
@@ -107,7 +107,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Customer Name</label> <input type="text" name="customerName"
+								<label for="customerName" >Customer Name <span id="star">*</span></label> <input type="text" name="customerName"
 									id="customerName" required="required" placeholder="Enter Cutomer Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -115,7 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="dob">Date of Birth</label> <input type="date" name="dob"
+								<label for="dob">Date of Birth <span id="star">*</span></label> <input type="date" name="dob"
 									id="dob" required="required"
 									placeholder="Enter Date Of Birth"
 									style="text-transform: uppercase;" />
@@ -126,7 +126,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Age</label> <input type="text" name="age"
+								<label>Age <span id="star">*</span></label> <input type="text" name="age"
 									id="age" required="required" placeholder="Enter Age"
 									style="text-transform: uppercase;" />
 							</div>
@@ -134,7 +134,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Family Customer Name</label> <input type="text"
+								<label for="">Family Customer Name <span id="star">*</span></label> <input type="text"
 									name="familyCustomerName" id="familyCustomerName" required="required"
 									placeholder="Enter Family Customer Name" />
 							</div>
@@ -143,7 +143,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label> <select id="relationtoApplicant"
+								<label>Relation to Applicant <span id="star">*</span></label> <select id="relationtoApplicant"
 									name="relationtoApplicant" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Enter Relation to Applicant</option>
@@ -156,14 +156,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="contactNo">Contact No</label> <input type="text" name="contactNo"
+								<label for="contactNo">Contact No <span id="star">*</span></label> <input type="text" name="contactNo"
 									id="contactNo" required="required" placeholder="Enter Contact No" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="nomineeName">Nominee Name</label> <input type="text"
+								<label for="nomineeName">Nominee Name <span id="star">*</span></label> <input type="text"
 									name="nomineeName" id="nomineeName" required="required"
 									placeholder="Enter Nominee Name" />
 							</div>
@@ -183,7 +183,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name</label> <select id="branchName" name="branchName"
+								<label>Branch Name <span id="star">*</span></label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -194,7 +194,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="nomineeAge">Nominee Age</label> <input type="text"
+								<label for="nomineeAge">Nominee Age <span id="star">*</span></label> <input type="text"
 									name="nomineeAge" id="nomineeAge" required="required"
 									placeholder="Enter Nominee Age" />
 							</div>
@@ -203,7 +203,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Address</label>
+								<label>Address <span id="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
@@ -211,21 +211,21 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="district">District</label> <input type="text" name="district"
+								<label for="district">District <span id="star">*</span></label> <input type="text" name="district"
 									id="district" required="required" placeholder="Enter District" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="state">State</label> <input type="text" name="state"
+								<label for="state">State <span id="star">*</span></label> <input type="text" name="state"
 									id="state" required="required" placeholder="Enter State" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="pinCode">Pin Code</label> <input type="text" name="pinCode"
+								<label for="pinCode">Pin Code <span id="star">*</span></label> <input type="text" name="pinCode"
 									id="pinCode" required="required" placeholder="Enter Pincode" />
 							</div>
 						</div>
@@ -235,14 +235,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Profession</label> <input type="text" name="profession"
+								<label>Profession <span id="star">*</span></label> <input type="text" name="profession"
 									id="profession" required="required" placeholder="Enter Profession" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="academicBackground">Academic Background</label> <input type="text" name="academicBackground"
+								<label for="academicBackground">Academic Background <span id="star">*</span></label> <input type="text" name="academicBackground"
 									id="academicBackground" required="required" placeholder="Enter Academic Background" />
 							</div>
 						</div>
@@ -252,7 +252,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="photo" id="drop-area"> <input
+								Photo <span id="star">*</span></label> <label for="photo" id="drop-area"> <input
 								type="file" accept="image/*" name="photo" id="photo"
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -272,7 +272,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="signature" id="drop-area"> <input
+								Signature <span id="star">*</span></label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -303,7 +303,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Select Position</label> <input type="text"
+								<label>Select Position <span id="star">*</span></label> <input type="text"
 									name="selectPosition" id="selectPosition" required="required"
 									placeholder="Enter Position" style="text-transform: uppercase;" />
 							</div>
@@ -311,7 +311,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="referenceCode">Reference Code</label> <input
+								<label for="referenceCode">Reference Code <span id="star">*</span></label> <input
 									type="text" name="referenceCode" id="referenceCode" required="required"
 									placeholder="Enter Reference Code"
 									style="text-transform: uppercase;" />
@@ -321,7 +321,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Reference Name</label> <input type="text"
+								<label>Reference Name <span id="star">*</span></label> <input type="text"
 									name="referenceCode" id="referenceCode" required="required"
 									placeholder="Enter Reference Name"
 									style="text-transform: uppercase;" />
@@ -330,7 +330,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="position">Position </label> <input type="text"
+								<label for="position">Position <span id="star">*</span></label> <input type="text"
 									name="position" id="position" required="required"
 									placeholder="Enter Position" />
 							</div>

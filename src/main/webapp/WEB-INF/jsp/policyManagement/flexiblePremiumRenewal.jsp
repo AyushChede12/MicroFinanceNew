@@ -60,94 +60,45 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Txn Date*</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+									name="txnDate" id="txnDate" required="required"
+									placeholder="Enter Txn Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch Name</label> <select
+									id="branchName" name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+									
+								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Select Policy ID .*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Select Policy Id.</label> <select
+									id="selectPolicyId" name="selectPolicyId" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Policy Id</option>
+									
+								</select>
 							</div>
 						</div>
 
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Emp Code* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Advisor/Collector Code" />
+									name="empCode" id="empCode" required="required"
+									placeholder="Enter Emp Code" />
 							</div>
 						</div>
 
@@ -155,17 +106,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Member Code* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Advisor/Collector Code" />
+									name="memberCode" id="memberCode" required="required"
+									placeholder="Enter Member Code" />
 							</div>
 						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Name* </label> <input type="text" name="location"
-									id="location" required="required"
-									placeholder="Enter Advisor/Collector Code" />
+								<label for="">Name* </label> <input type="text" name="name"
+									id="name" required="required"
+									placeholder="Enter Name" />
 							</div>
 						</div>
 
@@ -173,8 +124,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Contact Number* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Advisor/Collector Code" />
+									name="contactNumber" id="contactNumber" required="required"
+									placeholder="Enter contactNumber" />
 							</div>
 						</div>
 
@@ -182,8 +133,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Policy Code* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Advisor/Collector Code" />
+									name="policyCode" id="policyCode" required="required"
+									placeholder="Enter Policy Code " />
 							</div>
 						</div>
 
@@ -203,8 +154,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="">Plan Balance*</label> <input type="date"
-										name="vehicalNo" id="vehicalNo" required="required"
-										placeholder="Enter Vehicle No"
+										name="planBalance" id="planBalance" required="required"
+										placeholder="Enter Plan Balance"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
@@ -213,8 +164,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="">Payment Reason* </label> <input type="text"
-										name="location" id="location" required="required"
-										placeholder="Enter Advisor/Collector Code" />
+										name="paymentReason" id="paymentReason" required="required"
+										placeholder="Enter Payment Reason" />
 								</div>
 							</div>
 
@@ -222,35 +173,21 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="">Comments*</label>
-									<textarea name="" id=""
+									<textarea name="comments" id="comments"
 										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Txn.Type*</label>
-									<div class="position-relative">
-										<div class="select-btn1" style="cursor: pointer;">
-											<span name="cityName" id="cityNameId"
-												style="font-size: 12px;">Select</span> <i
-												class="fa-solid fa-angle-down"></i>
-										</div>
-										<div class="content" id="contentCityName"
-											style="display: none;">
-											<div class="search">
-												<input type="text" id="city-search" class="m-0"
-													placeholder="Search City" />
-											</div>
-											<ul class="options" id="city-options">
-												<!-- Options will be dynamically added here -->
-
-											</ul>
-										</div>
-									</div>
-								</div>
+							<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Txn.Type</label> <select
+									id="txnType" name="txnType" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+									
+								</select>
 							</div>
+						</div>
 
 
 
@@ -261,9 +198,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Amount</label> <input type="text" name="location"
-										id="location" required="required"
-										placeholder="Enter Nominee Name" />
+									<label>Amount</label> <input type="text" name="amount"
+										id="amount" required="required"
+										placeholder="Enter Amount" />
 								</div>
 							</div>
 
@@ -271,8 +208,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="">Mode of Payment *</label> <input type="text"
-										name="price" id="price" required="required"
-										placeholder="Enter Education" />
+										name="modeOfPayment" id="modeOfPayment" required="required"
+										placeholder="Enter Mode of Payment" />
 								</div>
 							</div>
 
@@ -337,7 +274,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row" style="margin-left: 80%;">
 					<div class="col-12 text-center">
-						<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+						<button id="saveBtn" class="btn btn-info">Save</button>
 					</div>
 				</div>
 			</form>

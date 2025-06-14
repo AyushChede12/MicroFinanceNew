@@ -85,8 +85,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class=" col-lg-3">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update</button>
+							<button id="saveBtn" class="btn btn-success"
+								>Update</button>
 						</div>
 					</div>
 					<div class="row mt-5">

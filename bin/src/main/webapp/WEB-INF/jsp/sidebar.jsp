@@ -250,7 +250,7 @@
           </li>
           
           <li>
-            <a href="contraEntry">
+            <a href="bankCashTransferEntry">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Bank/Cash Transfer Entry</span>
             </a>

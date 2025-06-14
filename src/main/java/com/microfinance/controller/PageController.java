@@ -1,10 +1,17 @@
 package com.microfinance.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.microfinance.repository.CustomerRepo;
 
 @Controller
 public class PageController {
+	
+	@Autowired
+	CustomerRepo customerRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -111,7 +118,10 @@ public class PageController {
 	}
 
 	@GetMapping("/addTeamMember")
-	public String getAddTeamMember() {
+	public String getAddTeamMember(Model model) {
+		//long maxId = employeeRepo.getMaxId();
+	    //String empUniqueNo = "EMC" + "00" + (maxId + 1);
+		//model.addAttribute("empUniqueNo", empUniqueNo);
 		return "teamManagement/addTeamMember";
 	}
 
@@ -305,7 +315,10 @@ public class PageController {
 
 	// Customer Management
 	@GetMapping("/addCustomer")
-	public String getAddClient() {
+	public String getAddClient(Model model) {
+		long maxId = customerRepo.getMaxId();
+		String memberCode = "M" + "0000" + (maxId + 1);
+		model.addAttribute("memberCode", memberCode);
 		return "customerManagement/addCustomer";
 	}
 
@@ -599,7 +612,7 @@ public class PageController {
 		return "incentiveManagement/incentiveSummaryReport";
 	}
 
-	// Investment Section
+	// Policy Management
 	@GetMapping("/planManagement")
 	public String getPlanManagement() {
 		return "policyManagement/planManagement";

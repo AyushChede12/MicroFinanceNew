@@ -33,8 +33,24 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
-</head>
 
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<style>
+#img-view img {
+	width: 100%;
+	max-height: 150px;
+	object-fit: cover;
+	border: 1px dashed #ccc;
+	padding: 5px;
+}
+
+label {
+	cursor: pointer;
+}
+</style>
 
 <body>
 
@@ -84,7 +100,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Type</label> <select id="colour" name="colour"
+								<label for="">Type</label> <select id="type" name="type"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Type</option>
@@ -98,8 +114,6 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="vehicalNo">Branch Name</label> <select
 									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
@@ -120,24 +134,22 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Date Of Birth</label> <input type="date"
-									name="dob" id="dob" required="required"
-									placeholder="Enter Date Of Birth" />
+									name="dateOfBirth" id="dateOfBirth" required="required" />
 							</div>
 						</div>
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">DIN/Promoter No </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+									name="promoterNo" id="promoterNo" required="required"
+									placeholder="Enter Promoter No" />
 							</div>
 						</div>
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Appointment Date</label> <input type="date"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="appointmentDate" id="appointmentDate" required="required" />
 							</div>
 						</div>
 
@@ -154,11 +166,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label> <select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Relation To Applicant</option>
-									<option value="Blue">Sister</option>
+								<label>Relation to Applicant</label> <select
+									id="relationToApplicant" name="relationToApplicant"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 								</select>
 							</div>
 						</div>
@@ -166,7 +177,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Address</label>
-								<textarea name="" id=""
+								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
@@ -174,15 +185,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter District" />
+								<label for="">District</label> <input type="text"
+									name="district" id="district" required="required"
+									placeholder="Enter District" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>State</label> <select id="colour" name="colour"
+								<label>State</label> <select id="state" name="state"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select State</option>
@@ -193,22 +205,23 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Pincode" />
+								<label for="">Pin Code</label> <input type="text" name="pinCode"
+									id="pinCode" required="required" placeholder="Enter Pincode" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Adhar No.</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Adhar No" />
+								<label for="">Aadhar No.</label> <input type="text"
+									name="aadharNo" id="aadharNo" required="required"
+									placeholder="Enter Aadhar No" />
 							</div>
 						</div>
 
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">PAN No.</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter PAN No" />
+								<label for="">PAN No.</label> <input type="text" name="panNo"
+									id="panNo" required="required" placeholder="Enter PAN No" />
 							</div>
 						</div>
 
@@ -225,8 +238,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Email ID</label> <input type="text" name="emailID"
-									id="emailID" required="required" placeholder="Enter Email ID" />
+								<label for="">Email ID</label> <input type="text" name="emailId"
+									id="emailId" required="required" placeholder="Enter Email ID" />
 							</div>
 						</div>
 
@@ -251,8 +264,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Share Amount</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Email id" />
+									name="shareAmount" id="shareAmount" required="required"
+									placeholder="Enter Share Amount" />
 							</div>
 						</div>
 
@@ -265,13 +278,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
+								Photo</label> <label for="photo" id="drop-area"> <input
+								type="file" accept="image/*" name="photo" id="photo"
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
+										id="photoPreview" /><input type="hidden" name="photoHidden" id="photoHidden">
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -285,13 +298,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
+								Signature</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="signature" id="signature"
 								hidden="hidden" onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+										id="signaturePreview" /><input type="hidden" name="signatureHidden" id="signatureHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -316,9 +329,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deposit Acc</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label>Deposit Acc</label> <select id="depositAcc"
+									name="depositAcc" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Deposit Acc</option>
 									<option value="Blue">Blue</option>
 								</select>
@@ -331,8 +344,7 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="showTableData()">Show</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
-							<button type="button" id="saveBtn" class="btnStyle bg-warning"
-								onclick="saveBranch()">Save</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
 						</div>
 					</div>
 			</form>
@@ -343,10 +355,44 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 
+		<div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
+
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Executive Founder Data <span>| Table View</span>
+						</h5>
+
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Name</th>
+									<th scope="col">Branch Name</th>
+									<th scope="col">Appointment Date</th>
+									<th scope="col">Address</th>
+									<th scope="col">Email</th>
+									<th scope="col">Contact</th>
+									<th scope="col">Edit</th>
+									<th scope="col">View</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody id="tableBody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/executivePromoter.js"></script>
 </body>
 
 </html>

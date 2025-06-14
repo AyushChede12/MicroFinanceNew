@@ -1,0 +1,118 @@
+package com.microfinance.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
+public class RecurringDepositPM {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	private String planCodeRD;
+	private String minimumAmountRD;
+	private String rateOfInterestRD;
+	private String termMode;
+	private String term;
+	private String commissionOnNewRD;
+	private String renewalCommissionRD;
+	private String componentIntervalRD;
+	private String totalPaidRD;
+	private String maturityAmountRD;
+	private String flexiblePlanRD;
+	private String graceDaysRD;
+	private String penaltyRateRD;
+	private String statusOfPlanRD;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getPlanCodeRD() {
+		return planCodeRD;
+	}
+	public void setPlanCodeRD(String planCodeRD) {
+		this.planCodeRD = planCodeRD;
+	}
+	public String getMinimumAmountRD() {
+		return minimumAmountRD;
+	}
+	public void setMinimumAmountRD(String minimumAmountRD) {
+		this.minimumAmountRD = minimumAmountRD;
+	}
+	public String getRateOfInterestRD() {
+		return rateOfInterestRD;
+	}
+	public void setRateOfInterestRD(String rateOfInterestRD) {
+		this.rateOfInterestRD = rateOfInterestRD;
+	}
+	public String getTermMode() {
+		return termMode;
+	}
+	public void setTermMode(String termMode) {
+		this.termMode = termMode;
+	}
+	public String getTerm() {
+		return term;
+	}
+	public void setTerm(String term) {
+		this.term = term;
+	}
+	public String getCommissionOnNewRD() {
+		return commissionOnNewRD;
+	}
+	public void setCommissionOnNewRD(String commissionOnNewRD) {
+		this.commissionOnNewRD = commissionOnNewRD;
+	}
+	public String getRenewalCommissionRD() {
+		return renewalCommissionRD;
+	}
+	public void setRenewalCommissionRD(String renewalCommissionRD) {
+		this.renewalCommissionRD = renewalCommissionRD;
+	}
+	public String getComponentIntervalRD() {
+		return componentIntervalRD;
+	}
+	public void setComponentIntervalRD(String componentIntervalRD) {
+		this.componentIntervalRD = componentIntervalRD;
+	}
+	public String getTotalPaidRD() {
+		return totalPaidRD;
+	}
+	public void setTotalPaidRD(String totalPaidRD) {
+		this.totalPaidRD = totalPaidRD;
+	}
+	public String getMaturityAmountRD() {
+		return maturityAmountRD;
+	}
+	public void setMaturityAmountRD(String maturityAmountRD) {
+		this.maturityAmountRD = maturityAmountRD;
+	}
+	public String getFlexiblePlanRD() {
+		return flexiblePlanRD;
+	}
+	public void setFlexiblePlanRD(String flexiblePlanRD) {
+		this.flexiblePlanRD = flexiblePlanRD;
+	}
+	public String getGraceDaysRD() {
+		return graceDaysRD;
+	}
+	public void setGraceDaysRD(String graceDaysRD) {
+		this.graceDaysRD = graceDaysRD;
+	}
+	public String getPenaltyRateRD() {
+		return penaltyRateRD;
+	}
+	public void setPenaltyRateRD(String penaltyRateRD) {
+		this.penaltyRateRD = penaltyRateRD;
+	}
+	public String getStatusOfPlanRD() {
+		return statusOfPlanRD;
+	}
+	public void setStatusOfPlanRD(String statusOfPlanRD) {
+		this.statusOfPlanRD = statusOfPlanRD;
+	}
+	
+}
