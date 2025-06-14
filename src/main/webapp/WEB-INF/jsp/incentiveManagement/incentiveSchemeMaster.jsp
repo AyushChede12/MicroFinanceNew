@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery 3.x (Latest stable) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 </head>
 
 
@@ -142,6 +146,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/incentive/incentiveSchemeMaster.js"></script>
 </body>
 
 </html>
