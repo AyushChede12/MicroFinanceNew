@@ -7,7 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 
-public class incentiveSchemeMaster {
+public class IncentiveSchemeMaster {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
