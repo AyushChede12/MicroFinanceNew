@@ -5,6 +5,13 @@ function photoUpload() {
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			document.getElementById("photoPreview").src = e.target.result;
+			const previewimg = document.getElementById("photoPreview");
+			document.getElementById("photoPreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -20,6 +27,13 @@ function signatureUpload() {
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			document.getElementById("signaturePreview").src = e.target.result;
+			const previewimg = document.getElementById("signaturePreview");
+			document.getElementById("signaturePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -296,16 +310,3 @@ function updateBranch() {
 	});
 }
 
-const previewimg = document.getElementById("photoPreview");
-
-document.getElementById("photoPreview").src = e.target.result;
-
-previewimg.style.width = "100%";
-
-previewimg.style.height = "100%";
-
-previewimg.style.objectFit = "cover"
-
-previewimg.style.overflow = "hidden"
-
-previewimg.style.borderRadius = "20px"

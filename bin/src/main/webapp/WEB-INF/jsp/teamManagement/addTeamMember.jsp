@@ -39,6 +39,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
+<<<<<<< HEAD
 <script type="text/javascript">
    function calculateAge() {
 	   const dob = new Date(document.getElementById("dateOfBirth").value); // get DOB from the date input field
@@ -46,6 +47,8 @@ pageEncoding="ISO-8859-1"%> -->
 	   document.getElementById("age").value = age; // set the calculated age in the age input field
 	 }
 </script>
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -95,7 +98,11 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
+<<<<<<< HEAD
 									name="teamMemberCode" value="${empUniqueNo}" required="required"
+=======
+									name="teamMemberCode" required="required"
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -130,7 +137,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
+<<<<<<< HEAD
 								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth" onchange="calculateAge()"
+=======
+								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
@@ -138,7 +149,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+<<<<<<< HEAD
 								<label for="">Age</label> <input type="text" name="age" id="age" 
+=======
+								<label for="">Age</label> <input type="text" name="age" id="age"
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									required="required" placeholder="Enter Age" />
 							</div>
 						</div>

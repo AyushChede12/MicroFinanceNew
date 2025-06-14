@@ -842,7 +842,11 @@ header .search-form button i {
 
 #img-view img {
     width: 100px;
+<<<<<<< HEAD
     /*margin-top: 25px;*/
+=======
+    margin-top: 25px;
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 }
 
 

@@ -172,6 +172,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row" style="margin-top: 30px;">
 						<div class="col-12 text-center">
+<<<<<<< HEAD
 							<button type="button" id="showBtn" class="btnStyle bg-primary"
 								onclick="showTableData()">Show</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
@@ -180,6 +181,12 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="saveBranch()">Save</button>
 							<button type="button" id="updateBtn" class="btnStyle bg-success"
 								onclick="updateBranch()">Update</button>
+=======
+							<button type="button" id="showBtn" class="btnStyle bg-primary" onclick="showTableData()">Show</button>
+							<button type="button" id="hideBtn" class="btnStyle bg-success" onclick="hideTableData()" >Hide</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning"
+								onclick="saveBranch()">Save</button>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 						</div>
 					</div>
 			</form>
@@ -211,6 +218,10 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Primary Contact</th>
 									<th scope="col">Contact</th>
 									<th scope="col">Edit</th>
+<<<<<<< HEAD
+=======
+									<th scope="col">View</th>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									<th scope="col">Delete</th>
 								</tr>
 							</thead>

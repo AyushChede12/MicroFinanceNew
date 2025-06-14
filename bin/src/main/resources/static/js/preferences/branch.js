@@ -31,7 +31,10 @@ function saveBranch() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
+<<<<<<< HEAD
 	$("#updateBtn").hide();
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 	$.ajax({
 		url: "/getAllBranchModule",
 		type: "GET",
@@ -47,11 +50,20 @@ $(document).ready(function() {
               <td><a href="#" class="text-primary">${item.branchName || ''}</a></td>
               <td>${item.openingDate || ''}</td>
               <td>${item.address || ''}</td>
+<<<<<<< HEAD
               <td>${item.pin || ''}</td>
               <td>${item.state || ''}</td>
               <td>${item.primaryContact || ''}</td>
               <td>${item.contact || ''}</td>
 			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
+=======
+              <td>${item.pinCode || ''}</td>
+              <td>${item.state || ''}</td>
+              <td>${item.primaryContact || ''}</td>
+              <td>${item.contact || ''}</td>
+              <td><button class="iconbutton" onclick="editData(${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square text-success"></i></button></td>
+			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-eye text-primary"></i></button></td>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
             </tr>`;
 				tbody.append(row);
@@ -73,10 +85,13 @@ function hideTableData() {
 }
 
 function viewData(id) {
+<<<<<<< HEAD
 	$("#updateBtn").show();
 	$("#saveBtn").hide();
 	$("#hideBtn").hide();
 	$("#showBtn").hide();
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 	$.ajax({
 		url: "/getBranchModuleById",
 		type: "GET",
@@ -99,6 +114,37 @@ function viewData(id) {
 
 }
 
+<<<<<<< HEAD
+=======
+function editData(id) {
+	let payload = {
+		id: id,
+		branchCode: $("#branchCode").val(),
+		branchName: $("#branchName").val(),
+		openingDate: $("#openingDate").val(),
+		address: $("#address").val(),
+		pin: $("#pin").val(),
+		state: $("#state").val(),
+		primaryContact: $("#primaryContact").val(),
+		contact: $("#contact").val()
+	};
+	$.ajax({
+		url: "/updateBranchModuleById",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(payload),
+		success: function(response) {
+			alert("Update Branch successfully!");
+			location.reload();
+			// Optionally refresh table or redirect
+		},
+		error: function(xhr, status, error) {
+			alert("Update failed: " + xhr.responseText);
+		}
+	});
+}
+
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
@@ -116,6 +162,7 @@ function deleteData(id) {
 			}
 		});
 	}
+<<<<<<< HEAD
 }
 
 
@@ -171,3 +218,6 @@ $(document).ready(function () {
 });
 
 
+=======
+}
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181

@@ -17,7 +17,12 @@ $(document).ready(function() {
 		formData.append("customerAge", $('#customerAge').val());
 		formData.append("relationshipStatus", $('#relationshipStatus').val());
 		formData.append("customerAddress", $('#customerAddress').val());
+<<<<<<< HEAD
 		
+=======
+		formData.append("state", $('#state').val());
+		formData.append("district", $('#district').val());
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 		formData.append("state", $('#state').val());
 		formData.append("district", $('#district').val());
 		formData.append("aadharNo", $('#aadharNo').val());
@@ -84,6 +89,7 @@ $(document).ready(function() {
 		});
 	});
 });
+<<<<<<< HEAD
 
 
 function photopreview() {
@@ -181,3 +187,5 @@ $(document).ready(function() {
 
 
 
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
