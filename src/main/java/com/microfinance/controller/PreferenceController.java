@@ -278,7 +278,7 @@ public class PreferenceController {
 		return companyAdmin;
 	}
 	
-	@ResponseBody
+	@ResponseBody               //Ayush
 	@PostMapping("/updateDataOfCompanyAdministration")
 	public ResponseEntity<String> updateCompanyAdministration(@RequestBody CompanyAdministration companyAdministration){
 		int i=preferenceService.updateCompanyAdministration(companyAdministration);

@@ -52,8 +52,8 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 		<div>
-			<form id="formid">
-				<div>
+			<form id="formdd">
+				<div >
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item action">Daily Deposit</li>
@@ -115,6 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
+</form>
 
 
 
@@ -124,8 +125,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-
-
+<form id="formrd">
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -189,9 +189,9 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div>
+		</form>
 
-
-
+		<form id="formfd">
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -256,11 +256,11 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div>
+			</form>
 
 
 
-
-
+			<form id="formmis">
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -336,6 +336,32 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script>
+  $("#formdd").submit(function (event) {
+    event.preventDefault();
+
+    // Get values directly using IDs
+    var data = {
+      policyCode: $("#ddPolicyCode").val(),
+      instFrom: $("#ddInstFrom").val(),
+      instTo: $("#ddInstTo").val(),
+      interestRate: $("#ddInterestRate").val(),
+      deduction: $("#ddDeduction").val()
+    };
+
+    $.post({
+      url: "http://localhost:8080/api/policy", // Your backend endpoint
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function () {
+        alert("Saved!");
+      },
+      error: function () {
+        alert("Error while saving");
+      }
+    });
+  });
+</script>
 </body>
 
 </html>
