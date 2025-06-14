@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+	
 
-import com.microfinance.model.incentiveSchemeMaster;
+import com.microfinance.model.IncentiveSchemeMaster;
 import com.microfinance.service.IncentiveManagementService;
 
 @Controller
@@ -21,16 +22,27 @@ public class IncentiveManagementController {
 	
 	
 	//incentive save Data date:-13-6-24
+	//Anjali
 	
 	@PostMapping("/saveIncentive")
 	@ResponseBody
-	public ResponseEntity<String> saveIncentiveScheme(@RequestBody incentiveSchemeMaster incentive) {
-		incentiveSchemeMaster Data = incentiveSchemeMasterService.saveIncentive(incentive);
+	public ResponseEntity<String> saveIncentiveScheme(@RequestBody IncentiveSchemeMaster incentive) {
+		IncentiveSchemeMaster Data = incentiveSchemeMasterService.saveIncentive(incentive);
 		if(Data!=null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("Failure");
 	}
 	
+	//fetch the data from table 
+	//Anjali
+	
+	
+	@GetMapping("/getAllIncentives")
+	@ResponseBody
+    public List<IncentiveSchemeMaster> getAllIncentives() {
+		List<IncentiveSchemeMaster> list=incentiveSchemeMasterService.getAllIncentives();
+        return list;
+    }
 
 }

@@ -7,14 +7,12 @@ import javax.persistence.Id;
 
 @Entity
 
-public class incentiveSummaryReport {
-
+public class IncentivePaymentDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private long id;
 	private String monthName;
-	private String branchName;
 	private String code;
 	public long getId() {
 		return id;
@@ -28,17 +26,12 @@ public class incentiveSummaryReport {
 	public void setMonthName(String monthName) {
 		this.monthName = monthName;
 	}
-	public String getBranchName() {
-		return branchName;
-	}
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
 	public String getCode() {
 		return code;
 	}
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
 	
 }

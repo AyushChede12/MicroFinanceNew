@@ -69,18 +69,19 @@ pageEncoding="ISO-8859-1"%> -->
 									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">January</option>
-									<option value="Blue">February</option>
-									<option value="Blue">March</option>
-									<option value="Blue">April</option>
-									<option value="Blue">May</option>
-									<option value="Blue">June</option>
-									<option value="Blue">July</option>
-									<option value="Blue">August</option>
-									<option value="Blue">September</option>
-									<option value="Blue">October</option>
-									<option value="Blue">November</option>
-									<option value="Blue">December</option>
+									<option value="month">January</option>
+									<option value="month">February</option>
+									<option value="month">March</option>
+									<option value="month">April</option>
+									<option value="month">May</option>
+									<option value="month">June</option>
+									<option value="month">July</option>
+									<option value="month">August</option>
+									<option value="month">September</option>
+									<option value="month">October</option>
+									<option value="month">November</option>
+									<option value="month">December</option>
+
 								</select>
 							</div>
 						</div>
