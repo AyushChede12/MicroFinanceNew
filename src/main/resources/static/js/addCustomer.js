@@ -126,30 +126,29 @@ function signpreview() {
 	}
 }
 
-$(document).ready(function() {
-
-    // Load states on page load
+$(document).ready(function () {
+    // Load States
     $.ajax({
         url: "getAllStates",
         method: "GET",
-        success: function(data) {
+        success: function (data) {
             console.log("Fetched states:", data);
-            data.forEach(function(state) {
+            data.forEach(function (state) {
                 $('#state').append(
                     $('<option>', {
-                        value: state.stateName,
+                        value: state.stateId, // ✅ use stateId here
                         text: state.stateName
                     })
                 );
             });
         },
-        error: function(err) {
+        error: function (err) {
             console.error("Error fetching states:", err);
         }
     });
 
-    // Load districts on state change
-    $('#state').on('change', function() {
+    // Load Districts when state is selected
+    $('#state').on('change', function () {
         var selectedStateId = $(this).val();
         $('#district').empty().append('<option value="">Select District</option>');
 
@@ -158,10 +157,10 @@ $(document).ready(function() {
                 url: 'getAllDistrictsByStateId',
                 method: 'GET',
                 data: { stateId: selectedStateId },
-                success: function(response) {
+                success: function (response) {
                     console.log("Fetched districts:", response);
                     var districts = response.allDistricts;
-                    districts.forEach(function(district) {
+                    districts.forEach(function (district) {
                         $('#district').append(
                             $('<option>', {
                                 value: district.districtName,
@@ -170,14 +169,53 @@ $(document).ready(function() {
                         );
                     });
                 },
-                error: function(err) {
+                error: function (err) {
                     console.error("Error fetching districts:", err);
                 }
             });
         }
     });
-
 });
 
+
+//Niraj Code 
+window.onload = function() {
+    fetch('getAllRelativeModule')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById("relationToApplicant");
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.relation;  // Use item.id if needed
+                option.text = item.relation;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading relations:", error);
+        });
+};
+
+$(document).ready(function () {
+    // Fetch all branches and populate the dropdown
+    $.ajax({
+        url: "getAllBranchModule",
+        method: "GET",
+        success: function (data) {
+            console.log("Fetched Branches:", data);
+            data.forEach(function (branch) {
+                $('#branchName').append(
+                    $('<option>', {
+                        value: branch.branchName,
+                        text: branch.branchName
+                    })
+                );
+            });
+        },
+        error: function (err) {
+            console.error("Error fetching branches:", err);
+        }
+    });
+});
 
 

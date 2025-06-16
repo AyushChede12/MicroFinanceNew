@@ -143,25 +143,3 @@ function deleteData(id) {
 }
 
 
-$(document).ready(function () {
-    // Fetch all branches and populate the dropdown
-    $.ajax({
-        url: "getAllBranchModule",
-        method: "GET",
-        success: function (data) {
-            console.log("Fetched Branches:", data);
-            data.forEach(function (branch) {
-                $('#branchName').append(
-                    $('<option>', {
-                        value: branch.branchName,
-                        text: branch.branchName
-                    })
-                );
-            });
-        },
-        error: function (err) {
-            console.error("Error fetching branches:", err);
-        }
-    });
-});
-
