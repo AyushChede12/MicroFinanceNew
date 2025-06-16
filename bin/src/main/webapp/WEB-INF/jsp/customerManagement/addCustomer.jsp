@@ -60,6 +60,17 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+<<<<<<< HEAD
+					
+					  <div class="col-lg-0">
+							<div class="d-none flex-column formFields" >
+								<label for="" >Customer Code </label> <input 
+									name="memberCode" id="memberCode" value="${memberCode}" required="required"
+									placeholder="Enter Customer Name" />
+							</div>
+						</div>
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Authenticate for</label> <select
@@ -67,6 +78,10 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="aadhar">Aadhar</option>
+<<<<<<< HEAD
+									<option value="aadhar">Without Aadhar</option>
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								</select>
 							</div>
 						</div>
@@ -85,11 +100,20 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">(Mr/Ms)</label> <select
 									id="major" name="major" required="required"
 									class="form-control selectField" style="height: 30px;">
+<<<<<<< HEAD
+									<option value="">Mr</option>
+									<option value="">Mrs</option>
+										
+=======
 									<option value="">Select</option>	
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								</select>
 							</div>
 						</div>
 						
+<<<<<<< HEAD
+						
+=======
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="major_name">(Mr/Ms)</label>
@@ -110,6 +134,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 							      
 						</div> -->
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -125,7 +150,11 @@ pageEncoding="ISO-8859-1"%> -->
 									id="minor" name="minor" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Yes(Below 18)</option>
+<<<<<<< HEAD
+									<option value="">No(Above 18)</option>
+=======
 									
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								</select>
 							</div>
 						</div>
@@ -163,7 +192,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Gender</label> <select
+<<<<<<< HEAD
+									id="customerGender" name="customerGender" required="required"
+=======
 									id="gender" name="gender" required="required"
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Gender</option>
 									<option value="">Male</option>
@@ -174,6 +207,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
+<<<<<<< HEAD
+=======
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -201,6 +236,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						
 
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Age</label> <input type="text" name="customerAge"
@@ -208,6 +244,9 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
+<<<<<<< HEAD
+						
+=======
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Family Member Name</label> <input type="text"
@@ -215,18 +254,28 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Family Member Name" />
 							</div>
 						</div>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 						
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relationship Status</label> <select
 									id="relationshipStatus" name="relationshipStatus" required="required"
 									class="form-control selectField" style="height: 30px;">
+<<<<<<< HEAD
+									<option value="">Single</option>
+									<option value="">Married</option>
+									<option value="">Divorced</option>
+=======
 									<option value="">Select Relationship Status</option>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									
 								</select>
 							</div>
 						</div>
 
+<<<<<<< HEAD
+						
+=======
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -251,6 +300,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div> -->
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -260,19 +310,41 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
+<<<<<<< HEAD
+						<div class="col-lg-3 mb-3">
+=======
 						<div class="col-lg-3 ">
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 							<div class="d-flex flex-column formFields">
 								<label for="">State</label> <select
 									id="state" name="state" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select State</option>
+<<<<<<< HEAD
+								
+=======
 									<option value="">Maharashtra</option>
 									<option value="">up</option>
 									
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								</select>
 							</div>
 						</div>
 						
+<<<<<<< HEAD
+						
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">District</label> <select
+									id="district" name="district" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select District</option>
+								
+								</select>
+							</div>
+						</div>
+					
+=======
 
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -305,6 +377,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter District" />
 							</div>
 						</div>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -334,6 +407,8 @@ pageEncoding="ISO-8859-1"%> -->
 						
 
 
+<<<<<<< HEAD
+=======
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -359,6 +434,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div> -->
 
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">PAN No</label> <input type="text" name="panNo"
@@ -394,6 +470,8 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
+<<<<<<< HEAD
+=======
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -417,6 +495,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div> -->
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -462,19 +541,29 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+<<<<<<< HEAD
+								Photo</label> <label for="customerPhoto" id="drop-area"> <input
+								type="file" accept="image/*" name="customerPhoto"
+								id="customerPhoto" hidden="hidden" onchange="photopreview();"
+=======
 								Photo</label> <label for="bike1image" id="drop-area"> <input
 								type="file" accept="image/*" name="customerPhoto"
 								id="customerPhoto" hidden="hidden" onchange="bike1Preview();"
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike1imagePreview" />
+<<<<<<< HEAD
+									
+=======
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
                   >
                     Drag and drop or Choose File to upload the image
                   </p> -->
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								</div>
 							</label>
 						</div>
@@ -482,20 +571,31 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+<<<<<<< HEAD
+								Signature</label> <label for="customerSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="customerSignature"
+								id="customerSignature" hidden="hidden"
+								onchange="signpreview();"
+=======
 								Signature</label> <label for="bike2image" id="drop-area"> <input
 								type="file" accept="image/*" name="customerSignature"
 								id="customerSignature" hidden="hidden"
 								onchange="bike2Preview();"
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
+<<<<<<< HEAD
+									
+=======
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
                   >
                     Drag and drop or Choose File to upload the image
                   </p> -->
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 								</div>
 							</label>
 						</div>
@@ -731,6 +831,11 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="js/addCustomer.js"></script>
+<<<<<<< HEAD
+<script src="./js/preferences/relative.js"></script>
+<script src="./js/preferences/branch.js"></script>
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 </body>
 
 </html>

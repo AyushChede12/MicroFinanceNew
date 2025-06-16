@@ -145,7 +145,11 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+<<<<<<< HEAD
+
+=======
 					
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 					</div>
 
 					<div class="row" style="margin-top: 30px;">
@@ -156,9 +160,17 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="hideTableData()">Hide</button>
 							<button type="button" id="saveBtn" class="btnStyle bg-warning"
 								onclick="saveBank()">Save</button>
+<<<<<<< HEAD
+							<button type="button" id="updateBtn" class="btnStyle bg-success"
+								onclick="updateBank()">Update</button>
+						</div>
+					</div>
+				</div>
+=======
 						</div>
 					</div>
 					</div>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 			</form>
 
 			<div class="mt-5">
@@ -182,12 +194,19 @@ pageEncoding="ISO-8859-1"%> -->
 											<th scope="col">Opening Date</th>
 											<th scope="col">Opening Balance</th>
 											<th scope="col">Edit</th>
+<<<<<<< HEAD
+=======
 											<th scope="col">View</th>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 											<th scope="col">Delete</th>
 										</tr>
 									</thead>
 									<tbody id="tableBody">
+<<<<<<< HEAD
+
+=======
 										
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									</tbody>
 								</table>
 							</div>
@@ -205,7 +224,11 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/bank.js"></script>
+<<<<<<< HEAD
+
+=======
 	
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 </body>
 
 </html>

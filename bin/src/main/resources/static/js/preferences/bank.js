@@ -27,6 +27,10 @@ function saveBank() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
+<<<<<<< HEAD
+	$("#updateBtn").hide();
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 	$.ajax({
 		url: "/getAllBankModule",
 		type: "GET",
@@ -44,8 +48,12 @@ $(document).ready(function() {
               <td>${item.address || ''}</td>
               <td>${item.openingDate || ''}</td>
               <td>${item.openingBalance || ''}</td>
+<<<<<<< HEAD
+			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
+=======
               <td><button class="iconbutton" onclick="editData(${item.id})" title="Edit"><i class="fa-solid fa-pen-to-square text-success"></i></button></td>
 			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-eye text-primary"></i></button></td>
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
             </tr>`;
 				tbody.append(row);
@@ -67,6 +75,13 @@ function hideTableData() {
 }
 
 function viewData(id) {
+<<<<<<< HEAD
+	$("#updateBtn").show();
+	$("#saveBtn").hide();
+	$("#hideBtn").hide();
+	$("#showBtn").hide();
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 	$.ajax({
 		url: "/getBankModuleById",
 		type: "GET",
@@ -87,9 +102,34 @@ function viewData(id) {
 
 }
 
+<<<<<<< HEAD
+function deleteData(id) {
+	if (confirm("Are you sure you want to delete this bank?")) {
+		$.ajax({
+			url: "/deleteBankModuleById", // or "/deleteAllBranchModule" if you're sending full object
+			type: "POST",
+			data: { id: id }, // if using @RequestParam long id
+			success: function(response) {
+				alert("Bank deleted successfully.");
+				// Refresh the table or page here
+				location.reload(); // example method to reload your data
+			},
+			error: function(xhr, status, error) {
+				alert("Failed to delete bank.");
+				console.error(error);
+			}
+		});
+	}
+}
+
+function updateBank() {
+	let payload = {
+		id: $("#id").val(),
+=======
 function editData(id) {
 	let payload = {
 		id: id,
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 		bankName: $("#bankName").val(),
 		accountNo: $("#accountNo").val(),
 		contactNo: $("#contactNo").val(),
@@ -111,6 +151,8 @@ function editData(id) {
 			alert("Update failed: " + xhr.responseText);
 		}
 	});
+<<<<<<< HEAD
+=======
 }
 
 function deleteData(id) {
@@ -130,4 +172,5 @@ function deleteData(id) {
 			}
 		});
 	}
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 }

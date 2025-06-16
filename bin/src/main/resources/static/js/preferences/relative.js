@@ -24,7 +24,11 @@ function saveRelative() {
 
 $(document).ready(function() {
 	$.ajax({
+<<<<<<< HEAD
+		url: "getAllRelativeModule",
+=======
 		url: "/getAllRelativeModule",
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 		type: "GET",
 		contentType: "application/json",
 		success: function(data) {
@@ -45,3 +49,23 @@ $(document).ready(function() {
 		}
 	});
 });
+<<<<<<< HEAD
+
+window.onload = function() {
+    fetch('getAllRelativeModule')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById("relationToApplicant");
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.relation;  // Use item.id if needed
+                option.text = item.relation;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading relations:", error);
+        });
+};
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
