@@ -34,6 +34,8 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -94,11 +96,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="selectCustomer">Select Customer <span id="star">*</span></label> <select id="selectCustomer"
-									name="selectCustomer" required="required"
+								<label for="selectCustomer">Select Customer Code<span id="star">*</span></label> 
+								<select id="memberCode"
+									name="memberCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Customer</option>
-									<option value="Blue">Blue</option>
+									
+									
 								</select>
 							</div>
 						</div>
@@ -134,8 +137,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Family Customer Name <span id="star">*</span></label> <input type="text"
-									name="familyCustomerName" id="familyCustomerName" required="required"
+								<label for="guardianName">Family Customer Name <span id="star">*</span></label> <input type="text"
+									name="guardianName" id="guardianName" required="required"
 									placeholder="Enter Family Customer Name" />
 							</div>
 						</div>
@@ -143,8 +146,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant <span id="star">*</span></label> <select id="relationtoApplicant"
-									name="relationtoApplicant" required="required"
+								<label>Relation to Applicant <span id="star">*</span></label> <select id="relationToApplicant"
+									name="relationToApplicant" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Enter Relation to Applicant</option>
 									<option value="Blue">Blue</option>
@@ -163,7 +166,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="nomineeName">Nominee Name <span id="star">*</span></label> <input type="text"
+								<label for="nomineeName">Nominee Name <span class="star">*</span></label> <input type="text"
 									name="nomineeName" id="nomineeName" required="required"
 									placeholder="Enter Nominee Name" />
 							</div>
@@ -186,8 +189,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Branch Name <span id="star">*</span></label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
+									
 								</select>
 							</div>
 						</div>
@@ -254,11 +256,11 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span id="star">*</span></label> <label for="photo" id="drop-area"> <input
 								type="file" accept="image/*" name="photo" id="photo"
-								hidden="hidden" onchange="bike1Preview();"
+								hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
+										id="customerPhoto" />
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -274,11 +276,11 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span id="star">*</span></label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="bike2Preview();"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+										id="customerSignature" />
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -312,7 +314,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="referenceCode">Reference Code <span id="star">*</span></label> <input
-									type="text" name="referenceCode" id="referenceCode" required="required"
+									type="text" name="referralCode" id="referralCode" required="required"
 									placeholder="Enter Reference Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -322,7 +324,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Reference Name <span id="star">*</span></label> <input type="text"
-									name="referenceCode" id="referenceCode" required="required"
+									name="referralName" id="referralName" required="required"
 									placeholder="Enter Reference Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -455,6 +457,14 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/FinancialConsultant/addFinancialConsultant.js"></script>
+	
+	
+	
+
+
+
+	
 </body>
 
 </html>

@@ -66,8 +66,19 @@ pageEncoding="ISO-8859-1"%> -->
 									name="monthName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">--SELECT MONTH NAME--</option>
-									<option value="Blue">January</option>
-									<option value="Blue">February</option>
+									<option value="month">January</option>
+									<option value="month">February</option>
+									<option value="month">March</option>
+									<option value="month">April</option>
+									<option value="month">May</option>
+									<option value="month">June</option>
+									<option value="month">July</option>
+									<option value="month">August</option>
+									<option value="month">September</option>
+									<option value="month">October</option>
+									<option value="month">November</option>
+									<option value="month">December</option>
+
 								</select>
 							</div>
 						</div>
