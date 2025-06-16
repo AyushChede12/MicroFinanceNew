@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 	
 
 import com.microfinance.model.IncentiveSchemeMaster;
+import com.microfinance.model.TeamMember;
 import com.microfinance.service.IncentiveManagementService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class IncentiveManagementController {
@@ -44,5 +47,14 @@ public class IncentiveManagementController {
 		List<IncentiveSchemeMaster> list=incentiveSchemeMasterService.getAllIncentives();
         return list;
     }
+	
+	@GetMapping("/getAllTeamMembers")
+	@ResponseBody
+	public List<TeamMember> getAllTeamMember() {
+		List<TeamMember> list=incentiveSchemeMasterService.getAllTeamMember();
+		return list;
+	}
+	
 
+	
 }
