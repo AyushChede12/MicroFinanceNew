@@ -11,27 +11,25 @@ public class SavingSchemeCatalog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String PolicyName;
-	private String YearlyROI;
-	private String CustomerName;
-	private String InitialDeposite;
-	private String MonthlyMinimumBalance;
-	private String ReservedFunds;
-	private String MessagingFees;
-	private String MessagingInterval;
-	private String MonthlyFreeIFSCTransactions;
+	private String policyName;
+	private String yearlyROI;
+	private String customerName;
+	private String initialDeposite;
+	private String monthlyMinimumBalance;
+	private String reservedFunds;
+	private String messagingFees;
+	private String messagingInterval;
+	private String monthlyFreeIFSCTransactions;
 	private String FreeMoneyTransfers;
-	private String LimitperTransaction;
-	private String DailyLimit;
-	private String WeeklyLimit;
-	private String MonthlyLimit;
-	private String ServiceFee;
-	private String BillingCycle;
-	private String CardFee;
-	private String MonthlyCardLimit;
-	private String YearlyCardLimit;
-	
-	
+	private String limitperTransaction;
+	private String dailyLimit;
+	private String weeklyLimit;
+	private String monthlyLimit;
+	private String serviceFee;
+	private String billingCycle;
+	private String cardFee;
+	private String monthlyCardLimit;
+	private String yearlyCardLimit;
 	public long getId() {
 		return id;
 	}
@@ -39,58 +37,58 @@ public class SavingSchemeCatalog {
 		this.id = id;
 	}
 	public String getPolicyName() {
-		return PolicyName;
+		return policyName;
 	}
 	public void setPolicyName(String policyName) {
-		PolicyName = policyName;
+		this.policyName = policyName;
 	}
 	public String getYearlyROI() {
-		return YearlyROI;
+		return yearlyROI;
 	}
 	public void setYearlyROI(String yearlyROI) {
-		YearlyROI = yearlyROI;
+		this.yearlyROI = yearlyROI;
 	}
 	public String getCustomerName() {
-		return CustomerName;
+		return customerName;
 	}
 	public void setCustomerName(String customerName) {
-		CustomerName = customerName;
+		this.customerName = customerName;
 	}
 	public String getInitialDeposite() {
-		return InitialDeposite;
+		return initialDeposite;
 	}
 	public void setInitialDeposite(String initialDeposite) {
-		InitialDeposite = initialDeposite;
+		this.initialDeposite = initialDeposite;
 	}
 	public String getMonthlyMinimumBalance() {
-		return MonthlyMinimumBalance;
+		return monthlyMinimumBalance;
 	}
 	public void setMonthlyMinimumBalance(String monthlyMinimumBalance) {
-		MonthlyMinimumBalance = monthlyMinimumBalance;
+		this.monthlyMinimumBalance = monthlyMinimumBalance;
 	}
 	public String getReservedFunds() {
-		return ReservedFunds;
+		return reservedFunds;
 	}
 	public void setReservedFunds(String reservedFunds) {
-		ReservedFunds = reservedFunds;
+		this.reservedFunds = reservedFunds;
 	}
 	public String getMessagingFees() {
-		return MessagingFees;
+		return messagingFees;
 	}
 	public void setMessagingFees(String messagingFees) {
-		MessagingFees = messagingFees;
+		this.messagingFees = messagingFees;
 	}
 	public String getMessagingInterval() {
-		return MessagingInterval;
+		return messagingInterval;
 	}
 	public void setMessagingInterval(String messagingInterval) {
-		MessagingInterval = messagingInterval;
+		this.messagingInterval = messagingInterval;
 	}
 	public String getMonthlyFreeIFSCTransactions() {
-		return MonthlyFreeIFSCTransactions;
+		return monthlyFreeIFSCTransactions;
 	}
 	public void setMonthlyFreeIFSCTransactions(String monthlyFreeIFSCTransactions) {
-		MonthlyFreeIFSCTransactions = monthlyFreeIFSCTransactions;
+		this.monthlyFreeIFSCTransactions = monthlyFreeIFSCTransactions;
 	}
 	public String getFreeMoneyTransfers() {
 		return FreeMoneyTransfers;
@@ -99,59 +97,61 @@ public class SavingSchemeCatalog {
 		FreeMoneyTransfers = freeMoneyTransfers;
 	}
 	public String getLimitperTransaction() {
-		return LimitperTransaction;
+		return limitperTransaction;
 	}
 	public void setLimitperTransaction(String limitperTransaction) {
-		LimitperTransaction = limitperTransaction;
+		this.limitperTransaction = limitperTransaction;
 	}
 	public String getDailyLimit() {
-		return DailyLimit;
+		return dailyLimit;
 	}
 	public void setDailyLimit(String dailyLimit) {
-		DailyLimit = dailyLimit;
+		this.dailyLimit = dailyLimit;
 	}
 	public String getWeeklyLimit() {
-		return WeeklyLimit;
+		return weeklyLimit;
 	}
 	public void setWeeklyLimit(String weeklyLimit) {
-		WeeklyLimit = weeklyLimit;
+		this.weeklyLimit = weeklyLimit;
 	}
 	public String getMonthlyLimit() {
-		return MonthlyLimit;
+		return monthlyLimit;
 	}
 	public void setMonthlyLimit(String monthlyLimit) {
-		MonthlyLimit = monthlyLimit;
+		this.monthlyLimit = monthlyLimit;
 	}
 	public String getServiceFee() {
-		return ServiceFee;
+		return serviceFee;
 	}
 	public void setServiceFee(String serviceFee) {
-		ServiceFee = serviceFee;
+		this.serviceFee = serviceFee;
 	}
 	public String getBillingCycle() {
-		return BillingCycle;
+		return billingCycle;
 	}
 	public void setBillingCycle(String billingCycle) {
-		BillingCycle = billingCycle;
+		this.billingCycle = billingCycle;
 	}
 	public String getCardFee() {
-		return CardFee;
+		return cardFee;
 	}
 	public void setCardFee(String cardFee) {
-		CardFee = cardFee;
+		this.cardFee = cardFee;
 	}
 	public String getMonthlyCardLimit() {
-		return MonthlyCardLimit;
+		return monthlyCardLimit;
 	}
 	public void setMonthlyCardLimit(String monthlyCardLimit) {
-		MonthlyCardLimit = monthlyCardLimit;
+		this.monthlyCardLimit = monthlyCardLimit;
 	}
 	public String getYearlyCardLimit() {
-		return YearlyCardLimit;
+		return yearlyCardLimit;
 	}
 	public void setYearlyCardLimit(String yearlyCardLimit) {
-		YearlyCardLimit = yearlyCardLimit;
+		this.yearlyCardLimit = yearlyCardLimit;
 	}
+	
+	
 	
 	
 }
