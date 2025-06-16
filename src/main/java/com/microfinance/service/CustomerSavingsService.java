@@ -11,8 +11,9 @@ public class CustomerSavingsService {
 
 	@Autowired
 	SavingSchmeCatalogRepo savingSchmeCatalogRepo;
-	public void saveSavingScheme(SavingSchemeCatalog savingSchemeCatalog) {
-		savingSchmeCatalogRepo.save(savingSchemeCatalog);
+	
+	public SavingSchemeCatalog saveSavingScheme(SavingSchemeCatalog savingSchemeCatalog) {
+		return savingSchmeCatalogRepo.save(savingSchemeCatalog);
 	}
 
 }
