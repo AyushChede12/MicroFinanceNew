@@ -1,8 +1,10 @@
 package com.microfinance.controller;
 
+import java.util.List;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.microfinance.model.DailyDepositPM;
+
+import com.microfinance.service.DailyDepositPMService;
+
 import com.microfinance.service.PolicyManagementService;
+
 
 
 
@@ -23,6 +29,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DailyDepositPMController {
 	@Autowired
+
+	DailyDepositPMService dailyDepositPMService;
+	
+	 @PostMapping("/dailydepositepmsave")
+	    public ResponseEntity<String> save(@RequestBody DailyDepositPM data) {
+	        boolean isSaved = dailyDepositPMService.saveDailyDeposite(data);
+	        if (isSaved) {
+	            return ResponseEntity.ok("success");
+	        } else {
+	            return ResponseEntity.badRequest().body("failure");
+	        }
+	    }
+
 	PolicyManagementService policyManagementService;
 	
 	@RestController
@@ -49,11 +68,16 @@ public class DailyDepositPMController {
 	    }
 	}
 
+
 	 
 	@ResponseBody 
 	 @GetMapping("/viewdailydeposite")
 	    public List<DailyDepositPM> getAllData() {
+
+	        return dailyDepositPMService.getAllData();
+
 	        return policyManagementService.getAllData();
+
 	    }
 
 	}
