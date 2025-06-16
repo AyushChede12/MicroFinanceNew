@@ -19,7 +19,7 @@ public class CustomerShareholdingController {
 	@Autowired
 	CustomerShareholdingService customershareholdingservice;
 	
-//Transfer Share - Oshin 14-06-2025	
+//Transfer Share - Oshin 14-06-2025	 
 	//Find CustomerCode 
 	@GetMapping("/findAllCustomerCode")
 	@ResponseBody
@@ -44,6 +44,6 @@ public class CustomerShareholdingController {
 		return list;
 	}
 	
-	
+	//Save Code  
 	
 }
