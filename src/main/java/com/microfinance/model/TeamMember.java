@@ -36,7 +36,7 @@ public class TeamMember {
 	private String fees;
 	private String modeofpayment;
 	private String comments;
-	private String customerStatus;
+	private int customerStatus;
 	
 	
 	public long getId() {
@@ -195,12 +195,13 @@ public class TeamMember {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	public String getCustomerStatus() {
+	public int getCustomerStatus() {
 		return customerStatus;
 	}
-	public void setCustomerStatus(String customerStatus) {
+	public void setCustomerStatus(int customerStatus) {
 		this.customerStatus = customerStatus;
 	}
+	
 	
 	
 

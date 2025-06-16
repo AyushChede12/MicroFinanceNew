@@ -22,6 +22,7 @@ public class CustomerManagementService {
 	
 	
 	@Value("${upload.directory}")
+	
 	private String uploadDirectory;
 
 	public ApiResponse<addCustomer> saveOrUpdateCustomer(CustomerDto clientMasterDto, MultipartFile customerPhoto,

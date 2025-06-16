@@ -39,6 +39,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
+<script type="text/javascript">
+   function calculateAge() {
+	   const dob = new Date(document.getElementById("dateOfBirth").value); // get DOB from the date input field
+	   const age = Math.floor((Date.now() - dob) / (365.25 * 24 * 60 * 60 * 1000)); // calculate age
+	   document.getElementById("age").value = age; // set the calculated age in the age input field
+	 }
+</script>
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -88,7 +95,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
-									name="teamMemberCode" required="required"
+									name="teamMemberCode" value="${empUniqueNo}" required="required"
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -123,7 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
+								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth" onchange="calculateAge()"
 									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
@@ -131,7 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Age</label> <input type="text" name="age" id="age"
+								<label for="">Age</label> <input type="text" name="age" id="age" 
 									required="required" placeholder="Enter Age" />
 							</div>
 						</div>

@@ -145,7 +145,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-					
+
 					</div>
 
 					<div class="row" style="margin-top: 30px;">
@@ -156,9 +156,11 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="hideTableData()">Hide</button>
 							<button type="button" id="saveBtn" class="btnStyle bg-warning"
 								onclick="saveBank()">Save</button>
+							<button type="button" id="updateBtn" class="btnStyle bg-success"
+								onclick="updateBank()">Update</button>
 						</div>
 					</div>
-					</div>
+				</div>
 			</form>
 
 			<div class="mt-5">
@@ -182,12 +184,11 @@ pageEncoding="ISO-8859-1"%> -->
 											<th scope="col">Opening Date</th>
 											<th scope="col">Opening Balance</th>
 											<th scope="col">Edit</th>
-											<th scope="col">View</th>
 											<th scope="col">Delete</th>
 										</tr>
 									</thead>
 									<tbody id="tableBody">
-										
+
 									</tbody>
 								</table>
 							</div>
@@ -205,7 +206,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/bank.js"></script>
-	
+
 </body>
 
 </html>

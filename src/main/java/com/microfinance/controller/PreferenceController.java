@@ -164,7 +164,7 @@ public class PreferenceController {
 	}
 	
 	
-	@GetMapping("/getAllDistrictsByStateId")
+	@GetMapping("/getAllDistrictsByStateId")                 //Niraj
 	@ResponseBody
 	public Map<String, List<Statedistricts>> getAllDistrictsByStateId(@RequestParam("stateId") int stateId) {
 	    List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
@@ -209,7 +209,7 @@ public class PreferenceController {
 		List<CategoryModule> list = preferenceService.fetchAllCategoryModule();
 		return list;
 	}
-	
+	// ayush branch
 	//Financial Year - Ayush
 	@PostMapping("/saveFinancialYear")
 	public ResponseEntity<String> saveFinancialYearData(@RequestBody FinancialYear financialyear) {
@@ -247,14 +247,14 @@ public class PreferenceController {
 	    return ResponseEntity.ok(new ApiResponse<ExecutiveFounder>("OK", executiveFounderDto.getId() != 0 ? "Data updated successfully" : "Data saved successfully", response));
 	}
 	
-	@ResponseBody
+	@ResponseBody                  //Ayush
 	@PostMapping("/fetchAllExecutiveFounder")
 	public List<ExecutiveFounder> getAllExecutiveFounderData() {
 		List<ExecutiveFounder> list = preferenceService.fetchAllExecutiveFounder();
 		return list;
 	}
 	
-	@ResponseBody
+	@ResponseBody                   //Ayush
 	@PostMapping("/deleteExecutiveFounder")
 	public ResponseEntity<String> deleteDirectorPromoter(@RequestParam long id) {
 		boolean bool = preferenceService.deleteExecutiveFounder(id);
@@ -264,7 +264,7 @@ public class PreferenceController {
 			return ResponseEntity.badRequest().body("Data Not Found");
 	}
 	
-	@ResponseBody
+	@ResponseBody            //Ayush
 	@PostMapping("/fetchExecutiveFounderById")
 	public ExecutiveFounder getExecutiveFounderById(@RequestParam long id){
 		ExecutiveFounder exeFounder = preferenceService.fetchExecutiveById(id);
@@ -279,7 +279,7 @@ public class PreferenceController {
 		return companyAdmin;
 	}
 	
-	@ResponseBody
+	@ResponseBody               //Ayush
 	@PostMapping("/updateDataOfCompanyAdministration")
 	public ResponseEntity<String> updateCompanyAdministration(@RequestBody CompanyAdministration companyAdministration){
 		int i=preferenceService.updateCompanyAdministration(companyAdministration);

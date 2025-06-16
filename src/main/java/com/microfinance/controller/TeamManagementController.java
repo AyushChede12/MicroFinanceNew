@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.microfinance.model.ManageDepartment;
 import com.microfinance.model.ManageDesignation;
 import com.microfinance.model.RelativeModule;
+import com.microfinance.model.TeamMember;
 import com.microfinance.service.TeamManagementService;
 
 @Controller
@@ -62,6 +64,21 @@ public class TeamManagementController {
 		public List<ManageDepartment> fetchDepartmentList() {
 			List<ManageDepartment> list = teamService.fetchDepartmentList();
 			return list;
-		}		
+		}
+		
+		//Save Team Member - Janvi
+		@PostMapping("/saveTeamMember")
+		public ResponseEntity<TeamMember> saveTeamMember(@RequestBody TeamMember teamMember) {
+		    // The 'isActive' value is already passed as 1 or 0, so no need to convert
+		    // If it's not passed as expected, you can still set it as a fallback
+		    if (teamMember.getCustomerStatus() == 0 || teamMember.getCustomerStatus() == 1) {
+		        teamMember.setCustomerStatus(teamMember.getCustomerStatus()); // Set 1 for active, 0 for inactive
+		    } else {
+		        teamMember.setCustomerStatus(0); // Default to 0 if invalid value
+		    }
+		    
+		    TeamMember savedEntry = teamService.saveTeamMember(teamMember);
+		    return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);  
+		}
 
 }

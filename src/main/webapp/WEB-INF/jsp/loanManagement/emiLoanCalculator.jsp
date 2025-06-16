@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Interest Type</label> <select id="colour" name="colour"
+								<label for="">Interest Type</label> <select id="intresttype1" name="intresttype1"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Interest Type</option>
@@ -95,8 +95,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Loan Amount</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="loanName">Loan Amount</label> <input type="text"
+									name="loanamount1" id="loanamount1" required="required"
 									placeholder="Enter Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -106,7 +106,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Yearly Interest</label> <input
-									type="loanName" name="vehicalNo" id="vehicalNo"
+									type="text" name="yearlyintrest" id="yearlyintrest"
 									required="required" placeholder="Yearly Interest"
 									style="text-transform: uppercase;" />
 							</div>
@@ -115,7 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Monthly Term</label> <input
-									type="loanName" name="vehicalNo" id="vehicalNo"
+									type="text" name="monthlyterm" id="monthlyterm"
 									required="required" placeholder="Enter Term in Month"
 									style="text-transform: uppercase;" />
 							</div>
