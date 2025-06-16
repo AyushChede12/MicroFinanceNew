@@ -1,41 +1,44 @@
 // Svaing the save scheme catalog (Customer Savings)
-function saveLoanPlan() {
-	const formData = {
-		PolicyName: $("#PolicyName").val(),
-		YearlyROI: $("#YearlyROI").val(),
-		CustomerName: $("#CustomerName").val(),
-		InitialDeposite: $("#InitialDeposite").val(),
-		MonthlyMinimumBalance: $("#MonthlyMinimumBalance").val(),
-		ReservedFunds: $("#ReservedFunds").val(),
-		MessagingFees: $("#MessagingFees").val(),
-		MessagingInterval: $("#MessagingInterval").val(),
-		MonthlyFreeIFSCTransactions: $("#MonthlyFreeIFSCTransactions").val(),
-		FreeMoneyTransfers: $("#FreeMoneyTransfers").val(),
-		LimitperTransaction: $("#LimitperTransaction").val(),
-		DailyLimit: $("#DailyLimit").val(),
-		WeeklyLimit: $("#WeeklyLimit").val(),
-		MonthlyLimit: $("#MonthlyLimit").val(),
-		//MonthlyLimit: $("#toggle-member-status").is(":checked") ? 1 : 0, // ✅ Updated here
-		ServiceFee: $("#ServiceFee").val(),
-		BillingCycle: $("#BillingCycle").val(),
-		CardFee: $("#CardFee").val(),
-		MonthlyCardLimit: $("#MonthlyCardLimit").val(),
-		YearlyCardLimit: $("#YearlyCardLimit").val(),
-	};
+$(document).ready(function() {
+	$("#saveBtn").on("click", function(e) {
+		alert("hii")
+		e.preventDefault();
 
-	console.log("Form Data: ", formData);
+		var formData = {
+			policyName: $("#policyName").val(),
+			yearlyROI: $("#yearlyROI").val(),
+			customerName: $("#customerName").val(),
+			initialDeposite: $("#initialDeposite").val(),
+			monthlyMinimumBalance: $("#monthlyMinimumBalance").val(),
+			reservedFunds: $("#reservedFunds").val(),
+			messagingFees: $("#messagingFees").val(),
+			messagingInterval: $("#messagingInterval").val(),
+			monthlyFreeIFSCTransactions: $("#monthlyFreeIFSCTransactions").val(),
+			freeMoneyTransfers: $("#freeMoneyTransfers").val(),
+			limitperTransaction: $("#limitperTransaction").val(),
+			dailyLimit: $("#dailyLimit").val(),
+			weeklyLimit: $("#weeklyLimit").val(),
+			monthlyLimit: $("#monthlyLimit").val(),
+			serviceFee: $("#serviceFee").val(),
+			billingCycle: $("#billingCycle").val(),
+			cardFee: $("#cardFee").val(),
+			monthlyCardLimit: $("#monthlyCardLimit").val(),
+			yearlyCardLimit: $("#yearlyCardLimit").val()
+		};
 
-	$.ajax({
-		type: "POST",
-		url: "/savescheme",
-		contentType: "application/json",
-		dataType: "text",
-		data: JSON.stringify(formData),
-		success: function(response) {
-			alert(response);
-		},
-		error: function(xhr, status, error) {
-			alert(" Failed to save scheme catalog " + xhr.responseText);
-		}
+alert(formData)
+		console.log(formData);
+		$.ajax({
+			type: "POST",
+			url: "savescheme",  // Spring Boot endpoint
+			contentType: "application/json",
+			data: JSON.stringify(formData),
+			success: function(response) {
+				alert("Data saved successfully!");
+			},
+			error: function() {
+				alert("Error saving data.");
+			}
+		});
 	});
-}
+});

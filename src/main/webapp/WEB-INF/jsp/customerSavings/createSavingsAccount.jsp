@@ -58,14 +58,14 @@ pageEncoding="ISO-8859-1"%> -->
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
                 <label for="vehicalNo">Opening Date</label>
-                <input type="date" name="OpeningDate" id="OpeningDate" required="required" placeholder="Opening Date"
+                <input type="date" name="openingDate" id="openingDate" required="required" placeholder="Opening Date"
                   style="text-transform: uppercase;" />
               </div>
             </div>
 
             <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Select By Customer</label> <select id="SelectByCustomer" name="SelectByCustomer" required="required"
+                  <label for="">Select By Customer</label> <select id="selectByCustomer" name="selectByCustomer" required="required"
                     class="form-control selectField" style="height: 30px;">
                     <option value=""> Select Colour</option>
                     <option value="Blue">Blue</option>
@@ -75,7 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Enter Customer Name </label> <input type="text" name="EnterCustomerName" id="EnterCustomerName" required="required"
+                  <label for="">Enter Customer Name </label> <input type="text" name="enterCustomerName" id="enterCustomerName" required="required"
                     placeholder="Enter Customer Name" />
                 </div>
               </div>
@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
             <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="vehicalNo">Date Of Birth</label>
-                  <input type="date" name="DateOfBirth" id="DateOfBirth" required="required" placeholder="Enter DateOfBirth"
+                  <input type="date" name="dateOfBirth" id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
                     style="text-transform: uppercase;" />
                 </div>
             </div>
