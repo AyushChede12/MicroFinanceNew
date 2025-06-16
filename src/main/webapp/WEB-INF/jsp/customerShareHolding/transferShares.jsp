@@ -139,6 +139,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select </option>
+									<option value="">Branch Manager </option>
 								</select>
 							</div>
 						</div>
@@ -182,7 +183,8 @@ pageEncoding="ISO-8859-1"%> -->
 										name="modeOfPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
 										<option value="">Select </option>
-
+										<option value="">Cash </option>
+										<option value="">Online </option>
 									</select>
 								</div>
 							</div>
