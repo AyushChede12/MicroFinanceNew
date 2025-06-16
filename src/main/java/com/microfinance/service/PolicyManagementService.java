@@ -25,16 +25,6 @@ public class PolicyManagementService {
 	@Autowired
 	FixedDepositPMRepo fixedDepositPMRepo;
 	
-@Transactional
-	public boolean saveDailyDeposite(DailyDepositPM data) {
-		// TODO Auto-generated method stub
-		return dailyDepositPMRepo.save(data) != null;
-	}
-
-public List<DailyDepositPM> getAllData() {
-	// TODO Auto-generated method stub
-	return dailyDepositPMRepo.findAll();
-}
 
 public boolean saveRecuringDailyDeposite(RecurringDepositPM recurringDepositPM) {
 	return recurringDepositRepo.save(recurringDepositPM) != null;

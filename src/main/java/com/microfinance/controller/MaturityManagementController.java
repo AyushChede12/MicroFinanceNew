@@ -1,21 +1,13 @@
 package com.microfinance.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.microfinance.dto.ApiResponse;
-import com.microfinance.model.BranchModule;
-import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.MaturitySchemeMaster;
-import com.microfinance.service.DailyDepositPMService;
 import com.microfinance.service.MaturitySchemeMasterService;
 
 @Controller
@@ -24,21 +16,6 @@ public class MaturityManagementController {
 	
 	@Autowired
 	MaturitySchemeMasterService maturityservice;
-	
-	@Autowired
-	DailyDepositPMService dailydepositpm;
-	
-	//fetch policy code from plan Management
-	//Ashwini
-	
-	@GetMapping("getpolicycode")
-	@ResponseBody
-	public List<DailyDepositPM> getPolicyCode()
-	{
-		List<DailyDepositPM> list=dailydepositpm.getAllData();
-		return list;
-	}
-	
 	
 	// save maturity scheme master daily deposit
 	//Ashwini

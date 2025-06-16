@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class CreateSavingsAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	private long id;
 	private String openingDate;
 	private String selectByCustomer;
 	private String enterCustomerName;
@@ -39,10 +39,11 @@ public class CreateSavingsAccount {
 	private String messageSend;
 	private String debitCardIssue;
 	
-	public String getId() {
+	
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getOpeningDate() {

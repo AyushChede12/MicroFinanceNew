@@ -39,7 +39,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
-<<<<<<< HEAD
 <script type="text/javascript">
    function calculateAge() {
 	   const dob = new Date(document.getElementById("dateOfBirth").value); // get DOB from the date input field
@@ -47,8 +46,6 @@ pageEncoding="ISO-8859-1"%> -->
 	   document.getElementById("age").value = age; // set the calculated age in the age input field
 	 }
 </script>
-=======
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -98,11 +95,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
-<<<<<<< HEAD
 									name="teamMemberCode" value="${empUniqueNo}" required="required"
-=======
-									name="teamMemberCode" required="required"
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -137,11 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-<<<<<<< HEAD
 								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth" onchange="calculateAge()"
-=======
-								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
@@ -149,11 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-<<<<<<< HEAD
 								<label for="">Age</label> <input type="text" name="age" id="age" 
-=======
-								<label for="">Age</label> <input type="text" name="age" id="age"
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									required="required" placeholder="Enter Age" />
 							</div>
 						</div>
@@ -337,19 +322,22 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Mode of Payment  </label> <select id="modeofpayment"
-									name="modeofpayment" required="required"
+								<label for="">Mode of Payment </label> <select
+									id="modeofpayment" name="modeofpayment" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Cash</option>
+									<option selected="selected" value="">Select Payment</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="NEFT">NEFT</option>
 								</select>
 							</div>
 						</div>
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comments </label> <input type="text" name="comments"
-									id="comments" required="required" placeholder="Enter Remarks" />
+								<label for="">Comments </label> <input type="text"
+									name="comments" id="comments" required="required"
+									placeholder="Enter Remarks" />
 							</div>
 						</div>
 
@@ -362,18 +350,79 @@ pageEncoding="ISO-8859-1"%> -->
 										Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="customerStatus" name="customerStatus"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="toggle-member-status" class="toggle__label"></label>
+											<input type="checkbox" id="customerStatus"
+												name="customerStatus" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="toggle-member-status" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-
-
 					</div>
+					<!-- Cheque input fields -->
+							<div class="row" id="chequeInputs" style="display: none;"> 								
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Cheque No. </label> <input type="text"
+											name="chequeNo" id="chequeNo" required="required"
+											placeholder="Enter cheque No" />
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Cheque Date </label> <input type="date"
+											name="chequeDate" id="chequeDate" required="required"
+											placeholder="Enter cheque Date" />
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Deposit A/C </label> <input type="text"
+											name="depositAcc1" id="depositAcc1" required="required"
+											placeholder="Enter deposit Acc No" />
+									</div>
+								</div>		
+							 </div>
+ 
+							<!-- Online input fields -->
+							<div class="row" id="onlineInputs" style="display: none;">
+							    <div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Deposit A/C </label> <input type="text"
+											name="depositAcc2" id="depositAcc2" required="required"
+											placeholder="Enter deposit Acc No." />
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Ref Number </label> <input type="text"
+											name="refNumber1" id="refNumber1" required="required"
+											placeholder="Enter Ref No." />
+									</div>
+								</div>
+							</div>
+
+							<!-- NEFT input fields -->
+							<div class="row" id="neftInputs" style="display: none;">
+							     <div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Deposit A/C </label> <input type="text"
+											name="depositAcc3" id="depositAcc3" required="required"
+											placeholder="Enter deposit Acc No." />
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<div class="d-flex flex-column formFields ">
+										<label for="">Ref Number </label> <input type="text"
+											name="refNumber2" id="refNumber2" required="required"
+											placeholder="Enter Ref No." />
+									</div>
+								</div>
+							</div>
+						
+
+						
 				</div>
 
 
@@ -399,6 +448,32 @@ pageEncoding="ISO-8859-1"%> -->
 		RelationDropdown();
 	});
 	</script>
+	<script>   
+    document.getElementById('modeofpayment').addEventListener('change', function () {
+    // Get the selected payment mode
+    let mode = this.value;
+
+    // Define all input field sections
+    const chequeInputs = document.getElementById('chequeInputs');
+    const onlineInputs = document.getElementById('onlineInputs');
+    const neftInputs = document.getElementById('neftInputs');
+
+    // Reset the display of all sections
+    chequeInputs.style.display = 'none';
+    onlineInputs.style.display = 'none';
+    neftInputs.style.display = 'none';
+
+    // Show the section corresponding to the selected payment mode
+    if (mode === 'Cheque') {
+        chequeInputs.style.display = 'block';
+    } else if (mode === 'Online') {
+        onlineInputs.style.display = 'block';
+    } else if (mode === 'NEFT') {
+        neftInputs.style.display = 'block';
+    }
+});
+</script>
+
 </body>
 
 </html>
