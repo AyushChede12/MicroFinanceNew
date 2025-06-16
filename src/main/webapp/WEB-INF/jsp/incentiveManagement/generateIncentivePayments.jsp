@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery 3.x (Latest stable) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 </head>
 
 <body>
@@ -65,8 +69,19 @@ pageEncoding="ISO-8859-1"%> -->
 									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">January</option>
-									<option value="Blue">February</option>
+									<option value="month">January</option>
+									<option value="month">February</option>
+									<option value="month">March</option>
+									<option value="month">April</option>
+									<option value="month">May</option>
+									<option value="month">June</option>
+									<option value="month">July</option>
+									<option value="month">August</option>
+									<option value="month">September</option>
+									<option value="month">October</option>
+									<option value="month">November</option>
+									<option value="month">December</option>
+
 								</select>
 							</div>
 						</div>
@@ -106,6 +121,22 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/incentive/generateIncentive.js"></script>
+	<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
+    const dd = String(today.getDate()).padStart(2, '0');
+
+    const formattedDate = `${yyyy}-${mm}-${dd}`; // Format required by <input type="date">
+
+    // Set the value in input fields
+    document.getElementById('dateFrom').value = formattedDate;
+    document.getElementById('dateTo').value = formattedDate;
+  });
+</script>
+	
 </body>
 
 </html>

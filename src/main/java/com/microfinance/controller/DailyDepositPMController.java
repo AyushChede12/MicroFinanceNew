@@ -25,20 +25,30 @@ public class DailyDepositPMController {
 	@Autowired
 	PolicyManagementService policyManagementService;
 	
-	@PostMapping("/dailydepositepmsave")
-	public ResponseEntity<Map<String, Object>> save(@RequestBody DailyDepositPM data) {
-	    boolean isSaved = policyManagementService.saveDailyDeposite(data);
-	    Map<String, Object> response = new HashMap<>();
-	    
-	    if (isSaved) {
-	        response.put("status", "success");
-	        response.put("data", data); // return the saved data
-	        return ResponseEntity.ok(response);
-	    } else {
-	        response.put("status", "failure");
-	        return ResponseEntity.badRequest().body(response);
+	@RestController
+	public class PolicyManagementController {
+
+	    @Autowired
+	    private PolicyManagementService policyManagementService;
+
+	    @PostMapping("/dailydepositepmsave")
+	    public ResponseEntity<ApiResponse<DailyDepositPM>> save(@RequestBody DailyDepositPM data) {
+	        boolean isSaved = policyManagementService.saveDailyDeposite(data);
+	        
+	        if (isSaved) {
+	            ApiResponse<DailyDepositPM> response = new ApiResponse<>(
+	                "success", "Data saved successfully", data
+	            );
+	            return ResponseEntity.ok(response);
+	        } else {
+	            ApiResponse<DailyDepositPM> response = new ApiResponse<>(
+	                "failure", "Failed to save data", null
+	            );
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+	        }
 	    }
 	}
+
 	 
 	@ResponseBody 
 	 @GetMapping("/viewdailydeposite")
