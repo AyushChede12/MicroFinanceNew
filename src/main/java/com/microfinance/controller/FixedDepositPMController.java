@@ -10,40 +10,37 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-import com.microfinance.model.DailyDepositPM;
-import com.microfinance.service.PolicyManagementService;
-
-
-
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.RecurringDepositPM;
+import com.microfinance.service.PolicyManagementService;
 
 @Controller
-public class DailyDepositPMController {
-	@Autowired
+public class FixedDepositPMController {
+	@Autowired 
 	PolicyManagementService policyManagementService;
 	
-	@PostMapping("/dailydepositepmsave")
-	public ResponseEntity<Map<String, Object>> save(@RequestBody DailyDepositPM data) {
-	    boolean isSaved = policyManagementService.saveDailyDeposite(data);
-	    Map<String, Object> response = new HashMap<>();
-	    
+	@PostMapping("/Fixeddepositepmsave")
+	public ResponseEntity<?> save(@RequestBody FixedDepositPM fixedDepositPM) {
+	    boolean isSaved = policyManagementService.saveFixedDeposite(fixedDepositPM);
 	    if (isSaved) {
+	        Map<String, Object> response = new HashMap<>();
 	        response.put("status", "success");
-	        response.put("data", data); // return the saved data
+	        response.put("data", fixedDepositPM); // return saved data in response
 	        return ResponseEntity.ok(response);
 	    } else {
+	        Map<String, Object> response = new HashMap<>();
 	        response.put("status", "failure");
 	        return ResponseEntity.badRequest().body(response);
 	    }
 	}
 	 
-	@ResponseBody 
-	 @GetMapping("/viewdailydeposite")
-	    public List<DailyDepositPM> getAllData() {
-	        return policyManagementService.getAllData();
-	    }
+	 @GetMapping("/viewreFixeddeposit") 
+	 @ResponseBody
+	 public List<FixedDepositPM> getAllData() {
+	     return policyManagementService.getAllFixeddata();
+	 }
 
-	}
+
+}
