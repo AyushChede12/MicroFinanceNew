@@ -119,6 +119,7 @@ function deleteData(id) {
 }
 
 
+
 function updateBranch(){
 	let payload = {
 			id: $("#id").val(),
