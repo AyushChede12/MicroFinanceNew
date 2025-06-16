@@ -3,6 +3,7 @@ package com.microfinance.dto;
 import org.springframework.http.HttpStatus;
 
 import com.microfinance.model.ExecutiveFounder;
+import com.microfinance.model.RecurringDepositPM;
 
 public class ApiResponse<T> {
 	
@@ -54,5 +55,7 @@ public class ApiResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+	
 
 }

@@ -14,7 +14,11 @@ const handleToggleSidebar = () => {
 
 // view image from image upload
 
+<<<<<<< HEAD
+const dropArea = document.getElementById("drop-area");
+=======
 /*const dropArea = document.getElementById("drop-area");
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 const inputFile = document.getElementById("input-file");
 const imgView = document.getElementById("img-view");
 const text = document.getElementById("upload-text");
@@ -84,7 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			label.style.backgroundColor = '#ccc'; // Gray OFF
 		}
 	}
+<<<<<<< HEAD
+}); 
+=======
 }); */
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 const wrapper = document.querySelector('.wrapper');
 selectBtn = wrapper.querySelector('.select-btn');
