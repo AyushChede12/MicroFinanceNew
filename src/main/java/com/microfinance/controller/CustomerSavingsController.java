@@ -2,6 +2,7 @@ package com.microfinance.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.model.SavingSchemeCatalog;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-@RestController
+@Controller
 public class CustomerSavingsController {
 
 	@Autowired
@@ -20,8 +21,11 @@ public class CustomerSavingsController {
 	@ResponseBody
 	@PostMapping("/savescheme")
 	public ResponseEntity<String> saveSavingScheme(@RequestBody SavingSchemeCatalog savingSchemeCatalog){
-		customersaving.saveSavingScheme(savingSchemeCatalog);
-		return ResponseEntity.ok("Save Saving Scheme Successfully");
+		SavingSchemeCatalog ssc=customersaving.saveSavingScheme(savingSchemeCatalog);
+		if(ssc!=null)
+			return ResponseEntity.ok("Data Saved Successfully");
+		else
+			return ResponseEntity.badRequest().body("Failure");
 	}
 	
 }

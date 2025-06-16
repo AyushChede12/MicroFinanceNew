@@ -17,8 +17,12 @@ $(document).ready(function() {
 		formData.append("customerAge", $('#customerAge').val());
 		formData.append("relationshipStatus", $('#relationshipStatus').val());
 		formData.append("customerAddress", $('#customerAddress').val());
+<<<<<<< HEAD
+		
+=======
 		formData.append("state", $('#state').val());
 		formData.append("district", $('#district').val());
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 		formData.append("state", $('#state').val());
 		formData.append("district", $('#district').val());
 		formData.append("aadharNo", $('#aadharNo').val());
@@ -85,3 +89,103 @@ $(document).ready(function() {
 		});
 	});
 });
+<<<<<<< HEAD
+
+
+function photopreview() {
+	const file = document.getElementById("customerPhoto").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewimg = document.getElementById("bike1imagePreview");
+			document.getElementById("bike1imagePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow="hidden"
+			previewimg.style.borderRadius="20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signpreview() {
+	const file = document.getElementById("customerSignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previevimg = document.getElementById("bike2imagePreview");
+			document.getElementById("bike2imagePreview").src = e.target.result;
+			previevimg.style.width = "100%";
+			previevimg.style.height = "100%";
+			previevimg.style.objectFit = "cover"
+			previevimg.style.overflow="hidden"
+			previevimg.style.borderRadius="20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+$(document).ready(function() {
+
+    // Load states on page load
+    $.ajax({
+        url: "getAllStates",
+        method: "GET",
+        success: function(data) {
+            console.log("Fetched states:", data);
+            data.forEach(function(state) {
+                $('#state').append(
+                    $('<option>', {
+                        value: state.stateName,
+                        text: state.stateName
+                    })
+                );
+            });
+        },
+        error: function(err) {
+            console.error("Error fetching states:", err);
+        }
+    });
+
+    // Load districts on state change
+    $('#state').on('change', function() {
+        var selectedStateId = $(this).val();
+        $('#district').empty().append('<option value="">Select District</option>');
+
+        if (selectedStateId) {
+            $.ajax({
+                url: 'getAllDistrictsByStateId',
+                method: 'GET',
+                data: { stateId: selectedStateId },
+                success: function(response) {
+                    console.log("Fetched districts:", response);
+                    var districts = response.allDistricts;
+                    districts.forEach(function(district) {
+                        $('#district').append(
+                            $('<option>', {
+                                value: district.districtName,
+                                text: district.districtName
+                            })
+                        );
+                    });
+                },
+                error: function(err) {
+                    console.error("Error fetching districts:", err);
+                }
+            });
+        }
+    });
+
+});
+
+
+
+=======
+>>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
