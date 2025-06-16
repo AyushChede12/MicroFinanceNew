@@ -139,6 +139,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select </option>
+									<option value="">Branch Manager </option>
 								</select>
 							</div>
 						</div>
@@ -182,7 +183,8 @@ pageEncoding="ISO-8859-1"%> -->
 										name="modeOfPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
 										<option value="">Select </option>
-
+										<option value="">Cash </option>
+										<option value="">Online </option>
 									</select>
 								</div>
 							</div>
@@ -220,11 +222,13 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">S/N</th>
-										<th scope="col">BRANCH NAME</th>
-										<th scope="col">MEMBER NAME</th>
-										<th scope="col">SHARE RANGE</th>
-										<th scope="col">CERTIFICATE NO.</th>
-										<th scope="col">Action</th>
+										<th scope="col">CUSTOMER CODE</th>
+										<th scope="col">CUSTOMER NAME</th>
+										<th scope="col">START DATE</th>
+										<th scope="col">BRANCH</th>
+										<th scope="col">DATE OF TRANSFER</th>
+										<th scope="col">MODE OF PAYMENT</th>
+										<th scope="col">ACTION</th>					
 									</tr>
 								</thead>
 								<tbody>
@@ -234,6 +238,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<td><a href="#" className="text-primary">Milk</a></td>
 										<td>$29</td>
 										<td><a href="#">14562</a></td>
+										<td><a href="#">ABC</a></td>
+										<td><a href="#">123</a></td>
 										<td class="d-flex" style="gap: .7rem;">
 											<button class="iconbutton">
 												<i class="fa-solid fa-pen-to-square text-success"></i>
@@ -253,6 +259,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<td><a href="#" className="text-primary">Ghee</a></td>
 										<td>$16.5</td>
 										<td><a href="#">14562</a></td>
+										<td><a href="#">DEF</a></td>
+										<td><a href="#">456</a></td>
 										<td class="d-flex" style="gap: .7rem;">
 											<button class="iconbutton">
 												<i class="fa-solid fa-pen-to-square text-success"></i>
@@ -271,6 +279,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<td><a href="#" className="text-primary">Ghee</a></td>
 										<td>$16.5</td>
 										<td><a href="#">14562</a></td>
+										<td><a href="#">GHI</a></td>
+										<td><a href="#">789</a></td>
 										<td class="d-flex" style="gap: .7rem;">
 											<button class="iconbutton">
 												<i class="fa-solid fa-pen-to-square text-success"></i>
@@ -289,6 +299,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<td><a href="#" className="text-primary">Ghee</a></td>
 										<td>$16.5</td>
 										<td><a href="#">14562</a></td>
+										<td><a href="#">JKL</a></td>
+										<td><a href="#">101112</a></td>
 										<td class="d-flex" style="gap: .7rem;">
 											<button class="iconbutton">
 												<i class="fa-solid fa-pen-to-square text-success"></i>
@@ -301,6 +313,7 @@ pageEncoding="ISO-8859-1"%> -->
 											</button>
 										</td>
 									</tr>
+
 								</tbody>
 							</table>
 						</div>
