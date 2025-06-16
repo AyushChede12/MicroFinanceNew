@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +26,7 @@ public class MaturityManagementController {
 	public ApiResponse<MaturitySchemeMaster> saveMaturityDailyDeposit(@RequestBody MaturitySchemeMaster maturityscheme) {
 		MaturitySchemeMaster maturity = maturityservice.saveAllDailyDeposit(maturityscheme);
 		
-		/*if (maturity != null) {
+		if (maturity != null) {
 	        ApiResponse<MaturitySchemeMaster> response = new ApiResponse<>(HttpStatus.OK,"Data saved successfully",maturity);
 	        return  response;
 	    } 
@@ -33,8 +34,7 @@ public class MaturityManagementController {
 	        ApiResponse<MaturitySchemeMaster> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved",null);
 	        return response;
 	    }
-*/
-		return null;
+
 	}
 	
 	//Svae Maturity scheme master Recurring Deposite
