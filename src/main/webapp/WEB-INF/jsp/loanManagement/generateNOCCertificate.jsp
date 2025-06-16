@@ -72,7 +72,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<div class="content" id="contentCityName"
 										style="display: none;">
 										<div class="search">
-											<input type="text" id="city-search" class="m-0"
+											<input type="text" id="findloanId" name="findloanId"class="m-0"
 												placeholder="Search City" />
 										</div>
 										<ul class="options" id="city-options">
@@ -92,7 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-12 text-center">
 
 							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Search</button>
+								style="background-color: #FFA500; left">Search</button>
 
 						</div>
 					</div>
