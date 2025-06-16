@@ -31,30 +31,31 @@ public class ApiResponse<T> {
         return new ApiResponse<>(status, message, null);
     }
 
-    // Getters and setters
-    public HttpStatus getStatus() {
-        return status;
-    }
+	public HttpStatus getStatus() {
+		return status;
+	}
 
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
 
-    public String getMessage() {
-        return message;
-    }
+	public String getMessage() {
+		return message;
+	}
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
-    public T getData() {
-        return data;
-    }
+	public T getData() {
+		return data;
+	}
 
-    public void setData(T data) {
-        this.data = data;
-    }
+	public void setData(T data) {
+		this.data = data;
+	}
+
+   
 
 	
 
