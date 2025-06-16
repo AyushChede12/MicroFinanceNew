@@ -337,6 +337,30 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script>
+
+    $(document).ready(function () {
+      // Call AJAX on page load to populate dropdown
+      $.ajax({
+        url: "/getpolicycode", // Your backend endpoint
+        method: "GET",
+        dataType: "json",
+        success: function (response) {
+          // Loop through the response and append options
+          $.each(response, function (index, policy) {
+            $('#ddPolicyCode').append(
+              $('<option>', {
+                value: policy.code,   // `code` should match your backend field
+                text: policy.code     // Can be `policy.name` or anything else
+              })
+            );
+          });
+        },
+        error: function (xhr, status, error) {
+          alert("Error loading policy codes: " + error);
+        }
+      });
+    });
+ 
   $("#formdd").submit(function (event) {
     event.preventDefault();
 
