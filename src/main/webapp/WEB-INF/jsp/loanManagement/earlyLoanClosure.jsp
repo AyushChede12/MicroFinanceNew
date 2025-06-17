@@ -72,7 +72,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<div class="content" id="contentCityName"
 										style="display: none;">
 										<div class="search">
-											<input type="text" id="city-search" class="m-0"
+											<input type="text" id="loanid" name="loanid"class="m-0"
 												placeholder="Search City" />
 										</div>
 										<ul class="options" id="city-options">
@@ -103,7 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Date of Loan</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="date" id="date" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -111,7 +111,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Id & Name</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="id" id="id" required="required"
 									placeholder="Enter Id & Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -121,7 +121,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Family Member Name</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="membername" id="membername" required="required"
 									placeholder="Enter Family Member Name
 "
 									style="text-transform: uppercase;" />
@@ -130,7 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Contact No.</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="phoneno" id="phoneno" required="required"
 									placeholder="Enter Contact No."
 									style="text-transform: uppercase;" />
 							</div>
@@ -138,7 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Branch Address</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="branchaddress" id="branchaddress" required="required"
 									placeholder="Enter Branch Address"
 									style="text-transform: uppercase;" />
 							</div>
@@ -147,7 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Name </label> <input type="text"
-									name="location" id="location" required="required"
+									name="planname" id="planname" required="required"
 									placeholder="Enter Plan Name" />
 							</div>
 						</div>
@@ -155,15 +155,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Duration</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Duration" />
+								<label for="">Duration</label> <input type="text" name="duration"
+									id="duration" required="required" placeholder="Enter Duration" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Loan Category</label> <input type="text"
-									name="location" id="location" required="required"
+									name="loancategory" id="loancategory" required="required"
 									placeholder="Enter Loan Category" />
 							</div>
 						</div>
@@ -171,7 +171,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Amount Of Loan</label> <input type="text"
-									name="location" id="location" required="required"
+									name="amountloan" id="amountloan" required="required"
 									placeholder="Enter Amount Of Loan" />
 							</div>
 						</div>
@@ -180,7 +180,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Rate of Interest Of Loan</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="roil" id="roil" required="required"
 									placeholder="Enter Loan ROI Of Loan" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -188,7 +188,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Interest Type</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="intresetype" id="intresetype" required="required"
 									placeholder="Enter Interest Type" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -205,7 +205,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Total Interest Of Loan</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="totalintrest" id="totalintrest" required="required"
 									placeholder="Enter Total Interest Of Loan"
 									style="text-transform: uppercase;" />
 							</div>
@@ -213,16 +213,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Total Principal Of Loan</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="">Total Principal Of Loan</label> <input type="text"
+									name="totalprincipalloan" id="totalprincipalloan" required="required"
 									placeholder="Enter Total Principal Of Loan"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Total Payable Of Loan</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="">Total Payable Of Loan</label> <input type="text"
+									name="Payableloan" id="Payableloan" required="required"
 									placeholder="Enter Total Payable Of Loan"
 									style="text-transform: uppercase;" />
 							</div>
@@ -244,15 +244,15 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Interset Due</label> <input type="text" name="price"
-							id="price" required="required" placeholder="Enter Interset Due" />
+						<label for="">Interset Due</label> <input type="text" name="intrestdue"
+							id="intrestdue" required="required" placeholder="Enter Interset Due" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Principal Due</label> <input type="text"
-							name="price" id="price" required="required"
+							name="principaldue" id="principaldue" required="required"
 							placeholder="Enter Total Principal Due" />
 					</div>
 				</div>
@@ -260,22 +260,24 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Total Amount Due </label> <input type="text"
-							name="price" id="price" required="required"
+							name="amountdue" id="amountdue" required="required"
 							placeholder="Enter Total Due Amount" />
 					</div>
 				</div>
 
+
+
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Due Date</label> <input type="date" name="location"
-							id="location" required="required" placeholder="" />
+						<label for="">Due Date</label> <input type="date" name="duedate"
+							id="duedate" required="required" placeholder="" />
 					</div>
 				</div>
 
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Payment Branch</label> <select id="colour" name="colour"
+						<label for="">Payment Branch</label> <select id="payblebranch" name="payblebranch"
 							required="required" class="form-control selectField"
 							style="height: 30px;">
 							<option value="">Select Branch</option>
@@ -287,7 +289,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Down Payment</label> <input type="text"
-							name="location" id="location" required="required"
+							name="downpayment" id="downpayment" required="required"
 							placeholder="Enter Advanced Paid" />
 					</div>
 				</div>
@@ -295,14 +297,14 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Payment Date</label> <input type="date" name="location"
-							id="location" required="required" placeholder="" />
+							id="paymentdate" required="paymentdate" placeholder="" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Deduct Fine</label> <select id="colour"
-							name="colour" required="required"
+						<label for="">Deduct Fine</label> <select id="deductfine"
+							name="deductfine" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">No</option>
 							<option value="Blue">Yes</option>
@@ -312,28 +314,28 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Deduct Fien Amount</label> <input type="text"
-							name="location" id="location" required="required" Value="0" />
+							name="deeductfienamount" id="deeductfienamount" required="required" Value="0" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Payment Amount</label> <input type="text"
-							name="location" id="location" required="required"
+							name="paymentamount" id="paymentamount" required="required"
 							placeholder="Enter Payable Amount" />
 					</div>
 				</div>
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Net Amount</label> <input type="text"
-							name="location" id="location" required="required"
+							name="netamount" id="netamount" required="required"
 							placeholder="Enter Total Payable Amount" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Payment Source</label> <select id="colour" name="colour"
+						<label for="">Payment Source</label> <select id="paymentsource" name="paymentsource"
 							required="required" class="form-control selectField"
 							style="height: 30px;">
 							<option value="">Online</option>
@@ -353,7 +355,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 							<div class="content" id="contentCityName" style="display: none;">
 								<div class="search">
-									<input type="text" id="city-search" class="m-0"
+									<input type="text" id="Advisorcollecterid" name="Advisorcollecterid" class="m-0"
 										placeholder="Search City" />
 								</div>
 								<ul class="options" id="city-options">
@@ -370,7 +372,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Advisor/Collector Full Name</label> <input
-							type="loanName" name="vehicalNo" id="vehicalNo"
+							type="text" name="advisorname" id="advisorname"
 							required="required" placeholder="Enter Advisor/Collector FullName"
 							style="text-transform: uppercase;" />
 					</div>
@@ -379,7 +381,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
 						<label for="">Remarks Section</label>
-						<textarea name="" id=""
+						<textarea name="remark" id="remark"
 							style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"
 							placeholder="Enter Remarks if any"></textarea>
 					</div>

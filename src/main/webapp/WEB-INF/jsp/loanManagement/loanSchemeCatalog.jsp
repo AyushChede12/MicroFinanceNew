@@ -84,8 +84,8 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Loan Plan Name</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="loanName">Loan Plan Name</label> <input type="text"
+									name="loanPlaneName" id="loanPlaneName" required="required"
 									placeholder="Enter Loan Plan Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -93,8 +93,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Type Of Loan</label> <select id="colour"
-									name="colour" required="required"
+								<label for=""> Type Of Loan</label> <select id="typeloan"
+									name="typeloan" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Type Of Loan</option>
 									<option value="Blue">Blue</option>
@@ -105,16 +105,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Minimum Age</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="loanName">Minimum Age</label> <input type="text"
+									name="minimumAge" id="minimumAge" required="required"
 									placeholder="Enter Minimum Age" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Maximum Age</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="loanName">Maximum Age</label> <input type="text"
+									name="maximumAge" id="maximumAge" required="required"
 									placeholder="Enter Maximum Age" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -122,7 +122,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Min Loan Duration(months)  </label> <input type="text"
-									name="location" id="location" required="required"
+									name="minloanDuration" id="minloanDuration" required="required"
 									placeholder="Enter Min Loan Duration" />
 							</div>
 						</div>
@@ -131,14 +131,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Max. Loan Duration(months) </label> <input type="text"
-									name="location" id="location" required="required"
+									name="mixloanDuration" id="mixloanDuration" required="required"
 									placeholder="Enter Max. Loan Duration" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Emi Frequency</label> <select id="colour" name="colour"
+								<label for="">Emi Frequency</label> <select id="emiFrequency" name="emiFrequency"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Emi Frequency</option>
@@ -149,7 +149,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Emi Type</label> <select id="colour" name="colour"
+								<label for="">Emi Type</label> <select id="emiType" name="emiType"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Emi Type</option>
@@ -161,8 +161,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="loanName">Minimum Loan Amount</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="loanName">Minimum Loan Amount</label> <input type="text"
+									name="minimumloanAmount" id="minimumloanAmount" required="required"
 									placeholder="Enter Minimum Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -170,8 +170,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="loanName">Maximum Loan Amount</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="loanName">Maximum Loan Amount</label> <input type="text"
+									name="maximumloanAmount" id="maximumloanAmount" required="required"
 									placeholder="Enter Maximum Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -179,15 +179,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Rate Interest Type(%p.a.)</label> <input type="text" name="price"
-									id="price" required="required"
+								<label for="">Rate Interest Type(%p.a.)</label> <input type="text" name="rateIntrestType"
+									id="rateIntrestType" required="required"
 									placeholder="Enter Rate Interest Type" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Interest Type</label> <select id="colour" name="colour"
+								<label for=""> Interest Type</label> <select id="typeIntrest" name="typeIntrest"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select ROI Type</option>
@@ -198,7 +198,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Security Type</label> <select id="colour" name="colour"
+								<label for="">Security Type</label> <select id="typesecurity" name="typesecurity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Security</option>
@@ -223,7 +223,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Processing Fee(%) </label> <input type="text"
-									name="price" id="price" required="required"
+									name="feeProcessing" id="feeProcessing" required="required"
 									placeholder="Enter Processing Fee" />
 							</div>
 						</div>
@@ -231,22 +231,22 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for=""> Legal Charges(%)</label> <input type="text"
-									name="price" id="price" required="required"
+									name="chargesLegal" id="chargesLegal" required="required"
 									placeholder="Enter Legal Charges" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">GST(%)</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter GST" />
+								<label for="">GST(%)</label> <input type="text" name="gst"
+									id="gst" required="required" placeholder="Enter GST" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Insurence Fee(%)</label> <input type="text"
-									name="location" id="location" required="required"
+									name="feeInsurence" id="feeInsurence" required="required"
 									placeholder="Enter Insurance Fee" />
 							</div>
 						</div>
@@ -255,7 +255,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Valuation Fee(%) </label> <input type="text"
-									name="price" id="price" required="required"
+									name="feeValuation" id="feeValuation" required="required"
 									placeholder="Enter Valuation Fee" />
 							</div>
 						</div>
@@ -284,14 +284,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Late Allowance Days</label> <input type="number"
-									name="price" id="price" required="required"
+									name="lateAllowanceday" id="lateAllowanceday" required="required"
 									placeholder="Enter Late Allowance Days" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">penalty mode</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">penalty mode</label> <select id="modePanalty"
+									name="modePanalty" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Penalty Type</option>
 									<option value="Blue">Percentage</option>
@@ -301,8 +301,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Monthly Penaty </label> <input type="number"
-									name="price" id="price" required="required" placeholder="" />
+								<label for=""> Monthly Penalty </label> <input type="number"
+									name="pennaltyMonthly" id="pennaltyMonthly" required="required" placeholder="" />
 							</div>
 						</div>
 					</div>
