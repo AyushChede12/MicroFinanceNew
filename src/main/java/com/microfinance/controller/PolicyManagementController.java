@@ -1,18 +1,11 @@
 package com.microfinance.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.FixedDepositPM;
@@ -20,68 +13,77 @@ import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.service.PolicyManagementService;
 
 @RestController
+@RequestMapping("/api")
 public class PolicyManagementController {
-	@Autowired 
-	PolicyManagementService policyManagementService;
-	
-	//saving fixed deposit by aakansha
-	
-	@PostMapping("/Fixeddepositepmsave")
-	public ResponseEntity<ApiResponse<FixedDepositPM>> save(@RequestBody FixedDepositPM fixedDepositPM) {
-	    boolean isSaved = policyManagementService.saveFixedDeposite(fixedDepositPM);
 
-	    if (isSaved) {
-	        ApiResponse<FixedDepositPM> response = ApiResponse.success(
-	            HttpStatus.OK,
-	            "Fixed deposit saved successfully.",
-	            fixedDepositPM
-	        );
-	        return ResponseEntity.ok(response);
-	    } else {
-	        ApiResponse<FixedDepositPM> response = ApiResponse.success(
-	            HttpStatus.BAD_REQUEST,
-	            "Failed to save fixed deposit.",
-	            null
-	        );
-	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-	    }
-	}
-	//view the fixed deposite code 
-	 @GetMapping("/viewreFixeddeposit") 
-	 @ResponseBody
-	 public List<FixedDepositPM> getAllData() {
-	     return policyManagementService.getAllFixeddata();
-	 }
- 
-	//saving recurring deposit by aakansha
+    @Autowired
+    private PolicyManagementService policyManagementService;
 
-	 @PostMapping("/reccuringepositepmsave")
-	 public ResponseEntity<ApiResponse<RecurringDepositPM>> save(@RequestBody RecurringDepositPM recuringDepositPM) {
-	     boolean isSaved = policyManagementService.saveRecuringDailyDeposite(recuringDepositPM);
+    // Save Fixed Deposit
+    @PostMapping("/fixed-deposit/save")
+    public ResponseEntity<ApiResponse<FixedDepositPM>> saveFixedDeposit(@RequestBody FixedDepositPM fixedDepositPM) {
+        boolean isSaved = policyManagementService.saveFixedDeposite(fixedDepositPM);
 
-	     if (isSaved) {
-	         ApiResponse<RecurringDepositPM> response = ApiResponse.success(
-	             HttpStatus.OK,
-	             "Recurring deposit saved successfully.",
-	             recuringDepositPM
-	         );
-	         return ResponseEntity.ok(response);
-	     } else {
-	         ApiResponse<RecurringDepositPM> response = ApiResponse.success(
-	             HttpStatus.BAD_REQUEST,
-	             "Failed to save recurring deposit.",
-	             null
-	         );
-	         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-	     }
-	 }
-	 
-	@ResponseBody 
-	 @GetMapping("/viedRecurringeposite")
-	    public List<RecurringDepositPM> getAllData1() {
-	        return policyManagementService.getAllData1();
-	    }
+        if (isSaved) {
+            ApiResponse<FixedDepositPM> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Fixed deposit saved successfully.",
+                fixedDepositPM
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<FixedDepositPM> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save fixed deposit."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    // View All Fixed Deposits
+    @GetMapping("/fixed-deposit/view")
+    public List<FixedDepositPM> getAllFixedDeposits() {
+        return policyManagementService.getAllFixeddata();
+    }
+
+    // Save Recurring Deposit
+    @PostMapping("/recurring-deposit/save")
+    public ResponseEntity<ApiResponse<RecurringDepositPM>>saveRecurringDeposit(@RequestBody RecurringDepositPM recurringDepositPM) {
+        boolean isSaved = policyManagementService.saveRecuringDailyDeposite(recurringDepositPM);
+
+        if (isSaved) {
+            ApiResponse<RecurringDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
+                "Recurring deposit saved successfully.",
+                recurringDepositPM
+            );
+            return new ResponseEntity<>(response, HttpStatus.CREATED);
+        } else {
+            ApiResponse<RecurringDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+                "Failed to save recurring deposit."
+            );
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
+
+    // View All Recurring Deposits
+    @GetMapping("/recurring-deposit/view")
+    public ResponseEntity<ApiResponse<List<RecurringDepositPM>>> getAllRecurringDeposits() {
+        List<RecurringDepositPM> deposits = policyManagementService.getAllData1();
+            
+        if (deposits != null && !deposits.isEmpty()) {
+            ApiResponse<List<RecurringDepositPM>> response = ApiResponse.success(HttpStatus.OK,
+                "Recurring deposits fetched successfully.",
+                deposits
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ApiResponse<List<RecurringDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+                "No recurring deposits found."
+            );
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
 
 }
