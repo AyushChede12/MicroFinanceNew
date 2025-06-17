@@ -72,7 +72,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<div class="content" id="contentCityName"
 										style="display: none;">
 										<div class="search">
-											<input type="text" id="city-search" class="m-0"
+											<input type="text" id="findByLoanId" name="findByLoanId"  class="m-0"
 												placeholder="Search City" />
 										</div>
 										<ul class="options" id="city-options">
