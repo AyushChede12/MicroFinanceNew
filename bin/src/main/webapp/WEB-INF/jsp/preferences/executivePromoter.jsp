@@ -38,8 +38,7 @@ pageEncoding="ISO-8859-1"%> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-<<<<<<< HEAD
-=======
+
 <style>
 #img-view img {
 	width: 100%;
@@ -53,7 +52,6 @@ label {
 	cursor: pointer;
 }
 </style>
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 
 <body>
 
@@ -102,10 +100,8 @@ label {
                   </div>
                 </div>
               </div> -->
-<<<<<<< HEAD
+
 							<input type="hidden" name="id" id="id">
-=======
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 							<div class="d-flex flex-column formFields">
 								<label for="">Type</label> <select id="type" name="type"
 									required="required" class="form-control selectField"
@@ -329,7 +325,6 @@ label {
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="signaturePreview" /><input type="hidden" name="signatureHidden" id="signatureHidden">
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
