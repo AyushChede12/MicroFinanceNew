@@ -132,20 +132,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/incentive/generateIncentive.js"></script>
-	<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // Month is 0-indexed
-    const dd = String(today.getDate()).padStart(2, '0');
-
-    const formattedDate = `${yyyy}-${mm}-${dd}`; // Format required by <input type="date">
-
-    // Set the value in input fields
-    document.getElementById('dateFrom').value = formattedDate;
-    document.getElementById('dateTo').value = formattedDate;
-  });
-</script>
+	
 	
 </body>
 
