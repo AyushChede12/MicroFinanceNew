@@ -34,8 +34,12 @@ public class IncentiveManagementService {
 
 	public List<TeamMember> getAllTeamMember() {
 		// TODO Auto-generated method stub
-		return teamMemberRepo.findAll() ;
+		return teamMemberRepo.findAll();
 	}
+
+	
+	
+	
 
 
 	

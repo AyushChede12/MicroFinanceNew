@@ -119,6 +119,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-12 text-center">
 								<button id="saveBtn" class="btnStyle bg-warning"
 									onclick="saveFinancialYear()">Add</button>
+								<button type="button" id="updateBtn" class="btnStyle bg-success"
+									onclick="updateFY()">Update</button>
 							</div>
 						</div>
 
@@ -145,7 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 													<th scope="col">Financial Year Name</th>
 													<th scope="col">Date From</th>
 													<th scope="col">Date To</th>
-
+													<th scope="col">Edit</th>
 												</tr>
 											</thead>
 											<tbody id="tableBody">

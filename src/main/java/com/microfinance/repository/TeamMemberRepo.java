@@ -6,4 +6,6 @@ import com.microfinance.model.TeamMember;
 
 public interface TeamMemberRepo extends JpaRepository<TeamMember, Long> {
 
+
+	
 }
