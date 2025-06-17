@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Build-Jdk-Spec: 23
+=======
+Build-Jdk-Spec: 17
+>>>>>>> a2bfd8b1f0675ce5446187b30861c0a019ccd58a
 Implementation-Title: societybank
 Implementation-Version: 0.0.1-SNAPSHOT
 Created-By: Maven Integration for Eclipse
