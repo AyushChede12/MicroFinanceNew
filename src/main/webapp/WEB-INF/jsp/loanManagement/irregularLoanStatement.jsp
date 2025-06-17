@@ -84,8 +84,8 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Find Loan Id & Name</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Find Loan Id & Name</label> <select id="loanid"
+									name="loanid" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Colour</option>
 									<option value="Blue">Blue</option>
