@@ -1,14 +1,9 @@
-package com.microfinance.model;
+package com.microfinance.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
-public class addFinancialCosultant {
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class FinancialConsultantDto {
+
 	private long id;
 	private String financialCode;
 	private String joiningDate;
@@ -28,8 +23,8 @@ public class addFinancialCosultant {
 	private String pinCode;
 	private String profession;
 	private String academicBackground;
-	private String customerPhoto;
-	private String customerSignature;
+	private MultipartFile customerPhoto;
+	private MultipartFile customerSignature;
 	private String selectPosition;
 	private String referralCode;
 	private String referralName;
@@ -147,16 +142,16 @@ public class addFinancialCosultant {
 	public void setAcademicBackground(String academicBackground) {
 		this.academicBackground = academicBackground;
 	}
-	public String getCustomerPhoto() {
+	public MultipartFile getCustomerPhoto() {
 		return customerPhoto;
 	}
-	public void setCustomerPhoto(String customerPhoto) {
+	public void setCustomerPhoto(MultipartFile customerPhoto) {
 		this.customerPhoto = customerPhoto;
 	}
-	public String getCustomerSignature() {
+	public MultipartFile getCustomerSignature() {
 		return customerSignature;
 	}
-	public void setCustomerSignature(String customerSignature) {
+	public void setCustomerSignature(MultipartFile customerSignature) {
 		this.customerSignature = customerSignature;
 	}
 	public String getSelectPosition() {
