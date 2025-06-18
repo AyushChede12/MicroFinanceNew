@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class LoanSchemCatalog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String loanPlaneName;
 	private String typeloan;
 	private String minimumAge;
@@ -36,10 +36,12 @@ public class LoanSchemCatalog {
 	private String lateAllowanceday;
 	private String modePanalty;
 	private String pennaltyMonthly;
-	public long getId() {
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getLoanPlaneName() {
