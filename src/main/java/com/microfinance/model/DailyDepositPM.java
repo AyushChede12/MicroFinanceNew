@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class DailyDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	private String planCode;
 	private String minimumDeposit;
 	private String rateOfInterest;
@@ -24,10 +24,11 @@ public class DailyDepositPM {
 	private String graceDays;
 	private String  penaltyRate;
 	private String statusOfPlan;
-	public int getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getPlanCode() {

@@ -29,6 +29,9 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -83,19 +86,20 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
+
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code *</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Plan Code"
-									style="text-transform: uppercase;" />
+									name="planCode" id="planCode" required="required"
+									placeholder="Enter Plan Code" value="${memberCodeDD}"
+									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Deposit*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Minimum Amount"
+									type="text" name="minimumDeposit" id="minimumDeposit"
+									required="required" placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -103,149 +107,121 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Rate of Interest (%)*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Interest Rate"
+									type="text" name="rateOfInterest" id="rateOfInterest"
+									required="required" placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Installment Type*</label> <select
+									id="installmentType" name="installmentType" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Installment Type</option>
+									<option value="">cash</option>
 
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Installment Type*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Select" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								</select>
 							</div>
 						</div>
 
+
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Duration*</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Term" />
+								<label for="">Duration*</label> <input type="text"
+									name="duration" id="duration" required="required"
+									placeholder="Enter Duration" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Commission on New*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="commissionOnNew" id="commissionOnNew" required="required"
+									placeholder="Enter Commission on New" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Renewal Commission (%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="renewalCommission" id="renewalCommission"
+									required="required" placeholder="Enter Renewal Commission" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Interest Interval*</label> <select
+									id="interestInterval" name="interestInterval"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Interest Interval</option>
+									<option value="">Monthly</option>
+									<option value="">Daily</option>
+									<option value="">Yearly</option>
+
+								</select>
 							</div>
 						</div>
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Interest Interval*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
 
-										</ul>
-									</div>
-								</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Total Paid</label> <input  type="text"
+									name="totalPaid" id="totalPaid" required="required"
+									placeholder="Enter Total Paid" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Total Paid</label> <input readonly type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+								<label for="">Maturity Amount*</label> <input 
+									type="text" name="maturityAmount" id="maturityAmount"
+									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+								<label for="">Is Flexible Plan?</label> <select
+									id="flexiblePlan" name="flexiblePlan" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Flexible Plan</option>
+									<option value="Yes">Yes</option>
+								<option value="No">No</option>
+
+								</select>
 							</div>
 						</div>
 
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Is Flexible Plan?</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">No</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search elative Relation" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Grace Days*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Mobile No" />
+									name="graceDays" id="graceDays" required="required"
+									placeholder="Enter Grace Days" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Penalty Rate (%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Email id" />
+									name="penaltyRate" id="penaltyRate" required="required"
+									placeholder="Enter Penalty Rate" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Status of Plan</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Occupation" />
+									name="statusOfPlan" id="statusOfPlan" required="required"
+									placeholder="Enter statusOfPlan" />
 							</div>
 						</div>
 
@@ -254,7 +230,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row" style="margin-left: 80%;">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-danger">Generate</button>
+							<button id="genrate" class="btnStyle bg-danger">Generate</button>
 							<button id="saveBtn" class="btnStyle bg-warning">Save</button>
 						</div>
 					</div>
@@ -401,8 +377,9 @@ pageEncoding="ISO-8859-1"%> -->
                 </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Plan Code"
+									name="planCodeRD" id="planCodeRD" required="required"
+									placeholder="Enter Plan Code" value="${memberCodeRD}"
+									readonly="readonly"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -410,7 +387,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Amount*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="minimumAmountRD" id="minimumAmountRD" required="required"
 									placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -419,98 +396,74 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Interest Rate(%)*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="rateOfInterestRD" id="rateOfInterestRD" required="required"
 									placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Term Mode</label> <select id="termMode"
+									name="termMode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Term Mode</option>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Term Mode*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Select" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								</select>
 							</div>
 						</div>
 
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Term" />
+								<label for="">Term*</label> <input type="text" name="term"
+									id="term" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.New(%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="commissionOnNewRD" id="commissionOnNewRD" required="required"
+									placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.Renew(%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="renewalCommissionRD" id="renewalCommissionRD" required="required"
+									placeholder="Enter Comm.Renew(%)" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Compound Interval</label> <select
+									id="componentIntervalRD" name="componentIntervalRD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Compound Interval</option>
+
+								</select>
 							</div>
 						</div>
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Compound Interval*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit</label> <input readonly type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="totalPaidRD" id="totalPaidRD" required="required"
+									placeholder="Enter Total Deposit" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									type="text" name="maturityAmountRD" id="maturityAmountRD" required="required"
+									placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
@@ -520,8 +473,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Grace Period*</label> <input readonly type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="graceDaysRD" id="graceDaysRD" required="required"
+									placeholder="Enter Grace Period" />
 							</div>
 						</div>
 
@@ -538,7 +491,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Status</label> <input type="text"
-									name="price" id="price" required="required"
+									name="statusOfPlanRD" id="statusOfPlanRD" required="required"
 									placeholder="Enter Occupation" />
 							</div>
 						</div>
@@ -695,7 +648,8 @@ pageEncoding="ISO-8859-1"%> -->
                 </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="planCodeFD" id="planCodeFD" required="required" value="${memberCodeFD}"
+									readonly="readonly"
 									placeholder="Enter Plan Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -704,7 +658,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Amount*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="minimumAmountFD" id="minimumAmountFD" required="required"
 									placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -713,113 +667,76 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Interest Rate(%)*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="rateOfInterestFD" id="rateOfInterestFD" required="required"
 									placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Term Mode *</label> <select id="termMode1"
+									name="termMode1" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Term Mode</option>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Term Mode*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Select" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								</select>
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Term" />
+								<label for="">Term*</label> <input type="text" name="termFd"
+									id="termFd" required="required" placeholder="Enter Term" />
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Interest Type*</label> <select id="installmentTypeFD"
+									name="installmentTypeFD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Interest Type*</option>
+
+								</select>
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Compound Interval*</label> <select
+									id="componentIntervalFD" name="componentIntervalFD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Compound Interval</option>
+
+								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Interest Type*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Simple</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Compound Interval*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit</label> <input readonly type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name=" totalPaidFD" id=" totalPaidFD" required="required"
+									placeholder="Enter Total Deposit" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									type="text" name="maturityAmountFD" id="maturityAmountFD" required="required"
+									placeholder="Enter maturityAmountFD" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.New(%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="commissionOnNewFD" id="commissionOnNewFD" required="required"
+									placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
 
@@ -829,8 +746,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Status</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Occupation" />
+									name="statusOfPlanFD" id="statusOfPlanFD" required="required"
+									placeholder="Enter Plan Status" />
 							</div>
 						</div>
 
@@ -985,8 +902,9 @@ pageEncoding="ISO-8859-1"%> -->
                 </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Plan Code"
+									name="planCodeMD" id="planCodeMD" required="required"
+									placeholder="Enter Plan Code" value="${memberCodeMD}"
+									readonly="readonly"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -994,7 +912,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Amount*</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="minimumAmountMD" id="minimumAmountMD" required="required"
 									placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -1003,98 +921,74 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Maturity ROI(%)</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+									type="text" name="maturityROIMD" id="maturityROIMD" required="required"
 									placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Term Mode*</label> <select id="termModeMD"
+									name="termModeMD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Term Mode</option>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Term Mode*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Select" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								</select>
 							</div>
 						</div>
 
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Term" />
+								<label for="">Term*</label> <input type="text" name="termMD"
+									id="termMD" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">MIS Int.ROI(%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="MISIntROIMD" id="MISIntROIMD" required="required"
+									placeholder="Enter MIS Int.ROI(%)" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">MIS Interval*</label> <select id="MISIntervalMD"
+									name="MISIntervalMD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select MIS Interval</option>
+
+								</select>
 							</div>
 						</div>
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>MIS Interval*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Daily</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">MIS Interest</label> <input readonly type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="MISInterestMD" id="MISInterestMD" required="required"
+									placeholder="Enter MIS Interest" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									type="text" name="maturityAmountMD" id="maturityAmountMD" required="required"
+									placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.New(%)*</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="commissionOnNewMD" id="commissionOnNewMD" required="required"
+									placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
 
@@ -1102,8 +996,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Status</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Occupation" />
+									name="statusOfPlanMDRD2" id="statusOfPlanMDRD2" required="required"
+									placeholder="Enter Plan Status" />
 							</div>
 						</div>
 
@@ -1226,7 +1120,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
-	<script src="./js/adminscript.js"></script>
+	<!--  <script src="./js/adminscript.js"></script>-->
+	<script src="./js/PolicyManagment/DailyDeposite.js"></script>
+	
 </body>
 
 </html>

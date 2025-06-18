@@ -9,39 +9,40 @@ public class FixedDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String planCodeRD1;
-	private String minimumAmountRD1;
-	private String rateOfInterestRD1;
+	private String planCodeFD;
+	private String minimumAmountFD;
+	private String rateOfInterestFD;
 	private String termMode1;
-	private String installmentType1;
-	private String commissionOnNewRD1;
-	private String componentIntervalRD;
-	private String totalPaidRD;
-	private String maturityAmountRD;
-	private String statusOfPlanRD1;
+	private String termFd;
+	private String installmentTypeFD;
+	private String commissionOnNewFD;
+	private String componentIntervalFD;
+	private String totalPaidFD;
+	private String maturityAmountFD;
+	private String statusOfPlanFD;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPlanCodeRD1() {
-		return planCodeRD1;
+	public String getPlanCodeFD() {
+		return planCodeFD;
 	}
-	public void setPlanCodeRD1(String planCodeRD1) {
-		this.planCodeRD1 = planCodeRD1;
+	public void setPlanCodeFD(String planCodeFD) {
+		this.planCodeFD = planCodeFD;
 	}
-	public String getMinimumAmountRD1() {
-		return minimumAmountRD1;
+	public String getMinimumAmountFD() {
+		return minimumAmountFD;
 	}
-	public void setMinimumAmountRD1(String minimumAmountRD1) {
-		this.minimumAmountRD1 = minimumAmountRD1;
+	public void setMinimumAmountFD(String minimumAmountFD) {
+		this.minimumAmountFD = minimumAmountFD;
 	}
-	public String getRateOfInterestRD1() {
-		return rateOfInterestRD1;
+	public String getRateOfInterestFD() {
+		return rateOfInterestFD;
 	}
-	public void setRateOfInterestRD1(String rateOfInterestRD1) {
-		this.rateOfInterestRD1 = rateOfInterestRD1;
+	public void setRateOfInterestFD(String rateOfInterestFD) {
+		this.rateOfInterestFD = rateOfInterestFD;
 	}
 	public String getTermMode1() {
 		return termMode1;
@@ -50,41 +51,48 @@ public class FixedDepositPM {
 		this.termMode1 = termMode1;
 	}
 	public String getInstallmentType1() {
-		return installmentType1;
+		return installmentTypeFD;
 	}
 	public void setInstallmentType1(String installmentType1) {
-		this.installmentType1 = installmentType1;
+		this.installmentTypeFD = installmentType1;
 	}
-	public String getCommissionOnNewRD1() {
-		return commissionOnNewRD1;
+	public String getCommissionOnNewFD() {
+		return commissionOnNewFD;
 	}
-	public void setCommissionOnNewRD1(String commissionOnNewRD1) {
-		this.commissionOnNewRD1 = commissionOnNewRD1;
+	public void setCommissionOnNewFD(String commissionOnNewFD) {
+		this.commissionOnNewFD = commissionOnNewFD;
 	}
-	public String getComponentIntervalRD() {
-		return componentIntervalRD;
+	public String getComponentIntervalFD() {
+		return componentIntervalFD;
 	}
-	public void setComponentIntervalRD(String componentIntervalRD) {
-		this.componentIntervalRD = componentIntervalRD;
+	public void setComponentIntervalFD(String componentIntervalFD) {
+		this.componentIntervalFD = componentIntervalFD;
 	}
-	public String getTotalPaidRD() {
-		return totalPaidRD;
+	public String getTotalPaidFD() {
+		return totalPaidFD;
 	}
-	public void setTotalPaidRD(String totalPaidRD) {
-		this.totalPaidRD = totalPaidRD;
+	public void setTotalPaidFD(String totalPaidFD) {
+		this.totalPaidFD = totalPaidFD;
 	}
-	public String getMaturityAmountRD() {
-		return maturityAmountRD;
+	public String getMaturityAmountFD() {
+		return maturityAmountFD;
 	}
-	public void setMaturityAmountRD(String maturityAmountRD) {
-		this.maturityAmountRD = maturityAmountRD;
+	public void setMaturityAmountFD(String maturityAmountFD) {
+		this.maturityAmountFD = maturityAmountFD;
 	}
-	public String getStatusOfPlanRD1() {
-		return statusOfPlanRD1;
+	public String getStatusOfPlanFD() {
+		return statusOfPlanFD;
 	}
-	public void setStatusOfPlanRD1(String statusOfPlanRD1) {
-		this.statusOfPlanRD1 = statusOfPlanRD1;
+	public void setStatusOfPlanFD(String statusOfPlanFD) {
+		this.statusOfPlanFD = statusOfPlanFD;
 	}
+	public String getTermFd() {
+		return termFd;
+	}
+	public void setTermFd(String termFd) {
+		this.termFd = termFd;
+	}
+	
 	
 
 }

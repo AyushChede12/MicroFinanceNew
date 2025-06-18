@@ -22,9 +22,9 @@ public class RecurringDepositPM {
     private String componentIntervalRD;
     private String totalPaidRD;
     private String maturityAmountRD;
-    private String flexiblePlanRD;
+    private String latefineRD;
     private String graceDaysRD;
-    private String penaltyRateRD;
+  
     private String statusOfPlanRD;
 	public long getId() {
 		return id;
@@ -92,29 +92,25 @@ public class RecurringDepositPM {
 	public void setMaturityAmountRD(String maturityAmountRD) {
 		this.maturityAmountRD = maturityAmountRD;
 	}
-	public String getFlexiblePlanRD() {
-		return flexiblePlanRD;
-	}
-	public void setFlexiblePlanRD(String flexiblePlanRD) {
-		this.flexiblePlanRD = flexiblePlanRD;
-	}
+	
 	public String getGraceDaysRD() {
 		return graceDaysRD;
 	}
 	public void setGraceDaysRD(String graceDaysRD) {
 		this.graceDaysRD = graceDaysRD;
 	}
-	public String getPenaltyRateRD() {
-		return penaltyRateRD;
-	}
-	public void setPenaltyRateRD(String penaltyRateRD) {
-		this.penaltyRateRD = penaltyRateRD;
-	}
+	
 	public String getStatusOfPlanRD() {
 		return statusOfPlanRD;
 	}
 	public void setStatusOfPlanRD(String statusOfPlanRD) {
 		this.statusOfPlanRD = statusOfPlanRD;
+	}
+	public String getLatefineRD() {
+		return latefineRD;
+	}
+	public void setLatefineRD(String latefineRD) {
+		this.latefineRD = latefineRD;
 	}
 
     
