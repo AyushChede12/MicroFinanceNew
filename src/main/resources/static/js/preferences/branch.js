@@ -1,4 +1,4 @@
-function saveBranch() {
+/*function saveBranch() {
 	const formData = {
 		branchCode: $('input[name="branchCode"]').val(),
 		branchName: $('input[name="branchName"]').val(),
@@ -27,41 +27,93 @@ function saveBranch() {
 		}
 	});
 
-}
+}*/
+
+
 
 $(document).ready(function() {
+
+	$('#saveBtn').click(function(event) {
+		alert("Save Button Clicked!");
+		event.preventDefault(); // Prevent default form submission
+
+		const branchData = {
+			// If updating an existing branch, add: id: $('#id').val()
+			branchCode: $('#branchCode').val(),
+			branchName: $('#branchName').val(),
+			openingDate: $('#openingDate').val(),
+			address: $('#address').val(),
+			pin: $('#pin').val(),
+			state: $('#state').val(),
+			primaryContact: $('#primaryContact').val(),
+			contact: $('#contact').val()
+		};
+
+		$.ajax({
+			url: '/api/preference/saveAllBranchModule',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(branchData),
+			success: function(response) {
+				alert("Branch Saved Successfully");
+				location.reload();
+			},
+			error: function(xhr) {
+				console.error('Error:', xhr.responseText);
+				alert('Failed to save branch data.');
+			}
+		});
+	});
+
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
+	
 	$.ajax({
-		url: "/getAllBranchModule",
-		type: "GET",
-		contentType: "application/json",
+		url: '/api/preference/getAllBranchModule',
+		type: 'POST',
+		contentType: 'application/json',
 		success: function(data) {
-			var tbody = $(".datatable tbody");
-			tbody.empty(); // Clear existing rows
+			if (data.success && Array.isArray(data.data)) {
+				var tbody = $(".datatable tbody");
+				tbody.empty(); // Clear old rows
 
-			$.each(data, function(index, item) {
-				var row = `<tr style="font-family: 'Poppins', sans-serif;">
-              <th scope="row"><a href="#">${index + 1}</a></th>
-              <td>${item.branchCode || ''}</td>
-              <td><a href="#" class="text-primary">${item.branchName || ''}</a></td>
-              <td>${item.openingDate || ''}</td>
-              <td>${item.address || ''}</td>
-              <td>${item.pin || ''}</td>
-              <td>${item.state || ''}</td>
-              <td>${item.primaryContact || ''}</td>
-              <td>${item.contact || ''}</td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-            </tr>`;
-				tbody.append(row);
-			});
+				$.each(data.data, function(index, item) {
+					var row = `
+						<tr style="font-family: 'Poppins', sans-serif;">
+							<th scope="row"><a href="#">${index + 1}</a></th>
+							<td>${item.branchCode || ''}</td>
+							<td><a href="#" class="text-primary">${item.branchName || ''}</a></td>
+							<td>${item.openingDate || ''}</td>
+							<td>${item.address || ''}</td>
+							<td>${item.pin || ''}</td>
+							<td>${item.state || ''}</td>
+							<td>${item.primaryContact || ''}</td>
+							<td>${item.contact || ''}</td>
+							<td>
+								<button class="iconbutton" onclick="viewData(${item.id})" title="View">
+									<i class="fa-solid fa-pen-to-square text-primary"></i>
+								</button>
+							</td>
+							<td>
+								<button class="iconbutton" onclick="deleteData(${item.id})" title="Delete">
+									<i class="fa-solid fa-trash text-danger"></i>
+								</button>
+							</td>
+						</tr>
+					`;
+					tbody.append(row);
+				});
+			} else {
+				alert("No branch modules found.");
+			}
 		},
 		error: function(xhr, status, error) {
 			console.error("Error fetching data:", error);
 			alert("Failed to load branch module data.");
 		}
 	});
+
+
 });
 
 function showTableData() {
@@ -120,55 +172,55 @@ function deleteData(id) {
 
 
 
-function updateBranch(){
+function updateBranch() {
 	let payload = {
-			id: $("#id").val(),
-			branchCode: $("#branchCode").val(),
-			branchName: $("#branchName").val(),
-			openingDate: $("#openingDate").val(),
-			address: $("#address").val(),
-			pin: $("#pin").val(),
-			state: $("#state").val(),
-			primaryContact: $("#primaryContact").val(),
-			contact: $("#contact").val()
-		};
-		$.ajax({
-			url: "/updateBranchModuleById",
-			type: "POST",
-			contentType: "application/json",
-			data: JSON.stringify(payload),
-			success: function(response) {
-				alert("Update Branch successfully!");
-				location.reload();
-				// Optionally refresh table or redirect
-			},
-			error: function(xhr, status, error) {
-				alert("Update failed: " + xhr.responseText);
-			}
-		});
+		id: $("#id").val(),
+		branchCode: $("#branchCode").val(),
+		branchName: $("#branchName").val(),
+		openingDate: $("#openingDate").val(),
+		address: $("#address").val(),
+		pin: $("#pin").val(),
+		state: $("#state").val(),
+		primaryContact: $("#primaryContact").val(),
+		contact: $("#contact").val()
+	};
+	$.ajax({
+		url: "/updateBranchModuleById",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(payload),
+		success: function(response) {
+			alert("Update Branch successfully!");
+			location.reload();
+			// Optionally refresh table or redirect
+		},
+		error: function(xhr, status, error) {
+			alert("Update failed: " + xhr.responseText);
+		}
+	});
 }
 
 
-$(document).ready(function () {
-    // Fetch all branches and populate the dropdown
-    $.ajax({
-        url: "getAllBranchModule",
-        method: "GET",
-        success: function (data) {
-            console.log("Fetched Branches:", data);
-            data.forEach(function (branch) {
-                $('#branchName').append(
-                    $('<option>', {
-                        value: branch.branchName,
-                        text: branch.branchName
-                    })
-                );
-            });
-        },
-        error: function (err) {
-            console.error("Error fetching branches:", err);
-        }
-    });
+$(document).ready(function() {
+	// Fetch all branches and populate the dropdown
+	$.ajax({
+		url: "getAllBranchModule",
+		method: "GET",
+		success: function(data) {
+			console.log("Fetched Branches:", data);
+			data.forEach(function(branch) {
+				$('#branchName').append(
+					$('<option>', {
+						value: branch.branchName,
+						text: branch.branchName
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("Error fetching branches:", err);
+		}
+	});
 });
 
 

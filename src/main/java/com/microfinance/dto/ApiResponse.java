@@ -6,36 +6,44 @@ import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.RecurringDepositPM;
 
 public class ApiResponse<T> {
-	
-	private HttpStatus status;
-    private String message;
-    private T data;
-   
 
-    // Constructors
-    public ApiResponse(HttpStatus status, String message, T data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
-    }
+	private boolean success;
+	private HttpStatus status;
+	private String message;
+	private T data;
+
+	// Constructors
+
+	public ApiResponse() {
+	}
+
+	public ApiResponse(HttpStatus status, String message, T data) {
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
 
 	public ApiResponse(String string, String message2, ApiResponse<ExecutiveFounder> response) {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public ApiResponse(String message, boolean success, T data) {
 	}
-	
 
+	public ApiResponse(boolean success, String message, T data) {
+		this.success = success;
+		this.message = message;
+		this.data = data;
+	}
 
 	// Static helper methods for success and error responses
-    public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
-        return new ApiResponse<>(status, message, data);
-    }
+	public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
+		return new ApiResponse<>(status, message, data);
+	}
 
-    public static <T> ApiResponse<T> error(HttpStatus status, String message) {
-        return new ApiResponse<>(status, message, null);
-    }
+	public static <T> ApiResponse<T> error(HttpStatus status, String message) {
+		return new ApiResponse<>(status, message, null);
+	}
 
 	public HttpStatus getStatus() {
 		return status;
@@ -62,4 +70,3 @@ public class ApiResponse<T> {
 	}
 
 }
-

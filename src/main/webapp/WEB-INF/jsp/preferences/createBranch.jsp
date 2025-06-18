@@ -176,8 +176,7 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="showTableData()">Show</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
-							<button type="button" id="saveBtn" class="btnStyle bg-warning"
-								onclick="saveBranch()">Save</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
 							<button type="button" id="updateBtn" class="btnStyle bg-success"
 								onclick="updateBranch()">Update</button>
 						</div>

@@ -10,17 +10,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.BranchModuleDto;
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
@@ -35,226 +37,249 @@ import com.microfinance.repository.StateDistrictRepo;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.service.PreferenceService;
 
-@Controller
+@RestController
+@RequestMapping("/api/preference")
 public class PreferenceController {
-	
+
 	@Autowired
 	PreferenceService preferenceService;
-	
+
 	@Autowired
 	StateDistrictRepo stateDistrictRepo;
-	
+
 	@Value("${upload.directory}")
 	private String uploadDirectory;
-	
-	//Branch Module - Ayush
-	@PostMapping("/saveAllBranchModule")
-	@ResponseBody
-	public ResponseEntity<String> saveBranchMaster(@RequestBody BranchModule branchmodule) {
-		BranchModule branch=preferenceService.saveAllBranchModule(branchmodule);
-		if(branch!=null)
-			return ResponseEntity.ok("success");
-		else
-			return ResponseEntity.badRequest().body("Failure");
+
+	// Branch Module - Ayush
+//	@PostMapping("/saveAllBranchModule")
+//	@ResponseBody
+//	public ResponseEntity<String> saveBranchMaster(@RequestBody BranchModule branchmodule) {
+//		BranchModule branch=preferenceService.saveAllBranchModule(branchmodule);
+//		if(branch!=null)
+//			return ResponseEntity.ok("success");
+//		else
+//			return ResponseEntity.badRequest().body("Failure");
+//	}
+
+	@PostMapping("/saveAllBranchModule")        //Ayush
+	public ResponseEntity<ApiResponse<BranchModuleDto>> saveBranch(@RequestBody BranchModuleDto branchDto) {
+		BranchModuleDto savedDTO = preferenceService.saveBranchModule(branchDto);
+		String message = (branchDto.getId() == null) ? "Branch created successfully" : "Branch updated successfully";
+		ApiResponse<BranchModuleDto> response = new ApiResponse<>(true, message, savedDTO);
+		return ResponseEntity.ok(response);
 	}
+
+//	@GetMapping("/getAllBranchModule") // Ayush
+//	@ResponseBody
+//	public List<BranchModule> fetchAllBranchModule() {
+//		List<BranchModule> list = preferenceService.fetchAllBranchModule();
+//		return list;
+//	}
 	
-	@GetMapping("/getAllBranchModule")               //Ayush
+	@PostMapping("/getAllBranchModule")                    //Ayush
 	@ResponseBody
-	public List<BranchModule> fetchAllBranchModule(){
-		List<BranchModule> list = preferenceService.fetchAllBranchModule();
-		return list;
+	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
+	    List<BranchModule> list = preferenceService.fetchAllBranchModule();
+
+	    ApiResponse<List<BranchModule>> response = new ApiResponse<>(
+	        true,
+	        "Branch modules fetched successfully",
+	        list
+	    );
+
+	    return ResponseEntity.ok(response);
 	}
-	
-	@GetMapping("/getBranchModuleById")           //Ayush
+
+
+	@GetMapping("/getBranchModuleById") // Ayush
 	@ResponseBody
 	public Optional<BranchModule> findBranchModuleById(@RequestParam("id") Long id) {
-		Optional<BranchModule> branch=preferenceService.findBranchDataById(id);
+		Optional<BranchModule> branch = preferenceService.findBranchDataById(id);
 		return branch;
 	}
-	
-	@PostMapping("/updateBranchModuleById")               //Ayush
+
+	@PostMapping("/updateBranchModuleById") // Ayush
 	@ResponseBody
 	public ResponseEntity<String> updateBranchModule(@RequestBody BranchModule branchModule) {
-		BranchModule updateBranch=preferenceService.updateAllBranchModule(branchModule);
-		if(updateBranch!=null)
+		BranchModule updateBranch = preferenceService.updateAllBranchModule(branchModule);
+		if (updateBranch != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("failure");
 	}
-	
-	@PostMapping("/deleteBranchModuleById")             //Ayush
+
+	@PostMapping("/deleteBranchModuleById") // Ayush
 	@ResponseBody
 	public ResponseEntity<String> deleteBranchModule(@RequestParam("id") Long id) {
-		Boolean deleteBranch=preferenceService.deleteBranchModule(id);
-		if(deleteBranch!=null)
+		Boolean deleteBranch = preferenceService.deleteBranchModule(id);
+		if (deleteBranch != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("failure");
 	}
-	
-	
-	//Bank Module - Ayush
+
+	// Bank Module - Ayush
 	@PostMapping("/saveAllBankModule")
 	@ResponseBody
 	public ResponseEntity<String> saveBankModule(@RequestBody BankModule bankModule) {
 		BankModule bank = preferenceService.saveAllBankModule(bankModule);
-		if(bank!=null)
+		if (bank != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("Failure");
 	}
-	
-	@GetMapping("/getAllBankModule")                   //Ayush
+
+	@GetMapping("/getAllBankModule") // Ayush
 	@ResponseBody
-	public List<BankModule> fetchAllBankModule(){
+	public List<BankModule> fetchAllBankModule() {
 		List<BankModule> list = preferenceService.fetchAllBankModule();
 		return list;
 	}
-	
-	@GetMapping("/getBankModuleById")                      //Ayush
+
+	@GetMapping("/getBankModuleById") // Ayush
 	@ResponseBody
 	public Optional<BankModule> findBankModuleById(@RequestParam("id") Long id) {
-		Optional<BankModule> bank=preferenceService.findBankDataById(id);
+		Optional<BankModule> bank = preferenceService.findBankDataById(id);
 		return bank;
 	}
-	
-	@PostMapping("/updateBankModuleById")                  //Ayush
+
+	@PostMapping("/updateBankModuleById") // Ayush
 	@ResponseBody
 	public ResponseEntity<String> updateBankModule(@RequestBody BankModule bankModule) {
-		BankModule updateBank=preferenceService.updateBankModuleById(bankModule);
-		if(updateBank!=null)
+		BankModule updateBank = preferenceService.updateBankModuleById(bankModule);
+		if (updateBank != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("failure");
 	}
-	
-	@PostMapping("/deleteBankModuleById")                  //Ayush
+
+	@PostMapping("/deleteBankModuleById") // Ayush
 	@ResponseBody
 	public ResponseEntity<String> deleteBankModule(@RequestParam("id") Long id) {
-		Boolean deleteBank=preferenceService.deleteBankModule(id);
-		if(deleteBank!=null)
+		Boolean deleteBank = preferenceService.deleteBankModule(id);
+		if (deleteBank != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("failure");
 	}
-	
-	//Relative Module - Ayush
+
+	// Relative Module - Ayush
 	@PostMapping("/saveAllRelativeModule")
 	@ResponseBody
 	public ResponseEntity<String> saveRelativeModule(@RequestBody RelativeModule relativeModule) {
 		RelativeModule relative = preferenceService.saveAllRelativeModule(relativeModule);
-		if(relative!=null)
+		if (relative != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("Failure");
 	}
-	
-	@GetMapping("/getAllRelativeModule")                       //Ayush
+
+	@GetMapping("/getAllRelativeModule") // Ayush
 	@ResponseBody
-	public List<RelativeModule> fetchAllRelativeModule(){
+	public List<RelativeModule> fetchAllRelativeModule() {
 		List<RelativeModule> list = preferenceService.fetchAllRelativeModule();
 		return list;
 	}
-	
-	@GetMapping("/getAllStates")                       //Niraj
+
+	@GetMapping("/getAllStates") // Niraj
 	@ResponseBody
-	public List<states> getAllStates(){
+	public List<states> getAllStates() {
 		List<states> list = preferenceService.getAllStates();
 		return list;
 	}
-	
-	
-	@GetMapping("/getAllDistrictsByStateId")                 //Niraj
+
+	@GetMapping("/getAllDistrictsByStateId") // Niraj
 	@ResponseBody
 	public Map<String, List<Statedistricts>> getAllDistrictsByStateId(@RequestParam("stateId") int stateId) {
-	    List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
-	    Map<String, List<Statedistricts>> response = new HashMap<>();
-	    response.put("allDistricts", data);
-	    return response;
+		List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
+		Map<String, List<Statedistricts>> response = new HashMap<>();
+		response.put("allDistricts", data);
+		return response;
 	}
 
-	
-	//Caste Module - Ayush
+	// Caste Module - Ayush
 	@PostMapping("/saveAllCasteModule")
 	@ResponseBody
 	public ResponseEntity<String> saveCasteModuleData(@RequestBody CasteModule castemodule) {
-		CasteModule caste=preferenceService.saveCasteModule(castemodule);
-		if(caste!=null)
+		CasteModule caste = preferenceService.saveCasteModule(castemodule);
+		if (caste != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("failure");
 	}
-	
-	@GetMapping("/getAllCasteModule")             //Ayush
+
+	@GetMapping("/getAllCasteModule") // Ayush
 	@ResponseBody
-	public List<CasteModule> fetchAllCasteModule(){
+	public List<CasteModule> fetchAllCasteModule() {
 		List<CasteModule> list = preferenceService.fetchAllCasteModule();
 		return list;
 	}
-	
-	//Category Module - Ayush
+
+	// Category Module - Ayush
 	@PostMapping("/saveAllCategoryModule")
 	public ResponseEntity<String> saveCategoryModuleData(@RequestBody CategoryModule categorymodule) {
-	    CategoryModule category = preferenceService.saveCategoryModule(categorymodule);
-	    if (category != null)
-	        return ResponseEntity.ok("success");
-	    else
-	        return ResponseEntity.badRequest().body("failure");
+		CategoryModule category = preferenceService.saveCategoryModule(categorymodule);
+		if (category != null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("failure");
 	}
 
-	 
-	@GetMapping("/getAllCategoryModule")                      //Ayush
+	@GetMapping("/getAllCategoryModule") // Ayush
 	@ResponseBody
-	public List<CategoryModule> fetchAllCategoryModule(){
+	public List<CategoryModule> fetchAllCategoryModule() {
 		List<CategoryModule> list = preferenceService.fetchAllCategoryModule();
 		return list;
 	}
+
 	// ayush branch
-	//Financial Year - Ayush
+	// Financial Year - Ayush
 	@PostMapping("/saveFinancialYear")
 	public ResponseEntity<String> saveFinancialYearData(@RequestBody FinancialYear financialyear) {
-	    FinancialYear fy = preferenceService.saveFinancialYear(financialyear);
-	    if (fy != null)
-	        return ResponseEntity.ok("success");
-	    else
-	        return ResponseEntity.badRequest().body("failure");
+		FinancialYear fy = preferenceService.saveFinancialYear(financialyear);
+		if (fy != null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("failure");
 	}
-	
-	@GetMapping("/getAllFinancialYear")                   //Ayush
+
+	@GetMapping("/getAllFinancialYear") // Ayush
 	@ResponseBody
-	public List<FinancialYear> fetchAllFinancialYear(){
+	public List<FinancialYear> fetchAllFinancialYear() {
 		List<FinancialYear> list = preferenceService.fetchAllFinancialYear();
 		return list;
 	}
 
-	
-	//Executive Founder(With DTO) - Ayush
+	// Executive Founder(With DTO) - Ayush
 	@ResponseBody
 	@PostMapping("/saveExecutiveFounder")
 	public ResponseEntity<ApiResponse<ExecutiveFounder>> saveExecutiveFounderData(
-	        @ModelAttribute ExecutiveFounderDto executiveFounderDto,
-	        @RequestParam(value = "photo", required = false) MultipartFile photo, @RequestParam(value = "signature", required = false) MultipartFile signature) {	 
-		
+			@ModelAttribute ExecutiveFounderDto executiveFounderDto,
+			@RequestParam(value = "photo", required = false) MultipartFile photo,
+			@RequestParam(value = "signature", required = false) MultipartFile signature) {
+
 		if (photo != null) {
-	        System.out.println("Received photo: " + photo.getOriginalFilename());
-	    }
+			System.out.println("Received photo: " + photo.getOriginalFilename());
+		}
 		if (signature != null) {
-	        System.out.println("Received signature: " + signature.getOriginalFilename());
-	    }
-	    
-	    ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo, signature);
-	    //return new ResponseEntity<>(response, response.getStatus());
-	    return ResponseEntity.ok(new ApiResponse<ExecutiveFounder>("OK", executiveFounderDto.getId() != 0 ? "Data updated successfully" : "Data saved successfully", response));
+			System.out.println("Received signature: " + signature.getOriginalFilename());
+		}
+
+		ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo,
+				signature);
+		// return new ResponseEntity<>(response, response.getStatus());
+		return ResponseEntity.ok(new ApiResponse<ExecutiveFounder>("OK",
+				executiveFounderDto.getId() != 0 ? "Data updated successfully" : "Data saved successfully", response));
 	}
-	
-	@ResponseBody                  //Ayush
+
+	@ResponseBody // Ayush
 	@PostMapping("/fetchAllExecutiveFounder")
 	public List<ExecutiveFounder> getAllExecutiveFounderData() {
 		List<ExecutiveFounder> list = preferenceService.fetchAllExecutiveFounder();
 		return list;
 	}
-	
-	@ResponseBody                   //Ayush
+
+	@ResponseBody // Ayush
 	@PostMapping("/deleteExecutiveFounder")
 	public ResponseEntity<String> deleteDirectorPromoter(@RequestParam long id) {
 		boolean bool = preferenceService.deleteExecutiveFounder(id);
@@ -263,33 +288,31 @@ public class PreferenceController {
 		} else
 			return ResponseEntity.badRequest().body("Data Not Found");
 	}
-	
-	@ResponseBody            //Ayush
+
+	@ResponseBody // Ayush
 	@PostMapping("/fetchExecutiveFounderById")
-	public ExecutiveFounder getExecutiveFounderById(@RequestParam long id){
+	public ExecutiveFounder getExecutiveFounderById(@RequestParam long id) {
 		ExecutiveFounder exeFounder = preferenceService.fetchExecutiveById(id);
-		return exeFounder;		
+		return exeFounder;
 	}
-	
-	//Customer Administration - Ayush
+
+	// Customer Administration - Ayush
 	@ResponseBody
 	@PostMapping("/fetchAllCompanyAdministration")
 	public List<CompanyAdministration> getCompanyAdministrationData() {
 		List<CompanyAdministration> companyAdmin = preferenceService.fetchAllCompanyAdministration();
 		return companyAdmin;
 	}
-	
-	@ResponseBody               //Ayush
+
+	@ResponseBody // Ayush
 	@PostMapping("/updateDataOfCompanyAdministration")
-	public ResponseEntity<String> updateCompanyAdministration(@RequestBody CompanyAdministration companyAdministration){
-		int i=preferenceService.updateCompanyAdministration(companyAdministration);
-		if(i>0)
+	public ResponseEntity<String> updateCompanyAdministration(
+			@RequestBody CompanyAdministration companyAdministration) {
+		int i = preferenceService.updateCompanyAdministration(companyAdministration);
+		if (i > 0)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("Failure");
 	}
-	
-	
-	
 
 }
