@@ -48,6 +48,26 @@ public class CustomerDto {
 		private String nomineeMobileNo;
 
 		
+		//Fees Details
+		private String memberFees;
+		private String chequeNo;
+		private String chequeDate;
+		private String depositAcNo;
+		private String referenceNo;
+		
+		
+		private int memberStatus;
+	    private int memberBanking;
+	    private int netBanking;
+	    private int smsSend;
+	    private String fDate;
+	    private String tDate;
+
+	    // New Property
+	    private boolean isVerified;
+
+	    private boolean isApproved;
+		
 
 		public long getId() {
 			return id;
@@ -356,6 +376,110 @@ public class CustomerDto {
 
 		public void setNomineeMobileNo(String nomineeMobileNo) {
 			this.nomineeMobileNo = nomineeMobileNo;
+		}
+
+		public String getMemberFees() {
+			return memberFees;
+		}
+
+		public void setMemberFees(String memberFees) {
+			this.memberFees = memberFees;
+		}
+
+		public String getChequeNo() {
+			return chequeNo;
+		}
+
+		public void setChequeNo(String chequeNo) {
+			this.chequeNo = chequeNo;
+		}
+
+		public String getChequeDate() {
+			return chequeDate;
+		}
+
+		public void setChequeDate(String chequeDate) {
+			this.chequeDate = chequeDate;
+		}
+
+		public String getDepositAcNo() {
+			return depositAcNo;
+		}
+
+		public void setDepositAcNo(String depositAcNo) {
+			this.depositAcNo = depositAcNo;
+		}
+
+		public String getReferenceNo() {
+			return referenceNo;
+		}
+
+		public void setReferenceNo(String referenceNo) {
+			this.referenceNo = referenceNo;
+		}
+
+		public int getMemberStatus() {
+			return memberStatus;
+		}
+
+		public void setMemberStatus(int memberStatus) {
+			this.memberStatus = memberStatus;
+		}
+
+		public int getMemberBanking() {
+			return memberBanking;
+		}
+
+		public void setMemberBanking(int memberBanking) {
+			this.memberBanking = memberBanking;
+		}
+
+		public int getNetBanking() {
+			return netBanking;
+		}
+
+		public void setNetBanking(int netBanking) {
+			this.netBanking = netBanking;
+		}
+
+		public int getSmsSend() {
+			return smsSend;
+		}
+
+		public void setSmsSend(int smsSend) {
+			this.smsSend = smsSend;
+		}
+
+		public String getfDate() {
+			return fDate;
+		}
+
+		public void setfDate(String fDate) {
+			this.fDate = fDate;
+		}
+
+		public String gettDate() {
+			return tDate;
+		}
+
+		public void settDate(String tDate) {
+			this.tDate = tDate;
+		}
+
+		public boolean isVerified() {
+			return isVerified;
+		}
+
+		public void setVerified(boolean isVerified) {
+			this.isVerified = isVerified;
+		}
+
+		public boolean isApproved() {
+			return isApproved;
+		}
+
+		public void setApproved(boolean isApproved) {
+			this.isApproved = isApproved;
 		}
 		
 		

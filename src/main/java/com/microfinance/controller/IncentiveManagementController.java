@@ -1,5 +1,6 @@
 package com.microfinance.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.microfinance.model.IncentiveSchemeMaster;
 import com.microfinance.model.TeamMember;
 import com.microfinance.service.IncentiveManagementService;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -24,7 +25,7 @@ public class IncentiveManagementController {
 	private IncentiveManagementService incentiveSchemeMasterService;
 	
 	
-	//incentive save Data date:-13-6-24
+	//incentive save Data date:-13-6-25
 	//Anjali
 	
 	@PostMapping("/saveIncentive")
@@ -38,7 +39,7 @@ public class IncentiveManagementController {
 	}
 	
 	//fetch the data from table 
-	//Anjali
+	//Anjali 14-6-25
 	
 	
 	@GetMapping("/getAllIncentives")
@@ -48,12 +49,20 @@ public class IncentiveManagementController {
         return list;
     }
 	
+	//fetch the team member name 
+	//anjali 17-6-25
+	
 	@GetMapping("/getAllTeamMembers")
 	@ResponseBody
-	public List<TeamMember> getAllTeamMember() {
-		List<TeamMember> list=incentiveSchemeMasterService.getAllTeamMember();
-		return list;
+	public List<String> getAllTeamMemberNames() {
+	    List<TeamMember> members = incentiveSchemeMasterService.getAllTeamMember();
+	    List<String> names = new ArrayList<>();
+	    for (TeamMember member : members) {
+	        names.add(member.getTeamMemberName());
+	    }
+	    return names;
 	}
+
 	
 
 	

@@ -64,6 +64,7 @@ $(document).ready(function() {
               <td>${item.financialYearName || ''}</td>
               <td>${item.dateFrom || ''}</td>
 			  <td>${item.dateTo || ''}</td>
+			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
             </tr>`;
 				tbody.append(row);
 			});
@@ -74,3 +75,30 @@ $(document).ready(function() {
 		}
 	});
 });
+
+function viewData(id) {
+
+	$.ajax({
+		url: '/fetchExecutiveFounderById',
+		type: 'POST',
+		data: { id: id },
+		success: function(response) {
+			// Example: populate form fields with the fetched data
+			$('#id').val(response.id);
+			$('#type').val(response.type);
+			$('#branchName').val(response.branchName);
+			
+			//Images
+			
+			
+			// Add other fields accordingly
+		},
+		error: function(xhr) {
+			alert("Failed to fetch data: " + xhr.responseText);
+		}
+	});
+}
+
+function updateFY(){
+	alert("hii");
+}
