@@ -5,31 +5,31 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.apache.poi.ss.formula.functions.T;
-
 @Entity
 public class RecurringDepositPM {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String planCodeRD;
-	private String minimumAmountRD;
-	private String rateOfInterestRD;
-	private String termMode;
-	private String term;
-	private String commissionOnNewRD;
-	private String renewalCommissionRD;
-	private String componentIntervalRD;
-	private String totalPaidRD;
-	private String maturityAmountRD;
-	private String flexiblePlanRD;
-	private String graceDaysRD;
-	private String penaltyRateRD;
-	private String statusOfPlanRD;
-	public int getId() {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    private String planCodeRD;
+    private String minimumAmountRD;
+    private String rateOfInterestRD;
+    private String termMode;
+    private String term;
+    private String commissionOnNewRD;
+    private String renewalCommissionRD;
+    private String componentIntervalRD;
+    private String totalPaidRD;
+    private String maturityAmountRD;
+    private String flexiblePlanRD;
+    private String graceDaysRD;
+    private String penaltyRateRD;
+    private String statusOfPlanRD;
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getPlanCodeRD() {
@@ -116,6 +116,7 @@ public class RecurringDepositPM {
 	public void setStatusOfPlanRD(String statusOfPlanRD) {
 		this.statusOfPlanRD = statusOfPlanRD;
 	}
-	
-	
+
+    
+    
 }
