@@ -78,19 +78,19 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Incentive Month</label> <select id="incentiveMonth"
 									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="month">January</option>
-									<option value="month">February</option>
-									<option value="month">March</option>
-									<option value="month">April</option>
-									<option value="month">May</option>
-									<option value="month">June</option>
-									<option value="month">July</option>
-									<option value="month">August</option>
-									<option value="month">September</option>
-									<option value="month">October</option>
-									<option value="month">November</option>
-									<option value="month">December</option>
+									 <option value="">Select</option>
+									<option value="01">January</option>
+									<option value="02">February</option>
+									<option value="03">March</option>
+									<option value="04">April</option>
+									<option value="05">May</option>
+									<option value="06">June</option>
+									<option value="07">July</option>
+									<option value="08">August</option>
+									<option value="09">September</option>
+									<option value="10">October</option>
+									<option value="11">November</option>
+									<option value="12">December</option>
 
 								</select>
 							</div>
@@ -132,6 +132,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/incentive/generateIncentive.js"></script>
+	
 	
 	
 </body>

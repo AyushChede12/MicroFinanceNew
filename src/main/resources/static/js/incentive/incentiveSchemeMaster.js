@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     $("#formid").submit(function (e) {
         e.preventDefault();
@@ -31,33 +33,35 @@ $(document).ready(function () {
     });
 });
 
-// This function will run automatically when the page finishes loading
 $(document).ready(function () {
-    loadIncentiveData(); 
+    loadIncentiveData();
 });
 
-// Separated logic into a named function for reuse
 function loadIncentiveData() {
     $.ajax({
         url: "/getAllIncentives",
         type: "GET",
         contentType: "application/json",
-        success: function (data) {
-            console.log(data);
-
+        success: function (response) {
+            console.log(response); 
             var tbody = $("#incentiveTableBody");
             tbody.empty();
 
-            $.each(data, function (index, item) {
-                var row = "<tr>" +
-                    "<td>" + (index + 1) + "</td>" +
-                    "<td>" + item.incentiveMonth + "</td>" +
-                    "<td>" + item.dateFrom + "</td>" +
-                    "<td>" + item.dateTo + "</td>" +
-                    "<td>" + item.comments + "</td>" +
-                    "</tr>";
-                tbody.append(row);
-            });
+            
+            if (response.data && response.data.length > 0) {
+                $.each(response.data, function (index, item) {
+                    var row = "<tr>" +
+                        "<td>" + (index + 1) + "</td>" +
+                        "<td>" + item.incentiveMonth + "</td>" +
+                        "<td>" + item.dateFrom + "</td>" +
+                        "<td>" + item.dateTo + "</td>" +
+                        "<td>" + item.comments + "</td>" +
+                        "</tr>";
+                    tbody.append(row);
+                });
+            } else {
+                tbody.append("<tr><td colspan='5'>No data found</td></tr>");
+            }
         },
         error: function (xhr, status, error) {
             alert("Error: " + xhr.status);
@@ -65,6 +69,7 @@ function loadIncentiveData() {
         }
     });
 }
+
 
 
     $(document).ready(function () {
