@@ -27,7 +27,7 @@ public class CustomerShareholdingController {
 	@ResponseBody
 	public ApiResponse<List<addCustomer>> findByCustomerCode(){
 		List<addCustomer> list = customershareholdingservice.findByCustomerCode();
-		if(list != null && !list.isEmpty()) {
+		if(!list.isEmpty()) {
 			return ApiResponse.success(HttpStatus.OK, "Fetched Success", list);
 		}else
 			return ApiResponse.error(HttpStatus.NOT_FOUND, "Data is not Found");
