@@ -29,6 +29,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -205,7 +206,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Policy Code <span id="star"> *</span></label> <select id="fdPolicyCode"
 									name="fdPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">ROYAL FI</option>
+									<option value="">Select Policy Code</option>
 
 								</select>
 							</div>
@@ -336,56 +337,12 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script>
+	<!-- Your HTML dropdown -->
+<!-- jQuery script -->
 
-    $(document).ready(function () {
-      // Call AJAX on page load to populate dropdown
-      $.ajax({
-        url: "/getpolicycode", // Your backend endpoint
-        method: "GET",
-        dataType: "json",
-        success: function (response) {
-          // Loop through the response and append options
-          $.each(response, function (index, policy) {
-            $('#ddPolicyCode').append(
-              $('<option>', {
-                value: policy.code,   // `code` should match your backend field
-                text: policy.code     // Can be `policy.name` or anything else
-              })
-            );
-          });
-        },
-        error: function (xhr, status, error) {
-          alert("Error loading policy codes: " + error);
-        }
-      });
-    });
- 
-  $("#formdd").submit(function (event) {
-    event.preventDefault();
+<script src="./js/MaturityManagement/maturityscheme.js"></script>	
 
-    // Get values directly using IDs
-    var data = {
-      policyCode: $("#ddPolicyCode").val(),
-      instFrom: $("#ddInstFrom").val(),
-      instTo: $("#ddInstTo").val(),
-      interestRate: $("#ddInterestRate").val(),
-      deduction: $("#ddDeduction").val()
-    };
-
-    $.post({
-      url: "http://localhost:8080/api/policy", // Your backend endpoint
-      contentType: "application/json",
-      data: JSON.stringify(data),
-      success: function () {
-        alert("Saved!");
-      },
-      error: function () {
-        alert("Error while saving");
-      }
-    });
-  });
-</script>
+	
 </body>
 
 </html>

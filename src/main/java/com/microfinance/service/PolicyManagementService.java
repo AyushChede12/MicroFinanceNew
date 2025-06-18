@@ -49,11 +49,11 @@ public boolean saveFixedDeposite(FixedDepositPM fixedDepositPM) {
 	return fixedDepositPMRepo.save(fixedDepositPM) != null;
 }
 
-public List<FixedDepositPM> getAllFixeddata() {
-	// TODO Auto-generated method stub
-	return fixedDepositPMRepo.findAll();
-}
 
+public List<FixedDepositPM> getAllFixeddata() {
+	List<FixedDepositPM> list = fixedDepositPMRepo.findAll();
+	return list;
+}
 
 
 }

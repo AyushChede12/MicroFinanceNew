@@ -40,11 +40,19 @@ public class PolicyManagementController {
         }
     }
 
-    // View All Fixed Deposits
+    
+    
     @GetMapping("/fixed-deposit/view")
-    public List<FixedDepositPM> getAllFixedDeposits() {
-        return policyManagementService.getAllFixeddata();
+    @ResponseBody
+    public ApiResponse<List<FixedDepositPM>> getAllFixedDeposits() {
+        List<FixedDepositPM> list = policyManagementService.getAllFixeddata();
+        if (list != null && !list.isEmpty()) {
+            return ApiResponse.success(HttpStatus.OK, "Fetched Success", list);
+        } else {
+            return ApiResponse.error(HttpStatus.NOT_FOUND, "Data is not Found");
+        }
     }
+
 
     // Save Recurring Deposit
     @PostMapping("/recurring-deposit/save")
