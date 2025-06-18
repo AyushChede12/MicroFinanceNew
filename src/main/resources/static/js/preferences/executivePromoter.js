@@ -160,7 +160,7 @@ $(document).ready(function() {
               <td>${item.address || ''}</td>
               <td>${item.emailId || ''}</td>
 			  <td>${item.contactNo || ''}</td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-eye text-primary"></i></button></td>
+			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
 			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
             </tr>`;
 				tbody.append(row);

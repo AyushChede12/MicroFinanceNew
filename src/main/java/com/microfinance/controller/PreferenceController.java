@@ -172,6 +172,7 @@ public class PreferenceController {
 	    response.put("allDistricts", data);
 	    return response;
 	}
+
 	
 	//Caste Module - Ayush
 	@PostMapping("/saveAllCasteModule")

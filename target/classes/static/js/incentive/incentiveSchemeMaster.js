@@ -66,7 +66,7 @@ function loadIncentiveData() {
     });
 }
 
-//date changes ajax
+
     $(document).ready(function () {
 
         // Set today's date initially

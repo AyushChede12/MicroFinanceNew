@@ -26,9 +26,16 @@ public class PolicyManagementService {
 	FixedDepositPMRepo fixedDepositPMRepo;
 	
 
-public boolean saveRecuringDailyDeposite(RecurringDepositPM recurringDepositPM) {
-	return recurringDepositRepo.save(recurringDepositPM) != null;
-}
+	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
+	    try {
+	    	recurringDepositRepo.save(deposit);
+	        return true;
+	    } catch (Exception e) {
+	        e.printStackTrace(); // Log actual error
+	        return false;
+	    }
+	}
+
 
 
 
