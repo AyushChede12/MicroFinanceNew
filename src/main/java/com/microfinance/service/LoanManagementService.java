@@ -25,7 +25,7 @@ public class LoanManagementService {
 	 */
 	
 
-	public ApiResponse<LoanSchemCatalog> saveLoanManagmentData(LoanSchemCatalog loan) {
+	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
 	    // Check if ID is present (update case)
 	    if(loan.getId() != null ) {
 	        Optional<LoanSchemCatalog> optionalLoan = loanRepository.findById(loan.getId());
@@ -55,19 +55,18 @@ public class LoanManagementService {
 	            existingLoan.setModePanalty(loan.getModePanalty());
 	            existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
 
-	            LoanSchemCatalog updatedLoan = loanRepository.save(existingLoan);
-	       return  new ApiResponse<>("Loan updated successfully", true, updatedLoan);
+	           return loanRepository.save(existingLoan);
+	      
 	      
 	         
 	        }
 	    }
 
 	  
-	    LoanSchemCatalog savedLoan = loanRepository.save(loan);
-	    return new ApiResponse<>("Loan saved successfully", true, savedLoan);
-	}
+	     return loanRepository.save(loan);
+	    
 
-	
+	}
 	
 
 }

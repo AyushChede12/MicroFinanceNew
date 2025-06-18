@@ -29,11 +29,17 @@ public class LoanManagementController {
 	 */
 	
 	@PostMapping("/saveLoanManagment")
-	public ResponseEntity<ApiResponse<LoanSchemCatalog>> saveLoanManagmentData(@RequestBody LoanSchemCatalog  Loan) {
+	public ApiResponse<LoanSchemCatalog> saveLoanManagmentData(@RequestBody LoanSchemCatalog  Loan) {
 		//TODO: process POST request
-		ApiResponse<LoanSchemCatalog> response = loanServices.saveLoanManagmentData(Loan);
+	LoanSchemCatalog response = loanServices.saveLoanManagmentData(Loan);
+		if(response!=null) {
+			return ApiResponse.success(HttpStatus.OK,"data saved",response);
+		}
+		else
+		{
+			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"data not saved");
+		}
 		
-		return new ResponseEntity<>(response,HttpStatus.OK);
 	
 		
 	}
