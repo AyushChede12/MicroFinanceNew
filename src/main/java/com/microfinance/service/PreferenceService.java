@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
-import com.microfinance.dto.BranchModuleDto;
+
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
@@ -67,53 +68,13 @@ public class PreferenceService {
 	private String uploadDirectory;
 
 	// Branch Module
-//	public BranchModule saveAllBranchModule(BranchModule branchModule) {
-//		// TODO Auto-generated method stub
-//		return branchModuleRepo.save(branchModule);
-//	}
-	
-	
-	//Save Branch Module using DTO - Ayush (18/06/2025)
-	public BranchModuleDto saveBranchModule(BranchModuleDto branchDto) {
-		BranchModule entity;
-
-	    if (branchDto.getId() != null) {
-	        // Update
-	        entity = branchModuleRepo.findById(branchDto.getId())
-	                .orElseThrow(() -> new RuntimeException("Branch not found with ID: " + branchDto.getId()));
-	    } else {
-	        // New insert
-	        entity = new BranchModule();
-	    }
-
-	    entity.setBranchCode(branchDto.getBranchCode());
-	    entity.setBranchName(branchDto.getBranchName());
-	    entity.setOpeningDate(branchDto.getOpeningDate());
-	    entity.setAddress(branchDto.getAddress());
-	    entity.setPin(branchDto.getPin());
-	    entity.setState(branchDto.getState());
-	    entity.setPrimaryContact(branchDto.getPrimaryContact());
-	    entity.setContact(branchDto.getContact());
-
-	    BranchModule saved = branchModuleRepo.save(entity);
-
-	    BranchModuleDto response = new BranchModuleDto();
-	    response.setId(saved.getId());
-	    response.setBranchCode(saved.getBranchCode());
-	    response.setBranchName(saved.getBranchName());
-	    response.setOpeningDate(saved.getOpeningDate());
-	    response.setAddress(saved.getAddress());
-	    response.setPin(saved.getPin());
-	    response.setState(saved.getState());
-	    response.setPrimaryContact(saved.getPrimaryContact());
-	    response.setContact(saved.getContact());
-
-	    return response;
-	}
-
-	public List<BranchModule> fetchAllBranchModule() {
+	public BranchModule saveBranchModule(BranchModule branchModule) {
 		// TODO Auto-generated method stub
-		return branchModuleRepo.findAll();
+		return branchModuleRepo.save(branchModule);
+	}
+	
+	public List<BranchModule> fetchAllBranchModule() {
+	    return branchModuleRepo.findAll();
 	}
 
 	public Optional<BranchModule> findBranchDataById(Long id) {
@@ -148,7 +109,7 @@ public class PreferenceService {
 	}
 
 	// Bank Module
-	public BankModule saveAllBankModule(BankModule bankModule) {
+	public BankModule saveBankModule(BankModule bankModule) {
 		// TODO Auto-generated method stub
 		return bankModuleRepo.save(bankModule);
 	}
@@ -423,6 +384,13 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		return stateRepo.findAll();
 	}
+
+
+
+
+
+
+	
 
 	
 	

@@ -23,15 +23,16 @@ public class ApiResponse<T> {
 		this.data = data;
 	}
 
-	public ApiResponse(String string, String message2, ApiResponse<ExecutiveFounder> response) {
+	public ApiResponse(String string, String message, ApiResponse<ExecutiveFounder> response) {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ApiResponse(String message, boolean success, T data) {
 	}
 
-	public ApiResponse(boolean success, String message, T data) {
+	public ApiResponse(boolean success, HttpStatus status, String message, T data) {
 		this.success = success;
+		this.status = status;
 		this.message = message;
 		this.data = data;
 	}
@@ -68,5 +69,15 @@ public class ApiResponse<T> {
 	public void setData(T data) {
 		this.data = data;
 	}
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+	
+	
 
 }

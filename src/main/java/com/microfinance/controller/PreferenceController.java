@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
-import com.microfinance.dto.BranchModuleDto;
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
@@ -50,83 +49,53 @@ public class PreferenceController {
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
-	// Branch Module - Ayush
-//	@PostMapping("/saveAllBranchModule")
-//	@ResponseBody
-//	public ResponseEntity<String> saveBranchMaster(@RequestBody BranchModule branchmodule) {
-//		BranchModule branch=preferenceService.saveAllBranchModule(branchmodule);
-//		if(branch!=null)
-//			return ResponseEntity.ok("success");
-//		else
-//			return ResponseEntity.badRequest().body("Failure");
-//	}
-
-	@PostMapping("/saveAllBranchModule")        //Ayush
-	public ResponseEntity<ApiResponse<BranchModuleDto>> saveBranch(@RequestBody BranchModuleDto branchDto) {
-		BranchModuleDto savedDTO = preferenceService.saveBranchModule(branchDto);
-		String message = (branchDto.getId() == null) ? "Branch created successfully" : "Branch updated successfully";
-		ApiResponse<BranchModuleDto> response = new ApiResponse<>(true, message, savedDTO);
+	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
+	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
+		BranchModule savedEntity = preferenceService.saveBranchModule(branchModule);
+		String message = (branchModule.getId() == null) ? "Branch created successfully" : "Branch updated successfully";
+		ApiResponse<BranchModule> response = new ApiResponse<>(true, HttpStatus.OK, message, savedEntity);
 		return ResponseEntity.ok(response);
 	}
 
-//	@GetMapping("/getAllBranchModule") // Ayush
-//	@ResponseBody
-//	public List<BranchModule> fetchAllBranchModule() {
-//		List<BranchModule> list = preferenceService.fetchAllBranchModule();
-//		return list;
-//	}
-	
-	@PostMapping("/getAllBranchModule")                    //Ayush
-	@ResponseBody
+	@PostMapping("/getAllBranchModule") // Ayush (without DTO)
 	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
-	    List<BranchModule> list = preferenceService.fetchAllBranchModule();
-
-	    ApiResponse<List<BranchModule>> response = new ApiResponse<>(
-	        true,
-	        "Branch modules fetched successfully",
-	        list
-	    );
-
-	    return ResponseEntity.ok(response);
+		List<BranchModule> list = preferenceService.fetchAllBranchModule();
+		ApiResponse<List<BranchModule>> response = new ApiResponse<>(true, HttpStatus.OK, "Branch modules fetched successfully", list);
+		return ResponseEntity.ok(response);
 	}
 
-
-	@GetMapping("/getBranchModuleById") // Ayush
-	@ResponseBody
-	public Optional<BranchModule> findBranchModuleById(@RequestParam("id") Long id) {
+	@PostMapping("/getBranchModuleById") // Ayush
+	public ResponseEntity<ApiResponse<BranchModule>> findBranchModuleById(@RequestParam("id") Long id) {
 		Optional<BranchModule> branch = preferenceService.findBranchDataById(id);
-		return branch;
+		if (branch.isPresent()) {
+			ApiResponse<BranchModule> response = new ApiResponse<>(true, HttpStatus.OK, "BranchModule fetched successfully",
+					branch.get());
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<BranchModule> response = new ApiResponse<>(false, HttpStatus.NOT_FOUND, "BranchModule not found for ID: " + id, null);
+			return ResponseEntity.status(404).body(response);
+		}
 	}
 
-	@PostMapping("/updateBranchModuleById") // Ayush
-	@ResponseBody
-	public ResponseEntity<String> updateBranchModule(@RequestBody BranchModule branchModule) {
-		BranchModule updateBranch = preferenceService.updateAllBranchModule(branchModule);
-		if (updateBranch != null)
-			return ResponseEntity.ok("success");
-		else
-			return ResponseEntity.badRequest().body("failure");
-	}
-
-	@PostMapping("/deleteBranchModuleById") // Ayush
-	@ResponseBody
-	public ResponseEntity<String> deleteBranchModule(@RequestParam("id") Long id) {
-		Boolean deleteBranch = preferenceService.deleteBranchModule(id);
-		if (deleteBranch != null)
-			return ResponseEntity.ok("success");
-		else
-			return ResponseEntity.badRequest().body("failure");
+	@PostMapping("/deleteBranchModuleById")               //Ayush
+	public ResponseEntity<ApiResponse<String>> deleteBranchModule(@RequestParam("id") Long id) {
+		boolean isDeleted = preferenceService.deleteBranchModule(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(true, HttpStatus.OK, "Branch module deleted successfully", "success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(false, HttpStatus.NOT_FOUND, "Branch module deletion failed", "failure");
+			return ResponseEntity.badRequest().body(response);
+		}
 	}
 
 	// Bank Module - Ayush
-	@PostMapping("/saveAllBankModule")
-	@ResponseBody
-	public ResponseEntity<String> saveBankModule(@RequestBody BankModule bankModule) {
-		BankModule bank = preferenceService.saveAllBankModule(bankModule);
-		if (bank != null)
-			return ResponseEntity.ok("success");
-		else
-			return ResponseEntity.badRequest().body("Failure");
+	@PostMapping("/saveAndUpdateAllBankModule") // Ayush (without DTO)
+	public ResponseEntity<ApiResponse<BankModule>> saveBank(@RequestBody BankModule bankModule) {
+		BankModule savedEntity = preferenceService.saveBankModule(bankModule);
+		String message = (bankModule.getId() == null) ? "Bank created successfully" : "Bank updated successfully";
+		ApiResponse<BankModule> response = new ApiResponse<>(true, HttpStatus.OK, message, savedEntity);
+		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("/getAllBankModule") // Ayush
