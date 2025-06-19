@@ -122,16 +122,13 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div>
             
-
-            <div class="col-lg-3">
+               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Suggested Nominee Relation </label> <select id="suggestedNomineeRelation" name="suggestedNomineeRelation" required="required"
-                    class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
-                  </select>
+                  <label for="">Suggested Nominee Relation</label> <input type="text" id="suggestedNomineeRelation" name="suggestedNomineeRelation" required="required"
+                    placeholder="" />
                 </div>
               </div>
+              
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
@@ -150,11 +147,8 @@ pageEncoding="ISO-8859-1"%> -->
 
               <div class="col-lg-3">
                 <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Branch Name</label> <select id="branchName" name="branchName" required="required"
-                    class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
-                  </select>
+                  <label for="">Branch Name</label> <input type="text" id="branchName" name="branchName" required="required"
+                    placeholder="Enter district" />
                 </div>
               </div>
 
@@ -176,8 +170,10 @@ pageEncoding="ISO-8859-1"%> -->
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Operation Type</label> <select id="operationType" name="operationType" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
+                    <option value=""> Select</option>
+                    <option value="">Single</option>
+                    <option value="">Joint</option>
+                    <option value="">Survival</option>
                   </select>
                 </div>
               </div>
@@ -191,7 +187,7 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Joint Survivor Code</label> <input type="text" name="jointSurvivorCode" id="jointSurvivorCode" required="required"
+                <label for="">Joint Survivor Name</label> <input type="text" name="jointSurvivorCode" id="jointSurvivorCode" required="required"
                   placeholder="Enter joint Survivor Code" />
               </div>
             </div>
@@ -200,7 +196,7 @@ pageEncoding="ISO-8859-1"%> -->
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Family Relation</label> <select id="familyRelation" name="familyRelation" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
+                    <option value=""> Select </option>
                     <option value="Blue">Blue</option>
                   </select>
                 </div>
@@ -210,8 +206,12 @@ pageEncoding="ISO-8859-1"%> -->
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Select Plan </label> <select id="selectPlan" name="selectPlan" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
+                    <option value=""> Select</option>
+                    <option value="">DD</option>
+                    <option value="">RD</option>
+                    <option value="">FD</option>
+                    <option value="">MIS</option>
+                   
                   </select>
                 </div>
               </div>
@@ -260,32 +260,24 @@ pageEncoding="ISO-8859-1"%> -->
           </nav>
           <div class="row">
             <div class="col-lg-3">
-              <div class="d-flex flex-column formFields mb-4" style="margin-bottom: 30px">
-                <label>Authenticate With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <!-- Options will be dynamically added here -->
-
-                    </ul>
-                  </div>
+                <div class="d-flex flex-column formFields mb-4">
+                  <label for="">Authentication for</label> <select id="familyRelation" name="familyRelation" required="required"
+                    class="form-control selectField" style="height: 30px;">
+                    <option value=""> Select </option>
+                    <option value="Blue">Aadhar</option>
+                  </select>
                 </div>
               </div>
-            </div>
 
             <div class="col-lg-3"> 
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Mode of payment</label> <select id="colour" name="colour" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
+                    <option value=""> Select </option>
+                    <option value="Blue">Cash</option>
+                    <option value="Blue">Online</option>
+                    <option value="Blue">Cheque</option>
+                    <option value="Blue">NEFT</option>
                   </select>
                 </div>
               </div>

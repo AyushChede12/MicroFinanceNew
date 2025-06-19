@@ -34,4 +34,11 @@ public class CustomerSavingsService {
 		return list;
 	}
 
+	public List<addCustomer> fetchCustomerCode(String memberCode) {
+		List<addCustomer> list = addcustomerRepo.findByMemberCode(memberCode);
+		return list;
+	}
+
+	
+
 }

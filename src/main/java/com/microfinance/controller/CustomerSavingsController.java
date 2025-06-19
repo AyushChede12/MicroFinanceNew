@@ -13,11 +13,13 @@ import com.microfinance.service.CustomerSavingsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
+@RequestMapping("/api/customersavings")
 public class CustomerSavingsController {
 
 	@Autowired
@@ -43,6 +45,18 @@ public class CustomerSavingsController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+    
+  //Fetching CustomerCode   
+  	@PostMapping("/fetchCustomerCode")
+  	public ApiResponse<List<addCustomer>> fetchByCustomerCode(@RequestBody addCustomer addcustomer) {
+  		List<addCustomer>  list = customersaving.fetchCustomerCode(addcustomer.getMemberCode());
+  		if(list!=null && !list.isEmpty()) {
+  			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  		}else
+  			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  		
+  		
+  	}
 	
    
 	
