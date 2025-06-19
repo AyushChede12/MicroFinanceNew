@@ -31,6 +31,9 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
@@ -325,11 +328,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row">
 					<div class="col-12 text-center">
-						<button id="saveBtn"  class="btnStyle bg-success">Save</button>
-						<button id="showBtn" style="display: none;">Show</button>
-						<button id="hideBtn" style="display: none;">Hide</button>
+						<button id="saveBtn" class="btnStyle bg-success">Save</button>
+						
 
-						<button id="updateBtn" class="btnStyle" 
+						<button id="updateBtn" class="btnStyle"
 							style="background-color: #FFA500;">Update</button>
 						<button id="printBtn" class="btnStyle bg-primary">Print</button>
 					</div>
@@ -358,25 +360,15 @@ pageEncoding="ISO-8859-1"%> -->
 										<th>Max Duration</th>
 										<th>Minimum Loan</th>
 										<th>Maximum Loan</th>
-										<th>Interest Type</th>
-										<th>Rate of Interest</th>
-										<th>EMI Frequency</th>
-										<th>EMI Type</th>
-										<th>GST</th>
-										<th>Insurance</th>
-										<th>Processing Fee</th>
-										<th>Legal Fee</th>
-										<th>Valuation Fee</th>
-										<th>Late Allowance Days</th>
-										<th>Penalty Mode</th>
-										<th>Monthly Penalty</th>
-										<th>Action</th>
+
+										<th>Edit</th>
+										<th>Delete</th>
 										<td>
 									</tr>
 								</thead>
-								<tbody id="loanTable">
+								<tbody id="loanTableBody">
 
-								</tbody >
+								</tbody>
 							</table>
 						</div>
 					</div>
