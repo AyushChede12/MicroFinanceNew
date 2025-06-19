@@ -61,20 +61,22 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Team Member Code </label> <input type="text"
-									name="empCode" id="teamcode" required="required"
-									placeholder="Enter Team Member Code" />
+								<label for="">State</label> <select
+									id="teamMemberCode" name="teamMemberCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select State</option>								
+								</select>
 							</div>
 						</div>
 					</div>
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="searchBtn" class="btnStyle bg-warning">Search</button>
+							<button id="searchBtn" class="btnStyle bg-warning" onclick="showTeamMemberDetailsByCode();">Search</button>
 						</div>
-					</div>
+					</div> -->
 
 				</div>
 
@@ -100,56 +102,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Department</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row">1</th>
-										<td>Poonam</td>
-										<td>Umrer</td>
-										<td>11-05-2025</td>
-										<td>11-02-2001</td>
-										<td>9168933105</td>
-										<td>Nagpur</td>
-										<td>ETC</td>
-
-
-									</tr>
-
-									<tr>
-										<th scope="row">2</th>
-										<td>Poonam</td>
-										<td>Umrer</td>
-										<td>11-05-2025</td>
-										<td>11-02-2001</td>
-										<td>9168933105</td>
-										<td>Nagpur</td>
-										<td>ETC</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>Poonam</td>
-										<td>Umrer</td>
-										<td>11-05-2025</td>
-										<td>11-02-2001</td>
-										<td>9168933105</td>
-										<td>Nagpur</td>
-										<td>ETC</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>Poonam</td>
-										<td>Umrer</td>
-										<td>11-05-2025</td>
-										<td>11-02-2001</td>
-										<td>9168933105</td>
-										<td>Nagpur</td>
-										<td>ETC</td>
-
-
-									</tr>
+								<tbody id="tabelBody">
+									
 								</tbody>
 							</table>
 						</div>
@@ -163,6 +117,12 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/TeamManagement/addTeamMember.js"></script>
+	<script>
+	$(document).ready(function() {
+		teamMemberCodeDropdown();
+	});
+	</script>
 </body>
 
 </html>
