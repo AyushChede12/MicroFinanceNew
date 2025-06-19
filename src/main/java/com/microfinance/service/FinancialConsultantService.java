@@ -24,10 +24,10 @@ public class FinancialConsultantService {
 
 	@Autowired
 	FinancialConsultantRepo financialConsultationRepo;
-	
+
 	@Autowired
 	AddCustomerRepo addCustomerRepo;
-	
+
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
@@ -43,7 +43,7 @@ public class FinancialConsultantService {
 
 	public List<addCustomer> getByMemberCode(String memberCode) {
 		// TODO Auto-generated method stub
-		return addCustomerRepo.findByMemberCode(memberCode);
+		return addCustomerRepo.findByMemberCodeIgnoreCase(memberCode);
 	}
 
 	public List<addCustomer> getAllRelationToApplicant() {
@@ -52,21 +52,25 @@ public class FinancialConsultantService {
 	}
 
 	public ApiResponse<addFinancialConsultant> saveOrUpdateFinancialConsultant(
-			FinancialConsultantDto financialConsultantDto, MultipartFile customerPhoto,
-			MultipartFile customerSignature) {
+			FinancialConsultantDto financialConsultantDto, String customerPhoto, String customerSignature) {
+		// TODO Auto-generated method stub
+
 		addFinancialConsultant addFinancialConsultant = new addFinancialConsultant();
 		boolean isNew = true;
 
-		// Check if the finacialConsultant is being updated
-		if (financialConsultantDto.getId() > 0) {
+		// Check if the ClientMaster is being updated
+		if (financialConsultantDto.getId() != null) {
 			addFinancialConsultant = financialConsultationRepo.findById(financialConsultantDto.getId())
 					.orElse(new addFinancialConsultant());
 			isNew = false;
 		}
+
+		// Map fields from DTO to entity
 		addFinancialConsultant.setFinancialCode(financialConsultantDto.getFinancialCode());
 		addFinancialConsultant.setJoiningDate(financialConsultantDto.getJoiningDate());
 		addFinancialConsultant.setMemberCode(financialConsultantDto.getMemberCode());
 		addFinancialConsultant.setCustomerName(financialConsultantDto.getCustomerName());
+		// advisorCollectorDetails.setMemberId(advisorCollectorDto.getMemberId());
 		addFinancialConsultant.setDob(financialConsultantDto.getDob());
 		addFinancialConsultant.setCustomerAge(financialConsultantDto.getCustomerAge());
 		addFinancialConsultant.setGuardianName(financialConsultantDto.getGuardianName());
@@ -84,90 +88,39 @@ public class FinancialConsultantService {
 		addFinancialConsultant.setSelectPosition(financialConsultantDto.getSelectPosition());
 		addFinancialConsultant.setReferralCode(financialConsultantDto.getReferralCode());
 		addFinancialConsultant.setReferralName(financialConsultantDto.getReferralName());
-
-		// TODO Auto-generated method stub
-		// Handle file upload
+		addFinancialConsultant.setFees(financialConsultantDto.getFees());
+		addFinancialConsultant.setModeofPayment(financialConsultantDto.getModeofPayment());
+		addFinancialConsultant.setChequeNo(financialConsultantDto.getChequeNo());
+		addFinancialConsultant.setChequeDate(financialConsultantDto.getChequeDate());
+		addFinancialConsultant.setDepositAccount(financialConsultantDto.getDepositAccount());
+		addFinancialConsultant.setRefNo(financialConsultantDto.getRefNo());
+		addFinancialConsultant.setComments(financialConsultantDto.getComments());
+		addFinancialConsultant.setFinancialStatus(financialConsultantDto.getFinancialStatus());
+		addFinancialConsultant.setSmsSend(financialConsultantDto.getSmsSend());
+		
+		
+		
+// Set photoWithAadhar path (already fetched)
 		if (customerPhoto != null && !customerPhoto.isEmpty()) {
-			try {
-				String fileName = saveFile(customerPhoto);
-				addFinancialConsultant.setCustomerPhoto(fileName);
-			} catch (IOException e) {
-				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
-			}
+			addFinancialConsultant.setCustomerPhoto(customerPhoto);
 		}
 
+		// Set Signature path (already fetched)
 		if (customerSignature != null && !customerSignature.isEmpty()) {
-			try {
-				String fileName1 = saveFile1(customerSignature); // Save the signature
-				addFinancialConsultant.setCustomerSignature(fileName1); // ✅ Correctly set it in entity
-			} catch (IOException e) {
-				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
-			}
+			addFinancialConsultant.setCustomerSignature(customerSignature);
 		}
-
 		// Save entity to the database
-		addFinancialConsultant savedFinancialCunsultant = financialConsultationRepo.save(addFinancialConsultant);
+		addFinancialConsultant savedFinancialConsultant = financialConsultationRepo.save(addFinancialConsultant);
 
-		// Return response
 		if (isNew) {
 			return ApiResponse.success(HttpStatus.CREATED,
-					"Saved successfully. Member Code: " + savedFinancialCunsultant.getFinancialCode(),
-					savedFinancialCunsultant);
+					"Saved successfully. Member Code: " + savedFinancialConsultant.getFinancialCode(),
+					savedFinancialConsultant);
 		} else {
 			return ApiResponse.success(HttpStatus.OK,
-					"Updated successfully. Member Code: " + savedFinancialCunsultant.getFinancialCode(),
-					savedFinancialCunsultant);
+					"Updated successfully. Member Code: " + savedFinancialConsultant.getFinancialCode(),
+					savedFinancialConsultant);
 		}
 
 	}
-
-	private String saveFile(MultipartFile file) throws IOException {
-		if (file != null && !file.isEmpty()) {
-			ensureUploadDirectoryExists();
-			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-			File destinationFile = new File(uploadDirectory + File.separator + fileName);
-
-			try {
-				file.transferTo(destinationFile);
-				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
-				return fileName;
-			} catch (IOException e) {
-				System.err.println("File saving failed: " + e.getMessage());
-				throw e;
-			}
-		}
-		return null;
-	}
-
-	private String saveFile1(MultipartFile customerSignature) throws IOException {
-		// TODO Auto-generated method stub
-		if (customerSignature != null && !customerSignature.isEmpty()) {
-			ensureUploadDirectoryExists(); // Ensure the upload directory exists
-			String fileName = System.currentTimeMillis() + "_" + customerSignature.getOriginalFilename();
-			File destinationFile = new File(uploadDirectory + File.separator + fileName);
-
-			try {
-				customerSignature.transferTo(destinationFile); // Save the file to the destination path
-				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
-				return fileName; // Return the saved file's name
-			} catch (IOException e) {
-				System.err.println("File saving failed: " + e.getMessage());
-				throw e; // Rethrow the exception to handle errors
-			}
-		}
-		return null;
-	}
-	
-	private void ensureUploadDirectoryExists() {
-	    File uploadDir = new File(uploadDirectory);
-	    if (!uploadDir.exists()) {
-	        boolean created = uploadDir.mkdirs();
-	        if (created) {
-	            System.out.println("Upload directory created at: " + uploadDirectory);
-	        } else {
-	            System.err.println("Failed to create upload directory: " + uploadDirectory);
-	        }
-	    }
-	}
-
 }

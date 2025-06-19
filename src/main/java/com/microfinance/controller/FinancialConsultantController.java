@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
@@ -23,72 +25,84 @@ import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.model.states;
 import com.microfinance.service.FinancialConsultantService;
 
-@Controller
+@RestController
+@RequestMapping("/api/financialconsultant")
 public class FinancialConsultantController {
 	@Autowired
 	FinancialConsultantService financialConsultantService;
-	
-	@GetMapping("/getAllCustomerCodes")  // Poonam 13-06-2025
-	@ResponseBody
-	public List<addCustomer> getAllCustomerCodes() {
-	    List<addCustomer> list = financialConsultantService.getAllCustomerCodes();
-	    return list;
-	}
-	
-	
-	@GetMapping("/getAllBranch")  //poonam 13-06-2025
-	@ResponseBody
-	public List<addCustomer> getAllBranch(){
-		List<addCustomer>  list=financialConsultantService.getAllBranch();
-		return list;
-	}
-	
-	@GetMapping("/getAllRelationToApplicant")
-	@ResponseBody
-	public List<addCustomer> getAllRelationToApplicant(){
-		List<addCustomer> list=financialConsultantService.getAllRelationToApplicant();
-		return list;
-	}
-	
-	
-	@PostMapping("/getFinancialConsultantByMemberCode") // poonam 14-06-2025
-	@ResponseBody
-	public ResponseEntity<?> getMemberByCode(@RequestParam String memberCode) {
-	    List<addCustomer> customerList = financialConsultantService.getByMemberCode(memberCode);
 
-	    if (customerList != null && !customerList.isEmpty()) {
-	        return ResponseEntity.ok(customerList); // Returns JSON in Postman
+	@PostMapping("/getAllCustomerCodes") // Poonam 13-06-2025
+    public ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomerCodes() {
+        List<addCustomer> list = financialConsultantService.getAllCustomerCodes();
+        ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK,"Customer codes fetched successfully",list);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+	@PostMapping("/getAllBranch") // poonam 13-06-2025
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllBranch() {
+		List<addCustomer> list = financialConsultantService.getAllBranch();
+		ApiResponse<List<addCustomer>> response= ApiResponse.success(HttpStatus.OK, "Branch Fetched Successfully", list);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
+
+	@PostMapping("/getAllRelationToApplicant")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllRelationToApplicant() {
+		List<addCustomer> list = financialConsultantService.getAllRelationToApplicant();
+		ApiResponse<List<addCustomer>> response= ApiResponse.success(HttpStatus.OK, "Relation Fetched Successfully", list);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
+
+	@PostMapping("/getFinancialConsultantByMemberCode")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getMemberByCode(@RequestParam String memberCode) {
+
+	    List<addCustomer> members = financialConsultantService.getByMemberCode(memberCode);
+
+	    if (members != null && !members.isEmpty()) {
+	        ApiResponse<List<addCustomer>> response = ApiResponse.success(
+	            HttpStatus.OK,
+	            "Consultants found for memberCode: " + memberCode,
+	            members
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.OK);
 	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Member not found");
+	        ApiResponse<List<addCustomer>> response = ApiResponse.error(
+	            HttpStatus.NOT_FOUND,
+	            "No member found with this code"
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
 
-	 
-	 
-	 @PostMapping("/saveOrUpdateFinancialConsultant")
-		public ResponseEntity<ApiResponse<addFinancialConsultant>> saveOrUpdateFinancialConsultant(
-				@ModelAttribute FinancialConsultantDto financialConsultantDto,
-				@RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
-				@RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature) throws IOException{
 
-			// Debug log
-			System.out.println("Received file: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "No file uploaded"));
-			if (customerSignature != null) {
-		        System.out.println("Received file: " + customerSignature.getOriginalFilename());
-		    }
 
-			ApiResponse<addFinancialConsultant> response = financialConsultantService.saveOrUpdateFinancialConsultant(financialConsultantDto, customerPhoto, customerSignature);
-			return new ResponseEntity<>(response, response.getStatus());
-		}
-		
-		
+	/*
+	 * @PostMapping("/saveOrUpdateFinancialConsultant") public
+	 * ResponseEntity<ApiResponse<addFinancialConsultant>>
+	 * saveOrUpdateFinancialConsultant(
+	 * 
+	 * @ModelAttribute FinancialConsultantDto financialConsultantDto) {
+	 * 
+	 * ApiResponse<addFinancialConsultant> response = financialConsultantService
+	 * .saveOrUpdateFinancialConsultant(financialConsultantDto);
+	 * 
+	 * return new ResponseEntity<>(response, response.getStatus()); }
+	 */
 	
+	@PostMapping("saveOrUpdateFinancialConsultant")
+	public ResponseEntity<ApiResponse<addFinancialConsultant>> saveOrUpdateFinancialConsultant(
+	        @ModelAttribute FinancialConsultantDto financialConsultantDto,
+	        @RequestParam(value = "customerPhoto", required = false) String customerPhoto, @RequestParam(value = "customerSignature", required = false) String customerSignature) {
+		
+		 // System.out.println("Received file: " + (signature != null ? signature.getOriginalFilename() : "No file uploaded"));
+		 
+		
+		System.out.println("Received financialPhoto: " + customerPhoto);
+	    
+	    System.out.println("Received Signature: " + customerSignature);	    
+	    
+	    ApiResponse<addFinancialConsultant> response = financialConsultantService.saveOrUpdateFinancialConsultant(financialConsultantDto, customerPhoto, customerSignature);
+	    return new ResponseEntity<>(response, response.getStatus());
+	}
 
 
 }
-
-
-
-
-
-

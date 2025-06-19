@@ -16,6 +16,12 @@ public interface AddCustomerRepo extends JpaRepository<addCustomer, Long> {
 
 	@Transactional
 	List<addCustomer> findByMemberCode(String memberCode);
+
+	@Transactional
+	List<addCustomer> findByMemberCodeIgnoreCase(String memberCode);
+	
+	
+   
 	
 	//Optional<addCustomer> findByMemberCodeFinancialConsultant(String memberCode);
 	

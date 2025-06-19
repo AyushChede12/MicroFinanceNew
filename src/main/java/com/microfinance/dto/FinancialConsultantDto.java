@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FinancialConsultantDto {
 
-	private long id;
+	private Long id;
 	private String financialCode;
 	private String joiningDate;
 	private String memberCode;
@@ -23,15 +23,24 @@ public class FinancialConsultantDto {
 	private String pinCode;
 	private String profession;
 	private String academicBackground;
-	private MultipartFile customerPhoto;
-	private MultipartFile customerSignature;
+	private String customerPhoto;
+	private String customerSignature;
 	private String selectPosition;
 	private String referralCode;
 	private String referralName;
-	public long getId() {
+	private String fees;
+	private String modeofPayment;
+	private String chequeNo;
+	private String chequeDate;
+	private String depositAccount;
+	private String refNo;
+	private String comments;
+	private String financialStatus;
+	private String smsSend;
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFinancialCode() {
@@ -142,16 +151,16 @@ public class FinancialConsultantDto {
 	public void setAcademicBackground(String academicBackground) {
 		this.academicBackground = academicBackground;
 	}
-	public MultipartFile getCustomerPhoto() {
+	public String getCustomerPhoto() {
 		return customerPhoto;
 	}
-	public void setCustomerPhoto(MultipartFile customerPhoto) {
+	public void setCustomerPhoto(String customerPhoto) {
 		this.customerPhoto = customerPhoto;
 	}
-	public MultipartFile getCustomerSignature() {
+	public String getCustomerSignature() {
 		return customerSignature;
 	}
-	public void setCustomerSignature(MultipartFile customerSignature) {
+	public void setCustomerSignature(String customerSignature) {
 		this.customerSignature = customerSignature;
 	}
 	public String getSelectPosition() {
@@ -171,6 +180,60 @@ public class FinancialConsultantDto {
 	}
 	public void setReferralName(String referralName) {
 		this.referralName = referralName;
+	}
+	public String getFees() {
+		return fees;
+	}
+	public void setFees(String fees) {
+		this.fees = fees;
+	}
+	public String getModeofPayment() {
+		return modeofPayment;
+	}
+	public void setModeofPayment(String modeofPayment) {
+		this.modeofPayment = modeofPayment;
+	}
+	public String getChequeNo() {
+		return chequeNo;
+	}
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+	public String getChequeDate() {
+		return chequeDate;
+	}
+	public void setChequeDate(String chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+	public String getDepositAccount() {
+		return depositAccount;
+	}
+	public void setDepositAccount(String depositAccount) {
+		this.depositAccount = depositAccount;
+	}
+	public String getRefNo() {
+		return refNo;
+	}
+	public void setRefNo(String refNo) {
+		this.refNo = refNo;
+	}
+	public String getComments() {
+		return comments;
+	}
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+	public String getFinancialStatus() {
+		return financialStatus;
+	}
+	public void setFinancialStatus(String financialStatus) {
+		this.financialStatus = financialStatus;
+	}
+	public String getSmsSend() {
+		return smsSend;
+	}
+	public void setSmsSend(String smsSend) {
+		this.smsSend = smsSend;
 	}
 	
 	
