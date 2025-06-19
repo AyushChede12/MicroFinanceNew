@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -64,7 +66,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">State</label> <select
-									id="teamMemberCode" name="teamMemberCode" required="required"
+									id="teamMemberCode" name="teamMemberCode" required="required" onchange="fetchTeamMemberDataByCode();"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select State</option>								
 								</select>

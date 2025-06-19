@@ -223,7 +223,7 @@ $(document).ready(function () {
     });
 });
 
-//BranchName Dropdown
+//TeamMemberCode Dropdown
 function teamMemberCodeDropdown() {
     $.ajax({
         type: "GET",
@@ -232,27 +232,26 @@ function teamMemberCodeDropdown() {
         async: true, // Correct spelling
         success: function(data) {
             console.log(data); // Debug the response
-            var appenddata1 = "<option value=''>Select</option>";
+            var appenddata = "<option value=''>Select</option>";
             for (var i = 0; i < data.length; i++) {
-                appenddata1 += "<option value='" + data[i].teamMemberCode + "'>" + data[i].teamMemberCode + "</option>";
+                appenddata += "<option value='" + data[i].teamMemberCode + "'>" + data[i].teamMemberCode + "</option>";
             }
-            $("#teamMemberCode").html(appenddata1); // Clear and populate
+            $("#teamMemberCode").html(appenddata); // Clear and populate
         },
-        error: function() {
+        error: function() {	
             alert("Failed to load departments");
         }
     });   
 }
 
 //show team member details
-/*function showTeamMemberDetailsByCode() {
+function fetchTeamMemberDataByCode() {
     var teamMemberCode = document.getElementById("teamMemberCode").value;
 
     $.ajax({
         type: "POST",
         contentType: "application/json", // Make sure we're sending JSON
-        url: 'fetchTeamMemberDataByCode',
-        
+        url: 'fetchTeamMemberDataByCode',       
         data: JSON.stringify({ teamMemberCode: teamMemberCode }), // 🔥 Must stringify!
         success: function(data) {
             if (!data || data.length === 0) {
@@ -282,4 +281,4 @@ function teamMemberCodeDropdown() {
             alert("Something went wrong while fetching team member data.");
         }
     });
-}*/
+}
