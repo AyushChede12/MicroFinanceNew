@@ -133,6 +133,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						<!-- Relation to Applicant -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relation to Applicant</label> <select
@@ -140,7 +141,6 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
-
 								</select>
 							</div>
 						</div>
@@ -386,14 +386,14 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						<!-- Nominee Relation to Applicant -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Nominee Relation to Applicant</label> <select
-									id="nomineeRelationToApplicant" name="nomineeRelationToApplicant"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">Nominee Relation to Applicant</label> <select
+									id="nomineeRelationToApplicant"
+									name="nomineeRelationToApplicant" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
-
 								</select>
 							</div>
 						</div>
@@ -468,6 +468,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<!-- Always Visible Fields -->
+					<!-- Always Visible Fields -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -520,8 +521,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3" id="depositAccountDiv"
 							style="display: none;">
 							<div class="d-flex flex-column formFields">
-								<label>Deposit A/C</label> <select id="depositAcNo"
-									name="depositAcNo" class="form-control selectField"
+								<label>Deposit A/C</label> <select id="depositAccount"
+									name="depositAccount" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
 									<!-- options will be filled dynamically -->
@@ -740,7 +741,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script src="js/addCustomer.js"></script>
+
+	<script src="./js/customerManagement/addCustomer.js"></script>
 	<script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const toggles = document.querySelectorAll('.toggle__input');
@@ -768,6 +770,7 @@ pageEncoding="ISO-8859-1"%> -->
 		}
 	}); 
 	</script>
+
 </body>
 
 </html>

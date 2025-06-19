@@ -17,7 +17,7 @@ $(document).ready(function() {
 		formData.append("customerAge", $('#customerAge').val());
 		formData.append("relationshipStatus", $('#relationshipStatus').val());
 		formData.append("customerAddress", $('#customerAddress').val());
-		
+
 		formData.append("state", $('#state').val());
 		formData.append("district", $('#district').val());
 		formData.append("aadharNo", $('#aadharNo').val());
@@ -42,25 +42,35 @@ $(document).ready(function() {
 		formData.append("nomineeAge", $('#nomineeAge').val());
 		formData.append("nomineePanNo", $('#nomineePanNo').val());
 		formData.append("nomineeKycType", $('#nomineeKycType').val());
-        formData.append("memberFees", $('#memberFees').val());
-        formData.append("chequeNo", $('#chequeNo').val());
-        formData.append("chequeDate", $('#chequeDate').val());
-        formData.append("depositAcNo", $('#depositAcNo').val());
-        formData.append("referenceNo", $('#referenceNo').val());
-        formData.append("remarks", $('#remarks').val());
-        formData.append("paymentBy", $('#paymentBy').val());
-		// Fees/Setting Details
-		
+		formData.append("memberFees", $('#memberFees').val());
+		formData.append("chequeNo", $('#chequeNo').val());
+		formData.append("chequeDate", $('#chequeDate').val());
+		formData.append("depositAcNo", $('#depositAcNo').val());
+		formData.append("referenceNo", $('#referenceNo').val());
+		formData.append("remarks", $('#remarks').val());
+		formData.append("paymentBy", $('#paymentBy').val());
 
+		// Before your AJAX call
+		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
+		formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
+		formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
+		formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
+
+		// Fees/Setting Details
+
+
+        
+        
+      
 		// Handle file uploads
 		var photoWithAadhar = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
 		if (photoWithAadhar) formData.append("customerPhoto", photoWithAadhar);
-		
+
 		// Handle file uploads
-        var signature = $('#customerSignature')[0].files[0];
-        if (signature) {
-            formData.append("customerSignature", signature);
-        }
+		var signature = $('#customerSignature')[0].files[0];
+		if (signature) {
+			formData.append("customerSignature", signature);
+		}
 
 		// Debugging: Log FormData to check entries
 		for (var pair of formData.entries()) {
@@ -102,8 +112,8 @@ function photopreview() {
 			previewimg.style.width = "100%";
 			previewimg.style.height = "100%";
 			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow="hidden"
-			previewimg.style.borderRadius="20px"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -123,8 +133,8 @@ function signpreview() {
 			previevimg.style.width = "100%";
 			previevimg.style.height = "100%";
 			previevimg.style.objectFit = "cover"
-			previevimg.style.overflow="hidden"
-			previevimg.style.borderRadius="20px"
+			previevimg.style.overflow = "hidden"
+			previevimg.style.borderRadius = "20px"
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -132,117 +142,121 @@ function signpreview() {
 	}
 }
 
-$(document).ready(function () {
-    // Load States
-    $.ajax({
-        url: "getAllStates",
-        method: "GET",
-        success: function (data) {
-            console.log("Fetched states:", data);
-            data.forEach(function (state) {
-                $('#state').append(
-                    $('<option>', {
-                        value: state.stateId, // ✅ use stateId here
-                        text: state.stateName
-                    })
-                );
-            });
-        },
-        error: function (err) {
-            console.error("Error fetching states:", err);
-        }
-    });
+$(document).ready(function() {
+	// Load States
+	$.ajax({
+		url: "getAllStates",
+		method: "GET",
+		success: function(data) {
+			console.log("Fetched states:", data);
+			data.forEach(function(state) {
+				$('#state').append(
+					$('<option>', {
+						value: state.stateId, // ✅ use stateId here
+						text: state.stateName
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("Error fetching states:", err);
+		}
+	});
 
-    // Load Districts when state is selected
-    $('#state').on('change', function () {
-        var selectedStateId = $(this).val();
-        $('#district').empty().append('<option value="">Select District</option>');
+	// Load Districts when state is selected
+	$('#state').on('change', function() {
+		var selectedStateId = $(this).val();
+		$('#district').empty().append('<option value="">Select District</option>');
 
-        if (selectedStateId) {
-            $.ajax({
-                url: 'getAllDistrictsByStateId',
-                method: 'GET',
-                data: { stateId: selectedStateId },
-                success: function (response) {
-                    console.log("Fetched districts:", response);
-                    var districts = response.allDistricts;
-                    districts.forEach(function (district) {
-                        $('#district').append(
-                            $('<option>', {
-                                value: district.districtName,
-                                text: district.districtName
-                            })
-                        );
-                    });
-                },
-                error: function (err) {
-                    console.error("Error fetching districts:", err);
-                }
-            });
-        }
-    });
+		if (selectedStateId) {
+			$.ajax({
+				url: 'getAllDistrictsByStateId',
+				method: 'GET',
+				data: { stateId: selectedStateId },
+				success: function(response) {
+					console.log("Fetched districts:", response);
+					var districts = response.allDistricts;
+					districts.forEach(function(district) {
+						$('#district').append(
+							$('<option>', {
+								value: district.districtName,
+								text: district.districtName
+							})
+						);
+					});
+				},
+				error: function(err) {
+					console.error("Error fetching districts:", err);
+				}
+			});
+		}
+	});
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+	fetch('/getAllRelativeModule')
+		.then(response => {
+			if (!response.ok) {
+				throw new Error("Network error: " + response.statusText);
+			}
+			return response.json();
+		})
+		.then(data => {
+			console.log("Received relation data:", data);
+
+			const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
+
+			dropdownIds.forEach(id => {
+				const select = document.getElementById(id);
+				if (!select) {
+					console.warn(`Dropdown with ID '${id}' not found.`);
+					return;
+				}
+
+				// Remove any existing options except the first one
+				while (select.options.length > 1) {
+					select.remove(1);
+				}
+
+				// Add new options
+				data.forEach(item => {
+					const option = document.createElement("option");
+					option.value = item.relation;
+					option.textContent = item.relation;
+					select.appendChild(option);
+				});
+			});
+		})
+		.catch(error => {
+			console.error("Error loading relations:", error);
+		});
 });
 
 
-//Niraj Code 
-window.onload = function() {
-    fetch('getAllRelativeModule')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById("relationToApplicant");
-            data.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item.relation;  // Use item.id if needed
-                option.text = item.relation;
-                select.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error("Error loading relations:", error);
-        });
-};
-//Niraj Code 
-window.onload = function() {
-    fetch('getAllRelativeModule')
-        .then(response => response.json())
-        .then(data => {
-            const select = document.getElementById("nomineeRelationToApplicant");
-            data.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item.relation;  // Use item.id if needed
-                option.text = item.relation;
-                select.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error("Error loading relations:", error);
-        });
-};
 
-$(document).ready(function () {
-    // Fetch all branches and populate the dropdown
-    $.ajax({
-        url: "getAllBranchModule",
-        method: "GET",
-        success: function (data) {
-            console.log("Fetched Branches:", data);
-            data.forEach(function (branch) {
-                $('#branchName').append(
-                    $('<option>', {
-                        value: branch.branchName,
-                        text: branch.branchName
-                    })
-                );
-            });
-        },
-        error: function (err) {
-            console.error("Error fetching branches:", err);
-        }
-    });
+$(document).ready(function() {
+	// Fetch all branches and populate the dropdown
+	$.ajax({
+		url: "getAllBranchModule",
+		method: "GET",
+		success: function(data) {
+			console.log("Fetched Branches:", data);
+			data.forEach(function(branch) {
+				$('#branchName').append(
+					$('<option>', {
+						value: branch.branchName,
+						text: branch.branchName
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("Error fetching branches:", err);
+		}
+	});
 });
 
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 	const paymentBy = document.getElementById("paymentBy");
 
 	const chequeNoDiv = document.getElementById("chequeNoDiv");
@@ -284,7 +298,8 @@ document.addEventListener("DOMContentLoaded", function () {
 	handlePaymentChange();
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+
+document.addEventListener("DOMContentLoaded", function() {
 	// Function to fetch and bind bank accounts
 	function loadBankAccounts() {
 		fetch("/getAllBankModule")

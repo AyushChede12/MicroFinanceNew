@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
@@ -17,11 +18,14 @@ import com.microfinance.service.CustomerManagementService;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@Controller
+@RestController
 public class CustomerManagementController {
 	@Autowired
 	CustomerManagementService customerService;
 
+	
+	
+	
 	@PostMapping("/saveOrUpdateCustomer")
 	public ResponseEntity<ApiResponse<addCustomer>> saveOrUpdateCustomer(
 			@ModelAttribute CustomerDto clientMasterDto,

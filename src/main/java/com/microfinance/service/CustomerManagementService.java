@@ -79,6 +79,13 @@ public class CustomerManagementService {
 	    addcustomer.setChequeDate(clientMasterDto.getChequeDate());
 	    addcustomer.setDepositAcNo(clientMasterDto.getDepositAcNo());
 	    addcustomer.setReferenceNo(clientMasterDto.getReferenceNo());
+	    addcustomer.setRemarks(clientMasterDto.getRemarks());
+	    addcustomer.setPaymentBy(clientMasterDto.getPaymentBy());
+	    
+	    addcustomer.setMemberBanking(clientMasterDto.getMemberBanking());
+	    addcustomer.setSmsSend(clientMasterDto.getSmsSend());
+	    addcustomer.setMemberStatus(clientMasterDto.getMemberStatus());
+	    addcustomer.setNetBanking(clientMasterDto.getNetBanking());
 	    
 
 	    // Fees/Setting Details
