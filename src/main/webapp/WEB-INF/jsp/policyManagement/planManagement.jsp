@@ -30,12 +30,16 @@ pageEncoding="ISO-8859-1"%> -->
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	rel="stylesheet">
+
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
 </head>
 
 
@@ -87,16 +91,24 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 
-							<div class="d-flex flex-column formFields">
+							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Code *</label> <input type="text"
 									name="planCode" id="planCode" required="required"
 									placeholder="Enter Plan Code" value="${memberCodeDD}"
 									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								<label for="vehicalNo">Plan Name*</label> <input type="text"
+									name="planNameDD" id="planNameDD" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
+							<div class="d-flex flex-column formFields  mb-4">
 								<label for="vehicalNo">Minimum Deposit*</label> <input
 									type="text" name="minimumDeposit" id="minimumDeposit"
 									required="required" placeholder="Enter Minimum Amount"
@@ -105,7 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
+							<div class="d-flex flex-column formFields  mb-4">
 								<label for="vehicalNo">Rate of Interest (%)*</label> <input
 									type="text" name="rateOfInterest" id="rateOfInterest"
 									required="required" placeholder="Enter Interest Rate"
@@ -132,6 +144,25 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Duration*</label> <input type="text"
 									name="duration" id="duration" required="required"
 									placeholder="Enter Duration" />
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Term Mode</label> <select id="termModeDD"
+									name="termModeDD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Term Mode</option>
+
+								</select>
+							</div>
+						</div>
+
+
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Term*</label> <input type="text" name="termDD"
+									id="termDD" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
 
@@ -170,7 +201,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Total Paid</label> <input  type="text"
+								<label for="">Total Paid</label> <input type="text"
 									name="totalPaid" id="totalPaid" required="required"
 									placeholder="Enter Total Paid" />
 							</div>
@@ -178,9 +209,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount*</label> <input 
-									type="text" name="maturityAmount" id="maturityAmount"
-									required="required" placeholder="Enter Maturity Amount" />
+								<label for="">Maturity Amount*</label> <input type="text"
+									name="maturityAmount" id="maturityAmount" required="required"
+									placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
@@ -191,7 +222,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Flexible Plan</option>
 									<option value="Yes">Yes</option>
-								<option value="No">No</option>
+									<option value="No">No</option>
 
 								</select>
 							</div>
@@ -218,20 +249,28 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Status of Plan</label> <input type="text"
-									name="statusOfPlan" id="statusOfPlan" required="required"
-									placeholder="Enter statusOfPlan" />
-							</div>
-						</div>
-
+                <div class=" h-100 d-flex justify-content-start align-items-center">
+                  <div class="d-flex justify-content-start align-items-center  formFields">
+                    <label style="margin-left: 20px;" class="mb-2">Status plan</label>
+                    <div class="cont">
+                      <div class="toggle">
+                        <input type="checkbox" id="toggle-member-status" class="toggle__input"
+                          data-toggle-type="member-status">
+                        <label for="toggle-member-status" class="toggle__label"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 					</div>
 
 					<div class="row" style="margin-left: 80%;">
 						<div class="col-12 text-center">
-							<button id="genrate" class="btnStyle bg-danger">Generate</button>
-							<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+							<button id="genrateBtn" class="btnStyle bg-danger">Generate</button>
+							<button id="saveBtn" class="btnStyle bg-warning ">Save</button>
+							<button id="updateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
+
 						</div>
 					</div>
 
@@ -244,97 +283,32 @@ pageEncoding="ISO-8859-1"%> -->
 										Recent Sales <span>| Today</span>
 									</h5>
 
-									<table class="table table-borderless datatable overflow-scroll">
+									<table class="table table-bordered">
 										<thead class="table-light">
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="col">#</th>
-												<th scope="col">Customer</th>
-												<th scope="col">Product</th>
-												<th scope="col">Price</th>
-												<th scope="col">Status</th>
-												<th scope="col">Action</th>
+											<tr>
+												<th>Plan Code</th>
+												<th>Minimum Deposit</th>
+												<th>Rate Of Interest</th>
+												<th>Installment Type</th>
+												<th>Duration</th>
+												<th>Commission On New</th>
+												<th>Renewal Commission</th>
+												<th>Interest Interval</th>
+												<th>Total Paid</th>
+												<th>Maturity Amount</th>
+												<th>Flexible Plan</th>
+												<th>Grace Days</th>
+												<th>Penalty Rate</th>
+												<th>Status</th>
+												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="row"><a href="#">1</a></th>
-												<td>Arun Kumar</td>
-												<td><a href="#" className="text-primary">Milk</a></td>
-												<td>$29</td>
-												<td><span class="badge bg-success text-white">Approved</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
+										<tbody id="depositTableBody">
+											<!-- Dynamic rows will be injected here -->
 										</tbody>
 									</table>
+
+
 								</div>
 							</div>
 						</div>
@@ -379,16 +353,15 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Plan Code*</label> <input type="text"
 									name="planCodeRD" id="planCodeRD" required="required"
 									placeholder="Enter Plan Code" value="${memberCodeRD}"
-									readonly="readonly"
-									style="text-transform: uppercase;" />
+									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Amount*</label> <input
-									type="text" name="minimumAmountRD" id="minimumAmountRD" required="required"
-									placeholder="Enter Minimum Amount"
+									type="text" name="minimumAmountRD" id="minimumAmountRD"
+									required="required" placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -396,8 +369,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Interest Rate(%)*</label> <input
-									type="text" name="rateOfInterestRD" id="rateOfInterestRD" required="required"
-									placeholder="Enter Interest Rate"
+									type="text" name="rateOfInterestRD" id="rateOfInterestRD"
+									required="required" placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -425,24 +398,25 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.New(%)*</label> <input type="text"
-									name="commissionOnNewRD" id="commissionOnNewRD" required="required"
-									placeholder="Enter Comm.New(%)" />
+									name="commissionOnNewRD" id="commissionOnNewRD"
+									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.Renew(%)*</label> <input type="text"
-									name="renewalCommissionRD" id="renewalCommissionRD" required="required"
-									placeholder="Enter Comm.Renew(%)" />
+									name="renewalCommissionRD" id="renewalCommissionRD"
+									required="required" placeholder="Enter Comm.Renew(%)" />
 							</div>
 						</div>
 
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Compound Interval</label> <select
-									id="componentIntervalRD" name="componentIntervalRD" required="required"
-									class="form-control selectField" style="height: 30px;">
+									id="componentIntervalRD" name="componentIntervalRD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Compound Interval</option>
 
 								</select>
@@ -462,8 +436,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="maturityAmountRD" id="maturityAmountRD" required="required"
-									placeholder="Enter Maturity Amount" />
+									type="text" name="maturityAmountRD" id="maturityAmountRD"
+									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
@@ -648,8 +622,8 @@ pageEncoding="ISO-8859-1"%> -->
                 </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
-									name="planCodeFD" id="planCodeFD" required="required" value="${memberCodeFD}"
-									readonly="readonly"
+									name="planCodeFD" id="planCodeFD" required="required"
+									value="${memberCodeFD}" readonly="readonly"
 									placeholder="Enter Plan Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -658,8 +632,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Amount*</label> <input
-									type="text" name="minimumAmountFD" id="minimumAmountFD" required="required"
-									placeholder="Enter Minimum Amount"
+									type="text" name="minimumAmountFD" id="minimumAmountFD"
+									required="required" placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -667,8 +641,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Interest Rate(%)*</label> <input
-									type="text" name="rateOfInterestFD" id="rateOfInterestFD" required="required"
-									placeholder="Enter Interest Rate"
+									type="text" name="rateOfInterestFD" id="rateOfInterestFD"
+									required="required" placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -693,9 +667,10 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Type*</label> <select id="installmentTypeFD"
-									name="installmentTypeFD" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label for="">Interest Type*</label> <select
+									id="installmentTypeFD" name="installmentTypeFD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Interest Type*</option>
 
 								</select>
@@ -704,8 +679,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Compound Interval*</label> <select
-									id="componentIntervalFD" name="componentIntervalFD" required="required"
-									class="form-control selectField" style="height: 30px;">
+									id="componentIntervalFD" name="componentIntervalFD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Compound Interval</option>
 
 								</select>
@@ -727,16 +703,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="maturityAmountFD" id="maturityAmountFD" required="required"
-									placeholder="Enter maturityAmountFD" />
+									type="text" name="maturityAmountFD" id="maturityAmountFD"
+									required="required" placeholder="Enter maturityAmountFD" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.New(%)*</label> <input type="text"
-									name="commissionOnNewFD" id="commissionOnNewFD" required="required"
-									placeholder="Enter Comm.New(%)" />
+									name="commissionOnNewFD" id="commissionOnNewFD"
+									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
 
@@ -904,16 +880,15 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Plan Code*</label> <input type="text"
 									name="planCodeMD" id="planCodeMD" required="required"
 									placeholder="Enter Plan Code" value="${memberCodeMD}"
-									readonly="readonly"
-									style="text-transform: uppercase;" />
+									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Minimum Amount*</label> <input
-									type="text" name="minimumAmountMD" id="minimumAmountMD" required="required"
-									placeholder="Enter Minimum Amount"
+									type="text" name="minimumAmountMD" id="minimumAmountMD"
+									required="required" placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -921,8 +896,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Maturity ROI(%)</label> <input
-									type="text" name="maturityROIMD" id="maturityROIMD" required="required"
-									placeholder="Enter Interest Rate"
+									type="text" name="maturityROIMD" id="maturityROIMD"
+									required="required" placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -979,16 +954,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="maturityAmountMD" id="maturityAmountMD" required="required"
-									placeholder="Enter Maturity Amount" />
+									type="text" name="maturityAmountMD" id="maturityAmountMD"
+									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Comm.New(%)*</label> <input type="text"
-									name="commissionOnNewMD" id="commissionOnNewMD" required="required"
-									placeholder="Enter Comm.New(%)" />
+									name="commissionOnNewMD" id="commissionOnNewMD"
+									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
 
@@ -996,8 +971,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Status</label> <input type="text"
-									name="statusOfPlanMDRD2" id="statusOfPlanMDRD2" required="required"
-									placeholder="Enter Plan Status" />
+									name="statusOfPlanMDRD2" id="statusOfPlanMDRD2"
+									required="required" placeholder="Enter Plan Status" />
 							</div>
 						</div>
 
@@ -1116,13 +1091,15 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 			</form>
 		</div>
-
-
+		<%--  <button class="btn btn-sm btn-primary" onclick="editPlan(${item.id})">
+	                    <i class="fa fa-edit"></i>
+	                  </button>
+ --%>
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<!--  <script src="./js/adminscript.js"></script>-->
 	<script src="./js/PolicyManagment/DailyDeposite.js"></script>
-	
+
 </body>
 
 </html>

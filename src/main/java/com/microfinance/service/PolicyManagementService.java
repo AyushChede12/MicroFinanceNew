@@ -110,4 +110,52 @@ public List<MISDepositPM> getAllMISDepositData() {
 
 
 
+
+public DailyDepositPM getDailyDepositById(Long id) {
+	// TODO Auto-generated method stub
+	 return dailyDepositPMRepo.findById(id).orElse(null);
 }
+
+
+
+
+public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
+	// TODO Auto-generated method stub
+	 
+	    return dailyDepositPMRepo.findById(id).map(existing -> {
+	        existing.setPlanCode(updatedData.getPlanCode());
+	        existing.setMinimumDeposit(updatedData.getMinimumDeposit());
+	        existing.setRateOfInterest(updatedData.getRateOfInterest());
+	        existing.setInstallmentType(updatedData.getInstallmentType());
+	        existing.setDuration(updatedData.getDuration()); // Fixed here
+	        existing.setCommissionOnNew(updatedData.getCommissionOnNew());
+	        existing.setRenewalCommission(updatedData.getRenewalCommission());
+	        existing.setInterestInterval(updatedData.getInterestInterval());
+	        existing.setTotalPaid(updatedData.getTotalPaid());
+	        existing.setMaturityAmount(updatedData.getMaturityAmount());
+	        existing.setFlexiblePlan(updatedData.getFlexiblePlan());
+	        existing.setGraceDays(updatedData.getGraceDays());
+	        existing.setPenaltyRate(updatedData.getPenaltyRate());
+	        existing.setStatusOfPlan(updatedData.getStatusOfPlan());
+	        
+	        return dailyDepositPMRepo.save(existing); // Fixed here
+	    }).orElse(null);
+	}
+
+
+
+
+public boolean deleteDailyDeposit(Long id) {
+	// TODO Auto-generated method stub
+	 if (dailyDepositPMRepo.existsById(id)) {
+		 dailyDepositPMRepo.deleteById(id);
+	        return true;
+	    } else {
+	        return false;
+	    }
+}
+
+
+
+}
+

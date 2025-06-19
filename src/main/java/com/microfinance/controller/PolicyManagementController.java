@@ -61,7 +61,72 @@ public class PolicyManagementController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+// feacth by id daily deposite
+    @GetMapping("/dailyedit/{id}")
+    public ResponseEntity<ApiResponse<DailyDepositPM>> getDailyDepositById(@PathVariable Long id) {
+        DailyDepositPM deposit = policyManagementService.getDailyDepositById(id);
 
+        if (deposit != null) {
+            ApiResponse<DailyDepositPM> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Daily deposit fetched successfully.",
+                deposit
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<DailyDepositPM> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "Daily deposit not found for ID: " + id
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+// update the deposite daily data
+    @PutMapping("/dailyupdate/{id}")
+    public ResponseEntity<ApiResponse<DailyDepositPM>> updateDailyDeposit(
+            @PathVariable Long id,
+            @RequestBody DailyDepositPM updatedData) {
+
+        DailyDepositPM updated = policyManagementService.updateDailyDeposit(id, updatedData);
+
+        if (updated != null) {
+            ApiResponse<DailyDepositPM> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Daily deposit updated successfully.",
+                updated
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<DailyDepositPM> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "Daily deposit not found or failed to update."
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+    //delete the data of the daily deposite
+    @DeleteMapping("/dailydelete/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteDailyDeposit(@PathVariable Long id) {
+        boolean deleted = policyManagementService.deleteDailyDeposit(id);
+
+        if (deleted) {
+            ApiResponse<Void> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Daily deposit deleted successfully.",
+                null
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<Void> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "Daily deposit not found for ID: " + id
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+
+    
     
 
     // Save Fixed Deposit
