@@ -11,13 +11,8 @@ public class GenerateIncentivePayments {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String teamMemberName;
-	public String getTeamMemberName() {
-		return teamMemberName;
-	}
-	public void setTeamMemberName(String teamMemberName) {
-		this.teamMemberName = teamMemberName;
-	}
+	private String teamCode;
+	private String teamName;
 	private String incentiveMonth;
 	private String dateFrom;
 	private String dateTo;
@@ -26,6 +21,18 @@ public class GenerateIncentivePayments {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getTeamCode() {
+		return teamCode;
+	}
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
+	}
+	public String getTeamName() {
+		return teamName;
+	}
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 	public String getIncentiveMonth() {
 		return incentiveMonth;

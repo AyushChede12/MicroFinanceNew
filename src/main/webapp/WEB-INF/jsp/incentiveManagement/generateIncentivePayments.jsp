@@ -62,11 +62,13 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Incentive Generate</li>
 						</ol>
 					</nav>
+					<input type="hidden" id="teamCode" name="teamCode">
+					<input type="hidden" id="teamName" name="teamName">
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Team Member Name</label> <select id="teamMemberName"
-									name="teamMemberName" required="required"
+								<label for="">Team Member Name</label> <select id="teamValue"
+									name="teamValue" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 								</select>
@@ -79,19 +81,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
 									 <option value="">Select</option>
-									<option value="01">January</option>
-									<option value="02">February</option>
-									<option value="03">March</option>
-									<option value="04">April</option>
-									<option value="05">May</option>
-									<option value="06">June</option>
-									<option value="07">July</option>
-									<option value="08">August</option>
-									<option value="09">September</option>
-									<option value="10">October</option>
-									<option value="11">November</option>
-									<option value="12">December</option>
-
+									
 								</select>
 							</div>
 						</div>

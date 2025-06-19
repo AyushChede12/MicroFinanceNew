@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.IncentiveSchemeMaster;
 import com.microfinance.model.TeamMember;
+import com.microfinance.model.BranchModule;
 import com.microfinance.model.GenerateIncentivePayments;
 import com.microfinance.service.IncentiveManagementService;
 
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/incentive")
 public class IncentiveManagementController {
 
 	@Autowired
@@ -70,44 +71,35 @@ public class IncentiveManagementController {
 
 	//fetch the team member name 
 	//anjali 17-6-25
-	
-	@GetMapping("/getAllTeamMembers")
-	public ApiResponse<List<String>> getAllTeamMemberNames() {
-	    List<TeamMember> members = incentiveSchemeMasterService.getAllTeamMember();
-	    List<String> names = new ArrayList<>();
 
-	    for (TeamMember member : members) {
-	        names.add(member.getTeamMemberName());
-	    }
-
-	    if (!names.isEmpty()) {
-	    	 return ApiResponse.success(HttpStatus.OK,"Team members fetched successfully", names);
-	    }else
-	    {
-	    	return ApiResponse.error(HttpStatus.NO_CONTENT,"No team members found");
-	    }
+	@GetMapping("/getAllTeamMember")        
+	public List<TeamMember> getAllTeamMember(){
+		List<TeamMember> list = incentiveSchemeMasterService.getAllTeamMember();
+		return list;
 	}
+	
 
 	//save data in the database
 	//anjali 18-6-25
     
 
-	@PostMapping("/incentive")
-	public ResponseEntity<ApiResponse<GenerateIncentivePayments>> saveIncentivePayment(@RequestBody GenerateIncentivePayments incentivepayment) {
-	    boolean isSaved = incentiveSchemeMasterService.saveIncentivePayment(incentivepayment); // fixed typo
+	@PostMapping("/saveDataInGenerateIncentivePayments")
+	public ResponseEntity<ApiResponse<GenerateIncentivePayments>> saveIncentivePayment(
+	        @RequestBody GenerateIncentivePayments incentivepayment) {
+
+	    boolean isSaved = incentiveSchemeMasterService.saveIncentivePayment(incentivepayment);
 
 	    if (isSaved) {
 	        ApiResponse<GenerateIncentivePayments> response = ApiResponse.success(
-	            HttpStatus.OK, "Incentive payment saved successfully", incentivepayment
-	        );
+	                HttpStatus.OK, "Incentive payment saved successfully", incentivepayment);
 	        return ResponseEntity.ok(response);
 	    } else {
 	        ApiResponse<GenerateIncentivePayments> response = ApiResponse.error(
-	            HttpStatus.BAD_REQUEST, "Failed to save incentive payment"
-	        );
+	                HttpStatus.BAD_REQUEST, "Failed to save incentive payment");
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	    }
 	}
+
 
 	}
 

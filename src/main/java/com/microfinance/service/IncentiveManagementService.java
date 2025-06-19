@@ -39,10 +39,7 @@ public class IncentiveManagementService {
 		return incentiveschemerepo.findAll();
 	}
 
-	public List<TeamMember> getAllTeamMember() {
-		// TODO Auto-generated method stub
-		return teamMemberRepo.findAll();
-	}
+	
 
 	public boolean saveIncentivePayment(GenerateIncentivePayments incentivepayment) {
 		try {
@@ -52,6 +49,11 @@ public class IncentiveManagementService {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public List<TeamMember> getAllTeamMember() {
+		// TODO Auto-generated method stub
+		return teamMemberRepo.findAll();
 	}
 
 }
