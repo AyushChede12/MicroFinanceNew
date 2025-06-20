@@ -333,7 +333,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<button id="updateBtn" class="btnStyle"
 							style="background-color: #FFA500;">Update</button>
-						<button id="printBtn" class="btnStyle bg-primary">Print</button>
+						
 					</div>
 				</div>
 			</form>
@@ -348,7 +348,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</h5>
 
 							<table class="table table-borderless datatable overflow-scroll"
-								onclick="loadLoanTable()">
+								onclick="loadLoanTable()" id="loanTableWrapper">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">ID</th>

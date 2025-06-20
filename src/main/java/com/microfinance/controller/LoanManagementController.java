@@ -53,6 +53,8 @@ public class LoanManagementController {
 	}
 
 	// Fetch Data 18/06/25
+	
+	
 	@GetMapping("/allDataFetchLoanSchemCatelog")
 	public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> allDataFetchLoanSchemCatelog() {
 	    List<LoanSchemCatalog> list = loanServices.allDataFetchLoanSchemCatelog();

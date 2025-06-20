@@ -110,7 +110,7 @@ function loadLoanTable() {
 		url: "/api/loanmanegment/allDataFetchLoanSchemCatelog",
 		type: "GET", // ✅ Use GET to fetch data
 		success: function(response) {
-			alert("data loaded");
+			//alert("data loaded");
 
 			let rows = "";
 			// ✅ Check if response has data (in ApiResponse wrapper)
@@ -150,110 +150,71 @@ function loadLoanTable() {
 
 
 function editLoanById(id) {
-   /* $.ajax({
-        url: `/api/loanmanegment/getLoanByIdEdite`,  // ✅ pass id as request param
-        type: "GET",
-        success: function (response) {
-            if (response.success) {
-                let loan = response.data;
-
-                // Populate form fields
-                $('#loanId').val(loan.id); // Hidden field for ID
-                $('#loanPlaneName').val(loan.loanPlaneName);
-                $('#typeloan').val(loan.typeloan);
-                $('#minimumAge').val(loan.minimumAge);
-                $('#maximumAge').val(loan.maximumAge);
-                $('#minloanDuration').val(loan.minloanDuration);
-                $('#mixloanDuration').val(loan.mixloanDuration);
-                $('#emiFrequency').val(loan.emiFrequency);
-                $('#emiType').val(loan.emiType);
-                $('#minimumloanAmount').val(loan.minimumloanAmount);
-                $('#maximumloanAmount').val(loan.maximumloanAmount);
-                $('#rateIntrestType').val(loan.rateIntrestType);
-                $('#typeIntrest').val(loan.typeIntrest);
-                $('#typesecurity').val(loan.typesecurity);
-                $('#feeProcessing').val(loan.feeProcessing);
-                $('#chargesLegal').val(loan.chargesLegal);
-                $('#gst').val(loan.gst);
-                $('#feeInsurence').val(loan.feeInsurence);
-                $('#feeValuation').val(loan.feeValuation);
-                $('#lateAllowanceday').val(loan.lateAllowanceday);
-                $('#modePanalty').val(loan.modePanalty);
-                $('#pennaltyMonthly').val(loan.pennaltyMonthly);
-            } else {
-                alert("Loan not found.");
-            }
-        },
-        error: function (xhr, status, error) {
-            alert("Error fetching loan details: " + error);
-        }
-    });*/
+   
 	
 	
 	$.ajax({
-			url: "/api/loanmanegment/getLoanByIdEdit",
-			type: "GET",
-			data: { id: id },
-			success: function(response) {
-				if (response.success) {
-					const branch = response.data;
-					$('#loanId').val(loan.id); // Hidden field for ID
-					               $('#loanPlaneName').val(loan.loanPlaneName);
-					               $('#typeloan').val(loan.typeloan);
-					               $('#minimumAge').val(loan.minimumAge);
-					               $('#maximumAge').val(loan.maximumAge);
-					               $('#minloanDuration').val(loan.minloanDuration);
-					               $('#mixloanDuration').val(loan.mixloanDuration);
-					               $('#emiFrequency').val(loan.emiFrequency);
-					               $('#emiType').val(loan.emiType);
-					               $('#minimumloanAmount').val(loan.minimumloanAmount);
-					               $('#maximumloanAmount').val(loan.maximumloanAmount);
-					               $('#rateIntrestType').val(loan.rateIntrestType);
-					               $('#typeIntrest').val(loan.typeIntrest);
-					               $('#typesecurity').val(loan.typesecurity);
-					               $('#feeProcessing').val(loan.feeProcessing);
-					               $('#chargesLegal').val(loan.chargesLegal);
-					               $('#gst').val(loan.gst);
-					               $('#feeInsurence').val(loan.feeInsurence);
-					               $('#feeValuation').val(loan.feeValuation);
-					               $('#lateAllowanceday').val(loan.lateAllowanceday);
-					               $('#modePanalty').val(loan.modePanalty);
-					               $('#pennaltyMonthly').val(loan.pennaltyMonthly);
-				} else {
-					alert("Loan not found: " + response.message);
-				}
-			},
-			error: function(xhr) {
-				alert("Error fetching loan details: " + xhr.responseText);
-			}
-		});
+	    url: "api/loanmanegment/getLoanByIdEdite",
+	    type: "GET",
+	    data: { id: id }, // Send ID as query param
+	    success: function(response) {
+	        if (response.success) {
+	            const loan = response.data; // ✅ correct variable name
+
+	            $('#loanId').val(loan.id); // Hidden field for ID
+	            $('#loanPlaneName').val(loan.loanPlaneName);
+	            $('#typeloan').val(loan.typeloan);
+	            $('#minimumAge').val(loan.minimumAge);
+	            $('#maximumAge').val(loan.maximumAge);
+	            $('#minloanDuration').val(loan.minloanDuration);
+	            $('#mixloanDuration').val(loan.mixloanDuration);
+	            $('#emiFrequency').val(loan.emiFrequency);
+	            $('#emiType').val(loan.emiType);
+	            $('#minimumloanAmount').val(loan.minimumloanAmount);
+	            $('#maximumloanAmount').val(loan.maximumloanAmount);
+	            $('#rateIntrestType').val(loan.rateIntrestType);
+	            $('#typeIntrest').val(loan.typeIntrest);
+	            $('#typesecurity').val(loan.typesecurity);
+	            $('#feeProcessing').val(loan.feeProcessing);
+	            $('#chargesLegal').val(loan.chargesLegal);
+	            $('#gst').val(loan.gst);
+	            $('#feeInsurence').val(loan.feeInsurence);
+	            $('#feeValuation').val(loan.feeValuation);
+	            $('#lateAllowanceday').val(loan.lateAllowanceday);
+	            $('#modePanalty').val(loan.modePanalty);
+	            $('#pennaltyMonthly').val(loan.pennaltyMonthly);
+	        } else {
+	            alert("Loan not found: " + response.message);
+	        }
+	    },
+	    error: function(xhr) {
+	        alert("Error fetching loan details: " + xhr.responseText);
+	    }
+	});
+
 }
 
 
 
-// print 
 
 
+/*// print 
 
-$(document).ready(function() {
+$(document).ready(function () {
+    $('#printBtn').click(function () {
+        let printContents = document.getElementById('loanTableWrapper').innerHTML;
+        let originalContents = document.body.innerHTML;
 
+        document.body.innerHTML = printContents;
 
-	printTableOnly();
-	// Print button click
-	$("#printBtn").on("click", function() {
-		alert("hii");
+        window.print(); // Open print dialog
 
-		function printTableOnly() {
-			var printContents = document.getElementById("loanTable").outerHTML;
-			var originalContents = document.body.innerHTML;
-
-			document.body.innerHTML = printContents;
-			window.print();
-			document.body.innerHTML = originalContents;
-			location.reload();
-		}
-	});
+        document.body.innerHTML = originalContents;
+        location.reload(); // Optional: reload to restore functionality
+    });
 });
+*/
+
 
 //Delete By Id
 
@@ -261,11 +222,12 @@ function deleteLoan(id) {
     if (confirm("Are you sure you want to delete this loan?")) {
         $.ajax({
             url: `/api/loanmanegment/deleteLoanById`,  
-            type: 'POST',
+            type: 'POST',                               
+            data: { id: id },                           
             success: function(response) {
                 if (response.success) {
                     alert("Loan deleted successfully");
-                    loadLoanTable(); // ✅ Refresh table
+                    loadLoanTable(); // Refresh table
                 } else {
                     alert("Failed to delete: " + response.message);
                 }
@@ -276,4 +238,5 @@ function deleteLoan(id) {
         });
     }
 }
+
 
