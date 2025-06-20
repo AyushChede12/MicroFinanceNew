@@ -2,10 +2,9 @@ $(document).ready(function() {
 
 	$('#saveBtn').click(function(event) {
 		alert("Save Button Clicked!");
-		event.preventDefault(); // Prevent default form submission
+		event.preventDefault(); 
 
 		const branchData = {
-			// If updating an existing branch, add: id: $('#id').val()
 			branchCode: $('#branchCode').val(),
 			branchName: $('#branchName').val(),
 			openingDate: $('#openingDate').val(),
@@ -32,15 +31,16 @@ $(document).ready(function() {
 		});
 	});
 
+
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
 
 	$.ajax({
-		type: "POST",
-		url: "/api/preference/getAllBranchModule", // matches @PostMapping
+		type: "GET",
+		url: "/api/preference/getAllBranchModule", 
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response); // Debug line
+			console.log("Full Response from API:", response); 
 			if (response.success) {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
@@ -69,8 +69,6 @@ $(document).ready(function() {
 			alert("Error while calling the API.");
 		}
 	});
-
-
 });
 
 function showTableData() {
@@ -88,7 +86,7 @@ function viewData(id) {
 	$("#showBtn").hide();
 	$.ajax({
 		url: "/api/preference/getBranchModuleById",
-		type: "POST",
+		type: "GET",
 		data: { id: id },
 		success: function(response) {
 			if (response.success) {
@@ -117,13 +115,13 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/preference/deleteBranchModuleById", // Matches your controller mapping
+			url: "/api/preference/deleteBranchModuleById",
 			type: "POST",
-			data: { id: id }, // Sent as form-data (used with @RequestParam)
+			data: { id: id }, 
 			success: function(response) {
 				if (response.success) {
-					alert(response.message); // e.g., "Branch module deleted successfully"
-					location.reload();       // Refresh page or table
+					alert(response.message); 
+					location.reload();    
 				} else {
 					alert("Delete failed: " + response.message);
 				}
@@ -153,13 +151,13 @@ function updateBranch() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBranchModule", // This should match your controller mapping
+		url: "/api/preference/saveAndUpdateAllBranchModule", 
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
 			if (response.success) {
-				alert(response.message); // e.g., "Branch updated successfully"
+				alert(response.message); 
 				location.reload();
 			} else {
 				alert("Operation failed: " + response.message);
@@ -173,9 +171,9 @@ function updateBranch() {
 
 
 $(document).ready(function() {
-	// Fetch all branches and populate the dropdown
+	
 	$.ajax({
-		url: "getAllBranchModule",
+		url: "/api/preference/getAllBranchModule",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Branches:", data);
