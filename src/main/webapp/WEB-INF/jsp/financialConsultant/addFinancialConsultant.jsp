@@ -382,21 +382,22 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="referenceCode">Mode of Payment <span
 										id="star">*</span></label> <select onchange="displayDetails()"
-									id="modeofPayment" name="modeofPayment"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Enter Mode of Payment</option>
-									<option value="Cash">CASH</option>
-									<option value="Online">Online</option>
-									<option value="Cheque">Cheque</option>
-									<option value="NEFT">NEFT</option>
-								</select>
+										id="modeofPayment" name="modeofPayment" required="required"
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Enter Mode of Payment</option>
+										<option value="Cash">CASH</option>
+										<option value="Online">Online</option>
+										<option value="Cheque">Cheque</option>
+										<option value="NEFT">NEFT</option>
+
+
+									</select>
 								</div>
 							</div>
 
 							<div class="col-lg-3" id="displayCheque">
 								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px" >
+									style="margin-bottom: 30px">
 									<label>Cheque Number <span id="star">*</span></label> <input
 										type="text" name="chequeNo" id="chequeNo" required="required"
 										placeholder="Enter Cheque No"
@@ -406,7 +407,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3" id="displaycheqdate">
 								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px" >
+									style="margin-bottom: 30px">
 									<label>Cheque Date <span id="star">*</span></label> <input
 										type="date" name="chequeDate" id="chequeDate"
 										required="required" placeholder="Enter Cheque Date"
@@ -417,67 +418,87 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3" id="displaydeposit">
 								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px" >
-									<label>Deposit Account  <span id="star">*</span></label> <input
-										type="text" name="depositAccount" id="depositAccount" required="required"
-										placeholder="Enter Deposit Account"
+									style="margin-bottom: 30px">
+									<label>Deposit Account <span id="star">*</span></label> <input
+										type="text" name="depositAccount" id="depositAccount"
+										required="required" placeholder="Enter Deposit Account"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
-							
+
+							<!-- <div class="col-lg-3" id="displayRef">
+								<div class="d-flex flex-column formFields"
+									style="margin-bottom: 30px">
+									<label>Ref Number/UPI ID <span id="star">*</span></label> <input
+										type="text" name="refNo" id="refNo" required="required"
+										placeholder="Enter Ref No" style="text-transform: uppercase;" />
+									<button type="button" class="btn btn-success" id="verifyUpiBtn"
+										style="margin-left: 5px;">Verify</button>
+								</div>
+								<small id="upiStatus" style="margin-top: 5px;"></small>
+							</div> -->
+
 							<div class="col-lg-3" id="displayRef">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px" >
-								<label>Ref Number <span id="star">*</span></label> <input
-									type="text" name="refNo" id="refNo"
-									required="required" placeholder="Enter Ref No"
-									style="text-transform: uppercase;" />
+								<div class="d-flex flex-column formFields">
+									<label for="">Ref Number/UPI ID</label>
+									<div class="row">
+										<div class="col-lg-9">
+											<input type="text" name="refNo" id="refNo"
+												required="required" placeholder="Enter Ref Number" />
+										</div>
+										<div class="col-lg-3">
+											<button class="btn btn-primary" type="button"
+												id="verifyUpiBtn" style="padding: 4px 8px; font-size: 11px;">Verify</button>
+
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-							
-							
+
+
 							<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Comments<span id="star">*</span></label> <input
-									type="text" name="comments" id="comments"
-									required="required" placeholder="Enter Comments "
-									style="text-transform: uppercase;" />
+								<div class="d-flex flex-column formFields"
+									style="margin-bottom: 30px">
+									<label>Comments<span id="star">*</span></label> <input
+										type="text" name="comments" id="comments" required="required"
+										placeholder="Enter Comments "
+										style="text-transform: uppercase;" />
+								</div>
 							</div>
-						</div>
 						</div>
 						<div class="row">
-						<div class="col-lg-3">
-							<div class=" h-100">
-								<div class="formFields d-flex flex-column">
-									<label>Financial Status</label>
-									<div class="cont">
-										<div class="toggle">
-											<input type="checkbox" id="financialStatus"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="toggle-sms-status" class="toggle__label"></label>
+							<div class="col-lg-3">
+								<div class="h-100">
+									<div class="formFields d-flex flex-column">
+										<label>Financial Status</label>
+										<div class="cont">
+											<div class="toggle">
+												<input type="checkbox" id="financialStatus"
+													class="toggle__input" data-toggle-type="financial-status">
+												<label for="financialStatus" class="toggle__label"></label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="h-100">
+									<div class="formFields d-flex flex-column">
+										<label>SMS Send</label>
+										<div class="cont">
+											<div class="toggle">
+												<input type="checkbox" id="smsSend" class="toggle__input"
+													data-toggle-type="sms-send"> <label for="smsSend"
+													class="toggle__label"></label>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						
-						<div class="col-lg-3">
-							<div class=" h-100">
-								<div class="formFields d-flex flex-column">
-									<label>SMS Send</label>
-									<div class="cont">
-										<div class="toggle">
-											<input type="checkbox" id="smsSend"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="toggle-sms-status" class="toggle__label"></label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						</div>
-							<!-- <div class="col-lg-3">
+
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="position">Position <span id="star">*</span></label> <input type="text"
 									name="position" id="position" required="required"
@@ -485,11 +506,11 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div> -->
 
-						</div>
+					</div>
 
 
 
-					
+
 
 
 					<div class="row">
@@ -611,6 +632,32 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+
+	<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const toggles = document.querySelectorAll('.toggle__input');
+
+		toggles.forEach((toggle) => {
+			updateToggleColor(toggle);
+
+			toggle.addEventListener('change', () => {
+				updateToggleColor(toggle);
+				console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+			});
+		});
+
+		function updateToggleColor(input) {
+			const label = input.nextElementSibling;
+			if (input.checked) {
+				label.style.backgroundColor = '#28a745'; // Green
+			} else {
+				label.style.backgroundColor = '#ccc'; // Gray
+			}
+		}
+	});
+
+	</script>
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/FinancialConsultant/addFinancialConsultant.js"></script>

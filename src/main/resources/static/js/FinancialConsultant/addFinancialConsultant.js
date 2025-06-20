@@ -232,20 +232,45 @@ $(document).ready(function() {
 function displayDetails() {
 	const paymentMode = $('#modeofPayment').val();
 	if (paymentMode === 'Cash') {
-			$('#displayCheque').hide();
-			$('#displaycheqdate').hide();
-			$('#displaydeposit').hide();
-			$('#displayRef').hide();
-		}
-	if (paymentMode === 'Cheque') {
+		$('#displayCheque').hide();
+		$('#displaycheqdate').hide();
+		$('#displaydeposit').hide();
+		$('#displayRef').hide();
+	}
+	else if (paymentMode === 'Cheque') {
 		$('#displayCheque').show();
 		$('#displaycheqdate').show();
 		$('#displaydeposit').show();
-	} else if (paymentMode === 'Online' || paymentMode === 'NEFT') {
-		formData.append("chequeNo", '');
-		formData.append("chequeDate", '');
-		formData.append("depositAccount", $('#depositAccount').val());
-		formData.append("refNo", $('#refNo').val());
+		$('#displayRef').hide();
+	} else if (paymentMode === 'Online') {
+		$('#displayCheque').hide();
+		$('#displaycheqdate').hide();
+		$('#displaydeposit').show();
+		$('#displayRef').show();
+	}
+	else if (paymentMode === 'NEFT') {
+		$('#displayCheque').hide();
+		$('#displaycheqdate').hide();
+		$('#displaydeposit').show();
+		$('#displayRef').show();
+
 	}
 
+
 }
+
+
+// ✅ UPI ID verification logic
+$('#verifyUpiBtn').click(function () {
+	const upi = $('#refNo').val().trim();
+	const upiPattern = /^[\w.\-]{2,256}@[a-zA-Z]{2,64}$/;
+
+	if (upiPattern.test(upi)) {
+		$('#refNo').css('border', '2px solid green');
+		$('#upiStatus').text('✅ Valid UPI ID').css('color', 'green');
+	} else {
+		$('#refNo').css('border', '2px solid red');
+		$('#upiStatus').text('❌ Invalid UPI ID format').css('color', 'red');
+	}
+});
+
