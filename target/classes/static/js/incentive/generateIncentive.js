@@ -56,7 +56,7 @@ function handleTeamMemberSelection(code, name) {
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
 	const months = [
 		"January", "February", "March", "April", "May", "June",
 		"July", "August", "September", "October", "November", "December"
@@ -65,23 +65,21 @@ $(document).ready(function() {
 	const monthDropdown = $('#incentiveMonth');
 	monthDropdown.empty().append('<option value="">Select</option>');
 
-	months.forEach((month, index) => {
-		const monthValue = (index + 1).toString().padStart(2, '0'); // e.g., "01", "02"
-		monthDropdown.append(`<option value="${monthValue}">${month}</option>`);
+	months.forEach((month) => {
+		// Set both value and display as the month name
+		monthDropdown.append(`<option value="${month}">${month}</option>`);
 	});
 
 	// Set Date From and Date To when month is selected
-	monthDropdown.on('change', function() {
-		const selectedMonth = parseInt($(this).val()); // "01" -> 1, "02" -> 2
+	monthDropdown.on('change', function () {
+		const selectedMonthName = $(this).val(); // e.g., "January"
+		const selectedMonth = months.indexOf(selectedMonthName); // 0 for Jan, 1 for Feb, etc.
 		const currentYear = new Date().getFullYear();
 
-		if (!isNaN(selectedMonth)) {
-			// Create first day of selected month
-			const startDate = new Date(currentYear, selectedMonth - 1, 2);
-			// Create last day of selected month
-			const endDate = new Date(currentYear, selectedMonth, 1);
+		if (selectedMonth >= 0) {
+			const startDate = new Date(currentYear, selectedMonth, 1); // 1st of selected month
+			const endDate = new Date(currentYear, selectedMonth + 1, 0); // Last day of selected month
 
-			// Format as YYYY-MM-DD
 			const formatDate = (date) => date.toISOString().split('T')[0];
 
 			$('#dateFrom').val(formatDate(startDate));
@@ -92,6 +90,7 @@ $(document).ready(function() {
 		}
 	});
 });
+
 
 
 
