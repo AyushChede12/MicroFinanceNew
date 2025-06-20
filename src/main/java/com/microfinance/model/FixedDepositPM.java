@@ -14,10 +14,12 @@ public class FixedDepositPM {
 	private String rateOfInterestFD;
 	private String termMode1;
 	private String termFd;
+	private String durationFD;
 	private String installmentTypeFD;
 	private String commissionOnNewFD;
 	private String componentIntervalFD;
 	private String totalPaidFD;
+	private String flexiblePlanFD;
 	private String maturityAmountFD;
 	private String statusOfPlanFD;
 	public int getId() {

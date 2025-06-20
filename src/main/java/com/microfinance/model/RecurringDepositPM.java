@@ -13,17 +13,24 @@ public class RecurringDepositPM {
     private long id;
 
     private String planCodeRD;
+    private String planNameRD;
     private String minimumAmountRD;
     private String rateOfInterestRD;
+    
+    private String installmentTypeRD;
+    private String durationRD;
+   
     private String termMode;
     private String term;
     private String commissionOnNewRD;
     private String renewalCommissionRD;
     private String componentIntervalRD;
     private String totalPaidRD;
+    private String flexiblePlanRD;
     private String maturityAmountRD;
-    private String latefineRD;
+    private String penltyfineRD;
     private String graceDaysRD;
+    
   
     private String statusOfPlanRD;
 	public long getId() {
@@ -106,11 +113,36 @@ public class RecurringDepositPM {
 	public void setStatusOfPlanRD(String statusOfPlanRD) {
 		this.statusOfPlanRD = statusOfPlanRD;
 	}
-	public String getLatefineRD() {
-		return latefineRD;
+	
+	public String getInstallmentTypeRD() {
+		return installmentTypeRD;
 	}
-	public void setLatefineRD(String latefineRD) {
-		this.latefineRD = latefineRD;
+	public void setInstallmentTypeRD(String installmentTypeRD) {
+		this.installmentTypeRD = installmentTypeRD;
+	}
+	public String getDurationRD() {
+		return durationRD;
+	}
+	public void setDurationRD(String durationRD) {
+		this.durationRD = durationRD;
+	}
+	public String getFlexiblePlanRD() {
+		return flexiblePlanRD;
+	}
+	public void setFlexiblePlanRD(String flexiblePlanRD) {
+		this.flexiblePlanRD = flexiblePlanRD;
+	}
+	public String getPlanNameRD() {
+		return planNameRD;
+	}
+	public void setPlanNameRD(String planNameRD) {
+		this.planNameRD = planNameRD;
+	}
+	public String getPenltyfineRD() {
+		return penltyfineRD;
+	}
+	public void setPenltyfineRD(String penltyfineRD) {
+		this.penltyfineRD = penltyfineRD;
 	}
 
     

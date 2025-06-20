@@ -35,6 +35,103 @@ pageEncoding="ISO-8859-1"%> -->
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
 
+		<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        margin-top: 20px;
+    }
+
+    th, td {
+        border: 1px solid #dee2e6;
+        padding: 10px 12px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    tr:hover {
+        background-color: #e9ecef;
+        cursor: pointer;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+
+    table thead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+</style>
+<style>
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 14px;
+    min-width: 1200px; /* Force minimum width so columns look even */
+}
+
+thead {
+    background: linear-gradient(to right, #7b2ff7, #f107a3);
+    color: white;
+    text-align: center;
+}
+
+th, td {
+    border: 1px solid #dee2e6;
+    padding: 10px 14px;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: #e2e6ea;
+    cursor: default;
+}
+
+th {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    color: #333;
+    white-space: nowrap;
+}
+</style>
+
+		
+
+
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -102,8 +199,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields  mb-4 ">
 								<label for="vehicalNo">Plan Name*</label> <input type="text"
 									name="planNameDD" id="planNameDD" required="required"
-									placeholder="Enter Minimum Amount"
-									style="text-transform: uppercase;" />
+									placeholder="Enter Plan Name" />
 							</div>
 						</div>
 
@@ -130,7 +226,10 @@ pageEncoding="ISO-8859-1"%> -->
 									id="installmentType" name="installmentType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Installment Type</option>
-									<option value="">cash</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="UPI">UPI</option>
 
 								</select>
 							</div>
@@ -152,6 +251,11 @@ pageEncoding="ISO-8859-1"%> -->
 									name="termModeDD" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Term Mode</option>
+									<option value="">Select Term Mode</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
 
 								</select>
 							</div>
@@ -189,9 +293,11 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Interest Interval</option>
-									<option value="">Monthly</option>
-									<option value="">Daily</option>
-									<option value="">Yearly</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
+									<option value="On Maturity">On Maturity</option>
 
 								</select>
 							</div>
@@ -249,19 +355,22 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-                <div class=" h-100 d-flex justify-content-start align-items-center">
-                  <div class="d-flex justify-content-start align-items-center  formFields">
-                    <label style="margin-left: 20px;" class="mb-2">Status plan</label>
-                    <div class="cont">
-                      <div class="toggle">
-                        <input type="checkbox" id="toggle-member-status" class="toggle__input"
-                          data-toggle-type="member-status">
-                        <label for="toggle-member-status" class="toggle__label"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+							<div
+								class=" h-100 d-flex justify-content-start align-items-center">
+								<div
+									class="d-flex justify-content-start align-items-center  formFields">
+									<label style="margin-left: 20px;" class="mb-2">Status
+										plan</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="statusOfPlan" name="statusOfPlan"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="toggle-member-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 					</div>
 
@@ -287,9 +396,13 @@ pageEncoding="ISO-8859-1"%> -->
 										<thead class="table-light">
 											<tr>
 												<th>Plan Code</th>
+												<th>Plan Name</th>
 												<th>Minimum Deposit</th>
 												<th>Rate Of Interest</th>
 												<th>Installment Type</th>
+												<th>Term Mode</th>
+												<th>Term</th>
+
 												<th>Duration</th>
 												<th>Commission On New</th>
 												<th>Renewal Commission</th>
@@ -356,6 +469,14 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								<label for="vehicalNo">Plan Name*</label> <input type="text"
+									name="planNameRD" id="planNameRD" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -381,6 +502,11 @@ pageEncoding="ISO-8859-1"%> -->
 									name="termMode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Term Mode</option>
+									<option value="">Select Term Mode</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
 
 								</select>
 							</div>
@@ -394,10 +520,36 @@ pageEncoding="ISO-8859-1"%> -->
 									id="term" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Installment Type*</label> <select
+									id="installmentTypeRD" name="installmentTypeRD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Installment Type</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="UPI">UPI</option>
+
+								</select>
+							</div>
+						</div>
+
+
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comm.New(%)*</label> <input type="text"
+								<label for="">Duration*</label> <input type="text"
+									name="durationRD" id="durationRD" required="required"
+									placeholder="Enter Duration" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">new Commission(%)*</label> <input type="text"
 									name="commissionOnNewRD" id="commissionOnNewRD"
 									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
@@ -405,7 +557,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comm.Renew(%)*</label> <input type="text"
+								<label for="">Renewal Commission(%)*</label> <input type="text"
 									name="renewalCommissionRD" id="renewalCommissionRD"
 									required="required" placeholder="Enter Comm.Renew(%)" />
 							</div>
@@ -413,12 +565,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Compound Interval</label> <select
+								<label for="">Interest Interval</label> <select
 									id="componentIntervalRD" name="componentIntervalRD"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Compound Interval</option>
-
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
+									<option value="On Maturity">On Maturity</option>
 								</select>
 							</div>
 						</div>
@@ -427,7 +583,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Total Deposit</label> <input readonly type="text"
+								<label for="">Total Deposit</label> <input  type="text"
 									name="totalPaidRD" id="totalPaidRD" required="required"
 									placeholder="Enter Total Deposit" />
 							</div>
@@ -435,18 +591,32 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount*</label> <input readonly
+								<label for="">Maturity Amount*</label> <input 
 									type="text" name="maturityAmountRD" id="maturityAmountRD"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Is Flexible Plan?</label> <select
+									id="flexiblePlanRD" name="flexiblePlanRD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Flexible Plan</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
+
+								</select>
+							</div>
+						</div>
+
 
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Grace Period*</label> <input readonly type="text"
+								<label>Grace Period*</label> <input  type="text"
 									name="graceDaysRD" id="graceDaysRD" required="required"
 									placeholder="Enter Grace Period" />
 							</div>
@@ -456,17 +626,28 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Late Fine(%)*</label> <input type="text"
-									name="price" id="price" required="required"
+								<label for="">Penalty Fine(%)*</label> <input type="text"
+									name="penltyfineRD" id="penltyfineRD" required="required"
 									placeholder="Enter Email id" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Plan Status</label> <input type="text"
-									name="statusOfPlanRD" id="statusOfPlanRD" required="required"
-									placeholder="Enter Occupation" />
+							<div
+								class=" h-100 d-flex justify-content-start align-items-center">
+								<div
+									class="d-flex justify-content-start align-items-center  formFields">
+									<label style="margin-left: 20px;" class="mb-2">Status
+										plan</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="statusOfPlanRD"
+												name="statusOfPlanRD" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="toggle-member-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -475,8 +656,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row" style="margin-left: 80%;">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-danger">Generate</button>
-							<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+							<button id="ReccuringgenrateBtn" class="btnStyle bg-danger">Generate</button>
+							<button id="ReccuringsaveBtn" class="btnStyle bg-warning ">Save</button>
+							<button id="ReccuringupdateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
+
 						</div>
 					</div>
 
@@ -489,97 +672,36 @@ pageEncoding="ISO-8859-1"%> -->
 										Recent Sales <span>| Today</span>
 									</h5>
 
-									<table class="table table-borderless datatable overflow-scroll">
+									<table class="table table-bordered">
 										<thead class="table-light">
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="col">#</th>
-												<th scope="col">Customer</th>
-												<th scope="col">Product</th>
-												<th scope="col">Price</th>
-												<th scope="col">Status</th>
-												<th scope="col">Action</th>
+											<tr>
+												<th>Plan Code</th>
+												<th>Plan Name</th>
+												<th>Minimum Deposit</th>
+												<th>Rate Of Interest</th>
+												<th>Installment Type</th>
+												<th>Term Mode</th>
+												<th>Term</th>
+
+												<th>Duration</th>
+												<th>Commission On New</th>
+												<th>Renewal Commission</th>
+												<th>Interest Interval</th>
+												<th>Total Paid</th>
+												<th>Maturity Amount</th>
+												<th>Flexible Plan</th>
+												<th>Grace Days</th>
+												<th>Penalty Rate</th>
+												<th>Status</th>
+												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="row"><a href="#">1</a></th>
-												<td>Arun Kumar</td>
-												<td><a href="#" className="text-primary">Milk</a></td>
-												<td>$29</td>
-												<td><span class="badge bg-success text-white">Approved</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
+										<tbody id="recurringTableBody">
+											<!-- Dynamic rows will be injected here -->
 										</tbody>
 									</table>
+
+
 								</div>
 							</div>
 						</div>
@@ -628,6 +750,14 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								<label for="vehicalNo">Plan Name*</label> <input type="text"
+									name="planNameFD" id="planNameFD" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -646,6 +776,30 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Installment Type*</label> <select
+									id="installmentTypeFD" name="installmentTypeFD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Installment Type</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="UPI">UPI</option>
+
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Duration*</label> <input type="text"
+									name="durationFD" id="durationFD" required="required"
+									placeholder="Enter Duration" />
+							</div>
+						</div>
+
 
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
@@ -653,6 +807,11 @@ pageEncoding="ISO-8859-1"%> -->
 									name="termMode1" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Term Mode</option>
+									<option value="">Select Term Mode</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
 
 								</select>
 							</div>
@@ -678,16 +837,20 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Compound Interval*</label> <select
+								<label for="">Interst Interval*</label> <select
 									id="componentIntervalFD" name="componentIntervalFD"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Compound Interval</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
+									<option value="On Maturity">On Maturity</option>
 
 								</select>
 							</div>
 						</div>
-
 
 
 
@@ -715,7 +878,18 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Is Flexible Plan?</label> <select
+									id="flexiblePlanFD" name="flexiblePlanFD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Flexible Plan</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
 
+								</select>
+							</div>
+						</div>
 
 
 
@@ -883,6 +1057,14 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								<label for="vehicalNo">Plan Name*</label> <input type="text"
+									name="planNameMD" id="planNameMD" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -890,6 +1072,37 @@ pageEncoding="ISO-8859-1"%> -->
 									type="text" name="minimumAmountMD" id="minimumAmountMD"
 									required="required" placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="vehicalNo">Interest Rate(%)*</label> <input
+									type="text" name="rateOfInterestMD" id="rateOfInterestMD"
+									required="required" placeholder="Enter Interest Rate"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Installment Type*</label> <select
+									id="installmentTypeMD" name="installmentTypeMD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Installment Type</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="UPI">UPI</option>
+
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Duration*</label> <input type="text"
+									name="durationMD" id="durationMD" required="required"
+									placeholder="Enter Duration" />
 							</div>
 						</div>
 
@@ -908,6 +1121,11 @@ pageEncoding="ISO-8859-1"%> -->
 									name="termModeMD" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Term Mode</option>
+									<option value="">Select Term Mode</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
 
 								</select>
 							</div>
@@ -920,6 +1138,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="termMD" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -966,7 +1185,18 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Is Flexible Plan?</label> <select
+									id="flexiblePlanMD" name="flexiblePlanMD" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Flexible Plan</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
 
+								</select>
+							</div>
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">

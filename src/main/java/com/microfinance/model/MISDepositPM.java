@@ -11,6 +11,10 @@ public class MISDepositPM {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String planCodeMD;
+	private String planNameMD;
+	private String rateOfInterestMD;
+	private String durationMD;
+	private String installmentTypeMD;
 	private String minimumAmountMD;
 	private String maturityROIMD;
 	private String termModeMD;
@@ -19,6 +23,7 @@ public class MISDepositPM {
 	private String MISIntervalMD;
 	private String MISInterestMD;
 	private String maturityAmountMD;
+	private String flexiblePlanMD;
 	private String commissionOnNewMD;
 	private String statusOfPlanMDRD2;
 	public long getId() {

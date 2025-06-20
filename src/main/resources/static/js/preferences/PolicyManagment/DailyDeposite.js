@@ -10,13 +10,10 @@ $(document).ready(function () {
 
 		    const dailyDeposit = {
 		        planCode: $('#planCode').val(),
-				planNameDD: $('#planNameDD').val(),
 		        minimumDeposit: $('#minimumDeposit').val(),
 		        rateOfInterest: $('#rateOfInterest').val(),
 		        installmentType: $('#installmentType').val(),    // ⬅️ Dropdown value
 		        duration: $('#duration').val(),
-				termModeDD: $('#termModeDD').val(),
-				termDD: $('#termDD').val(),
 		        commissionOnNew: $('#commissionOnNew').val(),
 		        renewalCommission: $('#renewalCommission').val(),
 		        interestInterval: $('#interestInterval').val(), // ⬅️ Dropdown value
@@ -62,14 +59,10 @@ $(document).ready(function () {
                         const row = `
                             <tr>
                                 <td>${item.planCode || ''}</td>
-								<td>${item.planNameDD || ''}</td>
-								
                                 <td>${item.minimumDeposit || ''}</td>
                                 <td>${item.rateOfInterest || ''}</td>
                                 <td>${item.installmentType || ''}</td>
                                 <td>${item.duration || ''}</td>
-								<td>${item.termModeDD || ''}</td>
-								<td>${item.termDD || ''}</td>
                                 <td>${item.commissionOnNew || ''}</td>
                                 <td>${item.renewalCommission || ''}</td>
                                 <td>${item.interestInterval || ''}</td>
@@ -122,12 +115,9 @@ $(document).ready(function () {
                     $('#formid').data('id', id); // ✅ Set the ID for update
 
                     $('#planCode').val(data.planCode);
-					$('#planNameDD').val(data.planNameDD);
                     $('#minimumDeposit').val(data.minimumDeposit);
                     $('#rateOfInterest').val(data.rateOfInterest);
                     $('#duration').val(data.duration);
-					$('#termModeDD').val(data.termModeDD);
-					$('#termDD').val(data.termDD);
                     $('#commissionOnNew').val(data.commissionOnNew);
                     $('#renewalCommission').val(data.renewalCommission);
                     $('#interestInterval').val(data.interestInterval);
@@ -188,12 +178,9 @@ $(document).ready(function () {
     function getFormData() {
         return {
             planCode: $('#planCode').val(),
-			planNameDD:$('#planNameDD').val(),
             minimumDeposit: $('#minimumDeposit').val(),
             rateOfInterest: $('#rateOfInterest').val(),
             installmentType: $('#installmentType').val(),
-			termModeDD: $('#termModeDD').val(),
-			termDD: $('#termDD').val(),
             duration: $('#duration').val(),
             commissionOnNew: $('#commissionOnNew').val(),
             renewalCommission: $('#renewalCommission').val(),
@@ -246,160 +233,5 @@ $(document).ready(function () {
 	        }
 	    });
 	});
-	
-	// save the Reccuring deposite
-	$("#ReccuringsaveBtn").show();
-	$("#ReccuringgenrateBtn").show();
-	$("#ReccuringupdateBtn").hide();
-	$("#ReccuringdeleteBtn").hide();
-
-	// SAVE BUTTON
-	$('#ReccuringsaveBtn').on('click', function (e) {
-	    e.preventDefault();
-
-	    const reccuringDeposite = {
-	        planCodeRD: $('#planCodeRD').val(),
-	        planNameRD: $('#planNameRD').val(),
-	        minimumAmountRD: $('#minimumAmountRD').val(),
-	        rateOfInterestRD: $('#rateOfInterestRD').val(),
-	        installmentTypeRD: $('#installmentTypeRD').val(),
-	        durationRD: $('#durationRD').val(),
-	        termMode: $('#termMode').val(),
-	        term: $('#term').val(),
-	        commissionOnNewRD: $('#commissionOnNewRD').val(),
-	        renewalCommissionRD: $('#renewalCommissionRD').val(),
-	        componentIntervalRD: $('#componentIntervalRD').val(),
-	        totalPaidRD: $('#totalPaidRD').val(),
-	        maturityAmountRD: $('#maturityAmountRD').val(),
-	        flexiblePlanRD: $('#flexiblePlanRD').val(),
-	        graceDaysRD: $('#graceDaysRD').val(),
-	        penltyfineRD: $('#penltyfineRD').val(),
-	        statusOfPlanRD: $('#statusOfPlanRD').val()
-	    };
-
-	    // Debug log
-	    console.log("Sending Recurring Deposit Data:", reccuringDeposite);
-
-	    $.ajax({
-	        url: '/api/recurring-depositsave', // ✅ Corrected endpoint
-	        type: 'GET',
-	        contentType: 'application/json',
-	        data: JSON.stringify(reccuringDeposite),
-	        success: function (response) {
-	            alert("Recurring Deposit Saved Successfully");
-	            location.reload(); // ✅ Reload page after success
-	        },
-	        error: function (xhr) {
-	            console.error("Save Error:", xhr.responseText);
-	            alert("Something went wrong while saving!");
-	        }
-	    });
-	});
-	// feacth recuuring deposite
-	function fetchRecurringDeposits() {
-	    $.ajax({
-	        url: "/api/recurring-depositview",  // ✅ Make sure this matches your controller mapping
-	        type: "GET",
-	        dataType: "json",
-	        success: function (response) {
-	            const data = response.data || [];
-	            const tableBody = $("#recurringTableBody").empty();
-
-	            if (data.length > 0) {
-	                $.each(data, function (index, item) {
-	                    const row = `
-	                        <tr>
-	                            <td>${item.planCodeRD || ''}</td>
-	                            <td>${item.planNameRD || ''}</td>
-	                            <td>${item.minimumAmountRD || ''}</td>
-	                            <td>${item.rateOfInterestRD || ''}</td>
-	                            <td>${item.installmentTypeRD || ''}</td>
-	                            <td>${item.durationRD || ''}</td>
-	                            <td>${item.termMode || ''}</td>
-	                            <td>${item.term || ''}</td>
-	                            <td>${item.commissionOnNewRD || ''}</td>
-	                            <td>${item.renewalCommissionRD || ''}</td>
-	                            <td>${item.componentIntervalRD || ''}</td>
-	                            <td>${item.totalPaidRD || ''}</td>
-	                            <td>${item.maturityAmountRD || ''}</td>
-	                            <td>${item.flexiblePlanRD || ''}</td>
-	                            <td>${item.graceDaysRD || ''}</td>
-	                            <td>${item.penltyfineRD || ''}</td>
-	                            <td>${item.statusOfPlanRD || ''}</td>
-	                            <td class="d-flex" style="gap: .7rem;">
-	                                <button class="iconbutton edit-btn" recurring-id="${item.id}">
-	                                    <i class="fa-solid fa-pen-to-square text-success"></i>
-	                                </button>
-	                                <button class="iconbutton delete-btn" recurring-id="${item.id}">
-	                                    <i class="fa-solid fa-trash text-danger"></i>
-	                                </button>
-	                            </td>
-	                        </tr>`;
-	                    tableBody.append(row);
-	                });
-	            } else {
-	                tableBody.html(`<tr><td colspan="17" class="text-center text-warning">No data found.</td></tr>`);
-	            }
-	        },
-	        error: function () {
-	            $("#recurringTableBody").html(`<tr><td colspan="17" class="text-center text-danger">Something went wrong.</td></tr>`);
-	        }
-	    });
-	}
-
-	fetchRecurringDeposits();
-	
-	// DELEGATED EVENT for edit button
-	    $('#recurringTableBody').on('click', '.edit-btn', function () {
-	        const id = $(this).data('id');
-	        editRecurringDeposit(id);
-	    });
-
-// get by id reccuring deposite
-function editRecurringDeposit(id) {
-    $.ajax({
-        url: `api/dailyedit/${id}`,  
-        method: 'GET',
-        contentType: 'application/json',
-        success: function (response) {
-            if (response && response.data) {
-                const data = response.data;
-
-                $('#formRecurring').data('id', id); // 🔁 Store ID for update
-
-                // Set values from fetched data
-                $('#planCodeRD').val(data.planCodeRD);
-                $('#planNameRD').val(data.planNameRD);
-                $('#minimumAmountRD').val(data.minimumAmountRD);
-                $('#rateOfInterestRD').val(data.rateOfInterestRD);
-                $('#installmentTypeRD').val(data.installmentTypeRD);
-                $('#durationRD').val(data.durationRD);
-                $('#termMode').val(data.termMode);
-                $('#term').val(data.term);
-                $('#commissionOnNewRD').val(data.commissionOnNewRD);
-                $('#renewalCommissionRD').val(data.renewalCommissionRD);
-                $('#componentIntervalRD').val(data.componentIntervalRD);
-                $('#totalPaidRD').val(data.totalPaidRD);
-                $('#maturityAmountRD').val(data.maturityAmountRD);
-                $('#flexiblePlanRD').val(data.flexiblePlanRD);
-                $('#graceDaysRD').val(data.graceDaysRD);
-                $('#penltyfineRD').val(data.penltyfineRD);
-                $('#statusOfPlanRD').val(data.statusOfPlanRD);
-
-                // Toggle buttons
-                $('#ReccuringsaveBtn').hide();
-                $('#ReccuringupdateBtn').show();
-                $('#ReccuringdeleteBtn').show();
-                $('#ReccuringgenrateBtn').hide();
-            } else {
-                alert('No data found for this ID');
-            }
-        },
-        error: function () {
-            alert('Failed to fetch recurring deposit details.');
-        }
-    });
-}
-
 
 });

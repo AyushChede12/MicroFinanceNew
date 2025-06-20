@@ -1,6 +1,7 @@
 package com.microfinance.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -127,9 +128,12 @@ public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
 	        existing.setMinimumDeposit(updatedData.getMinimumDeposit());
 	        existing.setRateOfInterest(updatedData.getRateOfInterest());
 	        existing.setInstallmentType(updatedData.getInstallmentType());
+	        existing.setPlanNameDD(updatedData.getPlanNameDD());
 	        existing.setDuration(updatedData.getDuration()); // Fixed here
 	        existing.setCommissionOnNew(updatedData.getCommissionOnNew());
 	        existing.setRenewalCommission(updatedData.getRenewalCommission());
+	        existing.setTermDD(updatedData.getTermDD());
+	        existing.setTermModeDD(updatedData.getTermModeDD());
 	        existing.setInterestInterval(updatedData.getInterestInterval());
 	        existing.setTotalPaid(updatedData.getTotalPaid());
 	        existing.setMaturityAmount(updatedData.getMaturityAmount());
@@ -157,5 +161,60 @@ public boolean deleteDailyDeposit(Long id) {
 
 
 
+// edit by id reccuring deposite
+public RecurringDepositPM getRecurringDepositById(Long id) {
+	// TODO Auto-generated method stub
+	 return recurringDepositRepo.findById(id).orElse(null);
 }
+
+
+
+//update the reccuring deposite service
+public RecurringDepositPM updateRecurringDeposit(Long id, RecurringDepositPM updatedData) {
+	 Optional<RecurringDepositPM> existingOpt = recurringDepositRepo.findById(id);
+
+	    if (existingOpt.isPresent()) {
+	        RecurringDepositPM existing = existingOpt.get();
+
+	        // Update all fields
+	        existing.setPlanCodeRD(updatedData.getPlanCodeRD());
+	        existing.setPlanNameRD(updatedData.getPlanNameRD());
+	        existing.setMinimumAmountRD(updatedData.getMinimumAmountRD());
+	        existing.setRateOfInterestRD(updatedData.getRateOfInterestRD());
+	        existing.setInstallmentTypeRD(updatedData.getInstallmentTypeRD());
+	        existing.setDurationRD(updatedData.getDurationRD());
+	        existing.setTermMode(updatedData.getTermMode());
+	        existing.setTerm(updatedData.getTerm());
+	        existing.setCommissionOnNewRD(updatedData.getCommissionOnNewRD());
+	        existing.setRenewalCommissionRD(updatedData.getRenewalCommissionRD());
+	        existing.setComponentIntervalRD(updatedData.getComponentIntervalRD());
+	        existing.setTotalPaidRD(updatedData.getTotalPaidRD());
+	        existing.setMaturityAmountRD(updatedData.getMaturityAmountRD());
+	        existing.setFlexiblePlanRD(updatedData.getFlexiblePlanRD());
+	        existing.setGraceDaysRD(updatedData.getGraceDaysRD());
+	        existing.setPenltyfineRD(updatedData.getPenltyfineRD());
+	        existing.setStatusOfPlanRD(updatedData.getStatusOfPlanRD());
+
+	        return recurringDepositRepo.save(existing);
+	    }
+
+	    return null; // Not found
+	}
+
+
+//delete the recurring deposit service
+
+public boolean deleteRecurringDeposit(Long id) {
+	 if (recurringDepositRepo.existsById(id)) {
+		 recurringDepositRepo.deleteById(id);
+	        return true;
+	    } else {
+	        return false;
+	    }
+}
+}
+
+
+
+
 
