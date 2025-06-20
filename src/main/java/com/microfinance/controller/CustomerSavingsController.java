@@ -57,6 +57,17 @@ public class CustomerSavingsController {
   		
   		
   	}
+  	
+  	//fetching saving scheme catalog data
+  	@GetMapping("/fetchsavingchemecatalog")
+  	public ApiResponse<List<SavingSchemeCatalog>> findBySchemeType() {
+  		List<SavingSchemeCatalog>  list = customersaving.findBySchemeType();
+  		if(list!=null && !list.isEmpty()) {
+  			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  		}else
+  			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  		
+  	}
 	
    
 	
