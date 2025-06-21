@@ -158,7 +158,7 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Enter Relation to Applicant</option>
-									<option value="Blue">Blue</option>
+									
 								</select>
 							</div>
 						</div>
@@ -519,7 +519,7 @@ pageEncoding="ISO-8859-1"%> -->
 								class="btnStyle bg-success">Save</button>
 							<button id="updateBtn" class="btnStyle"
 								style="background-color: #FFA500;">Update</button>
-							<button id="saveBtn" class="btnStyle bg-primary">Print</button>
+							<button id="printBtn" class="btnStyle bg-primary">Print</button>
 						</div>
 					</div>
 				</div>
@@ -629,32 +629,46 @@ pageEncoding="ISO-8859-1"%> -->
       </div> -->
 
 		</div>
+		
+		<div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
 
+					<div class="card-body table-responsive">
+						<h5 class="card-title">Financial Consultant Details</h5>
+
+
+                       <div style="overflow-x: auto; white-space: nowrap;">
+						<table class="table table-borderless datatable">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sl No.</th>
+									<th scope="col">Financial Name</th>
+									<th scope="col">Financial Code</th>
+									<th scope="col">Branch</th>
+									<th scope="col">Date of Joining</th>
+									<th scope="col">Address</th>
+									<th scope="col">Contact No</th>
+									<th scope="col">Financial Status</th>
+									<th scope="col">Profession</th>
+									<th scope="col">Edit</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 
 	</main>
 
 	<script>
-	document.addEventListener('DOMContentLoaded', () => {
-		const toggles = document.querySelectorAll('.toggle__input');
-
-		toggles.forEach((toggle) => {
-			updateToggleColor(toggle);
-
-			toggle.addEventListener('change', () => {
-				updateToggleColor(toggle);
-				console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
-			});
-		});
-
-		function updateToggleColor(input) {
-			const label = input.nextElementSibling;
-			if (input.checked) {
-				label.style.backgroundColor = '#28a745'; // Green
-			} else {
-				label.style.backgroundColor = '#ccc'; // Gray
-			}
-		}
-	});
+	
 
 	</script>
 

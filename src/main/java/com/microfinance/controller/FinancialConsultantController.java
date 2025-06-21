@@ -103,6 +103,30 @@ public class FinancialConsultantController {
 	    ApiResponse<addFinancialConsultant> response = financialConsultantService.saveOrUpdateFinancialConsultant(financialConsultantDto, customerPhoto, customerSignature);
 	    return new ResponseEntity<>(response, response.getStatus());
 	}
+	
+	@PostMapping("/getAllFinancialConsultantDetails")
+	public ResponseEntity<ApiResponse<List<addFinancialConsultant>>> getAllFinancialConsultantDetails() {
+		List<addFinancialConsultant> list = financialConsultantService.getAllFinancialConsultantDetails();
+		ApiResponse<List<addFinancialConsultant>> response= ApiResponse.success(HttpStatus.OK, "Details Fetched Successfully", list);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
+
+
+	
+	@GetMapping("/getFinancialConsultantById")
+	public ResponseEntity<ApiResponse<addFinancialConsultant>> findFinancialConsultantById(@RequestParam("id") Long id) {
+	    Optional<addFinancialConsultant> financial = financialConsultantService.FinancialConsultantById(id);
+
+	    if (financial.isPresent()) {
+	        ApiResponse<addFinancialConsultant> response = ApiResponse.success(
+	            HttpStatus.OK, "Financial Consultant data found successfully", financial.get());
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<addFinancialConsultant> response = ApiResponse.error(
+	            HttpStatus.NOT_FOUND, "Financial Consultant data not found");
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	    }
+	}
 
 
 }

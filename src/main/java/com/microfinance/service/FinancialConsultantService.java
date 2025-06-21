@@ -114,13 +114,23 @@ public class FinancialConsultantService {
 
 		if (isNew) {
 			return ApiResponse.success(HttpStatus.CREATED,
-					"Saved successfully. Member Code: " + savedFinancialConsultant.getFinancialCode(),
+					"Saved successfully. Finnacial Code: " + savedFinancialConsultant.getFinancialCode(),
 					savedFinancialConsultant);
 		} else {
 			return ApiResponse.success(HttpStatus.OK,
-					"Updated successfully. Member Code: " + savedFinancialConsultant.getFinancialCode(),
+					"Updated successfully. Financial Code: " + savedFinancialConsultant.getFinancialCode(),
 					savedFinancialConsultant);
 		}
 
+	}
+
+	public List<addFinancialConsultant> getAllFinancialConsultantDetails() {
+		// TODO Auto-generated method stub
+		return financialConsultationRepo.findAll();
+	}
+
+	public Optional<addFinancialConsultant> FinancialConsultantById(Long id) {
+		// TODO Auto-generated method stub
+		return financialConsultationRepo.findById(id);
 	}
 }
