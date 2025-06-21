@@ -43,6 +43,7 @@ $(document).ready(function() {
 		formData.append("nomineePanNo", $('#nomineePanNo').val());
 		formData.append("nomineeKycType", $('#nomineeKycType').val());
 
+
         formData.append("memberFees", $('#memberFees').val());
         formData.append("chequeNo", $('#chequeNo').val());
         formData.append("chequeDate", $('#chequeDate').val());
@@ -50,6 +51,7 @@ $(document).ready(function() {
         formData.append("referenceNo", $('#referenceNo').val());
         formData.append("remarks", $('#remarks').val());
         formData.append("paymentBy", $('#paymentBy').val());
+
 
 		// Fees/Setting Details
 		
@@ -204,6 +206,7 @@ window.onload = function() {
         });
 };
 
+
 //Niraj Code 
 window.onload = function() {
     fetch('getAllRelativeModule')
@@ -221,6 +224,7 @@ window.onload = function() {
             console.error("Error loading relations:", error);
         });
 };
+
 
 $(document).ready(function () {
     // Fetch all branches and populate the dropdown
@@ -318,6 +322,5 @@ document.addEventListener("DOMContentLoaded", function () {
 	// Load on page load
 	loadBankAccounts();
 });
-
 
 

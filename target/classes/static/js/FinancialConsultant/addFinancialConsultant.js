@@ -33,6 +33,7 @@ $(document).ready(function() {
 		}
 	});
 
+
 	$.ajax({
 		url: "getAllRelationToApplicant",
 		type: "GET",
@@ -47,8 +48,6 @@ $(document).ready(function() {
 			alert("Failed to load relation .");
 		}
 	});
-
-
 });
 
 
@@ -71,6 +70,60 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#memberCode").change(function() {
 		var memberCode = $(this).val();
+
+
+		if (memberCode !== "") {
+			$.ajax({
+				type: "POST",
+				url: "/getCustomerByMemberCode",
+				data: { memberCode: memberCode },
+				success: function(data) {
+					// Fill form fields
+					$("#customerName").val(data.customerName);
+					$("#dob").val(data.dob);
+					$("#age").val(data.customerAge);
+					$("#guardianName").val(data.guardianName);
+					$("#relationToApplicant").val(data.relationToApplicant);
+					$("#contactNo").val(data.contactNo);
+					$("#nomineeName").val(data.nomineeName);
+					$("#branchName").val(data.branchName);
+					$("#nomineeAge").val(data.nomineeAge);
+					$("#address").val(data.customerAddress);
+					$("#district").val(data.district);
+					$("#state").val(data.state);
+					$("#pinCode").val(data.pinCode);
+					$("#profession").val(data.profession);
+					$("#academicBackground").val(data.academicBackground);
+
+					// Set customer photo
+					if (data.customerPhoto) {
+						const imagePath = `Uploads/${data.customerPhoto}`;
+						document.getElementById("customerPhoto").src = imagePath;
+						/* imagePath.style.width = "100%";
+						imagePath.style.height = "100%";
+						imagePath.style.objectFit = "cover"
+						imagePath.style.overflow = "hidden"
+						imagePath.style.borderRadius = "20px"*/
+					} else {
+						document.getElementById("customerPhoto").src = 'Uploads/default-placeholder.jpg';
+					}
+
+					// Set customer signature
+					if (data.customerSignature) {
+						const imagePath = `Uploads/${data.customerSignature}`;
+						document.getElementById("customerSignature").src = imagePath;
+						/*const previewimg2 = document.getElementById("customerSignature");
+							document.getElementById("customerSignature").src = e.target.result;
+							previewimg2.style.width = "100%";
+							previewimg2.style.height = "100%";
+							previewimg2.style.objectFit = "cover"
+							previewimg2.style.overflow = "hidden"
+							previewimg2.style.borderRadius = "20px"*/
+					}
+					$("#referralCode").val(data.referralCode);
+					$("#referralName").val(data.referralName);
+
+
 		alert(memberCode);
 		if (memberCode !== "") {
 			$.ajax({
@@ -119,6 +172,7 @@ $(document).ready(function() {
 					} else {
 						alert("No customer found for this member code.");
 					}
+
 				},
 				error: function(xhr) {
 					alert("Member not found or server error.");
