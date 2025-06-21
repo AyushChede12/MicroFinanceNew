@@ -35,101 +35,101 @@ pageEncoding="ISO-8859-1"%> -->
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
 
-		<style>
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 14px;
-        margin-top: 20px;
-    }
-
-    th, td {
-        border: 1px solid #dee2e6;
-        padding: 10px 12px;
-        text-align: center;
-        vertical-align: middle;
-    }
-
-    th {
-        background-color: #f8f9fa;
-        font-weight: bold;
-        color: #343a40;
-    }
-
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-
-    tr:hover {
-        background-color: #e9ecef;
-        cursor: pointer;
-    }
-
-    .table-wrapper {
-        overflow-x: auto;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        border-radius: 10px;
-        margin-bottom: 30px;
-    }
-
-    table thead {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-    }
-</style>
 <style>
-.table-wrapper {
-    width: 100%;
-    overflow-x: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
 table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Segoe UI', sans-serif;
-    font-size: 14px;
-    min-width: 1200px; /* Force minimum width so columns look even */
-}
-
-thead {
-    background: linear-gradient(to right, #7b2ff7, #f107a3);
-    color: white;
-    text-align: center;
+	width: 100%;
+	border-collapse: collapse;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 14px;
+	margin-top: 20px;
 }
 
 th, td {
-    border: 1px solid #dee2e6;
-    padding: 10px 14px;
-    text-align: center;
-}
-
-tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-tbody tr:hover {
-    background-color: #e2e6ea;
-    cursor: default;
+	border: 1px solid #dee2e6;
+	padding: 10px 12px;
+	text-align: center;
+	vertical-align: middle;
 }
 
 th {
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+	background-color: #f8f9fa;
+	font-weight: bold;
+	color: #343a40;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+tr:hover {
+	background-color: #e9ecef;
+	cursor: pointer;
+}
+
+.table-wrapper {
+	overflow-x: auto;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	margin-bottom: 30px;
+}
+
+table thead {
+	position: sticky;
+	top: 0;
+	z-index: 1;
+}
+</style>
+<style>
+.table-wrapper {
+	width: 100%;
+	overflow-x: auto;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: 'Segoe UI', sans-serif;
+	font-size: 14px;
+	min-width: 1200px; /* Force minimum width so columns look even */
+}
+
+thead {
+	background: linear-gradient(to right, #7b2ff7, #f107a3);
+	color: white;
+	text-align: center;
+}
+
+th, td {
+	border: 1px solid #dee2e6;
+	padding: 10px 14px;
+	text-align: center;
+}
+
+tbody tr:nth-child(even) {
+	background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+	background-color: #e2e6ea;
+	cursor: default;
+}
+
+th {
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
 }
 
 td {
-    color: #333;
-    white-space: nowrap;
+	color: #333;
+	white-space: nowrap;
 }
 </style>
 
-		
+
 
 
 <title>Admin Dashboard</title>
@@ -431,7 +431,7 @@ td {
 
 
 		<div>
-			<form id="formid">
+			<form id="recurringformid">
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -583,7 +583,7 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Total Deposit</label> <input  type="text"
+								<label for="">Total Deposit</label> <input type="text"
 									name="totalPaidRD" id="totalPaidRD" required="required"
 									placeholder="Enter Total Deposit" />
 							</div>
@@ -591,8 +591,8 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount*</label> <input 
-									type="text" name="maturityAmountRD" id="maturityAmountRD"
+								<label for="">Maturity Amount*</label> <input type="text"
+									name="maturityAmountRD" id="maturityAmountRD"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
@@ -616,7 +616,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Grace Period*</label> <input  type="text"
+								<label>Grace Period*</label> <input type="text"
 									name="graceDaysRD" id="graceDaysRD" required="required"
 									placeholder="Enter Grace Period" />
 							</div>
@@ -628,7 +628,7 @@ td {
 							<div class="d-flex flex-column formFields">
 								<label for="">Penalty Fine(%)*</label> <input type="text"
 									name="penltyfineRD" id="penltyfineRD" required="required"
-									placeholder="Enter Email id" />
+									placeholder="Enter Penalty Fine" />
 							</div>
 						</div>
 
@@ -658,7 +658,8 @@ td {
 						<div class="col-12 text-center">
 							<button id="ReccuringgenrateBtn" class="btnStyle bg-danger">Generate</button>
 							<button id="ReccuringsaveBtn" class="btnStyle bg-warning ">Save</button>
-							<button id="ReccuringupdateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
+							<button id="ReccuringupdateBtn"
+								class="btnStyle bg-warning style="display:none;">Update</button>
 
 						</div>
 					</div>
@@ -711,7 +712,7 @@ td {
 
 
 		<div>
-			<form id="formid">
+			<form id="fixedformid">
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -826,15 +827,27 @@ td {
 						</div>
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Type*</label> <select
+								<label for="">Installment Type*</label> <select
 									id="installmentTypeFD" name="installmentTypeFD"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Interest Type*</option>
+									<option value="">Select Installment Type</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="UPI">UPI</option>
 
 								</select>
 							</div>
 						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Renewal Commission(%)*</label> <input type="text"
+									name="renewalCommissionFD" id="renewalCommissionFD"
+									required="required" placeholder="Enter Comm.Renew(%)" />
+							</div>
+						</div>
+
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Interst Interval*</label> <select
@@ -873,7 +886,7 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comm.New(%)*</label> <input type="text"
+								<label for="">New Commission(%)*</label> <input type="text"
 									name="commissionOnNewFD" id="commissionOnNewFD"
 									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
@@ -890,130 +903,99 @@ td {
 								</select>
 							</div>
 						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Grace Period*</label> <input type="text"
+									name="graceDaysFD" id="graceDaysFD" required="required"
+									placeholder="Enter Grace Period" />
+							</div>
+						</div>
 
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Plan Status</label> <input type="text"
-									name="statusOfPlanFD" id="statusOfPlanFD" required="required"
-									placeholder="Enter Plan Status" />
+								<label for="">Penalty Fine(%)*</label> <input type="text"
+									name="penltyfineFD" id="penltyfineFD" required="required"
+									placeholder="Enter Penalty Fine" />
 							</div>
 						</div>
 
 
-					</div>
-
-					<div class="row" style="margin-left: 80%;">
-						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-warning">Save</button>
-						</div>
-					</div>
-
-					<div class="row mt-5">
-						<div class="col-12">
-							<div class="card recent-sales">
-
-								<div class="card-body table-responsive">
-									<h5 class="card-title">
-										Recent Sales <span>| Today</span>
-									</h5>
-
-									<table class="table table-borderless datatable overflow-scroll">
-										<thead class="table-light">
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="col">#</th>
-												<th scope="col">Customer</th>
-												<th scope="col">Product</th>
-												<th scope="col">Price</th>
-												<th scope="col">Status</th>
-												<th scope="col">Action</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="row"><a href="#">1</a></th>
-												<td>Arun Kumar</td>
-												<td><a href="#" className="text-primary">Milk</a></td>
-												<td>$29</td>
-												<td><span class="badge bg-success text-white">Approved</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+						<div class="col-lg-3">
+							<div
+								class=" h-100 d-flex justify-content-start align-items-center">
+								<div
+									class="d-flex justify-content-start align-items-center  formFields">
+									<label style="margin-left: 20px;" class="mb-2">Status
+										plan</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="statusOfPlanFD"
+												name="statusOfPlanFD" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="toggle-member-status" class="toggle__label"></label>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
+
+
 					</div>
+
+
+				</div>
+
+				<div class="row" style="margin-left: 80%;">
+					<div class="col-12 text-center">
+						<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+					</div>
+				</div>
+
+				<div class="row mt-5">
+					<div class="col-12">
+						<div class="card recent-sales">
+
+							<div class="card-body table-responsive">
+								<h5 class="card-title">
+									Recent Sales <span>| Today</span>
+								</h5>
+
+								<table class="table table-bordered">
+									<thead class="table-light">
+										<tr>
+											<th>Plan Code</th>
+											<th>Plan Name</th>
+											<th>Minimum Deposit</th>
+											<th>Rate Of Interest</th>
+											<th>Installment Type</th>
+											<th>Term Mode</th>
+											<th>Term</th>
+
+											<th>Duration</th>
+											<th>Commission On New</th>
+											<th>Renewal Commission</th>
+											<th>Interest Interval</th>
+											<th>Total Paid</th>
+											<th>Maturity Amount</th>
+											<th>Flexible Plan</th>
+											<th>Grace Days</th>
+											<th>Penalty Rate</th>
+											<th>Status</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+									<tbody id="fixedTableBody">
+										<!-- Dynamic rows will be injected here -->
+									</tbody>
+								</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
 			</form>
 		</div>
 
@@ -1180,7 +1162,7 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comm.New(%)*</label> <input type="text"
+								<label for="">New Commission(%)*</label> <input type="text"
 									name="commissionOnNewMD" id="commissionOnNewMD"
 									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
@@ -1328,7 +1310,7 @@ td {
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<!--  <script src="./js/adminscript.js"></script>-->
-	<script src="./js/PolicyManagment/DailyDeposite.js"></script>
+	<script src="./js/PolicyManagment/PlanMangement.js"></script>
 
 </body>
 

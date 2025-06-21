@@ -233,7 +233,7 @@ public class PolicyManagementController {
     
 
     // Save Fixed Deposit
-    @PostMapping("/fixed-deposit/save")
+    @PostMapping("/fixed-depositsave")
     public ResponseEntity<ApiResponse<FixedDepositPM>> saveFixedDeposit(@RequestBody FixedDepositPM fixedDepositPM) {
         boolean isSaved = policyManagementService.saveFixedDeposite(fixedDepositPM);
 
@@ -255,7 +255,7 @@ public class PolicyManagementController {
 
 
     // View All Fixed Deposits
-    @GetMapping("/fixed-deposit/view")
+    @GetMapping("/fixed-depositview")
     public ResponseEntity<ApiResponse<List<FixedDepositPM>>> getAllFixedDeposits() {
         List<FixedDepositPM> deposits = policyManagementService.getAllFixeddata();
 
@@ -272,10 +272,54 @@ public class PolicyManagementController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+    //fetch by id fixed deposit
+    @GetMapping("/fixededit/{id}")
+    public ResponseEntity<ApiResponse<FixedDepositPM>> getFixedDepositById(@PathVariable Long id) {
+        FixedDepositPM deposit = policyManagementService.getFixedDepositById(id);
+
+        if (deposit != null) {
+            ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit fetched successfully.", deposit);
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed deposit not found for ID: " + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+ // Update Fixed deposit
+    @PutMapping("/fixedupdate/{id}")
+    public ResponseEntity<ApiResponse<FixedDepositPM>> updateFixedDeposit(
+            @PathVariable Long id,
+            @RequestBody FixedDepositPM updatedData) {
+
+        FixedDepositPM updated = policyManagementService.updateFixedDeposit(id, updatedData);
+
+        if (updated != null) {
+            ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit updated successfully.", updated);
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed deposit not found or failed to update.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+    
+    //  Delete fixed deposit
+    @DeleteMapping("/fixeddelete/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteFixedDeposit(@PathVariable Long id) {
+        boolean deleted = policyManagementService.deleteFixedDeposit(id);
+
+        if (deleted) {
+            ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit deleted successfully.", null);
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed deposit not found for ID: " + id);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 
 
     
-    //MIS Deposite save 
+    //MIS Deposit save 
     
     @PostMapping("/mis-deposit/save")
     public ResponseEntity<ApiResponse<MISDepositPM>> savemisdeposite(@RequestBody MISDepositPM misDepositPM)
@@ -317,6 +361,7 @@ public class PolicyManagementController {
         }
     }
 
+    
     
 
 }

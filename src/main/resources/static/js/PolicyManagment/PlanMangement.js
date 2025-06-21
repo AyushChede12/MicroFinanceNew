@@ -216,10 +216,10 @@ $(document).ready(function () {
             dropdown.append(`<option value="${value}">${value}</option>`).val(value);
         }
     }
-	//this is my deposite delete code
+
 	
 	// DELETE BUTTON (when editing a record)
-	// Delegated event listener for delete button
+	
 	$(document).on('click', '.delete-btn', function () {
 	    const id = $(this).data('id');
 
@@ -327,10 +327,10 @@ $(document).ready(function () {
 	                            <td>${item.penltyfineRD || ''}</td>
 	                            <td>${item.statusOfPlanRD || ''}</td>
 	                            <td class="d-flex" style="gap: .7rem;">
-	                                <button class="iconbutton edit-btn" recurring-id="${item.id}">
+	                                <button class="iconbutton reccuringedit-btn" data-id="${item.id}">
 	                                    <i class="fa-solid fa-pen-to-square text-success"></i>
 	                                </button>
-	                                <button class="iconbutton delete-btn" recurring-id="${item.id}">
+	                                <button class="iconbutton reccuringdelete-btn" data-id="${item.id}">
 	                                    <i class="fa-solid fa-trash text-danger"></i>
 	                                </button>
 	                            </td>
@@ -349,57 +349,134 @@ $(document).ready(function () {
 
 	fetchRecurringDeposits();
 	
-	// DELEGATED EVENT for edit button
-	    $('#recurringTableBody').on('click', '.edit-btn', function () {
-	        const id = $(this).data('id');
-	        editRecurringDeposit(id);
-	    });
-
+	$(document).on('click', '.reccuringedit-btn', function () {
+	    const id = $(this).data('id');
+	    editRecurringDeposit(id);
+	});
 // get by id reccuring deposite
 function editRecurringDeposit(id) {
+    console.log("🔍 Fetching Recurring Deposit with ID:", id);
+
     $.ajax({
-        url: `api/dailyedit/${id}`,  
+        url: `/api/recurringedit/${id}`,
         method: 'GET',
         contentType: 'application/json',
         success: function (response) {
             if (response && response.data) {
                 const data = response.data;
 
-                $('#formRecurring').data('id', id); // 🔁 Store ID for update
+                $('#recurringformid').data('id', id);
 
-                // Set values from fetched data
-                $('#planCodeRD').val(data.planCodeRD);
-                $('#planNameRD').val(data.planNameRD);
-                $('#minimumAmountRD').val(data.minimumAmountRD);
-                $('#rateOfInterestRD').val(data.rateOfInterestRD);
-                $('#installmentTypeRD').val(data.installmentTypeRD);
-                $('#durationRD').val(data.durationRD);
-                $('#termMode').val(data.termMode);
-                $('#term').val(data.term);
-                $('#commissionOnNewRD').val(data.commissionOnNewRD);
-                $('#renewalCommissionRD').val(data.renewalCommissionRD);
-                $('#componentIntervalRD').val(data.componentIntervalRD);
-                $('#totalPaidRD').val(data.totalPaidRD);
-                $('#maturityAmountRD').val(data.maturityAmountRD);
-                $('#flexiblePlanRD').val(data.flexiblePlanRD);
-                $('#graceDaysRD').val(data.graceDaysRD);
-                $('#penltyfineRD').val(data.penltyfineRD);
-                $('#statusOfPlanRD').val(data.statusOfPlanRD);
+                // Fill fields
+                Object.keys(data).forEach(key => {
+                    $(`#${key}`).val(data[key]);
+                    setDropdownValue(`#${key}`, data[key]);
+                });
 
-                // Toggle buttons
                 $('#ReccuringsaveBtn').hide();
                 $('#ReccuringupdateBtn').show();
                 $('#ReccuringdeleteBtn').show();
                 $('#ReccuringgenrateBtn').hide();
             } else {
-                alert('No data found for this ID');
+                alert('⚠️ No data found for this ID');
             }
         },
-        error: function () {
-            alert('Failed to fetch recurring deposit details.');
+        error: function (xhr) {
+            console.error("❌ Error fetching RD details:", xhr);
+            alert(`Failed to fetch recurring deposit details.\nStatus: ${xhr.status}`);
         }
     });
 }
+// UPDATE BUTTON for recuuring deposite code
+$('#ReccuringupdateBtn').on('click', function (e) {
+    e.preventDefault();
+
+    const id = $('#recurringformid').data('id');
+
+    if (!id) {
+        alert("ID missing. Please select a record by clicking Edit.");
+        return;
+    }
+
+    const updatedRecurringDeposit = getRDFormData();
+
+    $.ajax({
+        url: `/api/recurringupdate/${id}`,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify(updatedRecurringDeposit),
+        success: function () {
+            alert("Recurring Deposit updated successfully.");
+            location.reload();
+        },
+        error: function (xhr) {
+            console.error('Update error:', xhr.responseText);
+            alert("Failed to update Recurring Deposit.");
+        }
+    });
+});
+// Get form Data
+function getRDFormData() {
+    return {
+        planCodeRD: $('#planCodeRD').val(),
+        planNameRD: $('#planNameRD').val(),
+        minimumAmountRD: $('#minimumAmountRD').val(),
+        rateOfInterestRD: $('#rateOfInterestRD').val(),
+        installmentTypeRD: $('#installmentTypeRD').val(),
+        durationRD: $('#durationRD').val(),
+        termMode: $('#termMode').val(),
+        term: $('#term').val(),
+        commissionOnNewRD: $('#commissionOnNewRD').val(),
+        renewalCommissionRD: $('#renewalCommissionRD').val(),
+        componentIntervalRD: $('#componentIntervalRD').val(),
+        totalPaidRD: $('#totalPaidRD').val(),
+        maturityAmountRD: $('#maturityAmountRD').val(),
+        flexiblePlanRD: $('#flexiblePlanRD').val(),
+        graceDaysRD: $('#graceDaysRD').val(),
+        penltyfineRD: $('#penltyfineRD').val(),
+        statusOfPlanRD: $('#statusOfPlanRD').val()
+    };
+}
+
+function setDropdownValue(selector, value) {
+    const dropdown = $(selector);
+    if (dropdown.find(`option[value="${value}"]`).length) {
+        dropdown.val(value);
+    } else {
+        dropdown.append(`<option value="${value}">${value}</option>`).val(value);
+    }
+	}
+ // DELETE BUTTON Reccuring Deposite
+	$(document).on('click', '.reccuringdelete-btn', function () {
+	    const id = $(this).data('id');
+
+	    if (!id) {
+	        alert("Invalid record. ID not found.");
+	        return;
+	    }
+
+	    if (!confirm("Are you sure you want to delete this Recurring Deposit?")) {
+	        return;
+	    }
+
+	    $.ajax({
+	        url: `/api/recurringdelete/${id}`,
+	        type: 'DELETE',
+	        contentType: 'application/json',
+	        success: function (response) {
+	            alert(response.message || "Deleted successfully.");
+	            fetchRecurringDeposits(); // Table reload logic here
+	        },
+	        error: function (xhr) {
+	            const message = xhr.responseJSON?.message || "Failed to delete.";
+	            alert("Error: " + message);
+	        }
+	    });
+	});
+
+
+
+
 
 
 });
