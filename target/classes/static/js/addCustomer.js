@@ -43,6 +43,16 @@ $(document).ready(function() {
 		formData.append("nomineePanNo", $('#nomineePanNo').val());
 		formData.append("nomineeKycType", $('#nomineeKycType').val());
 
+
+        formData.append("memberFees", $('#memberFees').val());
+        formData.append("chequeNo", $('#chequeNo').val());
+        formData.append("chequeDate", $('#chequeDate').val());
+        formData.append("depositAcNo", $('#depositAcNo').val());
+        formData.append("referenceNo", $('#referenceNo').val());
+        formData.append("remarks", $('#remarks').val());
+        formData.append("paymentBy", $('#paymentBy').val());
+
+
 		// Fees/Setting Details
 		
 
@@ -196,6 +206,26 @@ window.onload = function() {
         });
 };
 
+
+//Niraj Code 
+window.onload = function() {
+    fetch('getAllRelativeModule')
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById("nomineeRelationToApplicant");
+            data.forEach(item => {
+                const option = document.createElement("option");
+                option.value = item.relation;  // Use item.id if needed
+                option.text = item.relation;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error("Error loading relations:", error);
+        });
+};
+
+
 $(document).ready(function () {
     // Fetch all branches and populate the dropdown
     $.ajax({
@@ -216,6 +246,81 @@ $(document).ready(function () {
             console.error("Error fetching branches:", err);
         }
     });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+	const paymentBy = document.getElementById("paymentBy");
+
+	const chequeNoDiv = document.getElementById("chequeNoDiv");
+	const chequeDateDiv = document.getElementById("chequeDateDiv");
+	const depositAccountDiv = document.getElementById("depositAccountDiv");
+	const refNoDiv = document.getElementById("refNoDiv");
+
+	function resetAndHideAll() {
+		chequeNoDiv.style.display = "none";
+		chequeDateDiv.style.display = "none";
+		depositAccountDiv.style.display = "none";
+		refNoDiv.style.display = "none";
+
+		// Optional: clear values
+		document.getElementById("chequeNo").value = "";
+		document.getElementById("chequeDate").value = "";
+		document.getElementById("depositAccount").value = "";
+		document.getElementById("referenceNo").value = "";
+	}
+
+	function handlePaymentChange() {
+		const selected = paymentBy.value;
+		resetAndHideAll();
+
+		if (selected === "cheque") {
+			chequeNoDiv.style.display = "block";
+			chequeDateDiv.style.display = "block";
+			depositAccountDiv.style.display = "block";
+		} else if (selected === "neft" || selected === "online") {
+			depositAccountDiv.style.display = "block";
+			refNoDiv.style.display = "block";
+		}
+		// Cash: show nothing extra
+	}
+
+	paymentBy.addEventListener("change", handlePaymentChange);
+
+	// Initialize (in case a value is pre-selected)
+	handlePaymentChange();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+	// Function to fetch and bind bank accounts
+	function loadBankAccounts() {
+		fetch("/getAllBankModule")
+			.then(response => {
+				if (!response.ok) {
+					throw new Error("Network response was not ok");
+				}
+				return response.json();
+			})
+			.then(data => {
+				const depositAccount = document.getElementById("depositAccount");
+				// Clear existing options except first
+				depositAccount.innerHTML = '<option value="">Select</option>';
+
+				data.forEach(bank => {
+					const option = document.createElement("option");
+					option.value = bank.accountNo; // Value sent on form submit
+					option.textContent = `${bank.accountNo} (${bank.bankName})`; // User-friendly label
+					depositAccount.appendChild(option);
+				});
+			})
+			.catch(error => {
+				console.error("Error fetching bank accounts:", error);
+			});
+	}
+
+	// Load on page load
+	loadBankAccounts();
 });
 
 

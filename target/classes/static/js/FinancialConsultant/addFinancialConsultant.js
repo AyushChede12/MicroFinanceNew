@@ -32,6 +32,22 @@ $(document).ready(function() {
 			alert("Failed to load branch names.");
 		}
 	});
+
+
+	$.ajax({
+		url: "getAllRelationToApplicant",
+		type: "GET",
+		success: function(data) {
+			$("#relationToApplicant").append("<option value=''>-- Select Relation --</option>");
+			for (let i = 0; i < data.length; i++) {
+				let option = "<option value='" + data[i].relationToApplicant + "'>" + data[i].relationToApplicant + "</option>";
+				$("#relationToApplicant").append(option);
+			}
+		},
+		error: function() {
+			alert("Failed to load relation .");
+		}
+	});
 });
 
 
@@ -54,6 +70,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#memberCode").change(function() {
 		var memberCode = $(this).val();
+
 
 		if (memberCode !== "") {
 			$.ajax({
@@ -105,6 +122,56 @@ $(document).ready(function() {
 					}
 					$("#referralCode").val(data.referralCode);
 					$("#referralName").val(data.referralName);
+
+
+		alert(memberCode);
+		if (memberCode !== "") {
+			$.ajax({
+				type: "POST",
+				url: "/getFinancialConsultantByMemberCode",
+				data: { memberCode: memberCode },
+				success: function(response) {
+					// Fill form fields
+					alert("success");
+					if (response.length > 0) {
+						var data = response[0]; // Use the first object from the list
+
+						$("#customerName").val(data.customerName);
+						$("#dob").val(data.dob);
+						$("#age").val(data.customerAge);
+						$("#guardianName").val(data.guardianName);
+						$("#relationToApplicant").val(data.relationToApplicant);
+						$("#contactNo").val(data.contactNo);
+						$("#nomineeName").val(data.nomineeName);
+						$("#branchName").val(data.branchName);
+						$("#nomineeAge").val(data.nomineeAge);
+						$("#address").val(data.customerAddress);
+						$("#district").val(data.district);
+						$("#state").val(data.state);
+						$("#pinCode").val(data.pinCode);
+						$("#profession").val(data.profession);
+						$("#academicBackground").val(data.academicBackground);
+						$("#referralCode").val(data.referralCode);
+						$("#referralName").val(data.referralName);
+
+						// Customer Photo
+						if (data.customerPhoto) {
+							const imagePath = `Uploads/${data.customerPhoto}`;
+							document.getElementById("customerPhoto").src = imagePath;
+						} else {
+							document.getElementById("customerPhoto").src = 'Uploads/default-placeholder.jpg';
+						}
+
+						// Customer Signature
+						if (data.customerSignature) {
+							const signPath = `Uploads/${data.customerSignature}`;
+							document.getElementById("customerSignature").src = signPath;
+						} else {
+							document.getElementById("customerSignature").src = 'Uploads/default-signature.jpg';
+						}
+					} else {
+						alert("No customer found for this member code.");
+					}
 
 				},
 				error: function(xhr) {
