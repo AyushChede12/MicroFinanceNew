@@ -62,23 +62,11 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Month Name</label> <select id="monthName"
-									name="monthName" required="required"
+								<label for="">Incentive Month</label> <select id="incentiveMonth"
+									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">--SELECT MONTH NAME--</option>
-									<option value="month">January</option>
-									<option value="month">February</option>
-									<option value="month">March</option>
-									<option value="month">April</option>
-									<option value="month">May</option>
-									<option value="month">June</option>
-									<option value="month">July</option>
-									<option value="month">August</option>
-									<option value="month">September</option>
-									<option value="month">October</option>
-									<option value="month">November</option>
-									<option value="month">December</option>
-
+								
 								</select>
 							</div>
 						</div>
@@ -140,6 +128,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/incentive/IncentiveSummaryReport.js"></script>
 </body>
 
 </html>

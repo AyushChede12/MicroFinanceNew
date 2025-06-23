@@ -3,6 +3,7 @@ package com.microfinance.dto;
 import org.springframework.http.HttpStatus;
 
 import com.microfinance.model.ExecutiveFounder;
+import com.microfinance.model.IncentiveSchemeMaster;
 import com.microfinance.model.RecurringDepositPM;
 
 public class ApiResponse<T> {
@@ -70,6 +71,7 @@ public class ApiResponse<T> {
 		this.data = data;
 	}
 
+
 	public boolean isSuccess() {
 		return success;
 	}
@@ -77,7 +79,6 @@ public class ApiResponse<T> {
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-	
 	
 
 }

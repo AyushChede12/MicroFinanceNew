@@ -67,7 +67,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Branch <span id="star"> *</span></label> <select id="branch" name="branch"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">All Branch</option>
+									
 
 								</select>
 							</div>
@@ -142,17 +142,6 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-
-
-
-
-
-
-
-
-
-
-
 			</form>
 
 
@@ -162,6 +151,33 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<!-- <script>
+	$(document).ready(function () {
+	    $.ajax({
+	        url: "getAllBranchModule", // Make sure this is correct and relative to your context path
+	        type: "GET",
+	        dataType: "json",
+	        success: function (response) {
+	            var dropdown = $('#branch');
+	            dropdown.empty();
+	            dropdown.append('<option value="">Select Branch</option>');
+
+	            if (response.status === "OK" && response.data) {
+	                $.each(response.data, function (index, branch) {
+	                    dropdown.append('<option value="' + branch.branchName + '">' + branch.branchName + '</option>');
+	                });
+	            } else {
+	                dropdown.append('<option value="">No branch found</option>');
+	            }
+	        },
+	        error: function (xhr, status, error) {
+	            console.error("Error:", status, error);
+	            alert("Error fetching branches.");
+	        }
+	    });
+	}); -->
+
+	</script>
 </body>
 
 </html>
