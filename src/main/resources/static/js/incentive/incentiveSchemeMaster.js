@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     $("#formid").submit(function (e) {
         e.preventDefault();
@@ -11,7 +13,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "/saveIncentive",
+            url: "/api/incentive/saveIncentive",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(incentiveData),
@@ -31,33 +33,35 @@ $(document).ready(function () {
     });
 });
 
-// This function will run automatically when the page finishes loading
 $(document).ready(function () {
-    loadIncentiveData(); 
+    loadIncentiveData();
 });
 
-// Separated logic into a named function for reuse
 function loadIncentiveData() {
     $.ajax({
-        url: "/getAllIncentives",
+        url: "/api/incentive/getAllIncentives",
         type: "GET",
         contentType: "application/json",
-        success: function (data) {
-            console.log(data);
-
+        success: function (response) {
+            console.log(response); 
             var tbody = $("#incentiveTableBody");
             tbody.empty();
 
-            $.each(data, function (index, item) {
-                var row = "<tr>" +
-                    "<td>" + (index + 1) + "</td>" +
-                    "<td>" + item.incentiveMonth + "</td>" +
-                    "<td>" + item.dateFrom + "</td>" +
-                    "<td>" + item.dateTo + "</td>" +
-                    "<td>" + item.comments + "</td>" +
-                    "</tr>";
-                tbody.append(row);
-            });
+            
+            if (response.data && response.data.length > 0) {
+                $.each(response.data, function (index, item) {
+                    var row = "<tr>" +
+                        "<td>" + (index + 1) + "</td>" +
+                        "<td>" + item.incentiveMonth + "</td>" +
+                        "<td>" + item.dateFrom + "</td>" +
+                        "<td>" + item.dateTo + "</td>" +
+                        "<td>" + item.comments + "</td>" +
+                        "</tr>";
+                    tbody.append(row);
+                });
+            } else {
+                tbody.append("<tr><td colspan='5'>No data found</td></tr>");
+            }
         },
         error: function (xhr, status, error) {
             alert("Error: " + xhr.status);
@@ -67,38 +71,43 @@ function loadIncentiveData() {
 }
 
 
-    $(document).ready(function () {
 
-        // Set today's date initially
-        let today = new Date().toISOString().split('T')[0];
-        $("#dateFrom").val(today);
-        $("#dateTo").val(today);
+    
+	
+	$(document).ready(function() {
+		const months = [
+			"January", "February", "March", "April", "May", "June",
+			"July", "August", "September", "October", "November", "December"
+		];
 
-        // When month entered
-        $("#incentiveMonth").on("change", function () {
-            let monthName = $(this).val().trim();
-            let year = new Date().getFullYear(); // Default to current year
+		const monthDropdown = $('#incentiveMonth');
+		monthDropdown.empty().append('<option value="">Select</option>');
 
-            let monthIndex = new Date(Date.parse(monthName + " 1, " + year)).getMonth();
+		months.forEach((month, index) => {
+			const monthValue = (index + 1).toString().padStart(2, '0'); // e.g., "01", "02"
+			monthDropdown.append(`<option value="${monthValue}">${month}</option>`);
+		});
 
-            if (!isNaN(monthIndex)) {
-                let firstDay = new Date(year, monthIndex, 2);       // 1st day of month
-                let lastDay = new Date(year, monthIndex + 1, 1);    // last day of month
+		// Set Date From and Date To when month is selected
+		monthDropdown.on('change', function() {
+			const selectedMonth = parseInt($(this).val()); // "01" -> 1, "02" -> 2
+			const currentYear = new Date().getFullYear();
 
-                // Convert to YYYY-MM-DD
-                function formatDate(date) {
-                    return date.toISOString().split('T')[0];
-                }
+			if (!isNaN(selectedMonth)) {
+				// Create first day of selected month
+				const startDate = new Date(currentYear, selectedMonth - 1, 2);
+				// Create last day of selected month
+				const endDate = new Date(currentYear, selectedMonth, 1);
 
-                $("#dateFrom").val(formatDate(firstDay));
-                $("#dateTo").val(formatDate(lastDay));
+				// Format as YYYY-MM-DD
+				const formatDate = (date) => date.toISOString().split('T')[0];
 
-                // OPTIONAL: Try to open calendar (works only on some browsers)
-                $("#dateFrom")[0].showPicker && $("#dateFrom")[0].showPicker();
-                $("#dateTo")[0].showPicker && $("#dateTo")[0].showPicker();
+				$('#dateFrom').val(formatDate(startDate));
+				$('#dateTo').val(formatDate(endDate));
+			} else {
+				$('#dateFrom').val('');
+				$('#dateTo').val('');
+			}
+		});
+	});
 
-            } else {
-                alert("Please enter a valid month name like ");
-            }
-        });
-    });
