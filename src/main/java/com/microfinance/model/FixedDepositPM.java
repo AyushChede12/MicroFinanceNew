@@ -8,6 +8,7 @@ import javax.persistence.Id;
 public class FixedDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private int id;
 	private String planCodeFD;
 	private String planNameFD;
@@ -21,77 +22,154 @@ public class FixedDepositPM {
 	private String maturityAmountRD;
 	private String statusOfPlanRD1;
 	public int getId() {
+
+	private  long id;
+	private String planCodeFD;
+	private String planNameFD;
+	private String minimumAmountFD;
+	private String rateOfInterestFD;
+	private String termModeFD;
+	private String termFd;
+	private String durationFD;
+	private String installmentTypeFD;
+	private String commissionOnNewFD;
+	private String componentIntervalFD;
+	private String totalPaidFD;
+	private String flexiblePlanFD;
+	private String maturityAmountFD;
+	private String renewalCommissionFD;
+	private String graceDaysFD;
+	private String penltyfineFD;
+	private String statusOfPlanFD;
+	
+	public long getId() {
+
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getPlanCodeFD() {
 		return planCodeFD;
 	}
+
 	public void setPlanCodeRD1(String planCodeFD) {
+
+	public void setPlanCodeFD(String planCodeFD) {
+
 		this.planCodeFD = planCodeFD;
 	}
-	public String getMinimumAmountRD1() {
-		return minimumAmountRD1;
+	public String getMinimumAmountFD() {
+		return minimumAmountFD;
 	}
-	public void setMinimumAmountRD1(String minimumAmountRD1) {
-		this.minimumAmountRD1 = minimumAmountRD1;
+	public void setMinimumAmountFD(String minimumAmountFD) {
+		this.minimumAmountFD = minimumAmountFD;
 	}
-	public String getRateOfInterestRD1() {
-		return rateOfInterestRD1;
+	public String getRateOfInterestFD() {
+		return rateOfInterestFD;
 	}
-	public void setRateOfInterestRD1(String rateOfInterestRD1) {
-		this.rateOfInterestRD1 = rateOfInterestRD1;
+	public void setRateOfInterestFD(String rateOfInterestFD) {
+		this.rateOfInterestFD = rateOfInterestFD;
 	}
 	public String getTermMode1() {
-		return termMode1;
+		return termModeFD;
 	}
 	public void setTermMode1(String termMode1) {
-		this.termMode1 = termMode1;
+		this.termModeFD = termMode1;
 	}
 	public String getInstallmentType1() {
-		return installmentType1;
+		return installmentTypeFD;
 	}
 	public void setInstallmentType1(String installmentType1) {
-		this.installmentType1 = installmentType1;
+		this.installmentTypeFD = installmentType1;
 	}
-	public String getCommissionOnNewRD1() {
-		return commissionOnNewRD1;
+	public String getCommissionOnNewFD() {
+		return commissionOnNewFD;
 	}
-	public void setCommissionOnNewRD1(String commissionOnNewRD1) {
-		this.commissionOnNewRD1 = commissionOnNewRD1;
+	public void setCommissionOnNewFD(String commissionOnNewFD) {
+		this.commissionOnNewFD = commissionOnNewFD;
 	}
-	public String getComponentIntervalRD() {
-		return componentIntervalRD;
+	public String getComponentIntervalFD() {
+		return componentIntervalFD;
 	}
-	public void setComponentIntervalRD(String componentIntervalRD) {
-		this.componentIntervalRD = componentIntervalRD;
+	public void setComponentIntervalFD(String componentIntervalFD) {
+		this.componentIntervalFD = componentIntervalFD;
 	}
-	public String getTotalPaidRD() {
-		return totalPaidRD;
+	public String getTotalPaidFD() {
+		return totalPaidFD;
 	}
-	public void setTotalPaidRD(String totalPaidRD) {
-		this.totalPaidRD = totalPaidRD;
+	public void setTotalPaidFD(String totalPaidFD) {
+		this.totalPaidFD = totalPaidFD;
 	}
-	public String getMaturityAmountRD() {
-		return maturityAmountRD;
+	public String getMaturityAmountFD() {
+		return maturityAmountFD;
 	}
-	public void setMaturityAmountRD(String maturityAmountRD) {
-		this.maturityAmountRD = maturityAmountRD;
+	public void setMaturityAmountFD(String maturityAmountFD) {
+		this.maturityAmountFD = maturityAmountFD;
 	}
-	public String getStatusOfPlanRD1() {
-		return statusOfPlanRD1;
+	public String getStatusOfPlanFD() {
+		return statusOfPlanFD;
 	}
-	public void setStatusOfPlanRD1(String statusOfPlanRD1) {
-		this.statusOfPlanRD1 = statusOfPlanRD1;
+	public void setStatusOfPlanFD(String statusOfPlanFD) {
+		this.statusOfPlanFD = statusOfPlanFD;
 	}
+	public String getTermFd() {
+		return termFd;
+	}
+	public void setTermFd(String termFd) {
+		this.termFd = termFd;
+	}
+	public String getTermModeFD() {
+		return termModeFD;
+	}
+	public void setTermModeFD(String termModeFD) {
+		this.termModeFD = termModeFD;
+	}
+	public String getDurationFD() {
+		return durationFD;
+	}
+	public void setDurationFD(String durationFD) {
+		this.durationFD = durationFD;
+	}
+	public String getInstallmentTypeFD() {
+		return installmentTypeFD;
+	}
+	public void setInstallmentTypeFD(String installmentTypeFD) {
+		this.installmentTypeFD = installmentTypeFD;
+	}
+	public String getFlexiblePlanFD() {
+		return flexiblePlanFD;
+	}
+
+	public void setFlexiblePlanFD(String flexiblePlanFD) {
+		this.flexiblePlanFD = flexiblePlanFD;
+	}
+	public String getRenewalCommissionFD() {
+		return renewalCommissionFD;
+	}
+	public void setRenewalCommissionFD(String renewalCommissionFD) {
+		this.renewalCommissionFD = renewalCommissionFD;
+	}
+	public String getGraceDaysFD() {
+		return graceDaysFD;
+	}
+	public void setGraceDaysFD(String graceDaysFD) {
+		this.graceDaysFD = graceDaysFD;
+	}
+	public String getPenltyfineFD() {
+		return penltyfineFD;
+	}
+	public void setPenltyfineFD(String penltyfineFD) {
+		this.penltyfineFD = penltyfineFD;
+	}
+
 	public String getPlanNameFD() {
 		return planNameFD;
 	}
 	public void setPlanNameFD(String planNameFD) {
 		this.planNameFD = planNameFD;
 	}
+
 	
 
 }

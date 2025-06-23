@@ -1,59 +1,63 @@
-function saveBank() {
-	const formData = {
-		bankName: $('input[name="bankName"]').val(),
-		accountNo: $('input[name="accountNo"]').val(),
-		contactNo: $('input[name="contactNo"]').val(),
-		address: $('textarea[name="address"]').val(),
-		openingDate: $('input[name="openingDate"]').val(),
-		openingBalance: $('input[name="openingBalance"]').val()
-	};
+$(document).ready(function() {
+	$("#saveBtn").click(function() {
+		const formData = {
+			bankName: $('input[name="bankName"]').val(),
+			accountNo: $('input[name="accountNo"]').val(),
+			contactNo: $('input[name="contactNo"]').val(),
+			address: $('textarea[name="address"]').val(),
+			openingDate: $('input[name="openingDate"]').val(),
+			openingBalance: $('input[name="openingBalance"]').val()
+		};
 
-	$.ajax({
-		type: "POST",
-		url: "/saveAllBankModule", // Replace this with your actual endpoint
-		contentType: "application/json",
-		data: JSON.stringify(formData),
-		success: function(response) {
-			if (response === "success") {
+		$.ajax({
+			url: '/api/preference/saveAndUpdateAllBankModule',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(formData),
+			success: function(response) {
 				alert("Bank Saved Successfully");
 				location.reload();
+			},
+			error: function(xhr) {
+				console.error('Error:', xhr.responseText);
+				alert('Failed to save bank data.');
 			}
-		},
-		error: function(xhr, status, error) {
-			$('#responseMessage').text("Error: " + xhr.responseText);
-		}
+		});
 	});
-}
 
-$(document).ready(function() {
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
-	$.ajax({
-		url: "/getAllBankModule",
-		type: "GET",
-		contentType: "application/json",
-		success: function(data) {
-			var tbody = $(".datatable tbody");
-			tbody.empty(); // Clear existing rows
 
-			$.each(data, function(index, item) {
-				var row = `<tr style="font-family: 'Poppins', sans-serif;">
-              <th scope="row"><a href="#">${index + 1}</a></th>
-              <td>${item.bankName || ''}</td>
-              <td>${item.accountNo || ''}</td>
-              <td>${item.contactNo || ''}</td>
-              <td>${item.address || ''}</td>
-              <td>${item.openingDate || ''}</td>
-              <td>${item.openingBalance || ''}</td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-            </tr>`;
-				tbody.append(row);
-			});
+	$.ajax({
+		type: "GET",
+		url: "/api/preference/getAllBankModule",
+		contentType: "application/json",
+		success: function(response) {
+			console.log("Full Response from API:", response);
+			if (response.success) {
+				let data = response.data;
+				let tableBody = $(".datatable tbody");
+				tableBody.empty();
+				data.forEach((item, index) => {
+					let row = `<tr>
+		                        <td>${index + 1}</td>
+		                        <td>${item.bankName}</td>
+		                        <td>${item.accountNo}</td>
+		                        <td>${item.contactNo}</td>
+		                        <td>${item.address}</td>
+		                        <td>${item.openingDate}</td>
+		                        <td>${item.openingBalance}</td>
+								<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
+								<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
+		                    </tr>`;
+					tableBody.append(row);
+				});
+			} else {
+				alert("Failed to fetch Relative data: " + response.message);
+			}
 		},
-		error: function(xhr, status, error) {
-			console.error("Error fetching data:", error);
-			alert("Failed to load branch module data.");
+		error: function() {
+			alert("Error while calling the API.");
 		}
 	});
 });
@@ -71,21 +75,27 @@ function viewData(id) {
 	$("#saveBtn").hide();
 	$("#hideBtn").hide();
 	$("#showBtn").hide();
+
 	$.ajax({
-		url: "/getBankModuleById",
+		url: "/api/preference/getBankModuleById",
 		type: "GET",
 		data: { id: id },
-		success: function(data) {
-			$("#id").val(data.id);
-			$("#bankName").val(data.bankName);
-			$("#accountNo").val(data.accountNo);
-			$("#contactNo").val(data.contactNo);
-			$("#address").val(data.address);
-			$("#openingDate").val(data.openingDate);
-			$("#openingBalance").val(data.openingBalance);
+		success: function(response) {
+			if (response.success) {
+				const branch = response.data;
+				$("#id").val(branch.id);
+				$("#bankName").val(branch.bankName);
+				$("#accountNo").val(branch.accountNo);
+				$("#contactNo").val(branch.contactNo);
+				$("#address").val(branch.address);
+				$("#openingDate").val(branch.openingDate);
+				$("#openingBalance").val(branch.openingBalance);
+			} else {
+				alert("Branch not found: " + response.message);
+			}
 		},
 		error: function(xhr) {
-			alert("Error: " + xhr.responseText);
+			alert("Request failed: " + xhr.responseText);
 		}
 	});
 
@@ -94,17 +104,20 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this bank?")) {
 		$.ajax({
-			url: "/deleteBankModuleById", // or "/deleteAllBranchModule" if you're sending full object
+			url: "/api/preference/deleteBankModuleById",
 			type: "POST",
-			data: { id: id }, // if using @RequestParam long id
+			data: { id: id },
 			success: function(response) {
-				alert("Bank deleted successfully.");
-				// Refresh the table or page here
-				location.reload(); // example method to reload your data
+				if (response.success) {
+					alert(response.message);
+					location.reload();
+				} else {
+					alert("Delete failed: " + response.message);
+				}
 			},
 			error: function(xhr, status, error) {
 				alert("Failed to delete bank.");
-				console.error(error);
+				console.error("Error:", error);
 			}
 		});
 	}
@@ -121,16 +134,19 @@ function updateBank() {
 		openingBalance: $("#openingBalance").val()
 	};
 	$.ajax({
-		url: "/updateBankModuleById",
+		url: "/api/preference/saveAndUpdateAllBankModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			alert("Bank Updated successfully!");
-			location.reload();
-			// Optionally refresh table or redirect
+			if (response.success) {
+				alert("Bank Updated Successfully");
+				location.reload();
+			} else {
+				alert("Operation failed: " + response.message);
+			}
 		},
-		error: function(xhr, status, error) {
+		error: function(xhr) {
 			alert("Update failed: " + xhr.responseText);
 		}
 	});

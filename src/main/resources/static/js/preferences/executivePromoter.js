@@ -42,34 +42,52 @@ function signatureUpload() {
 }
 
 $(document).ready(function() {
+	$("#tableBody").hide();
+	$("#updateBtn").hide();
 	$.ajax({
-		url: "getAllBranchModule", // Your backend URL here
+		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
-		success: function(data) {
-			// Add each option to the dropdown
-			$("#branchName").append("<option value=''>-- Select Branch --</option>");
-			for (let i = 0; i < data.length; i++) {
-				let option = "<option value='" + data[i].branchName + "'>" + data[i].branchName + "</option>";
-				$("#branchName").append(option);
+		success: function(response) {
+			if (response.success) {
+				const branchList = response.data;
+				$("#branchName").empty(); // Clear existing options
+				$("#branchName").append("<option value=''>-- Select Branch --</option>");
+
+				for (let i = 0; i < branchList.length; i++) {
+					let branch = branchList[i];
+					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
+					$("#branchName").append(option);
+				}
+			} else {
+				alert("Error: " + response.message);
 			}
 		},
-		error: function() {
+		error: function(xhr) {
+			console.error("Error loading branches:", xhr.responseText);
 			alert("Failed to load dropdown data.");
 		}
 	});
 
 	$.ajax({
-		url: "getAllRelativeModule", // Your backend URL here
+		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
-		success: function(data) {
-			// Add each option to the dropdown
-			$("#relationToApplicant").append("<option value=''>-- Select Relation To Applicant --</option>");
-			for (let i = 0; i < data.length; i++) {
-				let option = "<option value='" + data[i].relation + "'>" + data[i].relation + "</option>";
-				$("#relationToApplicant").append(option);
+		success: function(response) {
+			if (response.success) {
+				const relativeList = response.data;
+				$("#relationToApplicant").empty(); // Clear existing options
+				$("#relationToApplicant").append("<option value=''>-- Select Relative --</option>");
+
+				for (let i = 0; i < relativeList.length; i++) {
+					let relative = relativeList[i];
+					let option = `<option value="${relative.relation}">${relative.relation}</option>`;
+					$("#relationToApplicant").append(option);
+				}
+			} else {
+				alert("Error: " + response.message);
 			}
 		},
-		error: function() {
+		error: function(xhr) {
+			console.error("Error loading branches:", xhr.responseText);
 			alert("Failed to load dropdown data.");
 		}
 	});
@@ -78,10 +96,9 @@ $(document).ready(function() {
 	$('#saveBtn').click(function(event) {
 		event.preventDefault();
 
-		// Create FormData object to send data and files
-		var formData = new FormData();
+		const formData = new FormData();
 
-		// Append all form data (text values)
+		// Append form fields
 		formData.append("type", $('#type').val());
 		formData.append("branchName", $('#branchName').val());
 		formData.append("fullName", $('#fullName').val());
@@ -103,74 +120,87 @@ $(document).ready(function() {
 		formData.append("shareAmount", $('#shareAmount').val());
 		formData.append("depositAcc", $('#depositAcc').val());
 
-		// Handle file uploads
-		var photo = $('#photo')[0].files[0]; // Match 'photoWithAadhar' with backend
-		if (photo) formData.append("photo", photo);
+		// File upload: photo
+		const photo = $('#photo')[0].files[0];
+		if (photo) {
+			formData.append("photo", photo);
+		}
 
-		// Handle file uploads
-		var signature = $('#signature')[0].files[0];
+		// File upload: signature
+		const signature = $('#signature')[0].files[0];
 		if (signature) {
 			formData.append("signature", signature);
 		}
 
-		// Debugging: Log FormData to check entries
-		for (var pair of formData.entries()) {
+		// Debug log
+		for (let pair of formData.entries()) {
 			console.log(pair[0] + ':', pair[1]);
 		}
-		console.log(formData);
 
-		// Make the AJAX request to your API
 		$.ajax({
 			type: 'POST',
-			url: 'saveExecutiveFounder', // Update URL if necessary
+			url: '/api/preference/saveExecutiveFounder',
 			data: formData,
-			processData: false,
-			contentType: false,
+			processData: false,  // Don't process the files
+			contentType: false,  // Let browser set correct content type
 			success: function(response) {
-				alert("Data Saved Successfully"); // Message includes the Member Code
-				location.reload(); // Reload the page
+				if (response.success) {
+					alert("Executive Founder Saved Successfully");
+					location.reload();
+				} else {
+					alert("Failed to save executive/founder data.");
+				}
 			},
 			error: function(xhr, status, error) {
-				console.error("Error: ", xhr.responseText); // Log the error details
+				console.error("Error: ", xhr.responseText);
 				alert('An error occurred while saving the data. Please try again.');
 			}
 		});
 	});
 
-});
-
-
-$(document).ready(function() {
-	$("#tableBody").hide();
-	$("#updateBtn").hide();
 	$.ajax({
-		url: "fetchAllExecutiveFounder",
-		type: "POST",
+		url: "/api/preference/fetchAllExecutiveFounder", // Updated path
+		type: "GET",
 		contentType: "application/json",
-		success: function(data) {
-			var tbody = $(".datatable tbody");
-			tbody.empty(); // Clear existing rows
+		success: function(response) {
+			if (response.success) {
+				var data = response.data;
+				var tbody = $(".datatable tbody");
+				tbody.empty();
 
-			$.each(data, function(index, item) {
-				var row = `<tr style="font-family: 'Poppins', sans-serif;">
-              <th scope="row"><a href="#">${index + 1}</a></th>
-              <td>${item.fullName || ''}</td>
-              <td>${item.branchName || ''}</td>
-              <td>${item.appointmentDate || ''}</td>
-              <td>${item.address || ''}</td>
-              <td>${item.emailId || ''}</td>
-			  <td>${item.contactNo || ''}</td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-            </tr>`;
-				tbody.append(row);
-			});
+				$.each(data, function(index, item) {
+					var row = `<tr style="font-family: 'Poppins', sans-serif;">
+		                    <th scope="row"><a href="#">${index + 1}</a></th>
+		                    <td>${item.fullName || ''}</td>
+		                    <td>${item.branchName || ''}</td>
+		                    <td>${item.appointmentDate || ''}</td>
+		                    <td>${item.address || ''}</td>
+		                    <td>${item.emailId || ''}</td>
+		                    <td>${item.contactNo || ''}</td>
+		                    <td>
+		                        <button class="iconbutton" onclick="viewData(${item.id})" title="View">
+		                            <i class="fa-solid fa-pen-to-square text-primary"></i>
+		                        </button>
+		                    </td>
+		                    <td>
+		                        <button class="iconbutton" onclick="deleteData(${item.id})" title="Delete">
+		                            <i class="fa-solid fa-trash text-danger"></i>
+		                        </button>
+		                    </td>
+		                </tr>`;
+					tbody.append(row);
+				});
+			} else {
+				alert("⚠️ " + response.message);
+			}
 		},
 		error: function(xhr, status, error) {
-			console.error("Error fetching data:", error);
-			alert("Failed to load branch module data.");
+			console.error("❌ Error fetching data:", error);
+			alert("Failed to load executive founder data.");
 		}
 	});
+
+
 });
 
 function deleteData(id) {
@@ -202,53 +232,63 @@ function viewData(id) {
 	$("#saveBtn").hide();
 	$("#hideBtn").hide();
 	$("#showBtn").hide();
+
 	$.ajax({
-		url: '/fetchExecutiveFounderById',
-		type: 'POST',
+		url: "/api/preference/fetchExecutiveFounderById",
+		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			// Example: populate form fields with the fetched data
-			$('#id').val(response.id);
-			$('#type').val(response.type);
-			$('#branchName').val(response.branchName);
-			$('#fullName').val(response.fullName);
-			$('#dateOfBirth').val(response.dateOfBirth);
-			$('#promoterNo').val(response.promoterNo);
-			$('#appointmentDate').val(response.appointmentDate);
-			$('#relationName').val(response.relationName);
-			$('#relationToApplicant').val(response.relationToApplicant);
-			$('#address').val(response.address);
-			$('#district').val(response.district);
-			$('#state').val(response.state);
-			$('#pinCode').val(response.pinCode);
-			$('#aadharNo').val(response.aadharNo);
-			$('#panNo').val(response.panNo);
-			$('#contactNo').val(response.contactNo);
-			$('#emailId').val(response.emailId);
-			$('#baseValue').val(response.baseValue);
-			$('#shareCount').val(response.shareCount);
-			$('#shareAmount').val(response.shareAmount);
-			//Images
-			if (response.photo) {
-				const imagePath = `Uploads/${response.photo}`;
-				document.getElementById("photoPreview").src = imagePath; // Update preview
-				document.getElementById("photoHidden").value = imagePath; // Set hidden field value
+			if (response.success) {
+				const branch = response.data;
+
+				$("#id").val(branch.id);
+				$("#type").val(branch.type);
+				$("#branchName").val(branch.branchName);
+				$("#fullName").val(branch.fullName);
+				$("#dateOfBirth").val(branch.dateOfBirth);
+				$("#promoterNo").val(branch.promoterNo);
+				$("#appointmentDate").val(branch.appointmentDate);
+				$("#relationName").val(branch.relationName);
+				$("#relationToApplicant").val(branch.relationToApplicant);
+				$("#address").val(branch.address);
+				$("#district").val(branch.district);
+				$("#state").val(branch.state);
+				$("#pinCode").val(branch.pinCode);
+				$("#aadharNo").val(branch.aadharNo);
+				$("#panNo").val(branch.panNo);
+				$("#contactNo").val(branch.contactNo);
+				$("#emailId").val(branch.emailId);
+				$("#baseValue").val(branch.baseValue);
+				$("#shareCount").val(branch.shareCount);
+				$("#shareAmount").val(branch.shareAmount);
+				$("#depositAcc").val(branch.depositAcc); // You forgot this in your latest version
+
+				// Image: Photo
+				if (branch.photo) {
+					const photoPath = `Uploads/${branch.photo}`;
+					$("#photoPreview").attr("src", photoPath);
+					$("#photoHidden").val(photoPath);
+				} else {
+					$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+					$("#photoHidden").val("");
+				}
+
+				// Image: Signature
+				if (branch.signature) {
+					const signPath = `Uploads/${branch.signature}`;
+					$("#signaturePreview").attr("src", signPath);
+					$("#signatureHidden").val(signPath);
+				} else {
+					$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+					$("#signatureHidden").val("");
+				}
+
 			} else {
-				document.getElementById("photoPreview").src = 'Uploads/default-placeholder.jpg'; // Fallback
-				document.getElementById("photoHidden").value = ''; // Clear hidden field
+				alert("Executive founder not found: " + response.message);
 			}
-			if (response.signature) {
-				const imagePath = `Uploads/${response.signature}`;
-				document.getElementById("signaturePreview").src = imagePath; // Update preview
-				document.getElementById("signatureHidden").value = imagePath; // Set hidden field value
-			} else {
-				document.getElementById("signaturePreview").src = 'Uploads/default-placeholder.jpg'; // Fallback
-				document.getElementById("signatureHidden").value = ''; // Clear hidden field
-			}
-			// Add other fields accordingly
 		},
 		error: function(xhr) {
-			alert("Failed to fetch data: " + xhr.responseText);
+			alert("Request failed: " + xhr.responseText);
 		}
 	});
 }
@@ -310,3 +350,24 @@ function updateBranch() {
 	});
 }
 
+function deleteData(id) {
+	if (confirm("Are you sure you want to delete this Data?")) {
+		$.ajax({
+			url: "/api/preference/deleteExecutiveFounder",
+			type: "POST",
+			data: { id: id },
+			success: function(response) {
+				if (response.success) {
+					alert(response.message);
+					location.reload();
+				} else {
+					alert("Delete failed: " + response.message);
+				}
+			},
+			error: function(xhr, status, error) {
+				alert("Failed to delete Executive Founder.");
+				console.error("Error:", error);
+			}
+		});
+	}
+}

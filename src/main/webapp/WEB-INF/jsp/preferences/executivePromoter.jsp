@@ -186,7 +186,22 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select State</option>
-									<option value="Blue">MH</option>
+									<option value="Maharashtra">Maharashtra</option>
+									<option value="Gujarat">Gujarat</option>
+									<option value="Rajasthan">Rajasthan</option>
+									<option value="Goa">Goa</option>
+									<option value="Andhra Pradesh">Andhra Pradesh</option>
+									<option value="Punjab">Punjab</option>
+									<option value="Himachal Pradesh">Himachal Pradesh</option>
+									<option value="Uttar Pradesh">Uttar Pradesh</option>
+									<option value="Telangana">Telangana</option>
+									<option value="Bihar">Bihar</option>
+									<option value="Haryana">Haryana</option>
+									<option value="Jharkhand">Jharkhand</option>
+									<option value="Odissa">Odissa</option>
+									<option value="Tamil Nadu">Tamil Nadu</option>
+									<option value="Manipur">Manipur</option>
+									<option value="Nagaland">Nagaland</option>
 								</select>
 							</div>
 						</div>

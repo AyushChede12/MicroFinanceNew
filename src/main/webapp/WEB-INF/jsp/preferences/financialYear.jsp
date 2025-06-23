@@ -86,7 +86,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-
+							<input type="hidden" id="id" name="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Financial Year Name</label> <input type="text"
 									name="financialYearName" id="financialYearName"
@@ -117,7 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3" style="margin-top: 15px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning"
+								<button id="addBtn" class="btnStyle bg-warning"
 									onclick="saveFinancialYear()">Add</button>
 								<button type="button" id="updateBtn" class="btnStyle bg-success"
 									onclick="updateFY()">Update</button>
@@ -127,10 +127,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 					<div class="mt-5">
-
 						<div class="row">
-
-
 							<div class="col-12">
 								<div class="card recent-sales">
 
@@ -148,6 +145,7 @@ pageEncoding="ISO-8859-1"%> -->
 													<th scope="col">Date From</th>
 													<th scope="col">Date To</th>
 													<th scope="col">Edit</th>
+													<th scope="col">Delete</th>
 												</tr>
 											</thead>
 											<tbody id="tableBody">

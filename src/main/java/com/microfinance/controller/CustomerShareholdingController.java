@@ -27,18 +27,23 @@ public class CustomerShareholdingController {
 	@ResponseBody
 	public ApiResponse<List<addCustomer>> findByCustomerCode(){
 		List<addCustomer> list = customershareholdingservice.findByCustomerCode();
-		if(list != null && !list.isEmpty()) {
-			return ApiResponse.success(HttpStatus.OK, "Fetched Success", list);
+		if( list!=null && !list.isEmpty() ) {
+			return ApiResponse.success(HttpStatus.OK, "List Find Successfully", list);
 		}else
-			return ApiResponse.error(HttpStatus.NOT_FOUND, "Data is not Found");
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Data List is not Found");
 	}
 	
 	//Fetching CustomerCode   
 	@PostMapping("/fetchByCustomerCode")
 	@ResponseBody
-	public List<addCustomer> fetchByCustomerCode(@RequestBody addCustomer addcustomer) {
+	public ApiResponse<List<addCustomer>> fetchByCustomerCode(@RequestBody addCustomer addcustomer) {
 		List<addCustomer>  list = customershareholdingservice.fetchByCustomerCode(addcustomer.getMemberCode());
-		return list;
+		if(list!=null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Fetcheding is Successfully", list);
+		}else
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+		
+		
 	}
 	
 	//Find Branch 

@@ -62,11 +62,13 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Incentive Generate</li>
 						</ol>
 					</nav>
+					<input type="hidden" id="teamCode" name="teamCode">
+					<input type="hidden" id="teamName" name="teamName">
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Team Member Name</label> <select id="teamMemberName"
-									name="teamMemberName" required="required"
+								<label for="">Team Member Name</label> <select id="teamValue"
+									name="teamValue" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 								</select>
@@ -78,20 +80,8 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Incentive Month</label> <select id="incentiveMonth"
 									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="month">January</option>
-									<option value="month">February</option>
-									<option value="month">March</option>
-									<option value="month">April</option>
-									<option value="month">May</option>
-									<option value="month">June</option>
-									<option value="month">July</option>
-									<option value="month">August</option>
-									<option value="month">September</option>
-									<option value="month">October</option>
-									<option value="month">November</option>
-									<option value="month">December</option>
-
+									 <option value="">Select</option>
+									
 								</select>
 							</div>
 						</div>
@@ -132,6 +122,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/incentive/generateIncentive.js"></script>
+	
 	
 	
 </body>
