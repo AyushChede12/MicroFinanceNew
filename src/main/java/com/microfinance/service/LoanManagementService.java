@@ -9,7 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.LoanSchemCatalog;
+import com.microfinance.model.NewLoanApplication;
+import com.microfinance.model.addCustomer;
+import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.LoanMangmentSchemeRepo;
+import com.microfinance.repository.NewLoanAppicationRepo;
+
 
 @Service
 public class LoanManagementService {
@@ -17,7 +22,9 @@ public class LoanManagementService {
 	@Autowired
 
 	private LoanMangmentSchemeRepo loanRepository;
-
+	@Autowired
+	private AddCustomerRepo addCustomerRepo;
+	
 	/*
 	 * public LoanSchemCatalog saveLoan(LoanSchemCatalog lone) { return
 	 * loanRepository.save(lone);
@@ -85,5 +92,9 @@ public class LoanManagementService {
 	    return false;
 	}
 
+	public List<addCustomer> getAllLoanApplication() {
+		// TODO Auto-generated method stub
+		return addCustomerRepo.findAll();
+	}
 
 }

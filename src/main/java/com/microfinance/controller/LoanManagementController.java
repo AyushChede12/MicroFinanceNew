@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.LoanSchemCatalog;
+import com.microfinance.model.NewLoanApplication;
+import com.microfinance.model.addCustomer;
 import com.microfinance.service.LoanManagementService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -114,12 +116,16 @@ public class LoanManagementController {
 	}
 
 
+// this code is New Loan Application on drowpdown
+	@GetMapping("/allfetchdata")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllLoanApplication() {
+	    List<addCustomer> loanList = loanServices.getAllLoanApplication();
 
-  
+	    ApiResponse<List<addCustomer>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan applications fetched successfully",loanList );
 
+	    return ResponseEntity.ok(response);
+	}
 
-	
-	
 }
 
 
