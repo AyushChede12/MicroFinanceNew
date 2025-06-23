@@ -39,7 +39,6 @@ public class CustomerSavingsService {
 		return list;
 	}
 
-	
 
 	public List<SavingSchemeCatalog> findBySchemeType() {
 		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll();

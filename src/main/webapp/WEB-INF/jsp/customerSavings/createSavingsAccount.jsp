@@ -196,12 +196,16 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Joint Operation Code</label> <input type="text"
-									name="jointOperationCode" id="jointOperationCode"
-									required="required" placeholder="Enter joint Operation Code" />
+								<label for="">Joint Operation Code </label> <select id="jointOperationCode"
+									name="jointOperationCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
+									
+
+								</select>
 							</div>
 						</div>
 
@@ -219,7 +223,6 @@ pageEncoding="ISO-8859-1"%> -->
 									id="familyRelation" name="familyRelation" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>

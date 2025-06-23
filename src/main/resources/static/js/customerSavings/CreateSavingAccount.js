@@ -1,21 +1,83 @@
-//shubham kewat 18/06/25
-//fetch customer name  
+//shubham kewat
+//fetch Policy Name
 $(document).ready(function() {
     $.ajax({
-        url: "/findAllCustomerCode", // This mapping is used from customerShareHolder controller.
+        url: "/api/customersavings/fetchsavingchemecatalog",
         type: "GET",
         success: function(response) {
 			console.log("API response:", response);
-            var dropdown = $('#selectByCustomer');
+            var dropdown = $('#selectPlan');
             dropdown.empty();
             dropdown.append('<option value="">Select</option>');
 
-            if (response.status === "OK" && response.data) {
-                $.each(response.data, function(index, customer) {
-                   dropdown.append('<option value="' + customer.memberCode + '">' + customer.memberCode  + " - " + customer.customerName +'</option>');
+            if (response.status === "FOUND" && response.data) {
+                $.each(response.data, function(index, item) {
+                   dropdown.append('<option value="' + item.policyName+ '">' + item.policyName + '</option>');
                 });
             } else {
-                dropdown.append('<option value="">No customers found</option>');
+                dropdown.append('<option value="">No Policyname found</option>');
+            }
+        },
+        error: function() {
+            alert("Failed to fetch Policyname.");
+        }
+    });
+});
+
+//fetch minimum opening balance
+$('#selectPlan').on('change', function () {
+    let selectedName = $(this).val();
+
+    if (selectedName !== "") {
+        $.ajax({
+            url: '/api/customersavings/fetchsavingchemecatalog?policyName=' + encodeURIComponent(selectedName),
+            type: 'GET',
+            success: function (response) {
+                if (response.status === "FOUND") {
+                    $('#openingAmount').val(response.monthlyMinimumBalance);
+					
+                } else {
+                    alert('No minimum balance found!');
+                    $('#openingAmount').val('');
+                }
+            },
+            error: function () {
+                alert('Error while fetching minimum balance data!');
+                $('#openingAmount').val('');
+            }
+        });
+    } else {
+        $('#openingAmount').val('');
+    }
+});
+
+
+//shubham kewat 18/06/25
+//fetch customer name 
+$(document).ready(function() {
+    $.ajax({
+        url: "/findAllCustomerCode",
+        type: "GET",
+        success: function(response) {
+            console.log("API response:", response);
+
+            var dropdown1 = $('#selectByCustomer');       // shows: memberCode - customerName
+            var dropdown2 = $('#jointOperationCode');     // shows: memberCode only
+
+            dropdown1.empty();
+            dropdown2.empty();
+
+            dropdown1.append('<option value="">Select</option>');
+            dropdown2.append('<option value="">Select</option>');
+
+            if (response.status === "OK" && response.data) {
+                $.each(response.data, function(index, customer) {
+                    dropdown1.append('<option value="' + customer.memberCode + '">' + customer.memberCode + ' - ' + customer.customerName + '</option>');
+                    dropdown2.append('<option value="' + customer.memberCode + '">' + customer.memberCode + '</option>');
+                });
+            } else {
+                dropdown1.append('<option value="">No customers found</option>');
+                dropdown2.append('<option value="">No customers found</option>');
             }
         },
         error: function() {
@@ -70,6 +132,59 @@ $('#selectByCustomer').on('change', function () {
 });
 
 
+//fetch only customer name on cahnge in dropdown
+$('#jointOperationCode').on('change', function () {
+    let selectedCode = $(this).val();
 
+    if (selectedCode !== "") {
+        $.ajax({
+            url: '/api/customersavings/fetchCustomerCode',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ memberCode: selectedCode }),
+            success: function (response) {
+                if (response.status === "FOUND") {
+                    let customer = response.data[0];
+                    $('#jointSurvivorCode').val(customer.customerName);
+                } else {
+                    alert('No customer data found!');
+                    $('#jointSurvivorCode').val('');
+                }
+            },
+            error: function () {
+                alert('Error while fetching customer data!');
+                $('#jointSurvivorCode').val('');
+            }
+        });
+    } else {
+        $('#jointSurvivorCode').val('');
+    }
+});
+
+
+//fetch relative relation from preferences
+$(document).ready(function() {
+    $.ajax({
+        url: "/getAllRelativeModule",
+        type: "GET",
+        success: function(response) {
+			console.log("API response:", response);
+            var dropdown = $('#familyRelation');
+            dropdown.empty();
+            dropdown.append('<option value="">Select</option>');
+
+            if (response.status === "FOUND" && response.data) {
+                $.each(response.data, function(index, item) {
+                   dropdown.append('<option value="' + item.relation+ '">' + item.relation + '</option>');
+                });
+            } else {
+                dropdown.append('<option value="">No Relation found</option>');
+            }
+        },
+        error: function() {
+            alert("Failed to fetch relation.");
+        }
+    });
+});
 
 
