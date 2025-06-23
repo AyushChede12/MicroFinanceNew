@@ -32,6 +32,23 @@ $(document).ready(function() {
 			alert("Failed to load branch names.");
 		}
 	});
+
+	$.ajax({
+		url: "getAllRelationToApplicant",
+		type: "GET",
+		success: function(data) {
+			$("#relationToApplicant").append("<option value=''>-- Select Relation --</option>");
+			for (let i = 0; i < data.length; i++) {
+				let option = "<option value='" + data[i].relationToApplicant + "'>" + data[i].relationToApplicant + "</option>";
+				$("#relationToApplicant").append(option);
+			}
+		},
+		error: function() {
+			alert("Failed to load relation .");
+		}
+	});
+
+
 });
 
 
@@ -54,58 +71,54 @@ $(document).ready(function() {
 $(document).ready(function() {
 	$("#memberCode").change(function() {
 		var memberCode = $(this).val();
-
+		alert(memberCode);
 		if (memberCode !== "") {
 			$.ajax({
 				type: "POST",
-				url: "/getCustomerByMemberCode",
+				url: "/getFinancialConsultantByMemberCode",
 				data: { memberCode: memberCode },
-				success: function(data) {
+				success: function(response) {
 					// Fill form fields
-					$("#customerName").val(data.customerName);
-					$("#dob").val(data.dob);
-					$("#age").val(data.customerAge);
-					$("#guardianName").val(data.guardianName);
-					$("#relationToApplicant").val(data.relationToApplicant);
-					$("#contactNo").val(data.contactNo);
-					$("#nomineeName").val(data.nomineeName);
-					$("#branchName").val(data.branchName);
-					$("#nomineeAge").val(data.nomineeAge);
-					$("#address").val(data.customerAddress);
-					$("#district").val(data.district);
-					$("#state").val(data.state);
-					$("#pinCode").val(data.pinCode);
-					$("#profession").val(data.profession);
-					$("#academicBackground").val(data.academicBackground);
+					alert("success");
+					if (response.length > 0) {
+						var data = response[0]; // Use the first object from the list
 
-					// Set customer photo
-					if (data.customerPhoto) {
-						const imagePath = `Uploads/${data.customerPhoto}`;
-						document.getElementById("customerPhoto").src = imagePath;
-						/* imagePath.style.width = "100%";
-						imagePath.style.height = "100%";
-						imagePath.style.objectFit = "cover"
-						imagePath.style.overflow = "hidden"
-						imagePath.style.borderRadius = "20px"*/
+						$("#customerName").val(data.customerName);
+						$("#dob").val(data.dob);
+						$("#age").val(data.customerAge);
+						$("#guardianName").val(data.guardianName);
+						$("#relationToApplicant").val(data.relationToApplicant);
+						$("#contactNo").val(data.contactNo);
+						$("#nomineeName").val(data.nomineeName);
+						$("#branchName").val(data.branchName);
+						$("#nomineeAge").val(data.nomineeAge);
+						$("#address").val(data.customerAddress);
+						$("#district").val(data.district);
+						$("#state").val(data.state);
+						$("#pinCode").val(data.pinCode);
+						$("#profession").val(data.profession);
+						$("#academicBackground").val(data.academicBackground);
+						$("#referralCode").val(data.referralCode);
+						$("#referralName").val(data.referralName);
+
+						// Customer Photo
+						if (data.customerPhoto) {
+							const imagePath = `Uploads/${data.customerPhoto}`;
+							document.getElementById("customerPhoto").src = imagePath;
+						} else {
+							document.getElementById("customerPhoto").src = 'Uploads/default-placeholder.jpg';
+						}
+
+						// Customer Signature
+						if (data.customerSignature) {
+							const signPath = `Uploads/${data.customerSignature}`;
+							document.getElementById("customerSignature").src = signPath;
+						} else {
+							document.getElementById("customerSignature").src = 'Uploads/default-signature.jpg';
+						}
 					} else {
-						document.getElementById("customerPhoto").src = 'Uploads/default-placeholder.jpg';
+						alert("No customer found for this member code.");
 					}
-
-					// Set customer signature
-					if (data.customerSignature) {
-						const imagePath = `Uploads/${data.customerSignature}`;
-						document.getElementById("customerSignature").src = imagePath;
-						/*const previewimg2 = document.getElementById("customerSignature");
-							document.getElementById("customerSignature").src = e.target.result;
-							previewimg2.style.width = "100%";
-							previewimg2.style.height = "100%";
-							previewimg2.style.objectFit = "cover"
-							previewimg2.style.overflow = "hidden"
-							previewimg2.style.borderRadius = "20px"*/
-					}
-					$("#referralCode").val(data.referralCode);
-					$("#referralName").val(data.referralName);
-
 				},
 				error: function(xhr) {
 					alert("Member not found or server error.");

@@ -7,36 +7,45 @@ import com.microfinance.model.IncentiveSchemeMaster;
 import com.microfinance.model.RecurringDepositPM;
 
 public class ApiResponse<T> {
-	
+
+	private boolean success;
 	private HttpStatus status;
-    private String message;
-    private T data;
-   
+	private String message;
+	private T data;
 
-    // Constructors
-    public ApiResponse(HttpStatus status, String message, T data) {
-        this.status = status;
-        this.message = message;
-        this.data = data;
-    }
+	// Constructors
 
-	public ApiResponse(String string, String message2, ApiResponse<ExecutiveFounder> response) {
+	public ApiResponse() {
+	}
+
+	public ApiResponse(HttpStatus status, String message, T data) {
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
+
+	public ApiResponse(String string, String message, ApiResponse<ExecutiveFounder> response) {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public ApiResponse(String message, boolean success, T data) {
 	}
-	
 
+	public ApiResponse(boolean success, HttpStatus status, String message, T data) {
+		this.success = success;
+		this.status = status;
+		this.message = message;
+		this.data = data;
+	}
 
 	// Static helper methods for success and error responses
-    public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
-        return new ApiResponse<>(status, message, data);
-    }
+	public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
+		return new ApiResponse<>(status, message, data);
+	}
 
-    public static <T> ApiResponse<T> error(HttpStatus status, String message) {
-        return new ApiResponse<>(status, message, null);
-    }
+	public static <T> ApiResponse<T> error(HttpStatus status, String message) {
+		return new ApiResponse<>(status, message, null);
+	}
 
 	public HttpStatus getStatus() {
 		return status;
@@ -62,6 +71,14 @@ public class ApiResponse<T> {
 		this.data = data;
 	}
 
-	
-}
 
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+	
+
+}
