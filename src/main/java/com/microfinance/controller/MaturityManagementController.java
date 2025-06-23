@@ -14,7 +14,6 @@ import com.microfinance.model.MaturitySchemeMaster;
 import com.microfinance.service.MaturitySchemeMasterService;
 
 @RestController
-@RequestMapping("/api")
 public class MaturityManagementController {
 	
 	

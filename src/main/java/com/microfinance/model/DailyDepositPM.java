@@ -10,7 +10,8 @@ public class DailyDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String planCode;
+	private String planCodeDD;
+	private String planNameDD;
 	private String minimumDeposit;
 	private String rateOfInterest;
 	private String installmentType;
@@ -30,11 +31,11 @@ public class DailyDepositPM {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPlanCode() {
-		return planCode;
+	public String getPlanCodeDD() {
+		return planCodeDD;
 	}
-	public void setPlanCode(String planCode) {
-		this.planCode = planCode;
+	public void setPlanCodeDD(String planCodeDD) {
+		this.planCodeDD = planCodeDD;
 	}
 	public String getMinimumDeposit() {
 		return minimumDeposit;
@@ -113,6 +114,12 @@ public class DailyDepositPM {
 	}
 	public void setStatusOfPlan(String statusOfPlan) {
 		this.statusOfPlan = statusOfPlan;
+	}
+	public String getPlanNameDD() {
+		return planNameDD;
+	}
+	public void setPlanNameDD(String planNameDD) {
+		this.planNameDD = planNameDD;
 	}
 	
 }

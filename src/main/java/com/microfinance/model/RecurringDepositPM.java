@@ -13,6 +13,7 @@ public class RecurringDepositPM {
     private long id;
 
     private String planCodeRD;
+    private String planNameRD;
     private String minimumAmountRD;
     private String rateOfInterestRD;
     private String termMode;
@@ -115,6 +116,12 @@ public class RecurringDepositPM {
 	}
 	public void setStatusOfPlanRD(String statusOfPlanRD) {
 		this.statusOfPlanRD = statusOfPlanRD;
+	}
+	public String getPlanNameRD() {
+		return planNameRD;
+	}
+	public void setPlanNameRD(String planNameRD) {
+		this.planNameRD = planNameRD;
 	}
 
     

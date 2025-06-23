@@ -75,25 +75,30 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Inst.From <span id="star"> *</span></label> <input type="text"
-									name="ddInstFrom" id="ddInstFrom" required="required"
-									placeholder="Enter Inst.From"
-									style="text-transform: uppercase;" />
+								<label for="vehicalNo">Inst.From <span id="star"> *</span></label> 
+									<select id="ddInstFrom"
+									name="ddInstFrom" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Inst. To <span id="star"> *</span></label> <input type="text" name="ddInstTo"
-									id="ddInstTo" required="required" placeholder="Enter Inst.To"
-									style="text-transform: uppercase;" />
+								<label>Inst. To <span id="star"> *</span></label> 
+								<select id="ddInstTo"
+									name="ddInstTo" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="ddInterestRate"
+								<label for="">Interest Rate <span id="star"> *</span>( in % )</label> <input type="text" name="ddInterestRate"
 									id="ddInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -102,7 +107,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction </label> <input type="text" name="ddDeduction"
+								<label>Deduction ( in % )</label> <input type="text" name="ddDeduction"
 									id="ddDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
@@ -148,25 +153,27 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Inst.From <span id="star"> *</span></label> <input type="text"
-									name="rdInstFrom" id="rdInstFrom" required="required"
-									placeholder="Enter Inst.From"
-									style="text-transform: uppercase;" />
+								<label for="vehicalNo">Inst.From <span id="star"> *</span></label> 
+								<select id="rdInstFrom" name="rdInstFrom" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Inst. To <span id="star"> *</span></label> <input type="text" name="rdInstTo"
-									id="rdInstTo" required="required" placeholder="Enter Inst.To"
-									style="text-transform: uppercase;" />
+								<label>Inst. To <span id="star"> *</span></label> <select id="rdInstTo" name="rdInstTo" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="rdInterestRate"
+								<label for="">Interest Rate <span id="star"> *</span>( in % )</label> <input type="text" name="rdInterestRate"
 									id="rdInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -175,7 +182,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="rdDeduction"
+								<label>Deduction( in % )</label> <input type="text" name="rdDeduction"
 									id="rdDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
@@ -214,26 +221,27 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Months From <span id="star"> *</span></label> <input type="text"
-									name="fdMonthsFrom" id="fdMonthsFrom" required="required"
-									placeholder="Enter Months.From"
-									style="text-transform: uppercase;" />
-							</div>
+								<label for="vehicalNo">Months From <span id="star"> *</span></label> 
+								<select id="fdInstFrom" name="fdInstFrom" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
+								</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Months To <span id="star"> *</span></label> <input type="text" name="fdMonthsTo"
-									id="fdMonthsTo" required="required"
-									placeholder="Enter Months.To"
-									style="text-transform: uppercase;" />
+								<label>Months To <span id="star"> *</span></label> <select id="fdInstTo" name="fdInstTo" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="fdInterestRate"
+								<label for="">Interest Rate <span id="star"> *</span>( in % )</label> <input type="text" name="fdInterestRate"
 									id="fdInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -242,7 +250,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="fdDeduction"
+								<label>Deduction ( in % )</label> <input type="text" name="fdDeduction"
 									id="fdDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
@@ -283,26 +291,28 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Months From <span id="star"> *</span></label> <input type="text"
-									name="misMonthsFrom" id="misMonthsFrom" required="required"
-									placeholder="Enter Months.From"
-									style="text-transform: uppercase;" />
+								<label for="vehicalNo">Months From <span id="star"> *</span></label> 
+								<select id="misInstFrom" name="misInstFrom" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Months To <span id="star"> *</span></label> <input type="text" name="misMonthsTo"
-									id="misMonthsTo" required="required"
-									placeholder="Enter Months.To"
-									style="text-transform: uppercase;" />
+								<label>Months To <span id="star"> *</span></label> 
+								<select id="misInstTo" name="misInstTo" required="required"
+									class="form-control selectField monthname" style="height: 30px;">
+									<option value="">Select Month</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interest Rate <span id="star"> *</span></label> <input type="text" name="misInterestRate"
+								<label for="">Interest Rate <span id="star"> *</span>( in % )</label> <input type="text" name="misInterestRate"
 									id="misInterestRate" required="required" placeholder="Enter ROI" />
 							</div>
 						</div>
@@ -311,7 +321,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deduction</label> <input type="text" name="misDeduction"
+								<label>Deduction ( in % )</label> <input type="text" name="misDeduction"
 									id="misDeduction" required="required" placeholder="Enter Deduction" />
 
 							</div>
@@ -341,6 +351,13 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery script -->
 
 <script src="./js/MaturityManagement/maturityscheme.js"></script>	
+
+  
+
+ 
+   
+
+ 
 
 	
 </body>

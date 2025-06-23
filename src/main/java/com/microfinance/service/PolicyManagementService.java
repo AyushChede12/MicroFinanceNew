@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 
 @Service
@@ -24,6 +26,10 @@ public class PolicyManagementService {
 	
 	@Autowired
 	FixedDepositPMRepo fixedDepositPMRepo;
+	
+	@Autowired
+	MisDepositePMRepo misDepositePMRepo;
+
 	
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
@@ -54,6 +60,25 @@ public List<FixedDepositPM> getAllFixeddata() {
 	List<FixedDepositPM> list = fixedDepositPMRepo.findAll();
 	return list;
 }
+
+
+
+
+//feacth all data of the daily deposite
+public List<DailyDepositPM> getAlldailydepositedata() {
+	// TODO Auto-generated method stub
+	return dailyDepositPMRepo.findAll();
+}
+
+
+
+
+public List<MISDepositPM> getAllMISDepositData() {
+	// TODO Auto-generated method stub
+	return misDepositePMRepo.findAll();
+}
+
+
 
 
 }

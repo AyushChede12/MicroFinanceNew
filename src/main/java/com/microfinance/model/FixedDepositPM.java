@@ -9,7 +9,8 @@ public class FixedDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String planCodeRD1;
+	private String planCodeFD;
+	private String planNameFD;
 	private String minimumAmountRD1;
 	private String rateOfInterestRD1;
 	private String termMode1;
@@ -25,11 +26,11 @@ public class FixedDepositPM {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPlanCodeRD1() {
-		return planCodeRD1;
+	public String getPlanCodeFD() {
+		return planCodeFD;
 	}
-	public void setPlanCodeRD1(String planCodeRD1) {
-		this.planCodeRD1 = planCodeRD1;
+	public void setPlanCodeRD1(String planCodeFD) {
+		this.planCodeFD = planCodeFD;
 	}
 	public String getMinimumAmountRD1() {
 		return minimumAmountRD1;
@@ -84,6 +85,12 @@ public class FixedDepositPM {
 	}
 	public void setStatusOfPlanRD1(String statusOfPlanRD1) {
 		this.statusOfPlanRD1 = statusOfPlanRD1;
+	}
+	public String getPlanNameFD() {
+		return planNameFD;
+	}
+	public void setPlanNameFD(String planNameFD) {
+		this.planNameFD = planNameFD;
 	}
 	
 

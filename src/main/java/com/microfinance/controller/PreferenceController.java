@@ -58,11 +58,11 @@ public class PreferenceController {
 			return ResponseEntity.badRequest().body("Failure");
 	}
 	
-	@GetMapping("/getAllBranchModule")               //Ayush
-	@ResponseBody
-	public List<BranchModule> fetchAllBranchModule(){
+	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
+	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
 		List<BranchModule> list = preferenceService.fetchAllBranchModule();
-		return list;
+		ApiResponse<List<BranchModule>> response = new ApiResponse<>( HttpStatus.OK,"Branch modules fetched successfully", list);
+		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/getBranchModuleById")           //Ayush

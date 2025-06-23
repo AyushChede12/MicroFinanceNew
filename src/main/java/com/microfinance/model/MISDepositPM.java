@@ -10,7 +10,8 @@ public class MISDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String planCodeRD2;
+	private String planCodeMD;
+	private String planNameMD;
 	private String minimumAmountRD2;
 	private String maturityROI;
 	private String termMode2;
@@ -27,11 +28,11 @@ public class MISDepositPM {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getPlanCodeRD2() {
-		return planCodeRD2;
+	public String getPlanCodeMD() {
+		return planCodeMD;
 	}
-	public void setPlanCodeRD2(String planCodeRD2) {
-		this.planCodeRD2 = planCodeRD2;
+	public void setPlanCodeRD2(String planCodeMD) {
+		this.planCodeMD = planCodeMD;
 	}
 	public String getMinimumAmountRD2() {
 		return minimumAmountRD2;
@@ -92,6 +93,12 @@ public class MISDepositPM {
 	}
 	public void setStatusOfPlanRD2(String statusOfPlanRD2) {
 		this.statusOfPlanRD2 = statusOfPlanRD2;
+	}
+	public String getPlanNameMD() {
+		return planNameMD;
+	}
+	public void setPlanNameMD(String planNameMD) {
+		this.planNameMD = planNameMD;
 	}
 	
 

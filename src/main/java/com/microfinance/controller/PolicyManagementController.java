@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.service.PolicyManagementService;
 
@@ -41,7 +43,7 @@ public class PolicyManagementController {
     }
 
     
-    
+    //view all fixed deposit
     @GetMapping("/fixed-deposit/view")
     @ResponseBody
     public ApiResponse<List<FixedDepositPM>> getAllFixedDeposits() {
@@ -93,5 +95,47 @@ public class PolicyManagementController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+    
+    
+ // View All daily Deposits
+    @GetMapping("/daily-deposit/view")
+    public ResponseEntity<ApiResponse<List<DailyDepositPM>>> getAlldailyDeposits() {
+        List<DailyDepositPM> deposits = policyManagementService.getAlldailydepositedata();
+
+        if (deposits != null && !deposits.isEmpty()) {
+            ApiResponse<List<DailyDepositPM>> response = ApiResponse.success(HttpStatus.OK,
+                "Daily deposits fetched successfully.",
+                deposits
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ApiResponse<List<DailyDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+                "No daily deposits found."
+            );
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/mis-deposit/view")
+    public ResponseEntity<ApiResponse<List<MISDepositPM>>> getAllMISDeposits() {
+        List<MISDepositPM> deposits = policyManagementService.getAllMISDepositData();
+
+        if (deposits != null && !deposits.isEmpty()) {
+            ApiResponse<List<MISDepositPM>> response = ApiResponse.success(
+                HttpStatus.OK,
+                "MIS deposits fetched successfully.",
+                deposits
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ApiResponse<List<MISDepositPM>> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "No MIS deposits found."
+            );
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 
 }
