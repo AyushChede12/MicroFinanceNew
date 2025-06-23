@@ -21,6 +21,14 @@ public interface FinancialConsultantRepo extends JpaRepository<addFinancialConsu
 	@Query("select coalesce(max(id), 0) from addFinancialConsultant")
 	long getMaxId();
 
+	@Transactional
+	List<addFinancialConsultant> findByFinancialCode(String financialCode);
+
+	/*
+	 * @Transactional List<addFinancialConsultant> fetchAllFinancialCode(String
+	 * financialCode);
+	 */
+
 	//Optional<addCustomer> findByMemberCode(String memberCode);
 
 	

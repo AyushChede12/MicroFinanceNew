@@ -519,7 +519,7 @@ pageEncoding="ISO-8859-1"%> -->
 								class="btnStyle bg-success">Save</button>
 							<button id="updateBtn" class="btnStyle"
 								style="background-color: #FFA500;">Update</button>
-							<button id="printBtn" class="btnStyle bg-primary">Print</button>
+							<button id="printBtn" class="btnStyle bg-primary" onclick="printTable()">Print</button>
 						</div>
 					</div>
 				</div>
@@ -639,7 +639,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
                        <div style="overflow-x: auto; white-space: nowrap;">
-						<table class="table table-borderless datatable">
+						<table class="table table-borderless datatable" id="tabl">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">Sl No.</th>
@@ -667,10 +667,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 
-	<script>
 	
-
-	</script>
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>

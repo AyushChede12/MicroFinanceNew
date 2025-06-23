@@ -395,7 +395,48 @@ $(document).ready(function () {
             }
         });
     });
+	
+	$(document).on('click', '.deleteBtn', function () {
+	        var id = $(this).data('id');
+
+	        // Optional: Confirmation prompt
+	        if (confirm("Are you sure you want to delete this Financial Consultant?")) {
+	            $.ajax({
+	                url: '/api/financialconsultant/deleteFinancialConsultantById',
+	                type: 'POST',
+	                data: { id: id },
+	                success: function (response) {
+	                    if (response.status === 'OK') {
+	                        alert(response.message);
+	                        // Reload or update the table after deletion
+	                        location.reload(); // or call a function to refresh table via AJAX
+	                    } else {
+	                        alert("Error: " + response.message);
+	                    }
+	                },
+	                error: function (xhr) {
+	                    alert("Deletion failed. Please try again.");
+	                }
+	            });
+	        }
+	    });
+
 });
+
+function printTable(){
+	const printContent = document.getElementById('tabl').outerHTML;
+				const printWindow = window.open('', '', 'height=500,width=800');
+
+				printWindow.document
+						.write('<html><head><title>Print Details</title></head><body>');
+				printWindow.document.write(printContent);
+				printWindow.document.write('</body></html>');
+
+				printWindow.document.close();
+				printWindow.focus();
+				printWindow.print();
+}
+
 
 
 // End of document.ready

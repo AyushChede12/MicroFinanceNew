@@ -133,4 +133,23 @@ public class FinancialConsultantService {
 		// TODO Auto-generated method stub
 		return financialConsultationRepo.findById(id);
 	}
+
+	public boolean deleteFinancialConsultant(Long id) {
+		// TODO Auto-generated method stub
+		if (financialConsultationRepo.existsById(id)) {
+			financialConsultationRepo.deleteById(id);
+			return true;
+		}
+		return false;
+    }
+
+	public List<addFinancialConsultant> fetchfinancialHierarchyByFinancialCode(String financialCode) {
+		// TODO Auto-generated method stub
+		return financialConsultationRepo.findByFinancialCode(financialCode);
+	}
+
+	
+
+	
+	
 }

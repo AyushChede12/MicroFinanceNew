@@ -127,6 +127,42 @@ public class FinancialConsultantController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	    }
 	}
+	
+	
+	@PostMapping("/deleteFinancialConsultantById")
+	public ResponseEntity<ApiResponse<String>> deleteFinancialConsultant(@RequestParam("id") Long id) {
+	    boolean isDeleted = financialConsultantService.deleteFinancialConsultant(id);
+	    
+	    if (isDeleted) {
+	        ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Financial Consultant deleted successfully", "success");
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Financial Consultant deletion failed", "failure");
+	        return ResponseEntity.badRequest().body(response);
+	    }
+	}
 
+// For financialConsultantHierarchy
+	
+	@PostMapping("/getfinancialHierarchyByFinancialCode")
+	public ResponseEntity<ApiResponse<List<addFinancialConsultant>>> getfinancialHierarchyByFinancialCode(@RequestParam String financialCode) {
+
+	    List<addFinancialConsultant> financialconsultant = financialConsultantService.fetchfinancialHierarchyByFinancialCode(financialCode);
+
+	    if (financialconsultant != null && !financialconsultant.isEmpty()) {
+	        ApiResponse<List<addFinancialConsultant>> response = ApiResponse.success(
+	            HttpStatus.OK,
+	            "Consultants found for financialCode: " + financialCode,
+	            financialconsultant
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    } else {
+	        ApiResponse<List<addFinancialConsultant>> response = ApiResponse.error(
+	            HttpStatus.NOT_FOUND,
+	            "No member found with this code"
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
+	}
 
 }
