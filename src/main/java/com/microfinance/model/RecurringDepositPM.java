@@ -13,18 +13,25 @@ public class RecurringDepositPM {
     private long id;
 
     private String planCodeRD;
+    private String planNameRD;
     private String minimumAmountRD;
     private String rateOfInterestRD;
+    
+    private String installmentTypeRD;
+    private String durationRD;
+   
     private String termMode;
     private String term;
     private String commissionOnNewRD;
     private String renewalCommissionRD;
     private String componentIntervalRD;
     private String totalPaidRD;
-    private String maturityAmountRD;
     private String flexiblePlanRD;
+    private String maturityAmountRD;
+    private String penltyfineRD;
     private String graceDaysRD;
-    private String penaltyRateRD;
+    
+  
     private String statusOfPlanRD;
 	public long getId() {
 		return id;
@@ -92,29 +99,50 @@ public class RecurringDepositPM {
 	public void setMaturityAmountRD(String maturityAmountRD) {
 		this.maturityAmountRD = maturityAmountRD;
 	}
-	public String getFlexiblePlanRD() {
-		return flexiblePlanRD;
-	}
-	public void setFlexiblePlanRD(String flexiblePlanRD) {
-		this.flexiblePlanRD = flexiblePlanRD;
-	}
+	
 	public String getGraceDaysRD() {
 		return graceDaysRD;
 	}
 	public void setGraceDaysRD(String graceDaysRD) {
 		this.graceDaysRD = graceDaysRD;
 	}
-	public String getPenaltyRateRD() {
-		return penaltyRateRD;
-	}
-	public void setPenaltyRateRD(String penaltyRateRD) {
-		this.penaltyRateRD = penaltyRateRD;
-	}
+	
 	public String getStatusOfPlanRD() {
 		return statusOfPlanRD;
 	}
 	public void setStatusOfPlanRD(String statusOfPlanRD) {
 		this.statusOfPlanRD = statusOfPlanRD;
+	}
+	
+	public String getInstallmentTypeRD() {
+		return installmentTypeRD;
+	}
+	public void setInstallmentTypeRD(String installmentTypeRD) {
+		this.installmentTypeRD = installmentTypeRD;
+	}
+	public String getDurationRD() {
+		return durationRD;
+	}
+	public void setDurationRD(String durationRD) {
+		this.durationRD = durationRD;
+	}
+	public String getFlexiblePlanRD() {
+		return flexiblePlanRD;
+	}
+	public void setFlexiblePlanRD(String flexiblePlanRD) {
+		this.flexiblePlanRD = flexiblePlanRD;
+	}
+	public String getPlanNameRD() {
+		return planNameRD;
+	}
+	public void setPlanNameRD(String planNameRD) {
+		this.planNameRD = planNameRD;
+	}
+	public String getPenltyfineRD() {
+		return penltyfineRD;
+	}
+	public void setPenltyfineRD(String penltyfineRD) {
+		this.penltyfineRD = penltyfineRD;
 	}
 
     
