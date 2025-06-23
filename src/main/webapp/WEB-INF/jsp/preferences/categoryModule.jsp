@@ -137,6 +137,7 @@ pageEncoding="ISO-8859-1"%> -->
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">Sr No</th>
 													<th scope="col">Category</th>
+													<th scope="col">Delete</th>
 												</tr>
 											</thead>
 											<tbody id="tableBody">

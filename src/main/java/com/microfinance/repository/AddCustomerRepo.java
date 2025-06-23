@@ -1,6 +1,7 @@
 package com.microfinance.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -16,6 +17,8 @@ public interface AddCustomerRepo extends JpaRepository<addCustomer, Long> {
 
 	@Transactional
 	List<addCustomer> findByMemberCode(String memberCode);
+	
+	//Optional<addCustomer> findByMemberCodeFinancialConsultant(String memberCode);
 	
     //@Query(SELECT * FROM addCustomer WHERE  memberCode = :memberCode;)
 	//List<addCustomer> findByCustomerCode(String memberCode);
