@@ -12,6 +12,18 @@ public class MISDepositPM {
 	private long id;
 	private String planCodeMD;
 	private String planNameMD;
+
+	private String minimumAmountRD2;
+	private String maturityROI;
+	private String termMode2;
+	private String term1;
+	private String MISIntROI;
+	private String MISInterval;
+	private String MISInterest;
+	private String maturityAmountRD2;
+	private String commissionOnNewRD2;
+	private String statusOfPlanRD2;
+
 	private String rateOfInterestMD;
 	private String durationMD;
 	private String installmentTypeMD;
@@ -26,6 +38,7 @@ public class MISDepositPM {
 	private String flexiblePlanMD;
 	private String commissionOnNewMD;
 	private String statusOfPlanMDRD2;
+
 	public long getId() {
 		return id;
 	}
@@ -35,7 +48,11 @@ public class MISDepositPM {
 	public String getPlanCodeMD() {
 		return planCodeMD;
 	}
+
+	public void setPlanCodeRD2(String planCodeMD) {
+
 	public void setPlanCodeMD(String planCodeMD) {
+
 		this.planCodeMD = planCodeMD;
 	}
 	public String getMinimumAmountMD() {
@@ -97,6 +114,12 @@ public class MISDepositPM {
 	}
 	public void setStatusOfPlanMDRD2(String statusOfPlanMDRD2) {
 		this.statusOfPlanMDRD2 = statusOfPlanMDRD2;
+	}
+	public String getPlanNameMD() {
+		return planNameMD;
+	}
+	public void setPlanNameMD(String planNameMD) {
+		this.planNameMD = planNameMD;
 	}
 	
 	

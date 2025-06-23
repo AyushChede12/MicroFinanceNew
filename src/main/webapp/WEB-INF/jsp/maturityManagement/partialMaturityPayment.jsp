@@ -358,15 +358,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-			</form>
+		</form>
 
 
 		</div>
@@ -375,6 +367,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	
 </body>
 
 </html>

@@ -8,6 +8,21 @@ import javax.persistence.Id;
 public class FixedDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	private int id;
+	private String planCodeFD;
+	private String planNameFD;
+	private String minimumAmountRD1;
+	private String rateOfInterestRD1;
+	private String termMode1;
+	private String installmentType1;
+	private String commissionOnNewRD1;
+	private String componentIntervalRD;
+	private String totalPaidRD;
+	private String maturityAmountRD;
+	private String statusOfPlanRD1;
+	public int getId() {
+
 	private  long id;
 	private String planCodeFD;
 	private String planNameFD;
@@ -28,6 +43,7 @@ public class FixedDepositPM {
 	private String statusOfPlanFD;
 	
 	public long getId() {
+
 		return id;
 	}
 	public void setId(long id) {
@@ -36,7 +52,11 @@ public class FixedDepositPM {
 	public String getPlanCodeFD() {
 		return planCodeFD;
 	}
+
+	public void setPlanCodeRD1(String planCodeFD) {
+
 	public void setPlanCodeFD(String planCodeFD) {
+
 		this.planCodeFD = planCodeFD;
 	}
 	public String getMinimumAmountFD() {
@@ -120,6 +140,7 @@ public class FixedDepositPM {
 	public String getFlexiblePlanFD() {
 		return flexiblePlanFD;
 	}
+
 	public void setFlexiblePlanFD(String flexiblePlanFD) {
 		this.flexiblePlanFD = flexiblePlanFD;
 	}
@@ -141,13 +162,14 @@ public class FixedDepositPM {
 	public void setPenltyfineFD(String penltyfineFD) {
 		this.penltyfineFD = penltyfineFD;
 	}
+
 	public String getPlanNameFD() {
 		return planNameFD;
 	}
 	public void setPlanNameFD(String planNameFD) {
 		this.planNameFD = planNameFD;
 	}
-	
+
 	
 
 }
