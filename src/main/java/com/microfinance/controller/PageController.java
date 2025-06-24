@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.microfinance.repository.CustomerRepo;
+import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
+
 
 @Controller
 public class PageController {
@@ -18,6 +20,9 @@ public class PageController {
 	CustomerRepo customerRepo;
 	
 	@Autowired
+
+	FinancialConsultantRepo financialConsultantRepo;
+
 	DailyDepositPMRepo dailyDepositRepo;
 	
 	@Autowired
@@ -28,6 +33,7 @@ public class PageController {
 	
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
+
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -42,7 +48,10 @@ public class PageController {
 
 	// Financial Consultant
 	@GetMapping("/addFinancialConsultant")
-	public String getAddFinancialConsultant() {
+	public String getAddFinancialConsultant(Model model) {
+		long maxId = financialConsultantRepo.getMaxId();
+		String financialCode = "FC" + "0000" + (maxId + 1);
+		model.addAttribute("financialCode", financialCode);
 		return "financialConsultant/addFinancialConsultant";
 	}
 
@@ -959,7 +968,7 @@ public class PageController {
 	}
 	
 	
-	
+
 	
 
 	
