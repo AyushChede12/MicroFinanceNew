@@ -9,8 +9,13 @@ import javax.persistence.Id;
 public class DailyDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	private int id;
+	private String planCodeDD;
+
 	private Long id;
 	private String planCode;
+
 	private String planNameDD;
 	private String minimumDeposit;
 	private String rateOfInterest;
@@ -34,11 +39,11 @@ public class DailyDepositPM {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getPlanCode() {
-		return planCode;
+	public String getPlanCodeDD() {
+		return planCodeDD;
 	}
-	public void setPlanCode(String planCode) {
-		this.planCode = planCode;
+	public void setPlanCodeDD(String planCodeDD) {
+		this.planCodeDD = planCodeDD;
 	}
 	public String getMinimumDeposit() {
 		return minimumDeposit;
@@ -124,6 +129,7 @@ public class DailyDepositPM {
 	public void setPlanNameDD(String planNameDD) {
 		this.planNameDD = planNameDD;
 	}
+
 	public String getTermModeDD() {
 		return termModeDD;
 	}
@@ -137,5 +143,6 @@ public class DailyDepositPM {
 		this.termDD = termDD;
 	}
 	
+
 	
 }

@@ -113,6 +113,7 @@ public class RecurringDepositPM {
 	public void setStatusOfPlanRD(String statusOfPlanRD) {
 		this.statusOfPlanRD = statusOfPlanRD;
 	}
+
 	
 	public String getInstallmentTypeRD() {
 		return installmentTypeRD;
@@ -132,18 +133,21 @@ public class RecurringDepositPM {
 	public void setFlexiblePlanRD(String flexiblePlanRD) {
 		this.flexiblePlanRD = flexiblePlanRD;
 	}
+
 	public String getPlanNameRD() {
 		return planNameRD;
 	}
 	public void setPlanNameRD(String planNameRD) {
 		this.planNameRD = planNameRD;
 	}
+
 	public String getPenltyfineRD() {
 		return penltyfineRD;
 	}
 	public void setPenltyfineRD(String penltyfineRD) {
 		this.penltyfineRD = penltyfineRD;
 	}
+
 
     
     

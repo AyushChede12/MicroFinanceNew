@@ -30,7 +30,7 @@ public class PolicyManagementService {
 	
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
-	
+
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 	    try {
@@ -60,11 +60,31 @@ public boolean saveFixedDeposite(FixedDepositPM fixedDepositPM) {
         return false;
     }
 }
+
 // feacth all data of the fixed deposite
+
 public List<FixedDepositPM> getAllFixeddata() {
-	// TODO Auto-generated method stub
-	return fixedDepositPMRepo.findAll();
+	List<FixedDepositPM> list = fixedDepositPMRepo.findAll();
+	return list;
 }
+
+
+
+
+//feacth all data of the daily deposite
+public List<DailyDepositPM> getAlldailydepositedata() {
+	// TODO Auto-generated method stub
+	return dailyDepositPMRepo.findAll();
+}
+
+
+
+
+public List<MISDepositPM> getAllMISDepositData() {
+	// TODO Auto-generated method stub
+	return misDepositePMRepo.findAll();
+}
+
 
 
 
@@ -267,6 +287,7 @@ public boolean deleteFixedDeposit(Long id) {
 	        return false;
 	    }
 }
+
 }
 
 
