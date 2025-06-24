@@ -1,48 +1,76 @@
-function saveRelative() {
-	const formData = {
-		relation: $('input[name="relation"]').val()
-	};
+$(document).ready(function() {
 
-	$.ajax({
-		type: "POST",
-		url: "/saveAllRelativeModule", // Make sure the context path is correct
-		contentType: "application/json",
-		data: JSON.stringify(formData),
-		success: function(response) {
-			alert("success");
-			if (response === "success") {
-				alert("Relation Saved Successfully");
-				location.reload();
+	$("#saveBtn").click(function() {
+		const formData = {
+			relation: $('input[name="relation"]').val()
+		};
+
+		$.ajax({
+			url: '/api/preference/saveRelativeModule',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(formData),
+			success: function(response) {
+				if (response.success) {
+					alert(response.message); 
+					location.reload();
+				} else {
+					alert("Error: " + (response.message || "Unknown error occurred."));
+				}
+			},
+			error: function(xhr) {
+				console.error('Error:', xhr.responseText);
+				alert('Failed to save Relative data.');
 			}
-		},
-		error: function(xhr, status, error) {
-			$('#responseMessage').text("Error: " + xhr.responseText);
-		}
+		});
 	});
 
-}
-
-$(document).ready(function() {
 	$.ajax({
-		url: "getAllRelativeModule",
 		type: "GET",
+		url: "/api/preference/getAllRelativeModule", 
 		contentType: "application/json",
-		success: function(data) {
-			var tbody = $(".datatable tbody");
-			tbody.empty(); // Clear existing rows
-
-			$.each(data, function(index, item) {
-				var row = `<tr style="font-family: 'Poppins', sans-serif;">
-              <th scope="row"><a href="#">${index + 1}</a></th>
-              <td>${item.relation || ''}</td>
-            </tr>`;
-				tbody.append(row);
-			});
+		success: function(response) {
+			console.log("Full Response from API:", response); 
+			if (response.success) {
+				let data = response.data;
+				let tableBody = $(".datatable tbody");
+				tableBody.empty();
+				data.forEach((item, index) => {
+					let row = `<tr>
+			                        <td>${index + 1}</td>
+			                        <td>${item.relation}</td>
+									<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
+			                    </tr>`;
+					tableBody.append(row);
+				});
+			} else {
+				alert("Failed to fetch bank data: " + response.message);
+			}
 		},
-		error: function(xhr, status, error) {
-			console.error("Error fetching data:", error);
-			alert("Failed to load branch module data.");
+		error: function() {
+			alert("Error while calling the API.");
 		}
 	});
 });
 
+function deleteData(id) {
+	if (confirm("Are you sure you want to delete this bank?")) {
+		$.ajax({
+			url: "/api/preference/deleteRelativeModuleById",
+			type: "POST",
+			data: { id: id },
+			success: function(response) {
+				if (response.success) {
+					alert(response.message);
+					location.reload();
+				} else {
+					alert("Delete failed: " + response.message);
+				}
+			},
+			error: function(xhr, status, error) {
+				alert("Failed to delete Relative.");
+				console.error("Error:", error);
+			}
+		});
+	}
+}
