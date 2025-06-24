@@ -126,6 +126,19 @@ public class LoanManagementController {
 	    return ResponseEntity.ok(response);
 	}
 
+
+//data Fetch from name and id from customer model sharaddha
+	@GetMapping("/getByIdNewLoanApplication")
+	public ResponseEntity<ApiResponse<addCustomer>> getLoanById1(@RequestParam Long id) {
+	    try {
+	    	addCustomer customer = loanServices.getLoanApplicationById(id);
+	        return ResponseEntity.ok(new ApiResponse<>(true, HttpStatus.OK, "Customer found", customer));
+	    } catch (RuntimeException ex) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	            .body(new ApiResponse<>(false, HttpStatus.NOT_FOUND, ex.getMessage(), null));
+	    }
+	}
+
 }
 
 

@@ -97,4 +97,12 @@ public class LoanManagementService {
 		return addCustomerRepo.findAll();
 	}
 
+	public addCustomer getLoanApplicationById(Long id) {
+		
+		  return addCustomerRepo.findById(id)
+	                .orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
+	}
+
+	
+
 }
