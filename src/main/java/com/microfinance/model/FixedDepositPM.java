@@ -29,7 +29,7 @@ public class FixedDepositPM {
 	private String minimumAmountFD;
 	private String rateOfInterestFD;
 	private String termModeFD;
-	private String termFd;
+	private String termFD;
 	private String durationFD;
 	private String installmentTypeFD;
 	private String commissionOnNewFD;
@@ -114,10 +114,10 @@ public class FixedDepositPM {
 		this.statusOfPlanFD = statusOfPlanFD;
 	}
 	public String getTermFd() {
-		return termFd;
+		return termFD;
 	}
 	public void setTermFd(String termFd) {
-		this.termFd = termFd;
+		this.termFD = termFd;
 	}
 	public String getTermModeFD() {
 		return termModeFD;
