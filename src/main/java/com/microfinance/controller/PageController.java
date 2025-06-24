@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
+import com.microfinance.repository.DailyDepositPMRepo;
+import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.MisDepositePMRepo;
+import com.microfinance.repository.RecurringDepositRepo;
+
 
 @Controller
 public class PageController {
@@ -15,7 +20,20 @@ public class PageController {
 	CustomerRepo customerRepo;
 	
 	@Autowired
+
 	FinancialConsultantRepo financialConsultantRepo;
+
+	DailyDepositPMRepo dailyDepositRepo;
+	
+	@Autowired
+	RecurringDepositRepo recurringDepositRepo;
+	
+	@Autowired
+	FixedDepositPMRepo fixedDepositPMRepo;
+	
+	@Autowired
+	MisDepositePMRepo misDepositePMRepo;
+
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -626,7 +644,26 @@ public class PageController {
 
 	// Policy Management
 	@GetMapping("/planManagement")
-	public String getPlanManagement() {
+	public String getPlanManagement(Model model) {
+		
+		//Daily Deposit Code
+		long maxIdDD = dailyDepositRepo.getMaxId();
+		String memberCodeDD = "DD" + "000" + (maxIdDD + 1);
+		model.addAttribute("memberCodeDD", memberCodeDD);
+		
+		long maxIdRD = recurringDepositRepo.getMaxId();
+		String memberCodeRD = "RD" + "000" + (maxIdRD + 1);
+		model.addAttribute("memberCodeRD", memberCodeRD);
+		
+		long maxIdFD = fixedDepositPMRepo.getMaxId();
+		String memberCodeFD = "FD" + "000" + (maxIdFD + 1);
+		model.addAttribute("memberCodeFD", memberCodeFD);
+		
+		long maxIdMD = misDepositePMRepo.getMaxId();
+		String memberCodeMD = "MD" + "000" + (maxIdMD + 1);
+		model.addAttribute("memberCodeMD", memberCodeMD);
+		
+		
 		return "policyManagement/planManagement";
 	}
 
