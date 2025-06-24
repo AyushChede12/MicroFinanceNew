@@ -57,6 +57,11 @@ public class PageController {
 		return "financialConsultant/consultantIDCardGenerator";
 	}
 
+	@GetMapping("/updateFinacialConsultant")
+	public String financialConsultantUpdate() {
+		return "financialConsultant/financialConsultantUpdate";
+	}
+	
 	// Data Rectification
 	@GetMapping("/customerDataUpdate")
 	public String getCustomerDataUpdate() {

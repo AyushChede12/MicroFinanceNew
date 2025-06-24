@@ -144,7 +144,7 @@ public class FinancialConsultantController {
 
 // For financialConsultantHierarchy
 	
-	@PostMapping("/getfinancialHierarchyByFinancialCode")
+	@GetMapping("/getfinancialHierarchyByFinancialCode")
 	public ResponseEntity<ApiResponse<List<addFinancialConsultant>>> getfinancialHierarchyByFinancialCode(@RequestParam String financialCode) {
 
 	    List<addFinancialConsultant> financialconsultant = financialConsultantService.fetchfinancialHierarchyByFinancialCode(financialCode);
@@ -164,5 +164,8 @@ public class FinancialConsultantController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
+	
+	
+
 
 }
