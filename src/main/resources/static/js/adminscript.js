@@ -6,7 +6,7 @@ $('#fromDate').val(today);
 $('#toDate').val(today);
 $('#approvalDate').val(today);
 
-
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -154,6 +154,4 @@ dropBtnSearchInput.addEventListener("keyup", ()=>{
 selectBtn.addEventListener("click", () => {
 	wrapper.classList.toggle("active");
 })
-
-
 
