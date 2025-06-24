@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.SavingSchmeCatalogRepo;
 
 @Service
@@ -18,6 +20,9 @@ public class CustomerSavingsService {
 	
 	@Autowired
 	AddCustomerRepo addcustomerRepo;
+	
+	@Autowired
+	FinancialConsultantRepo financialConsultantRepo;
 	
 	public boolean saveSavingScheme(SavingSchemeCatalog savingSchemeCatalog) {
 		 try {
@@ -44,6 +49,17 @@ public class CustomerSavingsService {
 		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll();
 		return list;
 	}
+
+	public List<SavingSchemeCatalog> findByPolicyName(String policyName) {
+		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findByPolicyName(policyName);
+		return list;
+	}
+
+	public List<addFinancialConsultant> findByFinancialCode(String financialCode) {
+		List<addFinancialConsultant> list = financialConsultantRepo.findByFinancialCode(financialCode);
+		return list;
+	}
+
 
 
 	

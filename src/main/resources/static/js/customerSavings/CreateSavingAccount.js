@@ -25,24 +25,54 @@ $(document).ready(function() {
 });
 
 //fetch minimum opening balance
+/*$('#selectPlan').on('change', function () {
+    let selectedName = $(this).val();
+
+    if (selectedName !== "") {
+        $.ajax({
+            url: '/api/customersavings/fetchpolicyname',
+            type: 'GET',
+        contentType: 'application/json',
+            data: JSON.stringify({ policyName: selectedName }),
+            success: function (response) {
+                if (response.status === "FOUND") {
+                    let customer = response.data[0];
+					alert(customer);
+                    $('#openingAmount').val(customer.monthlyMinimumBalance);
+                } else {
+                    alert('No customer data found!');
+                    $('#openingAmount').val('');
+                }
+            },
+            error: function () {
+                alert('Error while fetching customer data!');
+                $('#openingAmount').val('');
+            }
+        });
+    } else {
+        $('#openingAmount').val('');
+    }
+});
+*/
+
 $('#selectPlan').on('change', function () {
     let selectedName = $(this).val();
 
     if (selectedName !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchsavingchemecatalog?policyName=' + encodeURIComponent(selectedName),
+            url: '/api/customersavings/fetchpolicyname?policyName=' + encodeURIComponent(selectedName), // Pass as query param
             type: 'GET',
             success: function (response) {
                 if (response.status === "FOUND") {
-                    $('#openingAmount').val(response.monthlyMinimumBalance);
-					
+                    let customer = response.data[0];
+                    $('#openingAmount').val(customer.monthlyMinimumBalance);
                 } else {
-                    alert('No minimum balance found!');
+                    alert('No data found!');
                     $('#openingAmount').val('');
                 }
             },
             error: function () {
-                alert('Error while fetching minimum balance data!');
+                alert('Error while fetching data!');
                 $('#openingAmount').val('');
             }
         });
@@ -165,7 +195,7 @@ $('#jointOperationCode').on('change', function () {
 //fetch relative relation from preferences
 $(document).ready(function() {
     $.ajax({
-        url: "/getAllRelativeModule",
+        url: "/api/preference/getAllRelativeModule",
         type: "GET",
         success: function(response) {
 			console.log("API response:", response);
@@ -173,7 +203,7 @@ $(document).ready(function() {
             dropdown.empty();
             dropdown.append('<option value="">Select</option>');
 
-            if (response.status === "FOUND" && response.data) {
+            if (response.status === "OK" && response.data) {
                 $.each(response.data, function(index, item) {
                    dropdown.append('<option value="' + item.relation+ '">' + item.relation + '</option>');
                 });

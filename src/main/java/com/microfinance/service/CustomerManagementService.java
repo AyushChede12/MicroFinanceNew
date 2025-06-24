@@ -74,6 +74,11 @@ public class CustomerManagementService {
 	    addcustomer.setNomineeAge(clientMasterDto.getNomineeAge());
 	    addcustomer.setNomineePanNo(clientMasterDto.getNomineePanNo());
 	    addcustomer.setNomineeKycType(clientMasterDto.getNomineeKycType());
+	    addcustomer.setMemberFees(clientMasterDto.getMemberFees());
+	    addcustomer.setChequeNo(clientMasterDto.getChequeNo());
+	    addcustomer.setChequeDate(clientMasterDto.getChequeDate());
+	    addcustomer.setDepositAcNo(clientMasterDto.getDepositAcNo());
+	    addcustomer.setReferenceNo(clientMasterDto.getReferenceNo());
 	    
 
 	    // Fees/Setting Details

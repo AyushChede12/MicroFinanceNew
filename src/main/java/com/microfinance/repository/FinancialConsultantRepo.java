@@ -8,12 +8,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.addFinancialConsultant;
 
 @Repository
-public interface FinancialConsultantRepo extends JpaRepository<addCustomer, Long> {
+public interface FinancialConsultantRepo extends JpaRepository<addFinancialConsultant, Long> {
 
 	Optional<addCustomer> findByMemberCode(String memberCode);
 
-	
+	List<addFinancialConsultant> findByFinancialCode(String financialCode);
 
 }

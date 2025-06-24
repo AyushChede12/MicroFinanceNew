@@ -94,7 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="vehicalNo">Date Of Birth</label> <input type="date"
+								<label for="vehicalNo">Date Of Birth <span class="star">*</span></label> <input type="date"
 									name="dateOfBirth" id="dateOfBirth" required="required"
 									placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />

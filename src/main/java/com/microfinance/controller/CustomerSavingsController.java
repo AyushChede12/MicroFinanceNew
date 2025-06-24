@@ -8,12 +8,14 @@ import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -69,7 +71,25 @@ public class CustomerSavingsController {
   		
   	}
 	
-   
+  	@GetMapping("/fetchpolicyname")
+  	public ApiResponse<List<SavingSchemeCatalog>> findByPolicyName(@RequestParam String policyName) {
+  	    List<SavingSchemeCatalog> list = customersaving.findByPolicyName(policyName);
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  	    }
+  	}
+
+  	@GetMapping("/fetchfinancialcode")
+  	public ApiResponse<List<addFinancialConsultant>> findByFinancialCode(@RequestParam String financialCode) {
+  	    List<addFinancialConsultant> list = customersaving.findByFinancialCode(financialCode);
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  	    }
+  	}
 	
 	
 }

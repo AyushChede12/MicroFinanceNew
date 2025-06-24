@@ -1,11 +1,11 @@
 $(document).ready(function() {
 	$.ajax({
-		url: "/fetchAllCompanyAdministration",
-		type: "POST",
-		success: function(data) {
-			if (data.length > 0) {
-				// Example: bind the first record to text fields
-				const admin = data[0];
+		url: "/api/preference/fetchAllCompanyAdministration",
+		type: "GET",
+		success: function(response) {
+			if (response.success && response.data.length > 0) {
+				const admin = response.data[0]; // Access the first company record
+
 				$("#id").val(admin.id);
 				$("#companyName").val(admin.companyName);
 				$("#shortName").val(admin.shortName);
@@ -28,7 +28,7 @@ $(document).ready(function() {
 				$("#taxDeduction").val(admin.taxDeduction);
 				$("#seniorCitizenTaxDeduction").val(admin.seniorCitizenTaxDeduction);
 			} else {
-				alert("No data found!");
+				alert("No company administration data found.");
 			}
 		},
 		error: function() {
@@ -36,7 +36,6 @@ $(document).ready(function() {
 		}
 	});
 
-	//Update the Data - Ayush
 	$('#updateBtn').click(function(event) {
 		event.preventDefault();
 
@@ -65,15 +64,20 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: "/updateDataOfCompanyAdministration",
+			url: "/api/preference/updateDataOfCompanyAdministration",
 			type: "POST",
-			data: JSON.stringify(companyData),
 			contentType: "application/json",
+			data: JSON.stringify(companyData),
 			success: function(response) {
-				alert("Update successfully!");
+				if (response.success) {
+					alert(response.message);
+					location.reload();
+				} else {
+					alert(response.message);
+				}
 			},
-			error: function(xhr) {
-				alert("Update failed: " + xhr.responseText);
+			error: function(xhr, status, error) {
+				alert("❌ Error: " + xhr.responseText);
 			}
 		});
 
@@ -94,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	editBtn.addEventListener("click", function() {
 		updateBtn.removeAttribute("disabled"); // Enable the Update button
 		$("#formid")
-		      .find("input, textarea")
-		      .prop("readonly", false);
+			.find("input, textarea")
+			.prop("readonly", false);
 	});
 });
