@@ -10,11 +10,10 @@ public class DailyDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	private int id;
-	private String planCodeDD;
+	
 
 	private Long id;
-	private String planCode;
+	private String planCodeDD;
 
 	private String planNameDD;
 	private String minimumDeposit;
