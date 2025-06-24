@@ -22,9 +22,14 @@ public class MISDepositPM {
 	private String MISIntROIMD;
 	private String MISIntervalMD;
 	private String MISInterestMD;
+	private String componentIntervalMD;
+	private String totalPaidMD;
+	private String graceDaysMD;
+	private String penltyfineMD;
 	private String maturityAmountMD;
 	private String flexiblePlanMD;
 	private String commissionOnNewMD;
+	private String renewalCommissionMD;
 	private String statusOfPlanMDRD2;
 	public long getId() {
 		return id;
@@ -127,6 +132,36 @@ public class MISDepositPM {
 	}
 	public void setStatusOfPlanMDRD2(String statusOfPlanMDRD2) {
 		this.statusOfPlanMDRD2 = statusOfPlanMDRD2;
+	}
+	public String getRenewalCommissionMD() {
+		return renewalCommissionMD;
+	}
+	public void setRenewalCommissionMD(String renewalCommissionMD) {
+		this.renewalCommissionMD = renewalCommissionMD;
+	}
+	public String getComponentIntervalMD() {
+		return componentIntervalMD;
+	}
+	public void setComponentIntervalMD(String componentIntervalMD) {
+		this.componentIntervalMD = componentIntervalMD;
+	}
+	public String getTotalPaidMD() {
+		return totalPaidMD;
+	}
+	public void setTotalPaidMD(String totalPaidMD) {
+		this.totalPaidMD = totalPaidMD;
+	}
+	public String getGraceDaysMD() {
+		return graceDaysMD;
+	}
+	public void setGraceDaysMD(String graceDaysMD) {
+		this.graceDaysMD = graceDaysMD;
+	}
+	public String getPenltyfineMD() {
+		return penltyfineMD;
+	}
+	public void setPenltyfineMD(String penltyfineMD) {
+		this.penltyfineMD = penltyfineMD;
 	}
 
 	

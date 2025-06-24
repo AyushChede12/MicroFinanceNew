@@ -23,7 +23,7 @@ public class PageController {
 
 	FinancialConsultantRepo financialConsultantRepo;
 
-	DailyDepositPMRepo dailyDepositRepo;
+	@Autowired DailyDepositPMRepo dailyDepositRepo;
 	
 	@Autowired
 	RecurringDepositRepo recurringDepositRepo;

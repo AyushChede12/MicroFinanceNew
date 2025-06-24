@@ -274,6 +274,61 @@ public boolean deleteFixedDeposit(Long id) {
 	        return false;
 	    }
 }
+
+
+
+
+public MISDepositPM getMISDepositById(Long id) {
+	// TODO Auto-generated method stub
+	 return misDepositePMRepo.findById(id).orElse(null);
+}
+
+
+
+
+public MISDepositPM updateMISDeposit(Long id, MISDepositPM updatedData) {
+	// TODO Auto-generated method stub
+	Optional<MISDepositPM> existingOptional = misDepositePMRepo.findById(id);
+
+    if (existingOptional.isPresent()) {
+        MISDepositPM existing = existingOptional.get();
+
+        // Set fields from updatedData to existing
+        existing.setPlanCodeMD(updatedData.getPlanCodeMD());
+        existing.setPlanNameMD(updatedData.getPlanNameMD());
+        existing.setRateOfInterestMD(updatedData.getRateOfInterestMD());
+        existing.setDurationMD(updatedData.getDurationMD());
+        existing.setInstallmentTypeMD(updatedData.getInstallmentTypeMD());
+        existing.setMinimumAmountMD(updatedData.getMinimumAmountMD());
+        existing.setMaturityROIMD(updatedData.getMaturityROIMD());
+        existing.setTermModeMD(updatedData.getTermModeMD());
+        existing.setTermMD(updatedData.getTermMD());
+        existing.setMISIntROIMD(updatedData.getMISIntROIMD());
+        existing.setMISIntervalMD(updatedData.getMISIntervalMD());
+        existing.setMISInterestMD(updatedData.getMISInterestMD());
+        existing.setMaturityAmountMD(updatedData.getMaturityAmountMD());
+        existing.setFlexiblePlanMD(updatedData.getFlexiblePlanMD());
+        existing.setCommissionOnNewMD(updatedData.getCommissionOnNewMD());
+        existing.setRenewalCommissionMD(updatedData.getRenewalCommissionMD());
+        existing.setStatusOfPlanMDRD2(updatedData.getStatusOfPlanMDRD2());
+
+        return misDepositePMRepo.save(existing);
+    } 
+        return null;
+    
+}
+
+
+
+
+public boolean deleteMISDeposit(Long id) {
+	if (misDepositePMRepo.existsById(id)) {
+		 misDepositePMRepo.deleteById(id);
+	        return true;
+	    } else {
+	        return false;
+	    }
+}
 }
 
 
