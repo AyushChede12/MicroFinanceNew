@@ -30,7 +30,7 @@ public class PolicyManagementService {
 	
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
-
+	
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 	    try {
@@ -60,31 +60,11 @@ public boolean saveFixedDeposite(FixedDepositPM fixedDepositPM) {
         return false;
     }
 }
-
 // feacth all data of the fixed deposite
-
 public List<FixedDepositPM> getAllFixeddata() {
-	List<FixedDepositPM> list = fixedDepositPMRepo.findAll();
-	return list;
-}
-
-
-
-
-//feacth all data of the daily deposite
-public List<DailyDepositPM> getAlldailydepositedata() {
 	// TODO Auto-generated method stub
-	return dailyDepositPMRepo.findAll();
+	return fixedDepositPMRepo.findAll();
 }
-
-
-
-
-public List<MISDepositPM> getAllMISDepositData() {
-	// TODO Auto-generated method stub
-	return misDepositePMRepo.findAll();
-}
-
 
 
 
@@ -144,7 +124,7 @@ public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
 	// TODO Auto-generated method stub
 	 
 	    return dailyDepositPMRepo.findById(id).map(existing -> {
-	        existing.setPlanCode(updatedData.getPlanCode());
+	        existing.setPlanCodeDD(updatedData.getPlanCodeDD());
 	        existing.setMinimumDeposit(updatedData.getMinimumDeposit());
 	        existing.setRateOfInterest(updatedData.getRateOfInterest());
 	        existing.setInstallmentType(updatedData.getInstallmentType());
@@ -257,7 +237,7 @@ public FixedDepositPM updateFixedDeposit(Long id, FixedDepositPM updatedData) {
         existing.setMinimumAmountFD(updatedData.getMinimumAmountFD());
         existing.setRateOfInterestFD(updatedData.getRateOfInterestFD());
         existing.setTermModeFD(updatedData.getTermModeFD());
-        existing.setTermFd(updatedData.getTermFd());
+        existing.setTermFD(updatedData.getTermFD());
         existing.setDurationFD(updatedData.getDurationFD());
         existing.setInstallmentTypeFD(updatedData.getInstallmentTypeFD());
         existing.setCommissionOnNewFD(updatedData.getCommissionOnNewFD());
@@ -287,7 +267,6 @@ public boolean deleteFixedDeposit(Long id) {
 	        return false;
 	    }
 }
-
 }
 
 
