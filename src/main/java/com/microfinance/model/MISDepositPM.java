@@ -12,18 +12,6 @@ public class MISDepositPM {
 	private long id;
 	private String planCodeMD;
 	private String planNameMD;
-
-	private String minimumAmountRD2;
-	private String maturityROI;
-	private String termMode2;
-	private String term1;
-	private String MISIntROI;
-	private String MISInterval;
-	private String MISInterest;
-	private String maturityAmountRD2;
-	private String commissionOnNewRD2;
-	private String statusOfPlanRD2;
-
 	private String rateOfInterestMD;
 	private String durationMD;
 	private String installmentTypeMD;
@@ -38,7 +26,6 @@ public class MISDepositPM {
 	private String flexiblePlanMD;
 	private String commissionOnNewMD;
 	private String statusOfPlanMDRD2;
-
 	public long getId() {
 		return id;
 	}
@@ -48,12 +35,32 @@ public class MISDepositPM {
 	public String getPlanCodeMD() {
 		return planCodeMD;
 	}
-
-	public void setPlanCodeRD2(String planCodeMD) {
-
 	public void setPlanCodeMD(String planCodeMD) {
-
 		this.planCodeMD = planCodeMD;
+	}
+	public String getPlanNameMD() {
+		return planNameMD;
+	}
+	public void setPlanNameMD(String planNameMD) {
+		this.planNameMD = planNameMD;
+	}
+	public String getRateOfInterestMD() {
+		return rateOfInterestMD;
+	}
+	public void setRateOfInterestMD(String rateOfInterestMD) {
+		this.rateOfInterestMD = rateOfInterestMD;
+	}
+	public String getDurationMD() {
+		return durationMD;
+	}
+	public void setDurationMD(String durationMD) {
+		this.durationMD = durationMD;
+	}
+	public String getInstallmentTypeMD() {
+		return installmentTypeMD;
+	}
+	public void setInstallmentTypeMD(String installmentTypeMD) {
+		this.installmentTypeMD = installmentTypeMD;
 	}
 	public String getMinimumAmountMD() {
 		return minimumAmountMD;
@@ -103,6 +110,12 @@ public class MISDepositPM {
 	public void setMaturityAmountMD(String maturityAmountMD) {
 		this.maturityAmountMD = maturityAmountMD;
 	}
+	public String getFlexiblePlanMD() {
+		return flexiblePlanMD;
+	}
+	public void setFlexiblePlanMD(String flexiblePlanMD) {
+		this.flexiblePlanMD = flexiblePlanMD;
+	}
 	public String getCommissionOnNewMD() {
 		return commissionOnNewMD;
 	}
@@ -115,13 +128,7 @@ public class MISDepositPM {
 	public void setStatusOfPlanMDRD2(String statusOfPlanMDRD2) {
 		this.statusOfPlanMDRD2 = statusOfPlanMDRD2;
 	}
-	public String getPlanNameMD() {
-		return planNameMD;
-	}
-	public void setPlanNameMD(String planNameMD) {
-		this.planNameMD = planNameMD;
-	}
-	
-	
 
+	
+	
 }

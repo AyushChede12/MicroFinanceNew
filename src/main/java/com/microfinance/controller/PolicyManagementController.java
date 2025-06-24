@@ -87,18 +87,6 @@ public class PolicyManagementController {
             @PathVariable Long id,
             @RequestBody DailyDepositPM updatedData) {
 
-
-    
-    //view all fixed deposit
-    @GetMapping("/fixed-deposit/view")
-    @ResponseBody
-    public ApiResponse<List<FixedDepositPM>> getAllFixedDeposits() {
-        List<FixedDepositPM> list = policyManagementService.getAllFixeddata();
-        if (list != null && !list.isEmpty()) {
-            return ApiResponse.success(HttpStatus.OK, "Fetched Success", list);
-        } else {
-            return ApiResponse.error(HttpStatus.NOT_FOUND, "Data is not Found");
-
         DailyDepositPM updated = policyManagementService.updateDailyDeposit(id, updatedData);
 
         if (updated != null) {
@@ -114,18 +102,12 @@ public class PolicyManagementController {
                 "Daily deposit not found or failed to update."
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-
         }
     }
     //delete the data of the daily deposite
     @DeleteMapping("/dailydelete/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteDailyDeposit(@PathVariable Long id) {
         boolean deleted = policyManagementService.deleteDailyDeposit(id);
-
-
-
-    // Save Recurring Deposit
-    @PostMapping("/recurring-deposit/save")
 
         if (deleted) {
             ApiResponse<Void> response = ApiResponse.success(
@@ -144,7 +126,6 @@ public class PolicyManagementController {
     }
  // Save Recurring Deposit
     @PostMapping("/recurring-depositsave")
-
     public ResponseEntity<ApiResponse<RecurringDepositPM>>saveRecurringDeposit(@RequestBody RecurringDepositPM recurringDepositPM) {
         boolean isSaved = policyManagementService.saveRecuringDailyDeposite(recurringDepositPM);
 
@@ -183,17 +164,6 @@ public class PolicyManagementController {
         }
     }
     
-
-    
- // View All daily Deposits
-    @GetMapping("/daily-deposit/view")
-    public ResponseEntity<ApiResponse<List<DailyDepositPM>>> getAlldailyDeposits() {
-        List<DailyDepositPM> deposits = policyManagementService.getAlldailydepositedata();
-
-        if (deposits != null && !deposits.isEmpty()) {
-            ApiResponse<List<DailyDepositPM>> response = ApiResponse.success(HttpStatus.OK,
-                "Daily deposits fetched successfully.",
-
 
  // GET BY ID reccuring deposite
     @GetMapping("/recurringedit/{id}")
@@ -292,23 +262,16 @@ public class PolicyManagementController {
         if (deposits != null && !deposits.isEmpty()) {
             ApiResponse<List<FixedDepositPM>> response = ApiResponse.success(HttpStatus.OK,
                 "Fixed deposits fetched successfully.",
-
                 deposits
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
-
-            ApiResponse<List<DailyDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-                "No daily deposits found."
-
             ApiResponse<List<FixedDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
                 "No fixed deposits found."
-
             );
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
-
     //fetch by id fixed deposit
     @GetMapping("/fixededit/{id}")
     public ResponseEntity<ApiResponse<FixedDepositPM>> getFixedDepositById(@PathVariable Long id) {
@@ -378,7 +341,6 @@ public class PolicyManagementController {
     	
     }
  // View All MIS Deposits
-
     @GetMapping("/mis-deposit/view")
     public ResponseEntity<ApiResponse<List<MISDepositPM>>> getAllMISDeposits() {
         List<MISDepositPM> deposits = policyManagementService.getAllMISDepositData();
@@ -399,6 +361,7 @@ public class PolicyManagementController {
         }
     }
 
-
+    
+    
 
 }
