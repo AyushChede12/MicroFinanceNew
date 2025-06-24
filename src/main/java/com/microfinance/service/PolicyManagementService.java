@@ -145,6 +145,13 @@ public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
 	        return dailyDepositPMRepo.save(existing); // Fixed here
 	    }).orElse(null);
 	}
+    
+
+
+
+
+
+
 
 
 
