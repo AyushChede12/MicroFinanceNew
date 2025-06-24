@@ -33,12 +33,10 @@ $(document).ready(function () {
 	
 	populateAllDropdownsWithCurrentMonth("monthname");
 	
-
-	  
 		
     //for fixed deposit
     $.ajax({
-        url: "api/fixed-deposit/view",
+        url: "api/fixed-depositview",
         type: "GET",
         success: function (response) {
             var dropdown = $('#fdPolicyCode');
@@ -49,7 +47,7 @@ $(document).ready(function () {
 					            $.each(response.data, function (index, plan) {
 					                // Concatenate planCode + " - " + planName
 					                var displayText = plan.planCodeFD + " - " + plan.planNameFD;
-					                dropdown.append('<option value="' + plan.planCode + '">' + displayText + '</option>');
+					                dropdown.append('<option value="' + plan.planCodeFD + '">' + displayText + '</option>');
 					            });
 					        } else {
                 dropdown.append('<option value="">No policy code found</option>');
@@ -99,7 +97,7 @@ $(document).ready(function () {
 	
 	//recurring deposit
 	$.ajax({
-	        url: "api/recurring-deposit/view",
+	        url: "api/recurring-depositview",
 	        type: "GET",
 	        success: function (response) {
 	            var dropdown = $('#rdPolicyCode');
@@ -110,7 +108,7 @@ $(document).ready(function () {
 						            $.each(response.data, function (index, plan) {
 						                // Concatenate planCode + " - " + planName
 						                var displayText = plan.planCodeRD + " - " + plan.planNameRD;
-						                dropdown.append('<option value="' + plan.planCode + '">' + displayText + '</option>');
+						                dropdown.append('<option value="' + plan.planCodeRD + '">' + displayText + '</option>');
 						            });
 						        } else {
 	                dropdown.append('<option value="">No policy code found</option>');
@@ -227,7 +225,7 @@ $(document).ready(function () {
 				       url: "api/mis-deposit/view",
 				       type: "GET",
 				       success: function (response) {
-				           var dropdown = $('#misPolicyCode');
+				           var dropdown = $('#mPolicyCode');
 				           dropdown.empty();
 				           dropdown.append('<option value="">Select Policy Code</option>');
 
@@ -235,7 +233,7 @@ $(document).ready(function () {
 						   		            $.each(response.data, function (index, plan) {
 						   		                // Concatenate planCode + " - " + planName
 						   		                var displayText = plan.planCodeMD + " - " + plan.planNameMD;
-						   		                dropdown.append('<option value="' + plan.planCode + '">' + displayText + '</option>');
+						   		                dropdown.append('<option value="' + plan.planCodeMD + '">' + displayText + '</option>');
 						   		            });
 						   		        } else {
 				               dropdown.append('<option value="">No policy code found</option>');
@@ -251,14 +249,14 @@ $(document).ready(function () {
 		event.preventDefault();
 	
 				       var data = {
-				           policyCode: $("#misPolicyCode").val(),       
+				           policyCode: $("#mPolicyCode").val(),       
 				           instFrom: $("#misInstFrom").val(),         
 				           instTo: $("#misInstTo").val(),             
 				           interestRate: $("#misInterestRate").val(),   
 				           deduction: $("#misDeduction").val()          
 				       };
 
-					   console.log("Data"+data.instFrom);
+					   console.log("Data"+data.policyCode);
 				       $.ajax({
 						
 				           url: "savematurityscheme",  

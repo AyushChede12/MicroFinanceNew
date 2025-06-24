@@ -280,8 +280,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code <span id="star"> *</span></label> <select id="misPolicyCode"
-									name="misPolicyCode" required="required"
+								<label for="">Policy Code <span id="star"> *</span></label> <select id="mPolicyCode"
+									name="mPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ALL</option>
 
