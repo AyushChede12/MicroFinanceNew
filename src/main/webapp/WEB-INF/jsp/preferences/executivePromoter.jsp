@@ -88,7 +88,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Type</label> <select id="type" name="type"
+								<label for="">Type <span class="star">*</span></label> <select id="type" name="type"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Type</option>
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Branch Name</label> <select
+								<label for="vehicalNo">Branch Name <span class="star">*</span></label> <select
 									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
@@ -110,7 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Full Name </label> <input type="text"
+								<label for="">Full Name <span class="star">*</span></label> <input type="text"
 									name="fullName" id="fullName" required="required"
 									placeholder="Enter FullName" />
 							</div>
@@ -121,14 +121,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Date Of Birth</label> <input type="date"
+								<label for="">Date Of Birth <span class="star">*</span></label> <input type="date"
 									name="dateOfBirth" id="dateOfBirth" required="required" />
 							</div>
 						</div>
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">DIN/Promoter No </label> <input type="text"
+								<label for="">DIN/Promoter No <span class="star">*</span></label> <input type="text"
 									name="promoterNo" id="promoterNo" required="required"
 									placeholder="Enter Promoter No" />
 							</div>
@@ -136,7 +136,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Appointment Date</label> <input type="date"
+								<label for="">Appointment Date <span class="star">*</span></label> <input type="date"
 									name="appointmentDate" id="appointmentDate" required="required" />
 							</div>
 						</div>
@@ -144,7 +144,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relation Name</label> <input type="text"
+								<label for="">Relation Name <span class="star">*</span></label> <input type="text"
 									name="relationName" id="relationName" required="required"
 									placeholder="Enter Relation Name" />
 							</div>
@@ -154,7 +154,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label> <select
+								<label>Relation to Applicant <span class="star">*</span></label> <select
 									id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
@@ -164,7 +164,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Address</label>
+								<label for="">Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
@@ -173,7 +173,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text"
+								<label for="">District <span class="star">*</span></label> <input type="text"
 									name="district" id="district" required="required"
 									placeholder="Enter District" />
 							</div>
@@ -182,7 +182,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>State</label> <select id="state" name="state"
+								<label>State <span class="star">*</span></label> <select id="state" name="state"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select State</option>
@@ -208,14 +208,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text" name="pinCode"
+								<label for="">Pin Code <span class="star">*</span></label> <input type="text" name="pinCode"
 									id="pinCode" required="required" placeholder="Enter Pincode" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Aadhar No.</label> <input type="text"
+								<label for="">Aadhar No <span class="star">*</span></label> <input type="text"
 									name="aadharNo" id="aadharNo" required="required"
 									placeholder="Enter Aadhar No" />
 							</div>
@@ -223,7 +223,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">PAN No.</label> <input type="text" name="panNo"
+								<label for="">PAN No <span class="star">*</span></label> <input type="text" name="panNo"
 									id="panNo" required="required" placeholder="Enter PAN No" />
 							</div>
 						</div>
@@ -233,7 +233,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Contact No</label> <input type="text"
+								<label for="">Contact No <span class="star">*</span></label> <input type="text"
 									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No" />
 							</div>
@@ -241,7 +241,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Email ID</label> <input type="text" name="emailId"
+								<label for="">Email ID <span class="star">*</span></label> <input type="text" name="emailId"
 									id="emailId" required="required" placeholder="Enter Email ID" />
 							</div>
 						</div>
@@ -281,7 +281,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="photo" id="drop-area"> <input
+								Photo <span class="star">*</span></label> <label for="photo" id="drop-area"> <input
 								type="file" accept="image/*" name="photo" id="photo"
 								hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -302,7 +302,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="signature" id="drop-area"> <input
+								Signature <span class="star">*</span></label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
 								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -334,7 +334,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Deposit Acc</label> <select id="depositAcc"
+								<label>Deposit Acc <span class="star">*</span></label> <select id="depositAcc"
 									name="depositAcc" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Deposit Acc</option>

@@ -89,7 +89,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Add Category</label> <input type="text"
+								<label for="">Add Category <span class="star">*</span></label> <input type="text"
 									name="category" id="category" 
 									placeholder="Enter Category" style="text-transform: uppercase;" />
 							</div>

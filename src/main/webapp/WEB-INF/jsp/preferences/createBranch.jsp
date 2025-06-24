@@ -89,7 +89,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Code</label> <input type="text"
+								<label for="">Branch Code <span class="star">*</span></label> <input type="text"
 									name="branchCode" id="branchCode" required="required"
 									placeholder="Enter Branch Code"
 									style="text-transform: uppercase;" />
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name</label> <input type="Text" name="branchName"
+								<label>Branch Name <span class="star">*</span></label> <input type="Text" name="branchName"
 									id="branchName" required="required"
 									placeholder="Enter Branch Name"
 									style="text-transform: uppercase;" />
@@ -110,7 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Opening Date</label> <input type="date"
+								<label for="">Opening Date <span class="star">*</span></label> <input type="date"
 									name="openingDate" id="openingDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
@@ -119,7 +119,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Address</label>
+								<label for="">Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
@@ -127,7 +127,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">PIN</label> <input type="text" name="pin" id="pin"
+								<label for="">PIN <span class="star">*</span></label> <input type="text" name="pin" id="pin"
 									required="required" placeholder="Enter Pin"
 									style="text-transform: uppercase;" />
 							</div>
@@ -135,7 +135,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <select id="state" name="state"
+								<label for="">State <span class="star">*</span></label> <select id="state" name="state"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select State</option>
@@ -151,7 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Primary Contact</label> <input type="text"
+								<label for="">Primary Contact <span class="star">*</span></label> <input type="text"
 									name="primaryContact" id="primaryContact" required="required"
 									placeholder="Enter Primary Contact"
 									style="text-transform: uppercase;" />
@@ -160,7 +160,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Contact</label> <input type="text" name="contact"
+								<label for="">Contact <span class="star">*</span></label> <input type="text" name="contact"
 									id="contact" required="required" placeholder="Enter Contact"
 									style="text-transform: uppercase;" />
 							</div>

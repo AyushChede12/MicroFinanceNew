@@ -94,7 +94,7 @@ $(document).ready(function() {
 
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
-		event.preventDefault();
+		event.preventDefault();	
 
 		const formData = new FormData();
 
@@ -371,3 +371,5 @@ function deleteData(id) {
 		});
 	}
 }
+
+

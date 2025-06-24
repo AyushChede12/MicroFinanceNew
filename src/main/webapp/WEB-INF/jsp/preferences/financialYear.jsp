@@ -88,7 +88,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" id="id" name="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Year Name</label> <input type="text"
+								<label for="">Financial Year Name <span class="star">*</span></label> <input type="text"
 									name="financialYearName" id="financialYearName"
 									required="required" placeholder="Enter Financial Year Name"
 									style="text-transform: uppercase;" />
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date From</label> <input type="date" name="dateFrom"
+								<label>Date From <span class="star">*</span></label> <input type="date" name="dateFrom"
 									id="dateFrom" required="required" placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
 							</div>
@@ -108,7 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date To</label> <input type="date" name="dateTo"
+								<label>Date To <span class="star">*</span></label> <input type="date" name="dateTo"
 									id="dateTo" required="required" placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
 							</div>

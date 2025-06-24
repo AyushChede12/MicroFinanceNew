@@ -39,6 +39,36 @@ $(document).ready(function() {
 	$('#updateBtn').click(function(event) {
 		event.preventDefault();
 
+		//Mobile Number
+		var contactInput = document.getElementById('contactNo');
+		var mobile = contactInput.value.trim();
+		var contactPattern = /^[6-9][0-9]{9}$/;
+
+		//Pan Card
+		var panInput = document.getElementById('pan');
+		var pan = panInput.value.trim().toUpperCase();
+		var panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+
+		//Pin Code
+		var pinInput = document.getElementById('pinCode');
+		var pin = pinInput.value.trim();
+		var pinPattern = /^[1-9][0-9]{5}$/;		
+		
+		if (!contactPattern.test(mobile)) {
+			alert("Please enter a valid 10-digit mobile number.");
+			contactInput.focus();
+			return false;
+		}
+		if (!panPattern.test(pan)) {
+			alert("Please enter a valid PAN card number (e.g., ABCDE1234F).");
+			panInput.focus();
+			return false;
+		}
+		if (!pinPattern.test(pin)) {
+			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
+			pinInput.focus();
+			return false;
+		}
 		const companyData = {
 			id: $("#id").val(),
 			companyName: $("#companyName").val(),
@@ -81,7 +111,6 @@ $(document).ready(function() {
 			}
 		});
 
-
 	});
 
 });
@@ -102,3 +131,5 @@ document.addEventListener("DOMContentLoaded", function() {
 			.prop("readonly", false);
 	});
 });
+
+
