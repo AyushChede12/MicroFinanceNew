@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.BranchModule;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.NewLoanAppicationRepo;
 
@@ -24,6 +26,11 @@ public class LoanManagementService {
 	private LoanMangmentSchemeRepo loanRepository;
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
+	
+	@Autowired
+	private BranchModuleRepo branchModuleRepo;
+	
+	
 	
 	/*
 	 * public LoanSchemCatalog saveLoan(LoanSchemCatalog lone) { return
@@ -101,6 +108,19 @@ public class LoanManagementService {
 		
 		  return addCustomerRepo.findById(id)
 	                .orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
+	}
+	
+	//Branch Model fetch for prefenses
+
+	public List<BranchModule> getgetBranchName() {
+		// TODO Auto-generated method stub
+		return branchModuleRepo.findAll();
+	}
+
+	// Loan Plan Name Dropdrawn
+	public List<LoanSchemCatalog> getLoanPlanName() {
+		// TODO Auto-generated method stub
+		return loanRepository.findAll();
 	}
 
 	

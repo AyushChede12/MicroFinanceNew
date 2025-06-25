@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.BranchModule;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
 import com.microfinance.model.addCustomer;
@@ -139,6 +140,25 @@ public class LoanManagementController {
 	    }
 	}
 
+
+@GetMapping("/allfetchdataBranchName")
+public ResponseEntity<ApiResponse<List<BranchModule>>> getBranchName() {
+    List<BranchModule> branchList = loanServices.getgetBranchName();
+
+    ApiResponse<List<BranchModule>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan Branch fetched successfully",branchList );
+
+    return ResponseEntity.ok(response);
+}
+
+
+@GetMapping("/allfetchdataLoanPlanName")
+public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanPlanName() {
+    List<LoanSchemCatalog> loanPlanNameList = loanServices.getLoanPlanName();
+
+    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan Branch fetched successfully",loanPlanNameList );
+
+    return ResponseEntity.ok(response);
+}
 }
 
 

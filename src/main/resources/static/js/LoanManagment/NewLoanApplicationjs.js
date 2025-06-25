@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+//fetch only Drowpdown
 $(document).ready(function () {
     console.log("Document ready");
 
@@ -32,9 +32,6 @@ $(document).ready(function () {
 
 //data fetch from id and name
 
-
-
-
 $(document).ready(function () {
     $('#findMember').on('change', function () {
         const selectedId = $(this).val();
@@ -51,23 +48,16 @@ $(document).ready(function () {
                     if (response.success) {
                         const d = response.data;
 						alert(d.customerName);
-                        $('#relativeDetail').val(d.relationshipStatus || '');
+                        $('#relativeDetail').val(d.relationToApplicant || '');
                         $('#newloanApplicationDOB').val(d.dob || '');
                         $('#newApplictionAge').val(d.customerAge || '');
                         $('#phoneNo').val(d.contactNo || '');
                         $('#noficationStatus').val(d.noficationStatus || '');
                         $('#newAplicationAddress').val(d.customerAddress || '');
                         $('#newAppicationPinCode').val(d.pinCode || '');
-                        $('#newApplicationBranchName').val(d.branchNames || '');
-                        $('#newApplicationLoanPlaneName').val(d.newApplicationLoanPlaneName || '');
-                        $('#newLoanApplicationTypeofloan').val(d.newLoanApplicationTypeofloan || '');
-                        $('#newApplicationDurationPlan').val(d.newApplicationDurationPlan || '');
-                        $('#newLoanApplicationCategoryLoan').val(d.newLoanApplicationCategoryLoan || '');
-                        $('#newApplicationROI').val(d.newApplicationROI || '');
-                        $('#newApplicationLoanAmount').val(d.newApplicationLoanAmount || '');
-                        $('#newApplicationTypeIntrest').val(d.newApplicationTypeIntrest || '');
-                        $('#newLoanApplicationPaymnetEMI').val(d.newLoanApplicationPaymnetEMI || '');
-                        $('#newApplicationLoanPurpose').val(d.newApplicationLoanPurpose || '');
+						alert(d.branchName);
+                        $('#newApplicationBranchName').val(d.branchName || '');
+                     
                     } else {
                         alert("Customer not found!");
                     }
@@ -79,6 +69,71 @@ $(document).ready(function () {
             });
         } else {
             $('input, textarea').not('#findMember').val('');
+        }
+    });
+});
+
+//branch name fetch for prefrences
+
+$(document).ready(function () {
+    console.log("Document ready");
+
+    $.ajax({
+        url: '/api/loanmanegment/allfetchdataBranchName', 
+        type: 'GET',
+        success: function (response) {
+            if (response.success && response.data.length > 0) {
+                const dropdown = $('#newApplicationBranchName');
+                dropdown.empty(); 
+                dropdown.append('<option value="">Select Branch Name</option>'); // Default
+
+                
+                response.data.forEach(function (loan) {
+                    if (loan.branchName) {
+                        dropdown.append(
+                            `<option value="${loan.branchName}">${loan.branchName}</option>`
+                        );
+                    }
+                });
+            } else {
+                alert('No branch data found');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+            alert('Failed to fetch branch names');
+        }
+    });
+});
+
+// Dropdawn in Loan Plan Name
+
+$(document).ready(function () {
+    console.log("Document ready");
+
+    $.ajax({
+        url: '/api/loanmanegment/allfetchdataLoanPlanName', 
+        type: 'GET',
+        success: function (response) {
+            if (response.success && response.data.length > 0) {
+                const dropdown = $('#newApplicationLoanPlaneName');
+                dropdown.empty();
+                dropdown.append('<option value="">Select Loan Plan Name</option>'); 
+
+                response.data.forEach(function (loan) {
+                    if (loan.loanPlaneName) {
+                        dropdown.append(
+                            `<option value="${loan.loanPlaneName}">${loan.loanPlaneName}</option>`
+                        );
+                    }
+                });
+            } else {
+                alert('No Loan Plan Name found');
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error('AJAX Error:', status, error);
+            alert('Failed to fetch Loan Plan names');
         }
     });
 });
