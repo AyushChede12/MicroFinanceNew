@@ -25,35 +25,6 @@ $(document).ready(function() {
 });
 
 //fetch minimum opening balance
-/*$('#selectPlan').on('change', function () {
-    let selectedName = $(this).val();
-
-    if (selectedName !== "") {
-        $.ajax({
-            url: '/api/customersavings/fetchpolicyname',
-            type: 'GET',
-        contentType: 'application/json',
-            data: JSON.stringify({ policyName: selectedName }),
-            success: function (response) {
-                if (response.status === "FOUND") {
-                    let customer = response.data[0];
-					alert(customer);
-                    $('#openingAmount').val(customer.monthlyMinimumBalance);
-                } else {
-                    alert('No customer data found!');
-                    $('#openingAmount').val('');
-                }
-            },
-            error: function () {
-                alert('Error while fetching customer data!');
-                $('#openingAmount').val('');
-            }
-        });
-    } else {
-        $('#openingAmount').val('');
-    }
-});
-*/
 
 $('#selectPlan').on('change', function () {
     let selectedName = $(this).val();
@@ -216,5 +187,35 @@ $(document).ready(function() {
         }
     });
 });
+
+//fetch financial name from financialConsultantController
+$('#financialConsultantCode').on('blur', function () {
+	alert("Hello");
+    let selectedCode = $(this).val();
+
+    if (selectedCode !== "") {
+        $.ajax({
+            url: '/api/customersavings/fetchfinancialcode?financialCode=' + encodeURIComponent(selectedCode), // Pass as query param
+            type: 'GET',
+            success: function (response) {
+                if (response.status === "FOUND") {
+                    let customer = response.data[0];
+                    $('#financialConsultantName').val(customer.customerName);
+                } else {
+                    alert('No data found!');
+                    $('#financialConsultantName').val('');
+                }
+            },
+            error: function () {
+                alert('Error while fetching data!');
+                $('#financialConsultantName').val('');
+            }
+        });
+    } else {
+        $('#financialConsultantName').val('');
+    }
+});
+
+// save create saving account details
 
 

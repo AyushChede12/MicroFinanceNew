@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.SavingSchmeCatalogRepo;
 
@@ -23,6 +25,9 @@ public class CustomerSavingsService {
 	
 	@Autowired
 	FinancialConsultantRepo financialConsultantRepo;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	public boolean saveSavingScheme(SavingSchemeCatalog savingSchemeCatalog) {
 		 try {
@@ -60,8 +65,15 @@ public class CustomerSavingsService {
 		return list;
 	}
 
+	public boolean saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
+		try {
+			createSavingAccountRepo.save(createSavingsAccount);
+		        return true;
+		    } catch (Exception e) {
+		        e.printStackTrace(); // Log actual error
+		        return false;
+		    }
+	}
 
-
-	
 
 }

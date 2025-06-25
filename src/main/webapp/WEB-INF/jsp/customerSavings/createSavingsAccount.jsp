@@ -233,9 +233,8 @@ pageEncoding="ISO-8859-1"%> -->
 									name="selectPlan" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									
 
-								</select>
+							</select>
 							</div>
 						</div>
 
@@ -266,13 +265,11 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Fees (if any)</label> <input type="text"
 									name="openingFees" id="openingFees" required="required"
-									placeholder="Enter Licence No" />
+									placeholder="Enter Opening Fees" />
 							</div>
 						</div>
 					</div>
