@@ -57,21 +57,6 @@ public class PreferenceController {
 		return ResponseEntity.ok(response);
 	}
 
-	
-	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
-		List<BranchModule> list = preferenceService.fetchAllBranchModule();
-		ApiResponse<List<BranchModule>> response = new ApiResponse<>( HttpStatus.OK,"Branch modules fetched successfully", list);
-		return ResponseEntity.ok(response);
-	}
-	
-	@GetMapping("/getBranchModuleById")           //Ayush
-	@ResponseBody
-	public Optional<BranchModule> findBranchModuleById(@RequestParam("id") Long id) {
-		Optional<BranchModule> branch=preferenceService.findBranchDataById(id);
-		return branch;
-
-
 	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
 	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
 		List<BranchModule> list = preferenceService.fetchAllBranchModule();

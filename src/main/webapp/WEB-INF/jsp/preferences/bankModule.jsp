@@ -94,6 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="bankName" id="bankName" required="required"
 									placeholder="Enter Bank Name"
 									style="text-transform: uppercase;" />
+									<small id="chkbankname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -104,6 +105,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="accountNo" required="required"
 									placeholder="Enter Account No"
 									style="text-transform: uppercase;" />
+									<small id="chkaccountno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -114,6 +116,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="contactNo" required="required"
 									placeholder="Enter Contact No"
 									style="text-transform: uppercase;" />
+									<small id="chkcontactno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -123,6 +126,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+									<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -132,6 +136,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Opening Date <span class="star">*</span></label> <input type="date"
 									name="openingDate" id="openingDate" required="required"
 									style="text-transform: uppercase;" />
+									<small id="chkopeningdate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -142,6 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="openingBalance" id="openingBalance" required="required"
 									placeholder="Enter Opening Balance"
 									style="text-transform: uppercase;" />
+									<small id="chkopeningbalance" style="color: red;"></small>
 							</div>
 						</div>
 

@@ -9,27 +9,13 @@ public class FixedDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
-	private int id;
-	private String planCodeFD;
-	private String planNameFD;
-	private String minimumAmountRD1;
-	private String rateOfInterestRD1;
-	private String termMode1;
-	private String installmentType1;
-	private String commissionOnNewRD1;
-	private String componentIntervalRD;
-	private String totalPaidRD;
-	private String maturityAmountRD;
-	private String statusOfPlanRD1;
-	public int getId() {
-
 	private  long id;
 	private String planCodeFD;
 	private String planNameFD;
 	private String minimumAmountFD;
 	private String rateOfInterestFD;
 	private String termModeFD;
-	private String termFd;
+	private String termFD;
 	private String durationFD;
 	private String installmentTypeFD;
 	private String commissionOnNewFD;
@@ -41,9 +27,7 @@ public class FixedDepositPM {
 	private String graceDaysFD;
 	private String penltyfineFD;
 	private String statusOfPlanFD;
-	
 	public long getId() {
-
 		return id;
 	}
 	public void setId(long id) {
@@ -52,12 +36,14 @@ public class FixedDepositPM {
 	public String getPlanCodeFD() {
 		return planCodeFD;
 	}
-
-	public void setPlanCodeRD1(String planCodeFD) {
-
 	public void setPlanCodeFD(String planCodeFD) {
-
 		this.planCodeFD = planCodeFD;
+	}
+	public String getPlanNameFD() {
+		return planNameFD;
+	}
+	public void setPlanNameFD(String planNameFD) {
+		this.planNameFD = planNameFD;
 	}
 	public String getMinimumAmountFD() {
 		return minimumAmountFD;
@@ -71,17 +57,29 @@ public class FixedDepositPM {
 	public void setRateOfInterestFD(String rateOfInterestFD) {
 		this.rateOfInterestFD = rateOfInterestFD;
 	}
-	public String getTermMode1() {
+	public String getTermModeFD() {
 		return termModeFD;
 	}
-	public void setTermMode1(String termMode1) {
-		this.termModeFD = termMode1;
+	public void setTermModeFD(String termModeFD) {
+		this.termModeFD = termModeFD;
 	}
-	public String getInstallmentType1() {
+	public String getTermFD() {
+		return termFD;
+	}
+	public void setTermFD(String termFD) {
+		this.termFD = termFD;
+	}
+	public String getDurationFD() {
+		return durationFD;
+	}
+	public void setDurationFD(String durationFD) {
+		this.durationFD = durationFD;
+	}
+	public String getInstallmentTypeFD() {
 		return installmentTypeFD;
 	}
-	public void setInstallmentType1(String installmentType1) {
-		this.installmentTypeFD = installmentType1;
+	public void setInstallmentTypeFD(String installmentTypeFD) {
+		this.installmentTypeFD = installmentTypeFD;
 	}
 	public String getCommissionOnNewFD() {
 		return commissionOnNewFD;
@@ -101,48 +99,17 @@ public class FixedDepositPM {
 	public void setTotalPaidFD(String totalPaidFD) {
 		this.totalPaidFD = totalPaidFD;
 	}
+	public String getFlexiblePlanFD() {
+		return flexiblePlanFD;
+	}
+	public void setFlexiblePlanFD(String flexiblePlanFD) {
+		this.flexiblePlanFD = flexiblePlanFD;
+	}
 	public String getMaturityAmountFD() {
 		return maturityAmountFD;
 	}
 	public void setMaturityAmountFD(String maturityAmountFD) {
 		this.maturityAmountFD = maturityAmountFD;
-	}
-	public String getStatusOfPlanFD() {
-		return statusOfPlanFD;
-	}
-	public void setStatusOfPlanFD(String statusOfPlanFD) {
-		this.statusOfPlanFD = statusOfPlanFD;
-	}
-	public String getTermFd() {
-		return termFd;
-	}
-	public void setTermFd(String termFd) {
-		this.termFd = termFd;
-	}
-	public String getTermModeFD() {
-		return termModeFD;
-	}
-	public void setTermModeFD(String termModeFD) {
-		this.termModeFD = termModeFD;
-	}
-	public String getDurationFD() {
-		return durationFD;
-	}
-	public void setDurationFD(String durationFD) {
-		this.durationFD = durationFD;
-	}
-	public String getInstallmentTypeFD() {
-		return installmentTypeFD;
-	}
-	public void setInstallmentTypeFD(String installmentTypeFD) {
-		this.installmentTypeFD = installmentTypeFD;
-	}
-	public String getFlexiblePlanFD() {
-		return flexiblePlanFD;
-	}
-
-	public void setFlexiblePlanFD(String flexiblePlanFD) {
-		this.flexiblePlanFD = flexiblePlanFD;
 	}
 	public String getRenewalCommissionFD() {
 		return renewalCommissionFD;
@@ -162,14 +129,13 @@ public class FixedDepositPM {
 	public void setPenltyfineFD(String penltyfineFD) {
 		this.penltyfineFD = penltyfineFD;
 	}
-
-	public String getPlanNameFD() {
-		return planNameFD;
+	public String getStatusOfPlanFD() {
+		return statusOfPlanFD;
 	}
-	public void setPlanNameFD(String planNameFD) {
-		this.planNameFD = planNameFD;
+	public void setStatusOfPlanFD(String statusOfPlanFD) {
+		this.statusOfPlanFD = statusOfPlanFD;
 	}
-
 	
+
 
 }

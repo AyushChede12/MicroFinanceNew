@@ -93,6 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="branchCode" id="branchCode" required="required"
 									placeholder="Enter Branch Code"
 									style="text-transform: uppercase;" />
+									<small id="chkbranchcode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -103,6 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="branchName" required="required"
 									placeholder="Enter Branch Name"
 									style="text-transform: uppercase;" />
+									<small id="chkbranchName" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -113,6 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Opening Date <span class="star">*</span></label> <input type="date"
 									name="openingDate" id="openingDate" required="required"
 									style="text-transform: uppercase;" />
+									<small id="chkopeningdate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -122,6 +125,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+									<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -130,6 +134,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">PIN <span class="star">*</span></label> <input type="text" name="pin" id="pin"
 									required="required" placeholder="Enter Pin"
 									style="text-transform: uppercase;" />
+									<small id="chkpin" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -146,6 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Odisha">Odisha</option>
 									<option value="Andaman & Nicobar">Andaman & Nicobar</option>
 								</select>
+								<small id="chkstate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -155,6 +161,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="primaryContact" id="primaryContact" required="required"
 									placeholder="Enter Primary Contact"
 									style="text-transform: uppercase;" />
+									<small id="chkprimarycontact" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -163,6 +170,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Contact <span class="star">*</span></label> <input type="text" name="contact"
 									id="contact" required="required" placeholder="Enter Contact"
 									style="text-transform: uppercase;" />
+									<small id="chkcontact" style="color: red;"></small>
 							</div>
 						</div>
 

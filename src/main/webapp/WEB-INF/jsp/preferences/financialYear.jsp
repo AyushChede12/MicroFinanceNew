@@ -92,6 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="financialYearName" id="financialYearName"
 									required="required" placeholder="Enter Financial Year Name"
 									style="text-transform: uppercase;" />
+									<small id="chkfyname" style="color: red;"></small>
 							</div>
 
 						</div>
@@ -102,6 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Date From <span class="star">*</span></label> <input type="date" name="dateFrom"
 									id="dateFrom" required="required" placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
+									<small id="chkdatefrom" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -111,6 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Date To <span class="star">*</span></label> <input type="date" name="dateTo"
 									id="dateTo" required="required" placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
+									<small id="chkdateto" style="color: red;"></small>
 							</div>
 						</div>
 
