@@ -31,6 +31,7 @@ public class PolicyManagementService {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
+
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 		try {
 			recurringDepositRepo.save(deposit);
@@ -52,6 +53,7 @@ public class PolicyManagementService {
 		try {
 			fixedDepositPMRepo.save(fixedDepositPM);
 			return true;
+
 		} catch (Exception e) {
 			e.printStackTrace(); // Log actual error
 			return false;
@@ -63,6 +65,20 @@ public class PolicyManagementService {
 		// TODO Auto-generated method stub
 		return fixedDepositPMRepo.findAll();
 	}
+
+    } catch (Exception e) {
+    		e.printStackTrace(); // Log actual error
+        return false;
+    }
+}
+// feacth all data of the fixed deposite
+public List<FixedDepositPM> getAllFixeddata() {
+	// TODO Auto-generated method stub
+	return fixedDepositPMRepo.findAll();
+}
+
+
+
 
 // daily Deposite save service
 	public boolean savedailydeposite(DailyDepositPM dailyDepositPM) {
@@ -83,6 +99,7 @@ public class PolicyManagementService {
 	}
 
 //MIS Deposite save service
+
 	public boolean savemistdeposite(MISDepositPM misDepositPM) {
 		try {
 			misDepositePMRepo.save(misDepositPM);
@@ -91,6 +108,61 @@ public class PolicyManagementService {
 			e.printStackTrace(); // Log actual error
 			return false;
 		}
+
+public boolean savemistdeposite(MISDepositPM misDepositPM) {
+	try {
+		misDepositePMRepo.save(misDepositPM);
+	return true;
+} catch (Exception e) {
+	e.printStackTrace(); // Log actual error
+return false;
+}
+}
+
+
+
+
+public List<MISDepositPM> getAllMISDepositData() {
+	// TODO Auto-generated method stub
+	return misDepositePMRepo.findAll();
+}
+
+
+
+
+public DailyDepositPM getDailyDepositById(Long id) {
+	// TODO Auto-generated method stub
+	 return dailyDepositPMRepo.findById(id).orElse(null);
+}
+
+
+
+
+public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
+	// TODO Auto-generated method stub
+	 
+	    return dailyDepositPMRepo.findById(id).map(existing -> {
+	        existing.setPlanCodeDD(updatedData.getPlanCodeDD());
+	        existing.setMinimumDeposit(updatedData.getMinimumDeposit());
+	        existing.setRateOfInterest(updatedData.getRateOfInterest());
+	        existing.setInstallmentType(updatedData.getInstallmentType());
+	        existing.setPlanNameDD(updatedData.getPlanNameDD());
+	        existing.setDuration(updatedData.getDuration()); // Fixed here
+	        existing.setCommissionOnNew(updatedData.getCommissionOnNew());
+	        existing.setRenewalCommission(updatedData.getRenewalCommission());
+	        existing.setTermDD(updatedData.getTermDD());
+	        existing.setTermModeDD(updatedData.getTermModeDD());
+	        existing.setInterestInterval(updatedData.getInterestInterval());
+	        existing.setTotalPaid(updatedData.getTotalPaid());
+	        existing.setMaturityAmount(updatedData.getMaturityAmount());
+	        existing.setFlexiblePlan(updatedData.getFlexiblePlan());
+	        existing.setGraceDays(updatedData.getGraceDays());
+	        existing.setPenaltyRate(updatedData.getPenaltyRate());
+	        existing.setStatusOfPlan(updatedData.getStatusOfPlan());
+	        
+	        return dailyDepositPMRepo.save(existing); // Fixed here
+	    }).orElse(null);
+
 	}
 
 	public List<MISDepositPM> getAllMISDepositData() {
@@ -191,10 +263,67 @@ public class PolicyManagementService {
 
 //Fetch the data fixed deposit service
 
+
 	public FixedDepositPM getFixedDepositById(Long id) {
 		// TODO Auto-generated method stub
 		return fixedDepositPMRepo.findById(id).orElse(null);
 	}
+
+public FixedDepositPM getFixedDepositById(Long id) {
+	// TODO Auto-generated method stub
+	 return fixedDepositPMRepo.findById(id).orElse(null);
+}
+
+
+
+
+public FixedDepositPM updateFixedDeposit(Long id, FixedDepositPM updatedData) {
+	Optional<FixedDepositPM> existingOptional = fixedDepositPMRepo.findById(id);
+
+    if (existingOptional.isPresent()) {
+        FixedDepositPM existing = existingOptional.get();
+
+        // Update all fields
+        existing.setPlanCodeFD(updatedData.getPlanCodeFD());
+        existing.setPlanNameFD(updatedData.getPlanNameFD());
+        existing.setMinimumAmountFD(updatedData.getMinimumAmountFD());
+        existing.setRateOfInterestFD(updatedData.getRateOfInterestFD());
+        existing.setTermModeFD(updatedData.getTermModeFD());
+        existing.setTermFD(updatedData.getTermFD());
+        existing.setDurationFD(updatedData.getDurationFD());
+        existing.setInstallmentTypeFD(updatedData.getInstallmentTypeFD());
+        existing.setCommissionOnNewFD(updatedData.getCommissionOnNewFD());
+        existing.setComponentIntervalFD(updatedData.getComponentIntervalFD());
+        existing.setTotalPaidFD(updatedData.getTotalPaidFD());
+        existing.setMaturityAmountFD(updatedData.getMaturityAmountFD());
+        existing.setFlexiblePlanFD(updatedData.getFlexiblePlanFD());
+        existing.setRenewalCommissionFD(updatedData.getRenewalCommissionFD());
+        existing.setGraceDaysFD(updatedData.getGraceDaysFD());
+        existing.setPenltyfineFD(updatedData.getPenltyfineFD());
+        existing.setStatusOfPlanFD(updatedData.getStatusOfPlanFD());
+
+        return fixedDepositPMRepo.save(existing); // save updated data
+    }
+
+    return null; // not found
+}
+
+
+
+
+public boolean deleteFixedDeposit(Long id) {
+	 if (fixedDepositPMRepo.existsById(id)) {
+		 fixedDepositPMRepo.deleteById(id);
+	        return true;
+	    } else {
+	        return false;
+	    }
+}
+}
+
+
+
+
 
 	public FixedDepositPM updateFixedDeposit(Long id, FixedDepositPM updatedData) {
 		Optional<FixedDepositPM> existingOptional = fixedDepositPMRepo.findById(id);
