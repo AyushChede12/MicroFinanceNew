@@ -92,8 +92,13 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Type</option>
-									<option value="Blue">RD</option>
+									<option value="Blue">Founder</option>
+									<option value="Blue">Co-Founder</option>
+									<option value="Blue">CEO</option>
+									<option value="Blue">MD</option>
+									<option value="Blue">Chairman</option>
 								</select>
+								<small id="chkexetype" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -103,6 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
+								<small id="chkbranchname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -113,6 +119,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Full Name <span class="star">*</span></label> <input type="text"
 									name="fullName" id="fullName" required="required"
 									placeholder="Enter FullName" />
+									<small id="chkfullname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -123,6 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Date Of Birth <span class="star">*</span></label> <input type="date"
 									name="dateOfBirth" id="dateOfBirth" required="required" />
+									<small id="chkdateofbirth" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -131,6 +139,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">DIN/Promoter No <span class="star">*</span></label> <input type="text"
 									name="promoterNo" id="promoterNo" required="required"
 									placeholder="Enter Promoter No" />
+									<small id="chkpromoterno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -138,6 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Appointment Date <span class="star">*</span></label> <input type="date"
 									name="appointmentDate" id="appointmentDate" required="required" />
+									<small id="chkappointmentdate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -147,6 +157,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Relation Name <span class="star">*</span></label> <input type="text"
 									name="relationName" id="relationName" required="required"
 									placeholder="Enter Relation Name" />
+									<small id="chkrelationname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -159,6 +170,7 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 								</select>
+								<small id="chkrelationtoapplicant" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -167,6 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+									<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -176,6 +189,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">District <span class="star">*</span></label> <input type="text"
 									name="district" id="district" required="required"
 									placeholder="Enter District" />
+									<small id="chkdistrict" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -203,6 +217,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Manipur">Manipur</option>
 									<option value="Nagaland">Nagaland</option>
 								</select>
+								<small id="chkstate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -210,6 +225,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Pin Code <span class="star">*</span></label> <input type="text" name="pinCode"
 									id="pinCode" required="required" placeholder="Enter Pincode" />
+									<small id="chkpincode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -218,6 +234,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Aadhar No <span class="star">*</span></label> <input type="text"
 									name="aadharNo" id="aadharNo" required="required"
 									placeholder="Enter Aadhar No" />
+									<small id="chkaadharno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -225,6 +242,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">PAN No <span class="star">*</span></label> <input type="text" name="panNo"
 									id="panNo" required="required" placeholder="Enter PAN No" />
+									<small id="chkpanno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -236,6 +254,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Contact No <span class="star">*</span></label> <input type="text"
 									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No" />
+									<small id="chkcontactno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -243,6 +262,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Email ID <span class="star">*</span></label> <input type="text" name="emailId"
 									id="emailId" required="required" placeholder="Enter Email ID" />
+									<small id="chkemailid" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -289,6 +309,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="photoPreview" /><input type="hidden" name="photoHidden"
 										id="photoHidden">
+										
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -297,6 +318,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </p> -->
 								</div>
 							</label>
+							<small id="chkphoto" style="color: red;"></small>
 						</div>
 
 						<div class="col-lg-3 mb-5">
@@ -318,6 +340,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </p> -->
 								</div>
 							</label>
+							<small id="chksignature" style="color: red;"></small>
 						</div>
 
 					</div>
@@ -340,6 +363,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="">Select Deposit Acc</option>
 									<option value="Blue">9542512445211</option>
 								</select>
+								<small id="chkdepositacc" style="color: red;"></small>
 							</div>
 						</div>
 					</div>

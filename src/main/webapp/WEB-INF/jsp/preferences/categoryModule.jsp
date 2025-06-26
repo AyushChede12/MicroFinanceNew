@@ -92,6 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Add Category <span class="star">*</span></label> <input type="text"
 									name="category" id="category" 
 									placeholder="Enter Category" style="text-transform: uppercase;" />
+									<small id="chkcategory" style="color: red;"></small>
 							</div>
 						</div>
 

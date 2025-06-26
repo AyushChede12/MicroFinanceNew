@@ -1,6 +1,23 @@
 $(document).ready(function() {
 
 	$("#saveBtn").click(function() {
+
+		$('#chkcaste').text('');
+
+		var caste = $('#caste').val().trim();
+
+		let isValid = true;
+
+		if (caste === '') {
+			$('#chkcaste').text('* This field is required');
+			$('#caste').focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
 		const formData = {
 			caste: $('input[name="caste"]').val()
 		};
@@ -12,7 +29,7 @@ $(document).ready(function() {
 			data: JSON.stringify(formData),
 			success: function(response) {
 				if (response.success) {
-					alert(response.message); 
+					alert(response.message);
 					location.reload();
 				} else {
 					alert("Error: " + (response.message || "Unknown error occurred."));
@@ -27,10 +44,10 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllCasteModule", 
+		url: "/api/preference/getAllCasteModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response); 
+			console.log("Full Response from API:", response);
 			if (response.success) {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
@@ -54,7 +71,7 @@ $(document).ready(function() {
 });
 
 function deleteData(id) {
-	if (confirm("Are you sure you want to delete this bank?")) {
+	if (confirm("Are you sure you want to delete this Caste?")) {
 		$.ajax({
 			url: "/api/preference/deleteCasteModuleById",
 			type: "POST",

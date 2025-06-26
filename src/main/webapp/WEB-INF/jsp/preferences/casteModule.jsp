@@ -92,6 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Add Caste <span class="star">*</span></label> <input type="text"
 									name="caste" id="caste" required="required"
 									placeholder="Enter Caste" style="text-transform: uppercase;" />
+									<small id="chkcaste" style="color: red;"></small>
 							</div>
 						</div>
 
