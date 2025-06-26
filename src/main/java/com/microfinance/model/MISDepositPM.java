@@ -22,113 +22,13 @@ public class MISDepositPM {
 	private String MISIntROIMD;
 	private String MISIntervalMD;
 	private String MISInterestMD;
+	private String componentIntervalMD;
+	private String totalPaidMD;
+	private String graceDaysMD;
+	private String penltyfineMD;
 	private String maturityAmountMD;
 	private String flexiblePlanMD;
 	private String commissionOnNewMD;
+	private String renewalCommissionMD;
 	private String statusOfPlanMDRD2;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getPlanCodeMD() {
-		return planCodeMD;
-	}
-	public void setPlanCodeMD(String planCodeMD) {
-		this.planCodeMD = planCodeMD;
-	}
-	public String getPlanNameMD() {
-		return planNameMD;
-	}
-	public void setPlanNameMD(String planNameMD) {
-		this.planNameMD = planNameMD;
-	}
-	public String getRateOfInterestMD() {
-		return rateOfInterestMD;
-	}
-	public void setRateOfInterestMD(String rateOfInterestMD) {
-		this.rateOfInterestMD = rateOfInterestMD;
-	}
-	public String getDurationMD() {
-		return durationMD;
-	}
-	public void setDurationMD(String durationMD) {
-		this.durationMD = durationMD;
-	}
-	public String getInstallmentTypeMD() {
-		return installmentTypeMD;
-	}
-	public void setInstallmentTypeMD(String installmentTypeMD) {
-		this.installmentTypeMD = installmentTypeMD;
-	}
-	public String getMinimumAmountMD() {
-		return minimumAmountMD;
-	}
-	public void setMinimumAmountMD(String minimumAmountMD) {
-		this.minimumAmountMD = minimumAmountMD;
-	}
-	public String getMaturityROIMD() {
-		return maturityROIMD;
-	}
-	public void setMaturityROIMD(String maturityROIMD) {
-		this.maturityROIMD = maturityROIMD;
-	}
-	public String getTermModeMD() {
-		return termModeMD;
-	}
-	public void setTermModeMD(String termModeMD) {
-		this.termModeMD = termModeMD;
-	}
-	public String getTermMD() {
-		return termMD;
-	}
-	public void setTermMD(String termMD) {
-		this.termMD = termMD;
-	}
-	public String getMISIntROIMD() {
-		return MISIntROIMD;
-	}
-	public void setMISIntROIMD(String mISIntROIMD) {
-		MISIntROIMD = mISIntROIMD;
-	}
-	public String getMISIntervalMD() {
-		return MISIntervalMD;
-	}
-	public void setMISIntervalMD(String mISIntervalMD) {
-		MISIntervalMD = mISIntervalMD;
-	}
-	public String getMISInterestMD() {
-		return MISInterestMD;
-	}
-	public void setMISInterestMD(String mISInterestMD) {
-		MISInterestMD = mISInterestMD;
-	}
-	public String getMaturityAmountMD() {
-		return maturityAmountMD;
-	}
-	public void setMaturityAmountMD(String maturityAmountMD) {
-		this.maturityAmountMD = maturityAmountMD;
-	}
-	public String getFlexiblePlanMD() {
-		return flexiblePlanMD;
-	}
-	public void setFlexiblePlanMD(String flexiblePlanMD) {
-		this.flexiblePlanMD = flexiblePlanMD;
-	}
-	public String getCommissionOnNewMD() {
-		return commissionOnNewMD;
-	}
-	public void setCommissionOnNewMD(String commissionOnNewMD) {
-		this.commissionOnNewMD = commissionOnNewMD;
-	}
-	public String getStatusOfPlanMDRD2() {
-		return statusOfPlanMDRD2;
-	}
-	public void setStatusOfPlanMDRD2(String statusOfPlanMDRD2) {
-		this.statusOfPlanMDRD2 = statusOfPlanMDRD2;
-	}
-
-	
-	
 }

@@ -94,6 +94,196 @@ $(document).ready(function() {
 
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
+
+		$('#chkexetype').text('');
+		$('#chkbranchname').text('');
+		$('#chkfullname').text('');
+		$('#chkdateofbirth').text('');
+		$('#chkpromoterno').text('');
+		$('#chkappointmentdate').text('');
+		$('#chkrelationname').text('');
+		$('#chkrelationtoapplicant').text('');
+		$('#chkaddress').text('');
+		$('#chkdistrict').text('');
+		$('#chkstate').text('');
+		$('#chkpincode').text('');
+		$('#chkaadharno').text('');
+		$('#chkpanno').text('');
+		$('#chkcontactno').text('');
+		$('#chkemailid').text('');
+		$('#chkphoto').text('');
+		$('#chksignature').text('');
+		$('#chkdepositacc').text('');
+
+		var type = $('#type').val().trim();
+		var branchName = $('#branchName').val().trim();
+		var fullName = $('#fullName').val().trim();
+		var dateOfBirth = $('#dateOfBirth').val().trim();
+		var promoterNo = $('#promoterNo').val().trim();
+		var appointmentDate = $('#appointmentDate').val().trim();
+		var relationName = $('#relationName').val().trim();
+		var relationToApplicant = $('#relationToApplicant').val().trim();
+		var address = $('#address').val().trim();
+		var district = $('#district').val().trim();
+		var state = $('#state').val().trim();
+		var pinCode = $('#pinCode').val().trim();
+		var aadharNo = $('#aadharNo').val().trim();
+		var panNo = $('#panNo').val().trim();
+		var contactNo = $('#contactNo').val().trim();
+		var emailId = $('#emailId').val().trim();
+		var depositAcc = $('#depositAcc').val().trim();
+
+		const photo = $('#photo')[0].files[0];
+		const signature = $('#signature')[0].files[0];
+
+
+		//Validations
+		var pinPattern = /^[1-9][0-9]{5}$/;
+		var panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+		var contactPattern = /^[6-9][0-9]{9}$/;
+		var aadharPattern = /^\d{12}$/;
+		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+		let isValid = true;
+
+		if (type === '') {
+			$('#chkexetype').text('* This field is required');
+			$('#type').focus();
+			isValid = false;
+		}
+
+		if (branchName === '') {
+			$('#chkbranchname').text('* This field is required');
+			$('#branchName').focus();
+			isValid = false;
+		}
+
+		if (fullName === '') {
+			$('#chkfullname').text('* This field is required');
+			$('#fullName').focus();
+			isValid = false;
+		}
+
+		if (fullName === '') {
+			$('#chkopeningdate').text('* This field is required');
+			$('#fullName').focus();
+			isValid = false;
+		}
+
+		if (dateOfBirth === '') {
+			$('#chkdateofbirth').text('* This field is required');
+			$('#dateOfBirth').focus();
+			isValid = false;
+		}
+
+		if (promoterNo === '') {
+			$('#chkpromoterno').text('* This field is required');
+			$('#promoterNo').focus();
+			isValid = false;
+		}
+
+		if (appointmentDate === '') {
+			$('#chkappointmentdate').text('* This field is required');
+			$('#appointmentDate').focus();
+			isValid = false;
+		}
+		if (relationName === '') {
+			$('#chkrelationname').text('* This field is required');
+			$('#relationName').focus();
+			isValid = false;
+		}
+		if (relationToApplicant === '') {
+			$('#chkrelationtoapplicant').text('* This field is required');
+			$('#relationToApplicant').focus();
+			isValid = false;
+		}
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+		if (district === '') {
+			$('#chkdistrict').text('* This field is required');
+			$('#district').focus();
+			isValid = false;
+		}
+		if (state === '') {
+			$('#chkstate').text('* This field is required');
+			$('#state').focus();
+			isValid = false;
+		}
+		if (pinCode === '') {
+			$('#chkpincode').text('* This field is required');
+			$('#pinCode').focus();
+			isValid = false;
+		}
+		else if (!pinPattern.test(pinCode)) {
+			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
+			pinCode.focus();
+			isValid = false;
+		}
+		if (aadharNo === '') {
+			$('#chkaadharno').text('* This field is required');
+			$('#aadharNo').focus();
+			isValid = false;
+		}
+		else if (!aadharPattern.test(aadharNo)) {
+			alert("Please enter a valid 12-digit Aadhar number.");
+			$('#aadharNo').focus();
+			isValid = false;
+		}
+		if (panNo === '') {
+			$('#chkpanno').text('* This field is required');
+			$('#panNo').focus();
+			isValid = false;
+		}
+		else if (!panPattern.test(panNo)) {
+			alert("Please enter a valid PAN card number (e.g., ABCDE1234F).");
+			panNo.focus();
+			isValid = false;
+		}
+		if (contactNo === '') {
+			$('#chkcontactno').text('* This field is required');
+			$('#contactNo').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(contactNo)) {
+			alert("Please enter a valid 10-digit mobile number.");
+			contactNo.focus();
+			isValid = false;
+		}
+		if (emailId === '') {
+			$('#chkemailid').text('* This field is required');
+			$('#emailId').focus();
+			isValid = false;
+		}
+		else if (!emailPattern.test(emailId)) {
+			alert('Please enter a valid email address (e.g., example@domain.com)');
+			$('#emailId').focus();
+			isValid = false;
+		}
+
+		if (!photo) {
+			$('#chkphoto').text('* Photo is required');
+			$('#photo').focus();
+			isValid = false;
+		}
+		if (!signature) {
+			$('#chksignature').text('* Signature is required');
+			$('#signature').focus();
+			isValid = false;
+		}
+
+		if (depositAcc === '') {
+			$('#chkdepositacc').text('* This field is required');
+			$('#depositAcc').focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
 		event.preventDefault();
 
 		const formData = new FormData();
@@ -121,13 +311,11 @@ $(document).ready(function() {
 		formData.append("depositAcc", $('#depositAcc').val());
 
 		// File upload: photo
-		const photo = $('#photo')[0].files[0];
 		if (photo) {
 			formData.append("photo", photo);
 		}
 
 		// File upload: signature
-		const signature = $('#signature')[0].files[0];
 		if (signature) {
 			formData.append("signature", signature);
 		}
@@ -204,19 +392,26 @@ $(document).ready(function() {
 });
 
 function deleteData(id) {
-	$.ajax({
-		url: 'deleteExecutiveFounder',
-		type: 'POST',
-		data: { id: id }, // Sends id as request param
-		success: function(response) {
-			alert("Data Deleted Successfully: ");
-			location.reload();
-			// Optionally refresh table or remove row
-		},
-		error: function(xhr) {
-			alert("Error: " + xhr.responseText);
-		}
-	});
+
+	if (confirm("Are you sure you want to delete this Executive Data?")) {
+		$.ajax({
+			url: "/api/preference/deleteExecutiveFounder",
+			type: "POST",
+			data: { id: id },
+			success: function(response) {
+				if (response.success) {
+					alert("Executive Data Deleted Successfully");
+					location.reload();
+				} else {
+					alert("Delete failed: " + response.message);
+				}
+			},
+			error: function(xhr, status, error) {
+				alert("Failed to delete Executive.");
+				console.error("Error:", error);
+			}
+		});
+	}
 }
 
 function showTableData() {
@@ -371,3 +566,5 @@ function deleteData(id) {
 		});
 	}
 }
+
+

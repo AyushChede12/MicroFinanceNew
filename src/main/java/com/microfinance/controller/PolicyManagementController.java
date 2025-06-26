@@ -361,7 +361,81 @@ public class PolicyManagementController {
         }
     }
 
+
+ // Get MIS deposit by ID
+//    @GetMapping("/misedit/{id}")
+//    public ResponseEntity<ApiResponse<MISDepositPM>> getMISDepositById(@PathVariable Long id) {
+//        MISDepositPM deposit = policyManagementService.getMISDepositById(id);
+//
+//        if (deposit != null) {
+//            ApiResponse<MISDepositPM> response = ApiResponse.success(
+//                HttpStatus.OK,
+//                "MIS deposit fetched successfully.",
+//                deposit
+//            );
+//            return ResponseEntity.ok(response);
+//        } else {
+//            ApiResponse<MISDepositPM> response = ApiResponse.error(
+//                HttpStatus.NOT_FOUND,
+//                "MIS deposit not found for ID: " + id
+//            );
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+//        }
+//    }
+
+    // Update MIS deposit
+//    @PutMapping("/misupdate/{id}")
+//    public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(
+//            @PathVariable Long id,
+//            @RequestBody MISDepositPM updatedData) {
+//
+//        MISDepositPM updated = policyManagementService.updateMISDeposit(id, updatedData);
+//
+//        if (updated != null) {
+//            ApiResponse<MISDepositPM> response = ApiResponse.success(
+//                HttpStatus.OK,
+//                "MIS deposit updated successfully.",
+//                updated
+//            );
+//            return ResponseEntity.ok(response);
+//        } else {
+//            ApiResponse<MISDepositPM> response = ApiResponse.error(
+//                HttpStatus.NOT_FOUND,
+//                "MIS deposit not found or failed to update."
+//            );
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+//        }
+//    }
+//
+//    // Delete MIS deposit
+//    @DeleteMapping("/misdelete/{id}")
+//    public ResponseEntity<ApiResponse<Void>> deleteMISDeposit(@PathVariable Long id) {
+//        boolean deleted = policyManagementService.deleteMISDeposit(id);
+//
+//        if (deleted) {
+//            ApiResponse<Void> response = ApiResponse.success(
+//                HttpStatus.OK,
+//                "MIS deposit deleted successfully.",
+//                null
+//            );
+//            return ResponseEntity.ok(response);
+//        } else {
+//            ApiResponse<Void> response = ApiResponse.error(
+//                HttpStatus.NOT_FOUND,
+//                "MIS deposit not found for ID: " + id
+//            );
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+//        }
+//    }
+    
+    
     
     
 
 }
+
+    
+    
+
+}
+
