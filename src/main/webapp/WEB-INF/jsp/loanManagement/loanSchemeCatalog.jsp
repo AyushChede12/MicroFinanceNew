@@ -42,6 +42,8 @@ pageEncoding="ISO-8859-1"%> -->
 </head>
 
 
+
+
 <body>
 
 	<main id="main" class="main">
@@ -89,6 +91,9 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
+              
+              <input type="hidden" id="loanSchemeId" name="loanSchemeId" value="1" />
+              
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Loan Plan Name</label> <input type="text"
 									name="loanPlaneName" id="loanPlaneName" required="required"

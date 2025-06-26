@@ -187,16 +187,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Type of Loan</label> <select id="newLoanApplicationTypeofloan"
-									name="newLoanApplicationTypeofloan" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Type of Loan</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
