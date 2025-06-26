@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
@@ -65,15 +66,19 @@ public class CustomerSavingsService {
 		return list;
 	}
 
-	public boolean saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
-		try {
-			createSavingAccountRepo.save(createSavingsAccount);
-		        return true;
-		    } catch (Exception e) {
-		        e.printStackTrace(); // Log actual error
-		        return false;
-		    }
-	}
+//	public boolean saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
+//		try {
+//			createSavingAccountRepo.save(createSavingsAccount);
+//		        return true;
+//		    } catch (Exception e) {
+//		        e.printStackTrace(); // Log actual error
+//		        return false;
+//		    }
+//	}
 
+	public CreateSavingsAccount saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
+		// TODO Auto-generated method stub
+		return createSavingAccountRepo.save(createSavingsAccount);
+	}
 
 }

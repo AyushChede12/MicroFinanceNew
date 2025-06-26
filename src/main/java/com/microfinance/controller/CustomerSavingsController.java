@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
@@ -91,26 +92,15 @@ public class CustomerSavingsController {
   	    }
   	}
   	
- // Save Saving Scheme Catalog
-    @PostMapping("/savesavingaccount")
-    public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
-        boolean isSaved = customersaving.saveSavingAccountDetails(createSavingsAccount);
-
-        if (isSaved) {
-            ApiResponse<CreateSavingsAccount> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Saving Scheme saved successfully.",
-                createSavingsAccount
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<CreateSavingsAccount> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save fixed deposit."
-            );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
+ 
+    @PostMapping("/savesavingaccount") 
+	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
+    	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
+		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"
+				: "Saving Account Details updated successfully";
+		ApiResponse<CreateSavingsAccount> response = new ApiResponse<>(true, HttpStatus.OK, message, savedEntity);
+		return ResponseEntity.ok(response);
+	}
 	
 	
 }
