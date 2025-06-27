@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import com.microfinance.model.MISDepositPM;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 

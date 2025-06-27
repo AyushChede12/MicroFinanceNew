@@ -1,5 +1,69 @@
 $(document).ready(function() {
 	$("#saveBtn").click(function() {
+
+		$('#chkbankname').text('');
+		$('#chkaccountno').text('');
+		$('#chkcontactno').text('');
+		$('#chkaddress').text('');
+		$('#chkopeningdate').text('');
+		$('#chkopeningbalance').text('');
+
+		var bankName = $('#bankName').val().trim();
+		var accountNo = $('#accountNo').val().trim();
+		var contactNo = $('#contactNo').val().trim();
+		var address = $('#address').val().trim();
+		var openingDate = $('#openingDate').val().trim();
+		var openingBalance = $('#openingBalance').val().trim();
+
+		var contactPattern = /^[6-9][0-9]{9}$/;
+
+		let isValid = true;
+
+		if (bankName === '') {
+			$('#chkbankname').text('* This field is required');
+			$('#bankName').focus();
+			isValid = false;
+		}
+
+		if (accountNo === '') {
+			$('#chkaccountno').text('* This field is required');
+			$('#accountNo').focus();
+			isValid = false;
+		}
+
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+
+		if (openingDate === '') {
+			$('#chkopeningdate').text('* This field is required');
+			$('#openingDate').focus();
+			isValid = false;
+		}
+
+		if (openingBalance === '') {
+			$('#chkopeningbalance').text('* This field is required');
+			$('#openingBalance').focus();
+			isValid = false;
+		}
+
+		if (contactNo === '') {
+			$('#chkcontactno').text('* This field is required');
+			$('#contactNo').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(contactNo)) {
+			alert("Please enter a valid 10-digit mobile number and start from (6-9).");
+			contactNo.focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
 		const formData = {
 			bankName: $('input[name="bankName"]').val(),
 			accountNo: $('input[name="accountNo"]').val(),
@@ -15,8 +79,13 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				alert("Bank Saved Successfully");
-				location.reload();
+				if (response && response.success) {
+					alert("Bank Saved Successfully"); 
+					location.reload(); 
+				} else {
+					alert("Unexpected response format");
+					console.log(response);
+				}
 			},
 			error: function(xhr) {
 				console.error('Error:', xhr.responseText);
