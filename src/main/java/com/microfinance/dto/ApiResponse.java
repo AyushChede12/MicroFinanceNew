@@ -40,11 +40,11 @@ public class ApiResponse<T> {
 
 	// Static helper methods for success and error responses
 	public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
-		return new ApiResponse<>(status, message, data);
+		return new ApiResponse<>(true,status, message, data);
 	}
 
 	public static <T> ApiResponse<T> error(HttpStatus status, String message) {
-		return new ApiResponse<>(status, message, null);
+		return new ApiResponse<>(false,status, message, null);
 	}
 
 	public HttpStatus getStatus() {

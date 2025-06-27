@@ -32,7 +32,7 @@ $(document).ready(function() {
 		console.log("Sending Data:", dailyDeposit);
 
 		$.ajax({
-			url: '/api/daily-depositsave',
+			url: '/api/Policymangment/daily-depositsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(dailyDeposit),
@@ -50,7 +50,7 @@ $(document).ready(function() {
 	// FETCH DATA
 	function fetchDailyDeposits() {
 		$.ajax({
-			url: "/api/daily-deposit/view",
+			url: "/api/Policymangment/daily-deposit/view",
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -112,7 +112,7 @@ $(document).ready(function() {
 	// EDIT FUNCTION
 	function editDailyDeposit(id) {
 		$.ajax({
-			url: `/api/dailyedit/${id}`,
+			url: `/api/Policymangment/dailyedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -169,8 +169,8 @@ $(document).ready(function() {
 		const updatedDailyDeposit = getFormData();
 
 		$.ajax({
-			url: `/api/dailyupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/dailyupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedDailyDeposit),
 			success: function() {
@@ -233,8 +233,8 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/dailydelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/dailydelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
 				alert(response.message || "Deleted successfully.");
@@ -281,8 +281,8 @@ $(document).ready(function() {
 		console.log("Sending Recurring Deposit Data:", reccuringDeposite);
 
 		$.ajax({
-			url: '/api/recurring-depositsave', // ✅ Corrected endpoint
-			type: 'GET',
+			url: '/api/Policymangment/recurring-depositsave', // ✅ Corrected endpoint
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(reccuringDeposite),
 			success: function(response) {
@@ -298,7 +298,7 @@ $(document).ready(function() {
 	// feacth recuuring deposite
 	function fetchRecurringDeposits() {
 		$.ajax({
-			url: "/api/recurring-depositview",  // ✅ Make sure this matches your controller mapping
+			url: "/api/Policymangment/recurring-depositview",  // ✅ Make sure this matches your controller mapping
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -358,7 +358,7 @@ $(document).ready(function() {
 		console.log("🔍 Fetching Recurring Deposit with ID:", id);
 
 		$.ajax({
-			url: `/api/recurringedit/${id}`,
+			url: `/api/Policymangment/recurringedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -401,8 +401,8 @@ $(document).ready(function() {
 		const updatedRecurringDeposit = getRDFormData();
 
 		$.ajax({
-			url: `/api/recurringupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/recurringupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedRecurringDeposit),
 			success: function() {
@@ -460,8 +460,8 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/recurringdelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/recurringdelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
 				alert(response.message || "Deleted successfully.");
@@ -508,7 +508,7 @@ $(document).ready(function() {
 		console.log("Sending FD Data:", fixedDeposit);
 
 		$.ajax({
-			url: '/api/fixed-depositsave',
+			url: '/api/Policymangment/fixed-depositsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(fixedDeposit),
@@ -525,7 +525,7 @@ $(document).ready(function() {
 	// featch Fixed deposite
 	function fetchFixedDeposits() {
 		$.ajax({
-			url: "/api/fixed-depositview",  // ✅ Controller mapping बरोबर आहे याची खात्री कर
+			url: "/api/Policymangment/fixed-depositview",  // ✅ Controller mapping बरोबर आहे याची खात्री कर
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -584,7 +584,7 @@ $(document).ready(function() {
 		console.log("🔍 Fetching Fixed Deposit with ID:", id);
 
 		$.ajax({
-			url: `/api/fixededit/${id}`,
+			url: `/api/Policymangment/fixededit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -626,8 +626,8 @@ $(document).ready(function() {
 		const updatedFixedDeposit = getFDFormData();
 
 		$.ajax({
-			url: `/api/fixedupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/fixedupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedFixedDeposit),
 			success: function() {
@@ -675,8 +675,8 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/fixeddelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/fixeddelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
 				alert(response.message || "Deleted successfully.");
@@ -730,7 +730,7 @@ $(document).ready(function() {
 		console.log("Sending MIS Data:", misDeposit);
 
 		$.ajax({
-			url: '/api/mis-deposit/save',
+			url: '/api/Policymangment/mis-deposit/save',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(misDeposit),
@@ -747,7 +747,7 @@ $(document).ready(function() {
 	// FETCH MIS DEPOSITS
 	function fetchMISDeposits() {
 		$.ajax({
-			url: "/api/mis-deposit/view",
+			url: "/api/Policymangment/mis-deposit/view",
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -807,7 +807,7 @@ $(document).ready(function() {
 
 	function editMISDeposit(id) {
 		$.ajax({
-			url: `/api/misedit/${id}`,
+			url: `/api/Policymangment/misedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -860,8 +860,8 @@ $(document).ready(function() {
 		const updatedMIS = getMISFormData();
 
 		$.ajax({
-			url: `/api/misupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/misupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedMIS),
 			success: function() {
@@ -892,8 +892,8 @@ $(document).ready(function() {
 
 		// Perform AJAX DELETE request
 		$.ajax({
-			url: `/api/misdelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/misdelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function (response) {
 				alert(response.message || "MIS Deposit deleted successfully.");

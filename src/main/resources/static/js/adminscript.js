@@ -6,7 +6,7 @@ $('#fromDate').val(today);
 $('#toDate').val(today);
 $('#approvalDate').val(today);
 
-
+});
 
 document.addEventListener("DOMContentLoaded", function () {
 
