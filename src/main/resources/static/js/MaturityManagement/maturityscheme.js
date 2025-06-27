@@ -195,7 +195,7 @@ $(document).ready(function () {
 								           deduction: $("#ddDeduction").val()          
 								       };
 
-									   console.log("Data"+data.instFrom);
+									   
 								       $.ajax({
 										
 								           url: "savematurityscheme",  
