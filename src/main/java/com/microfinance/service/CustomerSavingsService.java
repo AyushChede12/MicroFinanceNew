@@ -1,6 +1,7 @@
 package com.microfinance.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,5 +81,24 @@ public class CustomerSavingsService {
 		// TODO Auto-generated method stub
 		return createSavingAccountRepo.save(createSavingsAccount);
 	}
+
+	public List<CreateSavingsAccount> fetchAllSavingAccountData() {
+		// TODO Auto-generated method stub
+		return createSavingAccountRepo.findAll();
+	}
+
+	public Optional<CreateSavingsAccount> findSavingAccountDataById(Long id) {
+		// TODO Auto-generated method stub
+		return createSavingAccountRepo.findById(id);
+	}
+
+	public boolean deleteFinancialYear(Long id) {
+		if (createSavingAccountRepo.existsById(id)) {
+			createSavingAccountRepo.deleteById(id);
+			return true;
+		}
+		return false;
+	}
+	
 
 }

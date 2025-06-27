@@ -25,7 +25,6 @@ $(document).ready(function() {
 });
 
 //fetch minimum opening balance
-
 $('#selectPlan').on('change', function () {
     let selectedName = $(this).val();
 
@@ -216,6 +215,170 @@ $('#financialConsultantCode').on('blur', function () {
     }
 });
 
-// save create saving account details
+// save saving account details 
+$(document).ready(function () {
+    $('#saveBtn').click(function (event) {
+        event.preventDefault();
+
+        const accountData = {
+            openingDate: $('#openingDate').val(),
+            selectByCustomer: $('#selectByCustomer').val(),
+            enterCustomerName: $('#enterCustomerName').val(),
+            dateOfBirth: $('#dateOfBirth').val(),
+            familyDetails: $('#familyDetails').val(),
+            contactNumber: $('#contactNumber').val(),
+            suggestedNomineeName: $('#suggestedNomineeName').val(),
+            suggestedNomineeAge: $('#suggestedNomineeAge').val(),
+            suggestedNomineeRelation: $('#suggestedNomineeRelation').val(),
+            address: $('#address').val(),
+            district: $('#district').val(),
+            branchName: $('#branchName').val(),
+            state: $('#state').val(),
+            pinCode: $('#pinCode').val(),
+            operationType: $('#operationType').val(),
+            jointOperationCode: $('#jointOperationCode').val(),
+            jointSurvivorCode: $('#jointSurvivorCode').val(),
+            familyRelation: $('#familyRelation').val(),
+            selectPlan: $('#selectPlan').val(),
+            openingAmount: $('#openingAmount').val(),
+            financialConsultantCode: $('#financialConsultantCode').val(),
+            financialConsultantName: $('#financialConsultantName').val(),
+            openingFees: $('#openingFees').val(),
+            authenticateWith: $('#authenticateWith').val(),
+            modeOfPayment: $('#modeOfPayment').val(),
+            comment: $('#comment').val(),
+			accountNumber: $('#accountNumber').val(),
+			accountStatus: $('#toggle-member-status').is(':checked') ? 1 : 0,
+			messageSend: $('#toggle-member-status1').is(':checked') ? 1 : 0,
+			debitCardIssue: $('#toggle-member-status2').is(':checked') ? 1 : 0
+        };
+        $.ajax({
+            url: '/api/customersavings/savesavingaccount', // Replace with your actual endpoint
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(accountData),
+            success: function (response) {
+                alert("Saving Account data saved successfully!\nAccount No : "+accountData.accountNumber);
+                location.reload();
+            },
+            error: function (xhr) {
+                console.error('Error:', xhr.responseText);
+                alert('Failed to save saving account data.');
+            }
+        });
+    });
+	
+	$.ajax({
+			type: "GET",
+			url: "/api/customersavings/getAllSavingAccountData",
+			contentType: "application/json",
+			success: function(response) {
+				console.log("Full Response from API:", response); 
+				if (response.status =="FOUND" ) {
+					let data = response.data;
+					let tableBody = $(".datatable tbody");
+					tableBody.empty();
+					data.forEach((item, index) => {
+						let row = `<tr>
+			                        <td>${index + 1}</td>
+			                        <td>${item.accountNumber}</td>
+			                        <td>${item.selectByCustomer}</td>
+			                        <td>${item.enterCustomerName}</td>
+									<td>${item.contactNumber}</td>
+									<td>${item.branchName}</td>
+									<td>${item.address}</td>
+									<td>${item.district}</td>
+									<td>${item.state}</td>
+									<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
+									<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
+			                    </tr>`;
+						tableBody.append(row);
+					});
+				} else {
+					alert("Failed to fetch saving account data: " + response.message);
+				}
+			},
+			error: function() {
+				alert("Error while calling the API.");
+			}
+		});
+});
+
+function viewData(id) {
+	$.ajax({
+		url: "/api/customersavings/getSavingAccountDataById", // ✅ your correct endpoint
+		type: "GET",
+		data: { id: id },
+		success: function(response) {
+			if (response.status == "FOUND") {
+				const data = response.data;
+
+				$("#openingDate").val(data.openingDate);
+				$("#selectByCustomer").val(data.selectByCustomer);
+				$("#enterCustomerName").val(data.enterCustomerName);
+				$("#dateOfBirth").val(data.dateOfBirth);
+				$("#familyDetails").val(data.familyDetails);
+				$("#contactNumber").val(data.contactNumber);
+				$("#suggestedNomineeName").val(data.suggestedNomineeName);
+				$("#suggestedNomineeAge").val(data.suggestedNomineeAge);
+				$("#suggestedNomineeRelation").val(data.suggestedNomineeRelation);
+				$("#address").val(data.address);
+				$("#district").val(data.district);
+				$("#branchName").val(data.branchName);
+				$("#state").val(data.state);
+				$("#pinCode").val(data.pinCode);
+				$("#operationType").val(data.operationType);
+				$("#jointOperationCode").val(data.jointOperationCode);
+				$("#jointSurvivorCode").val(data.jointSurvivorCode);
+				$("#familyRelation").val(data.familyRelation);
+				$("#selectPlan").val(data.selectPlan);
+				$("#openingAmount").val(data.openingAmount);
+				$("#financialConsultantCode").val(data.financialConsultantCode);
+				$("#financialConsultantName").val(data.financialConsultantName);
+				$("#openingFees").val(data.openingFees);
+				$("#authenticateWith").val(data.authenticateWith);
+				$("#modeOfPayment").val(data.modeOfPayment);
+				$("#comment").val(data.comment);
+				$("#messageSend").val(data.messageSend);
+				$("#debitCardIssue").val(data.debitCardIssue);
+				$("#accountNumber").val(data.accountNumber);
+
+				// ✅ Toggle accountStatus (1 = checked, 0 = unchecked)
+				$("#toggle-member-status").prop('checked', data.accountStatus === 1);
+
+			} else {
+				alert("Account not found: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			alert("Request failed: " + xhr.responseText);
+		}
+	});
+}
+
+function deleteData(id) {
+	if (confirm("Are you sure you want to delete this branch?")) {
+		$.ajax({
+			url: "/api/customersavings/deleteSavingAccountDataById", 
+			type: "POST",
+			data: { id: id }, 
+			success: function(response) {
+				if (response.success) {
+					alert(response.message); 
+					location.reload();   
+				} else {
+					alert("Delete failed: " + response.message);
+				}
+			},
+			error: function(xhr, status, error) {
+				alert("Failed to delete financial Year.");
+				console.error("Error:", error);
+			}
+		});
+	}
+
+}
+
+
 
 

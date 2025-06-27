@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
@@ -28,6 +29,9 @@ public class PageController {
 	
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -833,7 +837,12 @@ public class PageController {
 	}
 	
 	@GetMapping("/createSavingsAccount")
-	public String getCreateSavingsAccount() {
+	public String getCreateSavingsAccount(Model model) {
+		long maxId = createSavingAccountRepo.getMaxId() + 1;
+		String savingaccountnumber = String.format("2025%08d", maxId);
+		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
+		//String savingaccountnumber = "2025" + "000000" + (maxId);
+		model.addAttribute("savingaccountnumber", savingaccountnumber);
 		return "customerSavings/createSavingsAccount";
 	}
 
