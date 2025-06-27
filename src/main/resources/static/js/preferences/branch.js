@@ -24,6 +24,7 @@ $(document).ready(function() {
 		var contact = $('#contact').val().trim();
 
 		var contactPattern = /^[6-9][0-9]{9}$/;
+		var pinPattern = /^[1-9][0-9]{5}$/;
 
 		let isValid = true;
 
@@ -55,6 +56,11 @@ $(document).ready(function() {
 		if (pin === '') {
 			$('#chkpin').text('* This field is required');
 			$('#pin').focus();
+			isValid = false;
+		}
+		else if (!pinPattern.test(pin)) {
+			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
+			pin.focus();
 			isValid = false;
 		}
 
@@ -107,8 +113,15 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
 			success: function(response) {
-				alert("Branch Saved Successfully");
-				location.reload();
+				if (response.status == 'CREATED') {
+					alert("Branch Saved Successfully");
+					location.reload();
+				}
+				else {
+					alert("Branch Not Saved");
+					location.reload();
+				}
+
 			},
 			error: function(xhr) {
 				console.error('Error:', xhr.responseText);
@@ -127,7 +140,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.success) {
+			if (response.status == "FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -175,7 +188,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#branchCode").val(branch.branchCode);
@@ -205,7 +218,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status == "OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -242,7 +255,7 @@ function updateBranch() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "OK") {
 				alert(response.message);
 				location.reload();
 			} else {

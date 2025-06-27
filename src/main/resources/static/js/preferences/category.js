@@ -27,7 +27,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				if (response.success) {
+				if (response.status=='CREATED') {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -47,7 +47,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.success) {
+			if (response.status=="FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -76,7 +76,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status="OK") {
 					alert("Category Deleted Successfully");
 					location.reload();
 				} else {

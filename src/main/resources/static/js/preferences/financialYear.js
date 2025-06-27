@@ -63,7 +63,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
 			success: function(response) {
-				if (response && response.success) {
+				if (response.status=='CREATED') {
 					alert("Financial Year Saved Successfully"); // Show custom message from controller
 					location.reload(); // Reload page or update table
 				} else {
@@ -84,7 +84,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.success) {
+			if (response.status=="FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -117,7 +117,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status=="FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#financialYearName").val(branch.financialYearName);
@@ -140,7 +140,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status=="OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -170,7 +170,7 @@ function updateFY() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
+			if (response.status="OK") {
 				alert(response.message);
 				location.reload();
 			} else {

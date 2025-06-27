@@ -63,8 +63,8 @@ pageEncoding="ISO-8859-1"%> -->
 				
 							<div class="d-flex flex-column formFields">
 								<label for="">Financial Consultant Code <span id="star">*</span></label> <input type="text"
-									name="agentcode" id="agentcode" required="required"
-									placeholder="Enter Advisor Code"
+									name="financialCode" id="financialCode" required="required"
+									placeholder="Enter FinancialCode"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -133,6 +133,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
+	<script src="./js/FinancialConsultant/financialConsultantHierarchy.js"></script>
 	<script src="./js/adminscript.js"></script>
 </body>
 

@@ -48,7 +48,7 @@ $(document).ready(function() {
 		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "FOUND") {
 				const branchList = response.data;
 				$("#branchName").empty(); // Clear existing options
 				$("#branchName").append("<option value=''>-- Select Branch --</option>");
@@ -72,7 +72,7 @@ $(document).ready(function() {
 		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "FOUND") {
 				const relativeList = response.data;
 				$("#relationToApplicant").empty(); // Clear existing options
 				$("#relationToApplicant").append("<option value=''>-- Select Relative --</option>");
@@ -332,7 +332,7 @@ $(document).ready(function() {
 			processData: false,  // Don't process the files
 			contentType: false,  // Let browser set correct content type
 			success: function(response) {
-				if (response.success) {
+				if (response.status == 'OK') {
 					alert("Executive Founder Saved Successfully");
 					location.reload();
 				} else {
@@ -351,7 +351,7 @@ $(document).ready(function() {
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
-			if (response.success) {
+			if (response.status = "FOUND") {
 				var data = response.data;
 				var tbody = $(".datatable tbody");
 				tbody.empty();
@@ -399,7 +399,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status == "OK") {
 					alert("Executive Data Deleted Successfully");
 					location.reload();
 				} else {
@@ -433,7 +433,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "FOUND") {
 				const branch = response.data;
 
 				$("#id").val(branch.id);
@@ -535,9 +535,12 @@ function updateBranch() {
 		processData: false,
 		contentType: false,
 		success: function(response) {
-			alert("Updated Data Successfully");
-			location.reload();
-			// Optionally reset form or refresh table
+			if (response.status == "OK") {
+				alert("Executive Founder Saved Successfully");
+				location.reload();
+			} else {
+				alert(response.message);
+			}
 		},
 		error: function(xhr) {
 			alert("Error: " + xhr.responseText);
@@ -545,26 +548,49 @@ function updateBranch() {
 	});
 }
 
-function deleteData(id) {
-	if (confirm("Are you sure you want to delete this Data?")) {
-		$.ajax({
-			url: "/api/preference/deleteExecutiveFounder",
-			type: "POST",
-			data: { id: id },
-			success: function(response) {
-				if (response.success) {
-					alert(response.message);
-					location.reload();
-				} else {
-					alert("Delete failed: " + response.message);
-				}
-			},
-			error: function(xhr, status, error) {
-				alert("Failed to delete Executive Founder.");
-				console.error("Error:", error);
-			}
-		});
-	}
-}
+$(document).ready(function() {
+	const rowsPerPage = 10;
+	let currentPage = 1;
 
+	function showPage(page) {
+		let rows = $("#tableBody tr");
+		let totalRows = rows.length;
+		let totalPages = Math.ceil(totalRows / rowsPerPage);
+
+		// Boundary check
+		if (page < 1) page = 1;
+		if (page > totalPages) page = totalPages;
+
+		// Hide all rows initially
+		rows.hide();
+
+		// Show only the relevant rows
+		let start = (page - 1) * rowsPerPage;
+		let end = start + rowsPerPage;
+		rows.slice(start, end).show();
+
+		// Disable/Enable buttons
+		$("#prevBtn").prop("disabled", page === 1);
+		$("#nextBtn").prop("disabled", page === totalPages);
+
+		currentPage = page;
+	}
+
+	// Button click handlers
+	$("#prevBtn").click(function() {
+		if (currentPage > 1) {
+			showPage(currentPage - 1);
+		}
+	});
+
+	$("#nextBtn").click(function() {
+		let rows = $("#tableBody tr").length;
+		if (currentPage * rowsPerPage < rows) {
+			showPage(currentPage + 1);
+		}
+	});
+
+	// Initialize the table on page load
+	showPage(currentPage);
+});
 
