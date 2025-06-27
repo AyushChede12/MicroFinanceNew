@@ -70,7 +70,23 @@ public class PreferenceService {
 	// Branch Module
 	public BranchModule saveBranchModule(BranchModule branchModule) {
 		// TODO Auto-generated method stub
-		return branchModuleRepo.save(branchModule);
+		if (branchModule.getId() != null) {
+            BranchModule existing = branchModuleRepo.findById(branchModule.getId())
+                    .orElseThrow(() -> new RuntimeException("Branch not found with ID: " + branchModule.getId()));
+
+            existing.setBranchCode(branchModule.getBranchCode());
+            existing.setBranchName(branchModule.getBranchName());
+            existing.setOpeningDate(branchModule.getOpeningDate());
+            existing.setAddress(branchModule.getAddress());
+            existing.setPin(branchModule.getPin());
+            existing.setState(branchModule.getState());
+            existing.setPrimaryContact(branchModule.getPrimaryContact());
+            existing.setContact(branchModule.getContact());
+
+            return branchModuleRepo.save(existing);
+        } else {
+            return branchModuleRepo.save(branchModule);
+        }
 	}
 
 	public List<BranchModule> fetchAllBranchModule() {
@@ -93,7 +109,21 @@ public class PreferenceService {
 	// Bank Module
 	public BankModule saveBankModule(BankModule bankModule) {
 		// TODO Auto-generated method stub
-		return bankModuleRepo.save(bankModule);
+		if (bankModule.getId() != null) {
+			BankModule existing = bankModuleRepo.findById(bankModule.getId())
+                    .orElseThrow(() -> new RuntimeException("Bank not found with ID: " + bankModule.getId()));
+
+            existing.setBankName(bankModule.getBankName());
+            existing.setAccountNo(bankModule.getAccountNo());
+            existing.setContactNo(bankModule.getContactNo());
+            existing.setAddress(bankModule.getAddress());
+            existing.setOpeningDate(bankModule.getOpeningDate());
+            existing.setOpeningBalance(bankModule.getOpeningBalance());
+
+            return bankModuleRepo.save(existing);
+        } else {
+            return bankModuleRepo.save(bankModule);
+        }
 	}
 
 	public List<BankModule> fetchAllBankModule() {
@@ -117,7 +147,16 @@ public class PreferenceService {
 	// Relative Module
 	public RelativeModule saveRelativeModule(RelativeModule relativeModule) {
 		// TODO Auto-generated method stub
-		return relativeModuleRepo.save(relativeModule);
+		if (relativeModule.getId() != null) {
+			RelativeModule existing = relativeModuleRepo.findById(relativeModule.getId())
+                    .orElseThrow(() -> new RuntimeException("Relative not found with ID: " + relativeModule.getId()));
+
+            existing.setRelation(relativeModule.getRelation());
+
+            return relativeModuleRepo.save(existing);
+        } else {
+            return relativeModuleRepo.save(relativeModule);
+        }
 	}
 
 	public List<RelativeModule> fetchAllRelativeModule() {
@@ -137,7 +176,16 @@ public class PreferenceService {
 	// Caste Module
 	public CasteModule saveCasteModule(CasteModule castemodule) {
 		// TODO Auto-generated method stub
-		return casteModuleRepo.save(castemodule);
+		if (castemodule.getId() != null) {
+			CasteModule existing = casteModuleRepo.findById(castemodule.getId())
+                    .orElseThrow(() -> new RuntimeException("Caste not found with ID: " + castemodule.getId()));
+
+            existing.setCaste(castemodule.getCaste());
+
+            return casteModuleRepo.save(existing);
+        } else {
+            return casteModuleRepo.save(castemodule);
+        }
 	}
 
 	public List<CasteModule> fetchAllCasteModule() {
@@ -157,7 +205,16 @@ public class PreferenceService {
 	// Category Module
 	public CategoryModule saveCategoryModule(CategoryModule categorymodule) {
 		// TODO Auto-generated method stub
-		return categoryModuleRepo.save(categorymodule);
+		if (categorymodule.getId() != null) {
+			CategoryModule existing = categoryModuleRepo.findById(categorymodule.getId())
+                    .orElseThrow(() -> new RuntimeException("Category not found with ID: " + categorymodule.getId()));
+
+            existing.setCategory(categorymodule.getCategory());
+
+            return categoryModuleRepo.save(existing);
+        } else {
+            return categoryModuleRepo.save(categorymodule);
+        }
 	}
 
 	public List<CategoryModule> fetchAllCategoryModule() {
@@ -177,7 +234,18 @@ public class PreferenceService {
 	// Financial Year
 	public FinancialYear saveFinancialYear(FinancialYear financialyear) {
 		// TODO Auto-generated method stub
-		return financialYearRepo.save(financialyear);
+		if (financialyear.getId() != null) {
+			FinancialYear existing = financialYearRepo.findById(financialyear.getId())
+                    .orElseThrow(() -> new RuntimeException("Financial Year not found with ID: " + financialyear.getId()));
+
+            existing.setFinancialYearName(financialyear.getFinancialYearName());
+            existing.setDateFrom(financialyear.getDateFrom());
+            existing.setDateTo(financialyear.getDateTo());
+
+            return financialYearRepo.save(existing);
+        } else {
+            return financialYearRepo.save(financialyear);
+        }
 	}
 
 	public List<FinancialYear> fetchAllFinancialYear() {

@@ -3,7 +3,7 @@ $(document).ready(function() {
 		url: "/api/preference/fetchAllCompanyAdministration",
 		type: "GET",
 		success: function(response) {
-			if (response.success && response.data.length > 0) {
+			if (response.status=="FOUND") {
 				const admin = response.data[0]; // Access the first company record
 
 				$("#id").val(admin.id);
@@ -99,7 +99,7 @@ $(document).ready(function() {
 			contentType: "application/json",
 			data: JSON.stringify(companyData),
 			success: function(response) {
-				if (response.success) {
+				if (response.status=="OK") {
 					alert(response.message);
 					location.reload();
 				} else {
