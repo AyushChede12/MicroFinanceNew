@@ -1,6 +1,23 @@
 $(document).ready(function() {
 
 	$("#saveBtn").click(function() {
+
+		$('#chkrelation').text('');
+
+		var relation = $('#relation').val().trim();
+
+		let isValid = true;
+
+		if (relation === '') {
+			$('#chkrelation').text('* This field is required');
+			$('#relation').focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
 		const formData = {
 			relation: $('input[name="relation"]').val()
 		};
@@ -11,8 +28,8 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				if (response.success) {
-					alert(response.message); 
+				if (response.status=='CREATED') {
+					alert(response.message);
 					location.reload();
 				} else {
 					alert("Error: " + (response.message || "Unknown error occurred."));
@@ -27,11 +44,11 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllRelativeModule", 
+		url: "/api/preference/getAllRelativeModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response); 
-			if (response.success) {
+			console.log("Full Response from API:", response);
+			if (response.status=="FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -44,7 +61,7 @@ $(document).ready(function() {
 					tableBody.append(row);
 				});
 			} else {
-				alert("Failed to fetch bank data: " + response.message);
+				alert("Failed to fetch Relative data: " + response.message);
 			}
 		},
 		error: function() {
@@ -54,13 +71,13 @@ $(document).ready(function() {
 });
 
 function deleteData(id) {
-	if (confirm("Are you sure you want to delete this bank?")) {
+	if (confirm("Are you sure you want to delete this Relation?")) {
 		$.ajax({
 			url: "/api/preference/deleteRelativeModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status="OK") {
 					alert(response.message);
 					location.reload();
 				} else {
