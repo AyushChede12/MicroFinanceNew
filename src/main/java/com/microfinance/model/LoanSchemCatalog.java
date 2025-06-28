@@ -12,6 +12,7 @@ public class LoanSchemCatalog {
 	private String loanPlaneName;
 	private String typeloan;
 	private String minimumAge;
+	private String maximumAge;
 	private String minloanDuration;
 	private String mixloanDuration;
 	private String emiFrequency;
@@ -61,6 +62,13 @@ public class LoanSchemCatalog {
 	}
 	public void setMinimumAge(String minimumAge) {
 		this.minimumAge = minimumAge;
+	}
+	
+	public String getMaximumAge() {
+		return maximumAge;
+	}
+	public void setMaximumAge(String maximumAge) {
+		this.maximumAge = maximumAge;
 	}
 	public String getMinloanDuration() {
 		return minloanDuration;

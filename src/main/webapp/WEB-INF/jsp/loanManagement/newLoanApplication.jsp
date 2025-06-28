@@ -29,6 +29,9 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -94,25 +97,12 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Find Members</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Find Members</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="findMember" name="findMember" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-										</ul>
-									</div>
-								</div>
+								<select id="findMember"
+									name="findMember" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select member name</option>
+									
+								</select>
 							</div>
 						</div>
 
@@ -129,15 +119,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Date of Birth </label> <input type="date"
-									name="dob5" id="dob5" required="required"
+									name="newloanApplicationDOB" id="newloanApplicationDOB" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Age </label> <input type="text" name="age5"
-									id="age5" required="required" placeholder="Age" />
+								<label for="">Age </label> <input type="text" name="newApplictionAge"
+									id="newApplictionAge" required="required" placeholder="Age" />
 							</div>
 						</div>
 
@@ -161,7 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Address</label>
-								<textarea name="address5" id="address5"
+								<textarea name="newAplicationAddress" id="newAplicationAddress"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
@@ -170,15 +160,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="loanName">Pin Code</label> <input type="number"
-									name="pincode5" id="pincode5" required="required"
+									name="newAppicationPinCode" id="newAppicationPinCode" required="required"
 									placeholder="Enter Pin Code" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Branch Name</label> <select id="branchName5"
-									name="branchName5" required="required"
+								<label for="">Branch Name</label> <select id="newApplicationBranchName"
+									name="newApplicationBranchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch Name</option>
 									<option value="Blue">Blue</option>
@@ -188,8 +178,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Plan Name</label> <select id="loanPlaneName5"
-									name="loanPlaneName5" required="required"
+								<label for="">Loan Plan Name</label> <select id="newApplicationLoanPlaneName"
+									name="newApplicationLoanPlaneName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Loan Plan Name</option>
 									<option value="Blue">Blue</option>
@@ -197,42 +187,33 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Type of Loan</label> <select id="Typeofloan5"
-									name="Typeofloan5" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Type of Loan</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Duration</label> <input type="text"
-									name="durationPlan5" id="durationPlan5" required="required"
+									name="newApplicationDurationPlan" id="newApplicationDurationPlan" required="required"
 									placeholder="Plan Duration" style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Loan Category</label> <input type="text"
-									name="categoryLoan5" id="categoryLoan5" required="required"
+									name="newLoanApplicationCategoryLoan" id="newLoanApplicationCategoryLoan" required="required"
 									placeholder="Enter Loan Category" style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Rate Of Interest(%)</label> <input type="number"
-									name="ROI5" id="ROI5" required="required"
+									name="newApplicationROI" id="newApplicationROI" required="required"
 									placeholder="Enter Rate Of Interest" style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Amount Of Loan </label> <input type="number"
-									name="loanAmount5" id="loanAmount5" required="required"
+									name="newApplicationLoanAmount" id="newApplicationLoanAmount" required="required"
 									placeholder="Enter Amount Of Loan"
 									style="text-transform: uppercase;" />
 							</div>
@@ -240,14 +221,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Interest Type</label> <input type="text"
-									name="typeIntrest5" id="typeIntrest5" required="required"
+									name="newApplicationTypeIntrest" id="newApplicationTypeIntrest" required="required"
 									placeholder="Enter Interest Type" style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">EMI Payment</label> <input type="number"
-									name="paymnetEMI5" id="paymnetEMI5" required="required"
+									name="newLoanApplicationPaymnetEMI" id="paymnetEMI5" required="required"
 									placeholder="Enter EMI Payment"
 									style="text-transform: uppercase;" />
 							</div>
@@ -255,7 +236,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Purpose of Loan </label> <input type="text"
-									name="loanpurpose5" id="loanpurpose5" required="required"
+									name="newApplicationLoanPurpose" id="newApplicationLoanPurpose" required="required"
 									placeholder="Enter Purpose of Loan"
 									style="text-transform: uppercase;" />
 							</div>
@@ -636,6 +617,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/LoanManagment/NewLoanApplicationjs.js"></script>
 </body>
 
 </html>
+
