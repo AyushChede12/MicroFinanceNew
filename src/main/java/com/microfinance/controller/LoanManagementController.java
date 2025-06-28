@@ -48,10 +48,10 @@ public class LoanManagementController {
 	    LoanSchemCatalog savedLoan = loanServices.saveLoanManagmentData(loan);
 
 	    if (savedLoan != null) {
-	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>(true, HttpStatus.OK, "Data saved", savedLoan);
+	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>( HttpStatus.OK, "Data saved", savedLoan);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(response); // 201 CREATED
 	    } else {
-	        ApiResponse<LoanSchemCatalog> errorResponse = new ApiResponse<>(false, HttpStatus.NOT_FOUND, "Data not saved", null);
+	        ApiResponse<LoanSchemCatalog> errorResponse = new ApiResponse<>( HttpStatus.NOT_FOUND, "Data not saved", null);
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 	    }
 	}
@@ -64,10 +64,10 @@ public class LoanManagementController {
 	    List<LoanSchemCatalog> list = loanServices.allDataFetchLoanSchemCatelog();
 
 	    if (list != null && !list.isEmpty()) {
-	        ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(true, HttpStatus.OK, "LoanSchemCatalog fetched successfully", list);
+	        ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(HttpStatus.OK, "LoanSchemCatalog fetched successfully", list);
 	        return ResponseEntity.ok(response);
 	    } else {
-	        ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(false, HttpStatus.NOT_FOUND, "No data found", null);
+	        ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.NOT_FOUND, "No data found", null);
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 	    }
 	}
@@ -84,7 +84,7 @@ public class LoanManagementController {
 	    if (loan != null) {
 	        // Success response
 	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>(
-	            true,
+	            
 	            HttpStatus.OK,
 	            "Loan fetched successfully",
 	            loan
@@ -93,7 +93,7 @@ public class LoanManagementController {
 	    } else {
 	        // Failure response
 	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>(
-	            false,
+	            
 	            HttpStatus.NOT_FOUND,
 	            "Loan not found with ID: " + id,
 	            null
@@ -110,10 +110,10 @@ public class LoanManagementController {
 	    boolean deleted = loanServices.deleteLoanLoanById(id);
 
 	    if (deleted) {
-	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>(true, HttpStatus.OK, "Loan deleted successfully", null);
+	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>( HttpStatus.OK, "Loan deleted successfully", null);
 	        return ResponseEntity.ok(response);
 	    } else {
-	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>(false, HttpStatus.NOT_FOUND, "Loan not found", null);
+	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>( HttpStatus.NOT_FOUND, "Loan not found", null);
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 	    }
 	}
@@ -124,7 +124,7 @@ public class LoanManagementController {
 	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllLoanApplication() {
 	    List<addCustomer> loanList = loanServices.getAllLoanApplication();
 
-	    ApiResponse<List<addCustomer>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan applications fetched successfully",loanList );
+	    ApiResponse<List<addCustomer>> response = new ApiResponse<>( HttpStatus.OK,"Loan applications fetched successfully",loanList );
 
 	    return ResponseEntity.ok(response);
 	}
@@ -135,10 +135,10 @@ public class LoanManagementController {
 	public ResponseEntity<ApiResponse<addCustomer>> getLoanById1(@RequestParam Long id) {
 	    try {
 	    	addCustomer customer = loanServices.getLoanApplicationById(id);
-	        return ResponseEntity.ok(new ApiResponse<>(true, HttpStatus.OK, "Customer found", customer));
+	        return ResponseEntity.ok(new ApiResponse<>( HttpStatus.OK, "Customer found", customer));
 	    } catch (RuntimeException ex) {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	            .body(new ApiResponse<>(false, HttpStatus.NOT_FOUND, ex.getMessage(), null));
+	            .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
 	    }
 	}
 
@@ -147,19 +147,35 @@ public class LoanManagementController {
 public ResponseEntity<ApiResponse<List<BranchModule>>> getBranchName() {
     List<BranchModule> branchList = loanServices.getgetBranchName();
 
-    ApiResponse<List<BranchModule>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan Branch fetched successfully",branchList );
+    ApiResponse<List<BranchModule>> response = new ApiResponse<>( HttpStatus.OK,"Loan Branch fetched successfully",branchList );
 
     return ResponseEntity.ok(response);
 }
 
 
-@GetMapping("/allfetchdataLoanPlanName")
-public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanPlanName() {
-    List<LoanSchemCatalog> loanPlanNameList = loanServices.getLoanPlanName();
+@GetMapping("/allfetchdataLoanSchemCode")
+public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanSchemCode() {
+    List<LoanSchemCatalog> loanschemCodeList = loanServices.getLoanSchemCode();
 
-    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan Branch fetched successfully",loanPlanNameList );
+    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.OK,"Loan Schem fetched successfully",loanschemCodeList );
 
     return ResponseEntity.ok(response);
+}
+
+
+// New Loan Application schem loan code
+
+@GetMapping("/getBySchemLoanCode")
+public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanByCode(@RequestParam String code) {
+    try {
+        LoanSchemCatalog loanScheme = loanServices.getLoanByCode(code);
+        return ResponseEntity.ok(
+            new ApiResponse<>( HttpStatus.OK, "Loan Scheme found", loanScheme)
+        );
+    } catch (RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
+    }
 }
 }
 

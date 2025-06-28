@@ -20,6 +20,7 @@ public class NewLoanApplication {
 	private String newLoanaddress;
 	private String newLoanpincode;
 	private String newLoanbranchName;
+	private String newApplicationLoanCode;
 	private String newloanPlaneName;
 	private String newLoanTypeofloan;
 	private String newLoanPlanDuration;
@@ -126,6 +127,13 @@ public class NewLoanApplication {
 	}
 	public String getNewloanPlaneName() {
 		return newloanPlaneName;
+	}
+	
+	public String getNewApplicationLoanCode() {
+		return newApplicationLoanCode;
+	}
+	public void setNewApplicationLoanCode(String newApplicationLoanCode) {
+		this.newApplicationLoanCode = newApplicationLoanCode;
 	}
 	public void setNewloanPlaneName(String newloanPlaneName) {
 		this.newloanPlaneName = newloanPlaneName;

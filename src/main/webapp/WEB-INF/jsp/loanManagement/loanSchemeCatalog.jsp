@@ -92,7 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
               
-              <input type="hidden" id="loanSchemeId" name="loanSchemeId" value="1" />
+              <input type="hidden" id="loanSchemeCode" name="loanSchemeCode" value="${loanSchemeCode}" />
               
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Loan Plan Name</label> <input type="text"
@@ -104,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Type Of Loan</label> <select id="typeloan"
+								<label for="">Type Of Loan</label> <select id="typeloan"
 									name="typeloan" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Type Of Loan</option>
