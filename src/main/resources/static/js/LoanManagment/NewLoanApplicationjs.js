@@ -106,24 +106,25 @@ $(document).ready(function () {
     });
 });
 
-// Dropdawn in Loan Plan Name
+// Dropdawn in Loan schem Code
 
 $(document).ready(function () {
+	
     console.log("Document ready");
 
     $.ajax({
-        url: '/api/loanmanegment/allfetchdataLoanPlanName', 
+        url: '/api/loanmanegment/allfetchdataLoanSchemCode', 
         type: 'GET',
         success: function (response) {
             if (response.success && response.data.length > 0) {
-                const dropdown = $('#newApplicationLoanPlaneName');
+                const dropdown = $('#newApplicationLoanCode');
                 dropdown.empty();
                 dropdown.append('<option value="">Select Loan Plan Name</option>'); 
 
                 response.data.forEach(function (loan) {
-                    if (loan.loanPlaneName) {
+                    if (loan.loanSchemeCode) {
                         dropdown.append(
-                            `<option value="${loan.loanPlaneName}">${loan.loanPlaneName}</option>`
+                            `<option value="${loan.loanSchemeCode}">${loan.loanSchemeCode}</option>`
                         );
                     }
                 });
@@ -137,3 +138,36 @@ $(document).ready(function () {
         }
     });
 });
+
+
+// All field fetch by loan new schem code by 
+function getLoanByCode() {
+    let code = $('#newApplicationLoanCode').val();
+
+    
+
+    $.ajax({
+        url: '/api/loanmanegment/getBySchemLoanCode?code=' + encodeURIComponent(code),
+        type: 'GET',
+        contentType: 'application/json',
+        success: function(response) {
+			alert("success");
+            if (response && response.data) {
+                console.log("✅ Loan Found:", response.data);
+
+                $('#newApplicationLoanPlaneName').val(response.data.loanPlaneName || '');
+                $('#newLoanTypeofloan').val(response.data.typeloan || '');
+                $('#newLoanROI').val(response.data.rateIntrestType || '');
+                // Add other fields as needed
+            } else {
+                alert("Loan not found or empty response.");
+            }
+        },
+        error: function(xhr) {
+            console.error(" Error:", xhr);
+            alert("Loan code not found or server error.");
+        }
+    });
+}
+
+

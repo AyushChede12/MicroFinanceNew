@@ -151,13 +151,29 @@ public ResponseEntity<ApiResponse<List<BranchModule>>> getBranchName() {
 }
 
 
-@GetMapping("/allfetchdataLoanPlanName")
-public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanPlanName() {
-    List<LoanSchemCatalog> loanPlanNameList = loanServices.getLoanPlanName();
+@GetMapping("/allfetchdataLoanSchemCode")
+public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanSchemCode() {
+    List<LoanSchemCatalog> loanschemCodeList = loanServices.getLoanSchemCode();
 
-    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan Branch fetched successfully",loanPlanNameList );
+    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(true, HttpStatus.OK,"Loan Schem fetched successfully",loanschemCodeList );
 
     return ResponseEntity.ok(response);
+}
+
+
+// New Loan Application schem loan code
+
+@GetMapping("/getBySchemLoanCode")
+public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanByCode(@RequestParam String code) {
+    try {
+        LoanSchemCatalog loanScheme = loanServices.getLoanByCode(code);
+        return ResponseEntity.ok(
+            new ApiResponse<>(true, HttpStatus.OK, "Loan Scheme found", loanScheme)
+        );
+    } catch (RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(new ApiResponse<>(false, HttpStatus.NOT_FOUND, ex.getMessage(), null));
+    }
 }
 }
 

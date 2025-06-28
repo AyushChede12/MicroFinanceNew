@@ -49,6 +49,8 @@ public class LoanManagementService {
 				LoanSchemCatalog existingLoan = optionalLoan.get();
 
 				// Update fields
+				existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
+
 				existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
 				existingLoan.setTypeloan(loan.getTypeloan());
 				existingLoan.setMinimumAge(loan.getMinimumAge());
@@ -117,10 +119,19 @@ public class LoanManagementService {
 		return branchModuleRepo.findAll();
 	}
 
-	// Loan Plan Name Dropdrawn
-	public List<LoanSchemCatalog> getLoanPlanName() {
+	// Loan schem Code Name Dropdrawn
+	
+	public List<LoanSchemCatalog> getLoanSchemCode() {
 		// TODO Auto-generated method stub
 		return loanRepository.findAll();
+	}
+
+	
+	//fetching in new loan application by schem loan Code
+
+	public LoanSchemCatalog getLoanByCode(String code) {
+	    return loanRepository.findByLoanSchemeCode(code)
+	        .orElseThrow(() -> new RuntimeException("Loan Scheme not found for code: " + code));
 	}
 
 	

@@ -9,6 +9,7 @@ public class LoanSchemCatalog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+    private String loanSchemeCode;
 	private String loanPlaneName;
 	private String typeloan;
 	private String minimumAge;
@@ -44,6 +45,13 @@ public class LoanSchemCatalog {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getLoanSchemeCode() {
+		return loanSchemeCode;
+	}
+	public void setLoanSchemeCode(String loanSchemeCode) {
+		this.loanSchemeCode = loanSchemeCode;
 	}
 	public String getLoanPlaneName() {
 		return loanPlaneName;
