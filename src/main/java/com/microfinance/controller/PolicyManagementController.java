@@ -15,7 +15,7 @@ import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.service.PolicyManagementService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/Policymangment")
 public class PolicyManagementController {
 
     @Autowired
@@ -82,7 +82,7 @@ public class PolicyManagementController {
         }
     }
 // update the deposite daily data
-    @PutMapping("/dailyupdate/{id}")
+    @PostMapping("/dailyupdate/{id}")
     public ResponseEntity<ApiResponse<DailyDepositPM>> updateDailyDeposit(
             @PathVariable Long id,
             @RequestBody DailyDepositPM updatedData) {
@@ -105,7 +105,7 @@ public class PolicyManagementController {
         }
     }
     //delete the data of the daily deposite
-    @DeleteMapping("/dailydelete/{id}")
+    @PostMapping("/dailydelete/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteDailyDeposit(@PathVariable Long id) {
         boolean deleted = policyManagementService.deleteDailyDeposit(id);
 
@@ -186,7 +186,7 @@ public class PolicyManagementController {
         }
     }
    // Update reccuring deposite 
-    @PutMapping("/recurringupdate/{id}")
+    @PostMapping("/recurringupdate/{id}")
     public ResponseEntity<ApiResponse<RecurringDepositPM>> updateRecurringDeposit(
             @PathVariable Long id,
             @RequestBody RecurringDepositPM updatedData) {
@@ -209,7 +209,7 @@ public class PolicyManagementController {
         }
     }
     //delete reccuring deposite
-    @DeleteMapping("/recurringdelete/{id}")
+    @PostMapping("/recurringdelete/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteRecurringDeposit(@PathVariable Long id) {
         boolean deleted = policyManagementService.deleteRecurringDeposit(id);
 
@@ -287,7 +287,7 @@ public class PolicyManagementController {
     }
 
  // Update Fixed deposit
-    @PutMapping("/fixedupdate/{id}")
+    @PostMapping("/fixedupdate/{id}")
     public ResponseEntity<ApiResponse<FixedDepositPM>> updateFixedDeposit(
             @PathVariable Long id,
             @RequestBody FixedDepositPM updatedData) {
@@ -304,7 +304,7 @@ public class PolicyManagementController {
     }
     
     //  Delete fixed deposit
-    @DeleteMapping("/fixeddelete/{id}")
+    @PostMapping("/fixeddelete/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteFixedDeposit(@PathVariable Long id) {
         boolean deleted = policyManagementService.deleteFixedDeposit(id);
 
@@ -361,81 +361,72 @@ public class PolicyManagementController {
         }
     }
 
-
  // Get MIS deposit by ID
-//    @GetMapping("/misedit/{id}")
-//    public ResponseEntity<ApiResponse<MISDepositPM>> getMISDepositById(@PathVariable Long id) {
-//        MISDepositPM deposit = policyManagementService.getMISDepositById(id);
-//
-//        if (deposit != null) {
-//            ApiResponse<MISDepositPM> response = ApiResponse.success(
-//                HttpStatus.OK,
-//                "MIS deposit fetched successfully.",
-//                deposit
-//            );
-//            return ResponseEntity.ok(response);
-//        } else {
-//            ApiResponse<MISDepositPM> response = ApiResponse.error(
-//                HttpStatus.NOT_FOUND,
-//                "MIS deposit not found for ID: " + id
-//            );
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-//        }
-//    }
+    @GetMapping("/misedit/{id}")
+    public ResponseEntity<ApiResponse<MISDepositPM>> getMISDepositById(@PathVariable Long id) {
+        MISDepositPM deposit = policyManagementService.getMISDepositById(id);
+
+        if (deposit != null) {
+            ApiResponse<MISDepositPM> response = ApiResponse.success(
+                HttpStatus.OK,
+                "MIS deposit fetched successfully.",
+                deposit
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<MISDepositPM> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "MIS deposit not found for ID: " + id
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 
     // Update MIS deposit
-//    @PutMapping("/misupdate/{id}")
-//    public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(
-//            @PathVariable Long id,
-//            @RequestBody MISDepositPM updatedData) {
-//
-//        MISDepositPM updated = policyManagementService.updateMISDeposit(id, updatedData);
-//
-//        if (updated != null) {
-//            ApiResponse<MISDepositPM> response = ApiResponse.success(
-//                HttpStatus.OK,
-//                "MIS deposit updated successfully.",
-//                updated
-//            );
-//            return ResponseEntity.ok(response);
-//        } else {
-//            ApiResponse<MISDepositPM> response = ApiResponse.error(
-//                HttpStatus.NOT_FOUND,
-//                "MIS deposit not found or failed to update."
-//            );
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-//        }
-//    }
-//
-//    // Delete MIS deposit
-//    @DeleteMapping("/misdelete/{id}")
-//    public ResponseEntity<ApiResponse<Void>> deleteMISDeposit(@PathVariable Long id) {
-//        boolean deleted = policyManagementService.deleteMISDeposit(id);
-//
-//        if (deleted) {
-//            ApiResponse<Void> response = ApiResponse.success(
-//                HttpStatus.OK,
-//                "MIS deposit deleted successfully.",
-//                null
-//            );
-//            return ResponseEntity.ok(response);
-//        } else {
-//            ApiResponse<Void> response = ApiResponse.error(
-//                HttpStatus.NOT_FOUND,
-//                "MIS deposit not found for ID: " + id
-//            );
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-//        }
-//    }
-    
-    
-    
-    
+    @PostMapping("/misupdate/{id}")
+    public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(
+            @PathVariable Long id,
+            @RequestBody MISDepositPM updatedData) {
 
+        MISDepositPM updated = policyManagementService.updateMISDeposit(id, updatedData);
+
+        if (updated != null) {
+            ApiResponse<MISDepositPM> response = ApiResponse.success(
+                HttpStatus.OK,
+                "MIS deposit updated successfully.",
+                updated
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<MISDepositPM> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "MIS deposit not found or failed to update."
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    // Delete MIS deposit
+    @PostMapping("/misdelete/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteMISDeposit(@PathVariable Long id) {
+        boolean deleted = policyManagementService.deleteMISDeposit(id);
+
+        if (deleted) {
+            ApiResponse<Void> response = ApiResponse.success(
+                HttpStatus.OK,
+                "MIS deposit deleted successfully.",
+                null
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<Void> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "MIS deposit not found for ID: " + id
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+    
+    
 }
-
-    
-    
-
-
 
