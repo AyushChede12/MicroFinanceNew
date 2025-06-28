@@ -49,6 +49,14 @@ public class PreferenceController {
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
+	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
+	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
+		List<BranchModule> list = preferenceService.fetchAllBranchModule();
+		ApiResponse<List<BranchModule>> response = new ApiResponse<>( HttpStatus.OK,
+				"Branch modules fetched successfully", list);
+		return ResponseEntity.ok(response);
+
+	}
 
 //	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
 //	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
@@ -382,10 +390,10 @@ public class PreferenceController {
 //			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 //		}
 //	}
+	
 
-}
 
-	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
+/*	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
 	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
 		BranchModule savedEntity = preferenceService.saveBranchModule(branchModule);
 		String message = (branchModule.getId() == null) ? "Branch created successfully" : "Branch updated successfully";
@@ -393,14 +401,7 @@ public class PreferenceController {
 		return ResponseEntity.ok(response);
 	}
 
-	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
-		List<BranchModule> list = preferenceService.fetchAllBranchModule();
-		ApiResponse<List<BranchModule>> response = new ApiResponse<>(true, HttpStatus.OK,
-				"Branch modules fetched successfully", list);
-		return ResponseEntity.ok(response);
-
-	}
+	
 
 	@GetMapping("/getBranchModuleById") // Ayush
 	public ResponseEntity<ApiResponse<BranchModule>> findBranchModuleById(@RequestParam("id") Long id) {
@@ -451,7 +452,7 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<BankModule>> findBankModuleById(@RequestParam("id") Long id) {
 		Optional<BankModule> bank = preferenceService.findBankDataById(id);
 		if (bank.isPresent()) {
-			ApiResponse<BankModule> response = new ApiResponse<>(true, HttpStatus.OK,
+			ApiResponse<BankModule> response = new ApiResponse<>( HttpStatus.OK,
 					"Bank Module fetched successfully", bank.get());
 			return ResponseEntity.ok(response);
 		} else {
@@ -717,6 +718,6 @@ public class PreferenceController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
-
+*/
 }
 
