@@ -1,59 +1,132 @@
-function saveBank() {
-	const formData = {
-		bankName: $('input[name="bankName"]').val(),
-		accountNo: $('input[name="accountNo"]').val(),
-		contactNo: $('input[name="contactNo"]').val(),
-		address: $('textarea[name="address"]').val(),
-		openingDate: $('input[name="openingDate"]').val(),
-		openingBalance: $('input[name="openingBalance"]').val()
-	};
-
-	$.ajax({
-		type: "POST",
-		url: "/saveAllBankModule", // Replace this with your actual endpoint
-		contentType: "application/json",
-		data: JSON.stringify(formData),
-		success: function(response) {
-			if (response === "success") {
-				alert("Bank Saved Successfully");
-				location.reload();
-			}
-		},
-		error: function(xhr, status, error) {
-			$('#responseMessage').text("Error: " + xhr.responseText);
-		}
-	});
-}
-
 $(document).ready(function() {
+	$("#saveBtn").click(function() {
+
+		$('#chkbankname').text('');
+		$('#chkaccountno').text('');
+		$('#chkcontactno').text('');
+		$('#chkaddress').text('');
+		$('#chkopeningdate').text('');
+		$('#chkopeningbalance').text('');
+
+		var bankName = $('#bankName').val().trim();
+		var accountNo = $('#accountNo').val().trim();
+		var contactNo = $('#contactNo').val().trim();
+		var address = $('#address').val().trim();
+		var openingDate = $('#openingDate').val().trim();
+		var openingBalance = $('#openingBalance').val().trim();
+
+		var contactPattern = /^[6-9][0-9]{9}$/;
+
+		let isValid = true;
+
+		if (bankName === '') {
+			$('#chkbankname').text('* This field is required');
+			$('#bankName').focus();
+			isValid = false;
+		}
+
+		if (accountNo === '') {
+			$('#chkaccountno').text('* This field is required');
+			$('#accountNo').focus();
+			isValid = false;
+		}
+
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+
+		if (openingDate === '') {
+			$('#chkopeningdate').text('* This field is required');
+			$('#openingDate').focus();
+			isValid = false;
+		}
+
+		if (openingBalance === '') {
+			$('#chkopeningbalance').text('* This field is required');
+			$('#openingBalance').focus();
+			isValid = false;
+		}
+
+		if (contactNo === '') {
+			$('#chkcontactno').text('* This field is required');
+			$('#contactNo').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(contactNo)) {
+			alert("Please enter a valid 10-digit mobile number and start from (6-9).");
+			contactNo.focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
+		const formData = {
+			bankName: $('input[name="bankName"]').val(),
+			accountNo: $('input[name="accountNo"]').val(),
+			contactNo: $('input[name="contactNo"]').val(),
+			address: $('textarea[name="address"]').val(),
+			openingDate: $('input[name="openingDate"]').val(),
+			openingBalance: $('input[name="openingBalance"]').val()
+		};
+
+		$.ajax({
+			url: '/api/preference/saveAndUpdateAllBankModule',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(formData),
+			success: function(response) {
+				if (response.status=='CREATED') {
+					alert("Bank Saved Successfully"); 
+					location.reload(); 
+				} else {
+					alert("Unexpected response format");
+					console.log(response);
+				}
+			},
+			error: function(xhr) {
+				console.error('Error:', xhr.responseText);
+				alert('Failed to save bank data.');
+			}
+		});
+	});
+
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
-	$.ajax({
-		url: "/getAllBankModule",
-		type: "GET",
-		contentType: "application/json",
-		success: function(data) {
-			var tbody = $(".datatable tbody");
-			tbody.empty(); // Clear existing rows
 
-			$.each(data, function(index, item) {
-				var row = `<tr style="font-family: 'Poppins', sans-serif;">
-              <th scope="row"><a href="#">${index + 1}</a></th>
-              <td>${item.bankName || ''}</td>
-              <td>${item.accountNo || ''}</td>
-              <td>${item.contactNo || ''}</td>
-              <td>${item.address || ''}</td>
-              <td>${item.openingDate || ''}</td>
-              <td>${item.openingBalance || ''}</td>
-			  <td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-			  <td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-            </tr>`;
-				tbody.append(row);
-			});
+	$.ajax({
+		type: "GET",
+		url: "/api/preference/getAllBankModule",
+		contentType: "application/json",
+		success: function(response) {
+			console.log("Full Response from API:", response);
+			if (response.status=="FOUND") {
+				let data = response.data;
+				let tableBody = $(".datatable tbody");
+				tableBody.empty();
+				data.forEach((item, index) => {
+					let row = `<tr>
+		                        <td>${index + 1}</td>
+		                        <td>${item.bankName}</td>
+		                        <td>${item.accountNo}</td>
+		                        <td>${item.contactNo}</td>
+		                        <td>${item.address}</td>
+		                        <td>${item.openingDate}</td>
+		                        <td>${item.openingBalance}</td>
+								<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
+								<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
+		                    </tr>`;
+					tableBody.append(row);
+				});
+			} else {
+				alert("Failed to fetch Relative data: " + response.message);
+			}
 		},
-		error: function(xhr, status, error) {
-			console.error("Error fetching data:", error);
-			alert("Failed to load branch module data.");
+		error: function() {
+			alert("Error while calling the API.");
 		}
 	});
 });
@@ -71,21 +144,27 @@ function viewData(id) {
 	$("#saveBtn").hide();
 	$("#hideBtn").hide();
 	$("#showBtn").hide();
+
 	$.ajax({
-		url: "/getBankModuleById",
+		url: "/api/preference/getBankModuleById",
 		type: "GET",
 		data: { id: id },
-		success: function(data) {
-			$("#id").val(data.id);
-			$("#bankName").val(data.bankName);
-			$("#accountNo").val(data.accountNo);
-			$("#contactNo").val(data.contactNo);
-			$("#address").val(data.address);
-			$("#openingDate").val(data.openingDate);
-			$("#openingBalance").val(data.openingBalance);
+		success: function(response) {
+			if (response.status="FOUND") {
+				const branch = response.data;
+				$("#id").val(branch.id);
+				$("#bankName").val(branch.bankName);
+				$("#accountNo").val(branch.accountNo);
+				$("#contactNo").val(branch.contactNo);
+				$("#address").val(branch.address);
+				$("#openingDate").val(branch.openingDate);
+				$("#openingBalance").val(branch.openingBalance);
+			} else {
+				alert("Branch not found: " + response.message);
+			}
 		},
 		error: function(xhr) {
-			alert("Error: " + xhr.responseText);
+			alert("Request failed: " + xhr.responseText);
 		}
 	});
 
@@ -94,17 +173,20 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this bank?")) {
 		$.ajax({
-			url: "/deleteBankModuleById", // or "/deleteAllBranchModule" if you're sending full object
+			url: "/api/preference/deleteBankModuleById",
 			type: "POST",
-			data: { id: id }, // if using @RequestParam long id
+			data: { id: id },
 			success: function(response) {
-				alert("Bank deleted successfully.");
-				// Refresh the table or page here
-				location.reload(); // example method to reload your data
+				if (response.status="OK") {
+					alert(response.message);
+					location.reload();
+				} else {
+					alert("Delete failed: " + response.message);
+				}
 			},
 			error: function(xhr, status, error) {
 				alert("Failed to delete bank.");
-				console.error(error);
+				console.error("Error:", error);
 			}
 		});
 	}
@@ -121,17 +203,67 @@ function updateBank() {
 		openingBalance: $("#openingBalance").val()
 	};
 	$.ajax({
-		url: "/updateBankModuleById",
+		url: "/api/preference/saveAndUpdateAllBankModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			alert("Bank Updated successfully!");
-			location.reload();
-			// Optionally refresh table or redirect
+			if (response.status="OK") {
+				alert("Bank Updated Successfully");
+				location.reload();
+			} else {
+				alert("Operation failed: " + response.message);
+			}
 		},
-		error: function(xhr, status, error) {
+		error: function(xhr) {
 			alert("Update failed: " + xhr.responseText);
 		}
 	});
 }
+
+
+$(document).ready(function() {
+	const rowsPerPage = 10;
+	let currentPage = 1;
+
+	function showPage(page) {
+		let rows = $("#tableBody tr");
+		let totalRows = rows.length;
+		let totalPages = Math.ceil(totalRows / rowsPerPage);
+
+		// Boundary check
+		if (page < 1) page = 1;
+		if (page > totalPages) page = totalPages;
+
+		// Hide all rows initially
+		rows.hide();
+
+		// Show only the relevant rows
+		let start = (page - 1) * rowsPerPage;
+		let end = start + rowsPerPage;
+		rows.slice(start, end).show();
+
+		// Disable/Enable buttons
+		$("#prevBtn").prop("disabled", page === 1);
+		$("#nextBtn").prop("disabled", page === totalPages);
+
+		currentPage = page;
+	}
+
+	// Button click handlers
+	$("#prevBtn").click(function() {
+		if (currentPage > 1) {
+			showPage(currentPage - 1);
+		}
+	});
+
+	$("#nextBtn").click(function() {
+		let rows = $("#tableBody tr").length;
+		if (currentPage * rowsPerPage < rows) {
+			showPage(currentPage + 1);
+		}
+	});
+
+	// Initialize the table on page load
+	showPage(currentPage);
+});

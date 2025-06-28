@@ -56,8 +56,8 @@ pageEncoding="ISO-8859-1"%> -->
           <div class="row">
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Policy Name </label> <input type="text" name="policyName" id="policyName" required="required"
-                  placeholder="Enter Policy Name" />
+                <label for="">Plan Name </label> <input type="text" name="policyName" id="policyName" required="required"
+                  placeholder="Enter Plan Name" />
               </div>
             </div>
 
@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields  mb-4">
-                <label for="">Monthly Minimum Balance </label> <input type="text" name="monthlyMinimumBalance" id="monthlyMinimumBalance"
+                <label for=""> Minimum Opening Balance </label> <input type="text" name="monthlyMinimumBalance" id="monthlyMinimumBalance"
                   required="required"  placeholder="Enter Monthly Minimum Balance" />
               </div>
             </div>
