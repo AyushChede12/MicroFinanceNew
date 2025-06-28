@@ -79,7 +79,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				if (response && response.success) {
+				if (response.status=='CREATED') {
 					alert("Bank Saved Successfully"); 
 					location.reload(); 
 				} else {
@@ -103,7 +103,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.success) {
+			if (response.status=="FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -150,7 +150,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status="FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#bankName").val(branch.bankName);
@@ -177,7 +177,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status="OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -208,7 +208,7 @@ function updateBank() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
+			if (response.status="OK") {
 				alert("Bank Updated Successfully");
 				location.reload();
 			} else {
@@ -220,3 +220,50 @@ function updateBank() {
 		}
 	});
 }
+
+
+$(document).ready(function() {
+	const rowsPerPage = 10;
+	let currentPage = 1;
+
+	function showPage(page) {
+		let rows = $("#tableBody tr");
+		let totalRows = rows.length;
+		let totalPages = Math.ceil(totalRows / rowsPerPage);
+
+		// Boundary check
+		if (page < 1) page = 1;
+		if (page > totalPages) page = totalPages;
+
+		// Hide all rows initially
+		rows.hide();
+
+		// Show only the relevant rows
+		let start = (page - 1) * rowsPerPage;
+		let end = start + rowsPerPage;
+		rows.slice(start, end).show();
+
+		// Disable/Enable buttons
+		$("#prevBtn").prop("disabled", page === 1);
+		$("#nextBtn").prop("disabled", page === totalPages);
+
+		currentPage = page;
+	}
+
+	// Button click handlers
+	$("#prevBtn").click(function() {
+		if (currentPage > 1) {
+			showPage(currentPage - 1);
+		}
+	});
+
+	$("#nextBtn").click(function() {
+		let rows = $("#tableBody tr").length;
+		if (currentPage * rowsPerPage < rows) {
+			showPage(currentPage + 1);
+		}
+	});
+
+	// Initialize the table on page load
+	showPage(currentPage);
+});
