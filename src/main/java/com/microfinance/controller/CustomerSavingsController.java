@@ -95,7 +95,7 @@ public class CustomerSavingsController {
   	}
   	
  
-    @PostMapping("/savesavingaccount") 
+    @PostMapping("/saveandupdatesavingaccount") 
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
     	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
 		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"

@@ -189,7 +189,7 @@ $(document).ready(function() {
 
 //fetch financial name from financialConsultantController
 $('#financialConsultantCode').on('blur', function () {
-	alert("Hello");
+	
     let selectedCode = $(this).val();
 
     if (selectedCode !== "") {
@@ -253,7 +253,7 @@ $(document).ready(function () {
 			debitCardIssue: $('#toggle-member-status2').is(':checked') ? 1 : 0
         };
         $.ajax({
-            url: '/api/customersavings/savesavingaccount', // Replace with your actual endpoint
+            url: '/api/customersavings/saveandupdatesavingaccount',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(accountData),
@@ -306,13 +306,13 @@ $(document).ready(function () {
 
 function viewData(id) {
 	$.ajax({
-		url: "/api/customersavings/getSavingAccountDataById", // ✅ your correct endpoint
+		url: "/api/customersavings/getSavingAccountDataById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
 			if (response.status == "FOUND") {
 				const data = response.data;
-
+				$("#id").val(data.id);
 				$("#openingDate").val(data.openingDate);
 				$("#selectByCustomer").val(data.selectByCustomer);
 				$("#enterCustomerName").val(data.enterCustomerName);
@@ -339,12 +339,16 @@ function viewData(id) {
 				$("#authenticateWith").val(data.authenticateWith);
 				$("#modeOfPayment").val(data.modeOfPayment);
 				$("#comment").val(data.comment);
-				$("#messageSend").val(data.messageSend);
-				$("#debitCardIssue").val(data.debitCardIssue);
+				//$("#messageSend").val(data.messageSend);
+				//$("#debitCardIssue").val(data.debitCardIssue);
 				$("#accountNumber").val(data.accountNumber);
 
-				// ✅ Toggle accountStatus (1 = checked, 0 = unchecked)
-				$("#toggle-member-status").prop('checked', data.accountStatus === 1);
+				let isChecked = data.accountStatus === 1;
+				$("#toggle-member-status").prop('checked', isChecked);
+				let isChecked2 = data.messageSend === 1;
+				$("#toggle-member-status1").prop('checked', isChecked2);
+				let isChecked3 = data.debitCardIssue === 1;
+				$("#toggle-member-status2").prop('checked', isChecked3);
 
 			} else {
 				alert("Account not found: " + response.message);
@@ -378,6 +382,64 @@ function deleteData(id) {
 	}
 
 }
+
+function updateSavingAccountData() {
+	let payload = {
+		id: $("#id").val(),
+		openingDate: $("#openingDate").val(),
+		selectByCustomer: $("#selectByCustomer").val(),
+		enterCustomerName: $("#enterCustomerName").val(),
+		dateOfBirth: $("#dateOfBirth").val(),
+		familyDetails: $("#familyDetails").val(),
+		contactNumber: $("#contactNumber").val(),
+		suggestedNomineeName: $("#suggestedNomineeName").val(),
+		suggestedNomineeAge: $("#suggestedNomineeAge").val(),
+		suggestedNomineeRelation: $("#suggestedNomineeRelation").val(),
+		address: $("#address").val(),
+		district: $("#district").val(),
+		branchName: $("#branchName").val(),
+		state: $("#state").val(),
+		pinCode: $("#pinCode").val(),
+		operationType: $("#operationType").val(),
+		jointOperationCode: $("#jointOperationCode").val(),
+		jointSurvivorCode: $("#jointSurvivorCode").val(),
+		familyRelation: $("#familyRelation").val(),
+		selectPlan: $("#selectPlan").val(),
+		openingAmount: $("#openingAmount").val(),
+		financialConsultantCode: $("#financialConsultantCode").val(),
+		financialConsultantName: $("#financialConsultantName").val(),
+		openingFees: $("#openingFees").val(),
+		authenticateWith: $("#authenticateWith").val(),
+		modeOfPayment: $("#modeOfPayment").val(),
+		comment: $("#comment").val(),
+
+		// Toggle/radio/checkbox values as 1 or 0
+		accountStatus: parseInt($("input[name='toggle-member-status']:checked").val()) || 0,
+		messageSend: parseInt($("input[name='toggle-member-status1']:checked").val()) || 0,
+		debitCardIssue: parseInt($("input[name='toggle-member-status2']:checked").val()) || 0
+
+	};
+
+	alert(payload.id);
+	$.ajax({
+		url: "/api/customersavings/saveandupdatesavingaccount",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(payload),
+		success: function(response) {
+			if (response.status == "OK") {
+				alert(response.message);
+				location.reload();
+			} else {
+				alert("Operation failed: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			alert("Update failed: " + xhr.responseText);
+		}
+	});
+}
+
 
 
 

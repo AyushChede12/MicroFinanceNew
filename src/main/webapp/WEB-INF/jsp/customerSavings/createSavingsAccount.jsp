@@ -64,6 +64,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 					
 						 <input type="hidden" name="accountNumber" id="accountNumber" placeholder="" value="${savingaccountnumber}" />
+						 <input type="hidden" name="id" id="id" />
 							
 
 						<div class="col-lg-3">
@@ -327,7 +328,7 @@ pageEncoding="ISO-8859-1"%> -->
 								Status</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-member-status"
+									<input type="checkbox" id="toggle-member-status" name="toggle-member-status"
 										class="toggle__input" data-toggle-type="member-status">
 									<label for="toggle-member-status" class="toggle__label"></label>
 								</div>
@@ -344,7 +345,7 @@ pageEncoding="ISO-8859-1"%> -->
 								Send</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-member-status1"
+									<input type="checkbox" id="toggle-member-status1" name="toggle-member-status1"
 										class="toggle__input" data-toggle-type="member-status">
 									<label for="toggle-member-status1" class="toggle__label"></label>
 								</div>
@@ -361,7 +362,7 @@ pageEncoding="ISO-8859-1"%> -->
 								Issue</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-member-status2"
+									<input type="checkbox" id="toggle-member-status2" name="toggle-member-status2"
 										class="toggle__input" data-toggle-type="member-status">
 									<label for="toggle-member-status2" class="toggle__label"></label>
 								</div>
@@ -376,7 +377,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<button id="saveBtn" class="btn btn-warning"
 						style="margin-left: 80%;">Save</button>
 					<button type="button" id="updateBtn" class="btnStyle bg-success"
-								onclick="">Update</button>
+								onclick="updateSavingAccountData()">Update</button>
 
 				</div>
 			</div>
