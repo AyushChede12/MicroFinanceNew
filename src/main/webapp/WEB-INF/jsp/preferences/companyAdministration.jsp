@@ -103,7 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Company Name:</label> <input type="text"
+								<label for="">Company Name <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="companyName" id="companyName"
 									required="required" placeholder="Enter Company Name"
 									style="text-transform: uppercase;" />
@@ -113,7 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Short Name:</label> <input type="Text" name="shortName"
+								<label>Short Name <span class="star">*</span></label> <input type="Text" name="shortName"
 									readonly="readonly" id="shortName" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -123,7 +123,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Sign-Up Date:</label> <input type="Date"
+								<label>Sign-Up Date <span class="star">*</span></label> <input type="Date"
 									readonly="readonly" name="signUpDate" id="signUpDate"
 									required="required" placeholder="Enter Sign-Up Date"
 									style="text-transform: uppercase;" />
@@ -133,7 +133,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>CIN No.:</label> <input type="Text" name="cinNo"
+								<label>CIN No <span class="star">*</span></label> <input type="Text" name="cinNo"
 									readonly="readonly" id="cinNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -143,7 +143,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>PAN:</label> <input type="Text" name="pan" id="pan"
+								<label>PAN <span class="star">*</span></label> <input type="Text" name="pan" id="pan"
 									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -153,7 +153,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>TAN</label> <input type="Text" name="tan" id="tan"
+								<label>TAN <span class="star">*</span></label> <input type="Text" name="tan" id="tan"
 									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -163,7 +163,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>GSTIN</label> <input type="Text" name="gstin" id="gstin"
+								<label>GSTIN <span class="star">*</span></label> <input type="Text" name="gstin" id="gstin"
 									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -173,7 +173,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Declared Value:</label> <input type="Text"
+								<label>Declared Value <span class="star">*</span></label> <input type="Text"
 									name="declaredValue" id="declaredValue" required="required"
 									readonly="readonly" placeholder="Enter Declared Value "
 									style="text-transform: uppercase;" />
@@ -183,7 +183,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Address:</label>
+								<label>Address <span class="star">*</span></label>
 								<textarea name="address" id="address" readonly="readonly"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
@@ -191,7 +191,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <input type="text"
+								<label for="">State <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="state" id="state" required="required"
 									placeholder="Enter State " style="text-transform: uppercase;" />
 							</div>
@@ -200,7 +200,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Pin Code:</label> <input type="text" name="pinCode"
+								<label>Pin Code <span class="star">*</span></label> <input type="text" name="pinCode"
 									readonly="readonly" id="pinCode" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -210,7 +210,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Email ID:</label> <input type="text" name="emailId"
+								<label>Email ID <span class="star">*</span></label> <input type="text" name="emailId"
 									readonly="readonly" id="emailId" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -220,7 +220,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Authorized Share Capital:</label> <input type="text"
+								<label>Authorized Share Capital <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="authorizedShareCapital"
 									id="authorizedShareCapital" required="required"
 									placeholder="Authorized Share Capital"
@@ -231,7 +231,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Paid Up Capital:</label> <input type="text"
+								<label>Paid Up Capital <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="paidUpCapital" id="paidUpCapital"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -241,7 +241,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>NOF</label> <input type="text" name="nof" id="nof"
+								<label>NOF <span class="star">*</span></label> <input type="text" name="nof" id="nof"
 									readonly="readonly" required="required"
 									placeholder="Enter NOF " style="text-transform: uppercase;" />
 							</div>
@@ -250,7 +250,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Contact No:</label> <input type="Terxt" name="contactNo"
+								<label>Contact No <span class="star">*</span></label> <input type="Terxt" name="contactNo"
 									readonly="readonly" id="contactNo" required="required"
 									placeholder="Enter Contact No"
 									style="text-transform: uppercase;" />
@@ -260,7 +260,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>TDS (With PAN):</label> <input type="text"
+								<label>TDS (With PAN) <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="tdsWithPan" id="tdsWithPan"
 									required="required" placeholder="Enter TDS"
 									style="text-transform: uppercase;" />
@@ -270,7 +270,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>TDS (Without PAN):</label> <input type="text"
+								<label>TDS (Without PAN) <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="tdsWithoutPan" id="tdsWithoutPan"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -280,7 +280,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Tax Deduction:</label> <input type="text"
+								<label>Tax Deduction <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="taxDeduction" id="taxDeduction"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -290,7 +290,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Senior Citizen Tax Deduction:</label> <input type="text"
+								<label>Senior Citizen Tax Deduction <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="seniorCitizenTaxDeduction"
 									id="seniorCitizenTaxDeduction" required="required"
 									placeholder="Enter Senior Citizen Tax Deduction"
@@ -308,7 +308,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3 mb-5">
 								<label for=""
 									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-									Photo</label> <label for="bike1image" id="drop-area"> <input
+									Photo <span class="star">*</span></label> <label for="bike1image" id="drop-area"> <input
 									type="file" accept="image/*" name="photo" id="photo"
 									hidden="hidden" onchange="bike1Preview();"
 									style="background-size: cover; background-repeat: no-repeat" />
@@ -328,7 +328,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3 mb-5">
 								<label for=""
 									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-									Signature</label> <label for="bike2image" id="drop-area"> <input
+									Signature <span class="star">*</span></label> <label for="bike2image" id="drop-area"> <input
 									type="file" accept="image/*" name="signature" id="signature"
 									hidden="hidden" onchange="bike2Preview();"
 									style="background-size: cover; background-repeat: no-repeat" />

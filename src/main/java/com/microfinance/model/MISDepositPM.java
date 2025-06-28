@@ -31,6 +31,7 @@ public class MISDepositPM {
 	private String commissionOnNewMD;
 	private String renewalCommissionMD;
 	private String statusOfPlanMDRD2;
+
 	public long getId() {
 		return id;
 	}
@@ -165,5 +166,5 @@ public class MISDepositPM {
 	}
 
 	
-	
+
 }

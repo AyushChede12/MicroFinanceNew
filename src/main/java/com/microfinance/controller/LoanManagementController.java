@@ -28,15 +28,15 @@ public class LoanManagementController {
 	 * loanServices.saveLoan(lone); return "Save successfully"; }
 	 */
 	
-	@PostMapping("/saveLoanManagment")
-	public ResponseEntity<ApiResponse<LoanSchemCatalog>> saveLoanManagmentData(@RequestBody LoanSchemCatalog  Loan) {
-		//TODO: process POST request
-		ApiResponse<LoanSchemCatalog> response = loanServices.saveLoanManagmentData(Loan);
-		
-		return new ResponseEntity<>(response,HttpStatus.OK);
-	
-		
-	}
+//	@PostMapping("/saveLoanManagment")
+//	public ResponseEntity<ApiResponse<LoanSchemCatalog>> saveLoanManagmentData(@RequestBody LoanSchemCatalog  Loan) {
+//		//TODO: process POST request
+//		ApiResponse<LoanSchemCatalog> response = loanServices.saveLoanManagmentData(Loan);
+//		
+//		return new ResponseEntity<>(response,HttpStatus.OK);
+//	
+//		
+//	}
 	
 }
 
