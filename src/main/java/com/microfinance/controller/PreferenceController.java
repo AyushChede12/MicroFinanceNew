@@ -49,14 +49,7 @@ public class PreferenceController {
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
-	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
-		List<BranchModule> list = preferenceService.fetchAllBranchModule();
-		ApiResponse<List<BranchModule>> response = new ApiResponse<>( HttpStatus.OK,
-				"Branch modules fetched successfully", list);
-		return ResponseEntity.ok(response);
-
-	}
+	
 
 //	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
 //	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
@@ -393,7 +386,7 @@ public class PreferenceController {
 	
 
 
-/*	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
+@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
 	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
 		BranchModule savedEntity = preferenceService.saveBranchModule(branchModule);
 		String message = (branchModule.getId() == null) ? "Branch created successfully" : "Branch updated successfully";
@@ -402,7 +395,14 @@ public class PreferenceController {
 	}
 
 	
+@GetMapping("/getAllBranchModule") // Ayush (without DTO)
+public ResponseEntity<ApiResponse<List<BranchModule>>> fetchAllBranchModule() {
+	List<BranchModule> list = preferenceService.fetchAllBranchModule();
+	ApiResponse<List<BranchModule>> response = new ApiResponse<>(true, HttpStatus.OK,
+			"Branch modules fetched successfully", list);
+	return ResponseEntity.ok(response);
 
+}
 	@GetMapping("/getBranchModuleById") // Ayush
 	public ResponseEntity<ApiResponse<BranchModule>> findBranchModuleById(@RequestParam("id") Long id) {
 		Optional<BranchModule> branch = preferenceService.findBranchDataById(id);
@@ -718,6 +718,6 @@ public class PreferenceController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
-*/
+
 }
 
