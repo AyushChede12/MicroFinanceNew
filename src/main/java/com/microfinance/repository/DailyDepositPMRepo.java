@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 import com.microfinance.model.DailyDepositPM;
 
 @Repository
-public interface DailyDepositPMRepo extends JpaRepository<DailyDepositPM, Long>{
-	@Query("select coalesce(max(id), 0) from DailyDepositPM")
-	long getMaxId();
-
-
+public interface DailyDepositPMRepo extends JpaRepository<DailyDepositPM, Long> {
+    @Query("select coalesce(max(id), 0) from DailyDepositPM")
+    long getMaxId();
 }
+

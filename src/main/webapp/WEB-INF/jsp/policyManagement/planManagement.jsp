@@ -31,6 +31,9 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 	rel="stylesheet">
@@ -804,8 +807,8 @@ td {
 
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Term Mode *</label> <select id="termMode1"
-									name="termMode1" required="required"
+								<label for="">Term Mode *</label> <select id="termModeFD"
+									name="termModeFD" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Term Mode</option>
 									<option value="">Select Term Mode</option>
@@ -819,27 +822,7 @@ td {
 						</div>
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="termFd"
-									id="termFd" required="required" placeholder="Enter Term" />
-							</div>
-						</div>
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Installment Type*</label> <select
-									id="installmentTypeFD" name="installmentTypeFD"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Installment Type</option>
-									<option value="Cash">Cash</option>
-									<option value="Cheque">Cheque</option>
-									<option value="Online">Online</option>
-									<option value="UPI">UPI</option>
 
-								</select>
-							</div>
-						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Renewal Commission(%)*</label> <input type="text"
@@ -870,16 +853,16 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Total Deposit</label> <input readonly type="text"
-									name=" totalPaidFD" id=" totalPaidFD" required="required"
+								<label for="">Total Deposit</label> <input type="text"
+									name="totalPaidFD" id="totalPaidFD" required="required"
 									placeholder="Enter Total Deposit" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="maturityAmountFD" id="maturityAmountFD"
+								<label for="">Maturity Amount*</label> <input type="text"
+									name="maturityAmountFD" id="maturityAmountFD"
 									required="required" placeholder="Enter maturityAmountFD" />
 							</div>
 						</div>
@@ -950,7 +933,9 @@ td {
 
 				<div class="row" style="margin-left: 80%;">
 					<div class="col-12 text-center">
-						<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+						<button id="FixedgenrateBtn" class="btnStyle bg-danger">Generate</button>
+						<button id="FixedsaveBtn" class="btnStyle bg-warning ">Save</button>
+						<button id="FixedupdateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
 					</div>
 				</div>
 
@@ -971,18 +956,17 @@ td {
 											<th>Minimum Deposit</th>
 											<th>Rate Of Interest</th>
 											<th>Installment Type</th>
+											<th>Duration</th>
 											<th>Term Mode</th>
 											<th>Term</th>
-
-											<th>Duration</th>
-											<th>Commission On New</th>
-											<th>Renewal Commission</th>
 											<th>Interest Interval</th>
 											<th>Total Paid</th>
 											<th>Maturity Amount</th>
 											<th>Flexible Plan</th>
 											<th>Grace Days</th>
 											<th>Penalty Rate</th>
+											<th>Commission On New</th>
+											<th>Renewal Commission</th>
 											<th>Status</th>
 											<th>Action</th>
 										</tr>
@@ -1001,7 +985,7 @@ td {
 
 
 		<div>
-			<form id="formid">
+			<form id="misdepositeid">
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -1087,6 +1071,33 @@ td {
 									placeholder="Enter Duration" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Interst Interval*</label> <select
+									id="componentIntervalMD" name="componentIntervalMD"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Compound Interval</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
+									<option value="On Maturity">On Maturity</option>
+
+								</select>
+							</div>
+						</div>
+
+
+
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Total Deposit</label> <input type="text"
+									name="totalPaidMD" id="totalPaidMD" required="required"
+									placeholder="Enter Total Deposit" />
+							</div>
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -1103,7 +1114,7 @@ td {
 									name="termModeMD" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Term Mode</option>
-									<option value="">Select Term Mode</option>
+
 									<option value="Monthly">Monthly</option>
 									<option value="Quarterly">Quarterly</option>
 									<option value="Half-Yearly">Half-Yearly</option>
@@ -1136,7 +1147,10 @@ td {
 									name="MISIntervalMD" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select MIS Interval</option>
-
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Half-Yearly">Half-Yearly</option>
+									<option value="Yearly">Yearly</option>
 								</select>
 							</div>
 						</div>
@@ -1146,7 +1160,7 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">MIS Interest</label> <input readonly type="text"
+								<label for="">MIS Interest</label> <input type="text"
 									name="MISInterestMD" id="MISInterestMD" required="required"
 									placeholder="Enter MIS Interest" />
 							</div>
@@ -1154,8 +1168,8 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount*</label> <input readonly
-									type="text" name="maturityAmountMD" id="maturityAmountMD"
+								<label for="">Maturity Amount*</label> <input type="text"
+									name="maturityAmountMD" id="maturityAmountMD"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
@@ -1167,6 +1181,33 @@ td {
 									required="required" placeholder="Enter Comm.New(%)" />
 							</div>
 						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Renewal Commission(%)*</label> <input type="text"
+									name="renewalCommissionMD" id="renewalCommissionMD"
+									required="required" placeholder="Enter Comm.Renew(%)" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Grace Period*</label> <input type="text"
+									name="graceDaysMD" id="graceDaysMD" required="required"
+									placeholder="Enter Grace Period" />
+							</div>
+						</div>
+
+
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Penalty Fine(%)*</label> <input type="text"
+									name="penltyfineMD" id="penltyfineMD" required="required"
+									placeholder="Enter Penalty Fine" />
+							</div>
+						</div>
+						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Is Flexible Plan?</label> <select
@@ -1181,10 +1222,21 @@ td {
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Plan Status</label> <input type="text"
-									name="statusOfPlanMDRD2" id="statusOfPlanMDRD2"
-									required="required" placeholder="Enter Plan Status" />
+							<div
+								class=" h-100 d-flex justify-content-start align-items-center">
+								<div
+									class="d-flex justify-content-start align-items-center  formFields">
+									<label style="margin-left: 20px;" class="mb-2">Status
+										plan</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="statusOfPlanMDRD2"
+												name="statusOfPlanMDRD2" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="toggle-member-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -1193,7 +1245,9 @@ td {
 
 					<div class="row" style="margin-left: 80%;">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+							<button id="misgenrateBtn" class="btnStyle bg-danger">Generate</button>
+							<button id="missaveBtn" class="btnStyle bg-warning ">Save</button>
+							<button id="misdupdateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
 						</div>
 					</div>
 
@@ -1206,97 +1260,35 @@ td {
 										Recent Sales <span>| Today</span>
 									</h5>
 
-									<table class="table table-borderless datatable overflow-scroll">
+									<table class="table table-bordered">
 										<thead class="table-light">
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="col">#</th>
-												<th scope="col">Customer</th>
-												<th scope="col">Product</th>
-												<th scope="col">Price</th>
-												<th scope="col">Status</th>
-												<th scope="col">Action</th>
+											<tr>
+												<th>Plan Code</th>
+												<th>Plan Name</th>
+												<th>Minimum Deposit</th>
+												<th>Rate Of Interest</th>
+												<th>Installment Type</th>
+												<th>Term Mode</th>
+												<th>Term</th>
+												<th>Duration</th>
+												<th>Commission On New</th>
+												<th>Renewal Commission</th>
+												<th>Interest Interval</th>
+												<th>Total Paid</th>
+												<th>Maturity Amount</th>
+												<th>Flexible Plan</th>
+												<th>Grace Days</th>
+												<th>Penalty Rate</th>
+												<th>Status</th>
+												<th>Action</th>
 											</tr>
 										</thead>
-										<tbody>
-											<tr style="font-family: 'Poppins', sans-serif;">
-												<th scope="row"><a href="#">1</a></th>
-												<td>Arun Kumar</td>
-												<td><a href="#" className="text-primary">Milk</a></td>
-												<td>$29</td>
-												<td><span class="badge bg-success text-white">Approved</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
-											<tr>
-												<th scope="row"><a href="#">2</a></th>
-												<td>Deepak Dalwe</td>
-												<td><a href="#" className="text-primary">Ghee</a></td>
-												<td>$16.5</td>
-												<td><span class="badge bg-danger text-white">Rejected</span>
-												</td>
-												<td class="d-flex" style="gap: .7rem;">
-													<button class="iconbutton">
-														<i class="fa-solid fa-pen-to-square text-success"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-eye text-primary"></i>
-													</button>
-													<button class="iconbutton">
-														<i class="fa-solid fa-trash text-danger"></i>
-													</button>
-												</td>
-											</tr>
+										<tbody id="misdepositeTableBody">
+											<!-- Dynamic rows will be injected here -->
 										</tbody>
 									</table>
+
+
 								</div>
 							</div>
 						</div>

@@ -22,10 +22,16 @@ public class MISDepositPM {
 	private String MISIntROIMD;
 	private String MISIntervalMD;
 	private String MISInterestMD;
+	private String componentIntervalMD;
+	private String totalPaidMD;
+	private String graceDaysMD;
+	private String penltyfineMD;
 	private String maturityAmountMD;
 	private String flexiblePlanMD;
 	private String commissionOnNewMD;
+	private String renewalCommissionMD;
 	private String statusOfPlanMDRD2;
+
 	public long getId() {
 		return id;
 	}
@@ -37,6 +43,30 @@ public class MISDepositPM {
 	}
 	public void setPlanCodeMD(String planCodeMD) {
 		this.planCodeMD = planCodeMD;
+	}
+	public String getPlanNameMD() {
+		return planNameMD;
+	}
+	public void setPlanNameMD(String planNameMD) {
+		this.planNameMD = planNameMD;
+	}
+	public String getRateOfInterestMD() {
+		return rateOfInterestMD;
+	}
+	public void setRateOfInterestMD(String rateOfInterestMD) {
+		this.rateOfInterestMD = rateOfInterestMD;
+	}
+	public String getDurationMD() {
+		return durationMD;
+	}
+	public void setDurationMD(String durationMD) {
+		this.durationMD = durationMD;
+	}
+	public String getInstallmentTypeMD() {
+		return installmentTypeMD;
+	}
+	public void setInstallmentTypeMD(String installmentTypeMD) {
+		this.installmentTypeMD = installmentTypeMD;
 	}
 	public String getMinimumAmountMD() {
 		return minimumAmountMD;
@@ -86,6 +116,12 @@ public class MISDepositPM {
 	public void setMaturityAmountMD(String maturityAmountMD) {
 		this.maturityAmountMD = maturityAmountMD;
 	}
+	public String getFlexiblePlanMD() {
+		return flexiblePlanMD;
+	}
+	public void setFlexiblePlanMD(String flexiblePlanMD) {
+		this.flexiblePlanMD = flexiblePlanMD;
+	}
 	public String getCommissionOnNewMD() {
 		return commissionOnNewMD;
 	}
@@ -98,7 +134,37 @@ public class MISDepositPM {
 	public void setStatusOfPlanMDRD2(String statusOfPlanMDRD2) {
 		this.statusOfPlanMDRD2 = statusOfPlanMDRD2;
 	}
-	
+	public String getRenewalCommissionMD() {
+		return renewalCommissionMD;
+	}
+	public void setRenewalCommissionMD(String renewalCommissionMD) {
+		this.renewalCommissionMD = renewalCommissionMD;
+	}
+	public String getComponentIntervalMD() {
+		return componentIntervalMD;
+	}
+	public void setComponentIntervalMD(String componentIntervalMD) {
+		this.componentIntervalMD = componentIntervalMD;
+	}
+	public String getTotalPaidMD() {
+		return totalPaidMD;
+	}
+	public void setTotalPaidMD(String totalPaidMD) {
+		this.totalPaidMD = totalPaidMD;
+	}
+	public String getGraceDaysMD() {
+		return graceDaysMD;
+	}
+	public void setGraceDaysMD(String graceDaysMD) {
+		this.graceDaysMD = graceDaysMD;
+	}
+	public String getPenltyfineMD() {
+		return penltyfineMD;
+	}
+	public void setPenltyfineMD(String penltyfineMD) {
+		this.penltyfineMD = penltyfineMD;
+	}
+
 	
 
 }

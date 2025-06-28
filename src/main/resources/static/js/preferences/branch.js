@@ -1,8 +1,100 @@
 $(document).ready(function() {
 
 	$('#saveBtn').click(function(event) {
-		alert("Save Button Clicked!");
-		event.preventDefault(); 
+		event.preventDefault();
+
+		// Clear all previous messages
+		$('#chkbranchcode').text('');
+		$('#chkbranchName').text('');
+		$('#chkopeningdate').text('');
+		$('#chkaddress').text('');
+		$('#chkpin').text('');
+		$('#chkstate').text('');
+		$('#chkprimarycontact').text('');
+		$('#chkcontact').text('');
+
+		// Fetch input values
+		var branchCode = $('#branchCode').val().trim();
+		var branchName = $('#branchName').val().trim();
+		var openingDate = $('#openingDate').val().trim();
+		var address = $('#address').val().trim();
+		var pin = $('#pin').val().trim();
+		var state = $('#state').val().trim();
+		var primaryContact = $('#primaryContact').val().trim();
+		var contact = $('#contact').val().trim();
+
+		var contactPattern = /^[6-9][0-9]{9}$/;
+		var pinPattern = /^[1-9][0-9]{5}$/;
+
+		let isValid = true;
+
+		// Validation: Financial Year Name
+		if (branchCode === '') {
+			$('#chkbranchcode').text('* This field is required');
+			$('#branchCode').focus();
+			isValid = false;
+		}
+
+		if (branchName === '') {
+			$('#chkbranchName').text('* This field is required');
+			$('#branchName').focus();
+			isValid = false;
+		}
+
+		if (openingDate === '') {
+			$('#chkopeningdate').text('* This field is required');
+			$('#openingDate').focus();
+			isValid = false;
+		}
+
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+
+		if (pin === '') {
+			$('#chkpin').text('* This field is required');
+			$('#pin').focus();
+			isValid = false;
+		}
+		else if (!pinPattern.test(pin)) {
+			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
+			pin.focus();
+			isValid = false;
+		}
+
+		if (state === '') {
+			$('#chkstate').text('* This field is required');
+			$('#state').focus();
+			isValid = false;
+		}
+
+		if (primaryContact === '') {
+			$('#chkprimarycontact').text('* This field is required');
+			$('#primaryContact').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(primaryContact)) {
+			alert("Please enter a valid 10-digit mobile number.");
+			primaryContact.focus();
+			isValid = false;
+		}
+
+		if (contact === '') {
+			$('#chkcontact').text('* This field is required');
+			$('#contact').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(contact)) {
+			alert("Please enter a valid 10-digit mobile number.");
+			contact.focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
 
 		const branchData = {
 			branchCode: $('#branchCode').val(),
@@ -21,8 +113,15 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
 			success: function(response) {
-				alert("Branch Saved Successfully");
-				location.reload();
+				if (response.status == 'CREATED') {
+					alert("Branch Saved Successfully");
+					location.reload();
+				}
+				else {
+					alert("Branch Not Saved");
+					location.reload();
+				}
+
 			},
 			error: function(xhr) {
 				console.error('Error:', xhr.responseText);
@@ -37,11 +136,11 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllBranchModule", 
+		url: "/api/preference/getAllBranchModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response); 
-			if (response.success) {
+			console.log("Full Response from API:", response);
+			if (response.status == "FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -89,7 +188,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#branchCode").val(branch.branchCode);
@@ -117,11 +216,11 @@ function deleteData(id) {
 		$.ajax({
 			url: "/api/preference/deleteBranchModuleById",
 			type: "POST",
-			data: { id: id }, 
+			data: { id: id },
 			success: function(response) {
-				if (response.success) {
-					alert(response.message); 
-					location.reload();    
+				if (response.status == "OK") {
+					alert(response.message);
+					location.reload();
 				} else {
 					alert("Delete failed: " + response.message);
 				}
@@ -151,13 +250,13 @@ function updateBranch() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBranchModule", 
+		url: "/api/preference/saveAndUpdateAllBranchModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
-				alert(response.message); 
+			if (response.status == "OK") {
+				alert(response.message);
 				location.reload();
 			} else {
 				alert("Operation failed: " + response.message);
@@ -171,7 +270,7 @@ function updateBranch() {
 
 
 $(document).ready(function() {
-	
+
 	$.ajax({
 		url: "/api/preference/getAllBranchModule",
 		method: "GET",

@@ -124,7 +124,7 @@ public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
 	// TODO Auto-generated method stub
 	 
 	    return dailyDepositPMRepo.findById(id).map(existing -> {
-	        existing.setPlanCode(updatedData.getPlanCode());
+	        existing.setPlanCodeDD(updatedData.getPlanCodeDD());
 	        existing.setMinimumDeposit(updatedData.getMinimumDeposit());
 	        existing.setRateOfInterest(updatedData.getRateOfInterest());
 	        existing.setInstallmentType(updatedData.getInstallmentType());
@@ -145,6 +145,13 @@ public DailyDepositPM updateDailyDeposit(Long id, DailyDepositPM updatedData) {
 	        return dailyDepositPMRepo.save(existing); // Fixed here
 	    }).orElse(null);
 	}
+    
+
+
+
+
+
+
 
 
 
@@ -237,7 +244,7 @@ public FixedDepositPM updateFixedDeposit(Long id, FixedDepositPM updatedData) {
         existing.setMinimumAmountFD(updatedData.getMinimumAmountFD());
         existing.setRateOfInterestFD(updatedData.getRateOfInterestFD());
         existing.setTermModeFD(updatedData.getTermModeFD());
-        existing.setTermFd(updatedData.getTermFd());
+        existing.setTermFD(updatedData.getTermFD());
         existing.setDurationFD(updatedData.getDurationFD());
         existing.setInstallmentTypeFD(updatedData.getInstallmentTypeFD());
         existing.setCommissionOnNewFD(updatedData.getCommissionOnNewFD());
@@ -262,6 +269,61 @@ public FixedDepositPM updateFixedDeposit(Long id, FixedDepositPM updatedData) {
 public boolean deleteFixedDeposit(Long id) {
 	 if (fixedDepositPMRepo.existsById(id)) {
 		 fixedDepositPMRepo.deleteById(id);
+	        return true;
+	    } else {
+	        return false;
+	    }
+}
+
+
+
+
+public MISDepositPM getMISDepositById(Long id) {
+	// TODO Auto-generated method stub
+	 return misDepositePMRepo.findById(id).orElse(null);
+}
+
+
+
+
+public MISDepositPM updateMISDeposit(Long id, MISDepositPM updatedData) {
+	// TODO Auto-generated method stub
+	Optional<MISDepositPM> existingOptional = misDepositePMRepo.findById(id);
+
+    if (existingOptional.isPresent()) {
+        MISDepositPM existing = existingOptional.get();
+
+        // Set fields from updatedData to existing
+        existing.setPlanCodeMD(updatedData.getPlanCodeMD());
+        existing.setPlanNameMD(updatedData.getPlanNameMD());
+        existing.setRateOfInterestMD(updatedData.getRateOfInterestMD());
+        existing.setDurationMD(updatedData.getDurationMD());
+        existing.setInstallmentTypeMD(updatedData.getInstallmentTypeMD());
+        existing.setMinimumAmountMD(updatedData.getMinimumAmountMD());
+        existing.setMaturityROIMD(updatedData.getMaturityROIMD());
+        existing.setTermModeMD(updatedData.getTermModeMD());
+        existing.setTermMD(updatedData.getTermMD());
+        existing.setMISIntROIMD(updatedData.getMISIntROIMD());
+        existing.setMISIntervalMD(updatedData.getMISIntervalMD());
+        existing.setMISInterestMD(updatedData.getMISInterestMD());
+        existing.setMaturityAmountMD(updatedData.getMaturityAmountMD());
+        existing.setFlexiblePlanMD(updatedData.getFlexiblePlanMD());
+        existing.setCommissionOnNewMD(updatedData.getCommissionOnNewMD());
+        existing.setRenewalCommissionMD(updatedData.getRenewalCommissionMD());
+        existing.setStatusOfPlanMDRD2(updatedData.getStatusOfPlanMDRD2());
+
+        return misDepositePMRepo.save(existing);
+    } 
+        return null;
+    
+}
+
+
+
+
+public boolean deleteMISDeposit(Long id) {
+	if (misDepositePMRepo.existsById(id)) {
+		 misDepositePMRepo.deleteById(id);
 	        return true;
 	    } else {
 	        return false;

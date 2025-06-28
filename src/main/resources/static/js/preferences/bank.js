@@ -1,5 +1,69 @@
 $(document).ready(function() {
 	$("#saveBtn").click(function() {
+
+		$('#chkbankname').text('');
+		$('#chkaccountno').text('');
+		$('#chkcontactno').text('');
+		$('#chkaddress').text('');
+		$('#chkopeningdate').text('');
+		$('#chkopeningbalance').text('');
+
+		var bankName = $('#bankName').val().trim();
+		var accountNo = $('#accountNo').val().trim();
+		var contactNo = $('#contactNo').val().trim();
+		var address = $('#address').val().trim();
+		var openingDate = $('#openingDate').val().trim();
+		var openingBalance = $('#openingBalance').val().trim();
+
+		var contactPattern = /^[6-9][0-9]{9}$/;
+
+		let isValid = true;
+
+		if (bankName === '') {
+			$('#chkbankname').text('* This field is required');
+			$('#bankName').focus();
+			isValid = false;
+		}
+
+		if (accountNo === '') {
+			$('#chkaccountno').text('* This field is required');
+			$('#accountNo').focus();
+			isValid = false;
+		}
+
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+
+		if (openingDate === '') {
+			$('#chkopeningdate').text('* This field is required');
+			$('#openingDate').focus();
+			isValid = false;
+		}
+
+		if (openingBalance === '') {
+			$('#chkopeningbalance').text('* This field is required');
+			$('#openingBalance').focus();
+			isValid = false;
+		}
+
+		if (contactNo === '') {
+			$('#chkcontactno').text('* This field is required');
+			$('#contactNo').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(contactNo)) {
+			alert("Please enter a valid 10-digit mobile number and start from (6-9).");
+			contactNo.focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
 		const formData = {
 			bankName: $('input[name="bankName"]').val(),
 			accountNo: $('input[name="accountNo"]').val(),
@@ -15,8 +79,13 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				alert("Bank Saved Successfully");
-				location.reload();
+				if (response.status=='CREATED') {
+					alert("Bank Saved Successfully"); 
+					location.reload(); 
+				} else {
+					alert("Unexpected response format");
+					console.log(response);
+				}
 			},
 			error: function(xhr) {
 				console.error('Error:', xhr.responseText);
@@ -34,7 +103,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.success) {
+			if (response.status=="FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -81,7 +150,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status="FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#bankName").val(branch.bankName);
@@ -108,7 +177,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.success) {
+				if (response.status="OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -139,7 +208,7 @@ function updateBank() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
+			if (response.status="OK") {
 				alert("Bank Updated Successfully");
 				location.reload();
 			} else {
@@ -151,3 +220,50 @@ function updateBank() {
 		}
 	});
 }
+
+
+$(document).ready(function() {
+	const rowsPerPage = 10;
+	let currentPage = 1;
+
+	function showPage(page) {
+		let rows = $("#tableBody tr");
+		let totalRows = rows.length;
+		let totalPages = Math.ceil(totalRows / rowsPerPage);
+
+		// Boundary check
+		if (page < 1) page = 1;
+		if (page > totalPages) page = totalPages;
+
+		// Hide all rows initially
+		rows.hide();
+
+		// Show only the relevant rows
+		let start = (page - 1) * rowsPerPage;
+		let end = start + rowsPerPage;
+		rows.slice(start, end).show();
+
+		// Disable/Enable buttons
+		$("#prevBtn").prop("disabled", page === 1);
+		$("#nextBtn").prop("disabled", page === totalPages);
+
+		currentPage = page;
+	}
+
+	// Button click handlers
+	$("#prevBtn").click(function() {
+		if (currentPage > 1) {
+			showPage(currentPage - 1);
+		}
+	});
+
+	$("#nextBtn").click(function() {
+		let rows = $("#tableBody tr").length;
+		if (currentPage * rowsPerPage < rows) {
+			showPage(currentPage + 1);
+		}
+	});
+
+	// Initialize the table on page load
+	showPage(currentPage);
+});
