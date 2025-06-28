@@ -31,13 +31,8 @@ public class LoanManagementService {
 	private BranchModuleRepo branchModuleRepo;
 	
 	
-	
-	/*
-	 * public LoanSchemCatalog saveLoan(LoanSchemCatalog lone) { return
-	 * loanRepository.save(lone);
-	 * 
-	 * }
-	 */
+
+
 
 // update and save
 	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
@@ -103,6 +98,7 @@ public class LoanManagementService {
 		// TODO Auto-generated method stub
 		return addCustomerRepo.findAll();
 	}
+
 
 	public addCustomer getLoanApplicationById(Long id) {
 		

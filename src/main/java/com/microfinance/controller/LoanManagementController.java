@@ -39,6 +39,7 @@ public class LoanManagementController {
 	 * loanServices.saveLoan(lone); return "Save successfully"; }
 	 */
 	
+
 	
 	// save and Update 17/06/25
 	@PostMapping("/saveLoanManagment")
@@ -70,6 +71,7 @@ public class LoanManagementController {
 	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 	    }
 	}
+
 	
 	
 // Edit BY Id 19/06/25

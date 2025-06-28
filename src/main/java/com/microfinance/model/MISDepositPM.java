@@ -10,89 +10,161 @@ public class MISDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String planCodeRD2;
-	private String minimumAmountRD2;
-	private String maturityROI;
-	private String termMode2;
-	private String term1;
-	private String MISIntROI;
-	private String MISInterval;
-	private String MISInterest;
-	private String maturityAmountRD2;
-	private String commissionOnNewRD2;
-	private String statusOfPlanRD2;
+	private String planCodeMD;
+	private String planNameMD;
+	private String rateOfInterestMD;
+	private String durationMD;
+	private String installmentTypeMD;
+	private String minimumAmountMD;
+	private String maturityROIMD;
+	private String termModeMD;
+	private String termMD;
+	private String MISIntROIMD;
+	private String MISIntervalMD;
+	private String MISInterestMD;
+	private String componentIntervalMD;
+	private String totalPaidMD;
+	private String graceDaysMD;
+	private String penltyfineMD;
+	private String maturityAmountMD;
+	private String flexiblePlanMD;
+	private String commissionOnNewMD;
+	private String renewalCommissionMD;
+	private String statusOfPlanMDRD2;
+
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getPlanCodeRD2() {
-		return planCodeRD2;
+	public String getPlanCodeMD() {
+		return planCodeMD;
 	}
-	public void setPlanCodeRD2(String planCodeRD2) {
-		this.planCodeRD2 = planCodeRD2;
+	public void setPlanCodeMD(String planCodeMD) {
+		this.planCodeMD = planCodeMD;
 	}
-	public String getMinimumAmountRD2() {
-		return minimumAmountRD2;
+	public String getPlanNameMD() {
+		return planNameMD;
 	}
-	public void setMinimumAmountRD2(String minimumAmountRD2) {
-		this.minimumAmountRD2 = minimumAmountRD2;
+	public void setPlanNameMD(String planNameMD) {
+		this.planNameMD = planNameMD;
 	}
-	public String getMaturityROI() {
-		return maturityROI;
+	public String getRateOfInterestMD() {
+		return rateOfInterestMD;
 	}
-	public void setMaturityROI(String maturityROI) {
-		this.maturityROI = maturityROI;
+	public void setRateOfInterestMD(String rateOfInterestMD) {
+		this.rateOfInterestMD = rateOfInterestMD;
 	}
-	public String getTermMode2() {
-		return termMode2;
+	public String getDurationMD() {
+		return durationMD;
 	}
-	public void setTermMode2(String termMode2) {
-		this.termMode2 = termMode2;
+	public void setDurationMD(String durationMD) {
+		this.durationMD = durationMD;
 	}
-	public String getTerm1() {
-		return term1;
+	public String getInstallmentTypeMD() {
+		return installmentTypeMD;
 	}
-	public void setTerm1(String term1) {
-		this.term1 = term1;
+	public void setInstallmentTypeMD(String installmentTypeMD) {
+		this.installmentTypeMD = installmentTypeMD;
 	}
-	public String getMISIntROI() {
-		return MISIntROI;
+	public String getMinimumAmountMD() {
+		return minimumAmountMD;
 	}
-	public void setMISIntROI(String mISIntROI) {
-		MISIntROI = mISIntROI;
+	public void setMinimumAmountMD(String minimumAmountMD) {
+		this.minimumAmountMD = minimumAmountMD;
 	}
-	public String getMISInterval() {
-		return MISInterval;
+	public String getMaturityROIMD() {
+		return maturityROIMD;
 	}
-	public void setMISInterval(String mISInterval) {
-		MISInterval = mISInterval;
+	public void setMaturityROIMD(String maturityROIMD) {
+		this.maturityROIMD = maturityROIMD;
 	}
-	public String getMISInterest() {
-		return MISInterest;
+	public String getTermModeMD() {
+		return termModeMD;
 	}
-	public void setMISInterest(String mISInterest) {
-		MISInterest = mISInterest;
+	public void setTermModeMD(String termModeMD) {
+		this.termModeMD = termModeMD;
 	}
-	public String getMaturityAmountRD2() {
-		return maturityAmountRD2;
+	public String getTermMD() {
+		return termMD;
 	}
-	public void setMaturityAmountRD2(String maturityAmountRD2) {
-		this.maturityAmountRD2 = maturityAmountRD2;
+	public void setTermMD(String termMD) {
+		this.termMD = termMD;
 	}
-	public String getCommissionOnNewRD2() {
-		return commissionOnNewRD2;
+	public String getMISIntROIMD() {
+		return MISIntROIMD;
 	}
-	public void setCommissionOnNewRD2(String commissionOnNewRD2) {
-		this.commissionOnNewRD2 = commissionOnNewRD2;
+	public void setMISIntROIMD(String mISIntROIMD) {
+		MISIntROIMD = mISIntROIMD;
 	}
-	public String getStatusOfPlanRD2() {
-		return statusOfPlanRD2;
+	public String getMISIntervalMD() {
+		return MISIntervalMD;
 	}
-	public void setStatusOfPlanRD2(String statusOfPlanRD2) {
-		this.statusOfPlanRD2 = statusOfPlanRD2;
+	public void setMISIntervalMD(String mISIntervalMD) {
+		MISIntervalMD = mISIntervalMD;
 	}
+	public String getMISInterestMD() {
+		return MISInterestMD;
+	}
+	public void setMISInterestMD(String mISInterestMD) {
+		MISInterestMD = mISInterestMD;
+	}
+	public String getMaturityAmountMD() {
+		return maturityAmountMD;
+	}
+	public void setMaturityAmountMD(String maturityAmountMD) {
+		this.maturityAmountMD = maturityAmountMD;
+	}
+	public String getFlexiblePlanMD() {
+		return flexiblePlanMD;
+	}
+	public void setFlexiblePlanMD(String flexiblePlanMD) {
+		this.flexiblePlanMD = flexiblePlanMD;
+	}
+	public String getCommissionOnNewMD() {
+		return commissionOnNewMD;
+	}
+	public void setCommissionOnNewMD(String commissionOnNewMD) {
+		this.commissionOnNewMD = commissionOnNewMD;
+	}
+	public String getStatusOfPlanMDRD2() {
+		return statusOfPlanMDRD2;
+	}
+	public void setStatusOfPlanMDRD2(String statusOfPlanMDRD2) {
+		this.statusOfPlanMDRD2 = statusOfPlanMDRD2;
+	}
+	public String getRenewalCommissionMD() {
+		return renewalCommissionMD;
+	}
+	public void setRenewalCommissionMD(String renewalCommissionMD) {
+		this.renewalCommissionMD = renewalCommissionMD;
+	}
+	public String getComponentIntervalMD() {
+		return componentIntervalMD;
+	}
+	public void setComponentIntervalMD(String componentIntervalMD) {
+		this.componentIntervalMD = componentIntervalMD;
+	}
+	public String getTotalPaidMD() {
+		return totalPaidMD;
+	}
+	public void setTotalPaidMD(String totalPaidMD) {
+		this.totalPaidMD = totalPaidMD;
+	}
+	public String getGraceDaysMD() {
+		return graceDaysMD;
+	}
+	public void setGraceDaysMD(String graceDaysMD) {
+		this.graceDaysMD = graceDaysMD;
+	}
+	public String getPenltyfineMD() {
+		return penltyfineMD;
+	}
+	public void setPenltyfineMD(String penltyfineMD) {
+		this.penltyfineMD = penltyfineMD;
+	}
+
 	
 
 }
