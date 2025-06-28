@@ -36,7 +36,7 @@ $(document).ready(function () {
 		
     //for fixed deposit
     $.ajax({
-        url: "api/fixed-depositview",
+        url: "api/Policymangment/fixed-depositview",
         type: "GET",
         success: function (response) {
             var dropdown = $('#fdPolicyCode');
@@ -97,7 +97,7 @@ $(document).ready(function () {
 	
 	//recurring deposit
 	$.ajax({
-	        url: "api/recurring-depositview",
+	        url: "api/Policymangment/recurring-depositview",
 	        type: "GET",
 	        success: function (response) {
 	            var dropdown = $('#rdPolicyCode');
@@ -160,7 +160,7 @@ $(document).ready(function () {
 		//for Daily Deposit
 		
 		$.ajax({
-		    url: "api/daily-deposit/view",
+		    url: "api/Policymangment/daily-deposit/view",
 		    type: "GET",
 		    success: function (response) {
 		        var dropdown = $('#ddPolicyCode');
@@ -222,7 +222,7 @@ $(document).ready(function () {
 
 // for mis deposit
 				$.ajax({
-				       url: "api/mis-deposit/view",
+				       url: "api/Policymangment/mis-deposit/view",
 				       type: "GET",
 				       success: function (response) {
 				           var dropdown = $('#mPolicyCode');
