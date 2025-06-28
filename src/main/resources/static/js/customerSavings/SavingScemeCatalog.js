@@ -30,7 +30,7 @@ alert(formData)
 		console.log(formData);
 		$.ajax({
 			type: "POST",
-			url: "savescheme",  // Spring Boot endpoint
+			url: "/api/customersavings/savescheme",  // Spring Boot endpoint
 			contentType: "application/json",
 			data: JSON.stringify(formData),
 			success: function(response) {

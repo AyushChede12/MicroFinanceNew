@@ -7,4 +7,5 @@ import com.microfinance.model.SavingSchemeCatalog;
 @Repository
 public interface SavingSchmeCatalogRepo extends JpaRepository<SavingSchemeCatalog,Long>{
 
+	
 }
