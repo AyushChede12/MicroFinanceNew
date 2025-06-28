@@ -95,7 +95,7 @@ public class CustomerSavingsController {
   	}
   	
  
-    @PostMapping("/savesavingaccount") 
+    @PostMapping("/saveandupdatesavingaccount") 
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
     	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
 		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"
@@ -130,11 +130,11 @@ public class CustomerSavingsController {
 	public ResponseEntity<ApiResponse<String>> deleteFinancialYear(@RequestParam("id") Long id) {
 		boolean isDeleted = customersaving.deleteFinancialYear(id);
 		if (isDeleted) {
-			ApiResponse<String> response = new ApiResponse<>(true, HttpStatus.OK, "Saving Account Data deleted successfully",
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Saving Account Data deleted successfully",
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(false, HttpStatus.NOT_FOUND,
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
 					" deletion failed", "failure");
 			return ResponseEntity.badRequest().body(response);
 		}
