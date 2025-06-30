@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
+
+import com.microfinance.repository.LoanMangmentSchemeRepo;
+
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
@@ -17,11 +20,14 @@ import com.microfinance.repository.RecurringDepositRepo;
 import com.microfinance.repository.TransferShareRepo;
 
 
+
 @Controller
 public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	@Autowired
+	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
 	
 	@Autowired
 
@@ -784,7 +790,10 @@ public class PageController {
 
 	// Loan Management
 	@GetMapping("/loanSchemeCatalog")
-	public String getLoanSchemeCatalog() {
+	public String getLoanSchemeCatalog(Model model) {
+		long maxId = loanMangmentSchemeRepo.getMaxId();
+		String loanSchemeCode = "M" + "0000" + (maxId + 1);
+		model.addAttribute("loanSchemeCode", loanSchemeCode);
 		return "loanManagement/loanSchemeCatalog";
 	}
 

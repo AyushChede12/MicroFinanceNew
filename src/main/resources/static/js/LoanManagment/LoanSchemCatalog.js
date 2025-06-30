@@ -3,53 +3,54 @@
  */
 
 // data save shraddha
-$(document).ready(function() {
-	loadLoanTable();
-	
-	$('#saveBtn').on('click', function(e) {
-		alert("shradha");
-		e.preventDefault();
+$(document).ready(function () {
+    loadLoanTable(); // If defined elsewhere
 
-		const loanData = {
-			loanPlaneName: $('#loanPlaneName').val(),
-			typeloan: $('#typeloan').val(),
-			minimumAge: $('#minimumAge').val(),
-			maximumAge: $('#maximumAge').val(),
-			minloanDuration: $('#minloanDuration').val(),
-			mixloanDuration: $('#mixloanDuration').val(),
-			emiFrequency: $('#emiFrequency').val(),
-			emiType: $('#emiType').val(),
-			minimumloanAmount: $('#minimumloanAmount').val(),
-			maximumloanAmount: $('#maximumloanAmount').val(),
-			rateIntrestType: $('#rateIntrestType').val(),
-			typeIntrest: $('#typeIntrest').val(),
-			typesecurity: $('#typesecurity').val(),
-			feeProcessing: $('#feeProcessing').val(),
-			chargesLegal: $('#chargesLegal').val(),
-			gst: $('#gst').val(),
-			feeInsurence: $('#feeInsurence').val(),
-			feeValuation: $('#feeValuation').val(),
-			lateAllowanceday: $('#lateAllowanceday').val(),
-			modePanalty: $('#modePanalty').val(),
-			pennaltyMonthly: $('#pennaltyMonthly').val()
-		};
+    $('#saveBtn').on('click', function (e) {
+        e.preventDefault();
+        alert("shradha");
 
-		$.ajax({
-			url: '/api/loanmanegment/saveLoanManagment',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(loanData),
-			success: function(response) {
-				console.log("Success: ", response);
-				alert(response.message || "Loan saved successfully");
-				fetchLoanTable(); // Table update
-			},
-			error: function(xhr, status, error) {
-				console.error("❌ Error: ", xhr.responseText);
-				alert("Save failed. Server error or incorrect request.");
-			}
-		});
-	});
+        const loanData = {
+            loanSchemeCode: $('#loanSchemeCode').val(),   // ✅ fixed here
+            loanPlaneName: $('#loanPlaneName').val(),
+            typeloan: $('#typeloan').val(),
+            minimumAge: $('#minimumAge').val(),
+            maximumAge: $('#maximumAge').val(),
+            minloanDuration: $('#minloanDuration').val(),
+            mixloanDuration: $('#mixloanDuration').val(),
+            emiFrequency: $('#emiFrequency').val(),
+            emiType: $('#emiType').val(),
+            minimumloanAmount: $('#minimumloanAmount').val(),
+            maximumloanAmount: $('#maximumloanAmount').val(),
+            rateIntrestType: $('#rateIntrestType').val(),
+            typeIntrest: $('#typeIntrest').val(),
+            typesecurity: $('#typesecurity').val(),
+            feeProcessing: $('#feeProcessing').val(),
+            chargesLegal: $('#chargesLegal').val(),
+            gst: $('#gst').val(),
+            feeInsurence: $('#feeInsurence').val(),
+            feeValuation: $('#feeValuation').val(),
+            lateAllowanceday: $('#lateAllowanceday').val(),
+            modePanalty: $('#modePanalty').val(),
+            pennaltyMonthly: $('#pennaltyMonthly').val()
+        };
+
+        $.ajax({
+            url: '/api/loanmanegment/saveLoanManagment',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(loanData),
+            success: function (response) {
+                console.log("✅ Success:", response);
+                alert(response.message || "Loan saved successfully");
+                fetchLoanTable(); // Update table if defined
+            },
+            error: function (xhr, status, error) {
+                console.error("❌ Error:", xhr.responseText);
+                alert("Save failed. Server error or incorrect request.");
+            }
+        });
+    });
 });
 
 

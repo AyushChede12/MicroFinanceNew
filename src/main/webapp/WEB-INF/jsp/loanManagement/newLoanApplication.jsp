@@ -175,17 +175,34 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Plan Name</label> <select id="newApplicationLoanPlaneName"
-									name="newApplicationLoanPlaneName" required="required"
+								<label for="">Loan Code</label> <select id="newApplicationLoanCode"
+									name="newApplicationLoanCode" required="required" onchange="getLoanByCode()"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Loan Plan Name</option>
+									<option value="">Select Loan Plan Code</option>
 									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Loan Plan Name</label><input type="text" readonly="readonly"
+									name="newApplicationLoanPlaneName" id="newApplicationLoanPlaneName" required="required"
+									placeholder="Plan Duration" style="text-transform: uppercase;" /> 
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Type of Loan</label> <input type="text"
+									name="newLoanTypeofloan" id="newLoanTypeofloan" required="required"
+									placeholder="Type of Loan" style="text-transform: uppercase;" /> 
+									
+							</div>
+						</div>
+
 
 						
 
@@ -205,14 +222,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Rate Of Interest(%)</label> <input type="number"
+								<label for="">Rate Of Interest(%)</label> <input type="text"
 									name="newApplicationROI" id="newApplicationROI" required="required"
 									placeholder="Enter Rate Of Interest" style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Amount Of Loan </label> <input type="number"
+								<label for="">Amount Of Loan </label> <input type="text"
 									name="newApplicationLoanAmount" id="newApplicationLoanAmount" required="required"
 									placeholder="Enter Amount Of Loan"
 									style="text-transform: uppercase;" />
@@ -227,7 +244,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">EMI Payment</label> <input type="number"
+								<label for="">EMI Payment</label> <input type="text"
 									name="newLoanApplicationPaymnetEMI" id="paymnetEMI5" required="required"
 									placeholder="Enter EMI Payment"
 									style="text-transform: uppercase;" />
