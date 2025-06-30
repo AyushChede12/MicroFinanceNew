@@ -105,61 +105,64 @@ $(document).ready(function() {
 // table show on data shraddha
 
 function loadLoanTable() {
-	alert("hello shraddha");
+    console.log("Fetching loan data...");
+    alert("Hi Shradha, loading data...");
 
-	$.ajax({
-		url: "/api/loanmanegment/allDataFetchLoanSchemCatelog",
-		type: "GET", // ✅ Use GET to fetch data
-		success: function(response) {
-			//alert("data loaded");
+    $.ajax({
+        url: "/api/loanmanegment/allDataFetchLoanSchemCatelog", // API should return JSON
+        type: "GET",
+        dataType: "json",
+        success: function(response) {
+            console.log("API response:", response);
 
-			let rows = "";
-			// ✅ Check if response has data (in ApiResponse wrapper)
-			if (response.success && Array.isArray(response.data)) {
-				response.data.forEach(function(loan) {
-					rows += `
+            let rows = "";
+
+            // Check if response is successful and contains an array
+            if (response.status=="OK") {
+                response.data.forEach(function(loan) {
+                    rows += `
                         <tr>
                             <td>${loan.id}</td>
-                            <td>${loan.loanPlaneName}</td>
-                            <td>${loan.typeloan}</td>
-                            <td>${loan.minimumAge}</td>
-                            <td>${loan.maximumAge}</td>
-                            <td>${loan.minloanDuration}</td>
-                            <td>${loan.mixloanDuration}</td>
-                            <td>${loan.emiFrequency}</td>
-                            <td>${loan.emiType}</td>
-                           
+                            <td>${loan.loanSchemeCode || "-"}</td>
+                            <td>${loan.loanPlaneName || "-"}</td>
+                            <td>${loan.typeloan || "-"}</td>
+                            <td>${loan.minimumAge || "-"}</td>
+                            <td>${loan.maximumAge || "-"}</td>
+                            <td>${loan.minloanDuration || "-"}</td>
+                            <td>${loan.mixloanDuration || "-"}</td>
+                            <td>${loan.emiFrequency || "-"}</td>
                             
-							<td><button class="iconbutton" onclick="editLoanById(${loan.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-														<td><button class="iconbutton" onclick="deleteLoan(${loan.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
+                            <td><button onclick="editLoanById(${loan.id})"><i class="fa fa-edit text-primary"></i></button></td>
+                            <td><button onclick="deleteLoan(${loan.id})"><i class="fa fa-trash text-danger"></i></button></td>
                         </tr>
                     `;
-				});
-			} else {
-				rows = "<tr><td colspan='23'>No data found</td></tr>";
-			}
+                });
+            } else {
+                rows = "<tr><td colspan='12'>No data found</td></tr>";
+            }
 
-			$("#loanTableBody").html(rows); // ✅ Update tbody only
-		},
-		error: function() {
-			alert("Error fetching data from server");
-		}
-	});
+            $("#loanTableBody").html(rows);
+        },
+        error: function(xhr, status, error) {
+            console.error("XHR Status:", xhr.status);
+            console.error("Error:", error);
+            console.error("Response Text:", xhr.responseText);
+            alert("Error loading data. See browser console for details.");
+        }
+    });
 }
+
 
 // edit by Id
 
 
-function editLoanById(id) {
-   
-	
-	
+function editLoanById(id) {	
 	$.ajax({
 	    url: "api/loanmanegment/getLoanByIdEdite",
 	    type: "GET",
 	    data: { id: id }, // Send ID as query param
 	    success: function(response) {
-	        if (response.success) {
+	        if (response.status==="OK") {
 	            const loan = response.data; // ✅ correct variable name
 
 	            $('#loanId').val(loan.id); // Hidden field for ID
@@ -226,7 +229,7 @@ function deleteLoan(id) {
             type: 'POST',                               
             data: { id: id },                           
             success: function(response) {
-                if (response.success) {
+                if (response.status=="OK") {
                     alert("Loan deleted successfully");
                     loadLoanTable(); // Refresh table
                 } else {
