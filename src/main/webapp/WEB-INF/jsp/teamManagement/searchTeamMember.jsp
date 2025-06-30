@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -64,11 +66,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
+								<label for="">Branch </label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
+									<option value="">Select Branch</option>									
 								</select>
 							</div>
 						</div>
@@ -76,7 +77,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date From :</label> <input type="date"
-									name="fDate" id="fDate" required="required"
+									name="dateFrom" id="dateFrom" required="required"
 									placeholder="Enter fDate" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -84,7 +85,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date To :</label> <input type="date"
-									name="tDate" id="tDate" required="required"
+									name="dateTo" id="dateTo" required="required"
 									placeholder="Enter tDate" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -92,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Team Member Name </label> <input type="text"
-									name="empName" id="empName" required="required"
+									name="teamMemberName" id="teamMemberName" required="required"
 									placeholder="Enter Employee Name" />
 							</div>
 						</div>
@@ -100,7 +101,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Team Member Code </label> <input type="text"
-									name="empCode" id="empCode" required="required"
+									name="teamMamberCode" id="teamMamberCode" required="required"
 									placeholder="Enter Employee Code" />
 							</div>
 						</div>
@@ -108,41 +109,39 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Contact Number </label> <input type="text"
-									name="mobileNo" id="mobileNo" required="required"
+									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Employee Name" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Designation </label> <select id="desg" name="desg"
+								<label for="">Designation </label> <select id="designation" name="designation"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Designation</option>
-									<option value="Blue">Developer</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Department </label> <select id="dept" name="dept"
+								<label for="">Department </label> <select id="department" name="department"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Department</option>
-									<option value="Blue">IT</option>
 								</select>
 							</div>
 						</div>
 
 					</div>
 
-					<div class="row">
+					<!-- <div class="row">
 						<div class="col-4 text-start mt-3">
 							<button id="searchBtn" class="btnStyle bg-warning">Search</button>
 							<button id="printBtn" class="btnStyle bg-primary">Print</button>
 						</div>
-					</div>
+					</div> -->
 
 				</div>
 
@@ -164,51 +163,14 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Bank Account</th>
 										<th scope="col">DOJ</th>
 										<th scope="col">Phone No</th>
+										<th scope="col">Branch Name</th>
+										<th scope="col">Team Member Code</th>
+										<th scope="col">Designation</th>
+										<th scope="col">Department</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row">1</th>
-										<td>Poonam</td>
-										<td>11-02-2001</td>
-										<td>1234</td>
-										<td>11-05-2025</td>
-										<td>8999240768</td>
-
-
-
-									</tr>
-
-									<tr>
-										<th scope="row">2</th>
-										<td>Poonam</td>
-										<td>11-02-2001</td>
-										<td>1234</td>
-										<td>11-05-2025</td>
-										<td>8999240768</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">3</th>
-										<td>Poonam</td>
-										<td>11-02-2001</td>
-										<td>1234</td>
-										<td>11-05-2025</td>
-										<td>8999240768</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row">4</th>
-										<td>Poonam</td>
-										<td>11-02-2001</td>
-										<td>1234</td>
-										<td>11-05-2025</td>
-										<td>8999240768</td>
-
-
-									</tr>
+								<tbody id="searchTeamMember">
+									
 								</tbody>
 							</table>
 						</div>
@@ -222,6 +184,16 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/TeamManagement/addTeamMember.js"></script>
+    <script src="./js/TeamManagement/SearchTeamMember.js"></script>
+ 	<script>
+	$(document).ready(function() {
+		DesignationDropdown();
+		DepartmentDropdown();
+		BranchNameDropdown();
+		searchInTheTeamMember();
+	});
+	</script>
 </body>
 
 </html>
