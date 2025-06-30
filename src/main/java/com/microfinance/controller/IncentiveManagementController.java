@@ -26,8 +26,6 @@ import io.jsonwebtoken.lang.Collections;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-
-
 @RestController
 @RequestMapping("/api/incentive")
 public class IncentiveManagementController {
@@ -100,8 +98,8 @@ public class IncentiveManagementController {
 	    }
 	}
 
-
 	}
+
 
 	
 

@@ -10,7 +10,7 @@ public class NewLoanApplication {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
-	private long id;
+	private Long id;
 	private String findMember;
 	private String relativeDetail;
 	private String newLoandob;
@@ -20,6 +20,7 @@ public class NewLoanApplication {
 	private String newLoanaddress;
 	private String newLoanpincode;
 	private String newLoanbranchName;
+	private String newApplicationLoanCode;
 	private String newloanPlaneName;
 	private String newLoanTypeofloan;
 	private String newLoanPlanDuration;
@@ -63,10 +64,11 @@ public class NewLoanApplication {
 	private String deductionAdvisorCollectorId;
 	private String deductionCollectorName;
 	
-	public long getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFindMember() {
@@ -125,6 +127,13 @@ public class NewLoanApplication {
 	}
 	public String getNewloanPlaneName() {
 		return newloanPlaneName;
+	}
+	
+	public String getNewApplicationLoanCode() {
+		return newApplicationLoanCode;
+	}
+	public void setNewApplicationLoanCode(String newApplicationLoanCode) {
+		this.newApplicationLoanCode = newApplicationLoanCode;
 	}
 	public void setNewloanPlaneName(String newloanPlaneName) {
 		this.newloanPlaneName = newloanPlaneName;
