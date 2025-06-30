@@ -21,12 +21,11 @@ public class TransferShare {
 	private String branch;
 	private String dateOfTransfer;
 	private String shareIssuedBy;
-	private String shareCount;
+	private String noOfShare;
 	private String amountTransferred;
-	private String sharesCount;
+	private String balanceShares;
 	private String modeOfPayment;
 	private String comments;
-	
 	public long getId() {
 		return id;
 	}
@@ -87,11 +86,11 @@ public class TransferShare {
 	public void setShareIssuedBy(String shareIssuedBy) {
 		this.shareIssuedBy = shareIssuedBy;
 	}
-	public String getShareCount() {
-		return shareCount;
+	public String getNoOfShare() {
+		return noOfShare;
 	}
-	public void setShareCount(String shareCount) {
-		this.shareCount = shareCount;
+	public void setNoOfShare(String noOfShare) {
+		this.noOfShare = noOfShare;
 	}
 	public String getAmountTransferred() {
 		return amountTransferred;
@@ -99,11 +98,11 @@ public class TransferShare {
 	public void setAmountTransferred(String amountTransferred) {
 		this.amountTransferred = amountTransferred;
 	}
-	public String getSharesCount() {
-		return sharesCount;
+	public String getBalanceShares() {
+		return balanceShares;
 	}
-	public void setSharesCount(String sharesCount) {
-		this.sharesCount = sharesCount;
+	public void setBalanceShares(String balanceShares) {
+		this.balanceShares = balanceShares;
 	}
 	public String getModeOfPayment() {
 		return modeOfPayment;
@@ -117,6 +116,7 @@ public class TransferShare {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
 	
 	
 	

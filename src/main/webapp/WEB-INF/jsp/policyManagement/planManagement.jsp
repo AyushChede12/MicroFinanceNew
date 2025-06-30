@@ -193,7 +193,7 @@ td {
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Code *</label> <input type="text"
-									name="planCode" id="planCode" required="required"
+									name="planCodeDD" id="planCodeDD" required="required"
 									placeholder="Enter Plan Code" value="${memberCodeDD}"
 									readonly="readonly" style="text-transform: uppercase;" />
 							</div>

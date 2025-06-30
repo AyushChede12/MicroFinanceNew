@@ -62,6 +62,10 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					
+						 <input type="hidden" name="accountNumber" id="accountNumber" placeholder="" value="${savingaccountnumber}" />
+						 <input type="hidden" name="id" id="id" />
+							
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -94,7 +98,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="vehicalNo">Date Of Birth</label> <input type="date"
+								<label for="vehicalNo">Date Of Birth <span class="star">*</span></label> <input type="date"
 									name="dateOfBirth" id="dateOfBirth" required="required"
 									placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
@@ -190,18 +194,21 @@ pageEncoding="ISO-8859-1"%> -->
 									name="operationType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="">Single</option>
-									<option value="">Joint</option>
-									<option value="">Survival</option>
+									<option value="Single">Single</option>
+									<option value="Joint">Joint</option>
 								</select>
 							</div>
 						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Joint Operation Code</label> <input type="text"
-									name="jointOperationCode" id="jointOperationCode"
-									required="required" placeholder="Enter joint Operation Code" />
+								<label for="">Joint Operation Code </label> <select id="jointOperationCode"
+									name="jointOperationCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
+									
+
+								</select>
 							</div>
 						</div>
 
@@ -219,20 +226,18 @@ pageEncoding="ISO-8859-1"%> -->
 									id="familyRelation" name="familyRelation" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Select Policy Name </label> <select id="selectPlan"
+								<label for="">Select Plan Name </label> <select id="selectPlan"
 									name="selectPlan" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									
 
-								</select>
+							</select>
 							</div>
 						</div>
 
@@ -263,13 +268,11 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Fees (if any)</label> <input type="text"
 									name="openingFees" id="openingFees" required="required"
-									placeholder="Enter Licence No" />
+									placeholder="Enter Opening Fees" />
 							</div>
 						</div>
 					</div>
@@ -291,21 +294,21 @@ pageEncoding="ISO-8859-1"%> -->
 							id="familyRelation" name="familyRelation" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select</option>
-							<option value="Blue">Aadhar</option>
+							<option value="Aadhar">Aadhar</option>
 						</select>
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Mode of payment</label> <select id="colour"
-							name="colour" required="required"
+						<label for="">Mode of payment</label> <select id="modeOfPayment"
+							name="modeOfPayment" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select</option>
-							<option value="Blue">Cash</option>
-							<option value="Blue">Online</option>
-							<option value="Blue">Cheque</option>
-							<option value="Blue">NEFT</option>
+							<option value="Cash">Cash</option>
+							<option value="Online">Online</option>
+							<option value="Cheque">Cheque</option>
+							<option value="NEFT">NEFT</option>
 						</select>
 					</div>
 				</div>
@@ -313,7 +316,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for=""> Comment</label>
-						<textarea name="" id=""
+						<textarea name="comment" id="comment"
 							style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 					</div>
 				</div>
@@ -325,7 +328,7 @@ pageEncoding="ISO-8859-1"%> -->
 								Status</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-member-status"
+									<input type="checkbox" id="toggle-member-status" name="toggle-member-status"
 										class="toggle__input" data-toggle-type="member-status">
 									<label for="toggle-member-status" class="toggle__label"></label>
 								</div>
@@ -342,7 +345,7 @@ pageEncoding="ISO-8859-1"%> -->
 								Send</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-member-status1"
+									<input type="checkbox" id="toggle-member-status1" name="toggle-member-status1"
 										class="toggle__input" data-toggle-type="member-status">
 									<label for="toggle-member-status1" class="toggle__label"></label>
 								</div>
@@ -359,7 +362,7 @@ pageEncoding="ISO-8859-1"%> -->
 								Issue</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-member-status2"
+									<input type="checkbox" id="toggle-member-status2" name="toggle-member-status2"
 										class="toggle__input" data-toggle-type="member-status">
 									<label for="toggle-member-status2" class="toggle__label"></label>
 								</div>
@@ -373,14 +376,72 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-12 text-center">
 					<button id="saveBtn" class="btn btn-warning"
 						style="margin-left: 80%;">Save</button>
+					<button type="button" id="updateBtn" class="btnStyle bg-success"
+								onclick="updateSavingAccountData()">Update</button>
 
 				</div>
 			</div>
 			</form>
+			
+		</div>
+		<div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
+
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Saving Account Data <span>| Table View</span>
+						</h5>
+
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Account Number</th>
+									<th scope="col">Customer Code</th>
+									<th scope="col">Customer Name</th>
+									<th scope="col">Mobile</th>
+									<th scope="col">Branch Name</th>
+									<th scope="col">Address</th>
+									<th scope="col">City</th>
+									<th scope="col">State</th>
+									<th scope="col">Edit</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
 
 
 	</main>
+	<script>
+document.addEventListener('DOMContentLoaded', function () {
+	const toggles = document.querySelectorAll('.toggle__input');
+	
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
+
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
+});
+</script>
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/customerSavings/CreateSavingAccount.js"></script>

@@ -49,4 +49,21 @@ public class TeamManagementService {
 		return teamMemberRepo.save(teamMember);
 	}
 
+	public List<TeamMember> findByteamMemberCode(String teamMemberCode) {
+		// TODO Auto-generated method stub
+		return teamMemberRepo.findByteamMemberCode(teamMemberCode);
+	}
+
+	public List<TeamMember> fetchAllteamMember() {
+		// TODO Auto-generated method stub
+		return teamMemberRepo.findAll();
+	}
+
+	public long getMaxId() {
+		// TODO Auto-generated method stub
+		return teamMemberRepo.getMaxId();
+	}
+
+	
+
 }

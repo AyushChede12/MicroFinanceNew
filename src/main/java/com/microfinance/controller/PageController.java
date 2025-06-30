@@ -1,16 +1,25 @@
 package com.microfinance.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
+import com.microfinance.service.TeamManagementService;
+
+import com.microfinance.repository.LoanMangmentSchemeRepo;
+
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
+import com.microfinance.repository.TransferShareRepo;
+
 
 
 @Controller
@@ -18,6 +27,8 @@ public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	@Autowired
+	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
 	
 	@Autowired
 
@@ -34,6 +45,14 @@ public class PageController {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
+	@Autowired TransferShareRepo transferShareRepo;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
+	
+	@Autowired
+	TeamManagementService teamService;
+	
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -144,9 +163,9 @@ public class PageController {
 
 	@GetMapping("/addTeamMember")
 	public String getAddTeamMember(Model model) {
-		//long maxId = employeeRepo.getMaxId();
-	    //String empUniqueNo = "EMC" + "00" + (maxId + 1);
-		//model.addAttribute("empUniqueNo", empUniqueNo);
+		long maxId = teamService.getMaxId();
+	    String teamMemberUniqueNo = "TM" + "00" + (maxId + 1);
+		model.addAttribute("teamMemberUniqueNo", teamMemberUniqueNo);
 		return "teamManagement/addTeamMember";
 	}
 
@@ -318,10 +337,16 @@ public class PageController {
 	}
 
 	// Customer ShareHolding
-	@GetMapping("/transferShares")
-	public String getShareTransfer() {
-		return "customerShareHolding/transferShares";
-	}
+		@GetMapping("/transferShares")
+		public String getShareTransfer(Model model) {
+			 // ✅ Generate certificate number (demo only)
+		    String year = String.valueOf(LocalDate.now().getYear());
+		    long count = transferShareRepo.count(); // total rows in DB
+		    String certNo = "SCF/MICROFINANCE/" + year + "/" + String.format("%06d", count + 1);
+		    // ✅ You can pass this to frontend (JSP or HTML) using model
+		    model.addAttribute("generatedCertificateNo", certNo);
+			return "customerShareHolding/transferShares";
+		}
 
 	@GetMapping("/unallotedShares")
 	public String getUnAllotedShare() {
@@ -770,7 +795,10 @@ public class PageController {
 
 	// Loan Management
 	@GetMapping("/loanSchemeCatalog")
-	public String getLoanSchemeCatalog() {
+	public String getLoanSchemeCatalog(Model model) {
+		long maxId = loanMangmentSchemeRepo.getMaxId();
+		String loanSchemeCode = "M" + "0000" + (maxId + 1);
+		model.addAttribute("loanSchemeCode", loanSchemeCode);
 		return "loanManagement/loanSchemeCatalog";
 	}
 
@@ -842,7 +870,12 @@ public class PageController {
 	}
 	
 	@GetMapping("/createSavingsAccount")
-	public String getCreateSavingsAccount() {
+	public String getCreateSavingsAccount(Model model) {
+		long maxId = createSavingAccountRepo.getMaxId() + 1;
+		String savingaccountnumber = String.format("2025%08d", maxId);
+		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
+		//String savingaccountnumber = "2025" + "000000" + (maxId);
+		model.addAttribute("savingaccountnumber", savingaccountnumber);
 		return "customerSavings/createSavingsAccount";
 	}
 

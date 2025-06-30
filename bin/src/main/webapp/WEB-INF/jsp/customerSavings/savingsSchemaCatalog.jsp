@@ -56,8 +56,8 @@ pageEncoding="ISO-8859-1"%> -->
           <div class="row">
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Policy Name </label> <input type="text" name="PolicyName" id="PolicyName" required="required"
-                  placeholder="Enter Policy Name" />
+                <label for="">Plan Name </label> <input type="text" name="PolicyName" id="PolicyName" required="required"
+                  placeholder="Enter plan Name" />
               </div>
             </div>
 

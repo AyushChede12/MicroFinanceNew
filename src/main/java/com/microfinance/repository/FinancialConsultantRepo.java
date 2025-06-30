@@ -31,6 +31,6 @@ public interface FinancialConsultantRepo extends JpaRepository<addFinancialConsu
 
 	//Optional<addCustomer> findByMemberCode(String memberCode);
 
-	
+	//List<addFinancialConsultant> findByFinancialCode(String financialCode);
 
 }
