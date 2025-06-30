@@ -29,11 +29,11 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-	
+
 <!-- JQuery link -->
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
-	
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <title>Share Certificate</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -51,7 +51,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-building-fill-down"></i>
 					</a></li>
-					<li class="breadcrumb-item action"> Generate Share Certificate</li>
+					<li class="breadcrumb-item action">Generate Share Certificate</li>
 				</ol>
 			</nav>
 		</div>
@@ -64,9 +64,10 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Referral Code Entry</label> <select id="referralCodeEntry"
-							name="referralCodeEntry" required="required"
-							onchange="fetchShareDataByCode()" class="form-control selectField" style="height: 30px; ">
+						<label for="">Referral Code Entry</label> <select
+							id="referralCodeEntry" name="referralCodeEntry"
+							required="required" onchange="fetchShareDataByCode()"
+							class="form-control selectField" style="height: 30px;">
 							<option value="">Select</option>
 						</select>
 					</div>
@@ -86,7 +87,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable overflow-scroll">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col"> </th>
+										<th scope="col"></th>
 										<th scope="col">Sr.No</th>
 										<th scope="col">Customer Code</th>
 										<th scope="col">Customer Name</th>
@@ -99,22 +100,89 @@ pageEncoding="ISO-8859-1"%> -->
 								</tbody>
 							</table>
 						</div>
-						
-                           
-                           
+
+
+
 					</div>
-					<button type="button" class="btn btn-warning"  id="printbtn" >Print</button>
+					<button type="button" class="btn btn-warning" id="printbtn"
+						style="float: right;">Print</button>
+
 				</div>
 			</div>
+
+			<div class="row mt-5">
+	<div class="col-12">
+		<div class="card recent-sales">
+			<div class="card-body table-responsive">
+				<!-- Certificate Form Starts Here -->
+				<div class="p-3">
+					<h5 class="text-center mb-3" style="font-size: 20px;">
+						<strong>Microfinance Pvt. Ltd</strong>
+					</h5>
+
+					<!-- Applicant Information -->
+					<p style="font-size: 14px;">
+						<strong>customer ID of customer Name:</strong> <span id = "customeridandName"></span> 
+					</p>
+					<p style="font-size: 14px;">
+						<strong>Certificate No.:</strong> <span id = "certificaten	o"></span> 
+					</p>
+
+					<!-- Policy Details Section -->
+					<h6 class="mt-4" style="font-size: 16px;">
+						<strong>Share Details :- </strong> <span></span>
+					</h6>
+					<div class="row border">
+						<div class="col-md-6" style="padding-top: 15px;">
+							<p style="font-size: 13px;">
+								<strong>Number Of Share :</strong>  <span></span>
+							</p>
+							<p style="font-size: 13px;">
+								<strong>Amount Transferred :</strong> <span id="interestRate"></span>
+							</p>
+							<p style="font-size: 13px;">
+								<strong>Branch :</strong> <span id="policyType"></span>
+							</p>
+							<p style="font-size: 13px;">
+								<strong>Start Date :</strong> <span id="policyType"></span>
+							</p>
+						</div>
+						<div class="col-md-6" style="padding-top: 15px;">
+							<p style="font-size: 13px;">
+								<strong>Balance Shares :</strong> <span id="interestFrequency"></span>
+							</p>
+							<p style="font-size: 13px;">
+								<strong>Share Issued By :</strong> <span id="policyTerm"></span>
+							</p>
+							<p style="font-size: 13px;">
+								<strong>Date of Transfer :</strong> <span id="maturityDate"></span>
+							</p>
+						</div>
+					</div>
+
+					<!-- Maturity Payment Instructions -->
+					<h6 class="mt-3" style="font-size: 16px;">
+						<strong>Mode Of Payment :</strong>
+					</h6>
+					<p style="font-size: 13px;">(Content can be added here if needed)</p>
+				</div>
+				<!-- Certificate Form Ends Here -->
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
 		</div>
 
 	</main>
-	
+
 	<script src="./js/adminscript.js"></script>
-	
+
 	<!-- JS Links -->
-	<script src="./js/CustomerShareHolding/generateShareCertificate.js"></script> 
-	
+	<script src="./js/CustomerShareHolding/generateShareCertificate.js"></script>
+
 </body>
 
 </html>

@@ -26,6 +26,7 @@ public class TransferShare {
 	private String balanceShares;
 	private String modeOfPayment;
 	private String comments;
+	private String certificateNo;
 	public long getId() {
 		return id;
 	}
@@ -116,8 +117,12 @@ public class TransferShare {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
-	
+	public String getCertificateNo() {
+		return certificateNo;
+	}
+	public void setCertificateNo(String certificateNo) {
+		this.certificateNo = certificateNo;
+	}
 	
 	
 }

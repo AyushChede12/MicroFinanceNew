@@ -27,14 +27,15 @@ public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	
 	@Autowired
 	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
 	
 	@Autowired
-
 	FinancialConsultantRepo financialConsultantRepo;
 
-	@Autowired DailyDepositPMRepo dailyDepositRepo;
+	@Autowired 
+	DailyDepositPMRepo dailyDepositRepo;
 	
 	@Autowired
 	RecurringDepositRepo recurringDepositRepo;
@@ -45,7 +46,8 @@ public class PageController {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
-	@Autowired TransferShareRepo transferShareRepo;
+	@Autowired 
+	TransferShareRepo transferShareRepo;
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
