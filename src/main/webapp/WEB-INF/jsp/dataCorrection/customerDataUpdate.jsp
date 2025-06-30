@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 
@@ -61,10 +65,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="vehicalNo">Customer Selection </label> <select id="MemberSelection "
-									name="colour" required="required"
+								<label for="memberCode">Customer Selection </label> <select id="memberCode "
+									name="memberCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Customer</option>
 								</select>
 							</div>
 						</div>
@@ -733,6 +736,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/customerDataUpdate.js"></script>
 </body>
 
 </html>

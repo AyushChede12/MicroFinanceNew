@@ -1,4 +1,9 @@
 $(document).ready(function() {
+	$("#tableBody").hide();
+	$("#updateBtn").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 
 	$('#saveBtn').click(function(event) {
 		event.preventDefault();
@@ -130,52 +135,113 @@ $(document).ready(function() {
 		});
 	});
 
+});
 
-	$("#tableBody").hide();
-	$("#updateBtn").hide();
+var totalDataMISD = [];
+var currentPageMISD = 1;
+var pageSizeMISD = 5;
 
+// Load data once
+function loadMISData() {
 	$.ajax({
 		type: "GET",
 		url: "/api/preference/getAllBranchModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response);
-			if (response.status == "FOUND") {
-				let data = response.data;
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
-				data.forEach((item, index) => {
-					let row = `<tr>
-	                        <td>${index + 1}</td>
-	                        <td>${item.branchCode}</td>
-	                        <td>${item.branchName}</td>
-	                        <td>${item.openingDate}</td>
-	                        <td>${item.address}</td>
-	                        <td>${item.pin}</td>
-	                        <td>${item.state}</td>
-	                        <td>${item.primaryContact}</td>
-	                        <td>${item.contact}</td>
-							<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-							<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-	                    </tr>`;
-					tableBody.append(row);
-				});
+			if (response.status === "FOUND") {
+				totalDataMISD = response.data;
+				renderTable(currentPageMISD);
+				togglePageNavigationMISD();
 			} else {
-				alert("Failed to fetch branch data: " + response.message);
+				alert("Failed to fetch data: " + response.message);
 			}
 		},
 		error: function() {
 			alert("Error while calling the API.");
 		}
 	});
+}
+
+// Render paginated table
+function renderTable(page) {
+	let tableBody = $(".datatable tbody");
+	tableBody.empty();
+
+	let startIndex = (page - 1) * pageSizeMISD;
+	let endIndex = Math.min(startIndex + pageSizeMISD, totalDataMISD.length);
+
+	for (let i = startIndex; i < endIndex; i++) {
+		let person = totalDataMISD[i];
+		let row = `<tr>
+				<td>${i + 1}</td>
+                <td>${person.branchCode}</td>
+                <td>${person.branchName}</td>
+                <td>${person.openingDate}</td>
+                <td>${person.address}</td>
+                <td>${person.pin}</td>
+                <td>${person.state}</td>
+				<td>${person.primaryContact}</td>
+				<td>${person.contact}</td>
+                <td>
+                  <button class="iconbutton" onclick="viewData(${person.id})" title="View">
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
+                    <i class="fa-solid fa-trash text-danger"></i>
+                  </button>
+                </td>
+              </tr>`;
+		tableBody.append(row);
+	}
+
+	// Update page info
+	$("#pageInfo").text(`Page ${currentPageMISD} of ${Math.ceil(totalDataMISD.length / pageSizeMISD)}`);
+}
+
+// Button state toggling
+function togglePageNavigationMISD() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	$("#prevBtn").prop("disabled", currentPageMISD === 1);
+	$("#nextBtn").prop("disabled", currentPageMISD === totalPages || totalPages === 0);
+}
+
+// Button click handlers
+$("#prevBtn").click(function() {
+	if (currentPageMISD > 1) {
+		currentPageMISD--;
+		renderTable(currentPageMISD);
+		togglePageNavigationMISD();
+	}
+});
+
+$("#nextBtn").click(function() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	if (currentPageMISD < totalPages) {
+		currentPageMISD++;
+		renderTable(currentPageMISD);
+		togglePageNavigationMISD();
+	}
+});
+
+// Call on page load
+$(document).ready(function() {
+	loadMISData();
 });
 
 function showTableData() {
 	$("#tableBody").show();
+	$("#prevBtn").show();
+	$("#nextBtn").show();
+	$("#pageInfo").show();
 }
 
 function hideTableData() {
 	$("#tableBody").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 }
 
 function viewData(id) {
