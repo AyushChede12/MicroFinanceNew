@@ -109,12 +109,12 @@ public class LoanManagementService {
 	                .orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
 	}
 	
-	//Branch Model fetch for prefenses
-
-	public List<BranchModule> getgetBranchName() {
-		// TODO Auto-generated method stub
-		return branchModuleRepo.findAll();
-	}
+	/*
+	 * //Branch Model fetch for prefenses
+	 * 
+	 * public List<BranchModule> getgetBranchName() { // TODO Auto-generated method
+	 * stub return branchModuleRepo.findAll(); }
+	 */
 
 	// Loan schem Code Name Dropdrawn
 	

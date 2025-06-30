@@ -39,6 +39,8 @@ public class NewLoanApplication {
 	private String gurantorPinCode;
 	private String guarantorContactno;
 	private String guarantorSecurityType;
+	
+	//Co-Application
 	private String coApplictionmemberID;
 	private String coApplictionGuarantorIdentity;
 	private String coApplictionAdress;

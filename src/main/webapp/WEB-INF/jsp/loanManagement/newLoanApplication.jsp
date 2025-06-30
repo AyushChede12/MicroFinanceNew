@@ -167,11 +167,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Branch Name</label> <select id="newApplicationBranchName"
-									name="newApplicationBranchName" required="required"
+								<label for="">Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									<option value="Blue">Blue</option>
+									
 								</select>
 							</div>
 						</div>
@@ -244,8 +243,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">EMI Payment</label> <input type="text"
-									name="newLoanApplicationPaymnetEMI" id="paymnetEMI5" required="required"
+								<label for="">EMI Payment</label> <input type="text" onclick="calculateEMI()"
+									name="newLoanApplicationPaymnetEMI" id="newLoanApplicationPaymnetEMI" required="required"
 									placeholder="Enter EMI Payment"
 									style="text-transform: uppercase;" />
 							</div>
@@ -275,24 +274,12 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label> Member ID </label>
 								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select
-											Member ID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="memberID5" name="memberID5" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-										</ul>
-									</div>
+										<select id="memberId"
+									name="memberId" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select member Code</option>
+									
+								</select>
 								</div>
 							</div>
 						</div>
