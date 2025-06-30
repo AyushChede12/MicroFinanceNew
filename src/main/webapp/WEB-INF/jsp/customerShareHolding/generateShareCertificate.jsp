@@ -29,6 +29,11 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+<!-- JQuery link -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>	
+	
 <title>Share Certificate</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,7 +66,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="d-flex flex-column formFields">
 						<label for="">Referral Code Entry</label> <select id="referralCodeEntry"
 							name="referralCodeEntry" required="required"
-							class="form-control selectField" style="height: 30px;">
+							onchange="fetchShareDataByCode()" class="form-control selectField" style="height: 30px; ">
 							<option value="">Select</option>
 						</select>
 					</div>
@@ -81,27 +86,35 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable overflow-scroll">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">SR.NO</th>
-										<th scope="col">M.CODE</th>
-										<th scope="col">M.NAME</th>
-										<th scope="col">Share AMT</th>
-										<th scope="col">NO. OF SHARE</th>
-										<th scope="col">CERTIFICATE NO.</th>
-										<th scope="col">ACTION</th>
-
+										<th scope="col"> </th>
+										<th scope="col">Sr.No</th>
+										<th scope="col">Customer Code</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Share Amount</th>
+										<th scope="col">No. Of Share</th>
+										<th scope="col">Certificate NO.</th>
 									</tr>
 								</thead>
 								<tbody>
 								</tbody>
 							</table>
 						</div>
+						
+                           
+                           
 					</div>
+					<button type="button" class="btn btn-warning"  id="printbtn" >Print</button>
 				</div>
 			</div>
 		</div>
 
 	</main>
+	
 	<script src="./js/adminscript.js"></script>
+	
+	<!-- JS Links -->
+	<script src="./js/CustomerShareHolding/generateShareCertificate.js"></script> 
+	
 </body>
 
 </html>
