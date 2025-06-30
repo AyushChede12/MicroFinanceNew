@@ -34,7 +34,7 @@ public class FinancialConsultantController {
 	@PostMapping("/getAllCustomerCodes") // Poonam 13-06-2025
     public ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomerCodes() {
         List<addCustomer> list = financialConsultantService.getAllCustomerCodes();
-        ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK,"Customer codes fetched successfully",list);
+        ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.FOUND,"Customer codes fetched successfully",list);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
