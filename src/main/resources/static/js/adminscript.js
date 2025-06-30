@@ -21,7 +21,7 @@ $(document).ready(function() {
 					let branch = branchList[i];
 					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
 					$("#branchName").append(option);
-					$("#branch").append(option);
+					//$("#branch").append(option);
 				}
 			} else {
 				alert("Error: " + response.message);
