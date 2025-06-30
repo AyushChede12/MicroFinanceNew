@@ -43,54 +43,7 @@ function signatureUpload() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
-	$("#updateBtn").hide();
-	$.ajax({
-		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
-		type: "GET",
-		success: function(response) {
-			if (response.status == "FOUND") {
-				const branchList = response.data;
-				$("#branchName").empty(); // Clear existing options
-				$("#branchName").append("<option value=''>-- Select Branch --</option>");
-
-				for (let i = 0; i < branchList.length; i++) {
-					let branch = branchList[i];
-					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
-					$("#branchName").append(option);
-				}
-			} else {
-				alert("Error: " + response.message);
-			}
-		},
-		error: function(xhr) {
-			console.error("Error loading branches:", xhr.responseText);
-			alert("Failed to load dropdown data.");
-		}
-	});
-
-	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
-		type: "GET",
-		success: function(response) {
-			if (response.status == "FOUND") {
-				const relativeList = response.data;
-				$("#relationToApplicant").empty(); // Clear existing options
-				$("#relationToApplicant").append("<option value=''>-- Select Relative --</option>");
-
-				for (let i = 0; i < relativeList.length; i++) {
-					let relative = relativeList[i];
-					let option = `<option value="${relative.relation}">${relative.relation}</option>`;
-					$("#relationToApplicant").append(option);
-				}
-			} else {
-				alert("Error: " + response.message);
-			}
-		},
-		error: function(xhr) {
-			console.error("Error loading branches:", xhr.responseText);
-			alert("Failed to load dropdown data.");
-		}
-	});
+	$("#updateBtn").hide();	
 
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
