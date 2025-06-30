@@ -29,6 +29,12 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<!-- JQuery link -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <title>DNO Generate</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -69,7 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 			<div class="row">
 				<div class="col-3">
-					<button id="saveBtn" class="btnStyle"
+					<button id="searchBtn" class="btnStyle"
 						style="background-color: #FFA500;">
 						<i class="bi bi-search"></i> Search
 					</button>
@@ -88,13 +94,13 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable overflow-scroll">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">SR.NO</th>
-										<th scope="col">M.NAME</th>
-										<th scope="col">Share DATE</th>
-										<th scope="col">NO. OF SHARE</th>
-										<th scope="col">SHARE AMT</th>
-
-
+										<th scope="col">Sr No.</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Customer Code</th>
+										<th scope="col">Start Date</th>
+										<th scope="col">Date of Transfer</th>
+										<th scope="col">No. Of Share</th>
+										<th scope="col">Share Amount</th>			
 									</tr>
 								</thead>
 								<tbody>
@@ -107,6 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 	</main>
+	<script src="./js/CustomerShareHolding/UnAllotedShare.js"></script> 
 	<script src="./js/adminscript.js"></script>
 </body>
 
