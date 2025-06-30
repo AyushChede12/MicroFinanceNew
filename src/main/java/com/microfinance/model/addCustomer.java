@@ -75,6 +75,15 @@ public class addCustomer {
     private boolean isVerified;
 
     private boolean isApproved;
+    
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
 
 	public long getId() {
 		return id;
@@ -480,13 +489,7 @@ public class addCustomer {
 		this.isVerified = isVerified;
 	}
 
-	public boolean isApproved() {
-		return isApproved;
-	}
-
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
-	}
+	
 
 	public String getRemarks() {
 		return remarks;
