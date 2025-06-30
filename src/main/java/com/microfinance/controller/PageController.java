@@ -6,12 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.microfinance.repository.CustomerRepo;
+import com.microfinance.service.TeamManagementService;
 
 @Controller
 public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	
+	@Autowired
+	TeamManagementService teamService;
+	
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -119,9 +124,9 @@ public class PageController {
 
 	@GetMapping("/addTeamMember")
 	public String getAddTeamMember(Model model) {
-		//long maxId = employeeRepo.getMaxId();
-	    //String empUniqueNo = "EMC" + "00" + (maxId + 1);
-		//model.addAttribute("empUniqueNo", empUniqueNo);
+		long maxId = teamService.getMaxId();
+	    String teamMemberUniqueNo = "TM" + "00" + (maxId + 1);
+		model.addAttribute("teamMemberUniqueNo", teamMemberUniqueNo);
 		return "teamManagement/addTeamMember";
 	}
 

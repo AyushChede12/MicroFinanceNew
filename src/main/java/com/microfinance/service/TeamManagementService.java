@@ -59,6 +59,11 @@ public class TeamManagementService {
 		return teamMemberRepo.findAll();
 	}
 
+	public long getMaxId() {
+		// TODO Auto-generated method stub
+		return teamMemberRepo.getMaxId();
+	}
+
 	
 
 }
