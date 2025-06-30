@@ -1,18 +1,54 @@
 package com.microfinance.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.service.TeamManagementService;
+
+import com.microfinance.repository.LoanMangmentSchemeRepo;
+
+import com.microfinance.repository.FinancialConsultantRepo;
+import com.microfinance.repository.DailyDepositPMRepo;
+import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.MisDepositePMRepo;
+import com.microfinance.repository.RecurringDepositRepo;
+import com.microfinance.repository.TransferShareRepo;
+
+
 
 @Controller
 public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	@Autowired
+	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
+	
+	@Autowired
+
+	FinancialConsultantRepo financialConsultantRepo;
+
+	@Autowired DailyDepositPMRepo dailyDepositRepo;
+	
+	@Autowired
+	RecurringDepositRepo recurringDepositRepo;
+	
+	@Autowired
+	FixedDepositPMRepo fixedDepositPMRepo;
+	
+	@Autowired
+	MisDepositePMRepo misDepositePMRepo;
+
+	@Autowired TransferShareRepo transferShareRepo;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	@Autowired
 	TeamManagementService teamService;
@@ -31,7 +67,10 @@ public class PageController {
 
 	// Financial Consultant
 	@GetMapping("/addFinancialConsultant")
-	public String getAddFinancialConsultant() {
+	public String getAddFinancialConsultant(Model model) {
+		long maxId = financialConsultantRepo.getMaxId();
+		String financialCode = "FC" + "0000" + (maxId + 1);
+		model.addAttribute("financialCode", financialCode);
 		return "financialConsultant/addFinancialConsultant";
 	}
 
@@ -298,10 +337,16 @@ public class PageController {
 	}
 
 	// Customer ShareHolding
-	@GetMapping("/transferShares")
-	public String getShareTransfer() {
-		return "customerShareHolding/transferShares";
-	}
+		@GetMapping("/transferShares")
+		public String getShareTransfer(Model model) {
+			 // ✅ Generate certificate number (demo only)
+		    String year = String.valueOf(LocalDate.now().getYear());
+		    long count = transferShareRepo.count(); // total rows in DB
+		    String certNo = "SCF/MICROFINANCE/" + year + "/" + String.format("%06d", count + 1);
+		    // ✅ You can pass this to frontend (JSP or HTML) using model
+		    model.addAttribute("generatedCertificateNo", certNo);
+			return "customerShareHolding/transferShares";
+		}
 
 	@GetMapping("/unallotedShares")
 	public String getUnAllotedShare() {
@@ -619,7 +664,26 @@ public class PageController {
 
 	// Policy Management
 	@GetMapping("/planManagement")
-	public String getPlanManagement() {
+	public String getPlanManagement(Model model) {
+		
+		//Daily Deposit Code
+		long maxIdDD = dailyDepositRepo.getMaxId();
+		String memberCodeDD = "DD" + "000" + (maxIdDD + 1);
+		model.addAttribute("memberCodeDD", memberCodeDD);
+		
+		long maxIdRD = recurringDepositRepo.getMaxId();
+		String memberCodeRD = "RD" + "000" + (maxIdRD + 1);
+		model.addAttribute("memberCodeRD", memberCodeRD);
+		
+		long maxIdFD = fixedDepositPMRepo.getMaxId();
+		String memberCodeFD = "FD" + "000" + (maxIdFD + 1);
+		model.addAttribute("memberCodeFD", memberCodeFD);
+		
+		long maxIdMD = misDepositePMRepo.getMaxId();
+		String memberCodeMD = "MD" + "000" + (maxIdMD + 1);
+		model.addAttribute("memberCodeMD", memberCodeMD);
+		
+		
 		return "policyManagement/planManagement";
 	}
 
@@ -731,7 +795,10 @@ public class PageController {
 
 	// Loan Management
 	@GetMapping("/loanSchemeCatalog")
-	public String getLoanSchemeCatalog() {
+	public String getLoanSchemeCatalog(Model model) {
+		long maxId = loanMangmentSchemeRepo.getMaxId();
+		String loanSchemeCode = "M" + "0000" + (maxId + 1);
+		model.addAttribute("loanSchemeCode", loanSchemeCode);
 		return "loanManagement/loanSchemeCatalog";
 	}
 
@@ -803,7 +870,12 @@ public class PageController {
 	}
 	
 	@GetMapping("/createSavingsAccount")
-	public String getCreateSavingsAccount() {
+	public String getCreateSavingsAccount(Model model) {
+		long maxId = createSavingAccountRepo.getMaxId() + 1;
+		String savingaccountnumber = String.format("2025%08d", maxId);
+		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
+		//String savingaccountnumber = "2025" + "000000" + (maxId);
+		model.addAttribute("savingaccountnumber", savingaccountnumber);
 		return "customerSavings/createSavingsAccount";
 	}
 
@@ -929,7 +1001,7 @@ public class PageController {
 	}
 	
 	
-	
+
 	
 
 	

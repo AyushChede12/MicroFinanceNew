@@ -6,27 +6,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-
-public class generateIncentivePayments {
+public class GenerateIncentivePayments {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
-	private long id;
-	private String teamMemberName;
-	public String getTeamMemberName() {
-		return teamMemberName;
-	}
-	public void setTeamMemberName(String teamMemberName) {
-		this.teamMemberName = teamMemberName;
-	}
+	private Long id;
+	private String teamCode;
+	private String teamName;
 	private String incentiveMonth;
 	private String dateFrom;
 	private String dateTo;
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getTeamCode() {
+		return teamCode;
+	}
+	public void setTeamCode(String teamCode) {
+		this.teamCode = teamCode;
+	}
+	public String getTeamName() {
+		return teamName;
+	}
+	public void setTeamName(String teamName) {
+		this.teamName = teamName;
 	}
 	public String getIncentiveMonth() {
 		return incentiveMonth;

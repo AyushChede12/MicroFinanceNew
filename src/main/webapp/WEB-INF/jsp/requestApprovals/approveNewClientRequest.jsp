@@ -8,6 +8,8 @@ pageEncoding="ISO-8859-1"%> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/ae73087723.js"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet" />
 <script
@@ -18,9 +20,7 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -66,12 +66,22 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
+									
 								</select>
 							</div>
 						</div>
-
-						<div class="col-lg-4">
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Code</label> <select id="Code" name="Code"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Member Code</option>
+								</select>
+							</div>
+							   
+						</div>
+						<!-- <div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date From</label> <input type="date"
 									name="dateFrom" id="dateFrom" required="required"
@@ -86,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="dateTo" id="dateTo" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 		</div>
@@ -139,6 +149,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/RequestApproval/ApprovalNewClientRequest.js"></script>
 </body>
 
 </html>

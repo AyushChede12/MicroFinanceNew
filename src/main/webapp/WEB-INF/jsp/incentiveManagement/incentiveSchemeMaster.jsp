@@ -65,12 +65,16 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Incentive Month </label> <input type="text"
-									name="incentiveMonth" id="incentiveMonth" required="required"
-									placeholder="Enter Incentive Month " />
+							<div class="d-flex flex-column formFields">
+								<label for="">Incentive Month</label> <select id="incentiveMonth"
+									name="incentiveMonth" required="required"
+									class="form-control selectField" style="height: 30px;">
+									 <option value="">Select</option>
+									
+								</select>
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">

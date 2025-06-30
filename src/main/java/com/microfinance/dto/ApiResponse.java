@@ -3,14 +3,12 @@ package com.microfinance.dto;
 import org.springframework.http.HttpStatus;
 
 import com.microfinance.model.ExecutiveFounder;
-import com.microfinance.model.RecurringDepositPM;
 
 public class ApiResponse<T> {
-	
+
 	private HttpStatus status;
     private String message;
     private T data;
-   
 
     // Constructors
     public ApiResponse(HttpStatus status, String message, T data) {
@@ -19,14 +17,11 @@ public class ApiResponse<T> {
         this.data = data;
     }
 
+   
+
 	public ApiResponse(String string, String message2, ApiResponse<ExecutiveFounder> response) {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public ApiResponse(String message, boolean success, T data) {
-	}
-	
-
 
 	// Static helper methods for success and error responses
     public static <T> ApiResponse<T> success(HttpStatus status, String message, T data) {
@@ -37,29 +32,30 @@ public class ApiResponse<T> {
         return new ApiResponse<>(status, message, null);
     }
 
-	public HttpStatus getStatus() {
-		return status;
-	}
+    // Getters and setters
+    public HttpStatus getStatus() {
+        return status;
+    }
 
-	public void setStatus(HttpStatus status) {
-		this.status = status;
-	}
+    public void setStatus(HttpStatus status) {
+        this.status = status;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public T getData() {
-		return data;
-	}
+    public T getData() {
+        return data;
+    }
 
-	public void setData(T data) {
-		this.data = data;
-	}
+    public void setData(T data) {
+        this.data = data;
+    }
+	
 
 }
-
