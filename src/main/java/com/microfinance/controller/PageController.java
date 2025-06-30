@@ -1,5 +1,7 @@
 package com.microfinance.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
+import com.microfinance.repository.TransferShareRepo;
 
 
 
@@ -41,6 +44,7 @@ public class PageController {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
+	@Autowired TransferShareRepo transferShareRepo;
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
@@ -328,10 +332,16 @@ public class PageController {
 	}
 
 	// Customer ShareHolding
-	@GetMapping("/transferShares")
-	public String getShareTransfer() {
-		return "customerShareHolding/transferShares";
-	}
+		@GetMapping("/transferShares")
+		public String getShareTransfer(Model model) {
+			 // ✅ Generate certificate number (demo only)
+		    String year = String.valueOf(LocalDate.now().getYear());
+		    long count = transferShareRepo.count(); // total rows in DB
+		    String certNo = "SCF/MICROFINANCE/" + year + "/" + String.format("%06d", count + 1);
+		    // ✅ You can pass this to frontend (JSP or HTML) using model
+		    model.addAttribute("generatedCertificateNo", certNo);
+			return "customerShareHolding/transferShares";
+		}
 
 	@GetMapping("/unallotedShares")
 	public String getUnAllotedShare() {
