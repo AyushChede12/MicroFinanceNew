@@ -9,7 +9,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const dailyDeposit = {
-			planCode: $('#planCode').val(),
+			planCodeDD: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
 			minimumDeposit: $('#minimumDeposit').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
@@ -61,7 +61,7 @@ $(document).ready(function() {
 					$.each(data, function(index, item) {
 						const row = `
                             <tr>
-                                <td>${item.planCode || ''}</td>
+                                <td>${item.planCodeDD || ''}</td>
 								<td>${item.planNameDD || ''}</td>
 								
                                 <td>${item.minimumDeposit || ''}</td>
@@ -121,7 +121,7 @@ $(document).ready(function() {
 
 					$('#formid').data('id', id); // ✅ Set the ID for update
 
-					$('#planCode').val(data.planCode);
+					$('#planCodeDD').val(data.planCodeDD);
 					$('#planNameDD').val(data.planNameDD);
 					$('#minimumDeposit').val(data.minimumDeposit);
 					$('#rateOfInterest').val(data.rateOfInterest);
@@ -187,7 +187,7 @@ $(document).ready(function() {
 	// GET FORM DATA
 	function getFormData() {
 		return {
-			planCode: $('#planCode').val(),
+			planCode: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
 			minimumDeposit: $('#minimumDeposit').val(),
 			rateOfInterest: $('#rateOfInterest').val(),

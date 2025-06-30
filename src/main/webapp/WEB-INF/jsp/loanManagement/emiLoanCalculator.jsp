@@ -29,6 +29,9 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,43 +64,24 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Interest Type</label> <select id="intresttype1" name="intresttype1"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Interest Type</option>
-									<option value="Blue">Blue</option>
+								<label for="">Interest Type</label> <select name="intrestType" id="intrestType" class="form-control selectField" style="height: 30px;">
+									<option>Select Interest Type</option>
+									<option >Flat Interest</option>
+									<option >Redused Interest</option>
+									<option >Rule 78</option>
+									
 								</select>
 							</div>
 						</div>
 
+
+	                          
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Loan Amount</label> <input type="text"
-									name="loanamount1" id="loanamount1" required="required"
-									placeholder="Enter Loan Amount"
+								<label for="loanName">Loan Amount</label> <input
+									type="text" name="loanAmount" id="loanAmount"
+									required="required" placeholder="Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -106,20 +90,46 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Yearly Interest</label> <input
-									type="text" name="yearlyintrest" id="yearlyintrest"
+									type="text" name="yearlyIntrest" id="yearlyIntrest"
 									required="required" placeholder="Yearly Interest"
 									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanName">Interest Mode</label> <select id="interestModeCalculater" name="interestModeCalculater"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Interest Mode</option>
+									<option value="Daily">Daily </option>
+									<option value="Weekly">Weekly</option>
+									<option value="Fortnightly">Fortnightly</option>
+									<option value="Monthaly">Monthaly</option>
+									<option value="halfYearly"> halfYearly</option>
+									
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Monthly Term</label> <input
-									type="text" name="monthlyterm" id="monthlyterm"
+									type="text" name="monthlyTerm" id="monthlyTerm"
 									required="required" placeholder="Enter Term in Month"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanName">EMI</label> <input
+									type="text" name="emi" id="emi"
+									readonly="readonly" placeholder="Enter Term in Month"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
 
 
 					</div>
@@ -127,7 +137,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-12 text-center">
 							<!-- <button id="saveBtn" class="btnStyle bg-success">Save</button> -->
-							<button id="saveBtn" class="btnStyle"
+							<button id="saveBtn" class="btnStyle" onclick="calculateEMI()"
 								style="background-color: #FFA500;">Calculate</button>
 							<button id="saveBtn" class="btnStyle bg-danger">View
 								Amortization</button>
@@ -193,6 +203,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/LoanManagment/emiLoanCalculator.js"></script>
+	
 </body>
 
 </html>
