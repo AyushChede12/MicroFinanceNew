@@ -89,20 +89,22 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Code</label> <input type="text"
-									name="branchCode" id="branchCode" required="required"
-									placeholder="Enter Branch Code"
-									style="text-transform: uppercase;" />
+								<label for="">Branch Code <span class="star">*</span></label> <input
+									type="text" name="branchCode" id="branchCode"
+									required="required" placeholder="Enter Branch Code"
+									style="text-transform: uppercase;" /> <small
+									id="chkbranchcode" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name</label> <input type="Text" name="branchName"
-									id="branchName" required="required"
-									placeholder="Enter Branch Name"
-									style="text-transform: uppercase;" />
+								<label>Branch Name <span class="star">*</span></label> <input
+									type="Text" name="branchName" id="branchName"
+									required="required" placeholder="Enter Branch Name"
+									style="text-transform: uppercase;" /> <small
+									id="chkbranchName" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -110,34 +112,37 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Opening Date</label> <input type="date"
-									name="openingDate" id="openingDate" required="required"
-									style="text-transform: uppercase;" />
+								<label for="">Opening Date <span class="star">*</span></label> <input
+									type="date" name="openingDate" id="openingDate"
+									required="required" style="text-transform: uppercase;" /> <small
+									id="chkopeningdate" style="color: red;"></small>
 							</div>
 						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Address</label>
+								<label for="">Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+								<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">PIN</label> <input type="text" name="pin" id="pin"
-									required="required" placeholder="Enter Pin"
-									style="text-transform: uppercase;" />
+								<label for="">PIN <span class="star">*</span></label> <input
+									type="text" name="pin" id="pin" required="required"
+									placeholder="Enter Pin" style="text-transform: uppercase;" />
+								<small id="chkpin" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <select id="state" name="state"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">State <span class="star">*</span></label> <select
+									id="state" name="state" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select State</option>
 									<option value="Maharashtra">Maharashtra</option>
 									<option value="Rajasthan">Rajasthan</option>
@@ -145,24 +150,26 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Gujarat">Gujarat</option>
 									<option value="Odisha">Odisha</option>
 									<option value="Andaman & Nicobar">Andaman & Nicobar</option>
-								</select>
+								</select> <small id="chkstate" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Primary Contact</label> <input type="text"
-									name="primaryContact" id="primaryContact" required="required"
-									placeholder="Enter Primary Contact"
-									style="text-transform: uppercase;" />
+								<label for="">Primary Contact <span class="star">*</span></label>
+								<input type="text" name="primaryContact" id="primaryContact"
+									required="required" placeholder="Enter Primary Contact"
+									style="text-transform: uppercase;" /> <small
+									id="chkprimarycontact" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Contact</label> <input type="text" name="contact"
-									id="contact" required="required" placeholder="Enter Contact"
-									style="text-transform: uppercase;" />
+								<label for="">Contact <span class="star">*</span></label> <input
+									type="text" name="contact" id="contact" required="required"
+									placeholder="Enter Contact" style="text-transform: uppercase;" />
+								<small id="chkcontact" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -176,8 +183,7 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="showTableData()">Show</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
-							<button type="button" id="saveBtn" class="btnStyle bg-warning"
-								onclick="saveBranch()">Save</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
 							<button type="button" id="updateBtn" class="btnStyle bg-success"
 								onclick="updateBranch()">Update</button>
 						</div>
@@ -218,12 +224,22 @@ pageEncoding="ISO-8859-1"%> -->
 
 							</tbody>
 						</table>
+						<div class="mt-2 text-center">
+							<button id="prevBtn" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-left"></i>
+							</button>
+							<span id="pageInfo" class="mx-2"></span>
+							<button id="nextBtn" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-right"></i>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
 	</main>
+
 
 
 	<!-- <script src="js/chartScript.js"></script> -->

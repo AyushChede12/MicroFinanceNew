@@ -90,58 +90,64 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Bank Name</label> <input type="text"
-									name="bankName" id="bankName" required="required"
+								<label for="">Bank Name <span class="star">*</span></label> <input
+									type="text" name="bankName" id="bankName" required="required"
 									placeholder="Enter Bank Name"
-									style="text-transform: uppercase;" />
+									style="text-transform: uppercase;" /> <small id="chkbankname"
+									style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Account No</label> <input type="text" name="accountNo"
-									id="accountNo" required="required"
+								<label>Account No <span class="star">*</span></label> <input
+									type="text" name="accountNo" id="accountNo" required="required"
 									placeholder="Enter Account No"
-									style="text-transform: uppercase;" />
+									style="text-transform: uppercase;" /> <small id="chkaccountno"
+									style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Contact No.</label> <input type="text" name="contactNo"
-									id="contactNo" required="required"
+								<label>Contact No <span class="star">*</span></label> <input
+									type="text" name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No"
-									style="text-transform: uppercase;" />
+									style="text-transform: uppercase;" /> <small id="chkcontactno"
+									style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Address</label>
+								<label>Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+								<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Opening Date</label> <input type="date"
-									name="openingDate" id="openingDate" required="required"
-									style="text-transform: uppercase;" />
+								<label>Opening Date <span class="star">*</span></label> <input
+									type="date" name="openingDate" id="openingDate"
+									required="required" style="text-transform: uppercase;" /> <small
+									id="chkopeningdate" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Opening Balance:</label> <input type="text"
-									name="openingBalance" id="openingBalance" required="required"
-									placeholder="Enter Opening Balance"
-									style="text-transform: uppercase;" />
+								<label>Opening Balance <span class="star">*</span></label> <input
+									type="text" name="openingBalance" id="openingBalance"
+									required="required" placeholder="Enter Opening Balance"
+									style="text-transform: uppercase;" /> <small
+									id="chkopeningbalance" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -152,10 +158,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-12 text-center">
 							<button type="button" id="showBtn" class="btnStyle bg-primary"
 								onclick="showTableData()">Show</button>
+								<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
-							<button type="button" id="saveBtn" class="btnStyle bg-warning"
-								onclick="saveBank()">Save</button>
 							<button type="button" id="updateBtn" class="btnStyle bg-success"
 								onclick="updateBank()">Update</button>
 						</div>
@@ -173,7 +178,8 @@ pageEncoding="ISO-8859-1"%> -->
 									Bank Data <span>| Table View</span>
 								</h5>
 
-								<table class="table table-borderless datatable overflow-scroll">
+								<table class="table table-borderless datatable overflow-scroll"
+									id="tableBody">
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">Sr No</th>
@@ -191,6 +197,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 									</tbody>
 								</table>
+								<div class="mt-2 text-center">
+									<button id="prevBtn" class="btn btn-sm btn-primary"><i class="bi bi-chevron-double-left"></i></button>
+									<span id="pageInfo" class="mx-2"></span>
+									<button id="nextBtn" class="btn btn-sm btn-primary"><i class="bi bi-chevron-double-right"></i></button>
+								</div>
 							</div>
 						</div>
 					</div>

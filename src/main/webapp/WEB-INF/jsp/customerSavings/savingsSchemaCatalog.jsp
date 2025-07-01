@@ -56,8 +56,8 @@ pageEncoding="ISO-8859-1"%> -->
           <div class="row">
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
-                <label for="">Policy Name </label> <input type="text" name="policyName" id="policyName" required="required"
-                  placeholder="Enter Policy Name" />
+                <label for="">Plan Name </label> <input type="text" name="policyName" id="policyName" required="required"
+                  placeholder="Enter Plan Name" />
               </div>
             </div>
 
@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields  mb-4">
-                <label for="">Monthly Minimum Balance </label> <input type="text" name="monthlyMinimumBalance" id="monthlyMinimumBalance"
+                <label for=""> Minimum Opening Balance </label> <input type="text" name="monthlyMinimumBalance" id="monthlyMinimumBalance"
                   required="required"  placeholder="Enter Monthly Minimum Balance" />
               </div>
             </div>
@@ -213,21 +213,38 @@ pageEncoding="ISO-8859-1"%> -->
       </form>
 
       <div class="row mt-5">
-        <div class="col-12">
-          <div class="card recent-sales">
+			<div class="col-12">
+				<div class="card recent-sales">
 
-            <div class="card-body table-responsive">
-              <h5 class="card-title">
-                Recent Sales <span>| Today</span>
-              </h5>
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Saving Scheme Catalog Data <span>| Table View</span>
+						</h5>
 
-              <table class="table table-borderless datatable overflow-scroll">
-                
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Plan Name</th>
+									<th scope="col">Customer Name</th>
+									<th scope="col">Initial Deposite</th>
+									<th scope="col">Opening Balance</th>
+									<th scope="col">Daily Limit</th>
+									<th scope="col">Monthly Card Limit</th>
+									<th scope="col">Yearly Cad Limit</th>
+									
+									<th scope="col">Edit</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
     </div>
 
