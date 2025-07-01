@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 	// 1. Load dropdown data on page load
 	alert("Welcome to  Generate Share Certificate");
@@ -26,40 +24,6 @@ $(document).ready(function() {
 		}
 	});
 
-	/*function fetchShareholdingDataByCode(selectedCode) {
-	    $.ajax({
-	        type: "POST",
-	        url: "/api/customershareholdingcontroller/fetchByCertificateNo",
-	        data: { findByCode: selectedCode },
-	        success: function(response) {
-	            if (response.status === "FOUND" && response.data) {
-	                let tableBody = "";
-	                $.each(response.data, function(index, share) {
-	                    tableBody += `
-	                        <tr>
-	                            <td><input type="checkbox" class="shareCheckbox" /></td>
-	                            <td>${index + 1}</td>
-	                            <td class="findByCode">${share.findByCode || ''}</td>
-	                            <td class="customerName">${share.customerName || ''}</td>
-	                            <td class="balanceShares">${share.balanceShares || ''}</td>
-	                            <td class="noOfShare">${share.noOfShare || ''}</td>
-	                            <td class="certificateNo">${share.certificateNo || ''}</td>
-	                        </tr>`;
-	                });
-	                $('.datatable tbody').html(tableBody);
-	            } else {
-	                $('.datatable tbody').html('');
-	                alert("No share data found for the selected referral code.");
-	            }
-	        },
-	        error: function(xhr) {
-	            console.error("Fetch Error:", xhr);
-	            alert("Error fetching share data.");
-	        }
-	    });
-	}*/
-
-	
 	// 2. Fetch and display table data on dropdown change
 	$('#referralCodeEntry').on('change', function() {
 		var selectedCode = $(this).val();

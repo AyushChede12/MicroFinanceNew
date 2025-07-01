@@ -8,6 +8,7 @@ pageEncoding="ISO-8859-1"%> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/ae73087723.js"
 	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet" />
 <script
@@ -42,6 +43,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
+<<!-- div class="container mt-5">
+    <h2 class="text-center">Share Certificates</h2>
+    <div id="certificateContainer" class="mt-4"></div>
+</div> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -62,9 +67,21 @@ pageEncoding="ISO-8859-1"%> -->
 				</ol>
 			</nav>
 			<div class="row">
+				<div class="col-lg-6">
+					<div class="d-flex flex-column formFields">
+						<label for="">Referral Code Entry :</label> <select
+							id="referralCodeEntry" name="referralCodeEntry" required="required" 
+							class="form-control selectField mb-4" style="height: 30px;">
+							<option value="">Select</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<!-- <div class="row">
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Referral Code Entry</label> <select
+						<label for=""></label> <select
 							id="referralCodeEntry" name="referralCodeEntry"
 							required="required" onchange="fetchShareDataByCode()"
 							class="form-control selectField" style="height: 30px;">
@@ -72,7 +89,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</select>
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 
 			<div class="row mt-5">
@@ -96,7 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Certificate NO.</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="shareholdingTableBody">
 								</tbody>
 							</table>
 						</div>
@@ -104,13 +121,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 					</div>
-					<button type="button" class="btn btn-warning" id="printbtn"
+					<button type="button" class="btn btn-warning" id="printCertificateBtn"
 						style="float: right;">Print</button>
 
 				</div>
 			</div>
 
-			<div class="row mt-5">
+			<div class="row mt-5" id="certificateContainer">
 	<div class="col-12">
 		<div class="card recent-sales">
 			<div class="card-body table-responsive">
@@ -125,7 +142,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<strong>customer ID of customer Name:</strong> <span id = "customeridandName"></span> 
 					</p>
 					<p style="font-size: 14px;">
-						<strong>Certificate No.:</strong> <span id = "certificaten	o"></span> 
+						<strong>Certificate No.:</strong> <span id = "certificateno"></span> 
 					</p>
 
 					<!-- Policy Details Section -->
@@ -135,34 +152,34 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row border">
 						<div class="col-md-6" style="padding-top: 15px;">
 							<p style="font-size: 13px;">
-								<strong>Number Of Share :</strong>  <span></span>
+								<strong>Number Of Share :</strong>  <span id = "numberofshare"></span>
 							</p>
 							<p style="font-size: 13px;">
-								<strong>Amount Transferred :</strong> <span id="interestRate"></span>
+								<strong>Amount Transferred :</strong> <span id="amounttransferred"></span>
 							</p>
 							<p style="font-size: 13px;">
-								<strong>Branch :</strong> <span id="policyType"></span>
+								<strong>Branch :</strong> <span id="branchname"></span>
 							</p>
 							<p style="font-size: 13px;">
-								<strong>Start Date :</strong> <span id="policyType"></span>
+								<strong>Start Date :</strong> <span id="startdate"></span>
 							</p>
 						</div>
 						<div class="col-md-6" style="padding-top: 15px;">
 							<p style="font-size: 13px;">
-								<strong>Balance Shares :</strong> <span id="interestFrequency"></span>
+								<strong>Balance Shares :</strong> <span id="balanceshare"></span>
 							</p>
 							<p style="font-size: 13px;">
-								<strong>Share Issued By :</strong> <span id="policyTerm"></span>
+								<strong>Share Issued By :</strong> <span id="shareissuedby"></span>
 							</p>
 							<p style="font-size: 13px;">
-								<strong>Date of Transfer :</strong> <span id="maturityDate"></span>
+								<strong>Date of Transfer :</strong> <span id="dataoftransfer"></span>
 							</p>
 						</div>
 					</div>
 
 					<!-- Maturity Payment Instructions -->
 					<h6 class="mt-3" style="font-size: 16px;">
-						<strong>Mode Of Payment :</strong>
+						<strong>Mode Of Payment :</strong> <span id="modeofpayement"></span>
 					</h6>
 					<p style="font-size: 13px;">(Content can be added here if needed)</p>
 				</div>
@@ -179,10 +196,11 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 
 	<script src="./js/adminscript.js"></script>
-
 	<!-- JS Links -->
 	<script src="./js/CustomerShareHolding/generateShareCertificate.js"></script>
 
+	
+	
 </body>
 
 </html>
