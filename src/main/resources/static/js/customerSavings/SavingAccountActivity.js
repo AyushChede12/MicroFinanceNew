@@ -1,27 +1,30 @@
-//fetch financial name from financialConsultantController
-$('#financialConsultantCode').on('blur', function () {
-	
-    let selectedCode = $(this).val();
-
+//fetch saving account details by account number
+$('#accountNumber').on('blur', function () {
+    let selectedCode = $(this).val().trim();
+	alert(selectedCode);
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchfinancialcode?financialCode=' + encodeURIComponent(selectedCode), // Pass as query param
+            url: '/api/customersavings/getallbyaccountnumber?accountNumber=' + encodeURIComponent(selectedCode),
             type: 'GET',
             success: function (response) {
-                if (response.status === "FOUND") {
+                if (response.status === "FOUND" && response.data.length > 0) {
                     let customer = response.data[0];
-                    $('#financialConsultantName').val(customer.customerName);
+                    $('#customerCode').val(customer.selectByCustomer);
+					$('#customerName').val(customer.enterCustomerName);
+					$('#contactNumber').val(customer.contactNumber);
+					$('#jointHolderName').val(customer.jointSurvivorCode);
+					$('#savingPlanName').val(customer.selectPlan);
                 } else {
                     alert('No data found!');
-                    $('#financialConsultantName').val('');
+                    $('#customerCode').val('');
                 }
             },
             error: function () {
                 alert('Error while fetching data!');
-                $('#financialConsultantName').val('');
+                $('#customerCode').val('');
             }
         });
     } else {
-        $('#financialConsultantName').val('');
+        $('#customerCode').val('');
     }
 });

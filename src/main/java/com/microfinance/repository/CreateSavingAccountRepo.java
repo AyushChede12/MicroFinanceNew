@@ -1,5 +1,6 @@
 package com.microfinance.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,5 +14,7 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 	@Transactional
 	@Query("select coalesce(max(id), 0) from CreateSavingsAccount")
 	long getMaxId();
+
+	List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
 
 }
