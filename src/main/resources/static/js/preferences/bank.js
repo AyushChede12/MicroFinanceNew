@@ -1,4 +1,9 @@
 $(document).ready(function() {
+	$("#tableBody").hide();
+	$("#updateBtn").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 	$("#saveBtn").click(function() {
 
 		$('#chkbankname').text('');
@@ -79,9 +84,9 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				if (response.status=='CREATED') {
-					alert("Bank Saved Successfully"); 
-					location.reload(); 
+				if (response.status == 'CREATED') {
+					alert("Bank Saved Successfully");
+					location.reload();
 				} else {
 					alert("Unexpected response format");
 					console.log(response);
@@ -94,49 +99,116 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#tableBody").hide();
-	$("#updateBtn").hide();
 
+
+});
+
+
+
+var totalDataMISD = [];
+var currentPageMISD = 1;
+var pageSizeMISD = 5;
+
+// Load data once
+function loadMISData() {
 	$.ajax({
 		type: "GET",
 		url: "/api/preference/getAllBankModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response);
-			if (response.status=="FOUND") {
-				let data = response.data;
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
-				data.forEach((item, index) => {
-					let row = `<tr>
-		                        <td>${index + 1}</td>
-		                        <td>${item.bankName}</td>
-		                        <td>${item.accountNo}</td>
-		                        <td>${item.contactNo}</td>
-		                        <td>${item.address}</td>
-		                        <td>${item.openingDate}</td>
-		                        <td>${item.openingBalance}</td>
-								<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-								<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-		                    </tr>`;
-					tableBody.append(row);
-				});
+			if (response.status === "FOUND") {
+				totalDataMISD = response.data;
+				renderTable(currentPageMISD);
+				togglePageNavigationMISD();
 			} else {
-				alert("Failed to fetch Relative data: " + response.message);
+				alert("Failed to fetch data: " + response.message);
 			}
 		},
 		error: function() {
 			alert("Error while calling the API.");
 		}
 	});
+}
+
+// Render paginated table
+function renderTable(page) {
+	let tableBody = $(".datatable tbody");
+	tableBody.empty();
+
+	let startIndex = (page - 1) * pageSizeMISD;
+	let endIndex = Math.min(startIndex + pageSizeMISD, totalDataMISD.length);
+
+	for (let i = startIndex; i < endIndex; i++) {
+		let person = totalDataMISD[i];
+		let row = `<tr>
+				<td>${i + 1}</td>
+                <td>${person.bankName}</td>
+                <td>${person.accountNo}</td>
+                <td>${person.contactNo}</td>
+                <td>${person.address}</td>
+                <td>${person.openingDate}</td>
+                <td>${person.openingBalance}</td>
+                <td>
+                  <button class="iconbutton" onclick="viewData(${person.id})" title="View">
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
+                    <i class="fa-solid fa-trash text-danger"></i>
+                  </button>
+                </td>
+              </tr>`;
+		tableBody.append(row);
+	}
+
+	// Update page info
+	$("#pageInfo").text(`Page ${currentPageMISD} of ${Math.ceil(totalDataMISD.length / pageSizeMISD)}`);
+}
+
+// Button state toggling
+function togglePageNavigationMISD() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	$("#prevBtn").prop("disabled", currentPageMISD === 1);
+	$("#nextBtn").prop("disabled", currentPageMISD === totalPages || totalPages === 0);
+}
+
+// Button click handlers
+$("#prevBtn").click(function() {
+	if (currentPageMISD > 1) {
+		currentPageMISD--;
+		renderTable(currentPageMISD);
+		togglePageNavigationMISD();
+	}
 });
+
+$("#nextBtn").click(function() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	if (currentPageMISD < totalPages) {
+		currentPageMISD++;
+		renderTable(currentPageMISD);
+		togglePageNavigationMISD();
+	}
+});
+
+// Call on page load
+$(document).ready(function() {
+	loadMISData();
+});
+
 
 function showTableData() {
 	$("#tableBody").show();
+	$("#prevBtn").show();
+	$("#nextBtn").show();
+	$("#pageInfo").show();
 }
 
 function hideTableData() {
 	$("#tableBody").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 }
 
 function viewData(id) {
@@ -150,7 +222,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.status="FOUND") {
+			if (response.status = "FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#bankName").val(branch.bankName);
@@ -177,7 +249,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.status="OK") {
+				if (response.status = "OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -208,7 +280,7 @@ function updateBank() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.status="OK") {
+			if (response.status = "OK") {
 				alert("Bank Updated Successfully");
 				location.reload();
 			} else {

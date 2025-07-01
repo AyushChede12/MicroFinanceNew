@@ -30,6 +30,8 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -64,10 +66,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch <span id="star"> *</span></label> <select id="branch" name="branch"
+								<label for="">Branch <span id="star"> *</span></label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									
+									<option value="">Select Branch</option>
 
 								</select>
 							</div>
@@ -151,33 +153,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<!-- <script>
-	$(document).ready(function () {
-	    $.ajax({
-	        url: "getAllBranchModule", // Make sure this is correct and relative to your context path
-	        type: "GET",
-	        dataType: "json",
-	        success: function (response) {
-	            var dropdown = $('#branch');
-	            dropdown.empty();
-	            dropdown.append('<option value="">Select Branch</option>');
-
-	            if (response.status === "OK" && response.data) {
-	                $.each(response.data, function (index, branch) {
-	                    dropdown.append('<option value="' + branch.branchName + '">' + branch.branchName + '</option>');
-	                });
-	            } else {
-	                dropdown.append('<option value="">No branch found</option>');
-	            }
-	        },
-	        error: function (xhr, status, error) {
-	            console.error("Error:", status, error);
-	            alert("Error fetching branches.");
-	        }
-	    });
-	}); -->
-
-	</script>
+	
 </body>
 
 </html>
