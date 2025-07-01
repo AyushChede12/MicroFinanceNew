@@ -135,7 +135,7 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 		<div class="row">
 			<div class="col-12 text-center mt-3" style="justify-content: end">
-				<button id="findfinanceConsultantBtn" class="btnStyle"
+				<button id="approveFinanceConsultantBtn" class="btnStyle"
 					style="background-color: #FFA500; ">Approve</button>
 			</div>
 		</div>
@@ -150,14 +150,30 @@ pageEncoding="ISO-8859-1"%> -->
 	<script>
 	$(document).ready(function(){
 		searchInTheFinanceOnboarding();
-		financialCodeDropdown();
-		updateSelectedMembersStatus();
+		financialCodeDropdown();		
 		
 		// Button click filter
 		$('#findfinanceConsultantBtn').on('click', function(e) {
 			e.preventDefault(); // Prevent form submission
 			filterFinancialCodeData();
 		});
+		
+		/* // Button click Approve
+		$('#approveFinanceConsultantBtn').on('click', function(e) {
+			e.preventDefault(); // Prevent form submission
+			updateSelectedMembersStatus();
+		}); */
+		// Button click Approve
+		$('#approveFinanceConsultantBtn').on('click', function(e) {
+		    e.preventDefault(); // Prevent form submission
+		    
+		    // Get all checked checkboxes
+		    $('.member-checkbox:checked').each(function() {
+		        const id = $(this).val();
+		        updateMemberApprovalStatus(id, true);
+		    });
+		});
+
 
 	});
 	</script>

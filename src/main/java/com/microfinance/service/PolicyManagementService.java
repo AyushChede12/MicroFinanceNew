@@ -8,10 +8,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.MisDepositePMRepo;
@@ -30,6 +32,9 @@ public class PolicyManagementService {
 	
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
+	
+	@Autowired
+	AddInvestmentRepo addinvestmentrepo;
 	
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
@@ -328,6 +333,14 @@ public boolean deleteMISDeposit(Long id) {
 	    } else {
 	        return false;
 	    }
+}
+
+
+
+//Ashwini
+public List<AddnewinvestmentPM> getAddInvestmentDetails() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
 }
 }
 

@@ -3,7 +3,7 @@ let allFinancialConsultantData = [];
 
 function searchInTheFinanceOnboarding() {
 	$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "/api/financialconsultant/getUnapprovedFinancialConsultants",
 		type: "POST",
 		contentType: "application/json",
 		success: function(response) {
@@ -96,36 +96,8 @@ function filterFinancialCodeData() {
 
 
 //Janvi : set approved status
-// Approve or reject selected members
-/*function updateSelectedMembersStatus(isApproved) {
-    const selectedIds = Array.from(document.querySelectorAll(".member-checkbox:checked"))
-        .map(checkbox => checkbox.value);
-
-    if (selectedIds.length === 0) {
-        alert("Please select at least one member.");
-        return;
-    }
-
-    selectedIds.forEach(memberId => {
-        $.ajax({
-            type: "POST",
-            url: `/approvedFinancialConsultantData/${memberId}`,
-            data: { isApproved: isApproved },
-            success: function () {
-                console.log(`Member ${memberId} ${isApproved ? "approved" : "rejected"} successfully.`);
-            },
-            error: function (xhr, status, error) {
-                console.error(`Error updating status for member ${memberId}:`, xhr.responseText || error);
-            }
-        });
-    });
-
-    alert(`Selected members ${isApproved ? "approved" : "rejected"} successfully.`);
-    getUnapprovedClients(); // Refresh the table
-}*/
-
-// Handle approve toggle
-
+// Approve selected members
+/*function updateSelectedMembersStatus() {
 $(document).on("change", ".member-checkbox", function() {
     const id = $(this).val();
     const isApproved = $(this).is(":checked");
@@ -148,3 +120,24 @@ $(document).on("change", ".member-checkbox", function() {
     });
 });
 
+}*/
+
+function updateMemberApprovalStatus(id, isApproved) {
+	 
+    $.ajax({
+        url: "/api/financialconsultant/approvedFinancialConsultantData",
+        type: "POST",
+        data: {
+            id: id,
+            isApproved: isApproved
+        },
+        success: function(response) {
+            console.log("Approval updated for ID:", id, response);
+            // Optionally show success toast
+        },
+        error: function(xhr, status, error) {
+            console.error("Error updating approval for ID:", id, error);
+            alert("Could not update approval status for ID: " + id);
+        }
+    });
+}

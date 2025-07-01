@@ -154,6 +154,11 @@ public class FinancialConsultantService {
 		return financialConsultationRepo.save(customer);
 	}
 
+	public List<addFinancialConsultant> getUnapprovedFinancialConsultants() {
+		// TODO Auto-generated method stub
+		return financialConsultationRepo.findByIsApprovedFalse();
+	}
+
 	
 
 	
