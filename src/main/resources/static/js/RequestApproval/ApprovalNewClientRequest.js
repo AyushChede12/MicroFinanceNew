@@ -134,8 +134,8 @@ function renderTable(data) {
             <tr style="font-family: 'Poppins', sans-serif;">
 			<td>
 							                <input type="checkbox" class="approval-checkbox"
-							                        data-id="${item.id}"
-							                        ${item.isApproved ? 'checked' : ''} />
+							                        data-id="${item.id}" ${item.isApproved}
+							                         />
 							                </td>   
 			 <td>${index + 1}</td>
                 <td>${item.customerName || '-'}</td>
@@ -177,5 +177,39 @@ function filterKYCData() {
 	renderTable(filtered);
 }
 
+//anjali 
 
 
+$(document).ready(function () {
+  $('#approvedBtn').click(function (e) {
+    e.preventDefault();
+
+    const selectedCheckboxes = $('.approval-checkbox:checked');
+
+    if (selectedCheckboxes.length === 0) {
+      alert("Please select at least one customer to approve.");
+      return;
+    }
+
+    selectedCheckboxes.each(function () {
+      const id = $(this).data('id');
+      const isApproved = 1; // because you're only approving selected ones
+
+      $.ajax({
+        url: `/api/requestapproval/approvedCustomerData?id=${id}&isApproved=${isApproved}`,
+        type: 'POST',
+        success: function (response) {
+          if (response.status === "OK") {
+			alert("Approved Successfully!");
+			location.reload();
+          }
+        },
+        error: function (xhr) {
+          alert("Error approving ID " + id);
+          console.error(xhr);
+        }
+      });
+    });
+
+  });
+});

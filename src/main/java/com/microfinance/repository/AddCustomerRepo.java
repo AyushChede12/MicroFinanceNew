@@ -20,6 +20,11 @@ public interface AddCustomerRepo extends JpaRepository<addCustomer, Long> {
 
 	@Transactional
 	List<addCustomer> findByMemberCodeIgnoreCase(String memberCode);
+
+	List<addCustomer> findByIsApprovedFalse();
+
+	
+	
 	
 	
    
