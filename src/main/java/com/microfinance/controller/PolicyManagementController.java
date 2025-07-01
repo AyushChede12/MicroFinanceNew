@@ -8,11 +8,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.service.PolicyManagementService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/Policymangment")
@@ -385,7 +389,7 @@ public class PolicyManagementController {
  }
     // Update MIS deposit
 
-    @PutMapping("/misupdate/{id}")
+    @PostMapping("/misupdate/{id}")
    public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(
             @PathVariable Long id,
            @RequestBody MISDepositPM updatedData) {
@@ -429,10 +433,42 @@ public class PolicyManagementController {
         }
    }
     
-   
-    
-    
-
+ // view add new Investment details
+ 	//Ashwini
+ 	@GetMapping("/getaddinvestmentdetails")
+ 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAddInvestmentDetails() {
+ 		 List<AddnewinvestmentPM> invest = policyManagementService.getAddInvestmentDetails();
+ 		 
+ 		 if (invest != null && !invest.isEmpty()) {
+ 	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.success(HttpStatus.OK,
+ 	                "Investment Details fetched successfully.",
+ 	                invest
+ 	            );
+ 	            return new ResponseEntity<>(response, HttpStatus.OK);
+ 	        } else {
+ 	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+ 	                "No Details found."
+ 	            );
+ 	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+ 	        }
+ 	}
+ 	
+ 	
+ 	//fetch new investment details by id
+ 	//Ashwini
+ 	
+ 	@GetMapping("/getinvestmentdetails")
+ 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> findByBranch(@RequestParam  String branchName) {
+ 		 List<AddnewinvestmentPM> invest = policyManagementService.findByBranch(branchName);
+ 		
+ 		
+ 			ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.FOUND, "investment fetched successfully.", invest);
+            return ResponseEntity.ok(response);
+      
+ 	}
+ 	
+ 	 
+ 	
     
     
 }

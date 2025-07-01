@@ -342,9 +342,17 @@ public List<AddnewinvestmentPM> getAddInvestmentDetails() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findAll();
 }
+
+
+
+
+public List<AddnewinvestmentPM> findByBranch(String branchName) {
+	// TODO Auto-generated method stub
+	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
+	return list;
 }
 
 
 
-
+}
 
