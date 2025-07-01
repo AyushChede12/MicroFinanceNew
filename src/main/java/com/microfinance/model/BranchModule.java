@@ -10,7 +10,7 @@ public class BranchModule {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String branchCode;
 	private String branchName;
 	private String openingDate;
@@ -19,10 +19,10 @@ public class BranchModule {
 	private String state;
 	private String primaryContact;
 	private String contact;
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getBranchCode() {

@@ -216,8 +216,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch Name:</label> <input type="text" name="approvalBranchName"
-									id="approvalBranchName" required="required" placeholder="" />
+								<label>Approval Branch Name:</label> <input type="text" name="BranchName"
+									id="BranchName" required="required" placeholder="" />
 
 							</div>
 
@@ -358,15 +358,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-			</form>
+		</form>
 
 
 		</div>
@@ -375,6 +367,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	
 </body>
 
 </html>

@@ -89,9 +89,10 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Add Caste</label> <input type="text"
+								<label for="">Add Caste <span class="star">*</span></label> <input type="text"
 									name="caste" id="caste" required="required"
 									placeholder="Enter Caste" style="text-transform: uppercase;" />
+									<small id="chkcaste" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -136,6 +137,7 @@ pageEncoding="ISO-8859-1"%> -->
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">Sr No</th>
 													<th scope="col">Caste</th>
+													<th scope="col">Delete</th>
 												</tr>
 											</thead>
 											<tbody id="tableBody">

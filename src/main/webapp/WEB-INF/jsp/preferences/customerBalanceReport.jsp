@@ -67,8 +67,6 @@ pageEncoding="ISO-8859-1"%> -->
 								<select id="Branch"
 									name="Branch" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Reshimbaug</option>
 								</select>
 							</div>
 

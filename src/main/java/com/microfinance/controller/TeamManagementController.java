@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.microfinance.model.BranchModule;
 import com.microfinance.model.ManageDepartment;
 import com.microfinance.model.ManageDesignation;
 import com.microfinance.model.RelativeModule;
@@ -80,5 +81,21 @@ public class TeamManagementController {
 		    TeamMember savedEntry = teamService.saveTeamMember(teamMember);
 		    return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);  
 		}
+		
+		@PostMapping("/fetchTeamMemberDataByCode")
+		@ResponseBody
+		public List<TeamMember> fetchAddMemberDataByCode(@RequestBody TeamMember teamMember) { 
+			List<TeamMember> list = teamService.findByteamMemberCode(teamMember.getTeamMemberCode());
+			return list;
+		}
+		
+		@GetMapping("/getAllteamMember")               //Janvi
+		@ResponseBody
+		public List<TeamMember> fetchAllteamMember(){
+			List<TeamMember> list = teamService.fetchAllteamMember();
+			return list;
+		}
+		
+
 
 }

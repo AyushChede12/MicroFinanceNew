@@ -9,9 +9,11 @@ public class LoanSchemCatalog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+    private String loanSchemeCode;
 	private String loanPlaneName;
 	private String typeloan;
 	private String minimumAge;
+	private String maximumAge;
 	private String minloanDuration;
 	private String mixloanDuration;
 	private String emiFrequency;
@@ -44,6 +46,13 @@ public class LoanSchemCatalog {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public String getLoanSchemeCode() {
+		return loanSchemeCode;
+	}
+	public void setLoanSchemeCode(String loanSchemeCode) {
+		this.loanSchemeCode = loanSchemeCode;
+	}
 	public String getLoanPlaneName() {
 		return loanPlaneName;
 	}
@@ -61,6 +70,13 @@ public class LoanSchemCatalog {
 	}
 	public void setMinimumAge(String minimumAge) {
 		this.minimumAge = minimumAge;
+	}
+	
+	public String getMaximumAge() {
+		return maximumAge;
+	}
+	public void setMaximumAge(String maximumAge) {
+		this.maximumAge = maximumAge;
 	}
 	public String getMinloanDuration() {
 		return minloanDuration;

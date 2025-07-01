@@ -30,6 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,38 +62,37 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					
+					<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch <span id="star"> *</span></label> <select id="branchName" name="branchName"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Branch</option>
+
+								</select>
+							</div>
+						</div>
+						
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Policy ID<span id="star"> *</span></label> <select id="policyId"
 									name="policyId" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select Policy ID</option>
-
 								</select>
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Maturity Date <span id="star"> *</span></label> <input type="date" name="maturityDate"
+									id="maturityDate" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -102,31 +102,58 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
+						
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Type <span id="star"> *</span></label> <select
+									id="schemeType" name="schemeType" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+									
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Name <span id="star"> *</span></label> <select
+									id="schemeName" name="schemeName" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+									
+								</select>
+							</div>
+						</div>
+						
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Policy Date <span id="star"> *</span></label> <input type="date" name="policyDate"
-									id="policyDate" required="required" placeholder=""
-									style="text-transform: uppercase;" />
+							<div class="d-flex flex-column formFields">
+								<label for="">Policy Amount <span id="star"> *</span></label> <input type="text"
+									name="policyAmount" id="policyAmount" required="required"
+									placeholder="Enter Voter No" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Application Date <span id="star"> *</span></label> <input type="date"
-									name="applicationDate" id="applicationDate" required="required"
-									placeholder="" />
+								<label for="">Deposit Amount <span id="star"> *</span></label> <input type="text"
+									name="depositAmount" id="depositAmount" required="required"
+									placeholder="Enter Licence No" />
 							</div>
 						</div>
 
-
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Comment</label> <input type="text" name="comment" id="comment"
-									required="required" placeholder="Enter Commet"  />
-
+							<div class="d-flex flex-column formFields">
+								<label for="">Maturity Amount <span id="star"> *</span></label> <input type="text"
+									name="maturityAmount" id="maturityAmount" required="required"
+									placeholder="Enter Intro Member Name" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Remark <span id="star"> *</span></label> <input type="text"
+									name="remark" id="remark" required="required"
+									placeholder="Enter Voter No" />
 							</div>
 						</div>
 
@@ -171,16 +198,6 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 
-
-
-
-
-
-
-
-
-
-
 		</form>
 
 
@@ -190,6 +207,9 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/applymaturity.js"></script>
+	
+	
 </body>
 
 </html>
