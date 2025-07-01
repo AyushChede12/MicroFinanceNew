@@ -164,5 +164,26 @@ public class FinancialConsultantController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
+	
+	//janvi: Approved Financial Consultant
+	@PostMapping("/approvedFinancialConsultantData")
+	public ResponseEntity<ApiResponse<addFinancialConsultant>> updateIsApprovedStatus(
+	        @RequestParam Long id,
+	        @RequestParam boolean isApproved) {
+
+	    Optional<addFinancialConsultant> optionalCustomer = financialConsultantService.FinancialConsultantById(id);
+
+	    if (!optionalCustomer.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Customer with ID " + id + " not found."));
+	    }
+
+	    addFinancialConsultant customer = optionalCustomer.get();
+	    customer.setApproved(isApproved); // ✅ Use a proper setter method
+	    addFinancialConsultant updated = financialConsultantService.save(customer);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.success(HttpStatus.OK, "isApproved status updated for ID " + id, updated));
+	}
 
 }

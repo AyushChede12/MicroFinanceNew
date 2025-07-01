@@ -147,6 +147,12 @@ public class FinancialConsultantService {
 		// TODO Auto-generated method stub
 		return financialConsultationRepo.findByFinancialCode(financialCode);
 	}
+	
+
+	public addFinancialConsultant save(addFinancialConsultant customer) {
+		// TODO Auto-generated method stub
+		return financialConsultationRepo.save(customer);
+	}
 
 	
 

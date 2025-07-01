@@ -24,6 +24,10 @@ public interface FinancialConsultantRepo extends JpaRepository<addFinancialConsu
 	@Transactional
 	List<addFinancialConsultant> findByFinancialCode(String financialCode);
 
+	
+
+	
+
 	/*
 	 * @Transactional List<addFinancialConsultant> fetchAllFinancialCode(String
 	 * financialCode);
