@@ -48,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-bank text-blue"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Create Savings Account</li>
+					<li class="breadcrumb-item action">Create Account</li>
 				</ol>
 			</nav>
 		</div>
@@ -66,7 +66,19 @@ pageEncoding="ISO-8859-1"%> -->
 						 <input type="hidden" name="accountNumber" id="accountNumber" placeholder="" value="${savingaccountnumber}" />
 						 <input type="hidden" name="id" id="id" />
 							
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Type Of Account</label> <select
+									id="typeofaccount" name="typeofaccount"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="savingaccount">Saving Account</option>
+									<option value="currentaccount">Current Account</option>
 
+								</select>
+							</div>
+						</div>
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="vehicalNo">Opening Date</label> <input type="date"
@@ -398,6 +410,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">Sr No</th>
 									<th scope="col">Account Number</th>
+									<th scope="col">Account Type</th>
 									<th scope="col">Customer Code</th>
 									<th scope="col">Customer Name</th>
 									<th scope="col">Mobile</th>

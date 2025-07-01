@@ -1,4 +1,9 @@
 $(document).ready(function() {
+	$("#tableBody").hide();
+	$("#updateBtn").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 	$("#saveBtn").click(function() {
 
 		$('#chkbankname').text('');
@@ -94,126 +99,116 @@ $(document).ready(function() {
 		});
 	});
 
-	$("#tableBody").hide();
-	$("#updateBtn").hide();
-	var totalDataMISD = [];
-	var currentPageMISD = 1; // Track current page
-	var pageSizeMISD = 5;
 
-	
+
+});
+
+
+
+var totalDataMISD = [];
+var currentPageMISD = 1;
+var pageSizeMISD = 5;
+
+// Load data once
+function loadMISData() {
 	$.ajax({
 		type: "GET",
 		url: "/api/preference/getAllBankModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response);
-			if (response.status == "FOUND") {
-				let data = response.data;
-				totalDataMISD = data;
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
-				var startIndexMISD = (currentPageMISD - 1) * pageSizeMISD;
-				var endIndexMISD = Math.min(startIndexMISD + pageSizeMISD, totalDataMISD.length);
-				/*				data.forEach((item, index) => {
-									let row = `<tr>
-												<td>${index + 1}</td>
-												<td>${item.bankName}</td>
-												<td>${item.accountNo}</td>
-												<td>${item.contactNo}</td>
-												<td>${item.address}</td>
-												<td>${item.openingDate}</td>
-												<td>${item.openingBalance}</td>
-												<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-												<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-											</tr>`;
-									tableBody.append(row);
-								});*/
-				for (var i = startIndexMISD; i < endIndexMISD; i++) {
-					var person = totalDataMISD[i];
-					var row = $('<tr></tr>');
-					row.append(`<td>${person.bankName}</td>`);
-					row.append(`<td>${person.accountNo}</td>`);
-					row.append(`<td>${person.contactNo}</td>`);
-					row.append(`<td>${person.address}</td>`);
-					row.append(`<td>${person.openingDate}</td>`);
-					row.append(`<td>${person.openingBalance}</td>`);
-
-					// View button with person.id passed to viewData
-					row.append(`
-					  <td>
-					    <button class="iconbutton" onclick="viewData(${person.id})" title="View">
-					      <i class="fa-solid fa-pen-to-square text-primary"></i>
-					    </button>
-					  </td>
-					`);
-
-					// Delete button with person.id passed to deleteData
-					row.append(`
-					  <td>
-					    <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
-					      <i class="fa-solid fa-trash text-danger"></i>
-					    </button>
-					  </td>
-					`);
-					tableBody.append(row);
-				}
+			if (response.status === "FOUND") {
+				totalDataMISD = response.data;
+				renderTable(currentPageMISD);
+				togglePageNavigationMISD();
 			} else {
-				alert("Failed to fetch Relative data: " + response.message);
+				alert("Failed to fetch data: " + response.message);
 			}
 		},
 		error: function() {
 			alert("Error while calling the API.");
 		}
 	});
-});
-
-
-
-function togglePageNavigationMISD() {
-	// Disable "Previous" button on the first page
-	if (currentPageMISD === 1) {
-		$('#prevBtn').prop('disabled', true);
-	} else {
-		$('#prevBtn').prop('disabled', false);
-	}
-
-	// Disable "Next" button on the last page
-	var totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
-	if (currentPageMISD === totalPages) {
-		$('#nextBtn').prop('disabled', true);
-	} else {
-		$('#nextBtn').prop('disabled', false);
-	}
 }
 
-$('#prevBtn').click(function() {
+// Render paginated table
+function renderTable(page) {
+	let tableBody = $(".datatable tbody");
+	tableBody.empty();
+
+	let startIndex = (page - 1) * pageSizeMISD;
+	let endIndex = Math.min(startIndex + pageSizeMISD, totalDataMISD.length);
+
+	for (let i = startIndex; i < endIndex; i++) {
+		let person = totalDataMISD[i];
+		let row = `<tr>
+				<td>${i + 1}</td>
+                <td>${person.bankName}</td>
+                <td>${person.accountNo}</td>
+                <td>${person.contactNo}</td>
+                <td>${person.address}</td>
+                <td>${person.openingDate}</td>
+                <td>${person.openingBalance}</td>
+                <td>
+                  <button class="iconbutton" onclick="viewData(${person.id})" title="View">
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
+                    <i class="fa-solid fa-trash text-danger"></i>
+                  </button>
+                </td>
+              </tr>`;
+		tableBody.append(row);
+	}
+
+	// Update page info
+	$("#pageInfo").text(`Page ${currentPageMISD} of ${Math.ceil(totalDataMISD.length / pageSizeMISD)}`);
+}
+
+// Button state toggling
+function togglePageNavigationMISD() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	$("#prevBtn").prop("disabled", currentPageMISD === 1);
+	$("#nextBtn").prop("disabled", currentPageMISD === totalPages || totalPages === 0);
+}
+
+// Button click handlers
+$("#prevBtn").click(function() {
 	if (currentPageMISD > 1) {
 		currentPageMISD--;
-		getMISDepositeAjax(currentPageMISD)
-
+		renderTable(currentPageMISD);
 		togglePageNavigationMISD();
 	}
 });
 
-$('#nextBtn').click(function() {
-	var totalPages = Math.ceil(totalDataMISD.length / pageSize);
+$("#nextBtn").click(function() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
 	if (currentPageMISD < totalPages) {
 		currentPageMISD++;
-		getMISDepositeAjax(currentPageMISD)
+		renderTable(currentPageMISD);
 		togglePageNavigationMISD();
 	}
 });
 
-function getMISDepositeAjax(currentPageMISD){
-	
-}
+// Call on page load
+$(document).ready(function() {
+	loadMISData();
+});
+
 
 function showTableData() {
 	$("#tableBody").show();
+	$("#prevBtn").show();
+	$("#nextBtn").show();
+	$("#pageInfo").show();
 }
 
 function hideTableData() {
 	$("#tableBody").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 }
 
 function viewData(id) {

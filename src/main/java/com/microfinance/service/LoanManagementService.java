@@ -49,6 +49,7 @@ public class LoanManagementService {
 				existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
 				existingLoan.setTypeloan(loan.getTypeloan());
 				existingLoan.setMinimumAge(loan.getMinimumAge());
+				existingLoan.setMaximumAge(loan.getMaximumAge());
 				existingLoan.setMinloanDuration(loan.getMinloanDuration());
 				existingLoan.setMixloanDuration(loan.getMixloanDuration());
 				existingLoan.setEmiFrequency(loan.getEmiFrequency());

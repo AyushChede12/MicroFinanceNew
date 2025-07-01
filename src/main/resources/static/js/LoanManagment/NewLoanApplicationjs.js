@@ -9,7 +9,7 @@ $(document).ready(function () {
         url: '/api/loanmanegment/allfetchdata', // ✅ Ensure this endpoint returns ApiResponse<List<Loan>>
         type: 'GET',
         success: function (response) {
-            if (response.success && response.data.length > 0) {
+            if (response.status=="OK" && response.data.length > 0) {
                 const dropdown = $('#findMember');
                 dropdown.empty(); // Clear existing options
                 dropdown.append('<option value="">Select Member</option>'); // Default
