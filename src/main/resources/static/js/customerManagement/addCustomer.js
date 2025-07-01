@@ -59,9 +59,9 @@ $(document).ready(function() {
 		// Fees/Setting Details
 
 
-        
-        
-      
+
+
+
 		// Handle file uploads
 		var photoWithAadhar = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
 		if (photoWithAadhar) formData.append("customerPhoto", photoWithAadhar);
@@ -141,57 +141,58 @@ function signpreview() {
 		alert("Please upload a valid image file for signature.");
 	}
 }
+$(document).ready(function () {
+    // Load States
+    $.ajax({
+        url: "getAllStates",
+        method: "GET",
+        success: function (data) {
+            console.log("Fetched states:", data);
+            data.forEach(function (state) {
+                $('#state').append(
+                    $('<option>', {
+                        value: state.stateName,       // ✅ Save state name to DB
+                        text: state.stateName,
+                        'data-id': state.stateId      // ✅ Keep stateId for internal use
+                    })
+                );
+            });
+        },
+        error: function (err) {
+            console.error("Error fetching states:", err);
+        }
+    });
 
-$(document).ready(function() {
-	// Load States
-	$.ajax({
-		url: "getAllStates",
-		method: "GET",
-		success: function(data) {
-			console.log("Fetched states:", data);
-			data.forEach(function(state) {
-				$('#state').append(
-					$('<option>', {
-						value: state.stateId, // ✅ use stateId here
-						text: state.stateName
-					})
-				);
-			});
-		},
-		error: function(err) {
-			console.error("Error fetching states:", err);
-		}
-	});
+    // Load Districts when state is selected
+    $('#state').on('change', function () {
+        const selectedStateId = $(this).find(':selected').data('id'); // ✅ Get ID from selected option
+        $('#district').empty().append('<option value="">Select District</option>');
 
-	// Load Districts when state is selected
-	$('#state').on('change', function() {
-		var selectedStateId = $(this).val();
-		$('#district').empty().append('<option value="">Select District</option>');
-
-		if (selectedStateId) {
-			$.ajax({
-				url: 'getAllDistrictsByStateId',
-				method: 'GET',
-				data: { stateId: selectedStateId },
-				success: function(response) {
-					console.log("Fetched districts:", response);
-					var districts = response.allDistricts;
-					districts.forEach(function(district) {
-						$('#district').append(
-							$('<option>', {
-								value: district.districtName,
-								text: district.districtName
-							})
-						);
-					});
-				},
-				error: function(err) {
-					console.error("Error fetching districts:", err);
-				}
-			});
-		}
-	});
+        if (selectedStateId) {
+            $.ajax({
+                url: 'getAllDistrictsByStateId',
+                method: 'GET',
+                data: { stateId: selectedStateId },  // ✅ Now correct ID passed
+                success: function (response) {
+                    console.log("Fetched districts:", response);
+                    const districts = response.allDistricts;
+                    districts.forEach(function (district) {
+                        $('#district').append(
+                            $('<option>', {
+                                value: district.districtName,
+                                text: district.districtName
+                            })
+                        );
+                    });
+                },
+                error: function (err) {
+                    console.error("Error fetching districts:", err);
+                }
+            });
+        }
+    });
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	fetch('/getAllRelativeModule')
@@ -329,5 +330,104 @@ document.addEventListener("DOMContentLoaded", function() {
 	// Load on page load
 	loadBankAccounts();
 });
+
+
+$(document).ready(function() {
+	// Fetch all customers and populate the "select by code" dropdown
+	$.ajax({
+		url: "getAllCustomer",
+		method: "GET",
+		success: function(data) {
+			console.log("Fetched Members:", data);
+			data.forEach(function(customer) {
+				const optionText = `${customer.memberCode} - ${customer.customerName}`;
+				$('#selectMember').append(
+					$('<option>', {
+						value: customer.memberCode, // You can change this to customer.id or anything else if needed
+						text: optionText
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("Error fetching customers:", err);
+		}
+	});
+});
+
+
+
+$(document).ready(function() {
+	// If already selected on load
+	if ($("#selectMember").val()) {
+		fetchBySelectedCustomer();
+	}
+
+	// On dropdown change
+	$("#selectMember").on("change", function() {
+		if ($(this).val()) {
+			fetchBySelectedCustomer();
+		} else {
+			clearCustomerFields();
+		}
+	});
+});
+
+function fetchBySelectedCustomer() {
+	const memberCode = $("#selectMember").val();
+	if (!memberCode) return;
+
+	const input = { memberCode };
+
+	$.ajax({
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(input),
+		url: 'fetchBySelectedCustomer',
+		async: false,
+		success: function(data) {
+			if (data && data.length > 0) {
+				const c = data[0];
+
+				$("#customerName").val(c.customerName || "");
+				$("#customerCode").val(c.memberCode || "");
+				$("#contactNo").val(c.contactNo || "");
+				$("#singupDate").val(c.signupDate || "");
+				$("#aadharNo").val(c.aadharNo || "");
+				$("#pan").val(c.panNo || "");
+				$("#voterNo").val(c.voterNo || "");
+				$("#rationCardNo").val(c.rationCardNo || "");
+				$("#drivingLicenseNo").val(c.drivingLicenceNo || "");
+
+				// Customer Photo
+				if (c.customerPhoto) {
+					const photoPath = `Uploads/${c.customerPhoto}`;
+					$("#photoPreview").attr("src", photoPath);
+					$("#photoHidden").val(photoPath);
+				} else {
+					$("#photoPreview").attr("src", 'Uploads/default-placeholder.jpg');
+					$("#photoHidden").val('');
+				}
+
+				// Signature
+				if (c.customerSignature) {
+					const signaturePath = `Uploads/${c.customerSignature}`;
+					$("#signaturePreview").attr("src", signaturePath);
+					$("#signatureHidden").val(signaturePath);
+				} else {
+					$("#signaturePreview").attr("src", 'Uploads/default-placeholder.jpg');
+					$("#signatureHidden").val('');
+				}
+
+			} else {
+				alert("No data found for the selected member.");
+				clearCustomerFields();
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
+		}
+	});
+}
 
 

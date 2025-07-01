@@ -68,10 +68,12 @@ public class addCustomer {
     private int memberBanking;
     private int netBanking;
     private int smsSend;
+    
+    
     private String fDate;
     private String tDate;
 
-    // New Property
+   
     private boolean isVerified;
 
     private boolean isApproved;

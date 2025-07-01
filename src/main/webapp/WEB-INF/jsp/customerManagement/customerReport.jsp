@@ -62,11 +62,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="branch" name="branch"
+								<label for="">Branch</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
@@ -89,11 +88,12 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div>
+				</form>
 		</div>
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="searchBtn" class="btnStyle"
 					style="background-color: #FFA500;">Search</button>
 			</div>
 		</div>
@@ -114,13 +114,14 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Sl No.</th>
 									<th scope="col">Customer Name</th>
 									<th scope="col">Customer Income</th>
-									<th scope="col">bank Code</th>
+									<th scope="col">bank Name</th>
 									<th scope="col">Date Of Birth</th>
 									<th scope="col">Family Member Name</th>
 									<th scope="col">Address</th>
 									<th scope="col">Contact No</th>
 									<th scope="col">Aadhar No</th>
 									<th scope="col">PAN</th>
+									<th scope="col">Registration Date </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -138,6 +139,16 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	 <script src="./js/customerManagement/customerReport.js"></script> 
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script>
+
+</script>
+
+
+
+	
 </body>
+
 
 </html>

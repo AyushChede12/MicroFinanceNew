@@ -36,7 +36,6 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 
-
 <body>
 
 	<main id="main" class="main">
