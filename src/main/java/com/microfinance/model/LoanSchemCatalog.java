@@ -12,14 +12,15 @@ public class LoanSchemCatalog {
     private String loanSchemeCode;
 	private String loanPlaneName;
 	private String typeloan;
-	private String minimumAge;
-	private String maximumAge;
-	private String minloanDuration;
-	private String mixloanDuration;
-	private String emiFrequency;
+	private String age;
+	
+	private String loanDuration;
+	
+	private String loanTerm;
 	private String emiType;
-	private String minimumloanAmount;
-	private String maximumloanAmount;
+	private String loanAmount;
+	private String loanMode;
+	
 	private String rateIntrestType;
 	private String typeIntrest;
 	private String typesecurity;
@@ -38,15 +39,12 @@ public class LoanSchemCatalog {
 	private String lateAllowanceday;
 	private String modePanalty;
 	private String pennaltyMonthly;
-	
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public String getLoanSchemeCode() {
 		return loanSchemeCode;
 	}
@@ -65,36 +63,23 @@ public class LoanSchemCatalog {
 	public void setTypeloan(String typeloan) {
 		this.typeloan = typeloan;
 	}
-	public String getMinimumAge() {
-		return minimumAge;
+	public String getAge() {
+		return age;
 	}
-	public void setMinimumAge(String minimumAge) {
-		this.minimumAge = minimumAge;
+	public void setAge(String age) {
+		this.age = age;
 	}
-	
-	public String getMaximumAge() {
-		return maximumAge;
+	public String getLoanDuration() {
+		return loanDuration;
 	}
-	public void setMaximumAge(String maximumAge) {
-		this.maximumAge = maximumAge;
+	public void setLoanDuration(String loanDuration) {
+		this.loanDuration = loanDuration;
 	}
-	public String getMinloanDuration() {
-		return minloanDuration;
+	public String getLoanTerm() {
+		return loanTerm;
 	}
-	public void setMinloanDuration(String minloanDuration) {
-		this.minloanDuration = minloanDuration;
-	}
-	public String getMixloanDuration() {
-		return mixloanDuration;
-	}
-	public void setMixloanDuration(String mixloanDuration) {
-		this.mixloanDuration = mixloanDuration;
-	}
-	public String getEmiFrequency() {
-		return emiFrequency;
-	}
-	public void setEmiFrequency(String emiFrequency) {
-		this.emiFrequency = emiFrequency;
+	public void setLoanTerm(String loanTerm) {
+		this.loanTerm = loanTerm;
 	}
 	public String getEmiType() {
 		return emiType;
@@ -102,17 +87,17 @@ public class LoanSchemCatalog {
 	public void setEmiType(String emiType) {
 		this.emiType = emiType;
 	}
-	public String getMinimumloanAmount() {
-		return minimumloanAmount;
+	public String getLoanAmount() {
+		return loanAmount;
 	}
-	public void setMinimumloanAmount(String minimumloanAmount) {
-		this.minimumloanAmount = minimumloanAmount;
+	public void setLoanAmount(String loanAmount) {
+		this.loanAmount = loanAmount;
 	}
-	public String getMaximumloanAmount() {
-		return maximumloanAmount;
+	public String getLoanMode() {
+		return loanMode;
 	}
-	public void setMaximumloanAmount(String maximumloanAmount) {
-		this.maximumloanAmount = maximumloanAmount;
+	public void setLoanMode(String loanMode) {
+		this.loanMode = loanMode;
 	}
 	public String getRateIntrestType() {
 		return rateIntrestType;
@@ -180,6 +165,9 @@ public class LoanSchemCatalog {
 	public void setPennaltyMonthly(String pennaltyMonthly) {
 		this.pennaltyMonthly = pennaltyMonthly;
 	}
+	
+	
+	
 	
 
 }

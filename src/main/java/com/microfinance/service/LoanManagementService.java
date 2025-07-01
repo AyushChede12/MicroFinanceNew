@@ -27,8 +27,7 @@ public class LoanManagementService {
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
 	
-	@Autowired
-	private BranchModuleRepo branchModuleRepo;
+	
 	
 	
 
@@ -48,14 +47,15 @@ public class LoanManagementService {
 
 				existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
 				existingLoan.setTypeloan(loan.getTypeloan());
-				existingLoan.setMinimumAge(loan.getMinimumAge());
-				existingLoan.setMaximumAge(loan.getMaximumAge());
-				existingLoan.setMinloanDuration(loan.getMinloanDuration());
-				existingLoan.setMixloanDuration(loan.getMixloanDuration());
-				existingLoan.setEmiFrequency(loan.getEmiFrequency());
+				existingLoan.setAge(loan.getAge());
+				
+				existingLoan.setLoanDuration(loan.getLoanDuration());
+				
+				existingLoan.setLoanTerm(loan.getLoanTerm());
 				existingLoan.setEmiType(loan.getEmiType());
-				existingLoan.setMinimumloanAmount(loan.getMinimumloanAmount());
-				existingLoan.setMaximumloanAmount(loan.getMaximumloanAmount());
+				existingLoan.setLoanAmount(loan.getLoanAmount());
+				existingLoan.setLoanMode(loan.getLoanMode());
+				
 				existingLoan.setRateIntrestType(loan.getRateIntrestType());
 				existingLoan.setTypeIntrest(loan.getTypeIntrest());
 				existingLoan.setTypesecurity(loan.getTypesecurity());

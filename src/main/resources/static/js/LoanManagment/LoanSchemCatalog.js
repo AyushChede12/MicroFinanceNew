@@ -14,14 +14,12 @@ $(document).ready(function () {
             loanSchemeCode: $('#loanSchemeCode').val(),   // ✅ fixed here
             loanPlaneName: $('#loanPlaneName').val(),
             typeloan: $('#typeloan').val(),
-            minimumAge: $('#minimumAge').val(),
-            maximumAge: $('#maximumAge').val(),
-            minloanDuration: $('#minloanDuration').val(),
-            mixloanDuration: $('#mixloanDuration').val(),
-            emiFrequency: $('#emiFrequency').val(),
+            age: $('#age').val(),    
+            loanDuration: $('#loanDuration').val(),
+            loanTerm: $('#loanTerm').val(),
             emiType: $('#emiType').val(),
-            minimumloanAmount: $('#minimumloanAmount').val(),
-            maximumloanAmount: $('#maximumloanAmount').val(),
+            loanAmount: $('#loanAmount').val(),
+			loanMode:$('#loanMode').val(),
             rateIntrestType: $('#rateIntrestType').val(),
             typeIntrest: $('#typeIntrest').val(),
             typesecurity: $('#typesecurity').val(),
@@ -126,12 +124,9 @@ function loadLoanTable() {
                             <td>${loan.loanSchemeCode || "-"}</td>
                             <td>${loan.loanPlaneName || "-"}</td>
                             <td>${loan.typeloan || "-"}</td>
-                            <td>${loan.minimumAge || "-"}</td>
-                            <td>${loan.maximumAge || "-"}</td>
-                            <td>${loan.minloanDuration || "-"}</td>
-                            <td>${loan.mixloanDuration || "-"}</td>
-                            <td>${loan.emiFrequency || "-"}</td>
-                            
+                            <td>${loan.age || "-"}</td>
+                            <td>${loan.loanDuration || "-"}</td>
+							<td>${loan.loanTerm || "-"}</td>
                             <td><button onclick="editLoanById(${loan.id})"><i class="fa fa-edit text-primary"></i></button></td>
                             <td><button onclick="deleteLoan(${loan.id})"><i class="fa fa-trash text-danger"></i></button></td>
                         </tr>
@@ -168,11 +163,10 @@ function editLoanById(id) {
 	            $('#loanId').val(loan.id); // Hidden field for ID
 	            $('#loanPlaneName').val(loan.loanPlaneName);
 	            $('#typeloan').val(loan.typeloan);
-	            $('#minimumAge').val(loan.minimumAge);
-	            $('#maximumAge').val(loan.maximumAge);
-	            $('#minloanDuration').val(loan.minloanDuration);
-	            $('#mixloanDuration').val(loan.mixloanDuration);
-	            $('#emiFrequency').val(loan.emiFrequency);
+	            $('#age').val(loan.age);
+	             $('#loanDuration').val(loan.loanDuration);
+	           
+	            $('#loanTerm').val(loan.loanTerm);
 	            $('#emiType').val(loan.emiType);
 	            $('#minimumloanAmount').val(loan.minimumloanAmount);
 	            $('#maximumloanAmount').val(loan.maximumloanAmount);
@@ -243,4 +237,79 @@ function deleteLoan(id) {
     }
 }
 
+function validateAge() {
+    const ageInput = document.getElementById("age").value.trim();
+    const age = parseInt(ageInput, 10); // parse age to integer
+    const messageBox = document.getElementById("message");
 
+    // Clear old message
+    messageBox.innerHTML = "";
+    messageBox.style.color = "red";
+    messageBox.style.fontSize = "12px"; // 👈 Font size reduced here
+
+    // Check for empty or invalid input
+    if (ageInput === "" || isNaN(age)) {
+        messageBox.innerHTML = "Please enter a valid age.";
+        return;
+    }
+
+    // Eligibility conditions
+    if (age < 18) {
+        messageBox.innerHTML = "You are not eligible for loan (below 18).";
+    } else if (age > 60) {
+        messageBox.innerHTML = "You are not eligible for loan (above 60).";
+    } else {
+        messageBox.innerHTML = "You are eligible for loan.";
+        messageBox.style.color = "green";
+    }
+}
+// duration validation
+
+function validateLoanDuration() {
+    const loanType = document.getElementById("typeloan").value;
+	alert("loanType");
+    const durationInput = document.getElementById("loanDuration").value.trim();
+    const duration = parseInt(durationInput, 10);
+    const message = document.getElementById("durationMsg");
+
+    message.innerHTML = "";
+    message.style.color = "red";
+    message.style.fontSize = "12px";
+
+    if (loanType === "") {
+        message.innerHTML = "Please select loan type.";
+        return false;
+    }
+
+    if (durationInput === "" || isNaN(duration)) {
+        message.innerHTML = "Please enter loan duration.";
+        return false;
+    }
+
+    // Define limits based on loan type
+    let min = 1;
+    let max = 30;
+
+    if (loanType === "personal") {
+        max = 5;
+    } else if (loanType === "home") {
+        max = 30;
+    } else if (loanType === "gold") {
+        max = 2;
+    }
+
+    // Validation
+    if (duration < min) {
+        message.innerHTML = `Loan duration must be at least ${min} year.`;
+        return false;
+    }
+
+    if (duration > max) {
+        message.innerHTML = `Loan duration cannot exceed ${max} years for ${loanType} loan.`;
+        return false;
+    }
+
+    message.innerHTML = "Valid loan duration.";
+    message.style.color = "green";
+    return true;
+}
