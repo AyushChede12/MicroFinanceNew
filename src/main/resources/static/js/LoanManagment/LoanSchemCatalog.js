@@ -13,10 +13,10 @@ $(document).ready(function () {
         const loanData = {
             loanSchemeCode: $('#loanSchemeCode').val(),   // ✅ fixed here
             loanPlaneName: $('#loanPlaneName').val(),
-            typeloan: $('#typeloan').val(),
+            typeLoan: $('#typeLoan').val(),
             age: $('#age').val(),    
             loanDuration: $('#loanDuration').val(),
-            loanTerm: $('#loanTerm').val(),
+            
             emiType: $('#emiType').val(),
             loanAmount: $('#loanAmount').val(),
 			loanMode:$('#loanMode').val(),
@@ -56,21 +56,17 @@ $(document).ready(function () {
 
 $(document).ready(function() {
 	$("#updateBtn").click(function(e) {
-		alert("hill sharddha");
+		alert("hill update alert");
 		e.preventDefault();
 
 		var loanData = {
 			loanPlaneName: $('#loanPlaneName').val(),
-			typeloan: $('#typeloan').val(),
-			minimumAge: $('#minimumAge').val(),
-			maximumAge: $('#maximumAge').val(),
-			minloanDuration: $('#minloanDuration').val(),
-			mixloanDuration: $('#mixloanDuration').val(),
-			emiFrequency: $('#emiFrequency').val(),
+			typeLoan: $('#typeLoan').val(),
+			age: $('#age').val(),
+			loanDuration: $('#loanDuration').val(),
 			emiType: $('#emiType').val(),
-			minimumloanAmount: $('#minimumloanAmount').val(),
-			maximumloanAmount: $('#maximumloanAmount').val(),
-			rateIntrestType: $('#rateIntrestType').val(),
+			loanAmount: $('#loanAmount').val(),			
+			loanMode: $('#loanMode').val(),
 			typeIntrest: $('#typeIntrest').val(),
 			typesecurity: $('#typesecurity').val(),
 			feeProcessing: $('#feeProcessing').val(),
@@ -123,10 +119,10 @@ function loadLoanTable() {
                             <td>${loan.id}</td>
                             <td>${loan.loanSchemeCode || "-"}</td>
                             <td>${loan.loanPlaneName || "-"}</td>
-                            <td>${loan.typeloan || "-"}</td>
+                            <td>${loan.typeLoan || "-"}</td>
                             <td>${loan.age || "-"}</td>
                             <td>${loan.loanDuration || "-"}</td>
-							<td>${loan.loanTerm || "-"}</td>
+							<td>${loan.emiType || "-"}</td>
                             <td><button onclick="editLoanById(${loan.id})"><i class="fa fa-edit text-primary"></i></button></td>
                             <td><button onclick="deleteLoan(${loan.id})"><i class="fa fa-trash text-danger"></i></button></td>
                         </tr>
@@ -162,14 +158,14 @@ function editLoanById(id) {
 
 	            $('#loanId').val(loan.id); // Hidden field for ID
 	            $('#loanPlaneName').val(loan.loanPlaneName);
-	            $('#typeloan').val(loan.typeloan);
+	            $('#typeLoan').val(loan.typeLoan);
 	            $('#age').val(loan.age);
 	             $('#loanDuration').val(loan.loanDuration);
 	           
-	            $('#loanTerm').val(loan.loanTerm);
+	          
 	            $('#emiType').val(loan.emiType);
-	            $('#minimumloanAmount').val(loan.minimumloanAmount);
-	            $('#maximumloanAmount').val(loan.maximumloanAmount);
+	            $('#loanAmount').val(loan.loanAmount);
+	            $('#loanMode').val(loan.loanMode);
 	            $('#rateIntrestType').val(loan.rateIntrestType);
 	            $('#typeIntrest').val(loan.typeIntrest);
 	            $('#typesecurity').val(loan.typesecurity);

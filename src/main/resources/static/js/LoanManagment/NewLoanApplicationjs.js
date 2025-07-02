@@ -144,22 +144,24 @@ $(document).ready(function () {
 
 // All field fetch by loan new schem code by 
 function getLoanByCode() {
-    let code = $('#newApplicationLoanCode').val();
-
-    
-
-    $.ajax({
+    let code = $('#newApplicationLoanCode').val(); 
+$.ajax({
         url: '/api/loanmanegment/getBySchemLoanCode?code=' + encodeURIComponent(code),
         type: 'GET',
         contentType: 'application/json',
         success: function(response) {
 			alert("success");
             if (response && response.data) {
-                console.log("✅ Loan Found:", response.data);
+                console.log(" Loan Found:", response.data);
 
                 $('#newApplicationLoanPlaneName').val(response.data.loanPlaneName || '');
-                $('#newLoanTypeofloan').val(response.data.typeloan || '');
-                $('#newLoanROI').val(response.data.rateIntrestType || '');
+                $('#newLoanTypeofloan').val(response.data.typeLoan || '');
+                $('#newApplicationDurationPlan').val(response.data.loanDuration || '');
+				$('#newApplicationROI').val(response.data.rateIntrestType || '');
+				$('#newApplicationTypeIntrest').val(response.data.typeIntrest || '');
+				$('#newLoanApplicationCategoryLoan').val(response.data.loanMode || '');
+								
+				
                 // Add other fields as needed
             } else {
                 alert("Loan not found or empty response.");
@@ -173,32 +175,34 @@ function getLoanByCode() {
 }
 
 // calulate the Emi Amout 
-/*function calculateEMI() {
-    const newloanAmountLoan = parseFloat(document.getElementById("newloanAmountLoan").value);
-    const newLoanROI = parseFloat(document.getElementById("newLoanROI").value);
-    const newLoanPlanDuration = parseInt(document.getElementById("newLoanPlanDuration").value); // in months
-    const newLoanTypeIntrest = document.getElementById("newLoanTypeIntrest").value.toLowerCase();
+function calculateEMI() {
+    let loanAmount = parseFloat(document.getElementById("newApplicationLoanAmount").value) || 0;
+	alert(loanAmount);
+    let loanROI = parseFloat(document.getElementById("newApplicationROI").value) || 0;
+	alert(loanROI);
+    let planTerm = parseInt(document.getElementById("newApplicationDurationPlan").value, 10) || 1;
+	alert(planTerm);
+    let roiType = document.getElementById("newApplicationTypeIntrest").value;
+	alert(roiType);
+    let monthlyEMI = 0;
 
-    if (!newloanAmountLoan || !newLoanROI || !newLoanPlanDuration) {
-        alert("Please enter valid loan amount, ROI and duration.");
-        return;
+    if (roiType === "Flat Interest") {
+        monthlyEMI = (loanAmount + (loanAmount * (loanROI / 100) * (planTerm / 12))) / planTerm;
+    } else if (roiType === "Reducing interest") {
+        let monthlyRate = loanROI / (12 * 100);
+        monthlyEMI = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, planTerm)) /
+                     (Math.pow(1 + monthlyRate, planTerm) - 1);
+    } else if (roiType === "Rule 78") {
+        let totalInterest = (loanAmount * (loanROI / 100) * (planTerm / 12));
+        monthlyEMI = (loanAmount + totalInterest) / planTerm;
     }
 
-    let emi = 0;
-    const monthlyRate = newLoanROI / 12 / 100;
+    // Set EMI into the form field
+    document.getElementById("newLoanApplicationPaymnetEMI").value = monthlyEMI.toFixed(2);
 
-    if (newLoanTypeIntrest === "reducing") {
-        emi = (newloanAmountLoan * monthlyRate * Math.pow(1 + monthlyRate, newLoanPlanDuration)) / (Math.pow(1 + monthlyRate, newLoanPlanDuration) - 1);
-    } else {
-        const totalInterest = (newloanAmountLoan * newLoanROI * newLoanPlanDuration) / (12 * 100);
-        emi = (newloanAmountLoan + totalInterest) / newLoanPlanDuration;
-    }
-
-    emi = emi.toFixed(2);
-    document.getElementById("newLoanApplicationPaymnetEMI").innerText = `Calculated EMI: ₹${emi}`;
+    // Optional: calculateCharges(loanAmount);
 }
 
-*/
 
 // Fetching guarented Detail Memeber code
 function loadMemberCodesOnly() {

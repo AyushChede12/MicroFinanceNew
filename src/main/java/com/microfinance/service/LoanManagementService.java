@@ -17,7 +17,6 @@ import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.NewLoanAppicationRepo;
 
-
 @Service
 public class LoanManagementService {
 
@@ -26,12 +25,6 @@ public class LoanManagementService {
 	private LoanMangmentSchemeRepo loanRepository;
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
-	
-	
-	
-	
-
-
 
 // update and save
 	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
@@ -46,16 +39,15 @@ public class LoanManagementService {
 				existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
 
 				existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
-				existingLoan.setTypeloan(loan.getTypeloan());
+				existingLoan.setTypeLoan(loan.getTypeLoan());
 				existingLoan.setAge(loan.getAge());
-				
+
 				existingLoan.setLoanDuration(loan.getLoanDuration());
-				
-				existingLoan.setLoanTerm(loan.getLoanTerm());
+
 				existingLoan.setEmiType(loan.getEmiType());
 				existingLoan.setLoanAmount(loan.getLoanAmount());
 				existingLoan.setLoanMode(loan.getLoanMode());
-				
+
 				existingLoan.setRateIntrestType(loan.getRateIntrestType());
 				existingLoan.setTypeIntrest(loan.getTypeIntrest());
 				existingLoan.setTypesecurity(loan.getTypesecurity());
@@ -82,19 +74,21 @@ public class LoanManagementService {
 		// TODO Auto-generated method stub
 		return loanRepository.findAll();
 	}
+
 // Append the data on Text Field
 	public LoanSchemCatalog getLoanById(Long id) {
 		// TODO Auto-generated method stub
 		return loanRepository.findById(id).orElse(null);
 	}
+
 // Delete By ID
 	public boolean deleteLoanLoanById(Long id) {
 		// TODO Auto-generated method stub
 		if (loanRepository.existsById(id)) {
-	        loanRepository.deleteById(id);
-	        return true;
-	    }
-	    return false;
+			loanRepository.deleteById(id);
+			return true;
+		}
+		return false;
 	}
 
 	public List<addCustomer> getAllLoanApplication() {
@@ -102,13 +96,11 @@ public class LoanManagementService {
 		return addCustomerRepo.findAll();
 	}
 
-
 	public addCustomer getLoanApplicationById(Long id) {
-		
-		  return addCustomerRepo.findById(id)
-	                .orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
+
+		return addCustomerRepo.findById(id).orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
 	}
-	
+
 	/*
 	 * //Branch Model fetch for prefenses
 	 * 
@@ -117,20 +109,17 @@ public class LoanManagementService {
 	 */
 
 	// Loan schem Code Name Dropdrawn
-	
+
 	public List<LoanSchemCatalog> getLoanSchemCode() {
 		// TODO Auto-generated method stub
 		return loanRepository.findAll();
 	}
 
-	
-	//fetching in new loan application by schem loan Code
+	// fetching in new loan application by schem loan Code
 
 	public LoanSchemCatalog getLoanByCode(String code) {
-	    return loanRepository.findByLoanSchemeCode(code)
-	        .orElseThrow(() -> new RuntimeException("Loan Scheme not found for code: " + code));
+		return loanRepository.findByLoanSchemeCode(code)
+				.orElseThrow(() -> new RuntimeException("Loan Scheme not found for code: " + code));
 	}
-
-	
 
 }

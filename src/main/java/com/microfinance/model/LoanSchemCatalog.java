@@ -11,12 +11,12 @@ public class LoanSchemCatalog {
 	private Long id;
     private String loanSchemeCode;
 	private String loanPlaneName;
-	private String typeloan;
+	private String typeLoan;
 	private String age;
 	
 	private String loanDuration;
 	
-	private String loanTerm;
+	
 	private String emiType;
 	private String loanAmount;
 	private String loanMode;
@@ -57,11 +57,12 @@ public class LoanSchemCatalog {
 	public void setLoanPlaneName(String loanPlaneName) {
 		this.loanPlaneName = loanPlaneName;
 	}
-	public String getTypeloan() {
-		return typeloan;
+	
+	public String getTypeLoan() {
+		return typeLoan;
 	}
-	public void setTypeloan(String typeloan) {
-		this.typeloan = typeloan;
+	public void setTypeLoan(String typeLoan) {
+		this.typeLoan = typeLoan;
 	}
 	public String getAge() {
 		return age;
@@ -75,12 +76,7 @@ public class LoanSchemCatalog {
 	public void setLoanDuration(String loanDuration) {
 		this.loanDuration = loanDuration;
 	}
-	public String getLoanTerm() {
-		return loanTerm;
-	}
-	public void setLoanTerm(String loanTerm) {
-		this.loanTerm = loanTerm;
-	}
+
 	public String getEmiType() {
 		return emiType;
 	}
