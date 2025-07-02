@@ -18,18 +18,18 @@ $(document).ready(function() {
 	});
 
 	$("#customerCode").change(function() {
-		let customerCode = $(this).val();
+		let customerCode = $("#customerCode").val();
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
 				url: "/api/financialconsultant/getFinancialConsultantByMemberCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
-					if (response.data && response.data.length > 0) {
+					if (response.status=="OK") {
 						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
-						$("#major").val(data.major);
+						$("#authenticateFor").val(data.authenticateFor);
 						$("#customerName").val(data.customerName);
 						$("#familyMemberName").val(data.guardianName);
 						$("#relationToApplicant").val(data.relationToApplicant);
@@ -40,6 +40,7 @@ $(document).ready(function() {
 						$("#customerAddress").val(data.customerAddress);
 						$("#district").val(data.district);
 						$("#state").val(data.state);
+						$("#branchName").val(data.branchName);
 						$("#pinCode").val(data.pinCode);
 						$("#aadharNo").val(data.aadharNo);
 						$("#panNo").val(data.panNo);
@@ -165,7 +166,7 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		alert("delete");
-		var id=$("#id").val();
+		var id = $("#id").val();
 		if (confirm("Are you sure you want to delete this Customer Data?")) {
 			$.ajax({
 				url: "/api/datacorrection/deleteCustomerDataByForm",
@@ -188,7 +189,68 @@ $(document).ready(function() {
 
 	});
 
+	$("#printBtn").on("click", function (e) {
+		e.preventDefault();
 
+		// Clone the form
+		const $formClone = $("#formid").clone();
+
+		// Remove the button row from cloned form
+		$formClone.find("#editmember").remove();
+		$formClone.find("#printBtn").remove();
+		$formClone.find("#updateBtn").remove();
+		$formClone.find("#deleteBtn").remove();
+
+		// Optional: remove any row that holds the buttons
+		$formClone.find(".text-center").each(function () {
+			if ($(this).find("button").length > 0) {
+				$(this).remove();
+			}
+		});
+
+		// Open print window
+		const printWindow = window.open("", "_blank");
+
+		if (printWindow) {
+			printWindow.document.open();
+			printWindow.document.write(`
+				<html>
+				<head>
+					<title>Print - Customer Form</title>
+					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+					<style>
+						body {
+							font-family: Arial, sans-serif;
+							padding: 20px;
+						}
+						.formFields {
+							margin-bottom: 15px;
+						}
+						label {
+							font-weight: bold;
+						}
+						input, select, textarea {
+							border: 1px solid #ccc;
+							border-radius: 5px;
+							padding: 5px;
+							width: 100%;
+						}
+						.toggle {
+							pointer-events: none;
+						}
+					</style>
+				</head>
+				<body onload="window.print(); window.close();">
+					<h3 class="text-center mb-4">Customer Information</h3>
+					${$formClone[0].outerHTML}
+				</body>
+				</html>
+			`);
+			printWindow.document.close();
+		} else {
+			alert("Popup blocked. Please allow popups for this website.");
+		}
+	});
 
 });
 
@@ -207,11 +269,11 @@ function restFieldsBind(customerCode) {
 				$("#comments").val(data.comments);
 
 			} else {
-				alert("No customer found for this Customer code.");
+				alert("Transfer Share Details Not Found For Customer");
 			}
 		},
 		error: function() {
-			alert("Customer not found or server error.");
+			alert("Shares not found or server error");
 		}
 	});
 }

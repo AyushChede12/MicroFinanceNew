@@ -58,7 +58,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Edit Member</li>
+							<li class="breadcrumb-item action" id="editmember">Edit Member</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -108,8 +108,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Select</label> <select id="major"
-									name="major" required="required"
+								<label for="vehicalNo">Select</label> <select id="authenticateFor"
+									name="authenticateFor" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>
