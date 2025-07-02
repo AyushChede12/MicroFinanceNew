@@ -10,6 +10,7 @@ public class FixedDepositPM {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 
 	private  long id;
+	private String fd;
 	private String planCodeFD;
 	private String planNameFD;
 	private String minimumAmountFD;
@@ -134,6 +135,12 @@ public class FixedDepositPM {
 	}
 	public void setStatusOfPlanFD(String statusOfPlanFD) {
 		this.statusOfPlanFD = statusOfPlanFD;
+	}
+	public String getFd() {
+		return fd;
+	}
+	public void setFd(String fd) {
+		this.fd = fd;
 	}
 	
 

@@ -1,6 +1,11 @@
 package com.microfinance.controller;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +16,10 @@ import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingSchemeCatalog;
+import com.microfinance.model.states;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
+
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -171,5 +178,6 @@ public class CustomerSavingsController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
 	
 }

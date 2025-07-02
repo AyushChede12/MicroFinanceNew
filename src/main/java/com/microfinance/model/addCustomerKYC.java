@@ -22,7 +22,7 @@ public class addCustomerKYC {
 	private String rationCardNo;
 	private String drivingLicenseNo;
 	private String customerPhoto;	
-	private String signature;
+	private String customerSignature;
 	private String aadharFrontPhoto;
 	private String aadharBackPhoto;
 	private String panPhoto;
@@ -102,11 +102,12 @@ public class addCustomerKYC {
 	public void setCustomerPhoto(String customerPhoto) {
 		this.customerPhoto = customerPhoto;
 	}
-	public String getSignature() {
-		return signature;
+	
+	public String getCustomerSignature() {
+		return customerSignature;
 	}
-	public void setSignature(String signature) {
-		this.signature = signature;
+	public void setCustomerSignature(String customerSignature) {
+		this.customerSignature = customerSignature;
 	}
 	public String getAadharFrontPhoto() {
 		return aadharFrontPhoto;
