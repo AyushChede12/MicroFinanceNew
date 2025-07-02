@@ -63,7 +63,20 @@ public class RequestApprovalsController {
 	            ApiResponse.success(HttpStatus.OK, "isApproved status updated for ID " + id, updated));
 	}
 	
-	//anjali
+	//anjali (2/07/25)
+   
 	
+    @GetMapping("/unapproved")
+    public ResponseEntity<ApiResponse<List<addCustomer>>> getAllUnapprovedCustomers() {
+        List<addCustomer> list = requestApprovalsService.getUnapprovedCustomers();
+        if (!list.isEmpty()) {
+            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved customers fetched", list));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved customers found"));
+        }
+    }
+
+
 
 }

@@ -1,5 +1,5 @@
 
-function memberCodeDropdown() {    //anjali
+/*function memberCodeDropdown() {    //anjali
 	$.ajax({
 		type: "GET",
 		url: '/api/requestapproval/findAllMemberCode',
@@ -24,7 +24,7 @@ function memberCodeDropdown() {    //anjali
 			alert("Failed to load member codes.");
 		}
 	});
-}
+}*/
 
 $(document).ready(function() {
 	memberCodeDropdown();
@@ -97,7 +97,7 @@ $(document).ready(function() {
 
 function loadCustomerKYCData() {
 	$.ajax({
-		url: "/api/requestapproval/findAllMemberCode",
+		url: "/api/requestapproval/unapproved",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -213,3 +213,80 @@ $(document).ready(function () {
 
   });
 });
+
+/*$(document).ready(function () {
+    // Fetch unapproved customers when page loads
+    fetchUnapprovedCustomers();
+    
+});
+
+function fetchUnapprovedCustomers() {
+        $.ajax({
+            url: '/api/requestapproval/unapproved',
+            method: 'GET',
+            success: function (response) {
+                if (response.status === 'OK') {
+                    populateUnapprovedCustomerTable(response.data);
+                } else {
+                    $('.datatable tbody').empty();
+                    alert("No unapproved customers found.");
+                }
+            },
+            error: function () {
+                $('.datatable tbody').empty();
+                alert("Error fetching unapproved customer data.");
+            }
+        });
+    }
+
+function populateUnapprovedCustomerTable(data) {
+        const tbody = $('.datatable tbody');
+        tbody.empty();
+
+        data.forEach((item, index) => {
+            const row = `
+                <tr>
+                    <td><input type="checkbox" value="${item.id}" /></td>
+                    <td>${index + 1}</td>
+                    <td>${item.customerName || ''}</td>
+                    <td>${item.memberCode || ''}</td>
+                    <td>${item.branchName || ''}</td>
+                    <td>${item.dob || ''}</td>
+                    <td>${item.customerAge || ''}</td>
+                    <td>${item.customerGender || ''}</td>
+                    <td>${item.customerAddress || ''}</td>
+                    <td>${item.academicBackground || ''}</td>
+                    <td>${item.contactNo || ''}</td>
+                    <td>${item.emailId || ''}</td>
+                </tr>
+            `;
+            tbody.append(row);
+        });
+    }*/
+
+	$(document).ready(function() {
+	$.ajax({
+			url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
+			type: "GET",
+			success: function(response) {
+				if (response.status == "FOUND") {
+					const branchList = response.data;
+					$("#branchName").empty(); // Clear existing options
+					$("#branchName").append("<option value=''>-- Select Branch --</option>");
+
+					for (let i = 0; i < branchList.length; i++) {
+						let branch = branchList[i];
+						let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
+						$("#branchName").append(option);
+						$("#branch").append(option);
+					}
+				} else {
+					alert("Error: " + response.message);
+				}
+			},
+			error: function(xhr) {
+				console.error("Error loading branches:", xhr.responseText);
+				alert("Failed to load dropdown data.");
+			}
+		});
+		});

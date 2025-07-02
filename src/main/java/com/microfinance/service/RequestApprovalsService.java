@@ -33,6 +33,18 @@ public class RequestApprovalsService {
 		return addCustomerRepo.save(customer);
 	}
 
+	public List<addCustomer> getUnapprovedCustomersByMemberCode(String branchName) {
+		// TODO Auto-generated method stub
+		return addCustomerRepo.findByIsApprovedFalseAndMemberCode(branchName);
+	}
+
+	
+
+	public List<addCustomer> getUnapprovedCustomers() {
+	    return addCustomerRepo.findByIsApprovedFalse();
+	}
+
+
 
 	
 	

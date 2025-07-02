@@ -34,7 +34,7 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 <!-- jQuery CDN (latest 3.x version) -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 
@@ -78,10 +78,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Code</label> <select id="Code" name="Code"
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Member Code</option>
 								</select>
 							</div>
 
@@ -175,8 +174,11 @@ pageEncoding="ISO-8859-1"%> -->
 			$('#fromDate').val(today);
 			$('#toDate').val(today);
 			$('#approvalDate').val(today);
-			$('#openingDate').val(today);
+			$('#openingDate').val(today);			
+			
 		});
+		
+		
 	</script>
 </body>
 
