@@ -163,3 +163,33 @@ function getSchemeNameBySchemeType() {
 		}
 	});
 }
+
+
+function updateSchemeMode() {
+	var schemeType = $("#schemeType").val(); // the schemeType you selected
+	var schemeModeDropdown = $("#schemeMode"); // your target dropdown
+
+	// Define the scheme modes based on type
+	var schemeModes = {
+		"RD": "Monthly",
+		"MIS": "N/A",
+		"FD": "Yearly",
+		"DRD": "Daily"
+	};
+
+	// Clear existing options
+	schemeModeDropdown.empty();
+
+	// Populate based on schemeType
+	if (schemeType && schemeModes[schemeType]) {
+		schemeModeDropdown.append(new Option(schemeModes[schemeType], schemeModes[schemeType]));
+	} else {
+		schemeModeDropdown.append(new Option("Select", ""));
+	}
+}
+
+$(document).ready(function () {
+	$("#schemeType").on("change", function () {
+		updateSchemeMode();
+	});
+});

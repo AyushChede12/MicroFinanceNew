@@ -460,8 +460,58 @@ public class PolicyManagementController {
         return response;
     }
 
+    
+    
+    
+    
+	@GetMapping("/ddterm")
+	public ResponseEntity<?> getDDTermAndInterestRate(@RequestParam(name = "planNameDD", required = true) String planNameDD) {
+    	DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
+	    if (response != null) {
+	        return ResponseEntity.ok(response);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
+	    }
+	}
 
+    
+ 
+    
+	@GetMapping("/rdterm")
+	public ResponseEntity<?> getRDTermAndInterestRate(@RequestParam(name = "planNameRD", required = true) String planNameRD) {
+	    RecurringDepositPM response = policyManagementService.getRDTermAndInterestRate(planNameRD);
+	    if (response != null) {
+	        return ResponseEntity.ok(response);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
+	    }
+	}
+    
+   
+	
+	
+	@GetMapping("/fdterm")
+	public ResponseEntity<?> getFDTermAndInterestRate(@RequestParam(name = "planNameFD", required = true) String planNameFD) {
+	    FixedDepositPM response = policyManagementService.getFDTermAndInterestRate(planNameFD);
+	    if (response != null) {
+	        return ResponseEntity.ok(response);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
+	    }
+	}
+    
+ 
 
+	
+	@GetMapping("/misterm")
+	public ResponseEntity<?> getMISTermAndInterestRate(@RequestParam(name = "planNameMD", required = true) String planNameMD) {
+	    MISDepositPM response = policyManagementService.getMISTermAndInterestRate(planNameMD);
+	    if (response != null) {
+	        return ResponseEntity.ok(response);
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
+	    }
+	}
     
     
 }
