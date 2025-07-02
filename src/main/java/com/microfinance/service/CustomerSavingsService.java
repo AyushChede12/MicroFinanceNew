@@ -99,6 +99,17 @@ public class CustomerSavingsService {
 		}
 		return false;
 	}
-	
+
+	public Optional<SavingSchemeCatalog> findSavingSchmeCatalogById(Long id) {
+		return savingSchmeCatalogRepo.findById(id);
+	}
+
+	public boolean deleteSavingSchemeCatalog(Long id) {
+		if (savingSchmeCatalogRepo.existsById(id)) {
+			savingSchmeCatalogRepo.deleteById(id);
+			return true;
+		}
+		return false;
+	}
 
 }

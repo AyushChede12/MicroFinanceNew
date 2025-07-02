@@ -1,6 +1,11 @@
 package com.microfinance.controller;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +16,10 @@ import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingSchemeCatalog;
+import com.microfinance.model.states;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
+
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,7 +80,38 @@ public class CustomerSavingsController {
   			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
   		
   	}
-	
+  	
+  	// find saving scheme catalog by id
+  	 @GetMapping("/getSavingSchemeCatalogById")
+ 	public ResponseEntity<ApiResponse<SavingSchemeCatalog>> findSavingSchmeCatalogById(@RequestParam("id") Long id) {
+ 		Optional<SavingSchemeCatalog> savingscheme = customersaving.findSavingSchmeCatalogById(id);
+ 		if (savingscheme.isPresent()) {
+ 			ApiResponse<SavingSchemeCatalog> response = new ApiResponse<>(HttpStatus.FOUND,
+ 					"Saving Scheme Catalog Data fetched successfully", savingscheme.get());
+ 			return ResponseEntity.ok(response);
+ 		} else {
+ 			ApiResponse<SavingSchemeCatalog> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+ 					"Saving Scheme Catalog Data not found for ID: " + id, null);
+ 			return ResponseEntity.status(404).body(response);
+ 		}
+ 	}
+  	 
+  	 //delete saving scheme catalog by id
+  	@PostMapping("/deleteSavingSchemeCatalogDataById") 
+	public ResponseEntity<ApiResponse<String>> deleteSavingSchemeCatalog(@RequestParam("id") Long id) {
+		boolean isDeleted = customersaving.deleteSavingSchemeCatalog(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Saving Scheme Catalog Data deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					" deletion failed", "failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+     
+	//fetch policy name
   	@GetMapping("/fetchpolicyname")
   	public ApiResponse<List<SavingSchemeCatalog>> findByPolicyName(@RequestParam String policyName) {
   	    List<SavingSchemeCatalog> list = customersaving.findByPolicyName(policyName);
@@ -84,6 +122,7 @@ public class CustomerSavingsController {
   	    }
   	}
 
+  	//fetch financial code  
   	@GetMapping("/fetchfinancialcode")
   	public ApiResponse<List<addFinancialConsultant>> findByFinancialCode(@RequestParam String financialCode) {
   	    List<addFinancialConsultant> list = customersaving.findByFinancialCode(financialCode);
@@ -139,5 +178,6 @@ public class CustomerSavingsController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
 	
 }

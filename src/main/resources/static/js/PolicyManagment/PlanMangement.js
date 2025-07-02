@@ -9,6 +9,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const dailyDeposit = {
+			drd: $('#drd').val(),
 			planCodeDD: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
 			minimumDeposit: $('#minimumDeposit').val(),

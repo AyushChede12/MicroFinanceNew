@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -62,18 +64,17 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="Branch" name="Branch"
+								<label for="">Financial Consultant Code</label> <select id="financialCode" name="financialCode"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select financial Code</option>									
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date From</label> <input type="date"
+								<label for="fromDate">Date From</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
@@ -82,7 +83,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date To</label> <input type="date"
+								<label for="toDate">Date To</label> <input type="date"
 									name="toDate" id="toDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
@@ -93,7 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="findfinanceConsultantBtn" class="btnStyle"
 					style="background-color: #FFA500;">FIND</button>
 			</div>
 		</div>
@@ -110,8 +111,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<table class="table table-borderless datatable">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
+								<th></th>
 									<th scope="col">Sr No.</th>
 									<th scope="col">Customer Name</th>
+									<th scope="col">Financial Code </th>									
 									<th scope="col">Date of Birth</th>
 									<th scope="col">Age</th>
 									<th scope="col">Address</th>
@@ -122,12 +125,18 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Payment Mode</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="searchFinanceOnboarding">
 							</tbody>
 						</table>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 text-center mt-3" style="justify-content: end">
+				<button id="approveFinanceConsultantBtn" class="btnStyle"
+					style="background-color: #FFA500; ">Approve</button>
 			</div>
 		</div>
 
@@ -137,6 +146,37 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/RequestApproval/ApproveFinanceOnboarding.js"></script>
+	<script>
+	$(document).ready(function(){
+		searchInTheFinanceOnboarding();
+		financialCodeDropdown();		
+		
+		// Button click filter
+		$('#findfinanceConsultantBtn').on('click', function(e) {
+			e.preventDefault(); // Prevent form submission
+			filterFinancialCodeData();
+		});
+		
+		/* // Button click Approve
+		$('#approveFinanceConsultantBtn').on('click', function(e) {
+			e.preventDefault(); // Prevent form submission
+			updateSelectedMembersStatus();
+		}); */
+		// Button click Approve
+		$('#approveFinanceConsultantBtn').on('click', function(e) {
+		    e.preventDefault(); // Prevent form submission
+		    
+		    // Get all checked checkboxes
+		    $('.member-checkbox:checked').each(function() {
+		        const id = $(this).val();
+		        updateMemberApprovalStatus(id, true);
+		    });
+		});
+
+
+	});
+	</script>
 </body>
 
 </html>
