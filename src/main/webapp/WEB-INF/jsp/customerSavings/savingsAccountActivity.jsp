@@ -167,10 +167,9 @@ pageEncoding="ISO-8859-1"%> -->
                   <label for="">Transaction Type</label> <select id="transactionType" name="transactionType" required="required"
                     class="form-control selectField" style="height: 30px;">
                     <option value=""> -Select-</option>
-                    <option value="Cash">Cash</option>
-                    <option value="Online">Online</option>
-                    <option value="Cheque">Cheque</option>
-                    <option value="NEFT">NEFT</option>
+                    <option value="Diposit">Diposit</option>
+                    <option value="Withdraw">Withdraw</option>
+                   
                   </select>
                 </div>
               </div>
@@ -187,8 +186,11 @@ pageEncoding="ISO-8859-1"%> -->
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Pay By</label> <select id="payBy" name="payBy" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
+                    <option value=""> -Select-</option>
+                    <option value="Cash">Cash</option>
+                    <option value="Online">Online</option>
+                    <option value="Cheque">Cheque</option>
+                    <option value="NEFT">NEFT</option>
                   </select>
                 </div>
               </div>

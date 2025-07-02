@@ -10,6 +10,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.FinancialYear;
+import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
@@ -127,6 +128,7 @@ public class CustomerSavingsController {
   	}
   	
  
+  	//save saving account data
     @PostMapping("/saveandupdatesavingaccount") 
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
     	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
@@ -181,5 +183,14 @@ public class CustomerSavingsController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+    
+    @PostMapping("/savesavingaccountactivity")
+    public ResponseEntity<ApiResponse<SavingAccountActivity>> saveSavingAccountActivityData(@RequestBody SavingAccountActivity savingAccountActivity) {
+
+    	SavingAccountActivity savedSavingActivity = customersaving.saveSavingAccountActivityData(savingAccountActivity);
+        ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.CREATED, "Saving Account Activit Data saved successfully", savedSavingActivity);
+        return ResponseEntity.ok(response);
+    }
+
 	
 }
