@@ -42,6 +42,7 @@ public class addFinancialConsultant {
 	private String comments;
 	private String financialStatus;
 	private String smsSend;
+	private boolean isApproved;
 
 	public Long getId() {
 		return id;
@@ -305,6 +306,14 @@ public class addFinancialConsultant {
 
 	public void setSmsSend(String smsSend) {
 		this.smsSend = smsSend;
+	}
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	
 
