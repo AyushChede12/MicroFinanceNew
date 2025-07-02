@@ -27,6 +27,7 @@ $(document).ready(function() {
 				success: function(response) {
 					if (response.data && response.data.length > 0) {
 						let data = response.data[0];
+						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
 						$("#major").val(data.major);
 						$("#customerName").val(data.customerName);
@@ -61,6 +62,7 @@ $(document).ready(function() {
 						$("#nomineeAge").val(data.nomineeAge);
 						$("#nomineePanNo").val(data.nomineePanNo);
 						$("#nomineeKycType").val(data.nomineeKycType);
+						$("#memberFees").val(data.memberFees);
 
 						restFieldsBind(customerCode);
 
@@ -129,6 +131,65 @@ $(document).ready(function() {
 	});
 
 
+
+	$('#updateBtn').click(async function(event) {
+		event.preventDefault();
+		alert("Update Button Called");
+		var id = $("#id").val();
+		alert(id);
+
+
+		try {
+			// Call First API: Save/Update Customer Info
+			const response1 = await updateCustomerBasicInfo(id);
+
+			if (response1.status === "OK") {
+				// Call Second API: Update Shareholding Info
+				const response2 = await updateCustomerRemainingData(id);
+
+				if (response2.status === "FOUND") {
+					alert("Customer data updated successfully!");
+					location.reload();
+				} else {
+					alert("Shareholding update failed: " + response2.message);
+				}
+			} else {
+				alert("Customer update failed: " + response1.message);
+			}
+
+		} catch (error) {
+			console.error("Error occurred during update:", error);
+			alert("An unexpected error occurred. Please try again.");
+		}
+	});
+
+	$('#deleteBtn').click(function(event) {
+		alert("delete");
+		var id=$("#id").val();
+		if (confirm("Are you sure you want to delete this Customer Data?")) {
+			$.ajax({
+				url: "/api/datacorrection/deleteCustomerDataByForm",
+				type: "POST",
+				data: { id: id },
+				success: function(response) {
+					if (response.status == "OK") {
+						alert("Customer Data Deleted Successfully");
+						location.reload();
+					} else {
+						alert("Delete failed: " + response.message);
+					}
+				},
+				error: function(xhr, status, error) {
+					alert("Failed to delete Executive.");
+					console.error("Error:", error);
+				}
+			});
+		}
+
+	});
+
+
+
 });
 
 function restFieldsBind(customerCode) {
@@ -139,13 +200,11 @@ function restFieldsBind(customerCode) {
 		success: function(response) {
 			if (response.status == "FOUND") {
 				let data = response.data[0];
-				$("#previousAccountBalance").val(data.previousAccountBalance);
 				$("#shareIssuedBy").val(data.shareIssuedBy);
 				$("#noOfShare").val(data.noOfShare);
 				$("#baseValue").val(data.baseValue);
 				$("#modeOfPayment").val(data.modeOfPayment);
 				$("#comments").val(data.comments);
-
 
 			} else {
 				alert("No customer found for this Customer code.");
@@ -200,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function photoUpload() {
-	const file = document.getElementById("photo").files[0];
+	const file = document.getElementById("customerPhoto").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -239,4 +298,94 @@ function signatureUpload() {
 	} else {
 		alert("Please upload a valid image file for signature.");
 	}
+}
+
+
+function updateCustomerBasicInfo(id) {
+	return new Promise(function(resolve, reject) {
+		var customerData = new FormData();
+
+		customerData.append("id", id);
+		customerData.append("memberCode", $('#customerCode').val());
+		customerData.append("signupDate", $('#signupDate').val());
+		customerData.append("customerName", $('#customerName').val());
+		customerData.append("customerGender", $('#customerGender').val());
+		customerData.append("guardianName", $('#guardianName').val());
+		customerData.append("relationToApplicant", $('#relationToApplicant').val());
+		customerData.append("dob", $('#dob').val());
+		customerData.append("customerAge", $('#customerAge').val());
+		customerData.append("relationshipStatus", $('#relationshipStatus').val());
+		customerData.append("customerAddress", $('#customerAddress').val());
+		customerData.append("state", $('#state').val());
+		customerData.append("district", $('#district').val());
+		customerData.append("aadharNo", $('#aadharNo').val());
+		customerData.append("pinCode", $('#pinCode').val());
+		customerData.append("branchName", $('#branchName').val());
+		customerData.append("panNo", $('#panNo').val());
+		customerData.append("voterNo", $('#voterNo').val());
+		customerData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
+		customerData.append("referralCode", $('#referralCode').val());
+		customerData.append("referralName", $('#referralName').val());
+		customerData.append("contactNo", $('#contactNo').val());
+		customerData.append("emailId", $('#emailId').val());
+		customerData.append("profession", $('#profession').val());
+		customerData.append("academicBackground", $('#academicBackground').val());
+
+		// Nominee
+		customerData.append("nomineeName", $('#nomineeName').val());
+		customerData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
+		customerData.append("nomineeAddress", $('#nomineeAddress').val());
+		customerData.append("nomineeKycNo", $('#nomineeKycNo').val());
+		customerData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
+		customerData.append("nomineeAge", $('#nomineeAge').val());
+		customerData.append("nomineePanNo", $('#nomineePanNo').val());
+		customerData.append("nomineeKycType", $('#nomineeKycType').val());
+		customerData.append("memberFees", $('#memberFees').val());
+		customerData.append("memberStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
+		customerData.append("memberBanking", $('#toggle-mobile-banking').is(':checked') ? 1 : 0);
+		customerData.append("netBanking", $('#toggle-net-banking').is(':checked') ? 1 : 0);
+		customerData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
+
+		var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
+		if (photo) customerData.append("customerPhoto", photo);
+
+		$.ajax({
+			type: 'POST',
+			url: '/saveOrUpdateCustomer',
+			data: customerData,
+			processData: false,
+			contentType: false,
+			success: resolve,
+			error: function(xhr) {
+				reject(xhr.responseText);
+			}
+		});
+	});
+}
+
+
+
+function updateCustomerRemainingData(id) {
+	return new Promise(function(resolve, reject) {
+		const transferData = {
+			id: id,
+			findByCode: $('#customerCode').val(),
+			shareIssuedBy: $('#shareIssuedBy').val(),
+			noOfShare: $('#noOfShare').val(),
+			baseValue: $('#baseValue').val(),
+			modeOfPayment: $('#modeOfPayment').val(),
+			comments: $('#comments').val()
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: '/api/customershareholdingcontroller/updateTransferShare',
+			data: JSON.stringify(transferData),
+			contentType: 'application/json',
+			success: resolve,
+			error: function(xhr) {
+				reject(xhr.responseText);
+			}
+		});
+	});
 }

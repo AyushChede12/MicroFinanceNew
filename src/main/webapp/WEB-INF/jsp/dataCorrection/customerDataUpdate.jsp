@@ -98,6 +98,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
+              <input type="hidden" id="id" name="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Sign-up Date</label> <input type="date"
 									name="signupDate" id="signupDate" required="required"
@@ -329,8 +330,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
-							</label> <label for="photo" id="drop-area"> <input type="file"
-								accept="image/*" name="photo" id="photo" hidden="hidden"
+							</label> <label for="customerPhoto" id="drop-area"> <input type="file"
+								accept="image/*" name="customerPhoto" id="customerPhoto" hidden="hidden"
 								onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -453,7 +454,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Customer Charges(if any)</label> <input type="text"
-									name="previousAccountBalance" id="previousAccountBalance" required="required"
+									name="memberFees" id="memberFees" required="required"
 									placeholder="Enter Charges" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -523,7 +524,7 @@ pageEncoding="ISO-8859-1"%> -->
 										Membership Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-member-status"
+											<input type="checkbox" id="toggle-member-status" name="memberStatus"
 												class="toggle__input" data-toggle-type="member-status">
 											<label for="toggle-member-status" class="toggle__label"></label>
 										</div>
@@ -541,7 +542,7 @@ pageEncoding="ISO-8859-1"%> -->
 										Bank Access</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-mobile-banking"
+											<input type="checkbox" id="toggle-mobile-banking" name="memberBanking"
 												class="toggle__input" data-toggle-type="mobile-banking">
 											<label for="toggle-mobile-banking" class="toggle__label"></label>
 										</div>
@@ -559,7 +560,7 @@ pageEncoding="ISO-8859-1"%> -->
 										Banking</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-net-banking"
+											<input type="checkbox" id="toggle-net-banking" name="netBanking"
 												class="toggle__input" data-toggle-type="net-banking">
 											<label for="toggle-net-banking" class="toggle__label"></label>
 										</div>
@@ -577,7 +578,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<label style="margin-left: 20px;" class="mb-2">SMS Send</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-sms-send"
+											<input type="checkbox" id="toggle-sms-send" name="smsSend"
 												class="toggle__input" data-toggle-type="sms-send">
 											<label for="toggle-sms-send" class="toggle__label"></label>
 										</div>

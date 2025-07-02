@@ -20,6 +20,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.addCustomer;
+import com.microfinance.repository.CustomerRepo;
 import com.microfinance.service.DataCorrectionService;
 
 @RestController
@@ -29,39 +30,21 @@ public class DataCorrectionController {
 	@Autowired
 	DataCorrectionService dataCorrectionService;
 	
-	@Value("${upload.directory}")
-	private String uploadDirectory;
-	
-	@PostMapping("/updateDataOfCustomer")
-	public ResponseEntity<ApiResponse<addCustomer>> updateCustomerData(
-			@RequestBody CustomerDto customerDto,
-			@RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto
-	) throws IOException {
-
-		try {
-
-			String photoName = null;
-			String signatureName = null;
-
-			// Save customer photo
-			if (customerPhoto != null && !customerPhoto.isEmpty()) {
-				photoName = System.currentTimeMillis() + "_" + customerPhoto.getOriginalFilename();
-				File photoFile = new File(uploadDirectory + photoName);
-				customerPhoto.transferTo(photoFile);
-			}
-
-			
-
-			// Update customer
-			addCustomer updated = dataCorrectionService.updateCustomer(customerDto, photoName);
-
-			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Customer updated successfully", updated));
-
-		} catch (IOException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-				.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed", null));
+	// Ayush
+	@PostMapping("/deleteCustomerDataByForm")        
+	public ResponseEntity<ApiResponse<String>> deleteCustomerData(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deleteCustomerData(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Customer Data deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Customer Data deletion failed", "failure");
+			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
 
 
 }
