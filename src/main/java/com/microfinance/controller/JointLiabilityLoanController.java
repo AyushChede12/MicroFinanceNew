@@ -85,7 +85,7 @@ public class JointLiabilityLoanController {
     }
 
     // Update Loan Plan
-    @PutMapping("/updateLendingGroup/{id}")
+    @PostMapping("/updateLendingGroup/{id}")
     public ResponseEntity<ApiResponse<CreateLendingGroup>> updateLoanPlan(
             @PathVariable Long id,
             @RequestBody CreateLendingGroup updatedGroup) {

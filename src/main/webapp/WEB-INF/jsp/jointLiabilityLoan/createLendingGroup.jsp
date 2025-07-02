@@ -62,13 +62,17 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="d-flex flex-column formFields mb-4">
-								<label for="">Plan Code *</label> <input type="hidden"
-									name="planCode" id="planCode" required="required"
-									placeholder="Enter Plan id" value="${memberCodePI}"
-									 style="text-transform: uppercase;" />
-							</div>
 
+						<div class="d-none">
+							<input type="hidden" name="id" id="id" required="required"
+								placeholder="Enter Plan id" style="text-transform: uppercase;" />
+						</div>
+
+						<div class="d-none">
+							<input type="hidden" name="planCode" id="planCode"
+								required="required" placeholder="Enter Plan id"
+								value="${memberCodePI}" style="text-transform: uppercase;" />
+						</div>
 
 
 						<div class="row">
@@ -271,7 +275,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 
 								<div class="col-lg-3 ">
-									<div class="d-flex flex-column formFields mb-4">
+									<div class="d-flex flex-column formFields ">
 										<label for="penaltyMode">Penalty Mode*</label> <input
 											type="text" name="penaltyMode" id="penaltyMode" required
 											placeholder="Enter Penalty Mode" />
@@ -279,7 +283,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 
 								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields mb-4">
+									<div class="d-flex flex-column formFields ">
 										<label for="monthlyPenalty">Monthly Penalty*</label> <input
 											type="text" name="monthlyPenalty" id="monthlyPenalty"
 											required placeholder="Enter Penalty" />
@@ -292,8 +296,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<div class="col-lg-4 d-flex justify-content-around">
 										<button type="button" id="savelendingBtn"
 											class="btnStyle bg-success">Save</button>
-										<button type="button" id="updatelendingBtn" name="updatelendingBtn"
-											class="btnStyle bg-primary">Update</button>
+										<button type="button" id="updatelendingBtn"
+											name="updatelendingBtn" class="btnStyle bg-primary">Update</button>
 
 									</div>
 								</div>

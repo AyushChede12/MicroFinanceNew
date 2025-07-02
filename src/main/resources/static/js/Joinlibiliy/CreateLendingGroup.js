@@ -4,57 +4,57 @@ $(document).ready(function() {
 
 	$('#updatelendingBtn').hide(); // Hide update initially
 
-	    $('#savelendingBtn').on('click', function (e) {
-	        e.preventDefault(); // Prevent default form submission
+	$('#savelendingBtn').on('click', function(e) {
+		e.preventDefault(); // Prevent default form submission
 
-	        const loanData = {
-				planCode: $('#planCode').val(),
-	            loanSchemeInformation: $('#loanSchemeInformation').val(),
-	            minimumAge: $('#minimumAge').val(),
-	            minLoanDurationMonths: $('#minLoanDurationMonths').val(),
-	            branchName: $('#branchName').val(),
-	            maximumAge: $('#maximumAge').val(),
-	            maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
-	            emiFrequency: $('#emiFrequency').val(),
-	            minLoanAmt: $('#minLoanAmt').val(),
-	            rateOfInterest: $('#rateOfInterest').val(),
-	            interestType: $('#interestType').val(),
-	            maximumLoanAmount: $('#maximumLoanAmount').val(),
-	            securityType: $('#securityType').val(),
-	            emiType: $('#emiType').val(),
-	            planActivationStatus: $('#planActivationStatus').is(':checked'),
+		const loanData = {
+			planCode: $('#planCode').val(),
+			loanSchemeInformation: $('#loanSchemeInformation').val(),
+			minimumAge: $('#minimumAge').val(),
+			minLoanDurationMonths: $('#minLoanDurationMonths').val(),
+			branchName: $('#branchName').val(),
+			maximumAge: $('#maximumAge').val(),
+			maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
+			emiFrequency: $('#emiFrequency').val(),
+			minLoanAmt: $('#minLoanAmt').val(),
+			rateOfInterest: $('#rateOfInterest').val(),
+			interestType: $('#interestType').val(),
+			maximumLoanAmount: $('#maximumLoanAmount').val(),
+			securityType: $('#securityType').val(),
+			emiType: $('#emiType').val(),
+			planActivationStatus: $('#planActivationStatus').is(':checked'),
 
-	            // Payment deductions
-	            processingFeePercent: $('#processingFeePercent').val(),
-	            legalChargesPercent: $('#legalChargesPercent').val(),
-	            gstPercent: $('#gstPercent').val(),
-	            insuranceFeePercent: $('#insuranceFeePercent').val(),
-	            valuationFeePercent: $('#valuationFeePercent').val(),
+			// Payment deductions
+			processingFeePercent: $('#processingFeePercent').val(),
+			legalChargesPercent: $('#legalChargesPercent').val(),
+			gstPercent: $('#gstPercent').val(),
+			insuranceFeePercent: $('#insuranceFeePercent').val(),
+			valuationFeePercent: $('#valuationFeePercent').val(),
 
-	            // Late fee
-	            lateAllowanceDays: $('#lateAllowanceDays').val(),
-	            penaltyMode: $('#penaltyMode').val(),
-	            monthlyPenalty: $('#monthlyPenalty').val()
-	        };
+			// Late fee
+			lateAllowanceDays: $('#lateAllowanceDays').val(),
+			penaltyMode: $('#penaltyMode').val(),
+			monthlyPenalty: $('#monthlyPenalty').val()
+		};
 
-	        console.log("Sending loanData:", loanData);
+		console.log("Sending loanData:", loanData);
 
-	        $.ajax({
-	            url: '/api/joinliability/createLendingGroupsave',
-	            type: 'POST',
-	            contentType: 'application/json',
-	            data: JSON.stringify(loanData),
-	            success: function (response) {
-	                alert("Lending Group saved successfully");
-	                $('#LendingIdForm')[0].reset();
-	                fetchLoanPlans(); // reload data if needed
-	            },
-	            error: function (xhr, status, error) {
-	                console.error("Save failed:", xhr.responseText);
-	                alert("Failed to save data");
-	            }
-	        });
-	    });
+		$.ajax({
+			url: '/api/joinliability/createLendingGroupsave',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(loanData),
+			success: function(response) {
+				alert("Lending Group saved successfully");
+				$('#LendingIdForm')[0].reset();
+				fetchLoanPlans(); // reload data if needed
+			},
+			error: function(xhr, status, error) {
+				console.error("Save failed:", xhr.responseText);
+				alert("Failed to save data");
+			}
+		});
+	});
 
 	// Load loan data into table
 	function fetchLoanPlans() {
@@ -120,6 +120,8 @@ $(document).ready(function() {
 			success: function(res) {
 				const item = res.data;
 				if (item) {
+					
+					$('#id').val(item.id);
 					$('#planCode').val(item.planCode);
 					$('#loanSchemeInformation').val(item.loanSchemeInformation);
 					$('#minimumAge').val(item.minimumAge);
@@ -158,22 +160,25 @@ $(document).ready(function() {
 	});
 
 	// Update
-	$('#updatelendingBtn').on('click', function () {
-		const id = $('#id').val(); // Make sure this is defined BEFORE using it
-		console.log("Updating Lending Group ID:", id); // Debug check
+	$('#updatelendingBtn').on('click', function() {
+			const id = $('#id').val();// Ensure this is correctly set in your HTML
+
+		console.log("Updating Lending Group ID:", id); // Debug
 
 		if (!id) {
 			alert("ID is missing. Cannot update.");
 			return;
 		}
 
+		// Gather form values
 		const loanPlan = {
-			loanSchemeInformation: $('#loanSchemeInformation').val(),
+			
+			loanSchemeInformation: $('#loanSchemeInformation').val()?.trim(),
 			minimumAge: $('#minimumAge').val(),
 			maximumAge: $('#maximumAge').val(),
 			maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
 			minLoanDurationMonths: $('#minLoanDurationMonths').val(),
-			branchName: $('#branchName').val(),
+			branchName: $('#branchName').val()?.trim(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			maximumLoanAmount: $('#maximumLoanAmount').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
@@ -192,24 +197,27 @@ $(document).ready(function() {
 			monthlyPenalty: $('#monthlyPenalty').val()
 		};
 
+		
+		// AJAX call to update the lending group
 		$.ajax({
 			url: `/api/joinliability/updateLendingGroup/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(loanPlan),
-			success: function (response) {
+			success: function(response) {
 				alert("Lending Group Updated Successfully");
 				$('#LendingIdForm')[0].reset();
 				$('#updatelendingBtn').hide();
 				$('#savelendingBtn').show();
-				fetchLoanPlans();
+				fetchLoanPlans(); // Refresh list
 			},
-			error: function (xhr) {
-				console.error("Update error:", xhr.responseText);
-				alert("Update failed.");
+			error: function(xhr, status, error) {
+				console.error("Update error:", xhr.responseText || error);
+				alert("Update failed. Please check the console for details.");
 			}
 		});
 	});
+
 
 	// Delete
 	$(document).on("click", ".delete-loan-btn", function() {

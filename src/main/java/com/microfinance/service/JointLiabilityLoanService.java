@@ -38,7 +38,7 @@ public class JointLiabilityLoanService {
 		Optional<CreateLendingGroup> existingOpt = createLendingGroupRepo.findById(id);
         if (existingOpt.isPresent()) {
             CreateLendingGroup existing = existingOpt.get();
-
+            existing.setPlanCode(updatedGroup.getPlanCode());
             existing.setLoanSchemeInformation(updatedGroup.getLoanSchemeInformation());
             existing.setMinimumAge(updatedGroup.getMinimumAge());
             existing.setMaxLoanDurationMonths(updatedGroup.getMaxLoanDurationMonths());
