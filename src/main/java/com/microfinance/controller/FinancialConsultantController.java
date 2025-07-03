@@ -34,7 +34,7 @@ public class FinancialConsultantController {
 	@PostMapping("/getAllCustomerCodes") // Poonam 13-06-2025
     public ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomerCodes() {
         List<addCustomer> list = financialConsultantService.getAllCustomerCodes();
-        ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK,"Customer codes fetched successfully",list);
+        ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.FOUND,"Customer codes fetched successfully",list);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -164,5 +164,37 @@ public class FinancialConsultantController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
+	
+	//janvi: Approved Financial Consultant 30/06/2025
+	@PostMapping("/approvedFinancialConsultantData")
+	public ResponseEntity<ApiResponse<addFinancialConsultant>> updateIsApprovedStatus(
+	        @RequestParam Long id,
+	        @RequestParam boolean isApproved) {
+
+	    Optional<addFinancialConsultant> optionalCustomer = financialConsultantService.FinancialConsultantById(id);
+
+	    if (!optionalCustomer.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Customer with ID " + id + " not found."));
+	    }
+
+	    addFinancialConsultant customer = optionalCustomer.get();
+	    customer.setApproved(isApproved); // ✅ Use a proper setter method
+	    addFinancialConsultant updated = financialConsultantService.save(customer);
+
+	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "isApproved status updated for ID " + id, updated));
+	}
+	
+	//Janvi : get Unapproved Financial Consultants 01/07/2025
+	@PostMapping("/getUnapprovedFinancialConsultants")
+    public ResponseEntity<ApiResponse<List<addFinancialConsultant>>> getUnapprovedFinancialConsultants() {
+        List<addFinancialConsultant> list = financialConsultantService.getUnapprovedFinancialConsultants();
+        ApiResponse<List<addFinancialConsultant>> response = ApiResponse.success(
+            HttpStatus.OK, 
+            "Unapproved Financial Consultants fetched successfully", 
+            list
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

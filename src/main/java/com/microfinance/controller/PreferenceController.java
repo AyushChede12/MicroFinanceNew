@@ -46,13 +46,6 @@ public class PreferenceController {
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
-
-
-
-
-	
-
-
 	@PostMapping("/saveAndUpdateAllBranchModule") // Ayush (without DTO)
 	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
 		boolean isCreate = (branchModule.getId() == null); // Check BEFORE saving
