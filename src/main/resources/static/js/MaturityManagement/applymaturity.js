@@ -1,28 +1,28 @@
-  $(document).ready(function () {
-	
-	$.ajax({
-	    url: "/api/Maturitymanagement/getaddinvestmentdetails",
-	    type: "GET",
-	    success: function (response) {
-	        console.log("Response received:", response); // ✅ Debug log
-	        var dropdown = $('#policyId');
-	        dropdown.empty();
-	        dropdown.append('<option value="">Select Policy No</option>');
+$(document).ready(function () {
+    $('#branchName').on('change', function () {
+        let branchName = $(this).val();
+alert(branchName);
+        if (branchName !== "") {
+            $.ajax({
+                url: 'api/Policymangment/getinvestmentdetails' + encodeURIComponent(branchName), // ✅ Use path variable
+                type: 'GET',
+                success: function (response) {
+                    var dropdown = $('#policyId');
+                    dropdown.empty();
+                    dropdown.append('<option value="">Select Policy Code</option>');
 
-	        if (response.success && response.data) {
-	            $.each(response.data, function (index, plan) {
-	                dropdown.append('<option value="' + plan.id + '">' + plan.id + '</option>');
-	            });
-	        } else {
-	            dropdown.append('<option value="">No policy No found</option>');
-	        }
-	    },
-	    error: function (xhr) {
-	        console.error("AJAX error:", xhr.responseText); // ✅ Error log
-	        alert("No policy code found.");
-	    }
-	});
-
-				
-  });
-
+                    if (response.status === "FOUND" || response.status === "OK") {
+                        $.each(response.data, function (index, response) {
+                            dropdown.append('<option value="' + response.jointMemCode + '">' + response.jointMemCode + '</option>');
+                        });
+                    } else {
+                        dropdown.append('<option value="">No policy code found</option>');
+                    }
+                },
+                error: function () {
+                    alert("No policy code found.");
+                }
+            });
+        }
+    });
+});
