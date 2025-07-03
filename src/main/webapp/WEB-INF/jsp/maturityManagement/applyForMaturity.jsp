@@ -98,30 +98,23 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Customer Name <span id="star"> *</span></label> <input type="text"
 									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Type <span id="star"> *</span></label> <select
-									id="schemeType" name="schemeType" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+								<label for="">Scheme Type <span id="star"> *</span></label> <input type="text"
+									name="schemeType" id="schemeType" required="required"	
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Name <span id="star"> *</span></label> <select
-									id="schemeName" name="schemeName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+								<label for="">Scheme Mode <span id="star"> *</span></label> <input type="text"
+									name="schemeMode" id="schemeMode" required="required"	
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						

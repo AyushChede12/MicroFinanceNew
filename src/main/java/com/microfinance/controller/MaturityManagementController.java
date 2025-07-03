@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
+import com.microfinance.model.ApplyForMaturity;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.MaturitySchemeMaster;
 import com.microfinance.service.MaturitySchemeMasterService;
@@ -51,8 +52,23 @@ public class MaturityManagementController {
 
 	}
 	
-	
+	//Save Apply Maturity
+	//Ashwini
 
+	@PostMapping("/saveApplymaturity")
+	@ResponseBody
+	public ApiResponse<ApplyForMaturity> saveApplymaturity(@RequestBody ApplyForMaturity Applymaturity) {
+		ApplyForMaturity maturity = maturityservice.saveApplymaturity(Applymaturity);
+		
+		if (maturity != null) {
+			return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
+	    } 
+		else {
+			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
+	       
+	    }
+
+	}
 	
 	
 	
