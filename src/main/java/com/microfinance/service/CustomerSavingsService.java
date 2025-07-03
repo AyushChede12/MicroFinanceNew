@@ -126,4 +126,8 @@ public class CustomerSavingsService {
 		return savingAccountActivityRepo.save(savingAccountActivity);
 	}
 
+	public Optional<SavingAccountActivity> findSavingAccountActivityById(Long id) {
+		return savingAccountActivityRepo.findById(id);
+	}
+
 }

@@ -1,6 +1,9 @@
 package com.microfinance.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -891,7 +894,13 @@ public class PageController {
 	}
 	
 	@GetMapping("/savingsAccountActivity")
-	public String getSavingsAccountActivity() {
+	public String getSavingsAccountActivity(Model model) {
+		String prefix = "TXN";
+		String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int randomNumber = new Random().nextInt(9000) + 1000; // 4-digit random number
+		String transactionCode = prefix + timestamp + randomNumber;
+
+		model.addAttribute("transactionCode", transactionCode);
 		return "customerSavings/savingsAccountActivity";
 	}
 	

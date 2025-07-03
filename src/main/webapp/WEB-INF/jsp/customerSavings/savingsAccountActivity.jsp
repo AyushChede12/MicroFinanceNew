@@ -55,14 +55,11 @@ pageEncoding="ISO-8859-1"%> -->
             </ol>
           </nav>
           <div class="row">
+          
             <div class="col-lg-3">
-             
-              <div class="d-flex flex-column formFields  mb-4">
-                <label for="">Select Saving Transaction Id</label> <select id="selectSavingTransactionId" name="selectSavingTransactionId" required="required"
-                  class="form-control selectField" style="height: 30px;">
-                  <option value=""> Select Colour</option>
-                  <option value="Blue">Blue</option>
-                </select>
+              <div class="d-flex flex-column formFields mb-4">
+                <label for="">Saving Transaction Id</label> <input type="text" name="selectSavingTransactionId" id="selectSavingTransactionId" required="required"
+                 value="${transactionCode}" placeholder=" " />
               </div>
             </div>
 
@@ -167,7 +164,7 @@ pageEncoding="ISO-8859-1"%> -->
                   <label for="">Transaction Type</label> <select id="transactionType" name="transactionType" required="required"
                     class="form-control selectField" style="height: 30px;">
                     <option value=""> -Select-</option>
-                    <option value="Diposit">Diposit</option>
+                    <option value="Deposit">Deposit</option>
                     <option value="Withdraw">Withdraw</option>
                    
                   </select>

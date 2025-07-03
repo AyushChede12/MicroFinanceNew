@@ -191,6 +191,20 @@ public class CustomerSavingsController {
         ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.CREATED, "Saving Account Activit Data saved successfully", savedSavingActivity);
         return ResponseEntity.ok(response);
     }
+    
+    @GetMapping("/getSavingAccountActivityById")
+	public ResponseEntity<ApiResponse<SavingAccountActivity>> findSavingAccountActivityById(@RequestParam("id") Long id) {
+		Optional<SavingAccountActivity> fyear = customersaving.findSavingAccountActivityById(id);
+		if (fyear.isPresent()) {
+			ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.FOUND,
+					"Saving Account Activity fetched successfully", fyear.get());
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Saving Account Activity not found for ID: " + id, null);
+			return ResponseEntity.status(404).body(response);
+		}
+	}
 
 	
 }
