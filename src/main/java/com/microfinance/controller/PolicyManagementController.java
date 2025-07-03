@@ -1,6 +1,8 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,11 +10,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.service.PolicyManagementService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/api/Policymangment")
@@ -385,7 +391,7 @@ public class PolicyManagementController {
  }
     // Update MIS deposit
 
-    @PutMapping("/misupdate/{id}")
+    @PostMapping("/misupdate/{id}")
    public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(
             @PathVariable Long id,
            @RequestBody MISDepositPM updatedData) {
@@ -429,9 +435,75 @@ public class PolicyManagementController {
         }
    }
     
+
    
     
+    // Get Scheme Name by Scheme Term
     
+    @GetMapping("/getSchemeNameBySchemeType")
+    public Map<String, List<String>> getSchemeNameBySchemeType(
+            @RequestParam(value = "drd", required = false) String drd,
+            @RequestParam(value = "rd", required = false) String rd,
+            @RequestParam(value = "fd", required = false) String fd,
+            @RequestParam(value = "mis", required = false) String mis) {
+
+        Map<String, List<String>> response = new HashMap<>();
+
+        if (drd != null) {
+            response.put("allBrands", policyManagementService.getSchemeNameBySchemeType(drd));
+        }
+        if (rd != null) {
+            response.put("allRds", policyManagementService.getRRDBySchemeType(rd));
+        }
+        if (fd != null) {
+            response.put("allFRDs", policyManagementService.getFRDBySchemeType(fd));
+        }
+        if (mis != null) {
+            response.put("allMISRDs", policyManagementService.getMISRDBySchemeType(mis));
+        }
+
+        return response;
+    }
+
+
+
+
+ // view add new Investment details
+ 	//Ashwini
+ 	@GetMapping("/getaddinvestmentdetails")
+ 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAddInvestmentDetails() {
+ 		 List<AddnewinvestmentPM> invest = policyManagementService.getAddInvestmentDetails();
+ 		 
+ 		 if (invest != null && !invest.isEmpty()) {
+ 	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.success(HttpStatus.OK,
+ 	                "Investment Details fetched successfully.",
+ 	                invest
+ 	            );
+ 	            return new ResponseEntity<>(response, HttpStatus.OK);
+ 	        } else {
+ 	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+ 	                "No Details found."
+ 	            );
+ 	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+ 	        }
+ 	}
+ 	
+ 	
+ 	//fetch new investment details by id
+ 	//Ashwini
+ 	
+ 	@GetMapping("/getinvestmentdetails")
+ 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> findByBranch(@RequestParam  String branchName) {
+ 		 List<AddnewinvestmentPM> invest = policyManagementService.findByBranch(branchName);
+ 		
+ 		
+ 			ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.FOUND, "investment fetched successfully.", invest);
+            return ResponseEntity.ok(response);
+      
+ 	}
+ 	
+ 	 
+ 	
 
     
     

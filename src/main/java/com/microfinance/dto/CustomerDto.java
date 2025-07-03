@@ -60,6 +60,8 @@ public class CustomerDto {
 	    private int memberBanking;
 	    private int netBanking;
 	    private int smsSend;
+	    private String remarks;
+		private String paymentBy;
 	    private String fDate;
 	    private String tDate;
 
@@ -480,6 +482,22 @@ public class CustomerDto {
 
 		public void setApproved(boolean isApproved) {
 			this.isApproved = isApproved;
+		}
+
+		public String getRemarks() {
+			return remarks;
+		}
+
+		public void setRemarks(String remarks) {
+			this.remarks = remarks;
+		}
+
+		public String getPaymentBy() {
+			return paymentBy;
+		}
+
+		public void setPaymentBy(String paymentBy) {
+			this.paymentBy = paymentBy;
 		}
 		
 		
