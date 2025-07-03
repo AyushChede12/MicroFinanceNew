@@ -33,28 +33,32 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
 <body>
-	
+
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Data Correction </h1>
+			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bbi bi-pencil-square"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Finance Entry Correction</li>
-				</ol> 
+				</ol>
 			</nav>
 		</div>
 
 		<div>
 			<form id="formid">
-			
-			<div>
+
+				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item action">Search Details</li>
@@ -84,23 +88,23 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-							<div class="d-flex flex-column formFields" style="margin-bottom: 40px;">
-								<label for="">Choose by Code</label> <select id="colour"
-									name="colour" required="required"
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 40px;">
+								<label for="">Choose by Code</label> <select id="financialCode"
+									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Member</option>
 								</select>
 							</div>
 						</div>
-						
+
 					</div>
 
-					
+
 				</div>
-			
-			
-			
-			
+
+
+
+
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -133,7 +137,7 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Date of Joining</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="joiningDate" id="joiningDate" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -141,10 +145,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Member Selection  </label> <select id="colour"
-									name="colour" required="required"
+								<label for="vehicalNo">Customer Code</label> <select
+									id="memberCode" name="memberCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Member Selection   </option>
 								</select>
 							</div>
 						</div>
@@ -153,17 +156,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Customer Name</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter 
+								<label>Customer Name</label> <input type="text"
+									name="customerName" id="customerName" required="required"
+									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Date of Birth  </label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required"
-									placeholder="Enter "
+								<label for="">Date of Birth </label> <input type="date"
+									name="dob" id="dob" required="required" placeholder="Enter "
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -172,8 +175,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Age</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Age"
+								<label>Age</label> <input type="text" name="customerAge"
+									id="customerAge" required="required" placeholder="Enter Age"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -181,18 +184,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Family Member Name</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
+									name="guardianName" id="guardianName" required="required"
+									placeholder="Enter Family Member Name" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant<label> <select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Relation to Applicant</option>
+								<label>Relation to Applicant</label> <select
+									id="relationToApplicant" name="relationToApplicant"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 
 								</select>
 							</div>
@@ -202,15 +205,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="">Contact No</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Contact No" />
+								<label for="">Contact No</label> <input type="text"
+									name="contactNo" id="contactNo" required="required"
+									placeholder="Enter Contact No" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Suggested Nominee</label> <input type="text"
-									name="price" id="price" required="required"
+									name="nomineeName" id="nomineeName" required="required"
 									placeholder="Enter Nominee Name" />
 							</div>
 						</div>
@@ -228,11 +232,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Branch</option>
-								
+								<label>Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
+
 								</select>
 							</div>
 						</div>
@@ -240,7 +243,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Age Of Nominee </label> <input type="text"
-									name="price" id="price" required="required"
+									name="nomineeAge" id="nomineeAge" required="required"
 									placeholder="Enter Nominee Age" />
 							</div>
 						</div>
@@ -249,29 +252,30 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Address</label>
-								<textarea name="" id=""
+								<textarea name="customerAddress" id="customerAddress"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter District" />
+								<label for="">District</label> <input type="text"
+									name="district" id="district" required="required"
+									placeholder="Enter District" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter State" />
+								<label for="">State</label> <input type="text" name="state"
+									id="state" required="required" placeholder="Enter State" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Pincode" />
+								<label for="">Pin Code</label> <input type="text" name="pinCode"
+									id="pinCode" required="required" placeholder="Enter Pincode" />
 							</div>
 						</div>
 
@@ -280,15 +284,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Profession</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter profession" />
+								<label>Profession</label> <input type="text" name="profession"
+									id="profession" required="required"
+									placeholder="Enter profession" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Academic background</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Academic background" />
+								<label for="">Academic background</label> <input type="text"
+									name="academicBackground" id="academicBackground"
+									required="required" placeholder="Enter Academic background" />
 							</div>
 						</div>
 					</div>
@@ -303,7 +309,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
+										id="photoPreview" />
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -323,7 +329,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+										id="signaturePreview" />
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -345,19 +351,20 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Select Role</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="selectPosition" id="selectPosition" required="required"
 									placeholder="Enter Role" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Reference Code</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Reference Code</label> <input type="text"
+									name="referralCode" id="referralCode" required="required"
 									placeholder="Enter Reference Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -367,19 +374,13 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Reference Name</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="referralName" id="referralName" required="required"
 									placeholder="Enter Reference Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Position </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Position" />
-							</div>
-						</div>
+
 
 					</div>
 
@@ -394,18 +395,19 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
 									<label>Charges (if any)</label> <input type="text"
-										name="vehicalNo" id="vehicalNo" required="required"
+										name="fees" id="fees" required="required"
 										placeholder="Enter Fees" style="text-transform: uppercase;" />
 								</div>
 							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="vehicalNo">Mode of payment</label> <select id="colour"
-										name="colour" required="required"
+									<label for="vehicalNo">Mode of payment</label> <select
+										id="modeofPayment" name="modeofPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
 										<option value="">Select</option>
-										<option value="Blue">Cash</option>
+										<option value="Cash">Cash</option>
+										<option value="Online">Online</option>
 
 									</select>
 								</div>
@@ -415,7 +417,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
 									<label>Comments</label>
-									<textarea name="" id="" placeholder="Enter Remarks"
+									<textarea name="comments" id="comments" placeholder="Enter Remarks"
 										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>
@@ -480,8 +482,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
 							<button id="updateBtn" class="btn btn-success">Update</button>
-							<button id="newBtn" class="btn btn-secondary"
-							>New</button>
+							<button id="newBtn" class="btn btn-secondary">New</button>
 							<button id="deleteBtn" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
@@ -594,6 +595,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/financialUpdate.js"></script>
 </body>
 
 </html>
