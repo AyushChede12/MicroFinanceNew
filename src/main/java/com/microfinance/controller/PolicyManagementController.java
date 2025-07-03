@@ -1,6 +1,8 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -433,6 +435,39 @@ public class PolicyManagementController {
         }
    }
     
+
+   
+    
+    // Get Scheme Name by Scheme Term
+    
+    @GetMapping("/getSchemeNameBySchemeType")
+    public Map<String, List<String>> getSchemeNameBySchemeType(
+            @RequestParam(value = "drd", required = false) String drd,
+            @RequestParam(value = "rd", required = false) String rd,
+            @RequestParam(value = "fd", required = false) String fd,
+            @RequestParam(value = "mis", required = false) String mis) {
+
+        Map<String, List<String>> response = new HashMap<>();
+
+        if (drd != null) {
+            response.put("allBrands", policyManagementService.getSchemeNameBySchemeType(drd));
+        }
+        if (rd != null) {
+            response.put("allRds", policyManagementService.getRRDBySchemeType(rd));
+        }
+        if (fd != null) {
+            response.put("allFRDs", policyManagementService.getFRDBySchemeType(fd));
+        }
+        if (mis != null) {
+            response.put("allMISRDs", policyManagementService.getMISRDBySchemeType(mis));
+        }
+
+        return response;
+    }
+
+
+
+
  // view add new Investment details
  	//Ashwini
  	@GetMapping("/getaddinvestmentdetails")
@@ -469,6 +504,7 @@ public class PolicyManagementController {
  	
  	 
  	
+
     
     
 }

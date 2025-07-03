@@ -2,6 +2,7 @@ package com.microfinance.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -18,6 +19,7 @@ import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
+
 
 @Service
 public class PolicyManagementService {
@@ -342,6 +344,48 @@ public List<AddnewinvestmentPM> getAddInvestmentDetails() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findAll();
 }
+
+
+
+
+public List<String> getSchemeNameBySchemeType(String drd) {
+    List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
+    return allDrdPlans.stream()
+                      .map(DailyDepositPM::getPlanNameDD)
+                      .distinct()
+                      .collect(Collectors.toList());
+}
+
+public List<String> getRRDBySchemeType(String rd) {
+    List<RecurringDepositPM> allRrdPlans = recurringDepositRepo.findByrd(rd);
+    return allRrdPlans.stream()
+                     .map(RecurringDepositPM::getPlanNameRD)
+                     .distinct()
+                     .collect(Collectors.toList());
+}
+
+public List<String> getFRDBySchemeType(String fd) {
+	List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
+    return allFrdPlans.stream()
+    		         .map(FixedDepositPM::getPlanNameFD)
+                     .distinct()
+                     .collect(Collectors.toList()); 
+	
+	
+}
+
+public List<String> getMISRDBySchemeType(String mis) {
+	List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
+    return allMisrdPlans.stream()
+    		         .map(MISDepositPM::getPlanNameMD)
+                     .distinct()
+                     .collect(Collectors.toList());
+}
+
+
+
+}
+
 
 
 
