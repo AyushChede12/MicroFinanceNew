@@ -9,6 +9,7 @@ public class CreateSavingsAccount {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	private String typeofaccount;
 	private String openingDate;
 	private String selectByCustomer;
 	private String enterCustomerName;
@@ -46,6 +47,13 @@ public class CreateSavingsAccount {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getTypeofaccount() {
+		return typeofaccount;
+	}
+	public void setTypeofaccount(String typeofaccount) {
+		this.typeofaccount = typeofaccount;
 	}
 	public String getOpeningDate() {
 		return openingDate;

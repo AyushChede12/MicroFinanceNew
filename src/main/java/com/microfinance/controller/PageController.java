@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.service.TeamManagementService;
@@ -27,14 +28,15 @@ public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	
 	@Autowired
 	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
 	
 	@Autowired
-
 	FinancialConsultantRepo financialConsultantRepo;
 
-	@Autowired DailyDepositPMRepo dailyDepositRepo;
+	@Autowired 
+	DailyDepositPMRepo dailyDepositRepo;
 	
 	@Autowired
 	RecurringDepositRepo recurringDepositRepo;
@@ -45,13 +47,17 @@ public class PageController {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
-	@Autowired TransferShareRepo transferShareRepo;
+	@Autowired 
+	TransferShareRepo transferShareRepo;
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	@Autowired
 	TeamManagementService teamService;
+	
+	@Autowired
+	CreateLendingGroupRepo createLendingGroupRepo;
 	
 	
 	@GetMapping("/")
@@ -287,7 +293,10 @@ public class PageController {
 
 	// Joint Liability Loan
 	@GetMapping("/createLendingGroup")
-	public String getCreateLendingGroup() {
+	public String getCreateLendingGroup(Model model) {
+		long maxIdDD = createLendingGroupRepo.getMaxId();
+		String memberCodePI = "PI" + "000" + (maxIdDD + 1);
+		model.addAttribute("memberCodePI", memberCodePI);
 		return "jointLiabilityLoan/createLendingGroup";
 	}
 
@@ -871,11 +880,17 @@ public class PageController {
 	
 	@GetMapping("/createSavingsAccount")
 	public String getCreateSavingsAccount(Model model) {
+//		long maxId = createSavingAccountRepo.getMaxId() + 1;
+//		//String savingaccountnumber = String.format("2025%08d", maxId);
+//		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
+//		String savingaccountnumber = "2025" + "000000" + (maxId);
+//		model.addAttribute("savingaccountnumber", savingaccountnumber);
 		long maxId = createSavingAccountRepo.getMaxId() + 1;
-		String savingaccountnumber = String.format("2025%08d", maxId);
-		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
-		//String savingaccountnumber = "2025" + "000000" + (maxId);
+		String idStr = String.valueOf(maxId);
+		String zeros = "00000000".substring(idStr.length()); // 8 - maxId length
+		String savingaccountnumber = "2025" + zeros + idStr;
 		model.addAttribute("savingaccountnumber", savingaccountnumber);
+
 		return "customerSavings/createSavingsAccount";
 	}
 

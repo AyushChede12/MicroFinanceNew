@@ -2,20 +2,24 @@ package com.microfinance.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
+
 
 @Service
 public class PolicyManagementService {
@@ -30,6 +34,9 @@ public class PolicyManagementService {
 	
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
+	
+	@Autowired
+	AddInvestmentRepo addinvestmentrepo;
 	
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
@@ -329,9 +336,99 @@ public boolean deleteMISDeposit(Long id) {
 	        return false;
 	    }
 }
+
+
+
+//Ashwini
+public List<AddnewinvestmentPM> getAddInvestmentDetails() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
 }
 
 
 
 
+public List<String> getSchemeNameBySchemeType(String drd) {
+    List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
+    return allDrdPlans.stream()
+                      .map(DailyDepositPM::getPlanNameDD)
+                      .distinct()
+                      .collect(Collectors.toList());
+}
+
+public List<String> getRRDBySchemeType(String rd) {
+    List<RecurringDepositPM> allRrdPlans = recurringDepositRepo.findByrd(rd);
+    return allRrdPlans.stream()
+                     .map(RecurringDepositPM::getPlanNameRD)
+                     .distinct()
+                     .collect(Collectors.toList());
+}
+
+public List<String> getFRDBySchemeType(String fd) {
+	List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
+    return allFrdPlans.stream()
+    		         .map(FixedDepositPM::getPlanNameFD)
+                     .distinct()
+                     .collect(Collectors.toList()); 
+	
+	
+}
+
+public List<String> getMISRDBySchemeType(String mis) {
+	List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
+    return allMisrdPlans.stream()
+    		         .map(MISDepositPM::getPlanNameMD)
+                     .distinct()
+                     .collect(Collectors.toList());
+}
+
+
+
+
+public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+public RecurringDepositPM getRDTermAndInterestRate(String planNameRD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+public FixedDepositPM getFDTermAndInterestRate(String planNameFD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+public MISDepositPM getMISTermAndInterestRate(String planNameMD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+}
+
+
+
+
+
+public List<AddnewinvestmentPM> findByBranch(String branchName) {
+	// TODO Auto-generated method stub
+	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
+	return list;
+}
+
+
+
+}
 
