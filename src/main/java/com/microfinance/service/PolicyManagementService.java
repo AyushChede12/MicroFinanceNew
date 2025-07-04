@@ -347,6 +347,7 @@ public List<AddnewinvestmentPM> getAddInvestmentDetails() {
 
 
 
+
 public List<String> getSchemeNameBySchemeType(String drd) {
     List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
     return allDrdPlans.stream()
@@ -383,9 +384,50 @@ public List<String> getMISRDBySchemeType(String mis) {
 
 
 
+
+public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
+	// TODO Auto-generated method stub
+	return null;
 }
 
 
 
 
+public RecurringDepositPM getRDTermAndInterestRate(String planNameRD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+public FixedDepositPM getFDTermAndInterestRate(String planNameFD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+public MISDepositPM getMISTermAndInterestRate(String planNameMD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+
+
+
+
+
+public List<AddnewinvestmentPM> findByBranch(String branchName) {
+	// TODO Auto-generated method stub
+	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
+	return list;
+}
+
+
+
+}
 
