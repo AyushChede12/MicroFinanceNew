@@ -9,6 +9,8 @@ $(document).ready(function() {
 	$('#transactionDate').val(today);
 	$('#dateOfTransfer').val(today);
 
+	$('#dateloan').val(today);
+
 	//Branch
 	$.ajax({
 		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule

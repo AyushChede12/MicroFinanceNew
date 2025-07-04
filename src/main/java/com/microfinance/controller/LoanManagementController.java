@@ -141,15 +141,16 @@ public class LoanManagementController {
 	}
 
 
-@GetMapping("/allfetchdataBranchName")
-public ResponseEntity<ApiResponse<List<BranchModule>>> getBranchName() {
-    List<BranchModule> branchList = loanServices.getgetBranchName();
-
-    ApiResponse<List<BranchModule>> response = new ApiResponse<>( HttpStatus.OK,"Loan Branch fetched successfully",branchList );
-
-    return ResponseEntity.ok(response);
-}
-
+	/*
+	 * @GetMapping("/allfetchdataBranchName") public
+	 * ResponseEntity<ApiResponse<List<BranchModule>>> getBranchName() {
+	 * List<BranchModule> branchList = loanServices.getgetBranchName();
+	 * 
+	 * ApiResponse<List<BranchModule>> response = new ApiResponse<>(
+	 * HttpStatus.OK,"Loan Branch fetched successfully",branchList );
+	 * 
+	 * return ResponseEntity.ok(response); }
+	 */
 
 @GetMapping("/allfetchdataLoanSchemCode")
 public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanSchemCode() {
@@ -175,6 +176,7 @@ public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanByCode(@RequestParam
             .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
     }
 }
+
 }
 
 
