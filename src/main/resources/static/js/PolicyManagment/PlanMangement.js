@@ -9,6 +9,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const dailyDeposit = {
+			drd: $('#drd').val(),
 			planCodeDD: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
 			minimumDeposit: $('#minimumDeposit').val(),
@@ -258,6 +259,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const reccuringDeposite = {
+			rd: $('#rd').val(),
 			planCodeRD: $('#planCodeRD').val(),
 			planNameRD: $('#planNameRD').val(),
 			minimumAmountRD: $('#minimumAmountRD').val(),
@@ -486,6 +488,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const fixedDeposit = {
+			fd: $('#fd').val(),
 			planCodeFD: $('#planCodeFD').val(),
 			planNameFD: $('#planNameFD').val(),
 			minimumAmountFD: $('#minimumAmountFD').val(),
@@ -708,6 +711,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const misDeposit = {
+			mis: $('#mis').val(),
 			planCodeMD: $('#planCodeMD').val(),                   
 				planNameMD: $('#planNameMD').val(),                   
 				minimumAmountMD: $('#minimumAmountMD').val(),         

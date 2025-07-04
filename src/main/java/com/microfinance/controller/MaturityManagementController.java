@@ -1,7 +1,5 @@
 package com.microfinance.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -19,8 +17,6 @@ import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.MaturitySchemeMaster;
 import com.microfinance.service.MaturitySchemeMasterService;
 import com.microfinance.service.PolicyManagementService;
-
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -53,26 +49,6 @@ public class MaturityManagementController {
 	       
 	    }
 
-	}
-	
-	// view add new Investment details
-	//Ashwini
-	@GetMapping("/getaddinvestmentdetails")
-	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAddInvestmentDetails() {
-		 List<AddnewinvestmentPM> invest = policyManagementService.getAddInvestmentDetails();
-		 
-		 if (invest != null && !invest.isEmpty()) {
-	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.success(HttpStatus.OK,
-	                "Investment Details fetched successfully.",
-	                invest
-	            );
-	            return new ResponseEntity<>(response, HttpStatus.OK);
-	        } else {
-	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-	                "No Details found."
-	            );
-	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-	        }
 	}
 	
 	

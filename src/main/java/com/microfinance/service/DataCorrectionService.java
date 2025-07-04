@@ -1,8 +1,39 @@
 package com.microfinance.service;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.CustomerDto;
+import com.microfinance.model.CompanyAdministration;
+import com.microfinance.model.addCustomer;
+import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.CustomerRepo;
 
 @Service
 public class DataCorrectionService {
+	
+	@Autowired
+	CustomerRepo customerRepo;;
+
+	public boolean deleteCustomerData(Long id) {
+		// TODO Auto-generated method stub
+		if (customerRepo.existsById(id)) {
+			customerRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+
+
 
 }
