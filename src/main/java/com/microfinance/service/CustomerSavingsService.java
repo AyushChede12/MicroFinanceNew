@@ -130,4 +130,9 @@ public class CustomerSavingsService {
 		return savingAccountActivityRepo.findById(id);
 	}
 
+	public List<SavingAccountActivity> findAllByAccountNumberSavingActivity(String accountNumber) {
+		List<SavingAccountActivity> list = savingAccountActivityRepo.findAllByAccountNumber(accountNumber);
+		return list;
+	}
+
 }

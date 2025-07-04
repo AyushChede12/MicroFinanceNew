@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
@@ -199,20 +200,29 @@ public class CustomerSavingsController {
         return ResponseEntity.ok(response);
     }
     
-    @GetMapping("/getSavingAccountActivityById")
-	public ResponseEntity<ApiResponse<SavingAccountActivity>> findSavingAccountActivityById(@RequestParam("id") Long id) {
-		Optional<SavingAccountActivity> fyear = customersaving.findSavingAccountActivityById(id);
-		if (fyear.isPresent()) {
-			ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.FOUND,
-					"Saving Account Activity fetched successfully", fyear.get());
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Saving Account Activity not found for ID: " + id, null);
-			return ResponseEntity.status(404).body(response);
-		}
-	}
+  //fetch all saving account Activity by account number
+    
+    @GetMapping("/getsavingaccountactivity")
+	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> findAllByAccountNumberSavingActivity(@RequestParam String accountNumber) {
 
+	    List<SavingAccountActivity> members = customersaving.findAllByAccountNumberSavingActivity(accountNumber);
+
+	    if (members != null && !members.isEmpty()) {
+	        ApiResponse<List<SavingAccountActivity>> response = ApiResponse.success(
+	            HttpStatus.OK,
+	            "Consultants found for memberCode: " + accountNumber,
+	            members
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    } else {
+	        ApiResponse<List<SavingAccountActivity>> response = ApiResponse.error(
+	            HttpStatus.NOT_FOUND,
+	            "No member found with this code"
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
+	}
+    
 	
 	
 }
