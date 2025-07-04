@@ -2,7 +2,7 @@
 $(document).ready(function() {
 	// Fetch all customers and populate the "select by code" dropdown
 	$.ajax({
-		url: "getAllCustomer",
+		url: "approved",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Members:", data);
@@ -211,39 +211,51 @@ $(document).ready(function () {
 	});
 });
 
-// Fetch term & ROI and then display maturity date
 function fetchTermBySchemeName() {
 	const selectedSchemeName = $("#schemeName").val();
 	const schemeType = $("#schemeType").val();
 
 	if (!selectedSchemeName) {
-		$("#schemeTerm").val("");
+		$("#term").val("");
 		$("#roi").val("");
+		$("#totalDeposit").val("");
+		$("#maturityAmount").val("");
 		$("#maturityDate").val("");
 		return;
 	}
 
-	let apiUrl = "", dataParam = {};
+	let apiUrl = "";
+	let dataParam = {};
+	let termField = "";
+	let interestRateField = "";
 
 	switch (schemeType) {
 		case "DRD":
 			apiUrl = "/api/Policymangment/ddterm";
 			dataParam = { planNameDD: selectedSchemeName };
+			termField = "ddterm";
+			interestRateField = "rateOfInterest";
 			break;
 		case "RD":
 			apiUrl = "/api/Policymangment/rdterm";
-			dataParam = { planNameDD: selectedSchemeName };
+			dataParam = { planNameRD: selectedSchemeName };
+			termField = "rdterm";
+			interestRateField = "rateOfInterestRD";
 			break;
 		case "FD":
 			apiUrl = "/api/Policymangment/fdterm";
-			dataParam = { planNameDD: selectedSchemeName };
+			dataParam = { planNameFD: selectedSchemeName };
+			termField = "fdterm";
+			interestRateField = "rateOfInterestFD";
 			break;
 		case "MIS":
 			apiUrl = "/api/Policymangment/misterm";
-			dataParam = { planNameDD: selectedSchemeName };
+			dataParam = { planNameMD: selectedSchemeName };
+			termField = "misterm";
+			interestRateField = "rateOfInterestMD";
 			break;
 		default:
-			alert("Invalid scheme type");
+			alert("Invalid scheme type selected.");
 			return;
 	}
 
@@ -252,26 +264,28 @@ function fetchTermBySchemeName() {
 		url: apiUrl,
 		data: dataParam,
 		dataType: "json",
-		success: function (response) {
-			if (response && response.data) {
-				$("#schemeTerm").val(response.data.term || "");
-				$("#roi").val(response.data.rateOfInterest || "");
+		success: function(response) {
+			let data = response.data || response;
 
-				// Set schemeMode based on schemeType
-				const schemeMode = getSchemeMode(schemeType);
-				$("#schemeMode").val(schemeMode);
+			if (data) {
+				$("#schemeTerm").val(data[termField] || "");
+				$("#roi").val(data[interestRateField] || "");
 
-				// Now display maturity date
+				updateSchemeMode();
+				calculateAmounts();
 				displayMaturityDate();
 			} else {
-				alert("Invalid response format.");
+				alert("No scheme data found.");
 			}
 		},
-		error: function () {
-			alert("Failed to fetch term and ROI");
+		error: function(xhr, status, error) {
+			console.error("Error fetching scheme data:", error);
+			alert("Error fetching scheme data. Please try again.");
 		}
 	});
 }
+
+
 
 // Determine schemeMode from schemeType
 function getSchemeMode(schemeType) {
