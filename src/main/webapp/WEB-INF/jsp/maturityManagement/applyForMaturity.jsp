@@ -76,8 +76,8 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID<span id="star"> *</span></label> <select id="policyId"
-									name="policyId" required="required"
+								<label for="">Policy No.<span id="star"> *</span></label> <select id="policyNo"
+									name="policyNo" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select Policy ID</option>
 								</select>
@@ -98,30 +98,23 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Customer Name <span id="star"> *</span></label> <input type="text"
 									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Type <span id="star"> *</span></label> <select
-									id="schemeType" name="schemeType" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+								<label for="">Scheme Type <span id="star"> *</span></label> <input type="text"
+									name="schemeType" id="schemeType" required="required"	
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Name <span id="star"> *</span></label> <select
-									id="schemeName" name="schemeName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+								<label for="">Scheme Mode <span id="star"> *</span></label> <input type="text"
+									name="schemeMode" id="schemeMode" required="required"	
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
@@ -160,7 +153,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-primary" color:black"> View Policy Detail</button>
+							<button id="viewBtn" class="btn btn-primary" color:black"> View Policy Detail</button>
 							<button id="Add" class="btn btn-info" color:black">Save</button>
 						</div>
 					</div>
@@ -177,15 +170,19 @@ pageEncoding="ISO-8859-1"%> -->
 							Marurity Application<span>|</span>
 						</h5>
 
-						<table class="table table-borderless datatable overflow-scroll">
+						<table class="table table-borderless datatable overflow-scroll" id="table">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">id</th>
+									
 									<th scope="col">Policy No.</th>
-									<th scope="col">Member name</th>
-									<th scope="col">Policy Date</th>
-									<th scope="col">Application Date</th>
-									<th scope="col">Remark</th>
+            						<th scope="col">Branch Name</th>
+            						<th scope="col">Maturity Date</th>
+           						  	<th scope="col">Customer Name</th>
+            						<th scope="col">Scheme Name</th>
+            						<th scope="col">Scheme Type</th>
+            						<th scope="col">Policy Amount</th>
+            						<th scope="col">Maturity Amount</th>
+            						<th scope="col">Remark</th>
 								</tr>
 							</thead>
 							<tbody>

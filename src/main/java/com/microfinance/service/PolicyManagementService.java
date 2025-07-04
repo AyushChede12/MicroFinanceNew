@@ -385,6 +385,7 @@ public List<String> getMISRDBySchemeType(String mis) {
 
 
 
+
 public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
 	// TODO Auto-generated method stub
 	return null;
@@ -422,6 +423,7 @@ public MISDepositPM getMISTermAndInterestRate(String planNameMD) {
 
 
 
+
 public List<AddnewinvestmentPM> findByBranch(String branchName) {
 	// TODO Auto-generated method stub
 	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
@@ -430,5 +432,27 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
+
+public AddnewinvestmentPM getDetailsById(Long id) {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findById(id).orElse(null);
 }
+
+
+
+}
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
 

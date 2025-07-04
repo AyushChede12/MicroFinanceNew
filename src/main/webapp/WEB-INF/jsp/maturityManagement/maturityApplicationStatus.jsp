@@ -30,6 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -62,30 +63,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch <span id="star"> *</span></label> <select id="branch" name="branch"
+								<label for="">Branch <span id="star"> *</span></label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Branch</option>
@@ -116,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-dark" color:black">Search</button>
+							<button id="searchBtn" class="btn btn-dark" color:black">Search</button>
 
 						</div>
 					</div>
@@ -137,7 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<span>|</span>
 								</h5>
 
-								<table class="table table-borderless datatable overflow-scroll">
+								<table class="table table-borderless datatable overflow-scroll" id="table">
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">slno</th>
@@ -160,17 +140,6 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-
-
-
-
-
-
-
-
-
-
-
 			</form>
 
 
@@ -180,6 +149,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/maturityapplicationstatus.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -516,8 +517,28 @@ public class PolicyManagementController {
       
  	}
  	
- 	 
  	
+
+ 	@GetMapping("/getDetailsById/{id}")
+    public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getDetailsById(@PathVariable Long id) {
+ 		AddnewinvestmentPM deposit = policyManagementService.getDetailsById(id);
+
+       if (deposit != null) {
+            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
+                 HttpStatus.OK,
+                "MIS deposit fetched successfully.",
+                deposit
+           );
+           return ResponseEntity.ok(response);
+         } else {
+            ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                 "MIS deposit not found for ID: " + id
+            );
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+         }
+  }
+
 
 
     
@@ -558,6 +579,7 @@ public class PolicyManagementController {
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
 	    }
 	}
+
 
     
     
