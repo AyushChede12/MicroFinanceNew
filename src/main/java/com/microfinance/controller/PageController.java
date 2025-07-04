@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.service.TeamManagementService;
@@ -27,14 +28,15 @@ public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	
 	@Autowired
 	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
 	
 	@Autowired
-
 	FinancialConsultantRepo financialConsultantRepo;
 
-	@Autowired DailyDepositPMRepo dailyDepositRepo;
+	@Autowired 
+	DailyDepositPMRepo dailyDepositRepo;
 	
 	@Autowired
 	RecurringDepositRepo recurringDepositRepo;
@@ -45,13 +47,17 @@ public class PageController {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
-	@Autowired TransferShareRepo transferShareRepo;
+	@Autowired 
+	TransferShareRepo transferShareRepo;
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	@Autowired
 	TeamManagementService teamService;
+	
+	@Autowired
+	CreateLendingGroupRepo createLendingGroupRepo;
 	
 	
 	@GetMapping("/")
@@ -287,7 +293,10 @@ public class PageController {
 
 	// Joint Liability Loan
 	@GetMapping("/createLendingGroup")
-	public String getCreateLendingGroup() {
+	public String getCreateLendingGroup(Model model) {
+		long maxIdDD = createLendingGroupRepo.getMaxId();
+		String memberCodePI = "PI" + "000" + (maxIdDD + 1);
+		model.addAttribute("memberCodePI", memberCodePI);
 		return "jointLiabilityLoan/createLendingGroup";
 	}
 

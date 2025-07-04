@@ -201,7 +201,6 @@ public class CustomerShareholdingController {
 			} else 
 				return ApiResponse.error(HttpStatus.NOT_FOUND, "UnAllotedShare Data List is not Found");	
         }
-
 		// fetch A table 
 		@PostMapping("/fetchByCertificateNo")
 		public ApiResponse<List<TransferShare>> fetchByCertificateNo(@RequestParam("findByCode") String findByCode) {
@@ -209,10 +208,10 @@ public class CustomerShareholdingController {
 			if (list != null && !list.isEmpty()) {
 				return ApiResponse.success(HttpStatus.FOUND, "Transfer Share Fetched Successfully", list);
 			} else {
-					return ApiResponse.error(HttpStatus.NOT_FOUND, "Transfer Share Not Found");		
-					}			
-			
+				return ApiResponse.error(HttpStatus.NOT_FOUND, "Transfer Share Not Found");
 			}
+
+		}
 	
 	
 // End Generate Share Certificate Sub Model -----------------------------------------------------------------------------------------------------

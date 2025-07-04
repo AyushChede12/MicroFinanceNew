@@ -1,4 +1,5 @@
-// janvi : search In Th eFinance Onboarding on Table
+// janvi : search In The Finance Onboarding on Table
+//Fetch Unapproved Financial Consultants
 let allFinancialConsultantData = []; 
 
 function searchInTheFinanceOnboarding() {
@@ -34,13 +35,12 @@ function renderTable(data) {
 				<td>${item.customerName || '-'}</td>
 				<td>${item.financialCode || '-'}</td>
 				<td>${item.dob || '-'}</td>
-				<td>${item.age || '-'}</td>
-				<td>${item.address || '-'}</td>
 				<td>${item.academicBackground || '-'}</td>
 				<td>${item.contactNo || '-'}</td>
 				<td>${item.profession || '-'}</td>
 				<td>${item.joiningDate || '-'}</td>
 				<td>${item.modeofPayment || '-'}</td>
+				<td>${item.branchName || '-'}</td>
             </tr>
         `;
 		tbody.append(row);
@@ -50,78 +50,58 @@ function renderTable(data) {
 
 
 
-//janvi:financial Code Dropdown
-function financialCodeDropdown() {
+//janvi:Branch Name Dropdown
+function branchNameDropdown() {
 $.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
-		type: "POST",
+		url: "getAllBranchModule",
+		type: "GET",
+		contentType: "application/json",
 		success: function (response) {
 			if (response.status === "OK" && response.data) {
-				$("#financialCode").empty().append("<option value=''>-- Select Code --</option>");
+				$("#branchName").empty().append("<option value=''>-- Select Code --</option>");
 				response.data.forEach(function (item) {
-					$("#financialCode").append(`<option value='${item.financialCode}'>${item.financialCode}</option>`);
+					$("#branchName").append(`<option value='${item.branchName}'>${item.branchName}</option>`);
 				});
 			} else {
-				alert("No financial codes found.");
+				alert("No branch found.");
 			}
-		},
-		error: function () {
-			alert("Failed to load financial codes.");
 		}
 	});
 }
 
+//Janvi : Apply filter
+function filterBranchNameData() {
+    const selectedbranchName = $('#branchName').val().trim().toLowerCase();
+    const fromDateVal = $('#fromDate').val();
+    const toDateVal = $('#toDate').val();
 
-function filterFinancialCodeData() {
-	const selectedCode = $('#financialCode').val();
-	const fromDateVal = $('#fromDate').val();
-	const toDateVal = $('#toDate').val();
+    const fromDate = fromDateVal ? new Date(fromDateVal) : null;
+    const toDate = toDateVal ? new Date(toDateVal) : null;
 
-	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
-	const toDate = toDateVal ? new Date(toDateVal) : null;
+    const filtered = allFinancialConsultantData.filter(item => {
+        const branchName = item.branchName ? item.branchName.trim().toLowerCase() : "";
+        const joiningDate = item.joiningDate ? new Date(item.joiningDate) : null;
 
-	const filtered = allFinancialConsultantData.filter(item => {
-		const financialCode = item.financialCode;
-		const joiningDate = item.joiningDate ? new Date(item.joiningDate) : null;
+        const matchesbranch = selectedbranchName ? branchName === selectedbranchName : true;
 
-		const matchesCode = selectedCode ? financialCode === selectedCode : true;
-		const matchesFrom = fromDate && joiningDate ? joiningDate >= fromDate : true;
-		const matchesTo = toDate && joiningDate ? joiningDate <= toDate : true;
+        let matchesFrom = true;
+        let matchesTo = true;
 
-		return matchesCode && matchesFrom && matchesTo;
-	});
+        if (fromDate && joiningDate) {
+            matchesFrom = joiningDate.getTime() >= fromDate.getTime();
+        }
 
-	renderTable(filtered);
+        if (toDate && joiningDate) {
+            matchesTo = joiningDate.getTime() <= toDate.getTime();
+        }
+
+        return matchesbranch && matchesFrom && matchesTo;
+    });
+
+    renderTable(filtered);
 }
 
-
-//Janvi : set approved status
-// Approve selected members
-/*function updateSelectedMembersStatus() {
-$(document).on("change", ".member-checkbox", function() {
-    const id = $(this).val();
-    const isApproved = $(this).is(":checked");
-
-    $.ajax({
-        url: "/api/financialconsultant/approvedFinancialConsultantData",
-        type: "POST",
-        data: {
-            id: id,
-            isApproved: isApproved
-        },
-        success: function(response) {
-            console.log("Approval updated:", response);
-            // Optionally show success toast
-        },
-        error: function(xhr, status, error) {
-            console.error("Error updating approval:", error);
-            alert("Could not update approval status.");
-        }
-    });
-});
-
-}*/
-
+//Janvi : Update Status Approved
 function updateMemberApprovalStatus(id, isApproved) {
 	 
     $.ajax({
@@ -133,6 +113,7 @@ function updateMemberApprovalStatus(id, isApproved) {
         },
         success: function(response) {
             console.log("Approval updated for ID:", id, response);
+            alert("Approval status updated successfully for ID: " + id);
             // Optionally show success toast
         },
         error: function(xhr, status, error) {
