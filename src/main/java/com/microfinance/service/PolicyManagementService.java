@@ -308,6 +308,8 @@ public class PolicyManagementService {
 		List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
 		return allFrdPlans.stream().map(FixedDepositPM::getPlanNameFD).distinct().collect(Collectors.toList());
 
+
+
 	}
 
 	public List<String> getMISRDBySchemeType(String mis) {
@@ -331,4 +333,20 @@ public class PolicyManagementService {
 		return misDepositePMRepo.findByplanNameMD(planNameMD);
 	}
 
+
+
+
+
+
+
+
+public List<AddnewinvestmentPM> findByBranch(String branchName) {
+	// TODO Auto-generated method stub
+	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
+	return list;
 }
+
+
+
+}
+

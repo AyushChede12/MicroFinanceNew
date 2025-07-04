@@ -7,6 +7,9 @@ $(document).ready(function() {
 	$('#approvalDate').val(today);
 	$('#openingDate').val(today);
 	$('#transactionDate').val(today);
+	$('#dateOfTransfer').val(today);
+
+	$('#dateloan').val(today);
 
 	//Branch
 	$.ajax({
