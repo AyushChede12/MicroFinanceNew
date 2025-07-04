@@ -107,6 +107,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" name="companyName" id="companyName"
 									required="required" placeholder="Enter Company Name"
 									style="text-transform: uppercase;" />
+									<small id="chkcompanyname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -117,6 +118,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" id="shortName" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkshortname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -127,6 +129,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" name="signUpDate" id="signUpDate"
 									required="required" placeholder="Enter Sign-Up Date"
 									style="text-transform: uppercase;" />
+									<small id="chksignupdate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -137,6 +140,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" id="cinNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkcinno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -147,6 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkpan" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -157,6 +162,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chktan" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -167,6 +173,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkgstin" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -177,6 +184,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="declaredValue" id="declaredValue" required="required"
 									readonly="readonly" placeholder="Enter Declared Value "
 									style="text-transform: uppercase;" />
+									<small id="chkdeclaredvalue" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -186,6 +194,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Address <span class="star">*</span></label>
 								<textarea name="address" id="address" readonly="readonly"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+									<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -194,6 +203,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">State <span class="star">*</span></label> <input type="text"
 									readonly="readonly" name="state" id="state" required="required"
 									placeholder="Enter State " style="text-transform: uppercase;" />
+									<small id="chkstate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -204,6 +214,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" id="pinCode" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkpincode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -214,6 +225,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" id="emailId" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkemailid" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -225,6 +237,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="authorizedShareCapital" required="required"
 									placeholder="Authorized Share Capital"
 									style="text-transform: uppercase;" />
+									<small id="chkauthorizedsharecapital" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -235,6 +248,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" name="paidUpCapital" id="paidUpCapital"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chkpaidupcapital" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -244,6 +258,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>NOF <span class="star">*</span></label> <input type="text" name="nof" id="nof"
 									readonly="readonly" required="required"
 									placeholder="Enter NOF " style="text-transform: uppercase;" />
+									<small id="chknof" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -254,6 +269,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" id="contactNo" required="required"
 									placeholder="Enter Contact No"
 									style="text-transform: uppercase;" />
+									<small id="chkcontactno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -264,6 +280,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" name="tdsWithPan" id="tdsWithPan"
 									required="required" placeholder="Enter TDS"
 									style="text-transform: uppercase;" />
+									<small id="chktdswithpan" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -274,6 +291,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" name="tdsWithoutPan" id="tdsWithoutPan"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chktdswithoutpan" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -284,6 +302,7 @@ pageEncoding="ISO-8859-1"%> -->
 									readonly="readonly" name="taxDeduction" id="taxDeduction"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
+									<small id="chktaxdeduction" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -295,6 +314,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="seniorCitizenTaxDeduction" required="required"
 									placeholder="Enter Senior Citizen Tax Deduction"
 									style="text-transform: uppercase;" />
+									<small id="chkseniorcitizentaxdeduction" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -322,7 +342,7 @@ pageEncoding="ISO-8859-1"%> -->
                     Drag and drop or Choose File to upload the image
                   </p> -->
 									</div>
-								</label>
+								</label><small id="chkphoto" style="color: red;"></small>
 							</div>
 
 							<div class="col-lg-3 mb-5">
@@ -342,7 +362,7 @@ pageEncoding="ISO-8859-1"%> -->
                     Drag and drop or Choose File to upload the image
                   </p> -->
 									</div>
-								</label>
+								</label><small id="chksignature" style="color: red;"></small>
 							</div>
 
 

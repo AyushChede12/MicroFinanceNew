@@ -11,35 +11,38 @@ public class NewLoanApplication {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	
 	private Long id;
+	private String dateloan;
 	private String findMember;
 	private String relativeDetail;
-	private String newLoandob;
-	private String newLoanage;
-	private String newLoanphoneNo;
+	private String newloanApplicationDOB;
+	private String newApplictionAge;
+	private String phoneNo;
 	private String noficationStatus;
-	private String newLoanaddress;
-	private String newLoanpincode;
-	private String newLoanbranchName;
+	private String newAplicationAddress;
+	private String newAppicationPinCode;
+	private String branchName;
 	private String newApplicationLoanCode;
-	private String newloanPlaneName;
+	private String newApplicationLoanPlaneName;
 	private String newLoanTypeofloan;
-	private String newLoanPlanDuration;
-	private String newLoanCategory;
-	private String newLoanROI;
-	private String newloanAmountLoan;
-	private String newLoanTypeIntrest;
-	private String newloanPaymnetEMI;
-	private String newLoanPurpose;
+	private String newLoanApplicationCategoryLoan;
+	private String newApplicationDurationPlan;
+	private String newApplicationROI;
+	private String newApplicationLoanAmount;
+	private String newApplicationTypeIntrest;
+	private String newLoanApplicationPaymnetEMI;
+	private String newApplicationLoanPurpose;
 	
 	//Gurantor Details
 	
 	private String memberId;
-	private String gurantorIdentifyGurantor;
+	private String identifyGurantor;
 	private String gurantorAddress;
 	private String gurantorPinCode;
 	private String guarantorContactno;
 	private String guarantorSecurityType;
-	private String coApplictionmemberID;
+	
+	//Co-Application
+	private String coApplictionMemberID;
 	private String coApplictionGuarantorIdentity;
 	private String coApplictionAdress;
 	private String coAppicationPinCode;
@@ -47,29 +50,25 @@ public class NewLoanApplication {
 	private String coAappictionSecurityType;
 	
 	//Deduction Details
-	
 	private String deductionProcessingFee;
 	private String deductionLegakCharges;
-	private String deductionStampDutyFee;
-	private String deductionSmsNotificationFee;
-	private String deductionServicesCharges;
+	private String deductionStampBuildingFund;
 	private String deductionStationaryCharges;
-	private String deductionSmsNotification;
-	private String deductionGst;
 	private String deductionInsuranaceFee;
-	private String deductionPanaltyCharges;
-	private String deductionFuelChargesEmi;
 	private String deductionOverdueIntrestCharge;
-	private String deuctionCollectionCharges;
 	private String deductionAdvisorCollectorId;
 	private String deductionCollectorName;
-	
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getDateloan() {
+		return dateloan;
+	}
+	public void setDateloan(String dateloan) {
+		this.dateloan = dateloan;
 	}
 	public String getFindMember() {
 		return findMember;
@@ -83,23 +82,23 @@ public class NewLoanApplication {
 	public void setRelativeDetail(String relativeDetail) {
 		this.relativeDetail = relativeDetail;
 	}
-	public String getNewLoandob() {
-		return newLoandob;
+	public String getNewloanApplicationDOB() {
+		return newloanApplicationDOB;
 	}
-	public void setNewLoandob(String newLoandob) {
-		this.newLoandob = newLoandob;
+	public void setNewloanApplicationDOB(String newloanApplicationDOB) {
+		this.newloanApplicationDOB = newloanApplicationDOB;
 	}
-	public String getNewLoanage() {
-		return newLoanage;
+	public String getNewApplictionAge() {
+		return newApplictionAge;
 	}
-	public void setNewLoanage(String newLoanage) {
-		this.newLoanage = newLoanage;
+	public void setNewApplictionAge(String newApplictionAge) {
+		this.newApplictionAge = newApplictionAge;
 	}
-	public String getNewLoanphoneNo() {
-		return newLoanphoneNo;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
-	public void setNewLoanphoneNo(String newLoanphoneNo) {
-		this.newLoanphoneNo = newLoanphoneNo;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 	public String getNoficationStatus() {
 		return noficationStatus;
@@ -107,36 +106,35 @@ public class NewLoanApplication {
 	public void setNoficationStatus(String noficationStatus) {
 		this.noficationStatus = noficationStatus;
 	}
-	public String getNewLoanaddress() {
-		return newLoanaddress;
+	public String getNewAplicationAddress() {
+		return newAplicationAddress;
 	}
-	public void setNewLoanaddress(String newLoanaddress) {
-		this.newLoanaddress = newLoanaddress;
+	public void setNewAplicationAddress(String newAplicationAddress) {
+		this.newAplicationAddress = newAplicationAddress;
 	}
-	public String getNewLoanpincode() {
-		return newLoanpincode;
+	public String getNewAppicationPinCode() {
+		return newAppicationPinCode;
 	}
-	public void setNewLoanpincode(String newLoanpincode) {
-		this.newLoanpincode = newLoanpincode;
+	public void setNewAppicationPinCode(String newAppicationPinCode) {
+		this.newAppicationPinCode = newAppicationPinCode;
 	}
-	public String getNewLoanbranchName() {
-		return newLoanbranchName;
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setNewLoanbranchName(String newLoanbranchName) {
-		this.newLoanbranchName = newLoanbranchName;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
-	public String getNewloanPlaneName() {
-		return newloanPlaneName;
-	}
-	
 	public String getNewApplicationLoanCode() {
 		return newApplicationLoanCode;
 	}
 	public void setNewApplicationLoanCode(String newApplicationLoanCode) {
 		this.newApplicationLoanCode = newApplicationLoanCode;
 	}
-	public void setNewloanPlaneName(String newloanPlaneName) {
-		this.newloanPlaneName = newloanPlaneName;
+	public String getNewApplicationLoanPlaneName() {
+		return newApplicationLoanPlaneName;
+	}
+	public void setNewApplicationLoanPlaneName(String newApplicationLoanPlaneName) {
+		this.newApplicationLoanPlaneName = newApplicationLoanPlaneName;
 	}
 	public String getNewLoanTypeofloan() {
 		return newLoanTypeofloan;
@@ -144,47 +142,47 @@ public class NewLoanApplication {
 	public void setNewLoanTypeofloan(String newLoanTypeofloan) {
 		this.newLoanTypeofloan = newLoanTypeofloan;
 	}
-	public String getNewLoanPlanDuration() {
-		return newLoanPlanDuration;
+	public String getNewLoanApplicationCategoryLoan() {
+		return newLoanApplicationCategoryLoan;
 	}
-	public void setNewLoanPlanDuration(String newLoanPlanDuration) {
-		this.newLoanPlanDuration = newLoanPlanDuration;
+	public void setNewLoanApplicationCategoryLoan(String newLoanApplicationCategoryLoan) {
+		this.newLoanApplicationCategoryLoan = newLoanApplicationCategoryLoan;
 	}
-	public String getNewLoanCategory() {
-		return newLoanCategory;
+	public String getNewApplicationDurationPlan() {
+		return newApplicationDurationPlan;
 	}
-	public void setNewLoanCategory(String newLoanCategory) {
-		this.newLoanCategory = newLoanCategory;
+	public void setNewApplicationDurationPlan(String newApplicationDurationPlan) {
+		this.newApplicationDurationPlan = newApplicationDurationPlan;
 	}
-	public String getNewLoanROI() {
-		return newLoanROI;
+	public String getNewApplicationROI() {
+		return newApplicationROI;
 	}
-	public void setNewLoanROI(String newLoanROI) {
-		this.newLoanROI = newLoanROI;
+	public void setNewApplicationROI(String newApplicationROI) {
+		this.newApplicationROI = newApplicationROI;
 	}
-	public String getNewloanAmountLoan() {
-		return newloanAmountLoan;
+	public String getNewApplicationLoanAmount() {
+		return newApplicationLoanAmount;
 	}
-	public void setNewloanAmountLoan(String newloanAmountLoan) {
-		this.newloanAmountLoan = newloanAmountLoan;
+	public void setNewApplicationLoanAmount(String newApplicationLoanAmount) {
+		this.newApplicationLoanAmount = newApplicationLoanAmount;
 	}
-	public String getNewLoanTypeIntrest() {
-		return newLoanTypeIntrest;
+	public String getNewApplicationTypeIntrest() {
+		return newApplicationTypeIntrest;
 	}
-	public void setNewLoanTypeIntrest(String newLoanTypeIntrest) {
-		this.newLoanTypeIntrest = newLoanTypeIntrest;
+	public void setNewApplicationTypeIntrest(String newApplicationTypeIntrest) {
+		this.newApplicationTypeIntrest = newApplicationTypeIntrest;
 	}
-	public String getNewloanPaymnetEMI() {
-		return newloanPaymnetEMI;
+	public String getNewLoanApplicationPaymnetEMI() {
+		return newLoanApplicationPaymnetEMI;
 	}
-	public void setNewloanPaymnetEMI(String newloanPaymnetEMI) {
-		this.newloanPaymnetEMI = newloanPaymnetEMI;
+	public void setNewLoanApplicationPaymnetEMI(String newLoanApplicationPaymnetEMI) {
+		this.newLoanApplicationPaymnetEMI = newLoanApplicationPaymnetEMI;
 	}
-	public String getNewLoanPurpose() {
-		return newLoanPurpose;
+	public String getNewApplicationLoanPurpose() {
+		return newApplicationLoanPurpose;
 	}
-	public void setNewLoanPurpose(String newLoanPurpose) {
-		this.newLoanPurpose = newLoanPurpose;
+	public void setNewApplicationLoanPurpose(String newApplicationLoanPurpose) {
+		this.newApplicationLoanPurpose = newApplicationLoanPurpose;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -192,11 +190,11 @@ public class NewLoanApplication {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getGurantorIdentifyGurantor() {
-		return gurantorIdentifyGurantor;
+	public String getIdentifyGurantor() {
+		return identifyGurantor;
 	}
-	public void setGurantorIdentifyGurantor(String gurantorIdentifyGurantor) {
-		this.gurantorIdentifyGurantor = gurantorIdentifyGurantor;
+	public void setIdentifyGurantor(String identifyGurantor) {
+		this.identifyGurantor = identifyGurantor;
 	}
 	public String getGurantorAddress() {
 		return gurantorAddress;
@@ -222,11 +220,11 @@ public class NewLoanApplication {
 	public void setGuarantorSecurityType(String guarantorSecurityType) {
 		this.guarantorSecurityType = guarantorSecurityType;
 	}
-	public String getCoApplictionmemberID() {
-		return coApplictionmemberID;
+	public String getCoApplictionMemberID() {
+		return coApplictionMemberID;
 	}
-	public void setCoApplictionmemberID(String coApplictionmemberID) {
-		this.coApplictionmemberID = coApplictionmemberID;
+	public void setCoApplictionMemberID(String coApplictionMemberID) {
+		this.coApplictionMemberID = coApplictionMemberID;
 	}
 	public String getCoApplictionGuarantorIdentity() {
 		return coApplictionGuarantorIdentity;
@@ -270,23 +268,11 @@ public class NewLoanApplication {
 	public void setDeductionLegakCharges(String deductionLegakCharges) {
 		this.deductionLegakCharges = deductionLegakCharges;
 	}
-	public String getDeductionStampDutyFee() {
-		return deductionStampDutyFee;
+	public String getDeductionStampBuildingFund() {
+		return deductionStampBuildingFund;
 	}
-	public void setDeductionStampDutyFee(String deductionStampDutyFee) {
-		this.deductionStampDutyFee = deductionStampDutyFee;
-	}
-	public String getDeductionSmsNotificationFee() {
-		return deductionSmsNotificationFee;
-	}
-	public void setDeductionSmsNotificationFee(String deductionSmsNotificationFee) {
-		this.deductionSmsNotificationFee = deductionSmsNotificationFee;
-	}
-	public String getDeductionServicesCharges() {
-		return deductionServicesCharges;
-	}
-	public void setDeductionServicesCharges(String deductionServicesCharges) {
-		this.deductionServicesCharges = deductionServicesCharges;
+	public void setDeductionStampBuildingFund(String deductionStampBuildingFund) {
+		this.deductionStampBuildingFund = deductionStampBuildingFund;
 	}
 	public String getDeductionStationaryCharges() {
 		return deductionStationaryCharges;
@@ -294,47 +280,17 @@ public class NewLoanApplication {
 	public void setDeductionStationaryCharges(String deductionStationaryCharges) {
 		this.deductionStationaryCharges = deductionStationaryCharges;
 	}
-	public String getDeductionSmsNotification() {
-		return deductionSmsNotification;
-	}
-	public void setDeductionSmsNotification(String deductionSmsNotification) {
-		this.deductionSmsNotification = deductionSmsNotification;
-	}
-	public String getDeductionGst() {
-		return deductionGst;
-	}
-	public void setDeductionGst(String deductionGst) {
-		this.deductionGst = deductionGst;
-	}
 	public String getDeductionInsuranaceFee() {
 		return deductionInsuranaceFee;
 	}
 	public void setDeductionInsuranaceFee(String deductionInsuranaceFee) {
 		this.deductionInsuranaceFee = deductionInsuranaceFee;
 	}
-	public String getDeductionPanaltyCharges() {
-		return deductionPanaltyCharges;
-	}
-	public void setDeductionPanaltyCharges(String deductionPanaltyCharges) {
-		this.deductionPanaltyCharges = deductionPanaltyCharges;
-	}
-	public String getDeductionFuelChargesEmi() {
-		return deductionFuelChargesEmi;
-	}
-	public void setDeductionFuelChargesEmi(String deductionFuelChargesEmi) {
-		this.deductionFuelChargesEmi = deductionFuelChargesEmi;
-	}
 	public String getDeductionOverdueIntrestCharge() {
 		return deductionOverdueIntrestCharge;
 	}
 	public void setDeductionOverdueIntrestCharge(String deductionOverdueIntrestCharge) {
 		this.deductionOverdueIntrestCharge = deductionOverdueIntrestCharge;
-	}
-	public String getDeuctionCollectionCharges() {
-		return deuctionCollectionCharges;
-	}
-	public void setDeuctionCollectionCharges(String deuctionCollectionCharges) {
-		this.deuctionCollectionCharges = deuctionCollectionCharges;
 	}
 	public String getDeductionAdvisorCollectorId() {
 		return deductionAdvisorCollectorId;
@@ -349,12 +305,4 @@ public class NewLoanApplication {
 		this.deductionCollectorName = deductionCollectorName;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 }
