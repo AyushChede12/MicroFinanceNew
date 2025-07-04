@@ -419,11 +419,6 @@ public MISDepositPM getMISTermAndInterestRate(String planNameMD) {
 
 
 
-
-
-
-
-
 public List<AddnewinvestmentPM> findByBranch(String branchName) {
 	// TODO Auto-generated method stub
 	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);

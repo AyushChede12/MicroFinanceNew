@@ -18,18 +18,18 @@ $(document).ready(function() {
 	});
 
 	$("#customerCode").change(function() {
-		let customerCode = $(this).val();
+		let customerCode = $("#customerCode").val();
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
 				url: "/api/financialconsultant/getFinancialConsultantByMemberCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
-					if (response.data && response.data.length > 0) {
+					if (response.status == "OK") {
 						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
-						$("#major").val(data.major);
+						$("#authenticateFor").val(data.authenticateFor);
 						$("#customerName").val(data.customerName);
 						$("#familyMemberName").val(data.guardianName);
 						$("#relationToApplicant").val(data.relationToApplicant);
@@ -40,6 +40,7 @@ $(document).ready(function() {
 						$("#customerAddress").val(data.customerAddress);
 						$("#district").val(data.district);
 						$("#state").val(data.state);
+						$("#branchName").val(data.branchName);
 						$("#pinCode").val(data.pinCode);
 						$("#aadharNo").val(data.aadharNo);
 						$("#panNo").val(data.panNo);
@@ -165,7 +166,7 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		alert("delete");
-		var id=$("#id").val();
+		var id = $("#id").val();
 		if (confirm("Are you sure you want to delete this Customer Data?")) {
 			$.ajax({
 				url: "/api/datacorrection/deleteCustomerDataByForm",
@@ -188,6 +189,121 @@ $(document).ready(function() {
 
 	});
 
+	$("#printBtn").on("click", function(e) {
+		e.preventDefault();
+
+		const $formClone = $("#formid").clone();
+
+		// Remove buttons and extra dropdowns
+		$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
+		$formClone.find(".text-center").each(function() {
+			if ($(this).find("button").length > 0) {
+				$(this).remove();
+			}
+		});
+
+		// Convert selects to plain text
+		$formClone.find("select").each(function() {
+			const selectedText = $(this).find("option:selected").text();
+			$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
+		});
+
+		// Convert inputs to plain text
+		$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
+			const value = $(this).val();
+			$(this).replaceWith(`<span class="form-value">${value}</span>`);
+		});
+
+		// Convert textareas
+		$formClone.find("textarea").each(function() {
+			const value = $(this).val();
+			$(this).replaceWith(`<span class="form-value">${value}</span>`);
+		});
+
+		// Convert checkboxes and radios
+		$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
+			const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
+			$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
+		});
+
+		// Optional: Resize images if any
+		$formClone.find("img").each(function () {
+			$(this).css({
+				width: "100px",
+				height: "auto",
+				border: "1px solid #ccc",
+				marginBottom: "10px"
+			});
+		});
+
+		// Open print window
+		const printWindow = window.open("", "_blank");
+		if (printWindow) {
+			printWindow.document.open();
+			printWindow.document.write(`
+				<html>
+				<head>
+					<title>Print - Customer Form</title>
+					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+					<style>
+						body {
+							font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+							padding: 30px;
+							background: #fff;
+							color: #333;
+						}
+						h3 {
+							text-align: center;
+							margin-bottom: 30px;
+							border-bottom: 2px solid #444;
+							padding-bottom: 10px;
+						}
+						.form-group, .form-row {
+							margin-bottom: 20px;
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
+						}
+						label {
+							width: 200px;
+							font-weight: 600;
+							margin-bottom: 5px;
+							color: #000;
+						}
+						.form-value {
+							flex: 1;
+							padding: 8px 12px;
+							border: 1px solid #ccc;
+							border-radius: 5px;
+							background-color: #f9f9f9;
+							font-weight: 500;
+							color: #222;
+						}
+						img {
+							display: block;
+							margin-top: 10px;
+						}
+						@media print {
+							body {
+								zoom: 95%;
+							}
+						}
+					</style>
+				</head>
+				<body onload="window.print(); window.close();">
+					<h3>Customer Information</h3>
+					<div class="container">
+						${$formClone[0].outerHTML}
+					</div>
+				</body>
+				</html>
+			`);
+			printWindow.document.close();
+		} else {
+			alert("Popup blocked. Please allow popups for this website.");
+		}
+	});
+
 
 
 });
@@ -207,11 +323,11 @@ function restFieldsBind(customerCode) {
 				$("#comments").val(data.comments);
 
 			} else {
-				alert("No customer found for this Customer code.");
+				alert("Transfer Share Details Not Found For Customer");
 			}
 		},
 		error: function() {
-			alert("Customer not found or server error.");
+			alert("Shares not found or server error");
 		}
 	});
 }
