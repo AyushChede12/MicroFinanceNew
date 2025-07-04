@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class AddnewinvestmentPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String policyStartDate;
 	private String memberSelection;
 	private String customerName;
