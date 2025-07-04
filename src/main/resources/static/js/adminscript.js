@@ -6,6 +6,9 @@ $(document).ready(function() {
 	$('#toDate').val(today);
 	$('#approvalDate').val(today);
 	$('#openingDate').val(today);
+	$('#transactionDate').val(today);
+	$('#dateOfTransfer').val(today);
+
 	$('#dateloan').val(today);
 
 	//Branch
@@ -17,12 +20,17 @@ $(document).ready(function() {
 				const branchList = response.data;
 				$("#branchName").empty(); // Clear existing options
 				$("#branchName").append("<option value=''>-- Select Branch --</option>");
+				$("#selectBranchName").empty(); // Clear existing options
+				$("#selectBranchName").append("<option value=''>-- Select Branch --</option>");
 
 				for (let i = 0; i < branchList.length; i++) {
 					let branch = branchList[i];
 					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
 					$("#branchName").append(option);
+
+					$("#selectBranchName").append(option);
 					$("#branch").append(option);
+
 				}
 			} else {
 				alert("Error: " + response.message);
@@ -43,11 +51,14 @@ $(document).ready(function() {
 				const relativeList = response.data;
 				$("#relationToApplicant").empty(); // Clear existing options
 				$("#relationToApplicant").append("<option value=''>-- Select Relative --</option>");
+				$("#familyRelation").empty(); // Clear existing options
+				$("#familyRelation").append("<option value=''>-- Select Relative --</option>");
 
 				for (let i = 0; i < relativeList.length; i++) {
 					let relative = relativeList[i];
 					let option = `<option value="${relative.relation}">${relative.relation}</option>`;
 					$("#relationToApplicant").append(option);
+					$("#familyRelation").append(option);
 				}
 			} else {
 				alert("Error: " + response.message);

@@ -27,14 +27,15 @@ public class PageController {
 	
 	@Autowired
 	CustomerRepo customerRepo;
+	
 	@Autowired
 	LoanMangmentSchemeRepo loanMangmentSchemeRepo;
 	
 	@Autowired
-
 	FinancialConsultantRepo financialConsultantRepo;
 
-	@Autowired DailyDepositPMRepo dailyDepositRepo;
+	@Autowired 
+	DailyDepositPMRepo dailyDepositRepo;
 	
 	@Autowired
 	RecurringDepositRepo recurringDepositRepo;
@@ -45,7 +46,8 @@ public class PageController {
 	@Autowired
 	MisDepositePMRepo misDepositePMRepo;
 
-	@Autowired TransferShareRepo transferShareRepo;
+	@Autowired 
+	TransferShareRepo transferShareRepo;
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
@@ -871,11 +873,17 @@ public class PageController {
 	
 	@GetMapping("/createSavingsAccount")
 	public String getCreateSavingsAccount(Model model) {
+//		long maxId = createSavingAccountRepo.getMaxId() + 1;
+//		//String savingaccountnumber = String.format("2025%08d", maxId);
+//		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
+//		String savingaccountnumber = "2025" + "000000" + (maxId);
+//		model.addAttribute("savingaccountnumber", savingaccountnumber);
 		long maxId = createSavingAccountRepo.getMaxId() + 1;
-		String savingaccountnumber = String.format("2025%08d", maxId);
-		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
-		//String savingaccountnumber = "2025" + "000000" + (maxId);
+		String idStr = String.valueOf(maxId);
+		String zeros = "00000000".substring(idStr.length()); // 8 - maxId length
+		String savingaccountnumber = "2025" + zeros + idStr;
 		model.addAttribute("savingaccountnumber", savingaccountnumber);
+
 		return "customerSavings/createSavingsAccount";
 	}
 

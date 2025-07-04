@@ -13,6 +13,7 @@ public class DailyDepositPM {
 	
 
 	private Long id;
+	private String drd;
 	private String planCodeDD;
 
 	private String planNameDD;
@@ -140,6 +141,12 @@ public class DailyDepositPM {
 	}
 	public void setTermDD(String termDD) {
 		this.termDD = termDD;
+	}
+	public String getDrd() {
+		return drd;
+	}
+	public void setDrd(String drd) {
+		this.drd = drd;
 	}
 	
 

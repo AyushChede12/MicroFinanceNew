@@ -39,6 +39,7 @@ pageEncoding="ISO-8859-1"%> -->
 <body>
 
 	<main id="main" class="main">
+	<form>
 		<div class="pagetitle">
 			<h1>Customer Management</h1>
 			<nav>
@@ -62,85 +63,33 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="Branch" name="Branch"
+								<label for="">Branch</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
+									
 								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date From</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date To</label> <input type="date"
-									name="toDate" id="toDate" required="required"
-									placeholder="Enter To Date" style="text-transform: uppercase;" />
-							</div>
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Customer Name</label> <input type="text"
 									name="customerName" id="customerName" required="required"
-									placeholder="Enter Member Name" disabled />
+									placeholder="Enter Customer Name"  />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Customer Code</label> <select id="customerCode"
-									name="customerCode" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Code</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
+						
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Contact No.</label> <input type="text"
-									name="contactNo" id="contactNo" required="required"
-									placeholder="Enter mobile No " disabled />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Aadhar No.</label> <input type="text"
-									name="aadharNo" id="aadharNo" required="required"
-									placeholder="Enter aadhar No" disabled />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">PAN No.</label> <input type="text" name="panNo"
-									id="panNo" required="required" placeholder="Enter PAN No"
-									disabled />
-							</div>
-						</div>
+						
 					</div>
 				</div>
 		</div>
 
-		<div class="row">
-			<div class="col-12 text-center">
-				<button id="saveBtn" class="btnStyle bg-success">Search</button>
-				<button id="saveBtn" class="btnStyle"
-					style="background-color: #FFA500;">Print</button>
-			</div>
-		</div>
+		
 		</form>
 
 		<div class="row mt-5">
@@ -148,8 +97,6 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="card recent-sales">
 
 					<div class="card-body table-responsive">
-						<h5 class="card-title">Search result</h5>
-
 						<table class="table table-borderless datatable overflow-scroll">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
@@ -161,7 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">PAN</th>
 									<th scope="col">Contact No.</th>
 									<th scope="col">Nominee Name</th>
-									<th scope="col">Status</th>
+									
 								</tr>
 							</thead>
 							<tbody>
@@ -178,6 +125,58 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/customerManagement/addCustomer.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    $.ajax({
+        url: "/getAllCustomer",
+        type: "GET",
+        success: function (data) {
+            var tbody = $("table tbody");
+            tbody.empty(); // Clear existing rows
+
+            for (var i = 0; i < data.length; i++) {
+                var customer = data[i];
+                var status = customer.approved ? "Approved" : "Pending";
+
+                var row = "<tr>" +
+                    "<td>" + (i + 1) + "</td>" +
+                    "<td>" + (customer.customerName || '') + "</td>" +
+                    "<td>" + (customer.customerGender || '') + "</td>" +
+                    "<td>" + (customer.dob || '') + "</td>" +
+                    "<td>" + (customer.aadharNo || '') + "</td>" +
+                    "<td>" + (customer.panNo || '') + "</td>" +
+                    "<td>" + (customer.contactNo || '') + "</td>" +
+                    "<td>" + (customer.nomineeName || '') + "</td>" +
+                    "</tr>";
+
+                tbody.append(row);
+            }
+        },
+        error: function () {
+            alert("Failed to fetch customer data.");
+        }
+    });
+});
+</script>
+	
+	
+	<script>
+$(document).ready(function () {
+    // Filter table rows as user types in customer name field
+    $("#customerName").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+
+        $("table tbody tr").filter(function () {
+            var name = $(this).find("td:eq(1)").text().toLowerCase(); // 2nd column = Customer Name
+            $(this).toggle(name.startsWith(value));
+        });
+    });
+});
+</script>
+	
 </body>
 
 </html>

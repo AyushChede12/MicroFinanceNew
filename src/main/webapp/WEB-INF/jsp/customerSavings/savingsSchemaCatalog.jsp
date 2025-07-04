@@ -213,21 +213,38 @@ pageEncoding="ISO-8859-1"%> -->
       </form>
 
       <div class="row mt-5">
-        <div class="col-12">
-          <div class="card recent-sales">
+			<div class="col-12">
+				<div class="card recent-sales">
 
-            <div class="card-body table-responsive">
-              <h5 class="card-title">
-                Recent Sales <span>| Today</span>
-              </h5>
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Saving Scheme Catalog Data <span>| Table View</span>
+						</h5>
 
-              <table class="table table-borderless datatable overflow-scroll">
-                
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Plan Name</th>
+									<th scope="col">Customer Name</th>
+									<th scope="col">Initial Deposite</th>
+									<th scope="col">Opening Balance</th>
+									<th scope="col">Daily Limit</th>
+									<th scope="col">Monthly Card Limit</th>
+									<th scope="col">Yearly Cad Limit</th>
+									
+									<th scope="col">Edit</th>
+									<th scope="col">Delete</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
     </div>
 

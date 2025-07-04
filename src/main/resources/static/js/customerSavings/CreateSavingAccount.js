@@ -56,7 +56,7 @@ $('#selectPlan').on('change', function () {
 //fetch customer name 
 $(document).ready(function() {
     $.ajax({
-        url: "/findAllCustomerCode",
+        url: "/api/customershareholdingcontroller/findAllCustomerCode",
         type: "GET",
         success: function(response) {
             console.log("API response:", response);
@@ -161,32 +161,6 @@ $('#jointOperationCode').on('change', function () {
     }
 });
 
-
-//fetch relative relation from preferences
-$(document).ready(function() {
-    $.ajax({
-        url: "/api/preference/getAllRelativeModule",
-        type: "GET",
-        success: function(response) {
-			console.log("API response:", response);
-            var dropdown = $('#familyRelation');
-            dropdown.empty();
-            dropdown.append('<option value="">Select</option>');
-
-            if (response.status === "OK" && response.data) {
-                $.each(response.data, function(index, item) {
-                   dropdown.append('<option value="' + item.relation+ '">' + item.relation + '</option>');
-                });
-            } else {
-                dropdown.append('<option value="">No Relation found</option>');
-            }
-        },
-        error: function() {
-            alert("Failed to fetch relation.");
-        }
-    });
-});
-
 //fetch financial name from financialConsultantController
 $('#financialConsultantCode').on('blur', function () {
 	
@@ -221,6 +195,7 @@ $(document).ready(function () {
         event.preventDefault();
 
         const accountData = {
+			typeofaccount: $('#typeofaccount').val(),
             openingDate: $('#openingDate').val(),
             selectByCustomer: $('#selectByCustomer').val(),
             enterCustomerName: $('#enterCustomerName').val(),
@@ -282,6 +257,7 @@ $(document).ready(function () {
 						let row = `<tr>
 			                        <td>${index + 1}</td>
 			                        <td>${item.accountNumber}</td>
+									<td>${item.typeofaccount}</td>
 			                        <td>${item.selectByCustomer}</td>
 			                        <td>${item.enterCustomerName}</td>
 									<td>${item.contactNumber}</td>

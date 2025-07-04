@@ -103,6 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</table>
 						</div>
 					</div>
+							<button type="button" class="btn btn-warning"  id="printbtn" style="float: right;">Print</button>
 				</div>
 			</div>
 		</div>
