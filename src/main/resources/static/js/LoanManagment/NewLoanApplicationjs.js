@@ -176,33 +176,46 @@ $.ajax({
 
 // calulate the Emi Amout 
 function calculateEMI() {
-    let loanAmount = parseFloat(document.getElementById("newApplicationLoanAmount").value) || 0;
-	alert(loanAmount);
-    let loanROI = parseFloat(document.getElementById("newApplicationROI").value) || 0;
-	alert(loanROI);
-    let planTerm = parseInt(document.getElementById("newApplicationDurationPlan").value, 10) || 1;
-	alert(planTerm);
-    let roiType = document.getElementById("newApplicationTypeIntrest").value;
-	alert(roiType);
-    let monthlyEMI = 0;
+   let loanAmount = parseFloat(document.getElementById("newApplicationLoanAmount").value) || 0;
+   alert("Loan Amount: " + loanAmount);
+   let loanROI = parseFloat(document.getElementById("newApplicationROI").value) || 0;
+   alert("ROI: " + loanROI);
+   let planTerm = parseInt(document.getElementById("newApplicationDurationPlan").value, 10) || 1;
+   alert("Term: " + planTerm);
+   let roiType = document.getElementById("newApplicationTypeIntrest").value;
+   alert("Type: " + roiType);
+   let monthlyEMI =0;
 
-    if (roiType === "Flat Interest") {
-        monthlyEMI = (loanAmount + (loanAmount * (loanROI / 100) * (planTerm / 12))) / planTerm;
-    } else if (roiType === "Reducing interest") {
-        let monthlyRate = loanROI / (12 * 100);
-        monthlyEMI = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, planTerm)) /
-                     (Math.pow(1 + monthlyRate, planTerm) - 1);
-    } else if (roiType === "Rule 78") {
-        let totalInterest = (loanAmount * (loanROI / 100) * (planTerm / 12));
-        monthlyEMI = (loanAmount + totalInterest) / planTerm;
-    }
+   if (loanAmount <= 0 || loanROI <= 0 || planTerm <= 0 || roiType === "") {
+     alert("Please fill in all fields correctly.");
+     return;
+   }
 
-    // Set EMI into the form field
-    document.getElementById("newLoanApplicationPaymnetEMI").value = monthlyEMI.toFixed(2);
+   console.log("Loan Amount:", loanAmount);
+   console.log("ROI:", loanROI);
+   console.log("Plan Term:", planTerm);
+   console.log("ROI Type:", roiType);
 
-    // Optional: calculateCharges(loanAmount);
-}
+   if (roiType === "Flat Interest") {
+	
+     let totalInterest = loanAmount * (loanROI / 100) * (planTerm / 12);
+     monthlyEMI = (loanAmount + totalInterest) / planTerm;
 
+   } else if (roiType === "Reducing interest") {
+     let monthlyRate = loanROI / (12 * 100);
+     monthlyEMI = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, planTerm)) /
+                  (Math.pow(1 + monthlyRate, planTerm) - 1);
+
+   } else if (roiType === "Rule 78") {
+     let totalInterest = loanAmount * (loanROI / 100) * (planTerm / 12);
+     monthlyEMI = (loanAmount + totalInterest) / planTerm;
+   }
+
+   document.getElementById("newLoanApplicationPaymentEMI").value = monthlyEMI.toFixed(2);
+ }
+ 
+	
+	
 
 // Fetching guarented Detail Memeber code
 function loadMemberCodesOnly() {
@@ -224,7 +237,7 @@ function loadMemberCodesOnly() {
                 alert('No member codes found');
             }
         },
-        error: function (xhr, status, error) {
+        error: function (xhr, status, error) {	
             console.error('AJAX Error:', status, error);
             alert('Failed to fetch member codes');
         }

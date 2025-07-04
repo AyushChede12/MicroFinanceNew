@@ -245,18 +245,26 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Interest Type</label> <input type="text"
+								<label for="">Interest Type</label><select id="newApplicationTypeIntrest"
+									name="newApplicationTypeIntrest" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select ROI Type</option>
+									<option value="Flat Interest">Flat Interest</option>
+									<option value="Reducing Interest">Reducing Interest</option>
+									<option value="Rule 78">Rule 78</option>
+
+								</select> <!-- <input type="text"
 									name="newApplicationTypeIntrest" id="newApplicationTypeIntrest"
 									required="required" placeholder="Enter Interest Type"
-									style="text-transform: uppercase;" />
+									style="text-transform: uppercase;" /> -->
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">EMI Payment</label> <input type="text"
-									onclick="calculateEMI()" name="newLoanApplicationPaymnetEMI"
-									id="newLoanApplicationPaymnetEMI" required="required"
-									placeholder="Enter EMI Payment"
+									onclick="calculateEMI()" name="newLoanApplicationPaymentEMI"
+									id="newLoanApplicationPaymentEMI" required="required"
+									placeholder="Enter EMI Payment" readonly="readonly"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
