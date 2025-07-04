@@ -65,7 +65,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="customerCode">Customer Selection </label> <select
+								<label for="customerCode" id="customerSelection">Customer Selection </label> <select
 									id="customerCode" name="customerCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
@@ -597,16 +597,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-
-
-
-
 			</form>
 
-			
-
 		</div>
-
 
 	</main>
 

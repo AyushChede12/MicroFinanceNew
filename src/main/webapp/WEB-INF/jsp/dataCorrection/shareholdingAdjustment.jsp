@@ -32,7 +32,7 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../header.jsp"></jsp:include>
 
 <!-- jQuery CDN (latest 3.x version) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
 

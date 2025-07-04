@@ -25,7 +25,7 @@ $(document).ready(function() {
 				url: "/api/financialconsultant/getFinancialConsultantByMemberCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
-					if (response.status=="OK") {
+					if (response.status == "OK") {
 						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
@@ -189,28 +189,55 @@ $(document).ready(function() {
 
 	});
 
-	$("#printBtn").on("click", function (e) {
+	$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
-		// Clone the form
 		const $formClone = $("#formid").clone();
 
-		// Remove the button row from cloned form
-		$formClone.find("#editmember").remove();
-		$formClone.find("#printBtn").remove();
-		$formClone.find("#updateBtn").remove();
-		$formClone.find("#deleteBtn").remove();
-
-		// Optional: remove any row that holds the buttons
-		$formClone.find(".text-center").each(function () {
+		// Remove buttons and extra dropdowns
+		$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
+		$formClone.find(".text-center").each(function() {
 			if ($(this).find("button").length > 0) {
 				$(this).remove();
 			}
 		});
 
+		// Convert selects to plain text
+		$formClone.find("select").each(function() {
+			const selectedText = $(this).find("option:selected").text();
+			$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
+		});
+
+		// Convert inputs to plain text
+		$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
+			const value = $(this).val();
+			$(this).replaceWith(`<span class="form-value">${value}</span>`);
+		});
+
+		// Convert textareas
+		$formClone.find("textarea").each(function() {
+			const value = $(this).val();
+			$(this).replaceWith(`<span class="form-value">${value}</span>`);
+		});
+
+		// Convert checkboxes and radios
+		$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
+			const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
+			$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
+		});
+
+		// Optional: Resize images if any
+		$formClone.find("img").each(function () {
+			$(this).css({
+				width: "100px",
+				height: "auto",
+				border: "1px solid #ccc",
+				marginBottom: "10px"
+			});
+		});
+
 		// Open print window
 		const printWindow = window.open("", "_blank");
-
 		if (printWindow) {
 			printWindow.document.open();
 			printWindow.document.write(`
@@ -220,29 +247,54 @@ $(document).ready(function() {
 					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
 					<style>
 						body {
-							font-family: Arial, sans-serif;
-							padding: 20px;
+							font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+							padding: 30px;
+							background: #fff;
+							color: #333;
 						}
-						.formFields {
-							margin-bottom: 15px;
+						h3 {
+							text-align: center;
+							margin-bottom: 30px;
+							border-bottom: 2px solid #444;
+							padding-bottom: 10px;
+						}
+						.form-group, .form-row {
+							margin-bottom: 20px;
+							display: flex;
+							flex-wrap: wrap;
+							align-items: center;
 						}
 						label {
-							font-weight: bold;
+							width: 200px;
+							font-weight: 600;
+							margin-bottom: 5px;
+							color: #000;
 						}
-						input, select, textarea {
+						.form-value {
+							flex: 1;
+							padding: 8px 12px;
 							border: 1px solid #ccc;
 							border-radius: 5px;
-							padding: 5px;
-							width: 100%;
+							background-color: #f9f9f9;
+							font-weight: 500;
+							color: #222;
 						}
-						.toggle {
-							pointer-events: none;
+						img {
+							display: block;
+							margin-top: 10px;
+						}
+						@media print {
+							body {
+								zoom: 95%;
+							}
 						}
 					</style>
 				</head>
 				<body onload="window.print(); window.close();">
-					<h3 class="text-center mb-4">Customer Information</h3>
-					${$formClone[0].outerHTML}
+					<h3>Customer Information</h3>
+					<div class="container">
+						${$formClone[0].outerHTML}
+					</div>
 				</body>
 				</html>
 			`);
@@ -251,6 +303,8 @@ $(document).ready(function() {
 			alert("Popup blocked. Please allow popups for this website.");
 		}
 	});
+
+
 
 });
 
