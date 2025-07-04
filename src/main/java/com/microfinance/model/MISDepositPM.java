@@ -10,6 +10,7 @@ public class MISDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	private String mis;
 	private String planCodeMD;
 	private String planNameMD;
 	private String rateOfInterestMD;
@@ -163,6 +164,12 @@ public class MISDepositPM {
 	}
 	public void setPenltyfineMD(String penltyfineMD) {
 		this.penltyfineMD = penltyfineMD;
+	}
+	public String getMis() {
+		return mis;
+	}
+	public void setMis(String mis) {
+		this.mis = mis;
 	}
 
 	

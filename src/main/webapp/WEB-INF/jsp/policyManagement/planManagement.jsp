@@ -168,28 +168,15 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+							
+										
+										<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								 <input type="hidden"  value="DRD" 
+									name="drd" id="drd" required="required"
+									placeholder="Enter Plan Name" />
+							</div>
+						</div>
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Code *</label> <input type="text"
@@ -443,28 +430,18 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                  <label>Verify With</label>
-                  <div class="position-relative">
-                    <div class="select-btn1" style="cursor: pointer;">
-                      <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                        class="fa-solid fa-angle-down"></i>
-                    </div>
-                    <div class="content" id="contentCityName" style="display: none;">
-                      <div class="search">
-                        <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                      </div>
-                      <ul class="options" id="city-options">
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> -->
+						
+                           <div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								<input type="hidden"
+									name="rd" id="rd"  value="RD" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+                            
+                            
+                            
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
 									name="planCodeRD" id="planCodeRD" required="required"
@@ -724,28 +701,16 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                  <label>Verify With</label>
-                  <div class="position-relative">
-                    <div class="select-btn1" style="cursor: pointer;">
-                      <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                        class="fa-solid fa-angle-down"></i>
-                    </div>
-                    <div class="content" id="contentCityName" style="display: none;">
-                      <div class="search">
-                        <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                      </div>
-                      <ul class="options" id="city-options">
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> -->
+					
+                
+                 <div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								 <input type="hidden"
+									name="fd" id="fd"  value="FD" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
 									name="planCodeFD" id="planCodeFD" required="required"
@@ -994,28 +959,15 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                  <label>Verify With</label>
-                  <div class="position-relative">
-                    <div class="select-btn1" style="cursor: pointer;">
-                      <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                        class="fa-solid fa-angle-down"></i>
-                    </div>
-                    <div class="content" id="contentCityName" style="display: none;">
-                      <div class="search">
-                        <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                      </div>
-                      <ul class="options" id="city-options">
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                        <li>ABC</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div> -->
+							
+                    <div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields  mb-4 ">
+								 <input type="hidden"
+									name="mis" id="mis"  value="MIS" required="required"
+									placeholder="Enter Minimum Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code*</label> <input type="text"
 									name="planCodeMD" id="planCodeMD" required="required"

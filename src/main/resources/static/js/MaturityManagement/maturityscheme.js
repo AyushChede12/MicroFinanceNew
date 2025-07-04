@@ -72,7 +72,7 @@ $(document).ready(function () {
 						   console.log("Data"+data.instFrom);
 					       $.ajax({
 							
-					           url: "savematurityscheme",  
+					           url: "/api/Maturitymanagement/savematurityscheme",  
 					           type: "POST",
 					           contentType: "application/json",
 					           data: JSON.stringify(data),
@@ -134,7 +134,7 @@ $(document).ready(function () {
 							   console.log("Data"+data.instFrom);
 						       $.ajax({
 								
-						           url: "savematurityscheme",  
+						           url: "/api/Maturitymanagement/savematurityscheme",  
 						           type: "POST",
 						           contentType: "application/json",
 						           data: JSON.stringify(data),
@@ -198,7 +198,7 @@ $(document).ready(function () {
 									   
 								       $.ajax({
 										
-								           url: "savematurityscheme",  
+								           url: "/api/Maturitymanagement/savematurityscheme",  
 								           type: "POST",
 								           contentType: "application/json",
 								           data: JSON.stringify(data),
@@ -259,7 +259,7 @@ $(document).ready(function () {
 					   console.log("Data"+data.policyCode);
 				       $.ajax({
 						
-				           url: "savematurityscheme",  
+				           url: "/api/Maturitymanagement/savematurityscheme",  
 				           type: "POST",
 				           contentType: "application/json",
 				           data: JSON.stringify(data),
@@ -280,6 +280,27 @@ $(document).ready(function () {
 						   
 				       });
 				   });
+				   
+				  
+				   	$("#saveBtn").click(function() {
+						$('#chkpolicycode').text('');
+						
+						
+						
+						var bankName = $('#ddPolicyCode').val().trim();
+					
+						
+						let isValid = true;
+						
+						
+						if (bankName === '') {
+									$('#chkpolicycode').text('* This field is required');
+									$('#ddPolicyCode').focus();
+									isValid = false;
+								}
+						
+						
+					});
 
 });
 

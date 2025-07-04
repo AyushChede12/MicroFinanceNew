@@ -171,9 +171,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Balance Shares </label> <input type="text"
+								<label for="">Balance Shares </label> <input type="text" readonly="readonly"
 									name="balanceShares" id="balanceShares" required="required"
-									placeholder="Enter Balance Shares" />
+									placeholder="" />
 							</div>
 						</div>
 
