@@ -7,7 +7,7 @@ $(document).ready(function () {
                 url: '/api/Policymangment/getinvestmentdetails?branchName=' + encodeURIComponent(branchName),
                 type: 'GET',
                 success: function (response) {
-                    var dropdown = $('#policyId');
+                    var dropdown = $('#policyNo');
                     dropdown.empty();
                     dropdown.append('<option value="">Select Policy No</option>');
 
@@ -26,8 +26,8 @@ $(document).ready(function () {
         }
     });
 	
-	$('#policyId').on('change', function () {
-	       let policyId = $(this).val(); // Long ID
+	$('#policyNo').on('change', function () {
+	       let policyId = $(this).val(); 
 
 	       if (policyId !== "") {
 	           $.ajax({
@@ -53,8 +53,91 @@ $(document).ready(function () {
 	               }
 	           });
 	       } else {
-	           // Clear fields
+	           
 	           $('#customerName, #schemeName, #schemeType, #policyAmount, #depositAmount, #maturityAmount, #maturityDate').val('');
 	       }
 	   });
-});
+	   
+	   
+	   //saving apply Maturity data
+	   
+	   $("#formid").submit(function (event) {
+	   						event.preventDefault();
+	   					
+	   								       var data = {
+	   								           branchName: $("#branchName").val(),       
+	   								           policyNo: $("#policyNo").val(),         
+	   								           maturityDate: $("#maturityDate").val(),             
+	   								           customerName: $("#customerName").val(),   
+	   								           schemeMode: $("#schemeMode").val(),      
+											   policyAmount: $("#policyAmount").val() , 
+											   depositAmount: $("#depositAmount").val(),
+											   maturityAmount: $("#maturityAmount").val(), 
+											   remark: $("#remark").val()    
+	   								       };
+
+	   									   
+	   								       $.ajax({
+	   										
+	   								           url: "/api/Maturitymanagement/saveApplymaturity",  
+	   								           type: "POST",
+	   								           contentType: "application/json",
+	   								           data: JSON.stringify(data),
+	   								           success: function (response) {
+	   											
+	   								               if (response.status === "OK") {
+	   								                   alert(" " + response.message);
+	   								                   $("#formid")[0].reset(); 
+	   								               } else {
+	   								                   alert(" " + response.message);
+	   								               }
+	   								           },
+	   								           error: function (xhr, status, error) {
+	   								               console.error(" Error saving:", error);
+	   											   console.log(" ",response.message);
+	   								               alert(" Something went wrong while saving the data.");
+	   								           }
+	   										   
+	   								       });
+	   								   });
+									   
+									  
+										
+									   $('#viewBtn').on('click', function (e) {
+									       e.preventDefault(); // <-- Stop form submission
+
+									       $.ajax({
+									           url: "/api/Maturitymanagement/getApplymaturitydetails",
+									           type: "GET",
+									           success: function (response) {
+									               if (response.status === "OK" && response.data && response.data.length > 0) {
+									                   var tableBody = $("#table tbody");
+									                   tableBody.empty();
+
+									                   $.each(response.data, function (index, item) {
+									                       var row = "<tr>" +
+									                           "<td>" + item.policyNo + "</td>" +
+									                           "<td>" + item.branchName + "</td>" +
+									                           "<td>" + item.maturityDate + "</td>" +
+									                           "<td>" + item.customerName + "</td>" +
+									                           "<td>" + item.schemeName + "</td>" +
+									                           "<td>" + item.schemeType + "</td>" +
+									                           "<td>" + item.policyAmount + "</td>" +
+									                           "<td>" + item.maturityAmount + "</td>" +
+									                           "<td>" + item.remark + "</td>" +
+									                           "</tr>";
+									                       tableBody.append(row);
+									                   });
+									               } else {
+									                   alert("No maturity details found.");
+									               }
+									           },
+									           error: function (xhr, status, error) {
+									               console.error("Error fetching maturity details:", error);
+									               alert("Failed to load maturity details.");
+									           }
+									       });
+									   });
+
+										  });
+

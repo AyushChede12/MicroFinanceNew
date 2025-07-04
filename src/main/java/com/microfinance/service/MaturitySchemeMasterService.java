@@ -1,5 +1,7 @@
 package com.microfinance.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,16 @@ public class MaturitySchemeMasterService {
 	public ApplyForMaturity saveApplymaturity(ApplyForMaturity applymaturity) {
 		// TODO Auto-generated method stub
 		return Applymaturityrepo.save(applymaturity);
+	}
+
+	public List<ApplyForMaturity> getApplyMaturityDetails() {
+		// TODO Auto-generated method stub
+		return Applymaturityrepo.findAll();
+	}
+
+	public List<ApplyForMaturity> getMaturityDetailsByBranchAndDate(String branchName, String fromDate, String toDate) {
+		// TODO Auto-generated method stub
+		return Applymaturityrepo.findByBranchToDateFromDate(branchName,fromDate,toDate);
 	}
 
 }
