@@ -10,7 +10,7 @@ public class SavingSchemeCatalog {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String policyName;
 	private String yearlyROI;
 	private String customerName;
@@ -33,7 +33,7 @@ public class SavingSchemeCatalog {
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getPolicyName() {

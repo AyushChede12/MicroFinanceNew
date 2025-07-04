@@ -57,11 +57,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Select by Code</label> <select id="selectByCode"
-									name="selectByCode" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label for="">Select by Code</label> <select id="selectMember"
+									name="selectByCode" required class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Criteria</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
@@ -77,27 +76,27 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mb-4">
+									<label for="">Customer Code</label> <input type="text"
+										name="customerCode" id="customerCode" required="required"
+										placeholder="Enter Customer Code" disabled />
+								</div>
+							</div>
+
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Client Code</label> <input type="text"
-									name="clientCode" id="clientCode" required="required"
-									placeholder="Enter Member Code" disabled />
+								<label for="">Customer Name</label> <input type="text"
+									name="customerName" id="customerName" required="required"
+									placeholder="Enter Customer Name" disabled />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Client Name</label> <input type="text"
-									name="clientName" id="clientName" required="required"
-									placeholder="Enter Member Name" disabled />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Registration Date</label> <input type="date"
-									name="registrationDate" id="registrationDate"
-									required="required" placeholder="Enter Registration Date"
-									disabled />
+								<label for="">Sign-up Date</label> <input type="date"
+									name="singupDate" id="singupDate" required="required"
+									placeholder="Enter Sign-up Date" disabled />
 							</div>
 						</div>
 
@@ -105,15 +104,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Relative Name</label> <input type="text"
-									name="relativeName" id="relativeName" required="required"
+									name="guardianName" id="guardianName" required="required"
 									placeholder="Enter Relative Name" disabled />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Address</label> <input type="text" name="address"
-									id="address" required="required" placeholder="Enter Address"
+								<label for="">Address</label> <input type="text" name="customerAddress"
+									id="customerAddress" required="required" placeholder="Enter Address"
 									disabled />
 							</div>
 						</div>
@@ -137,7 +136,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Mobile No.</label> <input type="text"
-									name="mobileNo" id="mobileNo" required="required"
+									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter mobileno" disabled />
 							</div>
 						</div>
@@ -182,7 +181,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Age</label> <input type="text" name="age" id="age"
+								<label for="">Age</label> <input type="text" name="customerAge" id="customerAge"
 									required="required" placeholder="Enter Age" disabled />
 							</div>
 						</div>
@@ -190,15 +189,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Branch Code</label> <input type="text"
-									name="branchCode" id="branchCode" required="required"
+									name="branchName" id="branchName" required="required"
 									placeholder="Enter Branch Code" disabled />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Gender</label> <input type="text" name="gender"
-									id="gender" required="required" placeholder="Enter gender"
+								<label for="">Gender</label> <input type="text" name="customerGender"
+									id="customerGender" required="required" placeholder="Enter gender"
 									disabled />
 							</div>
 						</div>
@@ -243,6 +242,10 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./js/customerManagement/addMemberKyc.js"></script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ public class RecurringDepositPM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    private String rd;
     private String planCodeRD;
     private String planNameRD;
     private String minimumAmountRD;
@@ -146,6 +146,12 @@ public class RecurringDepositPM {
 	}
 	public void setPenltyfineRD(String penltyfineRD) {
 		this.penltyfineRD = penltyfineRD;
+	}
+	public String getRd() {
+		return rd;
+	}
+	public void setRd(String rd) {
+		this.rd = rd;
 	}
 
 
