@@ -11,7 +11,7 @@ public class TransferShare {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	private long id;
+	private Long id;
 	private String findByCode;
 	private String customerName;
 	private String startDate;
@@ -27,10 +27,11 @@ public class TransferShare {
 	private String modeOfPayment;
 	private String comments;
 	private String certificateNo;
-	public long getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFindByCode() {
