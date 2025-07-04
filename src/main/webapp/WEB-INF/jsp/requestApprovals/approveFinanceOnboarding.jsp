@@ -64,10 +64,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Consultant Code</label> <select id="financialCode" name="financialCode"
+								<label for="">Financial Consultant Code</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select financial Code</option>									
+									<option value="">Select Branch Name</option>									
 								</select>
 							</div>
 						</div>
@@ -116,13 +116,12 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Customer Name</th>
 									<th scope="col">Financial Code </th>									
 									<th scope="col">Date of Birth</th>
-									<th scope="col">Age</th>
-									<th scope="col">Address</th>
 									<th scope="col">Academic background</th>
 									<th scope="col">Contact No.</th>
 									<th scope="col">Profession</th>
 									<th scope="col">start Date</th>
 									<th scope="col">Payment Mode</th>
+									<th scope="col">Branch Name</th>
 								</tr>
 							</thead>
 							<tbody id="searchFinanceOnboarding">
@@ -150,19 +149,15 @@ pageEncoding="ISO-8859-1"%> -->
 	<script>
 	$(document).ready(function(){
 		searchInTheFinanceOnboarding();
-		financialCodeDropdown();		
+		branchNameDropdown();		
 		
 		// Button click filter
 		$('#findfinanceConsultantBtn').on('click', function(e) {
 			e.preventDefault(); // Prevent form submission
-			filterFinancialCodeData();
+			filterBranchNameData();
 		});
 		
-		/* // Button click Approve
-		$('#approveFinanceConsultantBtn').on('click', function(e) {
-			e.preventDefault(); // Prevent form submission
-			updateSelectedMembersStatus();
-		}); */
+		
 		// Button click Approve
 		$('#approveFinanceConsultantBtn').on('click', function(e) {
 		    e.preventDefault(); // Prevent form submission
