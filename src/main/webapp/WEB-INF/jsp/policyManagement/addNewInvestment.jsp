@@ -249,6 +249,14 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter PAN No" />
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Rate Of Interest*</label> <input type="text"
+									name="roi" id="roi" required="required"
+									placeholder="Enter PAN No" />
+							</div>
+						</div>
 
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">

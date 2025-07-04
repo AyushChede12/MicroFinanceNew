@@ -21,7 +21,7 @@ public class RecurringDepositPM {
     private String durationRD;
    
     private String termMode;
-    private String term;
+    private String rdterm;
     private String commissionOnNewRD;
     private String renewalCommissionRD;
     private String componentIntervalRD;
@@ -63,11 +63,14 @@ public class RecurringDepositPM {
 	public void setTermMode(String termMode) {
 		this.termMode = termMode;
 	}
-	public String getTerm() {
-		return term;
+	
+	
+	
+	public String getRdterm() {
+		return rdterm;
 	}
-	public void setTerm(String term) {
-		this.term = term;
+	public void setRdterm(String rdterm) {
+		this.rdterm = rdterm;
 	}
 	public String getCommissionOnNewRD() {
 		return commissionOnNewRD;

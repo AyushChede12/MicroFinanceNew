@@ -89,7 +89,6 @@ $(document).ready(function() {
 });
 
 
-// Janvi Sonkusare 29/01/2025
 $(document).ready(function () {
 	// Trigger the function when schemeType dropdown value changes
 	$("#schemeType").on("change", function () {
@@ -152,8 +151,8 @@ function getSchemeNameBySchemeType() {
 				});
 			}
 			if (response.allMISRDs) {
-				response.allMISRDs.forEach(function (planNameMIS) {
-					$("#schemeName").append(`<option value="${planNameMIS}">${planNameMIS}</option>`);
+				response.allMISRDs.forEach(function (planNameMD) {
+					$("#schemeName").append(`<option value="${planNameMD}">${planNameMD}</option>`);
 				});
 			}
 		},
@@ -192,4 +191,188 @@ $(document).ready(function () {
 	$("#schemeType").on("change", function () {
 		updateSchemeMode();
 	});
+});
+
+
+$(document).ready(function () {
+	// Auto-set policy start date to today
+	const today = new Date();
+	const formattedToday = today.toISOString().split("T")[0];
+	$("#policyStartDate").val(formattedToday);
+
+	// Trigger on schemeName change
+	$("#schemeName").on("change", function () {
+		fetchTermBySchemeName();
+	});
+
+	// Trigger recalculation when policyStartDate is changed manually
+	$("#policyStartDate").on("change", function () {
+		displayMaturityDate();
+	});
+});
+
+// Fetch term & ROI and then display maturity date
+function fetchTermBySchemeName() {
+	const selectedSchemeName = $("#schemeName").val();
+	const schemeType = $("#schemeType").val();
+
+	if (!selectedSchemeName) {
+		$("#schemeTerm").val("");
+		$("#roi").val("");
+		$("#maturityDate").val("");
+		return;
+	}
+
+	let apiUrl = "", dataParam = {};
+
+	switch (schemeType) {
+		case "DRD":
+			apiUrl = "/api/Policymangment/ddterm";
+			dataParam = { planNameDD: selectedSchemeName };
+			break;
+		case "RD":
+			apiUrl = "/api/Policymangment/rdterm";
+			dataParam = { planNameDD: selectedSchemeName };
+			break;
+		case "FD":
+			apiUrl = "/api/Policymangment/fdterm";
+			dataParam = { planNameDD: selectedSchemeName };
+			break;
+		case "MIS":
+			apiUrl = "/api/Policymangment/misterm";
+			dataParam = { planNameDD: selectedSchemeName };
+			break;
+		default:
+			alert("Invalid scheme type");
+			return;
+	}
+
+	$.ajax({
+		type: "GET",
+		url: apiUrl,
+		data: dataParam,
+		dataType: "json",
+		success: function (response) {
+			if (response && response.data) {
+				$("#schemeTerm").val(response.data.term || "");
+				$("#roi").val(response.data.rateOfInterest || "");
+
+				// Set schemeMode based on schemeType
+				const schemeMode = getSchemeMode(schemeType);
+				$("#schemeMode").val(schemeMode);
+
+				// Now display maturity date
+				displayMaturityDate();
+			} else {
+				alert("Invalid response format.");
+			}
+		},
+		error: function () {
+			alert("Failed to fetch term and ROI");
+		}
+	});
+}
+
+// Determine schemeMode from schemeType
+function getSchemeMode(schemeType) {
+	switch (schemeType) {
+		case "DRD": return "Daily";
+		case "RD": return "Monthly";
+		case "FD": return "Yearly";
+		case "MIS": return "Yearly";
+		default: return "";
+	}
+}
+
+// Display maturity date in the input field
+function displayMaturityDate() {
+	const start = $("#policyStartDate").val();
+	const mode = $("#schemeMode").val();
+	const term = parseInt($("#schemeTerm").val());
+
+	if (!start || !mode || isNaN(term)) {
+		console.warn("Missing maturity date inputs");
+		$("#maturityDate").val("");
+		return;
+	}
+
+	const startDate = new Date(start);
+	let maturityDate = new Date(startDate);
+
+	if (mode === "Daily") {
+		maturityDate.setDate(maturityDate.getDate() + term);
+	} else if (mode === "Monthly") {
+		maturityDate.setMonth(maturityDate.getMonth() + term);
+	} else if (mode === "Yearly") {
+		maturityDate.setFullYear(maturityDate.getFullYear() + term);
+	}
+
+	const yyyy = maturityDate.getFullYear();
+	const mm = String(maturityDate.getMonth() + 1).padStart(2, '0');
+	const dd = String(maturityDate.getDate()).padStart(2, '0');
+
+	const finalDate = `${yyyy}-${mm}-${dd}`;
+	$("#maturityDate").val(finalDate);
+}
+
+$(document).ready(function () {
+	// Trigger calculation when any input changes
+	$("#policyAmount, #schemeTerm, #schemeMode, #roi").on("change keyup", function () {
+		calculateDepositAndMaturity();
+	});
+
+	function calculateDepositAndMaturity() {
+		const policyAmount = parseFloat($("#policyAmount").val());
+		const term = parseInt($("#schemeTerm").val());
+		const schemeMode = $("#schemeMode").val();
+		const roi = parseFloat($("#roi").val()); // Interest rate %
+
+		// Basic validations
+		if (isNaN(policyAmount) || isNaN(term) || !schemeMode || isNaN(roi)) {
+			$("#depositAmount").val("");
+			$("#maturityAmount").val("");
+			return;
+		}
+
+		let totalInstallments = 0;
+		let termInYears = 0;
+
+		// Calculate total installments and duration in years
+		switch (schemeMode) {
+			case "Daily":
+				totalInstallments = term;
+				termInYears = term / 365;
+				break;
+			case "Monthly":
+				totalInstallments = term;
+				termInYears = term / 12;
+				break;
+			case "Quarterly":
+				totalInstallments = term * 3;
+				termInYears = (term * 3) / 12;
+				break;
+			case "Half-Yearly":
+				totalInstallments = term * 6;
+				termInYears = (term * 6) / 12;
+				break;
+			case "Yearly":
+				totalInstallments = term * 12;
+				termInYears = term;
+				break;
+			default:
+				alert("Unknown scheme mode selected.");
+				return;
+		}
+
+		const depositAmount = policyAmount * totalInstallments;
+		const interest = (depositAmount * roi * termInYears) / 100;
+		const maturityAmount = depositAmount + interest;
+
+		// Optional alert for verification
+		//alert("Calculated Deposit: ₹" + depositAmount.toFixed(2) + "\nMaturity Amount: ₹" + maturityAmount.toFixed(2));
+
+		// Set calculated values in inputs
+		$("#depositAmount").val(depositAmount.toFixed(2));
+		$("#maturityAmount").val(maturityAmount.toFixed(2));
+	}
 });

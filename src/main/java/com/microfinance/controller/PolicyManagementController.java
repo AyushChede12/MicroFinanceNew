@@ -130,6 +130,7 @@ public class PolicyManagementController {
     @PostMapping("/recurring-depositsave")
     public ResponseEntity<ApiResponse<RecurringDepositPM>>saveRecurringDeposit(@RequestBody RecurringDepositPM recurringDepositPM) {
         boolean isSaved = policyManagementService.saveRecuringDailyDeposite(recurringDepositPM);
+        System.out.println("Received Term: " + recurringDepositPM.getRdterm());
 
         if (isSaved) {
             ApiResponse<RecurringDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
@@ -464,55 +465,65 @@ public class PolicyManagementController {
     
     
     
-	@GetMapping("/ddterm")
-	public ResponseEntity<?> getDDTermAndInterestRate(@RequestParam(name = "planNameDD", required = true) String planNameDD) {
-    	DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
-	    if (response != null) {
-	        return ResponseEntity.ok(response);
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
-	    }
-	}
+    @GetMapping("/ddterm")
+    public ResponseEntity<ApiResponse<DailyDepositPM>> getDDTermAndInterestRate(
+            @RequestParam(name = "planNameDD", required = true) String planNameDD) {
+
+        DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
+        if (response != null) {
+            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Daily Deposit plan details found", response));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Daily Deposit plan not found"));
+        }
+    }
+
 
     
  
-    
-	@GetMapping("/rdterm")
-	public ResponseEntity<?> getRDTermAndInterestRate(@RequestParam(name = "planNameRD", required = true) String planNameRD) {
-	    RecurringDepositPM response = policyManagementService.getRDTermAndInterestRate(planNameRD);
-	    if (response != null) {
-	        return ResponseEntity.ok(response);
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
-	    }
-	}
-    
-   
+    @GetMapping("/rdterm")
+    public ResponseEntity<ApiResponse<RecurringDepositPM>> getRDTermAndInterestRate(
+            @RequestParam(name = "planNameRD", required = true) String planNameRD) {
+
+        RecurringDepositPM response = policyManagementService.getRDTermAndInterestRate(planNameRD);
+        if (response != null) {
+            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Recurring Deposit plan details found", response));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Recurring Deposit plan not found"));
+        }
+    }
+
 	
-	
-	@GetMapping("/fdterm")
-	public ResponseEntity<?> getFDTermAndInterestRate(@RequestParam(name = "planNameFD", required = true) String planNameFD) {
-	    FixedDepositPM response = policyManagementService.getFDTermAndInterestRate(planNameFD);
-	    if (response != null) {
-	        return ResponseEntity.ok(response);
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
-	    }
-	}
+    @GetMapping("/fdterm")
+    public ResponseEntity<ApiResponse<FixedDepositPM>> getFDTermAndInterestRate(
+            @RequestParam(name = "planNameFD", required = true) String planNameFD) {
+
+        FixedDepositPM response = policyManagementService.getFDTermAndInterestRate(planNameFD);
+        if (response != null) {
+            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Fixed Deposit plan details found", response));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed Deposit plan not found"));
+        }
+    }
+
     
  
 
-	
-	@GetMapping("/misterm")
-	public ResponseEntity<?> getMISTermAndInterestRate(@RequestParam(name = "planNameMD", required = true) String planNameMD) {
-	    MISDepositPM response = policyManagementService.getMISTermAndInterestRate(planNameMD);
-	    if (response != null) {
-	        return ResponseEntity.ok(response);
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
-	    }
-	}
-    
+    @GetMapping("/misterm")
+    public ResponseEntity<ApiResponse<MISDepositPM>> getMISTermAndInterestRate(
+            @RequestParam(name = "planNameMD", required = true) String planNameMD) {
+
+        MISDepositPM response = policyManagementService.getMISTermAndInterestRate(planNameMD);
+        if (response != null) {
+            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "MIS plan details found", response));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "MIS plan not found"));
+        }
+    }
+
     
 }
 
