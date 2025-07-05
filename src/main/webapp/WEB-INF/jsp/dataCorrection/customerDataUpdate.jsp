@@ -58,14 +58,14 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Edit Member</li>
+							<li class="breadcrumb-item action" id="editmember">Edit Member</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="customerCode">Customer Selection </label> <select
+								<label for="customerCode" id="customerSelection">Customer Selection </label> <select
 									id="customerCode" name="customerCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
@@ -108,8 +108,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Select</label> <select id="major"
-									name="major" required="required"
+								<label for="vehicalNo">Select</label> <select id="authenticateFor"
+									name="authenticateFor" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>
@@ -597,16 +597,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-
-
-
-
 			</form>
 
-			
-
 		</div>
-
 
 	</main>
 
