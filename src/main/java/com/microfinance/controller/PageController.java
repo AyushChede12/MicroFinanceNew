@@ -883,16 +883,12 @@ public class PageController {
 	
 	@GetMapping("/createSavingsAccount")
 	public String getCreateSavingsAccount(Model model) {
-//		long maxId = createSavingAccountRepo.getMaxId() + 1;
-//		//String savingaccountnumber = String.format("2025%08d", maxId);
+		long maxId = createSavingAccountRepo.getMaxId();
+	    String savingaccountnumber = String.format("2025%08d", maxId + 1);
 //		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
-//		String savingaccountnumber = "2025" + "000000" + (maxId);
-//		model.addAttribute("savingaccountnumber", savingaccountnumber);
-		long maxId = createSavingAccountRepo.getMaxId() + 1;
-		String idStr = String.valueOf(maxId);
-		String zeros = "00000000".substring(idStr.length()); // 8 - maxId length
-		String savingaccountnumber = "2025" + zeros + idStr;
+//		String savingaccountnumber = "2025" + "000000" + (maxId + 1);
 		model.addAttribute("savingaccountnumber", savingaccountnumber);
+		
 
 		return "customerSavings/createSavingsAccount";
 	}
