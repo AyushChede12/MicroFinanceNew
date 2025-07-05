@@ -24,7 +24,7 @@ public class AddnewinvestmentPM {
 	private String state;
 	private String pinCode;
 	private String tds;
-	private String branch;
+	private String branchName;
 	private String ModeOfOperation;
 	private String jointMemCode;
 	private String jointName;
@@ -134,15 +134,11 @@ public class AddnewinvestmentPM {
 		this.tds = tds;
 	}
 	
-	
-	
-	
-	
-	public String getBranch() {
-		return branch;
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 	
 	public String getModeOfOperation() {
