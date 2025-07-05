@@ -28,6 +28,33 @@ public class RequestApprovalsService {
 
 	}
 
+
+	public Optional<addCustomer> findByIdShowStatus(Long id) {
+		// TODO Auto-generated method stub
+		return addCustomerRepo.findById(id);
+	}
+
+	public addCustomer save(addCustomer customer) {
+		// TODO Auto-generated method stub
+		return addCustomerRepo.save(customer);
+	}
+
+	public List<addCustomer> getUnapprovedCustomersByMemberCode(String branchName) {
+		// TODO Auto-generated method stub
+		return addCustomerRepo.findByIsApprovedFalseAndMemberCode(branchName);
+	}
+
+	
+
+	public List<addCustomer> getUnapprovedCustomers() {
+	    return addCustomerRepo.findByIsApprovedFalse();
+	}
+
+
+
+	
+	
+
 	public List<CreateSavingsAccount> getUnapprovedSavingTransaction() {
 		// TODO Auto-generated method stub
 		return createSavingAccountRepo.findByIsApprovedFalse();

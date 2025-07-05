@@ -143,16 +143,16 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="row mt-4">
 			<div id="certificateSection" style="display: none;">
 							<div class="col-12 d-flex justify-content-end gap-2">
-								<button type="button" class="btn btn-success">
+								<button type="button" class="btn btn-success" id="printBtn">
 									<i class="fa-solid fa-print"></i>
 								</button>
-								<button type="button" class="btn btn-success">
+								<button type="button" class="btn btn-success" id="downloadBtn">
 									<i class="fa-solid fa-download"></i>
 								</button>
 					</div>
 				<div class="row mt-5">
 					<div class="col-12">
-						<div class="card recent-sales">
+						<div class="card recent-sales" id="cetificateId">
 							<div class="card-body table-responsive">
 								<!-- Certificate Form Starts Here -->
 								<div class="p-3">
