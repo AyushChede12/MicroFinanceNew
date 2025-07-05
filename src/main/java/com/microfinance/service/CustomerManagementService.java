@@ -285,4 +285,9 @@ public class CustomerManagementService {
 	    return customerRepo.findCustomersByBranchAndDate(branchName, fDate, tDate);
 	}
 
+	 
+	public List<addCustomer> getApprovedCustomers() {
+        return customerRepo.findByIsApprovedTrue();
+    }
+
 }
