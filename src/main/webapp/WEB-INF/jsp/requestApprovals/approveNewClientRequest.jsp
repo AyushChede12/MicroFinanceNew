@@ -8,8 +8,8 @@ pageEncoding="ISO-8859-1"%> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/ae73087723.js"
 	crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	
+
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet" />
 <script
@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 
@@ -46,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-check-circle"></i>
 					</a></li>
-					<li class="breadcrumb-item action"> Approve New Client Request</li>
+					<li class="breadcrumb-item action">Approve New Client Request</li>
 				</ol>
 			</nav>
 		</div>
@@ -60,7 +62,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-4">
+						<!-- <div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
@@ -72,22 +74,21 @@ pageEncoding="ISO-8859-1"%> -->
 
 								</select>
 							</div>
-						</div>
-						
+						</div> -->
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Code</label> <select id="Code" name="Code"
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Member Code</option>
 								</select>
 							</div>
-							   
+
 						</div>
-						<!-- <div class="col-lg-4">
+						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date From</label> <input type="date"
-									name="dateFrom" id="dateFrom" required="required"
+									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
 							</div>
@@ -96,17 +97,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date To</label> <input type="date"
-									name="dateTo" id="dateTo" required="required"
+									name="toDate" id="toDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
-						</div> -->
+						</div>
 					</div>
 				</div>
 		</div>
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="findBtn" class="btnStyle"
 					style="background-color: #FFA500;">FIND</button>
 			</div>
 		</div>
@@ -122,29 +123,40 @@ pageEncoding="ISO-8859-1"%> -->
 						<div style="overflow-x: auto; white-space: nowrap;">
 							<table class="table table-borderless datatable">
 								<thead class="table-light">
+
 									<tr style="font-family: 'Poppins', sans-serif;">
+										<th scope="col"></th>
 										<th scope="col">Sr No.</th>
-										<th scope="col">Customer Name</th>
+										<th scope="col">Member Name</th>
+										<th scope="col">Member Code</th>
+										<th scope="col">Branch Name</th>
 										<th scope="col">Date of Birth</th>
 										<th scope="col">Age</th>
 										<th scope="col">Gender</th>
 										<th scope="col">Address</th>
 										<th scope="col">Academic background</th>
-										<th scope="col">Aadhar No</th>
-										<th scope="col">PAN No</th>
 										<th scope="col">Contact No</th>
 										<th scope="col">Email Id</th>
-										<th scope="col">Branch Name</th>
+
 									</tr>
 								</thead>
 								<tbody>
 								</tbody>
+
+
 							</table>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-12 d-flex justify-content-end mt-3">
+				<button id="approvedBtn" class="btnStyle"
+					style="background-color: #FFA500;">Approved</button>
+			</div>
+		</div>
+
 
 		</div>
 
@@ -153,6 +165,21 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/RequestApproval/ApprovalNewClientRequest.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			// Get today's date in YYYY-MM-DD format
+			const today = new Date().toISOString().split('T')[0];
+			$('#applicationDate').val(today);
+			$('#fromDate').val(today);
+			$('#toDate').val(today);
+			$('#approvalDate').val(today);
+			$('#openingDate').val(today);			
+			
+		});
+		
+		
+	</script>
 </body>
 
 </html>

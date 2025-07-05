@@ -289,10 +289,63 @@ public class PolicyManagementService {
 	}
 
 //Ashwini
+
+public List<AddnewinvestmentPM> getAddInvestmentDetails() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
+}
+
+
+
+
+public List<String> getSchemeNameBySchemeType(String drd) {
+    List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
+    return allDrdPlans.stream()
+                      .map(DailyDepositPM::getPlanNameDD)
+                      .distinct()
+                      .collect(Collectors.toList());
+}
+
+public List<String> getRRDBySchemeType(String rd) {
+    List<RecurringDepositPM> allRrdPlans = recurringDepositRepo.findByrd(rd);
+    return allRrdPlans.stream()
+                     .map(RecurringDepositPM::getPlanNameRD)
+                     .distinct()
+                     .collect(Collectors.toList());
+}
+
+public List<String> getFRDBySchemeType(String fd) {
+	List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
+    return allFrdPlans.stream()
+    		         .map(FixedDepositPM::getPlanNameFD)
+                     .distinct()
+                     .collect(Collectors.toList()); 
+	
+	
+}
+
+public List<String> getMISRDBySchemeType(String mis) {
+	List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
+    return allMisrdPlans.stream()
+    		         .map(MISDepositPM::getPlanNameMD)
+                     .distinct()
+                     .collect(Collectors.toList());
+}
+
+
+
+
+
+public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 	public List<AddnewinvestmentPM> getAddInvestmentDetails() {
 		// TODO Auto-generated method stub
 		return addinvestmentrepo.findAll();
 	}
+
 
 	public List<String> getSchemeNameBySchemeType(String drd) {
 		List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
@@ -336,10 +389,6 @@ public class PolicyManagementService {
 
 
 
-
-
-
-
 public List<AddnewinvestmentPM> findByBranch(String branchName) {
 	// TODO Auto-generated method stub
 	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
@@ -348,5 +397,27 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
+
+public AddnewinvestmentPM getDetailsById(Long id) {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findById(id).orElse(null);
 }
+
+
+
+}
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
 
