@@ -64,7 +64,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Consultant Code</label> <select id="branchName" name="branchName"
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch Name</option>									
