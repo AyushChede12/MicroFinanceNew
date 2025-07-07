@@ -58,7 +58,7 @@ function fetchBySelectedCustomer() {
 				$("#emailId").val(c.emailId || "");
 				$("#dateofBirth").val(c.dob || "");
 				$("#ageOfNominee").val(c.nomineeAge || "");
-				$("#branch").val(c.branchName || "");
+				$("#branchName").val(c.branchName || "");
 				$("#relation").val(c.relationToApplicant || "");
 				
 			} else {
@@ -390,3 +390,61 @@ $(document).ready(function () {
 		$("#maturityAmount").val(maturityAmount.toFixed(2));
 	}
 });
+
+
+$(document).ready(function () {
+    $("#saveBtn").click(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        const formData = {
+            policyStartDate: $("#policyStartDate").val(),
+            memberSelection: $("#selectCustomer").val(),
+            customerName: $("#customerName").val(),
+            dateofBirth: $("#dateofBirth").val(),
+            relationDetails: $("#relationDetails").val(),
+            contactNo: $("#contactNo").val(),
+            suggestedNominee: $("#suggestedNominee").val(),
+            ageOfNominee: $("#ageOfNominee").val(),
+            relation: $("#relation").val(),
+            address: $("#address").val(),
+            district: $("#district").val(),
+            state: $("#state").val(),
+            pinCode: $("#pinCode").val(),
+            tds: $("#tds").val(),
+            branchName: $("#branchName").val(),
+            modeOfOperation: $("#ModeOfOperation").val(),
+            jointName: $("#jointName").val(),
+            jointMemCode: $("#jointMemCode").val(), // if exists, else skip
+            schemeType: $("#schemeType").val(),
+            schemeTerm: $("#schemeTerm").val(),
+            schemeMode: $("#schemeMode").val(),
+            roi: $("#roi").val(), // optional if stored
+            maturityDate: $("#maturityDate").val(),
+            policyAmount: $("#policyAmount").val(),
+            depositAmount: $("#depositAmount").val(),
+            introMCode: $("#introMCode").val(),
+            maturityAmount: $("#maturityAmount").val(),
+            MISInterest: $("#MISInterest").val(),
+            paymentBy: $("#paymentBy").val(),
+            remark: $("#remark").val(),
+            agent: $("#Agent").val(),
+            smsSend: $("#smsSend").val(),
+            
+        };
+
+        $.ajax({
+            url: "/api/Policymangment/saveInvestment",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function (response) {
+                alert("✅ " + response.message);
+                $("#formid")[0].reset(); // clear form
+            },
+            error: function (xhr) {
+                alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+            }
+        });
+    });
+});
+
