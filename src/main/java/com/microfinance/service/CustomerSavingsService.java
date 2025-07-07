@@ -117,6 +117,7 @@ public class CustomerSavingsService {
 		return false;
 	}
 
+
 	public List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber) {
 		List<CreateSavingsAccount> list = createSavingAccountRepo.findAllByAccountNumber(accountNumber);
 		return list;
@@ -134,5 +135,6 @@ public class CustomerSavingsService {
 		List<SavingAccountActivity> list = savingAccountActivityRepo.findAllByAccountNumber(accountNumber);
 		return list;
 	}
+
 
 }

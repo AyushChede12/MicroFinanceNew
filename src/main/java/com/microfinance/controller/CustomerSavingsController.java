@@ -192,6 +192,7 @@ public class CustomerSavingsController {
 		}
 	}
     
+
     @PostMapping("/savesavingaccountactivity")
     public ResponseEntity<ApiResponse<SavingAccountActivity>> saveSavingAccountActivityData(@RequestBody SavingAccountActivity savingAccountActivity) {
 
@@ -222,7 +223,7 @@ public class CustomerSavingsController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
-    
+   
 	
 	
 }

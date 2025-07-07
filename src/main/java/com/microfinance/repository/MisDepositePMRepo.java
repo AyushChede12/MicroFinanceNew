@@ -18,6 +18,8 @@ public interface MisDepositePMRepo extends JpaRepository<MISDepositPM, Long>{
 
 	List<MISDepositPM> findBymis(String mis);
 
+	MISDepositPM findByplanNameMD(String planNameMD);
+
 	
 
 
