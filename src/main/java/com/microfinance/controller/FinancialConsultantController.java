@@ -88,7 +88,7 @@ public class FinancialConsultantController {
 	 * return new ResponseEntity<>(response, response.getStatus()); }
 	 */
 	
-	@PostMapping("saveOrUpdateFinancialConsultant")
+	@PostMapping("/saveOrUpdateFinancialConsultant")
 	public ResponseEntity<ApiResponse<addFinancialConsultant>> saveOrUpdateFinancialConsultant(
 	        @ModelAttribute FinancialConsultantDto financialConsultantDto,
 	        @RequestParam(value = "customerPhoto", required = false) String customerPhoto, @RequestParam(value = "customerSignature", required = false) String customerSignature) {
