@@ -15,6 +15,10 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 	@Query("select coalesce(max(id), 0) from CreateSavingsAccount")
 	long getMaxId();
 
+
 	List<CreateSavingsAccount> findByIsApprovedFalse();
+
+	List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
+
 
 }
