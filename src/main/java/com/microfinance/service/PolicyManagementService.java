@@ -380,8 +380,7 @@ public AddnewinvestmentPM getDetailsById(Long id) {
 	return addinvestmentrepo.findById(id).orElse(null);
 }
 
-
-
+}
 
 
 

@@ -223,7 +223,30 @@ public class CustomerSavingsController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
-   
-	
+   //update average balance of saving account by account number
+    @PostMapping("/updateaveragebalance")
+    public ResponseEntity<ApiResponse<String>> updateAverageBalance(@RequestBody CreateSavingsAccount createSavingsAccount) {
+        String accountNumber = createSavingsAccount.getAccountNumber();
+        String newBalance = createSavingsAccount.getOpeningAmount();
+
+        boolean isUpdated = customersaving.updateAverageBalance(accountNumber, newBalance);
+
+        if (isUpdated) {
+            ApiResponse<String> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Average balance updated successfully.",
+                "Updated account: " + accountNumber
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ApiResponse<String> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "Account number not found or update failed."
+            );
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 	
 }

@@ -21,6 +21,8 @@ pageEncoding="ISO-8859-1"%> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="./css/admin.css" />
    <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -59,7 +61,7 @@ pageEncoding="ISO-8859-1"%> -->
                 <label for="">Select Account Number</label> <select id="debitAccountNumber" name="debitAccountNumber" required="required"
                   class="form-control selectField" style="height: 30px;">
                   <option value=""> Select Colour</option>
-                  <option value="Blue">Blue</option>
+                  
                 </select>
               </div>
             </div>
@@ -191,6 +193,7 @@ pageEncoding="ISO-8859-1"%> -->
   </main>
   <!-- <script src="js/chartScript.js"></script> -->
   <script src="./js/adminscript.js"></script>
+  <script src="./js/customerSavings/SavingAccountFundTransfer.js"></script>
 </body>
 
 </html>

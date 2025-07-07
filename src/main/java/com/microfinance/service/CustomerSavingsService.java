@@ -136,5 +136,16 @@ public class CustomerSavingsService {
 		return list;
 	}
 
+	public boolean updateAverageBalance(String accountNumber, String newBalance) {
+		 Optional<CreateSavingsAccount> optionalAccount = createSavingAccountRepo.findByAccountNumber(accountNumber);
+		    if (optionalAccount.isPresent()) {
+		        CreateSavingsAccount account = optionalAccount.get();
+		        account.setOpeningAmount(newBalance); // or use `setAverageBalance()` if that's your actual field
+		        createSavingAccountRepo.save(account);
+		        return true;
+		    }
+		    return false;
+	}
+
 
 }
