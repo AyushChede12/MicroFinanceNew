@@ -227,36 +227,10 @@ td {
 
 
 
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Duration*</label> <input type="text"
-									name="duration" id="duration" required="required"
-									placeholder="Enter Duration" />
-							</div>
-						</div>
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term Mode</label> <select id="termModeDD"
-									name="termModeDD" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Term Mode</option>
-									<option value="">Select Term Mode</option>
-									<option value="Monthly">Monthly</option>
-									<option value="Quarterly">Quarterly</option>
-									<option value="Half-Yearly">Half-Yearly</option>
-									<option value="Yearly">Yearly</option>
-
-								</select>
-							</div>
-						</div>
-
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="termDD"
-									id="termDD" required="required" placeholder="Enter Term" />
+								<label for="">Term*</label> <input type="text" name="ddterm"
+									id="ddterm" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
 
@@ -476,28 +450,13 @@ td {
 							</div>
 						</div>
 
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term Mode</label> <select id="termMode"
-									name="termMode" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Term Mode</option>
-									<option value="">Select Term Mode</option>
-									<option value="Monthly">Monthly</option>
-									<option value="Quarterly">Quarterly</option>
-									<option value="Half-Yearly">Half-Yearly</option>
-									<option value="Yearly">Yearly</option>
-
-								</select>
-							</div>
-						</div>
-
+						
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="term"
-									id="term" required="required" placeholder="Enter Term" />
+								<label for="">Term*</label> <input type="text" name="rdterm"
+									id="rdterm" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4 ">
@@ -516,16 +475,6 @@ td {
 							</div>
 						</div>
 
-
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Duration*</label> <input type="text"
-									name="durationRD" id="durationRD" required="required"
-									placeholder="Enter Duration" />
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -763,28 +712,13 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Duration*</label> <input type="text"
-									name="durationFD" id="durationFD" required="required"
-									placeholder="Enter Duration" />
+								<label for="">Term*</label> <input type="text" name="fdterm"
+									id="fdterm" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
 
 
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term Mode *</label> <select id="termModeFD"
-									name="termModeFD" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Term Mode</option>
-									<option value="">Select Term Mode</option>
-									<option value="Monthly">Monthly</option>
-									<option value="Quarterly">Quarterly</option>
-									<option value="Half-Yearly">Half-Yearly</option>
-									<option value="Yearly">Yearly</option>
-
-								</select>
-							</div>
-						</div>
+						
 
 
 
@@ -1018,30 +952,11 @@ td {
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Duration*</label> <input type="text"
-									name="durationMD" id="durationMD" required="required"
-									placeholder="Enter Duration" />
+								<label for="">Term*</label> <input type="text" name="misTerm"
+									id="misTerm" required="required" placeholder="Enter Term" />
 							</div>
 						</div>
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Interst Interval*</label> <select
-									id="componentIntervalMD" name="componentIntervalMD"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Compound Interval</option>
-									<option value="Monthly">Monthly</option>
-									<option value="Quarterly">Quarterly</option>
-									<option value="Half-Yearly">Half-Yearly</option>
-									<option value="Yearly">Yearly</option>
-									<option value="On Maturity">On Maturity</option>
-
-								</select>
-							</div>
-						</div>
-
-
-
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -1051,72 +966,11 @@ td {
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Maturity ROI(%)</label> <input
-									type="text" name="maturityROIMD" id="maturityROIMD"
-									required="required" placeholder="Enter Interest Rate"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term Mode*</label> <select id="termModeMD"
-									name="termModeMD" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Term Mode</option>
-
-									<option value="Monthly">Monthly</option>
-									<option value="Quarterly">Quarterly</option>
-									<option value="Half-Yearly">Half-Yearly</option>
-									<option value="Yearly">Yearly</option>
-
-								</select>
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Term*</label> <input type="text" name="termMD"
-									id="termMD" required="required" placeholder="Enter Term" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">MIS Int.ROI(%)*</label> <input type="text"
-									name="MISIntROIMD" id="MISIntROIMD" required="required"
-									placeholder="Enter MIS Int.ROI(%)" />
-							</div>
-						</div>
-
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">MIS Interval*</label> <select id="MISIntervalMD"
-									name="MISIntervalMD" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select MIS Interval</option>
-									<option value="Monthly">Monthly</option>
-									<option value="Quarterly">Quarterly</option>
-									<option value="Half-Yearly">Half-Yearly</option>
-									<option value="Yearly">Yearly</option>
-								</select>
-							</div>
-						</div>
+						
 
 
 
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">MIS Interest</label> <input type="text"
-									name="MISInterestMD" id="MISInterestMD" required="required"
-									placeholder="Enter MIS Interest" />
-							</div>
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">

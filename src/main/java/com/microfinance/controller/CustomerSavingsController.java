@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
@@ -15,6 +16,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.FinancialYear;
+import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.states;
 import com.microfinance.model.addCustomer;
@@ -134,6 +136,7 @@ public class CustomerSavingsController {
   	}
   	
  
+  	//save saving account data
     @PostMapping("/saveandupdatesavingaccount") 
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
     	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
@@ -143,6 +146,7 @@ public class CustomerSavingsController {
 		return ResponseEntity.ok(response);
 	}
     
+    //fetch all saving accouunt data
     @GetMapping("/getAllSavingAccountData")
 	public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> fetchAllSavingAccountData() {
 		List<CreateSavingsAccount> list = customersaving.fetchAllSavingAccountData();
@@ -151,6 +155,15 @@ public class CustomerSavingsController {
 		return ResponseEntity.ok(response);
 	}
 	
+    //fetch all saving account data by account number
+    @GetMapping("/getallbyaccountnumber")
+   	public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> findAllByAccountNumber(@RequestParam String accountNumber) {
+   		List<CreateSavingsAccount> list = customersaving.findAllByAccountNumber(accountNumber);
+   		ApiResponse<List<CreateSavingsAccount>> response = new ApiResponse<>(HttpStatus.FOUND,
+   				"Fetch account details by account number", list);
+   		return ResponseEntity.ok(response);
+   	}
+    
     @GetMapping("/getSavingAccountDataById")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> findSavingAccountDataById(@RequestParam("id") Long id) {
 		Optional<CreateSavingsAccount> fyear = customersaving.findSavingAccountDataById(id);
@@ -178,6 +191,39 @@ public class CustomerSavingsController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+    
+
+    @PostMapping("/savesavingaccountactivity")
+    public ResponseEntity<ApiResponse<SavingAccountActivity>> saveSavingAccountActivityData(@RequestBody SavingAccountActivity savingAccountActivity) {
+
+    	SavingAccountActivity savedSavingActivity = customersaving.saveSavingAccountActivityData(savingAccountActivity);
+        ApiResponse<SavingAccountActivity> response = new ApiResponse<>(HttpStatus.CREATED, "Saving Account Activit Data saved successfully", savedSavingActivity);
+        return ResponseEntity.ok(response);
+    }
+    
+  //fetch all saving account Activity by account number
+    
+    @GetMapping("/getsavingaccountactivity")
+	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> findAllByAccountNumberSavingActivity(@RequestParam String accountNumber) {
+
+	    List<SavingAccountActivity> members = customersaving.findAllByAccountNumberSavingActivity(accountNumber);
+
+	    if (members != null && !members.isEmpty()) {
+	        ApiResponse<List<SavingAccountActivity>> response = ApiResponse.success(
+	            HttpStatus.OK,
+	            "Consultants found for memberCode: " + accountNumber,
+	            members
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.OK);
+	    } else {
+	        ApiResponse<List<SavingAccountActivity>> response = ApiResponse.error(
+	            HttpStatus.NOT_FOUND,
+	            "No member found with this code"
+	        );
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    }
+	}
+   
 	
 	
 }
