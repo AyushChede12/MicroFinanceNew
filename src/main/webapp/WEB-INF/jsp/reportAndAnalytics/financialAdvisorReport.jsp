@@ -63,7 +63,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Business Type </label> <select id="businessType"
@@ -73,16 +73,15 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Blue">AAA</option>
 								</select>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Financial Code </label> <select id="financialCode"
-									name="financialCode" required="required"
+								<label for="">Branch Name </label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">A0001</option>
 								</select>
 							</div>
 						</div>
@@ -115,7 +114,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="searchBtn" class="btn btn-dark">Find</button>
+							<button id="findFinancialAdvisorBtn" class="btnStyle"
+					style="background-color: #FFA500;">Find</button>
 						</div>
 					</div>
 
@@ -141,6 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Branch Type</th>
 										<th scope="col">Advisor Code</th>
 										<th scope="col">Date</th>
+										
 									</tr>
 								</thead>
 								<tbody id="fetchFinancialConsultants">									
@@ -161,7 +162,12 @@ pageEncoding="ISO-8859-1"%> -->
 	<script>
 		$(document).ready(function() {
 			searchFinancialConsultants();
-			financialCodeDropdown();
+			
+			// Button click filter
+			$('#findFinancialAdvisorBtn').on('click', function(e) {
+				e.preventDefault(); // Prevent form submission
+				filterDataByBranchName();
+			});
 
 		});
 	</script>

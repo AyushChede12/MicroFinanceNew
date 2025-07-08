@@ -43,7 +43,7 @@ function renderTable(data) {
 }
 
 //Janvi : Apply filter
-function filterByBranchName() {
+function filterDataByBranchName() {
     const selectedbranchName = $('#branchName').val().trim().toLowerCase();
     const fromDateVal = $('#fromDate').val();
     const toDateVal = $('#toDate').val();
@@ -51,7 +51,7 @@ function filterByBranchName() {
     const fromDate = fromDateVal ? new Date(fromDateVal) : null;
     const toDate = toDateVal ? new Date(toDateVal) : null;
 
-    const filtered = allSavingTransactionData.filter(item => {
+    const filtered = allFinancialConsultants.filter(item => {
         const branchName = item.branchName ? item.branchName.trim().toLowerCase() : "";
         const joiningDate = item.joiningDate ? new Date(item.joiningDate) : null;
 
@@ -74,21 +74,4 @@ function filterByBranchName() {
     renderTable(filtered);
 }
 
-//janvi:Financial Code Dropdown
-function financialCodeDropdown() {
-$.ajax({
-		url: "/api/reports/getApprovedFinancialConsultant",
-		type: "GET",
-		contentType: "application/json",
-		success: function (response) {
-			if (response.status === "OK" && response.data) {
-				$("#financialCode").empty().append("<option value=''>-- Select Code --</option>");
-				response.data.forEach(function (item) {
-					$("#financialCode").append(`<option value='${item.financialCode}'>${item.financialCode}</option>`);
-				});
-			} else {
-				alert("No Financial Code found.");
-			}
-		}
-	});
-}
+
