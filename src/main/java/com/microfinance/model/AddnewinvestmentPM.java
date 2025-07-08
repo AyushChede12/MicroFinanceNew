@@ -10,6 +10,7 @@ public class AddnewinvestmentPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String policyCode;
 	private String policyStartDate;
 	private String memberSelection;
 	private String customerName;
@@ -52,6 +53,16 @@ public class AddnewinvestmentPM {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	
+	
+	
+	public String getPolicyCode() {
+		return policyCode;
+	}
+	public void setPolicyCode(String policyCode) {
+		this.policyCode = policyCode;
 	}
 	public String getPolicyStartDate() {
 		return policyStartDate;
