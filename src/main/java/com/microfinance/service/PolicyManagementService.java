@@ -311,10 +311,15 @@ public class PolicyManagementService {
 
 	}
 
+public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
+    return dailyDepositPMRepo.findByplanNameDD(planNameDD);
+}
+
 	public List<String> getMISRDBySchemeType(String mis) {
 		List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
 		return allMisrdPlans.stream().map(MISDepositPM::getPlanNameMD).distinct().collect(Collectors.toList());
 	}
+
 
 	public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
 		// TODO Auto-generated method stub
@@ -349,4 +354,34 @@ public class PolicyManagementService {
 		return addinvestmentrepo.findById(id).orElse(null);
 	}
 
+
+
+
+public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
+    return addinvestmentrepo.save(investment);
 }
+
+
+public List<DailyDepositPM> getAllDDTerm() {
+	// TODO Auto-generated method stub
+	return dailyDepositPMRepo.findAll();
+}
+
+
+
+}
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+

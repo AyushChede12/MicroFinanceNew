@@ -2,6 +2,7 @@
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <head>
 <meta charset="UTF-8" />
@@ -18,9 +19,9 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -61,78 +62,62 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							
+							<input type="hidden" id="id" name="name">
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Consultant Code <span id="star">*</span></label> <input type="text"
-									name="agentcode" id="agentcode" required="required"
-									placeholder="Enter Advisor Code"
-									style="text-transform: uppercase;" />
+								<label for="">Search By Name Or Consultant Code <span id="star">*</span></label> 
+								<input type="text" id="searchKeyword" placeholder="Search by Name or Code" class="form-control d-inline w-auto" />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Financial Consultant Name</label> <input type="text"
-									name="agentname" id="agentname" required="required"
-									placeholder="Enter Advisor Name"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Position</label> <input type="text" name="position"
-									id="position" required="required" placeholder="Enter Position"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
+						
 					</div>
-					<div class="row">
-						<div class="col-1 text-center">
-							<button id="saveBtn" class="btnStyle bg-success">Search</button>
-						</div>
-					</div>
+					
 				</div>
 
 			</form>
 
 			<div class="row mt-5">
-				<div class="col-12">
-					<div class="card recent-sales">
+    <div class="col-12">
+        <div class="card recent-sales">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Table View <span>| Record</span>
+                </h5>
 
-						<div class="card-body table-responsive">
-							<h5 class="card-title">
-								Table View <span>| Record</span>
-							</h5>
+                <div style="overflow-x: auto; white-space: nowrap;">
+                    <table class="table table-borderless datatable" style="min-width: 1000px;">
+                        <thead class="table-light" style="position: sticky; top: 0; background: #f8f9fa; z-index: 2;">
+                            <tr style="font-family: 'Poppins', sans-serif;">
+                                <th scope="col">Sr No.</th>
+                                <th scope="col">Financial Name</th>
+                                <th scope="col">Financial Code</th>
+                                <th scope="col">Contact No</th>
+                                <th scope="col">Joining Date</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Branch</th>
+                                <th scope="col">Financial Status</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body will be populated via AJAX -->
+                        </tbody>
+                    </table>
+                </div>
 
-							<table class="table table-borderless datatable overflow-scroll">
-								<thead class="table-light">
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">#</th>
-										<th scope="col">Customer</th>
-										<th scope="col">Product</th>
-										<th scope="col">Price</th>
-										<th scope="col">Status</th>
-										<th scope="col">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
+            </div>
+        </div>
+    </div>
+</div>
 
-		</div>
 
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/FinancialConsultant/consultantDownlineView.js"></script>
+	
 </body>
 
 </html>
