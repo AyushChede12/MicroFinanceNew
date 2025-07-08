@@ -165,7 +165,6 @@ $(document).ready(function() {
 	});
 
 	$('#deleteBtn').click(function(event) {
-		alert("delete");
 		var id = $("#id").val();
 		if (confirm("Are you sure you want to delete this Customer Data?")) {
 			$.ajax({
@@ -181,7 +180,7 @@ $(document).ready(function() {
 					}
 				},
 				error: function(xhr, status, error) {
-					alert("Failed to delete Executive.");
+					alert("Failed to delete Customer.");
 					console.error("Error:", error);
 				}
 			});
