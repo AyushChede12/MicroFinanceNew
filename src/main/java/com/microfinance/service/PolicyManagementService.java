@@ -1,6 +1,7 @@
 package com.microfinance.service;
 
 import java.util.List;
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -334,6 +335,7 @@ public List<String> getMISRDBySchemeType(String mis) {
 
 
 
+
 public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
     return dailyDepositPMRepo.findByplanNameDD(planNameDD);
 }
@@ -389,7 +391,6 @@ public List<DailyDepositPM> getAllDDTerm() {
 
 
 
-}
 
 
 
