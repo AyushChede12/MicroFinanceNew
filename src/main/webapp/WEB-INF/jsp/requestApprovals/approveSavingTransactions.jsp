@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -62,11 +64,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="Branch" name="Branch"
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select Branch Name</option>
 								</select>
 							</div>
 						</div>
@@ -93,7 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div class="row">
 			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
+				<button id="findsavingTransactionBtn" class="btnStyle"
 					style="background-color: #FFA500;">FIND</button>
 			</div>
 		</div>
@@ -110,13 +111,19 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
+									    <th></th>
 										<th scope="col">Sr No.</th>
-										<th scope="col">Id</th>
-										<th scope="col">Account Holder Name</th>
+										<th scope="col">Account Number</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Opening Date</th>
+										<th scope="col">Phone No.</th>
+										<th scope="col">Customer Code</th>
 										<th scope="col">Branch Name</th>
+										<th scope="col">Opening Amount</th>
+										<th scope="col">Mode Of Payment</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="searchSavingTransaction">
 								</tbody>
 							</table>
 						</div>
@@ -124,13 +131,43 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 		</div>
-
+        <div class="row">
+			<div class="col-12 text-center mt-3" style="justify-content: end">
+				<button id="approveSavingTransactionBtn" class="btnStyle"
+					style="background-color: #FFA500; ">Approve</button>
+			</div>
+		</div>
 		</div>
 
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/RequestApproval/ApproveSavingTransaction.js"></script>
+	<script>
+	$(document).ready(function(){
+		searchInTheSavingTransaction();
+		branchNameDropdown();	
+		
+		// Button click filter
+		$('#findsavingTransactionBtn').on('click', function(e) {
+			e.preventDefault(); // Prevent form submission
+			filterByBranchName();
+		});
+		
+		// Button click Approve
+		$('#approveSavingTransactionBtn').on('click', function(e) {
+		    e.preventDefault(); // Prevent form submission
+		    
+		    // Get all checked checkboxes
+		    $('.member-checkbox:checked').each(function() {
+		        const id = $(this).val();
+		        updateSavingTransactionApprovalStatus(id, true);
+		    });
+		});
+		
+	});
+	</script>
 </body>
 
 </html>

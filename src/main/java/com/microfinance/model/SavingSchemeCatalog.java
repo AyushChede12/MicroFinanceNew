@@ -30,7 +30,8 @@ public class SavingSchemeCatalog {
 	private String cardFee;
 	private String monthlyCardLimit;
 	private String yearlyCardLimit;
-	public long getId() {
+	
+	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {

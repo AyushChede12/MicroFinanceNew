@@ -17,6 +17,8 @@ public interface FixedDepositPMRepo extends JpaRepository<FixedDepositPM, Long> 
 
 	List<FixedDepositPM> findByfd(String fd);
 
+	FixedDepositPM findByplanNameFD(String planNameFD);
+
 	
 
 
