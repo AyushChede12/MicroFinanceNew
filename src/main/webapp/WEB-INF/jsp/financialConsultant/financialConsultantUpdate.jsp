@@ -2,6 +2,7 @@
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
 <html>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 <head>
 <meta charset="UTF-8" />
@@ -515,11 +516,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtnFinacial" name="saveBtn"
-								class="btnStyle bg-success">Save</button>
-							<button id="updateBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update</button>
-							<button id="printBtn" class="btnStyle bg-primary" onclick="printTable()">Print</button>
+							<button id="updateBtn" name="updateBtn"
+								class="btnStyle bg-success">Update</button>
 						</div>
 					</div>
 				</div>
@@ -630,39 +628,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 		
-		<div class="row mt-5">
-			<div class="col-12">
-				<div class="card recent-sales">
-
-					<div class="card-body table-responsive">
-						<h5 class="card-title">Financial Consultant Details</h5>
-
-
-                       <div style="overflow-x: auto; white-space: nowrap;">
-						<table class="table table-borderless datatable" id="tabl">
-							<thead class="table-light">
-								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Sl No.</th>
-									<th scope="col">Financial Name</th>
-									<th scope="col">Financial Code</th>
-									<th scope="col">Branch</th>
-									<th scope="col">Date of Joining</th>
-									<th scope="col">Address</th>
-									<th scope="col">Contact No</th>
-									<th scope="col">Financial Status</th>
-									<th scope="col">Profession</th>
-									<th scope="col">Edit</th>
-									<th scope="col">Delete</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+		
 		
 
 	</main>
@@ -671,7 +637,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/FinancialConsultant/addFinancialConsultant.js"></script>
+	<script src="./js/FinancialConsultant/consultantDownlineView.js"></script>
 
 
 
