@@ -84,9 +84,10 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
+              <input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Find By Code</label> <select id="customerCode"
-									name="customerCode" required="required"
+								<label for="">Find By Code</label> <select id="findByCode"
+									name="findByCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 
 								</select>
@@ -237,9 +238,9 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 				<div class="row">
 					<div class="col-12 text-center" style="margin-top: 30px;">
-						<button id="printBtn" class="btn btn-warning">Print</button>
-						<button id="updateBtn" class="btn btn-success">Update</button>
-						<button id="deleteBtn" class="btn btn-danger">Delete</button>
+						<button type="button" id="printBtn" class="btn btn-warning">Print</button>
+						<button type="button" id="updateBtn" class="btn btn-success">Update</button>
+						<button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
 					</div>
 				</div>
 
