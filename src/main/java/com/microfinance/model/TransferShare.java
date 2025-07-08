@@ -11,7 +11,7 @@ public class TransferShare {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	private long id;
+	private Long id;
 	private String findByCode;
 	private String customerName;
 	private String startDate;
@@ -21,16 +21,17 @@ public class TransferShare {
 	private String branch;
 	private String dateOfTransfer;
 	private String shareIssuedBy;
-	private String shareCount;
+	private String noOfShare;
 	private String amountTransferred;
-	private String sharesCount;
+	private String balanceShares;
 	private String modeOfPayment;
 	private String comments;
+	private String certificateNo;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getFindByCode() {
@@ -87,11 +88,11 @@ public class TransferShare {
 	public void setShareIssuedBy(String shareIssuedBy) {
 		this.shareIssuedBy = shareIssuedBy;
 	}
-	public String getShareCount() {
-		return shareCount;
+	public String getNoOfShare() {
+		return noOfShare;
 	}
-	public void setShareCount(String shareCount) {
-		this.shareCount = shareCount;
+	public void setNoOfShare(String noOfShare) {
+		this.noOfShare = noOfShare;
 	}
 	public String getAmountTransferred() {
 		return amountTransferred;
@@ -99,11 +100,11 @@ public class TransferShare {
 	public void setAmountTransferred(String amountTransferred) {
 		this.amountTransferred = amountTransferred;
 	}
-	public String getSharesCount() {
-		return sharesCount;
+	public String getBalanceShares() {
+		return balanceShares;
 	}
-	public void setSharesCount(String sharesCount) {
-		this.sharesCount = sharesCount;
+	public void setBalanceShares(String balanceShares) {
+		this.balanceShares = balanceShares;
 	}
 	public String getModeOfPayment() {
 		return modeOfPayment;
@@ -117,7 +118,12 @@ public class TransferShare {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
+	public String getCertificateNo() {
+		return certificateNo;
+	}
+	public void setCertificateNo(String certificateNo) {
+		this.certificateNo = certificateNo;
+	}
 	
 	
 }

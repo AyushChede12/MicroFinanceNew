@@ -9,14 +9,15 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const dailyDeposit = {
-			planCode: $('#planCode').val(),
+			drd: $('#drd').val(),
+			planCodeDD: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
 			minimumDeposit: $('#minimumDeposit').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
 			installmentType: $('#installmentType').val(),    // ⬅️ Dropdown value
 			duration: $('#duration').val(),
 			termModeDD: $('#termModeDD').val(),
-			termDD: $('#termDD').val(),
+			ddterm: $('#ddterm').val(),
 			commissionOnNew: $('#commissionOnNew').val(),
 			renewalCommission: $('#renewalCommission').val(),
 			interestInterval: $('#interestInterval').val(), // ⬅️ Dropdown value
@@ -32,7 +33,7 @@ $(document).ready(function() {
 		console.log("Sending Data:", dailyDeposit);
 
 		$.ajax({
-			url: '/api/daily-depositsave',
+			url: '/api/Policymangment/daily-depositsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(dailyDeposit),
@@ -50,7 +51,7 @@ $(document).ready(function() {
 	// FETCH DATA
 	function fetchDailyDeposits() {
 		$.ajax({
-			url: "/api/daily-deposit/view",
+			url: "/api/Policymangment/daily-deposit/view",
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -61,7 +62,7 @@ $(document).ready(function() {
 					$.each(data, function(index, item) {
 						const row = `
                             <tr>
-                                <td>${item.planCode || ''}</td>
+                                <td>${item.planCodeDD || ''}</td>
 								<td>${item.planNameDD || ''}</td>
 								
                                 <td>${item.minimumDeposit || ''}</td>
@@ -69,7 +70,7 @@ $(document).ready(function() {
                                 <td>${item.installmentType || ''}</td>
                                 <td>${item.duration || ''}</td>
 								<td>${item.termModeDD || ''}</td>
-								<td>${item.termDD || ''}</td>
+								<td>${item.ddterm || ''}</td>
                                 <td>${item.commissionOnNew || ''}</td>
                                 <td>${item.renewalCommission || ''}</td>
                                 <td>${item.interestInterval || ''}</td>
@@ -112,7 +113,7 @@ $(document).ready(function() {
 	// EDIT FUNCTION
 	function editDailyDeposit(id) {
 		$.ajax({
-			url: `/api/dailyedit/${id}`,
+			url: `/api/Policymangment/dailyedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -121,13 +122,13 @@ $(document).ready(function() {
 
 					$('#formid').data('id', id); // ✅ Set the ID for update
 
-					$('#planCode').val(data.planCode);
+					$('#planCodeDD').val(data.planCodeDD);
 					$('#planNameDD').val(data.planNameDD);
 					$('#minimumDeposit').val(data.minimumDeposit);
 					$('#rateOfInterest').val(data.rateOfInterest);
 					$('#duration').val(data.duration);
 					$('#termModeDD').val(data.termModeDD);
-					$('#termDD').val(data.termDD);
+					$('#ddterm').val(data.ddterm);
 					$('#commissionOnNew').val(data.commissionOnNew);
 					$('#renewalCommission').val(data.renewalCommission);
 					$('#interestInterval').val(data.interestInterval);
@@ -169,8 +170,8 @@ $(document).ready(function() {
 		const updatedDailyDeposit = getFormData();
 
 		$.ajax({
-			url: `/api/dailyupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/dailyupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedDailyDeposit),
 			success: function() {
@@ -187,13 +188,13 @@ $(document).ready(function() {
 	// GET FORM DATA
 	function getFormData() {
 		return {
-			planCode: $('#planCode').val(),
+			planCode: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
 			minimumDeposit: $('#minimumDeposit').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
 			installmentType: $('#installmentType').val(),
 			termModeDD: $('#termModeDD').val(),
-			termDD: $('#termDD').val(),
+			ddterm: $('#ddterm').val(),
 			duration: $('#duration').val(),
 			commissionOnNew: $('#commissionOnNew').val(),
 			renewalCommission: $('#renewalCommission').val(),
@@ -233,8 +234,8 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/dailydelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/dailydelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
 				alert(response.message || "Deleted successfully.");
@@ -258,6 +259,7 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const reccuringDeposite = {
+			rd: $('#rd').val(),
 			planCodeRD: $('#planCodeRD').val(),
 			planNameRD: $('#planNameRD').val(),
 			minimumAmountRD: $('#minimumAmountRD').val(),
@@ -265,7 +267,7 @@ $(document).ready(function() {
 			installmentTypeRD: $('#installmentTypeRD').val(),
 			durationRD: $('#durationRD').val(),
 			termMode: $('#termMode').val(),
-			term: $('#term').val(),
+			rdterm: $('#rdterm').val(),
 			commissionOnNewRD: $('#commissionOnNewRD').val(),
 			renewalCommissionRD: $('#renewalCommissionRD').val(),
 			componentIntervalRD: $('#componentIntervalRD').val(),
@@ -281,8 +283,8 @@ $(document).ready(function() {
 		console.log("Sending Recurring Deposit Data:", reccuringDeposite);
 
 		$.ajax({
-			url: '/api/recurring-depositsave', // ✅ Corrected endpoint
-			type: 'GET',
+			url: '/api/Policymangment/recurring-depositsave', // ✅ Corrected endpoint
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(reccuringDeposite),
 			success: function(response) {
@@ -298,7 +300,7 @@ $(document).ready(function() {
 	// feacth recuuring deposite
 	function fetchRecurringDeposits() {
 		$.ajax({
-			url: "/api/recurring-depositview",  // ✅ Make sure this matches your controller mapping
+			url: "/api/Policymangment/recurring-depositview",  // ✅ Make sure this matches your controller mapping
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -316,7 +318,7 @@ $(document).ready(function() {
 	                            <td>${item.installmentTypeRD || ''}</td>
 	                            <td>${item.durationRD || ''}</td>
 	                            <td>${item.termMode || ''}</td>
-	                            <td>${item.term || ''}</td>
+	                            <td>${item.rdterm || ''}</td>
 	                            <td>${item.commissionOnNewRD || ''}</td>
 	                            <td>${item.renewalCommissionRD || ''}</td>
 	                            <td>${item.componentIntervalRD || ''}</td>
@@ -358,7 +360,7 @@ $(document).ready(function() {
 		console.log("🔍 Fetching Recurring Deposit with ID:", id);
 
 		$.ajax({
-			url: `/api/recurringedit/${id}`,
+			url: `/api/Policymangment/recurringedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -401,8 +403,8 @@ $(document).ready(function() {
 		const updatedRecurringDeposit = getRDFormData();
 
 		$.ajax({
-			url: `/api/recurringupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/recurringupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedRecurringDeposit),
 			success: function() {
@@ -425,7 +427,7 @@ $(document).ready(function() {
 			installmentTypeRD: $('#installmentTypeRD').val(),
 			durationRD: $('#durationRD').val(),
 			termMode: $('#termMode').val(),
-			term: $('#term').val(),
+			rdterm: $('#rdterm').val(),
 			commissionOnNewRD: $('#commissionOnNewRD').val(),
 			renewalCommissionRD: $('#renewalCommissionRD').val(),
 			componentIntervalRD: $('#componentIntervalRD').val(),
@@ -460,8 +462,8 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/recurringdelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/recurringdelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
 				alert(response.message || "Deleted successfully.");
@@ -486,12 +488,13 @@ $(document).ready(function() {
 		e.preventDefault();
 
 		const fixedDeposit = {
+			fd: $('#fd').val(),
 			planCodeFD: $('#planCodeFD').val(),
 			planNameFD: $('#planNameFD').val(),
 			minimumAmountFD: $('#minimumAmountFD').val(),
 			rateOfInterestFD: $('#rateOfInterestFD').val(),
 			termModeFD: $('#termModeFD').val(),
-			termFD: $('#termFD').val(),                      // ✅ fixed
+			fdterm: $('#fdterm').val(),                      // ✅ fixed
 			durationFD: $('#durationFD').val(),
 			installmentTypeFD: $('#installmentTypeFD').val(),
 			commissionOnNewFD: $('#commissionOnNewFD').val(),
@@ -508,7 +511,7 @@ $(document).ready(function() {
 		console.log("Sending FD Data:", fixedDeposit);
 
 		$.ajax({
-			url: '/api/fixed-depositsave',
+			url: '/api/Policymangment/fixed-depositsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(fixedDeposit),
@@ -525,7 +528,7 @@ $(document).ready(function() {
 	// featch Fixed deposite
 	function fetchFixedDeposits() {
 		$.ajax({
-			url: "/api/fixed-depositview",  // ✅ Controller mapping बरोबर आहे याची खात्री कर
+			url: "/api/Policymangment/fixed-depositview",  // ✅ Controller mapping बरोबर आहे याची खात्री कर
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -543,7 +546,7 @@ $(document).ready(function() {
 						                           <td>${item.installmentTypeFD || ''}</td>
 						                           <td>${item.durationFD || ''}</td>
 						                           <td>${item.termModeFD || ''}</td>
-						                           <td>${item.termFD || ''}</td>
+						                           <td>${item.fdterm || ''}</td>
 						                           <td>${item.componentIntervalFD || ''}</td>
 						                           <td>${item.totalPaidFD || ''}</td>
 						                           <td>${item.maturityAmountFD || ''}</td>
@@ -584,7 +587,7 @@ $(document).ready(function() {
 		console.log("🔍 Fetching Fixed Deposit with ID:", id);
 
 		$.ajax({
-			url: `/api/fixededit/${id}`,
+			url: `/api/Policymangment/fixededit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -626,8 +629,8 @@ $(document).ready(function() {
 		const updatedFixedDeposit = getFDFormData();
 
 		$.ajax({
-			url: `/api/fixedupdate/${id}`,
-			type: 'PUT',
+			url: `/api/Policymangment/fixedupdate/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedFixedDeposit),
 			success: function() {
@@ -650,7 +653,7 @@ $(document).ready(function() {
 			installmentTypeFD: $('#installmentTypeFD').val(),
 			durationFD: $('#durationFD').val(),
 			termModeFD: $('#termModeFD').val(),
-			termFd: $('#termFd').val(),
+			fdterm: $('#fdterm').val(),
 			componentIntervalFD: $('#componentIntervalFD').val(),
 			totalPaidFD: $('#totalPaidFD').val(),
 			maturityAmountFD: $('#maturityAmountFD').val(),
@@ -675,8 +678,8 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/fixeddelete/${id}`,
-			type: 'DELETE',
+			url: `/api/Policymangment/fixeddelete/${id}`,
+			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
 				alert(response.message || "Deleted successfully.");
@@ -697,7 +700,249 @@ $(document).ready(function() {
 		}
 	}
 
-//Mis deposite 
+	//Mis deposite save
+	$("#missaveBtn").show();
+	$("#misgenrateBtn").show();
+	$("#misdupdateBtn").hide();
+
+
+
+	$('#missaveBtn').on('click', function(e) {
+		e.preventDefault();
+
+		const misDeposit = {
+			mis: $('#mis').val(),
+			planCodeMD: $('#planCodeMD').val(),                   
+				planNameMD: $('#planNameMD').val(),                   
+				minimumAmountMD: $('#minimumAmountMD').val(),         
+				rateOfInterestMD: $('#rateOfInterestMD').val(),       
+				installmentTypeMD: $('#installmentTypeMD').val(),    
+				termModeMD: $('#termModeMD').val(),                  
+				misTerm: $('#misTerm').val(),                           
+				durationMD: $('#durationMD').val(),                   
+				commissionOnNewMD: $('#commissionOnNewMD').val(),     
+				renewalCommissionMD: $('#renewalCommissionMD').val(),
+				MISIntervalMD: $('#MISIntervalMD').val(),             
+				MISInterestMD: $('#MISInterestMD').val(),             
+				maturityAmountMD: $('#maturityAmountMD').val(),       
+				flexiblePlanMD: $('#flexiblePlanMD').val(),         
+				graceDaysMD: $('#graceDaysMD').val(),                 
+				penaltyRateMD: $('#penaltyRateMD').val(),           
+				statusOfPlanMDRD2: $('#statusOfPlanMDRD2').val() 
+		};
+
+		console.log("Sending MIS Data:", misDeposit);
+
+		$.ajax({
+			url: '/api/Policymangment/mis-deposit/save',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(misDeposit),
+			success: function(response) {
+				alert("MIS Deposit Saved Successfully");
+				location.reload();
+			},
+			error: function(xhr) {
+				console.error("Save Error:", xhr.responseText);
+				alert("Something went wrong while saving MIS Deposit!");
+			}
+		});
+	});
+	// FETCH MIS DEPOSITS
+	function fetchMISDeposits() {
+		$.ajax({
+			url: "/api/Policymangment/mis-deposit/view",
+			type: "GET",
+			dataType: "json",
+			success: function(response) {
+				const data = response.data || [];
+				const tableBody = $("#misdepositeTableBody").empty();
+
+				if (data.length > 0) {
+					$.each(data, function(index, item) {
+						const row = `
+						<tr>
+						<td>${item.planCodeMD || ''}</td>                 
+						<td>${item.planNameMD || ''}</td>                 
+						<td>${item.minimumAmountMD || ''}</td>            
+						<td>${item.rateOfInterestMD || ''}</td>           
+						<td>${item.installmentTypeMD || ''}</td>          
+						<td>${item.termModeMD || ''}</td>                 
+						<td>${item.misTerm || ''}</td>                     
+						<td>${item.durationMD || ''}</td>                 
+						<td>${item.commissionOnNewMD || ''}</td>         
+						<td>${item.renewalCommissionMD || ''}</td>       
+						<td>${item.MISIntervalMD || ''}</td>              
+						<td>${item.MISInterestMD || ''}</td>              
+						<td>${item.maturityAmountMD || ''}</td>          
+						<td>${item.flexiblePlanMD || ''}</td>             
+						<td>${item.graceDaysMD || ''}</td>                
+						<td>${item.penaltyRateMD || ''}</td>             
+						<td>${item.statusOfPlanMDRD2 || ''}</td>  
+							<td class="d-flex" style="gap: .7rem;">
+								<button class="iconbutton misedit-btn" data-id="${item.id}">
+									<i class="fa-solid fa-pen-to-square text-success"></i>
+								</button>
+								<button class="iconbutton misdelete-btn" data-id="${item.id}">
+									<i class="fa-solid fa-trash text-danger"></i>
+								</button>
+							</td>
+						</tr>`;
+						tableBody.append(row);
+					});
+				} else {
+					tableBody.html(`<tr><td colspan="17" class="text-center text-warning">No data found.</td></tr>`);
+				}
+			},
+			error: function() {
+				$("#misdepositeTableBody").html(`<tr><td colspan="17" class="text-center text-danger">Something went wrong.</td></tr>`);
+			}
+		});
+	}
+
+	fetchMISDeposits();
+	
+	// Fix this line (change `.misdelete-btn` to `.misedit-btn`)
+	$(document).on('click', '.misedit-btn', function() {
+		const id = $(this).data('id');
+		editMISDeposit(id);
+	});
+
+
+	function editMISDeposit(id) {
+		$.ajax({
+			url: `/api/Policymangment/misedit/${id}`,
+			method: 'GET',
+			contentType: 'application/json',
+			success: function(response) {
+				if (response && response.data) {
+					const data = response.data;
+					console.log("Editing ID:", id, data); // ✅ log
+
+					$('#misdepositeid').data('id', id); // ✅ Consistent ID holder
+
+					$('#planCodeMD').val(data.planCodeMD);                            
+					$('#planNameMD').val(data.planNameMD);                           
+					$('#minimumAmountMD').val(data.minimumAmountMD);                  
+					$('#rateOfInterestMD').val(data.rateOfInterestMD);               
+					setDropdownValue("#installmentTypeMD", data.installmentTypeMD); 
+					$('#termModeMD').val(data.termModeMD);                            
+					$('#misTerm').val(data.misTerm);                                    
+					$('#durationMD').val(data.durationMD);                            
+					$('#commissionOnNewMD').val(data.commissionOnNewMD);              
+					$('#renewalCommissionMD').val(data.renewalCommissionMD);          
+					setDropdownValue("#MISIntervalMD", data.MISIntervalMD);           
+					$('#MISInterestMD').val(data.MISInterestMD);                      
+					$('#maturityAmountMD').val(data.maturityAmountMD);                
+					setDropdownValue("#flexiblePlanMD", data.flexiblePlanMD);         
+					$('#graceDaysMD').val(data.graceDaysMD);                         
+					$('#penltyfineMD').val(data.penltyfineMD);                     
+					$('#statusOfPlanMDRD2').val(data.statusOfPlanMDRD2);
+
+					$("#missaveBtn").hide();
+					$("#misgenrateBtn").hide();
+					$("#misdupdateBtn").show();
+				} else {
+					alert('No data found for this ID');
+				}
+			},
+			error: function() {
+				alert('Failed to fetch MIS Deposit details.');
+			}
+		});
+	}
+//update code of the mis deposite
+	$('#misdupdateBtn').on('click', function(e) {
+		e.preventDefault();
+		const id = $('#misdepositeid').data('id'); // ✅ fix here
+
+		if (!id) {
+			alert("ID missing. Please select a record to update.");
+			return;
+		}
+
+		const updatedMIS = getMISFormData();
+
+		$.ajax({
+			url: `/api/Policymangment/misupdate/${id}`,
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(updatedMIS),
+			success: function() {
+				alert("MIS Deposit updated successfully.");
+				location.reload();
+			},
+			error: function(xhr) {
+				console.error('Update error:', xhr.responseText);
+				alert("Failed to update MIS Deposit.");
+			}
+		});
+	});
+
+	// DELETE
+	// DELETE HANDLER
+	$(document).on('click', '.misdelete-btn', function () {
+		const id = $(this).data('id');
+
+		if (!id) {
+			alert("Invalid record ID.");
+			return;
+		}
+
+		// Confirmation prompt
+		if (!confirm("Are you sure you want to delete this MIS Deposit?")) {
+			return;
+		}
+
+		// Perform AJAX DELETE request
+		$.ajax({
+			url: `/api/Policymangment/misdelete/${id}`,
+			type: 'POST',
+			contentType: 'application/json',
+			success: function (response) {
+				alert(response.message || "MIS Deposit deleted successfully.");
+				fetchMISDeposits(); // Refresh the table
+			},
+			error: function (xhr) {
+				const message = xhr.responseJSON?.message || "Failed to delete the MIS Deposit.";
+				alert("Error: " + message);
+				console.error("Delete error:", xhr.responseText);
+			}
+		});
+	});
+
+	// HELPER FUNCTION TO GET FORM DATA
+	function getMISFormData() {
+		return {
+			planCodeMD: $('#planCodeMD').val(),                      
+			planNameMD: $('#planNameMD').val(),                     
+			minimumAmountMD: $('#minimumAmountMD').val(),            
+			rateOfInterestMD: $('#rateOfInterestMD').val(),          
+			installmentTypeMD: $('#installmentTypeMD').val(),        
+			termModeMD: $('#termModeMD').val(),                      
+			misTerm: $('#misTerm').val(),                              
+			durationMD: $('#durationMD').val(),                     
+			commissionOnNewMD: $('#commissionOnNewMD').val(),        
+			renewalCommissionMD: $('#renewalCommissionMD').val(),    
+			MISIntervalMD: $('#MISIntervalMD').val(),                
+			MISInterestMD: $('#MISInterestMD').val(),               
+			maturityAmountMD: $('#maturityAmountMD').val(),          
+			flexiblePlanMD: $('#flexiblePlanMD').val(),              
+			graceDaysMD: $('#graceDaysMD').val(),                    
+			penaltyRateMD: $('#penaltyRateMD').val(),                
+			statusOfPlanMDRD2: $('#statusOfPlanMDRD2').val()          
+
+		};
+	}
+	function setDropdownValue(selector, value) {
+		const dropdown = $(selector);
+		if (dropdown.find(`option[value="${value}"]`).length) {
+			dropdown.val(value);
+		} else {
+			dropdown.append(`<option value="${value}">${value}</option>`).val(value);
+		}
+	}
+
 
 
 

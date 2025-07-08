@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class AddnewinvestmentPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String policyStartDate;
 	private String memberSelection;
 	private String customerName;
@@ -133,12 +133,14 @@ public class AddnewinvestmentPM {
 	public void setTds(String tds) {
 		this.tds = tds;
 	}
+	
 	public String getBranchName() {
 		return branchName;
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
+	
 	public String getModeOfOperation() {
 		return ModeOfOperation;
 	}

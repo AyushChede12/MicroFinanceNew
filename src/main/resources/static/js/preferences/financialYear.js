@@ -3,21 +3,72 @@ $(document).ready(function() {
 	$('#addBtn').click(function(event) {
 		event.preventDefault();
 
-		const branchData = {
-			financialYearName: $('#financialYearName').val(),
-			dateFrom: $('#dateFrom').val(),
-			dateTo: $('#dateTo').val(),
+		// Clear all previous messages
+		$('#chkfyname').text('');
+		$('#chkdatefrom').text('');
+		$('#chkdateto').text('');
 
+		// Fetch input values
+		var fyName = $('#financialYearName').val().trim();
+		var dateFrom = $('#dateFrom').val().trim();
+		var dateTo = $('#dateTo').val().trim();
+
+		let isValid = true;
+
+		// Validation: Financial Year Name
+		if (fyName === '') {
+			$('#chkfyname').text('* This field is required');
+			$('#financialYearName').focus();
+			isValid = false;
+		}
+
+		// Validation: Date From
+		if (dateFrom === '') {
+			$('#chkdatefrom').text('* This field is required');
+			if (isValid) $('#dateFrom').focus();
+			isValid = false;
+		}
+
+		// Validation: Date To
+		if (dateTo === '') {
+			$('#chkdateto').text('* This field is required');
+			if (isValid) $('#dateTo').focus();
+			isValid = false;
+		}
+
+		// Optional: Additional Date Range Validation
+		if (dateFrom !== '' && dateTo !== '') {
+			if (new Date(dateFrom) > new Date(dateTo)) {
+				$('#chkdateto').text('* Date To must be after Date From');
+				if (isValid) $('#dateTo').focus();
+				isValid = false;
+			}
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
+		// Prepare Data
+		const branchData = {
+			financialYearName: fyName.toUpperCase(),
+			dateFrom: dateFrom,
+			dateTo: dateTo
 		};
 
+		// AJAX Call
 		$.ajax({
-			url: '/api/preference/saveFinancialYear',
+			url: '/api/preference/saveAndUpdateAllFinancialYear',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
 			success: function(response) {
-				alert("Financial Year Saved Successfully");
-				location.reload();
+				if (response.status=='CREATED') {
+					alert("Financial Year Saved Successfully"); // Show custom message from controller
+					location.reload(); // Reload page or update table
+				} else {
+					alert('Something went wrong. Please try again.');
+				}
 			},
 			error: function(xhr) {
 				console.error('Error:', xhr.responseText);
@@ -26,13 +77,14 @@ $(document).ready(function() {
 		});
 	});
 
+
 	$.ajax({
 		type: "GET",
 		url: "/api/preference/getAllFinancialYear",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response); 
-			if (response.success) {
+			console.log("Full Response from API:", response);
+			if (response.status=="FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -65,7 +117,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status=="FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#financialYearName").val(branch.financialYearName);
@@ -84,13 +136,13 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/preference/deleteFinancialYearById", 
+			url: "/api/preference/deleteFinancialYearById",
 			type: "POST",
-			data: { id: id }, 
+			data: { id: id },
 			success: function(response) {
-				if (response.success) {
-					alert(response.message); 
-					location.reload();   
+				if (response.status=="OK") {
+					alert(response.message);
+					location.reload();
 				} else {
 					alert("Delete failed: " + response.message);
 				}
@@ -109,7 +161,7 @@ function updateFY() {
 		id: $("#id").val(),
 		financialYearName: $("#financialYearName").val(),
 		dateFrom: $("#dateFrom").val(),
-		dateTo: $("#dateTo").val(),	
+		dateTo: $("#dateTo").val(),
 	};
 
 	$.ajax({
@@ -118,7 +170,7 @@ function updateFY() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
+			if (response.status="OK") {
 				alert(response.message);
 				location.reload();
 			} else {

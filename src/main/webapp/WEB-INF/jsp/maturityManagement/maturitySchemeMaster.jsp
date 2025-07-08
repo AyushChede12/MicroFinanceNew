@@ -70,6 +70,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Policy Code</option>
 								</select>
+								<small id="chkpolicycode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -81,6 +82,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField monthname" style="height: 30px;">
 									<option value="">Select Month</option>
 								</select>
+								<small id="finstall" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -93,6 +95,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField monthname" style="height: 30px;">
 									<option value="">Select Month</option>
 								</select>
+								<small id="install" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -280,8 +283,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code <span id="star"> *</span></label> <select id="misPolicyCode"
-									name="misPolicyCode" required="required"
+								<label for="">Policy Code <span id="star"> *</span></label> <select id="mPolicyCode"
+									name="mPolicyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">ALL</option>
 

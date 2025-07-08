@@ -61,29 +61,6 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-
 							<div class="d-flex flex-column formFields">
 								<label for="">Policy start date*</label> <input type="date"
 									name="policyStartDate" id="policyStartDate" required="required"
@@ -92,17 +69,17 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
-								<div class="d-flex flex-column formFields">
-									<label for="branchName">Member Selection*</label> <select
-										id="branchName" name="branchName" required
-										class="form-control selectField" style="height: 30px;">
-										<option value="">Select Branch Name</option>
-										<!-- Add options here -->
-									</select>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for="branchName">Customer Selection*</label> <select
+									id="selectCustomer" name="selectCustomer" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+									<!-- Add options here -->
+								</select>
 							</div>
+						</div>
 
-						
+
 
 
 						<div class="col-lg-3">
@@ -117,9 +94,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date of Birth*</label> <input type="date" name="dateofBirth"
-									id="dateofBirth" required="required"
-									
+								<label>Date of Birth*</label> <input type="date"
+									name="dateofBirth" id="dateofBirth" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -145,8 +121,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Suggested Nominee *</label> <input type="text"
-									name="suggestedNominee" id="suggestedNominee" required="required"
-									placeholder="Enter Nominee Name" />
+									name="suggestedNominee" id="suggestedNominee"
+									required="required" placeholder="Enter Nominee Name" />
 							</div>
 						</div>
 
@@ -156,21 +132,19 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Age of Nominee</label> <input type="text" name="location"
-									id="ageOfNominee" required="ageOfNominee"
+								<label>Age of Nominee</label> <input type="text"
+									name="ageOfNominee" id="ageOfNominee" required="ageOfNominee"
 									placeholder="Enter Nominee Name" />
 							</div>
 						</div>
 
 
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Relation</label> <select
-									id="relation" name="relation" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Relation</label> <input type="text" name="relation"
+									id="relation" required="relation"
+									placeholder="Enter Nominee Name" />
 							</div>
 						</div>
 
@@ -185,8 +159,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">District*</label> <input type="text" name="district"
-									id="district" required="required" placeholder="Enter District" />
+								<label for="">District*</label> <input type="text"
+									name="district" id="district" required="required"
+									placeholder="Enter District" />
 							</div>
 						</div>
 
@@ -199,8 +174,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code*</label> <input type="text" name="pinCode"
-									id="pinCode" required="required" placeholder="Enter Pin Code" />
+								<label for="">Pin Code*</label> <input type="text"
+									name="pinCode" id="pinCode" required="required"
+									placeholder="Enter Pin Code" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch Name*</label> <input type="text"
+									name="branchName" id="branchName" required="required"
+									placeholder="Enter Pin Code" />
 							</div>
 						</div>
 
@@ -211,47 +195,77 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select
-									id="branchName" name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
-							</div>
-						</div>
+
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Mode of Operation*</label> <select
 									id="ModeOfOperation" name="ModeOfOperation" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
+									<option value="joint">Joint</option>
+									<option value="single">Single</option>
 								</select>
 							</div>
 						</div>
- 
-					
-						
- 
- 
-
-						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Joint Mem.Code*</label> <input type="text"
-									name="jointMemCode" id="jointMemCode" required="required"
-									placeholder="Enter District" />
+								<label for="">Policy Nominee Name*</label> <input type="text"
+									name="jointName" id="jointName" required="required"
+									placeholder="Enter Adhar No" />
 							</div>
 						</div>
 
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Type*</label> <select id="schemeType"
+									name="schemeType" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Scheme Type</option>
+									<option value="DRD">DRD</option>
+									<option value="RD">RD</option>
+									<option value="FD">FD</option>
+									<option value="MIS">MIS</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Name*</label> <select id="schemeName"
+									name="schemeName" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+
+								</select>
+							</div>
+						</div>
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Joint Name*</label> <input type="text"
-									name="jointName" id="jointName" required="required"
-									placeholder="Enter Adhar No" />
+								<label for="">Scheme Term*</label> <input type="text"
+									name="schemeTerm" id="schemeTerm" required="required"
+									placeholder="Enter PAN No" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Rate Of Interest*</label> <input type="text"
+									name="roi" id="roi" required="required"
+									placeholder="Enter PAN No" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Mode*</label> <select id="schemeMode"
+									name="schemeMode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+
+								</select>
 							</div>
 						</div>
 
@@ -263,58 +277,8 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Type*</label> <select
-									id="schemeType" name="schemeType" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
-							</div>
-						</div>
-						
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Name*</label> <select
-									id="schemeName" name="schemeName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
-							</div>
-						</div>
-						
 
 
-
-						
-
-						
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Term*</label> <input type="text"
-									name="schemeTerm" id="schemeTerm" required="required"
-									placeholder="Enter PAN No" />
-							</div>
-						</div>
-
-							<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Mode*</label> <select
-									id="schemeMode" name="schemeMode" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
-							</div>
-						</div>
-						
-							
-
-						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -331,19 +295,19 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Licence No" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Intro.M Code*</label> <select
-									id="introMCode" name="introMCode" required="required"
+								<label for="">Intro.M Code*</label> <select id="introMCode"
+									name="introMCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch Name</option>
-									
+
 								</select>
 							</div>
 						</div>
-						
-						
+
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -417,57 +381,15 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 
-					<div class="row mt-4">
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-									Photo</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="bike1image" id="bike1image"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
-									<div id="img-view">
-										<img src="./upload.png" alt="upload_icon"
-											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-									</div>
-								</label>
-							</div>
+				</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-									Signature</label> <label for="bike2image" id="drop-area"> <input
-									type="file" accept="image/*" name="bike2image" id="bike2image"
-									hidden="hidden" onchange="bike2Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
-									<div id="img-view">
-										<img src="./upload.png" alt="upload_icon"
-											id="bike2imagePreview" />
-										<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-									</div>
-								</label>
-							</div>
+				<div class="row">
+					<div class="col-12 text-center">
+						<button id="saveBtn" class="btn btn-info"
+							style="margin-left: 80%;">Save</button>
 
-						</div>
 					</div>
-
-					<div class="row">
-						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-info"
-								style="margin-left: 80%;">Save</button>
-
-						</div>
-					</div>
+				</div>
 			</form>
 
 
@@ -478,6 +400,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="./js/PolicyManagment/addInvestment.js"></script>
 </body>
 
 </html>

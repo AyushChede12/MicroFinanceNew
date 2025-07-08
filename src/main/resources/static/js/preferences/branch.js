@@ -1,8 +1,105 @@
 $(document).ready(function() {
+	$("#tableBody").hide();
+	$("#updateBtn").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 
 	$('#saveBtn').click(function(event) {
-		alert("Save Button Clicked!");
-		event.preventDefault(); 
+		event.preventDefault();
+
+		// Clear all previous messages
+		$('#chkbranchcode').text('');
+		$('#chkbranchName').text('');
+		$('#chkopeningdate').text('');
+		$('#chkaddress').text('');
+		$('#chkpin').text('');
+		$('#chkstate').text('');
+		$('#chkprimarycontact').text('');
+		$('#chkcontact').text('');
+
+		// Fetch input values
+		var branchCode = $('#branchCode').val().trim();
+		var branchName = $('#branchName').val().trim();
+		var openingDate = $('#openingDate').val().trim();
+		var address = $('#address').val().trim();
+		var pin = $('#pin').val().trim();
+		var state = $('#state').val().trim();
+		var primaryContact = $('#primaryContact').val().trim();
+		var contact = $('#contact').val().trim();
+
+		var contactPattern = /^[6-9][0-9]{9}$/;
+		var pinPattern = /^[1-9][0-9]{5}$/;
+
+		let isValid = true;
+
+		// Validation: Financial Year Name
+		if (branchCode === '') {
+			$('#chkbranchcode').text('* This field is required');
+			$('#branchCode').focus();
+			isValid = false;
+		}
+
+		if (branchName === '') {
+			$('#chkbranchName').text('* This field is required');
+			$('#branchName').focus();
+			isValid = false;
+		}
+
+		if (openingDate === '') {
+			$('#chkopeningdate').text('* This field is required');
+			$('#openingDate').focus();
+			isValid = false;
+		}
+
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+
+		if (pin === '') {
+			$('#chkpin').text('* This field is required');
+			$('#pin').focus();
+			isValid = false;
+		}
+		else if (!pinPattern.test(pin)) {
+			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
+			pin.focus();
+			isValid = false;
+		}
+
+		if (state === '') {
+			$('#chkstate').text('* This field is required');
+			$('#state').focus();
+			isValid = false;
+		}
+
+		if (primaryContact === '') {
+			$('#chkprimarycontact').text('* This field is required');
+			$('#primaryContact').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(primaryContact)) {
+			alert("Please enter a valid 10-digit mobile number.");
+			primaryContact.focus();
+			isValid = false;
+		}
+
+		if (contact === '') {
+			$('#chkcontact').text('* This field is required');
+			$('#contact').focus();
+			isValid = false;
+		}
+		else if (!contactPattern.test(contact)) {
+			alert("Please enter a valid 10-digit mobile number.");
+			contact.focus();
+			isValid = false;
+		}
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
 
 		const branchData = {
 			branchCode: $('#branchCode').val(),
@@ -21,8 +118,15 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
 			success: function(response) {
-				alert("Branch Saved Successfully");
-				location.reload();
+				if (response.status == 'CREATED') {
+					alert("Branch Saved Successfully");
+					location.reload();
+				}
+				else {
+					alert("Branch Not Saved");
+					location.reload();
+				}
+
 			},
 			error: function(xhr) {
 				console.error('Error:', xhr.responseText);
@@ -31,52 +135,113 @@ $(document).ready(function() {
 		});
 	});
 
+});
 
-	$("#tableBody").hide();
-	$("#updateBtn").hide();
+var totalDataMISD = [];
+var currentPageMISD = 1;
+var pageSizeMISD = 5;
 
+// Load data once
+function loadMISData() {
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllBranchModule", 
+		url: "/api/preference/getAllBranchModule",
 		contentType: "application/json",
 		success: function(response) {
-			console.log("Full Response from API:", response); 
-			if (response.success) {
-				let data = response.data;
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
-				data.forEach((item, index) => {
-					let row = `<tr>
-	                        <td>${index + 1}</td>
-	                        <td>${item.branchCode}</td>
-	                        <td>${item.branchName}</td>
-	                        <td>${item.openingDate}</td>
-	                        <td>${item.address}</td>
-	                        <td>${item.pin}</td>
-	                        <td>${item.state}</td>
-	                        <td>${item.primaryContact}</td>
-	                        <td>${item.contact}</td>
-							<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-							<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-	                    </tr>`;
-					tableBody.append(row);
-				});
+			if (response.status === "FOUND") {
+				totalDataMISD = response.data;
+				renderTable(currentPageMISD);
+				togglePageNavigationMISD();
 			} else {
-				alert("Failed to fetch branch data: " + response.message);
+				alert("Failed to fetch data: " + response.message);
 			}
 		},
 		error: function() {
 			alert("Error while calling the API.");
 		}
 	});
+}
+
+// Render paginated table
+function renderTable(page) {
+	let tableBody = $(".datatable tbody");
+	tableBody.empty();
+
+	let startIndex = (page - 1) * pageSizeMISD;
+	let endIndex = Math.min(startIndex + pageSizeMISD, totalDataMISD.length);
+
+	for (let i = startIndex; i < endIndex; i++) {
+		let person = totalDataMISD[i];
+		let row = `<tr>
+				<td>${i + 1}</td>
+                <td>${person.branchCode}</td>
+                <td>${person.branchName}</td>
+                <td>${person.openingDate}</td>
+                <td>${person.address}</td>
+                <td>${person.pin}</td>
+                <td>${person.state}</td>
+				<td>${person.primaryContact}</td>
+				<td>${person.contact}</td>
+                <td>
+                  <button class="iconbutton" onclick="viewData(${person.id})" title="View">
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
+                    <i class="fa-solid fa-trash text-danger"></i>
+                  </button>
+                </td>
+              </tr>`;
+		tableBody.append(row);
+	}
+
+	// Update page info
+	$("#pageInfo").text(`Page ${currentPageMISD} of ${Math.ceil(totalDataMISD.length / pageSizeMISD)}`);
+}
+
+// Button state toggling
+function togglePageNavigationMISD() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	$("#prevBtn").prop("disabled", currentPageMISD === 1);
+	$("#nextBtn").prop("disabled", currentPageMISD === totalPages || totalPages === 0);
+}
+
+// Button click handlers
+$("#prevBtn").click(function() {
+	if (currentPageMISD > 1) {
+		currentPageMISD--;
+		renderTable(currentPageMISD);
+		togglePageNavigationMISD();
+	}
+});
+
+$("#nextBtn").click(function() {
+	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
+	if (currentPageMISD < totalPages) {
+		currentPageMISD++;
+		renderTable(currentPageMISD);
+		togglePageNavigationMISD();
+	}
+});
+
+// Call on page load
+$(document).ready(function() {
+	loadMISData();
 });
 
 function showTableData() {
 	$("#tableBody").show();
+	$("#prevBtn").show();
+	$("#nextBtn").show();
+	$("#pageInfo").show();
 }
 
 function hideTableData() {
 	$("#tableBody").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 }
 
 function viewData(id) {
@@ -89,7 +254,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.success) {
+			if (response.status == "FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#branchCode").val(branch.branchCode);
@@ -117,11 +282,11 @@ function deleteData(id) {
 		$.ajax({
 			url: "/api/preference/deleteBranchModuleById",
 			type: "POST",
-			data: { id: id }, 
+			data: { id: id },
 			success: function(response) {
-				if (response.success) {
-					alert(response.message); 
-					location.reload();    
+				if (response.status == "OK") {
+					alert(response.message);
+					location.reload();
 				} else {
 					alert("Delete failed: " + response.message);
 				}
@@ -151,13 +316,13 @@ function updateBranch() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBranchModule", 
+		url: "/api/preference/saveAndUpdateAllBranchModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.success) {
-				alert(response.message); 
+			if (response.status == "OK") {
+				alert(response.message);
 				location.reload();
 			} else {
 				alert("Operation failed: " + response.message);
@@ -171,7 +336,7 @@ function updateBranch() {
 
 
 $(document).ready(function() {
-	
+
 	$.ajax({
 		url: "/api/preference/getAllBranchModule",
 		method: "GET",

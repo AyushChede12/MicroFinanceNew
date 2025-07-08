@@ -1,18 +1,82 @@
-$(document).ready(function () {
-   // Get today's date in YYYY-MM-DD format
-   const today = new Date().toISOString().split('T')[0];
-$('#applicationDate').val(today);
-$('#fromDate').val(today);
-$('#toDate').val(today);
-$('#approvalDate').val(today);
+$(document).ready(function() {
+	// Get today's date in YYYY-MM-DD format
+	const today = new Date().toISOString().split('T')[0];
+	$('#applicationDate').val(today);
+	$('#fromDate').val(today);
+	$('#toDate').val(today);
+	$('#approvalDate').val(today);
+	$('#openingDate').val(today);
+	$('#transactionDate').val(today);
+	$('#dateOfTransfer').val(today);
 
+	$('#dateloan').val(today);
 
+	//Branch
+	$.ajax({
+		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
+		type: "GET",
+		success: function(response) {
+			if (response.status == "FOUND") {
+				const branchList = response.data;
+				$("#branchName").empty(); // Clear existing options
+				$("#branchName").append("<option value=''>-- Select Branch --</option>");
+				$("#selectBranchName").empty(); // Clear existing options
+				$("#selectBranchName").append("<option value=''>-- Select Branch --</option>");
 
-document.addEventListener("DOMContentLoaded", function () {
+				for (let i = 0; i < branchList.length; i++) {
+					let branch = branchList[i];
+					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
+					$("#branchName").append(option);
 
-const handleToggleSidebar = () => {
-	document.body.classList.toggle('toggle-sidebar');
-}
+					$("#selectBranchName").append(option);
+					$("#branch").append(option);
+
+				}
+			} else {
+				alert("Error: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			console.error("Error loading branches:", xhr.responseText);
+			alert("Failed to load dropdown data.");
+		}
+	});
+
+	//Relatives
+	$.ajax({
+		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		type: "GET",
+		success: function(response) {
+			if (response.status == "FOUND") {
+				const relativeList = response.data;
+				$("#relationToApplicant").empty(); // Clear existing options
+				$("#relationToApplicant").append("<option value=''>-- Select Relative --</option>");
+				$("#familyRelation").empty(); // Clear existing options
+				$("#familyRelation").append("<option value=''>-- Select Relative --</option>");
+
+				for (let i = 0; i < relativeList.length; i++) {
+					let relative = relativeList[i];
+					let option = `<option value="${relative.relation}">${relative.relation}</option>`;
+					$("#relationToApplicant").append(option);
+					$("#familyRelation").append(option);
+				}
+			} else {
+				alert("Error: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			console.error("Error loading branches:", xhr.responseText);
+			alert("Failed to load dropdown data.");
+		}
+	});
+
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+
+	const handleToggleSidebar = () => {
+		document.body.classList.toggle('toggle-sidebar');
+	}
 
 	const toggleSidebarBtn = document.querySelector('.toggle-sidebar-btn');
 	if (toggleSidebarBtn) {
@@ -40,11 +104,11 @@ function uploadImage() {
 	text.style.display = 'none';
 }
 
-dropArea.addEventListener("dragover", function (e) {
+dropArea.addEventListener("dragover", function(e) {
 	e.preventDefault()
 })
 
-dropArea.addEventListener("drop", function (e) {
+dropArea.addEventListener("drop", function(e) {
 	e.preventDefault()
 	inputFile.files = e.dataTransfer.files;
 	uploadImage()
@@ -56,7 +120,7 @@ function changeImage(newImageSrc, selectedThumbnail) {
 	bigImage.src = newImageSrc;
 
 	var thumbnails = document.getElementById(galleryId).querySelectorAll('.thumbnail');
-	thumbnails.forEach(function (thumbnail) {
+	thumbnails.forEach(function(thumbnail) {
 		thumbnail.classList.remove('selected');
 	});
 
@@ -94,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			label.style.backgroundColor = '#ccc'; // Gray OFF
 		}
 	}
-}); 
+});
 
 const wrapper = document.querySelector('.wrapper');
 selectBtn = wrapper.querySelector('.select-btn');
@@ -121,7 +185,7 @@ function addCountry(selectedopt) {
 addCountry()
 */
 const major = [
-	"Mr","Ms","Mrs"
+	"Mr", "Ms", "Mrs"
 ];
 
 function addmajor(selectedopt) {
@@ -141,19 +205,17 @@ function updateName(selectedLi) {
 	selectBtn.firstElementChild.innerText = selectedLi.innerText;
 }
 
-dropBtnSearchInput.addEventListener("keyup", ()=>{
+dropBtnSearchInput.addEventListener("keyup", () => {
 	let arr = [];
 	let searchVal = dropBtnSearchInput.value.toLowerCase();
 	arr = countries.filter(data => {
 		return data.toLowerCase().startsWith(searchVal);
 
-	}).map(data =>`<li onclick="updateName(this)">${data}</li>`).join("")
+	}).map(data => `<li onclick="updateName(this)">${data}</li>`).join("")
 	optionsdropbtn.innerHTML = arr ? arr : `<p>Oops! Country not found</p>`;
 })
 
 selectBtn.addEventListener("click", () => {
 	wrapper.classList.toggle("active");
 })
-
-
 

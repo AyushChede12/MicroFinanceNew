@@ -12,11 +12,16 @@ public class ApplyForMaturity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
 	private long id;
-	private String policyId;
+	private String branchName;
+	private String policyNo;
+	private String maturityDate;
 	private String customerName;
-	private String policyDate;
-	private String applicationDate;
-	private String comment;
+	private String schemeName;
+	private String schemeType;
+	private String policyAmount;
+	private String depositAmount;
+	private String maturityAmount;
+	private String remark;
 	
 	public long getId() {
 		return id;
@@ -24,11 +29,23 @@ public class ApplyForMaturity {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getPolicyId() {
-		return policyId;
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setPolicyId(String policyId) {
-		this.policyId = policyId;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public String getPolicyNo() {
+		return policyNo;
+	}
+	public void setPolicyNo(String policyNo) {
+		this.policyNo = policyNo;
+	}
+	public String getMaturityDate() {
+		return maturityDate;
+	}
+	public void setMaturitydate(String maturityDate) {
+		this.maturityDate = maturityDate;
 	}
 	public String getCustomerName() {
 		return customerName;
@@ -36,23 +53,41 @@ public class ApplyForMaturity {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public String getPolicyDate() {
-		return policyDate;
+	public String getSchemeName() {
+		return schemeName;
 	}
-	public void setPolicyDate(String policyDate) {
-		this.policyDate = policyDate;
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
-	public String getApplicationDate() {
-		return applicationDate;
+	public String getSchemeType() {
+		return schemeType;
 	}
-	public void setApplicationDate(String applicationDate) {
-		this.applicationDate = applicationDate;
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
 	}
-	public String getComment() {
-		return comment;
+	public String getPolicyAmount() {
+		return policyAmount;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setPolicyAmount(String policyAmount) {
+		this.policyAmount = policyAmount;
+	}
+	public String getDepositAmount() {
+		return depositAmount;
+	}
+	public void setDepositAmount(String depositAmount) {
+		this.depositAmount = depositAmount;
+	}
+	public String getMaturityAmount() {
+		return maturityAmount;
+	}
+	public void setMaturityAmount(String maturityAmount) {
+		this.maturityAmount = maturityAmount;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 	

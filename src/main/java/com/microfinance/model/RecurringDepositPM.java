@@ -11,7 +11,7 @@ public class RecurringDepositPM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    private String rd;
     private String planCodeRD;
     private String planNameRD;
     private String minimumAmountRD;
@@ -21,7 +21,7 @@ public class RecurringDepositPM {
     private String durationRD;
    
     private String termMode;
-    private String term;
+    private String rdterm;
     private String commissionOnNewRD;
     private String renewalCommissionRD;
     private String componentIntervalRD;
@@ -63,11 +63,14 @@ public class RecurringDepositPM {
 	public void setTermMode(String termMode) {
 		this.termMode = termMode;
 	}
-	public String getTerm() {
-		return term;
+	
+	
+	
+	public String getRdterm() {
+		return rdterm;
 	}
-	public void setTerm(String term) {
-		this.term = term;
+	public void setRdterm(String rdterm) {
+		this.rdterm = rdterm;
 	}
 	public String getCommissionOnNewRD() {
 		return commissionOnNewRD;
@@ -146,6 +149,12 @@ public class RecurringDepositPM {
 	}
 	public void setPenltyfineRD(String penltyfineRD) {
 		this.penltyfineRD = penltyfineRD;
+	}
+	public String getRd() {
+		return rd;
+	}
+	public void setRd(String rd) {
+		this.rd = rd;
 	}
 
 

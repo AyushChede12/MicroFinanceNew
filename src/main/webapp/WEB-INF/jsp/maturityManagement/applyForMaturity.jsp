@@ -30,6 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,58 +62,98 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-				
+					
+					<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID<span id="star"> *</span></label> <select id="policyId"
-									name="policyId" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">select Policy ID</option>
+								<label for="">Branch <span id="star"> *</span></label> <select id="branchName" name="branchName"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Branch</option>
 
 								</select>
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Policy No.<span id="star"> *</span></label> <select id="policyNo"
+									name="policyNo" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">select Policy ID</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Maturity Date <span id="star"> *</span></label> <input type="date" name="maturityDate"
+									id="maturityDate" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Customer Name <span id="star"> *</span></label> <input type="text"
 									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Policy Date <span id="star"> *</span></label> <input type="date" name="policyDate"
-									id="policyDate" required="required" placeholder=""
+						
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Type <span id="star"> *</span></label> <input type="text"
+									name="schemeType" id="schemeType" required="required"	
 									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="">Scheme Mode <span id="star"> *</span></label> <input type="text"
+									name="schemeMode" id="schemeMode" required="required"	
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Policy Amount <span id="star"> *</span></label> <input type="text"
+									name="policyAmount" id="policyAmount" required="required"
+									placeholder="Enter Voter No" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Application Date <span id="star"> *</span></label> <input type="date"
-									name="applicationDate" id="applicationDate" required="required"
-									placeholder="" />
+								<label for="">Deposit Amount <span id="star"> *</span></label> <input type="text"
+									name="depositAmount" id="depositAmount" required="required"
+									placeholder="Enter Licence No" />
 							</div>
 						</div>
 
-
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Comment</label> <input type="text" name="comment" id="comment"
-									required="required" placeholder="Enter Commet"  />
-
+							<div class="d-flex flex-column formFields">
+								<label for="">Maturity Amount <span id="star"> *</span></label> <input type="text"
+									name="maturityAmount" id="maturityAmount" required="required"
+									placeholder="Enter Intro Member Name" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Remark <span id="star"> *</span></label> <input type="text"
+									name="remark" id="remark" required="required"
+									placeholder="Enter Voter No" />
 							</div>
 						</div>
 
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-primary" color:black"> View Policy Detail</button>
+							<button id="viewBtn" class="btn btn-primary" color:black"> View Policy Detail</button>
 							<button id="Add" class="btn btn-info" color:black">Save</button>
 						</div>
 					</div>
@@ -129,15 +170,19 @@ pageEncoding="ISO-8859-1"%> -->
 							Marurity Application<span>|</span>
 						</h5>
 
-						<table class="table table-borderless datatable overflow-scroll">
+						<table class="table table-borderless datatable overflow-scroll" id="table">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">id</th>
+									
 									<th scope="col">Policy No.</th>
-									<th scope="col">Member name</th>
-									<th scope="col">Policy Date</th>
-									<th scope="col">Application Date</th>
-									<th scope="col">Remark</th>
+            						<th scope="col">Branch Name</th>
+            						<th scope="col">Maturity Date</th>
+           						  	<th scope="col">Customer Name</th>
+            						<th scope="col">Scheme Name</th>
+            						<th scope="col">Scheme Type</th>
+            						<th scope="col">Policy Amount</th>
+            						<th scope="col">Maturity Amount</th>
+            						<th scope="col">Remark</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -150,16 +195,6 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 
-
-
-
-
-
-
-
-
-
-
 		</form>
 
 
@@ -169,6 +204,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/applymaturity.js"></script>
 	
 	
 </body>
