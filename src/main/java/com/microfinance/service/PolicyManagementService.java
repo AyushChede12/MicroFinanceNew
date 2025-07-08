@@ -354,7 +354,7 @@ public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
 		return addinvestmentrepo.findById(id).orElse(null);
 	}
 
-}
+
 
 
 public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
