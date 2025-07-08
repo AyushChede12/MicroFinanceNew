@@ -397,6 +397,7 @@ $(document).ready(function () {
         e.preventDefault(); // Prevent default form submission
 
         const formData = {
+			policyCode: $("#policyCode").val(),
             policyStartDate: $("#policyStartDate").val(),
             memberSelection: $("#selectCustomer").val(),
             customerName: $("#customerName").val(),
