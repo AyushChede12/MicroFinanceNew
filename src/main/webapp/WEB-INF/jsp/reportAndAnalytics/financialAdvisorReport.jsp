@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -76,8 +78,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Finicial Code </label> <select id="advisorCode"
-									name="advisorCode" required="required"
+								<label for="">Financial Code </label> <select id="financialCode"
+									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Blue">A0001</option>
@@ -92,15 +94,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">From Date :</label> <input type="date"
-									name="fDate" id="fDate" required="required"
-									placeholder="Enter fDate" style="text-transform: uppercase;" />
+									name="fromDate" id="fromDate" required="required"
+									placeholder="Enter From Date" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">TO Date :</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
+								<label for="">TO Date :</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder="Enter To Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -141,17 +143,7 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Date</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<td>1</td>
-										<td>Umrer</td>
-										<td>A001</td>
-										<td>11/02/2001</td>
-									</tr>
-
-
-
-
+								<tbody id="fetchFinancialConsultants">									
 								</tbody>
 							</table>
 						</div>
@@ -165,6 +157,15 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/FinancialAdvisorReport.js"></script>
+	<script>
+		$(document).ready(function() {
+			searchFinancialConsultants();
+			financialCodeDropdown();
+
+		});
+	</script>
+
 </body>
 
 </html>
