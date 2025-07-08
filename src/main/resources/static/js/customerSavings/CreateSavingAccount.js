@@ -189,59 +189,122 @@ $('#financialConsultantCode').on('blur', function () {
     }
 });
 
+//photo upload
+function photoUpload() {
+	const file = document.getElementById("photo").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById("photoPreview").src = e.target.result;
+			const previewimg = document.getElementById("photoPreview");
+			document.getElementById("photoPreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+function signatureUpload() {
+	const file = document.getElementById("signature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById("signaturePreview").src = e.target.result;
+			const previewimg = document.getElementById("signaturePreview");
+			document.getElementById("signaturePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
 // save saving account details 
 $(document).ready(function () {
-    $('#saveBtn').click(function (event) {
-        event.preventDefault();
+	$('#saveBtn').click(function (event) {
+		event.preventDefault();
 
-        const accountData = {
-			typeofaccount: $('#typeofaccount').val(),
-            openingDate: $('#openingDate').val(),
-            selectByCustomer: $('#selectByCustomer').val(),
-            enterCustomerName: $('#enterCustomerName').val(),
-            dateOfBirth: $('#dateOfBirth').val(),
-            familyDetails: $('#familyDetails').val(),
-            contactNumber: $('#contactNumber').val(),
-            suggestedNomineeName: $('#suggestedNomineeName').val(),
-            suggestedNomineeAge: $('#suggestedNomineeAge').val(),
-            suggestedNomineeRelation: $('#suggestedNomineeRelation').val(),
-            address: $('#address').val(),
-            district: $('#district').val(),
-            branchName: $('#branchName').val(),
-            state: $('#state').val(),
-            pinCode: $('#pinCode').val(),
-            operationType: $('#operationType').val(),
-            jointOperationCode: $('#jointOperationCode').val(),
-            jointSurvivorCode: $('#jointSurvivorCode').val(),
-            familyRelation: $('#familyRelation').val(),
-            selectPlan: $('#selectPlan').val(),
-            openingAmount: $('#openingAmount').val(),
-            financialConsultantCode: $('#financialConsultantCode').val(),
-            financialConsultantName: $('#financialConsultantName').val(),
-            openingFees: $('#openingFees').val(),
-            authenticateWith: $('#authenticateWith').val(),
-            modeOfPayment: $('#modeOfPayment').val(),
-            comment: $('#comment').val(),
-			accountNumber: $('#accountNumber').val(),
-			accountStatus: $('#toggle-member-status').is(':checked') ? 1 : 0,
-			messageSend: $('#toggle-member-status1').is(':checked') ? 1 : 0,
-			debitCardIssue: $('#toggle-member-status2').is(':checked') ? 1 : 0
-        };
-        $.ajax({
-            url: '/api/customersavings/saveandupdatesavingaccount',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(accountData),
-            success: function (response) {
-                alert("Saving Account data saved successfully!\nAccount No : "+accountData.accountNumber);
-                location.reload();
-            },
-            error: function (xhr) {
-                console.error('Error:', xhr.responseText);
-                alert('Failed to save saving account data.');
-            }
-        });
-    });
+		const formData = new FormData();
+
+		formData.append("typeofaccount", $('#typeofaccount').val());
+		formData.append("openingDate", $('#openingDate').val());
+		formData.append("selectByCustomer", $('#selectByCustomer').val());
+		formData.append("enterCustomerName", $('#enterCustomerName').val());
+		formData.append("dateOfBirth", $('#dateOfBirth').val());
+		formData.append("familyDetails", $('#familyDetails').val());
+		formData.append("contactNumber", $('#contactNumber').val());
+		formData.append("suggestedNomineeName", $('#suggestedNomineeName').val());
+		formData.append("suggestedNomineeAge", $('#suggestedNomineeAge').val());
+		formData.append("suggestedNomineeRelation", $('#suggestedNomineeRelation').val());
+		formData.append("address", $('#address').val());
+		formData.append("district", $('#district').val());
+		formData.append("branchName", $('#branchName').val());
+		formData.append("state", $('#state').val());
+		formData.append("pinCode", $('#pinCode').val());
+		formData.append("operationType", $('#operationType').val());
+		formData.append("jointOperationCode", $('#jointOperationCode').val());
+		formData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
+		formData.append("familyRelation", $('#familyRelation').val());
+		formData.append("selectPlan", $('#selectPlan').val());
+		formData.append("openingAmount", $('#openingAmount').val());
+		formData.append("financialConsultantCode", $('#financialConsultantCode').val());
+		formData.append("financialConsultantName", $('#financialConsultantName').val());
+		formData.append("openingFees", $('#openingFees').val());
+		formData.append("authenticateWith", $('#authenticateWith').val());
+		formData.append("modeOfPayment", $('#modeOfPayment').val());
+		formData.append("comment", $('#comment').val());
+		formData.append("accountNumber", $('#accountNumber').val());
+		formData.append("accountStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
+		formData.append("messageSend", $('#toggle-member-status1').is(':checked') ? 1 : 0);
+		formData.append("debitCardIssue", $('#toggle-member-status2').is(':checked') ? 1 : 0);
+
+		// Append files (photo and signature)
+		const photo = $('#photo')[0].files[0];
+		const signature = $('#signature')[0].files[0];
+
+		if (photo) {
+			formData.append("photo", photo);
+		}
+		if (signature) {
+			formData.append("signature", signature);
+		}
+
+		// Debug: Log all key-value pairs from FormData
+		for (let pair of formData.entries()) {
+			if (!pair[1]) {
+				console.warn(`⚠️ Field "${pair[0]}" is EMPTY or NULL ->`, pair[1]);
+			} else {
+				console.log(`✅ ${pair[0]}:`, pair[1]);
+			}
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '/api/customersavings/saveandupdatesavingaccount',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function (response) {
+				alert("Saving Account data saved successfully!\nAccount No : " + $('#accountNumber').val());
+				location.reload();
+			},
+			error: function (xhr) {
+				console.error('Error:', xhr.responseText);
+				alert('Failed to save saving account data.');
+			}
+		});
+	});
 	
 	$.ajax({
 			type: "GET",

@@ -3,18 +3,24 @@ package com.microfinance.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.ExecutiveFounderDto;
+import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
@@ -25,10 +31,12 @@ import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -38,6 +46,9 @@ public class CustomerSavingsController {
 
 	@Autowired
 	CustomerSavingsService customersaving;
+	
+	@Value("${upload.directory}")
+	private String uploadDirectory;
 	
 	// Save Saving Scheme Catalog
     @PostMapping("/savescheme")
@@ -54,7 +65,7 @@ public class CustomerSavingsController {
         } else {
             ApiResponse<SavingSchemeCatalog> response = ApiResponse.error(
                 HttpStatus.BAD_REQUEST,
-                "Failed to save fixed deposit."
+                "Failed to save scheme."
             );
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -136,14 +147,37 @@ public class CustomerSavingsController {
   	}
   	
  
-  	//save saving account data
-    @PostMapping("/saveandupdatesavingaccount") 
-	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
-    	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
-		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"
-				: "Saving Account Details updated successfully";
-		ApiResponse<CreateSavingsAccount> response = new ApiResponse<>(HttpStatus.OK, message, savedEntity);
-		return ResponseEntity.ok(response);
+//  	//save saving account data
+//    @PostMapping("/saveandupdatesavingaccount") 
+//	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
+//    	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
+//		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"
+//				: "Saving Account Details updated successfully";
+//		ApiResponse<CreateSavingsAccount> response = new ApiResponse<>(HttpStatus.OK, message, savedEntity);
+//		return ResponseEntity.ok(response);
+//	}
+    
+	@PostMapping("/saveandupdatesavingaccount")
+	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(
+			@ModelAttribute SavingAccountDto savingAccountDto,
+			@RequestParam(value = "photo", required = false) MultipartFile photo,
+			@RequestParam(value = "signature", required = false) MultipartFile signature) {
+
+		if (photo != null) {
+			System.out.println("Received photo: " + photo.getOriginalFilename());
+		}
+		if (signature != null) {
+			System.out.println("Received signature: " + signature.getOriginalFilename());
+		}
+
+		ApiResponse<CreateSavingsAccount> response = customersaving.saveSavingAccountDetails(savingAccountDto, photo,
+				signature);
+		// return new ResponseEntity<>(response, response.getStatus());
+		return ResponseEntity.ok(new ApiResponse<>(
+                HttpStatus.OK,
+                savingAccountDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
+                response.getData()
+        ));
 	}
     
     //fetch all saving accouunt data

@@ -60,7 +60,7 @@ pageEncoding="ISO-8859-1"%> -->
               <div class="d-flex flex-column formFields">
                 <label for="">Select Account Number</label> <select id="debitAccountNumber" name="debitAccountNumber" required="required"
                   class="form-control selectField" style="height: 30px;">
-                  <option value=""> Select Colour</option>
+                  <option value=""> Select </option>
                   
                 </select>
               </div>
@@ -110,8 +110,8 @@ pageEncoding="ISO-8859-1"%> -->
                 <div class="d-flex flex-column formFields">
                   <label for="">Select Account Number</label> <select id="creditAccountNumber" name="creditAccountNumber" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="Blue">Blue</option>
+                    <option value=""> Select</option>
+                    
                   </select>
                 </div>
               </div>
@@ -125,7 +125,7 @@ pageEncoding="ISO-8859-1"%> -->
   
                 <div class="col-lg-3">
                   <div class="d-flex flex-column formFields mb-4">
-                    <label for="">Account Branch</label> <input type="text" name="creditCustomerCode" id="creditCustomerCode" required="required"
+                    <label for="">Account Branch</label> <input type="text" name="creditAccountBranch" id="creditAccountBranch" required="required"
                       placeholder="" />
                   </div>
                 </div>

@@ -1,13 +1,9 @@
-package com.microfinance.model;
+package com.microfinance.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-@Entity
-public class CreateSavingsAccount {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+import org.springframework.web.multipart.MultipartFile;
+
+public class SavingAccountDto {
+
 	private Long id;
 	private String typeofaccount;
 	private String openingDate;
@@ -42,17 +38,14 @@ public class CreateSavingsAccount {
 	private String accountNumber;
 	private boolean isApproved;
 	
-	private String photo;
-	private String signature;
-	
-	
+	private MultipartFile photo;
+	private MultipartFile signature;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	public String getTypeofaccount() {
 		return typeofaccount;
 	}
@@ -245,20 +238,19 @@ public class CreateSavingsAccount {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
-	public String getPhoto() {
+	public MultipartFile getPhoto() {
 		return photo;
 	}
-	public void setPhoto(String photo) {
+	public void setPhoto(MultipartFile photo) {
 		this.photo = photo;
 	}
-	public String getSignature() {
+	public MultipartFile getSignature() {
 		return signature;
 	}
-	public void setSignature(String signature) {
+	public void setSignature(MultipartFile signature) {
 		this.signature = signature;
 	}
-
-
+	
 	
 	
 	
