@@ -382,7 +382,6 @@ public AddnewinvestmentPM getDetailsById(Long id) {
 
 
 
-}
 
 
 

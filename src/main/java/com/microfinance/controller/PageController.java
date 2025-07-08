@@ -1,6 +1,9 @@
 package com.microfinance.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -100,6 +103,11 @@ public class PageController {
 		return "financialConsultant/consultantIDCardGenerator";
 	}
 
+	@GetMapping("/updateFinacialConsultant")
+	public String financialConsultantUpdate() {
+		return "financialConsultant/financialConsultantUpdate";
+	}
+	
 	// Data Rectification
 	@GetMapping("/customerDataUpdate")
 	public String getCustomerDataUpdate() {
@@ -880,16 +888,12 @@ public class PageController {
 	
 	@GetMapping("/createSavingsAccount")
 	public String getCreateSavingsAccount(Model model) {
-//		long maxId = createSavingAccountRepo.getMaxId() + 1;
-//		//String savingaccountnumber = String.format("2025%08d", maxId);
+		long maxId = createSavingAccountRepo.getMaxId();
+	    String savingaccountnumber = String.format("2025%08d", maxId + 1);
 //		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
-//		String savingaccountnumber = "2025" + "000000" + (maxId);
-//		model.addAttribute("savingaccountnumber", savingaccountnumber);
-		long maxId = createSavingAccountRepo.getMaxId() + 1;
-		String idStr = String.valueOf(maxId);
-		String zeros = "00000000".substring(idStr.length()); // 8 - maxId length
-		String savingaccountnumber = "2025" + zeros + idStr;
+//		String savingaccountnumber = "2025" + "000000" + (maxId + 1);
 		model.addAttribute("savingaccountnumber", savingaccountnumber);
+		
 
 		return "customerSavings/createSavingsAccount";
 	}
@@ -900,7 +904,13 @@ public class PageController {
 	}
 	
 	@GetMapping("/savingsAccountActivity")
-	public String getSavingsAccountActivity() {
+	public String getSavingsAccountActivity(Model model) {
+		String prefix = "TXN";
+		String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int randomNumber = new Random().nextInt(9000) + 1000; // 4-digit random number
+		String transactionCode = prefix + timestamp + randomNumber;
+
+		model.addAttribute("transactionCode", transactionCode);
 		return "customerSavings/savingsAccountActivity";
 	}
 	
