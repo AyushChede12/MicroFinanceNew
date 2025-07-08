@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
@@ -62,6 +63,9 @@ public class PageController {
 	@Autowired
 	CreateLendingGroupRepo createLendingGroupRepo;
 	
+	@Autowired
+	AddInvestmentRepo addInvestmentRepo;
+	
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -103,6 +107,11 @@ public class PageController {
 		return "financialConsultant/consultantIDCardGenerator";
 	}
 
+	@GetMapping("/updateFinacialConsultant")
+	public String financialConsultantUpdate() {
+		return "financialConsultant/financialConsultantUpdate";
+	}
+	
 	// Data Rectification
 	@GetMapping("/customerDataUpdate")
 	public String getCustomerDataUpdate() {
@@ -700,7 +709,10 @@ public class PageController {
 	}
 
 	@GetMapping("/addNewInvestment")
-	public String getAddNewInvestment() {
+	public String getAddNewInvestment(Model model) {
+		long maxId = addInvestmentRepo.getMaxId();
+		String policyCode = "M" + "0000" + (maxId + 1);
+		model.addAttribute("policyCode", policyCode);
 		return "policyManagement/addNewInvestment";
 	}
 

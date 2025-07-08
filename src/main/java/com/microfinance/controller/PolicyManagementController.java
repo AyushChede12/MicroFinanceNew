@@ -16,6 +16,7 @@ import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
+import com.microfinance.model.addCustomer;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -471,18 +472,7 @@ public class PolicyManagementController {
     
     
     
-    @GetMapping("/ddterm")
-    public ResponseEntity<ApiResponse<DailyDepositPM>> getDDTermAndInterestRate(
-            @RequestParam(name = "planNameDD", required = true) String planNameDD) {
-
-        DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
-        if (response != null) {
-            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Daily Deposit plan details found", response));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Daily Deposit plan not found"));
-        }
-    }
+  
 
 
 
@@ -544,7 +534,21 @@ public class PolicyManagementController {
          }
   }
 
+ 	
+ 	@GetMapping("/ddterm")
+ 	public ResponseEntity<ApiResponse<DailyDepositPM>> getDDTermAndInterestRate(
+ 	        @RequestParam(name = "planNameDD", required = true) String planNameDD) {
 
+ 	    DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
+ 	    if (response != null) {
+ 	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Daily Deposit plan details found", response));
+ 	    } else {
+ 	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+ 	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Daily Deposit plan not found"));
+ 	    }
+ 	}
+
+ 	
 
     
  
@@ -590,8 +594,33 @@ public class PolicyManagementController {
 	    }
 	}
 
-
+	@PostMapping("/saveInvestment")
+    public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveInvestment(@RequestBody AddnewinvestmentPM investment) {
+        try {
+            AddnewinvestmentPM savedInvestment = policyManagementService.saveInvestment(investment);
+            ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+                    HttpStatus.OK,
+                    "✅ Investment saved successfully",
+                    savedInvestment
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace(); // Debugging only
+            ApiResponse<AddnewinvestmentPM> errorResponse = new ApiResponse<>(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "❌ Failed to save investment",
+                    null
+            );
+            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     
+	
+	@GetMapping("/getAllDDTerm")               //Niraj
+	public List<DailyDepositPM> getAllDDTerm(){
+		List<DailyDepositPM> list = policyManagementService.getAllDDTerm();
+		return list;
+	}
     
 }
 

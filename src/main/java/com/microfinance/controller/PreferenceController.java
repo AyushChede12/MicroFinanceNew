@@ -190,14 +190,23 @@ public class PreferenceController {
 	}
 
 	@GetMapping("/getAllStates") // Niraj
-	@ResponseBody
-	public List<states> getAllStates() {
-		List<states> list = preferenceService.getAllStates();
-		return list;
+	public ResponseEntity<ApiResponse<List<states>>> getAllStates() {
+	    List<states> list = preferenceService.getAllStates();
+	    
+	    ApiResponse<List<states>> response;
+	    
+	    if (list.isEmpty()) {
+	        response = new ApiResponse<>(HttpStatus.NOT_FOUND, "No states found", null);
+	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	    } else {
+	        response = new ApiResponse<>(HttpStatus.FOUND, "States fetched successfully", list);
+	        return ResponseEntity.ok(response); // or new ResponseEntity<>(response, HttpStatus.FOUND)
+	    }
 	}
 
+
 	@GetMapping("/getAllDistrictsByStateId") // Niraj
-	@ResponseBody
+	
 	public Map<String, List<Statedistricts>> getAllDistrictsByStateId(@RequestParam("stateId") int stateId) {
 		List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
 		Map<String, List<Statedistricts>> response = new HashMap<>();
