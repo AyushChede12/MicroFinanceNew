@@ -1,11 +1,14 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +28,7 @@ import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.states;
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 
@@ -46,6 +50,9 @@ public class CustomerSavingsController {
 
 	@Autowired
 	CustomerSavingsService customersaving;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -280,6 +287,51 @@ public class CustomerSavingsController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/transferAmount")
+    @Transactional
+    public ResponseEntity<?> transferAmount(
+            @RequestParam("debitAccountNo") String debitAccountNo,
+            @RequestParam("creditAccountNo") String creditAccountNo,
+            @RequestParam("amount") double amount) {
+        try {
+            
+          CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
+                  .orElseThrow(() -> new RuntimeException("Debit account not found"));
+
+          CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
+                  .orElseThrow(() -> new RuntimeException("Credit account not found"));
+
+          double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
+          System.out.println("debitBalance" +debitBalance);
+          double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+          System.out.println("creditBalance" +creditBalance);
+
+          
+          if (debitBalance < amount) {
+          	Map<String, String> response = new HashMap<>();
+          	response.put("message", "Insufficient balance in debit account");
+          	return ResponseEntity.badRequest().body(response);
+          }
+
+          // Update balances
+          debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
+          creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+          
+          // Save changes
+          createSavingAccountRepo.save(debitAccount);
+          createSavingAccountRepo.save(creditAccount);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Amount transferred successfully");
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Transfer failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
 
 
 	

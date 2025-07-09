@@ -85,3 +85,66 @@ $('#creditAccountNumber').on('change', function () {
         $('#debitCustomerCode').val('');
     }
 });
+
+/*$(document).ready(function () {
+    $('#saveBtn').click(function (e) {
+        e.preventDefault();
+
+        let debitAccountNo = $('#debitAccountNo').val();
+        let creditAccountNo = $('#creditAccountNo').val();
+        let amount = $('#amount').val();
+
+        $.ajax({
+            url: '/api/customersavings/transferAmount',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                debitAccountNo: debitAccountNo,
+                creditAccountNo: creditAccountNo,
+                amount: amount
+            }),
+            success: function (response) {
+                alert(response.message); // Transfer successful message
+                // Optionally, reload balances on the page
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert('Transfer failed: ' + xhr.responseText);
+            }
+        });
+    });
+});
+*/
+
+$(document).ready(function () {
+    $('#saveBtn').click(function (e) {
+        e.preventDefault();
+
+        let debitAccountNo = $('#debitAccountNumber').val();
+        let creditAccountNo = $('#creditAccountNumber').val();
+        let amount = $('#amount').val();
+
+        console.log('debitAccountNo:', debitAccountNo);
+        console.log('creditAccountNo:', creditAccountNo);
+        console.log('amount:', amount);
+
+        $.ajax({
+            url: '/api/customersavings/transferAmount',
+            type: 'POST',
+            data: {
+                debitAccountNo: debitAccountNo,
+                creditAccountNo: creditAccountNo,
+                amount: amount
+            },
+            success: function (response) {
+                alert(response.message);
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert('Transfer failed: ' + xhr.responseText);
+            }
+        });
+    });
+});
+
+
