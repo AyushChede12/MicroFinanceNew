@@ -101,14 +101,21 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Financial Code<span id="star">*</span></label> <input
+									type="text" name="financialCode" id="financialCode1"
+									required="required" readonly="readonly"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="selectCustomer">Select Customer Code<span
-									id="star">*</span></label> <select id="memberCode" name="memberCode"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-
-
-								</select>
+									id="star">*</span></label> <input type="text" id="memberCode"
+									name="memberCode" required="required"
+									class="form-control selectField" style="height: 30px;">
 							</div>
 						</div>
 
@@ -116,9 +123,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="customerName">Customer Name <span class="star">*</span></label>
-								<input type="text" name="customerName" id="customerName"
-									required="required" placeholder="Enter Cutomer Name"
+								<label for="customerName">Customer Name <span
+									class="star">*</span></label> <input type="text" name="customerName"
+									id="customerName" required="required"
+									placeholder="Enter Cutomer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -154,13 +162,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant <span id="star">*</span></label> <select
-									id="relationToApplicant" name="relationToApplicant"
+								<label>Relation to Applicant <span id="star">*</span></label> <input
+									type="text" id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Enter Relation to Applicant</option>
-									
-								</select>
+
 							</div>
 						</div>
 
@@ -196,11 +202,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name <span id="star">*</span></label> <select
-									id="branchName" name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label>Branch Name <span id="star">*</span></label> <input
+									type="text" id="branchName" name="branchName"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 
-								</select>
 							</div>
 						</div>
 
@@ -627,13 +633,13 @@ pageEncoding="ISO-8859-1"%> -->
       </div> -->
 
 		</div>
-		
-		
-		
+
+
+
 
 	</main>
 
-	
+
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>

@@ -100,6 +100,7 @@ $(document).ready(function () {
 
                         $("#id").val(data.id);
                         $("#joiningDate").val(data.joiningDate || '');
+						$("#financialCode1").val(data.financialCode || '');
                         $("#memberCode").val(data.memberCode || '');
                         $("#customerName").val(data.customerName || '');
                         $("#dob").val(data.dob || '');
@@ -159,4 +160,108 @@ $(document).ready(function () {
             alert("No ID found in URL.");
         }
     }
+	
+	$('#updateBtn').click(function (e) {
+	        e.preventDefault();
+
+	        let formData = new FormData();
+
+	        // Append regular text fields
+	        formData.append("id", $('#id').val());
+	        formData.append("financialCode", $('#financialCode1').val());
+	        formData.append("joiningDate", $('#joiningDate').val());
+	        formData.append("memberCode", $('#memberCode').val());
+	        formData.append("customerName", $('#customerName').val());
+	        formData.append("dob", $('#dob').val());
+	        formData.append("customerAge", $('#customerAge').val());
+	        formData.append("guardianName", $('#guardianName').val());
+	        formData.append("relationToApplicant", $('#relationToApplicant').val());
+	        formData.append("contactNo", $('#contactNo').val());
+	        formData.append("nomineeName", $('#nomineeName').val());
+	        formData.append("branchName", $('#branchName').val());
+	        formData.append("nomineeAge", $('#nomineeAge').val());
+	        formData.append("customerAddress", $('#customerAddress').val());
+	        formData.append("district", $('#district').val());
+	        formData.append("state", $('#state').val());
+	        formData.append("pinCode", $('#pinCode').val());
+	        formData.append("profession", $('#profession').val());
+	        formData.append("academicBackground", $('#academicBackground').val());
+	        formData.append("selectPosition", $('#selectPosition').val());
+	        formData.append("referralCode", $('#referralCode').val());
+	        formData.append("referralName", $('#referralName').val());
+	        formData.append("fees", $('#fees').val());
+	        formData.append("modeofPayment", $('#modeofPayment').val());
+	        formData.append("chequeNo", $('#chequeNo').val());
+	        formData.append("chequeDate", $('#chequeDate').val());
+	        formData.append("depositAccount", $('#depositAccount').val());
+	        formData.append("refNo", $('#refNo').val());
+	        formData.append("comments", $('#comments').val());
+	        formData.append("financialStatus", $('#financialStatus').is(':checked')? 1 : 0);
+	        formData.append("smsSend", $('#smsSend').is(':checked')? 1 : 0);
+
+	        // Append image paths or Base64 values
+	        formData.append("customerPhoto", $('#customerPhotoHidden').val());
+	        formData.append("customerSignature", $('#customerSignatureHidden').val());
+
+	        $.ajax({
+	            url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+	            type: "POST",
+	            data: formData,
+	            enctype: 'multipart/form-data',
+	            contentType: false,
+	            processData: false,
+	            cache: false,
+	            success: function (response) {
+	                if (response.status === "OK") {
+	                    alert("Updated Successfully");
+						location.reload();
+	                    // Optionally refresh the table or UI
+	                } else {
+	                    alert("Something went wrong: " + response.message);
+	                }
+	            },
+	            error: function (xhr) {
+	                alert("Error while saving data: " + xhr.responseText);
+	            }
+	        });
+	    });
+		
+		$('#verifyUpiBtn').click(function () {
+				const upi = $('#refNo').val().trim();
+				const upiPattern = /^[\w.\-]{2,256}@[a-zA-Z]{2,64}$/;
+				if (upiPattern.test(upi)) {
+					$('#refNo').css('border', '2px solid green');
+					$('#upiStatus').text('✅ Valid UPI ID').css('color', 'green');
+				} else {
+					$('#refNo').css('border', '2px solid red');
+					$('#upiStatus').text('❌ Invalid UPI ID format').css('color', 'red');
+				}
+			});
+
+		
+		$(document).on('click', '.deleteBtn', function () {
+			        var id = $(this).data('id');
+
+			        // Optional: Confirmation prompt
+			        if (confirm("Are you sure you want to delete this Financial Consultant?")) {
+			            $.ajax({
+			                url: '/api/financialconsultant/deleteFinancialConsultantById',
+			                type: 'POST',
+			                data: { id: id },
+			                success: function (response) {
+			                    if (response.status === 'OK') {
+			                        alert(response.message);
+			                        // Reload or update the table after deletion
+			                        location.reload(); // or call a function to refresh table via AJAX
+			                    } else {
+			                        alert("Error: " + response.message);
+			                    }
+			                },
+			                error: function (xhr) {
+			                    alert("Deletion failed. Please try again.");
+			                }
+			            });
+			        }
+			    });
+	
 });
