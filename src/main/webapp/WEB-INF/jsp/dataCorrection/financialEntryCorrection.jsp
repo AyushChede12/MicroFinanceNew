@@ -37,6 +37,13 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -88,12 +95,13 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-              <input type="hidden" name="id" id="id">
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 40px;">
-								<label for="">Choose by Code</label> <select id="financialCode"
+								<label for="financialCode">Choose by Code</label> <select id="financialCode"
 									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
+									<option value="">-- Search Financial Code --</option>
 								</select>
 							</div>
 						</div>
@@ -265,8 +273,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text" name="pinCode"
-									id="pinCode" required="required" placeholder="Enter Pincode" />
+								<labe39l for="">Pin Code</label> <input type="text"
+									name="pinCode" id="pinCode" required="required"
+									placeholder="Enter Pincode" />
 							</div>
 						</div>
 
@@ -480,9 +489,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
-							<button id="printBtn" class="btn btn-warning">Print</button>
-							<button id="updateBtn" class="btn btn-success">Update</button>
-							<button id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="button" id="printBtn" class="btn btn-warning">Print</button>
+							<button type="button" id="updateBtn" class="btn btn-success">Update</button>
+							<button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 			</form>
