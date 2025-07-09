@@ -18,9 +18,6 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -33,6 +30,17 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -40,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Data Correction </h1>
+			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
@@ -93,13 +101,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Branch Name</label> <select id="colour"
-									name="colour" required="required"
+								<label for="branchName">Branch Name</label> <select
+									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
-									<option value="Blue">Reshimbaag</option>
-									<option value="Blue">Chandrapur</option>
 								</select>
 							</div>
 						</div>
@@ -108,13 +112,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Select Acount No.</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Acount No</option>
-									<option value="Blue">Umrer</option>
-									<option value="Blue">Reshimbaag</option>
-									<option value="Blue">Chandrapur</option>
+								<label>Select Account No.</label> <select id="accountNumber"
+									name="accountNumber" required="required"
+									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
 						</div>
@@ -123,7 +123,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Customer Code</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Customer Code" style="text-transform: uppercase;" />
+									placeholder="Enter Customer Code"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -245,8 +246,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Available Balance</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Available Balance</label> <input type="text"
+									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Available Balance"
 									style="text-transform: uppercase;" />
 							</div>
@@ -254,8 +255,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Payment Reason</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Payment Reason</label> <input type="text"
+									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Payment Reason"
 									style="text-transform: uppercase;" />
 							</div>
@@ -272,9 +273,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Transaction Type </label><select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">Transaction Type </label><select id="colour"
+									name="colour" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Blue">Umrer</option>
 									<option value="Blue">Reshimbaag</option>
@@ -292,7 +293,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Mode Of Payment  </label> <select id="colour"
+								<label for="">Mode Of Payment </label> <select id="colour"
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Payment By</option>
@@ -424,6 +425,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/savingTransactionRemoval.js"></script>
+
 </body>
 
 </html>
