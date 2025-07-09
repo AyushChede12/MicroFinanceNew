@@ -37,6 +37,13 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -88,12 +95,13 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-              <input type="hidden" name="id" id="id">
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 40px;">
-								<label for="">Choose by Code</label> <select id="financialCode"
+								<label for="financialCode">Choose by Code</label> <select id="financialCode"
 									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
+									<option value="">-- Search Financial Code --</option>
 								</select>
 							</div>
 						</div>
@@ -265,8 +273,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<labe39l for="">Pin Code</label> <input type="text" name="pinCode"
-									id="pinCode" required="required" placeholder="Enter Pincode" />
+								<labe39l for="">Pin Code</label> <input type="text"
+									name="pinCode" id="pinCode" required="required"
+									placeholder="Enter Pincode" />
 							</div>
 						</div>
 
@@ -452,22 +461,23 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 
 							<div class="col-lg-3">
-							<div
-								class=" h-100 d-flex justify-content-start align-items-center"
-								style="margin-bottom: 30px;">
 								<div
-									class="d-flex justify-content-start align-items-center  formFields">
-									<label style="margin-left: 20px;" class="mb-2">SMS Send</label>
-									<div class="cont">
-										<div class="toggle">
-											<input type="checkbox" id="toggle-sms-send" name="smsSend"
-												class="toggle__input" data-toggle-type="sms-send">
-											<label for="toggle-sms-send" class="toggle__label"></label>
+									class=" h-100 d-flex justify-content-start align-items-center"
+									style="margin-bottom: 30px;">
+									<div
+										class="d-flex justify-content-start align-items-center  formFields">
+										<label style="margin-left: 20px;" class="mb-2">SMS
+											Send</label>
+										<div class="cont">
+											<div class="toggle">
+												<input type="checkbox" id="toggle-sms-send" name="smsSend"
+													class="toggle__input" data-toggle-type="sms-send">
+												<label for="toggle-sms-send" class="toggle__label"></label>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
 
 
