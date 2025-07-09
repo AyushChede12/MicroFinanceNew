@@ -265,7 +265,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text" name="pinCode"
+								<labe39l for="">Pin Code</label> <input type="text" name="pinCode"
 									id="pinCode" required="required" placeholder="Enter Pincode" />
 							</div>
 						</div>
@@ -452,23 +452,22 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 
 							<div class="col-lg-3">
+							<div
+								class=" h-100 d-flex justify-content-start align-items-center"
+								style="margin-bottom: 30px;">
 								<div
-									class=" h-100 d-flex justify-content-start align-items-center"
-									style="margin-bottom: 30px;">
-									<div
-										class="d-flex justify-content-start align-items-center  formFields">
-										<label style="margin-left: 20px;" class="mb-2">SMS
-											Send</label>
-										<div class="cont">
-											<div class="toggle">
-												<input type="checkbox" id="toggle-sms-send" name="smsSend"
-													class="toggle__input" data-toggle-type="sms-send">
-												<label for="toggle-sms-send" class="toggle__label"></label>
-											</div>
+									class="d-flex justify-content-start align-items-center  formFields">
+									<label style="margin-left: 20px;" class="mb-2">SMS Send</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="toggle-sms-send" name="smsSend"
+												class="toggle__input" data-toggle-type="sms-send">
+											<label for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 
 
 
@@ -480,9 +479,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
-							<button id="printBtn" class="btn btn-warning">Print</button>
-							<button id="updateBtn" class="btn btn-success">Update</button>
-							<button id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="button" id="printBtn" class="btn btn-warning">Print</button>
+							<button type="button" id="updateBtn" class="btn btn-success">Update</button>
+							<button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 			</form>

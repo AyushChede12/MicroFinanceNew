@@ -86,8 +86,34 @@ $(document).ready(function() {
 					$("#pinCode").val(data.pinCode);
 					$("#profession").val(data.profession);
 					$("#academicBackground").val(data.academicBackground);
-					$("#financialPhotoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
-					$("#financialSignaturePreview").attr("src", data.customerSignature ? `Uploads/${data.customerSignature}` : "Uploads/default-placeholder.jpg");
+					//$("#financialPhotoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
+					//$("#financialSignaturePreview").attr("src", data.customerSignature ? `Uploads/${data.customerSignature}` : "Uploads/default-placeholder.jpg");
+
+					/*if (data.customerPhoto) {
+						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto).show();
+						$('#financialphotoHidden').val(data.customerPhoto);
+					}
+
+					if (data.customerSignature) {
+						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature).show();
+						$('#financialsignatureHidden').val(data.customerSignature);
+					}*/
+
+					// Image bindings (photo and signature)
+					if (data.customerPhoto) {
+						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto);
+						$('#financialphotoHidden').val(data.customerPhoto); // Store file name for fallback
+					} else {
+						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
+					}
+
+					if (data.customerSignature) {
+						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature);
+						$('#financialsignatureHidden').val(data.customerSignature); // Store file name for fallback
+					} else {
+						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+					}
+
 
 					$("#selectPosition").val(data.selectPosition);
 					$("#referralCode").val(data.referralCode);
@@ -159,10 +185,20 @@ $(document).ready(function() {
 		financialData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
 
 		// Append image paths or Base64 values
-		var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		if (photo) financialData.append("customerPhoto", photo);
-		var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
-		if (signature) financialData.append("customerPhoto", signature);
+		//var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
+		//if (photo) financialData.append("customerPhoto", photo);
+		//var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
+		//if (signature) financialData.append("customerPhoto", signature);
+
+		/*financialData.append("customerPhoto", $('#financialphotoHidden').val());
+		financialData.append("customerSignature", $('#financialsignatureHidden').val());*/
+
+		let photoValue = $('#financialphotoHidden').val();
+		financialData.append("customerPhoto", photoValue || ""); // Always send string path
+
+		let signatureValue = $('#financialsignatureHidden').val();
+		financialData.append("customerSignature", signatureValue || "");
+
 
 		$.ajax({
 			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
@@ -187,25 +223,154 @@ $(document).ready(function() {
 		});
 	});
 
-	document.addEventListener('DOMContentLoaded', function() {
-		const toggles = document.querySelectorAll('.toggle__input');
 
-		toggles.forEach((toggle) => {
-			updateToggleColor(toggle);
 
-			toggle.addEventListener('change', () => {
-				updateToggleColor(toggle);
-				console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+	$("#printBtn").on("click", function(e) {
+		e.preventDefault();
+
+		var financialCode = $('#financialCode').val();
+		if (financialCode && financialCode !== "") {
+
+			const $formClone = $("#formid").clone();
+
+			// Remove buttons and extra dropdowns
+			$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
+			$formClone.find(".text-center").each(function() {
+				if ($(this).find("button").length > 0) {
+					$(this).remove();
+				}
 			});
-		});
 
-		function updateToggleColor(input) {
-			const label = input.nextElementSibling;
-			if (label) {
-				label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+			// Convert selects to plain text
+			$formClone.find("select").each(function() {
+				const selectedText = $(this).find("option:selected").text();
+				$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
+			});
+
+			// Convert inputs to plain text
+			$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
+				const value = $(this).val();
+				$(this).replaceWith(`<span class="form-value">${value}</span>`);
+			});
+
+			// Convert textareas
+			$formClone.find("textarea").each(function() {
+				const value = $(this).val();
+				$(this).replaceWith(`<span class="form-value">${value}</span>`);
+			});
+
+			// Convert checkboxes and radios
+			$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
+				const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
+				$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
+			});
+
+			// Optional: Resize images if any
+			$formClone.find("img").each(function() {
+				$(this).css({
+					width: "100px",
+					height: "auto",
+					border: "1px solid #ccc",
+					marginBottom: "10px"
+				});
+			});
+
+			// Open print window
+			const printWindow = window.open("", "_blank");
+			if (printWindow) {
+				printWindow.document.open();
+				printWindow.document.write(`
+					<html>
+					<head>
+						<title>Print - Financial Consultant Form</title>
+						<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+						<style>
+							body {
+								font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+								padding: 30px;
+								background: #fff;
+								color: #333;
+							}
+							h3 {
+								text-align: center;
+								margin-bottom: 30px;
+								border-bottom: 2px solid #444;
+								padding-bottom: 10px;
+							}
+							.form-group, .form-row {
+								margin-bottom: 20px;
+								display: flex;
+								flex-wrap: wrap;
+								align-items: center;
+							}
+							label {
+								width: 200px;
+								font-weight: 600;
+								margin-bottom: 5px;
+								color: #000;
+							}
+							.form-value {
+								flex: 1;
+								padding: 8px 12px;
+								border: 1px solid #ccc;
+								border-radius: 5px;
+								background-color: #f9f9f9;
+								font-weight: 500;
+								color: #222;
+							}
+							img {
+								display: block;
+								margin-top: 10px;
+							}
+							@media print {
+								body {
+									zoom: 95%;
+								}
+							}
+						</style>
+					</head>
+					<body onload="window.print(); window.close();">
+						<h3>Financial Information</h3>
+						<div class="container">
+							${$formClone[0].outerHTML}
+						</div>
+					</body>
+					</html>
+				`);
+				printWindow.document.close();
+			} else {
+				alert("Popup blocked. Please allow popups for this website.");
 			}
 		}
+		else {
+			alert("First Select Any One Data Then Proceed to Print");
+		}
 	});
+
+	$('#deleteBtn').click(function(event) {
+		var id = $("#id").val();
+		if (confirm("Are you sure you want to delete this Financial Data?")) {
+			$.ajax({
+				url: "/api/financialconsultant/deleteFinancialConsultantById",
+				type: "POST",
+				data: { id: id },
+				success: function(response) {
+					if (response.status == "OK") {
+						alert("Financial Data Deleted Successfully");
+						location.reload();
+					} else {
+						alert("Delete failed: " + response.message);
+					}
+				},
+				error: function(xhr, status, error) {
+					alert("Failed to delete Financial Share Data.");
+					console.error("Error:", error);
+				}
+			});
+		}
+
+	});
+
 });
 
 //Colour Change After Binding - Ayush
@@ -261,3 +426,25 @@ function signatureUpload() {
 		alert("Please upload a valid image file for signature.");
 	}
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+	const toggles = document.querySelectorAll('.toggle__input');
+
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
+
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
+
+
+});
