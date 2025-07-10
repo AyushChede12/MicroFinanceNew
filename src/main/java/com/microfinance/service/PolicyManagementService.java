@@ -382,7 +382,7 @@ public AddnewinvestmentPM getDetailsById(Long id) {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findById(id).orElse(null);
 }
-}
+
 
 
 public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
@@ -395,6 +395,15 @@ public List<DailyDepositPM> getAllDDTerm() {
 	return dailyDepositPMRepo.findAll();
 }
 
+public List<AddnewinvestmentPM> getAllInvestments() {
+    return addinvestmentrepo.findAll();
+}
+
+public List<AddnewinvestmentPM> getAllPolicyManagementData() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
+}
+}
 
 
 
