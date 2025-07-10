@@ -33,6 +33,17 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -63,10 +74,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="vehicalNo">Select By Policy ID</label> <select
-									id="colour" name="colour" required="required"
+								<label for="policyCode">Select By Policy Code</label> <select
+									id="policyCode" name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Policy ID</option>
+									<option value="">-- Search Policy Code --</option>
 								</select>
 							</div>
 						</div>
@@ -106,12 +117,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Member Selection </label> <select id="colour"
-									name="colour" required="required"
+								<label for="vehicalNo">Customer Selection </label> <select id="customerCode"
+									name="customerCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Ayush</option>
-									<option value="Blue">Vaibhav</option>
 								</select>
 							</div>
 						</div>
@@ -158,7 +166,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Suggested Nominee </label> <input type="date" name="vehicalNo"
+								<label>Suggested Nominee </label> <input type="text" name="vehicalNo"
 									id="vehicalNo" required="required"
 									placeholder="Enter Suggested Nominee            "
 									style="text-transform: uppercase;" />
@@ -169,12 +177,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="">Relation</label> <select id="colour" name="colour"
+								<label for="">Relation</label> <select id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Brother</option>
-									<option value="Blue">Sister</option>
 								</select>
 							</div>
 						</div>
@@ -185,10 +190,10 @@ pageEncoding="ISO-8859-1"%> -->
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Relationship Status</option>
-									<option value="Blue">Married</option>
-									<option value="Blue">Unmarried</option>
-									<option value="Blue">Devorced</option>
-									<option value="Blue">Single</option>
+									<option value="Married">Married</option>
+									<option value="Unmarried">Unmarried</option>
+									<option value="Divorced">Divorced</option>
+									<option value="Single">Single</option>
 								</select>
 							</div>
 						</div>
@@ -226,12 +231,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label><select id="colour"
-									name="colour" required="required"
+								<label for="">Branch Name</label><select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
-									<option value="Blue">Reshimbaag</option>
 								</select>
 							</div>
 						</div>
@@ -242,8 +244,8 @@ pageEncoding="ISO-8859-1"%> -->
 									name="colour" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Mode</option>
-									<option value="Blue">Mode 1</option>
-									<option value="Blue">Mode 2</option>
+									<option value="Single">Single</option>
+									<option value="Joint">Joint</option>
 
 								</select>
 							</div>
@@ -428,8 +430,8 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">Cash</option>
-
+									<option value="Cash">Cash</option>
+									<option value="Online">Online</option>
 
 								</select>
 							</div>
@@ -446,7 +448,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Financial Consultant</label> <input type="text"
+								<label>Financial Code</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Financial Consultant Code"
 									style="text-transform: uppercase;" />
@@ -455,7 +457,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Name </label> <input type="text" name="location"
+								<label for="">Financial Name</label> <input type="text" name="location"
 									id="location" required="required"
 									placeholder="Enter Financial Consultant Name" />
 							</div>
@@ -470,9 +472,9 @@ pageEncoding="ISO-8859-1"%> -->
 									<label style="margin-left: 20px;" class="mb-2">SMS Send</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-sms-send"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="toggle-member-status" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-sms-send" name="smsSend"
+												class="toggle__input" data-toggle-type="sms-send">
+											<label for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -610,6 +612,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/policyDetailsUpdate.js"></script>
+	
 </body>
 
 </html>

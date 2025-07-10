@@ -313,6 +313,7 @@ public List<String> getRRDBySchemeType(String rd) {
                      .collect(Collectors.toList());
 }
 
+
 public List<String> getFRDBySchemeType(String fd) {
 	List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
     return allFrdPlans.stream()
@@ -322,6 +323,7 @@ public List<String> getFRDBySchemeType(String fd) {
 	
 	
 }
+
 
 public List<String> getMISRDBySchemeType(String mis) {
 	List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
@@ -337,8 +339,7 @@ public List<String> getMISRDBySchemeType(String mis) {
 
 
 public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
-	// TODO Auto-generated method stub
-	return null;
+    return dailyDepositPMRepo.findByplanNameDD(planNameDD);
 }
 
 
@@ -348,6 +349,8 @@ public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
 	}
 
 
+	
+	
 	
 	
 
@@ -382,8 +385,15 @@ public AddnewinvestmentPM getDetailsById(Long id) {
 }
 
 
+public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
+    return addinvestmentrepo.save(investment);
+}
 
 
+public List<DailyDepositPM> getAllDDTerm() {
+	// TODO Auto-generated method stub
+	return dailyDepositPMRepo.findAll();
+}
 
 
 

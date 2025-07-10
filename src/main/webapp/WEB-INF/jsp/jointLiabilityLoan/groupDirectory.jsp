@@ -34,6 +34,7 @@
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/jquery.validation/1.19.5/jquery.validate.min.js"></script>
 <style type="text/css">
@@ -94,10 +95,16 @@
 			</nav>
 		</div>
 
-		<form id="formid">
+		<form id="groupdirectordform">
 			<div class="row">
 				<div class="col-12">
 					<h4 style="font-size: 20px;">Group Info</h4>
+				</div>
+				<div class="col-lg-3" style="display: none;">
+					<div class="d-flex flex-column formFields">
+						<label>id*</label> <input type="text" id="id" name="id"
+							class="form-control" required />
+					</div>
 				</div>
 
 				<div class="col-lg-3 ">
@@ -118,8 +125,8 @@
 
 				<div class="col-lg-3 mb-4 ">
 					<div class="d-flex flex-column formFields">
-						<label for="">Assigned Branch*</label> <select id="assignedBranch"
-							name="assignedBranch" required="required"
+						<label for="">Branch Name*</label> <select id="branchName"
+							name="branchName" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select Branch</option>
 							<option>Branch A</option>
@@ -221,13 +228,13 @@
 										<th>Allocated Staff</th>
 										<th>Collection Day</th>
 										<th>Collection Time</th>
-										
+
 
 										<th>Active</th>
 									</tr>
 								</thead>
 								<tbody id="groupDirectoryBody">
-									
+
 
 									<!-- More rows -->
 								</tbody>
@@ -246,7 +253,7 @@
 				<div class="col-lg-3 mb-4 ">
 					<div class="d-flex flex-column formFields">
 						<label for="">Select Member*</label> <select id="selectedMember"
-							name="selectedMember" required="required"
+							name="selectedMember" onchange="SelectMember()"  required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select Member</option>
 							<option>Member 1</option>
@@ -259,68 +266,54 @@
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label>Member Name*</label> <input type="text" id="memberName"
-							name="memberName" class="form-control" required
+						<label>Customer Name*</label> <input type="text" id="customerName"
+							name="customerName" class="form-control" required
 							placeholder="Enter Member Name" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label>Relative Details*</label> <input type="text"
-							id="relativeDetails" name="relativeDetails" class="form-control"
+						<label>Referral Details*</label> <input type="text"
+							id="referralDetails" name="referralDetails" class="form-control"
 							required placeholder="Enter Relative Details" />
 					</div>
 				</div>
 
 				<div class="col-lg-3 ">
 					<div class="d-flex flex-column formFields">
-						<label>Mobile*</label> <input type="text" id="mobile"
-							name="mobile" class="form-control" maxlength="10" required
+						<label>Contact*</label> <input type="text" id="contact"
+							name="contact" class="form-control" maxlength="10" required
 							placeholder="Enter Mobile Number" />
 					</div>
 				</div>
 
-				<div class="col-lg-3 ">
-					<div class="d-flex flex-column formFields">
-						<label>Previous Loan</label> <input type="text" id="previousLoan"
-							name="previousLoan" class="form-control"
-							placeholder="Enter Previous Loan" />
-					</div>
-				</div>
+				
+
 			</div>
 
 			<div class="col-12 text-right">
-				<button type="button" class="btn btn-success mt-3">Add Que</button>
+				<button type="button"  id="addque"  class="btn btn-success mt-3">Add Que</button>
 			</div>
 			<div class="row mt-5">
 				<div class="col-12">
 					<div class="card recent-sales">
 						<div class="card-body table-responsive">
 							<h5 class="card-title">Details Search List</h5>
-							<table class="table table-bordered">
+							<table class="table table-bordered" id="tab1">
 								<thead class="thead-light">
 									<tr>
-										<th>#</th>
-										<th>Customer</th>
-										<th>Product</th>
-										<th>Price</th>
-										<th>Status</th>
+										<th>id</th>
+										<th>Customer Name</th>
+										<th>Referral Details</th>
+										<th>Contact</th>
+										
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Arun Kumar</td>
-										<td>Milk</td>
-										<td>$29</td>
-										<td><span class="badge badge-success">Approved</span></td>
-										<td><i class="fa fa-pen text-success"></i> <i
-											class="fa fa-eye text-primary ml-2"></i> <i
-											class="fa fa-trash text-danger ml-2"></i></td>
-									</tr>
-									<!-- More rows -->
+									
+
 								</tbody>
 							</table>
 						</div>

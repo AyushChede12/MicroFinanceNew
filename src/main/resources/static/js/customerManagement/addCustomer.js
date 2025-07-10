@@ -144,24 +144,30 @@ function signpreview() {
 $(document).ready(function () {
     // Load States
     $.ajax({
-        url: "getAllStates",
+        url: 'api/preference/getAllStates',
         method: "GET",
-        success: function (data) {
-            console.log("Fetched states:", data);
-            data.forEach(function (state) {
-                $('#state').append(
-                    $('<option>', {
-                        value: state.stateName,       // ✅ Save state name to DB
-                        text: state.stateName,
-                        'data-id': state.stateId      // ✅ Keep stateId for internal use
-                    })
-                );
-            });
+        success: function (response) {
+            if (response && response.data && Array.isArray(response.data)) {
+                console.log("Fetched states:", response.data);
+                response.data.forEach(function (state) {
+                    $('#state').append(
+                        $('<option>', {
+                            value: state.stateName,  // What will be saved to DB
+                            text: state.stateName,   // What user sees
+                            'data-id': state.stateId // Optional: internal use
+                        })
+                    );
+                });
+            } else {
+                console.warn("No state data available.");
+            }
         },
         error: function (err) {
             console.error("Error fetching states:", err);
         }
     });
+});
+
 
     // Load Districts when state is selected
     $('#state').on('change', function () {
@@ -170,7 +176,7 @@ $(document).ready(function () {
 
         if (selectedStateId) {
             $.ajax({
-                url: 'getAllDistrictsByStateId',
+                url: 'api/preference/getAllDistrictsByStateId',
                 method: 'GET',
                 data: { stateId: selectedStateId },  // ✅ Now correct ID passed
                 success: function (response) {
@@ -191,7 +197,7 @@ $(document).ready(function () {
             });
         }
     });
-});
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
