@@ -37,6 +37,14 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
 </head>
 <body>
 
@@ -58,21 +66,23 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Edit Member</li>
+							<li class="breadcrumb-item action" id="editmember">Edit
+								Member</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="customerCode">Customer Selection </label> <select
-									id="customerCode" name="customerCode" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label for="customerCode" id="customerSelection">Customer
+									Selection </label> <select id="customerCode" name="customerCode"
+									class="form-control selectField" style="width: 100%;">
+									<option value="">-- Search Customer Code --</option>
 								</select>
 							</div>
 						</div>
-
 					</div>
+
 					<hr>
 					<div class="row">
 						<div class="col-lg-3">
@@ -98,7 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-              <input type="hidden" id="id" name="id">
+							<input type="hidden" id="id" name="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Sign-up Date</label> <input type="date"
 									name="signupDate" id="signupDate" required="required"
@@ -108,8 +118,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Select</label> <select id="major"
-									name="major" required="required"
+								<label for="vehicalNo">Select</label> <select
+									id="authenticateFor" name="authenticateFor" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>
@@ -330,9 +340,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
-							</label> <label for="customerPhoto" id="drop-area"> <input type="file"
-								accept="image/*" name="customerPhoto" id="customerPhoto" hidden="hidden"
-								onchange="photoUpload();"
+							</label> <label for="customerPhoto" id="drop-area"> <input
+								type="file" accept="image/*" name="customerPhoto"
+								id="customerPhoto" hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -376,9 +386,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="relationToApplicant">Nominee Relation</label> <select
-									id="nomineeRelationToApplicant" name="nomineeRelationToApplicant"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+									id="nomineeRelationToApplicant"
+									name="nomineeRelationToApplicant" required="required"
+									class="form-control selectField" style="height: 30px;">
 
 								</select>
 							</div>
@@ -489,8 +499,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Mode of payment </label> <select id="modeOfPayment"
-									name="modeOfPayment" required="required"
+								<label for="">Mode of payment </label> <select
+									id="modeOfPayment" name="modeOfPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Cash">Cash</option>
@@ -524,9 +534,10 @@ pageEncoding="ISO-8859-1"%> -->
 										Membership Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-member-status" name="memberStatus"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="toggle-member-status" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-member-status"
+												name="memberStatus" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="toggle-member-status" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -542,9 +553,10 @@ pageEncoding="ISO-8859-1"%> -->
 										Bank Access</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-mobile-banking" name="memberBanking"
-												class="toggle__input" data-toggle-type="mobile-banking">
-											<label for="toggle-mobile-banking" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-mobile-banking"
+												name="memberBanking" class="toggle__input"
+												data-toggle-type="mobile-banking"> <label
+												for="toggle-mobile-banking" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -560,9 +572,10 @@ pageEncoding="ISO-8859-1"%> -->
 										Banking</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-net-banking" name="netBanking"
-												class="toggle__input" data-toggle-type="net-banking">
-											<label for="toggle-net-banking" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-net-banking"
+												name="netBanking" class="toggle__input"
+												data-toggle-type="net-banking"> <label
+												for="toggle-net-banking" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -579,8 +592,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<div class="cont">
 										<div class="toggle">
 											<input type="checkbox" id="toggle-sms-send" name="smsSend"
-												class="toggle__input" data-toggle-type="sms-send">
-											<label for="toggle-sms-send" class="toggle__label"></label>
+												class="toggle__input" data-toggle-type="sms-send"> <label
+												for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -597,20 +610,13 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-
-
-
-
 			</form>
-
-			
 
 		</div>
 
-
 	</main>
 
-	
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/customerDataUpdate.js"></script>

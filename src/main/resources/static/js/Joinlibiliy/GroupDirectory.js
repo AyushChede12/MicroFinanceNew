@@ -46,23 +46,24 @@ $(document).ready(function() {
 		// 👥 Collect table members
 		let memberCodes = [];
 		let customerName = [];
-		
-		$('#tab1 tr').each(function () {
-		    let code = $(this).find('td').eq(0).text().trim();
-		    let name = $(this).find('td').eq(1).text().trim();
-		    if (code) memberCodes.push(code);
-		    if (name) customerName.push(name);
-			
+
+		$('#tab1 tr').each(function() {
+			let code = $(this).find('td').eq(0).text().trim();
+			let name = $(this).find('td').eq(1).text().trim();
+			if (code) memberCodes.push(code);
+			if (name) customerName.push(name);
+
 		});
 
 		if (memberCodes.length === 0 && memberNames.length === 0) {
-		    alert("⚠️ No members to save.");
-		    return;
+			alert("⚠️ No members to save.");
+			return;
 		}
 
 
-
+		
 		// Text fields
+		formData.append("groupID", $('#groupID').val());
 		formData.append("communityName", $('#communityName').val());
 		formData.append("openingDate", $('#openingDate').val());
 		formData.append("branchName", $('#branchName').val());
@@ -72,14 +73,14 @@ $(document).ready(function() {
 		formData.append("allocatedStaff", $('#allocatedStaff').val());
 		formData.append("collectionDay", $('#collectionDay').val());
 		formData.append("collectionTime", $('#collectionTime').val());
-		
+
 		// 👥 Optional member fields (comma-separated strings)
-		    formData.append("selectedMember", memberCodes.join(","));
-		    formData.append("customerName", customerName.join(","));
-			//formData.append("referralDetails", referralDetails.join(","));
-			// formData.append("contact", Contact.join(","));
-						
-			
+		formData.append("selectedMember", memberCodes.join(","));
+		formData.append("customerName", customerName.join(","));
+		//formData.append("referralDetails", referralDetails.join(","));
+		// formData.append("contact", Contact.join(","));
+
+
 
 		// File fields
 		const photoFile = $('#uploadPhoto')[0].files[0];
@@ -131,7 +132,8 @@ $(document).ready(function() {
 					$.each(data, function(index, item) {
 						const row = `
                         <tr>
-                            <td>${index + 1}</td>
+                            
+							<td>${item.groupID || ''}</td>
                             <td>${item.communityName || ''}</td>
                             <td>${item.openingDate || ''}</td>
                             <td>${item.branchName || ''}</td>
@@ -177,6 +179,8 @@ $(document).ready(function() {
 				if (item) {
 					// Use 'item' instead of 'data'
 					$("#id").val(item.id); // Hidden field to track ID while updating
+					
+					$("#groupID").val(item.groupID);
 					$("#communityName").val(item.communityName);
 					$("#openingDate").val(item.openingDate);
 					$("#branchName").val(item.branchName);
@@ -209,6 +213,7 @@ $(document).ready(function() {
 		}
 
 		const groupData = {
+			groupID: $('#groupID').val()?.trim(),
 			communityName: $('#communityName').val()?.trim(),
 			openingDate: $('#openingDate').val(),
 			branchName: $('#branchName').val(),
@@ -329,32 +334,32 @@ $(document).ready(function() {
 
 	// add que 
 	$("#addque").click(function() {
-			
-			var selectedMember = $("#selectedMember").val();
-			var customerName = $("#customerName").val();
-			var referralDetails = $("#referralDetails").val();
-			var contact = $("#contact").val();
-						
 
-			if (!selectedMember) {
-				alert("Please enter a member code.");
-				return;
-			}
-
-			if ($('#tab1').find('td:contains("' + selectedMember + '")').length > 0) {
-				alert("This member is already added to the queue.");
-				return;
-			}
+		var selectedMember = $("#selectedMember").val();
+		var customerName = $("#customerName").val();
+		var referralDetails = $("#referralDetails").val();
+		var contact = $("#contact").val();
 
 
-			$.ajax({
-				url: '/api/joinliability/feachdatagroupdirectory',
-				type: 'GET',
-				data: { selectedMember: selectedMember },
-				contentType: 'json',
-				success: function(data) {
-					if (data) {
-						let newRow = `
+		if (!selectedMember) {
+			alert("Please enter a member code.");
+			return;
+		}
+
+		if ($('#tab1').find('td:contains("' + selectedMember + '")').length > 0) {
+			alert("This member is already added to the queue.");
+			return;
+		}
+
+
+		$.ajax({
+			url: '/api/joinliability/feachdatagroupdirectory',
+			type: 'GET',
+			data: { selectedMember: selectedMember },
+			contentType: 'json',
+			success: function(data) {
+				if (data) {
+					let newRow = `
 						                        <tr>
 						                            <td>${selectedMember}</td>
 						                            <td>${customerName}</td>
@@ -363,24 +368,24 @@ $(document).ready(function() {
 													<td><button class="btn btn-danger btn-sm remove-btn"><i class="fa-solid fa-xmark"></i></i></button></td>				                       
 													 </tr>
 						                    `;
-						$('#tab1').append(newRow);
+					$('#tab1').append(newRow);
 
 
-					} else {
-						alert("No data found for this member.");
-					}
-				},
-				error: function() {
-					alert("Error fetching member data.");
+				} else {
+					alert("No data found for this member.");
 				}
-			});
+			},
+			error: function() {
+				alert("Error fetching member data.");
+			}
+		});
 
 
-		});
-		
-		$('#tab1').on('click', '.remove-btn', function () {
-		    $(this).closest('tr').remove();
-		});
+	});
+
+	$('#tab1').on('click', '.remove-btn', function() {
+		$(this).closest('tr').remove();
+	});
 
 
 

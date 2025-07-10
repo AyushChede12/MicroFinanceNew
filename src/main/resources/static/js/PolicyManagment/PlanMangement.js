@@ -17,7 +17,7 @@ $(document).ready(function() {
 			installmentType: $('#installmentType').val(),    // ⬅️ Dropdown value
 			duration: $('#duration').val(),
 			termModeDD: $('#termModeDD').val(),
-			termDD: $('#termDD').val(),
+			ddterm: $('#ddterm').val(),
 			commissionOnNew: $('#commissionOnNew').val(),
 			renewalCommission: $('#renewalCommission').val(),
 			interestInterval: $('#interestInterval').val(), // ⬅️ Dropdown value
@@ -70,7 +70,7 @@ $(document).ready(function() {
                                 <td>${item.installmentType || ''}</td>
                                 <td>${item.duration || ''}</td>
 								<td>${item.termModeDD || ''}</td>
-								<td>${item.termDD || ''}</td>
+								<td>${item.ddterm || ''}</td>
                                 <td>${item.commissionOnNew || ''}</td>
                                 <td>${item.renewalCommission || ''}</td>
                                 <td>${item.interestInterval || ''}</td>
@@ -128,7 +128,7 @@ $(document).ready(function() {
 					$('#rateOfInterest').val(data.rateOfInterest);
 					$('#duration').val(data.duration);
 					$('#termModeDD').val(data.termModeDD);
-					$('#termDD').val(data.termDD);
+					$('#ddterm').val(data.ddterm);
 					$('#commissionOnNew').val(data.commissionOnNew);
 					$('#renewalCommission').val(data.renewalCommission);
 					$('#interestInterval').val(data.interestInterval);
@@ -194,7 +194,7 @@ $(document).ready(function() {
 			rateOfInterest: $('#rateOfInterest').val(),
 			installmentType: $('#installmentType').val(),
 			termModeDD: $('#termModeDD').val(),
-			termDD: $('#termDD').val(),
+			ddterm: $('#ddterm').val(),
 			duration: $('#duration').val(),
 			commissionOnNew: $('#commissionOnNew').val(),
 			renewalCommission: $('#renewalCommission').val(),
@@ -267,7 +267,7 @@ $(document).ready(function() {
 			installmentTypeRD: $('#installmentTypeRD').val(),
 			durationRD: $('#durationRD').val(),
 			termMode: $('#termMode').val(),
-			term: $('#term').val(),
+			rdterm: $('#rdterm').val(),
 			commissionOnNewRD: $('#commissionOnNewRD').val(),
 			renewalCommissionRD: $('#renewalCommissionRD').val(),
 			componentIntervalRD: $('#componentIntervalRD').val(),
@@ -318,7 +318,7 @@ $(document).ready(function() {
 	                            <td>${item.installmentTypeRD || ''}</td>
 	                            <td>${item.durationRD || ''}</td>
 	                            <td>${item.termMode || ''}</td>
-	                            <td>${item.term || ''}</td>
+	                            <td>${item.rdterm || ''}</td>
 	                            <td>${item.commissionOnNewRD || ''}</td>
 	                            <td>${item.renewalCommissionRD || ''}</td>
 	                            <td>${item.componentIntervalRD || ''}</td>
@@ -427,7 +427,7 @@ $(document).ready(function() {
 			installmentTypeRD: $('#installmentTypeRD').val(),
 			durationRD: $('#durationRD').val(),
 			termMode: $('#termMode').val(),
-			term: $('#term').val(),
+			rdterm: $('#rdterm').val(),
 			commissionOnNewRD: $('#commissionOnNewRD').val(),
 			renewalCommissionRD: $('#renewalCommissionRD').val(),
 			componentIntervalRD: $('#componentIntervalRD').val(),
@@ -494,7 +494,7 @@ $(document).ready(function() {
 			minimumAmountFD: $('#minimumAmountFD').val(),
 			rateOfInterestFD: $('#rateOfInterestFD').val(),
 			termModeFD: $('#termModeFD').val(),
-			termFD: $('#termFD').val(),                      // ✅ fixed
+			fdterm: $('#fdterm').val(),                      // ✅ fixed
 			durationFD: $('#durationFD').val(),
 			installmentTypeFD: $('#installmentTypeFD').val(),
 			commissionOnNewFD: $('#commissionOnNewFD').val(),
@@ -546,7 +546,7 @@ $(document).ready(function() {
 						                           <td>${item.installmentTypeFD || ''}</td>
 						                           <td>${item.durationFD || ''}</td>
 						                           <td>${item.termModeFD || ''}</td>
-						                           <td>${item.termFD || ''}</td>
+						                           <td>${item.fdterm || ''}</td>
 						                           <td>${item.componentIntervalFD || ''}</td>
 						                           <td>${item.totalPaidFD || ''}</td>
 						                           <td>${item.maturityAmountFD || ''}</td>
@@ -653,7 +653,7 @@ $(document).ready(function() {
 			installmentTypeFD: $('#installmentTypeFD').val(),
 			durationFD: $('#durationFD').val(),
 			termModeFD: $('#termModeFD').val(),
-			termFd: $('#termFd').val(),
+			fdterm: $('#fdterm').val(),
 			componentIntervalFD: $('#componentIntervalFD').val(),
 			totalPaidFD: $('#totalPaidFD').val(),
 			maturityAmountFD: $('#maturityAmountFD').val(),
@@ -718,7 +718,7 @@ $(document).ready(function() {
 				rateOfInterestMD: $('#rateOfInterestMD').val(),       
 				installmentTypeMD: $('#installmentTypeMD').val(),    
 				termModeMD: $('#termModeMD').val(),                  
-				termMD: $('#termMD').val(),                           
+				misTerm: $('#misTerm').val(),                           
 				durationMD: $('#durationMD').val(),                   
 				commissionOnNewMD: $('#commissionOnNewMD').val(),     
 				renewalCommissionMD: $('#renewalCommissionMD').val(),
@@ -768,7 +768,7 @@ $(document).ready(function() {
 						<td>${item.rateOfInterestMD || ''}</td>           
 						<td>${item.installmentTypeMD || ''}</td>          
 						<td>${item.termModeMD || ''}</td>                 
-						<td>${item.termMD || ''}</td>                     
+						<td>${item.misTerm || ''}</td>                     
 						<td>${item.durationMD || ''}</td>                 
 						<td>${item.commissionOnNewMD || ''}</td>         
 						<td>${item.renewalCommissionMD || ''}</td>       
@@ -827,7 +827,7 @@ $(document).ready(function() {
 					$('#rateOfInterestMD').val(data.rateOfInterestMD);               
 					setDropdownValue("#installmentTypeMD", data.installmentTypeMD); 
 					$('#termModeMD').val(data.termModeMD);                            
-					$('#termMD').val(data.termMD);                                    
+					$('#misTerm').val(data.misTerm);                                    
 					$('#durationMD').val(data.durationMD);                            
 					$('#commissionOnNewMD').val(data.commissionOnNewMD);              
 					$('#renewalCommissionMD').val(data.renewalCommissionMD);          
@@ -920,7 +920,7 @@ $(document).ready(function() {
 			rateOfInterestMD: $('#rateOfInterestMD').val(),          
 			installmentTypeMD: $('#installmentTypeMD').val(),        
 			termModeMD: $('#termModeMD').val(),                      
-			termMD: $('#termMD').val(),                              
+			misTerm: $('#misTerm').val(),                              
 			durationMD: $('#durationMD').val(),                     
 			commissionOnNewMD: $('#commissionOnNewMD').val(),        
 			renewalCommissionMD: $('#renewalCommissionMD').val(),    
