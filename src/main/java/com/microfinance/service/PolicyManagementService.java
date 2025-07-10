@@ -378,6 +378,7 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
+
 public AddnewinvestmentPM getDetailsById(Long id) {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findById(id).orElse(null);
@@ -396,17 +397,3 @@ public List<DailyDepositPM> getAllDDTerm() {
 
 
 }
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
