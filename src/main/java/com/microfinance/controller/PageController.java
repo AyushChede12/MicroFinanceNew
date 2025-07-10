@@ -1,12 +1,17 @@
 package com.microfinance.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.repository.AddInvestmentRepo;
+import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.service.TeamManagementService;
@@ -55,6 +60,12 @@ public class PageController {
 	@Autowired
 	TeamManagementService teamService;
 	
+	@Autowired
+	CreateLendingGroupRepo createLendingGroupRepo;
+	
+	@Autowired
+	AddInvestmentRepo addInvestmentRepo;
+	
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -96,6 +107,11 @@ public class PageController {
 		return "financialConsultant/consultantIDCardGenerator";
 	}
 
+	@GetMapping("/updateFinacialConsultant")
+	public String financialConsultantUpdate() {
+		return "financialConsultant/financialConsultantUpdate";
+	}
+	
 	// Data Rectification
 	@GetMapping("/customerDataUpdate")
 	public String getCustomerDataUpdate() {
@@ -289,7 +305,10 @@ public class PageController {
 
 	// Joint Liability Loan
 	@GetMapping("/createLendingGroup")
-	public String getCreateLendingGroup() {
+	public String getCreateLendingGroup(Model model) {
+		long maxIdDD = createLendingGroupRepo.getMaxId();
+		String memberCodePI = "PI" + "000" + (maxIdDD + 1);
+		model.addAttribute("memberCodePI", memberCodePI);
 		return "jointLiabilityLoan/createLendingGroup";
 	}
 
@@ -690,7 +709,10 @@ public class PageController {
 	}
 
 	@GetMapping("/addNewInvestment")
-	public String getAddNewInvestment() {
+	public String getAddNewInvestment(Model model) {
+		long maxId = addInvestmentRepo.getMaxId();
+		String policyCode = "IC" + "0000" + (maxId + 1);
+		model.addAttribute("policyCode", policyCode);
 		return "policyManagement/addNewInvestment";
 	}
 
@@ -873,16 +895,12 @@ public class PageController {
 	
 	@GetMapping("/createSavingsAccount")
 	public String getCreateSavingsAccount(Model model) {
-//		long maxId = createSavingAccountRepo.getMaxId() + 1;
-//		//String savingaccountnumber = String.format("2025%08d", maxId);
+		long maxId = createSavingAccountRepo.getMaxId();
+	    String savingaccountnumber = String.format("2025%08d", maxId + 1);
 //		//String savingaccountnumber = String.format("%012d", 202500000000L + maxId);
-//		String savingaccountnumber = "2025" + "000000" + (maxId);
-//		model.addAttribute("savingaccountnumber", savingaccountnumber);
-		long maxId = createSavingAccountRepo.getMaxId() + 1;
-		String idStr = String.valueOf(maxId);
-		String zeros = "00000000".substring(idStr.length()); // 8 - maxId length
-		String savingaccountnumber = "2025" + zeros + idStr;
+//		String savingaccountnumber = "2025" + "000000" + (maxId + 1);
 		model.addAttribute("savingaccountnumber", savingaccountnumber);
+		
 
 		return "customerSavings/createSavingsAccount";
 	}
@@ -893,7 +911,13 @@ public class PageController {
 	}
 	
 	@GetMapping("/savingsAccountActivity")
-	public String getSavingsAccountActivity() {
+	public String getSavingsAccountActivity(Model model) {
+		String prefix = "TXN";
+		String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int randomNumber = new Random().nextInt(9000) + 1000; // 4-digit random number
+		String transactionCode = prefix + timestamp + randomNumber;
+
+		model.addAttribute("transactionCode", transactionCode);
 		return "customerSavings/savingsAccountActivity";
 	}
 	

@@ -10,6 +10,7 @@ public class AddnewinvestmentPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String policyCode;
 	private String policyStartDate;
 	private String memberSelection;
 	private String customerName;
@@ -43,11 +44,25 @@ public class AddnewinvestmentPM {
 	private String smsSend;
 	private String image1;
 	private String image2;
-	public long getId() {
+	
+	
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	
+	
+	
+	public String getPolicyCode() {
+		return policyCode;
+	}
+	public void setPolicyCode(String policyCode) {
+		this.policyCode = policyCode;
 	}
 	public String getPolicyStartDate() {
 		return policyStartDate;
@@ -133,12 +148,14 @@ public class AddnewinvestmentPM {
 	public void setTds(String tds) {
 		this.tds = tds;
 	}
+	
 	public String getBranchName() {
 		return branchName;
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
+	
 	public String getModeOfOperation() {
 		return ModeOfOperation;
 	}

@@ -18,9 +18,6 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -33,14 +30,24 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
-</head>
 
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+</head>
 
 <body>
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1> Data Correction </h1>
+			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
@@ -59,8 +66,6 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Share Details</li>
 						</ol>
 					</nav>
-
-					<hr>
 					<div class="row">
 						<div class="col-lg-3">
 							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
@@ -85,12 +90,13 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
+              <input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Find By Code</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Find By Code</label> <select id="findByCode"
+									name="findByCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									
+									<option value="">-- Search Customer Code --</option>
+
 								</select>
 							</div>
 						</div>
@@ -98,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Customer Name</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="customerName" id="customerName" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -108,8 +114,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Start Date</label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Start Date</label> <input type="date" name="startDate"
+									id="startDate" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -117,8 +123,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Previous Account Balance</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="">Previous Account Balance</label> <input
+									type="text" name="previousAccountBalance" id="previousAccountBalance" required="required"
 									placeholder="Enter Previous Balance"
 									style="text-transform: uppercase;" />
 							</div>
@@ -129,7 +135,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Previous Share Count</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="previousShareCount" id="previousShareCount" required="required"
 									placeholder="Enter Previous No Of Share"
 									style="text-transform: uppercase;" />
 							</div>
@@ -138,7 +144,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Base Value</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="baseValue" id="baseValue" required="required"
 									placeholder="Enter Face Value"
 									style="text-transform: uppercase;" />
 							</div>
@@ -147,13 +153,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch</label> <select id="colour" name="colour"
+								<label>Branch</label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Unrer</option>
-									<option value="Blue">Reshimbaag</option>
-									<option value="Blue">Sitabuldi</option>
 								</select>
 							</div>
 						</div>
@@ -163,21 +165,18 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label for="">Date of Transfer</label> <input type="date"
-									name="price" id="price" required="required"
+									name="dateOfTransfer" id="dateOfTransfer" required="required"
 									placeholder="Enter Age" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Shares Issued By</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Shares Issued By</label> <select id="shareIssuedBy"
+									name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Shares Issued By</option>
-									<option value="Blue">Married</option>
-									<option value="Blue">Unmarried</option>
-									<option value="Blue">Devorced</option>
-									<option value="Blue">Single</option>
+									<option value="Tata Motors Ltd.">Tata Motors Ltd.</option>
 								</select>
 							</div>
 						</div>
@@ -185,7 +184,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Share Count</label> <input type="text"
-									name="price" id="price" required="required"
+									name="noOfShare" id="noOfShare" required="required"
 									placeholder="Enter Share Count" />
 							</div>
 						</div>
@@ -193,17 +192,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Transfer Amount</label> <input type="text" name="price"
-									id="price" required="required"
+								<label>Transfer Amount</label> <input type="text" name="amountTransferred"
+									id="amountTransferred" required="required"
 									placeholder="Enter Transfer Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Shares Count</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Shares Count" />
+								<label for="">Balance Shares</label> <input type="text"
+									name="balanceShares" id="balanceShares" required="required"
+									placeholder="Enter Balance Shares" />
 							</div>
 						</div>
 
@@ -223,12 +222,12 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Mode of payment</label> <select id="colour" name="colour"
+								<label>Mode of payment</label> <select id="modeOfPayment" name="modeOfPayment"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Mode of payment</option>
-									<option value="Blue">Cash</option>
-									<option value="Blue">Online</option>
+									<option value="Cash">Cash</option>
+									<option value="Online">Online</option>
 								</select>
 							</div>
 						</div>
@@ -236,13 +235,20 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Comments</label>
-								<textarea name="" id="" placeholder="Enter Comments if any"
+								<textarea name="comments" id="comments" placeholder="Enter Comments if any"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
 
 					</div>
 
+				</div>
+				<div class="row">
+					<div class="col-12 text-center" style="margin-top: 30px;">
+						<button type="button" id="printBtn" class="btn btn-warning">Print</button>
+						<button type="button" id="updateBtn" class="btn btn-success">Update</button>
+						<button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
+					</div>
 				</div>
 
 			</form>
@@ -350,10 +356,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 
-
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/shareHoldingUpdate.js"></script>
 </body>
 
 </html>

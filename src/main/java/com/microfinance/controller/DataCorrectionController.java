@@ -45,6 +45,21 @@ public class DataCorrectionController {
 		}
 	}
 	
+	//Ayush
+	@PostMapping("/deleteFinancialDataByForm")        
+	public ResponseEntity<ApiResponse<String>> deleteFinancialData(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deleteFinancialData(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Financial Data deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Financial Data deletion failed", "failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
 
 
 }

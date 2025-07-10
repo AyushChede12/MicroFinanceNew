@@ -7,7 +7,7 @@ import javax.persistence.Id;
 @Entity
 public class CreateSavingsAccount {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String typeofaccount;
 	private String openingDate;
@@ -40,6 +40,10 @@ public class CreateSavingsAccount {
 	private String messageSend;
 	private String debitCardIssue;
 	private String accountNumber;
+	private boolean isApproved;
+	
+	private String photo;
+	private String signature;
 	
 	
 	public Long getId() {
@@ -234,6 +238,24 @@ public class CreateSavingsAccount {
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 
