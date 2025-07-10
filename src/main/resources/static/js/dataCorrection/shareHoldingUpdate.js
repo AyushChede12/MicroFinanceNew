@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$.ajax({
+	/*$.ajax({
 		url: "/api/customershareholdingcontroller/findAllTransferShare",
 		type: "GET",
 		success: function(response) {
@@ -15,7 +15,54 @@ $(document).ready(function() {
 		error: function() {
 			alert("Failed to load customer codes.");
 		}
-	});
+	});*/
+	
+	$.ajax({
+		    url: '/api/customershareholdingcontroller/findAllTransferShare',
+		    type: 'GET',
+		    success: function(response) {
+		        if (response.status === "OK") {
+		            let transferOptions = response.data.map(function (item) {
+		                return {
+		                    id: item.findByCode,
+		                    text: item.findByCode + " - " + item.customerName
+		                };
+		            });
+
+		            // Initialize Select2 with full data and custom search matcher
+		            $('#findByCode').select2({
+		                placeholder: '-- Search Customer Code or Name --',
+		                data: transferOptions,
+		                matcher: function(params, data) {
+		                    // If no search term, return all
+		                    if ($.trim(params.term) === '') {
+		                        return data;
+		                    }
+
+		                    if (typeof data.text === 'undefined') {
+		                        return null;
+		                    }
+
+		                    // Case-insensitive match on memberCode or customerName
+		                    const term = params.term.toLowerCase();
+		                    const text = data.text.toLowerCase();
+
+		                    if (text.includes(term)) {
+		                        return data;
+		                    }
+
+		                    return null;
+		                }
+		            });
+
+		        } else {
+		            alert("No customer codes found.");
+		        }
+		    },
+		    error: function() {
+		        alert("Failed to load customer codes.");
+		    }
+		});
 
 	$.ajax({
 		url: "api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule

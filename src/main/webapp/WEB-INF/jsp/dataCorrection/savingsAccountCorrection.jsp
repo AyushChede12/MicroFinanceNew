@@ -37,6 +37,13 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -70,6 +77,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="accountNumber">Select By Account No</label> <select
 									id="accountNumber" name="accountNumber" required="required"
 									class="form-control selectField" style="height: 30px;">
+									<option value="">-- Search Account No --</option>
 								</select>
 							</div>
 						</div>

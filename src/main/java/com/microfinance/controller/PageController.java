@@ -711,7 +711,7 @@ public class PageController {
 	@GetMapping("/addNewInvestment")
 	public String getAddNewInvestment(Model model) {
 		long maxId = addInvestmentRepo.getMaxId();
-		String policyCode = "M" + "0000" + (maxId + 1);
+		String policyCode = "IC" + "0000" + (maxId + 1);
 		model.addAttribute("policyCode", policyCode);
 		return "policyManagement/addNewInvestment";
 	}

@@ -1,5 +1,7 @@
 $(document).ready(function() {
-	$.ajax({
+	
+	//Dropdown without search
+	/*$.ajax({
 		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
@@ -8,6 +10,54 @@ $(document).ready(function() {
 				response.data.forEach(function(item) {
 					$("#financialCode").append(`<option value='${item.financialCode}'>${item.financialCode}-${item.customerName}</option>`);
 				});
+			} else {
+				alert("No Financial codes found.");
+			}
+		},
+		error: function() {
+			alert("Failed to load Financial codes.");
+		}
+	});*/
+	
+	//Dropdowns with search
+	$.ajax({
+		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
+		type: 'POST',
+		success: function(response) {
+			if (response.status === "OK") {
+				let financialOptions = response.data.map(function(item) {
+					return {
+						id: item.financialCode,
+						text: item.financialCode + " - " + item.customerName
+					};
+				});
+
+				// Initialize Select2 with full data and custom search matcher
+				$('#financialCode').select2({
+					placeholder: '-- Search Financial Code or Name --',
+					data: financialOptions,
+					matcher: function(params, data) {
+						// If no search term, return all
+						if ($.trim(params.term) === '') {
+							return data;
+						}
+
+						if (typeof data.text === 'undefined') {
+							return null;
+						}
+
+						// Case-insensitive match on memberCode or customerName
+						const term = params.term.toLowerCase();
+						const text = data.text.toLowerCase();
+
+						if (text.includes(term)) {
+							return data;
+						}
+
+						return null;
+					}
+				});
+
 			} else {
 				alert("No Financial codes found.");
 			}

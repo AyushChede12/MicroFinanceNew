@@ -1,5 +1,7 @@
 $(document).ready(function() {
-	$.ajax({
+	
+	//dropdown without search
+	/*$.ajax({
 		url: "/api/customersavings/getAllSavingAccountData",
 		type: "GET",
 		success: function(response) {
@@ -15,7 +17,55 @@ $(document).ready(function() {
 		error: function() {
 			alert("Failed to load Account Numbers.");
 		}
-	});
+	});*/
+	
+	//dropdown with search
+	$.ajax({
+				url: '/api/customersavings/getAllSavingAccountData',
+				type: 'GET',
+				success: function(response) {
+					if (response.status === "FOUND") {
+						let savingOptions = response.data.map(function(item) {
+							return {
+								id: item.accountNumber,
+								text: item.accountNumber + " - " + item.enterCustomerName
+							};
+						});
+
+						// Initialize Select2 with full data and custom search matcher
+						$('#accountNumber').select2({
+							placeholder: '-- Search Account Number or Name --',
+							data: savingOptions,
+							matcher: function(params, data) {
+								// If no search term, return all
+								if ($.trim(params.term) === '') {
+									return data;
+								}
+
+								if (typeof data.text === 'undefined') {
+									return null;
+								}
+
+								// Case-insensitive match on memberCode or customerName
+								const term = params.term.toLowerCase();
+								const text = data.text.toLowerCase();
+
+								if (text.includes(term)) {
+									return data;
+								}
+
+								return null;
+							}
+						});
+
+					} else {
+						alert("No Account Number found.");
+					}
+				},
+				error: function() {
+					alert("Failed to load Account Number.");
+				}
+			});
 
 	$.ajax({
 		url: "/api/customersavings/getAllSavingAccountData",

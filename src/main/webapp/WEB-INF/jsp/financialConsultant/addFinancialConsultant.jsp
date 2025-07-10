@@ -651,8 +651,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Contact No</th>
 									<th scope="col">Financial Status</th>
 									<th scope="col">Profession</th>
-									<th scope="col">Edit</th>
-									<th scope="col">Delete</th>
+									
 								</tr>
 							</thead>
 							<tbody>
