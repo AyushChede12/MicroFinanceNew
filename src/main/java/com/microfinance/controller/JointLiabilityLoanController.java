@@ -253,6 +253,27 @@ public class JointLiabilityLoanController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
+    
+    @GetMapping("/feachdatagroupdirectory")
+    public ResponseEntity<ApiResponse<List<GroupDirectory>>> getAllGroupDirectories1() {
+        List<GroupDirectory> groups = jointLiabilityLoanService.getaddquedata();
+
+        if (groups != null && !groups.isEmpty()) {
+            ApiResponse<List<GroupDirectory>> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Group Directories fetched successfully.",
+                groups
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<List<GroupDirectory>> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "No Group Directory found."
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 	
+
 
 }
