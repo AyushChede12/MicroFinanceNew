@@ -26,6 +26,8 @@ public interface CustomerRepo extends JpaRepository<addCustomer, Long>{
 
 	Optional<addCustomer> findByMemberCode(String customerCode);
 
+		List<addCustomer> findByIsApprovedTrue();
+
 
 
 }

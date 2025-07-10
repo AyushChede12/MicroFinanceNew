@@ -115,7 +115,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="customerName">Customer Name <span id="star">*</span></label>
+								<label for="customerName">Customer Name <span class="star">*</span></label>
 								<input type="text" name="customerName" id="customerName"
 									required="required" placeholder="Enter Cutomer Name"
 									style="text-transform: uppercase;" />
@@ -651,8 +651,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Contact No</th>
 									<th scope="col">Financial Status</th>
 									<th scope="col">Profession</th>
-									<th scope="col">Edit</th>
-									<th scope="col">Delete</th>
+									
 								</tr>
 							</thead>
 							<tbody>
