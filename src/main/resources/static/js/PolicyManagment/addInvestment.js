@@ -449,3 +449,34 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () {
+    $.ajax({
+        url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+        type: "POST",
+        success: function (response) {
+            const consultants = response.data;
+            const $agentDropdown = $("#Agent");
+
+            $agentDropdown.empty(); // Clear any existing options
+            $agentDropdown.append('<option value="">Select Payment By</option>');
+
+            // Create a Set to avoid duplicate codes
+            const addedCodes = new Set();
+
+            consultants.forEach(consultant => {
+                const code = consultant.financialCode;
+
+                // Add only if it's not null/empty/"undefined"
+                if (code && code.trim() !== "" && code.trim().toLowerCase() !== "undefined") {
+                    if (!addedCodes.has(code)) {
+                        $agentDropdown.append(`<option value="${code}">${code}</option>`);
+                        addedCodes.add(code);
+                    }
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error("Failed to fetch financial consultant details:", error);
+        }
+    });
+});

@@ -117,30 +117,31 @@ $(document).ready(function () {
     });
 });
 
-function getAccountNumberAndUpdateData(accountNumber){
-	alert(accountNumber);
-	$.ajax({
-					type: "GET",
-					url: "/api/customersavings/getsavingaccountactivity",
-					data: { accountNumber: accountNumber },
-					success: function(response) {
-						alert("success");
-						if (response.data && response.data.length > 0) {
-							let data = response.data[0];
-							//$("#id").val(data.id);
-							alert("shubham"+data.averageBalance);
-							
+function getAccountNumberAndUpdateData(accountNumber) {
+    $.ajax({
+        type: "GET",
+        url: "/api/customersavings/getsavingaccountactivity",
+        data: { accountNumber: accountNumber },
+        success: function(response) {
+            if (response.data && response.data.length > 0) {
+                let data = response.data[0]; // Get the latest or first transaction
+                let newBalance = parseFloat(data.averageBalance);
 
-						} else {
-							alert("No customer found for this member code.");
-						}
-					},
-					error: function() {
-						alert("Member not found or server error.");
-					}
-				});
-	
+                if (!isNaN(newBalance)) {
+                    updateMainAccountBalance(accountNumber, newBalance); // ✅ Call to update
+                } else {
+                    alert("Invalid balance received from server.");
+                }
+            } else {
+                alert("No customer found for this account number.");
+            }
+        },
+        error: function() {
+            alert("Member not found or server error.");
+        }
+    });
 }
+
 
 function updateMainAccountBalance(accountNumber, newBalance) {
     $.ajax({
@@ -149,7 +150,7 @@ function updateMainAccountBalance(accountNumber, newBalance) {
         contentType: "application/json",
         data: JSON.stringify({
             accountNumber: accountNumber,
-            averageBalance: parseFloat(newBalance)
+            openingAmount: parseFloat(newBalance)
         }),
         success: function (response) {
             alert("Main account balance updated successfully!");
