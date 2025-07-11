@@ -3,7 +3,9 @@ package com.microfinance.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CreateSavingsAccount;
-import com.microfinance.model.ExecutiveFounder;
-import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
@@ -290,7 +290,19 @@ public class CustomerSavingsService {
 		    return false;
 	}
 
-	
+	// Service for fetching the account numbers for passbook (vaibhav)
+		public List<String> getAccountNumbersByType(String accountType) {
+		    return createSavingAccountRepo.findByTypeofaccountContainingIgnoreCase(accountType)
+		            .stream()
+		            .map(CreateSavingsAccount::getAccountNumber)
+		            .filter(Objects::nonNull)
+		            .collect(Collectors.toList());
+		}
+		
+//		// Service for fetching the data according to the account number (vaibhav)
+//		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {
+//			return createSavingAccountRepo.findByAccountNumber(accountNumber);
+//		}
 
 
 }
