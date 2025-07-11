@@ -390,12 +390,12 @@
             </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="createCurrentAccount">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Create Current Account</span>
             </a>
-          </li>
+          </li> -->
           
           <li>
             <a href="savingsAccountActivity">
@@ -425,12 +425,12 @@
             </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="currentAccountRecordBook">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Current Account Record Book</span>
             </a>
-          </li>
+          </li> -->
           
           <li>
             <a href="savingsAccountStatement">
