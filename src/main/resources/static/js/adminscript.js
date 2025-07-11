@@ -5,11 +5,12 @@ $(document).ready(function() {
 	$('#fromDate').val(today);
 	$('#toDate').val(today);
 	$('#approvalDate').val(today);
-	$('#openingDate').val(today);
+	$('#openingDate').val(today);//crateSavingAccount
 	$('#transactionDate').val(today);
 	$('#dateOfTransfer').val(today);
 
 	$('#dateloan').val(today);
+	$('#transferDate').val(today); //savingAccountFundTransfer
 
 	//Branch
 	$.ajax({

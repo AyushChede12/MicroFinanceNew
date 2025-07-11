@@ -66,10 +66,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Interest Type</label> <select name="intrestType" id="intrestType" class="form-control selectField" style="height: 30px;">
-									<option>Select Interest Type</option>
-									<option >Flat Interest</option>
-									<option >Redused Interest</option>
-									<option >Rule 78</option>
+									<option value="">Select Interest Type</option>
+									<option value="FlatInterest">Flat Interest</option>
+									<option value=reducinginterest>Redused Interest</option>
+									<option value="Rule78">Rule 78</option>
 									
 								</select>
 							</div>
@@ -105,8 +105,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Daily">Daily </option>
 									<option value="Weekly">Weekly</option>
 									<option value="Fortnightly">Fortnightly</option>
-									<option value="Monthaly">Monthaly</option>
-									<option value="halfYearly"> halfYearly</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly"> Quarterly</option>
 									
 								</select>
 							</div>
@@ -136,10 +136,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<!-- <button id="saveBtn" class="btnStyle bg-success">Save</button> -->
-							<button id="saveBtn" class="btnStyle" onclick="calculateEMI()"
+							<button type="button" id="saveBtn" class="btnStyle" onclick="calculateEMI()"
 								style="background-color: #FFA500;">Calculate</button>
-							<button id="saveBtn" class="btnStyle bg-danger">View
+							<button id="" class="btnStyle bg-danger">View
 								Amortization</button>
 						</div>
 					</div>
@@ -165,30 +164,7 @@ pageEncoding="ISO-8859-1"%> -->
 									</tr>
 								</thead>
 								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row"><a href="#">1</a></th>
-										<td>Arun Kumar</td>
-										<td><a href="#" className="text-primary">Milk</a></td>
-										<td>$29</td>
-
-									</tr>
-
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-
-
-									</tr>
+									
 
 								</tbody>
 							</table>

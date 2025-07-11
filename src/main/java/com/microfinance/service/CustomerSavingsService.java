@@ -1,19 +1,29 @@
 package com.microfinance.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
+import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
+import com.microfinance.repository.SavingAccountActivityRepo;
 import com.microfinance.repository.SavingSchmeCatalogRepo;
 
 @Service
@@ -30,6 +40,12 @@ public class CustomerSavingsService {
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
+	
+	@Autowired
+	SavingAccountActivityRepo savingAccountActivityRepo;
+	
+	@Value("${upload.directory}")
+	private String uploadDirectory;
 	
 	public boolean saveSavingScheme(SavingSchemeCatalog savingSchemeCatalog) {
 		 try {
@@ -77,9 +93,141 @@ public class CustomerSavingsService {
 //		    }
 //	}
 
-	public CreateSavingsAccount saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
+//	public CreateSavingsAccount saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
+//		// TODO Auto-generated method stub
+//		return createSavingAccountRepo.save(createSavingsAccount);
+//	}
+	
+	public ApiResponse<CreateSavingsAccount> saveSavingAccountDetails(SavingAccountDto savingAccountDto,
+			MultipartFile photo, MultipartFile signature) {
 		// TODO Auto-generated method stub
-		return createSavingAccountRepo.save(createSavingsAccount);
+				CreateSavingsAccount createSavingsAccount = new CreateSavingsAccount();
+				boolean isNew = true;
+
+				// Check if the ClientMaster is being updated
+				if (savingAccountDto.getId() != null && savingAccountDto.getId() > 0) {
+				    createSavingsAccount = createSavingAccountRepo.findById(savingAccountDto.getId())
+				        .orElse(new CreateSavingsAccount());
+				    isNew = false;
+				}
+
+
+				// Map fields from DTO to entity
+				createSavingsAccount.setTypeofaccount(savingAccountDto.getTypeofaccount());
+				createSavingsAccount.setOpeningDate(savingAccountDto.getOpeningDate());
+				createSavingsAccount.setSelectByCustomer(savingAccountDto.getSelectByCustomer());
+				createSavingsAccount.setEnterCustomerName(savingAccountDto.getEnterCustomerName());
+				createSavingsAccount.setDateOfBirth(savingAccountDto.getDateOfBirth());
+				createSavingsAccount.setFamilyDetails(savingAccountDto.getFamilyDetails());
+				createSavingsAccount.setContactNumber(savingAccountDto.getContactNumber());
+				createSavingsAccount.setSuggestedNomineeName(savingAccountDto.getSuggestedNomineeName());
+				createSavingsAccount.setSuggestedNomineeAge(savingAccountDto.getSuggestedNomineeAge());
+				createSavingsAccount.setSuggestedNomineeRelation(savingAccountDto.getSuggestedNomineeRelation());
+				createSavingsAccount.setAddress(savingAccountDto.getAddress());
+				createSavingsAccount.setDistrict(savingAccountDto.getDistrict());
+				createSavingsAccount.setBranchName(savingAccountDto.getBranchName());
+				createSavingsAccount.setState(savingAccountDto.getState());
+				createSavingsAccount.setPinCode(savingAccountDto.getPinCode());
+				createSavingsAccount.setOperationType(savingAccountDto.getOperationType());
+				createSavingsAccount.setJointOperationCode(savingAccountDto.getJointOperationCode());
+				createSavingsAccount.setJointSurvivorCode(savingAccountDto.getJointSurvivorCode());
+				createSavingsAccount.setFamilyRelation(savingAccountDto.getFamilyRelation());
+				createSavingsAccount.setSelectPlan(savingAccountDto.getSelectPlan());
+				createSavingsAccount.setOpeningAmount(savingAccountDto.getOpeningAmount());
+				createSavingsAccount.setFinancialConsultantCode(savingAccountDto.getFinancialConsultantCode());
+				createSavingsAccount.setFinancialConsultantName(savingAccountDto.getFinancialConsultantName());
+				createSavingsAccount.setOpeningFees(savingAccountDto.getOpeningFees());
+				createSavingsAccount.setAuthenticateWith(savingAccountDto.getAuthenticateWith());
+				createSavingsAccount.setModeOfPayment(savingAccountDto.getModeOfPayment());
+				createSavingsAccount.setComment(savingAccountDto.getComment());
+				createSavingsAccount.setAccountStatus(savingAccountDto.getAccountStatus());
+				createSavingsAccount.setMessageSend(savingAccountDto.getMessageSend());
+				createSavingsAccount.setDebitCardIssue(savingAccountDto.getDebitCardIssue());
+				createSavingsAccount.setAccountNumber(savingAccountDto.getAccountNumber());
+
+				// Handle photo upload
+				if (photo != null && !photo.isEmpty()) {
+					try {
+						String fileName1 = saveFile(photo); // Save the signature
+						createSavingsAccount.setPhoto(fileName1);
+					} catch (IOException e) {
+						return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+					}
+				}
+
+				// Handle signature upload
+				if (signature != null && !signature.isEmpty()) {
+					try {
+						String fileName1 = saveFile1(signature); // Save the signature
+						createSavingsAccount.setSignature(fileName1);
+					} catch (IOException e) {
+						return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+					}
+				}
+
+				// Save entity to the database
+				CreateSavingsAccount saveSavingAccountDetails = createSavingAccountRepo.save(createSavingsAccount);
+
+				if (isNew) {
+					return ApiResponse.success(HttpStatus.CREATED,
+							"Saved successfully. Director Name: " + saveSavingAccountDetails.getEnterCustomerName(), saveSavingAccountDetails);
+				} else {
+					return ApiResponse.success(HttpStatus.OK,
+							"Updated successfully. Director Name: " + saveSavingAccountDetails.getEnterCustomerName(),
+							saveSavingAccountDetails);
+				}
+	}
+	
+	private String saveFile(MultipartFile photo) throws IOException {
+		// TODO Auto-generated method stub
+		if (photo != null && !photo.isEmpty()) {
+			ensureUploadDirectoryExists(); // Ensure the upload directory exists
+			String fileName = System.currentTimeMillis() + "_" + photo.getOriginalFilename(); // Generate a unique
+																								// filename
+			File destinationFile = new File(uploadDirectory + File.separator + fileName);
+
+			try {
+				photo.transferTo(destinationFile); // Save the file to the destination path
+				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
+				return fileName; // Return the saved file's name
+			} catch (IOException e) {
+				System.err.println("File saving failed: " + e.getMessage());
+				throw e; // Rethrow the exception to handle errors
+			}
+		}
+		return null;
+	}
+
+	private String saveFile1(MultipartFile signature) throws IOException {
+		// TODO Auto-generated method stub
+		if (signature != null && !signature.isEmpty()) {
+			ensureUploadDirectoryExists(); // Ensure the upload directory exists
+			String fileName = System.currentTimeMillis() + "_" + signature.getOriginalFilename(); // Generate a unique
+																									// filename
+			File destinationFile = new File(uploadDirectory + File.separator + fileName);
+
+			try {
+				signature.transferTo(destinationFile); // Save the file to the destination path
+				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
+				return fileName; // Return the saved file's name
+			} catch (IOException e) {
+				System.err.println("File saving failed: " + e.getMessage());
+				throw e; // Rethrow the exception to handle errors
+			}
+		}
+		return null;
+	}
+
+	private void ensureUploadDirectoryExists() {
+		File uploadDir = new File(uploadDirectory);
+		if (!uploadDir.exists()) {
+			boolean created = uploadDir.mkdirs(); // Create directories if they don't exist
+			if (created) {
+				System.out.println("Upload directory created at: " + uploadDirectory);
+			} else {
+				System.err.println("Failed to create upload directory: " + uploadDirectory);
+			}
+		}
 	}
 
 	public List<CreateSavingsAccount> fetchAllSavingAccountData() {
@@ -111,5 +259,38 @@ public class CustomerSavingsService {
 		}
 		return false;
 	}
+
+
+	public List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber) {
+		List<CreateSavingsAccount> list = createSavingAccountRepo.findAllByAccountNumber(accountNumber);
+		return list;
+	}
+
+	public SavingAccountActivity saveSavingAccountActivityData(SavingAccountActivity savingAccountActivity) {
+		return savingAccountActivityRepo.save(savingAccountActivity);
+	}
+
+	public Optional<SavingAccountActivity> findSavingAccountActivityById(Long id) {
+		return savingAccountActivityRepo.findById(id);
+	}
+
+	public List<SavingAccountActivity> findAllByAccountNumberSavingActivity(String accountNumber) {
+		List<SavingAccountActivity> list = savingAccountActivityRepo.findAllByAccountNumber(accountNumber);
+		return list;
+	}
+
+	public boolean updateAverageBalance(String accountNumber, String newBalance) {
+		 Optional<CreateSavingsAccount> optionalAccount = createSavingAccountRepo.findByAccountNumber(accountNumber);
+		    if (optionalAccount.isPresent()) {
+		        CreateSavingsAccount account = optionalAccount.get();
+		        account.setOpeningAmount(newBalance); // or use `setAverageBalance()` if that's your actual field
+		        createSavingAccountRepo.save(account);
+		        return true;
+		    }
+		    return false;
+	}
+
+	
+
 
 }

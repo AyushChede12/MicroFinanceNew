@@ -100,32 +100,127 @@ $('#printCertificateBtn').on('click', function () {
     $('#certificateSection').show();
 });
 
-	/*$('#printCertificateBtn').on('click', function () {
-	    var selectedCheckbox = $('.datatable tbody input[type="checkbox"]:checked');
+// print Code
+$("#printBtn").on("click", function (e) {
+		e.preventDefault();
 
-	    if (selectedCheckbox.length === 0) {
-	        alert("Please select a row to print the certificate.");
-	        $('#certificateSection').hide(); // hide certificate if no selection
-	        return;
-	    }
+		// Clone the form
+		const $formClone = $("#cetificateId").clone();
 
-	    // Get the selected row
-	    var selectedRow = selectedCheckbox.closest('tr');
-	    var columns = selectedRow.find('td');
+		/*// Remove the button row from cloned form
+		$formClone.find("#editmember").remove();
+		$formClone.find("#printBtn").remove();
+		$formClone.find("#updateBtn").remove();
+		$formClone.find("#deleteBtn").remove();*/
 
-	    // Fill certificate fields
-	    $('#customeridandName').text(columns.eq(2).text() + " - " + columns.eq(3).text());
-	    $('#certificateno').text(columns.eq(6).text());
-	    $('#numberofshare').text(columns.eq(5).text());
-	    $('#amounttransferred').text("Rs. " + (columns.eq(5).text() * 10)); // You can replace this logic
-	    $('#branchname').text("Main Branch"); // replace with dynamic if needed
-	    $('#startdate').text(new Date().toLocaleDateString()); // or dynamic
-	    $('#balanceshare').text(columns.eq(4).text());
-	    $('#shareissuedby').text("Admin"); // or dynamic
-	    $('#dataoftransfer').text(new Date().toLocaleDateString()); // or dynamic
-	    $('#modeofpayement').text("NEFT"); // or dynamic
+		// Optional: remove any row that holds the buttons
+		$formClone.find(".text-center").each(function () {
+			if ($(this).find("button").length > 0) {
+				$(this).remove();
+			}
+		});
 
-	    // Show the certificate section
-	    $('#certificateSection').show();
+		// Open print window
+		const printWindow = window.open("", "_blank");
+
+		if (printWindow) {
+			printWindow.document.open();
+			printWindow.document.write(`
+				<html>
+				<head>
+					<title>Print - Customer Form</title>
+					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+					<style>
+						body {
+							font-family: Arial, sans-serif;
+							padding: 20px;
+						}
+						.formFields {
+							margin-bottom: 15px;
+						}
+						label {
+							font-weight: bold;
+						}
+						input, select, textarea {
+							border: 1px solid #ccc;
+							border-radius: 5px;
+							padding: 5px;
+							width: 100%;
+						}
+						.toggle {
+							pointer-events: none;
+						}
+					</style>
+				</head>
+				<body onload="window.print(); window.close();">
+					<h3 class="text-center mb-4">Customer Information</h3>
+					${$formClone[0].outerHTML}
+				</body>
+				</html>
+			`);
+			printWindow.document.close();
+		} else {
+			alert("Popup blocked. Please allow popups for this website.");
+		}
 	});
-*/
+
+//	Download Code
+	$("#downloadBtn").on("click", function (e) {
+		e.preventDefault();
+
+		// Clone the certificate content
+		const $formClone = $("#cetificateId").clone();
+
+		// Optional: remove buttons or specific rows containing buttons
+		$formClone.find(".text-center").each(function () {
+			if ($(this).find("button").length > 0) {
+				$(this).remove();
+			}
+		});
+
+		// Create the full HTML document
+		const htmlContent = `
+			<html>
+			<head>
+				<title>Download - Customer Certificate</title>
+				<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+				<style>
+					body {
+						font-family: Arial, sans-serif;
+						padding: 20px;
+					}
+					.formFields {
+						margin-bottom: 15px;
+					}
+					label {
+						font-weight: bold;
+					}
+					input, select, textarea {
+						border: 1px solid #ccc;
+						border-radius: 5px;
+						padding: 5px;
+						width: 100%;
+					}
+					.toggle {
+						pointer-events: none;
+					}
+				</style>
+			</head>
+			<body>
+				<h3 class="text-center mb-4">Customer Information</h3>
+				${$formClone[0].outerHTML}
+			</body>
+			</html>
+		`;
+
+		// Create a Blob from HTML content
+		const blob = new Blob([htmlContent], { type: "text/html" });
+
+		// Create a temporary download link
+		const link = document.createElement("a");
+		link.href = URL.createObjectURL(blob);
+		link.download = "Customer_Certificate.html"; // Filename for download
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	});

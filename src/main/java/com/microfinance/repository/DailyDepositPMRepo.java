@@ -14,5 +14,8 @@ public interface DailyDepositPMRepo extends JpaRepository<DailyDepositPM, Long> 
     long getMaxId();
 
 	List<DailyDepositPM> findBydrd(String drd);
+
+	DailyDepositPM findByplanNameDD(String planNameDD);
+
 }
 

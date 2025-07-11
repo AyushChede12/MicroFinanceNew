@@ -88,7 +88,7 @@ public class FinancialConsultantController {
 	 * return new ResponseEntity<>(response, response.getStatus()); }
 	 */
 	
-	@PostMapping("saveOrUpdateFinancialConsultant")
+	@PostMapping("/saveOrUpdateFinancialConsultant")
 	public ResponseEntity<ApiResponse<addFinancialConsultant>> saveOrUpdateFinancialConsultant(
 	        @ModelAttribute FinancialConsultantDto financialConsultantDto,
 	        @RequestParam(value = "customerPhoto", required = false) String customerPhoto, @RequestParam(value = "customerSignature", required = false) String customerSignature) {
@@ -144,7 +144,7 @@ public class FinancialConsultantController {
 
 // For financialConsultantHierarchy
 	
-	@PostMapping("/getfinancialHierarchyByFinancialCode")
+	@GetMapping("/getfinancialHierarchyByFinancialCode")
 	public ResponseEntity<ApiResponse<List<addFinancialConsultant>>> getfinancialHierarchyByFinancialCode(@RequestParam String financialCode) {
 
 	    List<addFinancialConsultant> financialconsultant = financialConsultantService.fetchfinancialHierarchyByFinancialCode(financialCode);
@@ -165,6 +165,7 @@ public class FinancialConsultantController {
 	    }
 	}
 	
+
 	//janvi: Approved Financial Consultant 30/06/2025
 	@PostMapping("/approvedFinancialConsultantData")
 	public ResponseEntity<ApiResponse<addFinancialConsultant>> updateIsApprovedStatus(
@@ -196,5 +197,6 @@ public class FinancialConsultantController {
         );
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 
 }
