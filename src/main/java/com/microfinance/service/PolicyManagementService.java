@@ -395,6 +395,7 @@ public List<DailyDepositPM> getAllDDTerm() {
 	return dailyDepositPMRepo.findAll();
 }
 
+
 public List<AddnewinvestmentPM> getAllInvestments() {
     return addinvestmentrepo.findAll();
 }
