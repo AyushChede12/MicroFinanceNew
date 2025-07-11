@@ -20,4 +20,6 @@ public interface RecurringDepositRepo extends JpaRepository<RecurringDepositPM, 
 
 	List<RecurringDepositPM> findByrd(String rd);
 
+	RecurringDepositPM findByplanNameRD(String planNameRD);
+
 }

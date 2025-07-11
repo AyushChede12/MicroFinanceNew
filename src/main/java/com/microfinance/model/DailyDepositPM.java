@@ -21,7 +21,7 @@ public class DailyDepositPM {
 	private String rateOfInterest;
 	private String installmentType;
 	private String termModeDD;
-	private String termDD;
+	private String ddterm;
 	private String duration;
 	private String commissionOnNew;
 	private String renewalCommission;
@@ -136,17 +136,19 @@ public class DailyDepositPM {
 	public void setTermModeDD(String termModeDD) {
 		this.termModeDD = termModeDD;
 	}
-	public String getTermDD() {
-		return termDD;
-	}
-	public void setTermDD(String termDD) {
-		this.termDD = termDD;
-	}
+	
+	
 	public String getDrd() {
 		return drd;
 	}
 	public void setDrd(String drd) {
 		this.drd = drd;
+	}
+	public String getDdterm() {
+		return ddterm;
+	}
+	public void setDdterm(String ddterm) {
+		this.ddterm = ddterm;
 	}
 	
 

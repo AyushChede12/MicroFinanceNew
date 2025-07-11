@@ -207,8 +207,8 @@ $(document).ready(function() {
 			success: function(response) {
 				alert("Lending Group Updated Successfully");
 				$('#LendingIdForm')[0].reset();
-				$('#updatelendingBtn').hide();
-				$('#savelendingBtn').show();
+				//$('#updatelendingBtn').hide();
+				//$('#savelendingBtn').show();
 				fetchLoanPlans(); // Refresh list
 			},
 			error: function(xhr, status, error) {

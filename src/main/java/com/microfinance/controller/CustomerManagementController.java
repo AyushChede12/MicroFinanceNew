@@ -151,7 +151,10 @@ public class CustomerManagementController {
 		     return ResponseEntity.ok(response);
 		 }
 
-
-
+		 @GetMapping("/approved")
+		    public ResponseEntity<List<addCustomer>> getApprovedCustomers() {
+		        List<addCustomer> customers = customerService.getApprovedCustomers();
+		        return ResponseEntity.ok(customers);
+		    }
 
 }

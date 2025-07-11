@@ -19,7 +19,7 @@ public class MISDepositPM {
 	private String minimumAmountMD;
 	private String maturityROIMD;
 	private String termModeMD;
-	private String termMD;
+	private String misTerm;
 	private String MISIntROIMD;
 	private String MISIntervalMD;
 	private String MISInterestMD;
@@ -87,11 +87,14 @@ public class MISDepositPM {
 	public void setTermModeMD(String termModeMD) {
 		this.termModeMD = termModeMD;
 	}
-	public String getTermMD() {
-		return termMD;
+	
+	
+	
+	public String getMisTerm() {
+		return misTerm;
 	}
-	public void setTermMD(String termMD) {
-		this.termMD = termMD;
+	public void setMisTerm(String misTerm) {
+		this.misTerm = misTerm;
 	}
 	public String getMISIntROIMD() {
 		return MISIntROIMD;
