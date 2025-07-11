@@ -378,11 +378,12 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
-
 public AddnewinvestmentPM getDetailsById(Long id) {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findById(id).orElse(null);
 }
+
+
 
 public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
     return addinvestmentrepo.save(investment);
@@ -395,5 +396,33 @@ public List<DailyDepositPM> getAllDDTerm() {
 }
 
 
+public List<AddnewinvestmentPM> getAllInvestments() {
+    return addinvestmentrepo.findAll();
+}
+
+public List<AddnewinvestmentPM> getAllPolicyManagementData() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
+}
+
+
+
+public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
+    return addinvestmentrepo.findByPolicyCode(policyCode);
+}
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
