@@ -16,17 +16,24 @@ $(document).ready(function() {
 	        type: "GET",
 	        success: function(response) {
 				console.log("API response:", response);
-	            var dropdown = $('#findByCode');
-	            dropdown.empty();
-	            dropdown.append('<option value="">Select</option>');
+	            var dropdown1 = $('#findByCode');
+	            dropdown1.empty();
+	            dropdown1.append('<option value="">Select</option>');
+				var dropdown2 = $('#shareIssuedBy');
+				dropdown2.empty();
+			    dropdown2.append('<option value="">Select</option>');
+
 
 	            if (response.status === "OK" && response.data) {
 	                $.each(response.data, function(index, customer) {
-	                    dropdown.append('<option value="' + customer.memberCode + '">' + customer.memberCode  + " - " + customer.customerName +'</option>');
-	                    
+	                    dropdown1.append('<option value="' + customer.memberCode + '">' + customer.memberCode  + " - " + customer.customerName +'</option>');
+						dropdown2.append('<option value="' + customer.memberCode + '">' + customer.memberCode  + " - " + customer.customerName +'</option>');
+
 	                });
 	            } else {
-	                dropdown.append('<option value="">No customers found</option>');
+	                dropdown1.append('<option value="">No customers found</option>');
+					dropdown2.append('<option value="">No customers found</option>');
+
 	            }
 	        },
 	        error: function() {
@@ -230,6 +237,7 @@ function TransferShareTable() {
                             <td>${share.customerName}</td>
                             <td>${share.startDate}</td>
                             <td>${share.branch}</td>
+							<td>${share.noOfShare}</td>
                             <td>${share.dateOfTransfer}</td>
                             <td>
                                 <button class="iconbutton" onclick="EditTransfershare(${share.id})" title="View">

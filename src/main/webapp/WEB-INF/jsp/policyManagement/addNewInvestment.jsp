@@ -361,7 +361,10 @@ pageEncoding="ISO-8859-1"%> -->
 									<label for="branchName">Payment By*</label> <select
 										id="paymentBy" name="paymentBy" required
 										class="form-control selectField" style="height: 30px;">
-										<option value="">Select Branch Name</option>
+										<option value="">Select Payment By</option>
+										<option value="cash">Cash</option>
+										<option value="online">Online</option>
+										
 										<!-- Add options here -->
 									</select>
 								</div>
@@ -379,10 +382,11 @@ pageEncoding="ISO-8859-1"%> -->
 							<!-- Advisor/Collector -->
 							<div class="col-lg-3 mb-4">
 								<div class="d-flex flex-column formFields">
-									<label for="location">Agent/Collector*</label> <input
-										type="text" id="Agent" name="Agent" required
-										placeholder="Enter Advisor/Collector Code"
-										class="form-control" />
+									<label for="Agent">Agent*</label> <select
+										id="Agent" name="Agent" required
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Select Agent </option>
+									</select>
 								</div>
 							</div>
 

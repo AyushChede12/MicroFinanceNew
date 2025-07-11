@@ -1039,7 +1039,11 @@ public class PageController {
 		return "preferences/lockerManagement";
 	}
 	
-	
+	@GetMapping("/ViewAdvisorData")
+	public String ViewAdvisorData()
+	{
+		return "reportAndAnalytics/ReportAdvisor";
+	}
 
 	
 

@@ -395,7 +395,25 @@ public List<DailyDepositPM> getAllDDTerm() {
 	return dailyDepositPMRepo.findAll();
 }
 
+
+public List<AddnewinvestmentPM> getAllInvestments() {
+    return addinvestmentrepo.findAll();
 }
+
+public List<AddnewinvestmentPM> getAllPolicyManagementData() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
+}
+
+
+
+public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
+    return addinvestmentrepo.findByPolicyCode(policyCode);
+}
+
+
+}
+
 
 
 

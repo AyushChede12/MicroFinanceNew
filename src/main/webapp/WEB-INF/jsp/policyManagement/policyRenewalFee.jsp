@@ -61,48 +61,12 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID .*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								<label for="Agent">Policy Code*</label> <select id="policyCode"
+									name="policyCode" required class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Policy Code</option>
+								</select>
 							</div>
 						</div>
 
@@ -116,32 +80,13 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span>
-										<i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								<label for="">Customer Code* </label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Enter Advisor/Collector Code" />
 							</div>
 						</div>
-
-
 					</div>
 
 
@@ -292,7 +237,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Penalty Fee  *</label> <input type="text"
+									<label for="">Penalty Fee *</label> <input type="text"
 										name="price" id="price" required="required"
 										placeholder="Enter Education" />
 								</div>
@@ -301,8 +246,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Installments Completed*</label> <input type="text"
-										name="price" id="price" required="required"
+									<label for="">Installments Completed*</label> <input
+										type="text" name="price" id="price" required="required"
 										placeholder="Enter Education" />
 								</div>
 							</div>
@@ -372,11 +317,10 @@ pageEncoding="ISO-8859-1"%> -->
 								hidden="hidden" onchange="bike1Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+									<img src="./upload.png" alt="upload_icon" class="text-muted">
+									Drag and drop or Choose File to upload the image
+									</p>
+									-->
 								</div>
 							</label>
 						</div>
@@ -421,6 +365,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/PolicyManagment/policyRenewalFee.js"></script>
 </body>
 
 </html>

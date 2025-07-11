@@ -21,4 +21,7 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 	List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
 
 
+	Optional<CreateSavingsAccount> findByAccountNumber(String accountNumber);
+
+
 }
