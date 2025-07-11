@@ -5,7 +5,7 @@ $(document).ready(function () {
 		url: "/api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
 		success: function (response) {
-			if (response.status === "OK" && response.data) {
+			if (response.status === "FOUND" && response.data) {
 				$("#memberCode").empty().append("<option value=''>-- Select Code --</option>");
 				response.data.forEach(function (item) {
 					$("#memberCode").append(`<option value='${item.memberCode}'>${item.memberCode}</option>`);
@@ -124,16 +124,7 @@ $(document).ready(function () {
 							<td>${item.contactNo || ''}</td>
 							<td>${item.financialStatus || ''}</td>
 							<td>${item.profession || ''}</td>
-							<td>
-								<button class="iconbutton editBtn" data-id="${item.id}" title="Edit">
-									<i class="fa-solid fa-pen-to-square text-primary"></i>
-								</button>
-							</td>
-							<td>
-								<button class="iconbutton deleteBtn" data-id="${item.id}" title="Delete">
-									<i class="fa-solid fa-trash text-danger"></i>
-								</button>
-							</td>
+							
 						</tr>`;
 					tbody.append(row);
 				});
@@ -265,7 +256,7 @@ $(document).ready(function () {
 	}
 
 	// ✅ Edit Button Handler
-	$(document).on("click", ".editBtn", function () {
+	/*$(document).on("click", ".editBtn", function () {
 		const id = $(this).data("id");
 		$.ajax({
 			url: "/api/financialconsultant/getFinancialConsultantById",
@@ -419,7 +410,7 @@ $(document).ready(function () {
 	                }
 	            });
 	        }
-	    });
+	    });*/
 
 });
 

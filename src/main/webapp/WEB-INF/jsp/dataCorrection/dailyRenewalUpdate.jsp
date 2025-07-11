@@ -33,6 +33,17 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -63,28 +74,26 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="vehicalNo">Policy ID</label> <select id="colour"
-									name="colour" required="required"
+								<label for="policyCode">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Policy ID</option>
+									<option value="">-- Search Policy Code --</option>
 								
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Update Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="applicationDate">Update Date</label> <input type="date"
+									name="applicationDate" id="applicationDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="colour"
-									name="colour" required="required"
+								<label for="branchName">Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
 								</select>
 							</div>
 						</div>
@@ -489,6 +498,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/dailyRenewalUpdate.js"></script>
+	
 </body>
 
 </html>

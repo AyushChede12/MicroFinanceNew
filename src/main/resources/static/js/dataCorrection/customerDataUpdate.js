@@ -1,12 +1,13 @@
 $(document).ready(function() {
-	$.ajax({
+	
+	/*$.ajax({
 		url: "/api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "FOUND") {
 				$("#customerCode").empty().append("<option value=''>-- Select Code --</option>");
 				response.data.forEach(function(item) {
-					$("#customerCode").append(`<option value='${item.memberCode}'>${item.memberCode}-${item.customerName}</option>`);
+					$("#customerCode").append(<option value='${item.memberCode}'>${item.memberCode}-${item.customerName}</option>);
 				});
 			} else {
 				alert("No customer codes found.");
@@ -15,7 +16,55 @@ $(document).ready(function() {
 		error: function() {
 			alert("Failed to load customer codes.");
 		}
+	}); */
+	
+	$.ajax({
+	    url: '/api/financialconsultant/getAllCustomerCodes',
+	    type: 'POST',
+	    success: function(response) {
+	        if (response.status === "FOUND") {
+	            let customerOptions = response.data.map(function (item) {
+	                return {
+	                    id: item.memberCode,
+	                    text: item.memberCode + " - " + item.customerName
+	                };
+	            });
+
+	            // Initialize Select2 with full data and custom search matcher
+	            $('#customerCode').select2({
+	                placeholder: '-- Search Customer Code or Name --',
+	                data: customerOptions,
+	                matcher: function(params, data) {
+	                    // If no search term, return all
+	                    if ($.trim(params.term) === '') {
+	                        return data;
+	                    }
+
+	                    if (typeof data.text === 'undefined') {
+	                        return null;
+	                    }
+
+	                    // Case-insensitive match on memberCode or customerName
+	                    const term = params.term.toLowerCase();
+	                    const text = data.text.toLowerCase();
+
+	                    if (text.includes(term)) {
+	                        return data;
+	                    }
+
+	                    return null;
+	                }
+	            });
+
+	        } else {
+	            alert("No customer codes found.");
+	        }
+	    },
+	    error: function() {
+	        alert("Failed to load customer codes.");
+	    }
 	});
+
 
 	$("#customerCode").change(function() {
 		let customerCode = $("#customerCode").val();
@@ -165,7 +214,6 @@ $(document).ready(function() {
 	});
 
 	$('#deleteBtn').click(function(event) {
-		alert("delete");
 		var id = $("#id").val();
 		if (confirm("Are you sure you want to delete this Customer Data?")) {
 			$.ajax({
@@ -181,7 +229,7 @@ $(document).ready(function() {
 					}
 				},
 				error: function(xhr, status, error) {
-					alert("Failed to delete Executive.");
+					alert("Failed to delete Customer.");
 					console.error("Error:", error);
 				}
 			});
@@ -227,7 +275,7 @@ $(document).ready(function() {
 		});
 
 		// Optional: Resize images if any
-		$formClone.find("img").each(function () {
+		$formClone.find("img").each(function() {
 			$(this).css({
 				width: "100px",
 				height: "auto",
