@@ -237,7 +237,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Amount Of Loan </label> <input type="text"
+								<label for="">Amount Of Loan </label> <input type="text" onblur="calculateEMI()"
 									name="newApplicationLoanAmount" id="newApplicationLoanAmount"
 									required="required" placeholder="Enter Amount Of Loan"
 									style="text-transform: uppercase;" />
@@ -262,7 +262,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">EMI Payment</label> <input type="text"
-									onclick="calculateEMI()" name="newLoanApplicationPaymentEMI"
+									 name="newLoanApplicationPaymentEMI"
 									id="newLoanApplicationPaymentEMI" required="required"
 									placeholder="Enter EMI Payment" readonly="readonly"
 									style="text-transform: uppercase;" />
@@ -304,9 +304,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Guarantor Identity</label> <input type="text"
+								<label for="">Gurantor Name</label> <input type="text"
 									name="identifyGurantor" id="identifyGurantor"
-									required="required" placeholder="Enter Guarantor Identity" />
+									required="required" placeholder="Enter Guarantor Name" />
 							</div>
 						</div>
 
@@ -369,32 +369,24 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Members ID</label>
 								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="cityName" id="cityNameId" style="font-size: 12px;">Select
-											Members ID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="coApplictionMemberID"
-												name="coApplictionMemberID" class="m-0"
-												placeholder="Search City" />
-										</div>
-										<ul class="options" id="city-options">
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-											<li>A</li>
-										</ul>
-									</div>
+									<select id="coApplictionMemberID" name="coApplictionMemberID" required="required"
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Select member Code</option>
+
+									</select>
 								</div>
+								
 							</div>
 						</div>
 
+
+
+
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Guarantor Identity</label> <input type="text"
+								<label for="">Gurantor Name</label> <input type="text"
 									name="coApplictionGuarantorIdentity"
 									id="coApplictionGuarantorIdentity" required="required"
 									placeholder="Enter Guarantor Identity" />
