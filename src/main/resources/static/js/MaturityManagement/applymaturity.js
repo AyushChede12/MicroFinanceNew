@@ -7,13 +7,13 @@ $(document).ready(function () {
                 url: '/api/Policymangment/getinvestmentdetails?branchName=' + encodeURIComponent(branchName),
                 type: 'GET',
                 success: function (response) {
-                    var dropdown = $('#policyNo');
+                    var dropdown = $('#policyCode');
                     dropdown.empty();
                     dropdown.append('<option value="">Select Policy No</option>');
 
                     if (response.data && response.data.length > 0) {
                         $.each(response.data, function (index, policyNo) {
-                            dropdown.append('<option value="' + policyNo.id+'">'+ policyNo.id+'</option>');
+                            dropdown.append('<option value="' + policyNo.policyCode+'">'+ policyNo.policyCode+'</option>');
                         });
                     } else {
                         dropdown.append('<option value="">No policies found</option>');
@@ -26,38 +26,40 @@ $(document).ready(function () {
         }
     });
 	
-	$('#policyNo').on('change', function () {
-	       let policyId = $(this).val(); 
+	$('#policyCode').on('change', function () {
+	    let policyCode = $(this).val();
 
-	       if (policyId !== "") {
-	           $.ajax({
-	               url: '/api/Policymangment/getDetailsById/' + policyId,
-	               type: 'GET',
-	               success: function (response) {
-					
-	                   if (response.data) {
-	                       $('#customerName').val(response.data.customerName);
-	                       $('#schemeMode').val(response.data.schemeMode);
-	                       $('#schemeType').val(response.data.schemeType);
-	                       $('#policyAmount').val(response.data.policyAmount);
-	                       $('#depositAmount').val(response.data.depositAmount);
-	                       $('#maturityAmount').val(response.data.maturityAmount);
-	                       $('#maturityDate').val(response.data.maturityDate);
-						   
-	                   } else {
-	                       alert("No data found for this policy.");
-	                   }
-	               },
-	               error: function () {
-	                   alert("Error fetching policy details.");
-	               }
-	           });
-	       } else {
-	           
-	           $('#customerName, #schemeName, #schemeType, #policyAmount, #depositAmount, #maturityAmount, #maturityDate').val('');
-	       }
-	   });
-	   
+	    if (policyCode !== "") {
+	        $.ajax({
+	            url: '/api/Policymangment/getdetailsByPolicyCode?policyCode=' + encodeURIComponent(policyCode),
+	            type: 'GET',
+	            success: function (response) {
+	                console.log("Response:", response);
+	                alert(policyCode);
+
+	                if (response.data && response.data.length > 0) {
+	                    let data = response.data[0]; // Use the first element of the list
+
+	                    $('#customerName').val(data.customerName);
+	                    $('#schemeMode').val(data.schemeMode);
+	                    $('#schemeType').val(data.schemeType);
+	                    $('#policyAmount').val(data.policyAmount);
+	                    $('#depositAmount').val(data.depositAmount);
+	                    $('#maturityAmount').val(data.maturityAmount);
+	                    $('#maturityDate').val(data.maturityDate);
+	                } else {
+	                    alert("No data found for this policy.");
+	                }
+	            },
+	            error: function () {
+	                alert("Error fetching policy details.");
+	            }
+	        });
+	    } else {
+	        $('#customerName, #schemeMode, #schemeType, #policyAmount, #depositAmount, #maturityAmount, #maturityDate').val('');
+	    }
+	});
+
 	   
 	   //saving apply Maturity data
 	   
@@ -66,7 +68,7 @@ $(document).ready(function () {
 	   					
 	   								       var data = {
 	   								           branchName: $("#branchName").val(),       
-	   								           policyNo: $("#policyNo").val(),         
+	   								           policyCode: $("#policyCode").val(),         
 	   								           maturityDate: $("#maturityDate").val(),             
 	   								           customerName: $("#customerName").val(),   
 	   								           schemeMode: $("#schemeMode").val(),      
@@ -101,41 +103,43 @@ $(document).ready(function () {
 	   								       });
 	   								   });
 									   
-									  
-										
+									   
 									   $('#viewBtn').on('click', function (e) {
 									       e.preventDefault(); // <-- Stop form submission
 
 									       $.ajax({
-									           url: "/api/Maturitymanagement/getApplymaturitydetails",
+									           url: "/api/Maturitymanagement/getApplymaturitydetailswithPage",
 									           type: "GET",
-									           success: function (response) {
-									               if (response.status === "OK" && response.data && response.data.length > 0) {
-									                   var tableBody = $("#table tbody");
-									                   tableBody.empty();
+											   success: function (response) {
+											       if (response.status === "OK" && response.data && response.data.content.length > 0) {
+											           var tableBody = $("#table tbody");
+											           tableBody.empty();
 
-									                   $.each(response.data, function (index, item) {
-									                       var row = "<tr>" +
-									                           "<td>" + item.policyNo + "</td>" +
-									                           "<td>" + item.branchName + "</td>" +
-									                           "<td>" + item.maturityDate + "</td>" +
-									                           "<td>" + item.customerName + "</td>" +
-									                           "<td>" + item.schemeName + "</td>" +
-									                           "<td>" + item.schemeType + "</td>" +
-									                           "<td>" + item.policyAmount + "</td>" +
-									                           "<td>" + item.maturityAmount + "</td>" +
-									                           "<td>" + item.remark + "</td>" +
-									                           "</tr>";
-									                       tableBody.append(row);
-									                   });
-									               } else {
-									                   alert("No maturity details found.");
-									               }
+											           $.each(response.data.content, function (index, item) {
+											               var row = "<tr>" +
+											                   "<td>" + item.policyCode + "</td>" +
+											                   "<td>" + item.branchName + "</td>" +
+											                   "<td>" + item.maturityDate + "</td>" +
+											                   "<td>" + item.customerName + "</td>" +
+											                   "<td>" + item.schemeName + "</td>" +
+											                   "<td>" + item.schemeType + "</td>" +
+											                   "<td>" + item.policyAmount + "</td>" +
+											                   "<td>" + item.maturityAmount + "</td>" +
+											                   "<td>" + item.remark + "</td>" +
+											                   "</tr>";
+											               tableBody.append(row);
+											           });
+											       } else {
+											           alert("No maturity details found.");
+											       }
 									           },
 									           error: function (xhr, status, error) {
 									               console.error("Error fetching maturity details:", error);
 									               alert("Failed to load maturity details.");
 									           }
+											   
+											   
+											   
 									       });
 									   });
 

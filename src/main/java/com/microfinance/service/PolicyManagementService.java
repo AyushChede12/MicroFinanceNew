@@ -374,9 +374,10 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
-public AddnewinvestmentPM getDetailsById(Long id) {
+public List<AddnewinvestmentPM> getDetailsById(String policyCode) {
 	// TODO Auto-generated method stub
-	return addinvestmentrepo.findById(id).orElse(null);
+	List<AddnewinvestmentPM> list=addinvestmentrepo.findByPolicyCode(policyCode);
+	return list;
 }
 
 public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {

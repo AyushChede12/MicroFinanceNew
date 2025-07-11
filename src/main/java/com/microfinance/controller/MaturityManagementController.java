@@ -1,9 +1,11 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -93,6 +95,39 @@ public class MaturityManagementController {
  	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
  	        }
  	}
+	
+	@GetMapping("/getApplymaturitydetailswithPage")
+	public ResponseEntity<ApiResponse<Map<String, Object>>> getApplyMaturityDetailsWithPage(
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "5") int size) {
+
+	    Page<ApplyForMaturity> invest = maturityservice.getApplyMaturityDetailsWithPage(page, size);
+
+	    if (invest != null && !invest.isEmpty()) {
+
+	        Map<String, Object> responseData = new HashMap<>();
+	        responseData.put("content", invest.getContent());
+	        responseData.put("currentPage", invest.getNumber());
+	        responseData.put("totalPages", invest.getTotalPages());
+
+	        ApiResponse<Map<String, Object>> response = ApiResponse.success(
+	                HttpStatus.OK,
+	                "Investment details fetched successfully.",
+	                responseData
+	        );
+
+	        return ResponseEntity.ok(response);
+
+	    } else {
+	        ApiResponse<Map<String, Object>> response = ApiResponse.error(
+	                HttpStatus.NOT_FOUND,
+	                "No details found."
+	        );
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	    }
+	}
+
+
 	
 	// view data of apply maturity by branch name and todate - fromdate
 	

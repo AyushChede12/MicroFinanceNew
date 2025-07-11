@@ -499,7 +499,7 @@ public class PolicyManagementController {
  	}
  	
  	
- 	//fetch new investment details by id
+ 	//fetch new investment details by BranchName
  	//Ashwini
  	
  	@GetMapping("/getinvestmentdetails")
@@ -512,27 +512,17 @@ public class PolicyManagementController {
       
  	}
  	
+ 	@GetMapping("/getdetailsByPolicyCode")
+ 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> findByPolicyCode(@RequestParam  String policyCode) {
+ 		 List<AddnewinvestmentPM> invest = policyManagementService.getDetailsById(policyCode);
+ 		
+ 		
+ 			ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.FOUND, "investment fetched successfully.", invest);
+            return ResponseEntity.ok(response);
+      
+ 	}
+
  	
-
- 	@GetMapping("/getDetailsById/{id}")
-    public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getDetailsById(@PathVariable Long id) {
- 		AddnewinvestmentPM deposit = policyManagementService.getDetailsById(id);
-
-       if (deposit != null) {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
-                 HttpStatus.OK,
-                "MIS deposit fetched successfully.",
-                deposit
-           );
-           return ResponseEntity.ok(response);
-         } else {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                 "MIS deposit not found for ID: " + id
-            );
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-         }
-  }
 
  	
  	@GetMapping("/ddterm")
