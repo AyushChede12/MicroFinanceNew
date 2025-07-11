@@ -247,6 +247,23 @@ public class JointLiabilityLoanService {
 		return applyForGroupLoanRepo.findAll();
 	}
 
+	public List<GroupDirectory> fetchByGroupID(String groupID) {
+		// TODO Auto-generated method stub
+		return groupDirectoryRepo.findByGroupID(groupID);
+	}
+
+	
+
+	public List<CreateLendingGroup> fetchByPlanCode(String planCode) {
+		   return createLendingGroupRepo.findByPlanCode(planCode);
+	}
+
+	public List<ApplyForGroupLoan> getAllgroupdata() {
+		// TODO Auto-generated method stub
+		return applyForGroupLoanRepo.findAll();
+	}
+
+	
 	
 	
 

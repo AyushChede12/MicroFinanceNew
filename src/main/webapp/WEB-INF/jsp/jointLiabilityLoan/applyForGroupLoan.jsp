@@ -74,6 +74,20 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Group Profile</li>
 						</ol>
 					</nav>
+						<div class="col-lg-3" style="display: none;">
+					<div class="d-flex flex-column formFields">
+						<label>Selected Member*</label> <input type="hidden" id="selectedMember" name="selectedMember"
+							class="form-control" required />
+					</div>
+				</div>
+					
+						<div class="col-lg-3" style="display: none;">
+					<div class="d-flex flex-column formFields">
+						<label>Customer Name*</label> <input type="hidden" id="customerName" name="customerName" 
+							class="form-control" required />
+					</div>
+				</div>
+					
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -137,7 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="planCode">Fetch by Plan Code*</label>
 								<select id="planCode" name="planCode" required class="form-control selectField" style="height: 30px;">
-									<option value="">Select Customer Name</option>
+									<option value="">Select Plan Code</option>
 								</select>
 							</div>
 						</div>
@@ -147,6 +161,14 @@ pageEncoding="ISO-8859-1"%> -->
 								<input type="text" name="processingFee" id="processingFee" required placeholder="Enter Processing Fee" />
 							</div>
 						</div>
+							<div class="col-lg-3" style="display: none;">
+					<div class="d-flex flex-column formFields">
+						<label>Plan ID*</label> <input type="hidden" id="planCode" name="planCode" value="${memberCodePI}"
+							class="form-control" required />
+					</div>
+				</div>
+						
+						
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="legalCharges">Legal Charges (%)*</label>
@@ -217,12 +239,44 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-success" style="margin-left: 80%">Save</button>
+							<button id="saveBtn" name="saveBtn" class="btnStyle bg-success" style="margin-left: 80%">Save</button>
 						</div>
 					</div>
 				</div>
 			</form>
 		</div>
+		<div class="row mt-5">
+				<div class="col-12">
+					<div class="card recent-sales">
+						<div class="card-body table-responsive">
+							<h5 class="card-title">Details Search List</h5>
+							<table class="table table-bordered">
+								<thead class="thead-light">
+									<tr>
+										<th>Group ID</th>
+										<th>Plan Name</th>
+										<th>Customer Name</th>
+										<th>Selected Member</th>
+										<th>Emi Type</th>
+										<th>Contact No</th>
+										<th>Community Address</th>
+										<th>Allocated Staff</th>
+										
+
+
+										<th>Active</th>
+									</tr>
+								</thead>
+								<tbody id="groupDirectoryBody">
+
+
+									<!-- More rows -->
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/ApplyForGroupLoan.js"></script>
