@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.dto.GroupDirectoryDto;
+import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.GroupDirectory;
@@ -274,6 +275,48 @@ public class JointLiabilityLoanController {
         }
     }
 	
+// Apply For group loan
+    @PostMapping("/saveGroupLoan")
+    public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
+        boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
+
+        if (isSaved) {
+            ApiResponse<ApplyForGroupLoan> response = ApiResponse.success(
+                HttpStatus.CREATED,
+                "Group Loan saved successfully",
+                applyGroupLoan
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else {
+            ApiResponse<ApplyForGroupLoan> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save Group Loan."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+    //faeth the code
+    @GetMapping("/fetchApplyForGroupLoan")
+    public ResponseEntity<ApiResponse<List<ApplyForGroupLoan>>> getAllApplyForGroupLoan() {
+        List<ApplyForGroupLoan> loans = jointLiabilityLoanService.getAllApplyForGroupLoan();
+
+        if (loans != null && !loans.isEmpty()) {
+            return ResponseEntity.ok(
+                ApiResponse.success(HttpStatus.OK, "Apply For Group Loan fetched successfully.", loans)
+            );
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                ApiResponse.error(HttpStatus.NOT_FOUND, "No Apply For Group Loan data found.")
+            );
+        }
+    }
+    
+    }
+    
+    
 
 
-}
+
+    
+
+
