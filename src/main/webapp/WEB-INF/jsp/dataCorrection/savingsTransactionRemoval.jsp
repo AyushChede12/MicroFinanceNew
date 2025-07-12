@@ -69,6 +69,19 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 
 					<div class="row">
+					<input type="hidden" name="id" id="id">
+					
+					<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Select Account No.</label> <select id="accountNumber"
+									name="accountNumber" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">-- Search Account No --</option>
+								</select>
+							</div>
+						</div>
+						
 						<div class="col-lg-3">
 							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
                 <label>Verify With</label>
@@ -94,7 +107,16 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Transaction Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="transactionDate" id="transactionDate" required="required"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Transaction ID</label> <input type="text"
+									name="selectSavingTransactionId" id="selectSavingTransactionId" required="required"
+									placeholder="Enter Transaction ID"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -109,20 +131,12 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Select Account No.</label> <select id="accountNumber"
-									name="accountNumber" required="required"
-									class="form-control selectField" style="height: 30px;">
-								</select>
-							</div>
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Customer Code</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="customerCode" id="customerCode" required="required"
 									placeholder="Enter Customer Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -132,8 +146,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Name</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Name</label> <input type="text" name="customerName"
+									id="customerName" required="required"
 									placeholder="Enter A/C Holder Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -142,7 +156,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Contact No</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="contactNumber" id="contactNumber" required="required"
 									placeholder="Enter Contact No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -151,8 +165,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Co-Holder</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Co-Holder</label> <input type="text" name="jointHolderName"
+									id="jointHolderName" required="required"
 									placeholder="Joint Co-Holder Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -163,72 +177,10 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label for="">SB policy Type</label> <input type="text"
-									name="price" id="price" required="required"
+									name="savingPlanName" id="savingPlanName" required="required"
 									placeholder="Enter Policy Type" />
 							</div>
 						</div>
-
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                                  style="font-size: 12px; margin-top: 15px"
-                                  class="text-muted"
-                                >
-                                  Drag and drop or Choose File to upload the image
-                                </p> -->
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                                  style="font-size: 12px; margin-top: 15px"
-                                  class="text-muted"
-                                >
-                                  Drag and drop or Choose File to upload the image
-                                </p> -->
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Joint
-								Photo</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                                  style="font-size: 12px; margin-top: 15px"
-                                  class="text-muted"
-                                >
-                                  Drag and drop or Choose File to upload the image
-                                </p> -->
-								</div>
-							</label>
-						</div>
-
-
 
 					</div>
 
@@ -247,7 +199,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Available Balance</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="averageBalance" id="averageBalance" required="required"
 									placeholder="Enter Available Balance"
 									style="text-transform: uppercase;" />
 							</div>
@@ -256,7 +208,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Payment Reason</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="transactionFor" id="transactionFor" required="required"
 									placeholder="Enter Payment Reason"
 									style="text-transform: uppercase;" />
 							</div>
@@ -265,40 +217,39 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Comments</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Comments"
+								<label>Comments</label> <input type="text" name="comments"
+									id="comments" required="required" placeholder="Enter Comments"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Transaction Type </label><select id="colour"
-									name="colour" required="required"
+								<label for="">Transaction Type </label><select id="transactionType"
+									name="transactionType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">Umrer</option>
-									<option value="Blue">Reshimbaag</option>
-									<option value="Blue">Chandrapur</option>
+									<option value="Deposit">Deposit</option>
+									<option value="Withdraw">Withdraw</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Amount" />
+								<label for="">Amount</label> <input type="text" name="transactionAmount"
+									id="transactionAmount" required="required" placeholder="Enter Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Mode Of Payment </label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Mode Of Payment </label> <select id="payBy"
+									name="payBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Payment By</option>
-									<option value="Blue">Cash</option>
-									<option value="Blue">Online</option>
+									<option value="Cash">Cash</option>
+									<option value="Online">Online</option>
 								</select>
 							</div>
 						</div>
@@ -309,7 +260,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
-							<button id="deleteBtn" class="btnStyle bg-danger"
+							<button type="button" id="deleteBtn" class="btnStyle bg-danger"
 								style="background-color: #FFA500;">Delete</button>
 						</div>
 					</div>
@@ -318,106 +269,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			</form>
 
-			<!-- <div class="row mt-5">
-        <div class="col-12">
-          <div class="card recent-sales">
-
-            <div class="card-body table-responsive">
-              <h5 class="card-title">
-                Recent Sales <span>| Today</span>
-              </h5>
-
-              <table class="table table-borderless datatable overflow-scroll">
-                <thead class="table-light">
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="col">#</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="row">
-                      <a href="#">1</a>
-                    </th>
-                    <td>Arun Kumar</td>
-                    <td>
-                      <a href="#" className="text-primary">Milk</a>
-                    </td>
-                    <td>$29</td>
-                    <td>
-                      <span class="badge bg-success text-white">Approved</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
+			
 
 		</div>
 

@@ -42,6 +42,9 @@ public class CreateSavingsAccount {
 	private String accountNumber;
 	private boolean isApproved;
 	
+	private String photo;
+	private String signature;
+	
 	
 	public Long getId() {
 		return id;
@@ -241,6 +244,18 @@ public class CreateSavingsAccount {
 	}
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
 	}
 
 

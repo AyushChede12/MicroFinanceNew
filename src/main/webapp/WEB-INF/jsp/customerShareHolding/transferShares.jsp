@@ -143,18 +143,17 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Shares Issued By</label> <select id="shareIssuedBy"
+							<div class="d-flex flex-column formFields  mb-4">
+								<label for="">Shares Issued To Customer </label> <select id="shareIssuedBy"
 									name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Shares Issued </option>
-									<option value="Branch Manager">Branch Manager </option>
+									<option value="">Select </option>
 								</select>
 							</div>
 						</div>
 
 						  <div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
+							<div class="d-flex flex-column formFields  mb-4">
 								<label for="">No. Of Share</label> <input type="text"
 									name="noOfShare" id="noOfShare" required="required"
 									placeholder="Enter No. Of Share" />
@@ -176,6 +175,22 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="" />
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Previous Account Balance</label> <input type="text"
+									name="previousAccountBalance" id="previousAccountBalance" required="required"
+									placeholder="Enter Previous Account Balance" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields ">
+								<label for="">Previous Share Count</label> <input type="text"
+									name="previousShareCount" id="previousShareCount" required="required"
+									placeholder="Enter Previous Share Count" />
+							</div>
+						</div>
+
 
 					</div>
 					<div class="mt-5">
@@ -239,6 +254,7 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Customer Name</th>
 										<th scope="col">Start Date</th>
 										<th scope="col">Branch</th>
+										<th scope="col">No. Of Share</th>
 										<th scope="col">Date of Transfer</th>
 										
 										<th scope="col">Edit</th>	

@@ -72,7 +72,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="position">Position</label> <input type="text"
 									name="position" id="position" required="required"
@@ -142,7 +142,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Jr. Position" />
 							</div>
 						</div>
-
+ -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Select Branch</label> <select id="Branch"
@@ -166,7 +166,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">New Senior</label> <input type="text" name="newsenior"
 									id="newsenior" required="required" placeholder="Enter New Senior" />
@@ -187,7 +187,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="newseniorposition" id="newseniorposition" required="required"
 									placeholder="Enter New Senior Position" />
 							</div>
-						</div>
+						</div> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">

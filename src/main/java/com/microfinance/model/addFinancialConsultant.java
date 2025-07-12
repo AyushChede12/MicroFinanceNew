@@ -12,24 +12,19 @@ public class addFinancialConsultant {
 	private Long id;
 	private String financialCode;
 	private String joiningDate;
-	private String memberCode;
-	private String customerName;
+	private String financialName;
 	private String dob;
-	private String customerAge;
-	private String guardianName;
-	private String relationToApplicant;
+	private String age;
 	private String contactNo;
-	private String nomineeName;
 	private String branchName;
-	private String nomineeAge;
-	private String customerAddress;
+	private String address;
 	private String district;
 	private String state;
 	private String pinCode;
 	private String profession;
 	private String academicBackground;
-	private String customerPhoto;
-	private String customerSignature;
+	private String financialPhoto;
+	private String finnacialSignature;
 	private String selectPosition;
 	private String referralCode;
 	private String referralName;
@@ -68,52 +63,12 @@ public class addFinancialConsultant {
 		this.joiningDate = joiningDate;
 	}
 
-	public String getMemberCode() {
-		return memberCode;
-	}
-
-	public void setMemberCode(String memberCode) {
-		this.memberCode = memberCode;
-	}
-
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
 	public String getDob() {
 		return dob;
 	}
 
 	public void setDob(String dob) {
 		this.dob = dob;
-	}
-
-	public String getCustomerAge() {
-		return customerAge;
-	}
-
-	public void setCustomerAge(String customerAge) {
-		this.customerAge = customerAge;
-	}
-
-	public String getGuardianName() {
-		return guardianName;
-	}
-
-	public void setGuardianName(String guardianName) {
-		this.guardianName = guardianName;
-	}
-
-	public String getRelationToApplicant() {
-		return relationToApplicant;
-	}
-
-	public void setRelationToApplicant(String relationToApplicant) {
-		this.relationToApplicant = relationToApplicant;
 	}
 
 	public String getContactNo() {
@@ -123,37 +78,13 @@ public class addFinancialConsultant {
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-
-	public String getNomineeName() {
-		return nomineeName;
-	}
-
-	public void setNomineeName(String nomineeName) {
-		this.nomineeName = nomineeName;
-	}
-
+	
 	public String getBranchName() {
 		return branchName;
 	}
 
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
-	}
-
-	public String getNomineeAge() {
-		return nomineeAge;
-	}
-
-	public void setNomineeAge(String nomineeAge) {
-		this.nomineeAge = nomineeAge;
-	}
-
-	public String getCustomerAddress() {
-		return customerAddress;
-	}
-
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
 	}
 
 	public String getDistrict() {
@@ -194,22 +125,6 @@ public class addFinancialConsultant {
 
 	public void setAcademicBackground(String academicBackground) {
 		this.academicBackground = academicBackground;
-	}
-
-	public String getCustomerPhoto() {
-		return customerPhoto;
-	}
-
-	public void setCustomerPhoto(String customerPhoto) {
-		this.customerPhoto = customerPhoto;
-	}
-
-	public String getCustomerSignature() {
-		return customerSignature;
-	}
-
-	public void setCustomerSignature(String customerSignature) {
-		this.customerSignature = customerSignature;
 	}
 
 	public String getSelectPosition() {
@@ -314,6 +229,46 @@ public class addFinancialConsultant {
 
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+
+	public String getFinancialName() {
+		return financialName;
+	}
+
+	public void setFinancialName(String financialName) {
+		this.financialName = financialName;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getFinancialPhoto() {
+		return financialPhoto;
+	}
+
+	public void setFinancialPhoto(String financialPhoto) {
+		this.financialPhoto = financialPhoto;
+	}
+
+	public String getFinnacialSignature() {
+		return finnacialSignature;
+	}
+
+	public void setFinnacialSignature(String finnacialSignature) {
+		this.finnacialSignature = finnacialSignature;
 	}
 	
 
