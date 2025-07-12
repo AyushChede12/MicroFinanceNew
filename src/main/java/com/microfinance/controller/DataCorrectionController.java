@@ -2,12 +2,14 @@ package com.microfinance.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,8 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
 import com.microfinance.model.CompanyAdministration;
+import com.microfinance.model.ExecutiveFounder;
+import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.CustomerRepo;
+import com.microfinance.repository.SavingAccountActivityRepo;
 import com.microfinance.service.DataCorrectionService;
 
 @RestController
@@ -56,6 +61,28 @@ public class DataCorrectionController {
 		} else {
 			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
 					"Financial Data deletion failed", "failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
+	@GetMapping("/fetchAllSavingAccountActivity")
+	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> fetchAllSavingAccountActivity() {
+		List<SavingAccountActivity> list = dataCorrectionService.fetchAllSavingAccountActivity();
+		ApiResponse<List<SavingAccountActivity>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"Saving Account Activity fetched successfully", list);
+		return ResponseEntity.ok(response);
+	}
+	
+	@PostMapping("/deleteSavingTransactionRemoval")        
+	public ResponseEntity<ApiResponse<String>> deleteSavingTransaction(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deleteSavingTransaction(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Saving Transaction deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Saving Transaction deletion failed", "failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	//dropdown without search
 	/*$.ajax({
 		url: "/api/customersavings/getAllSavingAccountData",
@@ -18,54 +18,54 @@ $(document).ready(function() {
 			alert("Failed to load Account Numbers.");
 		}
 	});*/
-	
+
 	//dropdown with search
 	$.ajax({
-				url: '/api/customersavings/getAllSavingAccountData',
-				type: 'GET',
-				success: function(response) {
-					if (response.status === "FOUND") {
-						let savingOptions = response.data.map(function(item) {
-							return {
-								id: item.accountNumber,
-								text: item.accountNumber + " - " + item.enterCustomerName
-							};
-						});
+		url: '/api/customersavings/getAllSavingAccountData',
+		type: 'GET',
+		success: function(response) {
+			if (response.status === "FOUND") {
+				let savingOptions = response.data.map(function(item) {
+					return {
+						id: item.accountNumber,
+						text: item.accountNumber + " - " + item.enterCustomerName
+					};
+				});
 
-						// Initialize Select2 with full data and custom search matcher
-						$('#accountNumber').select2({
-							placeholder: '-- Search Account Number or Name --',
-							data: savingOptions,
-							matcher: function(params, data) {
-								// If no search term, return all
-								if ($.trim(params.term) === '') {
-									return data;
-								}
+				// Initialize Select2 with full data and custom search matcher
+				$('#accountNumber').select2({
+					placeholder: '-- Search Account Number or Name --',
+					data: savingOptions,
+					matcher: function(params, data) {
+						// If no search term, return all
+						if ($.trim(params.term) === '') {
+							return data;
+						}
 
-								if (typeof data.text === 'undefined') {
-									return null;
-								}
+						if (typeof data.text === 'undefined') {
+							return null;
+						}
 
-								// Case-insensitive match on memberCode or customerName
-								const term = params.term.toLowerCase();
-								const text = data.text.toLowerCase();
+						// Case-insensitive match on memberCode or customerName
+						const term = params.term.toLowerCase();
+						const text = data.text.toLowerCase();
 
-								if (text.includes(term)) {
-									return data;
-								}
+						if (text.includes(term)) {
+							return data;
+						}
 
-								return null;
-							}
-						});
-
-					} else {
-						alert("No Account Number found.");
+						return null;
 					}
-				},
-				error: function() {
-					alert("Failed to load Account Number.");
-				}
-			});
+				});
+
+			} else {
+				alert("No Account Number found.");
+			}
+		},
+		error: function() {
+			alert("Failed to load Account Number.");
+		}
+	});
 
 	$.ajax({
 		url: "/api/customersavings/getAllSavingAccountData",
@@ -127,7 +127,7 @@ $(document).ready(function() {
 			type: "GET",
 			url: "api/customersavings/getallbyaccountnumber",
 			data: { accountNumber: accountNumber },
-			success: function(response) {
+			success: function(response, e) {
 				if (response.status == "FOUND") {
 					let data = response.data[0];
 					$("#id").val(data.id);
@@ -185,9 +185,34 @@ $(document).ready(function() {
 						$('#financialsignatureHidden').val(data.customerSignature); // Store file name for fallback
 					} else {
 						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+					}*/
+
+					if (data.photo) {
+						const photoPath = `Uploads/${data.photo}`;
+						$("#photoPreview").attr("src", photoPath);
+						$("#photoHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						photoSizeEdit(fakePhotoEvent);
+
+					} else {
+						$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#photoHidden").val("");
 					}
 
-*/
+					// Image: Signature
+					if (data.signature) {
+						const signPath = `Uploads/${data.signature}`;
+						$("#signaturePreview").attr("src", signPath);
+						$("#signatureHidden").val(signPath);
+						const fakeSignEvent = { target: { result: signPath } };
+						signatureSizeEdit(fakeSignEvent);
+
+					} else {
+						$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#signatureHidden").val("");
+					}
+
+
 
 					if (parseInt(data.accountStatus) === 1) {
 						$('#toggle-account-status').prop('checked', true);
@@ -222,6 +247,89 @@ $(document).ready(function() {
 		});
 
 	});
+
+	$('#updateBtn').click(function(e) {
+		e.preventDefault();
+
+		let savingData = new FormData();
+
+		// Append regular text fields
+		savingData.append("id", $('#id').val());
+		savingData.append("accountNumber", $('#accountNumber').val());
+		savingData.append("openingDate", $('#openingDate').val());
+		savingData.append("selectByCustomer", $('#selectByCustomer').val());
+		savingData.append("enterCustomerName", $('#enterCustomerName').val());
+		savingData.append("dateOfBirth", $('#dateOfBirth').val());
+		savingData.append("familyDetails", $('#familyDetails').val());
+		savingData.append("contactNumber", $('#contactNumber').val());
+		savingData.append("suggestedNomineeName", $('#suggestedNomineeName').val());
+		savingData.append("suggestedNomineeAge", $('#suggestedNomineeAge').val());
+		savingData.append("suggestedNomineeRelation", $('#suggestedNomineeRelation').val());
+		savingData.append("address", $('#address').val());
+		savingData.append("district", $('#district').val());
+		savingData.append("branchName", $('#branchName').val());
+		savingData.append("state", $('#state').val());
+		savingData.append("pinCode", $('#pinCode').val());
+		savingData.append("operationType", $('#operationType').val());
+		savingData.append("jointOperationCode", $('#jointOperationCode').val());
+		savingData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
+		savingData.append("familyRelation", $('#familyRelation').val());
+		savingData.append("selectPlan", $('#selectPlan').val());
+		savingData.append("openingAmount", $('#openingAmount').val());
+		savingData.append("financialConsultantCode", $('#financialConsultantCode').val());
+		savingData.append("financialConsultantName", $('#financialConsultantName').val());
+		savingData.append("openingFees", $('#openingFees').val());
+		savingData.append("modeOfPayment", $('#modeOfPayment').val());
+		savingData.append("comment", $('#comment').val());
+
+		savingData.append("accountStatus", $('#toggle-account-status').is(':checked') ? 1 : 0);
+		savingData.append("messageSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
+		savingData.append("debitCardIssue", $('#toggle-debit-card').is(':checked') ? 1 : 0);
+
+		// Append image paths or Base64 values
+		//var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
+		//if (photo) financialData.append("customerPhoto", photo);
+		//var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
+		//if (signature) financialData.append("customerPhoto", signature);
+
+		/*financialData.append("customerPhoto", $('#financialphotoHidden').val());
+		financialData.append("customerSignature", $('#financialsignatureHidden').val());*/
+
+		const photoFile = $('#photo')[0].files[0];
+		const signatureFile = $('#signature')[0].files[0];
+
+		if (photoFile) {
+			savingData.append("photo", photoFile);
+		}
+
+		if (signatureFile) {
+			savingData.append("signature", signatureFile);
+		}
+
+
+		$.ajax({
+			url: "/api/customersavings/saveandupdatesavingaccount",
+			type: "POST",
+			data: savingData,
+			enctype: 'multipart/form-data',
+			contentType: false,
+			processData: false,
+			cache: false,
+			success: function(response) {
+				if (response.status === "OK") {
+					alert("Saving Account Updated Successfully");
+					location.reload();
+					// Optionally refresh the table or UI
+				} else {
+					alert("Something went wrong: " + response.message);
+				}
+			},
+			error: function(xhr) {
+				alert("Error while saving data: " + xhr.responseText);
+			}
+		});
+	});
+
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
@@ -306,4 +414,54 @@ function fetchByFinancialCode() {
 	});
 
 
+}
+//Ayush
+function photoUpload() {
+	const file = document.getElementById("photo").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("signature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }

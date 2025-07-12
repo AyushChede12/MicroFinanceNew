@@ -262,18 +262,6 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
-
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Survivor Status ID</label> <input type="text"
-									name="jointSurvivorCode" id="jointSurvivorCode" required="required"
-									placeholder="Enter Survivor Status ID" />
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -348,42 +336,47 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row mt-4">
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Photo <span class="star">*</span>
+							</label> <label for="photo" id="drop-area"> <input type="file"
+								accept="image/*" name="photo" id="photo" hidden="hidden"
+								onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
+
 									<!-- <p id="upload-text"
-                                style="font-size: 12px; margin-top: 15px"
-                                class="text-muted"
-                              >
-                                Drag and drop or Choose File to upload the image
-                              </p> -->
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
 								</div>
-							</label>
+							</label> <small id="chkphoto" style="color: red;"></small>
 						</div>
 
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Signature</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="signature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                                  style="font-size: 12px; margin-top: 15px"
-                                  class="text-muted"
-                                >
-                                  Drag and drop or Choose File to upload the image
-                                </p> -->
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+									<!-- <p
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
 								</div>
-							</label>
+							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
 						<div class="col-lg-3 mb-5">

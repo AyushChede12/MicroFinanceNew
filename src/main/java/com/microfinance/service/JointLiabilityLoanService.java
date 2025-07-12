@@ -13,8 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.GroupDirectoryDto;
+import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
 
@@ -25,6 +27,9 @@ public class JointLiabilityLoanService {
 
 	@Autowired
 	GroupDirectoryRepo groupDirectoryRepo;
+	
+	@Autowired
+	ApplyForGroupLoanRepo applyForGroupLoanRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -100,6 +105,7 @@ public class JointLiabilityLoanService {
 			GroupDirectory existing = optional.get();
 
 			// Update all fields
+			existing.setGroupID(updatedDirectory.getGroupID());
 			existing.setCommunityName(updatedDirectory.getCommunityName());
 			existing.setOpeningDate(updatedDirectory.getOpeningDate());
 			existing.setBranchName(updatedDirectory.getBranchName());
@@ -145,6 +151,7 @@ public class JointLiabilityLoanService {
 		}
 
 		// Map DTO to entity
+		groupDirectory.setGroupID(groupDirectoryDto.getGroupID());
 		groupDirectory.setCommunityName(groupDirectoryDto.getCommunityName());
 		groupDirectory.setOpeningDate(groupDirectoryDto.getOpeningDate());
 		groupDirectory.setBranchName(groupDirectoryDto.getBranchName());
@@ -225,6 +232,22 @@ public class JointLiabilityLoanService {
 		return groupDirectoryRepo.findAll();
 	}
 
+	public boolean saveGroupLoan(ApplyForGroupLoan applyGroupLoan) {
+		// TODO Auto-generated method stub
+		 try {
+			applyForGroupLoanRepo.save(applyGroupLoan);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public List<ApplyForGroupLoan> getAllApplyForGroupLoan() {
+		// TODO Auto-generated method stub
+		return applyForGroupLoanRepo.findAll();
+	}
+
+	
 	
 
 }
