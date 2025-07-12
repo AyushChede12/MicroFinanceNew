@@ -1,7 +1,7 @@
 package com.microfinance.repository;
 
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +22,8 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
     
 	@Query("select coalesce(max(id), 0) from AddnewinvestmentPM")
 	long getMaxId();
+
+	Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode);
 
 	
 
