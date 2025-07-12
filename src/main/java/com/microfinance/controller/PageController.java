@@ -21,6 +21,7 @@ import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.GroupDirectoryRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 import com.microfinance.repository.TransferShareRepo;
@@ -62,7 +63,10 @@ public class PageController {
 	CreateLendingGroupRepo createLendingGroupRepo;
 	
 	@Autowired
+	GroupDirectoryRepo groupDirectoryRepo;
+
 	AddInvestmentRepo addInvestmentRepo;
+
 	
 	
 	@GetMapping("/")
@@ -311,7 +315,10 @@ public class PageController {
 	}
 
 	@GetMapping("/groupDirectory")
-	public String getGroupDirectory() {
+	public String getGroupDirectory(Model model) {
+		long maxIdGD = groupDirectoryRepo.getMaxId();
+		String memberCodeGD = "GD" + "000" + (maxIdGD + 1);
+		model.addAttribute("memberCodeGD", memberCodeGD);
 		return "jointLiabilityLoan/groupDirectory";
 	}
 
@@ -1030,7 +1037,11 @@ public class PageController {
 		return "preferences/lockerManagement";
 	}
 	
-	
+	@GetMapping("/ViewAdvisorData")
+	public String ViewAdvisorData()
+	{
+		return "reportAndAnalytics/ReportAdvisor";
+	}
 
 	
 
