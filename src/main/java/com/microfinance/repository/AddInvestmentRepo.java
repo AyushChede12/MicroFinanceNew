@@ -24,7 +24,6 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Int
 	@Query("select coalesce(max(id), 0) from AddnewinvestmentPM")
 	long getMaxId();
 
-	List<AddnewinvestmentPM> findByPolicyCode(String policyCode);
 
 	
 

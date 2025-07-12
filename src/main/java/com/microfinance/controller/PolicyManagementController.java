@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -611,6 +612,42 @@ public class PolicyManagementController {
 		List<DailyDepositPM> list = policyManagementService.getAllDDTerm();
 		return list;
 	}
+	
+	
+	@GetMapping("/getAllRDPolicies")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllRDPolicies() {
+	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllInvestments(); // Fetch all
+
+	    // Filter policies where policyCode starts with "RD"
+	    List<AddnewinvestmentPM> rdPolicies = allPolicies.stream()
+	            .filter(p -> p.getPolicyCode() != null && p.getPolicyCode().startsWith("RD"))
+	            .collect(Collectors.toList());
+
+	    // Build response
+	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "RD policies fetched successfully",
+	            rdPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+
+	
+	
+	@GetMapping("/getAllPolicyManagementData")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllPolicyManagementData() {
+	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllPolicyManagementData();
+
+	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "All policy management data fetched successfully",
+	            allPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+
     
 }
 

@@ -13,7 +13,7 @@ public class GroupDirectory {
 	private Long id;
     private String communityName;
     private String openingDate;
-    private String assignedBranch;
+    private String branchName;
     private String communityLeader;
     private String contactNo;
     private String communityAddress;
@@ -23,10 +23,10 @@ public class GroupDirectory {
 
     // Group Member Link
     private String selectedMember;
-    private String memberName;
-    private String relativeDetails;
-    private String mobile;
-    private String previousLoan;
+    private String customerName;
+    private String referralDetails;
+    private String contact;
+    
 
     // Uploads
     private String uploadPhoto;        
@@ -50,11 +50,12 @@ public class GroupDirectory {
 	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
 	}
-	public String getAssignedBranch() {
-		return assignedBranch;
+	
+	public String getBranchName() {
+		return branchName;
 	}
-	public void setAssignedBranch(String assignedBranch) {
-		this.assignedBranch = assignedBranch;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 	public String getCommunityLeader() {
 		return communityLeader;
@@ -98,29 +99,24 @@ public class GroupDirectory {
 	public void setSelectedMember(String selectedMember) {
 		this.selectedMember = selectedMember;
 	}
-	public String getMemberName() {
-		return memberName;
+	
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
-	public String getRelativeDetails() {
-		return relativeDetails;
+	public String getReferralDetails() {
+		return referralDetails;
 	}
-	public void setRelativeDetails(String relativeDetails) {
-		this.relativeDetails = relativeDetails;
+	public void setReferralDetails(String referralDetails) {
+		this.referralDetails = referralDetails;
 	}
-	public String getMobile() {
-		return mobile;
+	public String getContact() {
+		return contact;
 	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	public String getPreviousLoan() {
-		return previousLoan;
-	}
-	public void setPreviousLoan(String previousLoan) {
-		this.previousLoan = previousLoan;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 	public String getUploadPhoto() {
 		return uploadPhoto;

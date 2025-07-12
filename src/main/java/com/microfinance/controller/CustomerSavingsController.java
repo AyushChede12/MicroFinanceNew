@@ -1,34 +1,46 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.ExecutiveFounderDto;
+import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.states;
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -38,6 +50,12 @@ public class CustomerSavingsController {
 
 	@Autowired
 	CustomerSavingsService customersaving;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
+	
+	@Value("${upload.directory}")
+	private String uploadDirectory;
 	
 	// Save Saving Scheme Catalog
     @PostMapping("/savescheme")
@@ -54,7 +72,7 @@ public class CustomerSavingsController {
         } else {
             ApiResponse<SavingSchemeCatalog> response = ApiResponse.error(
                 HttpStatus.BAD_REQUEST,
-                "Failed to save fixed deposit."
+                "Failed to save scheme."
             );
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
@@ -136,14 +154,37 @@ public class CustomerSavingsController {
   	}
   	
  
-  	//save saving account data
-    @PostMapping("/saveandupdatesavingaccount") 
-	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
-    	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
-		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"
-				: "Saving Account Details updated successfully";
-		ApiResponse<CreateSavingsAccount> response = new ApiResponse<>(HttpStatus.OK, message, savedEntity);
-		return ResponseEntity.ok(response);
+//  	//save saving account data
+//    @PostMapping("/saveandupdatesavingaccount") 
+//	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(@RequestBody CreateSavingsAccount createSavingsAccount) {
+//    	CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
+//		String message = (createSavingsAccount.getId() == null) ? "Saving Account Details Save successfully"
+//				: "Saving Account Details updated successfully";
+//		ApiResponse<CreateSavingsAccount> response = new ApiResponse<>(HttpStatus.OK, message, savedEntity);
+//		return ResponseEntity.ok(response);
+//	}
+    
+	@PostMapping("/saveandupdatesavingaccount")
+	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(
+			@ModelAttribute SavingAccountDto savingAccountDto,
+			@RequestParam(value = "photo", required = false) MultipartFile photo,
+			@RequestParam(value = "signature", required = false) MultipartFile signature) {
+
+		if (photo != null) {
+			System.out.println("Received photo: " + photo.getOriginalFilename());
+		}
+		if (signature != null) {
+			System.out.println("Received signature: " + signature.getOriginalFilename());
+		}
+
+		ApiResponse<CreateSavingsAccount> response = customersaving.saveSavingAccountDetails(savingAccountDto, photo,
+				signature);
+		// return new ResponseEntity<>(response, response.getStatus());
+		return ResponseEntity.ok(new ApiResponse<>(
+                HttpStatus.OK,
+                savingAccountDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
+                response.getData()
+        ));
 	}
     
     //fetch all saving accouunt data
@@ -223,7 +264,75 @@ public class CustomerSavingsController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
-   
-	
+   //update average balance of saving account by account number
+    @PostMapping("/updateaveragebalance")
+    public ResponseEntity<ApiResponse<String>> updateAverageBalance(@RequestBody CreateSavingsAccount createSavingsAccount) {
+        String accountNumber = createSavingsAccount.getAccountNumber();
+        String newBalance = createSavingsAccount.getOpeningAmount();
+
+        boolean isUpdated = customersaving.updateAverageBalance(accountNumber, newBalance);
+
+        if (isUpdated) {
+            ApiResponse<String> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Average balance updated successfully.",
+                "Updated account: " + accountNumber
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            ApiResponse<String> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "Account number not found or update failed."
+            );
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/transferAmount")
+    @Transactional
+    public ResponseEntity<?> transferAmount(
+            @RequestParam("debitAccountNo") String debitAccountNo,
+            @RequestParam("creditAccountNo") String creditAccountNo,
+            @RequestParam("amount") double amount) {
+        try {
+            
+          CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
+                  .orElseThrow(() -> new RuntimeException("Debit account not found"));
+
+          CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
+                  .orElseThrow(() -> new RuntimeException("Credit account not found"));
+
+          double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
+          System.out.println("debitBalance" +debitBalance);
+          double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+          System.out.println("creditBalance" +creditBalance);
+
+          
+          if (debitBalance < amount) {
+          	Map<String, String> response = new HashMap<>();
+          	response.put("message", "Insufficient balance in debit account");
+          	return ResponseEntity.badRequest().body(response);
+          }
+
+          // Update balances
+          debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
+          creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+          
+          // Save changes
+          createSavingAccountRepo.save(debitAccount);
+          createSavingAccountRepo.save(creditAccount);
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Amount transferred successfully");
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Transfer failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }
+
+
+
 	
 }

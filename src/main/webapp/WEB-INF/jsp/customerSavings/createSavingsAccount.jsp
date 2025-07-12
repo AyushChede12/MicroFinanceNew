@@ -10,8 +10,8 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous"></script>
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.46.0/apexcharts.min.js"></script>
+<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.46.0/apexcharts.min.js"></script> -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -29,7 +29,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
@@ -303,7 +303,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Authentication for</label> <select
-							id="familyRelation" name="familyRelation" required="required"
+							id="authenticateWith" name="authenticateWith" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select</option>
 							<option value="Aadhar">Aadhar</option>
@@ -383,6 +383,54 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 			</div>
+			
+			<div class="row mt-4">
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Photo <span class="star">*</span>
+							</label> <label for="photo" id="drop-area"> <input type="file"
+								accept="image/*" name="photo" id="photo" hidden="hidden"
+								onchange="photoUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
+
+									<!-- <p id="upload-text"
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
+								</div>
+							</label> <small id="chkphoto" style="color: red;"></small>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="signature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+									<!-- <p
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
+								</div>
+							</label> <small id="chksignature" style="color: red;"></small>
+						</div>
+
+					</div>
 
 			<div class="row">
 				<div class="col-12 text-center">

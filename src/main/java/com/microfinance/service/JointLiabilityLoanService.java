@@ -102,7 +102,7 @@ public class JointLiabilityLoanService {
 			// Update all fields
 			existing.setCommunityName(updatedDirectory.getCommunityName());
 			existing.setOpeningDate(updatedDirectory.getOpeningDate());
-			existing.setAssignedBranch(updatedDirectory.getAssignedBranch());
+			existing.setBranchName(updatedDirectory.getBranchName());
 			existing.setCommunityLeader(updatedDirectory.getCommunityLeader());
 			existing.setContactNo(updatedDirectory.getContactNo());
 			existing.setCommunityAddress(updatedDirectory.getCommunityAddress());
@@ -111,10 +111,10 @@ public class JointLiabilityLoanService {
 			existing.setCollectionTime(updatedDirectory.getCollectionTime());
 
 			existing.setSelectedMember(updatedDirectory.getSelectedMember());
-			existing.setMemberName(updatedDirectory.getMemberName());
-			existing.setRelativeDetails(updatedDirectory.getRelativeDetails());
-			existing.setMobile(updatedDirectory.getMobile());
-			existing.setPreviousLoan(updatedDirectory.getPreviousLoan());
+			existing.setCustomerName(updatedDirectory.getCustomerName());
+			existing.setReferralDetails(updatedDirectory.getReferralDetails());
+			existing.setContact(updatedDirectory.getContact());
+			
 
 			existing.setUploadPhoto(updatedDirectory.getUploadPhoto());
 			existing.setUploadSignature(updatedDirectory.getUploadSignature());
@@ -147,7 +147,7 @@ public class JointLiabilityLoanService {
 		// Map DTO to entity
 		groupDirectory.setCommunityName(groupDirectoryDto.getCommunityName());
 		groupDirectory.setOpeningDate(groupDirectoryDto.getOpeningDate());
-		groupDirectory.setAssignedBranch(groupDirectoryDto.getAssignedBranch());
+		groupDirectory.setBranchName(groupDirectoryDto.getBranchName());
 		groupDirectory.setCommunityLeader(groupDirectoryDto.getCommunityLeader());
 		groupDirectory.setContactNo(groupDirectoryDto.getContactNo());
 		groupDirectory.setCommunityAddress(groupDirectoryDto.getCommunityAddress());
@@ -155,10 +155,10 @@ public class JointLiabilityLoanService {
 		groupDirectory.setCollectionDay(groupDirectoryDto.getCollectionDay());
 		groupDirectory.setCollectionTime(groupDirectoryDto.getCollectionTime());
 		groupDirectory.setSelectedMember(groupDirectoryDto.getSelectedMember());
-		groupDirectory.setMemberName(groupDirectoryDto.getMemberName());
-		groupDirectory.setRelativeDetails(groupDirectoryDto.getRelativeDetails());
-		groupDirectory.setMobile(groupDirectoryDto.getMobile());
-		groupDirectory.setPreviousLoan(groupDirectoryDto.getPreviousLoan());
+		groupDirectory.setCustomerName(groupDirectoryDto.getCustomerName());
+		groupDirectory.setReferralDetails(groupDirectoryDto.getReferralDetails());
+		groupDirectory.setContact(groupDirectoryDto.getContact());
+		
 
 		// Photo save
 		if (uploadPhoto != null && !uploadPhoto.isEmpty()) {
@@ -218,6 +218,11 @@ public class JointLiabilityLoanService {
 
 	public GroupDirectory getGroupDirectoryById(Long id) {
 		return groupDirectoryRepo.findById(id).orElse(null);
+	}
+
+	public List<GroupDirectory> getaddquedata() {
+		// TODO Auto-generated method stub
+		return groupDirectoryRepo.findAll();
 	}
 
 	

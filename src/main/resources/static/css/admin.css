@@ -1091,3 +1091,27 @@ li.selected {
 li.selected {
     background-color: #f2f2f2;
 }
+
+/* Make Select2 placeholder text smaller */
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    font-size: 12px !important;  /* or your desired size */
+    color: #888; /* optional: make it lighter */
+}
+
+/* 1. Smaller font for placeholder and selected item */
+.select2-container--default .select2-selection--single {
+    font-size: 12px !important;  /* Adjust font size here */
+    height: 32px !important;     /* Optional: adjust height to match smaller font */
+    padding: 4px 8px !important;
+}
+
+/* 2. Smaller font for dropdown items */
+.select2-container--default .select2-results__option {
+    font-size: 12px !important;
+}
+
+/* 3. Smaller font for placeholder text specifically */
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    font-size: 12px !important;
+    color: #888;
+}
