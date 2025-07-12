@@ -8,6 +8,8 @@ pageEncoding="ISO-8859-1"%> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/ae73087723.js"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet" />
 <script
@@ -125,7 +127,12 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 		</div>
-
+<div class="row">
+			<div class="col-12 d-flex justify-content-end mt-3">
+				<button id="approvedBtn" class="btnStyle"
+					style="background-color: #FFA500;">Approved</button>
+			</div>
+		</div>
 		</div>
 
 
