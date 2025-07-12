@@ -112,8 +112,8 @@ $(document).ready(function() {
 	$("#financialCode").change(function() {
 		let financialCode = $("#financialCode").val();
 		$.ajax({
-			type: "POST",
-			url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
+			type: "GET",
+			url: "/api/financialconsultant/getfinancialHierarchyByFinancialCode",
 			data: { financialCode: financialCode },
 			success: function(response) {
 				if (response.status == "OK") {

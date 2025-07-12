@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	
+	//Without Search in Dropdown
 	/*$.ajax({
 		url: "/api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
@@ -18,6 +19,7 @@ $(document).ready(function() {
 		}
 	}); */
 	
+	//With Search in Dropdown
 	$.ajax({
 	    url: '/api/financialconsultant/getAllCustomerCodes',
 	    type: 'POST',
