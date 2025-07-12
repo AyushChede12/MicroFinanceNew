@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	//Search Without Dropdown
 	/*$.ajax({
 		url: "/api/Policymangment/getaddinvestmentdetails",
@@ -87,94 +87,155 @@ $(document).ready(function() {
 
 	$("#policyCode").change(function() {
 		let policyCode = $("#policyCode").val();
+		if (!policyCode) {
+			alert("Please enter/select a Policy Code.");
+			return;
+		}
+
 		$.ajax({
-			type: "POST",
-			url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
-			data: { financialCode: financialCode },
+			type: "GET",
+			url: "api/Policymangment/getPolicyByPolicyCode",
+			data: { policyCode: policyCode },
 			success: function(response) {
-				if (response.status == "OK") {
-					let data = response.data[0];
-					$("#id").val(data.id);
-					$("#joiningDate").val(data.joiningDate);
-					$("#memberCode").val(data.memberCode);
+				console.log("Full Response:", response);
+
+				if (response.status === "OK" && response.data) {
+					let data = response.data; // ✅ direct object access
+
+					// Populate form fields
+					$("#policyStartDate").val(data.policyStartDate);
+					$("#memberSelection").val(data.memberSelection);
 					$("#customerName").val(data.customerName);
-					$("#dob").val(data.dob);
-					$("#customerAge").val(data.customerAge);
-					$("#guardianName").val(data.guardianName);
-					$("#relationToApplicant").val(data.relationToApplicant);
+					$("#dateofBirth").val(data.dateofBirth);
+					$("#relationDetails").val(data.relationDetails);
 					$("#contactNo").val(data.contactNo);
-					$("#nomineeName").val(data.nomineeName);
-					$("#branchName").val(data.branchName);
-					$("#nomineeAge").val(data.nomineeAge);
-					$("#customerAddress").val(data.customerAddress);
+					$("#suggestedNominee").val(data.suggestedNominee);
+					$("#relationToApplicant").val(data.relation);
+					$("#address").val(data.address);
 					$("#district").val(data.district);
 					$("#state").val(data.state);
 					$("#pinCode").val(data.pinCode);
-					$("#profession").val(data.profession);
-					$("#academicBackground").val(data.academicBackground);
-					//$("#financialPhotoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
-					//$("#financialSignaturePreview").attr("src", data.customerSignature ? `Uploads/${data.customerSignature}` : "Uploads/default-placeholder.jpg");
+					$("#branchName").val(data.branchName);
+					$("#ModeOfOperation").val(data.ModeOfOperation);
+					$("#maturityDate").val(data.maturityDate);
+					$("#schemeType").val(data.schemeType);
+					$("#schemeTerm").val(data.schemeTerm);
+					$("#schemeMode").val(data.schemeMode);
+					$("#policyAmount").val(data.policyAmount);
+					$("#depositAmount").val(data.depositAmount);
+					$("#maturityAmount").val(data.maturityAmount);
+					$("#MISInterest").val(data.MISInterest);
+					$("#paymentBy").val(data.paymentBy);
+					$("#remark").val(data.remark);
 
-					/*if (data.customerPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto).show();
-						$('#financialphotoHidden').val(data.customerPhoto);
-					}
-
-					if (data.customerSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature).show();
-						$('#financialsignatureHidden').val(data.customerSignature);
-					}*/
-
-					// Image bindings (photo and signature)
-					if (data.customerPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto);
-						$('#financialphotoHidden').val(data.customerPhoto); // Store file name for fallback
+					// Photo preview
+					if (data.image1) {
+						const photoPath = `Uploads/${data.image1}`;
+						$("#photoPreview").attr("src", photoPath).show();
+						$("#photoHidden").val(data.image1);
 					} else {
-						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg").show();
+						$("#photoHidden").val("");
 					}
 
-					if (data.customerSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature);
-						$('#financialsignatureHidden').val(data.customerSignature); // Store file name for fallback
+					// Signature preview
+					if (data.image2) {
+						const signPath = `Uploads/${data.image2}`;
+						$("#signaturePreview").attr("src", signPath).show();
+						$("#signatureHidden").val(data.image2);
 					} else {
-						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg").show();
+						$("#signatureHidden").val("");
 					}
 
-
-					$("#selectPosition").val(data.selectPosition);
-					$("#referralCode").val(data.referralCode);
-					$("#referralName").val(data.referralName);
-
-					$("#fees").val(data.fees);
-					$("#modeofPayment").val(data.modeofPayment);
-					$("#comments").val(data.comments);
-
-					if (parseInt(data.financialStatus) === 1) {
-						$('#toggle-financial-status').prop('checked', true);
-					} else {
-						$('#toggle-financial-status').prop('checked', false);
-					}
-
-					if (parseInt(data.smsSend) === 1) {
-						$('#toggle-sms-send').prop('checked', true);
-					} else {
-						$('#toggle-sms-send').prop('checked', false);
-					}
-
-					updateToggleColor(document.getElementById('toggle-financial-status'));
+					// SMS toggle
+					const isSmsSend = parseInt(data.smsSend) === 1;
+					$('#toggle-sms-send').prop('checked', isSmsSend);
 					updateToggleColor(document.getElementById('toggle-sms-send'));
 
-
 				} else {
-					alert("Transfer Share Details Not Found For Customer");
+					alert("Policy Details Not Found For Customer");
 				}
 			},
 			error: function() {
-				alert("Shares not found or server error");
+				alert("Policy not found or server error");
 			}
 		});
-
 	});
+
+	$('#updateBtn').click(function(e) {
+		e.preventDefault();
+
+		let savingData = new FormData();
+
+		// Append regular text fields
+		savingData.append("id", $('#id').val());
+		savingData.append("policyCode", $('#policyCode').val());
+		savingData.append("policyStartDate", $('#policyStartDate').val());
+		savingData.append("memberSelection", $('#memberSelection').val());
+		savingData.append("customerName", $('#customerName').val());
+		savingData.append("dateofBirth", $('#dateofBirth').val());
+		savingData.append("relationDetails", $('#relationDetails').val());
+		savingData.append("contactNo", $('#contactNo').val());
+		savingData.append("suggestedNominee", $('#suggestedNominee').val());
+		savingData.append("relationToApplicant", $('#relationToApplicant').val());
+		savingData.append("address", $('#address').val());
+		savingData.append("district", $('#district').val());
+		savingData.append("state", $('#state').val());
+		savingData.append("pinCode", $('#pinCode').val());
+		savingData.append("branchName", $('#branchName').val());
+		savingData.append("ModeOfOperation", $('#ModeOfOperation').val());
+		savingData.append("maturityDate", $('#maturityDate').val());
+		savingData.append("schemeType", $('#schemeType').val());
+		savingData.append("schemeTerm", $('#schemeTerm').val());
+		savingData.append("schemeMode", $('#schemeMode').val());
+		savingData.append("policyAmount", $('#policyAmount').val());
+		savingData.append("depositAmount", $('#depositAmount').val());
+		savingData.append("maturityAmount", $('#maturityAmount').val());
+		savingData.append("MISInterest", $('#MISInterest').val());
+		
+		//Fees Details
+		savingData.append("paymentBy", $('#paymentBy').val());
+		savingData.append("remark", $('#remark').val());
+
+		savingData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
+
+		//Image
+		const photoFile = $('#image1')[0].files[0];
+		const signatureFile = $('#image2')[0].files[0];
+
+		if (photoFile) {
+			savingData.append("image1", photoFile);
+		}
+
+		if (signatureFile) {
+			savingData.append("image2", signatureFile);
+		}
+
+
+		$.ajax({
+			url: "/api/customersavings/saveandupdatesavingaccount",
+			type: "POST",
+			data: savingData,
+			enctype: 'multipart/form-data',
+			contentType: false,
+			processData: false,
+			cache: false,
+			success: function(response) {
+				if (response.status === "OK") {
+					alert("Saving Account Updated Successfully");
+					location.reload();
+					// Optionally refresh the table or UI
+				} else {
+					alert("Something went wrong: " + response.message);
+				}
+			},
+			error: function(xhr) {
+				alert("Error while saving data: " + xhr.responseText);
+			}
+		});
+	});
+
 
 });
 
@@ -199,3 +260,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+
+function updateToggleColor(input) {
+	const label = input.nextElementSibling;
+	if (input.checked) {
+		label.style.backgroundColor = "#4caf50";  // green
+		label.style.borderColor = "#4caf50";
+	} else {
+		label.style.backgroundColor = "#ccc";  // gray
+		label.style.borderColor = "#ccc";
+	}
+}

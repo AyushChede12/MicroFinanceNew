@@ -286,15 +286,7 @@ $(document).ready(function() {
 		savingData.append("messageSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 		savingData.append("debitCardIssue", $('#toggle-debit-card').is(':checked') ? 1 : 0);
 
-		// Append image paths or Base64 values
-		//var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (photo) financialData.append("customerPhoto", photo);
-		//var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (signature) financialData.append("customerPhoto", signature);
-
-		/*financialData.append("customerPhoto", $('#financialphotoHidden').val());
-		financialData.append("customerSignature", $('#financialsignatureHidden').val());*/
-
+		//Image
 		const photoFile = $('#photo')[0].files[0];
 		const signatureFile = $('#signature')[0].files[0];
 

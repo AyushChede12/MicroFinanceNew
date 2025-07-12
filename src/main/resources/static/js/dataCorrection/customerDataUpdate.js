@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	//Without Search in Dropdown
 	/*$.ajax({
 		url: "/api/financialconsultant/getAllCustomerCodes",
@@ -18,53 +18,53 @@ $(document).ready(function() {
 			alert("Failed to load customer codes.");
 		}
 	}); */
-	
+
 	//With Search in Dropdown
 	$.ajax({
-	    url: '/api/financialconsultant/getAllCustomerCodes',
-	    type: 'POST',
-	    success: function(response) {
-	        if (response.status === "FOUND") {
-	            let customerOptions = response.data.map(function (item) {
-	                return {
-	                    id: item.memberCode,
-	                    text: item.memberCode + " - " + item.customerName
-	                };
-	            });
+		url: '/api/financialconsultant/getAllCustomerCodes',
+		type: 'POST',
+		success: function(response) {
+			if (response.status === "FOUND") {
+				let customerOptions = response.data.map(function(item) {
+					return {
+						id: item.memberCode,
+						text: item.memberCode + " - " + item.customerName
+					};
+				});
 
-	            // Initialize Select2 with full data and custom search matcher
-	            $('#customerCode').select2({
-	                placeholder: '-- Search Customer Code or Name --',
-	                data: customerOptions,
-	                matcher: function(params, data) {
-	                    // If no search term, return all
-	                    if ($.trim(params.term) === '') {
-	                        return data;
-	                    }
+				// Initialize Select2 with full data and custom search matcher
+				$('#customerCode').select2({
+					placeholder: '-- Search Customer Code or Name --',
+					data: customerOptions,
+					matcher: function(params, data) {
+						// If no search term, return all
+						if ($.trim(params.term) === '') {
+							return data;
+						}
 
-	                    if (typeof data.text === 'undefined') {
-	                        return null;
-	                    }
+						if (typeof data.text === 'undefined') {
+							return null;
+						}
 
-	                    // Case-insensitive match on memberCode or customerName
-	                    const term = params.term.toLowerCase();
-	                    const text = data.text.toLowerCase();
+						// Case-insensitive match on memberCode or customerName
+						const term = params.term.toLowerCase();
+						const text = data.text.toLowerCase();
 
-	                    if (text.includes(term)) {
-	                        return data;
-	                    }
+						if (text.includes(term)) {
+							return data;
+						}
 
-	                    return null;
-	                }
-	            });
+						return null;
+					}
+				});
 
-	        } else {
-	            alert("No customer codes found.");
-	        }
-	    },
-	    error: function() {
-	        alert("Failed to load customer codes.");
-	    }
+			} else {
+				alert("No customer codes found.");
+			}
+		},
+		error: function() {
+			alert("Failed to load customer codes.");
+		}
 	});
 
 
@@ -103,7 +103,32 @@ $(document).ready(function() {
 						$("#referralCode").val(data.referralCode);
 						$("#referralName").val(data.referralName);
 						$("#minor").val(data.minor);
-						$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
+						//$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
+
+						if (data.customerPhoto) {
+							const photoPath = `Uploads/${data.customerPhoto}`;
+							$("#photoPreview").attr("src", photoPath);
+							$("#photoHidden").val(photoPath);
+							const fakePhotoEvent = { target: { result: photoPath } };
+							photoSizeEdit(fakePhotoEvent);
+
+						} else {
+							$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+							$("#photoHidden").val("");
+						}
+
+						// Image: Signature
+						/*if (data.customerSignature) {
+							const signPath = `Uploads/${data.customerSignature}`;
+							$("#signaturePreview").attr("src", signPath);
+							$("#signatureHidden").val(signPath);
+							const fakeSignEvent = { target: { result: signPath } };
+							signatureSizeEdit(fakeSignEvent);
+
+						} else {
+							$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+							$("#signatureHidden").val("");
+						}*/
 
 						//Nominee 
 						$("#nomineeName").val(data.nomineeName);
@@ -429,14 +454,9 @@ function photoUpload() {
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("photoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("photoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -451,14 +471,8 @@ function signatureUpload() {
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("signaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("signaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -512,8 +526,11 @@ function updateCustomerBasicInfo(id) {
 		customerData.append("netBanking", $('#toggle-net-banking').is(':checked') ? 1 : 0);
 		customerData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 
-		var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		if (photo) customerData.append("customerPhoto", photo);
+		const photoFile = $('#customerPhoto')[0].files[0];
+
+		if (photoFile) {
+			customerData.append("customerPhoto", photoFile);
+		}
 
 		$.ajax({
 			type: 'POST',
@@ -554,4 +571,24 @@ function updateCustomerRemainingData(id) {
 			}
 		});
 	});
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }
