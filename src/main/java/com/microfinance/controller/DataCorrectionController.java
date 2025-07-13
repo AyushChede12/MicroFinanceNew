@@ -20,10 +20,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
+import com.microfinance.dto.FinancialConsultantDto;
+import com.microfinance.dto.PolicyManagementDto;
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
 import com.microfinance.service.DataCorrectionService;
@@ -65,6 +69,7 @@ public class DataCorrectionController {
 		}
 	}
 	
+	//Ayush
 	@GetMapping("/fetchAllSavingAccountActivity")
 	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> fetchAllSavingAccountActivity() {
 		List<SavingAccountActivity> list = dataCorrectionService.fetchAllSavingAccountActivity();
@@ -73,6 +78,7 @@ public class DataCorrectionController {
 		return ResponseEntity.ok(response);
 	}
 	
+	//Ayush
 	@PostMapping("/deleteSavingTransactionRemoval")        
 	public ResponseEntity<ApiResponse<String>> deleteSavingTransaction(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteSavingTransaction(id);
@@ -85,6 +91,23 @@ public class DataCorrectionController {
 					"Saving Transaction deletion failed", "failure");
 			return ResponseEntity.badRequest().body(response);
 		}
+	}
+	
+	//Ayush
+	@PostMapping("/saveOrUpdatePolicyManagement")
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveOrUpdatePolicyManagementData(
+	        @ModelAttribute PolicyManagementDto policyManagementDto,
+	        @RequestParam(value = "image1", required = false) MultipartFile image1, @RequestParam(value = "image2", required = false) MultipartFile image2) {
+		
+		 // System.out.println("Received file: " + (signature != null ? signature.getOriginalFilename() : "No file uploaded"));
+		 
+		
+		System.out.println("Received financialPhoto: " + image1);
+	    
+	    System.out.println("Received Signature: " + image2);	    
+	    
+	    ApiResponse<AddnewinvestmentPM> response = dataCorrectionService.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
+	    return new ResponseEntity<>(response, response.getStatus());
 	}
 	
 

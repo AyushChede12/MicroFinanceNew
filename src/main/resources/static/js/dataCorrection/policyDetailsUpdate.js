@@ -68,13 +68,13 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/financialconsultant/getAllCustomerCodes",
-		type: "POST",
+		url: "/api/Policymangment/getAllPolicyManagementData",
+		type: "GET",
 		success: function(response) {
-			if (response.status === "FOUND") {
-				$("#customerCode").empty().append("<option value=''>-- Select Code --</option>");
+			if (response.status === "OK") {
+				$("#memberSelection").empty().append("<option value=''>-- Select Code --</option>");
 				response.data.forEach(function(item) {
-					$("#customerCode").append(`<option value='${item.memberCode}'>${item.memberCode}</option>`);
+					$("#memberSelection").append(`<option value='${item.memberSelection}'>${item.memberSelection}</option>`);
 				});
 			} else {
 				alert("No customer codes found.");
@@ -103,6 +103,7 @@ $(document).ready(function() {
 					let data = response.data; // ✅ direct object access
 
 					// Populate form fields
+					$("#id").val(data.id);
 					$("#policyStartDate").val(data.policyStartDate);
 					$("#memberSelection").val(data.memberSelection);
 					$("#customerName").val(data.customerName);
@@ -133,6 +134,8 @@ $(document).ready(function() {
 						const photoPath = `Uploads/${data.image1}`;
 						$("#photoPreview").attr("src", photoPath).show();
 						$("#photoHidden").val(data.image1);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						photoSizeEdit(fakePhotoEvent);
 					} else {
 						$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg").show();
 						$("#photoHidden").val("");
@@ -166,64 +169,65 @@ $(document).ready(function() {
 	$('#updateBtn').click(function(e) {
 		e.preventDefault();
 
-		let savingData = new FormData();
+		let policyData = new FormData();
 
 		// Append regular text fields
-		savingData.append("id", $('#id').val());
-		savingData.append("policyCode", $('#policyCode').val());
-		savingData.append("policyStartDate", $('#policyStartDate').val());
-		savingData.append("memberSelection", $('#memberSelection').val());
-		savingData.append("customerName", $('#customerName').val());
-		savingData.append("dateofBirth", $('#dateofBirth').val());
-		savingData.append("relationDetails", $('#relationDetails').val());
-		savingData.append("contactNo", $('#contactNo').val());
-		savingData.append("suggestedNominee", $('#suggestedNominee').val());
-		savingData.append("relationToApplicant", $('#relationToApplicant').val());
-		savingData.append("address", $('#address').val());
-		savingData.append("district", $('#district').val());
-		savingData.append("state", $('#state').val());
-		savingData.append("pinCode", $('#pinCode').val());
-		savingData.append("branchName", $('#branchName').val());
-		savingData.append("ModeOfOperation", $('#ModeOfOperation').val());
-		savingData.append("maturityDate", $('#maturityDate').val());
-		savingData.append("schemeType", $('#schemeType').val());
-		savingData.append("schemeTerm", $('#schemeTerm').val());
-		savingData.append("schemeMode", $('#schemeMode').val());
-		savingData.append("policyAmount", $('#policyAmount').val());
-		savingData.append("depositAmount", $('#depositAmount').val());
-		savingData.append("maturityAmount", $('#maturityAmount').val());
-		savingData.append("MISInterest", $('#MISInterest').val());
-		
-		//Fees Details
-		savingData.append("paymentBy", $('#paymentBy').val());
-		savingData.append("remark", $('#remark').val());
+		policyData.append("id", $('#id').val());
+		policyData.append("policyCode", $('#policyCode').val());
+		policyData.append("policyStartDate", $('#policyStartDate').val());
+		policyData.append("memberSelection", $('#memberSelection').val());
+		policyData.append("customerName", $('#customerName').val());
+		policyData.append("dateofBirth", $('#dateofBirth').val());
+		policyData.append("relationDetails", $('#relationDetails').val());
+		policyData.append("contactNo", $('#contactNo').val());
+		policyData.append("suggestedNominee", $('#suggestedNominee').val());
+		policyData.append("relationToApplicant", $('#relationToApplicant').val());
+		policyData.append("address", $('#address').val());
+		policyData.append("district", $('#district').val());
+		policyData.append("state", $('#state').val());
+		policyData.append("pinCode", $('#pinCode').val());
+		policyData.append("branchName", $('#branchName').val());
+		policyData.append("ModeOfOperation", $('#ModeOfOperation').val());
+		policyData.append("maturityDate", $('#maturityDate').val());
+		policyData.append("schemeType", $('#schemeType').val());
+		policyData.append("schemeTerm", $('#schemeTerm').val());
+		policyData.append("schemeMode", $('#schemeMode').val());
+		policyData.append("policyAmount", $('#policyAmount').val());
+		policyData.append("depositAmount", $('#depositAmount').val());
+		policyData.append("maturityAmount", $('#maturityAmount').val());
+		policyData.append("MISInterest", $('#MISInterest').val());
 
-		savingData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
+		//Fees Details
+		policyData.append("paymentBy", $('#paymentBy').val());
+		policyData.append("remark", $('#remark').val());
+
+		policyData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 
 		//Image
 		const photoFile = $('#image1')[0].files[0];
 		const signatureFile = $('#image2')[0].files[0];
 
 		if (photoFile) {
-			savingData.append("image1", photoFile);
+			policyData.append("image1", photoFile);
 		}
 
 		if (signatureFile) {
-			savingData.append("image2", signatureFile);
+			policyData.append("image2", signatureFile);
 		}
 
 
 		$.ajax({
-			url: "/api/customersavings/saveandupdatesavingaccount",
+			url: "/api/datacorrection/saveOrUpdatePolicyManagement",
 			type: "POST",
-			data: savingData,
+			data: policyData,
 			enctype: 'multipart/form-data',
 			contentType: false,
 			processData: false,
 			cache: false,
 			success: function(response) {
+				alert("success");
 				if (response.status === "OK") {
-					alert("Saving Account Updated Successfully");
+					alert("Policy Details Updated Successfully");
 					location.reload();
 					// Optionally refresh the table or UI
 				} else {
@@ -270,4 +274,55 @@ function updateToggleColor(input) {
 		label.style.backgroundColor = "#ccc";  // gray
 		label.style.borderColor = "#ccc";
 	}
+}
+
+function photoUpload() {
+	const file = document.getElementById("image1").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("image2").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }

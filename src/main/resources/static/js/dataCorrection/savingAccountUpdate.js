@@ -159,33 +159,6 @@ $(document).ready(function() {
 					//Payment Details
 					$("#modeOfPayment").val(data.modeOfPayment);
 					$("#comment").val(data.comment);
-					//$("#financialPhotoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
-					//$("#financialSignaturePreview").attr("src", data.customerSignature ? `Uploads/${data.customerSignature}` : "Uploads/default-placeholder.jpg");
-
-					/*if (data.customerPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto).show();
-						$('#financialphotoHidden').val(data.customerPhoto);
-					}
-
-					if (data.customerSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature).show();
-						$('#financialsignatureHidden').val(data.customerSignature);
-					}*/
-
-					// Image bindings (photo and signature)
-					/*if (data.customerPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto);
-						$('#financialphotoHidden').val(data.customerPhoto); // Store file name for fallback
-					} else {
-						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
-					}
-
-					if (data.customerSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature);
-						$('#financialsignatureHidden').val(data.customerSignature); // Store file name for fallback
-					} else {
-						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
-					}*/
 
 					if (data.photo) {
 						const photoPath = `Uploads/${data.photo}`;

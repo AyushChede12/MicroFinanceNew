@@ -51,7 +51,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Data Correction </h1>
+			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
@@ -108,18 +108,18 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>:Member Selection        
                 </div>
               </div> -->
-              <input type="hidden" name="id" id="id">
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="policyStartDate">Policy Date</label> <input type="date"
-									name="policyStartDate" id="policyStartDate" required="required"
-									style="text-transform: uppercase;" />
+								<label for="policyStartDate">Policy Date</label> <input
+									type="date" name="policyStartDate" id="policyStartDate"
+									required="required" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="memberSelection">Customer Selection </label> <select id="memberSelection"
-									name="memberSelection" required="required"
+								<label for="memberSelection">Customer Selection </label> <select
+									id="memberSelection" name="memberSelection" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
@@ -129,18 +129,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="customerName">Customer Name</label> <input type="text" name="customerName"
-									id="customerName" required="required"
-									placeholder="Enter Customer Name"
+								<label for="customerName">Customer Name</label> <input
+									type="text" name="customerName" id="customerName"
+									required="required" placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="dateofBirth">Date of Birth </label> <input type="date" name="dateofBirth"
-									id="dateofBirth" required="required"
-									style="text-transform: uppercase;" />
+								<label for="dateofBirth">Date of Birth </label> <input
+									type="date" name="dateofBirth" id="dateofBirth"
+									required="required" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -167,8 +167,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Suggested Nominee </label> <input type="text" name="suggestedNominee"
-									id="suggestedNominee" required="required"
+								<label>Suggested Nominee </label> <input type="text"
+									name="suggestedNominee" id="suggestedNominee"
+									required="required"
 									placeholder="Enter Suggested Nominee            "
 									style="text-transform: uppercase;" />
 							</div>
@@ -178,23 +179,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="">Relation</label> <select id="relationToApplicant" name="relationToApplicant"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Relationship Status</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Relation</label> <select id="relationToApplicant"
+									name="relationToApplicant" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Relationship Status</option>
-									<option value="Married">Married</option>
-									<option value="Unmarried">Unmarried</option>
-									<option value="Divorced">Divorced</option>
-									<option value="Single">Single</option>
 								</select>
 							</div>
 						</div>
@@ -232,8 +219,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="branchName">Branch Name</label><select id="branchName"
-									name="branchName" required="required"
+								<label for="branchName">Branch Name</label><select
+									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
@@ -241,8 +228,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="ModeOfOperation">Mode of Operation </label> <select id="ModeOfOperation"
-									name="ModeOfOperation" required="required"
+								<label for="ModeOfOperation">Mode of Operation </label> <select
+									id="ModeOfOperation" name="ModeOfOperation" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Mode</option>
 									<option value="Single">Single</option>
@@ -251,7 +238,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="maturityDate">Payoff Date</label> <input type="date"
@@ -262,11 +249,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>  Policy Type  </label> <select id="schemeType" name="schemeType"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select </option>
-									<option value="Blue">RD</option>
+								<label> Policy Type </label> <select id="schemeType"
+									name="schemeType" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
+									<option value="RD">RD</option>
 
 
 								</select>
@@ -275,7 +262,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="schemeTerm" >Policy Term  </label> <input type="text"
+								<label for="schemeTerm">Policy Term </label> <input type="text"
 									name="schemeTerm" id="schemeTerm" required="required"
 									placeholder="Enter Policy Term" />
 							</div>
@@ -283,11 +270,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Mode</label> <select id="colour"
-									name="colour" required="required"
+								<label for="schemeMode">Policy Mode</label> <select
+									id="schemeMode" name="schemeMode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Mode</option>
-									<option value="Blue">RD</option>
+									<option value="Daily">Daily</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+									<option value="Yearly">Yearly</option>
 
 
 								</select>
@@ -297,32 +287,33 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="policyAmount">Policy Amount</label> <input type="text"
-									name="policyAmount" id="policyAmount" required="required"
-									placeholder="Enter Policy Amount" />
+								<label for="policyAmount">Policy Amount</label> <input
+									type="text" name="policyAmount" id="policyAmount"
+									required="required" placeholder="Enter Policy Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label>Deposit Amount</label> <input type="text" name="depositAmount"
-									id="depositAmount" required="required"
+								<label>Deposit Amount</label> <input type="text"
+									name="depositAmount" id="depositAmount" required="required"
 									placeholder="Enter Deposit Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label>MAturity Amount</label> <input type="text" name="maturityAmount"
-									id="maturityAmount" required="required"
+								<label>MAturity Amount</label> <input type="text"
+									name="maturityAmount" id="maturityAmount" required="required"
 									placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label>MIS Interest</label> <input type="text" name="MISInterest"
-									id="MISInterest" required="required" placeholder="Enter MIS Interest" />
+								<label>MIS Interest</label> <input type="text"
+									name="MISInterest" id="MISInterest" required="required"
+									placeholder="Enter MIS Interest" />
 							</div>
 						</div>
 
@@ -333,9 +324,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
-							</label> <label for="photo" id="drop-area"> <input type="file"
-								accept="image/*" name="image1" id="image1" hidden="hidden"
-								onchange="photoUpload();"
+							</label> <label for="image1" id="drop-area"> <input
+								type="file" accept="image/*" name="image1"
+								id="image1" hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -356,7 +347,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span class="star">*</span>
-							</label> <label for="signature" id="drop-area"> <input
+							</label> <label for="image2" id="drop-area"> <input
 								type="file" accept="image/*" name="image2" id="image2"
 								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -387,9 +378,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Mode Of Payment </label> <select id="paymentBy" name="paymentBy"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label>Mode Of Payment </label> <select id="paymentBy"
+									name="paymentBy" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Cash">Cash</option>
 									<option value="Online">Online</option>
@@ -416,8 +407,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<div class="cont">
 										<div class="toggle">
 											<input type="checkbox" id="toggle-sms-send" name="smsSend"
-												class="toggle__input" data-toggle-type="sms-send">
-											<label for="toggle-sms-send" class="toggle__label"></label>
+												class="toggle__input" data-toggle-type="sms-send"> <label
+												for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -448,7 +439,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			</form>
 
-			
+
 
 		</div>
 
@@ -457,7 +448,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/policyDetailsUpdate.js"></script>
-	
+
 </body>
 
 </html>
