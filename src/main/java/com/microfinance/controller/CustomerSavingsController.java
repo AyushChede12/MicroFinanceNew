@@ -349,23 +349,23 @@ public class CustomerSavingsController {
         return ResponseEntity.ok(response);
     }
     
-// // Api for fetching the account details with the help of account number (vaibhav)
-//    @GetMapping("/getDataByAccountNumber")
-//    public ResponseEntity<ApiResponse<CreateSavingsAccount>> getAccountByNumber(@RequestParam String accountNumber) {
-//        Optional<CreateSavingsAccount> account = customersaving.getAccountByNumber(accountNumber);
-//
-//        // ✔️ Correct null check for Optional:
-//        if (account.isPresent()) {
-//            ApiResponse<CreateSavingsAccount> response = ApiResponse.error(
-//                    HttpStatus.NOT_FOUND, "Account not found.");
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-//        }
-//
-//        // ✔️ Use account.get() not Optional itself
-//        ApiResponse<CreateSavingsAccount> response = ApiResponse.success(
-//                HttpStatus.OK, "Account fetched successfully.", account.get());
-//        return ResponseEntity.ok(response);
-//    }
+ // Api for fetching the account details with the help of account number (vaibhav)
+    @GetMapping("/getDataByAccountNumber")
+    public ResponseEntity<ApiResponse<CreateSavingsAccount>> getAccountByNumber(@RequestParam String accountNumber) {
+        Optional<CreateSavingsAccount> account = customersaving.getAccountByNumber(accountNumber);
+
+        // ✔️ Correct null check for Optional:
+        if (!account.isPresent()) {
+            ApiResponse<CreateSavingsAccount> response = ApiResponse.error(
+                    HttpStatus.NOT_FOUND, "Account not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+         }
+
+        // ✔️ Use account.get() not Optional itself
+        ApiResponse<CreateSavingsAccount> response = ApiResponse.success(
+                HttpStatus.OK, "Account fetched successfully.", account.get());
+        return ResponseEntity.ok(response);
+    }
 
  
 	

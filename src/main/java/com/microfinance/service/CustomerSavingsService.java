@@ -299,10 +299,10 @@ public class CustomerSavingsService {
 		            .collect(Collectors.toList());
 		}
 		
-//		// Service for fetching the data according to the account number (vaibhav)
-//		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {
-//			return createSavingAccountRepo.findByAccountNumber(accountNumber);
-//		}
+		// Service for fetching the data according to the account number (vaibhav)
+		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {
+			return createSavingAccountRepo.findByAccountNumber(accountNumber);
+		}
 
 
 }
