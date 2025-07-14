@@ -39,23 +39,6 @@ public class MaturityManagementController {
 	
 	
 	
-	// save maturity scheme master daily deposit
-	//Ashwini
-	
-	@PostMapping("/savematurityscheme")
-	@ResponseBody
-	public ApiResponse<MaturitySchemeMaster> saveMaturityDailyDeposit(@RequestBody MaturitySchemeMaster maturityscheme) {
-		MaturitySchemeMaster maturity = maturityservice.saveAllDailyDeposit(maturityscheme);
-		
-		if (maturity != null) {
-			return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
-	    } 
-		else {
-			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
-	       
-	    }
-
-	}
 	
 	//Save Apply Maturity
 	//Ashwini
@@ -150,5 +133,8 @@ public class MaturityManagementController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
+	
+	
+	
 	
 }

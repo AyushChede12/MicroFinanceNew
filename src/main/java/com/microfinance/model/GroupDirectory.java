@@ -11,6 +11,7 @@ public class GroupDirectory {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	 // Group Info
 	private Long id;
+	private String groupID;
     private String communityName;
     private String openingDate;
     private String branchName;
@@ -37,6 +38,13 @@ public class GroupDirectory {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getGroupID() {
+		return groupID;
+	}
+	public void setGroupID(String groupID) {
+		this.groupID = groupID;
 	}
 	public String getCommunityName() {
 		return communityName;

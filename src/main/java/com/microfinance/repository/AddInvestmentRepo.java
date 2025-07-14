@@ -25,6 +25,14 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Int
 	long getMaxId();
 
 
+
+	Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode);
+
+
 	
+	
+
+
+
 
 }

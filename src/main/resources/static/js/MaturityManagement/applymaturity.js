@@ -31,14 +31,14 @@ $(document).ready(function () {
 
 	    if (policyCode !== "") {
 	        $.ajax({
-	            url: '/api/Policymangment/getdetailsByPolicyCode?policyCode=' + encodeURIComponent(policyCode),
+	            url: '/api/Policymangment/getPolicyByPolicyCode?policyCode=' + encodeURIComponent(policyCode),
 	            type: 'GET',
 	            success: function (response) {
 	                console.log("Response:", response);
-	                alert(policyCode);
+	                alert("Policy Code: " + policyCode);
 
-	                if (response.data && response.data.length > 0) {
-	                    let data = response.data[0]; // Use the first element of the list
+	                if (response.data) {
+	                    let data = response.data;
 
 	                    $('#customerName').val(data.customerName);
 	                    $('#schemeMode').val(data.schemeMode);

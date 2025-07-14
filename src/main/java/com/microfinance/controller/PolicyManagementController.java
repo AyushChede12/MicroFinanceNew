@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -513,16 +514,6 @@ public class PolicyManagementController {
       
  	}
  	
- 	@GetMapping("/getdetailsByPolicyCode")
- 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> findByPolicyCode(@RequestParam  String policyCode) {
- 		 List<AddnewinvestmentPM> invest = policyManagementService.getDetailsById(policyCode);
- 		
- 		
- 			ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.FOUND, "investment fetched successfully.", invest);
-            return ResponseEntity.ok(response);
-      
- 	}
-
  	
 
  	
@@ -631,6 +622,27 @@ public class PolicyManagementController {
 	    );
 
 	    return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/getPolicyByPolicyCode")
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getPolicyByPolicyCode(@RequestParam("policyCode") String policyCode) {
+	    Optional<AddnewinvestmentPM> optionalPolicy = policyManagementService.findByPolicyCode(policyCode);
+
+	    if (optionalPolicy.isPresent()) {
+	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+	                HttpStatus.OK,
+	                "Policy found successfully",
+	                optionalPolicy.get()
+	        );
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+	                HttpStatus.NOT_FOUND,
+	                "Policy not found for code: " + policyCode,
+	                null
+	        );
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	    }
 	}
 
 	

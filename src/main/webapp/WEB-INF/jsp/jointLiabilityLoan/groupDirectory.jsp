@@ -106,6 +106,12 @@
 							class="form-control" required />
 					</div>
 				</div>
+				<div class="col-lg-3" style="display: none;">
+					<div class="d-flex flex-column formFields">
+						<label>Group ID*</label> <input type="text" id="groupID" name="groupID" value="${memberCodeGD}"
+							class="form-control" required />
+					</div>
+				</div>
 
 				<div class="col-lg-3 ">
 					<div class="d-flex flex-column formFields">
@@ -218,7 +224,7 @@
 							<table class="table table-bordered">
 								<thead class="thead-light">
 									<tr>
-										<th>ID</th>
+										<th>Group ID</th>
 										<th>Community Name</th>
 										<th>Opening Date</th>
 										<th>Assigned Branch</th>

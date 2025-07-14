@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class GroupDirectoryDto {
 	private Long id;
+	private String groupID;
     private String communityName;
     private String openingDate;
     private String branchName;
@@ -29,6 +30,13 @@ public class GroupDirectoryDto {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getGroupID() {
+		return groupID;
+	}
+	public void setGroupID(String groupID) {
+		this.groupID = groupID;
 	}
 	public String getCommunityName() {
 		return communityName;

@@ -2,6 +2,7 @@ package com.microfinance.service;
 
 import java.util.List;
 
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -289,11 +290,6 @@ public class PolicyManagementService {
 		}
 	}
 
-//Ashwini
-	/*
-	 * public List<AddnewinvestmentPM> getAddInvestmentDetails() { // TODO
-	 * Auto-generated method stub return addinvestmentrepo.findAll(); }
-	 */
 
 
 
@@ -378,11 +374,11 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
-public List<AddnewinvestmentPM> getDetailsById(String policyCode) {
-	// TODO Auto-generated method stub
-	List<AddnewinvestmentPM> list=addinvestmentrepo.findByPolicyCode(policyCode);
-	return list;
-}
+/*
+ * public List<AddnewinvestmentPM> getDetailsById(String policyCode) { // TODO
+ * Auto-generated method stub List<AddnewinvestmentPM>
+ * list=addinvestmentrepo.findByPolicyCode(policyCode); return list; }
+ */
 
 
 
@@ -396,6 +392,7 @@ public List<DailyDepositPM> getAllDDTerm() {
 	return dailyDepositPMRepo.findAll();
 }
 
+
 public List<AddnewinvestmentPM> getAllInvestments() {
     return addinvestmentrepo.findAll();
 }
@@ -405,6 +402,12 @@ public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 	return addinvestmentrepo.findAll();
 }
 
+public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
+	// TODO Auto-generated method stub
+
+	return  addinvestmentrepo.findByPolicyCode(policyCode);
+}
+
 
 
 
@@ -415,7 +418,6 @@ public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 
 
 
-  
 
 
 
