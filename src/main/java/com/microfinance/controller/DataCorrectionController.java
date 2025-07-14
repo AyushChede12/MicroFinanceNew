@@ -26,6 +26,7 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.SavingAccountActivity;
+import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.CustomerRepo;
@@ -35,12 +36,12 @@ import com.microfinance.service.DataCorrectionService;
 @RestController
 @RequestMapping("/api/datacorrection")
 public class DataCorrectionController {
-	
+
 	@Autowired
 	DataCorrectionService dataCorrectionService;
-	
+
 	// Ayush
-	@PostMapping("/deleteCustomerDataByForm")        
+	@PostMapping("/deleteCustomerDataByForm")
 	public ResponseEntity<ApiResponse<String>> deleteCustomerData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteCustomerData(id);
 		if (isDeleted) {
@@ -48,14 +49,14 @@ public class DataCorrectionController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Customer Data deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Customer Data deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
-	//Ayush
-	@PostMapping("/deleteFinancialDataByForm")        
+
+	// Ayush
+	@PostMapping("/deleteFinancialDataByForm")
 	public ResponseEntity<ApiResponse<String>> deleteFinancialData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteFinancialData(id);
 		if (isDeleted) {
@@ -63,13 +64,13 @@ public class DataCorrectionController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Financial Data deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Financial Data deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
-	//Ayush
+
+	// Ayush
 	@GetMapping("/fetchAllSavingAccountActivity")
 	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> fetchAllSavingAccountActivity() {
 		List<SavingAccountActivity> list = dataCorrectionService.fetchAllSavingAccountActivity();
@@ -77,9 +78,9 @@ public class DataCorrectionController {
 				"Saving Account Activity fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
-	
-	//Ayush
-	@PostMapping("/deleteSavingTransactionRemoval")        
+
+	// Ayush
+	@PostMapping("/deleteSavingTransactionRemoval")
 	public ResponseEntity<ApiResponse<String>> deleteSavingTransaction(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteSavingTransaction(id);
 		if (isDeleted) {
@@ -87,29 +88,30 @@ public class DataCorrectionController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Saving Transaction deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Saving Transaction deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
-	//Ayush
+
+	// Ayush
 	@PostMapping("/saveOrUpdatePolicyManagement")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveOrUpdatePolicyManagementData(
-	        @ModelAttribute PolicyManagementDto policyManagementDto,
-	        @RequestParam(value = "image1", required = false) MultipartFile image1, @RequestParam(value = "image2", required = false) MultipartFile image2) {
-		
-		 // System.out.println("Received file: " + (signature != null ? signature.getOriginalFilename() : "No file uploaded"));
-		 
-		
+			@ModelAttribute PolicyManagementDto policyManagementDto,
+			@RequestParam(value = "image1", required = false) MultipartFile image1,
+			@RequestParam(value = "image2", required = false) MultipartFile image2) {
+
+		// System.out.println("Received file: " + (signature != null ?
+		// signature.getOriginalFilename() : "No file uploaded"));
+
 		System.out.println("Received financialPhoto: " + image1);
-	    
-	    System.out.println("Received Signature: " + image2);	    
-	    
-	    ApiResponse<AddnewinvestmentPM> response = dataCorrectionService.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
-	    return new ResponseEntity<>(response, response.getStatus());
+
+		System.out.println("Received Signature: " + image2);
+
+		ApiResponse<AddnewinvestmentPM> response = dataCorrectionService
+				.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
+		return new ResponseEntity<>(response, response.getStatus());
 	}
-	
 
 
 }

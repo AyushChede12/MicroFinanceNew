@@ -17,6 +17,7 @@ import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.SavingAccountActivity;
+import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
@@ -24,6 +25,7 @@ import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
+import com.microfinance.repository.TransferShareRepo;
 
 @Service
 public class DataCorrectionService {
@@ -209,6 +211,8 @@ public class DataCorrectionService {
 			}
 		}
 	}
+	
+	
 	
 
 
