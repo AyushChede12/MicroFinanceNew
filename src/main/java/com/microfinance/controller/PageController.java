@@ -67,6 +67,7 @@ public class PageController {
 	@Autowired
 	GroupDirectoryRepo groupDirectoryRepo;
 
+	@Autowired
 	AddInvestmentRepo addInvestmentRepo;
 
 	
@@ -716,10 +717,7 @@ public class PageController {
 	}
 
 	@GetMapping("/addNewInvestment")
-	public String getAddNewInvestment(Model model) {
-		long maxId = addInvestmentRepo.getMaxId();
-		String policyCode = "IC" + "0000" + (maxId + 1);
-		model.addAttribute("policyCode", policyCode);
+	public String getAddNewInvestment() {
 		return "policyManagement/addNewInvestment";
 	}
 

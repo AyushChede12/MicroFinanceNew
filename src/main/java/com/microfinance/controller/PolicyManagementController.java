@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.model.addCustomer;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,10 @@ public class PolicyManagementController {
 
     @Autowired
     private PolicyManagementService policyManagementService;
+    
+    
+    @Autowired
+    AddInvestmentRepo addinvestmentrepo;
     
     //save daily Deposite
     @PostMapping("/daily-depositsave")
@@ -643,6 +649,27 @@ public class PolicyManagementController {
 	    return ResponseEntity.ok(response);
 	}
 
+	@GetMapping("/getPolicyByPolicyCode")
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getPolicyByPolicyCode(@RequestParam("policyCode") String policyCode) {
+	    Optional<AddnewinvestmentPM> optionalPolicy = policyManagementService.findByPolicyCode(policyCode);
+
+	    if (optionalPolicy.isPresent()) {
+	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+	                HttpStatus.OK,
+	                "Policy found successfully",
+	                optionalPolicy.get()
+	        );
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+	                HttpStatus.NOT_FOUND,
+	                "Policy not found for code: " + policyCode,
+	                null
+	        );
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	    }
+	}
+
 	
 	
 	@GetMapping("/getAllPolicyManagementData")
@@ -659,5 +686,15 @@ public class PolicyManagementController {
 	}
 
     
+	@GetMapping("/getNextPolicyCode")
+	public ResponseEntity<String> getNextPolicyCode(@RequestParam String schemeType) {
+	    // Example logic - fetch from DB or increment
+	    String prefix = schemeType.toUpperCase(); // e.g., RD
+	    int count = addinvestmentrepo.countBySchemeType(schemeType); // e.g., 1
+	    String code = String.format("%s%04d", prefix, count + 1); // RD0002
+	    return ResponseEntity.ok(code);
+	}
+
+	
 }
 
