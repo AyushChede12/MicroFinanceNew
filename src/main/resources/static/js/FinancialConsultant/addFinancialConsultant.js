@@ -116,14 +116,17 @@ $(document).ready(function() {
 					var row = `
 						<tr style="font-family: 'Poppins', sans-serif;">
 							<td>${index + 1}</td>
-							<td>${item.customerName || ''}</td>
 							<td>${item.financialCode || ''}</td>
-							<td>${item.branchName || ''}</td>
-							<td>${item.joiningDate || ''}</td>
-							<td>${item.customerAddress || ''}</td>
+							<td>${item.financialName || ''}</td>
 							<td>${item.contactNo || ''}</td>
-							<td>${item.financialStatus || ''}</td>
+							<td>${item.branchName || ''}</td>
+							<td>${item.address || ''}</td>
+							<td>${item.district || ''}</td>
+							<td>${item.state || ''}</td>
+							<td>${item.pinCode || ''}</td>
 							<td>${item.profession || ''}</td>
+							<td>${item.financialStatus || ''}</td>
+							
 							
 						</tr>`;
 					tbody.append(row);
@@ -141,15 +144,19 @@ $(document).ready(function() {
 	// ✅ Save Button Logic
 	$('#saveBtnFinacial').click(function(event) {
 		event.preventDefault();
+		var financialCode=$('#financialCode').val();
+		
+		const photo = $('#photo')[0].files[0];
+				const signature = $('#signature')[0].files[0];
 
-		/*const financialPhotoSrc = $('#financialPhotoPreview').attr('src') || '';
-		const financialSignatureSrc = $('#financialSignaturePreview').attr('src') || '';
-		const financialPhoto = financialPhotoSrc.split('/').pop();
-		const finnacialSignature = financialSignatureSrc.split('/').pop();*/
-
+		/*const financialPhotoSrc = $('#photoHidden').attr('src') || '';
+		const financialSignatureSrc = $('#signatureHidden').attr('src') || '';
+		const photo = financialPhotoSrc.split('/').pop();
+		const signature = financialSignatureSrc.split('/').pop();
+*/
 		const formData = new FormData();
 		formData.append("joiningDate", $('#joiningDate').val());
-		formData.append("financialCode", $('#financialCode').val());
+		formData.append("financialCode", financialCode);
 		formData.append("financialName", $('#financialName').val());
 		formData.append("dob", $('#dob').val());
 		formData.append("age", $('#age').val());
@@ -173,8 +180,17 @@ $(document).ready(function() {
 		formData.append("comments", $('#comments').val());
 		formData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
 		formData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
-		/*formData.append("financialPhoto", financialPhoto);
-		formData.append("finnacialSignature", finnacialSignature);*/
+		/*formData.append("financialPhoto", photo);
+		formData.append("finnacialSignature", signature);*/
+		if (photo) {
+					formData.append("financialPhoto", photo);
+				}
+
+				// File upload: signature
+				if (signature) {
+					formData.append("finnacialSignature", signature);
+				}
+
 
 		$.ajax({
 			type: 'POST',

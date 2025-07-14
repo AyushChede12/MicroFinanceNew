@@ -70,8 +70,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="customerName">Financial Consultant Name</label> <input type="text"
-									name="customerName" id="customerName" required="required"
+								<label for="customerName">Financial Name</label> <input type="text"
+									name="financialName" id="financialName" required="required"
 									placeholder="Enter Financial Consultant Name"
 									style="text-transform: uppercase;" readonly/>
 							</div>

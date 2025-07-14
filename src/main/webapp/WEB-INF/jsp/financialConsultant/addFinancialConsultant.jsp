@@ -266,31 +266,46 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="customerPhoto" id="drop-area"> <input
-								type="file" accept="image/*" name="customerPhoto"
-								id="customerPhoto" hidden="hidden" onchange="photopreview();"
+								Photo <span class="star">*</span>
+							</label> <label for="photo" id="drop-area"> <input type="file"
+								accept="image/*" name="financialPhoto" id="photo" hidden="hidden"
+								onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
 
+									<!-- <p id="upload-text"
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
 								</div>
-							</label>
+							</label> <small id="chkphoto" style="color: red;"></small>
 						</div>
 
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="customerSignature" id="drop-area">
-								<input type="file" accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="finnacialSignature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+									<!-- <p
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
 								</div>
-							</label>
+							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
 					</div>
@@ -499,8 +514,6 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-12 text-center">
 							<button id="saveBtnFinacial" name="saveBtn"
 								class="btnStyle bg-success">Save</button>
-							<button id="updateBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update</button>
 							<button id="printBtn" class="btnStyle bg-primary" onclick="printTable()">Print</button>
 						</div>
 					</div>
@@ -625,15 +638,16 @@ pageEncoding="ISO-8859-1"%> -->
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">Sl No.</th>
-									<th scope="col">Financial Name</th>
 									<th scope="col">Financial Code</th>
-									<th scope="col">Branch</th>
-									<th scope="col">Date of Joining</th>
-									<th scope="col">Address</th>
+									<th scope="col">Financial Name</th>
 									<th scope="col">Contact No</th>
-									<th scope="col">Financial Status</th>
+									<th scope="col">Branch</th>
+									<th scope="col">Address</th>
+									<th scope="col">District</th>
+									<th scope="col">State</th>
+									<th scope="col">Pin Code</th>
 									<th scope="col">Profession</th>
-									
+									<th scope="col">Financial Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -660,13 +674,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 <script>
 function photoUpload() {
-alert("function called");
-	const file = document.getElementById("financialPhoto").files[0];
+	const file = document.getElementById("photo").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			const previewimg = document.getElementById("financialPhotoPreview");
-			document.getElementById("financialPhotoPreview").src = e.target.result;
+			document.getElementById("photoPreview").src = e.target.result;
+			const previewimg = document.getElementById("photoPreview");
+			document.getElementById("photoPreview").src = e.target.result;
 			previewimg.style.width = "100%";
 			previewimg.style.height = "100%";
 			previewimg.style.objectFit = "cover"
@@ -676,6 +690,28 @@ alert("function called");
 		reader.readAsDataURL(file);
 	} else {
 		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("signature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById("signaturePreview").src = e.target.result;
+			const previewimg = document.getElementById("signaturePreview");
+			document.getElementById("signaturePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
 	}
 }
 
