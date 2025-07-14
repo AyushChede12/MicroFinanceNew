@@ -61,21 +61,16 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 
-						<%-- <div class="col-lg-0">
-							<div class="d-none flex-column formFields">
-								<label for="">Customer Code </label> <input name="memberCode"
-									id="memberCode" value="${memberCode}" required="required"
-									placeholder="Enter Customer Name" />
-							</div>
-						</div> --%>
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code*</label> <input name="policyCode"
-									id="policyCode" class="form-control" value="${policyCode}"
+						 <input name="policyCode"
+									id="policyCode" class="form-control" type="hidden"
 									required />
 							</div>
 						</div>
+						
+						
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">

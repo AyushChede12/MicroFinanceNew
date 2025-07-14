@@ -5,12 +5,13 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.microfinance.model.AddnewinvestmentPM;
 
 
 
-
+@Repository
 public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Long> {
 
 	//@Query("SELECT b.id FROM AddnewinvestmentPM b WHERE b.branchName = :branchName")
@@ -24,6 +25,8 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
 	long getMaxId();
 
 	Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode);
+
+	int countBySchemeType(String schemeType);
 
 	
 
