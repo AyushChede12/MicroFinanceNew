@@ -44,7 +44,7 @@ public class AddnewinvestmentPM {
 	private String smsSend;
 	private String image1;
 	private String image2;
-	
+	private boolean isApproved;
 	
 	
 	
@@ -264,6 +264,14 @@ public class AddnewinvestmentPM {
 	public void setImage2(String image2) {
 		this.image2 = image2;
 	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+	
+	
 	
 
 }

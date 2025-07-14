@@ -391,63 +391,82 @@ $(document).ready(function () {
 	}
 });
 
+$("#saveBtn").click(function (e) {
+    e.preventDefault();
 
-$(document).ready(function () {
-    $("#saveBtn").click(function (e) {
-        e.preventDefault(); // Prevent default form submission
+    const schemeType = $("#schemeType").val();
 
-        const formData = {
-			policyCode: $("#policyCode").val(),
-            policyStartDate: $("#policyStartDate").val(),
-            memberSelection: $("#selectCustomer").val(),
-            customerName: $("#customerName").val(),
-            dateofBirth: $("#dateofBirth").val(),
-            relationDetails: $("#relationDetails").val(),
-            contactNo: $("#contactNo").val(),
-            suggestedNominee: $("#suggestedNominee").val(),
-            ageOfNominee: $("#ageOfNominee").val(),
-            relation: $("#relation").val(),
-            address: $("#address").val(),
-            district: $("#district").val(),
-            state: $("#state").val(),
-            pinCode: $("#pinCode").val(),
-            tds: $("#tds").val(),
-            branchName: $("#branchName").val(),
-            modeOfOperation: $("#ModeOfOperation").val(),
-            jointName: $("#jointName").val(),
-            jointMemCode: $("#jointMemCode").val(), // if exists, else skip
-            schemeType: $("#schemeType").val(),
-            schemeTerm: $("#schemeTerm").val(),
-            schemeMode: $("#schemeMode").val(),
-            roi: $("#roi").val(), // optional if stored
-            maturityDate: $("#maturityDate").val(),
-            policyAmount: $("#policyAmount").val(),
-            depositAmount: $("#depositAmount").val(),
-            introMCode: $("#introMCode").val(),
-            maturityAmount: $("#maturityAmount").val(),
-            MISInterest: $("#MISInterest").val(),
-            paymentBy: $("#paymentBy").val(),
-            remark: $("#remark").val(),
-            agent: $("#Agent").val(),
-            smsSend: $("#smsSend").val(),
-            
-        };
+    if (!schemeType) {
+        alert("Please select a Scheme Type first.");
+        return;
+    }
 
-        $.ajax({
-            url: "/api/Policymangment/saveInvestment",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-            success: function (response) {
-                alert("✅ " + response.message);
-                $("#formid")[0].reset(); // clear form
-            },
-            error: function (xhr) {
-                alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
-            }
-        });
+    // Step 1: Get next policy code from backend
+    $.ajax({
+        url: `/api/Policymangment/getNextPolicyCode`,
+        type: "GET",
+        data: { schemeType: schemeType },
+        success: function (policyCode) {
+            $("#policyCode").val(policyCode); // ✅ Set in form
+
+            // Step 2: Gather form data
+            const formData = {
+                policyCode: policyCode, // from backend
+                policyStartDate: $("#policyStartDate").val(),
+                memberSelection: $("#selectCustomer").val(),
+                customerName: $("#customerName").val(),
+                dateofBirth: $("#dateofBirth").val(),
+                relationDetails: $("#relationDetails").val(),
+                contactNo: $("#contactNo").val(),
+                suggestedNominee: $("#suggestedNominee").val(),
+                ageOfNominee: $("#ageOfNominee").val(),
+                relation: $("#relation").val(),
+                address: $("#address").val(),
+                district: $("#district").val(),
+                state: $("#state").val(),
+                pinCode: $("#pinCode").val(),
+                tds: $("#tds").val(),
+                branchName: $("#branchName").val(),
+                modeOfOperation: $("#ModeOfOperation").val(),
+                jointName: $("#jointName").val(),
+                jointMemCode: $("#jointMemCode").val(),
+                schemeType: $("#schemeType").val(),
+                schemeTerm: $("#schemeTerm").val(),
+                schemeMode: $("#schemeMode").val(),
+                roi: $("#roi").val(),
+                maturityDate: $("#maturityDate").val(),
+                policyAmount: $("#policyAmount").val(),
+                depositAmount: $("#depositAmount").val(),
+                introMCode: $("#introMCode").val(),
+                maturityAmount: $("#maturityAmount").val(),
+                MISInterest: $("#MISInterest").val(),
+                paymentBy: $("#paymentBy").val(),
+                remark: $("#remark").val(),
+                agent: $("#Agent").val(),
+                smsSend: $("#smsSend").val()
+            };
+
+            // Step 3: Save data to backend
+            $.ajax({
+                url: "/api/Policymangment/saveInvestment",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function (response) {
+                    alert("✅ " + response.message);
+                    $("#formid")[0].reset();
+                },
+                error: function (xhr) {
+                    alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+                }
+            });
+        },
+        error: function () {
+            alert("❌ Failed to generate policy code.");
+        }
     });
 });
+
 
 $(document).ready(function () {
     $.ajax({
