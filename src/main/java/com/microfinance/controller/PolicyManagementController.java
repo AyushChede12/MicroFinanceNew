@@ -19,6 +19,7 @@ import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.model.addCustomer;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,10 @@ public class PolicyManagementController {
 
     @Autowired
     private PolicyManagementService policyManagementService;
+    
+    
+    @Autowired
+    AddInvestmentRepo addinvestmentrepo;
     
     //save daily Deposite
     @PostMapping("/daily-depositsave")
@@ -681,5 +686,15 @@ public class PolicyManagementController {
 	}
 
     
+	@GetMapping("/getNextPolicyCode")
+	public ResponseEntity<String> getNextPolicyCode(@RequestParam String schemeType) {
+	    // Example logic - fetch from DB or increment
+	    String prefix = schemeType.toUpperCase(); // e.g., RD
+	    int count = addinvestmentrepo.countBySchemeType(schemeType); // e.g., 1
+	    String code = String.format("%s%04d", prefix, count + 1); // RD0002
+	    return ResponseEntity.ok(code);
+	}
+
+	
 }
 

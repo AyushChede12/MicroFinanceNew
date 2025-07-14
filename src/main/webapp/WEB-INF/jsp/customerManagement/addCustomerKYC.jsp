@@ -200,7 +200,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-4 mb-5">
+						<!-- <div class="col-lg-4 mb-5">
 							<label
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Aadhar Front photo</label> <label for="bike2image" id="drop-area">
@@ -245,7 +245,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 								</div>
 							</label>
-						</div>
+						</div> -->
 
 					</div>
 				</div>
