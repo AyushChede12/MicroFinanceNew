@@ -173,7 +173,7 @@ $('#financialConsultantCode').on('blur', function () {
             success: function (response) {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
-                    $('#financialConsultantName').val(customer.customerName);
+                    $('#financialConsultantName').val(customer.financialName);
                 } else {
                     alert('No data found!');
                     $('#financialConsultantName').val('');

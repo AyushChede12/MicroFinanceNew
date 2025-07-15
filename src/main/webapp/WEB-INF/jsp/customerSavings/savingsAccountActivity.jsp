@@ -69,10 +69,16 @@ pageEncoding="ISO-8859-1"%> -->
                 <input type="date" name="transactionDate" id="transactionDate" required="required" placeholder="Enter Vehicle No"
                   style="text-transform: uppercase;" />
               </div>
+            </div>                         
+              
+              <div class="col-lg-3">
+              <div class="d-flex flex-column formFields mb-4">
+                <label for="">Account Number</label> <input type="text" name="accountNumber" id="accountNumber" required="required"
+                  placeholder="Enter Account Number" />
+              </div>
             </div>
-             
-                <div class="col-lg-3">
-             
+            
+               <div class="col-lg-3">           
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Select Branch Name</label> <select id="selectBranchName" name="selectBranchName" required="required"
                     class="form-control selectField" style="height: 30px;">
@@ -81,13 +87,6 @@ pageEncoding="ISO-8859-1"%> -->
                   </select>
                 </div>
               </div>
-              
-              <div class="col-lg-3">
-              <div class="d-flex flex-column formFields mb-4">
-                <label for="">Account Number</label> <input type="text" name="accountNumber" id="accountNumber" required="required"
-                  placeholder="Enter Account Number" />
-              </div>
-            </div>
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
