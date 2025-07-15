@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -166,10 +168,10 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<!-- <div class="col-lg-3">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">New Senior</label> <input type="text" name="newsenior"
-									id="newsenior" required="required" placeholder="Enter New Senior" />
+								<label for="">New Senior Code</label> <input type="text" name="newseniorCode"
+									id="newseniorCode" required="required" placeholder="Enter New Senior" />
 							</div>
 						</div>
 
@@ -187,7 +189,7 @@ pageEncoding="ISO-8859-1"%> -->
 									name="newseniorposition" id="newseniorposition" required="required"
 									placeholder="Enter New Senior Position" />
 							</div>
-						</div> -->
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
@@ -209,6 +211,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/FinancialConsultant/consultantPromotionManagement.js"></script>
 </body>
 
 </html>
