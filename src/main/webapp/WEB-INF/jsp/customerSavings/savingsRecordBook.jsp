@@ -279,7 +279,21 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card recent-sales" id="passbookId">
 						<div class="card-body table-responsive">
 							<!-- Certificate Form Starts Here -->
-                             jiio
+                             <table class="table table-bordered" id="transaction-tabl">
+								<thead>
+									<tr style="color: White; background-color: #008385;">
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+									</tr>
+								</thead>
+								<tbody id="tableBody1">
+
+								</tbody>
+
+							</table>
 						</div>
 					</div>
 				</div>

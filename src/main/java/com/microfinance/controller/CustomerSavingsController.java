@@ -197,14 +197,28 @@ public class CustomerSavingsController {
 		return ResponseEntity.ok(response);
 	}
 	
-    //fetch all saving account data by account number
+    /*//fetch all saving account data by account number
     @GetMapping("/getallbyaccountnumber")
    	public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> findAllByAccountNumber(@RequestParam String accountNumber) {
    		List<CreateSavingsAccount> list = customersaving.findAllByAccountNumber(accountNumber);
    		ApiResponse<List<CreateSavingsAccount>> response = new ApiResponse<>(HttpStatus.FOUND,
    				"Fetch account details by account number", list);
    		return ResponseEntity.ok(response);
-   	}
+   	}*/
+    @GetMapping("/getallbyaccountnumber")
+    public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> findAllByAccountNumber(@RequestParam String accountNumber) {
+        
+        List<CreateSavingsAccount> approvedAccounts = customersaving.findAllApprovedByAccountNumber(accountNumber);
+
+        if (approvedAccounts == null || approvedAccounts.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "First approve account", null));
+        }
+
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .body(new ApiResponse<>(HttpStatus.FOUND, "Fetch account details by account number", approvedAccounts));
+    }
+
     
     @GetMapping("/getSavingAccountDataById")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> findSavingAccountDataById(@RequestParam("id") Long id) {

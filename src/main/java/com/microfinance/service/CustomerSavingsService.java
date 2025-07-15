@@ -261,10 +261,11 @@ public class CustomerSavingsService {
 	}
 
 
-	public List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber) {
+	/*public List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber) {
 		List<CreateSavingsAccount> list = createSavingAccountRepo.findAllByAccountNumber(accountNumber);
 		return list;
-	}
+	}*/
+	
 
 	public SavingAccountActivity saveSavingAccountActivityData(SavingAccountActivity savingAccountActivity) {
 		return savingAccountActivityRepo.save(savingAccountActivity);
@@ -303,6 +304,14 @@ public class CustomerSavingsService {
 		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {
 			return createSavingAccountRepo.findByAccountNumber(accountNumber);
 		}
+		//janvi
+		public List<CreateSavingsAccount> findAllApprovedByAccountNumber(String accountNumber) {
+			// TODO Auto-generated method stub
+			return createSavingAccountRepo.findAllByAccountNumberAndIsApprovedTrue(accountNumber);
+		}
+
+		
+		
 
 
 }

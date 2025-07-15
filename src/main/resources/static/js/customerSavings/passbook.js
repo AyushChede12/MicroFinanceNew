@@ -264,23 +264,23 @@ function displayHeadingSA(){
 }
 
 function displaySavingTransaction(){
-	let id = document.getElementById("accountNumber").value; // Get the selected Account No.
-    if (!id) {
+	let accountNumber = document.getElementById("accountNumber").value; // Get the selected Account No.
+    if (!accountNumber) {
         alert("Please select an Account Number.");
         return;
     }
 
     var input = {
-        accountNo: id // Match the backend expectation
+        accountNo: accountNumber // Match the backend expectation
     };
-    const myJson = JSON.stringify(input);
+   // const myJson = JSON.stringify(input);
 
     //AJAX call to fetch SavingTransactionEntry details
     $.ajax({
         type: "GET",
         contentType: "application/json",
-        data: JSON.stringify({ accountNumber: id }), // Ensure correct parameter name
-        url: '/api/customersavings/getDataByAccountNumber',
+        data: JSON.stringify({ accountNumber: accountNumber }), // Ensure correct parameter name
+        url: '/api/customersavings/getsavingaccountactivity',
         async: false,
         success: function(data) {
             if (data && data.length > 0) {
