@@ -52,7 +52,7 @@ public class FinancialConsultantService {
 	}
 
 	public ApiResponse<addFinancialConsultant> saveOrUpdateFinancialConsultant(
-			FinancialConsultantDto financialConsultantDto, String customerPhoto, String customerSignature) {
+			FinancialConsultantDto financialConsultantDto, MultipartFile financialPhoto, MultipartFile finnacialSignature) {
 		// TODO Auto-generated method stub
 
 		addFinancialConsultant addFinancialConsultant = new addFinancialConsultant();
@@ -68,18 +68,13 @@ public class FinancialConsultantService {
 		// Map fields from DTO to entity
 		addFinancialConsultant.setFinancialCode(financialConsultantDto.getFinancialCode());
 		addFinancialConsultant.setJoiningDate(financialConsultantDto.getJoiningDate());
-		addFinancialConsultant.setMemberCode(financialConsultantDto.getMemberCode());
-		addFinancialConsultant.setCustomerName(financialConsultantDto.getCustomerName());
+		addFinancialConsultant.setFinancialName(financialConsultantDto.getFinancialName());
 		// advisorCollectorDetails.setMemberId(advisorCollectorDto.getMemberId());
 		addFinancialConsultant.setDob(financialConsultantDto.getDob());
-		addFinancialConsultant.setCustomerAge(financialConsultantDto.getCustomerAge());
-		addFinancialConsultant.setGuardianName(financialConsultantDto.getGuardianName());
-		addFinancialConsultant.setRelationToApplicant(financialConsultantDto.getRelationToApplicant());
+		addFinancialConsultant.setAge(financialConsultantDto.getAge());
 		addFinancialConsultant.setContactNo(financialConsultantDto.getContactNo());
-		addFinancialConsultant.setNomineeName(financialConsultantDto.getNomineeName());
 		addFinancialConsultant.setBranchName(financialConsultantDto.getBranchName());
-		addFinancialConsultant.setNomineeAge(financialConsultantDto.getNomineeAge());
-		addFinancialConsultant.setCustomerAddress(financialConsultantDto.getCustomerAddress());
+		addFinancialConsultant.setAddress(financialConsultantDto.getAddress());
 		addFinancialConsultant.setDistrict(financialConsultantDto.getDistrict());
 		addFinancialConsultant.setState(financialConsultantDto.getState());
 		addFinancialConsultant.setPinCode(financialConsultantDto.getPinCode());
@@ -100,29 +95,90 @@ public class FinancialConsultantService {
 		
 		
 		
-// Set photoWithAadhar path (already fetched)
-		if (customerPhoto != null && !customerPhoto.isEmpty()) {
-			addFinancialConsultant.setCustomerPhoto(customerPhoto);
+
+		if (financialPhoto != null && !financialPhoto.isEmpty()) {
+			try {
+				String fileName = saveFile(financialPhoto);
+				addFinancialConsultant.setFinancialPhoto(fileName);
+			} catch (IOException e) {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+			}
 		}
 
-		// Set Signature path (already fetched)
-		if (customerSignature != null && !customerSignature.isEmpty()) {
-			addFinancialConsultant.setCustomerSignature(customerSignature);
+		if (finnacialSignature != null && !finnacialSignature.isEmpty()) {
+			try {
+				String fileName1 = saveFile1(finnacialSignature); // Save the signature
+				addFinancialConsultant.setFinnacialSignature(fileName1); // ✅ Correctly set it in entity
+			} catch (IOException e) {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+			}
 		}
+		
+		
+
 		// Save entity to the database
-		addFinancialConsultant savedFinancialConsultant = financialConsultationRepo.save(addFinancialConsultant);
+		addFinancialConsultant addfinancialConsultant = financialConsultationRepo.save(addFinancialConsultant);
 
+		// Return response
 		if (isNew) {
 			return ApiResponse.success(HttpStatus.CREATED,
-					"Saved successfully. Finnacial Code: " + savedFinancialConsultant.getFinancialCode(),
-					savedFinancialConsultant);
+					"Saved successfully. Financial Code: " + addfinancialConsultant.getFinancialCode(), addfinancialConsultant);
 		} else {
 			return ApiResponse.success(HttpStatus.OK,
-					"Updated successfully. Financial Code: " + savedFinancialConsultant.getFinancialCode(),
-					savedFinancialConsultant);
+					"Updated successfully. Finnacial Code: " + addfinancialConsultant.getFinancialCode(), addfinancialConsultant);
 		}
-
 	}
+	private String saveFile1(MultipartFile finnacialSignature) throws IOException {
+		// TODO Auto-generated method stub
+		if (finnacialSignature != null && !finnacialSignature.isEmpty()) {
+			ensureUploadDirectoryExists(); // Ensure the upload directory exists
+			String fileName = System.currentTimeMillis() + "_" + finnacialSignature.getOriginalFilename(); // Generate a
+																											// unique
+																											// filename
+			File destinationFile = new File(uploadDirectory + File.separator + fileName);
+
+			try {
+				finnacialSignature.transferTo(destinationFile); // Save the file to the destination path
+				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
+				return fileName; // Return the saved file's name
+			} catch (IOException e) {
+				System.err.println("File saving failed: " + e.getMessage());
+				throw e; // Rethrow the exception to handle errors
+			}
+		}
+		return null;
+	}
+
+	private String saveFile(MultipartFile file) throws IOException {
+		if (file != null && !file.isEmpty()) {
+			ensureUploadDirectoryExists();
+			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			File destinationFile = new File(uploadDirectory + File.separator + fileName);
+
+			try {
+				file.transferTo(destinationFile);
+				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
+				return fileName;
+			} catch (IOException e) {
+				System.err.println("File saving failed: " + e.getMessage());
+				throw e;
+			}
+		}
+		return null;
+	}
+	
+	private void ensureUploadDirectoryExists() {
+		File uploadDir = new File(uploadDirectory);
+		if (!uploadDir.exists()) {
+			boolean created = uploadDir.mkdirs();
+			if (created) {
+				System.out.println("Upload directory created at: " + uploadDirectory);
+			} else {
+				System.err.println("Failed to create upload directory: " + uploadDirectory);
+			}
+		}
+	}
+	
 
 	public List<addFinancialConsultant> getAllFinancialConsultantDetails() {
 		// TODO Auto-generated method stub
