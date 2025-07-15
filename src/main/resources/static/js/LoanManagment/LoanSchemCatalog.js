@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 // data save shraddha
 $(document).ready(function () {
@@ -8,7 +5,6 @@ $(document).ready(function () {
 
     $('#saveBtn').on('click', function (e) {
         e.preventDefault();
-        alert("shradha");
 
         const loanData = {
             loanSchemeCode: $('#loanSchemeCode').val(),   // ✅ fixed here
@@ -56,7 +52,6 @@ $(document).ready(function () {
 
 $(document).ready(function() {
 	$("#updateBtn").click(function(e) {
-		alert("hill update alert");
 		e.preventDefault();
 
 		var loanData = {
@@ -100,8 +95,6 @@ $(document).ready(function() {
 
 function loadLoanTable() {
     console.log("Fetching loan data...");
-    alert("Hi Shradha, loading data...");
-
     $.ajax({
         url: "/api/loanmanegment/allDataFetchLoanSchemCatelog", // API should return JSON
         type: "GET",
