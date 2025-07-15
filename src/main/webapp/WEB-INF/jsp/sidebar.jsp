@@ -965,7 +965,7 @@
           <li>
             <a href="groupLoanDataUpdate">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Group Loan Data Update</span>
+              <span style="font-family: 'Poppins', sans-serif">Joint Liability Update</span>
             </a>
           </li>       
           
