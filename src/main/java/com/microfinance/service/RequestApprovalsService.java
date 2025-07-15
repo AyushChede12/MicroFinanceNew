@@ -6,9 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 
 
@@ -20,6 +22,9 @@ public class RequestApprovalsService {
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
+	
+	@Autowired
+	AddInvestmentRepo addInvestmentRepo;
 
 	public List<addCustomer> findAllMemberCode() {
 		// TODO Auto-generated method stub
@@ -70,4 +75,26 @@ public class RequestApprovalsService {
 		return createSavingAccountRepo.save(customer);
 	}
 
+	public List<AddnewinvestmentPM> getAllUnapprovedAddNewInvestment() {
+		// TODO Auto-generated method stub
+		return addInvestmentRepo.findByIsApprovedFalse();
+	}
+
+
+	
+
+
+	public Optional<AddnewinvestmentPM> findByIdShowStatusInvestment(Long id) {
+		// TODO Auto-generated method stub
+		return addInvestmentRepo.findById(id);
+	}
+
+
+	public AddnewinvestmentPM save(AddnewinvestmentPM investment) {
+		// TODO Auto-generated method stub
+		return addInvestmentRepo.save(investment);
+	}
+
+
+	
 }

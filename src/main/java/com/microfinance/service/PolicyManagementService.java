@@ -396,6 +396,7 @@ public List<DailyDepositPM> getAllDDTerm() {
 }
 
 
+
 public List<AddnewinvestmentPM> getAllInvestments() {
     return addinvestmentrepo.findAll();
 }
@@ -410,9 +411,9 @@ public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
     return addinvestmentrepo.findByPolicyCode(policyCode);
 }
-
-
 }
+
+
 
 
 

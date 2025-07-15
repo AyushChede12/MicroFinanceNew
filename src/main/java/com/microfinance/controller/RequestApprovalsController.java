@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
@@ -79,7 +80,6 @@ public class RequestApprovalsController {
     }
 
 
-
 	//Janvi : get Unapproved Savings Data 01/07/2025
   	@PostMapping("/getUnapprovedSavingTransaction")
       public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> getUnapprovedSavingTransaction() {
@@ -110,6 +110,45 @@ public class RequestApprovalsController {
   	  CreateSavingsAccount updated = requestApprovalsService.save(customer);
 
   	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "isApproved status updated for ID " + id, updated));
+  	}
+
+
+  	//anjali :unapprove data AddNewInvestment 14/07/2025
+
+  	@GetMapping("/unapprovedAddNewInvestment")
+  	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllUnapprovedAddNewInvestment() {
+  	    List<AddnewinvestmentPM> list = requestApprovalsService.getAllUnapprovedAddNewInvestment();
+
+  	    if (!list.isEmpty()) {
+  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+  	    } else {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+  	    }
+  	}
+  	
+  	// anjali:: approve add invetment data 14/07/25
+        
+  	@PostMapping("/approveInvestmentData")
+  	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateIsApprovedStatusInvestment(
+  	        @RequestParam("id") Long id,
+  	        @RequestParam("isApproved") boolean isApproved) {
+
+  	    Optional<AddnewinvestmentPM> optionalInvestment = requestApprovalsService.findByIdShowStatusInvestment(id);
+
+  	    if (!optionalInvestment.isPresent()) {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Investment with ID " + id + " not found."));
+  	    }
+
+  	    AddnewinvestmentPM investment = optionalInvestment.get();
+  	    investment.setApproved(isApproved);
+
+  	    AddnewinvestmentPM updatedInvestment = requestApprovalsService.save(investment);
+
+  	    return ResponseEntity.ok(
+  	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedInvestment)
+  	    );
   	}
 
 

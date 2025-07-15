@@ -14,6 +14,8 @@ import com.microfinance.model.AddnewinvestmentPM;
 @Repository
 public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Long> {
 
+
+
 	//@Query("SELECT b.id FROM AddnewinvestmentPM b WHERE b.branchName = :branchName")
 	List<AddnewinvestmentPM> findByBranchName(String branchName);
 
@@ -27,6 +29,11 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
 	Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode);
 
 	int countBySchemeType(String schemeType);
+
+	List<AddnewinvestmentPM> findByBranchNameAndPolicyStartDateBetweenAndIsApprovedFalse(String branchName,
+			String fromDate, String toDate);
+
+	List<AddnewinvestmentPM> findByIsApprovedFalse();
 
 	
 
