@@ -14,6 +14,8 @@ import com.microfinance.model.AddnewinvestmentPM;
 @Repository
 public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Long> {
 
+
+
 	//@Query("SELECT b.id FROM AddnewinvestmentPM b WHERE b.branchName = :branchName")
 	List<AddnewinvestmentPM> findByBranchName(String branchName);
 
@@ -33,9 +35,17 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
 	@Query("SELECT MAX(a.id) FROM AddnewinvestmentPM a")
 	Long findMaxId();
 
+
 	 // Custom query to fetch only approved RD policies
     @Query("SELECT a FROM AddnewinvestmentPM a WHERE a.policyCode LIKE 'RD%' AND a.isApproved = true")
     List<AddnewinvestmentPM> findApprovedRDPolicies();
+
+	List<AddnewinvestmentPM> findByBranchNameAndPolicyStartDateBetweenAndIsApprovedFalse(String branchName,
+			String fromDate, String toDate);
+
+	List<AddnewinvestmentPM> findByIsApprovedFalse();
+
+
 	
 
 }

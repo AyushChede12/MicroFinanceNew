@@ -398,6 +398,12 @@ public List<DailyDepositPM> getAllDDTerm() {
 
 
 
+
+public List<AddnewinvestmentPM> getAllInvestments() {
+    return addinvestmentrepo.findAll();
+}
+
+
 public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findAll();
@@ -430,9 +436,9 @@ public List<AddnewinvestmentPM> getAllInvestments() {
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
 }
-
-
 }
+
+
 
 
 
