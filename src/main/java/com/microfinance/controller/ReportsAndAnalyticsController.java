@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.ReportsAndAnalyticsService;
 
@@ -26,6 +27,17 @@ public class ReportsAndAnalyticsController {
 	        List<addFinancialConsultant> list = reportsAndAnalyticsService.getApprovedFinancialConsultant();
 	        if (!list.isEmpty()) {
 	            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "approved customers fetched", list));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No approved customers found"));
+	        }
+	    }
+	 
+	 @GetMapping("/getApprovedSavingAccount")
+	    public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> getApprovedSavingAccount() {
+	        List<CreateSavingsAccount> list = reportsAndAnalyticsService.getApprovedSavingAccount();
+	        if (!list.isEmpty()) {
+	            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "approved Saving Account customers fetched", list));
 	        } else {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
 	                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No approved customers found"));

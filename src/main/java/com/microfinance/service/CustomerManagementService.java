@@ -281,10 +281,7 @@ public class CustomerManagementService {
 			}
 		}
 	}
-	public List<addCustomer> searchByBranchAndDateRange(String branchName, String fDate, String tDate) {
-	    return customerRepo.findCustomersByBranchAndDate(branchName, fDate, tDate);
-	}
-
+	
 	 
 	public List<addCustomer> getApprovedCustomers() {
         return customerRepo.findByIsApprovedTrue();
