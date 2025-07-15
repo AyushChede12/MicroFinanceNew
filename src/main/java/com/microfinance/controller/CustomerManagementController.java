@@ -87,14 +87,7 @@ public class CustomerManagementController {
 
 		        return new ResponseEntity<>(response, response.getStatus());
 		    }
-		 @PostMapping("/searchCustomerByBranchAndDates")
-		 public List<addCustomer> searchCustomerByBranchAndDates(@RequestBody addCustomer searchCriteria) {
-		     return customerService.searchByBranchAndDateRange(
-		         searchCriteria.getBranchName(),
-		         searchCriteria.getfDate(),
-		         searchCriteria.gettDate()
-		     );
-		 }
+		
 		 
 		 @PostMapping("/verifyFetchedData")
 		 public ResponseEntity<Map<String, Object>> verifyFetchedData(@RequestBody Map<String, Object> fetchedData) {

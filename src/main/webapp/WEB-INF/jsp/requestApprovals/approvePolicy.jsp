@@ -8,6 +8,8 @@ pageEncoding="ISO-8859-1"%> -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/ae73087723.js"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
 	rel="stylesheet" />
 <script
@@ -65,11 +67,11 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="branchName" name="branchName"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
-									
+
 								</select>
 							</div>
 						</div>
@@ -109,13 +111,19 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card-body table-responsive">
 						<h5 class="card-title">Search result</h5>
 
-						<table class="table table-borderless datatable overflow-scroll">
+						<table class="table table-borderless datatable style="white-space: nowrap;">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Sr No.</th>
-									<th scope="col">Id</th>
-									<th scope="col">Address</th>
-									<th scope="col">Branch Name</th>
+									<th scope="col"></th>
+									<th scope="col" style="white-space: nowrap;">Sr.No</th>
+									<th scope="col" style="white-space: nowrap;">Policy Code</th>
+									<th scope="col" style="white-space: nowrap;">Policy Date</th>
+									<th scope="col" style="white-space: nowrap;">Customer Name</th>
+									<th scope="col" style="white-space: nowrap;">Contact No.</th>
+									<th scope="col" style="white-space: nowrap;">Branch Name</th>
+									<th scope="col" style="white-space: nowrap;">Nominee Name</th>
+									<th scope="col" style="white-space: nowrap;">Scheme Type</th>
+									<th scope="col" style="white-space: nowrap;">Scheme Name</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -125,14 +133,19 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 		</div>
-
+		<div class="row">
+			<div class="col-12 d-flex justify-content-end mt-3">
+				<button id="approvedBtn" class="btnStyle"
+					style="background-color: #FFA500;">Approved</button>
+			</div>
+		</div>
 		</div>
 
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script type="./js/RequestApproval/ApprovePolicy.js"></script>
+	<script src="./js/RequestApproval/ApprovePolicy.js"></script>
 </body>
 
 </html>
