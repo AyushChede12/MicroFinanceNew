@@ -61,14 +61,14 @@ $(document).ready(function() {
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
-				url: "/api/financialconsultant/getFinancialConsultantByMemberCode",
+				url: "/api/customershareholdingcontroller/fetchByCustomerCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
-					if (response.status == "OK") {
+					if (response.status == "FOUND") {
 						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
-						$("#authenticateFor").val(data.authenticateFor);
+						$("#major").val(data.major);
 						$("#customerName").val(data.customerName);
 						$("#familyMemberName").val(data.guardianName);
 						$("#relationToApplicant").val(data.relationToApplicant);

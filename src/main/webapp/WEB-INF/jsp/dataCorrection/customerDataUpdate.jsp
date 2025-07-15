@@ -118,8 +118,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Select</label> <select
-									id="authenticateFor" name="authenticateFor" required="required"
+								<label for="major">Select</label> <select
+									id="major" name="major" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>

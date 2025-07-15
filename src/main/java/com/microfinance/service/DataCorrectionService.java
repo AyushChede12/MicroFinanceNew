@@ -34,9 +34,6 @@ public class DataCorrectionService {
 	CustomerRepo customerRepo;
 	
 	@Autowired
-	FinancialConsultantRepo financialConsultantRepo;
-	
-	@Autowired
 	SavingAccountActivityRepo savingAccountActivityRepo;
 	
 	@Autowired
@@ -55,15 +52,15 @@ public class DataCorrectionService {
 		}
 	}
 
-	public boolean deleteFinancialData(Long id) {
-		// TODO Auto-generated method stub
-		if (financialConsultantRepo.existsById(id)) {
-			financialConsultantRepo.deleteById(id);
-			return true;
-		} else {
-			return false;
-		}
-	}
+//	public boolean deleteFinancialData(Long id) {
+//		// TODO Auto-generated method stub
+//		if (financialConsultantRepo.existsById(id)) {
+//			financialConsultantRepo.deleteById(id);
+//			return true;
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public List<SavingAccountActivity> fetchAllSavingAccountActivity() {
 		// TODO Auto-generated method stub
@@ -80,135 +77,145 @@ public class DataCorrectionService {
 		}
 	}
 
-	public ApiResponse<AddnewinvestmentPM> saveOrUpdatePolicyManagement(PolicyManagementDto policyManagementDto,
-			MultipartFile image1, MultipartFile image2) {
+//	public ApiResponse<AddnewinvestmentPM> saveOrUpdatePolicyManagement(PolicyManagementDto policyManagementDto,
+//			MultipartFile image1, MultipartFile image2) {
+//		// TODO Auto-generated method stub
+//		AddnewinvestmentPM addnewinvestmentpm = new AddnewinvestmentPM();
+//		boolean isNew = true;
+//
+//		if (policyManagementDto.getId() != null) {
+//			addnewinvestmentpm = addInvestmentRepo.findById(policyManagementDto.getId())
+//					.orElse(new AddnewinvestmentPM());
+//			isNew = false;
+//		}
+//
+//		// Map fields from DTO to entity
+//		addnewinvestmentpm.setPolicyCode(policyManagementDto.getPolicyCode());
+//		addnewinvestmentpm.setPolicyStartDate(policyManagementDto.getPolicyStartDate());
+//		addnewinvestmentpm.setMemberSelection(policyManagementDto.getMemberSelection());
+//		addnewinvestmentpm.setCustomerName(policyManagementDto.getCustomerName());
+//		addnewinvestmentpm.setDateofBirth(policyManagementDto.getDateofBirth());
+//		addnewinvestmentpm.setRelationDetails(policyManagementDto.getRelationDetails());
+//		addnewinvestmentpm.setContactNo(policyManagementDto.getContactNo());
+//		addnewinvestmentpm.setSuggestedNominee(policyManagementDto.getSuggestedNominee());
+//		addnewinvestmentpm.setAgeOfNominee(policyManagementDto.getAgeOfNominee());
+//		addnewinvestmentpm.setRelation(policyManagementDto.getRelation());
+//		addnewinvestmentpm.setAddress(policyManagementDto.getAddress());
+//		addnewinvestmentpm.setDistrict(policyManagementDto.getDistrict());
+//		addnewinvestmentpm.setState(policyManagementDto.getState());
+//		addnewinvestmentpm.setPinCode(policyManagementDto.getPinCode());
+//		addnewinvestmentpm.setTds(policyManagementDto.getTds());
+//		addnewinvestmentpm.setBranchName(policyManagementDto.getBranchName());
+//		addnewinvestmentpm.setModeOfOperation(policyManagementDto.getModeOfOperation());
+//		addnewinvestmentpm.setJointMemCode(policyManagementDto.getJointMemCode());
+//		addnewinvestmentpm.setJointName(policyManagementDto.getJointName());
+//		addnewinvestmentpm.setMaturityDate(policyManagementDto.getMaturityDate());
+//		addnewinvestmentpm.setSchemeType(policyManagementDto.getSchemeType());
+//		addnewinvestmentpm.setSchemeTerm(policyManagementDto.getSchemeTerm());
+//		addnewinvestmentpm.setSchemeMode(policyManagementDto.getSchemeMode());
+//		addnewinvestmentpm.setPolicyAmount(policyManagementDto.getPolicyAmount());
+//		addnewinvestmentpm.setDepositAmount(policyManagementDto.getDepositAmount());
+//		addnewinvestmentpm.setIntroMCode(policyManagementDto.getIntroMCode());
+//		addnewinvestmentpm.setMaturityAmount(policyManagementDto.getMaturityAmount());
+//		addnewinvestmentpm.setMISInterest(policyManagementDto.getMISInterest());
+//		addnewinvestmentpm.setPaymentBy(policyManagementDto.getPaymentBy());
+//		addnewinvestmentpm.setRemark(policyManagementDto.getRemark());
+//		addnewinvestmentpm.setAgent(policyManagementDto.getAgent());
+//		addnewinvestmentpm.setSmsSend(policyManagementDto.getSmsSend());
+//		
+//		//Image1
+//		if (image1 != null && !image1.isEmpty()) {
+//			try {
+//				String fileName = saveFile(image1);
+//				addnewinvestmentpm.setImage1(fileName);
+//			} catch (IOException e) {
+//				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+//			}
+//		}
+//
+//		//Image2
+//		if (image2 != null && !image2.isEmpty()) {
+//			try {
+//				String fileName = saveFile1(image2); // Save the signature
+//				addnewinvestmentpm.setImage2(fileName); // ✅ Correctly set it in entity
+//			} catch (IOException e) {
+//				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+//			}
+//		}
+//
+//		// Save entity to the database
+//		AddnewinvestmentPM savedPolicyManagement = addInvestmentRepo.save(addnewinvestmentpm);
+//
+//		// Return response
+//		if (isNew) {
+//			return ApiResponse.success(HttpStatus.CREATED,
+//					"Saved successfully. Policy Code: " + savedPolicyManagement.getPolicyCode(), savedPolicyManagement);
+//		} else {
+//			return ApiResponse.success(HttpStatus.OK,
+//					"Updated successfully. Policy Code: " + savedPolicyManagement.getPolicyCode(), savedPolicyManagement);
+//		}
+//	}
+//	
+//	private String saveFile(MultipartFile file) throws IOException {
+//		if (file != null && !file.isEmpty()) {
+//			ensureUploadDirectoryExists();
+//			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+//			File destinationFile = new File(uploadDirectory + File.separator + fileName);
+//
+//			try {
+//				file.transferTo(destinationFile);
+//				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
+//				return fileName;
+//			} catch (IOException e) {
+//				System.err.println("File saving failed: " + e.getMessage());
+//				throw e;
+//			}
+//		}
+//		return null;
+//	}
+//	
+//	private String saveFile1(MultipartFile image2) throws IOException {
+//		// TODO Auto-generated method stub
+//		if (image2 != null && !image2.isEmpty()) {
+//			ensureUploadDirectoryExists(); // Ensure the upload directory exists
+//			String fileName = System.currentTimeMillis() + "_" + image2.getOriginalFilename(); // Generate a
+//																											// unique
+//																											// filename
+//			File destinationFile = new File(uploadDirectory + File.separator + fileName);
+//
+//			try {
+//				image2.transferTo(destinationFile); // Save the file to the destination path
+//				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
+//				return fileName; // Return the saved file's name
+//			} catch (IOException e) {
+//				System.err.println("File saving failed: " + e.getMessage());
+//				throw e; // Rethrow the exception to handle errors
+//			}
+//		}
+//		return null;
+//	}
+//
+//	
+//
+//	private void ensureUploadDirectoryExists() {
+//		File uploadDir = new File(uploadDirectory);
+//		if (!uploadDir.exists()) {
+//			boolean created = uploadDir.mkdirs();
+//			if (created) {
+//				System.out.println("Upload directory created at: " + uploadDirectory);
+//			} else {
+//				System.err.println("Failed to create upload directory: " + uploadDirectory);
+//			}
+//		}
+//	}
+
+	public boolean deletePolicyData(Long id) {
 		// TODO Auto-generated method stub
-		AddnewinvestmentPM addnewinvestmentpm = new AddnewinvestmentPM();
-		boolean isNew = true;
-
-		if (policyManagementDto.getId() != null) {
-			addnewinvestmentpm = addInvestmentRepo.findById(policyManagementDto.getId())
-					.orElse(new AddnewinvestmentPM());
-			isNew = false;
-		}
-
-		// Map fields from DTO to entity
-		addnewinvestmentpm.setPolicyCode(policyManagementDto.getPolicyCode());
-		addnewinvestmentpm.setPolicyStartDate(policyManagementDto.getPolicyStartDate());
-		addnewinvestmentpm.setMemberSelection(policyManagementDto.getMemberSelection());
-		addnewinvestmentpm.setCustomerName(policyManagementDto.getCustomerName());
-		addnewinvestmentpm.setDateofBirth(policyManagementDto.getDateofBirth());
-		addnewinvestmentpm.setRelationDetails(policyManagementDto.getRelationDetails());
-		addnewinvestmentpm.setContactNo(policyManagementDto.getContactNo());
-		addnewinvestmentpm.setSuggestedNominee(policyManagementDto.getSuggestedNominee());
-		addnewinvestmentpm.setAgeOfNominee(policyManagementDto.getAgeOfNominee());
-		addnewinvestmentpm.setRelation(policyManagementDto.getRelation());
-		addnewinvestmentpm.setAddress(policyManagementDto.getAddress());
-		addnewinvestmentpm.setDistrict(policyManagementDto.getDistrict());
-		addnewinvestmentpm.setState(policyManagementDto.getState());
-		addnewinvestmentpm.setPinCode(policyManagementDto.getPinCode());
-		addnewinvestmentpm.setTds(policyManagementDto.getTds());
-		addnewinvestmentpm.setBranchName(policyManagementDto.getBranchName());
-		addnewinvestmentpm.setModeOfOperation(policyManagementDto.getModeOfOperation());
-		addnewinvestmentpm.setJointMemCode(policyManagementDto.getJointMemCode());
-		addnewinvestmentpm.setJointName(policyManagementDto.getJointName());
-		addnewinvestmentpm.setMaturityDate(policyManagementDto.getMaturityDate());
-		addnewinvestmentpm.setSchemeType(policyManagementDto.getSchemeType());
-		addnewinvestmentpm.setSchemeTerm(policyManagementDto.getSchemeTerm());
-		addnewinvestmentpm.setSchemeMode(policyManagementDto.getSchemeMode());
-		addnewinvestmentpm.setPolicyAmount(policyManagementDto.getPolicyAmount());
-		addnewinvestmentpm.setDepositAmount(policyManagementDto.getDepositAmount());
-		addnewinvestmentpm.setIntroMCode(policyManagementDto.getIntroMCode());
-		addnewinvestmentpm.setMaturityAmount(policyManagementDto.getMaturityAmount());
-		addnewinvestmentpm.setMISInterest(policyManagementDto.getMISInterest());
-		addnewinvestmentpm.setPaymentBy(policyManagementDto.getPaymentBy());
-		addnewinvestmentpm.setRemark(policyManagementDto.getRemark());
-		addnewinvestmentpm.setAgent(policyManagementDto.getAgent());
-		addnewinvestmentpm.setSmsSend(policyManagementDto.getSmsSend());
-		
-		//Image1
-		if (image1 != null && !image1.isEmpty()) {
-			try {
-				String fileName = saveFile(image1);
-				addnewinvestmentpm.setImage1(fileName);
-			} catch (IOException e) {
-				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
-			}
-		}
-
-		//Image2
-		if (image2 != null && !image2.isEmpty()) {
-			try {
-				String fileName = saveFile1(image2); // Save the signature
-				addnewinvestmentpm.setImage2(fileName); // ✅ Correctly set it in entity
-			} catch (IOException e) {
-				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
-			}
-		}
-
-		// Save entity to the database
-		AddnewinvestmentPM savedPolicyManagement = addInvestmentRepo.save(addnewinvestmentpm);
-
-		// Return response
-		if (isNew) {
-			return ApiResponse.success(HttpStatus.CREATED,
-					"Saved successfully. Policy Code: " + savedPolicyManagement.getPolicyCode(), savedPolicyManagement);
+		if (addInvestmentRepo.existsById(id)) {
+			addInvestmentRepo.deleteById(id);
+			return true;
 		} else {
-			return ApiResponse.success(HttpStatus.OK,
-					"Updated successfully. Policy Code: " + savedPolicyManagement.getPolicyCode(), savedPolicyManagement);
-		}
-	}
-	
-	private String saveFile(MultipartFile file) throws IOException {
-		if (file != null && !file.isEmpty()) {
-			ensureUploadDirectoryExists();
-			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-			File destinationFile = new File(uploadDirectory + File.separator + fileName);
-
-			try {
-				file.transferTo(destinationFile);
-				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
-				return fileName;
-			} catch (IOException e) {
-				System.err.println("File saving failed: " + e.getMessage());
-				throw e;
-			}
-		}
-		return null;
-	}
-	
-	private String saveFile1(MultipartFile image2) throws IOException {
-		// TODO Auto-generated method stub
-		if (image2 != null && !image2.isEmpty()) {
-			ensureUploadDirectoryExists(); // Ensure the upload directory exists
-			String fileName = System.currentTimeMillis() + "_" + image2.getOriginalFilename(); // Generate a
-																											// unique
-																											// filename
-			File destinationFile = new File(uploadDirectory + File.separator + fileName);
-
-			try {
-				image2.transferTo(destinationFile); // Save the file to the destination path
-				System.out.println("File successfully saved at: " + destinationFile.getAbsolutePath());
-				return fileName; // Return the saved file's name
-			} catch (IOException e) {
-				System.err.println("File saving failed: " + e.getMessage());
-				throw e; // Rethrow the exception to handle errors
-			}
-		}
-		return null;
-	}
-
-	
-
-	private void ensureUploadDirectoryExists() {
-		File uploadDir = new File(uploadDirectory);
-		if (!uploadDir.exists()) {
-			boolean created = uploadDir.mkdirs();
-			if (created) {
-				System.out.println("Upload directory created at: " + uploadDirectory);
-			} else {
-				System.err.println("Failed to create upload directory: " + uploadDirectory);
-			}
+			return false;
 		}
 	}
 	

@@ -21,10 +21,10 @@ $(document).ready(function() {
 
 	//dropdown with search
 	$.ajax({
-		url: '/api/customersavings/getAllSavingAccountData',
+		url: '/api/reports/getApprovedSavingAccount',
 		type: 'GET',
 		success: function(response) {
-			if (response.status === "FOUND") {
+			if (response.status === "OK") {
 				let savingOptions = response.data.map(function(item) {
 					return {
 						id: item.accountNumber,
@@ -103,123 +103,89 @@ $(document).ready(function() {
 		}
 	});
 
-	$.ajax({
-		url: "/api/financialconsultant/getAllCustomerCodes",
-		type: "POST",
-		success: function(response) {
-			if (response.status === "FOUND") {
-				$("#jointOperationCode").empty().append("<option value=''>-- Select Code --</option>");
-				response.data.forEach(function(item) {
-					$("#jointOperationCode").append(`<option value='${item.memberCode}'>${item.memberCode}</option>`);
-				});
-			} else {
-				alert("No customer codes found.");
-			}
-		},
-		error: function() {
-			alert("Failed to load customer codes.");
-		}
+	$("#accountNumber").change(function () {
+	    let accountNumber = $("#accountNumber").val().trim();
+		alert(accountNumber);
+
+	    if (accountNumber === "") {
+	        alert("Please enter a valid account number.");
+	        return;
+	    }
+
+	    $.ajax({
+	        type: 'GET',
+	        url: '/api/customersavings/getallbyaccountnumber',
+	        data: {accountNumber: accountNumber},
+	        success: function (response) {
+				alert("success");
+	            if (response.status === "FOUND" && response.data.length > 0) {
+	                let data = response.data[0];
+
+	                // Fill form fields
+	                $("#id").val(data.id);
+	                $("#openingDate").val(data.openingDate);
+	                $("#selectByCustomer").val(data.selectByCustomer);
+	                $("#enterCustomerName").val(data.enterCustomerName);
+	                $("#dateOfBirth").val(data.dateOfBirth);
+	                $("#customerAge").val(data.customerAge);
+	                $("#familyDetails").val(data.familyDetails);
+	                $("#contactNumber").val(data.contactNumber);
+	                $("#suggestedNomineeName").val(data.suggestedNomineeName);
+	                $("#suggestedNomineeAge").val(data.suggestedNomineeAge);
+	                $("#relationToApplicant").val(data.suggestedNomineeRelation);
+	                $("#address").val(data.address);
+	                $("#district").val(data.district);
+	                $("#branchName").val(data.branchName);
+	                $("#state").val(data.state);
+	                $("#pinCode").val(data.pinCode);
+	                $("#operationType").val(data.operationType);
+	                $("#jointOperationCode").val(data.jointOperationCode);
+	                $("#jointSurvivorCode").val(data.jointSurvivorCode);
+	                $("#familyRelation").val(data.familyRelation);
+	                $("#selectPlan").val(data.selectPlan);
+	                $("#openingAmount").val(data.openingAmount);
+	                $("#financialConsultantCode").val(data.financialConsultantCode);
+	                $("#financialConsultantName").val(data.financialConsultantName);
+	                $("#openingFees").val(data.openingFees);
+	                $("#modeOfPayment").val(data.modeOfPayment);
+	                $("#comment").val(data.comment);
+
+	                // Photo
+	                const photoPath = data.photo ? `Uploads/${data.photo}` : "Uploads/default-placeholder.jpg";
+	                $("#photoPreview").attr("src", photoPath);
+	                $("#photoHidden").val(data.photo ? photoPath : "");
+	                if (data.photo) {
+	                    photoSizeEdit({ target: { result: photoPath } });
+	                }
+
+	                // Signature
+	                const signPath = data.signature ? `Uploads/${data.signature}` : "Uploads/default-placeholder.jpg";
+	                $("#signaturePreview").attr("src", signPath);
+	                $("#signatureHidden").val(data.signature ? signPath : "");
+	                if (data.signature) {
+	                    signatureSizeEdit({ target: { result: signPath } });
+	                }
+
+	                // Toggles
+	                $('#toggle-account-status').prop('checked', data.accountStatus === 1);
+	                $('#toggle-sms-send').prop('checked', data.messageSend === 1);
+	                $('#toggle-debit-card').prop('checked', data.debitCardIssue === 1);
+
+	                updateToggleColor(document.getElementById('toggle-account-status'));
+	                updateToggleColor(document.getElementById('toggle-sms-send'));
+	                updateToggleColor(document.getElementById('toggle-debit-card'));
+
+	            } else {
+	                alert("Saving Account Details Not Found or Not Approved.");
+	            }
+	        },
+	        error: function (xhr, status, error) {
+	            console.error("Error:", error);
+	            alert("Server error occurred. Please try again.");
+	        }
+	    });
 	});
 
-	$("#accountNumber").change(function() {
-		let accountNumber = $("#accountNumber").val();
-		$.ajax({
-			type: "GET",
-			url: "api/customersavings/getallbyaccountnumber",
-			data: { accountNumber: accountNumber },
-			success: function(response, e) {
-				if (response.status == "FOUND") {
-					let data = response.data[0];
-					$("#id").val(data.id);
-					$("#openingDate").val(data.openingDate);
-					$("#selectByCustomer").val(data.selectByCustomer);
-					$("#enterCustomerName").val(data.enterCustomerName);
-					$("#dateOfBirth").val(data.dateOfBirth);
-					$("#customerAge").val(data.customerAge);
-					$("#familyDetails").val(data.familyDetails);
-					$("#contactNumber").val(data.contactNumber);
-					$("#suggestedNomineeName").val(data.suggestedNomineeName);
-					$("#suggestedNomineeAge").val(data.suggestedNomineeAge);
-					$("#relationToApplicant").val(data.suggestedNomineeRelation);
-					$("#address").val(data.address);
-					$("#district").val(data.district);
-					$("#branchName").val(data.branchName);
-					$("#state").val(data.state);
-					$("#pinCode").val(data.pinCode);
-					$("#operationType").val(data.operationType);
-					$("#jointOperationCode").val(data.jointOperationCode);
-					$("#jointSurvivorCode").val(data.jointSurvivorCode);
-					$("#familyRelation").val(data.familyRelation);
-					$("#selectPlan").val(data.selectPlan);
-					$("#openingAmount").val(data.openingAmount);
-					$("#financialConsultantCode").val(data.financialConsultantCode);
-					$("#financialConsultantName").val(data.financialConsultantName);
-					$("#openingFees").val(data.openingFees);
-
-					//Payment Details
-					$("#modeOfPayment").val(data.modeOfPayment);
-					$("#comment").val(data.comment);
-
-					if (data.photo) {
-						const photoPath = `Uploads/${data.photo}`;
-						$("#photoPreview").attr("src", photoPath);
-						$("#photoHidden").val(photoPath);
-						const fakePhotoEvent = { target: { result: photoPath } };
-						photoSizeEdit(fakePhotoEvent);
-
-					} else {
-						$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
-						$("#photoHidden").val("");
-					}
-
-					// Image: Signature
-					if (data.signature) {
-						const signPath = `Uploads/${data.signature}`;
-						$("#signaturePreview").attr("src", signPath);
-						$("#signatureHidden").val(signPath);
-						const fakeSignEvent = { target: { result: signPath } };
-						signatureSizeEdit(fakeSignEvent);
-
-					} else {
-						$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
-						$("#signatureHidden").val("");
-					}
-
-
-
-					if (parseInt(data.accountStatus) === 1) {
-						$('#toggle-account-status').prop('checked', true);
-					} else {
-						$('#toggle-account-status').prop('checked', false);
-					}
-
-					if (parseInt(data.messageSend) === 1) {
-						$('#toggle-sms-send').prop('checked', true);
-					} else {
-						$('#toggle-sms-send').prop('checked', false);
-					}
-
-					if (parseInt(data.debitCardIssue) === 1) {
-						$('#toggle-debit-card').prop('checked', true);
-					} else {
-						$('#toggle-debit-card').prop('checked', false);
-					}
-
-					updateToggleColor(document.getElementById('toggle-account-status'));
-					updateToggleColor(document.getElementById('toggle-sms-send'));
-					updateToggleColor(document.getElementById('toggle-debit-card'));
-
-
-				} else {
-					alert("Transfer Share Details Not Found For Customer");
-				}
-			},
-			error: function() {
-				alert("Shares not found or server error");
-			}
-		});
-
-	});
 
 	$('#updateBtn').click(function(e) {
 		e.preventDefault();
@@ -318,6 +284,34 @@ $(document).ready(function() {
 			});
 		}
 
+	});
+
+	$('#jointOperationCode').blur(function(event) {
+		let jointOperationCode = $("#jointOperationCode").val();
+		$.ajax({
+			type: "GET",
+			url: "api/customersavings/getallbyaccountnumber",
+			data: { accountNumber: jointOperationCode },
+			success: function(response, e) {
+				if (response.status == "FOUND") {
+					let data = response.data[0];
+					$("#id").val(data.id);
+				} else {
+					alert("Transfer Share Details Not Found For Customer");
+				}
+			},
+			error: function() {
+				alert("Shares not found or server error");
+			}
+		});
+
+
+
+	});
+
+	$('#newBtn').click(function(event) {
+		event.preventDefault();
+		location.reload();
 	});
 
 

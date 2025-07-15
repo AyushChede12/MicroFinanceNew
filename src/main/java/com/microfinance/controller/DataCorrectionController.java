@@ -56,19 +56,19 @@ public class DataCorrectionController {
 	}
 
 	// Ayush
-	@PostMapping("/deleteFinancialDataByForm")
-	public ResponseEntity<ApiResponse<String>> deleteFinancialData(@RequestParam("id") Long id) {
-		boolean isDeleted = dataCorrectionService.deleteFinancialData(id);
-		if (isDeleted) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Financial Data deleted successfully",
-					"success");
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Financial Data deletion failed",
-					"failure");
-			return ResponseEntity.badRequest().body(response);
-		}
-	}
+//	@PostMapping("/deleteFinancialDataByForm")
+//	public ResponseEntity<ApiResponse<String>> deleteFinancialData(@RequestParam("id") Long id) {
+//		boolean isDeleted = dataCorrectionService.deleteFinancialData(id);
+//		if (isDeleted) {
+//			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Financial Data deleted successfully",
+//					"success");
+//			return ResponseEntity.ok(response);
+//		} else {
+//			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Financial Data deletion failed",
+//					"failure");
+//			return ResponseEntity.badRequest().body(response);
+//		}
+//	}
 
 	// Ayush
 	@GetMapping("/fetchAllSavingAccountActivity")
@@ -95,22 +95,36 @@ public class DataCorrectionController {
 	}
 
 	// Ayush
-	@PostMapping("/saveOrUpdatePolicyManagement")
-	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveOrUpdatePolicyManagementData(
-			@ModelAttribute PolicyManagementDto policyManagementDto,
-			@RequestParam(value = "image1", required = false) MultipartFile image1,
-			@RequestParam(value = "image2", required = false) MultipartFile image2) {
-
-		// System.out.println("Received file: " + (signature != null ?
-		// signature.getOriginalFilename() : "No file uploaded"));
-
-		System.out.println("Received financialPhoto: " + image1);
-
-		System.out.println("Received Signature: " + image2);
-
-		ApiResponse<AddnewinvestmentPM> response = dataCorrectionService
-				.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
-		return new ResponseEntity<>(response, response.getStatus());
+//	@PostMapping("/saveOrUpdatePolicyManagement")
+//	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveOrUpdatePolicyManagementData(
+//			@ModelAttribute PolicyManagementDto policyManagementDto,
+//			@RequestParam(value = "image1", required = false) MultipartFile image1,
+//			@RequestParam(value = "image2", required = false) MultipartFile image2) {
+//
+//		// System.out.println("Received file: " + (signature != null ?
+//		// signature.getOriginalFilename() : "No file uploaded"));
+//
+//		System.out.println("Received financialPhoto: " + image1);
+//
+//		System.out.println("Received Signature: " + image2);
+//
+//		ApiResponse<AddnewinvestmentPM> response = dataCorrectionService
+//				.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
+//		return new ResponseEntity<>(response, response.getStatus());
+//	}
+	
+	@PostMapping("/deletePolicyDataByForm")
+	public ResponseEntity<ApiResponse<String>> deletePolicyData(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deletePolicyData(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Policy Data deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy Data deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
 	}
 
 
