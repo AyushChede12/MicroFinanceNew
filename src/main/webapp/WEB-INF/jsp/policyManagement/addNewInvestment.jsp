@@ -308,16 +308,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Intro.M Code*</label> <select id="introMCode"
-									name="introMCode" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-
-								</select>
+						<div class="col-lg-3 mb-4">
+								<div class="d-flex flex-column formFields">
+									<label for="Agent">Agent*</label> <select
+										id="Agent" name="Agent" required
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Select Agent </option>
+									</select>
+								</div>
 							</div>
-						</div>
 
 
 
@@ -374,17 +373,9 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 
-							<!-- Advisor/Collector -->
-							<div class="col-lg-3 mb-4">
-								<div class="d-flex flex-column formFields">
-									<label for="Agent">Agent*</label> <select
-										id="Agent" name="Agent" required
-										class="form-control selectField" style="height: 30px;">
-										<option value="">Select Agent </option>
-									</select>
-								</div>
-							</div>
-
+							
+							
+							
 							<!-- SMS Send -->
 							<div class="col-lg-3 mb-4">
 								<div class="d-flex flex-column formFields">
@@ -393,6 +384,7 @@ pageEncoding="ISO-8859-1"%> -->
 										class="form-control" />
 								</div>
 							</div>
+							
 						</div>
 					</div>
 

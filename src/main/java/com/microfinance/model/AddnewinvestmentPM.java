@@ -45,7 +45,10 @@ public class AddnewinvestmentPM {
 	private String image1;
 	private String image2;
 	private boolean isApproved;
-	
+	private String lastInstPaid;
+	private String paidAmount;
+    private String amountDue;
+    private String schemeName;
 	
 	
 	public Long getId() {
@@ -269,6 +272,30 @@ public class AddnewinvestmentPM {
 	}
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+	public String getLastInstPaid() {
+		return lastInstPaid;
+	}
+	public void setLastInstPaid(String lastInstPaid) {
+		this.lastInstPaid = lastInstPaid;
+	}
+	public String getPaidAmount() {
+		return paidAmount;
+	}
+	public void setPaidAmount(String paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+	public String getAmountDue() {
+		return amountDue;
+	}
+	public void setAmountDue(String amountDue) {
+		this.amountDue = amountDue;
+	}
+	public String getSchemeName() {
+		return schemeName;
+	}
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
 	}
 	
 	
