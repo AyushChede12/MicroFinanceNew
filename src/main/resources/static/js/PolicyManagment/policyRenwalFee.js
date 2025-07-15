@@ -76,37 +76,23 @@ $(document).ready(function () {
     $("#saveBtn").click(function (e) {
         e.preventDefault(); // Prevent default form submission
 
-        // Collect form data
+        // Collect only required data for the API
         const formData = {
             policyCode: $("#policyCode").val(),
-            renewalDate: $("#renewalDate").val(),
-            policyDate: $("#policyDate").val(),
-            maturityDate: $("#maturityDate").val(),
-            customerCode: $("#customerCode").val(),
-            clientName: $("#clientName").val(),
-            contactNo: $("#contactNo").val(),
             policyAmount: $("#policyAmount").val(),
-            policyType: $("#policyType").val(),
-            policyTerm: $("#policyTerm").val(),
-            maturityAmount: $("#maturityAmount").val(),
-            totalDeposit: $("#totalDeposit").val(),
-            paymentDue: $("#paymentDue").val(),
-            lastPaymentDate: $("#lastPaymentDate").val(),
-            dueDate: $("#dueDate").val(),
-            noOfInst: $("#noOfInst").val(),
-            noOfInstPaid: $("#noOfInstPaid").val(),
-            modeOfPayment: $("#modeOfPayment").val()
+            noOfInstallments: $("#noOfInst").val() // ✅ Fixed key name
         };
 
         // Send to backend
         $.ajax({
-            url: "/api/Policymangment/updateRenewalData",
+            url: "/api/Policymangment/updateDueAndInstallment",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
                 alert("✅ " + response.message);
-                $("#formid")[0].reset(); // Reset form if needed
+                // Optionally reset form or reload table
+                // $("#formid")[0].reset();
             },
             error: function (xhr) {
                 alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
