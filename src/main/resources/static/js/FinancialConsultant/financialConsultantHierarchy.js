@@ -12,7 +12,7 @@ $(document).ready(function() {
 						let data = response.data[0]; // taking the first consultant from list
 
 						// Bind data to your form fields
-						$('#customerName').val(data.customerName);
+						$('#financialName').val(data.financialName);
 						$('#selectPosition').val(data.selectPosition);
 
 					} else {
@@ -49,11 +49,11 @@ $(document).ready(function () {
                             tableBody += `
                                 <tr>
                                     <td>${index + 1}</td>
-                                    <td>${item.customerName || ''}</td>
+                                    <td>${item.financialName || ''}</td>
                                     <td>${item.financialCode || ''}</td>
                                     <td>${item.contactNo || ''}</td>
                                     <td>${item.joiningDate || ''}</td>
-                                    <td>${item.customerAddress || ''}</td>
+                                    <td>${item.address || ''}</td>
                                     <td>${item.branchName || ''}</td>
                                     <td>${item.financialStatus === true || item.financialStatus === 1 ? 'Active' : 'Inactive'}</td>
                                 </tr>

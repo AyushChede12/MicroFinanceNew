@@ -1,7 +1,7 @@
-$(document).ready(function () {
+$(document).ready(function() {
 
 	// ✅ Load Customer Codes
-	$.ajax({
+	/*$.ajax({
 		url: "/api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
 		success: function (response) {
@@ -17,23 +17,23 @@ $(document).ready(function () {
 		error: function () {
 			alert("Failed to load customer codes.");
 		}
-	});
+	});*/
 
 	// ✅ Load Branches
 	$.ajax({
 		url: "/api/financialconsultant/getAllBranch",
 		type: "POST",
-		success: function (response) {
+		success: function(response) {
 			if (response.status === "OK" && response.data) {
 				$("#branchName").empty().append("<option value=''>-- Select Branch --</option>");
-				response.data.forEach(function (item) {
+				response.data.forEach(function(item) {
 					$("#branchName").append(`<option value='${item.branchName}'>${item.branchName}</option>`);
 				});
 			} else {
 				alert("No branches found.");
 			}
 		},
-		error: function () {
+		error: function() {
 			alert("Failed to load branch names.");
 		}
 	});
@@ -42,17 +42,17 @@ $(document).ready(function () {
 	$.ajax({
 		url: "/api/financialconsultant/getAllRelationToApplicant",
 		type: "POST",
-		success: function (response) {
+		success: function(response) {
 			if (response.status === "OK" && response.data) {
 				$("#relationToApplicant").empty().append("<option value=''>-- Select Relation --</option>");
-				response.data.forEach(function (item) {
+				response.data.forEach(function(item) {
 					$("#relationToApplicant").append(`<option value='${item.relationToApplicant}'>${item.relationToApplicant}</option>`);
 				});
 			} else {
 				alert("No relations found.");
 			}
 		},
-		error: function () {
+		error: function() {
 			alert("Failed to load relation.");
 		}
 	});
@@ -62,14 +62,14 @@ $(document).ready(function () {
 	$("#joiningDate").val(today);
 
 	// ✅ Auto-fill on Member Code Change
-	$("#memberCode").change(function () {
+	$("#memberCode").change(function() {
 		let memberCode = $(this).val();
 		if (memberCode !== "") {
 			$.ajax({
 				type: "POST",
 				url: "/api/financialconsultant/getFinancialConsultantByMemberCode",
 				data: { memberCode: memberCode },
-				success: function (response) {
+				success: function(response) {
 					if (response.data && response.data.length > 0) {
 						let data = response.data[0];
 						$("#customerName").val(data.customerName);
@@ -95,7 +95,7 @@ $(document).ready(function () {
 						alert("No customer found for this member code.");
 					}
 				},
-				error: function () {
+				error: function() {
 					alert("Member not found or server error.");
 				}
 			});
@@ -103,27 +103,30 @@ $(document).ready(function () {
 	});
 
 	// ✅ Fetch and Display All Financial Consultant Details
-	$("#updateBtn").hide();
+	//$("#updateBtn").hide();
 	$.ajax({
 		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		contentType: "application/json",
-		success: function (response) {
+		success: function(response) {
 			if (response.status === "OK" && response.data.length > 0) {
 				var tbody = $(".datatable tbody");
 				tbody.empty();
-				$.each(response.data, function (index, item) {
+				$.each(response.data, function(index, item) {
 					var row = `
 						<tr style="font-family: 'Poppins', sans-serif;">
 							<td>${index + 1}</td>
-							<td>${item.customerName || ''}</td>
 							<td>${item.financialCode || ''}</td>
-							<td>${item.branchName || ''}</td>
-							<td>${item.joiningDate || ''}</td>
-							<td>${item.customerAddress || ''}</td>
+							<td>${item.financialName || ''}</td>
 							<td>${item.contactNo || ''}</td>
-							<td>${item.financialStatus || ''}</td>
+							<td>${item.branchName || ''}</td>
+							<td>${item.address || ''}</td>
+							<td>${item.district || ''}</td>
+							<td>${item.state || ''}</td>
+							<td>${item.pinCode || ''}</td>
 							<td>${item.profession || ''}</td>
+							<td>${item.financialStatus || ''}</td>
+							
 							
 						</tr>`;
 					tbody.append(row);
@@ -132,35 +135,34 @@ $(document).ready(function () {
 				$(".datatable tbody").html(`<tr><td colspan="11" class="text-center">No data available</td></tr>`);
 			}
 		},
-		error: function (xhr, status, error) {
+		error: function(xhr, status, error) {
 			console.error("Error fetching financial consultants:", error);
 			alert("Failed to load financial consultant data.");
 		}
 	});
 
 	// ✅ Save Button Logic
-	$('#saveBtnFinacial').click(function (event) {
+	$('#saveBtnFinacial').click(function(event) {
 		event.preventDefault();
-		const financialCode = $('#financialCode').val();
-		const financialPhotoSrc = $('#financialPhotoPreview').attr('src') || '';
-		const financialSignatureSrc = $('#financialSignaturePreview').attr('src') || '';
-		const customerPhoto = financialPhotoSrc.split('/').pop();
-		const customerSignature = financialSignatureSrc.split('/').pop();
+		var financialCode=$('#financialCode').val();
+		
+		const photo = $('#photo')[0].files[0];
+				const signature = $('#signature')[0].files[0];
 
+		/*const financialPhotoSrc = $('#photoHidden').attr('src') || '';
+		const financialSignatureSrc = $('#signatureHidden').attr('src') || '';
+		const photo = financialPhotoSrc.split('/').pop();
+		const signature = financialSignatureSrc.split('/').pop();
+*/
 		const formData = new FormData();
-		formData.append("financialCode", $('#financialCode').val());
 		formData.append("joiningDate", $('#joiningDate').val());
-		formData.append("memberCode", $('#memberCode').val());
-		formData.append("customerName", $('#customerName').val());
+		formData.append("financialCode", financialCode);
+		formData.append("financialName", $('#financialName').val());
 		formData.append("dob", $('#dob').val());
-		formData.append("customerAge", $('#customerAge').val());
-		formData.append("guardianName", $('#guardianName').val());
-		formData.append("relationToApplicant", $('#relationToApplicant').val());
+		formData.append("age", $('#age').val());
 		formData.append("contactNo", $('#contactNo').val());
-		formData.append("nomineeName", $('#nomineeName').val());
 		formData.append("branchName", $('#branchName').val());
-		formData.append("nomineeAge", $('#nomineeAge').val());
-		formData.append("customerAddress", $('#customerAddress').val());
+		formData.append("address", $('#address').val());
 		formData.append("district", $('#district').val());
 		formData.append("state", $('#state').val());
 		formData.append("pinCode", $('#pinCode').val());
@@ -178,8 +180,17 @@ $(document).ready(function () {
 		formData.append("comments", $('#comments').val());
 		formData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
 		formData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
-		formData.append("customerPhoto", customerPhoto);
-		formData.append("customerSignature", customerSignature);
+		/*formData.append("financialPhoto", photo);
+		formData.append("finnacialSignature", signature);*/
+		if (photo) {
+					formData.append("financialPhoto", photo);
+				}
+
+				// File upload: signature
+				if (signature) {
+					formData.append("finnacialSignature", signature);
+				}
+
 
 		$.ajax({
 			type: 'POST',
@@ -187,7 +198,7 @@ $(document).ready(function () {
 			data: formData,
 			processData: false,
 			contentType: false,
-			success: function (response) {
+			success: function(response) {
 				if (response.status === "OK" || response.status === "CREATED") {
 					alert("Saved Successfully \n Financial Code : " + financialCode);
 					location.reload();
@@ -195,7 +206,7 @@ $(document).ready(function () {
 					alert("Error: " + response.message);
 				}
 			},
-			error: function (xhr) {
+			error: function(xhr) {
 				console.error("Error:", xhr.responseText);
 				alert("❌ An error occurred while saving the data.");
 			}
@@ -208,7 +219,7 @@ $(document).ready(function () {
 	$('#displaydeposit').hide();
 	$('#displayRef').hide();
 
-	$('#modeofPayment').change(function () {
+	$('#modeofPayment').change(function() {
 		const paymentMode = $(this).val();
 		if (paymentMode === 'Cash') {
 			$('#displayCheque').hide();
@@ -229,7 +240,7 @@ $(document).ready(function () {
 	});
 
 	// ✅ UPI ID verification
-	$('#verifyUpiBtn').click(function () {
+	$('#verifyUpiBtn').click(function() {
 		const upi = $('#refNo').val().trim();
 		const upiPattern = /^[\w.\-]{2,256}@[a-zA-Z]{2,64}$/;
 		if (upiPattern.test(upi)) {
@@ -322,112 +333,155 @@ $(document).ready(function () {
 
 
 
-    $('#updateBtn').click(function (e) {
-        e.preventDefault();
+	$('#updateBtn').click(function (e) {
+		e.preventDefault();
 
-        let formData = new FormData();
+		let formData = new FormData();
 
-        // Append regular text fields
-        formData.append("id", $('#id').val());
-        formData.append("financialCode", $('#financialCode').val());
-        formData.append("joiningDate", $('#joiningDate').val());
-        formData.append("memberCode", $('#memberCode').val());
-        formData.append("customerName", $('#customerName').val());
-        formData.append("dob", $('#dob').val());
-        formData.append("customerAge", $('#customerAge').val());
-        formData.append("guardianName", $('#guardianName').val());
-        formData.append("relationToApplicant", $('#relationToApplicant').val());
-        formData.append("contactNo", $('#contactNo').val());
-        formData.append("nomineeName", $('#nomineeName').val());
-        formData.append("branchName", $('#branchName').val());
-        formData.append("nomineeAge", $('#nomineeAge').val());
-        formData.append("customerAddress", $('#customerAddress').val());
-        formData.append("district", $('#district').val());
-        formData.append("state", $('#state').val());
-        formData.append("pinCode", $('#pinCode').val());
-        formData.append("profession", $('#profession').val());
-        formData.append("academicBackground", $('#academicBackground').val());
-        formData.append("selectPosition", $('#selectPosition').val());
-        formData.append("referralCode", $('#referralCode').val());
-        formData.append("referralName", $('#referralName').val());
-        formData.append("fees", $('#fees').val());
-        formData.append("modeofPayment", $('#modeofPayment').val());
-        formData.append("chequeNo", $('#chequeNo').val());
-        formData.append("chequeDate", $('#chequeDate').val());
-        formData.append("depositAccount", $('#depositAccount').val());
-        formData.append("refNo", $('#refNo').val());
-        formData.append("comments", $('#comments').val());
-        formData.append("financialStatus", $('#financialStatus').is(':checked')? 1 : 0);
-        formData.append("smsSend", $('#smsSend').is(':checked')? 1 : 0);
+		// Append regular text fields
+		formData.append("id", $('#id').val());
+		formData.append("financialCode", $('#financialCode').val());
+		formData.append("joiningDate", $('#joiningDate').val());
+		formData.append("memberCode", $('#memberCode').val());
+		formData.append("customerName", $('#customerName').val());
+		formData.append("dob", $('#dob').val());
+		formData.append("customerAge", $('#customerAge').val());
+		formData.append("guardianName", $('#guardianName').val());
+		formData.append("relationToApplicant", $('#relationToApplicant').val());
+		formData.append("contactNo", $('#contactNo').val());
+		formData.append("nomineeName", $('#nomineeName').val());
+		formData.append("branchName", $('#branchName').val());
+		formData.append("nomineeAge", $('#nomineeAge').val());
+		formData.append("customerAddress", $('#customerAddress').val());
+		formData.append("district", $('#district').val());
+		formData.append("state", $('#state').val());
+		formData.append("pinCode", $('#pinCode').val());
+		formData.append("profession", $('#profession').val());
+		formData.append("academicBackground", $('#academicBackground').val());
+		formData.append("selectPosition", $('#selectPosition').val());
+		formData.append("referralCode", $('#referralCode').val());
+		formData.append("referralName", $('#referralName').val());
+		formData.append("fees", $('#fees').val());
+		formData.append("modeofPayment", $('#modeofPayment').val());
+		formData.append("chequeNo", $('#chequeNo').val());
+		formData.append("chequeDate", $('#chequeDate').val());
+		formData.append("depositAccount", $('#depositAccount').val());
+		formData.append("refNo", $('#refNo').val());
+		formData.append("comments", $('#comments').val());
+		formData.append("financialStatus", $('#financialStatus').is(':checked')? 1 : 0);
+		formData.append("smsSend", $('#smsSend').is(':checked')? 1 : 0);
 
-        // Append image paths or Base64 values
-        formData.append("customerPhoto", $('#customerPhotoHidden').val());
-        formData.append("customerSignature", $('#customerSignatureHidden').val());
+		// Append image paths or Base64 values
+		formData.append("customerPhoto", $('#customerPhotoHidden').val());
+		formData.append("customerSignature", $('#customerSignatureHidden').val());
 
-        $.ajax({
-            url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
-            type: "POST",
-            data: formData,
-            enctype: 'multipart/form-data',
-            contentType: false,
-            processData: false,
-            cache: false,
-            success: function (response) {
-                if (response.status === "OK") {
-                    alert("Updated Successfully");
+		$.ajax({
+			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+			type: "POST",
+			data: formData,
+			enctype: 'multipart/form-data',
+			contentType: false,
+			processData: false,
+			cache: false,
+			success: function (response) {
+				if (response.status === "OK") {
+					alert("Updated Successfully");
 					location.reload();
-                    // Optionally refresh the table or UI
-                } else {
-                    alert("Something went wrong: " + response.message);
-                }
-            },
-            error: function (xhr) {
-                alert("Error while saving data: " + xhr.responseText);
-            }
-        });
-    });
+					// Optionally refresh the table or UI
+				} else {
+					alert("Something went wrong: " + response.message);
+				}
+			},
+			error: function (xhr) {
+				alert("Error while saving data: " + xhr.responseText);
+			}
+		});
+	});
 	
 	$(document).on('click', '.deleteBtn', function () {
-	        var id = $(this).data('id');
+			var id = $(this).data('id');
 
-	        // Optional: Confirmation prompt
-	        if (confirm("Are you sure you want to delete this Financial Consultant?")) {
-	            $.ajax({
-	                url: '/api/financialconsultant/deleteFinancialConsultantById',
-	                type: 'POST',
-	                data: { id: id },
-	                success: function (response) {
-	                    if (response.status === 'OK') {
-	                        alert(response.message);
-	                        // Reload or update the table after deletion
-	                        location.reload(); // or call a function to refresh table via AJAX
-	                    } else {
-	                        alert("Error: " + response.message);
-	                    }
-	                },
-	                error: function (xhr) {
-	                    alert("Deletion failed. Please try again.");
-	                }
-	            });
-	        }
-	    });*/
+			// Optional: Confirmation prompt
+			if (confirm("Are you sure you want to delete this Financial Consultant?")) {
+				$.ajax({
+					url: '/api/financialconsultant/deleteFinancialConsultantById',
+					type: 'POST',
+					data: { id: id },
+					success: function (response) {
+						if (response.status === 'OK') {
+							alert(response.message);
+							// Reload or update the table after deletion
+							location.reload(); // or call a function to refresh table via AJAX
+						} else {
+							alert("Error: " + response.message);
+						}
+					},
+					error: function (xhr) {
+						alert("Deletion failed. Please try again.");
+					}
+				});
+			}
+		});*/
 
 });
 
-function printTable(){
+function printTable() {
 	const printContent = document.getElementById('tabl').outerHTML;
-				const printWindow = window.open('', '', 'height=500,width=800');
+	const printWindow = window.open('', '', 'height=500,width=800');
 
-				printWindow.document
-						.write('<html><head><title>Print Details</title></head><body>');
-				printWindow.document.write(printContent);
-				printWindow.document.write('</body></html>');
+	printWindow.document
+		.write('<html><head><title>Print Details</title></head><body>');
+	printWindow.document.write(printContent);
+	printWindow.document.write('</body></html>');
 
-				printWindow.document.close();
-				printWindow.focus();
-				printWindow.print();
+	printWindow.document.close();
+	printWindow.focus();
+	printWindow.print();
 }
 
 
+
+
+/*function photoUpload() {
+	alert("function called");
+	const file = document.getElementById("financialPhoto").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewimg = document.getElementById("financialPhotoPreview");
+			document.getElementById("financialPhotoPreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+function signatureUpload() {
+	alert("function called");
+	const file = document.getElementById("finnacialSignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewimg = document.getElementById("financialSignaturePreview");
+			document.getElementById("financialSignaturePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+*/
 
 // End of document.ready

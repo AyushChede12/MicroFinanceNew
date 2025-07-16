@@ -393,15 +393,39 @@ public List<DailyDepositPM> getAllDDTerm() {
 }
 
 
+
+
+
 public List<AddnewinvestmentPM> getAllInvestments() {
     return addinvestmentrepo.findAll();
 }
+
 
 public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findAll();
 }
 
+
+
+public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
+    if (policyCode == null) return Optional.empty();
+
+    // Clean input: trim and convert to uppercase
+    String normalizedCode = policyCode.trim().toUpperCase();
+
+    // Fetch all and match manually
+    return addinvestmentrepo.findAll().stream()
+            .filter(p -> p.getPolicyCode() != null &&
+                         p.getPolicyCode().trim().equalsIgnoreCase(normalizedCode))
+            .findFirst();
+}
+
+
+public List<AddnewinvestmentPM> getApprovedInvestments() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findByIsApprovedTrue();
+}
 public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
 	// TODO Auto-generated method stub
 
@@ -411,9 +435,12 @@ public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
 
 
 
-
-
+public List<AddnewinvestmentPM> getApprovedRDPolicies() {
+    return addinvestmentrepo.findApprovedRDPolicies();
 }
+}
+
+
 
 
 
