@@ -719,6 +719,87 @@ public class PolicyManagementController {
 	    return ResponseEntity.ok(nextPolicyCode);
 	}
 
+	@PostMapping("/updateDueAndInstallment")
+	public ResponseEntity<ApiResponse<String>> updateDueAndInstallment(@RequestBody Map<String, Object> data) {
+	    try {
+	        String policyCode = (String) data.get("policyCode");
+	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+
+	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+	        if (optional.isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+	        }
+
+	        AddnewinvestmentPM investment = optional.get();
+
+	        // Parse existing values safely
+	        double currentDue = parseDoubleSafe(investment.getAmountDue());
+	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
+	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+
+	        // Calculate updates
+	        double totalDeduction = policyAmount * noOfInstallments;
+	        double updatedDue = currentDue - totalDeduction;
+	        int updatedPaid = currentPaid + noOfInstallments;
+	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
+
+	        // Update AddnewinvestmentPM
+	        investment.setAmountDue(String.valueOf(updatedDue));
+	        investment.setLastInstPaid(String.valueOf(updatedPaid));
+	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+	        addinvestmentrepo.save(investment);
+
+	        // Save to PolicyRenewal
+	        PolicyRenewal renewal = new PolicyRenewal();
+	        renewal.setPolicyCode(investment.getPolicyCode());
+	        renewal.setRenewalDate(LocalDate.now().toString());
+
+	        renewal.setPolicyDate(investment.getPolicyStartDate());
+	        renewal.setMaturityDate(investment.getMaturityDate());
+
+	        renewal.setCustomerCode(investment.getMemberSelection());
+	        renewal.setClientName(investment.getCustomerName());
+	        renewal.setContactNo(investment.getContactNo());
+
+	        renewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+	        renewal.setPolicyType(investment.getSchemeType());
+	        renewal.setPolicyTerm(investment.getSchemeTerm());
+
+	        renewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+	        renewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+	        renewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+
+	        renewal.setLastPaymentDate(investment.getLastPaymentDate());
+	        renewal.setDueDate(investment.getDueDate());
+
+	        renewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+	        renewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+
+	        renewal.setModeOfPayment(investment.getModeOfPayment());
+
+	        policyRenewalRepo.save(renewal);
+
+	        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+	    }
+	}
+
+	// ---------- Utility methods ----------
+
+	private Double parseDoubleSafe(String value) {
+	    if (value == null || value.trim().isEmpty()) return 0.0;
+	    return Double.parseDouble(value);
+	}
+
+	private Integer parseIntSafe(String value) {
+	    if (value == null || value.trim().isEmpty()) return 0;
+	    return Integer.parseInt(value);
+	}
+
 
   
 
