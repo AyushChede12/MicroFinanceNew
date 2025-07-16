@@ -51,6 +51,9 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
     @Query("SELECT a FROM AddnewinvestmentPM a WHERE a.policyCode LIKE 'FD%' AND a.isApproved = true")
     List<AddnewinvestmentPM> findApprovedFDPolicies();
 
+    @Query("SELECT a FROM AddnewinvestmentPM a WHERE a.policyCode LIKE 'DRD%' AND a.isApproved = true")
+	List<AddnewinvestmentPM> findApprovedDDPolicies();
+
 	
 
 }
