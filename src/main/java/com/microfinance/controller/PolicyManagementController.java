@@ -506,7 +506,7 @@ public class PolicyManagementController {
  	}
  	
  	
- 	//fetch new investment details by id
+ 	//fetch new investment details by BranchName
  	//Ashwini
  	
  	@GetMapping("/getinvestmentdetails")
@@ -520,26 +520,6 @@ public class PolicyManagementController {
  	}
  	
  	
-
- 	@GetMapping("/getDetailsById/{id}")
-    public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getDetailsById(@PathVariable Long id) {
- 		AddnewinvestmentPM deposit = policyManagementService.getDetailsById(id);
-
-       if (deposit != null) {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
-                 HttpStatus.OK,
-                "MIS deposit fetched successfully.",
-                deposit
-           );
-           return ResponseEntity.ok(response);
-         } else {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                 "MIS deposit not found for ID: " + id
-            );
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-         }
-  }
 
  	
  	@GetMapping("/ddterm")
@@ -745,7 +725,7 @@ public class PolicyManagementController {
 	public ResponseEntity<ApiResponse<String>> updateDueAndInstallment(@RequestBody Map<String, Object> data) {
 	    try {
 	        String policyCode = (String) data.get("policyCode");
-	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString()); // per installment amount
 	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
 	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
@@ -760,11 +740,14 @@ public class PolicyManagementController {
 	        double currentDue = Double.parseDouble(investment.getAmountDue());
 	        int currentPaid = Integer.parseInt(investment.getLastInstPaid());
 
-	        // Update calculations
-	        double updatedDue = currentDue - policyAmount;
+	        // ✅ Calculate total to deduct
+	        double totalDeduction = policyAmount * noOfInstallments;
+
+	        // ✅ Update calculations
+	        double updatedDue = currentDue - totalDeduction;
 	        int updatedPaid = currentPaid + noOfInstallments;
 
-	        // Save updated values back as Strings
+	        // ✅ Save updated values back as Strings
 	        investment.setAmountDue(String.valueOf(updatedDue));
 	        investment.setLastInstPaid(String.valueOf(updatedPaid));
 
@@ -776,7 +759,6 @@ public class PolicyManagementController {
 	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
 	    }
 	}
-
 
 	
     

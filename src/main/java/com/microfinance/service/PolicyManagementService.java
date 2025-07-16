@@ -2,6 +2,7 @@ package com.microfinance.service;
 
 import java.util.List;
 
+
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -289,11 +290,6 @@ public class PolicyManagementService {
 		}
 	}
 
-//Ashwini
-	/*
-	 * public List<AddnewinvestmentPM> getAddInvestmentDetails() { // TODO
-	 * Auto-generated method stub return addinvestmentrepo.findAll(); }
-	 */
 
 
 
@@ -378,10 +374,11 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
-public AddnewinvestmentPM getDetailsById(Long id) {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findById(id).orElse(null);
-}
+/*
+ * public List<AddnewinvestmentPM> getDetailsById(String policyCode) { // TODO
+ * Auto-generated method stub List<AddnewinvestmentPM>
+ * list=addinvestmentrepo.findByPolicyCode(policyCode); return list; }
+ */
 
 
 
@@ -410,6 +407,7 @@ public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 }
 
 
+
 public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
     if (policyCode == null) return Optional.empty();
 
@@ -428,10 +426,14 @@ public List<AddnewinvestmentPM> getApprovedInvestments() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findByIsApprovedTrue();
 }
+public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
+	// TODO Auto-generated method stub
 
-public List<AddnewinvestmentPM> getAllInvestments() {
-    return addinvestmentrepo.findAll();
+	return  addinvestmentrepo.findByPolicyCode(policyCode);
 }
+
+
+
 
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();

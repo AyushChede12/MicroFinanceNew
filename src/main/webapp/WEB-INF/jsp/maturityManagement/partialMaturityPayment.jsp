@@ -21,6 +21,7 @@ pageEncoding="ISO-8859-1"%> -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -29,6 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -63,35 +65,33 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Id. <span id="star"> *</span></label> <select id="policyID"
-									name="policyID" required="required"
+								<label for="">Plan type :<span id="star"> *</span></label> 
+								<select id="plantype"
+									name="plantype" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-
+									<option value="Select">Select</option>
+									<option value="DD">DD</option>
+									<option value="RD">RD</option>
+									<option value="FD">FD</option>
+									<option value="MIS">MIS</option>
 								</select>
 							</div>
-
 						</div>
-
-
-					</div>
-					<div class="row">
-						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
-						</div>
-					</div>
+				
+					
+				
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Plan Code :<span id="star"> *</span></label> 
+								<select id="planCode"
+									name="planCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
+								</select>
+							</div>
+					</div>					
+					
 				</div>
-
-
-
-
-
-
-
-
-
-
-
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -101,11 +101,12 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							
+							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Id :</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="" style="text-transform: uppercase;" />
-							</div>
+								<label for="">Policy code:</label> <input type="text"
+									name="policyCode" id="policyCode" required="required"
+									placeholder="" />
+						</div>
 						</div>
 
 						<div class="col-lg-3">
@@ -125,13 +126,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Policy code:</label> <input type="text"
-									name="policyCode" id="policyCode" required="required"
-									placeholder="" />
-							</div>
-						</div>
+						
 
 
 						<div class="col-lg-3">
@@ -223,15 +218,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Approval Date:</label> <input type="date" name="approvalDate"
-									id="approvalDate" required="required" placeholder="" />
-
-							</div>
-
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -354,7 +341,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" style="color: white; background-color: #B33791 ; border: none;" class="btn btn-warning">Approve</button>
+							<button id="saveBtn" class="btn btn-success">Update</button>
 						</div>
 					</div>
 				</div>
@@ -367,6 +354,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/partialmaturity.js"></script>
 	
 </body>
 
