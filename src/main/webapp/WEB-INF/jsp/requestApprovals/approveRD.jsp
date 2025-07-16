@@ -1,8 +1,7 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> -->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,7 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<title>Approve Policy</title>
+<title>Approve RD</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -40,10 +39,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 </head>
 
-
 <body>
-
-	<main id="main" class="main">
+<main id="main" class="main">
 		<div class="pagetitle">
 			<h1>Request Approval</h1>
 			<nav>
@@ -51,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-check-circle"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Approve Policy</li>
+					<li class="breadcrumb-item action">Approve RD</li>
 				</ol>
 			</nav>
 		</div>
@@ -118,7 +115,12 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col" style="white-space: nowrap;">Sr.No</th>
 									<th scope="col" style="white-space: nowrap;">Policy Code</th>
 									<th scope="col" style="white-space: nowrap;">Policy Date</th>
-								
+									<th scope="col" style="white-space: nowrap;">Customer Name</th>
+									<th scope="col" style="white-space: nowrap;">Contact No.</th>
+									<th scope="col" style="white-space: nowrap;">Branch Name</th>
+									<th scope="col" style="white-space: nowrap;">Nominee Name</th>
+									<th scope="col" style="white-space: nowrap;">Scheme Type</th>
+									<th scope="col" style="white-space: nowrap;">Scheme Name</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -142,5 +144,4 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/RequestApproval/ApprovePolicy.js"></script>
 </body>
-
 </html>

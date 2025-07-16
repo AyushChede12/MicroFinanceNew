@@ -814,6 +814,13 @@
             </a>
           </li>
           
+           <li>
+            <a href="approveRD">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Approve RD</span>
+            </a>
+          </li>
+          
           <li>
             <a href="approveRecurring">
               <i class="bi bi-circle"></i>
