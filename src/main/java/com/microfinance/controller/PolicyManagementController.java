@@ -644,19 +644,13 @@ public class PolicyManagementController {
 	    return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping("/getAllDDPolicies")
+	@GetMapping("/getAllFDPolicies")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllDDPolicies() {
-	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllInvestments(); // Fetch all
+	    List<AddnewinvestmentPM> ddPolicies = policyManagementService.getApprovedDDPolicies();
 
-	    // Filter policies where policyCode starts with "RD"
-	    List<AddnewinvestmentPM> ddPolicies = allPolicies.stream()
-	            .filter(p -> p.getPolicyCode() != null && p.getPolicyCode().startsWith("DRD"))
-	            .collect(Collectors.toList());
-
-	    // Build response
 	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
 	            HttpStatus.OK,
-	            "DD policies fetched successfully",
+	            "Approved DD policies fetched successfully",
 	            ddPolicies
 	    );
 
