@@ -62,14 +62,15 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					<input type="hidden" id="id" name="id">
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Select Code</label> <select id="agentcode"
-									name="agentcode" required="required"
+								<label for="">Select Code</label> <select id="financialCode"
+									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Code</option>
-									<option value="Blue">Blue</option>
+									
 								</select>
 							</div>
 						</div>
@@ -147,12 +148,18 @@ pageEncoding="ISO-8859-1"%> -->
  -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Select Branch</label> <select id="Branch"
-									name="Branch" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
-								</select>
+								<label for="">Select Branch</label> <input type="text" id="Branch"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px; background-color: #fff;" readonly="readonly">
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Old Position</label> <input type="text" id="oldPosition" name="oldPosition"
+									required="required" class="form-control selectField"
+									style="height: 30px; background-color: #fff;" readonly="readonly">
 							</div>
 						</div>
 
@@ -163,37 +170,48 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">New Position</option>
-									<option value="Blue">Blue</option>
+									<option value="L1">L1</option>
+									<option value="L2">L2</option>
+									<option value="L3">L3</option>
+									<option value="L4">L4</option>
+									<option value="L5">L5</option>
 								</select>
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Promotion Date</label> <input type="date" name="promotionDate"
+									id="promotionDate" required="required" placeholder="Enter New Senior"/>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">New Senior Code</label> <input type="text" name="newseniorCode"
-									id="newseniorCode" required="required" placeholder="Enter New Senior" />
+								<label for="">New Senior Code</label> <input type="text" name="seniorCode"
+									id="newseniorCode" required="required" placeholder="Enter New Senior" readonly="readonly"/>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Senior Name</label> <input type="text" name="newseniorname"
-									id="newseniorname" required="required" placeholder="Enter Senior Name" />
+								<label>Senior Name</label> <input type="text" name="seniorName"
+									id="newseniorname" required="required" placeholder="Enter Senior Name" readonly="readonly"/>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Senior Position</label> <input type="text"
-									name="newseniorposition" id="newseniorposition" required="required"
-									placeholder="Enter New Senior Position" />
+									name="seniorPosition" id="newseniorposition" required="required"
+									placeholder="Enter New Senior Position" readonly="readonly"/>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle"
+							<button type="button" id="updateBtn" class="btnStyle"
 								style="background-color: #FFA500;">Update</button>
 						</div>
 

@@ -14,9 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
 import com.microfinance.dto.FinancialConsultantDto;
+import com.microfinance.model.ConsultantPromotionManagement;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.ConsultantPromotionRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 
 @Service
@@ -27,6 +29,9 @@ public class FinancialConsultantService {
 
 	@Autowired
 	AddCustomerRepo addCustomerRepo;
+	
+	@Autowired
+	ConsultantPromotionRepo consultantpromotionRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -214,6 +219,23 @@ public class FinancialConsultantService {
 		// TODO Auto-generated method stub
 		return financialConsultationRepo.findByIsApprovedFalse();
 	}
+
+	public String savePromotionAndUpdatePosition(ConsultantPromotionManagement promotionData, Long id) {
+		// TODO Auto-generated method stub
+		consultantpromotionRepo.save(promotionData);
+
+        // Step 2: Find consultant and update position
+        Optional<addFinancialConsultant> optional = financialConsultationRepo.findById(id);
+        if (optional.isPresent()) {
+            addFinancialConsultant consultant = optional.get();
+            consultant.setSelectPosition(promotionData.getNewPosition());
+            financialConsultationRepo.save(consultant);
+            return "Promotion saved and consultant position updated.";
+        } else {
+            throw new RuntimeException("Consultant not found with ID: " + id);
+        }
+    }
+	
 
 	
 

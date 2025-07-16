@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
 import com.microfinance.dto.FinancialConsultantDto;
+import com.microfinance.model.ConsultantPromotionManagement;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.model.states;
@@ -200,6 +201,26 @@ public class FinancialConsultantController {
         );
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+	
+	
+	//poonam : for financial promotion save and update on 16/07/2025
+	
+	@PostMapping("/saveOrUpdatePromotionData")
+	public ResponseEntity<ApiResponse<String>> saveOrUpdatePromotionData(
+	        @ModelAttribute ConsultantPromotionManagement promotionData,
+	        @RequestParam("id") Long id) {
+
+	    try {
+	        String result = financialConsultantService.savePromotionAndUpdatePosition(promotionData, id);
+	        return new ResponseEntity<>(ApiResponse.success(HttpStatus.OK, result, null), HttpStatus.OK);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return new ResponseEntity<>(ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+	    }
+	}
+
+
+
 
 
 }
