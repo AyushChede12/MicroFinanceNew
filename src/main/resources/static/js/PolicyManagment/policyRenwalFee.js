@@ -91,6 +91,8 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             success: function (response) {
                 alert("✅ " + response.message);
+                
+                  location.reload();
                 // Optionally reset form or reload table
                 // $("#formid")[0].reset();
             },

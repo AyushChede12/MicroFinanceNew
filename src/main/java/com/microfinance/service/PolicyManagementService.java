@@ -438,6 +438,11 @@ public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
 }
+
+
+public List<AddnewinvestmentPM> getApprovedFDPolicies() {
+    return addinvestmentrepo.findApprovedFDPolicies();
+}
 }
 
 
