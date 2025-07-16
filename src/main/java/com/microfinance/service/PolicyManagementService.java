@@ -429,9 +429,7 @@ public List<AddnewinvestmentPM> getApprovedInvestments() {
 	return addinvestmentrepo.findByIsApprovedTrue();
 }
 
-public List<AddnewinvestmentPM> getAllInvestments() {
-    return addinvestmentrepo.findAll();
-}
+
 
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
