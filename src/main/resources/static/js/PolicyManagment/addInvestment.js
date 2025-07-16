@@ -422,7 +422,7 @@ $("#saveBtn").click(function (e) {
             // Step 2: Gather form data
             const policyAmount = parseFloat($("#policyAmount").val()) || 0;
             const depositAmount = parseFloat($("#depositAmount").val()) || 0;
-            const paidAmount = parseFloat($("#paidAmount").val()) || 0;
+            const paidAmount = parseFloat($("#policyAmount").val()) || 0;
             const amountDue = depositAmount - policyAmount;
 
             alert("Amount Due: ₹" + amountDue.toFixed(2)); // Optional for confirmation
@@ -464,6 +464,7 @@ $("#saveBtn").click(function (e) {
                 remark: $("#remark").val(),
                 agent: $("#Agent").val(),
                 smsSend: $("#smsSend").val(),
+                
                 lastInstPaid: 1
             };
 
