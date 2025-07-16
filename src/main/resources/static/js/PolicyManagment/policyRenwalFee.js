@@ -90,7 +90,7 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
-                alert("✅ " + response.message);
+                alert( + response.message);
                 
                   location.reload();
                 // Optionally reset form or reload table
