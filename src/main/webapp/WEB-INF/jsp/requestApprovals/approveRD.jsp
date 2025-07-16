@@ -115,12 +115,12 @@
 									<th scope="col" style="white-space: nowrap;">Sr.No</th>
 									<th scope="col" style="white-space: nowrap;">Policy Code</th>
 									<th scope="col" style="white-space: nowrap;">Policy Date</th>
-									<th scope="col" style="white-space: nowrap;">Customer Name</th>
-									<th scope="col" style="white-space: nowrap;">Contact No.</th>
-									<th scope="col" style="white-space: nowrap;">Branch Name</th>
-									<th scope="col" style="white-space: nowrap;">Nominee Name</th>
-									<th scope="col" style="white-space: nowrap;">Scheme Type</th>
-									<th scope="col" style="white-space: nowrap;">Scheme Name</th>
+									<th scope="col" style="white-space: nowrap;">customer Code</th>
+									<th scope="col" style="white-space: nowrap;">policy Amount </th>
+									<th scope="col" style="white-space: nowrap;">maturity Date</th>
+									<th scope="col" style="white-space: nowrap;">client Name</th>
+									<th scope="col" style="white-space: nowrap;">contac tNo</th>
+									<th scope="col" style="white-space: nowrap;">renewalDate</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -142,6 +142,6 @@
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/RequestApproval/ApprovePolicy.js"></script>
+	<script src="./js/RequestApproval/ApprovalRD.js"></script>
 </body>
 </html>

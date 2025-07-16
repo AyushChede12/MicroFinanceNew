@@ -182,4 +182,28 @@ public class RequestApprovalsController {
   	    }
   	}
 
+  	//anjali (16/7/25)
+  	//approve RD data from approve renewql
+  	@PostMapping("/approveRDFromPolicyRenewal")
+  	public ResponseEntity<ApiResponse<PolicyRenewal>> approveRDFromPolicyRenewal(
+  	        @RequestParam("id") Long id,
+  	        @RequestParam("isApproved") boolean isApproved) {
+
+  	    Optional<PolicyRenewal> optionalInvestment = requestApprovalsService.approveRDFromPolicyRenewal(id);
+
+  	    if (!optionalInvestment.isPresent()) {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Investment with ID " + id + " not found."));
+  	    }
+
+  	  PolicyRenewal Renewal = optionalInvestment.get();
+  	Renewal.setApproved(isApproved);
+
+  	  PolicyRenewal updatedInvestment = requestApprovalsService.saveRenewal(Renewal);
+
+  	    return ResponseEntity.ok(
+  	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedInvestment)
+  	    );
+  	}
+  	
 }

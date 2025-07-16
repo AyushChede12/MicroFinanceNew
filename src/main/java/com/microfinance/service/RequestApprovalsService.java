@@ -58,8 +58,6 @@ public class RequestApprovalsService {
 		return addCustomerRepo.findByIsApprovedFalseAndMemberCode(branchName);
 	}
 
-	
-
 	public List<addCustomer> getUnapprovedCustomers() {
 	    return addCustomerRepo.findByIsApprovedFalse();
 	}
@@ -84,10 +82,6 @@ public class RequestApprovalsService {
 		return addInvestmentRepo.findByIsApprovedFalse();
 	}
 
-
-	
-
-
 	public Optional<AddnewinvestmentPM> findByIdShowStatusInvestment(Long id) {
 		// TODO Auto-generated method stub
 		return addInvestmentRepo.findById(id);
@@ -106,6 +100,19 @@ public class RequestApprovalsService {
 	}
 
 
+	public PolicyRenewal saveRenewal(PolicyRenewal renewal) {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.save(renewal); 
+	}
+
+
+	public Optional<PolicyRenewal> approveRDFromPolicyRenewal(Long id) {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.findById(id);
+	}
+
+
+	
 	
 
 
