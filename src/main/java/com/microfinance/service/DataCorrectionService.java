@@ -16,12 +16,14 @@ import com.microfinance.dto.CustomerDto;
 import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.AddInvestmentRepo;
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
@@ -38,6 +40,9 @@ public class DataCorrectionService {
 	
 	@Autowired
 	AddInvestmentRepo addInvestmentRepo;
+	
+	@Autowired
+	CreateSavingAccountRepo createSavingAccountRepo;
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -218,6 +223,52 @@ public class DataCorrectionService {
 			return false;
 		}
 	}
+
+	public int updatePolicyManagement(AddnewinvestmentPM adddnewinvestmentPM) {
+		// TODO Auto-generated method stub
+		Optional<AddnewinvestmentPM> optional = addInvestmentRepo.findById(adddnewinvestmentPM.getId());
+
+		if (optional.isPresent()) {
+			AddnewinvestmentPM company = optional.get();
+
+			company.setPolicyCode(adddnewinvestmentPM.getPolicyCode());
+			company.setMemberSelection(adddnewinvestmentPM.getMemberSelection());
+			company.setCustomerName(adddnewinvestmentPM.getCustomerName());
+			company.setDateofBirth(adddnewinvestmentPM.getDateofBirth());
+			company.setRelationDetails(adddnewinvestmentPM.getRelationDetails());
+			company.setContactNo(adddnewinvestmentPM.getContactNo());
+			company.setSuggestedNominee(adddnewinvestmentPM.getSuggestedNominee());
+			company.setRelation(adddnewinvestmentPM.getRelation());
+			company.setAddress(adddnewinvestmentPM.getAddress());
+			company.setDistrict(adddnewinvestmentPM.getDistrict());
+			company.setState(adddnewinvestmentPM.getState());
+			company.setPinCode(adddnewinvestmentPM.getPinCode());
+			company.setBranchName(adddnewinvestmentPM.getBranchName());
+			company.setModeOfOperation(adddnewinvestmentPM.getModeOfOperation());
+			company.setMaturityDate(adddnewinvestmentPM.getMaturityDate());
+			company.setSchemeType(adddnewinvestmentPM.getSchemeType());
+			company.setSchemeTerm(adddnewinvestmentPM.getSchemeTerm());
+			company.setSchemeMode(adddnewinvestmentPM.getSchemeMode());
+			company.setPolicyAmount(adddnewinvestmentPM.getPolicyAmount());
+			company.setDepositAmount(adddnewinvestmentPM.getDepositAmount());
+			company.setMaturityAmount(adddnewinvestmentPM.getMaturityAmount());
+			company.setPaymentBy(adddnewinvestmentPM.getPaymentBy());
+			company.setRemark(adddnewinvestmentPM.getRemark());
+			company.setSmsSend(adddnewinvestmentPM.getSmsSend());
+			
+
+			addInvestmentRepo.save(company);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+//	public List<CreateSavingsAccount> fetchSavingDataByCustomerCode(String selectByCustomer) {
+//		// TODO Auto-generated method stub
+//		List<CreateSavingsAccount> list = createSavingAccountRepo.findBySelectByCustomer(selectByCustomer);
+//		return list;
+//	}
 	
 	
 	

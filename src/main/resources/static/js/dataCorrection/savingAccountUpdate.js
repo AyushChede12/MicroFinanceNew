@@ -103,36 +103,30 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#accountNumber").change(function () {
-	    let accountNumber = $("#accountNumber").val().trim();
+	$("#accountNumber").on("change", function () {
+	    let accountNumber = $(this).val();
 		alert(accountNumber);
 
-	    if (accountNumber === "") {
-	        alert("Please enter a valid account number.");
-	        return;
-	    }
-
 	    $.ajax({
-	        type: 'GET',
-	        url: '/api/customersavings/getallbyaccountnumber',
-	        data: {accountNumber: accountNumber},
+	        type: "GET",
+	        url: "/api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
+	        data: { accountNumber: accountNumber },
 	        success: function (response) {
-				alert("success");
-	            if (response.status === "FOUND" && response.data.length > 0) {
-	                let data = response.data[0];
+	            if (response.status === "FOUND") {
+	                const data = response.data[0]; // assuming single entry
 
-	                // Fill form fields
+	                // Now bind each field to your input elements
 	                $("#id").val(data.id);
+	                $("#typeofaccount").val(data.typeofaccount);
 	                $("#openingDate").val(data.openingDate);
 	                $("#selectByCustomer").val(data.selectByCustomer);
 	                $("#enterCustomerName").val(data.enterCustomerName);
 	                $("#dateOfBirth").val(data.dateOfBirth);
-	                $("#customerAge").val(data.customerAge);
 	                $("#familyDetails").val(data.familyDetails);
 	                $("#contactNumber").val(data.contactNumber);
 	                $("#suggestedNomineeName").val(data.suggestedNomineeName);
 	                $("#suggestedNomineeAge").val(data.suggestedNomineeAge);
-	                $("#relationToApplicant").val(data.suggestedNomineeRelation);
+	                $("#suggestedNomineeRelation").val(data.suggestedNomineeRelation);
 	                $("#address").val(data.address);
 	                $("#district").val(data.district);
 	                $("#branchName").val(data.branchName);
@@ -147,44 +141,24 @@ $(document).ready(function() {
 	                $("#financialConsultantCode").val(data.financialConsultantCode);
 	                $("#financialConsultantName").val(data.financialConsultantName);
 	                $("#openingFees").val(data.openingFees);
+	                $("#authenticateWith").val(data.authenticateWith);
 	                $("#modeOfPayment").val(data.modeOfPayment);
 	                $("#comment").val(data.comment);
-
-	                // Photo
-	                const photoPath = data.photo ? `Uploads/${data.photo}` : "Uploads/default-placeholder.jpg";
-	                $("#photoPreview").attr("src", photoPath);
-	                $("#photoHidden").val(data.photo ? photoPath : "");
-	                if (data.photo) {
-	                    photoSizeEdit({ target: { result: photoPath } });
-	                }
-
-	                // Signature
-	                const signPath = data.signature ? `Uploads/${data.signature}` : "Uploads/default-placeholder.jpg";
-	                $("#signaturePreview").attr("src", signPath);
-	                $("#signatureHidden").val(data.signature ? signPath : "");
-	                if (data.signature) {
-	                    signatureSizeEdit({ target: { result: signPath } });
-	                }
-
-	                // Toggles
-	                $('#toggle-account-status').prop('checked', data.accountStatus === 1);
-	                $('#toggle-sms-send').prop('checked', data.messageSend === 1);
-	                $('#toggle-debit-card').prop('checked', data.debitCardIssue === 1);
-
-	                updateToggleColor(document.getElementById('toggle-account-status'));
-	                updateToggleColor(document.getElementById('toggle-sms-send'));
-	                updateToggleColor(document.getElementById('toggle-debit-card'));
-
+	                $("#accountStatus").val(data.accountStatus);
+	                $("#messageSend").val(data.messageSend);
+	                $("#debitCardIssue").val(data.debitCardIssue);
+	                $("#accountNumber").val(data.accountNumber);
+					
 	            } else {
-	                alert("Saving Account Details Not Found or Not Approved.");
+	                alert(response.message);
 	            }
 	        },
-	        error: function (xhr, status, error) {
-	            console.error("Error:", error);
-	            alert("Server error occurred. Please try again.");
+	        error: function (xhr) {
+	            alert("Error: " + xhr.responseJSON.message);
 	        }
 	    });
 	});
+
 
 
 	$('#updateBtn').click(function(e) {

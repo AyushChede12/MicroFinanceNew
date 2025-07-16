@@ -129,28 +129,6 @@ $(document).ready(function() {
 					$("#paymentBy").val(data.paymentBy);
 					$("#remark").val(data.remark);
 
-					// Photo preview
-					if (data.image1) {
-						const photoPath = `Uploads/${data.image1}`;
-						$("#photoPreview").attr("src", photoPath).show();
-						$("#photoHidden").val(data.image1);
-						const fakePhotoEvent = { target: { result: photoPath } };
-						photoSizeEdit(fakePhotoEvent);
-					} else {
-						$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg").show();
-						$("#photoHidden").val("");
-					}
-
-					// Signature preview
-					if (data.image2) {
-						const signPath = `Uploads/${data.image2}`;
-						$("#signaturePreview").attr("src", signPath).show();
-						$("#signatureHidden").val(data.image2);
-					} else {
-						$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg").show();
-						$("#signatureHidden").val("");
-					}
-
 					// SMS toggle
 					const isSmsSend = parseInt(data.smsSend) === 1;
 					$('#toggle-sms-send').prop('checked', isSmsSend);
@@ -167,78 +145,56 @@ $(document).ready(function() {
 	});
 
 	$('#updateBtn').click(function(e) {
-		e.preventDefault();
+	    e.preventDefault();
 
-		let policyData = new FormData();
+	    let policyData = {
+	        id: $('#id').val(),
+	        policyCode: $('#policyCode').val(),
+	        policyStartDate: $('#policyStartDate').val(),
+	        memberSelection: $('#memberSelection').val(),
+	        customerName: $('#customerName').val(),
+	        dateofBirth: $('#dateofBirth').val(),
+	        relationDetails: $('#relationDetails').val(),
+	        contactNo: $('#contactNo').val(),
+	        suggestedNominee: $('#suggestedNominee').val(),
+	        relation: $('#relationToApplicant').val(),  // Match backend field name
+	        address: $('#address').val(),
+	        district: $('#district').val(),
+	        state: $('#state').val(),
+	        pinCode: $('#pinCode').val(),
+	        branchName: $('#branchName').val(),
+	        modeOfOperation: $('#ModeOfOperation').val(),
+	        maturityDate: $('#maturityDate').val(),
+	        schemeType: $('#schemeType').val(),
+	        schemeTerm: $('#schemeTerm').val(),
+	        schemeMode: $('#schemeMode').val(),
+	        policyAmount: $('#policyAmount').val(),
+	        depositAmount: $('#depositAmount').val(),
+	        maturityAmount: $('#maturityAmount').val(),
+	        paymentBy: $('#paymentBy').val(),
+	        remark: $('#remark').val(),
+	        smsSend: $('#toggle-sms-send').is(':checked') ? 1 : 0
+	    };
 
-		// Append regular text fields
-		policyData.append("id", $('#id').val());
-		policyData.append("policyCode", $('#policyCode').val());
-		policyData.append("policyStartDate", $('#policyStartDate').val());
-		policyData.append("memberSelection", $('#memberSelection').val());
-		policyData.append("customerName", $('#customerName').val());
-		policyData.append("dateofBirth", $('#dateofBirth').val());
-		policyData.append("relationDetails", $('#relationDetails').val());
-		policyData.append("contactNo", $('#contactNo').val());
-		policyData.append("suggestedNominee", $('#suggestedNominee').val());
-		policyData.append("relationToApplicant", $('#relationToApplicant').val());
-		policyData.append("address", $('#address').val());
-		policyData.append("district", $('#district').val());
-		policyData.append("state", $('#state').val());
-		policyData.append("pinCode", $('#pinCode').val());
-		policyData.append("branchName", $('#branchName').val());
-		policyData.append("ModeOfOperation", $('#ModeOfOperation').val());
-		policyData.append("maturityDate", $('#maturityDate').val());
-		policyData.append("schemeType", $('#schemeType').val());
-		policyData.append("schemeTerm", $('#schemeTerm').val());
-		policyData.append("schemeMode", $('#schemeMode').val());
-		policyData.append("policyAmount", $('#policyAmount').val());
-		policyData.append("depositAmount", $('#depositAmount').val());
-		policyData.append("maturityAmount", $('#maturityAmount').val());
-		policyData.append("MISInterest", $('#MISInterest').val());
-
-		//Fees Details
-		policyData.append("paymentBy", $('#paymentBy').val());
-		policyData.append("remark", $('#remark').val());
-
-		policyData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
-
-		//Image
-		const photoFile = $('#image1')[0].files[0];
-		const signatureFile = $('#image2')[0].files[0];
-
-		if (photoFile) {
-			policyData.append("image1", photoFile);
-		}
-
-		if (signatureFile) {
-			policyData.append("image2", signatureFile);
-		}
-
-
-		$.ajax({
-			url: "/api/datacorrection/saveOrUpdatePolicyManagement",
-			type: "POST",
-			data: policyData,
-			enctype: 'multipart/form-data',
-			contentType: false,
-			processData: false,
-			cache: false,
-			success: function(response) {
-				alert("success");
-				if (response.status === "OK") {
-					alert("Policy Details Updated Successfully");
-					location.reload();
-					// Optionally refresh the table or UI
-				} else {
-					alert("Something went wrong: " + response.message);
-				}
-			},
-			error: function(xhr) {
-				alert("Error while saving data: " + xhr.responseText);
-			}
-		});
+	    $.ajax({
+	        url: "/api/datacorrection/updateDataOfPolicyManagement",
+	        type: "POST",
+	        data: JSON.stringify(policyData),
+	        contentType: "application/json",
+	        success: function(response) {
+	            if (response.status === "OK") {
+	                alert("Policy Details Updated Successfully");
+	                location.reload();
+	            } else {
+	                alert("Something went wrong: " + response.message);
+	            }
+	        },
+	        error: function(xhr) {
+	            alert("Error while saving data: " + xhr.responseText);
+	        }
+	    });
 	});
+
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();

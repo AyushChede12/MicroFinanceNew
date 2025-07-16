@@ -309,62 +309,8 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label>MIS Interest</label> <input type="text"
-									name="MISInterest" id="MISInterest" required="required"
-									placeholder="Enter MIS Interest" />
-							</div>
-						</div>
-
 					</div>
 
-					<div class="row mt-4">
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo <span class="star">*</span>
-							</label> <label for="image1" id="drop-area"> <input
-								type="file" accept="image/*" name="image1"
-								id="image1" hidden="hidden" onchange="photoUpload();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" /><input type="hidden" name="photoHidden"
-										id="photoHidden">
-
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label> <small id="chkphoto" style="color: red;"></small>
-						</div>
-
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature <span class="star">*</span>
-							</label> <label for="image2" id="drop-area"> <input
-								type="file" accept="image/*" name="image2" id="image2"
-								hidden="hidden" onchange="signatureUpload();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="signaturePreview" /><input type="hidden"
-										name="signatureHidden" id="signatureHidden">
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label> <small id="chksignature" style="color: red;"></small>
-						</div>
-					</div>
 				</div>
 
 

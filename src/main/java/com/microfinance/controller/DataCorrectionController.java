@@ -24,6 +24,7 @@ import com.microfinance.dto.FinancialConsultantDto;
 import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.TransferShare;
@@ -124,6 +125,34 @@ public class DataCorrectionController {
 			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy Data deletion failed",
 					"failure");
 			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
+	//Ayush
+//	@PostMapping("/fetchSavingAccountByCustomerCode")
+//	public ApiResponse<List<CreateSavingsAccount>> fetchSavingByCustomerCode(@RequestParam("selectByCustomer") String selectByCustomer) {
+//		List<CreateSavingsAccount> list = dataCorrectionService.fetchSavingDataByCustomerCode(selectByCustomer);
+//		if (list != null && !list.isEmpty()) {
+//			return ApiResponse.success(HttpStatus.FOUND, "Saving Account Fetched Successfully", list);
+//		} else {
+//			return ApiResponse.error(HttpStatus.NOT_FOUND, "Saving Account Share Not Found");
+//		}
+//	}
+	
+	@PostMapping("/updateDataOfPolicyManagement")
+	public ResponseEntity<ApiResponse<String>> updatePolicyManagement(
+			@RequestBody AddnewinvestmentPM adddnewinvestmentPM) {
+
+		int result = dataCorrectionService.updatePolicyManagement(adddnewinvestmentPM);
+
+		if (result > 0) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
+					"Policy Data updated successfully.", "success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
+					"Failed to update Policy Data.", "failure");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
 
