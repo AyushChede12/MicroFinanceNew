@@ -431,13 +431,14 @@ public List<AddnewinvestmentPM> getApprovedInvestments() {
 	return addinvestmentrepo.findByIsApprovedTrue();
 }
 
+
 /*
  * public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) { //
  * TODO Auto-generated method stub
  * 
  * return addinvestmentrepo.findByPolicyCode(policyCode); }
- * 
  */
+ 
 
 
 

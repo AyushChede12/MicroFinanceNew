@@ -727,25 +727,30 @@ public class PolicyManagementController {
 	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
 	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
-	        if (optional.isPresent()) {
+	        if (!optional.isPresent()) {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
 	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
 	        }
 
 	        AddnewinvestmentPM investment = optional.get();
 
-	        // Parse existing values safely
+	        // Parse current values
 	        double currentDue = parseDoubleSafe(investment.getAmountDue());
 	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
 	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
 
-	        // Calculate updates
+	        // Calculate updated values
 	        double totalDeduction = policyAmount * noOfInstallments;
 	        double updatedDue = currentDue - totalDeduction;
 	        int updatedPaid = currentPaid + noOfInstallments;
 	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
 
-	        // Update AddnewinvestmentPM
+	        // Check if no payment is needed
+	        if (currentDue <= 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is already settled or overpaid.", null));
+	        }
+
+	        // Update the investment
 	        investment.setAmountDue(String.valueOf(updatedDue));
 	        investment.setLastInstPaid(String.valueOf(updatedPaid));
 	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
@@ -755,40 +760,38 @@ public class PolicyManagementController {
 	        PolicyRenewal renewal = new PolicyRenewal();
 	        renewal.setPolicyCode(investment.getPolicyCode());
 	        renewal.setRenewalDate(LocalDate.now().toString());
-
 	        renewal.setPolicyDate(investment.getPolicyStartDate());
 	        renewal.setMaturityDate(investment.getMaturityDate());
-
 	        renewal.setCustomerCode(investment.getMemberSelection());
 	        renewal.setClientName(investment.getCustomerName());
 	        renewal.setContactNo(investment.getContactNo());
-
 	        renewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
 	        renewal.setPolicyType(investment.getSchemeType());
 	        renewal.setPolicyTerm(investment.getSchemeTerm());
-
 	        renewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
 	        renewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
 	        renewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
-
 	        renewal.setLastPaymentDate(investment.getLastPaymentDate());
 	        renewal.setDueDate(investment.getDueDate());
-
 	        renewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
 	        renewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
-
 	        renewal.setModeOfPayment(investment.getModeOfPayment());
-
 	        policyRenewalRepo.save(renewal);
 
-	        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+	        // Final message based on updatedDue
+	        if (updatedDue == 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+	        } else if (updatedDue < 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+	        } else {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+	        }
+
 	    } catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
 	    }
 	}
-
-	// ---------- Utility methods ----------
 
 	private Double parseDoubleSafe(String value) {
 	    if (value == null || value.trim().isEmpty()) return 0.0;
@@ -800,10 +803,6 @@ public class PolicyManagementController {
 	    return Integer.parseInt(value);
 	}
 
-
-  
-
-	
 
 
     
