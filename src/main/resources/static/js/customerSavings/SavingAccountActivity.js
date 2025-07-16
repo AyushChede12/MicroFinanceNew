@@ -15,6 +15,7 @@ $('#accountNumber').on('blur', function () {
 					$('#jointHolderName').val(customer.jointSurvivorCode);
 					$('#savingPlanName').val(customer.selectPlan);
 					$('#averageBalance').val(customer.openingAmount);
+					$('#selectBranchName').val(customer.branchName);
                 } else {
                     alert('No data found!');
                     $('#customerCode').val('');
