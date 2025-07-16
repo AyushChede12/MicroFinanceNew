@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	// 1. Populate dropdown with approved RD policies
 	$.ajax({
-		url: "api/Policymangment/getAllRDPolicies",
+		url: "api/Policymangment/getAllFDPolicies",
 		type: "GET",
 		success: function (response) {
 			if (response.data && response.data.length > 0) {
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 						// 2a. Calculate renewal date (for RD = add 1 month to policyStartDate)
 						let renewalDate = "";
-						if (data.policyStartDate && data.schemeType === "RD") {
+						if (data.policyStartDate && data.schemeType === "FD") {
 							const startDate = new Date(data.policyStartDate);
 							startDate.setMonth(startDate.getMonth() + 1);
 							const yyyy = startDate.getFullYear();

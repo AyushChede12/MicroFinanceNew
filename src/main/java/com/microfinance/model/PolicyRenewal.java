@@ -40,6 +40,7 @@ public class PolicyRenewal {
     private Integer noOfInstPaid;
 
     private String modeOfPayment;
+    private boolean isApproved;
 
     // Getters and Setters
 
@@ -196,6 +197,14 @@ public class PolicyRenewal {
 
 	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
+	}
+
+	public boolean isApproved() {
+		return isApproved;
+	}
+
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
     
     
