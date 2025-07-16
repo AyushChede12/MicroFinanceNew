@@ -41,6 +41,7 @@ public class PolicyRenewal {
 
     private String modeOfPayment;
     private boolean isApproved;
+    private String fees;
 
     // Getters and Setters
 
@@ -205,6 +206,14 @@ public class PolicyRenewal {
 
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+
+	public String getFees() {
+		return fees;
+	}
+
+	public void setFees(String fees) {
+		this.fees = fees;
 	}
     
     
