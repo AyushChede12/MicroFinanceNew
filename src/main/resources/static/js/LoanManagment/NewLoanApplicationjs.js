@@ -4,17 +4,17 @@ $(document).ready(function () {
     console.log("Document ready");
 
     $.ajax({
-        url: '/api/loanmanegment/allfetchdata', // ✅ Ensure this endpoint returns ApiResponse<List<Loan>>
+        url: '/approved', // ✅ This hits your @GetMapping
         type: 'GET',
         success: function (response) {
-            if (response.status=="OK" && response.data.length > 0) {
-                const dropdown = $('#findMember');
+            if (Array.isArray(response) && response.length > 0) {
+                const dropdown = $('#memberId');
                 dropdown.empty(); // Clear existing options
-                dropdown.append('<option value="">Select Member</option>'); // Default
+                dropdown.append('<option value="">Select Member</option>');
 
-                response.data.forEach(function (loan) {
+                response.forEach(function (customer) {
                     dropdown.append(
-                        `<option value="${loan.id}">${loan.customerName} - ${loan.memberCode}</option>`
+                        `<option value="${customer.id}">${customer.customerName} - ${customer.memberCode}</option>`
                     );
                 });
             } else {
@@ -31,9 +31,8 @@ $(document).ready(function () {
 //data fetch from id and name
 
 $(document).ready(function () {
-    $('#findMember').on('change', function () {
+    $('#memberId').on('change', function () {
         const selectedId = $(this).val();
-        alert("Selected ID: " + selectedId);  // ✅ Debugging purpose
 
         if (selectedId !== "") {
             $.ajax({
@@ -45,15 +44,13 @@ $(document).ready(function () {
 
                     if (response.status=="OK") {
                         const d = response.data;
-						alert(d.customerName);
-                        $('#relativeDetail').val(d.relationToApplicant || '');
-                        $('#newloanApplicationDOB').val(d.dob || '');
-                        $('#newApplictionAge').val(d.customerAge || '');
-                        $('#phoneNo').val(d.contactNo || '');
-                        $('#noficationStatus').val(d.noficationStatus || '');
-                        $('#newAplicationAddress').val(d.customerAddress || '');
-                        $('#newAppicationPinCode').val(d.pinCode || '');
-						alert(d.branchName);
+                        $('#relativeDetails').val(d.relationToApplicant || '');
+                        $('#dateOfBirth').val(d.dob || '');
+                        $('#age').val(d.customerAge || '');
+                        $('#contactNo').val(d.contactNo || '');
+                        $('#notificationStatus').val(d.noficationStatus || '');
+                        $('#address').val(d.customerAddress || '');
+                        $('#pinCode').val(d.pinCode || '');
                         $('#branchName').val(d.branchName || '');
                      
                     } else {
@@ -71,6 +68,64 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function() {
+    $.ajax({
+        url: "/api/loanmanegment/fetchLoanSchemeCatalog",
+        type: "GET",
+        success: function(response) {
+            console.log("API response:", response);
+
+            var dropdown = $('#loanPlanName');     // shows: memberCode only
+            dropdown.empty();
+       		dropdown.append('<option value="">Select</option>');
+
+            if (response.status === "FOUND" && response.data) {
+                $.each(response.data, function(index, customer) {
+                    dropdown.append('<option value="' + customer.loanPlaneName + '">' + customer.loanPlaneName + '</option>');
+                });
+            } else {
+                dropdown.append('<option value="">No customers found</option>');
+            }
+        },
+        error: function() {
+            alert("Failed to fetch customer list.");
+        }
+    });
+});
+
+
+$('#loanPlanName').on('change', function () {
+    let selectedName = $(this).val();
+
+    if (selectedName !== "") {
+        $.ajax({
+            url: '/api/loanmanegment/allfetchdataLoanPlanName?loanPlanName=' + encodeURIComponent(selectedName), // Pass as query param
+            type: 'GET',
+            success: function (response) {
+                if (response.status === "FOUND") {
+                    let customer = response.data[0];
+                    $('#typeOfLoan').val(customer.typeLoan);
+					//$('#openingAmount').val(customer.loanCategory);
+					$('#planDuration').val(customer.loanDuration);
+					$('#rateOfInterest').val(customer.rateIntrestType);
+					$('#loanAmount').val(customer.loanAmount);
+					$('#interestType').val(customer.typeIntrest);
+					$('#emiPayment').val(customer.emiType);
+					$('#purposeOfLoan').val(customer.typeLoan);
+                } else {
+                    alert('No data found!');
+                    $('#openingAmount').val('');
+                }
+            },
+            error: function () {
+                alert('Error while fetching data!');
+                $('#openingAmount').val('');
+            }
+        });
+    } else {
+        $('#openingAmount').val('');
+    }
+});
 
 
 // Dropdawn in Loan schem Code
@@ -145,40 +200,7 @@ $.ajax({
 
 // calulate the Emi Amout 
 function calculateEMI() {
-  /* let loanAmount = parseFloat(document.getElementById("newApplicationLoanAmount").value) || 0;
-   alert("Loan Amount: " + loanAmount);
-   let loanROI = parseFloat(document.getElementById("newApplicationROI").value) || 0;
-   alert("ROI: " + loanROI);
-   let planTerm = parseInt(document.getElementById("newApplicationDurationPlan").value, 10) || 1;
-   alert("Term: " + planTerm);
-   let roiType = document.getElementById("newApplicationTypeIntrest").value;
-   alert("Type: " + roiType);
-   let monthlyEMI =0;
-
-
-
-   
-
-  console.log("Loan Amount:", loanAmount);
-   console.log("ROI:", loanROI);
-   console.log("Plan Term:", planTerm);
-   console.log("ROI Type:", roiType);
-/*
-   if (roiType === "Flat Interest") {
-	
-     let totalInterest = loanAmount * (loanROI / 100) * (planTerm / 12);
-     monthlyEMI = (loanAmount + totalInterest) / planTerm;
-
-   } else if (roiType === "Reducing interest") {
-     let monthlyRate = loanROI / (12 * 100);
-     monthlyEMI = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, planTerm)) /
-                  (Math.pow(1 + monthlyRate, planTerm) - 1);
-
-   } else if (roiType === "Rule 78") {
-     let totalInterest = loanAmount * (loanROI / 100) * (planTerm / 12);
-     monthlyEMI = (loanAmount + totalInterest) / planTerm;
-   }
-*/
+  
 let P = parseFloat(document.getElementById("newApplicationLoanAmount").value) || 0; // Principal amount
 let annualRate = parseFloat(document.getElementById("newApplicationROI").value) || 0; // Annual ROI in percentage
 let N = parseInt(document.getElementById("newApplicationDurationPlan").value) || 0; // Tenure in months
@@ -250,8 +272,6 @@ function setupMemberChangeEvent() {
     memberCode.on('change', function () {
         const selectedCode = $(this).val();
         console.log("Selected Member Code:", selectedCode);
-        alert("Selected Member Code: " + selectedCode);
-
         if (selectedCode !== "") {
             $.ajax({
                 url: '/api/loanmanegment/getByIdNewLoanApplication?id=' + selectedCode,
@@ -331,8 +351,6 @@ function setupMemberChangeCoApplication() {
     memberCode.on('change', function () {
         const selectedCode = $(this).val();
         console.log("Selected Member Code:", selectedCode);
-        alert("Selected Member Code: " + selectedCode);
-
         if (selectedCode !== "") {
             $.ajax({
                 url: '/api/loanmanegment/getByIdNewLoanApplication?id=' + selectedCode,

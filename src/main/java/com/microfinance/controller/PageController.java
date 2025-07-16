@@ -823,9 +823,6 @@ public class PageController {
 	// Loan Management
 	@GetMapping("/loanSchemeCatalog")
 	public String getLoanSchemeCatalog(Model model) {
-		long maxId = loanMangmentSchemeRepo.getMaxId();
-		String loanSchemeCode = "M" + "0000" + (maxId + 1);
-		model.addAttribute("loanSchemeCode", loanSchemeCode);
 		return "loanManagement/loanSchemeCatalog";
 	}
 
@@ -835,7 +832,10 @@ public class PageController {
 	}
 
 	@GetMapping("/newLoanApplication")
-	public String getNewLoanApplication() {
+	public String getNewLoanApplication(Model model) {
+		long maxId = loanMangmentSchemeRepo.getMaxId();
+		String loanCode = "LP" + "0000" + (maxId + 1);
+		model.addAttribute("loanCode", loanCode);
 		return "loanManagement/newLoanApplication";
 	}
 

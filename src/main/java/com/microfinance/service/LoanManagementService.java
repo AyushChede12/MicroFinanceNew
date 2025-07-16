@@ -26,48 +26,45 @@ public class LoanManagementService {
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
 
-// update and save
-	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
-		// Check if ID is present (update case)
-		if (loan.getId() != null) {
-			Optional<LoanSchemCatalog> optionalLoan = loanRepository.findById(loan.getId());
+	// Service fo saving and updating the loan scheme data 
+		public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
+		    if (loan.getId() != null && loanRepository.existsById(loan.getId())) {
+		        // Perform update
+		        LoanSchemCatalog existingLoan = loanRepository.findById(loan.getId()).get();
 
-			if (optionalLoan.isPresent()) {
-				LoanSchemCatalog existingLoan = optionalLoan.get();
+		        // Copy all fields from input to existing
+		        existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
+		        existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
+		        existingLoan.setTypeLoan(loan.getTypeLoan());
+		        existingLoan.setAge(loan.getAge());
+		        existingLoan.setLoanDuration(loan.getLoanDuration());
+		        existingLoan.setEmiType(loan.getEmiType());
+		        existingLoan.setLoanAmount(loan.getLoanAmount());
+		        existingLoan.setLoanMode(loan.getLoanMode());
+		        existingLoan.setRateIntrestType(loan.getRateIntrestType());
+		        existingLoan.setTypeIntrest(loan.getTypeIntrest());
+		        existingLoan.setTypesecurity(loan.getTypesecurity());
 
-				// Update fields
-				existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
+		        // Deductions
+		        existingLoan.setFeeProcessing(loan.getFeeProcessing());
+		        existingLoan.setChargesLegal(loan.getChargesLegal());
+		        existingLoan.setGst(loan.getGst());
+		        existingLoan.setFeeInsurence(loan.getFeeInsurence());
+		        existingLoan.setFeeValuation(loan.getFeeValuation());
 
-				existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
-				existingLoan.setTypeLoan(loan.getTypeLoan());
-				existingLoan.setAge(loan.getAge());
+		        // Late fee
+		        existingLoan.setLateAllowanceday(loan.getLateAllowanceday());
+		        existingLoan.setModePanalty(loan.getModePanalty());
+		        existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
 
-				existingLoan.setLoanDuration(loan.getLoanDuration());
-
-				existingLoan.setEmiType(loan.getEmiType());
-				existingLoan.setLoanAmount(loan.getLoanAmount());
-				existingLoan.setLoanMode(loan.getLoanMode());
-
-				existingLoan.setRateIntrestType(loan.getRateIntrestType());
-				existingLoan.setTypeIntrest(loan.getTypeIntrest());
-				existingLoan.setTypesecurity(loan.getTypesecurity());
-				existingLoan.setFeeProcessing(loan.getFeeProcessing());
-				existingLoan.setChargesLegal(loan.getChargesLegal());
-				existingLoan.setFeeInsurence(loan.getFeeInsurence());
-				existingLoan.setGst(loan.getGst());
-				existingLoan.setFeeValuation(loan.getFeeValuation());
-				existingLoan.setLateAllowanceday(loan.getLateAllowanceday());
-				existingLoan.setModePanalty(loan.getModePanalty());
-				existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
-
-				return loanRepository.save(existingLoan);
-
-			}
+		        return loanRepository.save(existingLoan);
+		    } else {
+		        // Save new record
+		        return loanRepository.save(loan);
+		    }
 		}
-		return loanRepository.save(loan);
-
-	}
-
+		
+		
 	// Fetch data On Table
 
 	public List<LoanSchemCatalog> allDataFetchLoanSchemCatelog() {
@@ -101,12 +98,6 @@ public class LoanManagementService {
 		return addCustomerRepo.findById(id).orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
 	}
 
-	/*
-	 * //Branch Model fetch for prefenses
-	 * 
-	 * public List<BranchModule> getgetBranchName() { // TODO Auto-generated method
-	 * stub return branchModuleRepo.findAll(); }
-	 */
 
 	// Loan schem Code Name Dropdrawn
 
@@ -121,5 +112,19 @@ public class LoanManagementService {
 		return loanRepository.findByLoanSchemeCode(code)
 				.orElseThrow(() -> new RuntimeException("Loan Scheme not found for code: " + code));
 	}
+
+
+	    public List<LoanSchemCatalog> getLoanPlanName(String loanPlanName) {
+	        // Example: find by plan name (case-insensitive match)
+	        return loanRepository.findByLoanPlaneNameContainingIgnoreCase(loanPlanName);
+	    }
+
+
+		public List<LoanSchemCatalog> getSchemeCatalog() {
+			
+			return loanRepository.findAll();
+		}
+	
+
 
 }

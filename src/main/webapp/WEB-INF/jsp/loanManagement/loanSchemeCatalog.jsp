@@ -92,8 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 
-							<input type="hidden" id="loanSchemeCode" name="loanSchemeCode"
-								value="${loanSchemeCode}" />
+							<input type="hidden" id="loanSchemeCode" name="loanSchemeCode" />
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Loan Plan Name</label> <input type="text"
@@ -120,10 +119,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Age</label> <input type="number"
-									onclick="validateAge()" name="age" id="age" required="required"
+								<label for="loanName">Age</label> <input type="text"
+									name="age" id="age" required="required"
 									placeholder="Enter Your Age"
-									onblur="validateAge()
+									
 									style=" text-transform: uppercase;" />
 								<span id="message"></span>
 							</div>
@@ -259,15 +258,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
-
-
-
-
-
-
-
-
 					</div>
 
 
@@ -282,7 +272,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Late Allowance Days</label> <input type="number"
+								<label for="">Late Allowance Days</label> <input type="text"
 									name="lateAllowanceday" id="lateAllowanceday"
 									required="required" placeholder="Enter Late Allowance Days" />
 							</div>
@@ -300,7 +290,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Monthly Penalty </label> <input type="number"
+								<label for=""> Monthly Penalty </label> <input type="numbtexter"
 									name="pennaltyMonthly" id="pennaltyMonthly" required="required"
 									placeholder="" />
 							</div>
@@ -309,7 +299,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 				</div>
-
+				<input type="hidden" id="loanId" value="" />
 				<div class="row">
 					<div class="col-12 text-center">
 						<button id="saveBtn" class="btnStyle bg-success">Save</button>
@@ -336,9 +326,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">ID</th>
-										<th>Loan Schem Code</th>
 										<th>Loan Plan Name</th>
-
 										<th>Type Of Loan</th>
 										<th>Age</th>
 										<th>Loan Duration</th>
