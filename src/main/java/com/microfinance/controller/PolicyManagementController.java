@@ -727,7 +727,7 @@ public class PolicyManagementController {
 	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
 	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
-	        if (optional.isEmpty()) {
+	        if (optional.isPresent()) {
 	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
 	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
 	        }
