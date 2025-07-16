@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.model.addCustomer;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,10 @@ public class PolicyManagementController {
 
     @Autowired
     private PolicyManagementService policyManagementService;
+    
+    
+    @Autowired
+    AddInvestmentRepo addinvestmentrepo;
     
     //save daily Deposite
     @PostMapping("/daily-depositsave")
@@ -500,7 +506,7 @@ public class PolicyManagementController {
  	}
  	
  	
- 	//fetch new investment details by id
+ 	//fetch new investment details by BranchName
  	//Ashwini
  	
  	@GetMapping("/getinvestmentdetails")
@@ -514,26 +520,6 @@ public class PolicyManagementController {
  	}
  	
  	
-
- 	@GetMapping("/getDetailsById/{id}")
-    public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getDetailsById(@PathVariable Long id) {
- 		AddnewinvestmentPM deposit = policyManagementService.getDetailsById(id);
-
-       if (deposit != null) {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
-                 HttpStatus.OK,
-                "MIS deposit fetched successfully.",
-                deposit
-           );
-           return ResponseEntity.ok(response);
-         } else {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                 "MIS deposit not found for ID: " + id
-            );
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-         }
-  }
 
  	
  	@GetMapping("/ddterm")
@@ -626,21 +612,77 @@ public class PolicyManagementController {
 	
 	@GetMapping("/getAllRDPolicies")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllRDPolicies() {
+	    List<AddnewinvestmentPM> rdPolicies = policyManagementService.getApprovedRDPolicies();
+
+	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "Approved RD policies fetched successfully",
+	            rdPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+
+
+	
+	@GetMapping("/getAllFDPolicies")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllFDPolicies() {
 	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllInvestments(); // Fetch all
 
 	    // Filter policies where policyCode starts with "RD"
-	    List<AddnewinvestmentPM> rdPolicies = allPolicies.stream()
-	            .filter(p -> p.getPolicyCode() != null && p.getPolicyCode().startsWith("RD"))
+	    List<AddnewinvestmentPM> fdPolicies = allPolicies.stream()
+	            .filter(p -> p.getPolicyCode() != null && p.getPolicyCode().startsWith("FD"))
 	            .collect(Collectors.toList());
 
 	    // Build response
 	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
 	            HttpStatus.OK,
-	            "RD policies fetched successfully",
-	            rdPolicies
+	            "FD policies fetched successfully",
+	            fdPolicies
 	    );
 
 	    return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/getAllDDPolicies")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllDDPolicies() {
+	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllInvestments(); // Fetch all
+
+	    // Filter policies where policyCode starts with "RD"
+	    List<AddnewinvestmentPM> ddPolicies = allPolicies.stream()
+	            .filter(p -> p.getPolicyCode() != null && p.getPolicyCode().startsWith("DRD"))
+	            .collect(Collectors.toList());
+
+	    // Build response
+	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "DD policies fetched successfully",
+	            ddPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+	
+
+	@GetMapping("/getPolicyByPolicyCode")
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getPolicyByPolicyCode(@RequestParam("policyCode") String policyCode) {
+	    Optional<AddnewinvestmentPM> optionalPolicy = policyManagementService.findByPolicyCode(policyCode);
+
+	    if (optionalPolicy.isPresent()) {
+	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+	                HttpStatus.OK,
+	                "Policy found successfully",
+	                optionalPolicy.get()
+	        );
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
+	                HttpStatus.NOT_FOUND,
+	                "Policy not found for code: " + policyCode,
+	                null
+	        );
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	    }
 	}
 
 	
@@ -659,5 +701,67 @@ public class PolicyManagementController {
 	}
 
     
+	@GetMapping("/getNextPolicyCode")
+	public ResponseEntity<String> getNextPolicyCode(@RequestParam String schemeType) {
+	    String prefix = schemeType.toUpperCase(); // e.g., RD, FD, DRD
+
+	    // Get the highest ID in the table
+	    Long maxId = addinvestmentrepo.findMaxId(); // Custom method
+	    long nextId = (maxId != null) ? maxId + 1 : 1;
+
+	    // Generate a unique part (timestamp or 4-digit random)
+	    String uniquePart = String.valueOf((int)(Math.random() * 9000) + 1000); // Random 4-digit number
+	    // Alternative: String uniquePart = String.valueOf(System.currentTimeMillis()).substring(8); // Last 5 digits of timestamp
+
+	    // Final policy code: e.g., RD-7284-0004
+	    String nextPolicyCode = String.format("%s-%s-%04d", prefix, uniquePart, nextId);
+
+	    return ResponseEntity.ok(nextPolicyCode);
+	}
+
+
+  
+	@PostMapping("/updateDueAndInstallment")
+	public ResponseEntity<ApiResponse<String>> updateDueAndInstallment(@RequestBody Map<String, Object> data) {
+	    try {
+	        String policyCode = (String) data.get("policyCode");
+	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString()); // per installment amount
+	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+
+	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+	        if (optional.isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+	        }
+
+	        AddnewinvestmentPM investment = optional.get();
+
+	        // Safely parse current values (stored as String)
+	        double currentDue = Double.parseDouble(investment.getAmountDue());
+	        int currentPaid = Integer.parseInt(investment.getLastInstPaid());
+
+	        // ✅ Calculate total to deduct
+	        double totalDeduction = policyAmount * noOfInstallments;
+
+	        // ✅ Update calculations
+	        double updatedDue = currentDue - totalDeduction;
+	        int updatedPaid = currentPaid + noOfInstallments;
+
+	        // ✅ Save updated values back as Strings
+	        investment.setAmountDue(String.valueOf(updatedDue));
+	        investment.setLastInstPaid(String.valueOf(updatedPaid));
+
+	        addinvestmentrepo.save(investment);
+
+	        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment & due updated successfully", null));
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+	    }
+	}
+
+	
+    
+	
 }
 

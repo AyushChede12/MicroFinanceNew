@@ -31,12 +31,14 @@ public class FinancialConsultantController {
 	@Autowired
 	FinancialConsultantService financialConsultantService;
 
-	@PostMapping("/getAllCustomerCodes") // Poonam 13-06-2025
-    public ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomerCodes() {
-        List<addCustomer> list = financialConsultantService.getAllCustomerCodes();
-        ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.FOUND,"Customer codes fetched successfully",list);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+	/*
+	 * @PostMapping("/getAllCustomerCodes") // Poonam 13-06-2025 public
+	 * ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomerCodes() {
+	 * List<addCustomer> list = financialConsultantService.getAllCustomerCodes();
+	 * ApiResponse<List<addCustomer>> response =
+	 * ApiResponse.success(HttpStatus.FOUND,"Customer codes fetched successfully"
+	 * ,list); return new ResponseEntity<>(response, HttpStatus.OK); }
+	 */
 
 	@PostMapping("/getAllBranch") // poonam 13-06-2025
 	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllBranch() {
@@ -52,7 +54,7 @@ public class FinancialConsultantController {
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 
-	@PostMapping("/getFinancialConsultantByMemberCode")
+	/*@PostMapping("/getFinancialConsultantByMemberCode")
 	public ResponseEntity<ApiResponse<List<addCustomer>>> getMemberByCode(@RequestParam String memberCode) {
 
 	    List<addCustomer> members = financialConsultantService.getByMemberCode(memberCode);
@@ -72,6 +74,7 @@ public class FinancialConsultantController {
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
 	}
+	*/
 
 
 
@@ -91,16 +94,16 @@ public class FinancialConsultantController {
 	@PostMapping("/saveOrUpdateFinancialConsultant")
 	public ResponseEntity<ApiResponse<addFinancialConsultant>> saveOrUpdateFinancialConsultant(
 	        @ModelAttribute FinancialConsultantDto financialConsultantDto,
-	        @RequestParam(value = "customerPhoto", required = false) String customerPhoto, @RequestParam(value = "customerSignature", required = false) String customerSignature) {
+	        @RequestParam(value = "financialPhoto", required = false) MultipartFile financialPhoto, @RequestParam(value = "finnacialSignature", required = false) MultipartFile finnacialSignature) {
 		
 		 // System.out.println("Received file: " + (signature != null ? signature.getOriginalFilename() : "No file uploaded"));
 		 
 		
-		System.out.println("Received financialPhoto: " + customerPhoto);
+		System.out.println("Received financialPhoto: " + financialPhoto);
 	    
-	    System.out.println("Received Signature: " + customerSignature);	    
+	    System.out.println("Received Signature: " + finnacialSignature);	    
 	    
-	    ApiResponse<addFinancialConsultant> response = financialConsultantService.saveOrUpdateFinancialConsultant(financialConsultantDto, customerPhoto, customerSignature);
+	    ApiResponse<addFinancialConsultant> response = financialConsultantService.saveOrUpdateFinancialConsultant(financialConsultantDto, financialPhoto, finnacialSignature);
 	    return new ResponseEntity<>(response, response.getStatus());
 	}
 	

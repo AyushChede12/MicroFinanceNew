@@ -53,8 +53,7 @@ pageEncoding="ISO-8859-1"%> -->
 			</nav>
 		</div>
 
-		<div>
-			<form id="formid">
+		
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -87,16 +86,31 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row" style="padding-left: 800px;">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Front Page</button>
-							<button id="saveBtn" class="btn btn-primary">Transacton</button>
-							<button id="saveBtn" class="btn btn-danger">Heading</button>
+						    <a id="btnSearchTransactionData"
+													href="javascript:displayTransactionDataList()"
+													class="btn btn-success margin-20 "
+													style="background-color: #FFDF00;"><span
+													class="fa fa-search "></span> SEARCH</a>
+							<a id="btnFrontPageOnSavingPassbook"
+													href="javascript:displaySavingfrontPage()"
+													class="btn btn-success margin-20"
+													style="background-color: orange;"> Front Page</a>
+							<a
+													id="btnTransactionPageOnSavingPassbook"
+													href="javascript:displaySavingTransaction()"
+													class="btn btn-success margin-20"
+													style="background-color: #87CEEB;"> Transaction</a> 
+							<a
+													id="btnHeadingOnSavingPassbook"
+													href="javascript:displayHeadingSA()"
+													class="btn btn-success margin-20"
+													style="background-color: #FF4040;"> Heading</a>
 						</div>
 					</div>
 				</div>
 
 				 <div class="row mt-5">
-					<div class="col-12">
+					<div class="col-12" id="tableSection" style="display: none;">
 						<div class="card recent-sales">
 							<div class="card-body table-responsive">
 								<h5 class="card-title">Account Holder Details</h5>
@@ -105,7 +119,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<thead class="table-light">
 										<tr>
 											<th>ID</th>
-											<th>Bank Name</th>
+											<th>Branch Name</th>
 											<th>Account No</th>
 											<th>Mobile No</th>
 											<th>Address</th>
@@ -123,10 +137,174 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 				</div> 
+				
+				<div class="mt-4">
+			<div id="printbtnSection"  style="display: none;">
+							<div class="col-12 d-flex justify-content-end gap-2">
+								<button type="button" class="btn btn-success" id="printBtn">
+									<i class="fa-solid fa-print"></i>
+								</button>
+								<button type="button" class="btn btn-success" id="downloadBtn">
+									<i class="fa-solid fa-download"></i>
+								</button>
+					</div>
+			</div>
+				<div class="row mt-5">
+					<div class="col-12" id="passbookSection"  style="display: none;">
+						<div class="card recent-sales" id="passbookId">
+							<div class="card-body table-responsive">
+								<!-- Certificate Form Starts Here -->
+								<div class="p-3">
+									<h5 class="text-center mb-3" style="font-size: 20px;">
+										<strong>Microfinance Pvt. Ltd</strong>
+									</h5>
 
-			</form>
+									<!-- Applicant Information -->
+									
+									<div class="row border">
+										<div class="col-md-6" style="padding-top: 15px;">
+											<p style="font-size: 13px;">
+												<strong>Customer No. :</strong> <span id="customerNo"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Account No. :</strong> <span id="accountNo"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Account Holder Name :</strong> <span id="customerName"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>S/D/W/H/O :</strong> <span id="familyDetails"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Date Of Birth :</strong> <span id="dateOfBirth"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Contact No. :</strong> <span id="contactNo"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Email ID :</strong> <span id="emailId"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Mode Of Operation :</strong> <span id="operationType"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Aadhar No. :</strong> <span id="aadharNo"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Address :</strong> <span id="address"></span>
+											</p>
+										</div>
+										<div class="col-md-6" style="padding-top: 15px;">
+											<p style="font-size: 13px;">
+												<strong>opening Date :</strong> <span id="openingDate"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Account Type :</strong> <span id="typeofaccount"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>IFSC Code :</strong> <span
+													id="IFSCCode"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Date Of Issue :</strong> <span id="dateOfIssue"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Nomination Registered :</strong> <span id="nominationStatus"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Nomination Name :</strong> <span id="nominationName"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>Branch and Code :</strong> <span id="branch"></span>
+											</p>
+											<p style="font-size: 13px;">
+												<strong>UPI :</strong> <span id="upi"></span>
+											</p>
+										</div>
+									</div>
+
+									
+								</div>
+								<!-- Certificate Form Ends Here -->
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<div class="row mt-5">
+				<div class="col-12" id="headingSection" style="display: none;">
+					<div class="card recent-sales" id="passbookId">
+						<div class="card-body table-responsive">
+							<!-- Certificate Form Starts Here -->
+							<table id="heading-tabl">
+								<thead>
+									<tr style="color: Black;">
+										<th scope="col"
+											style="text-align: center; width: 100px; font-weight: 400;">TXN
+											DATE</th>
+										<th scope="col"
+											style="text-align: center; width: 100px; font-weight: 400;">PARTICULARS</th>
+										<th scope="col"
+											style="text-align: center; width: 100px; font-weight: 400;">DEBIT</th>
+										<th scope="col"
+											style="text-align: center; width: 100px; font-weight: 400;">CREDIT</th>
+										<th scope="col"
+											style="text-align: center; width: 100px; font-weight: 400;">BALANCE</th>
+									</tr>
+								</thead>
+
+								<tbody>
+									<tr>
+										<td><div
+												style="width: 100%; height: 1px; background-color: black; margin-top: 5px;"></div></td>
+										<td><div
+												style="width: 100%; height: 1px; background-color: black; margin-top: 5px;"></div></td>
+										<td><div
+												style="width: 100%; height: 1px; background-color: black; margin-top: 5px;"></div></td>
+										<td><div
+												style="width: 100%; height: 1px; background-color: black; margin-top: 5px;"></div></td>
+										<td><div
+												style="width: 100%; height: 1px; background-color: black; margin-top: 5px;"></div></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt-5">
+				<div class="col-12" id="TransactionSection" style="display: none;">
+					<div class="card recent-sales" id="passbookId">
+						<div class="card-body table-responsive">
+							<!-- Certificate Form Starts Here -->
+                             <table class="table table-bordered" id="transaction-tabl">
+								<thead>
+									<tr style="color: White; background-color: #008385;">
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+										<th scope="col" style="text-align: center; width: 100px"></th>
+									</tr>
+								</thead>
+								<tbody id="tableBody1">
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
 
 		</div>
+				
+
+			
 
 
 	</main>

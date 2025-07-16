@@ -36,11 +36,11 @@ $(document).ready(function () {
                 const row = `
                     <tr style="font-family: 'Poppins', sans-serif;">
                         <td>${index + 1}</td>
-                        <td>${item.customerName || ''}</td>
+                        <td>${item.financialName || ''}</td>
                         <td>${item.financialCode || ''}</td>
                         <td>${item.contactNo || ''}</td>
                         <td>${item.joiningDate || ''}</td>
-                        <td>${item.customerAddress || ''}</td>
+                        <td>${item.address || ''}</td>
                         <td>${item.branchName || ''}</td>
                         <td>${item.financialStatus === true || item.financialStatus === 1 ? 'Active' : 'Inactive'}</td>
                         <td>
@@ -68,7 +68,7 @@ $(document).ready(function () {
             }
 
             const filteredData = allData.filter(item =>
-                (item.customerName && item.customerName.toLowerCase().includes(keyword)) ||
+                (item.financialName && item.financialName.toLowerCase().includes(keyword)) ||
                 (item.financialCode && item.financialCode.toLowerCase().includes(keyword))
             );
 
@@ -101,17 +101,12 @@ $(document).ready(function () {
                         $("#id").val(data.id);
                         $("#joiningDate").val(data.joiningDate || '');
 						$("#financialCode1").val(data.financialCode || '');
-                        $("#memberCode").val(data.memberCode || '');
-                        $("#customerName").val(data.customerName || '');
+                        $("#financialName").val(data.financialName || '');
                         $("#dob").val(data.dob || '');
-                        $("#customerAge").val(data.customerAge || '');
-                        $("#guardianName").val(data.guardianName || '');
-                        $("#relationToApplicant").val(data.relationToApplicant || '');
+                        $("#age").val(data.age || '');
                         $("#contactNo").val(data.contactNo || '');
-                        $("#nomineeName").val(data.nomineeName || '');
                         $("#branchName").val(data.branchName || '');
-                        $("#nomineeAge").val(data.nomineeAge || '');
-                        $("#customerAddress").val(data.customerAddress || '');
+                        $("#address").val(data.address || '');
                         $("#district").val(data.district || '');
                         $("#state").val(data.state || '');
                         $("#pinCode").val(data.pinCode || '');
@@ -130,15 +125,15 @@ $(document).ready(function () {
                         document.getElementById("financialStatus").checked = data.financialStatus === true || data.financialStatus === '1';
                         document.getElementById("smsSend").checked = data.smsSend === true || data.smsSend === '1';
 
-                        if (data.customerPhoto) {
-                            const img = `Uploads/${data.customerPhoto}`;
-                            $("#financialPhotoPreview").attr("src", img);
+                        if (data.financialPhoto) {
+                            const img = `Uploads/${data.financialPhoto}`;
+                            $("#photoPreview").attr("src", img);
                             $("#photoHidden").val(img);
                         }
 
-                        if (data.customerSignature) {
-                            const img = `Uploads/${data.customerSignature}`;
-                            $("#financialSignaturePreview").attr("src", img);
+                        if (data.finnacialSignature) {
+                            const img = `Uploads/${data.finnacialSignature}`;
+                            $("#signaturePreview").attr("src", img);
                             $("#signatureHidden").val(img);
                         }
 
@@ -168,19 +163,14 @@ $(document).ready(function () {
 
 	        // Append regular text fields
 	        formData.append("id", $('#id').val());
-	        formData.append("financialCode", $('#financialCode1').val());
 	        formData.append("joiningDate", $('#joiningDate').val());
-	        formData.append("memberCode", $('#memberCode').val());
-	        formData.append("customerName", $('#customerName').val());
+			formData.append("financialCode", $('#financialCode1').val());
+	        formData.append("financialName", $('#financialName').val());
 	        formData.append("dob", $('#dob').val());
-	        formData.append("customerAge", $('#customerAge').val());
-	        formData.append("guardianName", $('#guardianName').val());
-	        formData.append("relationToApplicant", $('#relationToApplicant').val());
+	        formData.append("age", $('#age').val());
 	        formData.append("contactNo", $('#contactNo').val());
-	        formData.append("nomineeName", $('#nomineeName').val());
 	        formData.append("branchName", $('#branchName').val());
-	        formData.append("nomineeAge", $('#nomineeAge').val());
-	        formData.append("customerAddress", $('#customerAddress').val());
+	        formData.append("address", $('#address').val());
 	        formData.append("district", $('#district').val());
 	        formData.append("state", $('#state').val());
 	        formData.append("pinCode", $('#pinCode').val());
@@ -200,8 +190,19 @@ $(document).ready(function () {
 	        formData.append("smsSend", $('#smsSend').is(':checked')? 1 : 0);
 
 	        // Append image paths or Base64 values
-	        formData.append("customerPhoto", $('#customerPhotoHidden').val());
-	        formData.append("customerSignature", $('#customerSignatureHidden').val());
+			
+			const photoFile = $('#photo')[0].files[0];
+			    const signatureFile = $('#signature')[0].files[0];
+
+			    if (photoFile) {
+			        formData.append("financialPhoto", photoFile);
+			    }
+			    if (signatureFile) {
+			        formData.append("finnacialSignature", signatureFile);
+			    }
+				
+	        /*formData.append("financialPhoto", $('#photoHidden').val());
+	        formData.append("finnacialSignature", $('#signatureHidden').val());*/
 
 	        $.ajax({
 	            url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
@@ -215,6 +216,7 @@ $(document).ready(function () {
 	                if (response.status === "OK") {
 	                    alert("Updated Successfully");
 						location.reload();
+						location.assign('consultantDownlineView');
 	                    // Optionally refresh the table or UI
 	                } else {
 	                    alert("Something went wrong: " + response.message);
