@@ -31,10 +31,18 @@ pageEncoding="ISO-8859-1"%> -->
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
 </head>
 
 
@@ -78,18 +86,19 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 				
-					
-				
 						<div class="col-lg-3">
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Plan Code :<span id="star"> *</span></label> 
-								<select id="planCode"
-									name="planCode" required="required"
+								<label for="policyCode">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="">-- Policy Code --</option>
+
 								</select>
 							</div>
-					</div>					
+						</div>
+				
+										
 					
 				</div>
 				<div class="mt-5">
@@ -100,13 +109,11 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							
-							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy code:</label> <input type="text"
-									name="policyCode" id="policyCode" required="required"
-									placeholder="" />
-						</div>
+								<label for="vehicalNo">Plan Code :</label> <input
+									type="text" name="planCode" id="planCode" required="required"
+									placeholder="" style="text-transform: uppercase;" />
+							</div>
 						</div>
 
 						<div class="col-lg-3">

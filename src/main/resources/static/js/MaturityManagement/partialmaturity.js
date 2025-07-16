@@ -1,114 +1,134 @@
 $(document).ready(function () {
+    $('#plantype').on('change', function () {
+        let plantype = $(this).val();
+
+        if (!plantype) {
+            alert("Please select a valid plan type.");
+            return;
+        }
+
+        $.ajax({
+            url: 'api/Policymangment/getaddinvestmentdetails',
+            type: 'GET',
+            data: { planType: plantype }, // sending planType as a query parameter
+            success: function (response) {
+                if (response.status === "OK" && response.data && response.data.length > 0) {
+                    // Filter policyCodes starting with selected planType (e.g., DD...)
+                    const filteredData = response.data.filter(item =>
+                        item.policyCode && item.policyCode.startsWith(plantype)
+                    );
+
+                    const transferOptions = filteredData.map(function (item) {
+                        return {
+                            id: item.policyCode,
+                            text: item.policyCode
+                        };
+                    });
+
+                    $('#policyCode').empty().select2({
+                        placeholder: '-- Search policy Code --',
+                        data: transferOptions,
+                        matcher: function (params, data) {
+                            if ($.trim(params.term) === '') return data;
+
+                            if (typeof data.text === 'undefined') return null;
+
+                            const term = params.term.toLowerCase();
+                            const text = data.text.toLowerCase();
+
+                            return text.includes(term) ? data : null;
+                        }
+                    });
+                } else {
+                    alert("No policy codes found.");
+                }
+            },
+            error: function () {
+                alert("Failed to load policy codes.");
+            }
+        });
+    });
 	
-	$('#plantype').on('change', function () {
-	       let plantype = $(this).val();
+	$('#policyCode').on('change', function () {
+	    let policyCode = $(this).val();
 
-	       if (plantype == "DD") {
-			$.ajax({
-					    url: "api/Policymangment/daily-deposit/view",
-					    type: "GET",
-					    success: function (response) {
-					        var dropdown = $('#planCode');
-					        dropdown.empty();
-					        dropdown.append('<option value="">Select Policy Code</option>');
+	    if (policyCode !== "") {
+	        $.ajax({
+	            url: '/api/Policymangment/getPolicyByPolicyCode?policyCode=' + encodeURIComponent(policyCode),
+	            type: 'GET',
+	            success: function (response) {
+	                console.log("Response:", response);
+	                alert("Policy Code: " + policyCode);
 
-					        if (response.status == "OK" && response.data) {
-					            $.each(response.data, function (index, plan) {
-					                // Concatenate planCode + " - " + planName
-					                var displayText = plan.planCodeDD + " - " + plan.planNameDD;
-					                dropdown.append('<option value="' + plan.planCode + '">' + displayText + '</option>');
-					            });
-					        } else {
-					            dropdown.append('<option value="">No policy code found</option>');
-					        }
-					    },
-					    error: function () {
-					        alert("No policy code found.");
-					    }
-					});
+	                if (response.data) {
+	                    let data = response.data;
 
-					
-	       }
-		   else 
-		   
-		   		if(plantype=="RD"){
-				$.ajax({
-				        url: "api/Policymangment/recurring-depositview",
-				        type: "GET",
-				        success: function (response) {
-				            var dropdown = $('#planCode');
-				            dropdown.empty();
-				            dropdown.append('<option value="">Select Policy Code</option>');
-
-							if (response.status == "OK" && response.data) {
-									            $.each(response.data, function (index, plan) {
-									                // Concatenate planCode + " - " + planName
-									                var displayText = plan.planCodeRD + " - " + plan.planNameRD;
-									                dropdown.append('<option value="' + plan.planCodeRD + '">' + displayText + '</option>');
-									            });
-									        } else {
-				                dropdown.append('<option value="">No policy code found</option>');
-				            }
-				        },
-				        error: function () {
-				            alert("No policy code found.");
-				        }
-				    });
-		  		}
-				
-				else 
-					if(plantype=="FD"){
+	                    $('#planCode').val(data.schemeCode);
+	                    $('#clientName').val(data.customerName);
+	                    $('#policyName').val(data.schemeName);
+	                    $('#schemeType').val(data.schemeType);
+	                    $('#policyAmount').val(data.policyAmount);
+	                    $('#paidAmount').val(data.depositAmount);
+	                    $('#actualMaturity').val(data.maturityAmount);
+	                    $('#maturityDate').val(data.maturityDate);
+	                    $('#duration').val(calDuration(data));
+						$('#syspayable').val(sysPayable(data));
 						
-						$.ajax({
-						        url: "api/Policymangment/fixed-depositview",
-						        type: "GET",
-						        success: function (response) {
-						            var dropdown = $('#planCode');
-						            dropdown.empty();
-						            dropdown.append('<option value="">Select Policy Code</option>');
+						
+						
+						
 
-									if (response.status == "OK" && response.data) {
-											            $.each(response.data, function (index, plan) {
-											                // Concatenate planCode + " - " + planName
-											                var displayText = plan.planCodeFD + " - " + plan.planNameFD;
-											                dropdown.append('<option value="' + plan.planCodeFD + '">' + displayText + '</option>');
-											            });
-											        } else {
-						                dropdown.append('<option value="">No policy code found</option>');
-						            }
-						        },
-						        error: function () {
-						            alert("No policy code found.");
-						        }
-						    });
-					}
-					
-					else 
-						if(plantype=="MIS"){
-							$.ajax({
-								  url: "api/Policymangment/mis-deposit/view",
-										 type: "GET",
-											success: function (response) {
-											           var dropdown = $('#planCode');
-											           dropdown.empty();
-											           dropdown.append('<option value="">Select Policy Code</option>');
+	                } else {
+	                    alert("No data found for this policy.");
+	                }
+	            },
+	            error: function () {
+	                alert("Error fetching policy details.");
+	            }
+	        });
+	    } else {
+	        $('#customerName, #schemeMode, #schemeType, #policyAmount, #depositAmount, #maturityAmount, #maturityDate, #duration').val('');
+	    }
+	});
 
-													   if (response.status == "OK" && response.data) {
-													   		            $.each(response.data, function (index, plan) {
-													   		                // Concatenate planCode + " - " + planName
-													   		                var displayText = plan.planCodeMD + " - " + plan.planNameMD;
-													   		                dropdown.append('<option value="' + plan.planCodeMD + '">' + displayText + '</option>');
-													   		            });
-													   		        } else {
-											               dropdown.append('<option value="">No policy code found</option>');
-											           }
-											       },
-											       error: function () {
-											           alert("No policy code found.");
-											       }
-											   });
-						}
-				
-				
-	   });
+
 });
+
+function calDuration(data){
+	let openingDate = new Date(data.policyStartDate);
+	let maturityDate = new Date(data.maturityDate);
+	let schemeMode = data.schemeMode; // e.g., "Monthly" or "Yearly"
+
+    let duration = 0;
+	let durationText = "-";
+
+		 if (schemeMode && openingDate && maturityDate) 
+			{
+		      if (schemeMode.toLowerCase() === "monthly") 
+				{
+		          duration = (maturityDate.getFullYear() - openingDate.getFullYear()) * 12 +(maturityDate.getMonth() - openingDate.getMonth());
+				 durationText = duration + (duration === 1 ? " month" : " months");
+				}
+				 else
+				   if (schemeMode.toLowerCase() === "yearly")
+					 {
+		                duration = maturityDate.getFullYear() - openingDate.getFullYear();
+		                   if (
+		                        maturityDate.getMonth() < openingDate.getMonth() ||
+		                          (maturityDate.getMonth() === openingDate.getMonth() &&
+		                           maturityDate.getDate() < openingDate.getDate())
+		                              ) {
+		                                duration--;
+		                            }
+							 durationText = duration + (duration === 1 ? " year" : " years");
+		                }
+		         }
+				 return durationText;
+}
+
+function sysPayable(data){
+	
+	
+	// System Payable = (Total Deposit Amount × (Completed Period / Total Period)) + Interest for that period
+
+}
