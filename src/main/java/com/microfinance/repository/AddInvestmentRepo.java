@@ -45,6 +45,10 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
 
 	List<AddnewinvestmentPM> findByIsApprovedFalse();
 
+	
+	// Custom query to fetch only approved RD policies
+    @Query("SELECT a FROM AddnewinvestmentPM a WHERE a.policyCode LIKE 'FD%' AND a.isApproved = true")
+    List<AddnewinvestmentPM> findApprovedFDPolicies();
 
 	
 

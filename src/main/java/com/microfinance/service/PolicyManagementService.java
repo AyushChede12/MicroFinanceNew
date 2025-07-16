@@ -434,6 +434,11 @@ public List<AddnewinvestmentPM> getApprovedInvestments() {
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
 }
+
+
+public List<AddnewinvestmentPM> getApprovedFDPolicies() {
+    return addinvestmentrepo.findApprovedFDPolicies();
+}
 }
 
 
