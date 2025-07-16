@@ -721,44 +721,6 @@ public class PolicyManagementController {
 
 
   
-	/*
-	 * @PostMapping("/updateDueAndInstallment") public
-	 * ResponseEntity<ApiResponse<String>> updateDueAndInstallment(@RequestBody
-	 * Map<String, Object> data) { try { String policyCode = (String)
-	 * data.get("policyCode"); double policyAmount =
-	 * Double.parseDouble(data.get("policyAmount").toString()); // per installment
-	 * amount int noOfInstallments =
-	 * Integer.parseInt(data.get("noOfInstallments").toString());
-	 * 
-	 * Optional<AddnewinvestmentPM> optional =
-	 * addinvestmentrepo.findByPolicyCode(policyCode); if (optional.isEmpty()) {
-	 * return ResponseEntity.status(HttpStatus.NOT_FOUND) .body(new
-	 * ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null)); }
-	 * 
-	 * AddnewinvestmentPM investment = optional.get();
-	 * 
-	 * // Safely parse current values (stored as String) double currentDue =
-	 * Double.parseDouble(investment.getAmountDue()); int currentPaid =
-	 * Integer.parseInt(investment.getLastInstPaid());
-	 * 
-	 * // ✅ Calculate total to deduct double totalDeduction = policyAmount *
-	 * noOfInstallments;
-	 * 
-	 * // ✅ Update calculations double updatedDue = currentDue - totalDeduction; int
-	 * updatedPaid = currentPaid + noOfInstallments;
-	 * 
-	 * // ✅ Save updated values back as Strings
-	 * investment.setAmountDue(String.valueOf(updatedDue));
-	 * investment.setLastInstPaid(String.valueOf(updatedPaid));
-	 * 
-	 * addinvestmentrepo.save(investment);
-	 * 
-	 * return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-	 * "Installment & due updated successfully", null)); } catch (Exception e) {
-	 * return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR) .body(new
-	 * ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " +
-	 * e.getMessage(), null)); } }
-	 */
 
 	@PostMapping("/updateDueAndInstallment")
 	public ResponseEntity<ApiResponse<String>> updateDueAndInstallment(@RequestBody Map<String, Object> data) {
