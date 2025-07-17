@@ -68,11 +68,13 @@ pageEncoding="ISO-8859-1"%> -->
 								placeholder="Enter Plan id" style="text-transform: uppercase;" />
 						</div>
 
-						<div class="d-none">
-							<input type="hidden" name="planCode" id="planCode"
-								required="required" placeholder="Enter Plan id"
-								value="${memberCodePI}" style="text-transform: uppercase;" />
-						</div>
+						
+				<div class="col-lg-3" style="display: none;">
+					<div class="d-flex flex-column formFields">
+						<label>Plan ID*</label> <input type="hidden" id="planCode" name="planCode" value="${memberCodePI}"
+							class="form-control" required />
+					</div>
+				</div>
 
 
 						<div class="row">

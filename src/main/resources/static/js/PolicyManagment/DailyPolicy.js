@@ -1,7 +1,7 @@
 $(document).ready(function () {
 	// 1. Populate dropdown with approved RD policies
 	$.ajax({
-		url: "api/Policymangment/getAllFDPolicies",
+		url: "api/Policymangment/getAllDDPolicies",
 		type: "GET",
 		success: function (response) {
 			if (response.data && response.data.length > 0) {
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 						// 2a. Calculate renewal date (for RD = add 1 month to policyStartDate)
 						let renewalDate = "";
-						if (data.policyStartDate && data.schemeType === "FD") {
+						if (data.policyStartDate && data.schemeType === "RD") {
 							const startDate = new Date(data.policyStartDate);
 							startDate.setMonth(startDate.getMonth() + 1);
 							const yyyy = startDate.getFullYear();
@@ -49,8 +49,8 @@ $(document).ready(function () {
 						$("#contactNo").val(data.contactNo);
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
-						$("#policyTerm").val(data.schemeTerm);
 						$("#branchname").val(data.branchName);
+						$("#policyTerm").val(data.schemeTerm);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);
 						$("#paymentDue").val(data.amountDue);
@@ -74,7 +74,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("#btnSave").click(function (e) {
+    $("#buttonSave").click(function (e) {
         e.preventDefault(); // Prevent default form submission
 
         // Collect only required data for the API
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
         // Send to backend
         $.ajax({
-            url: "/api/Policymangment/updateFDDueAndInstallment",
+            url: "/api/Policymangment/updateDDDueAndInstallment",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
