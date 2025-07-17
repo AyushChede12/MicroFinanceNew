@@ -20,10 +20,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
+import com.microfinance.dto.FinancialConsultantDto;
+import com.microfinance.dto.PolicyManagementDto;
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.SavingAccountActivity;
+import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
 import com.microfinance.service.DataCorrectionService;
@@ -31,12 +37,12 @@ import com.microfinance.service.DataCorrectionService;
 @RestController
 @RequestMapping("/api/datacorrection")
 public class DataCorrectionController {
-	
+
 	@Autowired
 	DataCorrectionService dataCorrectionService;
-	
+
 	// Ayush
-	@PostMapping("/deleteCustomerDataByForm")        
+	@PostMapping("/deleteCustomerDataByForm")
 	public ResponseEntity<ApiResponse<String>> deleteCustomerData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteCustomerData(id);
 		if (isDeleted) {
@@ -44,27 +50,28 @@ public class DataCorrectionController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Customer Data deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Customer Data deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
-	//Ayush
-	@PostMapping("/deleteFinancialDataByForm")        
-	public ResponseEntity<ApiResponse<String>> deleteFinancialData(@RequestParam("id") Long id) {
-		boolean isDeleted = dataCorrectionService.deleteFinancialData(id);
-		if (isDeleted) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Financial Data deleted successfully",
-					"success");
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Financial Data deletion failed", "failure");
-			return ResponseEntity.badRequest().body(response);
-		}
-	}
-	
+
+	// Ayush
+//	@PostMapping("/deleteFinancialDataByForm")
+//	public ResponseEntity<ApiResponse<String>> deleteFinancialData(@RequestParam("id") Long id) {
+//		boolean isDeleted = dataCorrectionService.deleteFinancialData(id);
+//		if (isDeleted) {
+//			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Financial Data deleted successfully",
+//					"success");
+//			return ResponseEntity.ok(response);
+//		} else {
+//			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Financial Data deletion failed",
+//					"failure");
+//			return ResponseEntity.badRequest().body(response);
+//		}
+//	}
+
+	// Ayush
 	@GetMapping("/fetchAllSavingAccountActivity")
 	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> fetchAllSavingAccountActivity() {
 		List<SavingAccountActivity> list = dataCorrectionService.fetchAllSavingAccountActivity();
@@ -72,8 +79,9 @@ public class DataCorrectionController {
 				"Saving Account Activity fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
-	
-	@PostMapping("/deleteSavingTransactionRemoval")        
+
+	// Ayush
+	@PostMapping("/deleteSavingTransactionRemoval")
 	public ResponseEntity<ApiResponse<String>> deleteSavingTransaction(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteSavingTransaction(id);
 		if (isDeleted) {
@@ -81,12 +89,72 @@ public class DataCorrectionController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Saving Transaction deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Saving Transaction deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+
+	// Ayush
+//	@PostMapping("/saveOrUpdatePolicyManagement")
+//	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveOrUpdatePolicyManagementData(
+//			@ModelAttribute PolicyManagementDto policyManagementDto,
+//			@RequestParam(value = "image1", required = false) MultipartFile image1,
+//			@RequestParam(value = "image2", required = false) MultipartFile image2) {
+//
+//		// System.out.println("Received file: " + (signature != null ?
+//		// signature.getOriginalFilename() : "No file uploaded"));
+//
+//		System.out.println("Received financialPhoto: " + image1);
+//
+//		System.out.println("Received Signature: " + image2);
+//
+//		ApiResponse<AddnewinvestmentPM> response = dataCorrectionService
+//				.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
+//		return new ResponseEntity<>(response, response.getStatus());
+//	}
+	
+	@PostMapping("/deletePolicyDataByForm")
+	public ResponseEntity<ApiResponse<String>> deletePolicyData(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deletePolicyData(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Policy Data deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy Data deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
 	
+	//Ayush
+//	@PostMapping("/fetchSavingAccountByCustomerCode")
+//	public ApiResponse<List<CreateSavingsAccount>> fetchSavingByCustomerCode(@RequestParam("selectByCustomer") String selectByCustomer) {
+//		List<CreateSavingsAccount> list = dataCorrectionService.fetchSavingDataByCustomerCode(selectByCustomer);
+//		if (list != null && !list.isEmpty()) {
+//			return ApiResponse.success(HttpStatus.FOUND, "Saving Account Fetched Successfully", list);
+//		} else {
+//			return ApiResponse.error(HttpStatus.NOT_FOUND, "Saving Account Share Not Found");
+//		}
+//	}
+	
+	@PostMapping("/updateDataOfPolicyManagement")
+	public ResponseEntity<ApiResponse<String>> updatePolicyManagement(
+			@RequestBody AddnewinvestmentPM adddnewinvestmentPM) {
+
+		int result = dataCorrectionService.updatePolicyManagement(adddnewinvestmentPM);
+
+		if (result > 0) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
+					"Policy Data updated successfully.", "success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
+					"Failed to update Policy Data.", "failure");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
 
 
 }

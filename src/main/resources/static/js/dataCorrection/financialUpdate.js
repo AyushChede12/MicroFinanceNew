@@ -28,7 +28,7 @@ $(document).ready(function() {
 				let financialOptions = response.data.map(function(item) {
 					return {
 						id: item.financialCode,
-						text: item.financialCode + " - " + item.customerName
+						text: item.financialCode + " - " + item.financialName
 					};
 				});
 
@@ -120,46 +120,29 @@ $(document).ready(function() {
 					let data = response.data[0];
 					$("#id").val(data.id);
 					$("#joiningDate").val(data.joiningDate);
-					$("#memberCode").val(data.memberCode);
-					$("#customerName").val(data.customerName);
+					$("#financialName").val(data.financialName);
 					$("#dob").val(data.dob);
-					$("#customerAge").val(data.customerAge);
-					$("#guardianName").val(data.guardianName);
-					$("#relationToApplicant").val(data.relationToApplicant);
+					$("#age").val(data.age);
 					$("#contactNo").val(data.contactNo);
-					$("#nomineeName").val(data.nomineeName);
 					$("#branchName").val(data.branchName);
-					$("#nomineeAge").val(data.nomineeAge);
-					$("#customerAddress").val(data.customerAddress);
+					$("#address").val(data.address);
 					$("#district").val(data.district);
 					$("#state").val(data.state);
 					$("#pinCode").val(data.pinCode);
 					$("#profession").val(data.profession);
 					$("#academicBackground").val(data.academicBackground);
-					//$("#financialPhotoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
-					//$("#financialSignaturePreview").attr("src", data.customerSignature ? `Uploads/${data.customerSignature}` : "Uploads/default-placeholder.jpg");
-
-					/*if (data.customerPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto).show();
-						$('#financialphotoHidden').val(data.customerPhoto);
-					}
-
-					if (data.customerSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature).show();
-						$('#financialsignatureHidden').val(data.customerSignature);
-					}*/
 
 					// Image bindings (photo and signature)
-					if (data.customerPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.customerPhoto);
-						$('#financialphotoHidden').val(data.customerPhoto); // Store file name for fallback
+					if (data.financialPhoto) {
+						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.financialPhoto);
+						$('#financialphotoHidden').val(data.financialPhoto); // Store file name for fallback
 					} else {
 						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
 					}
 
-					if (data.customerSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.customerSignature);
-						$('#financialsignatureHidden').val(data.customerSignature); // Store file name for fallback
+					if (data.finnacialSignature) {
+						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.finnacialSignature);
+						$('#financialsignatureHidden').val(data.finnacialSignature); // Store file name for fallback
 					} else {
 						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
 					}
@@ -209,17 +192,12 @@ $(document).ready(function() {
 		financialData.append("id", $('#id').val());
 		financialData.append("financialCode", $('#financialCode').val());
 		financialData.append("joiningDate", $('#joiningDate').val());
-		financialData.append("memberCode", $('#memberCode').val());
-		financialData.append("customerName", $('#customerName').val());
+		financialData.append("financialName", $('#financialName').val());
 		financialData.append("dob", $('#dob').val());
-		financialData.append("customerAge", $('#customerAge').val());
-		financialData.append("guardianName", $('#guardianName').val());
-		financialData.append("relationToApplicant", $('#relationToApplicant').val());
+		financialData.append("age", $('#age').val());
 		financialData.append("contactNo", $('#contactNo').val());
-		financialData.append("nomineeName", $('#nomineeName').val());
 		financialData.append("branchName", $('#branchName').val());
-		financialData.append("nomineeAge", $('#nomineeAge').val());
-		financialData.append("customerAddress", $('#customerAddress').val());
+		financialData.append("address", $('#address').val());
 		financialData.append("district", $('#district').val());
 		financialData.append("state", $('#state').val());
 		financialData.append("pinCode", $('#pinCode').val());
