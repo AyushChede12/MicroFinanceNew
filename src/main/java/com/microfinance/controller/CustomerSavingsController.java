@@ -205,6 +205,7 @@ public class CustomerSavingsController {
    				"Fetch account details by account number", list);
    		return ResponseEntity.ok(response);
    	}*/
+    //janvi
     @GetMapping("/getallbyaccountnumber")
     public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> findAllByAccountNumber(@RequestParam String accountNumber) {
         
