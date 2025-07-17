@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
@@ -206,4 +207,41 @@ public class RequestApprovalsController {
   	    );
   	}
   	
+  	//anjali (17/7/25)
+  	//get flexible renewal data
+	@GetMapping("/getUnapprovedFlexibleRenewal")
+  	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
+  	    List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
+
+  	    if (!list.isEmpty()) {
+  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+  	    } else {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+  	    }
+  	}
+
+	//anjali (16/7/25)
+  	//approve RD data from flexible renewql
+	@PostMapping("/approveFDFromFlexibleRenewal")
+	public ResponseEntity<ApiResponse<FlexibleRenewal>> approveFDFromFlexibleRenewalInApproval(
+	        @RequestParam("id") Long id,
+	        @RequestParam("isApproved") boolean isApproved) {
+
+	    Optional<FlexibleRenewal> optionalRenewal = requestApprovalsService.approveFDFromFlexibleRenewalInApproval(id);
+
+	    if (!optionalRenewal.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Flexible Renewal with ID " + id + " not found."));
+	    }
+
+	    FlexibleRenewal renewals = optionalRenewal.get();
+	    renewals.setApproved(isApproved);
+
+	    FlexibleRenewal updatedRenewal = requestApprovalsService.saveRenewal(renewals);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedRenewal)
+	    );
+	}
 }
