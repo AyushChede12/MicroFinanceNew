@@ -61,18 +61,15 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID*</label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Policy Name" />
+								<label for="Agent">Policy Code*</label> <select id="policyCode"
+									name="policyCode" required class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Policy Code</option>
+								</select>
 							</div>
 						</div>
-
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -83,16 +80,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Relation</label> <select id="relation"
-									name="relation" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-
-								</select>
-							</div>
-						</div>
+					
 					</div>
 
 
@@ -103,71 +91,71 @@ pageEncoding="ISO-8859-1"%> -->
 							</ol>
 						</nav>
 						<div class="row">
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields"
-										style="margin-bottom: 30px">
-										<label>Policy Date*</label> <input type="date"
-											name="policyDate" id="policyDate" required="required"
-											placeholder="Enter Policy Date"
-											style="text-transform: uppercase;" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields"
+									style="margin-bottom: 30px">
+									<label>Policy Date*</label> <input type="date"
+										name="policyDate" id="policyDate" required="required"
+										placeholder="Enter Policy Date"
+										style="text-transform: uppercase;" />
 								</div>
+							</div>
 
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields">
-										<label for="">Maturity Date*</label> <input type="date"
-											name="maturityDate" id="maturityDate" required="required"
-											placeholder="Enter Maturity Date"
-											style="text-transform: uppercase;" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Maturity Date*</label> <input type="date"
+										name="maturityDate" id="maturityDate" required="required"
+										placeholder="Enter Maturity Date"
+										style="text-transform: uppercase;" />
 								</div>
+							</div>
 
 
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields">
-										<label for="">Customer Code* </label> <input type="text"
-											name="customerCode" id="customerCode" required="required"
-											placeholder="Enter Customer Code" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Customer Code* </label> <input type="text"
+										name="customerCode" id="customerCode" required="required"
+										placeholder="Enter Customer Code" />
 								</div>
+							</div>
 
 
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields">
-										<label for="">Client Name*</label> <input type="text"
-											name="clientName" id="clientName" required="required"
-											placeholder="Enter Client Name" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Client Name*</label> <input type="text"
+										name="clientName" id="clientName" required="required"
+										placeholder="Enter Client Name" />
 								</div>
+							</div>
 
 
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields">
-										<label for="">Contact Number*</label> <input type="text"
-											name="contactNumber" id="contactNumber" required="required"
-											placeholder="Enter Contact Number" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Contact Number*</label> <input type="text"
+										name="contactNumber" id="contactNumber" required="required"
+										placeholder="Enter Contact Number" />
 								</div>
+							</div>
 
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields">
-										<label for="">Policy Amount*</label> <input type="text"
-											name="policyAmount" id="policyAmount" required="required"
-											placeholder="Enter Policy Amount" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Policy Amount*</label> <input type="text"
+										name="policyAmount" id="policyAmount" required="required"
+										placeholder="Enter Policy Amount" />
 								</div>
+							</div>
 
 
 
 
-								<div class="col-lg-3">
-									<div class="d-flex flex-column formFields"
-										style="margin-bottom: 30px">
-										<label>Policy Type</label> <input type="text" name="policyType"
-											id="policyType" required="required"
-											placeholder="Enter Policy Type" />
-									</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields"
+									style="margin-bottom: 30px">
+									<label>Policy Type</label> <input type="text" name="policyType"
+										id="policyType" required="required"
+										placeholder="Enter Policy Type" />
 								</div>
+							</div>
 
 
 
@@ -294,48 +282,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-					<div class="row mt-4">
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-
-					</div>
+				
 				</div>
 
 				<div class="row" style="margin-left: 80%;">

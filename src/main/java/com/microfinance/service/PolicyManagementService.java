@@ -424,15 +424,36 @@ public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
 }
 
 
+
+
 public List<AddnewinvestmentPM> getApprovedInvestments() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findByIsApprovedTrue();
 }
 
 
+/*
+ * public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) { //
+ * TODO Auto-generated method stub
+ * 
+ * return addinvestmentrepo.findByPolicyCode(policyCode); }
+ */
+ 
+
+
 
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
+}
+
+
+public List<AddnewinvestmentPM> getApprovedFDPolicies() {
+    return addinvestmentrepo.findApprovedFDPolicies();
+}
+
+public List<AddnewinvestmentPM> getApprovedDDPolicies() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findApprovedDDPolicies();
 }
 }
 

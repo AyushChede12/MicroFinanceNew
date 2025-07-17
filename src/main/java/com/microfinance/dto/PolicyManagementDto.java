@@ -1,14 +1,9 @@
-package com.microfinance.model;
+package com.microfinance.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
-public class AddnewinvestmentPM {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PolicyManagementDto {
+	
 	private Long id;
 	private String policyCode;
 	private String policyStartDate;
@@ -39,32 +34,17 @@ public class AddnewinvestmentPM {
 	private String maturityAmount;
 	private String MISInterest;
 	private String paymentBy;
-	private String schemeCode;
 	private String remark;
 	private String Agent;
 	private String smsSend;
-	private String image1;
-	private String image2;
-	private boolean isApproved;
-	private String lastInstPaid;
-	private String paidAmount;
-    private String amountDue;
-    private String schemeName;
-    private String lastPaymentDate;
-    private String dueDate;
-    private String noOfInstallments;
-    private String modeOfPayment;
-	
+	private MultipartFile image1;
+	private MultipartFile image2;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
-	
 	public String getPolicyCode() {
 		return policyCode;
 	}
@@ -155,14 +135,12 @@ public class AddnewinvestmentPM {
 	public void setTds(String tds) {
 		this.tds = tds;
 	}
-	
 	public String getBranchName() {
 		return branchName;
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	
 	public String getModeOfOperation() {
 		return ModeOfOperation;
 	}
@@ -259,89 +237,19 @@ public class AddnewinvestmentPM {
 	public void setSmsSend(String smsSend) {
 		this.smsSend = smsSend;
 	}
-	public String getImage1() {
+	public MultipartFile getImage1() {
 		return image1;
 	}
-	public void setImage1(String image1) {
+	public void setImage1(MultipartFile image1) {
 		this.image1 = image1;
 	}
-	public String getImage2() {
+	public MultipartFile getImage2() {
 		return image2;
 	}
-	public void setImage2(String image2) {
+	public void setImage2(MultipartFile image2) {
 		this.image2 = image2;
 	}
-	public boolean isApproved() {
-		return isApproved;
-	}
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
-	}
-	public String getLastInstPaid() {
-		return lastInstPaid;
-	}
-	public void setLastInstPaid(String lastInstPaid) {
-		this.lastInstPaid = lastInstPaid;
-	}
-	public String getPaidAmount() {
-		return paidAmount;
-	}
-	public void setPaidAmount(String paidAmount) {
-		this.paidAmount = paidAmount;
-	}
-	public String getAmountDue() {
-		return amountDue;
-	}
-	public void setAmountDue(String amountDue) {
-		this.amountDue = amountDue;
-	}
-	public String getSchemeName() {
-		return schemeName;
-	}
-	public void setSchemeName(String schemeName) {
-		this.schemeName = schemeName;
-	}
-	public String getSchemeCode() {
-		return schemeCode;
-	}
-	public void setSchemeCode(String schemeCode) {
-		this.schemeCode = schemeCode;
-	}
 	
-	
-	// Add these getters
-	public String getLastPaymentDate() {
-	    return lastPaymentDate;
-	}
-
-	public String getDueDate() {
-	    return dueDate;
-	}
-
-	public String getNoOfInstallments() {
-	    return noOfInstallments;
-	}
-
-	public String getModeOfPayment() {
-	    return modeOfPayment;
-	}
-	
-	public void setLastPaymentDate(String lastPaymentDate) {
-	    this.lastPaymentDate = lastPaymentDate;
-	}
-
-	public void setDueDate(String dueDate) {
-	    this.dueDate = dueDate;
-	}
-
-	public void setNoOfInstallments(String noOfInstallments) {
-	    this.noOfInstallments = noOfInstallments;
-	}
-
-	public void setModeOfPayment(String modeOfPayment) {
-	    this.modeOfPayment = modeOfPayment;
-	}
-
 	
 
 }
