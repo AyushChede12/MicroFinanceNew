@@ -73,7 +73,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						 <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Find Members</label> <select id="memberId"
@@ -83,8 +83,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 								</select>
 							</div>
-						</div>
-
+						</div> 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -139,13 +138,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Branch Name</label> <select id="branchName"
-									name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
-
-								</select>
+								<label for="">Branch Name </label> <input type="text" name="branchName"
+									id="branchName" required="required" placeholder="Branch Name" />
 							</div>
 						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -231,14 +228,13 @@ pageEncoding="ISO-8859-1"%> -->
 								class="h-100 d-flex justify-content-start align-items-center">
 								<div
 									class="d-flex justify-content-start align-items-center formFields">
-									<label style="margin-left: 20px;" class="mb-2">Message
+									<label for="planStatus" style="margin-left: 20px;" class="mb-2">Message
 										Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="messageStatus"
-												name="messageStatus" class="toggle__input"
-												data-toggle-type="member-status"> <label
-												for="toggle-member-status1" class="toggle__label"></label>
+											<input type="checkbox" id="planStatus" name="planStatus"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="planStatus" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -273,11 +269,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Guarantor Identity</label> <input type="text"
-									name="guarantorIdentity" id="guarantorIdentity"
-									required="required" placeholder="Enter Guarantor Identity" />
+								<label for="">Guarantor Identity</label> <select
+									id="guarantorIdentity" name="guarantorIdentity"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">-Select-</option>
+									<option value="Aadhar">Aadhar</option>
+									<option value="Pan Card">Pan Card</option>
+								</select>
 							</div>
 						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -289,7 +291,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Pin Code</label> <input type="number"
+								<label for="">Pin Code</label> <input type="text"
 									name="guarantorPinCode" id="guarantorPinCode"
 									required="required" placeholder="Enter Pin Code" />
 							</div>
@@ -298,7 +300,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Guarantor Contact No.</label> <input type="number"
+								<label for="">Guarantor Contact No.</label> <input type="text"
 									name="guarantorContactNo" id="guarantorContactNo"
 									required="required" placeholder="Enter  Guarantor Contact No." />
 							</div>
@@ -329,20 +331,33 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Member Id</label> <input type="number"
-									name="coApplicantMemberId" id="coApplicantMemberId"
-									required="required" placeholder="Enter  Guarantor Contact No." />
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label> Member ID </label>
+								<div class="position-relative">
+									<select id="coApplicantMemberId" name="coApplicantMemberId"
+										required="required" class="form-control selectField"
+										style="height: 30px;">
+										<option value="">Select member Code</option>
+
+									</select>
+								</div>
 							</div>
 						</div>
-
+					
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Guarantor Identity</label> <input type="text"
-									name="coApplicantIdentity" id="coApplicantIdentity"
-									required="required" placeholder="Enter Guarantor Identity" />
+								<label for="">Co-Applicant Identity</label> <select
+									id="coApplicantIdentity" name="coApplicantIdentity"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">-Select-</option>
+									<option value="Aadhar">Aadhar</option>
+									<option value="Pan Card">Pan Card</option>
+								</select>
 							</div>
 						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -354,7 +369,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Pin Code</label> <input type="number"
+								<label for="">Pin Code</label> <input type="text"
 									name="coApplicantPinCode" id="coApplicantPinCode"
 									required="required" placeholder="Enter Pin Code" />
 							</div>
@@ -363,7 +378,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Gurantor Contact No.</label> <input type="number"
+								<label for="">Co-Applicant Contact No.</label> <input type="text"
 									name="coApplicantContactNo" id="coApplicantContactNo"
 									required="required" placeholder="Enter Gurantor Contact No." />
 							</div>
