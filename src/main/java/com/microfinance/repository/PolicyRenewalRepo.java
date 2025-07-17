@@ -1,5 +1,7 @@
 package com.microfinance.repository;
 
+<<<<<< niraj
+import java.util.Optional;
 import java.util.List;
 
 
@@ -12,10 +14,15 @@ import com.microfinance.model.PolicyRenewal;
 @Repository
 public interface PolicyRenewalRepo extends JpaRepository<PolicyRenewal, Long> {
 
+	Optional<PolicyRenewal> findByPolicyCode(String policyCode);
+
+	
+
 
 	List<PolicyRenewal> findByIsApprovedFalse();
 
 
 
+ 
 
 }
