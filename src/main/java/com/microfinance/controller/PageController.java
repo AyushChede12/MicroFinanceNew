@@ -920,7 +920,7 @@ public class PageController {
 		return "customerSavings/createCurrentAccount";
 	}
 	
-	@GetMapping("/savingsAccountActivity")
+	/*@GetMapping("/savingsAccountActivity")
 	public String getSavingsAccountActivity(Model model) {
 		String prefix = "TXN";
 		String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -929,7 +929,7 @@ public class PageController {
 
 		model.addAttribute("transactionCode", transactionCode);
 		return "customerSavings/savingsAccountActivity";
-	}
+	}*/
 	
 	@GetMapping("/savingsAccountFundTransfer")
 	public String getSavingsAccountFundTransfer() {
