@@ -3,12 +3,9 @@ package com.microfinance.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.microfinance.model.FlexibleRenewal;
-import com.microfinance.model.PolicyRenewal;
+import com.microfinance.model.DailyPremiumRenewalPM;
 
 @EnableJpaRepositories
-public interface PolicyRenewalRepo extends JpaRepository<PolicyRenewal, Long> {
-
-	
+public interface DailyPremiumRenewalRepo extends JpaRepository<DailyPremiumRenewalPM, Long> {
 
 }
