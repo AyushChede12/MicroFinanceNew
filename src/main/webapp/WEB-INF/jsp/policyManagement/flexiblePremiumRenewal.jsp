@@ -127,6 +127,14 @@ pageEncoding="ISO-8859-1"%> -->
 										placeholder="Enter Relative Name" />
 								</div>
 							</div>
+							
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Branch Name </label> <input type="text"
+										name="branchname" id="branchname" required="required"
+										placeholder="Enter Relative Name" />
+								</div>
+							</div>
 
 
 							<div class="col-lg-3">
