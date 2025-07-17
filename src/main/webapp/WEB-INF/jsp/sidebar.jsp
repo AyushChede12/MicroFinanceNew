@@ -101,9 +101,9 @@
           </li>
           
           <li>
-            <a href="customerMenu">
+            <a href="customerMenuAccess">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Customer Menu</span>
+              <span style="font-family: 'Poppins', sans-serif">Customer Menu Access</span>
             </a>
           </li>
           
