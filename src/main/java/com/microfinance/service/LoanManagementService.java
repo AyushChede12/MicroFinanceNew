@@ -27,43 +27,43 @@ public class LoanManagementService {
 	private AddCustomerRepo addCustomerRepo;
 
 	// Service fo saving and updating the loan scheme data 
-		public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
-		    if (loan.getId() != null && loanRepository.existsById(loan.getId())) {
-		        // Perform update
-		        LoanSchemCatalog existingLoan = loanRepository.findById(loan.getId()).get();
+	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
+		if (loan.getId() != null && loanRepository.existsById(loan.getId())) {
+			// Perform update
+			LoanSchemCatalog existingLoan = loanRepository.findById(loan.getId()).get();
 
-		        // Copy all fields from input to existing
-		        existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
-		        existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
-		        existingLoan.setTypeLoan(loan.getTypeLoan());
-		        existingLoan.setAge(loan.getAge());
-		        existingLoan.setLoanDuration(loan.getLoanDuration());
-		        existingLoan.setEmiType(loan.getEmiType());
-		        existingLoan.setLoanAmount(loan.getLoanAmount());
-		        existingLoan.setLoanMode(loan.getLoanMode());
-		        existingLoan.setRateIntrestType(loan.getRateIntrestType());
-		        existingLoan.setTypeIntrest(loan.getTypeIntrest());
-		        existingLoan.setTypesecurity(loan.getTypesecurity());
+			// Copy all fields from input to existing
+			existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
+			existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
+			existingLoan.setTypeLoan(loan.getTypeLoan());
+			existingLoan.setAge(loan.getAge());
+			existingLoan.setLoanTerm(loan.getLoanTerm());
+			existingLoan.setEmiType(loan.getEmiType());
+			existingLoan.setLoanAmount(loan.getLoanAmount());
+			existingLoan.setLoanMode(loan.getLoanMode());
+			existingLoan.setRateIntrestType(loan.getRateIntrestType());
+			existingLoan.setTypeIntrest(loan.getTypeIntrest());
+			existingLoan.setTypesecurity(loan.getTypesecurity());
+			existingLoan.setPlanStatus(loan.getPlanStatus());
+			
+			// Deductions
+			existingLoan.setFeeProcessing(loan.getFeeProcessing());
+			existingLoan.setChargesLegal(loan.getChargesLegal());
+			existingLoan.setGst(loan.getGst());
+			existingLoan.setFeeInsurence(loan.getFeeInsurence());
+			existingLoan.setFeeValuation(loan.getFeeValuation());
 
-		        // Deductions
-		        existingLoan.setFeeProcessing(loan.getFeeProcessing());
-		        existingLoan.setChargesLegal(loan.getChargesLegal());
-		        existingLoan.setGst(loan.getGst());
-		        existingLoan.setFeeInsurence(loan.getFeeInsurence());
-		        existingLoan.setFeeValuation(loan.getFeeValuation());
+			// Late fee
+			existingLoan.setLateAllowanceday(loan.getLateAllowanceday());
+			existingLoan.setModePanalty(loan.getModePanalty());
+			existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
 
-		        // Late fee
-		        existingLoan.setLateAllowanceday(loan.getLateAllowanceday());
-		        existingLoan.setModePanalty(loan.getModePanalty());
-		        existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
-
-		        return loanRepository.save(existingLoan);
-		    } else {
-		        // Save new record
-		        return loanRepository.save(loan);
-		    }
+			return loanRepository.save(existingLoan);
+		} else {
+			// Save new record
+			return loanRepository.save(loan);
 		}
-		
+	}
 		
 	// Fetch data On Table
 

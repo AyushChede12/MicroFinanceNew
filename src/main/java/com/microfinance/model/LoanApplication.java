@@ -19,14 +19,14 @@ public class LoanApplication {
     private String dateOfBirth;
     private String age;
     private String contactNo;
-    private String notificationStatus;
+    private String messageStatus;
     private String address;
     private String pinCode;
     private String branchName;
     private String loanPlanName;
     private String typeOfLoan;
-    private String loanCategory;
-    private String planDuration;
+    private String loanMode;
+    private String loanTerm;
     private String rateOfInterest;
     private String loanAmount;
     private String interestType;
@@ -56,8 +56,10 @@ public class LoanApplication {
     private String insuranceFee;
     private String overdueInterestCharge;
     private String stationaryFee;
-    private String advisorCollectorId;
-    private String advisorCollectorName;
+    private String financialConsultantId;
+    private String financialConsultantName;
+    private String approvalDate;
+    private String approvalStatus;
     
     
 	public long getId() {
@@ -108,12 +110,7 @@ public class LoanApplication {
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-	public String getNotificationStatus() {
-		return notificationStatus;
-	}
-	public void setNotificationStatus(String notificationStatus) {
-		this.notificationStatus = notificationStatus;
-	}
+	
 	public String getAddress() {
 		return address;
 	}
@@ -144,18 +141,7 @@ public class LoanApplication {
 	public void setTypeOfLoan(String typeOfLoan) {
 		this.typeOfLoan = typeOfLoan;
 	}
-	public String getLoanCategory() {
-		return loanCategory;
-	}
-	public void setLoanCategory(String loanCategory) {
-		this.loanCategory = loanCategory;
-	}
-	public String getPlanDuration() {
-		return planDuration;
-	}
-	public void setPlanDuration(String planDuration) {
-		this.planDuration = planDuration;
-	}
+	
 	public String getRateOfInterest() {
 		return rateOfInterest;
 	}
@@ -294,18 +280,50 @@ public class LoanApplication {
 	public void setStationaryFee(String stationaryFee) {
 		this.stationaryFee = stationaryFee;
 	}
-	public String getAdvisorCollectorId() {
-		return advisorCollectorId;
+	
+	public String getFinancialConsultantId() {
+		return financialConsultantId;
 	}
-	public void setAdvisorCollectorId(String advisorCollectorId) {
-		this.advisorCollectorId = advisorCollectorId;
+	public void setFinancialConsultantId(String financialConsultantId) {
+		this.financialConsultantId = financialConsultantId;
 	}
-	public String getAdvisorCollectorName() {
-		return advisorCollectorName;
+	public String getFinancialConsultantName() {
+		return financialConsultantName;
 	}
-	public void setAdvisorCollectorName(String advisorCollectorName) {
-		this.advisorCollectorName = advisorCollectorName;
+	public void setFinancialConsultantName(String financialConsultantName) {
+		this.financialConsultantName = financialConsultantName;
 	}
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+	public String getMessageStatus() {
+		return messageStatus;
+	}
+	public void setMessageStatus(String messageStatus) {
+		this.messageStatus = messageStatus;
+	}
+	public String getLoanMode() {
+		return loanMode;
+	}
+	public void setLoanMode(String loanMode) {
+		this.loanMode = loanMode;
+	}
+	public String getLoanTerm() {
+		return loanTerm;
+	}
+	public void setLoanTerm(String loanTerm) {
+		this.loanTerm = loanTerm;
+	}
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+	
 
    
 }

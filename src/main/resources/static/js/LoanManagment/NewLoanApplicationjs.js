@@ -93,7 +93,6 @@ $(document).ready(function() {
     });
 });
 
-
 $('#loanPlanName').on('change', function () {
     let selectedName = $(this).val();
 
@@ -105,13 +104,13 @@ $('#loanPlanName').on('change', function () {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
                     $('#typeOfLoan').val(customer.typeLoan);
-					//$('#openingAmount').val(customer.loanCategory);
-					$('#planDuration').val(customer.loanDuration);
-					$('#rateOfInterest').val(customer.rateIntrestType);
-					$('#loanAmount').val(customer.loanAmount);
-					$('#interestType').val(customer.typeIntrest);
-					$('#emiPayment').val(customer.emiType);
-					$('#purposeOfLoan').val(customer.typeLoan);
+					const emicollection = $('#loanMode').val(customer.loanMode).val();
+					const tensure =$('#loanTerm').val(customer.loanTerm).val();
+					const interestinyear =$('#rateOfInterest').val(customer.rateIntrestType).val();
+					const loanamount =$('#loanAmount').val(customer.loanAmount).val();
+					const roitype =$('#interestType').val(customer.typeIntrest).val();
+					//$('#purposeOfLoan').val(customer.typeLoan);
+				 calculateEMI(emicollection,tensure,interestinyear,loanamount,roitype);
                 } else {
                     alert('No data found!');
                     $('#openingAmount').val('');
@@ -127,266 +126,115 @@ $('#loanPlanName').on('change', function () {
     }
 });
 
+function calculateEMI(emicollection,tensure,interestinyear,loanamount,roitype) {
+  const roitype = document.getElementById("interestType").value;
+  const emicollection = document.getElementById("loanMode").value;
+  const interestinyear = parseFloat(document.getElementById("rateOfInterest").value);
+  const loanamount = parseFloat(document.getElementById("loanAmount").value);
+  const tensure = parseInt(document.getElementById("loanTerm").value);
 
-// Dropdawn in Loan schem Code
+  const periods = tensure; // ✅ ALWAYS use entered term — no conversion!
+  let periodicRate;
 
-$(document).ready(function () {
-	loadMemberCodesOnly();
-	setupMemberChangeEvent();
-	loadMemberCodeApplication();
-	setupMemberChangeCoApplication();
-	
-    console.log("Document ready");
+  // ✅ Only adjust the rate — periods stays fixed
+  switch (emicollection) {
+    case "Daily":
+      periodicRate = interestinyear / 365 / 100;
+      break;
+    case "Weekly":
+      periodicRate = interestinyear / 52 / 100;
+      break;
+    case "Fortnightly":
+      periodicRate = interestinyear / 24 / 100;
+      break;
+    case "Monthly":
+      periodicRate = interestinyear / 12 / 100;
+      break;
+    case "Quarterly":
+      periodicRate = interestinyear / 4 / 100;
+      break;
+  }
 
-    $.ajax({
-        url: '/api/loanmanegment/allfetchdataLoanSchemCode', 
-        type: 'GET',
-        success: function (response) {
-            if (response.status=="OK" && response.data.length > 0) {
-                const dropdown = $('#newApplicationLoanCode');
-                dropdown.empty();
-                dropdown.append('<option value="">Select Loan Plan Name</option>'); 
+  let emi, tabledata = '', principal, currentDate = new Date();
 
-                response.data.forEach(function (loan) {
-                    if (loan.loanSchemeCode) {
-                        dropdown.append(
-                            `<option value="${loan.loanSchemeCode}">${loan.loanSchemeCode}</option>`
-                        );
-                    }
-                });
-            } else {
-                alert('No Loan Plan Name found');
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error('AJAX Error:', status, error);
-            alert('Failed to fetch Loan Plan names');
-        }
-    });
-});
+  if (roitype === "FlatInterest") {
+    const totalInterest = loanamount * periodicRate * periods;
+    const totalAmount = loanamount + totalInterest;
+    emi = totalAmount / periods;
 
+    document.getElementById("emiPayment").value = emi.toFixed(2);
 
-// All field fetch by loan new schem code by 
-function getLoanByCode() {
-    let code = $('#newApplicationLoanCode').val(); 
-$.ajax({
-        url: '/api/loanmanegment/getBySchemLoanCode?code=' + encodeURIComponent(code),
-        type: 'GET',
-        contentType: 'application/json',
-        success: function(response) {
-			//alert("success");
-            if (response && response.data) {
-                console.log(" Loan Found:", response.data);
+    principal = loanamount;
 
-                $('#newApplicationLoanPlaneName').val(response.data.loanPlaneName || '');
-                $('#newLoanTypeofloan').val(response.data.typeLoan || '');
-                $('#newApplicationDurationPlan').val(response.data.loanDuration || '');
-				$('#newApplicationROI').val(response.data.rateIntrestType || '');
-				$('#newApplicationTypeIntrest').val(response.data.typeIntrest || '');
-				$('#newLoanApplicationCategoryLoan').val(response.data.loanMode || '');
-								
-				
-                // Add other fields as needed
-            } else {
-               // alert("Loan not found or empty response.");
-            }
-        },
-        error: function(xhr) {
-            console.error(" Error:", xhr);
-          //  alert("Loan code not found or server error.");
-        }
-    });
-}
+    for (let m = 1; m <= periods; m++) {
+      const interestComponent = totalInterest / periods;
+      const principalComponent = emi - interestComponent;
+      let closingPrincipal = principal - principalComponent;
 
-// calulate the Emi Amout 
-function calculateEMI() {
-  
-let P = parseFloat(document.getElementById("newApplicationLoanAmount").value) || 0; // Principal amount
-let annualRate = parseFloat(document.getElementById("newApplicationROI").value) || 0; // Annual ROI in percentage
-let N = parseInt(document.getElementById("newApplicationDurationPlan").value) || 0; // Tenure in months
-let roiType = document.getElementById("newApplicationTypeIntrest").value;
-let EMI;
+      if (Math.abs(closingPrincipal) < 0.01) closingPrincipal = 0.00;
 
+      tabledata += buildRow(m, currentDate, emi, principalComponent, interestComponent, closingPrincipal);
 
-	
-if (P <= 0 || annualRate <= 0 || N <= 0 || roiType === "") {
-     alert("Please fill in all fields correctly.");
-     return;
-   }
-   
-   if (roiType === "Flat Interest") {
-		let totalInterest = (P * annualRate * N) / 100;
-		let totalRepayable = P + totalInterest;
-		 EMI = totalRepayable / (N);
-   	}
-   else if (roiType === "Reducing interest") {
-			let R = annualRate / 12 / 100; // Monthly interest rate
-			 EMI = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-			}
-			else if (roiType === "Rule 78") {
-			     let totalInterest = P * (annualRate / 100) * ( N / 12);
-			    EMI = (P + totalInterest) /  N;
-			   }
-   document.getElementById("newLoanApplicationPaymentEMI").value = EMI.toFixed(2);
- }
- 
-	
-	
+      principal = closingPrincipal;
+      currentDate = incrementDate(currentDate, emicollection);
+    }
+  }
 
-// Fetching guarented Detail Memeber code
-function loadMemberCodesOnly() {
-    $.ajax({
-        url: '/api/loanmanegment/allfetchdata',
-        type: 'GET',
-        success: function (response) {
-            if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
-                const dropdown = document.getElementById("memberId");
-                dropdown.innerHTML = '<option value="">Select Member Code</option>'; // Clear and add default
+  else if (roitype === "reducinginterest") {
+    const r = periodicRate;
+    emi = (loanamount * r * Math.pow(1 + r, periods)) / (Math.pow(1 + r, periods) - 1);
 
-                response.data.forEach(function (member) {
-                    const option = document.createElement("option");
-                    option.value = member.id; // or member.memberCode if needed
-                    option.text = member.memberCode;
-                    dropdown.appendChild(option);
-                });
-            } else {
-                alert('No member codes found');
-            }
-        },
-        error: function (xhr, status, error) {	
-            console.error('AJAX Error:', status, error);
-            alert('Failed to fetch member codes');
-        }
-    });
-}
+    document.getElementById("emiPayment").value = emi.toFixed(2);
 
-// fetching the data 
-function setupMemberChangeEvent() {
-    const memberCode = $('#memberId');
+    principal = loanamount;
 
-    if (memberCode.length === 0) {
-        console.error("Dropdown with id 'memberId' not found!");
-        return;
+    for (let m = 1; m <= periods; m++) {
+      const interestComponent = principal * r;
+      const principalComponent = emi - interestComponent;
+      let closingPrincipal = principal - principalComponent;
+
+      if (Math.abs(closingPrincipal) < 0.01) closingPrincipal = 0.00;
+
+      tabledata += buildRow(m, currentDate, emi, principalComponent, interestComponent, closingPrincipal);
+
+      principal = closingPrincipal;
+      currentDate = incrementDate(currentDate, emicollection);
+    }
+  }
+
+  else if (roitype === "Rule78") {
+    const totalInterest = loanamount * periodicRate * periods;
+    const sumOfDigits = (periods * (periods + 1)) / 2;
+
+    let interestPerPeriod = [];
+    for (let i = periods; i >= 1; i--) {
+      interestPerPeriod.push((i / sumOfDigits) * totalInterest);
     }
 
-    memberCode.on('change', function () {
-        const selectedCode = $(this).val();
-        console.log("Selected Member Code:", selectedCode);
-        if (selectedCode !== "") {
-            $.ajax({
-                url: '/api/loanmanegment/getByIdNewLoanApplication?id=' + selectedCode,
-                type: 'GET',
-                success: function (response) {
-                    console.log("API Response:", response);
+    const totalAmount = loanamount + totalInterest;
+    emi = totalAmount / periods;
 
-                    if (response.status === "OK" && response.data) {
-                        const d = response.data;
+    document.getElementById("emiPayment").value = emi.toFixed(2);
 
-                        $('#identifyGurantor').val(d.customerName || '');
-                        $('#gurantorAddress').val(d.customerAddress || '');
-                        $('#gurantorPinCode').val(d.pinCode || '');
-                        $('#guarantorContactno').val(d.contactNo || '');
-                    } else {
-                        alert("Customer not found or data is missing.");
-                        clearGuarantorFields();
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", status, error);
-                    alert("Something went wrong while fetching data: " + error);
-                    clearGuarantorFields();
-                }
-            });
-        } else {
-            clearGuarantorFields();
-        }
-    });
+    principal = loanamount;
+    const principalComponent = loanamount / periods;
 
-    function clearGuarantorFields() {
-        $('#gurantorIdentifyGurantor').val('');
-        $('#gurantorAddress').val('');
-        $('#gurantorPinCode').val('');
-        $('#guarantorContactno').val('');
+    for (let m = 1; m <= periods; m++) {
+      const interestComponent = interestPerPeriod[m - 1];
+      const installment = principalComponent + interestComponent;
+      let closingPrincipal = principal - principalComponent;
+
+      if (Math.abs(closingPrincipal) < 0.01) closingPrincipal = 0.00;
+
+      tabledata += buildRow(m, currentDate, installment, principalComponent, interestComponent, closingPrincipal);
+
+      principal = closingPrincipal;
+      currentDate = incrementDate(currentDate, emicollection);
     }
-}
+  }
 
-
-
-// Fetching guarented Co- Application Detail Memeber code
-function loadMemberCodeApplication() {
-    $.ajax({
-        url: '/api/loanmanegment/allfetchdata',
-        type: 'GET',
-        success: function (response) {
-            if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
-                const dropdown = document.getElementById("coApplictionMemberID");
-                dropdown.innerHTML = '<option value="">Select Member Code</option>'; // Clear and add default
-
-                response.data.forEach(function (member) {
-                    const option = document.createElement("option");
-                    option.value = member.id; // or member.memberCode if needed
-                    option.text = member.memberCode;
-                    dropdown.appendChild(option);
-                });
-            } else {
-                alert('No member codes found');
-            }
-        },
-        error: function (xhr, status, error) {	
-            console.error('AJAX Error:', status, error);
-            alert('Failed to fetch member codes');
-        }
-    });
-}
-
-// co-Application fetch Detail
-function setupMemberChangeCoApplication() {
-    const memberCode = $('#coApplictionMemberID');
-
-    if (memberCode.length === 0) {
-        console.error("Dropdown with id 'memberId' not found!");
-        return;
-    }
-
-    memberCode.on('change', function () {
-        const selectedCode = $(this).val();
-        console.log("Selected Member Code:", selectedCode);
-        if (selectedCode !== "") {
-            $.ajax({
-                url: '/api/loanmanegment/getByIdNewLoanApplication?id=' + selectedCode,
-                type: 'GET',
-                success: function (response) {
-                    console.log("API Response:", response);
-
-                    if (response.status === "OK" && response.data) {
-                        const d = response.data;
-
-                        $('#coApplictionGuarantorIdentity').val(d.customerName || '');
-                        $('#coApplictionAdress').val(d.customerAddress || '');
-                        $('#coAppicationPinCode').val(d.pinCode || '');
-                        $('#coApplictionguarantorContactNo').val(d.contactNo || '');
-                    } else {
-                        alert("Customer not found or data is missing.");
-                        clearGuarantorFields();
-                    }
-                },
-                error: function (xhr, status, error) {
-                    console.error("AJAX Error:", status, error);
-                    alert("Something went wrong while fetching data: " + error);
-                    clearGuarantorFields();
-                }
-            });
-        } else {
-            clearGuarantorFields();
-        }
-    });
-
-    function clearGuarantorFields() {
-        $('#gurantorIdentifyGurantor').val('');
-        $('#gurantorAddress').val('');
-        $('#gurantorPinCode').val('');
-        $('#guarantorContactno').val('');
-    }
+  document.querySelector('.datatable').classList.add('show');
+  document.getElementById('tbody').innerHTML = tabledata;
 }
 
 

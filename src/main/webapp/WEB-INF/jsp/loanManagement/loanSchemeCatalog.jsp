@@ -69,30 +69,10 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
 
-							<input type="hidden" id="loanSchemeCode" name="loanSchemeCode" />
+
+							<input type="hidden" id="loanSchemeCode" name="loanSchemeCode"
+								value="${loanSchemeCode}" />
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Loan Plan Name</label> <input type="text"
@@ -119,65 +99,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Age</label> <input type="text"
-									name="age" id="age" required="required"
-									placeholder="Enter Your Age"
-									
-									style=" text-transform: uppercase;" />
-								<span id="message"></span>
+								<label for="loanName">Age</label> <input type="text" name="age"
+									id="age" required="required" placeholder="Enter Your Age"
+									style="text-transform: uppercase;" /> <span id="message"></span>
 							</div>
 
-						</div>
-
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Loan Duration </label> <input type="text"
-									name="loanDuration" id="loanDuration"
-									onblur="validateLoanDuration()" required="required"
-									placeholder="Enter Min Loan Duration" /><span id="durationMsg"></span>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Emi Type</label> <select id="emiType"
-									name="emiType" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Emi Type</option>
-									<option value="Online">Online</option>
-									<option value="Cash">Cash</option>
-
-								</select>
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="loanName">Loan Amount</label> <input type="text"
-									name="loanAmount" id="loanAmount" required="required"
-									placeholder="Enter Minimum Loan Amount"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="loanName"> Loan Mode</label> <input type="text"
-									name="loanMode" id="loanMode" required="required"
-									placeholder="Enter Maximum Loan Amount"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Rate Interest Type(%p.a.)</label> <input
-									type="text" name="rateIntrestType" id="rateIntrestType"
-									required="required" placeholder="Enter Rate Interest Type" />
-							</div>
 						</div>
 
 						<div class="col-lg-3">
@@ -194,17 +120,97 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Loan Term </label> <input type="text"
+									name="loanTerm" id="loanTerm" onblur="validateLoanDuration()"
+									required="required" placeholder="Enter Min Loan Duration" /><span
+									id="durationMsg"></span>
+							</div>
+						</div>
+
+
+
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="loanName">Loan Amount</label> <input type="text"
+									name="loanAmount" id="loanAmount" required="required"
+									placeholder="Enter Minimum Loan Amount"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Loan Mode</label> <select id="loanMode"
+									name="loanMode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Loan Mode</option>
+									<option value="Daily">Daily</option>
+									<option value="Weekly">Weekly</option>
+									<option value="Fortnightly">Fortnightly</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly">Quarterly</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Rate Interest Type(%p.a.)</label> <input
+									type="text" name="rateIntrestType" id="rateIntrestType"
+									required="required" placeholder="Enter Rate Interest Type" />
+							</div>
+						</div>
+
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Security Type</label> <select id="typesecurity"
 									name="typesecurity" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Security</option>
-									<option value="Blue">Blue</option>
+									<option value="Pledge">Pledge</option>
+									<option value="Mortgage">Mortgage</option>
+									<option value="Property">Property</option>
+									<option value="Gold">Gold</option>
 								</select>
 							</div>
 						</div>
 
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Emi Type</label> <select id="emiType"
+									name="emiType" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Emi Type</option>
+									<option value="Regular">Regular</option>
+									<option value="Irregular">Irregular</option>
+
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div
+								class="h-100 d-flex justify-content-start align-items-center">
+								<div
+									class="d-flex justify-content-start align-items-center formFields">
+									<label for="planStatus" style="margin-left: 20px;" class="mb-2">Plan
+										Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="planStatus" name="planStatus"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="planStatus" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 
 
 					</div>
@@ -283,8 +289,8 @@ pageEncoding="ISO-8859-1"%> -->
 									name="modePanalty" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Penalty Type</option>
-									<option value="Blue">Percentage</option>
-									<option value="Blue">Amount</option>
+									<option value="Percentage">Percentage</option>
+									<option value="Amount">Amount</option>
 								</select>
 							</div>
 						</div>
@@ -326,10 +332,12 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">ID</th>
+										<th>Loan Schem Code</th>
 										<th>Loan Plan Name</th>
+
 										<th>Type Of Loan</th>
 										<th>Age</th>
-										<th>Loan Duration</th>
+										<th>Loan Term</th>
 										<th>Loan Term</th>
 										<th>Edit</th>
 										<th>Delete</th>
@@ -355,5 +363,26 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	const toggles = document.querySelectorAll('.toggle__input');
+	
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
+
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
+});
+</script>
 
 </html>

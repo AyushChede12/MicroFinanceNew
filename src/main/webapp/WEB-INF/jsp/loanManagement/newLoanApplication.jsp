@@ -169,8 +169,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Category</label> <input type="text"
-									name="loanCategory" id="loanCategory" required="required"
+								<label for="">Loan Mode</label> <input type="text"
+									name="loanMode" id="loanMode" required="required"
 									placeholder="Enter Loan Category"
 									style="text-transform: uppercase;" />
 							</div>
@@ -179,8 +179,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Plan Duration</label> <input type="text"
-									name="planDuration" id="planDuration" required="required"
+								<label for="">Loan Term</label> <input type="text"
+									name="loanTerm" id="loanTerm" required="required"
 									placeholder="Plan Duration" style="text-transform: uppercase;" />
 							</div>
 						</div>
