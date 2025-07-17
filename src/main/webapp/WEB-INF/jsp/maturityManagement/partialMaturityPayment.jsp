@@ -195,7 +195,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
@@ -203,7 +203,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 							</div>
 
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"

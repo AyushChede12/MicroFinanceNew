@@ -71,8 +71,13 @@ $(document).ready(function () {
 	                    $('#paidAmount').val(data.depositAmount);
 	                    $('#actualMaturity').val(data.maturityAmount);
 	                    $('#maturityDate').val(data.maturityDate);
-	                    $('#duration').val(calDuration(data));
-						$('#syspayable').val(sysPayable(data));
+	                    $('#duration').val(calDuration(data)); //function calDuration(data)
+						$('#sysPayable').val(sysPayable(data)); //function sysPayable(data)
+						$('#deduction').val(Deduction(data));	//function Deduction(data)					
+						
+						
+						
+						$('#netPayable').val(netPayment(data));
 						
 						
 						
@@ -128,7 +133,61 @@ function calDuration(data){
 
 function sysPayable(data){
 	
-	
-	// System Payable = (Total Deposit Amount × (Completed Period / Total Period)) + Interest for that period
+	let policyAmount = parseFloat(data.policyAmount);     // e.g. ₹12,000
+	 let noOfInst = parseInt(data.noOfInstallments);               // e.g. 12
+	 let lastInstPaid = parseInt(data.lastInstPaid);       // e.g. 6
+	 let rateOfIntrest = parseFloat(data.roi);   // e.g. 10%
+	let syspayable=0;
+													
+	if (!isNaN(policyAmount) && !isNaN(noOfInst) && !isNaN(lastInstPaid) && !isNaN(rateOfIntrest))
+ {
+								                        
+	let paidPrincipal = (policyAmount * lastInstPaid) / noOfInst;
 
+	let interest = (policyAmount * rateOfIntrest * (lastInstPaid / noOfInst)) / 100;
+
+	syspayable = paidPrincipal + interest;
+	alert(syspayable);
+														 
 }
+return syspayable;							
+							
+}
+
+function Deduction(data){
+	
+	let noOfInst = parseInt(data.noOfInstallments);               // e.g. 12
+	 let lastInstPaid = parseInt(data.lastInstPaid); 
+	let deduction =0;
+	// 
+	
+	if (!isNaN(noOfInst) && !isNaN(lastInstPaid))
+	 {
+		let missedInst = noOfInst - lastInstPaid;
+		deduction = missedInst * 2.0;
+	 }
+	 
+	 return deduction;
+}
+
+function netPayment(data){
+	//Net Payable = System Payable - Deduction
+	let sysPayable = parseFloat(data.sysPayable || 0);
+	let deduction = parseFloat(data.deduction || 0);
+	let netpay = 0;
+
+	console.log("systemPayable:", sysPayable);
+	console.log("deduction:", deduction);
+
+	if (!isNaN(sysPayable) && !isNaN(deduction)) {
+	    netpay = sysPayable - deduction;
+	    alert("Net Payable: " + netpay);
+	}
+	return netpay;
+}
+
+
+
+
+
+
