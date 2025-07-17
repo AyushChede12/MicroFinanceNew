@@ -220,7 +220,12 @@ public class FinancialConsultantController {
 	}
 
 
-
+	@PostMapping("/getAllPromotionManagementDetails")
+	public ResponseEntity<ApiResponse<List<ConsultantPromotionManagement>>> getAllPromotionManagementDetails() {
+		List<ConsultantPromotionManagement> list = financialConsultantService.getAllPromotionManagementDetail();
+		ApiResponse<List<ConsultantPromotionManagement>> response= ApiResponse.success(HttpStatus.OK, "Details Fetched Successfully", list);
+		return new ResponseEntity<>(response,HttpStatus.OK);
+	}
 
 
 }

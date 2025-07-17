@@ -33,6 +33,7 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 
@@ -62,17 +63,17 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-								<label for="">Advisor Code</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="">Financial Code</label> <input type="text"
+									 id="searchKeyword" required="required"
 									placeholder="Enter Advisor Code"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						<div class="row">
+						<!-- <div class="row">
 							<div class="col-1 text-center">
 								<button id="saveBtn" class="btnStyle bg-success">Search</button>
 							</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 
@@ -87,21 +88,28 @@ pageEncoding="ISO-8859-1"%> -->
 								Table View <span>| Record</span>
 							</h5>
 
+                          <div style="overflow-x: auto; white-space: nowrap;">
 							<table class="table table-borderless datatable overflow-scroll">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">#</th>
-										<th scope="col">Customer</th>
-										<th scope="col">Product</th>
-										<th scope="col">Price</th>
-										<th scope="col">Status</th>
-										<th scope="col">Action</th>
+										<th scope="col">Sl No.</th>
+									<th scope="col">Financial Code</th>
+									<th scope="col">Financial Name</th>
+									<th scope="col">Contact No</th>
+									<th scope="col">Branch</th>
+									<th scope="col">Address</th>
+									<th scope="col">District</th>
+									<th scope="col">State</th>
+									<th scope="col">Pin Code</th>
+									<th scope="col">Profession</th>
+									<th scope="col">Financial Status</th>
 									</tr>
 								</thead>
 								<tbody>
 									
 								</tbody>
 							</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -113,6 +121,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/FinancialConsultant/ConsultantIDCardGenerator.js"></script>
 </body>
 
 </html>
