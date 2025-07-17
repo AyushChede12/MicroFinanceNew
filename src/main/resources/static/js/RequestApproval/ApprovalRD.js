@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function loadCustomerKYCData() {
 	$.ajax({	
-		url: "/api/requestapproval/getUnapprovedPolicyRenewal",
+		url: "/api/requestapproval/getUnapprovedPolicyRenewals",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -77,6 +77,7 @@ function renderTable(data) {
 								   <td>${item.clientName || '-'}</td>
 								   <td>${item.contactNo || '-'}</td>
 								   <td>${item.renewalDate || '-'}</td>
+								   <td>${item.branchname || '-'}</td>
 								   
 								   
             </tr>
@@ -135,18 +136,24 @@ function filterKYCData() {
 	const selectedCode = $('#branchName').val();
 	const fromDateVal = $('#fromDate').val();
 	const toDateVal = $('#toDate').val();
+	alert(selectedCode);
+	alert(fromDateVal);
+	alert(toDateVal);
 
 	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
 	const toDate = toDateVal ? new Date(toDateVal) : null;
 
 	const filtered = allKYCData.filter(item => {
-
-		const branchName = item.branchName;
+		alert(item.branchname);
+		const branchName = item.branchname;
 		const dob = item.dob ? new Date(item.dob) : null;
 
 		const matchesCode = selectedCode ? branchName === selectedCode : true;
 		const matchesFrom = fromDate && dob ? dob >= fromDate : true;
 		const matchesTo = toDate && dob ? dob <= toDate : true;
+		alert(matchesCode);
+		alert(matchesFrom);
+		alert(matchesTo);
 		
 
 

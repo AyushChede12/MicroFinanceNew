@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function loadCustomerKYCData() {
 	$.ajax({	
-		url: "/api/requestapproval/getUnapprovedFlexibleRenewal",
+		url: "/api/requestapproval/getAllUnapproveFlexibleRenewals",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {

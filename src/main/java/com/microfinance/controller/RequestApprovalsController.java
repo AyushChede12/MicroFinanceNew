@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.addCustomer;
@@ -171,7 +172,7 @@ public class RequestApprovalsController {
 */
   	//ANJALI (16/7/25)
   	//	get policy renewal data
-  	@GetMapping("/getUnapprovedPolicyRenewal")
+  	@GetMapping("/getUnapprovedPolicyRenewals")
   	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getAllUnapprovedPolicyRenewalData() {
   	    List<PolicyRenewal> list = requestApprovalsService.getAllUnapprovedPolicyRenewalData();
 
@@ -209,7 +210,7 @@ public class RequestApprovalsController {
   	
   	//anjali (17/7/25)
   	//get flexible renewal data
-	@GetMapping("/getUnapprovedFlexibleRenewal")
+  	@GetMapping("/getAllUnapproveFlexibleRenewals")
   	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
   	    List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
 
@@ -220,9 +221,21 @@ public class RequestApprovalsController {
   	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
   	    }
   	}
+//	@GetMapping("/getUnapprovedFlexibleRenewals")
+//  	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
+//  	    List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
+//
+//  	    if (!list.isEmpty()) {
+//  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+//  	    } else {
+//  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+//  	    }
+//  	}
 
 	//anjali (16/7/25)
-  	//approve RD data from flexible renewql
+  	//approve FD data from flexible renewql
+	
 	@PostMapping("/approveFDFromFlexibleRenewal")
 	public ResponseEntity<ApiResponse<FlexibleRenewal>> approveFDFromFlexibleRenewalInApproval(
 	        @RequestParam("id") Long id,
@@ -239,6 +252,45 @@ public class RequestApprovalsController {
 	    renewals.setApproved(isApproved);
 
 	    FlexibleRenewal updatedRenewal = requestApprovalsService.saveRenewal(renewals);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedRenewal)
+	    );
+	}
+	
+	//anjali (17/7/25)
+  	//get DailyPremiumRenewalPM data
+	@GetMapping("/getUnapprovedDailyPremiumRenewalPM")
+  	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getUnapprovedDailyPremiumRenewalPMData() {
+  	    List<DailyPremiumRenewalPM> list = requestApprovalsService.getUnapprovedDailyPremiumRenewalPMData();
+
+  	    if (!list.isEmpty()) {
+  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+  	    } else {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+  	    }
+  	}
+
+	//anjali (16/7/25)
+  	//approve DD data from DailyPremiumRenewalPM 
+	
+	@PostMapping("/approveDDFromDailyPremiumRenewalPM ")
+	public ResponseEntity<ApiResponse<DailyPremiumRenewalPM>> approveDDFromDailyPremiumRenewalPMData(
+	        @RequestParam("id") Long id,
+	        @RequestParam("isApproved") boolean isApproved) {
+
+	    Optional<DailyPremiumRenewalPM> optionalRenewal = requestApprovalsService.approveDDFromDailyPremiumRenewalPMData(id);
+
+	    if (!optionalRenewal.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Flexible Renewal with ID " + id + " not found."));
+	    }
+
+	    DailyPremiumRenewalPM DailyRenewal = optionalRenewal.get();
+	    DailyRenewal.setApproved(isApproved);
+
+	    DailyPremiumRenewalPM updatedRenewal = requestApprovalsService.saveRenewal(DailyRenewal);
 
 	    return ResponseEntity.ok(
 	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedRenewal)

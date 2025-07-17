@@ -141,6 +141,6 @@
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/RequestApproval/ApprovalDD.js"></script>
+	<script src="./js/RequestApproval/ApproveDD.js"></script>
 </body>
 </html>

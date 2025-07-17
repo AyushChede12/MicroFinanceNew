@@ -64,7 +64,7 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="branchName"
+								<label for="branchName">Branch Name</label> <select id="branchName"
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -75,7 +75,7 @@
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date From</label> <input type="date"
+								<label for="fromDate">Date From</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
@@ -84,7 +84,7 @@
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date To</label> <input type="date"
+								<label for="toDate">Date To</label> <input type="date"
 									name="toDate" id="toDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
@@ -121,6 +121,7 @@
 									<th scope="col" style="white-space: nowrap;">client Name</th>
 									<th scope="col" style="white-space: nowrap;">contac tNo</th>
 									<th scope="col" style="white-space: nowrap;">renewalDate</th>
+									<th scope="col" style="white-space: nowrap;">Branch Name</th>
 								</tr>
 							</thead>
 							<tbody>

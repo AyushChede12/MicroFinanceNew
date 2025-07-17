@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.addCustomer;
@@ -16,6 +17,7 @@ import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 
@@ -38,6 +40,9 @@ public class RequestApprovalsService {
 	
 	@Autowired
 	FlexibleRenewalRepo flexibleRenewalRepo;
+	
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
 	
 	
 	public List<addCustomer> findAllMemberCode() {
@@ -137,6 +142,24 @@ public class RequestApprovalsService {
 	public FlexibleRenewal saveRenewal(FlexibleRenewal renewals) {
 		// TODO Auto-generated method stub
 		 return flexibleRenewalRepo.save(renewals);
+	}
+
+
+	public List<DailyPremiumRenewalPM> getUnapprovedDailyPremiumRenewalPMData() {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.findByIsApprovedFalse();
+	}
+
+
+	public Optional<DailyPremiumRenewalPM> approveDDFromDailyPremiumRenewalPMData(Long id) {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.findById(id);
+	}
+
+
+	public DailyPremiumRenewalPM saveRenewal(DailyPremiumRenewalPM dailyRenewal) {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.save(dailyRenewal);
 	}
 	
 }
