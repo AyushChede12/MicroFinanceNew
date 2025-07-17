@@ -174,26 +174,28 @@ $(document).ready(function() {
 				//feach data
 				function fetchGroupLoanData() {
 				    $.ajax({
-				        url: "/api/joinliability/viewgrouploans",  // तुमचा GET endpoint इथे ठेवा
+				        url: "/api/joinliability/viewgrouploans",
 				        type: "GET",
 				        dataType: "json",
 				        success: function(response) {
+				            console.log("API Success:", response);
 				            const data = response.data || [];
 				            const tableBody = $("#groupLoanBody").empty();
 
 				            if (data.length > 0) {
 				                $.each(data, function(index, item) {
+				                    console.log("Item:", item); // ✅ debug
 				                    const row = `
 				                        <tr>
 				                            <td>${item.groupCode || ''}</td>
-				                            <td>${item.planCode ||  ''}</td>
+				                            <td>${item.planCode || ''}</td>
 				                            <td>${item.customerName || ''}</td>
 				                            <td>${item.selectedMember || ''}</td>
 				                            <td>${item.emiType || ''}</td>
 				                            <td>${item.contactNumber || ''}</td>
-				                            <td>${item.communityAddress || ''}</td>
+				                           
 				                            <td>${item.allocatedStaff || ''}</td>
-				                            <td>${item.active ? 'Yes' : 'No'}</td>
+				                           
 				                        </tr>
 				                    `;
 				                    tableBody.append(row);
@@ -202,13 +204,12 @@ $(document).ready(function() {
 				                tableBody.html(`<tr><td colspan="9" class="text-center text-warning">No data found.</td></tr>`);
 				            }
 				        },
-				        error: function() {
+				        error: function(xhr, status, error) {
+				            console.error("API Error:", error);
 				            $("#groupLoanBody").html(`<tr><td colspan="9" class="text-center text-danger">Something went wrong.</td></tr>`);
 				        }
 				    });
 				}
-
-				// Call function on page load
 				fetchGroupLoanData();
 
 			});

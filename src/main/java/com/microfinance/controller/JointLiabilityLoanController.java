@@ -26,6 +26,7 @@ import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.LoanAprroval;
 import com.microfinance.service.JointLiabilityLoanService;
 
 
@@ -276,7 +277,7 @@ public class JointLiabilityLoanController {
     }
 	
 // Apply For group loan
-    @PostMapping("/saveGroupLoan")
+    @PostMapping("/saveloanapproval")
     public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
         boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
 
@@ -337,6 +338,27 @@ public class JointLiabilityLoanController {
         }
     }
     
+    //save loan application
+    @PostMapping("/saveGroupLoan")
+    public ResponseEntity<ApiResponse<LoanAprroval>> saveLoanApproval(@RequestBody LoanAprroval loanAprroval) {
+        boolean isSaved = jointLiabilityLoanService.saveLoanApproval(loanAprroval);
+
+        if (isSaved) {
+            ApiResponse<LoanAprroval> response = ApiResponse.success(
+                HttpStatus.CREATED,
+                "Group Loan saved successfully",
+                loanAprroval
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else {
+            ApiResponse<LoanAprroval> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save Group Loan."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+   
 }
     
     

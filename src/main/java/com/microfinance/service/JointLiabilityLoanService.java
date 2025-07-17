@@ -16,9 +16,11 @@ import com.microfinance.dto.GroupDirectoryDto;
 import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.LoanAprroval;
 import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
+import com.microfinance.repository.LoanApprovalRepo;
 
 @Service
 public class JointLiabilityLoanService {
@@ -30,6 +32,9 @@ public class JointLiabilityLoanService {
 	
 	@Autowired
 	ApplyForGroupLoanRepo applyForGroupLoanRepo;
+	
+	@Autowired
+	LoanApprovalRepo loanApprovalRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -261,6 +266,16 @@ public class JointLiabilityLoanService {
 	public List<ApplyForGroupLoan> getAllgroupdata() {
 		// TODO Auto-generated method stub
 		return applyForGroupLoanRepo.findAll();
+	}
+
+	public boolean saveLoanApproval(LoanAprroval loanAprroval) {
+		// TODO Auto-generated method stub
+		try {
+			loanApprovalRepo.save(loanAprroval);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	

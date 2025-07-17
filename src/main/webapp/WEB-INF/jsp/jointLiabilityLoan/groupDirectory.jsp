@@ -113,7 +113,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 ">
+				<div class="col-lg-3 ">	
 					<div class="d-flex flex-column formFields">
 						<label>Community Name*</label> <input type="text"
 							id="communityName" name="communityName" class="form-control"

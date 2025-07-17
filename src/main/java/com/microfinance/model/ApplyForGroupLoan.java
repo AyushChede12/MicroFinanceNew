@@ -41,6 +41,8 @@ public class ApplyForGroupLoan {
     private String rateOfInterest;
     private String interestType;
     private String emiType;
+    private String approvalStatus;
+    private String totalAmount;
 	public Long getId() {
 		return id;
 	}
@@ -190,6 +192,18 @@ public class ApplyForGroupLoan {
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
     
