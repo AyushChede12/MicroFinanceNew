@@ -441,6 +441,11 @@ public class PageController {
 	public String getPolicyApproval() {
 		return "requestApprovals/approvePolicy";
 	}
+	
+	@GetMapping("/approveRD")
+	public String getRDApproval() {
+		return "requestApprovals/approveRD";
+	}
 
 	@GetMapping("/approveRecurring")
 	public String getRecurringApproval() {
