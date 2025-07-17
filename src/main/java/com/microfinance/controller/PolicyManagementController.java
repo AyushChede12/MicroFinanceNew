@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.*;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddInvestmentRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
+import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +45,12 @@ public class PolicyManagementController {
     
     @Autowired
     PolicyRenewalRepo policyRenewalRepo;
+    
+    @Autowired
+    FlexibleRenewalRepo flexibleRenewalRepo;
+    
+    @Autowired
+    DailyPremiumRenewalRepo dailyPremiumRenewalRepo;  
     
     //save daily Deposite
     @PostMapping("/daily-depositsave")
@@ -646,17 +656,11 @@ public class PolicyManagementController {
 	
 	@GetMapping("/getAllDDPolicies")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllDDPolicies() {
-	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllInvestments(); // Fetch all
+	    List<AddnewinvestmentPM> ddPolicies = policyManagementService.getApprovedDDPolicies();
 
-	    // Filter policies where policyCode starts with "RD"
-	    List<AddnewinvestmentPM> ddPolicies = allPolicies.stream()
-	            .filter(p -> p.getPolicyCode() != null && p.getPolicyCode().startsWith("DRD"))
-	            .collect(Collectors.toList());
-
-	    // Build response
 	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
 	            HttpStatus.OK,
-	            "DD policies fetched successfully",
+	            "Approved DD policies fetched successfully",
 	            ddPolicies
 	    );
 
@@ -803,6 +807,154 @@ public class PolicyManagementController {
 	    return Integer.parseInt(value);
 	}
 
+	
+	@PostMapping("/updateFDDueAndInstallment")
+	public ResponseEntity<ApiResponse<String>> updateFDDueAndInstallment(@RequestBody Map<String, Object> data) {
+	    try {
+	        String policyCode = (String) data.get("policyCode");
+	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+
+	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+	        if (!optional.isPresent()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+	        }
+
+	        AddnewinvestmentPM investment = optional.get();
+
+	        // Parse current values
+	        double currentDue = parseDoubleSafe(investment.getAmountDue());
+	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
+	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+
+	        // Calculate updated values
+	        double totalDeduction = policyAmount * noOfInstallments;
+	        double updatedDue = currentDue - totalDeduction;
+	        int updatedPaid = currentPaid + noOfInstallments;
+	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
+
+	        // Check if no payment is needed
+	        if (currentDue <= 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is already settled or overpaid.", null));
+	        }
+
+	        // Update the investment
+	        investment.setAmountDue(String.valueOf(updatedDue));
+	        investment.setLastInstPaid(String.valueOf(updatedPaid));
+	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+	        addinvestmentrepo.save(investment);
+
+	        // Save to PolicyRenewal
+	        FlexibleRenewal fRenewal = new FlexibleRenewal();
+	        fRenewal.setPolicyCode(investment.getPolicyCode());
+	        fRenewal.setRenewalDate(LocalDate.now().toString());
+	        fRenewal.setPolicyDate(investment.getPolicyStartDate());
+	        fRenewal.setMaturityDate(investment.getMaturityDate());
+	        fRenewal.setCustomerCode(investment.getMemberSelection());
+	        fRenewal.setClientName(investment.getCustomerName());
+	        fRenewal.setContactNo(investment.getContactNo());
+	        fRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+	        fRenewal.setPolicyType(investment.getSchemeType());
+	        fRenewal.setPolicyTerm(investment.getSchemeTerm());
+	        fRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+	        fRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+	        fRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+	        fRenewal.setLastPaymentDate(investment.getLastPaymentDate());
+	        fRenewal.setDueDate(investment.getDueDate());
+	        fRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+	        fRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+	        fRenewal.setModeOfPayment(investment.getModeOfPayment());
+	        flexibleRenewalRepo.save(fRenewal);
+
+	        // Final message based on updatedDue
+	        if (updatedDue == 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+	        } else if (updatedDue < 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+	        } else {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+	        }
+
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+	    }
+	}
+
+	@PostMapping("/updateDDDueAndInstallment")
+	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallment(@RequestBody Map<String, Object> data) {
+	    try {
+	        String policyCode = (String) data.get("policyCode");
+	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+
+	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+	        if (!optional.isPresent()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+	        }
+
+	        AddnewinvestmentPM investment = optional.get();
+
+	        // Parse current values
+	        double currentDue = parseDoubleSafe(investment.getAmountDue());
+	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
+	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+
+	        // Calculate updated values
+	        double totalDeduction = policyAmount * noOfInstallments;
+	        double updatedDue = currentDue - totalDeduction;
+	        int updatedPaid = currentPaid + noOfInstallments;
+	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
+
+	        // Check if no payment is needed
+	        if (currentDue <= 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is already settled or overpaid.", null));
+	        }
+
+	        // Update the investment
+	        investment.setAmountDue(String.valueOf(updatedDue));
+	        investment.setLastInstPaid(String.valueOf(updatedPaid));
+	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+	        addinvestmentrepo.save(investment);
+
+	        // Save to PolicyRenewal
+	        DailyPremiumRenewalPM ddRenewal = new DailyPremiumRenewalPM();
+	        ddRenewal.setPolicyCode(investment.getPolicyCode());
+	        ddRenewal.setRenewalDate(LocalDate.now().toString());
+	        ddRenewal.setPolicyDate(investment.getPolicyStartDate());
+	        ddRenewal.setMaturityDate(investment.getMaturityDate());
+	        ddRenewal.setCustomerCode(investment.getMemberSelection());
+	        ddRenewal.setClientName(investment.getCustomerName());
+	        ddRenewal.setContactNo(investment.getContactNo());
+	        ddRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+	        ddRenewal.setPolicyType(investment.getSchemeType());
+	        ddRenewal.setPolicyTerm(investment.getSchemeTerm());
+	        ddRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+	        ddRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+	        ddRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+	        ddRenewal.setLastPaymentDate(investment.getLastPaymentDate());
+	        ddRenewal.setDueDate(investment.getDueDate());
+	        ddRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+	        ddRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+	        ddRenewal.setModeOfPayment(investment.getModeOfPayment());
+	        dailyPremiumRenewalRepo.save(ddRenewal);
+
+	        // Final message based on updatedDue
+	        if (updatedDue == 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+	        } else if (updatedDue < 0) {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+	        } else {
+	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+	        }
+
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+	    }
+	}
 
 
     

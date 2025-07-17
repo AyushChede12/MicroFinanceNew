@@ -8,7 +8,7 @@ import javax.persistence.Id;
 @Entity
 
 
-public class PolicyRenewal {
+public class FlexibleRenewal {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,10 +40,8 @@ public class PolicyRenewal {
     private Integer noOfInstPaid;
 
     private String modeOfPayment;
-
     private boolean isApproved;
     private String fees;
-
 
     // Getters and Setters
 
@@ -201,7 +199,6 @@ public class PolicyRenewal {
 	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
-
 
 	public boolean isApproved() {
 		return isApproved;
