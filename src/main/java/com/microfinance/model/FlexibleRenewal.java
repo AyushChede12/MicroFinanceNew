@@ -42,6 +42,7 @@ public class FlexibleRenewal {
     private String modeOfPayment;
     private boolean isApproved;
     private String fees;
+    private String branchname;
 
     // Getters and Setters
 
@@ -214,6 +215,14 @@ public class FlexibleRenewal {
 
 	public void setFees(String fees) {
 		this.fees = fees;
+	}
+
+	public String getBranchname() {
+		return branchname;
+	}
+
+	public void setBranchname(String branchname) {
+		this.branchname = branchname;
 	}
     
     

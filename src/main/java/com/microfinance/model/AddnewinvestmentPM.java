@@ -33,6 +33,7 @@ public class AddnewinvestmentPM {
 	private String schemeType;
 	private String schemeTerm;
 	private String schemeMode;
+	private String roi;
 	private String policyAmount;
 	private String depositAmount;
 	private String introMCode;
@@ -341,7 +342,14 @@ public class AddnewinvestmentPM {
 	public void setModeOfPayment(String modeOfPayment) {
 	    this.modeOfPayment = modeOfPayment;
 	}
+	public String getRoi() {
+		return roi;
+	}
+	public void setRoi(String roi) {
+		this.roi = roi;
+	}
 
+	
 	
 
 }

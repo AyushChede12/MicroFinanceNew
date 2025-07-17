@@ -49,6 +49,7 @@ $(document).ready(function () {
 						$("#contactNo").val(data.contactNo);
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
+						$("#branchname").val(data.branchName);
 						$("#policyTerm").val(data.schemeTerm);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);

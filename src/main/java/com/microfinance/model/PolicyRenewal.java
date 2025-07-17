@@ -43,6 +43,7 @@ public class PolicyRenewal {
 
     private boolean isApproved;
     private String fees;
+    private String branchname;
 
 
     // Getters and Setters
@@ -217,6 +218,14 @@ public class PolicyRenewal {
 
 	public void setFees(String fees) {
 		this.fees = fees;
+	}
+
+	public String getBranchname() {
+		return branchname;
+	}
+
+	public void setBranchname(String branchname) {
+		this.branchname = branchname;
 	}
     
     
