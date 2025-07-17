@@ -1,0 +1,255 @@
+package com.microfinance.dto;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class PolicyManagementDto {
+	
+	private Long id;
+	private String policyCode;
+	private String policyStartDate;
+	private String memberSelection;
+	private String customerName;
+	private String dateofBirth;
+	private String relationDetails;
+	private String contactNo;
+	private String suggestedNominee;
+	private String ageOfNominee;
+	private String relation;
+	private String address;
+	private String district;
+	private String state;
+	private String pinCode;
+	private String tds;
+	private String branchName;
+	private String ModeOfOperation;
+	private String jointMemCode;
+	private String jointName;
+	private String maturityDate;
+	private String schemeType;
+	private String schemeTerm;
+	private String schemeMode;
+	private String policyAmount;
+	private String depositAmount;
+	private String introMCode;
+	private String maturityAmount;
+	private String MISInterest;
+	private String paymentBy;
+	private String remark;
+	private String Agent;
+	private String smsSend;
+	private MultipartFile image1;
+	private MultipartFile image2;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getPolicyCode() {
+		return policyCode;
+	}
+	public void setPolicyCode(String policyCode) {
+		this.policyCode = policyCode;
+	}
+	public String getPolicyStartDate() {
+		return policyStartDate;
+	}
+	public void setPolicyStartDate(String policyStartDate) {
+		this.policyStartDate = policyStartDate;
+	}
+	public String getMemberSelection() {
+		return memberSelection;
+	}
+	public void setMemberSelection(String memberSelection) {
+		this.memberSelection = memberSelection;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getDateofBirth() {
+		return dateofBirth;
+	}
+	public void setDateofBirth(String dateofBirth) {
+		this.dateofBirth = dateofBirth;
+	}
+	public String getRelationDetails() {
+		return relationDetails;
+	}
+	public void setRelationDetails(String relationDetails) {
+		this.relationDetails = relationDetails;
+	}
+	public String getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+	public String getSuggestedNominee() {
+		return suggestedNominee;
+	}
+	public void setSuggestedNominee(String suggestedNominee) {
+		this.suggestedNominee = suggestedNominee;
+	}
+	public String getAgeOfNominee() {
+		return ageOfNominee;
+	}
+	public void setAgeOfNominee(String ageOfNominee) {
+		this.ageOfNominee = ageOfNominee;
+	}
+	public String getRelation() {
+		return relation;
+	}
+	public void setRelation(String relation) {
+		this.relation = relation;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getDistrict() {
+		return district;
+	}
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getPinCode() {
+		return pinCode;
+	}
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
+	public String getTds() {
+		return tds;
+	}
+	public void setTds(String tds) {
+		this.tds = tds;
+	}
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
+	public String getModeOfOperation() {
+		return ModeOfOperation;
+	}
+	public void setModeOfOperation(String modeOfOperation) {
+		ModeOfOperation = modeOfOperation;
+	}
+	public String getJointMemCode() {
+		return jointMemCode;
+	}
+	public void setJointMemCode(String jointMemCode) {
+		this.jointMemCode = jointMemCode;
+	}
+	public String getJointName() {
+		return jointName;
+	}
+	public void setJointName(String jointName) {
+		this.jointName = jointName;
+	}
+	public String getMaturityDate() {
+		return maturityDate;
+	}
+	public void setMaturityDate(String maturityDate) {
+		this.maturityDate = maturityDate;
+	}
+	public String getSchemeType() {
+		return schemeType;
+	}
+	public void setSchemeType(String schemeType) {
+		this.schemeType = schemeType;
+	}
+	public String getSchemeTerm() {
+		return schemeTerm;
+	}
+	public void setSchemeTerm(String schemeTerm) {
+		this.schemeTerm = schemeTerm;
+	}
+	public String getSchemeMode() {
+		return schemeMode;
+	}
+	public void setSchemeMode(String schemeMode) {
+		this.schemeMode = schemeMode;
+	}
+	public String getPolicyAmount() {
+		return policyAmount;
+	}
+	public void setPolicyAmount(String policyAmount) {
+		this.policyAmount = policyAmount;
+	}
+	public String getDepositAmount() {
+		return depositAmount;
+	}
+	public void setDepositAmount(String depositAmount) {
+		this.depositAmount = depositAmount;
+	}
+	public String getIntroMCode() {
+		return introMCode;
+	}
+	public void setIntroMCode(String introMCode) {
+		this.introMCode = introMCode;
+	}
+	public String getMaturityAmount() {
+		return maturityAmount;
+	}
+	public void setMaturityAmount(String maturityAmount) {
+		this.maturityAmount = maturityAmount;
+	}
+	public String getMISInterest() {
+		return MISInterest;
+	}
+	public void setMISInterest(String mISInterest) {
+		MISInterest = mISInterest;
+	}
+	public String getPaymentBy() {
+		return paymentBy;
+	}
+	public void setPaymentBy(String paymentBy) {
+		this.paymentBy = paymentBy;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getAgent() {
+		return Agent;
+	}
+	public void setAgent(String agent) {
+		Agent = agent;
+	}
+	public String getSmsSend() {
+		return smsSend;
+	}
+	public void setSmsSend(String smsSend) {
+		this.smsSend = smsSend;
+	}
+	public MultipartFile getImage1() {
+		return image1;
+	}
+	public void setImage1(MultipartFile image1) {
+		this.image1 = image1;
+	}
+	public MultipartFile getImage2() {
+		return image2;
+	}
+	public void setImage2(MultipartFile image2) {
+		this.image2 = image2;
+	}
+	
+	
+
+}
