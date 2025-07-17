@@ -253,7 +253,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="col-12 text-center">
 						<button id="viewBtn" type="button" class="btn btn-primary">View
 							Installment</button>
-						<button id="saveBtn" type="button" class="btn btn-info">Save</button>
+						<button id="btnSave" type="button" class="btn btn-info">Save</button>
 					</div>
 				</div>
 
