@@ -38,6 +38,7 @@ public class DailyPremiumRenewalPM {
     private String modeOfPayment;
     private boolean isApproved;
     private String fees;
+    private String branchname;
 
     // Getters and Setters
 
@@ -210,6 +211,14 @@ public class DailyPremiumRenewalPM {
 
 	public void setFees(String fees) {
 		this.fees = fees;
+	}
+
+	public String getBranchname() {
+		return branchname;
+	}
+
+	public void setBranchname(String branchname) {
+		this.branchname = branchname;
 	}
     
 	

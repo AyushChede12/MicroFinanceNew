@@ -50,6 +50,7 @@ $(document).ready(function () {
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
 						$("#policyTerm").val(data.schemeTerm);
+						$("#branchname").val(data.branchName);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);
 						$("#paymentDue").val(data.amountDue);

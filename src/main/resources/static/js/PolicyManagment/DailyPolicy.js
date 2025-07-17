@@ -49,6 +49,7 @@ $(document).ready(function () {
 						$("#contactNo").val(data.contactNo);
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
+						$("#branchname").val(data.branchName);
 						$("#policyTerm").val(data.schemeTerm);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);
@@ -73,7 +74,7 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $("#saveBtn").click(function (e) {
+    $("#buttonSave").click(function (e) {
         e.preventDefault(); // Prevent default form submission
 
         // Collect only required data for the API
@@ -85,7 +86,7 @@ $(document).ready(function () {
 
         // Send to backend
         $.ajax({
-            url: "/api/Policymangment/updateDueAndInstallment",
+            url: "/api/Policymangment/updateDDDueAndInstallment",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
