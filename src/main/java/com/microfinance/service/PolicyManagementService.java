@@ -12,13 +12,19 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.MISDepositPM;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.MisDepositePMRepo;
+import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 
 @Service
@@ -37,6 +43,15 @@ public class PolicyManagementService {
 
 	@Autowired
 	AddInvestmentRepo addinvestmentrepo;
+	
+	@Autowired
+	PolicyRenewalRepo policyRenewalRepo;
+	
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+	
+	@Autowired
+	FlexibleRenewalRepo flexibleRenewalRepo;
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 		try {
@@ -396,9 +411,13 @@ public List<DailyDepositPM> getAllDDTerm() {
 }
 
 
+
+
+
 public List<AddnewinvestmentPM> getAllInvestments() {
     return addinvestmentrepo.findAll();
 }
+
 
 public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 	// TODO Auto-generated method stub
@@ -406,13 +425,71 @@ public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 }
 
 
-
 public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
-    return addinvestmentrepo.findByPolicyCode(policyCode);
+    if (policyCode == null) return Optional.empty();
+
+    // Clean input: trim and convert to uppercase
+    String normalizedCode = policyCode.trim().toUpperCase();
+
+    // Fetch all and match manually
+    return addinvestmentrepo.findAll().stream()
+            .filter(p -> p.getPolicyCode() != null &&
+                         p.getPolicyCode().trim().equalsIgnoreCase(normalizedCode))
+            .findFirst();
+}
+
+
+
+
+public List<AddnewinvestmentPM> getApprovedInvestments() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findByIsApprovedTrue();
+}
+
+
+/*
+ * public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) { //
+ * TODO Auto-generated method stub
+ * 
+ * return addinvestmentrepo.findByPolicyCode(policyCode); }
+ */
+ 
+
+
+
+public List<AddnewinvestmentPM> getApprovedRDPolicies() {
+    return addinvestmentrepo.findApprovedRDPolicies();
+}
+
+
+public List<AddnewinvestmentPM> getApprovedFDPolicies() {
+    return addinvestmentrepo.findApprovedFDPolicies();
+}
+
+public List<AddnewinvestmentPM> getApprovedDDPolicies() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findApprovedDDPolicies();
+}
+
+public List<PolicyRenewal> getAllRdRenewalData() {
+	// TODO Auto-generated method stub
+	return policyRenewalRepo.findAll();
+}
+
+public List<DailyPremiumRenewalPM> getAllDdRenewalData() {
+	// TODO Auto-generated method stub
+	return dailyPremiumRenewalRepo.findAll();
+}
+
+public List<FlexibleRenewal> getAllFdRenewalData() {
+	// TODO Auto-generated method stub
+	return flexibleRenewalRepo.findAll();
 }
 
 
 }
+
+
 
 
 

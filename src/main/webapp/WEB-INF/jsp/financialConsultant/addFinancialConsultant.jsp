@@ -88,9 +88,9 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
                 
               </div> -->
-							<input type="hidden" id="id" name="id"> <input
+							<%-- <input type="hidden" id="id" name="id"> <input
 								type="hidden" id="financialCode" name="financialCode"
-								value="${financialCode }">
+								value="${financialCode }"> --%>
 							<div class="d-flex flex-column formFields">
 								<label for="joiningDate">Joining Date<span id="star">*</span></label>
 								<input type="date" name="joiningDate" id="joiningDate" required
@@ -101,13 +101,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="selectCustomer">Select Customer Code<span
-									id="star">*</span></label> <select id="memberCode" name="memberCode"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-
-
-								</select>
+								<label for="selectCustomer">Financial Code<span
+									id="star">*</span></label> <input type="text" id="financialCode" name="financialCode"
+									required="required" class="form-control selectField" value="${financialCode }"
+									style="height: 30px;" readonly="readonly">
 							</div>
 						</div>
 
@@ -115,9 +112,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="customerName">Customer Name <span class="star">*</span></label>
-								<input type="text" name="customerName" id="customerName"
-									required="required" placeholder="Enter Cutomer Name"
+								<label for="financialName">Financial Name <span class="star">*</span></label>
+								<input type="text" name="financialName" id="financialName"
+									required="required" placeholder="Enter Financial Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -136,21 +133,21 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Age <span id="star">*</span></label> <input type="text"
-									name="age" id="customerAge" required="required"
+									name="age" id="age" required="required"
 									placeholder="Enter Age" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="guardianName">Family Customer Name <span
 									id="star">*</span></label> <input type="text" name="guardianName"
 									id="guardianName" required="required"
 									placeholder="Enter Family Customer Name" />
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Relation to Applicant <span id="star">*</span></label> <select
@@ -161,7 +158,7 @@ pageEncoding="ISO-8859-1"%> -->
 									
 								</select>
 							</div>
-						</div>
+						</div> -->
 
 
 						<div class="col-lg-3">
@@ -173,13 +170,13 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="nomineeName">Nominee Name <span class="star">*</span></label>
 								<input type="text" name="nomineeName" id="nomineeName"
 									required="required" placeholder="Enter Nominee Name" />
 							</div>
-						</div>
+						</div> -->
 
 						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -203,19 +200,19 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="nomineeAge">Nominee Age <span id="star">*</span></label>
+								<label for="nomineeAge">Age <span id="star">*</span></label>
 								<input type="text" name="nomineeAge" id="nomineeAge"
 									required="required" placeholder="Enter Nominee Age" />
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Address <span id="star">*</span></label>
-								<textarea name="customerAddress" id="customerAddress"
+								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
@@ -269,15 +266,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo <span id="star">*</span>
-							</label> <label for="customerPhoto" id="drop-area"> <input
-								type="file" accept="image/*" name="customerPhoto"
-								id="customerPhoto" hidden="hidden" onchange="photoUpload();"
+								Photo <span class="star">*</span>
+							</label> <label for="photo" id="drop-area"> <input type="file"
+								accept="image/*" name="financialPhoto" id="photo" hidden="hidden"
+								onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="financialPhotoPreview" /> <input type="hidden"
-										id="photoHidden" name="photoHidden">
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
+
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -285,22 +283,21 @@ pageEncoding="ISO-8859-1"%> -->
                     Drag and drop or Choose File to upload the image
                   </p> -->
 								</div>
-							</label>
+							</label> <small id="chkphoto" style="color: red;"></small>
 						</div>
 
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature <span id="star">*</span>
-							</label> <label for="customerSignature" id="drop-area"> <input
-								type="file" accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden"
-								onchange="signatureUpload();"
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="finnacialSignature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="financialSignaturePreview" /> <input type="hidden"
-										id="signatureHidden" name="signatureHidden">
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -308,7 +305,7 @@ pageEncoding="ISO-8859-1"%> -->
                     Drag and drop or Choose File to upload the image
                   </p> -->
 								</div>
-							</label>
+							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
 					</div>
@@ -517,8 +514,6 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-12 text-center">
 							<button id="saveBtnFinacial" name="saveBtn"
 								class="btnStyle bg-success">Save</button>
-							<button id="updateBtn" class="btnStyle"
-								style="background-color: #FFA500;">Update</button>
 							<button id="printBtn" class="btnStyle bg-primary" onclick="printTable()">Print</button>
 						</div>
 					</div>
@@ -643,15 +638,16 @@ pageEncoding="ISO-8859-1"%> -->
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">Sl No.</th>
-									<th scope="col">Financial Name</th>
 									<th scope="col">Financial Code</th>
-									<th scope="col">Branch</th>
-									<th scope="col">Date of Joining</th>
-									<th scope="col">Address</th>
+									<th scope="col">Financial Name</th>
 									<th scope="col">Contact No</th>
-									<th scope="col">Financial Status</th>
+									<th scope="col">Branch</th>
+									<th scope="col">Address</th>
+									<th scope="col">District</th>
+									<th scope="col">State</th>
+									<th scope="col">Pin Code</th>
 									<th scope="col">Profession</th>
-									
+									<th scope="col">Financial Status</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -676,7 +672,55 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
+<script>
+function photoUpload() {
+	const file = document.getElementById("photo").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById("photoPreview").src = e.target.result;
+			const previewimg = document.getElementById("photoPreview");
+			document.getElementById("photoPreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
 
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("signature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById("signaturePreview").src = e.target.result;
+			const previewimg = document.getElementById("signaturePreview");
+			document.getElementById("signaturePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+
+
+
+
+
+</script>
 
 </body>
 
