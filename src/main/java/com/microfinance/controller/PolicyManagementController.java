@@ -777,6 +777,7 @@ public class PolicyManagementController {
 	        renewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
 	        renewal.setLastPaymentDate(investment.getLastPaymentDate());
 	        renewal.setDueDate(investment.getDueDate());
+	        renewal.setBranchname(investment.getBranchName());
 	        renewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
 	        renewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
 	        renewal.setModeOfPayment(investment.getModeOfPayment());
@@ -857,6 +858,7 @@ public class PolicyManagementController {
 	        fRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
 	        fRenewal.setPolicyType(investment.getSchemeType());
 	        fRenewal.setPolicyTerm(investment.getSchemeTerm());
+	        fRenewal.setBranchname(investment.getBranchName());
 	        fRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
 	        fRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
 	        fRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
@@ -931,6 +933,7 @@ public class PolicyManagementController {
 	        ddRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
 	        ddRenewal.setPolicyType(investment.getSchemeType());
 	        ddRenewal.setPolicyTerm(investment.getSchemeTerm());
+	        ddRenewal.setBranchname(investment.getBranchName());
 	        ddRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
 	        ddRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
 	        ddRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
@@ -955,6 +958,49 @@ public class PolicyManagementController {
 	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
 	    }
 	}
+
+	
+	@GetMapping("/getAllRdRenewalData")
+	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getAllRdRenewalData() {
+	    List<PolicyRenewal> allRdPolicies = policyManagementService.getAllRdRenewalData();
+
+	    ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "All RD Policy Data fetched successfully",
+	            allRdPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/getAllDdRenewalData")
+	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getAllDdRenewalData() {
+	    List<DailyPremiumRenewalPM> allRdPolicies = policyManagementService.getAllDdRenewalData();
+
+	    ApiResponse<List<DailyPremiumRenewalPM>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "All DD Policy Data fetched successfully",
+	            allRdPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/getAllFdRenewalData")
+	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getAllFdRenewalData() {
+	    List<FlexibleRenewal> allFdPolicies = policyManagementService.getAllFdRenewalData();
+
+	    ApiResponse<List<FlexibleRenewal>> response = new ApiResponse<>(
+	            HttpStatus.OK,
+	            "All FD Policy Data fetched successfully",
+	            allFdPolicies
+	    );
+
+	    return ResponseEntity.ok(response);
+	}
+  
+	
+	
 
 
     

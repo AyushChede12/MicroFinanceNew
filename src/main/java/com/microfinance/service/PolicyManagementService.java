@@ -12,13 +12,19 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.MISDepositPM;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.MisDepositePMRepo;
+import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 
 @Service
@@ -37,6 +43,15 @@ public class PolicyManagementService {
 
 	@Autowired
 	AddInvestmentRepo addinvestmentrepo;
+	
+	@Autowired
+	PolicyRenewalRepo policyRenewalRepo;
+	
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+	
+	@Autowired
+	FlexibleRenewalRepo flexibleRenewalRepo;
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 		try {
@@ -455,6 +470,23 @@ public List<AddnewinvestmentPM> getApprovedDDPolicies() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findApprovedDDPolicies();
 }
+
+public List<PolicyRenewal> getAllRdRenewalData() {
+	// TODO Auto-generated method stub
+	return policyRenewalRepo.findAll();
+}
+
+public List<DailyPremiumRenewalPM> getAllDdRenewalData() {
+	// TODO Auto-generated method stub
+	return dailyPremiumRenewalRepo.findAll();
+}
+
+public List<FlexibleRenewal> getAllFdRenewalData() {
+	// TODO Auto-generated method stub
+	return flexibleRenewalRepo.findAll();
+}
+
+
 }
 
 
