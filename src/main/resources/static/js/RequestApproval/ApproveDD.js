@@ -1,29 +1,29 @@
 //all unprove data
 
-let allPolicyRenewalsData = [];
+let allDailyPremiumRenewalPMData = [];
 
 $(document).ready(function() {
 	// Load all member data on page load
-	loadUnapprovedPolicyRenewalsData();
+	loadDailyPremiumRenewalPMData();
 
 	// Button click filter
 	$('#saveBtn').on('click', function(e) {
 		e.preventDefault(); // Prevent form submission
-		filterPolicyRenewalsData();
+		filterDailyPremiumRenewalPMData();
 	});
 });
 //
 
-function loadUnapprovedPolicyRenewalsData() {
-	$.ajax({
-		url: "/api/requestapproval/getUnapprovedPolicyRenewals",
+function loadDailyPremiumRenewalPMData() {
+	$.ajax({	
+		url: "/api/requestapproval/getUnapprovedDailyPremiumRenewalPM",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
 			if (response.status === "OK" && Array.isArray(response.data)) {
-				allPolicyRenewalsData = response.data;
+				allDailyPremiumRenewalPMData = response.data;
 				//populateMemberCodeDropdown(allKYCData);
-				renderTable(allPolicyRenewalsData); // Initially show all
+				renderTable(allDailyPremiumRenewalPMData); // Initially show all
 			} else {
 				alert("No member data found.");
 			}
@@ -35,7 +35,7 @@ function loadUnapprovedPolicyRenewalsData() {
 	});
 }
 
-function DropdownCode(data) {
+function populateMemberCodeDropdown(data) {
 	const dropdown = $('#branchName');
 	dropdown.empty().append('<option value="">Select Branch</option>');
 	const uniqueCodes = [...new Set(data.map(item => item.branchName))];
@@ -45,23 +45,23 @@ function DropdownCode(data) {
 }
 
 function renderTable(data) {
-	const tbody = $(".datatable tbody");
-	tbody.empty();
+    const tbody = $(".datatable tbody");
+    tbody.empty();
 
-	if (!data || data.length === 0) {
-		const noDataRow = `
+    if (!data || data.length === 0) {
+        const noDataRow = `
             <tr>
                 <td colspan="12" style="text-align:center; font-family: 'Poppins', sans-serif;">
                     No data found
                 </td>
             </tr>
         `;
-		tbody.append(noDataRow); 0
-		return; // Exit the function early
-	}
+        tbody.append(noDataRow);0
+        return; // Exit the function early
+    }
 
-	data.forEach((item, index) => {
-		const row = `
+    data.forEach((item, index) => {
+        const row = `
             <tr style="font-family: 'Poppins', sans-serif;">
                 <td>
                     <input type="checkbox" class="approval-checkbox"
@@ -82,10 +82,9 @@ function renderTable(data) {
 								   
             </tr>
         `;
-		tbody.append(row);
-	});
+        tbody.append(row);
+    });
 }
-
 
 //approval data
 $(document).ready(function() {
@@ -107,7 +106,7 @@ $(document).ready(function() {
 		// Approve each selected investment
 		selectedIds.forEach(function(id) {
 			$.ajax({
-				url: "/api/requestapproval/approveRDFromPolicyRenewal",
+				url: "/api/requestapproval/approveDDFromDailyPremiumRenewalPM",
 				type: "POST",
 				data: {
 					id: id,
@@ -132,7 +131,7 @@ $(document).ready(function() {
 });
 
 //filter Data
-function filterPolicyRenewalsData() {
+function filterDailyPremiumRenewalPMData() {
 	const selectedCode = $('#branchName').val();
 	const fromDateVal = $('#fromDate').val();
 	const toDateVal = $('#toDate').val();
@@ -140,7 +139,8 @@ function filterPolicyRenewalsData() {
 	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
 	const toDate = toDateVal ? new Date(toDateVal) : null;
 
-	const filtered = allPolicyRenewalsData.filter(item => {
+	const filtered = allDailyPremiumRenewalPMData.filter(item => {
+
 		const branchName = item.branchname;
 		const dob = item.dob ? new Date(item.dob) : null;
 

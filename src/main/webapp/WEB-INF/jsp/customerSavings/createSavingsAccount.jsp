@@ -89,12 +89,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Select By Customer</label> <select
-									id="selectByCustomer" name="selectByCustomer"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select customer name</option>
-
+								<label for="">Select By Customer</label> 
+								<select
+									id="selectByCustomer" name="selectByCustomer" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+									<!-- Add options here -->
 								</select>
 							</div>
 						</div>
@@ -316,11 +316,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<label for="">Mode of payment</label> <select id="modeOfPayment"
 							name="modeOfPayment" required="required"
 							class="form-control selectField" style="height: 30px;">
-							<option value="">Select</option>
-							<option value="Cash">Cash</option>
-							<option value="Online">Online</option>
-							<option value="Cheque">Cheque</option>
-							<option value="NEFT">NEFT</option>
+							<option selected="selected" value="">Select</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="NEFT">Neft</option>
 						</select>
 					</div>
 				</div>				
@@ -383,9 +383,10 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 				
+				
 			</div>
 			<!-- Cheque input fields -->
-					<div id="chequeInputs" style="display: none;">
+					 <div id="chequeInputs" style="display: none;" >
 						<div class="row">
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
@@ -429,7 +430,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>										
 					</div>
-										<!-- NEFT input fields -->
+					<!-- NEFT input fields -->
 					<div id="neftInputs" style="display: none;">
 						<div class="row">
 							<div class="col-lg-3">
@@ -447,56 +448,90 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div>											
-					</div>
-					
-					
+					</div>  										
 			
 			<div class="row mt-4">
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
-							</label> <label for="photo" id="drop-area"> <input type="file"
+							</label> <label for="photo" id="drop-area"> <!-- <input type="file"
 								accept="image/*" name="photo" id="photo" hidden="hidden"
 								onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="photoPreview" /><input type="hidden" name="photoHidden"
-										id="photoHidden">
+										id="photoHidden"> -->
 
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
+									<img id="photo" src="../images/upload/upload.png" alt="Photo Preview" style="width: 250px; height: 200px">
+						            <input type="hidden" id="photoHidden" name="photo" value="">
 							</label> <small id="chkphoto" style="color: red;"></small>
 						</div>
 
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature <span class="star">*</span>
-							</label> <label for="signature" id="drop-area"> <input
+				<div class="col-lg-3 mb-5">
+					<label for=""
+						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+						Signature <span class="star">*</span>
+					</label> <label for="signature" id="drop-area"> <!-- <input
 								type="file" accept="image/*" name="signature" id="signature"
 								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="signaturePreview" /><input type="hidden"
-										name="signatureHidden" id="signatureHidden">
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label> <small id="chksignature" style="color: red;"></small>
-						</div>
+										name="signatureHidden" id="signatureHidden"> --> <img
+						id="signature" src="../images/upload/upload.png"
+						alt="signature Preview" style="width: 250px; height: 200px">
+						<input type="hidden" id="signatureHidden" name="photo" value="">
+					</label> <small id="chksignature" style="color: red;"></small>
+				</div>
+				
+				<div class="col-lg-3 mb-5">
+					<label for=""
+						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+						Joint Photo <span class="star">*</span>
+					</label> <label for="jointPhoto" id="drop-area"> <!-- <input
+								type="file" accept="image/*" name="signature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden"> --> <img
+						id="jointPhoto" src="../images/upload/upload.png"
+						alt="jointPhoto Preview" style="width: 250px; height: 200px">
+						<input type="hidden" id="jointPhotoHidden" name="jointPhoto" value="">
+					</label> <small id="chkjointPhoto" style="color: red;"></small>
+				</div>
+			</div>
 
+					</div>
+					<!-- Cheque input fields -->
+					<div id="chequeInputs" style="display: none;" >
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Cheque No. </label> <input type="text"
+										name="chequeNo" id="chequeNo" required="required"
+										placeholder="Enter Cheque No." />
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Cheque Date </label> <input type="Date"
+										name="chequeDate" id="chequeDate" required="required"
+										placeholder="Enter Cheque Date" />
+								</div>
+							</div>						
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc1" id="depositAcc1" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+						</div>												
 					</div>
 
 			<div class="row">
@@ -504,7 +539,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<button id="saveBtn" class="btn btn-warning"
 						style="margin-left: 80%;">Save</button>
 					<button type="button" id="updateBtn" class="btnStyle bg-success"
-								onclick="updateSavingAccountData()">Update</button>
+								>Update</button><!-- onclick="updateSavingAccountData()" -->
 
 				</div>
 			</div>
@@ -549,6 +584,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script>
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
+	
 document.addEventListener('DOMContentLoaded', function () {
 	const toggles = document.querySelectorAll('.toggle__input');
 	
@@ -560,19 +602,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
 		});
 	});
-
-	function updateToggleColor(input) {
-		const label = input.nextElementSibling;
-		if (label) {
-			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
-		}
-	}
+	
 });
 </script>
 
-<script>
-    
-document.getElementById('modeofpayment').addEventListener('change', function () {
+<script>    
+document.getElementById('modeOfPayment').addEventListener('change', function () {
     // Get the selected payment mode
     let mode = this.value;
 
@@ -595,8 +630,6 @@ document.getElementById('modeofpayment').addEventListener('change', function () 
         neftInputs.style.display = 'block';
     }
 });
-
-
 </script>
 
 	<!-- <script src="js/chartScript.js"></script> -->
