@@ -447,6 +447,16 @@ public class PageController {
 		return "requestApprovals/approveRD";
 	}
 
+	@GetMapping("/approveFD")
+	public String getFDApproval() {
+		return "requestApprovals/approveFD";
+	}
+
+	@GetMapping("/approveDD")
+	public String getDDApproval() {
+		return "requestApprovals/approveDD";
+	}
+
 	@GetMapping("/approveRecurring")
 	public String getRecurringApproval() {
 		return "requestApprovals/approveRecurringDeposits";
@@ -920,7 +930,7 @@ public class PageController {
 		return "customerSavings/createCurrentAccount";
 	}
 	
-	/*@GetMapping("/savingsAccountActivity")
+	@GetMapping("/savingsAccountActivity")
 	public String getSavingsAccountActivity(Model model) {
 		String prefix = "TXN";
 		String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -929,7 +939,7 @@ public class PageController {
 
 		model.addAttribute("transactionCode", transactionCode);
 		return "customerSavings/savingsAccountActivity";
-	}*/
+	}
 	
 	@GetMapping("/savingsAccountFundTransfer")
 	public String getSavingsAccountFundTransfer() {

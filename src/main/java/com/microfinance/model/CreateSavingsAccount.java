@@ -42,8 +42,17 @@ public class CreateSavingsAccount {
 	private String accountNumber;
 	private boolean isApproved;
 	
+	private String chequeNo;
+    private String chequeDate;
+    private String depositAcc1;
+    private String depositAcc2;
+    private String refNumber1;
+    private String depositAcc3;
+    private String refNumber2;
+	
 	private String photo;
 	private String signature;
+	private String jointPhoto;
 	
 	
 	public Long getId() {
@@ -65,6 +74,8 @@ public class CreateSavingsAccount {
 	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
 	}
+	
+	
 	public String getSelectByCustomer() {
 		return selectByCustomer;
 	}
@@ -257,7 +268,56 @@ public class CreateSavingsAccount {
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
-
+	
+	public String getJointPhoto() {
+		return jointPhoto;
+	}
+	public void setJointPhoto(String jointPhoto) {
+		this.jointPhoto = jointPhoto;
+	}
+	public String getChequeNo() {
+		return chequeNo;
+	}
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+	public String getChequeDate() {
+		return chequeDate;
+	}
+	public void setChequeDate(String chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+	public String getDepositAcc1() {
+		return depositAcc1;
+	}
+	public void setDepositAcc1(String depositAcc1) {
+		this.depositAcc1 = depositAcc1;
+	}
+	public String getDepositAcc2() {
+		return depositAcc2;
+	}
+	public void setDepositAcc2(String depositAcc2) {
+		this.depositAcc2 = depositAcc2;
+	}
+	public String getRefNumber1() {
+		return refNumber1;
+	}
+	public void setRefNumber1(String refNumber1) {
+		this.refNumber1 = refNumber1;
+	}
+	public String getDepositAcc3() {
+		return depositAcc3;
+	}
+	public void setDepositAcc3(String depositAcc3) {
+		this.depositAcc3 = depositAcc3;
+	}
+	public String getRefNumber2() {
+		return refNumber2;
+	}
+	public void setRefNumber2(String refNumber2) {
+		this.refNumber2 = refNumber2;
+	}
+    
 
 	
 	

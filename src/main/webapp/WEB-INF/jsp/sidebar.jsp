@@ -821,6 +821,20 @@
             </a>
           </li>
           
+           <li>
+            <a href="approveFD">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Approve FD</span>
+            </a>
+          </li>
+          
+           <li>
+            <a href="approveDD">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Approve DD</span>
+            </a>
+          </li>
+          
           <li>
             <a href="approveRecurring">
               <i class="bi bi-circle"></i>
