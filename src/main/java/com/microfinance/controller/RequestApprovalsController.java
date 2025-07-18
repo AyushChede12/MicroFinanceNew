@@ -155,21 +155,7 @@ public class RequestApprovalsController {
   	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedInvestment)
   	    );
   	}
-  	
-  	//ANJALI (16/07/24)
-  	//get unpproved saving acount transfer data
-  /*	@GetMapping("/getunapprovedSavingAcountTransfer")
-  	public ResponseEntity<ApiResponse<List<savingAccountFundTransfer>>> getunapprovedSavingAcountTransferData() {
-  	    List<savingAccountFundTransfer> list = requestApprovalsService.findByIsApprovedFalse();
-
-  	    if (!list.isEmpty()) {
-  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
-  	    } else {
-  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
-  	    }
-  	}
-*/
+  
   	//ANJALI (16/7/25)
   	//	get policy renewal data
   	@GetMapping("/getUnapprovedPolicyRenewals")
@@ -210,29 +196,18 @@ public class RequestApprovalsController {
   	
   	//anjali (17/7/25)
   	//get flexible renewal data
-  	@GetMapping("/getAllUnapproveFlexibleRenewals")
-  	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
-  	    List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
+  	 @GetMapping("/getAllUnapproveFlexibleRenewals")
+     public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
+         List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
 
-  	    if (!list.isEmpty()) {
-  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
-  	    } else {
-  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
-  	    }
-  	}
-//	@GetMapping("/getUnapprovedFlexibleRenewals")
-//  	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
-//  	    List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
-//
-//  	    if (!list.isEmpty()) {
-//  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
-//  	    } else {
-//  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-//  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
-//  	    }
-//  	}
-
+         if (!list.isEmpty()) {
+             return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+         } else {
+             return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                     .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+         }
+     }
+	
 	//anjali (16/7/25)
   	//approve FD data from flexible renewql
 	
@@ -275,7 +250,7 @@ public class RequestApprovalsController {
 	//anjali (16/7/25)
   	//approve DD data from DailyPremiumRenewalPM 
 	
-	@PostMapping("/approveDDFromDailyPremiumRenewalPM ")
+	@PostMapping("/approveDDFromDailyPremiumRenewalPM")
 	public ResponseEntity<ApiResponse<DailyPremiumRenewalPM>> approveDDFromDailyPremiumRenewalPMData(
 	        @RequestParam("id") Long id,
 	        @RequestParam("isApproved") boolean isApproved) {

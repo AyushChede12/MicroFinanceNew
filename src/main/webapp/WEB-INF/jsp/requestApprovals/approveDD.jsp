@@ -119,7 +119,8 @@
 									<th scope="col" style="white-space: nowrap;">maturity Date</th>
 									<th scope="col" style="white-space: nowrap;">client Name</th>
 									<th scope="col" style="white-space: nowrap;">contac tNo</th>
-									<th scope="col" style="white-space: nowrap;">renewalDate</th>
+									<th scope="col" style="white-space: nowrap;">renewal Date</th>
+									<th scope="col" style="white-space: nowrap;">Branch Name</th>
 								</tr>
 							</thead>
 							<tbody>

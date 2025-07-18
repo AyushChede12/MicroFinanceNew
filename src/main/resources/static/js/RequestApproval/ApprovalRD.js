@@ -1,29 +1,29 @@
 //all unprove data
 
-let allKYCData = [];
+let allPolicyRenewalsData = [];
 
 $(document).ready(function() {
 	// Load all member data on page load
-	loadCustomerKYCData();
+	loadUnapprovedPolicyRenewalsData();
 
 	// Button click filter
 	$('#saveBtn').on('click', function(e) {
 		e.preventDefault(); // Prevent form submission
-		filterKYCData();
+		filterPolicyRenewalsData();
 	});
 });
 //
 
-function loadCustomerKYCData() {
-	$.ajax({	
+function loadUnapprovedPolicyRenewalsData() {
+	$.ajax({
 		url: "/api/requestapproval/getUnapprovedPolicyRenewals",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
 			if (response.status === "OK" && Array.isArray(response.data)) {
-				allKYCData = response.data;
+				allPolicyRenewalsData = response.data;
 				//populateMemberCodeDropdown(allKYCData);
-				renderTable(allKYCData); // Initially show all
+				renderTable(allPolicyRenewalsData); // Initially show all
 			} else {
 				alert("No member data found.");
 			}
@@ -35,7 +35,7 @@ function loadCustomerKYCData() {
 	});
 }
 
-function populateMemberCodeDropdown(data) {
+function DropdownCode(data) {
 	const dropdown = $('#branchName');
 	dropdown.empty().append('<option value="">Select Branch</option>');
 	const uniqueCodes = [...new Set(data.map(item => item.branchName))];
@@ -45,23 +45,23 @@ function populateMemberCodeDropdown(data) {
 }
 
 function renderTable(data) {
-    const tbody = $(".datatable tbody");
-    tbody.empty();
+	const tbody = $(".datatable tbody");
+	tbody.empty();
 
-    if (!data || data.length === 0) {
-        const noDataRow = `
+	if (!data || data.length === 0) {
+		const noDataRow = `
             <tr>
                 <td colspan="12" style="text-align:center; font-family: 'Poppins', sans-serif;">
                     No data found
                 </td>
             </tr>
         `;
-        tbody.append(noDataRow);0
-        return; // Exit the function early
-    }
+		tbody.append(noDataRow); 0
+		return; // Exit the function early
+	}
 
-    data.forEach((item, index) => {
-        const row = `
+	data.forEach((item, index) => {
+		const row = `
             <tr style="font-family: 'Poppins', sans-serif;">
                 <td>
                     <input type="checkbox" class="approval-checkbox"
@@ -82,80 +82,71 @@ function renderTable(data) {
 								   
             </tr>
         `;
-        tbody.append(row);
-    });
+		tbody.append(row);
+	});
 }
 
 
 //approval data
-$(document).ready(function () {
-    // Handle Approve button click
-    $('#approvedBtn').on('click', function () {
-        // Collect all checked checkboxes
-        const selectedIds = [];
+$(document).ready(function() {
+	// Handle Approve button click
+	$('#approvedBtn').on('click', function() {
+		// Collect all checked checkboxes
+		const selectedIds = [];
 
-        $('.approval-checkbox:checked').each(function () {
-            const id = $(this).data('id');
-            selectedIds.push(id);
-        });
+		$('.approval-checkbox:checked').each(function() {
+			const id = $(this).data('id');
+			selectedIds.push(id);
+		});
 
-        if (selectedIds.length === 0) {
-            alert("Please select at least one row to approve.");
-            return;
-        }
+		if (selectedIds.length === 0) {
+			alert("Please select at least one row to approve.");
+			return;
+		}
 
-        // Approve each selected investment
-        selectedIds.forEach(function (id) {
-            $.ajax({
-                url: "/api/requestapproval/approveRDFromPolicyRenewal",
-                type: "POST",
-                data: {
-                    id: id,
-                    isApproved: true // Sends 1 to the DB
-                },
+		// Approve each selected investment
+		selectedIds.forEach(function(id) {
+			$.ajax({
+				url: "/api/requestapproval/approveRDFromPolicyRenewal",
+				type: "POST",
+				data: {
+					id: id,
+					isApproved: true // Sends 1 to the DB
+				},
 				success: function(response) {
-								if (response.status === "OK") {
-									alert("Approved Successfully!");
-									location.reload();
-								}
-							},
-							error: function(xhr) {
-								alert("Error approving ID " + id);
-								console.error(xhr);
-							}
-            });
-        });
-    });
+					if (response.status === "OK") {
+						alert("Approved Successfully!");
+						location.reload();
+					}
+				},
+				error: function(xhr) {
+					alert("Error approving ID " + id);
+					console.error(xhr);
+				}
+			});
+		});
+	});
 
-    // Optional: reload after approval
-    
+	// Optional: reload after approval
+
 });
 
 //filter Data
-function filterKYCData() {
+function filterPolicyRenewalsData() {
 	const selectedCode = $('#branchName').val();
 	const fromDateVal = $('#fromDate').val();
 	const toDateVal = $('#toDate').val();
-	alert(selectedCode);
-	alert(fromDateVal);
-	alert(toDateVal);
 
 	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
 	const toDate = toDateVal ? new Date(toDateVal) : null;
 
-	const filtered = allKYCData.filter(item => {
-		alert(item.branchname);
+	const filtered = allPolicyRenewalsData.filter(item => {
 		const branchName = item.branchname;
 		const dob = item.dob ? new Date(item.dob) : null;
 
 		const matchesCode = selectedCode ? branchName === selectedCode : true;
 		const matchesFrom = fromDate && dob ? dob >= fromDate : true;
 		const matchesTo = toDate && dob ? dob <= toDate : true;
-		alert(matchesCode);
-		alert(matchesFrom);
-		alert(matchesTo);
-		
-
 
 		return matchesCode && matchesFrom && matchesTo;
 	});
