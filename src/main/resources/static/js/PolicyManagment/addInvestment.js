@@ -340,63 +340,57 @@ function displayMaturityDate() {
 
 
 $(document).ready(function () {
-	// Trigger calculation when any input changes
 	$("#policyAmount, #schemeTerm, #schemeMode, #roi").on("change keyup", function () {
 		calculateDepositAndMaturity();
 	});
 
 	function calculateDepositAndMaturity() {
-		const policyAmount = parseFloat($("#policyAmount").val());
+		const policyAmount = parseFloat($("#policyAmount").val()); // This is per-installment amount
 		const term = parseInt($("#schemeTerm").val());
 		const schemeMode = $("#schemeMode").val();
-		const roi = parseFloat($("#roi").val()); // Interest rate %
+		const roi = parseFloat($("#roi").val());
 
-		// Basic validations
 		if (isNaN(policyAmount) || isNaN(term) || !schemeMode || isNaN(roi)) {
 			$("#depositAmount").val("");
 			$("#maturityAmount").val("");
 			return;
 		}
 
-		let totalInstallments = 0;
-		let termInYears = 0;
+		let installmentsPerYear = 0;
 
-		// Calculate total installments and duration in years
 		switch (schemeMode) {
 			case "Daily":
-				totalInstallments = term;
-				termInYears = term / 365;
+				installmentsPerYear = 1;
 				break;
 			case "Monthly":
-				totalInstallments = term;
-				termInYears = term / 12;
+				installmentsPerYear = 12;
 				break;
 			case "Quarterly":
-				totalInstallments = term * 3;
-				termInYears = (term * 3) / 12;
+				installmentsPerYear = 4;
 				break;
 			case "Half-Yearly":
-				totalInstallments = term * 6;
-				termInYears = (term * 6) / 12;
+				installmentsPerYear = 2;
 				break;
 			case "Yearly":
-				totalInstallments = term * 12;
-				termInYears = term;
+				installmentsPerYear = 1;
 				break;
 			default:
 				alert("Unknown scheme mode selected.");
 				return;
 		}
 
-		const depositAmount = policyAmount * totalInstallments;
-		const interest = (depositAmount * roi * termInYears) / 100;
-		const maturityAmount = depositAmount + interest;
+		const totalInstallments = installmentsPerYear * term;
+		const totalDepositAmount = policyAmount * totalInstallments;
+		const r = roi / 100;
+		const n = installmentsPerYear;
+		const t = term;
 
-		// Optional alert for verification
-		//alert("Calculated Deposit: ₹" + depositAmount.toFixed(2) + "\nMaturity Amount: ₹" + maturityAmount.toFixed(2));
+		// Use Future Value of Ordinary Annuity Formula:
+		// M = P × [((1 + r/n)^(nt) - 1) / (r/n)]
+		const compoundRate = r / n;
+		const maturityAmount = policyAmount * ((Math.pow(1 + compoundRate, n * t) - 1) / compoundRate);
 
-		// Set calculated values in inputs
-		$("#depositAmount").val(depositAmount.toFixed(2));
+		$("#depositAmount").val(totalDepositAmount.toFixed(2));
 		$("#maturityAmount").val(maturityAmount.toFixed(2));
 	}
 });
