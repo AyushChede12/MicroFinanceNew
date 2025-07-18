@@ -118,8 +118,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Client Name :</label> <input
-									type="text" name="clientName" id="clientName" required="required"
+								<label for="vehicalNo">Customer Name :</label> <input
+									type="text" name="customerName" id="customerName" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -159,8 +159,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Actual Maturity:</label> <input type="text" name="actualMaturity"
-									id="actualMaturity" required="required" placeholder="" />
+								<label>Actual Maturity:</label> <input type="text" name="maturityAmount"
+									id="maturityAmount" required="required" placeholder="" />
 
 							</div>
 
@@ -179,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Sys.Payable:</label> <input type="text" name="sysPayable"
-									id="sysPayable" required="required" placeholder="" />
+									id="sysPayable" required="required" placeholder="" value="sysPayable" />
 
 							</div>
 
@@ -189,21 +189,12 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Deduction(-):</label> <input type="text" name="deduction"
-									id="deduction" required="required" placeholder="" />
+									id="deduction" required="required" placeholder="" value="deduction "/>
 
 							</div>
 
 						</div>
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
-									id="adjeustment" required="required" placeholder="" />
-
-							</div>
-
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -218,8 +209,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch Name:</label> <input type="text" name="BranchName"
-									id="BranchName" required="required" placeholder="" />
+								<label>Approval Branch Name:</label> <input type="text" name="Approvebranch"
+									id="Approvebranch" required="required" />
 
 							</div>
 
@@ -230,8 +221,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve Comment:</label> <input type="text" name="approveComment"
-									id="approveComment" required="required" placeholder="" />
+								<label>Approve Status:</label> <input type="text" name="approveStatus"
+									id="approveStatus" required="required" value="NotApproved" readonly="readonly" />
 
 							</div>
 
@@ -241,8 +232,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve User:</label> <input type="text" name="approveUser"
-									id="approveUser" required="required" placeholder="" />
+								 <input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields">
+								<label> User Approver:</label> <select id="userApprover"
+									name="userApprover" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Team Member</option>
+
+								</select>
+							</div>
 
 							</div>
 
@@ -264,14 +262,14 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Amount: <span id="star"> *</span></label> <input type="text"
 									name="amount" id="amount" required="required"
-									placeholder="" style="text-transform: uppercase;" />
+									 style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
-									name="paidAmount" id="paidAmount" required="required"
+									name="depositAmount" id="depositAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -312,8 +310,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch <span id="star"> *</span> :</label> <select id="payBranch"
-									name="payBranch" required="required"
+								<label for="vehicalNo">Pay Branch <span id="star"> *</span> :</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -335,7 +333,9 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Mode of Payment <span id="star"> *</span></label> <select id="modeofPayment"
 									name="modeofPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="Select">Select</option>
+									<option value="Online">Online</option>
+									<option value="Cash">Cash</option>
 
 								</select>
 							</div>
