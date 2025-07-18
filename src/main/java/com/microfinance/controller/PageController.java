@@ -1037,9 +1037,9 @@ public class PageController {
 		return "preferences/customerCreation";
 	}
 	
-	@GetMapping("/customerMenu")
+	@GetMapping("/customerMenuAccess")
 	public String getCustomerMenu() {
-		return "preferences/customerMenu";
+		return "preferences/customerMenuAccess";
 	}
 	
 	@GetMapping("/customerBalanceReport")
