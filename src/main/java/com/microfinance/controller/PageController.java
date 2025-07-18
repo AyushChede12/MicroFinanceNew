@@ -447,6 +447,16 @@ public class PageController {
 		return "requestApprovals/approveRD";
 	}
 
+	@GetMapping("/approveFD")
+	public String getFDApproval() {
+		return "requestApprovals/approveFD";
+	}
+
+	@GetMapping("/approveDD")
+	public String getDDApproval() {
+		return "requestApprovals/approveDD";
+	}
+
 	@GetMapping("/approveRecurring")
 	public String getRecurringApproval() {
 		return "requestApprovals/approveRecurringDeposits";
