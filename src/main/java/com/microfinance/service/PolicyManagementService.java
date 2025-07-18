@@ -2,7 +2,6 @@ package com.microfinance.service;
 
 import java.util.List;
 
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -13,13 +12,19 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
+import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.MISDepositPM;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.MisDepositePMRepo;
+import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 
 @Service
@@ -38,6 +43,15 @@ public class PolicyManagementService {
 
 	@Autowired
 	AddInvestmentRepo addinvestmentrepo;
+	
+	@Autowired
+	PolicyRenewalRepo policyRenewalRepo;
+	
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+	
+	@Autowired
+	FlexibleRenewalRepo flexibleRenewalRepo;
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 		try {
@@ -290,6 +304,11 @@ public class PolicyManagementService {
 		}
 	}
 
+//Ashwini
+	/*
+	 * public List<AddnewinvestmentPM> getAddInvestmentDetails() { // TODO
+	 * Auto-generated method stub return addinvestmentrepo.findAll(); }
+	 */
 
 
 
@@ -374,11 +393,10 @@ public List<AddnewinvestmentPM> findByBranch(String branchName) {
 
 
 
-/*
- * public List<AddnewinvestmentPM> getDetailsById(String policyCode) { // TODO
- * Auto-generated method stub List<AddnewinvestmentPM>
- * list=addinvestmentrepo.findByPolicyCode(policyCode); return list; }
- */
+public AddnewinvestmentPM getDetailsById(Long id) {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findById(id).orElse(null);
+}
 
 
 
@@ -407,7 +425,6 @@ public List<AddnewinvestmentPM> getAllPolicyManagementData() {
 }
 
 
-
 public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
     if (policyCode == null) return Optional.empty();
 
@@ -422,22 +439,54 @@ public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
 }
 
 
+
+
 public List<AddnewinvestmentPM> getApprovedInvestments() {
 	// TODO Auto-generated method stub
 	return addinvestmentrepo.findByIsApprovedTrue();
 }
-public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
-	// TODO Auto-generated method stub
 
-	return  addinvestmentrepo.findByPolicyCode(policyCode);
-}
 
+/*
+ * public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) { //
+ * TODO Auto-generated method stub
+ * 
+ * return addinvestmentrepo.findByPolicyCode(policyCode); }
+ */
+ 
 
 
 
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
 }
+
+
+public List<AddnewinvestmentPM> getApprovedFDPolicies() {
+    return addinvestmentrepo.findApprovedFDPolicies();
+}
+
+public List<AddnewinvestmentPM> getApprovedDDPolicies() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findApprovedDDPolicies();
+}
+
+public List<PolicyRenewal> getAllRdRenewalData() {
+	// TODO Auto-generated method stub
+	return policyRenewalRepo.findAll();
+}
+
+public List<DailyPremiumRenewalPM> getAllDdRenewalData() {
+	// TODO Auto-generated method stub
+	return dailyPremiumRenewalRepo.findAll();
+}
+
+public List<FlexibleRenewal> getAllFdRenewalData() {
+	// TODO Auto-generated method stub
+	return flexibleRenewalRepo.findAll();
+}
+
+
 }
 
 

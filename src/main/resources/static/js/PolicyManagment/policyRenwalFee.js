@@ -49,6 +49,7 @@ $(document).ready(function () {
 						$("#contactNo").val(data.contactNo);
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
+						$("#branchname").val(data.branchName);
 						$("#policyTerm").val(data.schemeTerm);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);
@@ -90,7 +91,9 @@ $(document).ready(function () {
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
-                alert("✅ " + response.message);
+                 alert("✅ " + response.message);
+                
+                  location.reload();
                 // Optionally reset form or reload table
                 // $("#formid")[0].reset();
             },
