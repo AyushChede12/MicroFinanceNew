@@ -22,9 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.dto.GroupDirectoryDto;
+import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.LoanAprroval;
 import com.microfinance.service.JointLiabilityLoanService;
 
 
@@ -274,6 +276,95 @@ public class JointLiabilityLoanController {
         }
     }
 	
+// Apply For group loan
+    @PostMapping("/saveloanapproval")
+    public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
+        boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
 
+        if (isSaved) {
+            ApiResponse<ApplyForGroupLoan> response = ApiResponse.success(
+                HttpStatus.CREATED,
+                "Group Loan saved successfully",
+                applyGroupLoan
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else {
+            ApiResponse<ApplyForGroupLoan> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save Group Loan."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+    //faeth the group directory code
+    @PostMapping("/fetchByGroupID")
+    public ApiResponse<List<GroupDirectory>> fetchByGroupID(@RequestParam("groupID") String groupID) {
+    	List<GroupDirectory> list = jointLiabilityLoanService.fetchByGroupID(groupID);
+    	if (list != null && !list.isEmpty()) {
+    		return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
+    	} else {
+    		return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
+    	}
+    }
+    // feath the property form lending group
+    @PostMapping("/fetchByPlanCode")
+    public ApiResponse<List<CreateLendingGroup>> fetchByPlanCode(@RequestParam("planCode") String planCode) {
+        List<CreateLendingGroup> list = jointLiabilityLoanService.fetchByPlanCode(planCode);
+        if (list != null && !list.isEmpty()) {
+            return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
+        } else {
+            return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
+        }
+    }
+    
+    // feath group loan
+    @GetMapping("/viewgrouploans")
+    public ResponseEntity<ApiResponse<List<ApplyForGroupLoan>>> getAllGroupLoanApplications() {
+        List<ApplyForGroupLoan> applications = jointLiabilityLoanService.getAllgroupdata();
 
+        if (applications != null && !applications.isEmpty()) {
+            ApiResponse<List<ApplyForGroupLoan>> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Group loan applications fetched successfully.",
+                applications
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<List<ApplyForGroupLoan>> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "No group loan applications found."
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+    
+    //save loan application
+    @PostMapping("/saveGroupLoan")
+    public ResponseEntity<ApiResponse<LoanAprroval>> saveLoanApproval(@RequestBody LoanAprroval loanAprroval) {
+        boolean isSaved = jointLiabilityLoanService.saveLoanApproval(loanAprroval);
+
+        if (isSaved) {
+            ApiResponse<LoanAprroval> response = ApiResponse.success(
+                HttpStatus.CREATED,
+                "Group Loan saved successfully",
+                loanAprroval
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else {
+            ApiResponse<LoanAprroval> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save Group Loan."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+   
 }
+    
+    
+
+
+
+    
+
+

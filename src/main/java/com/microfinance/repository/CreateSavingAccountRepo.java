@@ -15,13 +15,20 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 	@Query("select coalesce(max(id), 0) from CreateSavingsAccount")
 	long getMaxId();
 
-
 	List<CreateSavingsAccount> findByIsApprovedFalse();
 
-	List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
-
+	//List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
 
 	Optional<CreateSavingsAccount> findByAccountNumber(String accountNumber);
 
+	List<CreateSavingsAccount> findByTypeofaccountContainingIgnoreCase(String keyword);
 
+	List<CreateSavingsAccount> findAllByAccountNumberAndIsApprovedTrue(String accountNumber);
+
+	List<CreateSavingsAccount> findByIsApprovedTrue();
+
+	List<CreateSavingsAccount> findBySelectByCustomer(String selectByCustomer);
+	
+
+	//CreateSavingsAccount findByaAccountNumber(String accountNumber);
 }

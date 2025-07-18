@@ -15,8 +15,9 @@ import com.microfinance.model.addFinancialConsultant;
 @Repository
 public interface FinancialConsultantRepo extends JpaRepository<addFinancialConsultant, Long> {
 
-	@Transactional
-	List<addCustomer> findByMemberCode(String memberCode);
+	/*
+	 * @Transactional List<addCustomer> findByMemberCode(String memberCode);
+	 */
 
 	@Query("select coalesce(max(id), 0) from addFinancialConsultant")
 	long getMaxId();

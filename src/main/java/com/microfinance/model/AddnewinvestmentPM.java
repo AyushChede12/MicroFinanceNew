@@ -33,20 +33,28 @@ public class AddnewinvestmentPM {
 	private String schemeType;
 	private String schemeTerm;
 	private String schemeMode;
+	private String roi;
 	private String policyAmount;
 	private String depositAmount;
 	private String introMCode;
 	private String maturityAmount;
 	private String MISInterest;
 	private String paymentBy;
+	private String schemeCode;
 	private String remark;
 	private String Agent;
 	private String smsSend;
 	private String image1;
 	private String image2;
-	
-	
-	
+	private boolean isApproved;
+	private String lastInstPaid;
+	private String paidAmount;
+    private String amountDue;
+    private String schemeName;
+    private String lastPaymentDate;
+    private String dueDate;
+    private String noOfInstallments;
+    private String modeOfPayment;
 	
 	public Long getId() {
 		return id;
@@ -264,6 +272,84 @@ public class AddnewinvestmentPM {
 	public void setImage2(String image2) {
 		this.image2 = image2;
 	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+	public String getLastInstPaid() {
+		return lastInstPaid;
+	}
+	public void setLastInstPaid(String lastInstPaid) {
+		this.lastInstPaid = lastInstPaid;
+	}
+	public String getPaidAmount() {
+		return paidAmount;
+	}
+	public void setPaidAmount(String paidAmount) {
+		this.paidAmount = paidAmount;
+	}
+	public String getAmountDue() {
+		return amountDue;
+	}
+	public void setAmountDue(String amountDue) {
+		this.amountDue = amountDue;
+	}
+	public String getSchemeName() {
+		return schemeName;
+	}
+	public void setSchemeName(String schemeName) {
+		this.schemeName = schemeName;
+	}
+	public String getSchemeCode() {
+		return schemeCode;
+	}
+	public void setSchemeCode(String schemeCode) {
+		this.schemeCode = schemeCode;
+	}
+	
+	
+	// Add these getters
+	public String getLastPaymentDate() {
+	    return lastPaymentDate;
+	}
+
+	public String getDueDate() {
+	    return dueDate;
+	}
+
+	public String getNoOfInstallments() {
+	    return noOfInstallments;
+	}
+
+	public String getModeOfPayment() {
+	    return modeOfPayment;
+	}
+	
+	public void setLastPaymentDate(String lastPaymentDate) {
+	    this.lastPaymentDate = lastPaymentDate;
+	}
+
+	public void setDueDate(String dueDate) {
+	    this.dueDate = dueDate;
+	}
+
+	public void setNoOfInstallments(String noOfInstallments) {
+	    this.noOfInstallments = noOfInstallments;
+	}
+
+	public void setModeOfPayment(String modeOfPayment) {
+	    this.modeOfPayment = modeOfPayment;
+	}
+	public String getRoi() {
+		return roi;
+	}
+	public void setRoi(String roi) {
+		this.roi = roi;
+	}
+
+	
 	
 
 }

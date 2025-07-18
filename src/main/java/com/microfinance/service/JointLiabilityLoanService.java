@@ -13,10 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.GroupDirectoryDto;
+import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.LoanAprroval;
+import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
+import com.microfinance.repository.LoanApprovalRepo;
 
 @Service
 public class JointLiabilityLoanService {
@@ -25,6 +29,12 @@ public class JointLiabilityLoanService {
 
 	@Autowired
 	GroupDirectoryRepo groupDirectoryRepo;
+	
+	@Autowired
+	ApplyForGroupLoanRepo applyForGroupLoanRepo;
+	
+	@Autowired
+	LoanApprovalRepo loanApprovalRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -100,6 +110,7 @@ public class JointLiabilityLoanService {
 			GroupDirectory existing = optional.get();
 
 			// Update all fields
+			existing.setGroupID(updatedDirectory.getGroupID());
 			existing.setCommunityName(updatedDirectory.getCommunityName());
 			existing.setOpeningDate(updatedDirectory.getOpeningDate());
 			existing.setBranchName(updatedDirectory.getBranchName());
@@ -145,6 +156,7 @@ public class JointLiabilityLoanService {
 		}
 
 		// Map DTO to entity
+		groupDirectory.setGroupID(groupDirectoryDto.getGroupID());
 		groupDirectory.setCommunityName(groupDirectoryDto.getCommunityName());
 		groupDirectory.setOpeningDate(groupDirectoryDto.getOpeningDate());
 		groupDirectory.setBranchName(groupDirectoryDto.getBranchName());
@@ -225,6 +237,49 @@ public class JointLiabilityLoanService {
 		return groupDirectoryRepo.findAll();
 	}
 
+	public boolean saveGroupLoan(ApplyForGroupLoan applyGroupLoan) {
+		// TODO Auto-generated method stub
+		 try {
+			applyForGroupLoanRepo.save(applyGroupLoan);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public List<ApplyForGroupLoan> getAllApplyForGroupLoan() {
+		// TODO Auto-generated method stub
+		return applyForGroupLoanRepo.findAll();
+	}
+
+	public List<GroupDirectory> fetchByGroupID(String groupID) {
+		// TODO Auto-generated method stub
+		return groupDirectoryRepo.findByGroupID(groupID);
+	}
+
+	
+
+	public List<CreateLendingGroup> fetchByPlanCode(String planCode) {
+		   return createLendingGroupRepo.findByPlanCode(planCode);
+	}
+
+	public List<ApplyForGroupLoan> getAllgroupdata() {
+		// TODO Auto-generated method stub
+		return applyForGroupLoanRepo.findAll();
+	}
+
+	public boolean saveLoanApproval(LoanAprroval loanAprroval) {
+		// TODO Auto-generated method stub
+		try {
+			loanApprovalRepo.save(loanAprroval);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	
+	
 	
 
 }

@@ -21,6 +21,7 @@ import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.GroupDirectoryRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 import com.microfinance.repository.TransferShareRepo;
@@ -64,7 +65,11 @@ public class PageController {
 	CreateLendingGroupRepo createLendingGroupRepo;
 	
 	@Autowired
+	GroupDirectoryRepo groupDirectoryRepo;
+
+	@Autowired
 	AddInvestmentRepo addInvestmentRepo;
+
 	
 	
 	@GetMapping("/")
@@ -313,7 +318,10 @@ public class PageController {
 	}
 
 	@GetMapping("/groupDirectory")
-	public String getGroupDirectory() {
+	public String getGroupDirectory(Model model) {
+		long maxIdGD = groupDirectoryRepo.getMaxId();
+		String memberCodeGD = "GD" + "000" + (maxIdGD + 1);
+		model.addAttribute("memberCodeGD", memberCodeGD);
 		return "jointLiabilityLoan/groupDirectory";
 	}
 
@@ -432,6 +440,11 @@ public class PageController {
 	@GetMapping("/approvePolicy")
 	public String getPolicyApproval() {
 		return "requestApprovals/approvePolicy";
+	}
+	
+	@GetMapping("/approveRD")
+	public String getRDApproval() {
+		return "requestApprovals/approveRD";
 	}
 
 	@GetMapping("/approveRecurring")
@@ -709,10 +722,7 @@ public class PageController {
 	}
 
 	@GetMapping("/addNewInvestment")
-	public String getAddNewInvestment(Model model) {
-		long maxId = addInvestmentRepo.getMaxId();
-		String policyCode = "IC" + "0000" + (maxId + 1);
-		model.addAttribute("policyCode", policyCode);
+	public String getAddNewInvestment() {
 		return "policyManagement/addNewInvestment";
 	}
 
@@ -910,7 +920,7 @@ public class PageController {
 		return "customerSavings/createCurrentAccount";
 	}
 	
-	@GetMapping("/savingsAccountActivity")
+	/*@GetMapping("/savingsAccountActivity")
 	public String getSavingsAccountActivity(Model model) {
 		String prefix = "TXN";
 		String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
@@ -919,7 +929,7 @@ public class PageController {
 
 		model.addAttribute("transactionCode", transactionCode);
 		return "customerSavings/savingsAccountActivity";
-	}
+	}*/
 	
 	@GetMapping("/savingsAccountFundTransfer")
 	public String getSavingsAccountFundTransfer() {
@@ -1032,7 +1042,11 @@ public class PageController {
 		return "preferences/lockerManagement";
 	}
 	
-	
+	@GetMapping("/ViewAdvisorData")
+	public String ViewAdvisorData()
+	{
+		return "reportAndAnalytics/ReportAdvisor";
+	}
 
 	
 

@@ -3,6 +3,8 @@ package com.microfinance.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.microfinance.model.ApplyForMaturity;
@@ -32,6 +34,12 @@ public class MaturitySchemeMasterService {
 	public List<ApplyForMaturity> getApplyMaturityDetails() {
 		// TODO Auto-generated method stub
 		return Applymaturityrepo.findAll();
+	}
+	
+
+	public Page<ApplyForMaturity> getApplyMaturityDetailsWithPage(int page, int size) {
+	    PageRequest pageable = PageRequest.of(page, size);
+	    return Applymaturityrepo.findWithPage(pageable);
 	}
 
 	public List<ApplyForMaturity> getMaturityDetailsByBranchAndDate(String branchName, String fromDate, String toDate) {

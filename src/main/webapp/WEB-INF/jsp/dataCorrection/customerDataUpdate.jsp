@@ -118,8 +118,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Select</label> <select
-									id="authenticateFor" name="authenticateFor" required="required"
+								<label for="major">Select</label> <select
+									id="major" name="major" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>
@@ -359,6 +359,28 @@ pageEncoding="ISO-8859-1"%> -->
 							</label> <small id="chkphoto" style="color: red;"></small>
 						</div>
 
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Signature <span class="star">*</span>
+							</label> <label for="customerSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="customerSignature" id="customerSignature"
+								hidden="hidden" onchange="signatureUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+									<!-- <p
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
+								</div>
+							</label> <small id="chksignature" style="color: red;"></small>
+						</div>
+
 
 
 					</div>
@@ -446,75 +468,6 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Current">Current</option>
 
 								</select>
-							</div>
-						</div>
-
-					</div>
-
-				</div>
-
-				<div class="mt-5">
-					<nav>
-						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Fees/Setting Details</li>
-						</ol>
-					</nav>
-					<div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Customer Charges(if any)</label> <input type="text"
-									name="memberFees" id="memberFees" required="required"
-									placeholder="Enter Charges" style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Shares Issued From</label> <select
-									id="shareIssuedBy" name="shareIssuedBy" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Branch Manager">Branch Manager</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Number of Shares</label> <input type="text"
-									name="noOfShare" id="noOfShare" required="required"
-									placeholder="Enter Share" style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Share Value </label> <input type="text"
-									name="baseValue" id="baseValue" required="required"
-									placeholder="Enter Nominee KYC" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Mode of payment </label> <select
-									id="modeOfPayment" name="modeOfPayment" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Cash">Cash</option>
-									<option value="Online">Online</option>
-
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Comments </label> <input type="text"
-									name="comments" id="comments" required="required"
-									placeholder="Enter Comments" />
 							</div>
 						</div>
 
