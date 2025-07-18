@@ -22,6 +22,7 @@ import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
+import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 import com.microfinance.repository.TransferShareRepo;
@@ -68,7 +69,8 @@ public class PageController {
 	@Autowired
 	AddInvestmentRepo addInvestmentRepo;
 
-	
+	@Autowired
+	LoanApplicationRepo loanApplicationRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -833,7 +835,7 @@ public class PageController {
 
 	@GetMapping("/newLoanApplication")
 	public String getNewLoanApplication(Model model) {
-		long maxId = loanMangmentSchemeRepo.getMaxId();
+		long maxId = loanApplicationRepo.getMaxId();
 		String loanCode = "LP" + "0000" + (maxId + 1);
 		model.addAttribute("loanCode", loanCode);
 		return "loanManagement/newLoanApplication";

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.BranchModule;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
+import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.service.LoanManagementService;
 
@@ -108,16 +110,27 @@ public class LoanManagementController {
 	}
 
 //data Fetch from name and id from customer model
-	@GetMapping("/getByIdNewLoanApplication")
-	public ResponseEntity<ApiResponse<addCustomer>> getLoanById1(@RequestParam Long id) {
+	@GetMapping("/getByMemberCodeNewLoanApplication")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getLoanByMemberCode(
+	    @RequestParam String memberCode) {
 	    try {
-	    	addCustomer customer = loanServices.getLoanApplicationById(id);
-	        return ResponseEntity.ok(new ApiResponse<>( HttpStatus.OK, "Customer found", customer));
+	        List<addCustomer> customerList = loanServices.getLoanApplicationById(memberCode);
+
+	        if (customerList == null || customerList.isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+	        }
+
+	        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Customer(s) found", customerList));
 	    } catch (RuntimeException ex) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	            .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	            .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
 	    }
 	}
+
+	
+	
+
 	
 	//fetch all data loan scheme catalog
 	@GetMapping("/fetchLoanSchemeCatalog")
@@ -152,6 +165,19 @@ public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanByCode(@RequestParam
     } catch (RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
+    }
+}
+
+@PostMapping("/saveloanapplication")
+public ResponseEntity<ApiResponse<LoanApplication>> saveSchemeCatalog(@RequestBody LoanApplication loanApplication) {
+    boolean isSaved = loanServices.saveLoanApplicationData(loanApplication);
+
+    if (isSaved) {
+        ApiResponse<LoanApplication> response = ApiResponse.success(HttpStatus.CREATED,"Saving Scheme saved successfully.",loanApplication);
+        return ResponseEntity.ok(response);
+    } else {
+        ApiResponse<LoanApplication> response = ApiResponse.error(HttpStatus.BAD_REQUEST,"Failed to save scheme.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
 

@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.BranchModule;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.BranchModuleRepo;
+import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.NewLoanAppicationRepo;
 
@@ -25,6 +27,9 @@ public class LoanManagementService {
 	private LoanMangmentSchemeRepo loanRepository;
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
+	
+	@Autowired
+	LoanApplicationRepo loanApplicationRepo;
 
 	// Service fo saving and updating the loan scheme data 
 	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
@@ -93,12 +98,6 @@ public class LoanManagementService {
 		return addCustomerRepo.findAll();
 	}
 
-	public addCustomer getLoanApplicationById(Long id) {
-
-		return addCustomerRepo.findById(id).orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
-	}
-
-
 	// Loan schem Code Name Dropdrawn
 
 	public List<LoanSchemCatalog> getLoanSchemCode() {
@@ -124,6 +123,23 @@ public class LoanManagementService {
 			
 			return loanRepository.findAll();
 		}
+
+		public boolean saveLoanApplicationData(LoanApplication loanApplication) {
+	        try {
+	        	loanApplicationRepo.save(loanApplication);
+	            return true; // Saved successfully
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            return false; // Something went wrong
+	        }
+	    }
+
+		public List<addCustomer> getLoanApplicationById(String memberCode) {
+			 return addCustomerRepo.findByMemberCode(memberCode);
+		}
+
+		
+
 	
 
 

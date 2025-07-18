@@ -52,9 +52,9 @@ public class LoanApplication {
     // Deduction Details
     private String processingFee;
     private String legalCharges;
-    private String buildingFund;
+    private String gst;
     private String insuranceFee;
-    private String overdueInterestCharge;
+    private String valuationFees;
     private String stationaryFee;
     private String financialConsultantId;
     private String financialConsultantName;
@@ -256,11 +256,19 @@ public class LoanApplication {
 	public void setLegalCharges(String legalCharges) {
 		this.legalCharges = legalCharges;
 	}
-	public String getBuildingFund() {
-		return buildingFund;
+	
+	
+	public String getGst() {
+		return gst;
 	}
-	public void setBuildingFund(String buildingFund) {
-		this.buildingFund = buildingFund;
+	public void setGst(String gst) {
+		this.gst = gst;
+	}
+	public String getValuationFees() {
+		return valuationFees;
+	}
+	public void setValuationFees(String valuationFees) {
+		this.valuationFees = valuationFees;
 	}
 	public String getInsuranceFee() {
 		return insuranceFee;
@@ -268,12 +276,7 @@ public class LoanApplication {
 	public void setInsuranceFee(String insuranceFee) {
 		this.insuranceFee = insuranceFee;
 	}
-	public String getOverdueInterestCharge() {
-		return overdueInterestCharge;
-	}
-	public void setOverdueInterestCharge(String overdueInterestCharge) {
-		this.overdueInterestCharge = overdueInterestCharge;
-	}
+	
 	public String getStationaryFee() {
 		return stationaryFee;
 	}

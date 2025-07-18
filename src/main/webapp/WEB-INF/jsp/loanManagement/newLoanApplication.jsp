@@ -64,6 +64,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					<input type="hidden" id="loanId" name="loanId" value="${loanCode}">
+					
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
@@ -428,8 +430,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Building Fund</label> <input type="text"
-									name="buildingFund" id="buildingFund" required="required"
+								<label for="loanName">GST</label> <input type="text"
+									name="gst" id="gst" required="required"
 									placeholder="Enter Stamp Duty Fee"
 									style="text-transform: uppercase;" />
 							</div>
@@ -447,9 +449,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Overdue Interest Charge</label> <input
-									type="text" name="overdueInterestCharge"
-									id="overdueInterestCharge" required="required"
+								<label for="loanName">Valuation Fees</label> <input
+									type="text" name="valuationFees"
+									id="valuationFees" required="required"
 									placeholder="Enter Interest Charge"
 									style="text-transform: uppercase;" />
 							</div>
@@ -468,30 +470,24 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4"
 								style="margin-bottom: 30px">
-								<label> Advisor Collector ID</label>
+								<label> Financial Consultant Id</label>
 								<div class="position-relative">
-									<select id="advisorCollectorId" name="advisorCollectorId"
+									<select id="financialConsultantId" name="financialConsultantId"
 										required="required" class="form-control selectField"
 										style="height: 30px;">
-										<option value="">Select Advisor ID</option>
+										<option value=""></option>
 
 									</select>
-
-
-
 								</div>
 							</div>
 						</div>
 
-
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Advisor/Collector Full Name</label> <input
-									type="text" name="advisorCollectorName"
-									id="advisorCollectorName" required="required"
-									placeholder="Enter Loan ROI" style="text-transform: uppercase;" />
+								<label for="">Financial Consultant Name</label> <input
+									type="text" name="financialConsultantName"
+									id="financialConsultantName" required="required"
+									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
