@@ -92,7 +92,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable overflow-scroll">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">Sl No.</th>
+									<th scope="col">Sl No.</th>
+									<th scope="col"></th>
 									<th scope="col">Financial Code</th>
 									<th scope="col">Financial Name</th>
 									<th scope="col">Contact No</th>
@@ -103,6 +104,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">Pin Code</th>
 									<th scope="col">Profession</th>
 									<th scope="col">Financial Status</th>
+									<th scope="col">Generate</th>
+									
 									</tr>
 								</thead>
 								<tbody>

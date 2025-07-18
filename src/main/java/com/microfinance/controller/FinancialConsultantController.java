@@ -227,5 +227,4 @@ public class FinancialConsultantController {
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 
-
 }
