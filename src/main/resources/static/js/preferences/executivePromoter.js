@@ -4,14 +4,8 @@ function photoUpload() {
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("photoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("photoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -26,14 +20,8 @@ function signatureUpload() {
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("signaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("signaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -43,7 +31,7 @@ function signatureUpload() {
 
 $(document).ready(function() {
 	$("#tableBody").hide();
-	$("#updateBtn").hide();	
+	$("#updateBtn").hide();
 
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
@@ -411,11 +399,13 @@ function viewData(id) {
 				$("#shareAmount").val(branch.shareAmount);
 				$("#depositAcc").val(branch.depositAcc); // You forgot this in your latest version
 
-				// Image: Photo
 				if (branch.photo) {
 					const photoPath = `Uploads/${branch.photo}`;
 					$("#photoPreview").attr("src", photoPath);
 					$("#photoHidden").val(photoPath);
+					const fakePhotoEvent = { target: { result: photoPath } };
+					photoSizeEdit(fakePhotoEvent);
+
 				} else {
 					$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
 					$("#photoHidden").val("");
@@ -426,10 +416,14 @@ function viewData(id) {
 					const signPath = `Uploads/${branch.signature}`;
 					$("#signaturePreview").attr("src", signPath);
 					$("#signatureHidden").val(signPath);
+					const fakeSignEvent = { target: { result: signPath } };
+					signatureSizeEdit(fakeSignEvent);
+
 				} else {
 					$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
 					$("#signatureHidden").val("");
 				}
+
 
 			} else {
 				alert("Executive founder not found: " + response.message);
@@ -482,14 +476,14 @@ function updateBranch() {
 
 	// Send the data via AJAX
 	$.ajax({
-		url: "/saveExecutiveFounder",
+		url: "/api/preference/saveExecutiveFounder",
 		type: "POST",
 		data: formData,
 		processData: false,
 		contentType: false,
 		success: function(response) {
 			if (response.status == "OK") {
-				alert("Executive Founder Saved Successfully");
+				alert("Executive Founder Updated Successfully");
 				location.reload();
 			} else {
 				alert(response.message);
@@ -547,3 +541,22 @@ $(document).ready(function() {
 	showPage(currentPage);
 });
 
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}

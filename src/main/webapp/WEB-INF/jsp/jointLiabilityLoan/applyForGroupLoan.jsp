@@ -29,23 +29,21 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 
-
 <body>
-
 	<main id="main" class="main">
 		<div class="pagetitle">
 			<h1>Joint Liability Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-person-bounding-box"></i>
-					</a></li>
+					<li class="breadcrumb-item"><a href="home"><i
+							class="bi bi-person-bounding-box"></i></a></li>
 					<li class="breadcrumb-item action">Apply For Group Loan</li>
 				</ol>
 			</nav>
@@ -61,36 +59,16 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Find by Group Code*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Find by Group Code*</label> <select
+									id="groupCode" name="groupCode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+								</select>
 							</div>
 						</div>
-
-
-
 					</div>
-
-
 				</div>
-
 
 				<div class="mt-5">
 					<nav>
@@ -98,93 +76,80 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Group Profile</li>
 						</ol>
 					</nav>
+					<div class="col-lg-3" style="display: none;">
+						<div class="d-flex flex-column formFields">
+							<label>Selected Member*</label> <input type="hidden"
+								id="selectedMember" name="selectedMember" class="form-control"
+								required />
+						</div>
+					</div>
+
+					<div class="col-lg-3" style="display: none;">
+						<div class="d-flex flex-column formFields">
+							<label>Customer Name*</label> <input type="hidden"
+								id="customerName" name="customerName" class="form-control"
+								required />
+						</div>
+					</div>
+
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Loan Application Date*</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+								<label for="openingDate">Opening Date*</label> <input
+									type="date" name="openingDate" id="openingDate" required
+									placeholder="Enter Opening Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Name of Group* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Assigned Loan Officer* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Weekly Collection Day* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="communityName">Community Name*</label> <input
+									type="text" name="communityName" id="communityName" required
+									placeholder="Enter Community Name" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">	Group Leader* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="allocatedStaff">Allocated Staff*</label> <input
+									type="text" name="allocatedStaff" id="allocatedStaff" required
+									placeholder="Enter Allocated Staff" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Mode of Collection* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="branchName">Branch Name*</label> <select
+									id="branchName" name="branchName" required
+									class="form-control selectField" style="height: 30px;"></select>
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="collectionDays">Scheduled Collection Days*</label> <input
+									type="text" name="collectionDays" id="collectionDays" required
+									placeholder="Enter Collection Days" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="communityLeader">Community Leader*</label> <input
+									type="text" name="communityLeader" id="communityLeader"
+									required placeholder="Enter Community Leader" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">	Contact Number* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="contactNumber">Contact Number*</label> <input
+									type="text" name="contactNumber" id="contactNumber" required
+									placeholder="Enter Contact Number" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Purpose of Loan* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="loanPurpose">Purpose of Loan*</label> <input
+									type="text" name="loanPurpose" id="loanPurpose" required
+									placeholder="Enter Loan Purpose" />
 							</div>
 						</div>
-
-
-
 					</div>
 				</div>
 
@@ -195,141 +160,171 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3 mb-4">
+						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Loan Processing Fee* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> 	GST Amount* </label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Location" />
+								<label for="planCode">Fetch by Plan Code*</label> <select
+									id="planCode" name="planCode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Plan Code</option>
+								</select>
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> 	Legal Charges* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="processingFee">Processing Fee (%)*</label> <input
+									type="text" name="processingFee" id="processingFee" required
+									placeholder="Enter Processing Fee" />
 							</div>
 						</div>
-						<div class="col-lg-3 mb-4">
+						<div class="col-lg-3" style="display: none;">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Insurence Fee* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label>Plan ID*</label> <input type="hidden" id="planCode"
+									name="planCode" value="${memberCodePI}" class="form-control"
+									required />
 							</div>
 						</div>
 
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Legal Charges* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="legalCharges">Legal Charges (%)*</label> <input
+									type="text" name="legalCharges" id="legalCharges" required
+									placeholder="Enter Legal Charges" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Penalty Charge* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="gstPercentage">GST(%)*</label> <input type="text"
+									name="gstPercentage" id="gstPercentage" required
+									placeholder="Enter GST" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> EMI SMS Service Charge * </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="insuranceFee">Insurence.Fee(%)*</label> <input
+									type="text" name="insuranceFee" id="insuranceFee" required
+									placeholder="Enter Insurance Fee" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> 	Transportation Cost per EMI* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="valuationFee">Valuation Fee (%)*</label> <input
+									type="text" name="valuationFee" id="valuationFee" required
+									placeholder="Enter Valuation Fee" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Loan Maintenance Fee* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="lateAllowanceDays">Late Allowance Days*</label> <input
+									type="text" name="lateAllowanceDays" id="lateAllowanceDays"
+									required placeholder="Enter Late Allowance Days" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Overdue Interest (Total)* </label> <input
-									type="text" name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="penaltyMode">Penalty Mode*</label> <input
+									type="text" name="penaltyMode" id="penaltyMode" required
+									placeholder="Enter Penalty Mode" />
 							</div>
 						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Additional Overdue Interest* </label> <input
-									type="text" name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="monthlyPenalty">Monthly Penalty*</label> <input
+									type="text" name="monthlyPenalty" id="monthlyPenalty" required
+									placeholder="Enter Monthly Penalty" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="emiFrequency">EMI Frequency*</label> <input
+									type="text" name="emiFrequency" id="emiFrequency" required
+									placeholder="Enter EMI Frequency" />
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="rateOfInterest">Rate of Interest (% p.a.)*</label> <input
+									type="text" name="rateOfInterest" id="rateOfInterest" required
+									placeholder="Enter Rate of Interest" />
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="interestType">Interest Type*</label> <input
+									type="text" name="interestType" id="interestType" required
+									placeholder="Enter Interest Type" />
+							</div>
+						</div>
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="emiType">EMI Type*</label> <input type="text"
+									name="emiType" id="emiType" required
+									placeholder="Enter EMI Type" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="emiType">Total Amount*</label> <input type="text"
+									name="totalAmount" id="totalAmount" required
+									placeholder="Enter EMI Type" />
+							</div>
+						</div>
+					
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+							<label for="approvalStatus">Approval Status</label> <input type="text" id="approvalStatus" value="Not Approved" readonly />
+							</div>
+						</div>
+						
 
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Stationery Fee per EMI* </label> <input
-									type="text" name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
 
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">	Collection Handling Fee per EMI* </label> <input
-									type="text" name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Advisor/Collector ID* </label> <input
-									type="text" name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Advisor/Collector Full Name* </label> <input
-									type="text" name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-success"
+							<button id="saveBtn" name="saveBtn" class="btnStyle bg-success"
 								style="margin-left: 80%">Save</button>
-
 						</div>
 					</div>
 				</div>
-
-
 			</form>
-
-
-
 		</div>
+		<div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
+					<div class="card-body table-responsive">
+						<h5 class="card-title">Details Search List</h5>
+						<table class="table table-bordered">
+							<thead class="thead-light">
+								<tr>
+									<th>Group ID</th>
+									<th>Plan Name</th>
+									<th>Customer Name</th>
+									<th>Selected Member</th>
+									<th>Emi Type</th>
+									<th>Contact No</th>
+									<th>Allocated Staff</th>
 
 
 
 
 
+								</tr>
+							</thead>
+							<tbody id="groupLoanBody">
 
+
+								<!-- More rows -->
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
-	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/Joinlibiliy/ApplyForGroupLoan.js"></script>
 </body>
 
 </html>

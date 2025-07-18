@@ -1,15 +1,22 @@
 package com.microfinance.service;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.repository.AddCustomerRepo;
+import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
+import com.microfinance.repository.PolicyRenewalRepo;
+
 
 
 @Service
@@ -20,7 +27,14 @@ public class RequestApprovalsService {
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
-
+	
+	@Autowired
+	AddInvestmentRepo addInvestmentRepo;
+	
+	@Autowired
+	PolicyRenewalRepo policyRenewalRepo;
+	
+	
 	public List<addCustomer> findAllMemberCode() {
 		// TODO Auto-generated method stub
 		List<addCustomer> list = addCustomerRepo.findAll();
@@ -44,16 +58,9 @@ public class RequestApprovalsService {
 		return addCustomerRepo.findByIsApprovedFalseAndMemberCode(branchName);
 	}
 
-	
-
 	public List<addCustomer> getUnapprovedCustomers() {
 	    return addCustomerRepo.findByIsApprovedFalse();
 	}
-
-
-
-	
-	
 
 	public List<CreateSavingsAccount> getUnapprovedSavingTransaction() {
 		// TODO Auto-generated method stub
@@ -70,4 +77,44 @@ public class RequestApprovalsService {
 		return createSavingAccountRepo.save(customer);
 	}
 
+	public List<AddnewinvestmentPM> getAllUnapprovedAddNewInvestment() {
+		// TODO Auto-generated method stub
+		return addInvestmentRepo.findByIsApprovedFalse();
+	}
+
+	public Optional<AddnewinvestmentPM> findByIdShowStatusInvestment(Long id) {
+		// TODO Auto-generated method stub
+		return addInvestmentRepo.findById(id);
+	}
+
+
+	public AddnewinvestmentPM save(AddnewinvestmentPM investment) {
+		// TODO Auto-generated method stub
+		return addInvestmentRepo.save(investment);
+	}
+
+
+	public List<PolicyRenewal> getAllUnapprovedPolicyRenewalData() {
+		// TODO Auto-generated method stub
+	 return policyRenewalRepo.findByIsApprovedFalse();
+	}
+
+
+	public PolicyRenewal saveRenewal(PolicyRenewal renewal) {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.save(renewal); 
+	}
+
+
+	public Optional<PolicyRenewal> approveRDFromPolicyRenewal(Long id) {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.findById(id);
+	}
+
+
+	
+	
+
+
+	
 }

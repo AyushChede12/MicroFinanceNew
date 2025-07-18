@@ -390,12 +390,12 @@
             </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="createCurrentAccount">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Create Current Account</span>
             </a>
-          </li>
+          </li> -->
           
           <li>
             <a href="savingsAccountActivity">
@@ -425,12 +425,12 @@
             </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="currentAccountRecordBook">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Current Account Record Book</span>
             </a>
-          </li>
+          </li> -->
           
           <li>
             <a href="savingsAccountStatement">
@@ -814,6 +814,13 @@
             </a>
           </li>
           
+           <li>
+            <a href="approveRD">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Approve RD</span>
+            </a>
+          </li>
+          
           <li>
             <a href="approveRecurring">
               <i class="bi bi-circle"></i>
@@ -965,7 +972,7 @@
           <li>
             <a href="groupLoanDataUpdate">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Group Loan Data Update</span>
+              <span style="font-family: 'Poppins', sans-serif">Joint Liability Update</span>
             </a>
           </li>       
           

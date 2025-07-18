@@ -17,12 +17,7 @@ public interface CustomerRepo extends JpaRepository<addCustomer, Long>{
 
 	List<addCustomer> findBymemberCode(String memberCode);
 
-	@Query("SELECT c FROM addCustomer c WHERE c.branchName = :branchName AND c.fDate BETWEEN :start AND :end")
-	List<addCustomer> findCustomersByBranchAndDate(
-	    @Param("branchName") String branchName,
-	    @Param("start") String startDate,
-	    @Param("end") String endDate
-	);
+	
 
 	Optional<addCustomer> findByMemberCode(String customerCode);
 

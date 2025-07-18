@@ -153,21 +153,11 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Customer Code</label> <select
-									id="memberCode" name="memberCode" required="required"
-									class="form-control selectField" style="height: 30px;">
-								</select>
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Customer Name</label> <input type="text"
-									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name"
+								<label>Financial Name</label> <input type="text"
+									name="financialName" id="financialName" required="required"
+									placeholder="Enter Financial Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -184,47 +174,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Age</label> <input type="text" name="customerAge"
-									id="customerAge" required="required" placeholder="Enter Age"
+								<label>Age</label> <input type="text" name="age"
+									id="age" required="required" placeholder="Enter Age"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="guardianName" id="guardianName" required="required"
-									placeholder="Enter Family Member Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label> <select
-									id="relationToApplicant" name="relationToApplicant"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-
-								</select>
-							</div>
-						</div>
-
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label for="">Contact No</label> <input type="text"
 									name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Suggested Nominee</label> <input type="text"
-									name="nomineeName" id="nomineeName" required="required"
-									placeholder="Enter Nominee Name" />
 							</div>
 						</div>
 
@@ -238,20 +199,12 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Age Of Nominee </label> <input type="text"
-									name="nomineeAge" id="nomineeAge" required="required"
-									placeholder="Enter Nominee Age" />
-							</div>
-						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Address</label>
-								<textarea name="customerAddress" id="customerAddress"
+								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
@@ -273,9 +226,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<labe39l for="">Pin Code</label> <input type="text"
-									name="pinCode" id="pinCode" required="required"
-									placeholder="Enter Pincode" />
+								<label for="pinCode">Pin Code</label> <input type="text" name="pinCode"
+									id="pinCode" required="required" placeholder="Enter Pin Code" />
 							</div>
 						</div>
 
@@ -304,9 +256,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span id="star">*</span>
-							</label> <label for="customerPhoto" id="drop-area"> <input
-								type="file" accept="image/*" name="customerPhoto"
-								id="customerPhoto" hidden="hidden" onchange="photoUpload();"
+							</label> <label for="financialPhoto" id="drop-area"> <input
+								type="file" accept="image/*" name="financialPhoto"
+								id="financialPhoto" hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -326,9 +278,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span id="star">*</span>
-							</label> <label for="customerSignature" id="drop-area"> <input
-								type="file" accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden"
+							</label> <label for="finnacialSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="finnacialSignature"
+								id="finnacialSignature" hidden="hidden"
 								onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -419,20 +371,13 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 
 							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
+								<div class="d-flex flex-column formFields">
 									<label>Comments</label>
 									<textarea name="comments" id="comments"
 										placeholder="Enter Remarks"
 										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>
-
-
-
-
-
-
 
 						</div>
 

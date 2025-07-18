@@ -13,7 +13,7 @@ public class ApplyForMaturity {
 	
 	private long id;
 	private String branchName;
-	private String policyNo;
+	private String policyCode;
 	private String maturityDate;
 	private String customerName;
 	private String schemeName;
@@ -35,11 +35,11 @@ public class ApplyForMaturity {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	public String getPolicyNo() {
-		return policyNo;
+	public String getPolicyCode() {
+		return policyCode;
 	}
-	public void setPolicyNo(String policyNo) {
-		this.policyNo = policyNo;
+	public void setPolicyCodeo(String policyCode) {
+		this.policyCode = policyCode;
 	}
 	public String getMaturityDate() {
 		return maturityDate;
