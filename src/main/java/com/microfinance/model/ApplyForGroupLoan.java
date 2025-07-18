@@ -16,6 +16,9 @@ public class ApplyForGroupLoan {
 
     // Group Profile
     private String openingDate;
+    private String selectedMember;
+    private String customerName;
+    
     private String communityName;
     private String allocatedStaff;
     private String branchName;
@@ -38,6 +41,8 @@ public class ApplyForGroupLoan {
     private String rateOfInterest;
     private String interestType;
     private String emiType;
+    private String approvalStatus;
+    private String totalAmount;
 	public Long getId() {
 		return id;
 	}
@@ -176,6 +181,31 @@ public class ApplyForGroupLoan {
 	public void setEmiType(String emiType) {
 		this.emiType = emiType;
 	}
+	public String getSelectedMember() {
+		return selectedMember;
+	}
+	public void setSelectedMember(String selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	
     
 
 }
