@@ -182,15 +182,79 @@ pageEncoding="ISO-8859-1"%> -->
                 <div class="d-flex flex-column formFields mb-4">
                   <label for="">Pay By</label> <select id="payBy" name="payBy" required="required"
                     class="form-control selectField" style="height: 30px;">
-                    <option value=""> -Select-</option>
-                    <option value="Cash">Cash</option>
-                    <option value="Online">Online</option>
-                    <option value="Cheque">Cheque</option>
-                    <option value="NEFT">NEFT</option>
+                    <option selected="selected" value="">Select</option>
+					<option value="Cash">Cash</option>
+					<option value="Cheque">Cheque</option>
+					<option value="Online">Online</option>
+					<option value="NEFT">Neft</option>
                   </select>
                 </div>
               </div>
           </div>
+          <!-- Cheque input fields -->
+					 <div id="chequeInputs" style="display: none;" >
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Cheque No. </label> <input type="text"
+										name="chequeNo" id="chequeNo" required="required"
+										placeholder="Enter Cheque No." />
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Cheque Date </label> <input type="Date"
+										name="chequeDate" id="chequeDate" required="required"
+										placeholder="Enter Cheque Date" />
+								</div>
+							</div>						
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc1" id="depositAcc1" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+						</div>												
+					</div>
+					<!-- Online input fields -->
+					<div id="onlineInputs" style="display: none;">
+						<div class="row" >
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc2" id="depositAcc2" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Ref Number </label> <input type="text"
+										name="refNumber1" id="refNumber1" required="required"
+										placeholder="Enter Deposite Ref No." />
+								</div>
+							</div>
+						</div>										
+					</div>
+					<!-- NEFT input fields -->
+					<div id="neftInputs" style="display: none;">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc3" id="depositAcc3" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Ref Number </label> <input type="text"
+										name="refNumber2" id="refNumber2" required="required"
+										placeholder="Enter Deposite Ref No." />
+								</div>
+							</div>
+						</div>											
+					</div>
         </div>
 
         <div class="row">
@@ -207,6 +271,31 @@ pageEncoding="ISO-8859-1"%> -->
   <!-- <script src="js/chartScript.js"></script> -->
   <script src="./js/adminscript.js"></script>
   <script src="./js/customerSavings/SavingAccountActivity.js"></script>
+  <script>    
+document.getElementById('payBy').addEventListener('change', function () {
+    // Get the selected payment mode
+    let mode = this.value;
+
+    // Define all input field sections
+    const chequeInputs = document.getElementById('chequeInputs');
+    const onlineInputs = document.getElementById('onlineInputs');
+    const neftInputs = document.getElementById('neftInputs');
+
+    // Reset the display of all sections
+    chequeInputs.style.display = 'none';
+    onlineInputs.style.display = 'none';
+    neftInputs.style.display = 'none';
+
+    // Show the section corresponding to the selected payment mode
+    if (mode === 'Cheque') {
+        chequeInputs.style.display = 'block';
+    } else if (mode === 'Online') {
+        onlineInputs.style.display = 'block';
+    } else if (mode === 'NEFT') {
+        neftInputs.style.display = 'block';
+    }
+});
+</script>
 </body>
 
 </html>
