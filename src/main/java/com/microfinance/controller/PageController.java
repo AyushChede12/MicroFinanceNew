@@ -117,6 +117,11 @@ public class PageController {
 		return "financialConsultant/financialConsultantUpdate";
 	}
 	
+	@GetMapping("/IDCardFinancial")
+	public String IDCardFinancial() {
+		return "financialConsultant/IDCard";
+	}
+	
 	// Data Rectification
 	@GetMapping("/customerDataUpdate")
 	public String getCustomerDataUpdate() {
