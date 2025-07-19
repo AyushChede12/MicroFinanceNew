@@ -133,19 +133,18 @@ $(document).ready(function () {
 	
 	$("#formid").submit(function (event) {
 	    event.preventDefault();
+ 
+		  const selectedCode = $('#userApprover').val(); // Will give "TM0001"
+		  const selectedText = $('#userApprover option:selected').text(); // Will give "TM0001 - Ashwini Rajurkar"
+		    
+		  let teamMemberCode = selectedCode;
+		  let teamMemberName = selectedText.split(" - ")[1].trim();
+	
+		  console.log("Parsed Code:", teamMemberCode);
+		  console.log("Parsed Name:", teamMemberName);
+		  
+		 let newdeposit=calculateDepositAmount();
 
-	    // ✅ Declare helper values first
-	    let selectedValue = $('#userApprover').val(); // e.g. "TM0001 - Ashwini Rajurkar"
-	    let teamMemberCode = "";
-	    let teamMemberName = "";
-
-	    if (selectedValue && selectedValue.includes(" - ")) {
-	        let parts = selectedValue.split(" - ");
-	        teamMemberCode = parts[0].trim();
-	        teamMemberName = parts[1].trim();
-	    }
-
-	    // ✅ Now build your object
 	    var data = {
 	        policyCode: $("#policyCode").val(),
 	        planCode: $("#planCode").val(),
@@ -158,11 +157,11 @@ $(document).ready(function () {
 	        sysPayable: $("#sysPayable").val(),
 	        deduction: $("#deduction").val(),
 	        netPayable: $("#netPayable").val(),
-	        approveBranch: $("#approvebranch").val(),
+	        approveBranch: $("#Approvebranch").val(),
 	        teamMemberCode: teamMemberCode,
 	        teamMemberName: teamMemberName,
 	        amount: $("#amount").val(),
-	        depositAmount: $("#depositAmount").val(),
+	        depositAmount: newdeposit,
 	        dueAmount: $("#dueAmount").val(),
 	        paymentDate: $("#paymentDate").val(),
 	        branchName: $("#branchName").val(),
@@ -170,32 +169,78 @@ $(document).ready(function () {
 	        modeofPayment: $("#modeofPayment").val()
 	    };
 
-	    // ✅ Make the AJAX call
-	    $.ajax({
-	        url: "/api/Maturitymanagement/savePartialmaturity",
-	        type: "POST",
-	        contentType: "application/json",
-	        data: JSON.stringify(data),
-	        success: function (response) {
-	            if (response.status === "OK") {
-	                alert("Saved successfully: " + response.message);
-	                $("#formid")[0].reset();
-	            } else {
-	                alert("Failed: " + response.message);
-	            }
-	        },
-	        error: function (xhr, status, error) {
-	            console.error("Error saving:", error);
-	            alert("Something went wrong while saving the data.");
-	        }
-	    });
+		$.ajax({
+		    url: "/api/Maturitymanagement/savePartialmaturity",
+		    type: "POST",
+		    contentType: "application/json",
+		    data: JSON.stringify(data),
+		    success: function(response) {
+		      alert(response.status === "OK"
+		        ? "Saved: " + response.message
+		        : "Failed: " + response.message
+		      );
+		      if (response.status === "OK"){
+				updateAddNewInvestmentAmount(data);
+				 $("#formid")[0].reset();
+					 
+			 }
+			
+		    },
+		    error: function(xhr, status, error) {
+		      console.error("Save error:", error, xhr.responseText);
+		      alert("Something went wrong while saving the data.");
+		    }
+		  });
 	});				   
 
 });
 
-function updateAddNewInvestmentAmount()
+
+function calculateDepositAmount(){
+	let amount = parseFloat($('#amount').val()) || 0;
+	let paidAmount = parseFloat($('#depositAmount').val()) || 0;
+	let deposit=0;
+	
+	if (!isNaN(amount) && !isNaN(paidAmount)) {
+		    deposit = amount + paidAmount;
+		    alert("depositAmount " + deposit);
+		}
+		return deposit;
+	
+}
+
+
+function updateAddNewInvestmentAmount(data)
 {
 	
+	let policyCode = $("#policyCode").val();
+	let depositamount =  calculateDepositAmount(data);
+
+	    // Validate before sending (optional)
+	    if (!policyCode || !depositAmount) {
+	        alert("Please enter both Policy Code and Deposit Amount.");
+	        return;
+	    }
+	let details = {
+	        policyCode: policyCode,
+	        depositAmount: depositamount
+	    };
+
+	    // Make the AJAX call
+	    $.ajax({
+	        url: "/api/Policymangment/updateinvestment",  // 👈 adjust this to your actual endpoint
+	        type: "POST",
+	        contentType: "application/json",
+	        data: JSON.stringify(details),
+	        success: function (response) {
+	            alert("Update successful!");
+	            console.log("Updated record:", response);
+	        },
+	        error: function (xhr, status, error) {
+	            console.error("Update failed:", error);
+	            alert("Failed to update installment details.");
+	        }
+	    });
 }
 
 function calDuration(data){
