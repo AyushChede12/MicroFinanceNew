@@ -127,6 +127,14 @@ pageEncoding="ISO-8859-1"%> -->
 										placeholder="Enter Relative Name" />
 								</div>
 							</div>
+							
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Branch Name </label> <input type="text"
+										name="branchname" id="branchname" required="required"
+										placeholder="Enter Relative Name" />
+								</div>
+							</div>
 
 
 							<div class="col-lg-3">
@@ -253,7 +261,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="col-12 text-center">
 						<button id="viewBtn" type="button" class="btn btn-primary">View
 							Installment</button>
-						<button id="saveBtn" type="button" class="btn btn-info">Save</button>
+						<button id="btnSave" type="button" class="btn btn-info">Save</button>
 					</div>
 				</div>
 

@@ -1,5 +1,6 @@
 package com.microfinance.controller;
 
+import java.security.Policy;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
+import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
+import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.service.RequestApprovalsService;
 
 @RestController
@@ -150,6 +155,120 @@ public class RequestApprovalsController {
   	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedInvestment)
   	    );
   	}
+  
+  	//ANJALI (16/7/25)
+  	//	get policy renewal data
+  	@GetMapping("/getUnapprovedPolicyRenewals")
+  	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getAllUnapprovedPolicyRenewalData() {
+  	    List<PolicyRenewal> list = requestApprovalsService.getAllUnapprovedPolicyRenewalData();
 
+  	    if (!list.isEmpty()) {
+  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+  	    } else {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+  	    }
+  	}
 
+  	//anjali (16/7/25)
+  	//approve RD data from approve renewql
+  	@PostMapping("/approveRDFromPolicyRenewal")
+  	public ResponseEntity<ApiResponse<PolicyRenewal>> approveRDFromPolicyRenewal(
+  	        @RequestParam("id") Long id,
+  	        @RequestParam("isApproved") boolean isApproved) {
+
+  	    Optional<PolicyRenewal> optionalInvestment = requestApprovalsService.approveRDFromPolicyRenewal(id);
+
+  	    if (!optionalInvestment.isPresent()) {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Investment with ID " + id + " not found."));
+  	    }
+
+  	  PolicyRenewal Renewal = optionalInvestment.get();
+  	Renewal.setApproved(isApproved);
+
+  	  PolicyRenewal updatedInvestment = requestApprovalsService.saveRenewal(Renewal);
+
+  	    return ResponseEntity.ok(
+  	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedInvestment)
+  	    );
+  	}
+  	
+  	//anjali (17/7/25)
+  	//get flexible renewal data
+  	 @GetMapping("/getAllUnapproveFlexibleRenewals")
+     public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getUnapprovedFlexibleRenewalData() {
+         List<FlexibleRenewal> list = requestApprovalsService.getUnapprovedFlexibleRenewalData();
+
+         if (!list.isEmpty()) {
+             return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+         } else {
+             return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                     .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+         }
+     }
+	
+	//anjali (16/7/25)
+  	//approve FD data from flexible renewql
+	
+	@PostMapping("/approveFDFromFlexibleRenewal")
+	public ResponseEntity<ApiResponse<FlexibleRenewal>> approveFDFromFlexibleRenewalInApproval(
+	        @RequestParam("id") Long id,
+	        @RequestParam("isApproved") boolean isApproved) {
+
+	    Optional<FlexibleRenewal> optionalRenewal = requestApprovalsService.approveFDFromFlexibleRenewalInApproval(id);
+
+	    if (!optionalRenewal.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Flexible Renewal with ID " + id + " not found."));
+	    }
+
+	    FlexibleRenewal renewals = optionalRenewal.get();
+	    renewals.setApproved(isApproved);
+
+	    FlexibleRenewal updatedRenewal = requestApprovalsService.saveRenewal(renewals);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedRenewal)
+	    );
+	}
+	
+	//anjali (17/7/25)
+  	//get DailyPremiumRenewalPM data
+	@GetMapping("/getUnapprovedDailyPremiumRenewalPM")
+  	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getUnapprovedDailyPremiumRenewalPMData() {
+  	    List<DailyPremiumRenewalPM> list = requestApprovalsService.getUnapprovedDailyPremiumRenewalPMData();
+
+  	    if (!list.isEmpty()) {
+  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+  	    } else {
+  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+  	    }
+  	}
+
+	//anjali (16/7/25)
+  	//approve DD data from DailyPremiumRenewalPM 
+	
+	@PostMapping("/approveDDFromDailyPremiumRenewalPM")
+	public ResponseEntity<ApiResponse<DailyPremiumRenewalPM>> approveDDFromDailyPremiumRenewalPMData(
+	        @RequestParam("id") Long id,
+	        @RequestParam("isApproved") boolean isApproved) {
+
+	    Optional<DailyPremiumRenewalPM> optionalRenewal = requestApprovalsService.approveDDFromDailyPremiumRenewalPMData(id);
+
+	    if (!optionalRenewal.isPresent()) {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Flexible Renewal with ID " + id + " not found."));
+	    }
+
+	    DailyPremiumRenewalPM DailyRenewal = optionalRenewal.get();
+	    DailyRenewal.setApproved(isApproved);
+
+	    DailyPremiumRenewalPM updatedRenewal = requestApprovalsService.saveRenewal(DailyRenewal);
+
+	    return ResponseEntity.ok(
+	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedRenewal)
+	    );
+	}
 }

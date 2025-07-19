@@ -117,6 +117,11 @@ public class PageController {
 		return "financialConsultant/financialConsultantUpdate";
 	}
 	
+	@GetMapping("/IDCardFinancial")
+	public String IDCardFinancial() {
+		return "financialConsultant/IDCard";
+	}
+	
 	// Data Rectification
 	@GetMapping("/customerDataUpdate")
 	public String getCustomerDataUpdate() {
@@ -440,6 +445,21 @@ public class PageController {
 	@GetMapping("/approvePolicy")
 	public String getPolicyApproval() {
 		return "requestApprovals/approvePolicy";
+	}
+	
+	@GetMapping("/approveRD")
+	public String getRDApproval() {
+		return "requestApprovals/approveRD";
+	}
+
+	@GetMapping("/approveFD")
+	public String getFDApproval() {
+		return "requestApprovals/approveFD";
+	}
+
+	@GetMapping("/approveDD")
+	public String getDDApproval() {
+		return "requestApprovals/approveDD";
 	}
 
 	@GetMapping("/approveRecurring")
@@ -1022,9 +1042,9 @@ public class PageController {
 		return "preferences/customerCreation";
 	}
 	
-	@GetMapping("/customerMenu")
+	@GetMapping("/customerMenuAccess")
 	public String getCustomerMenu() {
-		return "preferences/customerMenu";
+		return "preferences/customerMenuAccess";
 	}
 	
 	@GetMapping("/customerBalanceReport")

@@ -235,6 +235,11 @@ public class FinancialConsultantService {
             throw new RuntimeException("Consultant not found with ID: " + id);
         }
     }
+
+	public List<ConsultantPromotionManagement> getAllPromotionManagementDetail() {
+		// TODO Auto-generated method stub
+		return consultantpromotionRepo.findAll();
+	}
 	
 
 	

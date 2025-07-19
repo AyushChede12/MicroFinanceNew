@@ -33,6 +33,7 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -40,16 +41,18 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Joint Liability Loan/h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-person-bounding-box"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Loan Approval</li>
-				</ol>
-			</nav>
+			<h1>
+				Joint Liability Loan/h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="home"> <i
+								class="bi bi-person-bounding-box"></i>
+						</a></li>
+						<li class="breadcrumb-item action">Loan Approval</li>
+					</ol>
+				</nav>
 		</div>
+		
 
 		<div>
 			<form id="formid">
@@ -61,27 +64,15 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Find by Group Code*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
 
-										</ul>
-									</div>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Find by Group Code*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+								</select>
 							</div>
+
 						</div>
 
 
@@ -101,66 +92,43 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Loan Application Date*</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+								<label for="openingDate">Opening Date*</label> <input
+									type="date" name="openingDate" id="openingDate" required
+									placeholder="Enter Opening Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Customer Group Name* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="communityName">Community Name*</label> <input
+									type="text" name="communityName" id="communityName" required
+									placeholder="Enter Community Name" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Assign Officer* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Office*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+								<label for="allocatedStaff">Allocated Staff*</label> <input
+									type="text" name="allocatedStaff" id="allocatedStaff" required
+									placeholder="Enter Allocated Staff" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Collection Schedule* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
+								<label for="branchName">Branch Name*</label> <select
+									id="branchName" name="branchName" required
+									class="form-control selectField" style="height: 30px;"></select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Group Head* </label> <input type="text"
-									name="location" id="location" required="required"
+								<label for=""> Collection Schedule* </label> <input type="text"
+									name="collectionDays" id="collectionDays" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Payment Mode* </label> <input type="text"
@@ -170,15 +138,15 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Contact Number* </label> <input type="text"
-									name="location" id="location" required="required"
+								<label for=""> ContactNumber* </label> <input type="text"
+									name="contactNumber" id="contactNumber" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Purpose of Loan* </label> <input type="text"
-									name="location" id="location" required="required"
+									name="purposeOfLoan" id="purposeOfLoan" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
@@ -197,42 +165,32 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date of Approval*</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Date of Approval*</label> <input
+									type="date" name="dateOfApproval" id="dateOfApproval" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+<div class="col-lg-3">
 
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Approval Branch*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Approval Status:*</label> <select
+									id="approvalStatus" name="approvalStatus" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="approved">Approved</option>
+									<option value="not_approved">Not Approved</option>
+								</select>
 							</div>
+
 						</div>
+
+						
+
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle bg-success"
-								style="margin-left: 80%">Save</button>
+							<button  type="button"  id="approved" class="btnStyle bg-success"
+								style="margin-left: 80%">Approved</button>
 
 						</div>
 					</div>
@@ -245,7 +203,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 
-
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let today = new Date();
+        let formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD
+        document.getElementById("dateOfApproval").value = formattedDate;
+    });
+</script>
 
 
 
@@ -253,6 +217,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/Joinlibiliy/LoanApproval.js"></script>
 </body>
 
 </html>
