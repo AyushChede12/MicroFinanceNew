@@ -168,18 +168,31 @@ public class CustomerSavingsController {
 	@PostMapping("/saveandupdatesavingaccount")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(
 			@ModelAttribute SavingAccountDto savingAccountDto,
-			@RequestParam(value = "photo", required = false) MultipartFile photo,
-			@RequestParam(value = "signature", required = false) MultipartFile signature) {
+			@RequestParam(value = "photo", required = false) String photo,
+			@RequestParam(value = "signature", required = false) String signature,
+			@RequestParam(value = "jointPhoto", required = false) String jointPhoto) {
 
-		if (photo != null) {
-			System.out.println("Received photo: " + photo.getOriginalFilename());
-		}
-		if (signature != null) {
-			System.out.println("Received signature: " + signature.getOriginalFilename());
-		}
+		String customerId = savingAccountDto.getSelectByCustomer(); // assuming it's Long
+
+	    // Check for existing record before saving (only for new entries)
+	    if (savingAccountDto.getId() == null && customersaving.existsByCustomerId(customerId)) {
+	        return ResponseEntity
+	                .status(HttpStatus.CONFLICT)
+	                .body(new ApiResponse<>(
+	                        HttpStatus.CONFLICT,
+	                        "Customer already exists in saving account",
+	                        null));
+	    }
+		
+			System.out.println("Received photo: " + photo);
+
+			System.out.println("Received signature: " + signature);
+			
+			System.out.println("Received jointPhoto: " + jointPhoto);
+		
 
 		ApiResponse<CreateSavingsAccount> response = customersaving.saveSavingAccountDetails(savingAccountDto, photo,
-				signature);
+				signature, jointPhoto);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(
                 HttpStatus.OK,
@@ -216,8 +229,10 @@ public class CustomerSavingsController {
                     .body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "First approve account", null));
         }
 
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .body(new ApiResponse<>(HttpStatus.FOUND, "Fetch account details by account number", approvedAccounts));
+        return ResponseEntity.ok(
+                new ApiResponse<>(HttpStatus.OK, "Fetch account details by account number", approvedAccounts)
+        );
+
     }
 
     

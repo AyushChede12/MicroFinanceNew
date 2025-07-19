@@ -19,9 +19,7 @@
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -30,7 +28,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<title>Approve RD</title>
+<title>Approve FD</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -38,7 +36,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-
 <body>
 <main id="main" class="main">
 		<div class="pagetitle">
@@ -48,7 +45,7 @@
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-check-circle"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Approve RD</li>
+					<li class="breadcrumb-item action">Approve FD</li>
 				</ol>
 			</nav>
 		</div>
@@ -64,7 +61,7 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="branchName">Branch Name</label> <select id="branchName"
+								<label for="">Branch Name</label> <select id="branchName"
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -75,7 +72,7 @@
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="fromDate">Date From</label> <input type="date"
+								<label for="vehicalNo">Date From</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
@@ -84,7 +81,7 @@
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="toDate">Date To</label> <input type="date"
+								<label for="vehicalNo">Date To</label> <input type="date"
 									name="toDate" id="toDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
@@ -143,6 +140,6 @@
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/RequestApproval/ApprovalRD.js"></script>
+	<script src="./js/RequestApproval/ApproveFD.js"></script>
 </body>
 </html>
