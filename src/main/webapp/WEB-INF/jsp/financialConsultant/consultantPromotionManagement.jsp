@@ -48,7 +48,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-briefcase text-blue"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Consultant Promotion Management</li>
+					<li class="breadcrumb-item action">Consultant Promotion
+						Management</li>
 				</ol>
 			</nav>
 		</div>
@@ -58,19 +59,20 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Financial Consultant Promotion</li>
+							<li class="breadcrumb-item action">Financial Consultant
+								Promotion</li>
 						</ol>
 					</nav>
 					<div class="row">
-					<input type="hidden" id="id" name="id">
+						<input type="hidden" id="id" name="id">
 						<div class="col-lg-3">
-							
+
 							<div class="d-flex flex-column formFields">
 								<label for="">Select Code</label> <select id="financialCode"
 									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Code</option>
-									
+
 								</select>
 							</div>
 						</div>
@@ -148,27 +150,31 @@ pageEncoding="ISO-8859-1"%> -->
  -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Select Branch</label> <input type="text" id="Branch"
-									name="branchName" required="required"
-									class="form-control selectField" style="height: 30px; background-color: #fff;" readonly="readonly">
-							</div>
-						</div>
-						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Old Position</label> <input type="text" id="oldPosition" name="oldPosition"
-									required="required" class="form-control selectField"
-									style="height: 30px; background-color: #fff;" readonly="readonly">
+								<label for="">Select Branch</label> <input type="text"
+									id="Branch" name="branchName" required="required"
+									class="form-control selectField"
+									style="height: 30px; background-color: #fff;"
+									readonly="readonly">
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>New Position</label> <select id="newPosition" name="newPosition"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label>Old Position</label> <input type="text" id="oldPosition"
+									name="oldPosition" required="required"
+									class="form-control selectField"
+									style="height: 30px; background-color: #fff;"
+									readonly="readonly">
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>New Position</label> <select id="newPosition"
+									name="newPosition" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">New Position</option>
 									<option value="L1">L1</option>
 									<option value="L2">L2</option>
@@ -178,18 +184,20 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Promotion Date</label> <input type="date" name="promotionDate"
-									id="promotionDate" required="required" placeholder="Enter New Senior"/>
+								<label for="">Promotion Date</label> <input type="date"
+									name="promotionDate" id="promotionDate" required="required"
+									placeholder="Enter New Senior" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">New Senior Code</label> <input type="text" name="seniorCode"
-									id="newseniorCode" required="required" placeholder="Enter New Senior" readonly="readonly"/>
+								<label for="">New Senior Code</label> <input type="text"
+									name="seniorCode" id="newseniorCode" required="required"
+									placeholder="Enter New Senior" readonly="readonly" />
 							</div>
 						</div>
 
@@ -197,15 +205,17 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Senior Name</label> <input type="text" name="seniorName"
-									id="newseniorname" required="required" placeholder="Enter Senior Name" readonly="readonly"/>
+									id="newseniorname" required="required"
+									placeholder="Enter Senior Name" readonly="readonly" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Senior Position</label> <input type="text"
-									name="seniorPosition" id="newseniorposition" required="required"
-									placeholder="Enter New Senior Position" readonly="readonly"/>
+									name="seniorPosition" id="newseniorposition"
+									required="required" placeholder="Enter New Senior Position"
+									readonly="readonly" />
 							</div>
 						</div>
 					</div>
@@ -220,9 +230,38 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 
 
-				<div class="mt-5">
-			</form>
 
+			</form>
+			<div class="row mt-5">
+				<div class="col-12">
+					<div class="card recent-sales">
+
+						<div class="card-body table-responsive">
+							<h5 class="card-title">Promotion Management Details</h5>
+
+
+							<div style="overflow-x: auto; white-space: nowrap;">
+								<table class="table table-borderless datatable" id="tabl">
+									<thead class="table-light">
+										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">Sl No.</th>
+											<th scope="col">Financial Code</th>
+											<th scope="col">Branch</th>
+											<th scope="col">Old Position</th>
+											<th scope="col">New Position</th>
+											<th scope="col">Promotion Date</th>
+											<th scope="col">Senior Code</th>
+											<th scope="col">Senior Position</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
 
