@@ -34,6 +34,9 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Select2 CSS and JS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
@@ -70,8 +73,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="col-lg-5">
 						<div class="d-flex flex-column formFields"
 							style="margin-bottom: 20px;">
-							<label for="vehicalNo">Select Loan ID</label> <select
-								id="colour" name="colour" required="required"
+							<label for="loanId">Select Loan ID</label> <select
+								id="loanId" name="loanId" required="required"
 								class="form-control selectField" style="height: 30px;">
 								<option value="">Select Loan ID</option>
 							</select>
@@ -630,6 +633,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/loanAccount.js"></script>
+	
 </body>
 
 </html>
