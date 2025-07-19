@@ -25,13 +25,14 @@ import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
+import com.microfinance.model.ManageDepartment;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.states;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
-
+import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -236,6 +237,7 @@ public class CustomerSavingsController {
     }
 
     
+    
     @GetMapping("/getSavingAccountDataById")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> findSavingAccountDataById(@RequestParam("id") Long id) {
 		Optional<CreateSavingsAccount> fyear = customersaving.findSavingAccountDataById(id);
@@ -397,6 +399,15 @@ public class CustomerSavingsController {
         return ResponseEntity.ok(response);
     }
 
- 
+ //Janvi : save fund transfer entry
+    @PostMapping("/saveSavingAccountFundTransfer")
+	@ResponseBody
+	public ResponseEntity<String> saveSavingAccountFundTransfer(@RequestBody savingAccountFundTransfer savingAccFundTransfer) {
+    	savingAccountFundTransfer fund = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+		if (fund != null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("Failure");
+	}
 	
 }

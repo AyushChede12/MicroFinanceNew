@@ -16,14 +16,17 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.ManageDepartment;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
+import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
+import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.repository.SavingSchmeCatalogRepo;
 
 @Service
@@ -43,6 +46,9 @@ public class CustomerSavingsService {
 	
 	@Autowired
 	SavingAccountActivityRepo savingAccountActivityRepo;
+	
+	@Autowired
+	SavingAccountFundTransferRepo savingAccFundTransferRepo;
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -336,6 +342,11 @@ public class CustomerSavingsService {
 		public boolean existsByCustomerId(String customerId) {
 			// TODO Auto-generated method stub
 			return createSavingAccountRepo.existsBySelectByCustomer(customerId);
+		}
+
+		public savingAccountFundTransfer saveSavingAccountFundTransfer(savingAccountFundTransfer savingAccFundTransfer) {
+			// TODO Auto-generated method stub
+			return savingAccFundTransferRepo.save(savingAccFundTransfer);
 		}
 
 		

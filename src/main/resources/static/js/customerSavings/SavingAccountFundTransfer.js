@@ -1,6 +1,7 @@
+//janvi : Customer name list fetch
 $(document).ready(function() {
     $.ajax({
-        url: "/api/customersavings/getAllSavingAccountData",
+        url: "/api/reports/getApprovedSavingAccount",
         type: "GET",
         success: function(response) {
 			console.log("API response:", response);
@@ -12,7 +13,7 @@ $(document).ready(function() {
 			dropdown2.append('<option value="">Select</option>');
 
 
-            if (response.status === "FOUND" && response.data) {
+            if (response.status === "OK" && response.data) {
                 $.each(response.data, function(index, item) {
                    dropdown1.append('<option value="' + item.accountNumber+ '">' + item.accountNumber + '</option>');
 				   dropdown2.append('<option value="' + item.accountNumber+ '">' + item.accountNumber + '</option>');
@@ -26,17 +27,19 @@ $(document).ready(function() {
             alert("Failed to fetch Policyname.");
         }
     });
-})
+});
+
 
 $('#debitAccountNumber').on('change', function () {
     let accountNumber = $(this).val();
 
     if (accountNumber !== "") {
         $.ajax({
-            url: '/api/customersavings/getallbyaccountnumber?accountNumber=' + encodeURIComponent(accountNumber), // Pass as query param
+            url: '/api/customersavings/getallbyaccountnumber', // Pass as query param
             type: 'GET',
+            data: { accountNumber: accountNumber },
             success: function (response) {
-                if (response.status === "FOUND") {
+                if (response.data && response.data.length > 0) {
                     let customer = response.data[0];
                     $('#debitCustomerCode').val(customer.selectByCustomer);
 					$('#debitAccountBranch').val(customer.branchName);
@@ -62,10 +65,11 @@ $('#creditAccountNumber').on('change', function () {
 
     if (accountNumber !== "") {
         $.ajax({
-            url: '/api/customersavings/getallbyaccountnumber?accountNumber=' + encodeURIComponent(accountNumber), // Pass as query param
+            url: '/api/customersavings/getallbyaccountnumber', // Pass as query param
             type: 'GET',
+            data: { accountNumber: accountNumber },
             success: function (response) {
-                if (response.status === "FOUND") {
+                if (response.data && response.data.length > 0) {
                     let customer = response.data[0];
                     $('#creditCustomerCode').val(customer.selectByCustomer);
 					$('#creditAccountBranch').val(customer.branchName);
@@ -142,6 +146,46 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 alert('Transfer failed: ' + xhr.responseText);
+            }
+        });
+        
+   
+    event.preventDefault();
+    const accountData = {
+            debitAccountNumber: $('#debitAccountNumber').val(),
+            debitCustomerCode: $('#debitCustomerCode').val(),
+            debitAccountBranch: $('#debitAccountBranch').val(),
+            debitAverageBalance: $('#debitAverageBalance').val(),
+            debitContactNumber: $('#debitContactNumber').val(),
+            creditAccountNumber: $('#creditAccountNumber').val(),
+            creditCustomerCode: $('#creditCustomerCode').val(),
+            creditAccountBranch: $('#creditAccountBranch').val(),
+            creditAverageBalance: $('#creditAverageBalance').val(),
+            transferDate:  $('#transferDate').val(),
+            amount: $('#amount').val(),
+            comment: $('#comment').val()
+            /*chequeNo: $('#chequeNo').val(),
+            chequeDate: $('#chequeDate').val(),
+            depositAcc1: $('#depositAcc1').val(),
+            depositAcc2: $('#depositAcc2').val(),
+            refNumber1: $('#refNumber1').val(),
+            depositAcc3: $('#depositAcc3').val(),
+            refNumber2: $('#refNumber2').val()*/
+            
+        };
+        $.ajax({
+            url: '/api/customersavings/saveSavingAccountFundTransfer',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(accountData),
+            success: function (response) {
+				
+                alert("Saving Account transaction saved successfully!");
+				getAccountNumberAndUpdateData(accountNumber);
+            },
+            error: function (xhr) {
+                console.error('Error:', xhr.responseText);
+                alert('Failed to save transaction data.');
             }
         });
     });
