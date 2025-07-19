@@ -22,11 +22,10 @@ import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
+import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.RecurringDepositRepo;
 import com.microfinance.repository.TransferShareRepo;
-
-
 
 @Controller
 public class PageController {
@@ -70,7 +69,8 @@ public class PageController {
 	@Autowired
 	AddInvestmentRepo addInvestmentRepo;
 
-	
+	@Autowired
+	LoanApplicationRepo loanApplicationRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -115,6 +115,11 @@ public class PageController {
 	@GetMapping("/updateFinacialConsultant")
 	public String financialConsultantUpdate() {
 		return "financialConsultant/financialConsultantUpdate";
+	}
+	
+	@GetMapping("/IDCardFinancial")
+	public String IDCardFinancial() {
+		return "financialConsultant/IDCard";
 	}
 	
 	// Data Rectification
@@ -840,9 +845,6 @@ public class PageController {
 	// Loan Management
 	@GetMapping("/loanSchemeCatalog")
 	public String getLoanSchemeCatalog(Model model) {
-		long maxId = loanMangmentSchemeRepo.getMaxId();
-		String loanSchemeCode = "M" + "0000" + (maxId + 1);
-		model.addAttribute("loanSchemeCode", loanSchemeCode);
 		return "loanManagement/loanSchemeCatalog";
 	}
 
@@ -852,7 +854,10 @@ public class PageController {
 	}
 
 	@GetMapping("/newLoanApplication")
-	public String getNewLoanApplication() {
+	public String getNewLoanApplication(Model model) {
+		long maxId = loanApplicationRepo.getMaxId();
+		String loanCode = "LP" + "0000" + (maxId + 1);
+		model.addAttribute("loanCode", loanCode);
 		return "loanManagement/newLoanApplication";
 	}
 
@@ -1037,9 +1042,9 @@ public class PageController {
 		return "preferences/customerCreation";
 	}
 	
-	@GetMapping("/customerMenu")
+	@GetMapping("/customerMenuAccess")
 	public String getCustomerMenu() {
-		return "preferences/customerMenu";
+		return "preferences/customerMenuAccess";
 	}
 	
 	@GetMapping("/customerBalanceReport")
