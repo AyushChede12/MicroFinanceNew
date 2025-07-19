@@ -65,7 +65,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Interest Type</label> <select name="intrestType" id="intrestType" class="form-control selectField" style="height: 30px;">
+								<label for="">Interest Type</label> <select name="intrestType" id="intrestType" onchange="calculateEMI()" class="form-control selectField" style="height: 30px;">
 									<option value="">Select Interest Type</option>
 									<option value="FlatInterest">Flat Interest</option>
 									<option value=reducinginterest>Redused Interest</option>
@@ -98,7 +98,7 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Interest Mode</label> <select id="interestModeCalculater" name="interestModeCalculater"
+								<label for="loanName">Interest Mode</label> <select id="interestModeCalculater" name="interestModeCalculater" onchange="calculateEMI()"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Interest Mode</option>
@@ -150,20 +150,22 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="card-body table-responsive">
 							<h5 class="card-title">
-								Recent Sales <span>| Today</span>
+								Loan Calculator <span>| Today</span>
 							</h5>
 
-							<table class="table table-borderless datatable overflow-scroll">
+							<table class="table table-borderless datatable overflow-scroll" >
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">ID</th>
-										<th scope="col">Loan Name</th>
-										<th scope="col">Loan Type</th>
-										<th scope="col">EMI Calculation</th>
+										<th scope="col">EMI No.</th>
+										<th scope="col">Due Date</th>
+										<th scope="col">EMI</th>
+										<th scope="col">Principle</th>
+										<th scope="col">Interest</th>
+										<th scope="col">Current Balance</th>
 
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="tbody">
 									
 
 								</tbody>

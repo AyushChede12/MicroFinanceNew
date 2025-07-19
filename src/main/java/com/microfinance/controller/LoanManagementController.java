@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.BranchModule;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
+import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.service.LoanManagementService;
 
@@ -29,51 +31,43 @@ public class LoanManagementController {
 
 	@Autowired
 	private LoanManagementService loanServices;
+	
+	// Api for saving and updatig the loan scheme data  (Vaibhav) Loan Scheme Catalog
+		@PostMapping("/saveLoanManagment")
+		public ResponseEntity<ApiResponse<LoanSchemCatalog>> saveLoanManagmentData(@RequestBody LoanSchemCatalog loan) {
+		    LoanSchemCatalog savedLoan = loanServices.saveLoanManagmentData(loan);
 
-	// Shraddha - 16/06/2025
-	/*
-	 * @ResponseBody
-	 * 
-	 * @PostMapping("/SaveLoan") public String saveLoan(@RequestBody
-	 * LoanSchemCatalog lone) { // TODO: process POST request
-	 * loanServices.saveLoan(lone); return "Save successfully"; }
-	 */
-	
-	
-	// save and Update 17/06/25
-	@PostMapping("/saveLoanManagment")
-	public ResponseEntity<ApiResponse<LoanSchemCatalog>> saveLoanManagmentData(@RequestBody LoanSchemCatalog loan) {
-	    
-	    LoanSchemCatalog savedLoan = loanServices.saveLoanManagmentData(loan);
+		    if (savedLoan != null) {
+		        String message = (loan.getId() != null) ? "Data updated successfully" : "Data saved successfully";
+		        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>(HttpStatus.OK, message, savedLoan);
+		        return ResponseEntity.ok(response);
+		    } else {
+		        ApiResponse<LoanSchemCatalog> errorResponse = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, 
+		            "Failed to save or update data", null);
+		        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+		    }
+		}
 
-	    if (savedLoan != null) {
-	        ApiResponse<LoanSchemCatalog> response = new ApiResponse<>( HttpStatus.OK, "Data saved", savedLoan);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(response); // 201 CREATED
-	    } else {
-	        ApiResponse<LoanSchemCatalog> errorResponse = new ApiResponse<>( HttpStatus.NOT_FOUND, "Data not saved", null);
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
-	    }
-	}
+		
+		
+		
+		// Api for fetching the data on tabel (Vaibhav) Loan Scheme Catalog
+		@GetMapping("/allDataFetchLoanSchemCatelog")
+		public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> allDataFetchLoanSchemCatelog() {
+			List<LoanSchemCatalog> list = loanServices.allDataFetchLoanSchemCatelog();
 
-	// Fetch Data 18/06/25
+			if (list != null && !list.isEmpty()) {
+				ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(HttpStatus.OK,
+						"LoanSchemCatalog fetched successfully", list);
+				return ResponseEntity.ok(response);
+			} else {
+				ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "No data found",
+						null);
+				return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
+			}
+		}
 	
-	
-	@GetMapping("/allDataFetchLoanSchemCatelog")
-	public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> allDataFetchLoanSchemCatelog() {
-	    List<LoanSchemCatalog> list = loanServices.allDataFetchLoanSchemCatelog();
-
-	    if (list != null && !list.isEmpty()) {
-	        ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.OK, "LoanSchemCatalog fetched successfully", list);
-	        return ResponseEntity.ok(response);
-	    } else {
-	        ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.NOT_FOUND, "No data found", null);
-	        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
-	    }
-	}
-	
-	
-// Edit BY Id 19/06/25
-	
+// Edit BY Id 19/06/25 Loan scheme catalog
 	
 	@GetMapping("/getLoanByIdEdite")
 	public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanById(@RequestParam Long id) {
@@ -100,8 +94,7 @@ public class LoanManagementController {
 	    }
 	}
 
-
-	// delete By Id 19/06/25
+	// delete By Id 19/06/25 Loan scheme catalog
 	
 	@PostMapping("/deleteLoanById")
 	public ResponseEntity<ApiResponse<LoanSchemCatalog>> deleteLoan(@RequestParam Long id) {
@@ -116,47 +109,45 @@ public class LoanManagementController {
 	    }
 	}
 
+//data Fetch from name and id from customer model
+	@GetMapping("/getByMemberCodeNewLoanApplication")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getLoanByMemberCode(
+	    @RequestParam String memberCode) {
+	    try {
+	        List<addCustomer> customerList = loanServices.getLoanApplicationById(memberCode);
 
-// this code is New Loan Application on drowpdown
-	@GetMapping("/allfetchdata")
-	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllLoanApplication() {
-	    List<addCustomer> loanList = loanServices.getAllLoanApplication();
+	        if (customerList == null || customerList.isEmpty()) {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+	        }
 
-	    ApiResponse<List<addCustomer>> response = new ApiResponse<>( HttpStatus.OK,"Loan applications fetched successfully",loanList );
+	        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Customer(s) found", customerList));
+	    } catch (RuntimeException ex) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	            .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+	    }
+	}
+
+	
+	
+
+	
+	//fetch all data loan scheme catalog
+	@GetMapping("/fetchLoanSchemeCatalog")
+	public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getSchemeCatalog() {
+	    List<LoanSchemCatalog> loanschemCodeList = loanServices.getSchemeCatalog();
+
+	    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.FOUND,"Loan Schem fetched successfully",loanschemCodeList );
 
 	    return ResponseEntity.ok(response);
 	}
 
 
-//data Fetch from name and id from customer model sharaddha
-	@GetMapping("/getByIdNewLoanApplication")
-	public ResponseEntity<ApiResponse<addCustomer>> getLoanById1(@RequestParam Long id) {
-	    try {
-	    	addCustomer customer = loanServices.getLoanApplicationById(id);
-	        return ResponseEntity.ok(new ApiResponse<>( HttpStatus.OK, "Customer found", customer));
-	    } catch (RuntimeException ex) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	            .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
-	    }
-	}
+@GetMapping("/allfetchdataLoanPlanName")
+public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanPlanName(@RequestParam String loanPlanName) {
+    List<LoanSchemCatalog> loanschemCodeList = loanServices.getLoanPlanName(loanPlanName);
 
-
-	/*
-	 * @GetMapping("/allfetchdataBranchName") public
-	 * ResponseEntity<ApiResponse<List<BranchModule>>> getBranchName() {
-	 * List<BranchModule> branchList = loanServices.getgetBranchName();
-	 * 
-	 * ApiResponse<List<BranchModule>> response = new ApiResponse<>(
-	 * HttpStatus.OK,"Loan Branch fetched successfully",branchList );
-	 * 
-	 * return ResponseEntity.ok(response); }
-	 */
-
-@GetMapping("/allfetchdataLoanSchemCode")
-public ResponseEntity<ApiResponse<List<LoanSchemCatalog>>> getLoanSchemCode() {
-    List<LoanSchemCatalog> loanschemCodeList = loanServices.getLoanSchemCode();
-
-    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.OK,"Loan Schem fetched successfully",loanschemCodeList );
+    ApiResponse<List<LoanSchemCatalog>> response = new ApiResponse<>( HttpStatus.FOUND,"Loan Schem fetched successfully",loanschemCodeList );
 
     return ResponseEntity.ok(response);
 }
@@ -174,6 +165,19 @@ public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanByCode(@RequestParam
     } catch (RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
             .body(new ApiResponse<>( HttpStatus.NOT_FOUND, ex.getMessage(), null));
+    }
+}
+
+@PostMapping("/saveloanapplication")
+public ResponseEntity<ApiResponse<LoanApplication>> saveSchemeCatalog(@RequestBody LoanApplication loanApplication) {
+    boolean isSaved = loanServices.saveLoanApplicationData(loanApplication);
+
+    if (isSaved) {
+        ApiResponse<LoanApplication> response = ApiResponse.success(HttpStatus.CREATED,"Saving Scheme saved successfully.",loanApplication);
+        return ResponseEntity.ok(response);
+    } else {
+        ApiResponse<LoanApplication> response = ApiResponse.error(HttpStatus.BAD_REQUEST,"Failed to save scheme.");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
 

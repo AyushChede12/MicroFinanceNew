@@ -9,18 +9,15 @@ public class LoanSchemCatalog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
     private String loanSchemeCode;
 	private String loanPlaneName;
 	private String typeLoan;
 	private String age;
-	
-	private String loanDuration;
-	
-	
+	private String loanTerm;
 	private String emiType;
 	private String loanAmount;
 	private String loanMode;
-	
 	private String rateIntrestType;
 	private String typeIntrest;
 	private String typesecurity;
@@ -39,6 +36,8 @@ public class LoanSchemCatalog {
 	private String lateAllowanceday;
 	private String modePanalty;
 	private String pennaltyMonthly;
+	private String planStatus;
+	
 	public Long getId() {
 		return id;
 	}
@@ -70,13 +69,13 @@ public class LoanSchemCatalog {
 	public void setAge(String age) {
 		this.age = age;
 	}
-	public String getLoanDuration() {
-		return loanDuration;
+	
+	public String getLoanTerm() {
+		return loanTerm;
 	}
-	public void setLoanDuration(String loanDuration) {
-		this.loanDuration = loanDuration;
+	public void setLoanTerm(String loanTerm) {
+		this.loanTerm = loanTerm;
 	}
-
 	public String getEmiType() {
 		return emiType;
 	}
@@ -160,6 +159,12 @@ public class LoanSchemCatalog {
 	}
 	public void setPennaltyMonthly(String pennaltyMonthly) {
 		this.pennaltyMonthly = pennaltyMonthly;
+	}
+	public String getPlanStatus() {
+		return planStatus;
+	}
+	public void setPlanStatus(String planStatus) {
+		this.planStatus = planStatus;
 	}
 	
 	
