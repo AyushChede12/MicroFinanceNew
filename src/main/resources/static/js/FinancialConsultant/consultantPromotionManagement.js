@@ -98,6 +98,36 @@ $(document).ready(function() {
 	    });
 	});
 
-
+	$.ajax({
+			url: "/api/financialconsultant/getAllPromotionManagementDetails",
+			type: "POST",
+			contentType: "application/json",
+			success: function(response) {
+				if (response.status === "OK" && response.data.length > 0) {
+					var tbody = $(".datatable tbody");
+					tbody.empty();
+					$.each(response.data, function(index, item) {
+						var row = `
+							<tr style="font-family: 'Poppins', sans-serif;">
+								<td>${index + 1}</td>
+								<td>${item.financialCode || ''}</td>
+								<td>${item.branchName || ''}</td>
+								<td>${item.oldPosition || ''}</td>
+								<td>${item.newPosition || ''}</td>
+								<td>${item.promotionDate || ''}</td>
+								<td>${item.seniorCode || ''}</td>
+								<td>${item.seniorPosition || ''}</td>
+							</tr>`;
+						tbody.append(row);
+					});
+				} else {
+					$(".datatable tbody").html(`<tr><td colspan="11" class="text-center">No data available</td></tr>`);
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error("Error fetching financial consultants:", error);
+				alert("Failed to load Promotion Management data.");
+			}
+		});
 });
 

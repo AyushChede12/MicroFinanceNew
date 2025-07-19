@@ -8,7 +8,12 @@ $(document).ready(function() {
 	$('#openingDate').val(today);//crateSavingAccount
 	$('#transactionDate').val(today);
 	$('#dateOfTransfer').val(today);
+
+	$('#loanDate').val(today); //loan application
+
+
 	$('#paymentDate').val(today);
+
 	$('#dateloan').val(today);
 	$('#transferDate').val(today); //savingAccountFundTransfer
 
