@@ -242,6 +242,43 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div>
+				
+					</div>
+					<div class="row mt-4">
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Photo <span id="star">*</span>
+							</label> <label for="Photo" id="drop-area"> <input
+								type="file" accept="image/*" name="photo"
+								id="photo" hidden="hidden" onchange=""
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../upload/upload.png" alt="upload_icon"
+										id="photoPreview" /> <input type="hidden"
+										id="photoHidden" name="photoHidden">
+									
+								</div>
+							</label>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Signature <span id="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="signature"
+								id="signature" hidden="hidden"
+								onchange="signatureUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="signaturePreview" /> <input type="hidden"
+										id="signatureHidden" name="signatureHidden">
+									
+								</div>
+							</label>
+						</div>
 
 					</div>
 				</div>

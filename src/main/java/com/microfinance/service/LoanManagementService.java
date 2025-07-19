@@ -1,7 +1,9 @@
 package com.microfinance.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -137,7 +139,19 @@ public class LoanManagementService {
 		public List<addCustomer> getLoanApplicationById(String memberCode) {
 			 return addCustomerRepo.findByMemberCode(memberCode);
 		}
+		
+		// Service for fetching Loan Id In the dropdown (Vaibhav)
+		public List<String> fetchAllLoanIds() {
 
+			// This assumes you have a loanId field in your Loan entity.
+			return loanApplicationRepo.findAll().stream().map(LoanApplication::getLoanId) // adjust class name if needed
+					.filter(Objects::nonNull).collect(Collectors.toList());
+		}
+
+		// Service for fetching the data in the textfields (Vaibhav)
+		public LoanApplication getLoanById(String loanId) {
+			return loanApplicationRepo.findByLoanId(loanId); // Make sure this method exists
+		}
 		
 
 	

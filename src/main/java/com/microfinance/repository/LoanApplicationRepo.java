@@ -17,7 +17,7 @@ public interface LoanApplicationRepo extends JpaRepository<LoanApplication,Long>
 	long getMaxId();
 
 	
-	
+	LoanApplication findByLoanId(String loanId); // assumes loanId is unique
 	
 	    	
 

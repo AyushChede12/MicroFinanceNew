@@ -3,16 +3,14 @@ package com.microfinance.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import com.microfinance.dto.ApiResponse;
-import com.microfinance.model.BranchModule;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanSchemCatalog;
-import com.microfinance.model.NewLoanApplication;
-import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.service.LoanManagementService;
 
@@ -28,6 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RestController
 @RequestMapping("/api/loanmanegment")
 public class LoanManagementController {
+	
+	@Value("${upload.directory}")
+    private String uploadDirectory;
 
 	@Autowired
 	private LoanManagementService loanServices;
@@ -127,6 +128,11 @@ public class LoanManagementController {
 	            .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
 	    }
 	}
+	
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/Uploads/**")
+            .addResourceLocations("file:///" + uploadDirectory);
+    }
 
 	
 	
@@ -181,6 +187,31 @@ public ResponseEntity<ApiResponse<LoanApplication>> saveSchemeCatalog(@RequestBo
     }
 }
 
+//Api for fetching Loan Id In the dropdown (Vaibhav)
+	@GetMapping("/getAllLoanIds")
+	public ResponseEntity<ApiResponse<List<String>>> getAllLoanIds() {
+	    List<String> loanIds = loanServices.fetchAllLoanIds();
+
+	    if (loanIds != null && !loanIds.isEmpty()) {
+	        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan IDs fetched successfully", loanIds));
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+	                .body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No Loan IDs found", null));
+	    }
+	}
+
+	// Api for fething the details on the textfiled (Vaibhav) 
+		@GetMapping("/getLoanById")
+		public ResponseEntity<ApiResponse<LoanApplication>> getLoanById(@RequestParam String loanId) {
+		    LoanApplication loan = loanServices.getLoanById(loanId);
+
+		    if (loan != null) {
+		        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan found", loan));
+		    } else {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Loan not found", null));
+		    }
+		}
 }
 
 
