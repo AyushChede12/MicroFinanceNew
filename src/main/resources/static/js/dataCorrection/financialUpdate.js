@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	//Dropdown without search
 	/*$.ajax({
 		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
@@ -18,7 +18,7 @@ $(document).ready(function() {
 			alert("Failed to load Financial codes.");
 		}
 	});*/
-	
+
 	//Dropdowns with search
 	$.ajax({
 		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
@@ -377,24 +377,30 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Financial Data?")) {
-			$.ajax({
-				url: "/api/financialconsultant/deleteFinancialConsultantById",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Financial Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let financialCode = $("#financialCode").val();
+		if (financialCode !== "") {
+			if (confirm("Are you sure you want to delete this Financial Data?")) {
+				$.ajax({
+					url: "/api/financialconsultant/deleteFinancialConsultantById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Financial Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Financial Data.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Financial Share Data.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});

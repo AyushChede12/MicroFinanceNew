@@ -115,7 +115,7 @@ public class DataCorrectionController {
 //				.saveOrUpdatePolicyManagement(policyManagementDto, image1, image2);
 //		return new ResponseEntity<>(response, response.getStatus());
 //	}
-	
+
 	@PostMapping("/deletePolicyDataByForm")
 	public ResponseEntity<ApiResponse<String>> deletePolicyData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deletePolicyData(id);
@@ -129,8 +129,8 @@ public class DataCorrectionController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
-	//Ayush
+
+	// Ayush
 //	@PostMapping("/fetchSavingAccountByCustomerCode")
 //	public ApiResponse<List<CreateSavingsAccount>> fetchSavingByCustomerCode(@RequestParam("selectByCustomer") String selectByCustomer) {
 //		List<CreateSavingsAccount> list = dataCorrectionService.fetchSavingDataByCustomerCode(selectByCustomer);
@@ -140,7 +140,7 @@ public class DataCorrectionController {
 //			return ApiResponse.error(HttpStatus.NOT_FOUND, "Saving Account Share Not Found");
 //		}
 //	}
-	
+
 	@PostMapping("/updateDataOfPolicyManagement")
 	public ResponseEntity<ApiResponse<String>> updatePolicyManagement(
 			@RequestBody AddnewinvestmentPM adddnewinvestmentPM) {
@@ -148,39 +148,33 @@ public class DataCorrectionController {
 		int result = dataCorrectionService.updatePolicyManagement(adddnewinvestmentPM);
 
 		if (result > 0) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
-					"Policy Data updated successfully.", "success");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Policy Data updated successfully.",
+					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
-					"Failed to update Policy Data.", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST, "Failed to update Policy Data.",
+					"failure");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
-	
-	//Ayush
-	@GetMapping("/fetchAllApprovedLoanApplications")
-    public ResponseEntity<ApiResponse<List<LoanApplication>>> getApprovedLoanApplications() {
-        List<LoanApplication> loan = dataCorrectionService.getApprovedLoanApplications();
 
-        if (loan != null && !loan.isEmpty()) {
-            ApiResponse<List<LoanApplication>> response = new ApiResponse<>(
-                    HttpStatus.OK,
-                    "Approved Loan Application fetched successfully.",
-                    loan
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<LoanApplication>> response = new ApiResponse<>(
-                    HttpStatus.NOT_FOUND,
-                    "No approved customers found.",
-                    null
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-	
-	//Ayush
+	// Ayush
+	@GetMapping("/fetchAllApprovedLoanApplications")
+	public ResponseEntity<ApiResponse<List<LoanApplication>>> getApprovedLoanApplications() {
+		List<LoanApplication> loan = dataCorrectionService.getApprovedLoanApplications();
+
+		if (loan != null && !loan.isEmpty()) {
+			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.OK,
+					"Approved Loan Application fetched successfully.", loan);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved customers found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	// Ayush
 	@GetMapping("/fetchAllLoanApplications")
 	public ResponseEntity<ApiResponse<List<LoanApplication>>> fetchAllLoanApplicationsData() {
 		List<LoanApplication> list = dataCorrectionService.fetchAllLoanApplication();
@@ -188,31 +182,88 @@ public class DataCorrectionController {
 				"Loan Application fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
-	
-	@GetMapping("/fetchAllApprovedPolicyRenewal")
-    public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getApprovedPolicyRenewal() {
-        List<PolicyRenewal> policy = dataCorrectionService.getApprovedPolicyRenewal();
 
-        if (policy != null && !policy.isEmpty()) {
-            ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
-                    HttpStatus.OK,
-                    "Policy Renewal Data fetched successfully.",
-                    policy
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
-                    HttpStatus.NOT_FOUND,
-                    "No approved Policy Renewal found.",
-                    null
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+	// Ayush
+	@GetMapping("/getLoanApplicationByLoanId")
+	public ResponseEntity<ApiResponse<List<LoanApplication>>> getLoanApplicationByLoanID(@RequestParam String loanId) {
+
+		List<LoanApplication> application = dataCorrectionService.fetchLoanApplicationByLoanId(loanId);
+
+		if (application != null && !application.isEmpty()) {
+			ApiResponse<List<LoanApplication>> response = ApiResponse.success(HttpStatus.FOUND,
+					"Loan Applications found for Loan ID: " + loanId, application);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<List<LoanApplication>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Loan Member found with Loan ID: " + loanId);
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
+
+	// Ayush
+	@GetMapping("/fetchAllApprovedPolicyRenewal")
+	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getApprovedPolicyRenewal() {
+		List<PolicyRenewal> policy = dataCorrectionService.getApprovedPolicyRenewal();
+
+		if (policy != null && !policy.isEmpty()) {
+			ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(HttpStatus.OK,
+					"Policy Renewal Data fetched successfully.", policy);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved Policy Renewal found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	// Ayush
+//	@GetMapping("/getPolicyRenewalByPolicyCode")
+//	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getRenewalByPolicyData(@RequestParam String policyCode) {
+//
+//	    List<PolicyRenewal> renewal = dataCorrectionService.fetchRenewalByPolicyCode(policyCode);
+//
+//	    if (renewal != null && !renewal.isEmpty()) {
+//	        ApiResponse<List<PolicyRenewal>> response = ApiResponse.success(
+//	            HttpStatus.OK,
+//	            "Policy Renewal found for PolicyCode: " + policyCode,
+//	            renewal
+//	        );
+//	        return new ResponseEntity<>(response, HttpStatus.OK);
+//	    } else {
+//	        ApiResponse<List<PolicyRenewal>> response = ApiResponse.error(
+//	            HttpStatus.NOT_FOUND,
+//	            "No member found with this code"
+//	        );
+//	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+//	    }
+//	}
 	
+	@PostMapping("/deleteLoanApplicationDataById")
+	public ResponseEntity<ApiResponse<String>> deleteLoanApplication(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deleteLoanApplication(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Loan Application deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Loan Application deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
 	
-	
-	
+	@PostMapping("/updateLoanApplication")
+	public ResponseEntity<ApiResponse<String>> updateLoanApplicationData(@RequestBody LoanApplication loanapplication){
+		boolean result = dataCorrectionService.updateLoanApplication(loanapplication);
+		if(result) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Loan Application Data Updated Successfully", "success");
+			return ResponseEntity.ok(response);
+		}
+		else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST, "Loan Application Data Not Updated", "failure");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
 
 
 }

@@ -198,7 +198,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var customerData = new FormData();
 		var id = $('#id').val();
-		customerData.append("id",id);
+		customerData.append("id", id);
 		customerData.append("memberCode", $('#customerCode').val());
 		customerData.append("signupDate", $('#signupDate').val());
 		customerData.append("customerName", $('#customerName').val());
@@ -272,24 +272,30 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Customer Data?")) {
-			$.ajax({
-				url: "/api/datacorrection/deleteCustomerDataByForm",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Customer Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let customerCode = $("#customerCode").val();
+		if (customerCode !== "") {
+			if (confirm("Are you sure you want to delete this Customer Data?")) {
+				$.ajax({
+					url: "/api/datacorrection/deleteCustomerDataByForm",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Customer Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Customer.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Customer.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
