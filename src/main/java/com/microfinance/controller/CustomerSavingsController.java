@@ -51,8 +51,9 @@ public class CustomerSavingsController {
 	@Autowired
 	CustomerSavingsService customersaving;
 	
-	@Autowired
-	CreateSavingAccountRepo createSavingAccountRepo;
+	
+	  @Autowired CreateSavingAccountRepo createSavingAccountRepo;
+	 
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -167,18 +168,31 @@ public class CustomerSavingsController {
 	@PostMapping("/saveandupdatesavingaccount")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(
 			@ModelAttribute SavingAccountDto savingAccountDto,
-			@RequestParam(value = "photo", required = false) MultipartFile photo,
-			@RequestParam(value = "signature", required = false) MultipartFile signature) {
+			@RequestParam(value = "photo", required = false) String photo,
+			@RequestParam(value = "signature", required = false) String signature,
+			@RequestParam(value = "jointPhoto", required = false) String jointPhoto) {
 
-		if (photo != null) {
-			System.out.println("Received photo: " + photo.getOriginalFilename());
-		}
-		if (signature != null) {
-			System.out.println("Received signature: " + signature.getOriginalFilename());
-		}
+		String customerId = savingAccountDto.getSelectByCustomer(); // assuming it's Long
+
+	    // Check for existing record before saving (only for new entries)
+	    if (savingAccountDto.getId() == null && customersaving.existsByCustomerId(customerId)) {
+	        return ResponseEntity
+	                .status(HttpStatus.CONFLICT)
+	                .body(new ApiResponse<>(
+	                        HttpStatus.CONFLICT,
+	                        "Customer already exists in saving account",
+	                        null));
+	    }
+		
+			System.out.println("Received photo: " + photo);
+
+			System.out.println("Received signature: " + signature);
+			
+			System.out.println("Received jointPhoto: " + jointPhoto);
+		
 
 		ApiResponse<CreateSavingsAccount> response = customersaving.saveSavingAccountDetails(savingAccountDto, photo,
-				signature);
+				signature, jointPhoto);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(
                 HttpStatus.OK,
@@ -196,14 +210,31 @@ public class CustomerSavingsController {
 		return ResponseEntity.ok(response);
 	}
 	
-    //fetch all saving account data by account number
+    /*//fetch all saving account data by account number
     @GetMapping("/getallbyaccountnumber")
    	public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> findAllByAccountNumber(@RequestParam String accountNumber) {
    		List<CreateSavingsAccount> list = customersaving.findAllByAccountNumber(accountNumber);
    		ApiResponse<List<CreateSavingsAccount>> response = new ApiResponse<>(HttpStatus.FOUND,
    				"Fetch account details by account number", list);
    		return ResponseEntity.ok(response);
-   	}
+   	}*/
+    //janvi
+    @GetMapping("/getallbyaccountnumber")
+    public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> findAllByAccountNumber(@RequestParam String accountNumber) {
+        
+        List<CreateSavingsAccount> approvedAccounts = customersaving.findAllApprovedByAccountNumber(accountNumber);
+
+        if (approvedAccounts == null || approvedAccounts.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "First approve account", null));
+        }
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(HttpStatus.OK, "Fetch account details by account number", approvedAccounts)
+        );
+
+    }
+
     
     @GetMapping("/getSavingAccountDataById")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> findSavingAccountDataById(@RequestParam("id") Long id) {
@@ -332,7 +363,40 @@ public class CustomerSavingsController {
         }
     }
 
+ // Api For fetching account numbers (Vaibhav)
+    @GetMapping("/fetchAccountNumbers")
+    public ResponseEntity<ApiResponse<List<String>>> getAccountNumbersByType(@RequestParam String accountType) {
+        List<String> accountNumbers = customersaving.getAccountNumbersByType(accountType);
 
+        if (accountNumbers.isEmpty()) {
+            ApiResponse<List<String>> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND, "No account numbers found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
 
+        ApiResponse<List<String>> response = ApiResponse.success(
+            HttpStatus.OK, "Account numbers fetched successfully.", accountNumbers);
+        return ResponseEntity.ok(response);
+    }
+    
+ // Api for fetching the account details with the help of account number (vaibhav)
+    @GetMapping("/getDataByAccountNumber")
+    public ResponseEntity<ApiResponse<CreateSavingsAccount>> getAccountByNumber(@RequestParam String accountNumber) {
+        Optional<CreateSavingsAccount> account = customersaving.getAccountByNumber(accountNumber);
+
+        // ✔️ Correct null check for Optional:
+        if (!account.isPresent()) {
+            ApiResponse<CreateSavingsAccount> response = ApiResponse.error(
+                    HttpStatus.NOT_FOUND, "Account not found.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+         }
+
+        // ✔️ Use account.get() not Optional itself
+        ApiResponse<CreateSavingsAccount> response = ApiResponse.success(
+                HttpStatus.OK, "Account fetched successfully.", account.get());
+        return ResponseEntity.ok(response);
+    }
+
+ 
 	
 }

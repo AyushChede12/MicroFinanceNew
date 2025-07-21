@@ -1,7 +1,9 @@
 package com.microfinance.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.BranchModule;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.BranchModuleRepo;
+import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.NewLoanAppicationRepo;
 
@@ -26,46 +30,46 @@ public class LoanManagementService {
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
 
-// update and save
+	@Autowired
+	LoanApplicationRepo loanApplicationRepo;
+
+	// Service fo saving and updating the loan scheme data
 	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
-		// Check if ID is present (update case)
-		if (loan.getId() != null) {
-			Optional<LoanSchemCatalog> optionalLoan = loanRepository.findById(loan.getId());
+		if (loan.getId() != null && loanRepository.existsById(loan.getId())) {
+			// Perform update
+			LoanSchemCatalog existingLoan = loanRepository.findById(loan.getId()).get();
 
-			if (optionalLoan.isPresent()) {
-				LoanSchemCatalog existingLoan = optionalLoan.get();
+			// Copy all fields from input to existing
+			existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
+			existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
+			existingLoan.setTypeLoan(loan.getTypeLoan());
+			existingLoan.setAge(loan.getAge());
+			existingLoan.setLoanTerm(loan.getLoanTerm());
+			existingLoan.setEmiType(loan.getEmiType());
+			existingLoan.setLoanAmount(loan.getLoanAmount());
+			existingLoan.setLoanMode(loan.getLoanMode());
+			existingLoan.setRateIntrestType(loan.getRateIntrestType());
+			existingLoan.setTypeIntrest(loan.getTypeIntrest());
+			existingLoan.setTypesecurity(loan.getTypesecurity());
+			existingLoan.setPlanStatus(loan.getPlanStatus());
 
-				// Update fields
-				existingLoan.setLoanSchemeCode(loan.getLoanSchemeCode());
+			// Deductions
+			existingLoan.setFeeProcessing(loan.getFeeProcessing());
+			existingLoan.setChargesLegal(loan.getChargesLegal());
+			existingLoan.setGst(loan.getGst());
+			existingLoan.setFeeInsurence(loan.getFeeInsurence());
+			existingLoan.setFeeValuation(loan.getFeeValuation());
 
-				existingLoan.setLoanPlaneName(loan.getLoanPlaneName());
-				existingLoan.setTypeLoan(loan.getTypeLoan());
-				existingLoan.setAge(loan.getAge());
+			// Late fee
+			existingLoan.setLateAllowanceday(loan.getLateAllowanceday());
+			existingLoan.setModePanalty(loan.getModePanalty());
+			existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
 
-				existingLoan.setLoanDuration(loan.getLoanDuration());
-
-				existingLoan.setEmiType(loan.getEmiType());
-				existingLoan.setLoanAmount(loan.getLoanAmount());
-				existingLoan.setLoanMode(loan.getLoanMode());
-
-				existingLoan.setRateIntrestType(loan.getRateIntrestType());
-				existingLoan.setTypeIntrest(loan.getTypeIntrest());
-				existingLoan.setTypesecurity(loan.getTypesecurity());
-				existingLoan.setFeeProcessing(loan.getFeeProcessing());
-				existingLoan.setChargesLegal(loan.getChargesLegal());
-				existingLoan.setFeeInsurence(loan.getFeeInsurence());
-				existingLoan.setGst(loan.getGst());
-				existingLoan.setFeeValuation(loan.getFeeValuation());
-				existingLoan.setLateAllowanceday(loan.getLateAllowanceday());
-				existingLoan.setModePanalty(loan.getModePanalty());
-				existingLoan.setPennaltyMonthly(loan.getPennaltyMonthly());
-
-				return loanRepository.save(existingLoan);
-
-			}
+			return loanRepository.save(existingLoan);
+		} else {
+			// Save new record
+			return loanRepository.save(loan);
 		}
-		return loanRepository.save(loan);
-
 	}
 
 	// Fetch data On Table
@@ -96,18 +100,6 @@ public class LoanManagementService {
 		return addCustomerRepo.findAll();
 	}
 
-	public addCustomer getLoanApplicationById(Long id) {
-
-		return addCustomerRepo.findById(id).orElseThrow(() -> new RuntimeException("Loan not found with ID: " + id));
-	}
-
-	/*
-	 * //Branch Model fetch for prefenses
-	 * 
-	 * public List<BranchModule> getgetBranchName() { // TODO Auto-generated method
-	 * stub return branchModuleRepo.findAll(); }
-	 */
-
 	// Loan schem Code Name Dropdrawn
 
 	public List<LoanSchemCatalog> getLoanSchemCode() {
@@ -120,6 +112,61 @@ public class LoanManagementService {
 	public LoanSchemCatalog getLoanByCode(String code) {
 		return loanRepository.findByLoanSchemeCode(code)
 				.orElseThrow(() -> new RuntimeException("Loan Scheme not found for code: " + code));
+	}
+
+	public List<LoanSchemCatalog> getLoanPlanName(String loanPlanName) {
+		// Example: find by plan name (case-insensitive match)
+		return loanRepository.findByLoanPlaneNameContainingIgnoreCase(loanPlanName);
+	}
+
+	public List<LoanSchemCatalog> getSchemeCatalog() {
+
+		return loanRepository.findAll();
+	}
+
+	public boolean saveLoanApplicationData(LoanApplication loanApplication) {
+		try {
+			loanApplicationRepo.save(loanApplication);
+			return true; // Saved successfully
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false; // Something went wrong
+		}
+	}
+
+	public List<addCustomer> getLoanApplicationById(String memberCode) {
+		return addCustomerRepo.findByMemberCode(memberCode);
+	}
+
+	// Service for fetching Loan Id In the dropdown (Vaibhav)
+	public List<String> fetchAllLoanIds() {
+
+		// This assumes you have a loanId field in your Loan entity.
+		return loanApplicationRepo.findAll().stream().map(LoanApplication::getLoanId) // adjust class name if needed
+				.filter(Objects::nonNull).collect(Collectors.toList());
+	}
+
+	// Service for fetching the data in the textfields (Vaibhav)
+	public LoanApplication getLoanById(String loanId) {
+		return loanApplicationRepo.findByLoanId(loanId); // Make sure this method exists
+	}
+
+	// Service for approving the loan application (Vaibhav)
+	public String updateApproval(LoanApplication approval) {
+		LoanApplication loan = loanApplicationRepo.findByLoanId(approval.getLoanId());
+
+		if (loan != null) {
+			if (loan.isApprovalStatus()) {
+				return "already_approved";
+			}
+
+			loan.setApprovalStatus(approval.isApprovalStatus());
+			loan.setApprovalDate(approval.getApprovalDate());
+			loanApplicationRepo.save(loan);
+			return "success";
+		} else {
+			return "not_found";
+		}
 	}
 
 }

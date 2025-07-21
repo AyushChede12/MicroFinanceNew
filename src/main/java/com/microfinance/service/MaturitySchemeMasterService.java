@@ -3,12 +3,16 @@ package com.microfinance.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.microfinance.model.ApplyForMaturity;
 import com.microfinance.model.MaturitySchemeMaster;
+import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.repository.ApplyForMaturityRepo;
 import com.microfinance.repository.MaturitySchemeMasterRepo;
+import com.microfinance.repository.PartialMaturitypaymentRepo;
 
 @Service
 public class MaturitySchemeMasterService {
@@ -18,6 +22,9 @@ public class MaturitySchemeMasterService {
 	
 	@Autowired
 	ApplyForMaturityRepo Applymaturityrepo;
+	
+	@Autowired
+	PartialMaturitypaymentRepo partialmaturityrepo;
 
 	public MaturitySchemeMaster saveAllDailyDeposit(MaturitySchemeMaster maturityscheme) {
 		// TODO Auto-generated method stub
@@ -33,10 +40,21 @@ public class MaturitySchemeMasterService {
 		// TODO Auto-generated method stub
 		return Applymaturityrepo.findAll();
 	}
+	
+
+	public Page<ApplyForMaturity> getApplyMaturityDetailsWithPage(int page, int size) {
+	    PageRequest pageable = PageRequest.of(page, size);
+	    return Applymaturityrepo.findWithPage(pageable);
+	}
 
 	public List<ApplyForMaturity> getMaturityDetailsByBranchAndDate(String branchName, String fromDate, String toDate) {
 		// TODO Auto-generated method stub
 		return Applymaturityrepo.findByBranchToDateFromDate(branchName,fromDate,toDate);
+	}
+
+	public partialMaturityPayment savePartialmaturity(partialMaturityPayment partialmaturity) {
+		// TODO Auto-generated method stub
+		return partialmaturityrepo.save(partialmaturity) ;
 	}
 
 }

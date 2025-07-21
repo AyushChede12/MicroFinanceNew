@@ -3,7 +3,9 @@ package com.microfinance.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,8 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CreateSavingsAccount;
-import com.microfinance.model.ExecutiveFounder;
-import com.microfinance.model.FinancialYear;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
@@ -99,7 +99,7 @@ public class CustomerSavingsService {
 //	}
 	
 	public ApiResponse<CreateSavingsAccount> saveSavingAccountDetails(SavingAccountDto savingAccountDto,
-			MultipartFile photo, MultipartFile signature) {
+			String photo, String signature, String jointPhoto) {
 		// TODO Auto-generated method stub
 				CreateSavingsAccount createSavingsAccount = new CreateSavingsAccount();
 				boolean isNew = true;
@@ -139,31 +139,54 @@ public class CustomerSavingsService {
 				createSavingsAccount.setOpeningFees(savingAccountDto.getOpeningFees());
 				createSavingsAccount.setAuthenticateWith(savingAccountDto.getAuthenticateWith());
 				createSavingsAccount.setModeOfPayment(savingAccountDto.getModeOfPayment());
+				
+				createSavingsAccount.setChequeNo(savingAccountDto.getChequeNo());
+				createSavingsAccount.setChequeDate(savingAccountDto.getChequeDate());
+				createSavingsAccount.setDepositAcc1(savingAccountDto.getDepositAcc1());
+				createSavingsAccount.setDepositAcc2(savingAccountDto.getDepositAcc2());
+				createSavingsAccount.setRefNumber1(savingAccountDto.getRefNumber1());
+				createSavingsAccount.setDepositAcc3(savingAccountDto.getDepositAcc3());
+				createSavingsAccount.setRefNumber2(savingAccountDto.getRefNumber2());
+				
 				createSavingsAccount.setComment(savingAccountDto.getComment());
 				createSavingsAccount.setAccountStatus(savingAccountDto.getAccountStatus());
 				createSavingsAccount.setMessageSend(savingAccountDto.getMessageSend());
 				createSavingsAccount.setDebitCardIssue(savingAccountDto.getDebitCardIssue());
 				createSavingsAccount.setAccountNumber(savingAccountDto.getAccountNumber());
+				 // Set photo path (already fetched)
+			    if (photo != null && !photo.isEmpty()) {
+			    	createSavingsAccount.setPhoto(photo);
+			    }
+			    
+			    // Handle signature upload
+			    if (signature != null && !signature.isEmpty()) {
+			    	createSavingsAccount.setSignature(signature);
+			    }
+			    
+			    // Handle signature upload
+			    if (jointPhoto != null && !jointPhoto.isEmpty()) {
+			    	createSavingsAccount.setJointPhoto(jointPhoto);
+			    }	    	 
 
 				// Handle photo upload
-				if (photo != null && !photo.isEmpty()) {
+				/*if (photo != null && !photo.isEmpty()) {
 					try {
 						String fileName1 = saveFile(photo); // Save the signature
 						createSavingsAccount.setPhoto(fileName1);
 					} catch (IOException e) {
 						return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
 					}
-				}
+				}*/
 
 				// Handle signature upload
-				if (signature != null && !signature.isEmpty()) {
+				/*if (signature != null && !signature.isEmpty()) {
 					try {
 						String fileName1 = saveFile1(signature); // Save the signature
 						createSavingsAccount.setSignature(fileName1);
 					} catch (IOException e) {
 						return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
 					}
-				}
+				}*/
 
 				// Save entity to the database
 				CreateSavingsAccount saveSavingAccountDetails = createSavingAccountRepo.save(createSavingsAccount);
@@ -178,7 +201,7 @@ public class CustomerSavingsService {
 				}
 	}
 	
-	private String saveFile(MultipartFile photo) throws IOException {
+	/*private String saveFile(MultipartFile photo) throws IOException {
 		// TODO Auto-generated method stub
 		if (photo != null && !photo.isEmpty()) {
 			ensureUploadDirectoryExists(); // Ensure the upload directory exists
@@ -196,9 +219,9 @@ public class CustomerSavingsService {
 			}
 		}
 		return null;
-	}
+	}*/
 
-	private String saveFile1(MultipartFile signature) throws IOException {
+	/*private String saveFile1(MultipartFile signature) throws IOException {
 		// TODO Auto-generated method stub
 		if (signature != null && !signature.isEmpty()) {
 			ensureUploadDirectoryExists(); // Ensure the upload directory exists
@@ -216,9 +239,9 @@ public class CustomerSavingsService {
 			}
 		}
 		return null;
-	}
+	}*/
 
-	private void ensureUploadDirectoryExists() {
+	/*private void ensureUploadDirectoryExists() {
 		File uploadDir = new File(uploadDirectory);
 		if (!uploadDir.exists()) {
 			boolean created = uploadDir.mkdirs(); // Create directories if they don't exist
@@ -228,7 +251,7 @@ public class CustomerSavingsService {
 				System.err.println("Failed to create upload directory: " + uploadDirectory);
 			}
 		}
-	}
+	}*/
 
 	public List<CreateSavingsAccount> fetchAllSavingAccountData() {
 		// TODO Auto-generated method stub
@@ -261,10 +284,11 @@ public class CustomerSavingsService {
 	}
 
 
-	public List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber) {
+	/*public List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber) {
 		List<CreateSavingsAccount> list = createSavingAccountRepo.findAllByAccountNumber(accountNumber);
 		return list;
-	}
+	}*/
+	
 
 	public SavingAccountActivity saveSavingAccountActivityData(SavingAccountActivity savingAccountActivity) {
 		return savingAccountActivityRepo.save(savingAccountActivity);
@@ -290,7 +314,32 @@ public class CustomerSavingsService {
 		    return false;
 	}
 
-	
+	// Service for fetching the account numbers for passbook (vaibhav)
+		public List<String> getAccountNumbersByType(String accountType) {
+		    return createSavingAccountRepo.findByTypeofaccountContainingIgnoreCase(accountType)
+		            .stream()
+		            .map(CreateSavingsAccount::getAccountNumber)
+		            .filter(Objects::nonNull)
+		            .collect(Collectors.toList());
+		}
+		
+		// Service for fetching the data according to the account number (vaibhav)
+		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {
+			return createSavingAccountRepo.findByAccountNumber(accountNumber);
+		}
+		//janvi
+		public List<CreateSavingsAccount> findAllApprovedByAccountNumber(String accountNumber) {
+			// TODO Auto-generated method stub
+			return createSavingAccountRepo.findAllByAccountNumberAndIsApprovedTrue(accountNumber);
+		}
+
+		public boolean existsByCustomerId(String customerId) {
+			// TODO Auto-generated method stub
+			return createSavingAccountRepo.existsBySelectByCustomer(customerId);
+		}
+
+		
+		
 
 
 }

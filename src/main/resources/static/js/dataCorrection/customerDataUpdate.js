@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	
+
+	//Without Search in Dropdown
 	/*$.ajax({
 		url: "/api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
@@ -17,53 +18,42 @@ $(document).ready(function() {
 			alert("Failed to load customer codes.");
 		}
 	}); */
-	
+
+	//With Search in Dropdown
 	$.ajax({
-	    url: '/api/financialconsultant/getAllCustomerCodes',
-	    type: 'POST',
-	    success: function(response) {
-	        if (response.status === "FOUND") {
-	            let customerOptions = response.data.map(function (item) {
-	                return {
-	                    id: item.memberCode,
-	                    text: item.memberCode + " - " + item.customerName
-	                };
-	            });
+		url: 'approved',
+		type: 'GET',
+		success: function(response) {
+			// response is a direct array of addCustomer
+			if (Array.isArray(response) && response.length > 0) {
+				let customerOptions = response.map(function(item) {
+					return {
+						id: item.memberCode,
+						text: item.memberCode + " - " + item.customerName
+					};
+				});
 
-	            // Initialize Select2 with full data and custom search matcher
-	            $('#customerCode').select2({
-	                placeholder: '-- Search Customer Code or Name --',
-	                data: customerOptions,
-	                matcher: function(params, data) {
-	                    // If no search term, return all
-	                    if ($.trim(params.term) === '') {
-	                        return data;
-	                    }
+				$('#customerCode').select2({
+					placeholder: '-- Search Customer Code or Name --',
+					data: customerOptions,
+					matcher: function(params, data) {
+						if ($.trim(params.term) === '') return data;
+						if (typeof data.text === 'undefined') return null;
 
-	                    if (typeof data.text === 'undefined') {
-	                        return null;
-	                    }
-
-	                    // Case-insensitive match on memberCode or customerName
-	                    const term = params.term.toLowerCase();
-	                    const text = data.text.toLowerCase();
-
-	                    if (text.includes(term)) {
-	                        return data;
-	                    }
-
-	                    return null;
-	                }
-	            });
-
-	        } else {
-	            alert("No customer codes found.");
-	        }
-	    },
-	    error: function() {
-	        alert("Failed to load customer codes.");
-	    }
+						const term = params.term.toLowerCase();
+						const text = data.text.toLowerCase();
+						return text.includes(term) ? data : null;
+					}
+				});
+			} else {
+				alert("No approved customers found.");
+			}
+		},
+		error: function() {
+			alert("Failed to load customer codes.");
+		}
 	});
+
 
 
 	$("#customerCode").change(function() {
@@ -71,14 +61,14 @@ $(document).ready(function() {
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
-				url: "/api/financialconsultant/getFinancialConsultantByMemberCode",
+				url: "/api/customershareholdingcontroller/fetchByCustomerCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
-					if (response.status == "OK") {
+					if (response.status == "FOUND") {
 						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
-						$("#authenticateFor").val(data.authenticateFor);
+						$("#major").val(data.major);
 						$("#customerName").val(data.customerName);
 						$("#familyMemberName").val(data.guardianName);
 						$("#relationToApplicant").val(data.relationToApplicant);
@@ -101,7 +91,32 @@ $(document).ready(function() {
 						$("#referralCode").val(data.referralCode);
 						$("#referralName").val(data.referralName);
 						$("#minor").val(data.minor);
-						$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
+						//$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
+
+						if (data.customerPhoto) {
+							const photoPath = `Uploads/${data.customerPhoto}`;
+							$("#photoPreview").attr("src", photoPath);
+							$("#photoHidden").val(photoPath);
+							const fakePhotoEvent = { target: { result: photoPath } };
+							photoSizeEdit(fakePhotoEvent);
+
+						} else {
+							$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+							$("#photoHidden").val("");
+						}
+
+						// Image: Signature
+						if (data.customerSignature) {
+							const signPath = `Uploads/${data.customerSignature}`;
+							$("#signaturePreview").attr("src", signPath);
+							$("#signatureHidden").val(signPath);
+							const fakeSignEvent = { target: { result: signPath } };
+							signatureSizeEdit(fakeSignEvent);
+
+						} else {
+							$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+							$("#signatureHidden").val("");
+						}
 
 						//Nominee 
 						$("#nomineeName").val(data.nomineeName);
@@ -112,9 +127,6 @@ $(document).ready(function() {
 						$("#nomineeAge").val(data.nomineeAge);
 						$("#nomineePanNo").val(data.nomineePanNo);
 						$("#nomineeKycType").val(data.nomineeKycType);
-						$("#memberFees").val(data.memberFees);
-
-						restFieldsBind(customerCode);
 
 						if (parseInt(data.memberStatus) === 1) {
 							$('#toggle-member-status').prop('checked', true);
@@ -184,33 +196,78 @@ $(document).ready(function() {
 
 	$('#updateBtn').click(async function(event) {
 		event.preventDefault();
-		alert("Update Button Called");
-		var id = $("#id").val();
-		alert(id);
+		var customerData = new FormData();
+		var id = $('#id').val();
+		customerData.append("id",id);
+		customerData.append("memberCode", $('#customerCode').val());
+		customerData.append("signupDate", $('#signupDate').val());
+		customerData.append("customerName", $('#customerName').val());
+		customerData.append("customerGender", $('#customerGender').val());
+		customerData.append("guardianName", $('#guardianName').val());
+		customerData.append("relationToApplicant", $('#relationToApplicant').val());
+		customerData.append("dob", $('#dob').val());
+		customerData.append("customerAge", $('#customerAge').val());
+		customerData.append("relationshipStatus", $('#relationshipStatus').val());
+		customerData.append("customerAddress", $('#customerAddress').val());
+		customerData.append("state", $('#state').val());
+		customerData.append("district", $('#district').val());
+		customerData.append("aadharNo", $('#aadharNo').val());
+		customerData.append("pinCode", $('#pinCode').val());
+		customerData.append("branchName", $('#branchName').val());
+		customerData.append("panNo", $('#panNo').val());
+		customerData.append("voterNo", $('#voterNo').val());
+		customerData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
+		customerData.append("referralCode", $('#referralCode').val());
+		customerData.append("referralName", $('#referralName').val());
+		customerData.append("contactNo", $('#contactNo').val());
+		customerData.append("emailId", $('#emailId').val());
+		customerData.append("profession", $('#profession').val());
+		customerData.append("academicBackground", $('#academicBackground').val());
 
+		// Nominee
+		customerData.append("nomineeName", $('#nomineeName').val());
+		customerData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
+		customerData.append("nomineeAddress", $('#nomineeAddress').val());
+		customerData.append("nomineeKycNo", $('#nomineeKycNo').val());
+		customerData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
+		customerData.append("nomineeAge", $('#nomineeAge').val());
+		customerData.append("nomineePanNo", $('#nomineePanNo').val());
+		customerData.append("nomineeKycType", $('#nomineeKycType').val());
+		customerData.append("memberStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
+		customerData.append("memberBanking", $('#toggle-mobile-banking').is(':checked') ? 1 : 0);
+		customerData.append("netBanking", $('#toggle-net-banking').is(':checked') ? 1 : 0);
+		customerData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 
-		try {
-			// Call First API: Save/Update Customer Info
-			const response1 = await updateCustomerBasicInfo(id);
+		const photoFile = $('#customerPhoto')[0].files[0];
+		const signatureFile = $('#customerSignature')[0].files[0];
 
-			if (response1.status === "OK") {
-				// Call Second API: Update Shareholding Info
-				const response2 = await updateCustomerRemainingData(id);
+		if (photoFile) {
+			customerData.append("customerPhoto", photoFile);
+		}
 
-				if (response2.status === "FOUND") {
-					alert("Customer data updated successfully!");
+		if (signatureFile) {
+			customerData.append("customerSignature", signatureFile);
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: 'saveOrUpdateCustomer',
+			data: customerData,
+			contentType: false,
+			processData: false,
+			cache: false,
+			success: function(response) {
+				if (response.status === "OK") {
+					alert("Customer Data Updated Successfully");
 					location.reload();
 				} else {
-					alert("Shareholding update failed: " + response2.message);
+					alert("Something went wrong: " + response.message);
 				}
-			} else {
-				alert("Customer update failed: " + response1.message);
+			},
+			error: function(xhr) {
+				alert("Error while saving data: " + xhr.responseText);
 			}
-
-		} catch (error) {
-			console.error("Error occurred during update:", error);
-			alert("An unexpected error occurred. Please try again.");
-		}
+		});
 	});
 
 	$('#deleteBtn').click(function(event) {
@@ -356,30 +413,6 @@ $(document).ready(function() {
 
 });
 
-function restFieldsBind(customerCode) {
-	$.ajax({
-		type: "POST",
-		url: "/api/customershareholdingcontroller/fetchByFindByCode",
-		data: { findByCode: customerCode },
-		success: function(response) {
-			if (response.status == "FOUND") {
-				let data = response.data[0];
-				$("#shareIssuedBy").val(data.shareIssuedBy);
-				$("#noOfShare").val(data.noOfShare);
-				$("#baseValue").val(data.baseValue);
-				$("#modeOfPayment").val(data.modeOfPayment);
-				$("#comments").val(data.comments);
-
-			} else {
-				alert("Transfer Share Details Not Found For Customer");
-			}
-		},
-		error: function() {
-			alert("Shares not found or server error");
-		}
-	});
-}
-
 document.addEventListener('DOMContentLoaded', function() {
 	const toggles = document.querySelectorAll('.toggle__input');
 
@@ -427,14 +460,9 @@ function photoUpload() {
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("photoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("photoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -445,18 +473,12 @@ function photoUpload() {
 
 //Ayush
 function signatureUpload() {
-	const file = document.getElementById("signature").files[0];
+	const file = document.getElementById("customerSignature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("signaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("signaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -464,92 +486,22 @@ function signatureUpload() {
 	}
 }
 
-
-function updateCustomerBasicInfo(id) {
-	return new Promise(function(resolve, reject) {
-		var customerData = new FormData();
-
-		customerData.append("id", id);
-		customerData.append("memberCode", $('#customerCode').val());
-		customerData.append("signupDate", $('#signupDate').val());
-		customerData.append("customerName", $('#customerName').val());
-		customerData.append("customerGender", $('#customerGender').val());
-		customerData.append("guardianName", $('#guardianName').val());
-		customerData.append("relationToApplicant", $('#relationToApplicant').val());
-		customerData.append("dob", $('#dob').val());
-		customerData.append("customerAge", $('#customerAge').val());
-		customerData.append("relationshipStatus", $('#relationshipStatus').val());
-		customerData.append("customerAddress", $('#customerAddress').val());
-		customerData.append("state", $('#state').val());
-		customerData.append("district", $('#district').val());
-		customerData.append("aadharNo", $('#aadharNo').val());
-		customerData.append("pinCode", $('#pinCode').val());
-		customerData.append("branchName", $('#branchName').val());
-		customerData.append("panNo", $('#panNo').val());
-		customerData.append("voterNo", $('#voterNo').val());
-		customerData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
-		customerData.append("referralCode", $('#referralCode').val());
-		customerData.append("referralName", $('#referralName').val());
-		customerData.append("contactNo", $('#contactNo').val());
-		customerData.append("emailId", $('#emailId').val());
-		customerData.append("profession", $('#profession').val());
-		customerData.append("academicBackground", $('#academicBackground').val());
-
-		// Nominee
-		customerData.append("nomineeName", $('#nomineeName').val());
-		customerData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
-		customerData.append("nomineeAddress", $('#nomineeAddress').val());
-		customerData.append("nomineeKycNo", $('#nomineeKycNo').val());
-		customerData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
-		customerData.append("nomineeAge", $('#nomineeAge').val());
-		customerData.append("nomineePanNo", $('#nomineePanNo').val());
-		customerData.append("nomineeKycType", $('#nomineeKycType').val());
-		customerData.append("memberFees", $('#memberFees').val());
-		customerData.append("memberStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
-		customerData.append("memberBanking", $('#toggle-mobile-banking').is(':checked') ? 1 : 0);
-		customerData.append("netBanking", $('#toggle-net-banking').is(':checked') ? 1 : 0);
-		customerData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
-
-		var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		if (photo) customerData.append("customerPhoto", photo);
-
-		$.ajax({
-			type: 'POST',
-			url: '/saveOrUpdateCustomer',
-			data: customerData,
-			processData: false,
-			contentType: false,
-			success: resolve,
-			error: function(xhr) {
-				reject(xhr.responseText);
-			}
-		});
-	});
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }
 
-
-
-function updateCustomerRemainingData(id) {
-	return new Promise(function(resolve, reject) {
-		const transferData = {
-			id: id,
-			findByCode: $('#customerCode').val(),
-			shareIssuedBy: $('#shareIssuedBy').val(),
-			noOfShare: $('#noOfShare').val(),
-			baseValue: $('#baseValue').val(),
-			modeOfPayment: $('#modeOfPayment').val(),
-			comments: $('#comments').val()
-		};
-
-		$.ajax({
-			type: 'POST',
-			url: '/api/customershareholdingcontroller/updateTransferShare',
-			data: JSON.stringify(transferData),
-			contentType: 'application/json',
-			success: resolve,
-			error: function(xhr) {
-				reject(xhr.responseText);
-			}
-		});
-	});
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }

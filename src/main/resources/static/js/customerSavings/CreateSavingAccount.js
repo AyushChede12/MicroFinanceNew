@@ -54,7 +54,7 @@ $('#selectPlan').on('change', function () {
 
 //shubham kewat 18/06/25
 //fetch customer name 
-$(document).ready(function() {
+ /*$(document).ready(function() {
     $.ajax({
         url: "/api/customershareholdingcontroller/findAllCustomerCode",
         type: "GET",
@@ -84,7 +84,39 @@ $(document).ready(function() {
             alert("Failed to fetch customer list.");
         }
     });
+});*/
+
+//janvi : Customer name list fetch
+$(document).ready(function() {
+	// Fetch all customers and populate the "select by code" dropdown
+	$.ajax({
+		url: "approved",
+		method: "GET",
+		success: function(data) {
+			console.log("Fetched Members:", data);
+			data.forEach(function(customer) {
+				const optionText = `${customer.memberCode} - ${customer.customerName}`;
+				const optionText1 = `${customer.memberCode}`;
+				$('#selectByCustomer').append(
+					$('<option>', {
+						value: customer.memberCode, // You can change this to customer.id or anything else if needed
+						text: optionText
+					})
+				);
+				$('#jointOperationCode').append(
+					$('<option>', {
+						value: customer.memberCode, // You can change this to customer.id or anything else if needed
+						text: optionText1
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("Error fetching customers:", err);
+		}
+	});
 });
+
 
 //Member Code fetch in Customer Name 
 
@@ -113,6 +145,24 @@ $('#selectByCustomer').on('change', function () {
 					$('#state').val(customer.state);
 					$('#dateOfBirth').val(customer.dob);
                     //$('#panCardNumber').val(customer.panCardNumber);
+                    //photo
+                    if (customer.customerPhoto) {
+						const imagePath = `Uploads/${customer.customerPhoto}`; // Construct full image path
+						document.getElementById("photo").src = imagePath; // Set image source
+						document.getElementById("photoHidden").value = customer.customerPhoto; // Set hidden input value
+					} else {
+						document.getElementById("photo").src = 'Uploads/upload.jpg'; // Default placeholder
+						document.getElementById("photoHidden").value = ''; // Clear hidden input value
+					}
+					//signature
+					if (customer.customerSignature) {
+						const imagePath = `Uploads/${customer.customerSignature}`; // Construct full image path
+						document.getElementById("signature").src = imagePath; // Set image source
+						document.getElementById("signatureHidden").value = customer.customerSignature; // Set hidden input value
+					} else {
+						document.getElementById("signature").src = 'Uploads/upload.jpg'; // Default placeholder
+						document.getElementById("signatureHidden").value = ''; // Clear hidden input value
+					}
                 } else {
                     alert('No customer data found!');
                     $('#enterCustomerName').val('');
@@ -146,6 +196,15 @@ $('#jointOperationCode').on('change', function () {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
                     $('#jointSurvivorCode').val(customer.customerName);
+                    //Jointphoto
+                    if (customer.customerPhoto) {
+						const imagePath = `Uploads/${customer.customerPhoto}`; // Construct full image path
+						document.getElementById("jointPhoto").src = imagePath; // Set image source
+						document.getElementById("jointPhotoHidden").value = customer.customerPhoto; // Set hidden input value
+					} else {
+						document.getElementById("jointPhoto").src = 'Uploads/upload.jpg'; // Default placeholder
+						document.getElementById("jointPhotoHidden").value = ''; // Clear hidden input value
+					}
                 } else {
                     alert('No customer data found!');
                     $('#jointSurvivorCode').val('');
@@ -173,7 +232,7 @@ $('#financialConsultantCode').on('blur', function () {
             success: function (response) {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
-                    $('#financialConsultantName').val(customer.customerName);
+                    $('#financialConsultantName').val(customer.financialName);
                 } else {
                     alert('No data found!');
                     $('#financialConsultantName').val('');
@@ -190,7 +249,7 @@ $('#financialConsultantCode').on('blur', function () {
 });
 
 //photo upload
-function photoUpload() {
+/*function photoUpload() {
 	const file = document.getElementById("photo").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
@@ -208,9 +267,9 @@ function photoUpload() {
 	} else {
 		alert("Please upload a valid image file for photo.");
 	}
-}
+}*/
 
-function signatureUpload() {
+/*function signatureUpload() {
 	const file = document.getElementById("signature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
@@ -228,12 +287,42 @@ function signatureUpload() {
 	} else {
 		alert("Please upload a valid image file for signature.");
 	}
-}
+}*/
 
 // save saving account details 
 $(document).ready(function () {
+	 // Ensure the hidden input is updated with the image file name
+    let imageSrc = $('#photo').attr('src');
+    let imageName = imageSrc.split('/').pop(); // Extract the file name
+    $('#photoHidden').val(imageName);
+    
+    // Ensure the hidden input is updated with the image file name
+    let imageSrc1 = $('#signature').attr('src');
+    let imageName1 = imageSrc1.split('/').pop(); // Extract the file name
+    $('#signatureHidden').val(imageName1);
+    
+     // Ensure the hidden input is updated with the image file name
+    let imageSrc2 = $('#jointPhoto').attr('src');
+    let imageName2 = imageSrc2.split('/').pop(); // Extract the file name
+    $('#jointPhotoHidden').val(imageName2);
+	
 	$('#saveBtn').click(function (event) {
 		event.preventDefault();
+		
+		// Update the hidden input with the current file name from the image
+		let updatedImageSrc = $('#photo').attr('src');
+		let updatedImageName = updatedImageSrc.split('/').pop(); // Extract the file name
+		$('#photoHidden').val(updatedImageName);
+		
+		// Update the hidden input with the current file name from the image
+		let updatedImageSrc1 = $('#signature').attr('src');
+		let updatedImageName1 = updatedImageSrc1.split('/').pop(); // Extract the file name
+		$('#signatureHidden').val(updatedImageName1);
+		
+		// Update the hidden input with the current file name from the image
+		let updatedImageSrc2 = $('#jointPhoto').attr('src');
+		let updatedImageName2 = updatedImageSrc2.split('/').pop(); // Extract the file name
+		$('#jointPhotoHidden').val(updatedImageName2);
 
 		const formData = new FormData();
 
@@ -263,14 +352,30 @@ $(document).ready(function () {
 		formData.append("openingFees", $('#openingFees').val());
 		formData.append("authenticateWith", $('#authenticateWith').val());
 		formData.append("modeOfPayment", $('#modeOfPayment').val());
+		formData.append("chequeNo", $('#chequeNo').val());
+		formData.append("chequeDate", $('#chequeDate').val());
+		formData.append("depositAcc1", $('#depositAcc1').val());
+		formData.append("refNumber1", $('#refNumber1').val());
+		formData.append("depositAcc2", $('#depositAcc2').val());
+		formData.append("refNumber2", $('#refNumber2').val());
+		formData.append("depositAcc3", $('#depositAcc3').val());
 		formData.append("comment", $('#comment').val());
 		formData.append("accountNumber", $('#accountNumber').val());
 		formData.append("accountStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
 		formData.append("messageSend", $('#toggle-member-status1').is(':checked') ? 1 : 0);
 		formData.append("debitCardIssue", $('#toggle-member-status2').is(':checked') ? 1 : 0);
+		
+		// Append the extracted photoWithAadhar file name
+		formData.append("photo", $('#photoHidden').val());
+		
+		// Append the extracted photoWithAadhar file name
+		formData.append("signature", $('#signatureHidden').val());
+		
+		// Append the extracted photoWithAadhar file name
+		formData.append("jointPhoto", $('#jointPhotoHidden').val());
 
 		// Append files (photo and signature)
-		const photo = $('#photo')[0].files[0];
+		/*const photo = $('#photo')[0].files[0];
 		const signature = $('#signature')[0].files[0];
 
 		if (photo) {
@@ -279,7 +384,7 @@ $(document).ready(function () {
 		if (signature) {
 			formData.append("signature", signature);
 		}
-
+*/
 		// Debug: Log all key-value pairs from FormData
 		for (let pair of formData.entries()) {
 			if (!pair[1]) {
@@ -301,7 +406,7 @@ $(document).ready(function () {
 			},
 			error: function (xhr) {
 				console.error('Error:', xhr.responseText);
-				alert('Failed to save saving account data.');
+				alert('Customer already exists in saving account.');
 			}
 		});
 	});
@@ -377,18 +482,61 @@ function viewData(id) {
 				$("#openingFees").val(data.openingFees);
 				$("#authenticateWith").val(data.authenticateWith);
 				$("#modeOfPayment").val(data.modeOfPayment);
+				$("#chequeNo").val(data.chequeNo);
+				$("#chequeDate").val(data.chequeDate);
+				$("#depositAcc1").val(data.depositAcc1);
+				$("#depositAcc2").val(data.depositAcc2);
+				$("#refNumber1").val(data.refNumber1);
+				$("#depositAcc3").val(data.depositAcc3);
+				$("#refNumber2").val(data.refNumber2);
 				$("#comment").val(data.comment);
 				//$("#messageSend").val(data.messageSend);
 				//$("#debitCardIssue").val(data.debitCardIssue);
 				$("#accountNumber").val(data.accountNumber);
+				
+				 if (data.photo) {
+						const imagePath = `Uploads/${data.photo}`; // Construct full image path
+						document.getElementById("photo").src = imagePath; // Set image source
+						document.getElementById("photoHidden").value = data.photo; // Set hidden input value
+					} else {
+						document.getElementById("photo").src = 'Uploads/upload.jpg'; // Default placeholder
+						document.getElementById("photoHidden").value = ''; // Clear hidden input value
+					}
+					//signature
+					if (data.signature) {
+						const imagePath = `Uploads/${data.signature}`; // Construct full image path
+						document.getElementById("signature").src = imagePath; // Set image source
+						document.getElementById("signatureHidden").value = data.signature; // Set hidden input value
+					} else {
+						document.getElementById("signature").src = 'Uploads/upload.jpg'; // Default placeholder
+						document.getElementById("signatureHidden").value = ''; // Clear hidden input value
+					}
+					//Jointphoto
+                    if (data.jointPhoto) {
+						const imagePath = `Uploads/${data.jointPhoto}`; // Construct full image path
+						document.getElementById("jointPhoto").src = imagePath; // Set image source
+						document.getElementById("jointPhotoHidden").value = data.jointPhoto; // Set hidden input value
+					} else {
+						document.getElementById("jointPhoto").src = 'Uploads/upload.jpg'; // Default placeholder
+						document.getElementById("jointPhotoHidden").value = ''; // Clear hidden input value
+					}
 
-				let isChecked = data.accountStatus === 1;
+				/*let isChecked = data.accountStatus === 1;
 				$("#toggle-member-status").prop('checked', isChecked);
 				let isChecked2 = data.messageSend === 1;
 				$("#toggle-member-status1").prop('checked', isChecked2);
 				let isChecked3 = data.debitCardIssue === 1;
-				$("#toggle-member-status2").prop('checked', isChecked3);
-
+				$("#toggle-member-status2").prop('checked', isChecked3);*/
+				 document.getElementById("toggle-member-status").checked = data.accountStatus === true || data.accountStatus === '1';
+                 document.getElementById("toggle-member-status1").checked = data.messageSend === true || data.messageSend === '1';
+                 document.getElementById("toggle-member-status2").checked = data.debitCardIssue === true || data.debitCardIssue === '1';
+				// Call updateToggleColor manually
+				updateToggleColor(document.getElementById("toggle-member-status"));
+				updateToggleColor(document.getElementById("toggle-member-status1"));
+				updateToggleColor(document.getElementById("toggle-member-status2"));
+console.log(data.accountStatus)
+console.log(data.messageSend)
+console.log(data.debitCardIssue)
 			} else {
 				alert("Account not found: " + response.message);
 			}
@@ -422,7 +570,7 @@ function deleteData(id) {
 
 }
 
-function updateSavingAccountData() {
+/*function updateSavingAccountData() {
 	let payload = {
 		id: $("#id").val(),
 		openingDate: $("#openingDate").val(),
@@ -450,7 +598,16 @@ function updateSavingAccountData() {
 		openingFees: $("#openingFees").val(),
 		authenticateWith: $("#authenticateWith").val(),
 		modeOfPayment: $("#modeOfPayment").val(),
+		
+		chequeNo: $("#chequeNo").val(),
+		chequeDate: $("#chequeDate").val(),
+		depositAcc1: $("#depositAcc1").val(),
+		depositAcc2: $("#depositAcc2").val(),
+		refNumber1: $("#refNumber1").val(),
+		depositAcc3: $("#depositAcc3").val(),
+		refNumber2: $("#refNumber2").val(),
 		comment: $("#comment").val(),
+		
 
 		// Toggle/radio/checkbox values as 1 or 0
 		accountStatus: parseInt($("input[name='toggle-member-status']:checked").val()) || 0,
@@ -477,9 +634,129 @@ function updateSavingAccountData() {
 			alert("Update failed: " + xhr.responseText);
 		}
 	});
-}
+}*/
 
+$(document).ready(function () {
+	let imageSrc = $('#photo').attr('src');
+    let imageName = imageSrc.split('/').pop(); // Extract the file name
+    $('#photoHidden').val(imageName);
+    
+    // Ensure the hidden input is updated with the image file name
+    let imageSrc1 = $('#signature').attr('src');
+    let imageName1 = imageSrc1.split('/').pop(); // Extract the file name
+    $('#signatureHidden').val(imageName1);
+    
+     // Ensure the hidden input is updated with the image file name
+    let imageSrc2 = $('#jointPhoto').attr('src');
+    let imageName2 = imageSrc2.split('/').pop(); // Extract the file name
+    $('#jointPhotoHidden').val(imageName2);
+    
+    $('#updateBtn').click(function (event) {
+		event.preventDefault();
+		
+		// Update the hidden input with the current file name from the image
+		let updatedImageSrc = $('#photo').attr('src');
+		let updatedImageName = updatedImageSrc.split('/').pop(); // Extract the file name
+		$('#photoHidden').val(updatedImageName);
+		
+		// Update the hidden input with the current file name from the image
+		let updatedImageSrc1 = $('#signature').attr('src');
+		let updatedImageName1 = updatedImageSrc1.split('/').pop(); // Extract the file name
+		$('#signatureHidden').val(updatedImageName1);
+		
+		// Update the hidden input with the current file name from the image
+		let updatedImageSrc2 = $('#jointPhoto').attr('src');
+		let updatedImageName2 = updatedImageSrc2.split('/').pop(); // Extract the file name
+		$('#jointPhotoHidden').val(updatedImageName2);
 
+		const formData = new FormData();
+        formData.append("id", $('#id').val());
+		formData.append("typeofaccount", $('#typeofaccount').val());
+		formData.append("openingDate", $('#openingDate').val());
+		formData.append("selectByCustomer", $('#selectByCustomer').val());
+		formData.append("enterCustomerName", $('#enterCustomerName').val());
+		formData.append("dateOfBirth", $('#dateOfBirth').val());
+		formData.append("familyDetails", $('#familyDetails').val());
+		formData.append("contactNumber", $('#contactNumber').val());
+		formData.append("suggestedNomineeName", $('#suggestedNomineeName').val());
+		formData.append("suggestedNomineeAge", $('#suggestedNomineeAge').val());
+		formData.append("suggestedNomineeRelation", $('#suggestedNomineeRelation').val());
+		formData.append("address", $('#address').val());
+		formData.append("district", $('#district').val());
+		formData.append("branchName", $('#branchName').val());
+		formData.append("state", $('#state').val());
+		formData.append("pinCode", $('#pinCode').val());
+		formData.append("operationType", $('#operationType').val());
+		formData.append("jointOperationCode", $('#jointOperationCode').val());
+		formData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
+		formData.append("familyRelation", $('#familyRelation').val());
+		formData.append("selectPlan", $('#selectPlan').val());
+		formData.append("openingAmount", $('#openingAmount').val());
+		formData.append("financialConsultantCode", $('#financialConsultantCode').val());
+		formData.append("financialConsultantName", $('#financialConsultantName').val());
+		formData.append("openingFees", $('#openingFees').val());
+		formData.append("authenticateWith", $('#authenticateWith').val());
+		formData.append("modeOfPayment", $('#modeOfPayment').val());
+		formData.append("chequeNo", $('#chequeNo').val());
+		formData.append("chequeDate", $('#chequeDate').val());
+		formData.append("depositAcc1", $('#depositAcc1').val());
+		formData.append("refNumber1", $('#refNumber1').val());
+		formData.append("depositAcc2", $('#depositAcc2').val());
+		formData.append("refNumber2", $('#refNumber2').val());
+		formData.append("depositAcc3", $('#depositAcc3').val());
+		formData.append("comment", $('#comment').val());
+		formData.append("accountNumber", $('#accountNumber').val());
+		formData.append("accountStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
+		formData.append("messageSend", $('#toggle-member-status1').is(':checked') ? 1 : 0);
+		formData.append("debitCardIssue", $('#toggle-member-status2').is(':checked') ? 1 : 0);
+		
+		// Append the extracted photoWithAadhar file name
+		formData.append("photo", $('#photoHidden').val());
+		
+		// Append the extracted photoWithAadhar file name
+		formData.append("signature", $('#signatureHidden').val());
+		
+		// Append the extracted photoWithAadhar file name
+		formData.append("jointPhoto", $('#jointPhotoHidden').val());
+
+		// Append files (photo and signature)
+		/*const photo = $('#photo')[0].files[0];
+		const signature = $('#signature')[0].files[0];
+
+		if (photo) {
+			formData.append("photo", photo);
+		}
+		if (signature) {
+			formData.append("signature", signature);
+		}
+*/
+		// Debug: Log all key-value pairs from FormData
+		for (let pair of formData.entries()) {
+			if (!pair[1]) {
+				console.warn(`⚠️ Field "${pair[0]}" is EMPTY or NULL ->`, pair[1]);
+			} else {
+				console.log(`✅ ${pair[0]}:`, pair[1]);
+			}
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: '/api/customersavings/saveandupdatesavingaccount',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function (response) {
+				alert("Saving Account data saved successfully!\nAccount No : " + $('#accountNumber').val());
+				location.reload();
+			},
+			error: function (xhr) {
+				console.error('Error:', xhr.responseText);
+				alert('Customer already exists in saving account.');
+			}
+		});
+	});
+
+});
 
 
 

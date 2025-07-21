@@ -1,9 +1,11 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.ApplyForMaturity;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.MaturitySchemeMaster;
+import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.service.MaturitySchemeMasterService;
 import com.microfinance.service.PolicyManagementService;
 
@@ -37,23 +40,6 @@ public class MaturityManagementController {
 	
 	
 	
-	// save maturity scheme master daily deposit
-	//Ashwini
-	
-	@PostMapping("/savematurityscheme")
-	@ResponseBody
-	public ApiResponse<MaturitySchemeMaster> saveMaturityDailyDeposit(@RequestBody MaturitySchemeMaster maturityscheme) {
-		MaturitySchemeMaster maturity = maturityservice.saveAllDailyDeposit(maturityscheme);
-		
-		if (maturity != null) {
-			return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
-	    } 
-		else {
-			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
-	       
-	    }
-
-	}
 	
 	//Save Apply Maturity
 	//Ashwini
@@ -94,6 +80,39 @@ public class MaturityManagementController {
  	        }
  	}
 	
+	@GetMapping("/getApplymaturitydetailswithPage")
+	public ResponseEntity<ApiResponse<Map<String, Object>>> getApplyMaturityDetailsWithPage(
+	        @RequestParam(defaultValue = "0") int page,
+	        @RequestParam(defaultValue = "5") int size) {
+
+	    Page<ApplyForMaturity> invest = maturityservice.getApplyMaturityDetailsWithPage(page, size);
+
+	    if (invest != null && !invest.isEmpty()) {
+
+	        Map<String, Object> responseData = new HashMap<>();
+	        responseData.put("content", invest.getContent());
+	        responseData.put("currentPage", invest.getNumber());
+	        responseData.put("totalPages", invest.getTotalPages());
+
+	        ApiResponse<Map<String, Object>> response = ApiResponse.success(
+	                HttpStatus.OK,
+	                "Investment details fetched successfully.",
+	                responseData
+	        );
+
+	        return ResponseEntity.ok(response);
+
+	    } else {
+	        ApiResponse<Map<String, Object>> response = ApiResponse.error(
+	                HttpStatus.NOT_FOUND,
+	                "No details found."
+	        );
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+	    }
+	}
+
+
+	
 	// view data of apply maturity by branch name and todate - fromdate
 	
 	@GetMapping("/getMaturityByBranchAndDate")
@@ -114,6 +133,23 @@ public class MaturityManagementController {
 	                "No data found for the given branch and date range.");
 	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 	    }
+	}
+	
+	//save and Update Partial Maturity Payment
+	//Ashwini
+	@PostMapping("/savePartialmaturity")
+	@ResponseBody
+	public ApiResponse<partialMaturityPayment> savePartialmaturity(@RequestBody partialMaturityPayment partialmaturity) {
+		partialMaturityPayment maturity = maturityservice.savePartialmaturity(partialmaturity);
+		
+		if (maturity != null) {
+			return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
+	    } 
+		else {
+			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
+	       
+	    }
+
 	}
 	
 }

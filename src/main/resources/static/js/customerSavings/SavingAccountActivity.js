@@ -1,5 +1,5 @@
 //fetch saving account details by account number
-$('#accountNumber').on('blur', function () {
+/*$('#accountNumber').on('blur', function () {
     let selectedCode = $(this).val().trim();
 	alert(selectedCode);
     if (selectedCode !== "") {
@@ -7,7 +7,7 @@ $('#accountNumber').on('blur', function () {
             url: '/api/customersavings/getallbyaccountnumber?accountNumber=' + encodeURIComponent(selectedCode),
             type: 'GET',
             success: function (response) {
-                if (response.status === "FOUND" && response.data.length > 0) {
+                if (response.status === 302  || response.status === "FOUND" && response.data.length > 0) {
                     let customer = response.data[0];
                     $('#customerCode').val(customer.selectByCustomer);
 					$('#customerName').val(customer.enterCustomerName);
@@ -15,6 +15,7 @@ $('#accountNumber').on('blur', function () {
 					$('#jointHolderName').val(customer.jointSurvivorCode);
 					$('#savingPlanName').val(customer.selectPlan);
 					$('#averageBalance').val(customer.openingAmount);
+					$('#selectBranchName').val(customer.branchName);
                 } else {
                     alert('No data found!');
                     $('#customerCode').val('');
@@ -29,6 +30,60 @@ $('#accountNumber').on('blur', function () {
         $('#customerCode').val('');
     }
 });
+*/
+$(document).ready(function () {
+$('#accountNumber').on('blur', function () {
+    let accountNumber = $(this).val().trim();
+
+    if (accountNumber !== "") {
+        $.ajax({
+            url: '/api/customersavings/getallbyaccountnumber',
+            type: 'GET',
+            data: { accountNumber: accountNumber },
+            success: function (response) {
+                console.log("Success response:", response);
+
+                if (response.data && response.data.length > 0) {
+                    let customer = response.data[0];
+
+                    $('#customerCode').val(customer.selectByCustomer || '');
+                    $('#customerName').val(customer.enterCustomerName || '');
+                    $('#contactNumber').val(customer.contactNumber || '');
+                    $('#jointHolderName').val(customer.jointSurvivorCode || '');
+                    $('#savingPlanName').val(customer.selectPlan || '');
+                    $('#averageBalance').val(customer.openingAmount || '');
+                    $('#selectBranchName').val(customer.branchName || '');
+                } else {
+                    alert('No data found!');
+                    clearAccountForm();
+                }
+            },
+            error: function (xhr) {
+                console.error("Fetch error:", xhr);
+                alert('First approve account!');
+                clearAccountForm();
+            }
+        });
+    } else {
+        clearAccountForm();
+    }
+
+    function clearAccountForm() {
+        $('#customerCode').val('');
+        $('#customerName').val('');
+        $('#contactNumber').val('');
+        $('#jointHolderName').val('');
+        $('#savingPlanName').val('');
+        $('#averageBalance').val('');
+        $('#selectBranchName').val('');
+    }
+});
+});
+
+
+
+
+
 
 $(document).ready(function () {
     $('#saveBtn').click(function (event) {
@@ -97,6 +152,13 @@ $(document).ready(function () {
             transactionType: transactionType,
             transactionAmount: txnAmount.toFixed(2),
             payBy: $('#payBy').val()
+            /*chequeNo: $('#chequeNo').val(),
+            chequeDate: $('#chequeDate').val(),
+            depositAcc1: $('#depositAcc1').val(),
+            depositAcc2: $('#depositAcc2').val(),
+            refNumber1: $('#refNumber1').val(),
+            depositAcc3: $('#depositAcc3').val(),
+            refNumber2: $('#refNumber2').val()*/
         };
 
         $.ajax({
