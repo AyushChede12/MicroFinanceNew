@@ -20,6 +20,7 @@ import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
+import com.microfinance.repository.SavingAccountFundTransferRepo;
 
 
 
@@ -44,6 +45,8 @@ public class RequestApprovalsService {
 	@Autowired
 	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
 	
+	@Autowired
+	SavingAccountFundTransferRepo savingAccountFundTransferRepo;
 	
 	public List<addCustomer> findAllMemberCode() {
 		// TODO Auto-generated method stub
@@ -161,5 +164,20 @@ public class RequestApprovalsService {
 		// TODO Auto-generated method stub
 		return dailyPremiumRenewalRepo.save(dailyRenewal);
 	}
-	
+
+
+	public List<savingAccountFundTransfer> getUnapprovedsavingAccountFundTransferData() {
+		// TODO Auto-generated method stub
+		return savingAccountFundTransferRepo.findByIsApprovedFalse();
+	}
+
+	public Optional<savingAccountFundTransfer> approvesavingAccountFundTransferData(Long id) {
+		// TODO Auto-generated method stub
+        return savingAccountFundTransferRepo.findById(id);
+    }
+
+    public savingAccountFundTransfer saveAccount(savingAccountFundTransfer transfer) {
+    	// TODO Auto-generated method stub
+        return savingAccountFundTransferRepo.save(transfer);
+    }
 }
