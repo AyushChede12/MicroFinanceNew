@@ -26,6 +26,8 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.ExecutiveFounder;
+import com.microfinance.model.LoanApplication;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
@@ -155,6 +157,58 @@ public class DataCorrectionController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
+	
+	//Ayush
+	@GetMapping("/fetchAllApprovedLoanApplications")
+    public ResponseEntity<ApiResponse<List<LoanApplication>>> getApprovedLoanApplications() {
+        List<LoanApplication> loan = dataCorrectionService.getApprovedLoanApplications();
+
+        if (loan != null && !loan.isEmpty()) {
+            ApiResponse<List<LoanApplication>> response = new ApiResponse<>(
+                    HttpStatus.OK,
+                    "Approved Loan Application fetched successfully.",
+                    loan
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<List<LoanApplication>> response = new ApiResponse<>(
+                    HttpStatus.NOT_FOUND,
+                    "No approved customers found.",
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+	
+	//Ayush
+	@GetMapping("/fetchAllLoanApplications")
+	public ResponseEntity<ApiResponse<List<LoanApplication>>> fetchAllLoanApplicationsData() {
+		List<LoanApplication> list = dataCorrectionService.fetchAllLoanApplication();
+		ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"Loan Application fetched successfully", list);
+		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping("/fetchAllApprovedPolicyRenewal")
+    public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getApprovedPolicyRenewal() {
+        List<PolicyRenewal> policy = dataCorrectionService.getApprovedPolicyRenewal();
+
+        if (policy != null && !policy.isEmpty()) {
+            ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
+                    HttpStatus.OK,
+                    "Policy Renewal Data fetched successfully.",
+                    policy
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
+                    HttpStatus.NOT_FOUND,
+                    "No approved Policy Renewal found.",
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 	
 	
 	
