@@ -18,14 +18,14 @@ $(document).ready(function() {
 	});*/
 
 	$.ajax({
-		url: '/api/Policymangment/getaddinvestmentdetails',
+		url: '/api/datacorrection/fetchAllApprovedPolicyRenewal',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
 				let policyOptions = response.data.map(function(item) {
 					return {
 						id: item.policyCode,
-						text: item.policyCode + " - " + item.customerName
+						text: item.policyCode + " - " + item.clientName
 					};
 				});
 
