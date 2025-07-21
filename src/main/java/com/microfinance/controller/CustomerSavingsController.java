@@ -54,6 +54,9 @@ public class CustomerSavingsController {
 	
 	
 	  @Autowired CreateSavingAccountRepo createSavingAccountRepo;
+	  
+	  @Autowired
+	  CreateSavingAccountRepo creSavingAccountRepo;
 	 
 	
 	@Value("${upload.directory}")
@@ -321,12 +324,13 @@ public class CustomerSavingsController {
         }
     }
 
-    @PostMapping("/transferAmount")
+    /*@PostMapping("/transferAmount")
     @Transactional
     public ResponseEntity<?> transferAmount(
             @RequestParam("debitAccountNo") String debitAccountNo,
             @RequestParam("creditAccountNo") String creditAccountNo,
-            @RequestParam("amount") double amount) {
+            @RequestParam("amount") double amount, 
+            @RequestBody savingAccountFundTransfer savingAccFundTransfer) {
         try {
             
           CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
@@ -338,7 +342,7 @@ public class CustomerSavingsController {
           double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
           System.out.println("debitBalance" +debitBalance);
           double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
-          System.out.println("creditBalance" +creditBalance);
+          System.out.println("-creditBalance" +creditBalance);
 
           
           if (debitBalance < amount) {
@@ -363,7 +367,58 @@ public class CustomerSavingsController {
             response.put("message", "Transfer failed: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
+        
+        // Save the intra-transfer record
+	    savingAccountFundTransfer savedEntry = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+
+	    return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+    } */
+    
+    @PostMapping("/transferAmount")
+    @Transactional
+    public ResponseEntity<?> transferAmount(
+            @RequestParam("debitAccountNo") String debitAccountNo,
+            @RequestParam("creditAccountNo") String creditAccountNo,
+            @RequestParam("amount") double amount, 
+            @RequestBody savingAccountFundTransfer savingAccFundTransfer) {
+
+        try {
+            CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Debit account not found"));
+
+            CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Credit account not found"));
+
+            double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
+            double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+
+            if (debitBalance < amount) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Insufficient balance in debit account");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            // Update balances
+            debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
+            creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+
+            // Save updated accounts
+            createSavingAccountRepo.save(debitAccount);
+            createSavingAccountRepo.save(creditAccount);
+
+            // Save the transfer record
+            savingAccountFundTransfer savedEntry = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+
+            // Send response
+            return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Transfer failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
+
 
  // Api For fetching account numbers (Vaibhav)
     @GetMapping("/fetchAccountNumbers")
@@ -400,14 +455,14 @@ public class CustomerSavingsController {
     }
 
  //Janvi : save fund transfer entry
-    @PostMapping("/saveSavingAccountFundTransfer")
+    /*@PostMapping("/saveSavingAccountFundTransfer")
 	@ResponseBody
-	public ResponseEntity<String> saveSavingAccountFundTransfer(@RequestBody savingAccountFundTransfer savingAccFundTransfer) {
+	public ResponseEntity<String> saveSavingAccountFundTransfer(@RequestBody savingAccountFundTransfer savingAccFundTransfer) {    	
     	savingAccountFundTransfer fund = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
 		if (fund != null)
 			return ResponseEntity.ok("success");
 		else
 			return ResponseEntity.badRequest().body("Failure");
-	}
+	}*/
 	
 }

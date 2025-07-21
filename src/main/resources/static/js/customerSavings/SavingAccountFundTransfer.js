@@ -164,30 +164,10 @@ $(document).ready(function () {
             transferDate:  $('#transferDate').val(),
             amount: $('#amount').val(),
             comment: $('#comment').val()
-            /*chequeNo: $('#chequeNo').val(),
-            chequeDate: $('#chequeDate').val(),
-            depositAcc1: $('#depositAcc1').val(),
-            depositAcc2: $('#depositAcc2').val(),
-            refNumber1: $('#refNumber1').val(),
-            depositAcc3: $('#depositAcc3').val(),
-            refNumber2: $('#refNumber2').val()*/
+            
             
         };
-        $.ajax({
-            url: '/api/customersavings/saveSavingAccountFundTransfer',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(accountData),
-            success: function (response) {
-				
-                alert("Saving Account transaction saved successfully!");
-				getAccountNumberAndUpdateData(accountNumber);
-            },
-            error: function (xhr) {
-                console.error('Error:', xhr.responseText);
-                alert('Failed to save transaction data.');
-            }
-        });
+        
     });
 });
 
