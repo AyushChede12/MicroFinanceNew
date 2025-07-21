@@ -120,7 +120,7 @@ $('#creditAccountNumber').on('change', function () {
 });
 */
 
-$(document).ready(function () {
+/*$(document).ready(function () {
     $('#saveBtn').click(function (e) {
         e.preventDefault();
 
@@ -168,6 +168,45 @@ $(document).ready(function () {
             
         };
         
+    });
+});
+*/
+
+$(document).ready(function () {
+    $('#saveBtn').click(function (e) {
+        e.preventDefault();
+
+        const accountData = {
+            debitAccountNumber: $('#debitAccountNumber').val(),
+            debitCustomerCode: $('#debitCustomerCode').val(),
+            debitAccountBranch: $('#debitAccountBranch').val(),
+            debitAverageBalance: $('#debitAverageBalance').val(),
+            debitContactNumber: $('#debitContactNumber').val(),
+            creditAccountNumber: $('#creditAccountNumber').val(),
+            creditCustomerCode: $('#creditCustomerCode').val(),
+            creditAccountBranch: $('#creditAccountBranch').val(),
+            creditAverageBalance: $('#creditAverageBalance').val(),
+            transferDate: $('#transferDate').val(),
+            amount: $('#amount').val(),
+            comment: $('#comment').val()
+        };
+
+        console.log("Sending Data:", accountData);
+
+        $.ajax({
+            url: '/api/customersavings/transferAmount',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(accountData),
+            success: function (response) {
+                alert("Transfer successful");
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                let errorMessage = xhr.responseJSON?.message || 'Transfer failed';
+                alert(errorMessage);
+            }
+        });
     });
 });
 

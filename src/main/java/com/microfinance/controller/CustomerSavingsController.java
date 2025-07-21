@@ -374,7 +374,7 @@ public class CustomerSavingsController {
 	    return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
     } */
     
-    @PostMapping("/transferAmount")
+   /* @PostMapping("/transferAmount")
     @Transactional
     public ResponseEntity<?> transferAmount(
             @RequestParam("debitAccountNo") String debitAccountNo,
@@ -383,6 +383,51 @@ public class CustomerSavingsController {
             @RequestBody savingAccountFundTransfer savingAccFundTransfer) {
 
         try {
+            CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Debit account not found"));
+
+            CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Credit account not found"));
+
+            double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
+            double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+
+            if (debitBalance < amount) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Insufficient balance in debit account");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            // Update balances
+            debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
+            creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+
+            // Save updated accounts
+            createSavingAccountRepo.save(debitAccount);
+            createSavingAccountRepo.save(creditAccount);
+
+            // Save the transfer record
+            savingAccountFundTransfer savedEntry = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+
+            // Send response
+            return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Transfer failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }*/
+    
+    //janvi 21/07
+    @PostMapping("/transferAmount")
+    @Transactional
+    public ResponseEntity<?> transferAmount(@RequestBody savingAccountFundTransfer savingAccFundTransfer) {
+
+        try {
+        	String debitAccountNo = savingAccFundTransfer.getDebitAccountNumber();
+            String creditAccountNo = savingAccFundTransfer.getCreditAccountNumber();
+            double amount = Double.parseDouble(savingAccFundTransfer.getAmount());
             CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
                     .orElseThrow(() -> new RuntimeException("Debit account not found"));
 
