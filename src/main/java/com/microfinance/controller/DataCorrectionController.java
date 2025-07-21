@@ -3,6 +3,7 @@ package com.microfinance.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -184,23 +185,6 @@ public class DataCorrectionController {
 	}
 
 	// Ayush
-	@GetMapping("/getLoanApplicationByLoanId")
-	public ResponseEntity<ApiResponse<List<LoanApplication>>> getLoanApplicationByLoanID(@RequestParam String loanId) {
-
-		List<LoanApplication> application = dataCorrectionService.fetchLoanApplicationByLoanId(loanId);
-
-		if (application != null && !application.isEmpty()) {
-			ApiResponse<List<LoanApplication>> response = ApiResponse.success(HttpStatus.FOUND,
-					"Loan Applications found for Loan ID: " + loanId, application);
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		} else {
-			ApiResponse<List<LoanApplication>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-					"No Loan Member found with Loan ID: " + loanId);
-			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-		}
-	}
-
-	// Ayush
 	@GetMapping("/fetchAllApprovedPolicyRenewal")
 	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getApprovedPolicyRenewal() {
 		List<PolicyRenewal> policy = dataCorrectionService.getApprovedPolicyRenewal();
@@ -237,7 +221,7 @@ public class DataCorrectionController {
 //	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 //	    }
 //	}
-	
+
 	@PostMapping("/deleteLoanApplicationDataById")
 	public ResponseEntity<ApiResponse<String>> deleteLoanApplication(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteLoanApplication(id);
@@ -251,19 +235,38 @@ public class DataCorrectionController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
+
+	// Ayush
 	@PostMapping("/updateLoanApplication")
-	public ResponseEntity<ApiResponse<String>> updateLoanApplicationData(@RequestBody LoanApplication loanapplication){
+	public ResponseEntity<ApiResponse<String>> updateLoanApplicationData(@RequestBody LoanApplication loanapplication) {
 		boolean result = dataCorrectionService.updateLoanApplication(loanapplication);
-		if(result) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Loan Application Data Updated Successfully", "success");
+		if (result) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
+					"Loan Application Data Updated Successfully", "success");
 			return ResponseEntity.ok(response);
-		}
-		else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST, "Loan Application Data Not Updated", "failure");
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
+					"Loan Application Data Not Updated", "failure");
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
 
+	// Ayush
+	@GetMapping("/getPolicyRenewalByPolicyCode")
+	public ResponseEntity<ApiResponse<PolicyRenewal>> getPolicyRenewalDataByPolicyCode(
+			@RequestParam String policyCode) {
+
+		Optional<PolicyRenewal> renewal = dataCorrectionService.fetchPolicyRenewalByPolicyCode(policyCode);
+
+		if (renewal.isPresent()) {
+			ApiResponse<PolicyRenewal> response = ApiResponse.success(HttpStatus.FOUND,
+					"Policy Renewal found for Policy Code: " + policyCode, renewal.get());
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<PolicyRenewal> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Policy Renewal found with Policy Code: " + policyCode);
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

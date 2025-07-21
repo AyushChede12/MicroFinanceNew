@@ -92,11 +92,12 @@ $(document).ready(function() {
 		if (loanId !== "") {
 			$.ajax({
 				type: "GET",
-				url: "/api/datacorrection/getLoanApplicationByLoanId",
+				url: "/api/loanmanegment/getLoanById",
 				data: { loanId: loanId },
 				success: function(response) {
-					if (response.status == "FOUND") {
-						let data = response.data[0];
+					if (response.status == "OK") {
+						alert("if condition");
+						let data = response.data;
 						$("#id").val(data.id);
 						$("#loanDate").val(data.loanDate);
 						$("#memberId").val(data.memberId);

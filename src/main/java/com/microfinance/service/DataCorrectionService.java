@@ -287,11 +287,6 @@ public class DataCorrectionService {
 		return policyRenewalRepo.findByIsApprovedTrue();
 	}
 
-	public List<LoanApplication> fetchLoanApplicationByLoanId(String loanId) {
-		// TODO Auto-generated method stub
-		return loanApplicationRepo.findByLoanId(loanId);
-	}
-
 	public boolean deleteLoanApplication(Long id) {
 		// TODO Auto-generated method stub
 		if (loanApplicationRepo.existsById(id)) {
@@ -360,14 +355,19 @@ public class DataCorrectionService {
 			existing.setFinancialConsultantName(loanapplication.getFinancialConsultantName());
 
 			// Approval
-			existing.setApprovalDate(loanapplication.getApprovalDate());
-			existing.setApprovalStatus(loanapplication.getApprovalStatus());
+			//existing.setApprovalDate(loanapplication.getApprovalDate());
+			//existing.setApprovalStatus(loanapplication.getApprovalStatus());
 
 			loanApplicationRepo.save(existing);
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.findByPolicyCode(policyCode);
 	}
 
 //	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {

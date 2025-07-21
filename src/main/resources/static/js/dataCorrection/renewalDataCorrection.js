@@ -63,4 +63,48 @@ $(document).ready(function() {
 			alert("Failed to load Policy codes.");
 		}
 	});
+
+	$("#policyCode").change(function() {
+		let policyCode = $("#policyCode").val();
+		if (policyCode !== "") {
+			$.ajax({
+				type: "GET",
+				url: "/api/datacorrection/getPolicyRenewalByPolicyCode",
+				data: { policyCode: policyCode },
+				success: function(response) {
+					alert("success");
+					if (response.status == "FOUND") {
+						alert("if condition");
+						let data = response.data[0];
+						$("#id").val(data.id);
+						alert("hii");
+						$("#renewalDate").val(data.renewalDate);
+						$("#policyDate").val(data.policyDate);
+						$("#maturityDate").val(data.maturityDate);
+						$("#customerCode").val(data.customerCode);
+						$("#clientName").val(data.clientName);
+						$("#branchname").val(data.branchname);
+						$("#contactNo").val(data.contactNo);
+						$("#policyAmount").val(data.policyAmount);
+						$("#policyType").val(data.policyType);
+						$("#policyTerm").val(data.policyTerm);
+						$("#maturityAmount").val(data.maturityAmount);
+						$("#totalDeposit").val(data.totalDeposit);
+						$("#paymentDue").val(data.paymentDue);
+						$("#lastPaymentDate").val(data.lastPaymentDate);
+						$("#dueDate").val(data.dueDate);
+						$("#noOfInst").val(data.noOfInst);
+						$("#noOfInstPaid").val(data.noOfInstPaid);
+						$("#modeOfPayment").val(data.modeOfPayment);
+					} else {
+						alert("No customer found for this member code.");
+					}
+				},
+				error: function() {
+					alert("Member not found or server error.");
+				}
+			});
+		}
+	});
+
 });
