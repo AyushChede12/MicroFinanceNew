@@ -1,7 +1,9 @@
 package com.microfinance.service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,11 @@ public class LoanManagementService {
 	private LoanMangmentSchemeRepo loanRepository;
 	@Autowired
 	private AddCustomerRepo addCustomerRepo;
-	
+
 	@Autowired
 	LoanApplicationRepo loanApplicationRepo;
 
-	// Service fo saving and updating the loan scheme data 
+	// Service fo saving and updating the loan scheme data
 	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
 		if (loan.getId() != null && loanRepository.existsById(loan.getId())) {
 			// Perform update
@@ -50,7 +52,7 @@ public class LoanManagementService {
 			existingLoan.setTypeIntrest(loan.getTypeIntrest());
 			existingLoan.setTypesecurity(loan.getTypesecurity());
 			existingLoan.setPlanStatus(loan.getPlanStatus());
-			
+
 			// Deductions
 			existingLoan.setFeeProcessing(loan.getFeeProcessing());
 			existingLoan.setChargesLegal(loan.getChargesLegal());
@@ -69,7 +71,7 @@ public class LoanManagementService {
 			return loanRepository.save(loan);
 		}
 	}
-		
+
 	// Fetch data On Table
 
 	public List<LoanSchemCatalog> allDataFetchLoanSchemCatelog() {
@@ -112,35 +114,59 @@ public class LoanManagementService {
 				.orElseThrow(() -> new RuntimeException("Loan Scheme not found for code: " + code));
 	}
 
+	public List<LoanSchemCatalog> getLoanPlanName(String loanPlanName) {
+		// Example: find by plan name (case-insensitive match)
+		return loanRepository.findByLoanPlaneNameContainingIgnoreCase(loanPlanName);
+	}
 
-	    public List<LoanSchemCatalog> getLoanPlanName(String loanPlanName) {
-	        // Example: find by plan name (case-insensitive match)
-	        return loanRepository.findByLoanPlaneNameContainingIgnoreCase(loanPlanName);
-	    }
+	public List<LoanSchemCatalog> getSchemeCatalog() {
 
+		return loanRepository.findAll();
+	}
 
-		public List<LoanSchemCatalog> getSchemeCatalog() {
-			
-			return loanRepository.findAll();
+	public boolean saveLoanApplicationData(LoanApplication loanApplication) {
+		try {
+			loanApplicationRepo.save(loanApplication);
+			return true; // Saved successfully
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false; // Something went wrong
 		}
+	}
 
-		public boolean saveLoanApplicationData(LoanApplication loanApplication) {
-	        try {
-	        	loanApplicationRepo.save(loanApplication);
-	            return true; // Saved successfully
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return false; // Something went wrong
-	        }
-	    }
+	public List<addCustomer> getLoanApplicationById(String memberCode) {
+		return addCustomerRepo.findByMemberCode(memberCode);
+	}
 
-		public List<addCustomer> getLoanApplicationById(String memberCode) {
-			 return addCustomerRepo.findByMemberCode(memberCode);
+	// Service for fetching Loan Id In the dropdown (Vaibhav)
+	public List<String> fetchAllLoanIds() {
+
+		// This assumes you have a loanId field in your Loan entity.
+		return loanApplicationRepo.findAll().stream().map(LoanApplication::getLoanId) // adjust class name if needed
+				.filter(Objects::nonNull).collect(Collectors.toList());
+	}
+
+	// Service for fetching the data in the textfields (Vaibhav)
+	public LoanApplication getLoanById(String loanId) {
+		return loanApplicationRepo.findByLoanId(loanId); // Make sure this method exists
+	}
+
+	// Service for approving the loan application (Vaibhav)
+	public String updateApproval(LoanApplication approval) {
+		LoanApplication loan = loanApplicationRepo.findByLoanId(approval.getLoanId());
+
+		if (loan != null) {
+			if (loan.isApprovalStatus()) {
+				return "already_approved";
+			}
+
+			loan.setApprovalStatus(approval.isApprovalStatus());
+			loan.setApprovalDate(approval.getApprovalDate());
+			loanApplicationRepo.save(loan);
+			return "success";
+		} else {
+			return "not_found";
 		}
-
-		
-
-	
-
+	}
 
 }

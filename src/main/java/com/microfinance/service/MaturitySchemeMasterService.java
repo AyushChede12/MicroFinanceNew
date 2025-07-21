@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.ApplyForMaturity;
 import com.microfinance.model.MaturitySchemeMaster;
+import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.repository.ApplyForMaturityRepo;
 import com.microfinance.repository.MaturitySchemeMasterRepo;
+import com.microfinance.repository.PartialMaturitypaymentRepo;
 
 @Service
 public class MaturitySchemeMasterService {
@@ -20,6 +22,9 @@ public class MaturitySchemeMasterService {
 	
 	@Autowired
 	ApplyForMaturityRepo Applymaturityrepo;
+	
+	@Autowired
+	PartialMaturitypaymentRepo partialmaturityrepo;
 
 	public MaturitySchemeMaster saveAllDailyDeposit(MaturitySchemeMaster maturityscheme) {
 		// TODO Auto-generated method stub
@@ -45,6 +50,11 @@ public class MaturitySchemeMasterService {
 	public List<ApplyForMaturity> getMaturityDetailsByBranchAndDate(String branchName, String fromDate, String toDate) {
 		// TODO Auto-generated method stub
 		return Applymaturityrepo.findByBranchToDateFromDate(branchName,fromDate,toDate);
+	}
+
+	public partialMaturityPayment savePartialmaturity(partialMaturityPayment partialmaturity) {
+		// TODO Auto-generated method stub
+		return partialmaturityrepo.save(partialmaturity) ;
 	}
 
 }
