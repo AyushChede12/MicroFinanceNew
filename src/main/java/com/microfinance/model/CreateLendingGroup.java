@@ -14,8 +14,8 @@ public class CreateLendingGroup {
 	private String planCode;
     private String loanSchemeInformation;
     private String minimumAge;
-    private String maxLoanDurationMonths;
-    private String minLoanDurationMonths;
+    private String term;
+    
     private String branchName;
     private String maximumAge;
     private String minLoanAmt;
@@ -56,18 +56,7 @@ public class CreateLendingGroup {
 	public void setMinimumAge(String minimumAge) {
 		this.minimumAge = minimumAge;
 	}
-	public String getMaxLoanDurationMonths() {
-		return maxLoanDurationMonths;
-	}
-	public void setMaxLoanDurationMonths(String maxLoanDurationMonths) {
-		this.maxLoanDurationMonths = maxLoanDurationMonths;
-	}
-	public String getMinLoanDurationMonths() {
-		return minLoanDurationMonths;
-	}
-	public void setMinLoanDurationMonths(String minLoanDurationMonths) {
-		this.minLoanDurationMonths = minLoanDurationMonths;
-	}
+	
 	public String getBranchName() {
 		return branchName;
 	}
@@ -182,6 +171,12 @@ public class CreateLendingGroup {
 	public void setPlanCode(String planCode) {
 		this.planCode = planCode;
 	}
-
+	public String getTerm() {
+		return term;
+	}
+	public void setTerm(String term) {
+		this.term = term;
+	}
+	
 
 }

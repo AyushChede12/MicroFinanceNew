@@ -2,6 +2,7 @@ package com.microfinance.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,8 +67,9 @@ public class JointLiabilityLoanService {
 			existing.setPlanCode(updatedGroup.getPlanCode());
 			existing.setLoanSchemeInformation(updatedGroup.getLoanSchemeInformation());
 			existing.setMinimumAge(updatedGroup.getMinimumAge());
-			existing.setMaxLoanDurationMonths(updatedGroup.getMaxLoanDurationMonths());
-			existing.setMinLoanDurationMonths(updatedGroup.getMinLoanDurationMonths());
+
+
+			existing.setTerm(updatedGroup.getTerm());
 			existing.setBranchName(updatedGroup.getBranchName());
 			existing.setMaximumAge(updatedGroup.getMaximumAge());
 			existing.setMinLoanAmt(updatedGroup.getMinLoanAmt());
@@ -278,8 +280,25 @@ public class JointLiabilityLoanService {
 		}
 	}
 
+	public ApplyForGroupLoan updateApprovalStatusApplyGroupLoan(String groupCode, String approvalStatus) {
+		 ApplyForGroupLoan existingLoan = applyForGroupLoanRepo.findSingleByGroupCode(groupCode);
+
+	        if (existingLoan != null) {
+	            existingLoan.setApprovalStatus(approvalStatus);
+	            return applyForGroupLoanRepo.save(existingLoan); // ✅ update होईल
+	        } else {
+	            return null; // group नाही सापडला
+	        }
+	    }
+
+	    // ✅ Fetch Method (list)
+	    public List<ApplyForGroupLoan> fetchApplyGroupLoanByGroupcode(String groupCode) {
+	        return applyForGroupLoanRepo.findByGroupCode(groupCode);
+	    }
+	}
+
 	
 	
 	
 
-}
+
