@@ -22,7 +22,7 @@ public interface LoanApplicationRepo extends JpaRepository<LoanApplication,Long>
 	List<LoanApplication> findByLoanId(String loanId);
 
 	
-	
+	LoanApplication findByLoanId(String loanId); // assumes loanId is unique
 	
 	    	
 
