@@ -59,7 +59,9 @@ public class LoanApplication {
     private String financialConsultantId;
     private String financialConsultantName;
     private String approvalDate;
-    private String approvalStatus;
+    private boolean approvalStatus;
+    private String photo;
+    private String signature;
     
     
 	public long getId() {
@@ -296,10 +298,11 @@ public class LoanApplication {
 	public void setFinancialConsultantName(String financialConsultantName) {
 		this.financialConsultantName = financialConsultantName;
 	}
-	public String getApprovalStatus() {
+	
+	public boolean isApprovalStatus() {
 		return approvalStatus;
 	}
-	public void setApprovalStatus(String approvalStatus) {
+	public void setApprovalStatus(boolean approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 	public String getMessageStatus() {
@@ -326,8 +329,21 @@ public class LoanApplication {
 	public void setApprovalDate(String approvalDate) {
 		this.approvalDate = approvalDate;
 	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
 	
 
+	
    
 }
 
