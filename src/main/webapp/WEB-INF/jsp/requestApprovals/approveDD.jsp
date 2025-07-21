@@ -30,7 +30,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<title>Approve RD</title>
+<title>Approve DD</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -38,7 +38,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
-
 <body>
 <main id="main" class="main">
 		<div class="pagetitle">
@@ -48,7 +47,7 @@
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-check-circle"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Approve RD</li>
+					<li class="breadcrumb-item action">Approve DD</li>
 				</ol>
 			</nav>
 		</div>
@@ -64,7 +63,7 @@
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="branchName">Branch Name</label> <select id="branchName"
+								<label for="">Branch Name</label> <select id="branchName"
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -75,7 +74,7 @@
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="fromDate">Date From</label> <input type="date"
+								<label for="vehicalNo">Date From</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter From Date"
 									style="text-transform: uppercase;" />
@@ -84,7 +83,7 @@
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="toDate">Date To</label> <input type="date"
+								<label for="vehicalNo">Date To</label> <input type="date"
 									name="toDate" id="toDate" required="required"
 									placeholder="Enter To Date" style="text-transform: uppercase;" />
 							</div>
@@ -120,7 +119,7 @@
 									<th scope="col" style="white-space: nowrap;">maturity Date</th>
 									<th scope="col" style="white-space: nowrap;">client Name</th>
 									<th scope="col" style="white-space: nowrap;">contac tNo</th>
-									<th scope="col" style="white-space: nowrap;">renewalDate</th>
+									<th scope="col" style="white-space: nowrap;">renewal Date</th>
 									<th scope="col" style="white-space: nowrap;">Branch Name</th>
 								</tr>
 							</thead>
@@ -143,6 +142,6 @@
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/RequestApproval/ApprovalRD.js"></script>
+	<script src="./js/RequestApproval/ApproveDD.js"></script>
 </body>
 </html>

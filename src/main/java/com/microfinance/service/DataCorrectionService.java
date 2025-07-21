@@ -17,6 +17,8 @@ import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.LoanApplication;
+import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
@@ -26,6 +28,8 @@ import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
+import com.microfinance.repository.LoanApplicationRepo;
+import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
 import com.microfinance.repository.TransferShareRepo;
 
@@ -43,6 +47,12 @@ public class DataCorrectionService {
 	
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
+	
+	@Autowired
+	LoanApplicationRepo loanApplicationRepo;
+	
+	@Autowired
+	PolicyRenewalRepo policyRenewalRepo;
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -262,6 +272,20 @@ public class DataCorrectionService {
 		} else {
 			return 0;
 		}
+	}
+
+	public List<LoanApplication> getApprovedLoanApplications() {
+        return loanApplicationRepo.findByApprovalStatusTrue();
+    }
+
+	public List<LoanApplication> fetchAllLoanApplication() {
+		// TODO Auto-generated method stub
+		return loanApplicationRepo.findAll();
+	}
+
+	public List<PolicyRenewal> getApprovedPolicyRenewal() {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.findByIsApprovedTrue();
 	}
 
 //	public List<CreateSavingsAccount> fetchSavingDataByCustomerCode(String selectByCustomer) {

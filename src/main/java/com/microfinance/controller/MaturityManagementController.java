@@ -21,6 +21,7 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.ApplyForMaturity;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.MaturitySchemeMaster;
+import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.service.MaturitySchemeMasterService;
 import com.microfinance.service.PolicyManagementService;
 
@@ -134,7 +135,21 @@ public class MaturityManagementController {
 	    }
 	}
 	
-	
-	
+	//save and Update Partial Maturity Payment
+	//Ashwini
+	@PostMapping("/savePartialmaturity")
+	@ResponseBody
+	public ApiResponse<partialMaturityPayment> savePartialmaturity(@RequestBody partialMaturityPayment partialmaturity) {
+		partialMaturityPayment maturity = maturityservice.savePartialmaturity(partialmaturity);
+		
+		if (maturity != null) {
+			return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
+	    } 
+		else {
+			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
+	       
+	    }
+
+	}
 	
 }
