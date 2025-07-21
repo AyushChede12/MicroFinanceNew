@@ -105,129 +105,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo"> Issue Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Choose Applicant*</label> <select
-									id="groupcode" name="groupcode" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Applicant</option>
-								</select>
-							</div>
-
-						</div>
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Choose Applicant*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Loan Branch*</label> <select
-									id="groupcode" name="groupcode" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-								</select>
-							</div>
-
-						</div>
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Loan Branch*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<div class="col-lg-3 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Loan Plan Name*</label> <select
-									id="groupcode" name="groupcode" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Loan Plan Name</option>
-								</select>
-							</div>
-
-						</div>
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Loan Plan Name*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> 	Nominee Info* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> 	Type of Loan* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">	Date of Birth*</label> <input type="date"
+								<label for="vehicalNo"> Opening Date</label> <input type="date"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
@@ -235,7 +113,31 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Term* </label> <input type="text"
+								<label for="">Community Name*</label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Enter Location" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch Name*</label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Enter Location" />
+							</div>
+						</div>
+					
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Loan Scheme Name*</label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Enter Location" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Community Address* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -257,19 +159,33 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Rate of Interest)* </label> <input type="text"
+								<label for=""> Loan Purpose* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
-
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> SMS Status* </label> <input type="text"
+								<label for=""> Term* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for=""> Rate of Interest(%)* </label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Enter Location" />
+							</div>
+						</div>
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for=""> Interest Type* </label> <input type="text"
+									name="location" id="location" required="required"
+									placeholder="Enter Location" />
+							</div>
+						</div>
+						
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Loan Amount* </label> <input type="text"
@@ -277,27 +193,8 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Address* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> ROI Type* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Pincode* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
+						
+						
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> EMI Amount* </label> <input type="text"
@@ -305,13 +202,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Loan Purpose* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
+						
 
 
 
@@ -537,6 +428,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-left: 80%">Payment</button>
 
 						</div>
+					</div>
 					</div>
 			</form>
 
