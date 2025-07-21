@@ -203,7 +203,7 @@ $(document).ready(function () {
                 location.reload();
             },
             error: function (xhr, status, error) {
-                let errorMessage = xhr.responseJSON?.message || 'Transfer failed';
+                let errorMessage = xhr.responseJSON?.message || 'Transfer failed!!! Approve previous Transaction.';
                 alert(errorMessage);
             }
         });

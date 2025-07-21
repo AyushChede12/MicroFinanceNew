@@ -30,6 +30,7 @@ import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.states;
 import com.microfinance.repository.CreateSavingAccountRepo;
+import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.model.savingAccountFundTransfer;
@@ -57,6 +58,9 @@ public class CustomerSavingsController {
 	  
 	  @Autowired
 	  CreateSavingAccountRepo creSavingAccountRepo;
+	  
+	  @Autowired
+	  SavingAccountFundTransferRepo savingAccountFundTransferRepo;
 	 
 	
 	@Value("${upload.directory}")
@@ -428,6 +432,14 @@ public class CustomerSavingsController {
         	String debitAccountNo = savingAccFundTransfer.getDebitAccountNumber();
             String creditAccountNo = savingAccFundTransfer.getCreditAccountNumber();
             double amount = Double.parseDouble(savingAccFundTransfer.getAmount());
+            
+         // Check if there are any unapproved transactions for the sender
+    	    List<savingAccountFundTransfer> unapprovedTransfers = savingAccountFundTransferRepo.findByDebitAccountNumberAndIsApproved(debitAccountNo, false);
+
+    	    if (!unapprovedTransfers.isEmpty()) {
+    	        return new ResponseEntity<>("Previous transaction is pending approval. Complete approval before proceeding.", HttpStatus.FORBIDDEN );
+    	    }
+            
             CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
                     .orElseThrow(() -> new RuntimeException("Debit account not found"));
 
