@@ -52,7 +52,7 @@ $(document).ready(function() {
 						$("#dateOfBirth").val(data.dateOfBirth);
 						$("#age").val(data.age);
 						$("#contactNo").val(data.contactNo);
-						$("#notificationStatus").val(data.notificationStatus);
+						$("#messageStatus").val(data.messageStatus);
 						$("#address").val(data.address);
 						$("#pinCode").val(data.pinCode);
 						$("#branchName").val(data.branchName);
@@ -90,23 +90,11 @@ $(document).ready(function() {
 						$("#financialConsultantId").val(data.financialConsultantId);
 						$("#financialConsultantName").val(data.financialConsultantName);
 
-						/*// ✅ Add these lines below
-						$("#photoPreview").attr("src", "/api/loanmanegment/get-image?filename=" + encodeURIComponent(data.photo));
-						$("#signaturePreview").attr("src", "/api/loanmanegment/get-image?filename=" + encodeURIComponent(data.signature));
-
-						$("#photoHidden").val(data.photo);
-						$("#signatureHidden").val(data.signature);
-						
-						alert(data.photo);
-						alert(data.signature);
-*/
-
 						// ✅ PHOTO block
 						if (data.photo) {
-							alert(data.photo);  
 
-							const fileName = data.photo;  
-							const photoPath = `/Uploads/${encodeURIComponent(fileName)}`; 
+							const fileName = data.photo;
+							const photoPath = `/Uploads/${encodeURIComponent(fileName)}`;
 
 							$("#photoPreview").attr("src", photoPath);  // ✅ Shows preview
 							$("#photoHidden").val(fileName);            // ✅ Save only the filename, not full path
@@ -119,13 +107,12 @@ $(document).ready(function() {
 
 						// ✅ SIGNATURE block
 						if (data.signature) {
-							alert(data.signature);  
 
 							const fileName = data.signature;
 							const signPath = `/Uploads/${encodeURIComponent(fileName)}`;
 
 							$('#signaturePreview').attr('src', signPath);
-							$('#signatureHidden').val(fileName); 
+							$('#signatureHidden').val(fileName);
 							signatureSizeEdit({ target: { result: signPath } }); // ✅ Resize preview
 						} else {
 							$('#signaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
@@ -165,3 +152,31 @@ function signatureSizeEdit(e) {
 	previewimg.style.overflow = "hidden";
 	previewimg.style.borderRadius = "20px";
 }
+
+// js for approving the loan application (Vaibhav)
+$('#approveBtn').click(function() {
+	const loanId = $('#findByLoanId').val(); // hidden input or fetched dynamically
+	const approvalStatus = $('#approvalStatus').val().toLowerCase() === "approve"; // FIXED
+	const approvalDate = $('#approvalDate').val(); // format: yyyy-MM-dd
+
+
+	const requestData = {
+		loanId: loanId,
+		approvalStatus: approvalStatus,
+		approvalDate: approvalDate
+	};
+
+	$.ajax({
+		type: "POST",
+		url: "/api/loanmanegment/approve",
+		contentType: "application/json",
+		data: JSON.stringify(requestData),
+		success: function(response) {
+			alert(response.message); // shows: "Loan is already approved." or "Loan approved successfully."
+			location.reload();
+		},
+		error: function(xhr) {
+			alert("Error: " + xhr.responseText);
+		}
+	});
+});

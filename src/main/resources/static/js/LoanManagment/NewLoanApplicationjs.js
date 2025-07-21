@@ -1,49 +1,4 @@
 
-/*//fetch only Drowpdown
-$(document).ready(function () {
-	console.log("Document ready");
-
-	$.ajax({
-		url: '/approved', // ✅ This hits your @GetMapping
-		type: 'GET',
-		success: function (response) {
-			if (Array.isArray(response) && response.length > 0) {
-				// Get all three dropdowns
-				const memberDropdown = $('#memberId');
-				const guarantorDropdown = $('#guarantorMemberId');
-				const coApplicantDropdown = $('#coApplicantMemberId');
-
-				// Clear existing options
-				memberDropdown.empty();
-				guarantorDropdown.empty();
-				coApplicantDropdown.empty();
-
-				// Add default option
-				const defaultOption = '<option value="">Select Member</option>';
-				memberDropdown.append(defaultOption);
-				guarantorDropdown.append(defaultOption);
-				coApplicantDropdown.append(defaultOption);
-
-				// Append options to all dropdowns
-				response.forEach(function (customer) {
-					const option = `<option value="${customer.id}">${customer.customerName} - ${customer.memberCode}</option>`;
-					memberDropdown.append(option);
-					guarantorDropdown.append(option);
-					coApplicantDropdown.append(option);
-				});
-
-			} else {
-				alert('No member data found');
-			}
-		},
-		error: function (xhr, status, error) {
-			console.error('AJAX Error:', status, error);
-			alert('Failed to fetch members');
-		}
-	});
-});
-*/
-
 
 $(document).ready(function() {
 	console.log("Document ready");
@@ -85,59 +40,7 @@ $(document).ready(function() {
 	});
 });
 
-/*//data fetch from id and name
 
-$(document).ready(function () {
-  $('#memberId,#guarantorMemberId,#coApplicantMemberId').on('change', function () {
-	const selectedCode = $(this).val(); // This is your memberCode now!
-	const changedId = $(this).attr('id'); // ✅ Correct
-
-	if (selectedCode !== "") {
-	  $.ajax({
-		url: '/api/loanmanegment/getByMemberCodeNewLoanApplication', // ✅ MUST hit your new backend!
-		type: 'GET',
-		data: { memberCode: selectedCode }, // ✅ Correct key
-		success: function (response) {
-		  console.log("Response:", response);
-
-		  if (response.status === "OK") {
-			const d = response.data;
-
-			if (changedId === 'memberId') {
-			  $('#relativeDetails').val(d.relationToApplicant || '');
-			  $('#dateOfBirth').val(d.dob || '');
-			  $('#age').val(d.customerAge || '');
-			  $('#contactNo').val(d.contactNo || '');
-			  $('#notificationStatus').val(d.noficationStatus || '');
-			  $('#address').val(d.customerAddress || '');
-			  $('#pinCode').val(d.pinCode || '');
-			  $('#branchName').val(d.branchName || '');
-
-			} else if (changedId === 'guarantorMemberId') {
-			  $('#guarantorPinCode').val(d.pinCode || '');
-			  $('#guarantorAddress').val(d.customerAddress || '');
-			  $('#guarantorContactNo').val(d.contactNo || '');
-
-			} else if (changedId === 'coApplicantMemberId') {
-			  $('#coApplicantPinCode').val(d.pinCode || '');
-			  $('#coApplicantAddress').val(d.customerAddress || '');
-			  $('#coApplicantContactNo').val(d.contactNo || '');
-			}
-
-		  } else {
-			alert("Customer not found!");
-		  }
-		},
-		error: function (xhr) {
-		  console.error("AJAX Error:", xhr.responseText);
-		  alert("Something went wrong while fetching data.");
-		}
-	  });
-	} else {
-	  $('input, textarea').not('#findMember').val('');
-	}
-  });
-});*/
 
 $(document).ready(function() {
 	$('#memberId,#guarantorMemberId,#coApplicantMemberId').on('change', function() {
@@ -172,29 +75,29 @@ $(document).ready(function() {
 								$('#branchName').val(d.branchName || '');
 
 								if (d.customerPhoto) {
-								  const fileName = d.customerPhoto; // This should be JUST the name
-								  const photoPath = `/Uploads/${encodeURIComponent(fileName)}`;
+									const fileName = d.customerPhoto; // This should be JUST the name
+									const photoPath = `/Uploads/${encodeURIComponent(fileName)}`;
 
-								  $("#photoPreview").attr("src", photoPath);
-								  $("#photoHidden").val(fileName); // ✅ Only file name!
-								  photoSizeEdit({ target: { result: photoPath } });
+									$("#photoPreview").attr("src", photoPath);
+									$("#photoHidden").val(fileName); // ✅ Only file name!
+									photoSizeEdit({ target: { result: photoPath } });
 								} else {
-								  $("#photoPreview").attr("src", "/Uploads/default-placeholder.jpg");
-								  $("#photoHidden").val("");
-								  photoSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
+									$("#photoPreview").attr("src", "/Uploads/default-placeholder.jpg");
+									$("#photoHidden").val("");
+									photoSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
 								}
 
 								if (d.customerSignature) {
-								  const fileName = d.customerSignature;
-								  const signPath = `/Uploads/${encodeURIComponent(fileName)}`;
+									const fileName = d.customerSignature;
+									const signPath = `/Uploads/${encodeURIComponent(fileName)}`;
 
-								  $('#signaturePreview').attr('src', signPath);
-								  $('#signatureHidden').val(fileName); // ✅ Only file name!
-								  signatureSizeEdit({ target: { result: signPath } });
+									$('#signaturePreview').attr('src', signPath);
+									$('#signatureHidden').val(fileName); // ✅ Only file name!
+									signatureSizeEdit({ target: { result: signPath } });
 								} else {
-								  $('#signaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
-								  $('#signatureHidden').val("");
-								  signatureSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
+									$('#signaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+									$('#signatureHidden').val("");
+									signatureSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
 								}
 
 
@@ -422,7 +325,7 @@ $(document).ready(function() {
 			photo: $('#photoHidden').val(),
 			signature: $('#signatureHidden').val()
 		};
-		
+
 		$.ajax({
 			url: '/api/loanmanegment/saveloanapplication',
 			type: 'POST',
@@ -431,7 +334,7 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log('Response:', response);
 				if (response.status === 'CREATED') {
-					alert("Loan Code" + response.loanId + "\n" + response.message);
+					alert("Loan Code: " + response.loanId + "\n" + response.message);
 				} else {
 					alert('Failed: ' + response.message);
 				}
@@ -446,60 +349,60 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $.ajax({
-    url: '/api/financialconsultant/getAllFinancialConsultantDetails',
-    type: 'POST',
-    success: function(response) {
-      console.log("API Response:", response); // ✅ Debug to check!
+	$.ajax({
+		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
+		type: 'POST',
+		success: function(response) {
+			console.log("API Response:", response); // ✅ Debug to check!
 
-      const consultantDropdown = $('#financialConsultantId');
-      consultantDropdown.empty();
-      consultantDropdown.append('<option value="">Select Consultant</option>');
+			const consultantDropdown = $('#financialConsultantId');
+			consultantDropdown.empty();
+			consultantDropdown.append('<option value="">Select Consultant</option>');
 
-      response.data.forEach(function(customer) {
-        // ✅ Only the code
-        const option = `<option value="${customer.financialCode}">${customer.financialCode}</option>`;
-        consultantDropdown.append(option);
-      });
-    },
-    error: function(xhr, status, error) {
-      console.error('AJAX Error:', status, error);
-      alert('Failed to fetch consultant data.');
-    }
-  });
+			response.data.forEach(function(customer) {
+				// ✅ Only the code
+				const option = `<option value="${customer.financialCode}">${customer.financialCode}</option>`;
+				consultantDropdown.append(option);
+			});
+		},
+		error: function(xhr, status, error) {
+			console.error('AJAX Error:', status, error);
+			alert('Failed to fetch consultant data.');
+		}
+	});
 });
 $(document).ready(function() {
-  $('#financialConsultantId').on('change', function() {
-    const selectedCode = $(this).val();
-    console.log("Selected Financial Code:", selectedCode);
+	$('#financialConsultantId').on('change', function() {
+		const selectedCode = $(this).val();
+		console.log("Selected Financial Code:", selectedCode);
 
-    if (selectedCode) {
-      $.ajax({
-        url: 'api/financialconsultant/getfinancialHierarchyByFinancialCode',
-        type: 'GET',
-        data: { financialCode: selectedCode },
-        success: function(response) {
-          console.log("API Response:", response);
+		if (selectedCode) {
+			$.ajax({
+				url: 'api/financialconsultant/getfinancialHierarchyByFinancialCode',
+				type: 'GET',
+				data: { financialCode: selectedCode },
+				success: function(response) {
+					console.log("API Response:", response);
 
-          // ✅ If your API returns an ARRAY
-          const consultant = Array.isArray(response.data) ? response.data[0] : response.data;
+					// ✅ If your API returns an ARRAY
+					const consultant = Array.isArray(response.data) ? response.data[0] : response.data;
 
-          if (consultant && consultant.financialName) {
-            $('#financialConsultantName').val(consultant.financialName);
-          } else {
-            $('#financialConsultantName').val('');
-            alert('No consultant name found for this code.');
-          }
-        },
-        error: function(xhr, status, error) {
-          console.error('AJAX Error:', status, error);
-          alert('Error fetching consultant name.');
-        }
-      });
-    } else {
-      $('#financialConsultantName').val('');
-    }
-  });
+					if (consultant && consultant.financialName) {
+						$('#financialConsultantName').val(consultant.financialName);
+					} else {
+						$('#financialConsultantName').val('');
+						alert('No consultant name found for this code.');
+					}
+				},
+				error: function(xhr, status, error) {
+					console.error('AJAX Error:', status, error);
+					alert('Error fetching consultant name.');
+				}
+			});
+		} else {
+			$('#financialConsultantName').val('');
+		}
+	});
 });
 
 

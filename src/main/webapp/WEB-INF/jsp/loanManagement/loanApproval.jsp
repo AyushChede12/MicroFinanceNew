@@ -129,9 +129,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">SMS Notification</label> <input type="text"
-									name="notificationStatus" id="notificationStatus"
-									required="required" placeholder="SMS Staus" />
+								<label for="">Message Status</label> <input type="text"
+									name="messageStatus" id="messageStatus"
+									required="required" placeholder=" messageStatus" />
 							</div>
 						</div>
 
@@ -493,14 +493,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Approval Notification</label> <input
-									type="text" name="approvalStatus" id="approvalStatus"
-									required="required" style="text-transform: uppercase;" />
+								<label for="loanName">Approval Status</label> <select
+									id="approvalStatus" name="approvalStatus"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Approval Status</option>
+									<option value="Approve">Approve</option>
+								</select>
 							</div>
 						</div>
 
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle"
+							<button id="approveBtn" class="btnStyle" name="approveBtn"
 								style="background-color: #FFA500;">Approve It</button>
 							<!-- <button id="saveBtn" class="btnStyle" style="background-color: #FFA500;">Update</button>
                             <button id="saveBtn" class="btnStyle bg-primary">Print</button> -->

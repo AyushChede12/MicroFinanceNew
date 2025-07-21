@@ -64,8 +64,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					<input type="hidden" id="loanId" name="loanId" value="${loanCode}">
-					
+						<input type="hidden" id="loanId" name="loanId" value="${loanCode}">
+
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
@@ -75,7 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						 <div class="col-lg-3">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Find Members</label> <select id="memberId"
@@ -85,7 +85,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 								</select>
 							</div>
-						</div> 
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -140,11 +140,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Branch Name </label> <input type="text" name="branchName"
-									id="branchName" required="required" placeholder="Branch Name" />
+								<label for="">Branch Name </label> <input type="text"
+									name="branchName" id="branchName" required="required"
+									placeholder="Branch Name" />
 							</div>
 						</div>
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -230,34 +231,35 @@ pageEncoding="ISO-8859-1"%> -->
 								class="h-100 d-flex justify-content-start align-items-center">
 								<div
 									class="d-flex justify-content-start align-items-center formFields">
-									<label for="planStatus" style="margin-left: 20px;" class="mb-2">Message
-										Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<label for="messageStatus" style="margin-left: 20px;"
+										class="mb-2">Message Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="planStatus" name="planStatus"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="planStatus" class="toggle__label"></label>
+											<input type="checkbox" id="messageStatus"
+												name="messageStatus" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="messageStatus" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-				
+
 					</div>
 					<div class="row mt-4">
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span id="star">*</span>
-							</label> <label for="Photo" id="drop-area"> <input
-								type="file" accept="image/*" name="photo"
-								id="photo" hidden="hidden" onchange=""
+							</label> <label for="Photo" id="drop-area"> <input type="file"
+								accept="image/*" name="photo" id="photo" hidden="hidden"
+								onchange=""
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../upload/upload.png" alt="upload_icon"
-										id="photoPreview" /> <input type="hidden"
-										id="photoHidden" name="photoHidden">
-									
+										id="photoPreview" /> <input type="hidden" id="photoHidden"
+										name="photoHidden">
+
 								</div>
 							</label>
 						</div>
@@ -267,15 +269,14 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span id="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
-								type="file" accept="image/*" name="signature"
-								id="signature" hidden="hidden"
-								onchange="signatureUpload();"
+								type="file" accept="image/*" name="signature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="signaturePreview" /> <input type="hidden"
 										id="signatureHidden" name="signatureHidden">
-									
+
 								</div>
 							</label>
 						</div>
@@ -318,7 +319,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -351,8 +352,11 @@ pageEncoding="ISO-8859-1"%> -->
 									id="guarantorSecurityType" name="guarantorSecurityType"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Loan Type</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select Security</option>
+									<option value="Pledge">Pledge</option>
+									<option value="Mortgage">Mortgage</option>
+									<option value="Property">Property</option>
+									<option value="Gold">Gold</option>
 								</select>
 							</div>
 						</div>
@@ -383,7 +387,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div>
-					
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Co-Applicant Identity</label> <select
@@ -396,7 +400,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -417,9 +421,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Co-Applicant Contact No.</label> <input type="text"
-									name="coApplicantContactNo" id="coApplicantContactNo"
-									required="required" placeholder="Enter Gurantor Contact No." />
+								<label for="">Co-Applicant Contact No.</label> <input
+									type="text" name="coApplicantContactNo"
+									id="coApplicantContactNo" required="required"
+									placeholder="Enter Gurantor Contact No." />
 							</div>
 						</div>
 
@@ -429,8 +434,11 @@ pageEncoding="ISO-8859-1"%> -->
 									id="coApplicantSecurityType" name="coApplicantSecurityType"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Loan Type</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select Security</option>
+									<option value="Pledge">Pledge</option>
+									<option value="Mortgage">Mortgage</option>
+									<option value="Property">Property</option>
+									<option value="Gold">Gold</option>
 								</select>
 							</div>
 						</div>
@@ -467,9 +475,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">GST</label> <input type="text"
-									name="gst" id="gst" required="required"
-									placeholder="Enter Stamp Duty Fee"
+								<label for="loanName">GST</label> <input type="text" name="gst"
+									id="gst" required="required" placeholder="Enter Stamp Duty Fee"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -486,9 +493,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Valuation Fees</label> <input
-									type="text" name="valuationFees"
-									id="valuationFees" required="required"
+								<label for="loanName">Valuation Fees</label> <input type="text"
+									name="valuationFees" id="valuationFees" required="required"
 									placeholder="Enter Interest Charge"
 									style="text-transform: uppercase;" />
 							</div>
@@ -523,8 +529,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Financial Consultant Name</label> <input
 									type="text" name="financialConsultantName"
-									id="financialConsultantName" required="required"
-									placeholder="" style="text-transform: uppercase;" />
+									id="financialConsultantName" required="required" placeholder=""
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
