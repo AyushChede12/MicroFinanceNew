@@ -1,5 +1,6 @@
 package com.microfinance.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,8 @@ public interface LoanApplicationRepo extends JpaRepository<LoanApplication,Long>
 	@Transactional
 	@Query("select coalesce(max(id), 0) from LoanApplication")
 	long getMaxId();
+
+	List<LoanApplication> findByApprovalStatusTrue();
 
 	
 	LoanApplication findByLoanId(String loanId); // assumes loanId is unique

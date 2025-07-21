@@ -23,6 +23,11 @@ public interface PolicyRenewalRepo extends JpaRepository<PolicyRenewal, Long> {
 
 
 
+
+	List<PolicyRenewal> findByIsApprovedTrue();
+
+
+
  
 
 }
