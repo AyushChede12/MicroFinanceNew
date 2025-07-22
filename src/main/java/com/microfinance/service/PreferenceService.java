@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.ExecutiveFounderDto;
+import com.microfinance.exception.BadRequestException;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
@@ -101,6 +102,18 @@ public class PreferenceService {
 		}
 		return false;
 	}
+	public void validateBranchNameExists(String branchName) {
+	    if (branchName == null || branchName.trim().isEmpty()) {
+	        throw new BadRequestException("Branch name is required");
+	    }
+
+	    Optional<BranchModule> branchOpt = branchModuleRepo.findByBranchNameIgnoreCase(branchName.trim());
+
+	    if (branchOpt.isEmpty()) {
+	        throw new BadRequestException("Invalid branch name: " + branchName);
+	    }
+	}
+
 
 	// Bank Module
 	public BankModule saveAllBankModule(BankModule bankModule) {

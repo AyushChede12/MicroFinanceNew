@@ -33,6 +33,9 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -67,59 +70,78 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Ledger name" />
 							</div>
 						</div>
-
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="branchName" name="branchName"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Bank A/C</option>
-									<option value="Blue">Blue</option>
+								<label for="">Group Name</label> <select id="groupName"
+									name="groupName" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Group</option>
 								</select>
 							</div>
 						</div>
 
-						<div class="col-4 text-center mt-3">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Save</button>
-							<button id="clearBtn" class="btnStyle bg-primary">Clear</button>
+						<div class="col-lg-4">
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch Name </label> <select id="branchName"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch Name</option>
+								</select>
+							</div>
+
+
+
+							<div class="col-lg-8 mt-3 text-center mx-auto">
+								<button id="saveBtn" type="submit" class="btnStyle"
+									style="background-color: #FFA500;">Save</button>
+								<button id="clearBtn" type="reset" class="btnStyle bg-primary">Clear</button>
+
+								<button type="button" id="toggleBtn" class="btnStyle bg-success"
+									onclick="showTableData()">Show</button>
+
+
+							</div>
+
 						</div>
 					</div>
 				</div>
-		</div>
 
-		<!--  <div class="row">
-          <div class="col-12 text-center mt-3">
-            <button id="saveBtn" class="btnStyle" style="background-color: #FFA500;">Save</button>
-            <button id="saveBtn" class="btnStyle bg-primary">Clear</button>
-          </div>
-        </div> -->
-		</form>
 
-		<div class="row mt-5">
-			<div class="col-12">
-				<div class="card recent-sales">
+			</form>
 
-					<div class="card-body table-responsive">
-						<h5 class="card-title">Ledger list</h5>
+			<div class="mt-5">
+				<div class="row mt-5">
+					<div class="col-12">
+						<div class="card recent-sales">
 
-						<table class="table table-borderless datatable overflow-scroll">
-							<thead class="table-light">
-								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Ledger Name</th>
-									<th scope="col">Group Name</th>
-									<th scope="col">View</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-						<button id="saveBtn" class="btnStyle bg-secondary">Select
-							All</button>
+							<div class="card-body table-responsive">
+								<h5 class="card-title">
+									Ledger List <span>| Table View</span>
+								</h5>
+
+								<table class="table table-borderless datatable overflow-scroll">
+									<thead class="table-light">
+										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">ID</th>
+											<th scope="col">Ledger Name</th>
+											<th scope="col">Group Name</th>
+											<th scope="col">Branch Name</th>
+											<th scope="col">View</th>
+										</tr>
+									</thead>
+									<tbody id="tableBody">
+
+
+									</tbody>
+								</table>
+								<button id="selectAllBtn" class="btnStyle bg-secondary">Select
+									All</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+
 
 		</div>
 
@@ -127,6 +149,13 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/account-management/ledgeraccountmaster.js"></script>
+	<script>
+		$(document).ready(function() {
+			BranchNameDropdown();
+		});
+	</script>
+
 </body>
 
 </html>

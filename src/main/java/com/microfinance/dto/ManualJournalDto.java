@@ -1,31 +1,36 @@
-package com.microfinance.model;
+package com.microfinance.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-public class ManualJournalEntry {
+public class ManualJournalDto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
+	private long id;
+	
+    @NotBlank(message = "Branch name is required")
 	private String branchName;
+    
 	private String generatedReceiptID;
+	
+    @NotBlank(message = "Date of entry is required")
     private String dateOfEntry;
+    
+    @NotBlank(message = "Credit ledger is required")
     private String creditLedger;
+    
+    @NotBlank(message = "Debit ledger is required")
     private String debitLedger;
+    
+    @NotBlank(message = "Transaction amount is required")
     private String transactionAmount;
+    
     private String remarks;
+    
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	
 	public String getBranchName() {
 		return branchName;
 	}
@@ -69,6 +74,7 @@ public class ManualJournalEntry {
 		this.remarks = remarks;
 	}
 	
+    
     
 
 }

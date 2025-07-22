@@ -29,6 +29,10 @@ public class ApiResponse<T> {
     public static <T> ApiResponse<T> error(HttpStatus status, String message) {
         return new ApiResponse<>(status, message, null);
     }
+    public static <T> ApiResponse<T> error(HttpStatus status, String message, T data) {
+        return new ApiResponse<>(status, message, data);
+    }
+
 
     // Getters and setters
     public HttpStatus getStatus() {
