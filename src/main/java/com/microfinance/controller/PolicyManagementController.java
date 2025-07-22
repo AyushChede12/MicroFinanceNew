@@ -960,46 +960,21 @@ public class PolicyManagementController {
 	}
 
 	
-	@GetMapping("/getAllRdRenewalData")
-	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getAllRdRenewalData() {
-	    List<PolicyRenewal> allRdPolicies = policyManagementService.getAllRdRenewalData();
-
-	    ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All RD Policy Data fetched successfully",
-	            allRdPolicies
-	    );
-
-	    return ResponseEntity.ok(response);
-	}
-	
-	@GetMapping("/getAllDdRenewalData")
-	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getAllDdRenewalData() {
-	    List<DailyPremiumRenewalPM> allRdPolicies = policyManagementService.getAllDdRenewalData();
-
-	    ApiResponse<List<DailyPremiumRenewalPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All DD Policy Data fetched successfully",
-	            allRdPolicies
-	    );
-
-	    return ResponseEntity.ok(response);
-	}
-	
-	@GetMapping("/getAllFdRenewalData")
-	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getAllFdRenewalData() {
-	    List<FlexibleRenewal> allFdPolicies = policyManagementService.getAllFdRenewalData();
-
-	    ApiResponse<List<FlexibleRenewal>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All FD Policy Data fetched successfully",
-	            allFdPolicies
-	    );
-
-	    return ResponseEntity.ok(response);
-	}
   
-	
+	@GetMapping("/getApprovedPolicies")
+    public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
+        List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
+
+        if (approvedList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+        }
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList)
+        );
+    }
+
 	
 
 
