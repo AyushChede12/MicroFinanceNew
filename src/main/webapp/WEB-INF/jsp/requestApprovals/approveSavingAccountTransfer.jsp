@@ -111,18 +111,19 @@ pageEncoding="ISO-8859-1"%> -->
 						<h5 class="card-title">Search result</h5>
 
 						<div style="overflow-x: auto; white-space: nowrap;">
-							<table class="table table-borderless datatable">
+							<table class="table table-borderless  datatable">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col"></th>
 										<th scope="col">ID</th>
-										<th scope="col">Account No</th>
-										<th scope="col">Account Holder Name</th>
-										<th scope="col">Contact No.</th>
-										<th scope="col">Joint Holder</th>
-										<th scope="col">SB Plan Name</th>
-										<th scope="col">Available Balance</th>
-										<th scope="col">Transaction For</th>
-										<th scope="col">Comments</th>
+										<th scope="col">Transfer Date</th>
+										<th scope="col">CreditCustomer Code</th>
+										<th scope="col">CreditAccount Branch</th>
+										<th scope="col">CreditAverage Balance</th>
+										<th scope="col">Credit ContactNumber</th>
+										<th scope="col">DebitAccount Branch</th>
+										<th scope="col">contactNo</th>
+										<th scope="col">renewalDate</th>
 									</tr>
 								</thead>
 								<tbody>
