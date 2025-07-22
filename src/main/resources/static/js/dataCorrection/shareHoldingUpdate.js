@@ -135,7 +135,7 @@ $(document).ready(function() {
 			previousAccountBalance: $('#previousAccountBalance').val(),
 			previousShareCount: $('#previousShareCount').val(),
 			baseValue: $('#baseValue').val(),
-			branch: $('#branch').val(),
+			branch: $('#branchName').val(),
 			dateOfTransfer: $('#dateOfTransfer').val(),
 			shareIssuedBy: $('#shareIssuedBy').val(),
 			noOfShare: $('#noOfShare').val(),

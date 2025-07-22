@@ -72,12 +72,9 @@ $(document).ready(function() {
 				url: "/api/datacorrection/getPolicyRenewalByPolicyCode",
 				data: { policyCode: policyCode },
 				success: function(response) {
-					alert("success");
 					if (response.status == "FOUND") {
-						alert("if condition");
-						let data = response.data[0];
+						let data = response.data;
 						$("#id").val(data.id);
-						alert("hii");
 						$("#renewalDate").val(data.renewalDate);
 						$("#policyDate").val(data.policyDate);
 						$("#maturityDate").val(data.maturityDate);
@@ -105,6 +102,36 @@ $(document).ready(function() {
 				}
 			});
 		}
+	});
+
+	$('#deleteBtn').click(function(event) {
+		var id = $("#id").val();
+		let policyCode = $("#policyCode").val();
+		if (policyCode !== "") {
+			if (confirm("Are you sure you want to delete this Policy Renewal Data?")) {
+				$.ajax({
+					url: "/api/datacorrection/deletePolicyRenewalDataById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Policy Renewal Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Policy Renewal.");
+						console.error("Error:", error);
+					}
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
+		}
+
 	});
 
 });

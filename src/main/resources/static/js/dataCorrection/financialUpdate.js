@@ -21,8 +21,8 @@ $(document).ready(function() {
 
 	//Dropdowns with search
 	$.ajax({
-		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
-		type: 'POST',
+		url: '/api/reports/getApprovedFinancialConsultant',
+		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
 				let financialOptions = response.data.map(function(item) {
@@ -134,17 +134,25 @@ $(document).ready(function() {
 
 					// Image bindings (photo and signature)
 					if (data.financialPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.financialPhoto);
-						$('#financialphotoHidden').val(data.financialPhoto); // Store file name for fallback
+						const photoPath = `Uploads/${data.financialPhoto}`;
+						$("#financialPhotoPreview").attr("src", photoPath);
+						$("#financialphotoHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						photoSizeEdit(fakePhotoEvent);
 					} else {
-						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#financialPhotoPreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#financialphotoHidden").val("");
 					}
 
 					if (data.finnacialSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.finnacialSignature);
-						$('#financialsignatureHidden').val(data.finnacialSignature); // Store file name for fallback
+						const signPath = `Uploads/${data.finnacialSignature}`;
+						$("#financialSignaturePreview").attr("src", signPath);
+						$("#financialsignatureHidden").val(signPath);
+						const fakeSignEvent = { target: { result: signPath } };
+						signatureSizeEdit(fakeSignEvent);
 					} else {
-						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#financialSignaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#financialsignatureHidden").val("");
 					}
 
 
@@ -420,18 +428,12 @@ function updateToggleColor(input) {
 }
 
 function photoUpload() {
-	const file = document.getElementById("customerPhoto").files[0];
+	const file = document.getElementById("financialPhoto").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("financialPhotoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("financialPhotoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			photoSizeEdit(e);
+			$("#financialphotoHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -442,18 +444,12 @@ function photoUpload() {
 
 //Ayush
 function signatureUpload() {
-	const file = document.getElementById("customerSignature").files[0];
+	const file = document.getElementById("finnacialSignature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("financialSignaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("financialSignaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			signatureSizeEdit(e);
+			$("#financialsignatureHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -482,3 +478,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("financialPhotoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("financialSignaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}

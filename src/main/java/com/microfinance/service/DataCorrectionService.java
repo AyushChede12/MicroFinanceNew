@@ -17,6 +17,7 @@ import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
@@ -27,6 +28,7 @@ import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
@@ -53,6 +55,9 @@ public class DataCorrectionService {
 
 	@Autowired
 	PolicyRenewalRepo policyRenewalRepo;
+	
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -368,6 +373,36 @@ public class DataCorrectionService {
 	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
 		// TODO Auto-generated method stub
 		return policyRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public boolean deletePolicyRenewalData(Long id) {
+		// TODO Auto-generated method stub
+		if (policyRenewalRepo.existsById(id)) {
+			policyRenewalRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<DailyPremiumRenewalPM> getApprovedDailyRenewal() {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
+	}
+
+	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public boolean deleteDailyRenewal(Long id) {
+		// TODO Auto-generated method stub
+		if (dailyPremiumRenewalRepo.existsById(id)) {
+			dailyPremiumRenewalRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 //	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {

@@ -26,6 +26,7 @@ import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
@@ -184,12 +185,13 @@ public class DataCorrectionController {
 		return ResponseEntity.ok(response);
 	}
 
+	
 	// Ayush
 	@GetMapping("/fetchAllApprovedPolicyRenewal")
 	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getApprovedPolicyRenewal() {
 		List<PolicyRenewal> policy = dataCorrectionService.getApprovedPolicyRenewal();
-
 		if (policy != null && !policy.isEmpty()) {
+
 			ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(HttpStatus.OK,
 					"Policy Renewal Data fetched successfully.", policy);
 			return ResponseEntity.ok(response);
@@ -268,5 +270,69 @@ public class DataCorrectionController {
 			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	//Ayush
+	@PostMapping("/deletePolicyRenewalDataById")
+	public ResponseEntity<ApiResponse<String>> deletePolicyRenewal(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deletePolicyRenewalData(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Policy Renewal deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy Renewal deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
+	//Ayush
+	@GetMapping("/fetchAllApprovedDailyRenewal")
+	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getApprovedDailyRenewalData() {
+		List<DailyPremiumRenewalPM> dailyrenewal = dataCorrectionService.getApprovedDailyRenewal();
+		if (dailyrenewal != null && !dailyrenewal.isEmpty()) {
+
+			ApiResponse<List<DailyPremiumRenewalPM>> response = new ApiResponse<>(HttpStatus.FOUND,
+					"Daily Renewal Data fetched successfully.", dailyrenewal);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<DailyPremiumRenewalPM>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved Daily Renewal found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+	
+	//Ayush
+	@GetMapping("/getDailyRenewalByPolicyCode")
+	public ResponseEntity<ApiResponse<DailyPremiumRenewalPM>> getDailyRenewalDataByPolicyCode(
+			@RequestParam String policyCode) {
+
+		Optional<DailyPremiumRenewalPM> renewal = dataCorrectionService.fetchDailyRenewalByPolicyCode(policyCode);
+
+		if (renewal.isPresent()) {
+			ApiResponse<DailyPremiumRenewalPM> response = ApiResponse.success(HttpStatus.FOUND,
+					"Daily Renewal found for Policy Code: " + policyCode, renewal.get());
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<DailyPremiumRenewalPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Daily Renewal found with Policy Code: " + policyCode);
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PostMapping("/deleteDailyRenewalDataById")
+	public ResponseEntity<ApiResponse<String>> deleteDailyRenewalData(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deleteDailyRenewal(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Daily Renewal deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Daily Renewal deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+
 
 }
