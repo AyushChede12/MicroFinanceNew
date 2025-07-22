@@ -102,13 +102,17 @@ function renderTable(data) {
 				<td><input type="checkbox" class="approval-checkbox" data-id="${item.id}" ${item.isApproved ? 'checked' : ''} /></td>
 				<td>${index + 1}</td>
 				<td>${item.transferDate || '-'}</td>
+				<td>${item.debitAccountNumber || '-'}</td>
+				<td>${item.debitCustomerCode || '-'}</td>
+				<td>${item.debitAccountBranch || '-'}</td>
+				<td>${item.debitAverageBalance || '-'}</td>
+				<td>${item.debitContactNumber || '-'}</td>
+				<td>${item.creditAccountNumber || '-'}</td>
 				<td>${item.creditCustomerCode || '-'}</td>
 				<td>${item.creditAccountBranch || '-'}</td>
 				<td>${item.creditAverageBalance || '-'}</td>
 				<td>${item.creditContactNumber || '-'}</td>
-				<td>${item.debitAccountBranch || '-'}</td>
-				<td>${item.contactNo || '-'}</td>
-				<td>${item.renewalDate || '-'}</td>
+				<td>${item.amount || '-'}</td>
 				
 			</tr>
 		`;
@@ -121,9 +125,7 @@ function filterSavingAccountFundTransfer() {
 	const selectedCode = $('#branchName').val();
 	const fromDateVal = $('#fromDate').val();
 	const toDateVal = $('#toDate').val();
-	alert(selectedCode);
-	alert(fromDateVal);
-	alert(toDateVal);
+
 
 	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
 	const toDate = toDateVal ? new Date(toDateVal) : null;
@@ -135,9 +137,7 @@ function filterSavingAccountFundTransfer() {
 		const matchesCode = selectedCode ? branchName === selectedCode : true;
 		const matchesFrom = fromDate && transferDate ? transferDate >= fromDate : true;
 		const matchesTo = toDate && transferDate ? transferDate <= toDate : true;
-		alert(matchesCode);
-		alert(matchesFrom);
-		alert(matchesTo);
+
 
 		return matchesCode && matchesFrom && matchesTo;
 	});
