@@ -151,7 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Loan Plan Name</label> <select id="loanPlanName"
-									name="loanPlanName" required="required"
+									name="loanPlanName" required="required" onchange="calculateCharges()"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Loan Plan</option>
 
@@ -457,7 +457,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Processing Fee(%) </label> <input
+								<label for="loanName">Processing Fee </label> <input
 									type="text" name="processingFee" id="processingFee"
 									required="required" style="text-transform: uppercase;" />
 							</div>
@@ -465,7 +465,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Legal Charges(%) </label> <input
+								<label for="loanName">Legal Charges </label> <input
 									type="text" name="legalCharges" id="legalCharges"
 									required="required" style="text-transform: uppercase;" />
 							</div>
@@ -484,7 +484,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="loanName">Insurence Fee(%)</label> <input
+								<label for="loanName">Insurence Fee</label> <input
 									type="text" name="insuranceFee" id="insuranceFee"
 									required="required" placeholder="Enter insurence fees"
 									style="text-transform: uppercase;" />
@@ -504,7 +504,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Stationary Charger Fee(%)</label> <input
+								<label for="">Stationary Charges Fee</label> <input
 									type="text" name="stationaryFee" id="stationaryFee"
 									required="required" placeholder="Enter Stationary Number Fee" />
 							</div>

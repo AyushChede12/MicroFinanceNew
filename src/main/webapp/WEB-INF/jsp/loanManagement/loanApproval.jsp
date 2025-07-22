@@ -61,6 +61,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Search Details</li>
 						</ol>
 					</nav>
+					<div class="row">
 					<div class="col-lg-5">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="">Find Loan By ID</label> <select id="findByLoanId"
@@ -69,6 +70,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<option value="">Select Loan ID</option>
 							</select>
 						</div>
+					</div>
 					</div>
 				</div>
 				<div>
