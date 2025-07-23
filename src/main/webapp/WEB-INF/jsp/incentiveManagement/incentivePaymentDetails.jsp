@@ -63,12 +63,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Month Name</label>
-								<select id="monthName"
-									name="monthName" required="required"
+								<label>incentiveMonth</label>
+								<select id="incentiveMonth"
+									name="Incentive Month" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Month</option>
-									<option value="Blue">2</option>
+									<option value="">Select</option>
+									
+								</select>
 								</select>
 							</div>
 						</div>
@@ -88,6 +89,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<button id="saveBtn" class="btn btn-success"
 								>Update</button>
 						</div>
+						
+						
 					</div>
 					<div class="row mt-5">
 						<div class="col-12">
@@ -118,6 +121,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/incentive/incentivePaymentDetails.js"></script>
 </body>
 
 </html>

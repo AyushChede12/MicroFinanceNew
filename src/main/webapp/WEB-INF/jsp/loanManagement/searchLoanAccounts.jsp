@@ -57,7 +57,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Branch Address</label> <select id="colour" name="colour"
+							<label for="">Branch Address</label> <select id="AdressBranch6" name="AdressBranch6"
 								required="required" class="form-control selectField"
 								style="height: 30px;">
 								<option value="">Select Branch</option>
@@ -70,14 +70,14 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="loanName"> Beginning Date</label> <input type="date"
-								name="vehicalNo" id="vehicalNo" required="required"
+								name="beginningdate" id="beginningdate" required="required"
 								placeholder="" style="text-transform: uppercase;" />
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="loanName">Final Date</label> <input type="date"
-								name="vehicalNo" id="vehicalNo" required="required"
+								name="finaldate" id="finaldate" required="required"
 								placeholder="" style="text-transform: uppercase;" />
 						</div>
 					</div>
@@ -85,7 +85,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="">Applicant Name: </label> <input type="text"
-								name="location" id="location" required="required"
+								name="applicantName" id="applicantName" required="required"
 								placeholder="Enter Application Name" />
 						</div>
 					</div>
@@ -103,7 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 								<div class="content" id="contentCityName" style="display: none;">
 									<div class="search">
-										<input type="text" id="city-search" class="m-0"
+										<input type="text" id="loanid" name="loanid" class="m-0"
 											placeholder="Search City" />
 									</div>
 									<ul class="options" id="city-options">
@@ -122,21 +122,21 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="">Member ID: </label> <input type="text"
-								name="location" id="location" required="required"
+								name="memberID" id="memberID" required="required"
 								placeholder="Enter Member Code" />
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="">Plan Name: </label> <input type="text"
-								name="location" id="location" required="required"
+								name="planeName" id="planeName" required="required"
 								placeholder="Enter Plan Name" />
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="">Advisor ID: </label> <input type="text"
-								name="location" id="location" required="required"
+								name="advisorId" id="advisorId" required="required"
 								placeholder="Enter Advisor Code" />
 						</div>
 					</div>

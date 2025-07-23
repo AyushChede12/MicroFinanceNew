@@ -33,28 +33,39 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
 <body>
-	
+
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Data Correction </h1>
+			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bbi bi-pencil-square"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Finance Entry Correction</li>
-				</ol> 
+				</ol>
 			</nav>
 		</div>
 
 		<div>
 			<form id="formid">
-			
-			<div>
+
+				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item action">Search Details</li>
@@ -84,27 +95,29 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-							<div class="d-flex flex-column formFields" style="margin-bottom: 40px;">
-								<label for="">Choose by Code</label> <select id="colour"
-									name="colour" required="required"
+							<input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 40px;">
+								<label for="financialCode">Choose by Code</label> <select id="financialCode"
+									name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Member</option>
+									<option value="">-- Search Financial Code --</option>
 								</select>
 							</div>
 						</div>
-						
+
 					</div>
 
-					
+
 				</div>
-			
-			
-			
-			
+
+
+
+
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Advisor/Collector Details</li>
+							<li class="breadcrumb-item action">Financial Details</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -133,145 +146,88 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Date of Joining</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="joiningDate" id="joiningDate" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Financial Name</label> <input type="text"
+									name="financialName" id="financialName" required="required"
+									placeholder="Enter Financial Name"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Member Selection  </label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Date of Birth </label> <input type="date"
+									name="dob" id="dob" required="required" placeholder="Enter "
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Age</label> <input type="text" name="age"
+									id="age" required="required" placeholder="Enter Age"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label for="">Contact No</label> <input type="text"
+									name="contactNo" id="contactNo" required="required"
+									placeholder="Enter Contact No" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Member Selection   </option>
-								</select>
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Customer Name</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter 
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Date of Birth  </label> <input type="date" name="vehicalNo"
-									id="vehicalNo" required="required"
-									placeholder="Enter "
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Age</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required" placeholder="Enter Age"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Relative Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relation to Applicant<label> <select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Relation to Applicant</option>
 
 								</select>
 							</div>
 						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label for="">Contact No</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Contact No" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Suggested Nominee</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Nominee Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Relation</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Relation to Applicant</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Branch</option>
-								
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Age Of Nominee </label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Nominee Age" />
-							</div>
-						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Address</label>
-								<textarea name="" id=""
+								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter District" />
+								<label for="">District</label> <input type="text"
+									name="district" id="district" required="required"
+									placeholder="Enter District" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter State" />
+								<label for="">State</label> <input type="text" name="state"
+									id="state" required="required" placeholder="Enter State" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Pin Code</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Pincode" />
+								<label for="pinCode">Pin Code</label> <input type="text" name="pinCode"
+									id="pinCode" required="required" placeholder="Enter Pin Code" />
 							</div>
 						</div>
 
@@ -280,15 +236,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Profession</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter profession" />
+								<label>Profession</label> <input type="text" name="profession"
+									id="profession" required="required"
+									placeholder="Enter profession" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Academic background</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Academic background" />
+								<label for="">Academic background</label> <input type="text"
+									name="academicBackground" id="academicBackground"
+									required="required" placeholder="Enter Academic background" />
 							</div>
 						</div>
 					</div>
@@ -297,13 +255,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
+								Photo <span id="star">*</span>
+							</label> <label for="financialPhoto" id="drop-area"> <input
+								type="file" accept="image/*" name="financialPhoto"
+								id="financialPhoto" hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
+										id="financialPhotoPreview" /> <input type="hidden"
+										id="financialphotoHidden" name="financialphotoHidden">
 									<!-- <p id="upload-text"
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -317,13 +277,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
+								Signature <span id="star">*</span>
+							</label> <label for="finnacialSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="finnacialSignature"
+								id="finnacialSignature" hidden="hidden"
+								onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+										id="financialSignaturePreview" /> <input type="hidden"
+										id="financialsignatureHidden" name="financialsignatureHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
@@ -345,19 +308,20 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Select Role</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="selectPosition" id="selectPosition" required="required"
 									placeholder="Enter Role" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Reference Code</label> <input
-									type="text" name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Reference Code</label> <input type="text"
+									name="referralCode" id="referralCode" required="required"
 									placeholder="Enter Reference Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -367,19 +331,13 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Reference Name</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+									name="referralName" id="referralName" required="required"
 									placeholder="Enter Reference Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Position </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Position" />
-							</div>
-						</div>
+
 
 					</div>
 
@@ -393,38 +351,33 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Charges (if any)</label> <input type="text"
-										name="vehicalNo" id="vehicalNo" required="required"
-										placeholder="Enter Fees" style="text-transform: uppercase;" />
+									<label>Charges (if any)</label> <input type="text" name="fees"
+										id="fees" required="required" placeholder="Enter Fees"
+										style="text-transform: uppercase;" />
 								</div>
 							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="vehicalNo">Mode of payment</label> <select id="colour"
-										name="colour" required="required"
+									<label for="vehicalNo">Mode of payment</label> <select
+										id="modeofPayment" name="modeofPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
 										<option value="">Select</option>
-										<option value="Blue">Cash</option>
+										<option value="Cash">Cash</option>
+										<option value="Online">Online</option>
 
 									</select>
 								</div>
 							</div>
 
 							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
+								<div class="d-flex flex-column formFields">
 									<label>Comments</label>
-									<textarea name="" id="" placeholder="Enter Remarks"
+									<textarea name="comments" id="comments"
+										placeholder="Enter Remarks"
 										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>
-
-
-
-
-
-
 
 						</div>
 
@@ -438,13 +391,14 @@ pageEncoding="ISO-8859-1"%> -->
 									class=" h-100 d-flex justify-content-start align-items-center">
 									<div
 										class="d-flex justify-content-start align-items-center  formFields">
-										<label style="margin-left: 20px;" class="mb-2">Advisor
+										<label style="margin-left: 20px;" class="mb-2">Financial
 											Status</label>
 										<div class="cont">
 											<div class="toggle">
-												<input type="checkbox" id="toggle-advisor-status"
-													class="toggle__input" data-toggle-type="member-status">
-												<label for="toggle-member-status" class="toggle__label"></label>
+												<input type="checkbox" id="toggle-financial-status"
+													name="financialStatus" class="toggle__input"
+													data-toggle-type="financial-status"> <label
+													for="toggle-financial-status" class="toggle__label"></label>
 											</div>
 										</div>
 									</div>
@@ -453,16 +407,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div
-									class=" h-100 d-flex justify-content-start align-items-center"">
+									class=" h-100 d-flex justify-content-start align-items-center"
+									style="margin-bottom: 30px;">
 									<div
 										class="d-flex justify-content-start align-items-center  formFields">
 										<label style="margin-left: 20px;" class="mb-2">SMS
 											Send</label>
 										<div class="cont">
 											<div class="toggle">
-												<input type="checkbox" id="toggle-sms-send"
-													class="toggle__input" data-toggle-type="member-status">
-												<label for="toggle-member-status" class="toggle__label"></label>
+												<input type="checkbox" id="toggle-sms-send" name="smsSend"
+													class="toggle__input" data-toggle-type="sms-send">
+												<label for="toggle-sms-send" class="toggle__label"></label>
 											</div>
 										</div>
 									</div>
@@ -479,114 +434,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center" style="margin-top: 30px;">
-							<button id="updateBtn" class="btn btn-success">Update</button>
-							<button id="newBtn" class="btn btn-secondary"
-							>New</button>
-							<button id="deleteBtn" class="btn btn-danger">Delete</button>
+							<button type="button" id="printBtn" class="btn btn-warning">Print</button>
+							<button type="button" id="updateBtn" class="btn btn-success">Update</button>
+							<button type="button" id="deleteBtn" class="btn btn-danger">Delete</button>
 						</div>
 					</div>
 			</form>
 
-			<!-- <div class="row mt-5">
-        <div class="col-12">
-          <div class="card recent-sales">
-
-            <div class="card-body table-responsive">
-              <h5 class="card-title">
-                Recent Sales <span>| Today</span>
-              </h5>
-
-              <table class="table table-borderless datatable overflow-scroll">
-                <thead class="table-light">
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="col">#</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="row">
-                      <a href="#">1</a>
-                    </th>
-                    <td>Arun Kumar</td>
-                    <td>
-                      <a href="#" className="text-primary">Milk</a>
-                    </td>
-                    <td>$29</td>
-                    <td>
-                      <span class="badge bg-success text-white">Approved</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
 		</div>
 
@@ -594,6 +448,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/financialUpdate.js"></script>
 </body>
 
 </html>

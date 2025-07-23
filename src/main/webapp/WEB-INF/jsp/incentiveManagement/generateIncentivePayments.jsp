@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery 3.x (Latest stable) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 </head>
 
 <body>
@@ -58,15 +62,26 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Incentive Generate</li>
 						</ol>
 					</nav>
+					<input type="hidden" id="teamCode" name="teamCode">
+					<input type="hidden" id="teamName" name="teamName">
 					<div class="row">
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Team Member Name</label> <select id="teamValue"
+									name="teamValue" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
+								</select>
+							</div>
+						</div>
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Incentive Month</label> <select id="incentiveMonth"
 									name="incentiveMonth" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">January</option>
-									<option value="Blue">February</option>
+									 <option value="">Select</option>
+									
 								</select>
 							</div>
 						</div>
@@ -106,6 +121,10 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/incentive/generateIncentive.js"></script>
+	
+	
+	
 </body>
 
 </html>

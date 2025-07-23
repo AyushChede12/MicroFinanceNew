@@ -56,85 +56,27 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Policy Information  </li>
+							<li class="breadcrumb-item action">Search Box</li>
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3 mb-4">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Txn Date*</label> <input type="date"
-									name="txnDate" id="txnDate" required="required"
-									placeholder="Enter Txn Date"
+								<label for="Agent">Policy Code*</label> <select id="policyCode"
+									name="policyCode" required class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Policy Code</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Renewal Date</label> <input type="date"
+									name="renewalDate" id="renewalDate" required="required"
+									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-
-
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select
-									id="branchName" name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Select Policy Id.</label> <select
-									id="selectPolicyId" name="selectPolicyId" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Policy Id</option>
-									
-								</select>
-							</div>
-						</div>
-
-
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Emp Code* </label> <input type="text"
-									name="empCode" id="empCode" required="required"
-									placeholder="Enter Emp Code" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Member Code* </label> <input type="text"
-									name="memberCode" id="memberCode" required="required"
-									placeholder="Enter Member Code" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Name* </label> <input type="text" name="name"
-									id="name" required="required"
-									placeholder="Enter Name" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Contact Number* </label> <input type="text"
-									name="contactNumber" id="contactNumber" required="required"
-									placeholder="Enter contactNumber" />
-							</div>
-						</div>
-
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Policy Code* </label> <input type="text"
-									name="policyCode" id="policyCode" required="required"
-									placeholder="Enter Policy Code " />
 							</div>
 						</div>
 
@@ -145,17 +87,25 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="mt-5">
 						<nav>
 							<ol class="breadcrumb breadcrumb-title">
-								<li class="breadcrumb-item action">Payment Information  </li>
+								<li class="breadcrumb-item action">Policy Information</li>
 							</ol>
 						</nav>
 						<div class="row">
-
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields"
+									style="margin-bottom: 30px">
+									<label>Policy Date*</label> <input type="date"
+										name="policyDate" id="policyDate" required="required"
+										placeholder="Enter Vehicle No"
+										style="text-transform: uppercase;" />
+								</div>
+							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Plan Balance*</label> <input type="date"
-										name="planBalance" id="planBalance" required="required"
-										placeholder="Enter Plan Balance"
+									<label for="">Maturity Date*</label> <input type="date"
+										name="maturityDate" id="maturityDate" required="required"
+										placeholder="Enter Vehicle No"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
@@ -163,34 +113,45 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Payment Reason* </label> <input type="text"
-										name="paymentReason" id="paymentReason" required="required"
-										placeholder="Enter Payment Reason" />
+									<label for="">Customer Code* </label> <input type="text"
+										name="customerCode" id="customerCode" required="required"
+										placeholder="Enter Advisor/Collector Code" />
 								</div>
 							</div>
 
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Comments*</label>
-									<textarea name="comments" id="comments"
-										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+									<label for="">Client Name </label> <input type="text"
+										name="clientName" id="clientName" required="required"
+										placeholder="Enter Relative Name" />
+								</div>
+							</div>
+							
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Branch Name </label> <input type="text"
+										name="branchname" id="branchname" required="required"
+										placeholder="Enter Relative Name" />
 								</div>
 							</div>
 
-							<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Txn.Type</label> <select
-									id="txnType" name="txnType" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Contact No*</label> <input type="text"
+										name="contactNo" id="contactNo" required="required"
+										placeholder="Enter Mobile No." />
+								</div>
 							</div>
-						</div>
 
-
-
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Policy Amount*</label> <input type="text"
+										name="policyAmount" id="policyAmount" required="required"
+										placeholder="Enter Nominee Name" />
+								</div>
+							</div>
 
 
 
@@ -198,85 +159,112 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Amount</label> <input type="text" name="amount"
-										id="amount" required="required"
-										placeholder="Enter Amount" />
+									<label>Policy Type </label> <input type="text"
+										name="policyType" id="policyType" required="required"
+										placeholder="Enter Nominee Name" />
+								</div>
+							</div>
+
+
+							<!-- in this two text fieldds are required -->
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Policy Trem </label> <input type="text"
+										name="policyTerm" id="policyTerm" required="required"
+										placeholder="Enter Education" />
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Maturity Amt.*</label> <input type="text"
+										name="maturityAmount" id="maturityAmount" required="required"
+										placeholder="Enter Education" />
 								</div>
 							</div>
 
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Mode of Payment *</label> <input type="text"
+									<label for="">Total Deposits*</label> <input type="text"
+										name="totalDeposit" id="totalDeposit" required="required"
+										placeholder="Enter Education" />
+								</div>
+							</div>
+
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Payment Due*</label> <input type="text"
+										name="paymentDue" id="paymentDue" required="required"
+										placeholder="Enter Education" />
+								</div>
+							</div>
+
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mt-4">
+									<label for="">Last Payment Date *</label> <input type="text"
+										name="lastPaymentDate" id="lastPaymentDate"
+										required="required" placeholder="Enter Education" />
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mt-4">
+									<label for="">Due Date*</label> <input type="date"
+										name="dueDate" id="dueDate" required="required"
+										placeholder="Enter Vehicle No"
+										style="text-transform: uppercase;" />
+								</div>
+							</div>
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mt-4">
+									<label for="">No Of Installment*</label> <input type="text"
+										name="noOfInst" id="noOfInst" required="required"
+										placeholder="Enter Education" />
+								</div>
+							</div>
+
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mt-4">
+									<label for="">Installments Completed*</label> <input
+										type="text" name="noOfInstPaid" id="noOfInstPaid"
+										required="required" placeholder="Enter Education" />
+								</div>
+							</div>
+
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mt-4">
+									<label for="">Mode Of Payment*</label> <input type="text"
 										name="modeOfPayment" id="modeOfPayment" required="required"
-										placeholder="Enter Mode of Payment" />
+										placeholder="Enter Education" />
 								</div>
 							</div>
 
 
 
 
-
-
-
-
-
-
 						</div>
 					</div>
 
 
 
 
-					<div class="row mt-4">
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
 
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="./upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-
-					</div>
 				</div>
 
 				<div class="row" style="margin-left: 80%;">
 					<div class="col-12 text-center">
-						<button id="saveBtn" class="btn btn-info">Save</button>
+						<button id="viewBtn" type="button" class="btn btn-primary">View
+							Installment</button>
+						<button id="btnSave" type="button" class="btn btn-info">Save</button>
 					</div>
 				</div>
+
 			</form>
 
 
@@ -287,6 +275,9 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<script src="./js/PolicyManagment/FlexibleRenewal.js"></script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import com.microfinance.model.ExecutiveFounder;
 
 public class ApiResponse<T> {
-	
+
 	private HttpStatus status;
     private String message;
     private T data;
@@ -16,6 +16,8 @@ public class ApiResponse<T> {
         this.message = message;
         this.data = data;
     }
+
+   
 
 	public ApiResponse(String string, String message2, ApiResponse<ExecutiveFounder> response) {
 		// TODO Auto-generated constructor stub
@@ -58,5 +60,6 @@ public class ApiResponse<T> {
     public void setData(T data) {
         this.data = data;
     }
+	
 
 }

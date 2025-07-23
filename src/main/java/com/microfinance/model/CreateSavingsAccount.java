@@ -1,13 +1,15 @@
 package com.microfinance.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+@Entity
 public class CreateSavingsAccount {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String typeofaccount;
 	private String openingDate;
 	private String selectByCustomer;
 	private String enterCustomerName;
@@ -37,12 +39,34 @@ public class CreateSavingsAccount {
 	private String accountStatus;
 	private String messageSend;
 	private String debitCardIssue;
+	private String accountNumber;
+	private boolean isApproved;
 	
-	public String getId() {
+	private String chequeNo;
+    private String chequeDate;
+    private String depositAcc1;
+    private String depositAcc2;
+    private String refNumber1;
+    private String depositAcc3;
+    private String refNumber2;
+	
+	private String photo;
+	private String signature;
+	private String jointPhoto;
+	
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getTypeofaccount() {
+		return typeofaccount;
+	}
+	public void setTypeofaccount(String typeofaccount) {
+		this.typeofaccount = typeofaccount;
 	}
 	public String getOpeningDate() {
 		return openingDate;
@@ -50,6 +74,8 @@ public class CreateSavingsAccount {
 	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
 	}
+	
+	
 	public String getSelectByCustomer() {
 		return selectByCustomer;
 	}
@@ -218,8 +244,82 @@ public class CreateSavingsAccount {
 	public void setDebitCardIssue(String debitCardIssue) {
 		this.debitCardIssue = debitCardIssue;
 	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	
+	public String getJointPhoto() {
+		return jointPhoto;
+	}
+	public void setJointPhoto(String jointPhoto) {
+		this.jointPhoto = jointPhoto;
+	}
+	public String getChequeNo() {
+		return chequeNo;
+	}
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+	public String getChequeDate() {
+		return chequeDate;
+	}
+	public void setChequeDate(String chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+	public String getDepositAcc1() {
+		return depositAcc1;
+	}
+	public void setDepositAcc1(String depositAcc1) {
+		this.depositAcc1 = depositAcc1;
+	}
+	public String getDepositAcc2() {
+		return depositAcc2;
+	}
+	public void setDepositAcc2(String depositAcc2) {
+		this.depositAcc2 = depositAcc2;
+	}
+	public String getRefNumber1() {
+		return refNumber1;
+	}
+	public void setRefNumber1(String refNumber1) {
+		this.refNumber1 = refNumber1;
+	}
+	public String getDepositAcc3() {
+		return depositAcc3;
+	}
+	public void setDepositAcc3(String depositAcc3) {
+		this.depositAcc3 = depositAcc3;
+	}
+	public String getRefNumber2() {
+		return refNumber2;
+	}
+	public void setRefNumber2(String refNumber2) {
+		this.refNumber2 = refNumber2;
+	}
+    
 
-
+	
 	
 	
 }

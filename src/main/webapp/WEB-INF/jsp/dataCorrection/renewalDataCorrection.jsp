@@ -33,6 +33,17 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -63,31 +74,22 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="vehicalNo">Policy ID</label> <select id="colour"
-									name="colour" required="required"
+								<label for="policyCode">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Policy ID</option>
+									<option value="">-- Search Policy Code --</option>
 									
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Update Date </label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="applicationDate">Update Date </label> <input type="date"
+									name="applicationDate" id="applicationDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="colour"
-									name="colour" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
-								</select>
-							</div>
-						</div>
+						
 
 					</div>
 					<hr>
@@ -183,18 +185,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="">Policy Trem</label> <input type="text"
+								<label for="">Policy Term</label> <input type="text"
 									name="vehicalNo" id="vehicalNo" required="required"
 									placeholder="Enter Policy Term"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Mode</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Scheme Mode"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -225,22 +218,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>SMS Status</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter SMS Status" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Finicial Code</label><input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Advisor Code" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Last Payment Date  </label> <input type="text"
 									name="price" id="price" required="required"
@@ -254,14 +231,12 @@ pageEncoding="ISO-8859-1"%> -->
 									id="price" required="required" placeholder="Enter Mem Code" />
 							</div>
 						</div>
-
-
-
+						
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Late Fine</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Joint Name" />
+							<div class="d-flex flex-column formFields">
+								<label for="">No Of Installments   </label> <input type="text"
+									name="price" id="price" required="required"
+									placeholder="Enter Installments Completed   " />
 							</div>
 						</div>
 
@@ -285,76 +260,8 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Financial Consultant</label> <input type="text" name="price"
-									id="price" required="required"
-									placeholder="Enter Financial Consultant Code" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Name</label> <input type="text" name="price"
-									id="price" required="required"
-									placeholder="Enter Financial Consultant Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Comments</label>
-								<textarea name="" id="" placeholder="Enter Remarks"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
-							</div>
-						</div>
-
-
-
-
 					</div>
 
-					<div class="row mt-4">
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                                  style="font-size: 12px; margin-top: 15px"
-                                  class="text-muted"
-                                >
-                                  Drag and drop or Choose File to upload the image
-                                </p> -->
-								</div>
-							</label>
-						</div>
-					</div>
 				</div>
 
 
@@ -382,106 +289,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			</form>
 
-			<!-- <div class="row mt-5">
-        <div class="col-12">
-          <div class="card recent-sales">
-
-            <div class="card-body table-responsive">
-              <h5 class="card-title">
-                Recent Sales <span>| Today</span>
-              </h5>
-
-              <table class="table table-borderless datatable overflow-scroll">
-                <thead class="table-light">
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="col">#</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="row">
-                      <a href="#">1</a>
-                    </th>
-                    <td>Arun Kumar</td>
-                    <td>
-                      <a href="#" className="text-primary">Milk</a>
-                    </td>
-                    <td>$29</td>
-                    <td>
-                      <span class="badge bg-success text-white">Approved</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
+		
 
 		</div>
 
@@ -489,6 +297,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/dataCorrection/renewalDataCorrection.js"></script>
+	
 </body>
 
 </html>

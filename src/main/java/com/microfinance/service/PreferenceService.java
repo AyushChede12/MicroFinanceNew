@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
+
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.exception.BadRequestException;
 import com.microfinance.model.BankModule;
@@ -22,6 +24,7 @@ import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
+import com.microfinance.model.states;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.CasteModuleRepo;
@@ -30,6 +33,7 @@ import com.microfinance.repository.CompanyAdministrationRepo;
 import com.microfinance.repository.ExecutiveFounderRepo;
 import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
+import com.microfinance.repository.Staterepo;
 
 @Service
 public class PreferenceService {
@@ -54,45 +58,45 @@ public class PreferenceService {
 
 	@Autowired
 	ExecutiveFounderRepo executiveFounderRepo;
-	
+
 	@Autowired
 	CompanyAdministrationRepo companyAdministrationRepo;
+
+	@Autowired
+	Staterepo stateRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
 	// Branch Module
-	public BranchModule saveAllBranchModule(BranchModule branchModule) {
+	public BranchModule saveBranchModule(BranchModule branchModule) {
 		// TODO Auto-generated method stub
-		return branchModuleRepo.save(branchModule);
+		if (branchModule.getId() != null) {
+            BranchModule existing = branchModuleRepo.findById(branchModule.getId())
+                    .orElseThrow(() -> new RuntimeException("Branch not found with ID: " + branchModule.getId()));
+
+            existing.setBranchCode(branchModule.getBranchCode());
+            existing.setBranchName(branchModule.getBranchName());
+            existing.setOpeningDate(branchModule.getOpeningDate());
+            existing.setAddress(branchModule.getAddress());
+            existing.setPin(branchModule.getPin());
+            existing.setState(branchModule.getState());
+            existing.setPrimaryContact(branchModule.getPrimaryContact());
+            existing.setContact(branchModule.getContact());
+
+            return branchModuleRepo.save(existing);
+        } else {
+            return branchModuleRepo.save(branchModule);
+        }
 	}
 
 	public List<BranchModule> fetchAllBranchModule() {
-		// TODO Auto-generated method stub
 		return branchModuleRepo.findAll();
 	}
 
 	public Optional<BranchModule> findBranchDataById(Long id) {
 		// TODO Auto-generated method stub
 		return branchModuleRepo.findById(id);
-	}
-
-	public BranchModule updateAllBranchModule(BranchModule branchModule) {
-		// TODO Auto-generated method stub
-		Optional<BranchModule> existingOptional = branchModuleRepo.findById(branchModule.getId());
-		if (existingOptional.isPresent()) {
-			BranchModule existing = existingOptional.get();
-			existing.setBranchCode(branchModule.getBranchCode());
-			existing.setBranchName(branchModule.getBranchName());
-			existing.setOpeningDate(branchModule.getOpeningDate());
-			existing.setAddress(branchModule.getAddress());
-			existing.setPin(branchModule.getPin());
-			existing.setState(branchModule.getState());
-			existing.setPrimaryContact(branchModule.getPrimaryContact());
-			existing.setContact(branchModule.getContact());
-			return branchModuleRepo.save(existing);
-		} else
-			return null;
 	}
 
 	public boolean deleteBranchModule(long id) {
@@ -116,9 +120,23 @@ public class PreferenceService {
 
 
 	// Bank Module
-	public BankModule saveAllBankModule(BankModule bankModule) {
+	public BankModule saveBankModule(BankModule bankModule) {
 		// TODO Auto-generated method stub
-		return bankModuleRepo.save(bankModule);
+		if (bankModule.getId() != null) {
+			BankModule existing = bankModuleRepo.findById(bankModule.getId())
+                    .orElseThrow(() -> new RuntimeException("Bank not found with ID: " + bankModule.getId()));
+
+            existing.setBankName(bankModule.getBankName());
+            existing.setAccountNo(bankModule.getAccountNo());
+            existing.setContactNo(bankModule.getContactNo());
+            existing.setAddress(bankModule.getAddress());
+            existing.setOpeningDate(bankModule.getOpeningDate());
+            existing.setOpeningBalance(bankModule.getOpeningBalance());
+
+            return bankModuleRepo.save(existing);
+        } else {
+            return bankModuleRepo.save(bankModule);
+        }
 	}
 
 	public List<BankModule> fetchAllBankModule() {
@@ -131,22 +149,6 @@ public class PreferenceService {
 		return bankModuleRepo.findById(id);
 	}
 
-	public BankModule updateBankModuleById(BankModule bankModule) {
-		// TODO Auto-generated method stub
-		Optional<BankModule> existingOptional = bankModuleRepo.findById(bankModule.getId());
-		if (existingOptional.isPresent()) {
-			BankModule existing = existingOptional.get();
-			existing.setBankName(bankModule.getBankName());
-			existing.setAccountNo(bankModule.getAccountNo());
-			existing.setContactNo(bankModule.getContactNo());
-			existing.setAddress(bankModule.getAddress());
-			existing.setOpeningDate(bankModule.getOpeningDate());
-			existing.setOpeningBalance(bankModule.getOpeningBalance());
-			return bankModuleRepo.save(existing);
-		} else
-			return null;
-	}
-
 	public boolean deleteBankModule(long id) {
 		if (bankModuleRepo.existsById(id)) {
 			bankModuleRepo.deleteById(id);
@@ -156,9 +158,18 @@ public class PreferenceService {
 	}
 
 	// Relative Module
-	public RelativeModule saveAllRelativeModule(RelativeModule relativeModule) {
+	public RelativeModule saveRelativeModule(RelativeModule relativeModule) {
 		// TODO Auto-generated method stub
-		return relativeModuleRepo.save(relativeModule);
+		if (relativeModule.getId() != null) {
+			RelativeModule existing = relativeModuleRepo.findById(relativeModule.getId())
+                    .orElseThrow(() -> new RuntimeException("Relative not found with ID: " + relativeModule.getId()));
+
+            existing.setRelation(relativeModule.getRelation());
+
+            return relativeModuleRepo.save(existing);
+        } else {
+            return relativeModuleRepo.save(relativeModule);
+        }
 	}
 
 	public List<RelativeModule> fetchAllRelativeModule() {
@@ -166,10 +177,28 @@ public class PreferenceService {
 		return relativeModuleRepo.findAll();
 	}
 
+	public boolean deleteRelativeModule(Long id) {
+		// TODO Auto-generated method stub
+		if (relativeModuleRepo.existsById(id)) {
+			relativeModuleRepo.deleteById(id);
+			return true;
+		}
+		return false;
+	}
+
 	// Caste Module
 	public CasteModule saveCasteModule(CasteModule castemodule) {
 		// TODO Auto-generated method stub
-		return casteModuleRepo.save(castemodule);
+		if (castemodule.getId() != null) {
+			CasteModule existing = casteModuleRepo.findById(castemodule.getId())
+                    .orElseThrow(() -> new RuntimeException("Caste not found with ID: " + castemodule.getId()));
+
+            existing.setCaste(castemodule.getCaste());
+
+            return casteModuleRepo.save(existing);
+        } else {
+            return casteModuleRepo.save(castemodule);
+        }
 	}
 
 	public List<CasteModule> fetchAllCasteModule() {
@@ -177,10 +206,28 @@ public class PreferenceService {
 		return casteModuleRepo.findAll();
 	}
 
+	public boolean deleteCasteModule(Long id) {
+		// TODO Auto-generated method stub
+		if (casteModuleRepo.existsById(id)) {
+			casteModuleRepo.deleteById(id);
+			return true;
+		}
+		return false;
+	}
+
 	// Category Module
 	public CategoryModule saveCategoryModule(CategoryModule categorymodule) {
 		// TODO Auto-generated method stub
-		return categoryModuleRepo.save(categorymodule);
+		if (categorymodule.getId() != null) {
+			CategoryModule existing = categoryModuleRepo.findById(categorymodule.getId())
+                    .orElseThrow(() -> new RuntimeException("Category not found with ID: " + categorymodule.getId()));
+
+            existing.setCategory(categorymodule.getCategory());
+
+            return categoryModuleRepo.save(existing);
+        } else {
+            return categoryModuleRepo.save(categorymodule);
+        }
 	}
 
 	public List<CategoryModule> fetchAllCategoryModule() {
@@ -188,15 +235,49 @@ public class PreferenceService {
 		return categoryModuleRepo.findAll();
 	}
 
+	public boolean deleteCategoryModule(Long id) {
+		// TODO Auto-generated method stub
+		if (categoryModuleRepo.existsById(id)) {
+			categoryModuleRepo.deleteById(id);
+			return true;
+		}
+		return false;
+	}
+
 	// Financial Year
 	public FinancialYear saveFinancialYear(FinancialYear financialyear) {
 		// TODO Auto-generated method stub
-		return financialYearRepo.save(financialyear);
+		if (financialyear.getId() != null) {
+			FinancialYear existing = financialYearRepo.findById(financialyear.getId())
+                    .orElseThrow(() -> new RuntimeException("Financial Year not found with ID: " + financialyear.getId()));
+
+            existing.setFinancialYearName(financialyear.getFinancialYearName());
+            existing.setDateFrom(financialyear.getDateFrom());
+            existing.setDateTo(financialyear.getDateTo());
+
+            return financialYearRepo.save(existing);
+        } else {
+            return financialYearRepo.save(financialyear);
+        }
 	}
 
 	public List<FinancialYear> fetchAllFinancialYear() {
 		// TODO Auto-generated method stub
 		return financialYearRepo.findAll();
+	}
+
+	public Optional<FinancialYear> findFinancialYearById(Long id) {
+		// TODO Auto-generated method stub
+		return financialYearRepo.findById(id);
+	}
+
+	public boolean deleteFinancialYear(Long id) {
+		// TODO Auto-generated method stub
+		if (financialYearRepo.existsById(id)) {
+			financialYearRepo.deleteById(id);
+			return true;
+		}
+		return false;
 	}
 
 //	public ExecutiveFounder saveExecutiveFounder(ExecutiveFounder founder) {
@@ -341,51 +422,54 @@ public class PreferenceService {
 		}
 	}
 
-	public ExecutiveFounder fetchExecutiveById(long id) {
+	public Optional<ExecutiveFounder> findExecutiveFounderById(long id) {
 		// TODO Auto-generated method stub
-		return executiveFounderRepo.findById(id).orElse(null);
+		return executiveFounderRepo.findById(id);
 	}
 
-	//Company Administration - Ayush
+	// Company Administration - Ayush
 	public List<CompanyAdministration> fetchAllCompanyAdministration() {
 		// TODO Auto-generated method stub
 		return companyAdministrationRepo.findAll();
 	}
 
 	public int updateCompanyAdministration(CompanyAdministration companyAdministration) {
-		// TODO Auto-generated method stub
 		Optional<CompanyAdministration> optional = companyAdministrationRepo.findById(companyAdministration.getId());
 
-        if (optional.isPresent()) {
-            CompanyAdministration company = optional.get();
+		if (optional.isPresent()) {
+			CompanyAdministration company = optional.get();
 
-            company.setCompanyName(companyAdministration.getCompanyName());
-            company.setShortName(companyAdministration.getShortName()); 
-            company.setSignUpDate(companyAdministration.getSignUpDate());
-            company.setCinNo(companyAdministration.getCinNo());
-            company.setPan(companyAdministration.getPan());
-            company.setTan(companyAdministration.getTan());
-            company.setGstin(companyAdministration.getGstin());
-            company.setDeclaredValue(companyAdministration.getDeclaredValue());
-            company.setAddress(companyAdministration.getAddress());
-            company.setState(companyAdministration.getState());
-            company.setPinCode(companyAdministration.getPinCode());
-            company.setEmailId(companyAdministration.getEmailId());
-            company.setAuthorizedShareCapital(companyAdministration.getAuthorizedShareCapital());
-            company.setPaidUpCapital(companyAdministration.getPaidUpCapital());
-            company.setNof(companyAdministration.getNof());
-            company.setContactNo(companyAdministration.getContactNo());
-            company.setTdsWithPan(companyAdministration.getTdsWithPan());
-            company.setTdsWithoutPan(companyAdministration.getTdsWithoutPan());
-            company.setTaxDeduction(companyAdministration.getTaxDeduction());
-            company.setSeniorCitizenTaxDeduction(companyAdministration.getSeniorCitizenTaxDeduction());
+			company.setCompanyName(companyAdministration.getCompanyName());
+			company.setShortName(companyAdministration.getShortName());
+			company.setSignUpDate(companyAdministration.getSignUpDate());
+			company.setCinNo(companyAdministration.getCinNo());
+			company.setPan(companyAdministration.getPan());
+			company.setTan(companyAdministration.getTan());
+			company.setGstin(companyAdministration.getGstin());
+			company.setDeclaredValue(companyAdministration.getDeclaredValue());
+			company.setAddress(companyAdministration.getAddress());
+			company.setState(companyAdministration.getState());
+			company.setPinCode(companyAdministration.getPinCode());
+			company.setEmailId(companyAdministration.getEmailId());
+			company.setAuthorizedShareCapital(companyAdministration.getAuthorizedShareCapital());
+			company.setPaidUpCapital(companyAdministration.getPaidUpCapital());
+			company.setNof(companyAdministration.getNof());
+			company.setContactNo(companyAdministration.getContactNo());
+			company.setTdsWithPan(companyAdministration.getTdsWithPan());
+			company.setTdsWithoutPan(companyAdministration.getTdsWithoutPan());
+			company.setTaxDeduction(companyAdministration.getTaxDeduction());
+			company.setSeniorCitizenTaxDeduction(companyAdministration.getSeniorCitizenTaxDeduction());
 
-            companyAdministrationRepo.save(company);
-            return 1; // success
-        } else {
-            return 0; // failure
-        }
-    }
-	
+			companyAdministrationRepo.save(company);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	public List<states> getAllStates() {
+		// TODO Auto-generated method stub
+		return stateRepo.findAll();
+	}
 
 }

@@ -29,6 +29,11 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<!-- JQuery link -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <title>Member Share</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -62,10 +67,14 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+								<input type="hidden" id="id" name="id">
+								<input type="hidden" value="${generatedCertificateNo}" id="certificateNo"  name="certificateNo"/>
+								
+								
 								<label for="">Find By Code</label> <select id="findByCode"
 									name="findByCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select </option>
+									<option value="">Select Code</option>
 									
 								</select>
 							</div>
@@ -76,7 +85,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Customer Name</label> <input type="text"
 									name="customerName" id="customerName" required="required"
-									placeholder="Enter Location" />
+									placeholder="Enter Customer Name" readonly="readonly"/>
 							</div>
 						</div>
 
@@ -84,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Start Date</label> <input type="date"
 									name="startDate" id="startDate" required="required"
-									placeholder="Enter"
+									placeholder="Enter" readonly="readonly"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -94,7 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Previous Account Balance</label> <input type="text"
 									name="previousAccountBalance" id="previousAccountBalance" required="required"
-									placeholder="Enter Relative Name" />
+									placeholder="Enter Previous Account Balance" />
 							</div>
 						</div>
 
@@ -102,7 +111,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Previous Share Count</label> <input type="text"
 									name="previousShareCount" id="previousShareCount" required="required"
-									placeholder="Enter Relative Name" />
+									placeholder="Enter Previous Share Count" />
 							</div>
 						</div>
 
@@ -110,7 +119,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Base Value</label> <input type="text" name="baseValue"
 									id="baseValue" required="required"
-									placeholder="Enter Relative Name" />
+									placeholder="Enter Base Value" />
 							</div>
 						</div>
 
@@ -118,8 +127,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch</label> <select id="branch" name="branch"
 									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select </option>
+									style="height: 30px; " placeholder="Enter Branch">
+									<option value="">Select Branch</option>
 								</select>
 							</div>
 						</div>
@@ -134,8 +143,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Shares Issued By</label> <select id="shareIssuedBy"
+							<div class="d-flex flex-column formFields  mb-4">
+								<label for="">Shares Issued To Customer </label> <select id="shareIssuedBy"
 									name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select </option>
@@ -143,29 +152,45 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Share Count</label> <input type="text"
-									name="shareCount" id="ShareCount" required="required"
-									placeholder="Enter Relative Name" />
+						  <div class="col-lg-3">
+							<div class="d-flex flex-column formFields  mb-4">
+								<label for="">No. Of Share</label> <input type="text"
+									name="noOfShare" id="noOfShare" required="required"
+									placeholder="Enter No. Of Share" />
 							</div>
-						</div>
+						</div> 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Amount Transferred</label> <input type="text"
 									name="amountTransferred" id="amountTransferred" required="required"
-									placeholder="Enter Relative Name" />
+									placeholder="Enter Amount Transferred" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Shares Count</label> <input type="text"
-									name="sharesCount" id="sharesCount" required="required"
-									placeholder="Enter Relative Name" />
+								<label for="">Balance Shares </label> <input type="text" readonly="readonly"
+									name="balanceShares" id="balanceShares" required="required"
+									placeholder="" />
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Previous Account Balance</label> <input type="text"
+									name="previousAccountBalance" id="previousAccountBalance" required="required"
+									placeholder="Enter Previous Account Balance" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields ">
+								<label for="">Previous Share Count</label> <input type="text"
+									name="previousShareCount" id="previousShareCount" required="required"
+									placeholder="Enter Previous Share Count" />
+							</div>
+						</div>
+
 
 					</div>
 					<div class="mt-5">
@@ -181,8 +206,11 @@ pageEncoding="ISO-8859-1"%> -->
 									<label for="">Mode of Payment </label> <select id="modeOfPayment"
 										name="modeOfPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
-										<option value="">Select </option>
-
+										<option value="">Select Payment </option>
+										<option value="cash">Cash</option>
+										<option value="cheque">Cheque</option>
+										<option value="neft">NEFT</option>
+										<option value="online">Online</option>
 									</select>
 								</div>
 							</div>
@@ -191,7 +219,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields mb-4">
 									<label for="">Comments</label>
 									<textarea name="comments" id="comments"
-										style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 								</div>
 							</div>
 
@@ -201,7 +229,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-3">
-							<button id="saveBtn" class="btnStyle bg-success">Save</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-success" onclick="saveShares()">Save</button>
+							<button type="button" id="updateBtn" class="btnStyle bg-success" onclick="updateShares()">Update</button>
+
 						</div>
 					</div>
 			</form>
@@ -219,88 +249,20 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable overflow-scroll">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">S/N</th>
-										<th scope="col">BRANCH NAME</th>
-										<th scope="col">MEMBER NAME</th>
-										<th scope="col">SHARE RANGE</th>
-										<th scope="col">CERTIFICATE NO.</th>
-										<th scope="col">Action</th>
+										<th scope="col">Sr No.</th>
+										<th scope="col">Customer Code</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Start Date</th>
+										<th scope="col">Branch</th>
+										<th scope="col">No. Of Share</th>
+										<th scope="col">Date of Transfer</th>
+										
+										<th scope="col">Edit</th>	
+										<th scope="col">Delete</th>				
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row"><a href="#">1</a></th>
-										<td>Arun Kumar</td>
-										<td><a href="#" className="text-primary">Milk</a></td>
-										<td>$29</td>
-										<td><a href="#">14562</a></td>
-										<td class="d-flex" style="gap: .7rem;">
-											<button class="iconbutton">
-												<i class="fa-solid fa-pen-to-square text-success"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-eye text-primary"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-trash text-danger"></i>
-											</button>
-										</td>
-									</tr>
-
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-										<td><a href="#">14562</a></td>
-										<td class="d-flex" style="gap: .7rem;">
-											<button class="iconbutton">
-												<i class="fa-solid fa-pen-to-square text-success"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-eye text-primary"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-trash text-danger"></i>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-										<td><a href="#">14562</a></td>
-										<td class="d-flex" style="gap: .7rem;">
-											<button class="iconbutton">
-												<i class="fa-solid fa-pen-to-square text-success"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-eye text-primary"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-trash text-danger"></i>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-										<td><a href="#">14562</a></td>
-										<td class="d-flex" style="gap: .7rem;">
-											<button class="iconbutton">
-												<i class="fa-solid fa-pen-to-square text-success"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-eye text-primary"></i>
-											</button>
-											<button class="iconbutton">
-												<i class="fa-solid fa-trash text-danger"></i>
-											</button>
-										</td>
-									</tr>
+								<tbody id="transfersharetable">
+									
 								</tbody>
 							</table>
 						</div>
@@ -311,8 +273,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+	<!-- JS Links -->
+	<script src="./js/CustomerShareHolding/TransferShares.js"></script> 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+
 </body>
 
 </html>

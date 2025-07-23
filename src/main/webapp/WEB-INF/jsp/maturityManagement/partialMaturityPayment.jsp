@@ -21,6 +21,7 @@ pageEncoding="ISO-8859-1"%> -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
+
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -29,10 +30,19 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
 </head>
 
 
@@ -63,35 +73,34 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Id. <span id="star"> *</span></label> <select id="policyID"
-									name="policyID" required="required"
+								<label for="">Plan type :<span id="star"> *</span></label> 
+								<select id="plantype"
+									name="plantype" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="Select">Select</option>
+									<option value="DD">DD</option>
+									<option value="RD">RD</option>
+									<option value="FD">FD</option>
+									<option value="MIS">MIS</option>
+								</select>
+							</div>
+						</div>
+				
+						<div class="col-lg-3">
+							<input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields">
+								<label for="policyCode">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">-- Policy Code --</option>
 
 								</select>
 							</div>
-
 						</div>
-
-
-					</div>
-					<div class="row">
-						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
-						</div>
-					</div>
+				
+										
+					
 				</div>
-
-
-
-
-
-
-
-
-
-
-
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -100,18 +109,17 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Id :</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="vehicalNo">Plan Code :</label> <input
+									type="text" name="planCode" id="planCode" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Client Name :</label> <input
-									type="text" name="clientName" id="clientName" required="required"
+								<label for="vehicalNo">Customer Name :</label> <input
+									type="text" name="customerName" id="customerName" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -125,13 +133,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Policy code:</label> <input type="text"
-									name="policyCode" id="policyCode" required="required"
-									placeholder="" />
-							</div>
-						</div>
+						
 
 
 						<div class="col-lg-3">
@@ -157,8 +159,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Actual Maturity:</label> <input type="text" name="actualMaturity"
-									id="actualMaturity" required="required" placeholder="" />
+								<label>Actual Maturity:</label> <input type="text" name="maturityAmount"
+									id="maturityAmount" required="required" placeholder="" />
 
 							</div>
 
@@ -177,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Sys.Payable:</label> <input type="text" name="sysPayable"
-									id="sysPayable" required="required" placeholder="" />
+									id="sysPayable" required="required" placeholder="" value="sysPayable" />
 
 							</div>
 
@@ -187,21 +189,12 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Deduction(-):</label> <input type="text" name="deduction"
-									id="deduction" required="required" placeholder="" />
+									id="deduction" required="required" placeholder="" value="deduction "/>
 
 							</div>
 
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
-									id="adjeustment" required="required" placeholder="" />
-
-							</div>
-
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -216,28 +209,20 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch Name:</label> <input type="text" name="approvalBranchName"
-									id="approvalBranchName" required="required" placeholder="" />
+								<label>Approval Branch Name:</label> <input type="text" name="Approvebranch"
+									id="Approvebranch" required="required" />
 
 							</div>
 
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Approval Date:</label> <input type="date" name="approvalDate"
-									id="approvalDate" required="required" placeholder="" />
-
-							</div>
-
-						</div>
+						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve Comment:</label> <input type="text" name="approveComment"
-									id="approveComment" required="required" placeholder="" />
+								<label>Approve Status:</label> <input type="text" name="approveStatus"
+									id="approveStatus" required="required" value="NotApproved" readonly="readonly" />
 
 							</div>
 
@@ -247,8 +232,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve User:</label> <input type="text" name="approveUser"
-									id="approveUser" required="required" placeholder="" />
+								 <input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields">
+								<label> User Approver:</label> <select id="userApprover"
+									name="userApprover" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Team Member</option>
+
+								</select>
+							</div>
 
 							</div>
 
@@ -270,14 +262,14 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Amount: <span id="star"> *</span></label> <input type="text"
 									name="amount" id="amount" required="required"
-									placeholder="" style="text-transform: uppercase;" />
+									 style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
-									name="paidAmount" id="paidAmount" required="required"
+									name="depositAmount" id="depositAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -318,8 +310,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch <span id="star"> *</span> :</label> <select id="payBranch"
-									name="payBranch" required="required"
+								<label for="vehicalNo">Pay Branch <span id="star"> *</span> :</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -341,7 +333,9 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Mode of Payment <span id="star"> *</span></label> <select id="modeofPayment"
 									name="modeofPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="Select">Select</option>
+									<option value="Online">Online</option>
+									<option value="Cash">Cash</option>
 
 								</select>
 							</div>
@@ -354,19 +348,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" style="color: white; background-color: #B33791 ; border: none;" class="btn btn-warning">Approve</button>
+							<button id="saveBtn" class="btn btn-success">Update</button>
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
-
-			</form>
+		</form>
 
 
 		</div>
@@ -375,6 +361,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/partialmaturity.js"></script>
+	
 </body>
 
 </html>

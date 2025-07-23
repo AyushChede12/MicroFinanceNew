@@ -29,6 +29,9 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,43 +64,24 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Interest Type</label> <select id="colour" name="colour"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">Interest Type</label> <select name="intrestType" id="intrestType" onchange="calculateEMI()" class="form-control selectField" style="height: 30px;">
 									<option value="">Select Interest Type</option>
-									<option value="Blue">Blue</option>
+									<option value="FlatInterest">Flat Interest</option>
+									<option value=reducinginterest>Redused Interest</option>
+									<option value="Rule78">Rule 78</option>
+									
 								</select>
 							</div>
 						</div>
 
+
+	                          
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Loan Amount</label> <input type="loanName"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Loan Amount"
+								<label for="loanName">Loan Amount</label> <input
+									type="text" name="loanAmount" id="loanAmount"
+									required="required" placeholder="Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -106,30 +90,55 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Yearly Interest</label> <input
-									type="loanName" name="vehicalNo" id="vehicalNo"
+									type="text" name="yearlyIntrest" id="yearlyIntrest"
 									required="required" placeholder="Yearly Interest"
 									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanName">Interest Mode</label> <select id="interestModeCalculater" name="interestModeCalculater" onchange="calculateEMI()"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Interest Mode</option>
+									<option value="Daily">Daily </option>
+									<option value="Weekly">Weekly</option>
+									<option value="Fortnightly">Fortnightly</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Quarterly"> Quarterly</option>
+									
+								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Monthly Term</label> <input
-									type="loanName" name="vehicalNo" id="vehicalNo"
+									type="text" name="monthlyTerm" id="monthlyTerm"
 									required="required" placeholder="Enter Term in Month"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanName">EMI</label> <input
+									type="text" name="emi" id="emi"
+									readonly="readonly" placeholder="Enter Term in Month"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
 
 
 					</div>
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<!-- <button id="saveBtn" class="btnStyle bg-success">Save</button> -->
-							<button id="saveBtn" class="btnStyle"
+							<button type="button" id="saveBtn" class="btnStyle" onclick="calculateEMI()"
 								style="background-color: #FFA500;">Calculate</button>
-							<button id="saveBtn" class="btnStyle bg-danger">View
+							<button id="" class="btnStyle bg-danger">View
 								Amortization</button>
 						</div>
 					</div>
@@ -141,44 +150,23 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="card-body table-responsive">
 							<h5 class="card-title">
-								Recent Sales <span>| Today</span>
+								Loan Calculator <span>| Today</span>
 							</h5>
 
-							<table class="table table-borderless datatable overflow-scroll">
+							<table class="table table-borderless datatable overflow-scroll" >
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">ID</th>
-										<th scope="col">Loan Name</th>
-										<th scope="col">Loan Type</th>
-										<th scope="col">EMI Calculation</th>
+										<th scope="col">EMI No.</th>
+										<th scope="col">Due Date</th>
+										<th scope="col">EMI</th>
+										<th scope="col">Principle</th>
+										<th scope="col">Interest</th>
+										<th scope="col">Current Balance</th>
 
 									</tr>
 								</thead>
-								<tbody>
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="row"><a href="#">1</a></th>
-										<td>Arun Kumar</td>
-										<td><a href="#" className="text-primary">Milk</a></td>
-										<td>$29</td>
-
-									</tr>
-
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-
-
-									</tr>
-									<tr>
-										<th scope="row"><a href="#">2</a></th>
-										<td>Deepak Dalwe</td>
-										<td><a href="#" className="text-primary">Ghee</a></td>
-										<td>$16.5</td>
-
-
-									</tr>
+								<tbody id="tbody">
+									
 
 								</tbody>
 							</table>
@@ -193,6 +181,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/LoanManagment/emiLoanCalculator.js"></script>
+	
 </body>
 
 </html>

@@ -86,12 +86,13 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-
+							<input type="hidden" id="id" name="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Year Name</label> <input type="text"
+								<label for="">Financial Year Name <span class="star">*</span></label> <input type="text"
 									name="financialYearName" id="financialYearName"
 									required="required" placeholder="Enter Financial Year Name"
 									style="text-transform: uppercase;" />
+									<small id="chkfyname" style="color: red;"></small>
 							</div>
 
 						</div>
@@ -99,36 +100,37 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date From</label> <input type="date" name="dateFrom"
+								<label>Date From <span class="star">*</span></label> <input type="date" name="dateFrom"
 									id="dateFrom" required="required" placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
+									<small id="chkdatefrom" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date To</label> <input type="date" name="dateTo"
+								<label>Date To <span class="star">*</span></label> <input type="date" name="dateTo"
 									id="dateTo" required="required" placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
+									<small id="chkdateto" style="color: red;"></small>
 							</div>
 						</div>
 
 
 						<div class="col-lg-3" style="margin-top: 15px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning"
+								<button id="addBtn" class="btnStyle bg-warning"
 									onclick="saveFinancialYear()">Add</button>
+								<button type="button" id="updateBtn" class="btnStyle bg-success"
+									onclick="updateFY()">Update</button>
 							</div>
 						</div>
 
 					</div>
 
 					<div class="mt-5">
-
 						<div class="row">
-
-
 							<div class="col-12">
 								<div class="card recent-sales">
 
@@ -145,7 +147,8 @@ pageEncoding="ISO-8859-1"%> -->
 													<th scope="col">Financial Year Name</th>
 													<th scope="col">Date From</th>
 													<th scope="col">Date To</th>
-
+													<th scope="col">Edit</th>
+													<th scope="col">Delete</th>
 												</tr>
 											</thead>
 											<tbody id="tableBody">

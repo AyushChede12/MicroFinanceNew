@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery 3.x (Latest stable) -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 </head>
 
 
@@ -61,12 +65,16 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Incentive Month </label> <input type="text"
-									name="incentiveMonth" id="incentiveMonth" required="required"
-									placeholder="Enter Incentive Month " />
+							<div class="d-flex flex-column formFields">
+								<label for="">Incentive Month</label> <select id="incentiveMonth"
+									name="incentiveMonth" required="required"
+									class="form-control selectField" style="height: 30px;">
+									 <option value="">Select</option>
+									
+								</select>
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -127,7 +135,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="incentiveTableBody">
 							
 						   </tbody>
 						</table>
@@ -142,6 +150,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/incentive/incentiveSchemeMaster.js"></script>
 </body>
 
 </html>

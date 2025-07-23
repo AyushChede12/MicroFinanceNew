@@ -1,4 +1,5 @@
- <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
 <html>
@@ -35,7 +36,6 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
 
-
 <body>
 
 	<main id="main" class="main">
@@ -60,6 +60,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+
+						<div class="col-lg-0">
+							<div class="d-none flex-column formFields">
+								<label for="">Customer Code </label> <input name="memberCode"
+									id="memberCode" value="${memberCode}" required="required"
+									placeholder="Enter Customer Name" />
+							</div>
+						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Authenticate for</label> <select
@@ -67,6 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="aadhar">Aadhar</option>
+									<option value="aadhar">Without Aadhar</option>
 								</select>
 							</div>
 						</div>
@@ -82,34 +91,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">(Mr/Ms)</label> <select
-									id="major" name="major" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>	
+								<label for="">(Mr/Ms)</label> <select id="major" name="major"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Mr</option>
+									<option value="">Mrs</option>
+
 								</select>
 							</div>
 						</div>
-						
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="major_name">(Mr/Ms)</label>
-								<div class="wrapper">
-									<div class="select-btn">
-										<span>Select</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content">
-										<div class="search">
-											<i class="fa-solid fa-magnifying-glass"></i> <input
-												class="dropsearchinp" type="text" name="major" id="major"
-												placeholder="Search...">
-										</div>
-										<ul class="options">
-										</ul>
-									</div>
-								</div>
-							</div>
-							      
-						</div> -->
+
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -118,19 +110,19 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Customer Name" />
 							</div>
 						</div>
-	
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Minor</label> <select
-									id="minor" name="minor" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label for="">Minor</label> <select id="minor" name="minor"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Yes(Below 18)</option>
-									
+									<option value="">No(Above 18)</option>
 								</select>
 							</div>
 						</div>
 
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -139,67 +131,41 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Family Member Name" />
 							</div>
 						</div>
-						
+
+						<!-- Relation to Applicant -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relation to Applicant</label> <select
-									id="relationToApplicant" name="relationToApplicant" required="required"
-									class="form-control selectField" style="height: 30px;">
+									id="relationToApplicant" name="relationToApplicant"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Relation to Applicant</option>
-									
 								</select>
 							</div>
 						</div>
 
-						
-						
+
+
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">DOB</label> <input type="text" name="dob" id="dob"
+								<label for="">DOB</label> <input type="date" name="dob" id="dob"
 									required="required" placeholder="Enter DOB" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Gender</label> <select
-									id="gender" name="gender" required="required"
+								<label for="">Gender</label> <select id="customerGender"
+									name="customerGender" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Gender</option>
 									<option value="">Male</option>
 									<option value="">Female</option>
-									
+
 								</select>
 							</div>
 						</div>
 
-
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Gender</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="customerGender" id="customerGender"
-											style="font-size: 12px;">Select Gender</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
-						
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -207,50 +173,24 @@ pageEncoding="ISO-8859-1"%> -->
 									id="customerAge" required="required" placeholder="Enter Age" />
 							</div>
 						</div>
-						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="guardianName" id="guardianName" required="required"
-									placeholder="Enter Family Member Name" />
-							</div>
-						</div>
-						
+
+
+
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Relationship Status</label> <select
-									id="relationshipStatus" name="relationshipStatus" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Relationship Status</option>
-									
+									id="relationshipStatus" name="relationshipStatus"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Single</option>
+									<option value="">Married</option>
+									<option value="">Divorced</option>
+
 								</select>
 							</div>
 						</div>
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Relationship Status </label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="relationshipStatus" id="relationshipStatus"
-											style="font-size: 12px;">Select Relationship Status</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -259,52 +199,30 @@ pageEncoding="ISO-8859-1"%> -->
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>
-						
-						<div class="col-lg-3 ">
+
+						<div class="col-lg-3 mb-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">State</label> <select
-									id="state" name="state" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label for="">State</label> <select id="state" name="state"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select State</option>
-									<option value="">Maharashtra</option>
-									<option value="">up</option>
-									
+
 								</select>
 							</div>
 						</div>
-						
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>State</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="state" id="state" style="font-size: 12px;">Select
-											State</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
-
-						<div class="col-lg-3">
+						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">District</label> <input type="text"
-									name="district" id="district" required="required"
-									placeholder="Enter District" />
+								<label for="">District</label> <select id="district"
+									name="district" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select District</option>
+
+								</select>
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -320,44 +238,19 @@ pageEncoding="ISO-8859-1"%> -->
 									id="pinCode" required="required" placeholder="Enter Pincode" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select
-									id="branchName" name="branchName" required="required"
+								<label for="">Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch Name</option>
-									
+
 								</select>
 							</div>
 						</div>
-						
 
 
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Branch Name</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="branchName" id="branchName"
-											style="font-size: 12px;">Select Branch Name</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -380,43 +273,20 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" placeholder="Enter Licence No" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Referral Code</label> <select
-									id="referralCode" name="referralCode" required="required"
+								<label for="">Referral Code</label> <select id="referralCode"
+									name="referralCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Code</option>
 									<option value="">A</option>
 									<option value="">B</option>
-									
+
 								</select>
 							</div>
 						</div>
-						
-						<!-- <div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Referral Code</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="referralCode" id="referralCode"
-											style="font-size: 12px;">Select Code</span> <i
-											class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentreferralcode"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
 
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -462,19 +332,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
+								Photo</label> <label for="customerPhoto" id="drop-area"> <input
 								type="file" accept="image/*" name="customerPhoto"
-								id="customerPhoto" hidden="hidden" onchange="bike1Preview();"
+								id="customerPhoto" hidden="hidden" onchange="photopreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+
 								</div>
 							</label>
 						</div>
@@ -482,25 +347,23 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden"
-								onchange="bike2Preview();"
+								Signature</label> <label for="customerSignature" id="drop-area">
+								<input type="file" accept="image/*" name="customerSignature"
+								id="customerSignature" hidden="hidden" onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+
 								</div>
 							</label>
 						</div>
 
 					</div>
+
+
+
+
 				</div>
 
 
@@ -511,7 +374,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						
+
 
 
 						<div class="col-lg-3">
@@ -522,29 +385,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
+						<!-- Nominee Relation to Applicant -->
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Nominee  Applicant</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="nomineeRelationToApplicant"
-											id="nomineeRelationToApplicant" style="font-size: 12px;">Select
-											Relation to Applicant</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search elative Relation" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for="">Nominee Relation to Applicant</label> <select
+									id="nomineeRelationToApplicant"
+									name="nomineeRelationToApplicant" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Relation to Applicant</option>
+								</select>
 							</div>
 						</div>
 
@@ -552,19 +401,21 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Nominee Age</label> <input type="text" name="nomineeAge"
-									id="nomineeAge" required="required" placeholder="Enter Age" />
-							</div>
-						</div>
-						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Nominee Mobile No</label> <input type="text" name="nomineeMobileNo"
-									id="nomineeMobileNo" required="required" placeholder="Enter Age" />
+								<label for=""> Nominee Age</label> <input type="text"
+									name="nomineeAge" id="nomineeAge" required="required"
+									placeholder="Enter Age" />
 							</div>
 						</div>
 
-						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for=""> Nominee Mobile No</label> <input type="text"
+									name="nomineeMobileNo" id="nomineeMobileNo" required="required"
+									placeholder="Enter Age" />
+							</div>
+						</div>
+
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -574,7 +425,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">PAN No</label> <input type="text"
@@ -582,16 +433,16 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter PAN No" />
 							</div>
 						</div>
-  
-                          
-                          <div class="col-lg-3">
+
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Nominee Kyc No</label> <input type="text"
 									name="nomineeKycNo" id="nomineeKycNo" required="required"
 									placeholder="Enter PAN No" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Nominee Kyc Type</label> <input type="text"
@@ -599,21 +450,180 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter PAN No" />
 							</div>
 						</div>
-						
 
-						
 
-						
+
+
+
 					</div>
 
-					
+
+				</div>
+
+				<div class="mt-5">
+					<nav>
+						<ol class="breadcrumb breadcrumb-title">
+							<li class="breadcrumb-item action">Fees Details</li>
+						</ol>
+					</nav>
+					<!-- Always Visible Fields -->
+					<!-- Always Visible Fields -->
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Member Fees</label> <input type="text" id="memberFees"
+									name="memberFees" placeholder="Enter Fees" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Payment By</label> <select id="paymentBy"
+									name="paymentBy" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select</option>
+									<option value="cash">Cash</option>
+									<option value="cheque">Cheque</option>
+									<option value="neft">NEFT</option>
+									<option value="online">Online</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Remarks</label> <input type="text" id="remarks"
+									name="remarks" placeholder="Enter Remarks" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Conditionally Displayed Fields -->
+					<div class="row">
+						<!-- Cheque No -->
+						<div class="col-lg-3" id="chequeNoDiv" style="display: none;">
+							<div class="d-flex flex-column formFields">
+								<label>Cheque No</label> <input type="text" id="chequeNo"
+									name="chequeNo" placeholder="Enter Cheque No" />
+							</div>
+						</div>
+
+						<!-- Cheque Date -->
+						<div class="col-lg-3" id="chequeDateDiv" style="display: none;">
+							<div class="d-flex flex-column formFields">
+								<label>Cheque Date</label> <input type="date" id="chequeDate"
+									name="chequeDate" />
+							</div>
+						</div>
+
+						<!-- Deposit A/C -->
+						<div class="col-lg-3" id="depositAccountDiv"
+							style="display: none;">
+							<div class="d-flex flex-column formFields">
+								<label>Deposit A/C</label> <select id="depositAccount"
+									name="depositAccount" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select</option>
+									<!-- options will be filled dynamically -->
+								</select>
+							</div>
+						</div>
+
+						<!-- Reference No -->
+						<div class="col-lg-3" id="refNoDiv" style="display: none;">
+							<div class="d-flex flex-column formFields">
+								<label>Reference No</label> <input type="text" id="referenceNo"
+									name="referenceNo" placeholder="Enter Reference No" />
+							</div>
+						</div>
+					</div>
+
+
+					<div class="row">
+
+
+
+						<div class="col-lg-3">
+							<div class=" h-100">
+								<div class="formFields d-flex flex-column">
+									<label>Member Status</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="toggle-member-status"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="toggle-member-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class=" h-100">
+								<div class="formFields d-flex flex-column">
+									<label>SMS Send</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="toggle-sms-status"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="toggle-sms-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class=" h-100">
+								<div class="formFields d-flex flex-column">
+									<label>Member Banking</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="toggle-banking-status"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="toggle-banking-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class=" h-100">
+								<div class="formFields d-flex flex-column">
+									<label>Net Banking</label>
+									<div class="cont">
+										<div class="toggle">
+											<input type="checkbox" id="toggle-netbanking-status"
+												class="toggle__input" data-toggle-type="member-status">
+											<label for="toggle-netbanking-status" class="toggle__label"></label>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</div>
+
+
 				</div>
 
 				<div class="row">
 					<div class="col-12 text-center">
-						<button id="saveBtn"  name="saveBtn" class="btnStyle bg-success">Save</button>
-						<button id="" class="btnStyle"
-							style="background-color: #FFA500;">Update</button>
+						<button id="saveBtn" name="saveBtn" class="btnStyle bg-success">Save</button>
+						<button id="" class="btnStyle" style="background-color: #FFA500;">Update</button>
 						<button id="saveBtn" class="btnStyle bg-primary">Print</button>
 					</div>
 				</div>
@@ -729,8 +739,40 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script src="./js/adminscript.js"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="js/addCustomer.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	<script src="./js/customerManagement/addCustomer.js"></script>
+	<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const toggles = document.querySelectorAll('.toggle__input');
+
+		toggles.forEach((toggle) => {
+			// Initialize colors
+			updateToggleColor(toggle);
+
+			// console.log("updated toggle" , toggle)
+
+			// Add change event listener
+			toggle.addEventListener('change', () => {
+				updateToggleColor(toggle);
+				// console.log(${ toggle.dataset.toggleType } is now ${ toggle.checked });
+			});
+		});
+
+		function updateToggleColor(input) {
+			const label = input.nextElementSibling;
+			if (input.checked) {
+				label.style.backgroundColor = '#28a745'; // Green ON
+			} else {
+				label.style.backgroundColor = '#ccc'; // Gray OFF
+			}
+		}
+	}); 
+	
+	
+	
+	</script>
+
 </body>
 
 </html>

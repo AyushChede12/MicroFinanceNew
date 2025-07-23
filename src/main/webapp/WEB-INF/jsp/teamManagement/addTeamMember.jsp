@@ -39,6 +39,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
+<script type="text/javascript">
+   function calculateAge() {
+	   const dob = new Date(document.getElementById("dateOfBirth").value); // get DOB from the date input field
+	   const age = Math.floor((Date.now() - dob) / (365.25 * 24 * 60 * 60 * 1000)); // calculate age
+	   document.getElementById("age").value = age; // set the calculated age in the age input field
+	 }
+</script>
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -88,7 +95,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
 								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
-									name="teamMemberCode" required="required"
+									name="teamMemberCode" value="${teamMemberUniqueNo}" required="required"
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -123,7 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth"
+								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth" onchange="calculateAge()"
 									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
@@ -131,7 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Age</label> <input type="text" name="age" id="age"
+								<label for="">Age</label> <input type="text" name="age" id="age" 
 									required="required" placeholder="Enter Age" />
 							</div>
 						</div>
@@ -318,8 +325,11 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Mode of Payment  </label> <select id="modeofpayment"
 									name="modeofpayment" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Cash</option>
+									<option selected="selected" value="">Select</option>
+									<option value="Cash">Cash</option>
+									<option value="Cheque">Cheque</option>
+									<option value="Online">Online</option>
+									<option value="NEFT">Neft</option>
 								</select>
 							</div>
 						</div>
@@ -342,16 +352,91 @@ pageEncoding="ISO-8859-1"%> -->
 										<div class="toggle">
 											<input type="checkbox" id="customerStatus" name="customerStatus"
 												class="toggle__input" data-toggle-type="member-status">
-											<label for="toggle-member-status" class="toggle__label"></label>
+											<label for="customerStatus" class="toggle__label"></label>
+											
+											
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-
-
-
+						</div> 
+										                      
 					</div>
+					<!-- Cheque input fields -->
+					<div id="chequeInputs" style="display: none;">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Cheque No. </label> <input type="text"
+										name="chequeNo" id="chequeNo" required="required"
+										placeholder="Enter Cheque No." />
+								</div>
+							</div>
+						</div>
+						<div class="row" >
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Cheque Date </label> <input type="Date"
+										name="chequeDate" id="chequeDate" required="required"
+										placeholder="Enter Cheque Date" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc1" id="depositAcc1" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Online input fields -->
+					<div id="onlineInputs" style="display: none;">
+						<div class="row" >
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc2" id="depositAcc2" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Ref Number </label> <input type="text"
+										name="refNumber1" id="refNumber1" required="required"
+										placeholder="Enter Deposite Ref No." />
+								</div>
+							</div>
+						</div>						
+					</div>
+					
+					<!-- NEFT input fields -->
+					<div id="neftInputs" style="display: none;">
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Deposit A/C </label> <input type="text"
+										name="depositAcc3" id="depositAcc3" required="required"
+										placeholder="Enter Deposite A/C No." />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Ref Number </label> <input type="text"
+										name="refNumber2" id="refNumber2" required="required"
+										placeholder="Enter Deposite Ref No." />
+								</div>
+							</div>
+						</div>						
+					</div>
+
 				</div>
 
 
@@ -361,6 +446,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<button id="newBtn" class="btnStyle"
 							style="background-color: #FFA500;">New</button>
 					</div>
+				</div>
 			</form>
 		</div>
 
@@ -368,7 +454,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/TeamManagement/addTeamMember.js"></script>
+	<script src="./js/TeamManagement/addTeamMember.js"></script>	
 	<script>
 	$(document).ready(function() {
 		DesignationDropdown();
@@ -377,6 +463,59 @@ pageEncoding="ISO-8859-1"%> -->
 		RelationDropdown();
 	});
 	</script>
-</body>
+	
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+	
+	const toggles = document.querySelectorAll('.toggle__input');	
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
 
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			//console.log(${toggle.dataset.toggleType} is now ${toggle.checked});
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#2830a7' : '#ccc';
+		}
+	}
+});
+</script>
+
+<script>
+    
+document.getElementById('modeofpayment').addEventListener('change', function () {
+    // Get the selected payment mode
+    let mode = this.value;
+
+    // Define all input field sections
+    const chequeInputs = document.getElementById('chequeInputs');
+    const onlineInputs = document.getElementById('onlineInputs');
+    const neftInputs = document.getElementById('neftInputs');
+
+    // Reset the display of all sections
+    chequeInputs.style.display = 'none';
+    onlineInputs.style.display = 'none';
+    neftInputs.style.display = 'none';
+
+    // Show the section corresponding to the selected payment mode
+    if (mode === 'Cheque') {
+        chequeInputs.style.display = 'block';
+    } else if (mode === 'Online') {
+        onlineInputs.style.display = 'block';
+    } else if (mode === 'NEFT') {
+        neftInputs.style.display = 'block';
+    }
+});
+
+
+</script>
+
+</body>
 </html>

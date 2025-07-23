@@ -64,13 +64,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Select by Code</label> <select id="selectMember"
-									name="selectByCode" required="selectByCode"
-									class="form-control selectField" style="height: 30px;">
+									name="selectByCode" required class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Criteria</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
+
 
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Customer Code</label> <input type="text"
-									name="customerCode" id="customerCode" required="required"
+									name="memberCode" id="memberCode" required="required"
 									placeholder="Enter Customer Code" disabled />
 							</div>
 						</div>
@@ -115,9 +115,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Sign-up Date</label> <input type="date"
-									name="singupDate" id="singupDate"
-									required="required" placeholder="Enter Sign-up Date"
-									disabled />
+									name="singupDate" id="singupDate" required="required"
+									placeholder="Enter Sign-up Date" disabled />
 							</div>
 						</div>
 
@@ -145,94 +144,74 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Ration Card No.</label> <input type="text"
-									name="rationCardNo" id="rationCardNo" required="required"
-									placeholder="Ration Card No." />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Driving License No.</label> <input type="text" name="drivingLicenseNo"
-									id="drivingLicenseNo" required="required" placeholder="Enter Driving License No." />
+								<label for="">Driving License No.</label> <input type="text"
+									name="drivingLicenceNo" id="drivingLicenceNo"
+									required="required" placeholder="Enter Driving License No." />
 							</div>
 						</div>
 					</div>
 					<div class="row mt-3">
-						<div class="col-9 text-center">
-							<button id="saveBtn" class="btnStyle bg-success">Online
-								Aadhar Verify</button>
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500;">Online Voter Verify</button>
-							<button id="saveBtn" class="btnStyle bg-primary">Online
-								PAN verify</button>
-						</div>
+
 
 						<div class="col-3 text-center">
-							<button id="saveBtn" class="btnStyle bg-danger">Click
+							<button  type="button" id="saveBtn" class="btnStyle bg-danger" onclick="verifyFetchedData();">Click
 								Here to Authenticate Complete</button>
 						</div>
 					</div>
 
 					<div class="row mt-4">
-						<div class="col-lg-4 mb-5">
+						<!-- Customer Photo -->
+						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Customer
-								Photo </label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="customerPhoto" id="customerPhoto"
-								hidden="hidden" onchange="bike1Preview();"
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Customer Photo <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="photo" id="photo"
+								hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+										id="photoPreview" /><input type="hidden"
+										name="photoHidden" id="photoHidden">
+
 								</div>
-							</label>
+							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
-						<div class="col-lg-4 mb-5">
+						<!-- Signature -->
+						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Signature</label> <label for="bike2image" id="drop-area"> <input
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="bike2Preview();"
+								hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+
 								</div>
-							</label>
+							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
-						<div class="col-lg-4 mb-5">
-							<label for=""
+
+						<!-- <div class="col-lg-4 mb-5">
+							<label
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Aadhar Front photo</label> <label for="bike2image" id="drop-area">
 								<input type="file" accept="image/*" name="aadharFrontPhoto"
-								id="aadharFrontPhoto" hidden="hidden" onchange="bike2Preview();"
+								id="bike2imagePreview" hidden="hidden"
+								onchange="bike2Preview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
-									<!-- <p
-                      style="font-size: 12px; margin-top: 15px"
-                      class="text-muted"
-                    >
-                      Drag and drop or Choose File to upload the image
-                    </p> -->
+
 								</div>
 							</label>
 						</div>
@@ -247,12 +226,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
-									<!-- <p
-                      style="font-size: 12px; margin-top: 15px"
-                      class="text-muted"
-                    >
-                      Drag and drop or Choose File to upload the image
-                    </p> -->
+
 								</div>
 							</label>
 						</div>
@@ -267,21 +241,17 @@ pageEncoding="ISO-8859-1"%> -->
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="bike2imagePreview" />
-									<!-- <p
-                      style="font-size: 12px; margin-top: 15px"
-                      class="text-muted"
-                    >
-                      Drag and drop or Choose File to upload the image
-                    </p> -->
+
+
 								</div>
 							</label>
-						</div>
+						</div> -->
 
 					</div>
 				</div>
 
 
-				<div class="mt-5">
+				<!-- <div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
 							<li class="breadcrumb-item action">Bank Details</li>
@@ -325,10 +295,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row">
 					<div class="col-12 text-right mt-3">
-						<button id="saveBtn" class="btnStyle"
+						<button id="saveBtN" class="btnStyle"
 							style="background-color: #FFA500;">Save</button>
 					</div>
-				</div>
+				</div> -->
 			</form>
 
 		</div>
@@ -337,6 +307,12 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/customerManagement/addMemberKyc.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+	
+
 </body>
 
 </html>

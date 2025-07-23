@@ -9,11 +9,19 @@ import javax.persistence.Id;
 public class DailyDepositPM {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String planCode;
+
+	
+
+	private Long id;
+	private String drd;
+	private String planCodeDD;
+
+	private String planNameDD;
 	private String minimumDeposit;
 	private String rateOfInterest;
 	private String installmentType;
+	private String termModeDD;
+	private String ddterm;
 	private String duration;
 	private String commissionOnNew;
 	private String renewalCommission;
@@ -24,17 +32,18 @@ public class DailyDepositPM {
 	private String graceDays;
 	private String  penaltyRate;
 	private String statusOfPlan;
-	public int getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getPlanCode() {
-		return planCode;
+	public String getPlanCodeDD() {
+		return planCodeDD;
 	}
-	public void setPlanCode(String planCode) {
-		this.planCode = planCode;
+	public void setPlanCodeDD(String planCodeDD) {
+		this.planCodeDD = planCodeDD;
 	}
 	public String getMinimumDeposit() {
 		return minimumDeposit;
@@ -114,5 +123,34 @@ public class DailyDepositPM {
 	public void setStatusOfPlan(String statusOfPlan) {
 		this.statusOfPlan = statusOfPlan;
 	}
+	public String getPlanNameDD() {
+		return planNameDD;
+	}
+	public void setPlanNameDD(String planNameDD) {
+		this.planNameDD = planNameDD;
+	}
+
+	public String getTermModeDD() {
+		return termModeDD;
+	}
+	public void setTermModeDD(String termModeDD) {
+		this.termModeDD = termModeDD;
+	}
+	
+	
+	public String getDrd() {
+		return drd;
+	}
+	public void setDrd(String drd) {
+		this.drd = drd;
+	}
+	public String getDdterm() {
+		return ddterm;
+	}
+	public void setDdterm(String ddterm) {
+		this.ddterm = ddterm;
+	}
+	
+
 	
 }
