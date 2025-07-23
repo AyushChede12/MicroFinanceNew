@@ -29,12 +29,13 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<title>Manual Journal Entry</title>
+<title>Bank/Cash Transfer Entry</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
 </head>
 
 
@@ -48,42 +49,43 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-wallet2"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Manual Journal Entry</li>
+					<li class="breadcrumb-item action">Bank/Cash Transfer Entry</li>
 				</ol>
 			</nav>
 		</div>
 
-
 		<form id="searchForm">
-			<nav>
-				<ol class="breadcrumb breadcrumb-title">
-					<li class="breadcrumb-item action">Search Box</li>
-				</ol>
-			</nav>
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="d-flex flex-column formFields">
-						<label for=""> Branch Name</label> <select id="searchBranchName"
-							name="searchBranchName" required="required"
-							class="form-control selectField" style="height: 30px;">
-							<option value="">Select Branch</option>
-						</select>
+			<div>
+				<nav>
+					<ol class="breadcrumb breadcrumb-title">
+						<li class="breadcrumb-item action">Search Box</li>
+					</ol>
+				</nav>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="d-flex flex-column formFields">
+							<label for="">Branch Name</label> <select id="searchBranchName"
+								name="searchBranchName" required="required"
+								class="form-control selectField" style="height: 30px;">
+								<option value="">Select Branch</option>
+							</select>
+						</div>
 					</div>
-				</div>
 
-				<div class="col-lg-4">
-					<div class="d-flex flex-column formFields">
-						<label for="vehicalNo">Start Date</label> <input type="date"
-							name="startDate" id="startDate" required="required"
-							placeholder="Enter From Date" style="text-transform: uppercase;" />
+					<div class="col-lg-4">
+						<div class="d-flex flex-column formFields">
+							<label for="vehicalNo">Start Date</label> <input type="date"
+								name="startDate" id="startDate" required="required"
+								style="text-transform: uppercase;" />
+						</div>
 					</div>
-				</div>
 
-				<div class="col-lg-4">
-					<div class="d-flex flex-column formFields">
-						<label for="vehicalNo">End Date</label> <input type="date"
-							name="endDate" id="endDate" required="required"
-							placeholder="Enter To Date" style="text-transform: uppercase;" />
+					<div class="col-lg-4">
+						<div class="d-flex flex-column formFields">
+							<label for="vehicalNo">End Date</label> <input type="date"
+								name="endDate" id="endDate" required="required"
+								style="text-transform: uppercase;" />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -97,6 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 		</form>
 
 		<form id="formid">
+
 
 			<div class="row">
 				<div class="col-lg-12">
@@ -120,7 +123,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Generated Receipt ID</label> <input type="text"
-							name="generatedReceiptID" id="generatedReceiptID"
+							name="genratedReceiptId" id="genratedReceiptId"
 							required="required" placeholder="Enter receipt no." disabled />
 					</div>
 				</div>
@@ -178,6 +181,8 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 		</form>
 
+
+
 		<div class="row mt-5">
 			<div class="col-12">
 				<div class="card recent-sales">
@@ -190,12 +195,13 @@ pageEncoding="ISO-8859-1"%> -->
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">ID.</th>
 									<th scope="col">Branch</th>
-									<th scope="col">Date of Entry</th>
+									<th scope="col">Date Of Entry</th>
 									<th scope="col">Cr. Ledger</th>
 									<th scope="col">Dr. Ledger</th>
-									<th scope="col">Amount</th>
+									<th scope="col">Transaction Amount</th>
 									<th scope="col">Remarks</th>
 									<th scope="col">View</th>
+
 
 								</tr>
 							</thead>
@@ -208,12 +214,10 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 		</div>
-
-
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/account-management/manualJournalEntry.js"></script>
+	<script src="./js/account-management/bankCashTransferEntry.js"></script>
 	<script>
 		$(document).ready(function() {
 			BranchNameDropdown();
