@@ -32,7 +32,7 @@ function renderTable(data) {
             <tr style="font-family: 'Poppins', sans-serif;">
                 <td><input type="checkbox" class="member-checkbox" value="${item.id}"></td>
 				<td>${index + 1}</td>
-				<td>${item.customerName || '-'}</td>
+				<td>${item.financialName || '-'}</td>
 				<td>${item.financialCode || '-'}</td>
 				<td>${item.dob || '-'}</td>
 				<td>${item.academicBackground || '-'}</td>
