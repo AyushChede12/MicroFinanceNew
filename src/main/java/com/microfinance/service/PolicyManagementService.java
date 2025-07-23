@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
@@ -478,6 +479,36 @@ public List<AddnewinvestmentPM> getAllFdRenewalData() {
 
 public List<AddnewinvestmentPM> getAllApprovedPolicies() {
     return addinvestmentrepo.findByIsApprovedTrue();
+}
+
+
+
+public AddnewinvestmentPM updateInstalmentDetails(String policyCode, String DepositAmount) {
+    Optional<AddnewinvestmentPM> optionalInvestment = addinvestmentrepo.findByPolicyCode(policyCode);
+
+    if (optionalInvestment.isPresent()) {
+        AddnewinvestmentPM investment = optionalInvestment.get();
+
+        // Set the new deposit amount
+        investment.setDepositAmount(DepositAmount);
+
+        // Increment lastInstPaid
+        try {
+            int last = Integer.parseInt(
+                    investment.getLastInstPaid() == null || investment.getLastInstPaid().isEmpty()
+                            ? "0"
+                            : investment.getLastInstPaid()
+            );
+            investment.setLastInstPaid(String.valueOf(last + 1));
+        } catch (NumberFormatException e) {
+            investment.setLastInstPaid("1");
+        }
+
+        // Save and return updated investment
+        return addinvestmentrepo.save(investment);
+    }
+
+    return null; // or throw custom exception if you prefer
 }
 
 

@@ -977,7 +977,27 @@ public class PolicyManagementController {
 
 	
 
+	@PostMapping("/updateinvestment")
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateInvestment(@RequestBody AddnewinvestmentPM invest) {
+        AddnewinvestmentPM updated =  policyManagementService.updateInstalmentDetails(invest.getPolicyCode(), invest.getDepositAmount());
+
    // Niraj Code Above
+    
+        if (updated != null) {
+            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
+                 HttpStatus.OK,
+                "MIS deposit updated successfully.",
+                updated
+             );
+             return ResponseEntity.ok(response);
+        } else {
+             ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "MIS deposit not found or failed to update."
+             );
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+         }
+	}
     
 	
 }
