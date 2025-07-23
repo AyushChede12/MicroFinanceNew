@@ -66,8 +66,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="selectBranchName"
-									name="selectBranchName" required="required"
+								<label for="">Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 
@@ -117,13 +117,18 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col"></th>
 										<th scope="col">ID</th>
 										<th scope="col">Transfer Date</th>
-										<th scope="col">CreditCustomer Code</th>
-										<th scope="col">CreditAccount Branch</th>
-										<th scope="col">CreditAverage Balance</th>
-										<th scope="col">Credit ContactNumber</th>
-										<th scope="col">DebitAccount Branch</th>
-										<th scope="col">contactNo</th>
-										<th scope="col">renewalDate</th>
+										<th scope="col">Debit Account Number</th>
+										<th scope="col">Debit Customer Code</th>
+										<th scope="col">Debit Account Branch</th>
+										<th scope="col">Debit Average Balance</th>
+										<th scope="col">Debit Contact Number</th>
+										<th scope="col">Credit Account Number</th>
+										<th scope="col">Credit Customer Code</th>
+										<th scope="col">Credit Account Branch</th>
+										<th scope="col">Credit Average Balance</th>
+										<th scope="col">Credit Contact Number</th>
+										<th scope="col">Amount</th>
+
 									</tr>
 								</thead>
 								<tbody>

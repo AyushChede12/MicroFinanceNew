@@ -8,6 +8,10 @@ import com.microfinance.model.savingAccountFundTransfer;
 
 public interface SavingAccountFundTransferRepo extends JpaRepository<savingAccountFundTransfer, Long>{
 
+
+	List<savingAccountFundTransfer> findByDebitAccountNumberAndIsApproved(String debitAccountNo, boolean b);
+
 	List<savingAccountFundTransfer> findByIsApprovedFalse();
+
 
 }
