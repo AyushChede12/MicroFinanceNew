@@ -193,10 +193,20 @@ $('#loanPlanName').on('change', function() {
 
 					$('#loanAmount').val(customer.loanAmount);
 					const loanamount = parseFloat($('#loanAmount').val());
-
 					const roitype = $('#interestType').val(customer.typeIntrest).val();
-					//$('#purposeOfLoan').val(customer.typeLoan);
+					
 					calculateEMI(emicollection, tensure, interestinyear, loanamount, roitype);
+					
+					
+					const feeProcessing = parseFloat(customer.feeProcessing) || 0;
+					const chargesLegal = parseFloat(customer.chargesLegal) || 0;
+					const gst = parseFloat(customer.gst) || 0;
+					const feeInsurence = parseFloat(customer.feeInsurence) || 0;
+					const feeValuation = parseFloat(customer.feeValuation) || 0;                            
+
+					
+					calculateCharges(feeProcessing,chargesLegal,gst,feeInsurence,feeValuation,loanamount);
+					
 				} else {
 					alert('No data found!');
 					$('#openingAmount').val('');
@@ -267,6 +277,24 @@ function calculateEMI(emicollection, tensure, interestinyear, loanamount, roityp
 
 		document.getElementById("emiPayment").value = emi.toFixed(2);
 	}
+}
+
+function calculateCharges(feeProcessing,chargesLegal,gst,feeInsurence,feeValuation,loanamount){
+	
+	const processingFee = (loanamount * feeProcessing) / 100;
+	 const legalCharges = (loanamount * chargesLegal) / 100;
+	 const feeInsurence1 = (loanamount * feeInsurence) / 100;
+	 const feeValuation1 = (loanamount * feeValuation) / 100;
+	 const statinaryCharges = 50;
+	 const gsst = ((processingFee + legalCharges + feeValuation1) * gst)/ 100;
+	 
+	 $('#processingFee').val(processingFee.toFixed(2));
+	 $('#legalCharges').val(legalCharges.toFixed(2));
+	 $('#gst').val(gsst.toFixed(2));
+	 $('#insuranceFee').val(feeInsurence1.toFixed(2));
+	 $('#valuationFees').val(feeValuation1.toFixed(2));
+	 $('#stationaryFee').val(statinaryCharges.toFixed(2));
+	 
 }
 
 //saving loan application details

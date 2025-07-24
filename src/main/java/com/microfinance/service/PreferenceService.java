@@ -113,7 +113,7 @@ public class PreferenceService {
 
 	    Optional<BranchModule> branchOpt = branchModuleRepo.findByBranchNameIgnoreCase(branchName.trim());
 
-	    if (branchOpt.isEmpty()) {
+	    if (branchOpt.isPresent()) {
 	        throw new BadRequestException("Invalid branch name: " + branchName);
 	    }
 	}
