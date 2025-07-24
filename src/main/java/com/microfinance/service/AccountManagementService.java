@@ -197,9 +197,12 @@ public class AccountManagementService {
 
 		// Branch validation
 		branchModuleRepo.findByBranchNameIgnoreCase(dto.getBranchName())
-				.ifPresentOrElse(branch -> dto.setBranchName(branch.getBranchName()), () -> {
-					throw new BadRequestException("Invalid branch name: " + dto.getBranchName());
-				});
+	    .map(branch -> {
+	        dto.setBranchName(branch.getBranchName());
+	        return branch;
+	    })
+	    .orElseThrow(() -> new BadRequestException("Invalid branch name: " + dto.getBranchName()));
+
 
 		// Ledger validation and normalization
 		LedgerAccountMaster matchedLedger = ledgerAccountRepository.findByBranchName(dto.getBranchName()).stream()
@@ -398,9 +401,12 @@ public class AccountManagementService {
 
 		// Branch validation
 		branchModuleRepo.findByBranchNameIgnoreCase(dto.getBranchName())
-				.ifPresentOrElse(branch -> dto.setBranchName(branch.getBranchName()), () -> {
-					throw new BadRequestException("Invalid branch name: " + dto.getBranchName());
-				});
+	    .map(branch -> {
+	        dto.setBranchName(branch.getBranchName());
+	        return branch;
+	    })
+	    .orElseThrow(() -> new BadRequestException("Invalid branch name: " + dto.getBranchName()));
+
 
 		// Ledger validation and normalization
 		LedgerAccountMaster matchedLedger = ledgerAccountRepository.findByBranchName(dto.getBranchName()).stream()
