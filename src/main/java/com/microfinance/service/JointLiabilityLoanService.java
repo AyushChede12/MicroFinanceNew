@@ -278,6 +278,11 @@ public class JointLiabilityLoanService {
 		}
 	}
 
+	public List<ApplyForGroupLoan> fetchBygroupCode(String groupCode) {
+		// TODO Auto-generated method stub
+		 return applyForGroupLoanRepo.findByGroupCode(groupCode);
+	}
+
 	
 	
 	

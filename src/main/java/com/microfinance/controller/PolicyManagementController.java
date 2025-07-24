@@ -965,23 +965,23 @@ public class PolicyManagementController {
 
 	
   
-	@GetMapping("/getApprovedPolicies")
-    public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
-        List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
+//	@GetMapping("/getApprovedPolicies")
+//    public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
+//        List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
+//
+//        if (approvedList.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+//        }
+//
+//        return ResponseEntity.ok(
+//                new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList)
+//        );
+//    
+//
+//
+//	    return ResponseEntity.ok(response);
 
-        if (approvedList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
-        }
-
-        return ResponseEntity.ok(
-                new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList)
-        );
-    }
-
-
-	    return ResponseEntity.ok(response);
-	}
   
 	
 	@PostMapping("/updateinvestment")

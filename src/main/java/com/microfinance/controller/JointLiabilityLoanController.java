@@ -358,6 +358,18 @@ public class JointLiabilityLoanController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
+    
+   
+    // feath the property form Installment Re-Payment
+    @PostMapping("/fetchBygroupCode")
+    public ApiResponse<List<ApplyForGroupLoan>> fetchBygroupCode(@RequestParam("groupCode") String groupCode) {
+        List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchBygroupCode(groupCode);
+        if (list != null && !list.isEmpty()) {
+            return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
+        } else {
+            return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
+        }
+    }
    
 }
     

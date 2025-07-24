@@ -92,7 +92,8 @@ $(document).ready(function() {
 						success: function(response) {
 							if (response.status === "FOUND") {
 								let customer = response.data[0];
-								$('#processingFee').val(customer.processingFeePercent);
+													$('#loanSchemeName').val(customer.loanSchemeInformation);
+													$('#processingFee').val(customer.processingFeePercent);
 													$('#legalCharges').val(customer.legalChargesPercent);
 													$('#gstPercentage').val(customer.gstPercent );
 													$('#insuranceFee').val(customer.insuranceFeePercent );
@@ -138,6 +139,7 @@ $(document).ready(function() {
 			            contactNumber: $('#contactNumber').val(),
 			            loanPurpose: $('#loanPurpose').val(),
 			            planCode: $('#planCode').val(),
+						loanSchemeInformation: $('#loanSchemeName').val(),
 			            processingFee: $('#processingFee').val(),
 			            legalCharges: $('#legalCharges').val(),
 			            gstPercentage: $('#gstPercentage').val(),
