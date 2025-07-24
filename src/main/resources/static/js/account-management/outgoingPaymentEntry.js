@@ -148,45 +148,7 @@ function loadOutgoingPaymentData() {
 	});
 }
 
-/*function viewOutgoingPayment(id) {
-	$.ajax({
-		type: "GET",
-		url: `/accountManagement/outgoingPayment/${id}`,
-		contentType: "application/json",
-		success: function(response) {
-			const payment = response?.data;
 
-			if (!payment) {
-				alert("No data found for the selected payment.");
-				return;
-			}
-
-			// ✅ Set values into the form fields
-			$('#entryBranchName').val(payment.branchName ?? '');
-			$('#generatedReceiptID').val(payment.generatedReceiptID ?? '');
-			$('#dateOfEntry').val(payment.dateOfEntry ?? '');
-			$('#transferMode').val(payment.transferMode ?? '');
-			$('#ledgerAccount').val(payment.ledgerAccount ?? '');
-			$('#transactionAmount').val(payment.transactionAmount ?? '');
-			$('#remarks').val(payment.remarks ?? '');
-			// Load ledgers dynamically for this branch
-			LedgerDropdown(payment.branchName, function() {
-				// Once dropdown is populated, set selected ledger
-				$('#ledgerAccount').val(payment.ledgerAccount ?? '');
-			});
-		},
-		error: function(xhr) {
-			let errorMsg = "Error fetching payment entry.";
-			try {
-				const res = JSON.parse(xhr.responseText);
-				if (res?.message) errorMsg = res.message;
-			} catch (e) {
-				// fallback to default message
-			}
-			alert(errorMsg);
-		}
-	});
-}*/
 function viewOutgoingPayment(id) {
 	$.ajax({
 		type: "GET",
@@ -333,13 +295,16 @@ function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/getAllBranchModule',
-		success: function(data) {
+		url: '/api/preference/getAllBranchModule',
+		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
-			data.forEach(branch => {
-				options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
-			});
-			$("#searchBranchName").html(options);  // ✅ For search box
+			// The actual branch array is inside response.data
+			if (response && Array.isArray(response.data)) {
+				response.data.forEach(branch => {
+					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
+				});
+			}
+			$("#searchBranchName").html(options);
 			$("#entryBranchName").html(options);
 		},
 		error: function() {
