@@ -242,24 +242,24 @@ function searchIncomingReceipts() {
 }
 
 // Branch Dropdown Loader
-//BranchName Dropdown
 function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: 'getAllBranchModule', // Update the URL if necessary
-		async: true, // Correct spelling
-		success: function(data) {
-			console.log(data); // Debug the response
-			var options = "<option value=''>Select</option>";
-			for (var i = 0; i < data.length; i++) {
-				options += "<option value='" + data[i].branchName + "'>" + data[i].branchName + "</option>";
+		url: '/api/preference/getAllBranchModule',
+		success: function(response) {
+			let options = "<option value=''>Select Branch Name</option>";
+			// The actual branch array is inside response.data
+			if (response && Array.isArray(response.data)) {
+				response.data.forEach(branch => {
+					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
+				});
 			}
-			$("#searchBranchName").html(options);  // ✅ For search box
-			$("#entryBranchName").html(options);   // ✅ For entry form
+			$("#searchBranchName").html(options);
+			$("#entryBranchName").html(options);
 		},
 		error: function() {
-			alert("Failed to load departments");
+			alert("Failed to load branch names.");
 		}
 	});
 }
