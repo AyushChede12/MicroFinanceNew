@@ -332,13 +332,12 @@ pageEncoding="ISO-8859-1"%> -->
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
 										<th scope="col">ID</th>
-										<th>Loan Schem Code</th>
 										<th>Loan Plan Name</th>
 
 										<th>Type Of Loan</th>
 										<th>Age</th>
 										<th>Loan Term</th>
-										<th>Loan Term</th>
+										<th>EMI Type</th>
 										<th>Edit</th>
 										<th>Delete</th>
 										<td>

@@ -8,110 +8,126 @@
     <title>ID Card Upload</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-    body {
-        background-color: #e6e6e6;
-        font-family: 'Poppins', sans-serif;
-    }
+        body {
+            background-color: #e6e6e6;
+            font-family: 'Poppins', sans-serif;
+        }
 
-    .id-card {
-        width: 450px; /* reduced from 600px */
-        height: 300px;
-        border: 2px solid #333;
-        padding: 12px;
-        padding-bottom: 80px; /* space for signature */
-        background: white;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-        position: relative;
-    }
+        .id-card {
+            width: 450px;
+            height: 300px;
+            border: 2px solid #333;
+            padding: 12px;
+            padding-bottom: 80px;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            position: relative;
+        }
 
-    .id-header {
-        background-color: #002147;
-        color: white;
-        padding: 8px;
-        font-weight: bold;
-        text-align: center;
-        border-radius: 6px;
-        font-size: 18px;
-    }
+        .id-header {
+            background-color: #002147;
+            color: white;
+            padding: 8px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 6px;
+            font-size: 18px;
+        }
 
-    .id-photo-label {
-        width: 100px;
-        height: 140px;
-        border: 1px solid #aaa;
-        cursor: pointer;
-        display: inline-block;
-        overflow: hidden;
-        background-color: #f8f8f8;
-        border-radius: 5px;
-    }
+        .id-photo-label {
+            width: 100px;
+            height: 140px;
+            border: 1px solid #aaa;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
 
-    .id-photo-label img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+        .id-photo-label img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    .signature-label {
-        width: 100px;
-        height: 45px;
-        border: 1px solid #aaa;
-        cursor: pointer;
-        display: inline-block;
-        overflow: hidden;
-        background-color: #f8f8f8;
-        border-radius: 5px;
-    }
+        .signature-label {
+            width: 100px;
+            height: 45px;
+            border: 1px solid #aaa;
+            cursor: pointer;
+            display: inline-block;
+            overflow: hidden;
+            background-color: #f8f8f8;
+            border-radius: 5px;
+        }
 
-    .signature-label img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+        .signature-label img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-    #financialPhoto,
-    #signature {
-        display: none;
-    }
+        #financialPhoto,
+        #signature {
+            display: none;
+        }
 
-    .top-section {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
+        .top-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
 
-    .info {
-        font-size: 13px;
-        margin-right: 10px;
-        margin: 20px;
-    }
+        .info {
+            font-size: 13px;
+            margin-right: 10px;
+            margin: 20px;
+        }
 
-    .info p {
-        margin: 4px 0;
-    }
+        .info p {
+            margin: 4px 0;
+        }
 
-    .info label {
-        font-weight: 600;
-        color: #333;
-    }
+        .info label {
+            font-weight: 600;
+            color: #333;
+        }
 
-    .info span {
-        color: #0d6efd;
-        font-weight: bold;
-    }
+        .info span {
+            color: #0d6efd;
+            font-weight: bold;
+        }
 
-    .photo-section {
-        margin-right: 5px;
-        margin-top: 20px;
-    }
+        .photo-section {
+            margin-right: 5px;
+            margin-top: 20px;
+        }
 
-    .signature-section {
-        position: absolute;
-        bottom: 12px;
-        right: 17px;
-    }
-</style>
+        .signature-section {
+            position: absolute;
+            bottom: 12px;
+            right: 17px;
+        }
 
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            .id-card, .id-card * {
+                visibility: visible;
+            }
+
+            .id-card {
+                position: absolute;
+                top: 0;
+                left: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -120,7 +136,6 @@
             <div class="id-header">Financial Services</div>
 
             <div class="top-section mt-3">
-                <!-- Info Section Left -->
                 <div class="info">
                     <p><label>ID No</label> : <span id="financialCode"></span></p>
                     <p><label>Financial Name</label> : <span id="financialName"></span></p>
@@ -131,7 +146,6 @@
                     <p><label>Branch</label> : <span id="branchName"></span></p>
                 </div>
 
-                <!-- Photo Section Top Right -->
                 <div class="photo-section">
                     <label for="financialPhoto" class="id-photo-label" title="Click to upload photo">
                         <img src="../images/upload/upload.png" alt="upload icon" id="idCardPhoto" />
@@ -142,7 +156,6 @@
                 </div>
             </div>
 
-            <!-- Signature Section Bottom Right -->
             <div class="signature-section">
                 <label for="signature" class="signature-label" title="Click to upload signature">
                     <img src="../images/upload/signature.png" alt="Signature" id="idCardSignature" />
@@ -152,6 +165,11 @@
                 <input type="hidden" name="signatureHidden" id="signatureHidden">
             </div>
         </div>
+    </div>
+
+    <!-- Print Button -->
+    <div class="text-center mt-3">
+        <button class="btn btn-primary" onclick="printIDCard()">Print ID Card</button>
     </div>
 
     <script>
@@ -185,6 +203,10 @@
                 };
                 reader.readAsDataURL(file);
             }
+        }
+
+        function printIDCard() {
+            window.print();
         }
     </script>
 

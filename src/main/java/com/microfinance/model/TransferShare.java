@@ -27,6 +27,7 @@ public class TransferShare {
 	private String modeOfPayment;
 	private String comments;
 	private String certificateNo;
+	private boolean isApproved;
 	
 	public Long getId() {
 		return id;
@@ -123,6 +124,12 @@ public class TransferShare {
 	}
 	public void setCertificateNo(String certificateNo) {
 		this.certificateNo = certificateNo;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	
 	
