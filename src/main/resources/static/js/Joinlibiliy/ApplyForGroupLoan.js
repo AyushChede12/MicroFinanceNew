@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	// 1. Populate dropdown
 	$.ajax({
-		url: "/api/joinliability/viewGroupDirectories",
+		url: "api/joinliability/viewGroupDirectories",
 		type: "GET",
 		success: function(response) {
 			console.log("API response:", response);
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 		if (selectedCode !== "") {
 			$.ajax({
-				url: '/api/joinliability/fetchByGroupID?groupID=' + selectedCode, // ✅ send as query param
+				url: 'api/joinliability/fetchByGroupID?groupID=' + selectedCode, // ✅ send as query param
 				type: 'POST',
 				success: function(response) {
 					if (response.status === "FOUND") {
@@ -60,7 +60,7 @@ $(document).ready(function() {
 	//fecth data from the crete 
 	//fecth data from the create group Lending
 		$.ajax({
-				url: "/api/joinliability/viewlendinggroup",
+				url: "api/joinliability/viewlendinggroup",
 				type: "GET",
 				success: function(response) {
 					console.log("API response:", response);
@@ -87,12 +87,13 @@ $(document).ready(function() {
 
 				if (selectedCode !== "") {
 					$.ajax({
-						url: '/api/joinliability/fetchByPlanCode?planCode=' + selectedCode, // ✅ send as query param
+						url: 'api/joinliability/fetchByPlanCode?planCode=' + selectedCode, // ✅ send as query param
 						type: 'POST',
 						success: function(response) {
 							if (response.status === "FOUND") {
 								let customer = response.data[0];
-								$('#processingFee').val(customer.processingFeePercent);
+													$('#loanSchemeName').val(customer.loanSchemeInformation);
+													$('#processingFee').val(customer.processingFeePercent);
 													$('#legalCharges').val(customer.legalChargesPercent);
 													$('#gstPercentage').val(customer.gstPercent );
 													$('#insuranceFee').val(customer.insuranceFeePercent );
@@ -104,6 +105,9 @@ $(document).ready(function() {
 													$('#rateOfInterest').val(customer.rateOfInterest);
 													$('#interestType').val(customer.interestType);
 													$('#emiType').val(customer.emiType);
+													$('#Term').val(customer.Term);
+													$('#totalAmount').val(customer.totalAmount);
+													
 													
 
 							} else {
@@ -138,6 +142,7 @@ $(document).ready(function() {
 			            contactNumber: $('#contactNumber').val(),
 			            loanPurpose: $('#loanPurpose').val(),
 			            planCode: $('#planCode').val(),
+						loanSchemeInformation: $('#loanSchemeName').val(),
 			            processingFee: $('#processingFee').val(),
 			            legalCharges: $('#legalCharges').val(),
 			            gstPercentage: $('#gstPercentage').val(),
@@ -149,13 +154,15 @@ $(document).ready(function() {
 			            emiFrequency: $('#emiFrequency').val(),
 			            rateOfInterest: $('#rateOfInterest').val(),
 			            interestType: $('#interestType').val(),
-			            emiType: $('#emiType').val()
+			            emiType: $('#emiType').val(),
+						approvalStatus: $('#approvalStatus').val(),
+						approvalDate: $('#approvalDate').val()
 			        };
 
 			        console.log("Sending group loan data:", groupLoanData);
 
 			        $.ajax({
-			            url: '/api/joinliability/saveGroupLoan',
+			            url: 'api/joinliability/saveGroupLoan',
 			            type: 'POST',
 			            contentType: 'application/json',
 			            data: JSON.stringify(groupLoanData),
@@ -173,44 +180,46 @@ $(document).ready(function() {
 			    });
 				//feach data
 				function fetchGroupLoanData() {
-				    $.ajax({
-				        url: "/api/joinliability/viewgrouploans",
-				        type: "GET",
-				        dataType: "json",
-				        success: function(response) {
-				            console.log("API Success:", response);
-				            const data = response.data || [];
-				            const tableBody = $("#groupLoanBody").empty();
+				       $.ajax({
+				           url: "api/joinliability/viewgrouploans",
+				           type: "GET",
+				           dataType: "json",
+				           success: function (response) {
+				               console.log("API Success:", response);
 
-				            if (data.length > 0) {
-				                $.each(data, function(index, item) {
-				                    console.log("Item:", item); // ✅ debug
-				                    const row = `
-				                        <tr>
-				                            <td>${item.groupCode || ''}</td>
-				                            <td>${item.planCode || ''}</td>
-				                            <td>${item.customerName || ''}</td>
-				                            <td>${item.selectedMember || ''}</td>
-				                            <td>${item.emiType || ''}</td>
-				                            <td>${item.contactNumber || ''}</td>
-				                           
-				                            <td>${item.allocatedStaff || ''}</td>
-				                           
-				                        </tr>
-				                    `;
-				                    tableBody.append(row);
-				                });
-				            } else {
-				                tableBody.html(`<tr><td colspan="9" class="text-center text-warning">No data found.</td></tr>`);
-				            }
-				        },
-				        error: function(xhr, status, error) {
-				            console.error("API Error:", error);
-				            $("#groupLoanBody").html(`<tr><td colspan="9" class="text-center text-danger">Something went wrong.</td></tr>`);
-				        }
-				    });
-				}
-				fetchGroupLoanData();
+				               // ✅ जर response.status आणि response.data असेल तर
+				               const data = response.data ? response.data : response;
+
+				               const tableBody = $("#groupLoanBody").empty();
+
+				               if (data.length > 0) {
+				                   $.each(data, function (index, item) {
+				                       console.log("Item:", item);
+				                       const row = `
+				                           <tr>
+				                               <td>${item.groupCode || ''}</td>
+				                               <td>${item.planCode || ''}</td>
+				                               <td>${item.customerName || ''}</td>
+				                               <td>${item.selectedMember || ''}</td>
+				                               <td>${item.emiType || ''}</td>
+				                               <td>${item.contactNumber || ''}</td>
+				                               <td>${item.allocatedStaff || ''}</td>
+				                           </tr>
+				                       `;
+				                       tableBody.append(row);
+				                   });
+				               } else {
+				                   tableBody.html(`<tr><td colspan="7" class="text-center text-warning">No data found.</td></tr>`);
+				               }
+				           },
+				           error: function (xhr, status, error) {
+				               console.error("API Error:", error);
+				               $("#groupLoanBody").html(`<tr><td colspan="7" class="text-center text-danger">Something went wrong.</td></tr>`);
+				           }
+				       });
+				   }
+
+				   fetchGroupLoanData();
 
 			});
 
