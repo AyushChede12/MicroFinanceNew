@@ -14,14 +14,10 @@ import com.microfinance.model.PolicyRenewal;
 @Repository
 public interface PolicyRenewalRepo extends JpaRepository<PolicyRenewal, Long> {
 
-<<<<<<< HEAD
-	Optional<PolicyRenewal> findByPolicyCode(String policyCode);
 
-=======
 	List<PolicyRenewal> findByPolicyCode(String policyCode);
  
-	
->>>>>>> 0607492b3dcd14065e4e05e7d15756646671b865
+
 	
 
 
