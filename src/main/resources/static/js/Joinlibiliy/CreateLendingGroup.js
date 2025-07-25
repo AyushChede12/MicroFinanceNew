@@ -11,10 +11,11 @@ $(document).ready(function() {
 			planCode: $('#planCode').val(),
 			loanSchemeInformation: $('#loanSchemeInformation').val(),
 			minimumAge: $('#minimumAge').val(),
-			minLoanDurationMonths: $('#minLoanDurationMonths').val(),
+		
+			term: $('#term').val(), 
 			branchName: $('#branchName').val(),
 			maximumAge: $('#maximumAge').val(),
-			maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
+			
 			emiFrequency: $('#emiFrequency').val(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
@@ -126,8 +127,8 @@ $(document).ready(function() {
 					$('#loanSchemeInformation').val(item.loanSchemeInformation);
 					$('#minimumAge').val(item.minimumAge);
 					$('#maximumAge').val(item.maximumAge);
-					$('#minLoanDurationMonths').val(item.minLoanDurationMonths);
-					$('#maxLoanDurationMonths').val(item.maxLoanDurationMonths);
+					$('#Term').val(item.Term);
+					
 					$('#branchName').val(item.branchName);
 					$('#minLoanAmt').val(item.minLoanAmt);
 					$('#maximumLoanAmount').val(item.maximumLoanAmount);
@@ -176,8 +177,8 @@ $(document).ready(function() {
 			loanSchemeInformation: $('#loanSchemeInformation').val()?.trim(),
 			minimumAge: $('#minimumAge').val(),
 			maximumAge: $('#maximumAge').val(),
-			maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
-			minLoanDurationMonths: $('#minLoanDurationMonths').val(),
+			Term: $('#Term').val(),
+			
 			branchName: $('#branchName').val()?.trim(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			maximumLoanAmount: $('#maximumLoanAmount').val(),

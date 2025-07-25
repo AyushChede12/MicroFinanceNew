@@ -198,7 +198,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		var customerData = new FormData();
 		var id = $('#id').val();
-		customerData.append("id",id);
+		customerData.append("id", id);
 		customerData.append("memberCode", $('#customerCode').val());
 		customerData.append("signupDate", $('#signupDate').val());
 		customerData.append("customerName", $('#customerName').val());
@@ -272,24 +272,30 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Customer Data?")) {
-			$.ajax({
-				url: "/api/datacorrection/deleteCustomerDataByForm",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Customer Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let customerCode = $("#customerCode").val();
+		if (customerCode !== "") {
+			if (confirm("Are you sure you want to delete this Customer Data?")) {
+				$.ajax({
+					url: "/api/datacorrection/deleteCustomerDataByForm",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Customer Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Customer.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Customer.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
@@ -297,55 +303,58 @@ $(document).ready(function() {
 	$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
-		const $formClone = $("#formid").clone();
+		var findByCode = $('#findByCode').val();
+		if (findByCode && findByCode !== "") {
 
-		// Remove buttons and extra dropdowns
-		$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
-		$formClone.find(".text-center").each(function() {
-			if ($(this).find("button").length > 0) {
-				$(this).remove();
-			}
-		});
+			const $formClone = $("#formid").clone();
 
-		// Convert selects to plain text
-		$formClone.find("select").each(function() {
-			const selectedText = $(this).find("option:selected").text();
-			$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
-		});
-
-		// Convert inputs to plain text
-		$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
-			const value = $(this).val();
-			$(this).replaceWith(`<span class="form-value">${value}</span>`);
-		});
-
-		// Convert textareas
-		$formClone.find("textarea").each(function() {
-			const value = $(this).val();
-			$(this).replaceWith(`<span class="form-value">${value}</span>`);
-		});
-
-		// Convert checkboxes and radios
-		$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
-			const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
-			$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
-		});
-
-		// Optional: Resize images if any
-		$formClone.find("img").each(function() {
-			$(this).css({
-				width: "100px",
-				height: "auto",
-				border: "1px solid #ccc",
-				marginBottom: "10px"
+			// Remove buttons and extra dropdowns
+			$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
+			$formClone.find(".text-center").each(function() {
+				if ($(this).find("button").length > 0) {
+					$(this).remove();
+				}
 			});
-		});
 
-		// Open print window
-		const printWindow = window.open("", "_blank");
-		if (printWindow) {
-			printWindow.document.open();
-			printWindow.document.write(`
+			// Convert selects to plain text
+			$formClone.find("select").each(function() {
+				const selectedText = $(this).find("option:selected").text();
+				$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
+			});
+
+			// Convert inputs to plain text
+			$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
+				const value = $(this).val();
+				$(this).replaceWith(`<span class="form-value">${value}</span>`);
+			});
+
+			// Convert textareas
+			$formClone.find("textarea").each(function() {
+				const value = $(this).val();
+				$(this).replaceWith(`<span class="form-value">${value}</span>`);
+			});
+
+			// Convert checkboxes and radios
+			$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
+				const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
+				$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
+			});
+
+			// Optional: Resize images if any
+			$formClone.find("img").each(function() {
+				$(this).css({
+					width: "100px",
+					height: "auto",
+					border: "1px solid #ccc",
+					marginBottom: "10px"
+				});
+			});
+
+			// Open print window
+			const printWindow = window.open("", "_blank");
+			if (printWindow) {
+				printWindow.document.open();
+				printWindow.document.write(`
 				<html>
 				<head>
 					<title>Print - Customer Form</title>
@@ -403,9 +412,13 @@ $(document).ready(function() {
 				</body>
 				</html>
 			`);
-			printWindow.document.close();
-		} else {
-			alert("Popup blocked. Please allow popups for this website.");
+				printWindow.document.close();
+			} else {
+				alert("Popup blocked. Please allow popups for this website.");
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed to Print");
 		}
 	});
 

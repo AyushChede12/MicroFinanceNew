@@ -41,10 +41,15 @@ public class ApplyForGroupLoan {
     private String rateOfInterest;
     private String interestType;
     private String emiType;
-    private String approvalStatus;
+    private String Term;
     private String totalAmount;
-    private String loanSchemeName;
+
     
+    private String approvalStatus;
+    private String approvalDate;
+
+    private String loanSchemeName;
+
 	public Long getId() {
 		return id;
 	}
@@ -200,6 +205,18 @@ public class ApplyForGroupLoan {
 	}
 	public void setApprovalStatus(String approvalStatus) {
 		this.approvalStatus = approvalStatus;
+	}
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+	public String getTerm() {
+		return Term;
+	}
+	public void setTerm(String term) {
+		Term = term;
 	}
 	public String getTotalAmount() {
 		return totalAmount;
