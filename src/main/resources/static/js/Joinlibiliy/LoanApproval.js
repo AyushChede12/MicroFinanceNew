@@ -1,5 +1,6 @@
-$.ajax({
-	url: "/api/joinliability/viewGroupDirectories",
+$(document).ready(function() {
+	$.ajax({
+	url: "/api/joinliability/viewgrouploans",
 	type: "GET",
 	success: function(response) {
 		console.log("API response:", response);
@@ -9,7 +10,7 @@ $.ajax({
 
 		if (response.status === "OK" && response.data) {
 			$.each(response.data, function(index, customer) {
-				dropdown1.append('<option value="' + customer.groupID + '">' + customer.groupID + '</option>');
+				dropdown1.append('<option value="' + customer.groupCode + '">' + customer.groupCode + '</option>');
 			});
 		} else {
 			dropdown1.append('<option value="">No groups found</option>');
@@ -21,77 +22,69 @@ $.ajax({
 });
 
 // 2. On dropdown change, fetch details of selected group
-$('#groupcode').on('change', function() {
-	let selectedCode = $(this).val();
+// 2. On dropdown change, fetch details of selected group
+			$('#groupcode').on('change', function() {
+				let selectedCode = $(this).val();
 
-	if (selectedCode !== "") {
-		$.ajax({
-			url: '/api/joinliability/fetchByGroupID?groupID=' + selectedCode, // ✅ send as query param
-			type: 'POST',
-			success: function(response) {
-				if (response.status === "FOUND") {
-					let customer = response.data[0];
-					$('#communityName').val(customer.communityName);
-					$('#openingDate').val(customer.openingDate);
-					$('#selectedMember').val(customer.selectedMember);
-					$('#customerName').val(customer.customerName);
-					$('#communityLeader').val(customer.communityLeader );
-					$('#contactNumber').val(customer.contactNo );
-					$('#branchName').val(customer.branchName );
-					$('#allocatedStaff').val(customer.allocatedStaff);
-					$('#collectionDays').val(customer.collectionDay);
+				if (selectedCode !== "") {
+					$.ajax({
+						url: '/api/joinliability/fetchByGroupCode?groupCode=' + selectedCode, // ✅ send as query param
+						type: 'POST',
+						success: function(response) {
+							if (response.status === "FOUND") {
+								let customer = response.data[0];
+								$('#openingDate').val(customer.openingDate);
+													$('#communityName').val(customer.communityName);
+													$('#allocatedStaff').val(customer.allocatedStaff );
+													$('#branchName').val(customer.branchName );
+													$('#collectionDays').val(customer.collectionDays );
+													$('#contactNumber').val(customer.contactNumber);
+													$('#purposeOfLoan').val(customer.loanPurpose);
+													$('#dateOfApproval').val(customer.approvalDate);
+													alert(customer.approvalStatus);
+													$('#approvalStatus').val(customer.approvalStatus);
+													
+													
 
+							} else {
+								alert('No customer data found!');
+								$('#openingDate').val('');
+							}
+						},
+						error: function() {
+							alert('Error while fetching customer data!');
+						}
+					});
 				} else {
-					alert('No customer data found!');
-					$('#communityName').val('');
+					$('#openingDate').val('');
 				}
-			},
-			error: function() {
-				alert('Error while fetching customer data!');
-			}
-		});
-	} else {
-		$('#communityName').val('');
-	}
-	$('#saveBtn').on('click', function (e) {
-			        e.preventDefault();
+			});
+			$("#approved").click(function () {
+			    let groupCode = $("#groupcode").val();
+			    let approvalStatus = "approved"; // ✅ योग्य value पाठवा
 
-			        const groupLoanData = {
-			            groupcode: $('#groupcode').val(),
-			            openingDate: $('#openingDate').val(),
-						selectedMember: $('#selectedMember').val(),
-						communityName: $('#communityName').val(),
-			            allocatedStaff: $('#allocatedStaff').val(),
-			            branchName: $('#branchName').val(),
-			            collectionDays: $('#collectionDays').val(),
-			            paymentMode: $('#paymentMode').val(),
-			            contactNumber: $('#contactNumber').val(),
-			            purposeOfLoan: $('#purposeOfLoan').val(),
-			            dateOfApproval: $('#dateOfApproval').val(),
-			            approvalStatus: $('#approvalStatus').val()
-			           
-			        };
+			    if (groupCode === "") {
+			        alert("Please select a Group Code first!");
+			        return;
+			    }
 
-			        console.log("Sending group loan data:", groupLoanData);
-
-			        $.ajax({
-			            url: '/api/joinliability/saveloanapproval',
-			            type: 'POST',
-			            contentType: 'application/json',
-			            data: JSON.stringify(groupLoanData),
-			            success: function (response) {
-			                console.log("✅ Saved successfully:", response);
-			                alert(response.message || "Group Loan saved successfully!");
-			                // Optional: Clear form or reload
-			                $('#formid')[0].reset();
-			            },
-			            error: function (xhr, status, error) {
-			                console.error("❌ Save error:", xhr.responseText);
-			                alert("Failed to save group loan data. Check inputs or server logs.");
-			            }
-			        });
+			    $.ajax({
+			        url: "/api/joinliability/updateApprovalStatusApplyGroupLoan",
+			        type: "POST",
+			        contentType: "application/json",
+			        data: JSON.stringify({
+			            groupCode: groupCode,
+			            approvalStatus: approvalStatus
+			        }),
+			        success: function (response) {
+			            alert(response.message);
+			            $("#approvalStatus").val("approved"); // ✅ UI Update
+			        },
+			        error: function () {
+			            alert("Failed to update approval status!");
+			        }
 			    });
+			});
+
+
 });
-/**
- * 
- */
