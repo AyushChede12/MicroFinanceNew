@@ -97,7 +97,7 @@ $(document).ready(function() {
 		console.log("📤 Sending Group Directory FormData...");
 
 		$.ajax({
-			url: '/api/joinliability/saveGroupDirectory',
+			url: 'api/joinliability/saveGroupDirectory',
 			type: 'POST',
 			data: formData,
 			processData: false,
@@ -121,7 +121,7 @@ $(document).ready(function() {
 	// FETCH GROUP DIRECTORY DATA
 	function fetchGroupDirectory() {
 		$.ajax({
-			url: "/api/joinliability/viewGroupDirectories",  // your GET endpoint
+			url: "api/joinliability/viewGroupDirectories",  // your GET endpoint
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -171,7 +171,7 @@ $(document).ready(function() {
 		var id = $(this).data("id");
 
 		$.ajax({
-			url: `/api/joinliability/editGroupDirectory/${id}`,
+			url: `api/joinliability/editGroupDirectory/${id}`,
 			type: "GET",
 			dataType: "json",
 			success: function(res) {
@@ -226,7 +226,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: `/api/joinliability/updateGroupDirectory/${id}`,
+			url: `api/joinliability/updateGroupDirectory/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(groupData),
@@ -252,7 +252,7 @@ $(document).ready(function() {
 
 		if (confirm("Are you sure you want to delete this group?")) {
 			$.ajax({
-				url: `/api/joinliability/deleteGroupDirectory/${id}`, // तुमचं backend endpoint
+				url: `api/joinliability/deleteGroupDirectory/${id}`, // तुमचं backend endpoint
 				type: "POST", // POST आहे तर backend सुद्धा POST expect करतं का हे पाहा (else use DELETE)
 				success: function(response) {
 					alert("Group Directory deleted successfully!");
@@ -273,7 +273,7 @@ $(document).ready(function() {
 	// add que
 	$(document).ready(function() {
 		$.ajax({
-			url: "/api/customershareholdingcontroller/findAllCustomerCode",
+			url: "api/customershareholdingcontroller/findAllCustomerCode",
 			type: "GET",
 			success: function(response) {
 				console.log("API response:", response);
@@ -309,7 +309,7 @@ $(document).ready(function() {
 
 		if (selectedCode !== "") {
 			$.ajax({
-				url: '/api/customershareholdingcontroller/fetchByCustomerCode?memberCode=' + selectedCode, // ✅ send as query param
+				url: 'api/customershareholdingcontroller/fetchByCustomerCode?memberCode=' + selectedCode, // ✅ send as query param
 				type: 'POST',
 				success: function(response) {
 					if (response.status === "FOUND") {
@@ -353,7 +353,7 @@ $(document).ready(function() {
 
 
 		$.ajax({
-			url: '/api/joinliability/feachdatagroupdirectory',
+			url: 'api/joinliability/feachdatagroupdirectory',
 			type: 'GET',
 			data: { selectedMember: selectedMember },
 			contentType: 'json',

@@ -41,7 +41,7 @@ $(document).ready(function() {
 		console.log("Sending loanData:", loanData);
 
 		$.ajax({
-			url: '/api/joinliability/createLendingGroupsave',
+			url: 'api/joinliability/createLendingGroupsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(loanData),
@@ -60,7 +60,7 @@ $(document).ready(function() {
 	// Load loan data into table
 	function fetchLoanPlans() {
 		$.ajax({
-			url: "/api/joinliability/viewlendinggroup",
+			url: "api/joinliability/viewlendinggroup",
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -115,7 +115,7 @@ $(document).ready(function() {
 		const id = $(this).data('id');
 
 		$.ajax({
-			url: `/api/joinliability/editLendingGroup/${id}`,
+			url: `api/joinliability/editLendingGroup/${id}`,
 			type: 'GET',
 			dataType: 'json',
 			success: function(res) {
@@ -201,7 +201,7 @@ $(document).ready(function() {
 		
 		// AJAX call to update the lending group
 		$.ajax({
-			url: `/api/joinliability/updateLendingGroup/${id}`,
+			url: `api/joinliability/updateLendingGroup/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(loanPlan),
@@ -226,7 +226,7 @@ $(document).ready(function() {
 
 		if (confirm("Are you sure you want to delete this record?")) {
 			$.ajax({
-				url: `/api/joinliability/deleteLendingGroup/${id}`,
+				url: `api/joinliability/deleteLendingGroup/${id}`,
 				type: "POST",
 				success: function(response) {
 					alert("Record deleted successfully!");
