@@ -73,11 +73,9 @@ pageEncoding="ISO-8859-1"%> -->
 					<!-- <div class="col-md-6 text-right"> -->
 					<div class="col-md-6 d-flex justify-content-center">
 
-						<button type="button" class="btn btn-dark mr-2">Find</button>
-						<button type="button" class="btn btn-dark mr-2"
-							onclick="toggleTransaction()">Front Page</button>
-						<button type="button" class="btn btn-dark mr-2">Transaction</button>
-						<button type="button" class="btn btn-dark mr-2">Heading</button>
+						
+						<button type="button" class="btn btn-dark mr-2" onclick="toggleTransaction()">Transaction</button>
+						
 						<button type="button" class="btn btn-dark"
 							onclick="printTransactionSection()">
 							<i class="bi bi-download"></i>
@@ -193,6 +191,8 @@ pageEncoding="ISO-8859-1"%> -->
 						style="width: 12vw; display: inline-block;"></span>
 				</p>
 
+
+
 				<div class="d-flex justify-content-end">
 					<hr style="border-color: black; width: 20vw;">
 					<p style="position: relative; top: 23px; right: 17rem">Authorized
@@ -217,6 +217,6 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- External Scripts -->
 	<script src="./js/adminscript.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script src="./js/PolicyManagment/policyRenwalFee.js"></script>
+	<script src="./js/PolicyManagment/policyReport.js"></script>
 </body>
 </html>

@@ -41,19 +41,18 @@ public class CustomerManagementController {
 	
 	@PostMapping("/saveOrUpdateCustomer")
 	public ResponseEntity<ApiResponse<addCustomer>> saveOrUpdateCustomer(
-			@ModelAttribute CustomerDto clientMasterDto,
-			@RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
-			@RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature) throws IOException{
+	        @ModelAttribute CustomerDto clientMasterDto,
+	        @RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
+	        @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature) throws IOException {
 
-		// Debug log
-		System.out.println("Received file: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "No file uploaded"));
-		if (customerSignature != null) {
-	        System.out.println("Received file: " + customerSignature.getOriginalFilename());
-	    }
+	    // Debug log
+	    System.out.println("Received Photo: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "None"));
+	    System.out.println("Received Signature: " + (customerSignature != null ? customerSignature.getOriginalFilename() : "None"));
 
-		ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature);
-		return new ResponseEntity<>(response, response.getStatus());
+	    ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature);
+	    return new ResponseEntity<>(response, response.getStatus());
 	}
+
 	
 	
 	
