@@ -18,7 +18,7 @@ public interface FlexibleRenewalRepo extends JpaRepository<FlexibleRenewal, Long
 	List<FlexibleRenewal> findByIsApprovedFalse();
 
 
-	Optional<FlexibleRenewal> findByPolicyCode(String policyCode);
+	List<FlexibleRenewal> findByPolicyCode(String policyCode);
 
 
 }

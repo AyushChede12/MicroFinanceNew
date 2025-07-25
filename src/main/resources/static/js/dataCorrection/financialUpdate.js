@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	//Dropdown without search
 	/*$.ajax({
 		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
@@ -18,11 +18,11 @@ $(document).ready(function() {
 			alert("Failed to load Financial codes.");
 		}
 	});*/
-	
+
 	//Dropdowns with search
 	$.ajax({
-		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
-		type: 'POST',
+		url: '/api/reports/getApprovedFinancialConsultant',
+		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
 				let financialOptions = response.data.map(function(item) {
@@ -134,17 +134,25 @@ $(document).ready(function() {
 
 					// Image bindings (photo and signature)
 					if (data.financialPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.financialPhoto);
-						$('#financialphotoHidden').val(data.financialPhoto); // Store file name for fallback
+						const photoPath = `Uploads/${data.financialPhoto}`;
+						$("#financialPhotoPreview").attr("src", photoPath);
+						$("#financialphotoHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						photoSizeEdit(fakePhotoEvent);
 					} else {
-						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#financialPhotoPreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#financialphotoHidden").val("");
 					}
 
 					if (data.finnacialSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.finnacialSignature);
-						$('#financialsignatureHidden').val(data.finnacialSignature); // Store file name for fallback
+						const signPath = `Uploads/${data.finnacialSignature}`;
+						$("#financialSignaturePreview").attr("src", signPath);
+						$("#financialsignatureHidden").val(signPath);
+						const fakeSignEvent = { target: { result: signPath } };
+						signatureSizeEdit(fakeSignEvent);
 					} else {
-						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#financialSignaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#financialsignatureHidden").val("");
 					}
 
 
@@ -377,24 +385,30 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Financial Data?")) {
-			$.ajax({
-				url: "/api/financialconsultant/deleteFinancialConsultantById",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Financial Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let financialCode = $("#financialCode").val();
+		if (financialCode !== "") {
+			if (confirm("Are you sure you want to delete this Financial Data?")) {
+				$.ajax({
+					url: "/api/financialconsultant/deleteFinancialConsultantById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Financial Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Financial Data.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Financial Share Data.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
@@ -414,18 +428,12 @@ function updateToggleColor(input) {
 }
 
 function photoUpload() {
-	const file = document.getElementById("customerPhoto").files[0];
+	const file = document.getElementById("financialPhoto").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("financialPhotoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("financialPhotoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			photoSizeEdit(e);
+			$("#financialphotoHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -436,18 +444,12 @@ function photoUpload() {
 
 //Ayush
 function signatureUpload() {
-	const file = document.getElementById("customerSignature").files[0];
+	const file = document.getElementById("finnacialSignature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("financialSignaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("financialSignaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			signatureSizeEdit(e);
+			$("#financialsignatureHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -476,3 +478,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("financialPhotoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("financialSignaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
