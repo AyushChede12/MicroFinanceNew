@@ -144,7 +144,7 @@ public class LoanManagementController {
 		return ResponseEntity.ok(response);
 	}
 
-// New Loan Application schem loan code
+// New Loan Application scheme loan code
 
 	@GetMapping("/getBySchemLoanCode")
 	public ResponseEntity<ApiResponse<LoanSchemCatalog>> getLoanByCode(@RequestParam String code) {
@@ -157,6 +157,7 @@ public class LoanManagementController {
 		}
 	}
 
+	// save loan application details
 	@PostMapping("/saveloanapplication")
 	public ResponseEntity<ApiResponse<LoanApplication>> saveSchemeCatalog(
 			@RequestBody LoanApplication loanApplication) {

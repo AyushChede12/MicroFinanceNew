@@ -12,6 +12,7 @@ import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.PolicyRenewal;
+import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.repository.AddCustomerRepo;
@@ -21,6 +22,7 @@ import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.SavingAccountFundTransferRepo;
+import com.microfinance.repository.TransferShareRepo;
 
 
 
@@ -47,6 +49,9 @@ public class RequestApprovalsService {
 	
 	@Autowired
 	SavingAccountFundTransferRepo savingAccountFundTransferRepo;
+	
+	@Autowired
+	TransferShareRepo transferShareRepo;
 	
 	public List<addCustomer> findAllMemberCode() {
 		// TODO Auto-generated method stub
@@ -180,4 +185,22 @@ public class RequestApprovalsService {
     	// TODO Auto-generated method stub
         return savingAccountFundTransferRepo.save(transfer);
     }
+
+
+	public List<TransferShare> getUnapprovedTransferShareData() {
+		// TODO Auto-generated method stub
+		return transferShareRepo.findByIsApprovedFalse();
+	}
+
+
+	public Optional<TransferShare> approveShareTransactionData(Long id) {
+		// TODO Auto-generated method stub
+		return transferShareRepo.findById(id);
+	}
+
+
+	public TransferShare saveTransferShare(TransferShare share) {
+		// TODO Auto-generated method stub
+		return transferShareRepo.save(share);
+	}
 }

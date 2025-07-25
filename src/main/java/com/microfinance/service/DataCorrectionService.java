@@ -18,6 +18,7 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
+import com.microfinance.model.FlexiblepremiumrenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
@@ -30,6 +31,7 @@ import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
+import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
@@ -58,6 +60,9 @@ public class DataCorrectionService {
 	
 	@Autowired
 	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+	
+	@Autowired
+	FlexibleRenewalRepo flexibleRenewalRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -403,6 +408,11 @@ public class DataCorrectionService {
 		} else {
 			return false;
 		}
+	}
+
+	public List<FlexiblepremiumrenewalPM> getApprovedFlexibleRenewal() {
+		// TODO Auto-generated method stub
+		return flexibleRenewalRepo.findB;
 	}
 
 //	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {

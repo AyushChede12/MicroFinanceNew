@@ -28,6 +28,7 @@ import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.ExecutiveFounder;
+import com.microfinance.model.FlexiblepremiumrenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
@@ -331,6 +332,21 @@ public class DataCorrectionController {
 			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Daily Renewal deletion failed",
 					"failure");
 			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
+	@GetMapping("/fetchAllApprovedFlexibleRenewal")
+	public ResponseEntity<ApiResponse<List<FlexiblepremiumrenewalPM>>> getApprovedFlexibleRenewalData() {
+		List<FlexiblepremiumrenewalPM> dailyrenewal = dataCorrectionService.getApprovedFlexibleRenewal();
+		if (dailyrenewal != null && !dailyrenewal.isEmpty()) {
+
+			ApiResponse<List<FlexiblepremiumrenewalPM>> response = new ApiResponse<>(HttpStatus.FOUND,
+					"Flexible Renewal Data fetched successfully.", dailyrenewal);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<FlexiblepremiumrenewalPM>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved Flexible Renewal found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 	}
 
