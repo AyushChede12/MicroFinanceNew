@@ -861,7 +861,6 @@ public class PolicyManagementController {
 
 
 
-
 	@PostMapping("/updateinvestment")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateInvestment(@RequestBody AddnewinvestmentPM invest) {
 		AddnewinvestmentPM updated = policyManagementService.updateInstalmentDetails(invest.getPolicyCode(),

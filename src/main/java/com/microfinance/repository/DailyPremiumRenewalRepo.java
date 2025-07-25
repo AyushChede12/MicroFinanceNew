@@ -9,7 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.microfinance.model.DailyPremiumRenewalPM;
 
+<<<<<<< HEAD
+=======
 @Repository
+>>>>>>> 0607492b3dcd14065e4e05e7d15756646671b865
 public interface DailyPremiumRenewalRepo extends JpaRepository<DailyPremiumRenewalPM, Long> {
 
 	List<DailyPremiumRenewalPM> findByIsApprovedFalse();
