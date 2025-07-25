@@ -6,7 +6,7 @@ $(document).ready(function() {
 	if (window.location.pathname !== "/updateFinacialConsultant") {
 		// Fetch all data once on page load
 		$.ajax({
-			url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+			url: "api/financialconsultant/getAllFinancialConsultantDetails",
 			type: "POST",
 			contentType: "application/json",
 			success: function(response) {
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
 		if (id) {
 			$.ajax({
-				url: "/api/financialconsultant/getFinancialConsultantById",
+				url: "api/financialconsultant/getFinancialConsultantById",
 				type: "GET",
 				data: { id: id },
 				success: function(response) {
@@ -208,7 +208,7 @@ $(document).ready(function() {
 		formData.append("finnacialSignature", $('#signatureHidden').val());*/
 
 		$.ajax({
-			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+			url: "api/financialconsultant/saveOrUpdateFinancialConsultant",
 			type: "POST",
 			data: formData,
 			enctype: 'multipart/form-data',
@@ -250,7 +250,7 @@ $(document).ready(function() {
 		// Optional: Confirmation prompt
 		if (confirm("Are you sure you want to delete this Financial Consultant?")) {
 			$.ajax({
-				url: '/api/financialconsultant/deleteFinancialConsultantById',
+				url: 'api/financialconsultant/deleteFinancialConsultantById',
 				type: 'POST',
 				data: { id: id },
 				success: function(response) {

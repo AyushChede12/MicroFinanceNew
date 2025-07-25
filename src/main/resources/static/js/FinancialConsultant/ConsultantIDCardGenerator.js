@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	const apiUrl = "/api/financialconsultant/getAllFinancialConsultantDetails";
+	const apiUrl = "api/financialconsultant/getAllFinancialConsultantDetails";
 
 	// 1. Render Table
 	function renderTable(data) {
@@ -76,7 +76,7 @@ $(document).ready(function() {
 
 	if (finCode) {
 		$.ajax({
-			url: `/api/financialconsultant/getfinancialHierarchyByFinancialCode?financialCode=${finCode}`,
+			url: `api/financialconsultant/getfinancialHierarchyByFinancialCode?financialCode=${finCode}`,
 			type: "GET",
 			success: function(response) {
 				console.log("API response:", response)

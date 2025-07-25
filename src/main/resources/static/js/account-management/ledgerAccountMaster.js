@@ -127,16 +127,19 @@ function viewLedger(id) {
 }
 
 // Populate Branch Name Dropdown
+
 function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/getAllBranchModule',
-		success: function(data) {
+		url: '/api/preference/getAllBranchModule',
+		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
-			data.forEach(branch => {
-				options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
-			});
+			if (response && Array.isArray(response.data)) {
+				response.data.forEach(branch => {
+					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
+				});
+			}
 			$("#branchName").html(options);
 		},
 		error: function() {
@@ -144,6 +147,7 @@ function BranchNameDropdown() {
 		}
 	});
 }
+
 // 🔹 Populate Group Name Dropdown
 function GroupNameDropdown() {
 	$.ajax({

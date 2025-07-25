@@ -363,7 +363,7 @@ $(document).ready(function () {
 				installmentsPerYear = 1;
 				break;
 			case "Monthly":
-				installmentsPerYear = 12;
+				installmentsPerYear = 1;
 				break;
 			case "Quarterly":
 				installmentsPerYear = 4;
