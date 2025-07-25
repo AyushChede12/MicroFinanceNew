@@ -43,9 +43,13 @@ public class ApplyForGroupLoan {
     private String emiType;
     private String Term;
     private String totalAmount;
+
     
     private String approvalStatus;
     private String approvalDate;
+
+    private String loanSchemeName;
+
 	public Long getId() {
 		return id;
 	}
@@ -63,6 +67,18 @@ public class ApplyForGroupLoan {
 	}
 	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
+	}
+	public String getSelectedMember() {
+		return selectedMember;
+	}
+	public void setSelectedMember(String selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 	public String getCommunityName() {
 		return communityName;
@@ -184,18 +200,6 @@ public class ApplyForGroupLoan {
 	public void setEmiType(String emiType) {
 		this.emiType = emiType;
 	}
-	public String getSelectedMember() {
-		return selectedMember;
-	}
-	public void setSelectedMember(String selectedMember) {
-		this.selectedMember = selectedMember;
-	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
 	public String getApprovalStatus() {
 		return approvalStatus;
 	}
@@ -220,7 +224,13 @@ public class ApplyForGroupLoan {
 	public void setTotalAmount(String totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	
+	public String getLoanSchemeName() {
+		return loanSchemeName;
+	}
+	public void setLoanSchemeName(String loanSchemeName) {
+		this.loanSchemeName = loanSchemeName;
+	}
     
+	
 
 }

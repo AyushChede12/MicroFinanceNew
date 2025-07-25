@@ -852,7 +852,14 @@ public class PolicyManagementController {
                 new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList)
         );
 
+
     }
+
+    
+   return ResponseEntity.ok(response);
+
+	}
+
 
 
 
@@ -906,7 +913,7 @@ public class PolicyManagementController {
 
 
 	
-}
+	}
 
 
 

@@ -169,6 +169,13 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="communityLeader">loan Scheme Name*</label> <input
+									type="text" name="loanSchemeName" id="loanSchemeName"
+									required placeholder="Enter Community Leader" />
+							</div>
+						</div>
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="processingFee">Processing Fee (%)*</label> <input
