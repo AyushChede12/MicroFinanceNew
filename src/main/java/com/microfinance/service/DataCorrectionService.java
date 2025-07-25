@@ -370,11 +370,19 @@ public class DataCorrectionService {
 		}
 	}
 
+
+//	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return policyRenewalRepo.findByPolicyCode(policyCode);
+//	}
+
+
 	/*
 	 * public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String
 	 * policyCode) { // TODO Auto-generated method stub return
 	 * policyRenewalRepo.findByPolicyCode(policyCode); }
 	 */
+
 	public boolean deletePolicyRenewalData(Long id) {
 		// TODO Auto-generated method stub
 		if (policyRenewalRepo.existsById(id)) {
@@ -390,11 +398,18 @@ public class DataCorrectionService {
 		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
 	}
 
+
+//	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+//	}
+
 	/*
 	 * public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String
 	 * policyCode) { // TODO Auto-generated method stub return
 	 * dailyPremiumRenewalRepo.findByPolicyCode(policyCode); }
 	 */
+
 
 	public boolean deleteDailyRenewal(Long id) {
 		// TODO Auto-generated method stub
