@@ -1,29 +1,34 @@
-package com.microfinance.model;
+package com.microfinance.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
-@Entity
-public class OutgoingPaymentEntry {
+public class OutgoingPaymentDto {
+
+	private long id;
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-	
+	//OutgoingPaymentEntry
+
+    @NotBlank(message = "Branch name must not be blank")
 	private String branchName;
 
     private String generatedReceiptID;  // Typo retained from form name. Recommended: `generatedId`
+    
 
+    @NotBlank(message = "Date of entry is required")
     private String dateOfEntry;
-
+    
+    @NotBlank(message = "Ledger account must not be blank")
     private String ledgerAccount;
-
+    
+    @NotBlank(message = "Transfer mode is required")
     private String transferMode;
 
+    @NotBlank(message = "Transaction amount must not be blank")
     private String transactionAmount;
-
+    
+    @NotBlank(message = "Remarks must not be blank")
+    @Size(max = 255, message = "Remarks should not exceed 255 characters")
     private String remarks;
 
 	public long getId() {
@@ -92,4 +97,5 @@ public class OutgoingPaymentEntry {
 	}
 
 	
+    
 }

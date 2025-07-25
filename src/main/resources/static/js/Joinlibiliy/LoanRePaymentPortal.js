@@ -34,38 +34,48 @@ $(document).ready(function () {
 		}
 	});
 	
-	/*$('#groupid').on('change', function() {
-			let selectedCode = $(this).val();
+	$('#groupid').on('change', function() {
+		let selectedCode = $(this).val();
 
-			if (selectedCode !== "") {
-				$.ajax({
-					url: '/api/joinliability/fetchBygroupCode?groupCode=' + groupCode, // ✅ send as query param
-					type: 'POST',
-					success: function(response) {
-						if (response.status === "FOUND") {
-							let customer = response.data[0];
-							$('#openingdate').val(customer.openingDate);
-							$('#communityname').val(customer.communityName);
-							$('#branchname').val(customer.branchName);
-							$('#loanschemename').val(customer.loanSchemeName);
-							$('#communityLeader').val(customer.communityLeader );
-							$('#contactNumber').val(customer.contactNo );
-							$('#branchName').val(customer.branchName );
-							$('#allocatedStaff').val(customer.allocatedStaff);
-							$('#collectionDays').val(customer.collectionDay);
-
-						} else {
-							alert('No customer data found!');
-							$('#communityName').val('');
-						}
-					},
-					error: function() {
-						alert('Error while fetching customer data!');
+		if (selectedCode !== "") {
+			$.ajax({
+				url: '/api/joinliability/fetchBygroupCode?groupCode=' + selectedCode, // ✅ fixed here
+				type: 'POST',
+				success: function(response) {
+					if (response.status === "FOUND") {
+						let customer = response.data[0];
+						$('#openingdate').val(customer.openingDate);
+						$('#communityname').val(customer.communityName);
+						$('#branchname').val(customer.branchName);
+						//$('#loanschemename').val(customer.loanSchemeName);
+						//$('#communityaddress').val(customer.communityLeader);
+						$('#contactno').val(customer.contactNumber);
+						//$('#paymentmode').val(customer.branchName);
+						$('#loanpurpose').val(customer.loanPurpose);
+						//$('#term').val(customer.collectionDay);
+						$('#rateofinterest').val(customer.rateOfInterest);
+						//$('#interest').val(customer.loanPurpose);
+						$('#loanamount').val(customer.totalAmount);
+						//$('#emiamount').val(customer.loanPurpose);
+						$('#Processingfee').val(customer.processingFee);
+						$('#gstvalue').val(customer.gstPercentage);
+						$('#legalfee').val(customer.legalCharges);
+						$('#insurencefee').val(customer.insuranceFee);
+						$('#Valuationfee').val(customer.valuationFee);
+						//$('#loanpurpose12').val(customer.loanPurpose);
+						
+					} else {
+						alert('No customer data found!');
+						$('#communityname').val('');
 					}
-				});
-			} else {
-				$('#communityName').val('');
-			}
-		});
-	*/
+				},
+				error: function() {
+					alert('Error while fetching customer data!');
+				}
+			});
+		} else {
+			$('#communityname').val('');
+		}
+	});
+
 });
