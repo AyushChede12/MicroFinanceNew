@@ -57,10 +57,10 @@ public class DataCorrectionService {
 
 	@Autowired
 	PolicyRenewalRepo policyRenewalRepo;
-	
+
 	@Autowired
 	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
-	
+
 	@Autowired
 	FlexibleRenewalRepo flexibleRenewalRepo;
 
@@ -365,8 +365,8 @@ public class DataCorrectionService {
 			existing.setFinancialConsultantName(loanapplication.getFinancialConsultantName());
 
 			// Approval
-			//existing.setApprovalDate(loanapplication.getApprovalDate());
-			//existing.setApprovalStatus(loanapplication.getApprovalStatus());
+			// existing.setApprovalDate(loanapplication.getApprovalDate());
+			// existing.setApprovalStatus(loanapplication.getApprovalStatus());
 
 			loanApplicationRepo.save(existing);
 			return true;
@@ -375,8 +375,8 @@ public class DataCorrectionService {
 		}
 	}
 
-	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
-		// TODO Auto-generated method stub
+	public List<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub return
 		return policyRenewalRepo.findByPolicyCode(policyCode);
 	}
 
@@ -395,8 +395,8 @@ public class DataCorrectionService {
 		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
 	}
 
-	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
-		// TODO Auto-generated method stub
+	public List<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub return
 		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
 	}
 
@@ -408,11 +408,6 @@ public class DataCorrectionService {
 		} else {
 			return false;
 		}
-	}
-
-	public List<FlexiblepremiumrenewalPM> getApprovedFlexibleRenewal() {
-		// TODO Auto-generated method stub
-		return flexibleRenewalRepo.findB;
 	}
 
 //	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {
