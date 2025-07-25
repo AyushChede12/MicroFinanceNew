@@ -280,6 +280,7 @@ public class JointLiabilityLoanService {
 		}
 	}
 
+
 	public ApplyForGroupLoan updateApprovalStatusApplyGroupLoan(String groupCode, String approvalStatus) {
 		 ApplyForGroupLoan existingLoan = applyForGroupLoanRepo.findSingleByGroupCode(groupCode);
 
@@ -295,6 +296,11 @@ public class JointLiabilityLoanService {
 	    public List<ApplyForGroupLoan> fetchApplyGroupLoanByGroupcode(String groupCode) {
 	        return applyForGroupLoanRepo.findByGroupCode(groupCode);
 	    }
+
+	public List<ApplyForGroupLoan> fetchBygroupCode(String groupCode) {
+		// TODO Auto-generated method stub
+		 return applyForGroupLoanRepo.findByGroupCode(groupCode);
+
 	}
 
 	
