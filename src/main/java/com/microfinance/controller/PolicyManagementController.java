@@ -855,8 +855,13 @@ public class PolicyManagementController {
     }
 
 
+<<<<<<< HEAD
 	
 	}
+=======
+
+	
+>>>>>>> 0607492b3dcd14065e4e05e7d15756646671b865
 
 
 	@PostMapping("/updateinvestment")
@@ -909,4 +914,4 @@ public class PolicyManagementController {
 }
 
 
-}
+
