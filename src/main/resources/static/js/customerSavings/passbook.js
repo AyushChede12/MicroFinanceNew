@@ -38,8 +38,67 @@ function fetchAccountNumbers(accountType) {
 
 
 // Js for fetching the data on the tabel according to account number (vaibhav)
+$(document).ready(function () {
+    $('#btnTransactionPageOnSavingPassbook').click(function () {
+        let accountNumber = $("#accountNumber").val().trim(); // correct fetch
 
-     function displayTransactionDataList() {
+        if (accountNumber !== "") {
+            $.ajax({
+                type: "GET",
+                url: "/api/customersavings/getsavingaccountactivity",
+                data: { accountNumber: accountNumber },
+                success: function(response) {
+                    console.log("API Response:", response);
+
+                    if (response.status && response.status.toUpperCase() === "OK") {
+                        let data = response.data;
+                        let tableBody = $("#tableBody1"); // correct tbody ID
+                        tableBody.empty();
+
+                        if (data.length > 0) {
+                            $('#TransactionSection').show(); // show the hidden div
+
+                            data.forEach((item, index) => {
+                                let row = `<tr>
+                                    <td>${index + 1}</td>
+                                    <td>${item.selectBranchName || ''}</td>
+                                    <td>${item.transactionDate || ''}</td>
+                                    <td>${item.accountNumber || ''}</td>
+                                    <td>${item.transactionType || ''}</td>
+                                    <td>${item.transactionAmount || ''}</td>
+                                    <td>${item.averageBalance || ''}</td>
+                                    <td>${item.payBy || ''}</td>
+                                    <td>${item.comments || ''}</td>
+                                    <td>${item.selectSavingTransactionId || ''}</td>
+                                    <td>${item.customerCode || ''}</td>
+                                </tr>`;
+                                tableBody.append(row);
+                            });
+                        } else {
+                            alert("No transactions found.");
+                            $('#TransactionSection').hide();
+                        }
+                    } else {
+                        alert("No transactions found.");
+                        $('#TransactionSection').hide();
+                    }
+                },
+                error: function(xhr) {
+                    console.error("API Error:", xhr.responseText);
+                    alert("Error fetching saving account activity.");
+                    $('#TransactionSection').hide();
+                }
+            });
+        } else {
+            alert("Please select an Account Number.");
+            $('#TransactionSection').hide();
+        }
+    });
+});
+
+
+
+     /*function displayTransactionDataList() {
        // const accountNumber = $(this).val();
  let accountNumber = document.getElementById("accountNumber").value; // Get the selected Account No.
     // $("#tabl").show();
@@ -87,7 +146,7 @@ function fetchAccountNumbers(accountType) {
         } else {
             $("#customerDetails").empty(); // Clear if no account selected
         }
-    }
+    }*/
 
 //Janvi passbook data fetch
  /*function displaySavingfrontPage() {
