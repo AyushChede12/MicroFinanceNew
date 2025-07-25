@@ -41,7 +41,7 @@ $(document).ready(function() {
 													$('#contactNumber').val(customer.contactNumber);
 													$('#purposeOfLoan').val(customer.loanPurpose);
 													$('#dateOfApproval').val(customer.approvalDate);
-													
+													alert(customer.approvalStatus);
 													$('#approvalStatus').val(customer.approvalStatus);
 													
 													
@@ -59,33 +59,32 @@ $(document).ready(function() {
 					$('#openingDate').val('');
 				}
 			});
-	$("#approved").click(function () {
-	       let groupCode = $("#groupcode").val();
-	       let approvalStatus = "approved"; // ✅ Approved करतोय
-	       
+			$("#approved").click(function () {
+			    let groupCode = $("#groupcode").val();
+			    let approvalStatus = "approved"; // ✅ योग्य value पाठवा
 
-	       if (groupCode === "") {
-	           alert("Please select a Group Code first!");
-	           return;
-	       }
+			    if (groupCode === "") {
+			        alert("Please select a Group Code first!");
+			        return;
+			    }
 
-	       $.ajax({
-	           url: "/api/joinliability/updateApprovalStatusApplyGroupLoan",
-	           type: "POST",
-	           contentType: "application/json",
-	           data: JSON.stringify({
-	               groupCode: groupCode,
-	               approvalStatus: approvalStatus,
-	               
-	           }),
-	           success: function (response) {
-	               alert(response.message);
-	               $("#approvalStatus").val("approved"); // ✅ UI Update
-	           },
-	           error: function () {
-	               alert("Failed to update approval status!");
-	           }
-	       });
-	   });
+			    $.ajax({
+			        url: "/api/joinliability/updateApprovalStatusApplyGroupLoan",
+			        type: "POST",
+			        contentType: "application/json",
+			        data: JSON.stringify({
+			            groupCode: groupCode,
+			            approvalStatus: approvalStatus
+			        }),
+			        success: function (response) {
+			            alert(response.message);
+			            $("#approvalStatus").val("approved"); // ✅ UI Update
+			        },
+			        error: function () {
+			            alert("Failed to update approval status!");
+			        }
+			    });
+			});
+
 
 });

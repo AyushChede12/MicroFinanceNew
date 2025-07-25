@@ -1,5 +1,6 @@
 																										package com.microfinance.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,8 @@ public interface LoanMangmentSchemeRepo extends JpaRepository<LoanSchemCatalog, 
 	long getMaxId();
 
 	Optional<LoanSchemCatalog> findByLoanSchemeCode(String code);
+
+	List<LoanSchemCatalog> findByLoanPlaneNameContainingIgnoreCase(String loanPlanName);
 
 
 }

@@ -59,11 +59,22 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Loan Search Details</li>
 						</ol>
 					</nav>
-					<div class="row">
+					<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Select BY GroupID*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select GroupID</option>
+								</select>
+							</div>
+
+						</div>
+						
+					<!-- <div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Select BY LoanID*</label>
+								<label>Select BY GroupID*</label>
 								<div class="position-relative">
 									<div class="select-btn1" style="cursor: pointer;">
 										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
@@ -76,19 +87,13 @@ pageEncoding="ISO-8859-1"%> -->
 												placeholder="Search" />
 										</div>
 										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+											Options will be dynamically added here
 
 										</ul>
 									</div>
 								</div>
 							</div>
-						</div>
-
-
-
-					</div>
-
-
+						</div> </div> -->
 				</div>
 
 
@@ -99,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo"> Issue Date</label> <input type="date"
 									name="vehicalNo" id="vehicalNo" required="required"
@@ -107,8 +112,17 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Choose Applicant*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Applicant</option>
+								</select>
+							</div>
 
-						<div class="col-lg-3">
+						</div>
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Choose Applicant*</label>
@@ -124,14 +138,24 @@ pageEncoding="ISO-8859-1"%> -->
 												placeholder="Search" />
 										</div>
 										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+											Options will be dynamically added here
 
 										</ul>
 									</div>
 								</div>
 							</div>
+						</div> -->
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Loan Branch*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch</option>
+								</select>
+							</div>
+
 						</div>
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Loan Branch*</label>
@@ -147,14 +171,24 @@ pageEncoding="ISO-8859-1"%> -->
 												placeholder="Search" />
 										</div>
 										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+											Options will be dynamically added here
 
 										</ul>
 									</div>
 								</div>
 							</div>
+						</div> -->
+						<div class="col-lg-3 mb-4 ">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Loan Plan Name*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Loan Plan Name</option>
+								</select>
+							</div>
+
 						</div>
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Loan Plan Name*</label>
@@ -170,13 +204,13 @@ pageEncoding="ISO-8859-1"%> -->
 												placeholder="Search" />
 										</div>
 										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
+											Options will be dynamically added here
 
 										</ul>
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> 	Nominee Info* </label> <input type="text"
@@ -202,7 +236,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Duration* </label> <input type="text"
+								<label for=""> Term* </label> <input type="text"
 									name="location" id="location" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -355,7 +389,17 @@ pageEncoding="ISO-8859-1"%> -->
 							</ol>
 						</nav>
 						<div class="row">
-							<div class="col-lg-3">
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Cheque Deducted InCash*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Cheque Deducted InCash*</option>
+								</select>
+							</div>
+
+						</div>
+							<!-- <div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
 									<label>Cheque Deducted InCash*</label>
@@ -372,13 +416,13 @@ pageEncoding="ISO-8859-1"%> -->
 													placeholder="Search" />
 											</div>
 											<ul class="options" id="city-options">
-												<!-- Options will be dynamically added here -->
+												Options will be dynamically added here
 
 											</ul>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 							<div class="col-lg-3  mb-4">
 								<div class="d-flex flex-column formFields">
 									<label for=""> Payment Remarks* </label> <input type="text"
@@ -403,6 +447,16 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 							<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Paid By*</label> <select
+									id="groupcode" name="groupcode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Paid By</option>
+								</select>
+							</div>
+
+						</div>
+							<!-- <div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
 									<label>Paid By*</label>
@@ -419,13 +473,13 @@ pageEncoding="ISO-8859-1"%> -->
 													placeholder="Search" />
 											</div>
 											<ul class="options" id="city-options">
-												<!-- Options will be dynamically added here -->
+												Options will be dynamically added here
 
 											</ul>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 
 
