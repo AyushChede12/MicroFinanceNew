@@ -14,23 +14,23 @@ public class OutgoingPaymentEntry {
 	
 	private String branchName;
 
-    private String genratedId;  // Typo retained from form name. Recommended: `generatedId`
+    private String generatedReceiptID;  // Typo retained from form name. Recommended: `generatedId`
 
     private String dateOfEntry;
 
-    private String creditLedger;
+    private String ledgerAccount;
 
-    private String debitLedger;
+    private String transferMode;
 
     private String transactionAmount;
 
     private String remarks;
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -42,12 +42,12 @@ public class OutgoingPaymentEntry {
 		this.branchName = branchName;
 	}
 
-	public String getGenratedId() {
-		return genratedId;
+	public String getGeneratedReceiptID() {
+		return generatedReceiptID;
 	}
 
-	public void setGenratedId(String genratedId) {
-		this.genratedId = genratedId;
+	public void setGeneratedReceiptID(String generatedReceiptID) {
+		this.generatedReceiptID = generatedReceiptID;
 	}
 
 	public String getDateOfEntry() {
@@ -58,20 +58,21 @@ public class OutgoingPaymentEntry {
 		this.dateOfEntry = dateOfEntry;
 	}
 
-	public String getCreditLedger() {
-		return creditLedger;
+
+	public String getLedgerAccount() {
+		return ledgerAccount;
 	}
 
-	public void setCreditLedger(String creditLedger) {
-		this.creditLedger = creditLedger;
+	public void setLedgerAccount(String ledgerAccount) {
+		this.ledgerAccount = ledgerAccount;
 	}
 
-	public String getDebitLedger() {
-		return debitLedger;
+	public String getTransferMode() {
+		return transferMode;
 	}
 
-	public void setDebitLedger(String debitLedger) {
-		this.debitLedger = debitLedger;
+	public void setTransferMode(String transferMode) {
+		this.transferMode = transferMode;
 	}
 
 	public String getTransactionAmount() {
@@ -90,5 +91,5 @@ public class OutgoingPaymentEntry {
 		this.remarks = remarks;
 	}
 
-
+	
 }

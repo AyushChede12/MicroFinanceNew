@@ -51,7 +51,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1> Data Correction </h1>
+			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
@@ -71,28 +71,29 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+						<input type="hidden" name="id" id="id">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 20px;">
-								<label for="policyCode">Policy Code</label> <select id="policyCode"
-									name="policyCode" required="required"
+								<label for="policyCode">Policy Code</label> <select
+									id="policyCode" name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">-- Search Policy Code --</option>
-								
+
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="applicationDate">Update Date</label> <input type="date"
-									name="applicationDate" id="applicationDate" required="required"
+								<label for="renewalDate">Update Date</label> <input type="date"
+									name="renewalDate" id="renewalDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="branchName">Branch Name</label> <select id="branchName"
-									name="branchName" required="required"
+								<label for="branchName">Branch Name</label> <select
+									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
@@ -125,16 +126,16 @@ pageEncoding="ISO-8859-1"%> -->
                 </div>
               </div> -->
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="policyDate">Policy Date</label> <input type="date"
+									name="policyDate" id="policyDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Payoff Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="maturityDate">Payoff Date</label> <input type="date"
+									name="maturityDate" id="maturityDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -143,8 +144,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Member Code</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label>Member Code</label> <input type="text"
+									name="customerCode" id="customerCode" required="required"
 									placeholder="Enter Member Code"
 									style="text-transform: uppercase;" />
 							</div>
@@ -152,8 +153,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Client Name</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="clientName">Client Name</label> <input type="text"
+									name="clientName" id="clientName" required="required"
 									placeholder="Enter Client Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -163,17 +164,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Contact No</label> <input type="text" name="vehicalNo"
-									id="vehicalNo" placeholder="Enter Contact No"
+								<label>Contact No</label> <input type="text" name="contactNo"
+									id="contactNo" placeholder="Enter Contact No"
 									required="required" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Amount</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Policy Amount"
+								<label for="policyAmount">Policy Amount</label> <input
+									type="text" name="policyAmount" id="policyAmount"
+									required="required" placeholder="Enter Policy Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -181,8 +182,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>  Policy Type </label> <input type="text" name="vehicalNo"
-									id="vehicalNo" required="required"
+								<label> Policy Type </label> <input type="text"
+									name="policyType" id="policyType" required="required"
 									placeholder="Enter policy Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -192,8 +193,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="">Policy Term</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
+								<label for="policyTerm">Policy Term</label> <input type="text"
+									name="policyTerm" id="policyTerm" required="required"
 									placeholder="Enter pilcy Term"
 									style="text-transform: uppercase;" />
 							</div>
@@ -201,18 +202,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Mode</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Scheme Mode"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount</label> <input type="text"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Maturity Amount"
+								<label for="maturityAmount">Maturity Amount</label> <input
+									type="text" name="maturityAmount" id="maturityAmount"
+									required="required" placeholder="Enter Maturity Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -220,47 +212,33 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Total Deposited</label> <input type="text" name="price"
-									id="price" required="required"
+								<label>Total Deposited</label> <input type="text"
+									name="totalDeposit" id="totalDeposit" required="required"
 									placeholder="Enter Total Deposited" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment Due</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Payment Due" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>SMS Status</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter SMS Status" />
+								<label for="paymentDue">Payment Due</label> <input type="text"
+									name="paymentDue" id="paymentDue" required="required"
+									placeholder="Enter Payment Due" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Finicial Code             </label><input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter  Finicial Code  " />
+								<label for="lastPaymentDate">Last Payment Date</label> <input
+									type="text" name="lastPaymentDate" id="lastPaymentDate"
+									required="required" placeholder="Enter Last Payment Date" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Last Payment Date</label> <input type="text"
-									name="price" id="price" required="required"
-									placeholder="Enter Last Payment Date" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Deadline</label> <input type="date" name="price"
-									id="price" required="required" placeholder="Enter Mem Code" />
+								<label for="dueDate">Deadline</label> <input type="date"
+									name="dueDate" id="dueDate" required="required"
+									placeholder="Enter Mem Code" />
 							</div>
 						</div>
 
@@ -269,101 +247,36 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Late Fine</label> <input type="text" name="price"
-									id="price" required="required" placeholder="Enter Joint Name" />
+								<label>No Of Installments</label> <input type="text"
+									name="noOfInst" id="noOfInst" required="required"
+									placeholder="Enter Joint Name" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Installments Completed  </label> <input type="text"
-									name="price" id="price" required="required"
+								<label for="noOfInstPaid">Installments Completed </label> <input
+									type="text" name="noOfInstPaid" id="noOfInstPaid"
+									required="required"
 									placeholder="Enter Installments Completed  " />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Mpde Of Payment </label> <select id="colour"
-									name="colour" required="required"
+								<label for="modeOfPayment"> Mpde Of Payment </label> <select
+									id="modeOfPayment" name="modeOfPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Paymode</option>
-									<option value="Blue">Cash</option>
+									<option value="Cash">Cash</option>
+									<option value="Online">Online</option>
 
 								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Financial Consultant</label> <input type="text" name="price"
-									id="price" required="required"
-									placeholder="Enter Financial Consultant Code" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Name</label> <input type="text" name="price"
-									id="price" required="required"
-									placeholder="Enter Financial Consultant Name" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Comments</label>
-								<textarea name="" id="" placeholder="Enter Comments"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
-							</div>
-						</div>
-
-
-
-
 					</div>
 
-					<div class="row mt-4">
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
-						</div>
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                                  style="font-size: 12px; margin-top: 15px"
-                                  class="text-muted"
-                                >
-                                  Drag and drop or Choose File to upload the image
-                                </p> -->
-								</div>
-							</label>
-						</div>
-					</div>
 				</div>
 
 
@@ -381,116 +294,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 				</div>
 
-
-
-
-
-
-
-
-
 			</form>
-
-			<!-- <div class="row mt-5">
-        <div class="col-12">
-          <div class="card recent-sales">
-
-            <div class="card-body table-responsive">
-              <h5 class="card-title">
-                Recent Sales <span>| Today</span>
-              </h5>
-
-              <table class="table table-borderless datatable overflow-scroll">
-                <thead class="table-light">
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="col">#</th>
-                    <th scope="col">Customer</th>
-                    <th scope="col">Product</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr style="font-family: 'Poppins', sans-serif;">
-                    <th scope="row">
-                      <a href="#">1</a>
-                    </th>
-                    <td>Arun Kumar</td>
-                    <td>
-                      <a href="#" className="text-primary">Milk</a>
-                    </td>
-                    <td>$29</td>
-                    <td>
-                      <span class="badge bg-success text-white">Approved</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <a href="#">2</a>
-                    </th>
-                    <td>Deepak Dalwe</td>
-                    <td>
-                      <a href="#" className="text-primary">Ghee</a>
-                    </td>
-                    <td>$16.5</td>
-                    <td>
-                      <span class="badge bg-danger text-white">Rejected</span>
-                    </td>
-                    <td class="d-flex" style="gap: .7rem;">
-                      <button class="iconbutton"><i class="fa-solid fa-pen-to-square text-success"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-eye text-primary"></i></button>
-                      <button class="iconbutton"><i class="fa-solid fa-trash text-danger"></i></button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
 		</div>
 
@@ -499,7 +303,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/dailyRenewalUpdate.js"></script>
-	
+
 </body>
 
 </html>

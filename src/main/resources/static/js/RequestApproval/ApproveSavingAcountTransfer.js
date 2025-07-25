@@ -105,14 +105,11 @@ function renderTable(data) {
 				<td>${item.debitAccountNumber || '-'}</td>
 				<td>${item.debitCustomerCode || '-'}</td>
 				<td>${item.debitAccountBranch || '-'}</td>
-				<td>${item.debitAverageBalance || '-'}</td>
 				<td>${item.debitContactNumber || '-'}</td>
 				<td>${item.creditAccountNumber || '-'}</td>
 				<td>${item.creditCustomerCode || '-'}</td>
 				<td>${item.creditAccountBranch || '-'}</td>
-				<td>${item.creditAverageBalance || '-'}</td>
-				<td>${item.creditContactNumber || '-'}</td>
-				<td>${item.amount || '-'}</td>
+				
 				
 			</tr>
 		`;
@@ -125,7 +122,7 @@ function filterSavingAccountFundTransfer() {
 	const selectedCode = $('#branchName').val();
 	const fromDateVal = $('#fromDate').val();
 	const toDateVal = $('#toDate').val();
-
+	
 
 	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
 	const toDate = toDateVal ? new Date(toDateVal) : null;

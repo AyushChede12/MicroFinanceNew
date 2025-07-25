@@ -29,12 +29,13 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<title>Payment Entry</title>
+<title>Outgoing Payment Entry</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 
 <body>
 
@@ -51,133 +52,144 @@ pageEncoding="ISO-8859-1"%> -->
 			</nav>
 		</div>
 
-		<div>
-			<form id="formid">
-				<div>
-					<nav>
-						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Box</li>
-						</ol>
-					</nav>
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="branchName"
-									name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
 
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Start Date</label> <input type="date"
-									name="startDate" id="startDate"required="required"
-									
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
+		<form id="searchForm">
 
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo"> End Date</label> <input type="date"
-									name="endDate" id="endDate" required="required"
-									 style="text-transform: uppercase;" />
-							</div>
-						</div>
+			<nav>
+				<ol class="breadcrumb breadcrumb-title">
+					<li class="breadcrumb-item action">Search Box</li>
+				</ol>
+			</nav>
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="d-flex flex-column formFields">
+						<label for="">Branch Name </label> <select id="searchBranchName"
+							name="searchBranchName" required="required"
+							class="form-control selectField" style="height: 30px;">
+							<option value="">Select Branch Name</option>
+						</select>
+					</div>
+
+				</div>
+
+				<div class="col-lg-4">
+					<div class="d-flex flex-column formFields">
+						<label for="vehicalNo">Start Date</label> <input type="date"
+							name="startDate" id="startDate" required="required"
+							style="text-transform: uppercase;" />
 					</div>
 				</div>
-		</div>
 
-		<div class="row">
-			<div class="col-12 text-right mt-3">
-				<button id="searchBtn" class="btnStyle"
-					style="background-color: #FFA500;">Search</button>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-lg-12">
-				<nav>
-					<ol class="breadcrumb breadcrumb-title">
-						<li class="breadcrumb-item action mt-3">Entry Details</li>
-					</ol>
-				</nav>
-			</div>
-
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields">
-					<label for=""> Branch Name</label> <select id=" branchName"
-						name="branchName" required="required" class="form-control selectField"
-						style="height: 30px;">
-						<option value="">Select Branch</option>
-						<option value="Blue">Blue</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Generated Receipt ID</label> <input type="text"
-						name="generatedReceiptID" id="generatedReceiptID" required="required"
-						placeholder="Enter Receipt no." disabled />
-				</div>
-			</div>
-
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Date of Entry</label> <input type="date"
-						name="dateOfEntry" id="dateOfEntry" required="required"
-						placeholder="Enter Registration Date" />
-				</div>
-			</div>
-
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields">
-					<label for=""> Choose Ledger</label> <select id="Branch"
-						name="Branch" required="required" class="form-control selectField"
-						style="height: 30px;">
-						<option value="">Select ledger</option>
-						<option value="Blue">Blue</option>
-					</select>
-				</div>
-			</div>
-
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields">
-					<label for="">Transfer Mode</label> <select id="transferMode"
-						name="transferMode" required="required" class="form-control selectField"
-						style="height: 30px;">
-						<option value="">Select Debit</option>
-						<option value="Blue">Blue</option>
-					</select>
+				<div class="col-lg-4">
+					<div class="d-flex flex-column formFields">
+						<label for="vehicalNo"> End Date</label> <input type="date"
+							name="endDate" id="endDate" required="required"
+							style="text-transform: uppercase;" />
+					</div>
 				</div>
 			</div>
 
 
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields mb-4">
-					<label for="">Transaction Amount</label> <input type="text" name="transactionAmount" id="transactionAmount"
-						required="required" placeholder="Enter Amount" />
+			<div class="row">
+				<div class="col-12 text-center mt-3">
+					<button id="searchBtn" class="btnStyle"
+						style="background-color: #FFA500;">Search</button>
 				</div>
 			</div>
 
-			<div class="col-lg-3">
-				<div class="d-flex flex-column formFields">
-					<label for="">Remarks</label>
-					<textarea name="remarks" id="remarks"
-						style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+		</form>
+
+		<form id="formid">
+			<div class="row">
+				<div class="col-lg-12">
+					<nav>
+						<ol class="breadcrumb breadcrumb-title">
+							<li class="breadcrumb-item action mt-3">Entry Details</li>
+						</ol>
+					</nav>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields">
+						<label for="">Branch Name </label> <select id="entryBranchName"
+							name="entryBranchName" required="required"
+							class="form-control selectField" style="height: 30px;">
+							<option value="">Select Branch Name</option>
+						</select>
+					</div>
+
+				</div>
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields mb-4">
+						<label for="">Generated Receipt ID</label> <input type="text"
+							name="generatedReceiptID" id="generatedReceiptID"
+							required="required" placeholder="Enter Receipt no." disabled />
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields mb-4">
+						<label for="">Date of Entry</label> <input type="date"
+							name="dateOfEntry" id="dateOfEntry" required="required"
+							placeholder="Enter Registration Date" />
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields">
+						<label for=""> Choose Ledger</label> <select id="ledgerAccount"
+							name="ledgerAccount" required="required"
+							class="form-control selectField" style="height: 30px;">
+							<option value="">Select ledger</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields">
+						<label for="">Transfer Mode</label> <select id="transferMode"
+							name="transferMode" required="required"
+							class="form-control selectField" style="height: 30px;">
+							<option value="">Select Transfer Mode</option>
+							<option value="Direct Payment">Direct Payment</option>
+							<option value="Bank Transfer">Bank Transfer</option>
+							<option value="Cash Payment">Cash Payment</option>
+							<option value="Cheque Payment">Cheque Payment</option>
+							<option value="Loan Disbursement">Loan Disbursement</option>
+							<option value="Inter-Branch Transfer">Inter-Branch
+								Transfer</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+				</div>
+
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields mb-4">
+						<label for="">Transaction Amount</label> <input type="text"
+							name="transactionAmount" id="transactionAmount"
+							required="required" placeholder="Enter Amount" />
+					</div>
+				</div>
+
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields">
+						<label for="">Remarks</label>
+						<textarea name="remarks" id="remarks"
+							style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 text-right mt-3">
-				<button id="saveBtn" class="btnStyle"
-					style="background-color: #FFA500;">Save</button>
+			<div class="row">
+				<div class="col-12 text-center mt-3">
+					<button id="saveBtn" class="btnStyle"
+						style="background-color: #FFA500;">Save</button>
+					<button type="button" id="toggleBtn" class="btnStyle bg-primary"
+						onclick="showTableData()">Show</button>
+				</div>
 			</div>
-		</div>
+
 		</form>
 
 		<div class="row mt-5">
@@ -192,14 +204,17 @@ pageEncoding="ISO-8859-1"%> -->
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">ID.</th>
 									<th scope="col">Branch</th>
-									<th scope="col">Txn Date</th>
-									<th scope="col">Direct transfer</th>
-									<th scope="col">Select Ledger</th>
-									<th scope="col">Amount</th>
-									<th scope="col">Narration</th>
+									<th scope="col">Date of Entry</th>
+									<th scope="col">Transfer Mode</th>
+									<th scope="col">Choose Ledger</th>
+									<th scope="col">Transaction Amount</th>
+									<th scope="col">Remarks</th>
+									<th scope="col">View</th>
+
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="tableBody">
+
 							</tbody>
 						</table>
 					</div>
@@ -213,6 +228,13 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/account-management/outgoingPaymentEntry.js"></script>
+	<script>
+		$(document).ready(function() {
+			BranchNameDropdown();
+			LedgerDropdown()
+		});
+	</script>
 </body>
 
 </html>

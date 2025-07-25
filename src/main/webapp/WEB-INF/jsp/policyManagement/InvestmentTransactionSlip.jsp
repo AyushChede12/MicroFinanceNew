@@ -29,6 +29,9 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-YcsIPjYnCmvYp+3mYImENxPlzCP5kafO9ZqzPIP0Lg3AzAv6r6kTTZf1TzLn14RwK55CUNIMSuq66UQBqkzgog=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,40 +64,17 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-
-							
 							<div class="col-lg-12 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Find by Policy Number*</label> <select
-									id="findByPolicyNumber" name="findByPolicyNumber" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
+								<div class="d-flex flex-column formFields">
+									<label for="">Find by Policy Number*</label> <select
+										id="findPolicyNumber" name="findPolicyNumber"
+										required="required" class="form-control selectField"
+										style="height: 30px;">
+										<option value="">Select Branch Name</option>
+
+									</select>
+								</div>
 							</div>
-						</div>
 
 
 
@@ -111,129 +91,190 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 					<div class="mt-5">
-
-						<div class="row">
-
-
-							<div class="col-12">
-								<div class="card recent-sales">
-
-									<div class="card-body table-responsive">
-										<h5 class="card-title">
-											Recent Sales <span>| Today</span>
-										</h5>
-
-										<table
-											class="table table-borderless datatable overflow-scroll">
-											<thead class="table-light">
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="col">#</th>
-													<th scope="col">Customer</th>
-													<th scope="col">Product</th>
-													<th scope="col">Price</th>
-													<th scope="col">Status</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="row"><a href="#">1</a></th>
-													<td>Arun Kumar</td>
-													<td><a href="#" className="text-primary">Milk</a></td>
-													<td>$29</td>
-													<td><span class="badge bg-success text-white">Approved</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+						<div class="row" id="policyDataRow">
+							<div class="col-lg-12">
+								<!-- Scrollable table wrapper -->
+								<div style="overflow-x: auto; max-height: 400px;">
+									<table class="table table-bordered table-striped"
+										id="policyTable">
+										<thead class="thead-dark"
+											style="position: sticky; top: 0; background-color: #343a40; color: white;">
+											<tr>
+												<th>Policy Code</th>
+												<th>Customer Name</th>
+												<th>Policy Amount</th>
+												<th>Renewal Date</th>
+												<th>Policy Type</th>
+												<th>Maturity Amount</th>
+												<th>Deposit Amount</th>
+												<th>Start Date</th>
+												<th>Policy Term</th>
+												<th>Maturity Date</th>
+												<th>Customer Code</th>
+												<th>Contact No</th>
+												<th>Total Deposit</th>
+												<th>Payment Due</th>
+												<th>No. of Installments Paid</th>
+												<th>Approved</th>
+												<th>Branch Name</th>
+												<th>Action</th>
+											</tr>
+										</thead>
+										<tbody id="policyTableBody">
+											<!-- Data will be inserted here -->
+										</tbody>
+									</table>
 								</div>
 							</div>
-
 						</div>
 					</div>
+
+					<br> <br> <br> <br> <br> <br> <br>
+					<div class="mb-3" style="display:flex; justify-content: end">
+						<button id="printBtn" class="btn btn-success">Print
+							</button>
+					</div>	
+					<div id="transactionSection" class="transaction-section">
+						<div style="width: 70%; margin: auto">
+							<h1>Microfinance Services</h1>
+							<p>Address : Nagpur(440024) - Maharashtra</p>
+							<hr />
+
+							<div class="d-flex justify-content-between">
+								<p>
+									Branch Name: <span id="branchCodeSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Start Date: <span id="docSpan"
+										style="width: 15vw; display: inline-block;"></span>
+								</p>
+							</div>
+
+							<div class="d-flex justify-content-between">
+								<p>
+									Policy Code: <span id="policyNoSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Customer Code: <span id="memberCodeSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+							</div>
+
+							<p>
+								Customer Name: <span id="applicantNameSpan"
+									style="width: 12vw; display: inline-block;"></span>
+							</p>
+							<p>
+								Contact No: <span id="mobileSpan"
+									style="width: 12vw; display: inline-block;"></span>
+							</p>
+
+							<div class="d-flex justify-content-between">
+								<p>
+									Policy Type: <span id="planSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Policy Term: <span id="termSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Approved: <span id="approvedSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+							</div>
+
+							<div class="d-flex justify-content-between">
+								<p>
+									Policy Amount: <span id="renewalAmountSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Total Deposit: <span id="totalValueSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Payment Due: <span id="paymentDueSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+							</div>
+
+							<div class="d-flex justify-content-between">
+								<p>
+									Maturity Amount: <span id="maturitySpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									Maturity Date: <span id="maturityDateSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+								<p>
+									No. of Installments Paid: <span id="installmentsPaidSpan"
+										style="width: 12vw; display: inline-block;"></span>
+								</p>
+							</div>
+
+							<div class="d-flex justify-content-end">
+								<hr style="border-color: black; width: 20vw;">
+								<p style="position: relative; top: 23px; right: 17rem">Authorized
+									Signature</p>
+							</div>
+						</div>
+					</div>
+
+
 				</div>
-
-
 			</form>
-
-
-
 		</div>
-
-
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/PolicyManagment/policyReport.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Load html2pdf -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+    document.getElementById("printBtn").addEventListener("click", function () {
+        const printContent = document.getElementById("transactionSection").innerHTML;
+
+        const printWindow = window.open('', '', 'width=800,height=600');
+        printWindow.document.write('<html><head><title>Print</title>');
+        printWindow.document.write('<style>');
+        printWindow.document.write(`
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            table, th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+            }
+        `);
+        printWindow.document.write('</style>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // Wait for new window to load before printing
+        printWindow.onload = function () {
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        };
+    });
+</script>
+
+
 </body>
 
 </html>
