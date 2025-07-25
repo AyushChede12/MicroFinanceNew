@@ -4,7 +4,7 @@ let allFinancialConsultantData = [];
 
 function searchInTheFinanceOnboarding() {
 	$.ajax({
-		url: "/api/financialconsultant/getUnapprovedFinancialConsultants",
+		url: "api/financialconsultant/getUnapprovedFinancialConsultants",
 		type: "POST",
 		contentType: "application/json",
 		success: function(response) {
@@ -105,7 +105,7 @@ function filterBranchNameData() {
 function updateMemberApprovalStatus(id, isApproved) {
 	 
     $.ajax({
-        url: "/api/financialconsultant/approvedFinancialConsultantData",
+        url: "api/financialconsultant/approvedFinancialConsultantData",
         type: "POST",
         data: {
             id: id,

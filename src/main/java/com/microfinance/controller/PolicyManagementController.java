@@ -852,16 +852,11 @@ public class PolicyManagementController {
 	}
 
 
-    }
 
     
-   return ResponseEntity.ok(response);
+   //return ResponseEntity.ok(response);
 
-<<<<<<< HEAD
-=======
-	}
 
->>>>>>> 11dffcc505f11443c581ba7be8a46f20e6444068
 
 
 	@PostMapping("/updateinvestment")
