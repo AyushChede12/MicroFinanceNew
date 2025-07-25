@@ -2,7 +2,11 @@ package com.microfinance.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -156,92 +160,71 @@ public class CustomerManagementService {
 		return customerRepo.findBymemberCode(memberCode);
 	}
 
-	public ApiResponse<addCustomerKYC> saveOrUpdateCustomerKYC(addCustomerKYC kyc, MultipartFile customerPhoto,
-			MultipartFile customerSignature, MultipartFile aadharFrontPhoto, MultipartFile aadharBackPhoto,
-			MultipartFile panPhoto) {
-
-		boolean isNew = true;
-
-		// Step 1: Check if the base customer exists
-		addCustomer baseCustomer = customerRepo.findById(kyc.getId()).orElse(null);
-
-		if (baseCustomer == null) {
-			return ApiResponse.error(HttpStatus.NOT_FOUND, "Customer ID not found in master table.");
-		}
-
-		// Step 2: Check if KYC already exists
-		addCustomerKYC entity = addCustomerKycRepo.findById(kyc.getId()).orElse(new addCustomerKYC());
-
-		if (entity.getId() > 0) {
-			isNew = false;
-		}
-
-		// Step 3: Copy fields from form to entity
-		entity.setSelectByCode(kyc.getSelectByCode());
-		entity.setCustomerName(kyc.getCustomerName());
-		entity.setCustomerCode(kyc.getCustomerCode());
-		entity.setContactNo(kyc.getContactNo());
-		entity.setSingupDate(kyc.getSingupDate());
-		entity.setAadharNo(kyc.getAadharNo());
-		entity.setPan(kyc.getPan());
-		entity.setVoterNo(kyc.getVoterNo());
-		entity.setRationCardNo(kyc.getRationCardNo());
-		entity.setDrivingLicenseNo(kyc.getDrivingLicenseNo());
-		entity.setBankName(kyc.getBankName());
-		entity.setBankBranch(kyc.getBankBranch());
-		entity.setAcountNo(kyc.getAcountNo());
-		entity.setIfscCode(kyc.getIfscCode());
-
-		try {
-			if (customerPhoto != null && !customerPhoto.isEmpty()) {
-				entity.setCustomerPhoto(saveFile2(customerPhoto));
-			}
-			if (customerSignature != null && !customerSignature.isEmpty()) {
-				entity.setCustomerSignature(saveFile2(customerSignature));
-			}
-			if (aadharFrontPhoto != null && !aadharFrontPhoto.isEmpty()) {
-				entity.setAadharFrontPhoto(saveFile2(aadharFrontPhoto));
-			}
-			if (aadharBackPhoto != null && !aadharBackPhoto.isEmpty()) {
-				entity.setAadharBackPhoto(saveFile2(aadharBackPhoto));
-			}
-			if (panPhoto != null && !panPhoto.isEmpty()) {
-				entity.setPanPhoto(saveFile2(panPhoto));
-			}
-		} catch (IOException e) {
-			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed: " + e.getMessage());
-		}
-
-		addCustomerKYC saved = addCustomerKycRepo.save(entity);
-
-		return ApiResponse.success(isNew ? HttpStatus.CREATED : HttpStatus.OK,
-				(isNew ? "KYC saved" : "KYC updated") + " successfully for customer code: " + saved.getCustomerCode(),
-				saved);
-	}
-
-	private String saveFile2(MultipartFile file) throws IOException {
-		if (file != null && !file.isEmpty()) {
-			ensureUploadDirectoryExists1();
-			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-			File destinationFile = new File(uploadDirectory + File.separator + fileName);
-			file.transferTo(destinationFile);
-			System.out.println("Saved at: " + destinationFile.getAbsolutePath());
-			return fileName;
-		}
-		return null;
-	}
-
-	private void ensureUploadDirectoryExists1() {
-		File dir = new File(uploadDirectory);
-		if (!dir.exists()) {
-			boolean created = dir.mkdirs();
-			if (created) {
-				System.out.println("Upload directory created: " + uploadDirectory);
-			} else {
-				System.err.println("Failed to create upload directory: " + uploadDirectory);
-			}
-		}
-	}
+	/*
+	 * public ApiResponse<addCustomerKYC> saveOrUpdateCustomerKYC(addCustomerKYC
+	 * kyc, MultipartFile customerPhoto, MultipartFile customerSignature,
+	 * MultipartFile aadharFrontPhoto, MultipartFile aadharBackPhoto, MultipartFile
+	 * panPhoto) {
+	 * 
+	 * boolean isNew = true;
+	 * 
+	 * // Step 1: Check if the base customer exists addCustomer baseCustomer =
+	 * customerRepo.findById(kyc.getId()).orElse(null);
+	 * 
+	 * if (baseCustomer == null) { return ApiResponse.error(HttpStatus.NOT_FOUND,
+	 * "Customer ID not found in master table."); }
+	 * 
+	 * // Step 2: Check if KYC already exists addCustomerKYC entity =
+	 * addCustomerKycRepo.findById(kyc.getId()).orElse(new addCustomerKYC());
+	 * 
+	 * if (entity.getId() > 0) { isNew = false; }
+	 * 
+	 * // Step 3: Copy fields from form to entity
+	 * entity.setSelectByCode(kyc.getSelectByCode());
+	 * entity.setCustomerName(kyc.getCustomerName());
+	 * entity.setCustomerCode(kyc.getCustomerCode());
+	 * entity.setContactNo(kyc.getContactNo());
+	 * entity.setSingupDate(kyc.getSingupDate());
+	 * entity.setAadharNo(kyc.getAadharNo()); entity.setPan(kyc.getPan());
+	 * entity.setVoterNo(kyc.getVoterNo());
+	 * entity.setRationCardNo(kyc.getRationCardNo());
+	 * entity.setDrivingLicenseNo(kyc.getDrivingLicenseNo());
+	 * entity.setBankName(kyc.getBankName());
+	 * entity.setBankBranch(kyc.getBankBranch());
+	 * entity.setAcountNo(kyc.getAcountNo()); entity.setIfscCode(kyc.getIfscCode());
+	 * 
+	 * try { if (customerPhoto != null && !customerPhoto.isEmpty()) {
+	 * entity.setCustomerPhoto(saveFile2(customerPhoto)); } if (customerSignature !=
+	 * null && !customerSignature.isEmpty()) {
+	 * entity.setCustomerSignature(saveFile2(customerSignature)); } if
+	 * (aadharFrontPhoto != null && !aadharFrontPhoto.isEmpty()) {
+	 * entity.setAadharFrontPhoto(saveFile2(aadharFrontPhoto)); } if
+	 * (aadharBackPhoto != null && !aadharBackPhoto.isEmpty()) {
+	 * entity.setAadharBackPhoto(saveFile2(aadharBackPhoto)); } if (panPhoto != null
+	 * && !panPhoto.isEmpty()) { entity.setPanPhoto(saveFile2(panPhoto)); } } catch
+	 * (IOException e) { return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,
+	 * "File upload failed: " + e.getMessage()); }
+	 * 
+	 * addCustomerKYC saved = addCustomerKycRepo.save(entity);
+	 * 
+	 * return ApiResponse.success(isNew ? HttpStatus.CREATED : HttpStatus.OK, (isNew
+	 * ? "KYC saved" : "KYC updated") + " successfully for customer code: " +
+	 * saved.getCustomerCode(), saved); }
+	 * 
+	 * private String saveFile2(MultipartFile file) throws IOException { if (file !=
+	 * null && !file.isEmpty()) { ensureUploadDirectoryExists1(); String fileName =
+	 * System.currentTimeMillis() + "_" + file.getOriginalFilename(); File
+	 * destinationFile = new File(uploadDirectory + File.separator + fileName);
+	 * file.transferTo(destinationFile); System.out.println("Saved at: " +
+	 * destinationFile.getAbsolutePath()); return fileName; } return null; }
+	 * 
+	 * private void ensureUploadDirectoryExists1() { File dir = new
+	 * File(uploadDirectory); if (!dir.exists()) { boolean created = dir.mkdirs();
+	 * if (created) { System.out.println("Upload directory created: " +
+	 * uploadDirectory); } else {
+	 * System.err.println("Failed to create upload directory: " + uploadDirectory);
+	 * } } }
+	 */
 
 	public List<addCustomer> getApprovedCustomers() {
 		return customerRepo.findByIsApprovedTrue();
