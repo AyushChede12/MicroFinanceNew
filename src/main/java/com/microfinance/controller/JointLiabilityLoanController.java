@@ -1,7 +1,9 @@
 package com.microfinance.controller;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -277,7 +279,7 @@ public class JointLiabilityLoanController {
     }
 	
 // Apply For group loan
-    @PostMapping("/saveloanapproval")
+    @PostMapping("/saveGroupLoan")
     public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
         boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
 
@@ -337,31 +339,63 @@ public class JointLiabilityLoanController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
-    
-    //save loan application
-    @PostMapping("/saveGroupLoan")
-    public ResponseEntity<ApiResponse<LoanAprroval>> saveLoanApproval(@RequestBody LoanAprroval loanAprroval) {
-        boolean isSaved = jointLiabilityLoanService.saveLoanApproval(loanAprroval);
 
-        if (isSaved) {
-            ApiResponse<LoanAprroval> response = ApiResponse.success(
-                HttpStatus.CREATED,
-                "Group Loan saved successfully",
-                loanAprroval
+
+    @PostMapping("/updateApprovalStatusApplyGroupLoan")
+    public ResponseEntity<ApiResponse<ApplyForGroupLoan>> updateApprovalStatusApplyGroupLoan(
+            @RequestBody Map<String, String> request) {
+        
+        String groupCode = request.get("groupCode");
+        String approvalStatus = request.get("approvalStatus"); // "approved" / "not_approved"
+
+        ApplyForGroupLoan updatedLoan = jointLiabilityLoanService
+                .updateApprovalStatusApplyGroupLoan(groupCode, approvalStatus);
+
+        if (updatedLoan != null) {
+            ApiResponse<ApplyForGroupLoan> response = ApiResponse.success(
+                    HttpStatus.OK,
+                    "Loan Approval Status updated successfully.",
+                    updatedLoan
             );
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+            return ResponseEntity.ok(response);
         } else {
-            ApiResponse<LoanAprroval> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save Group Loan."
+            ApiResponse<ApplyForGroupLoan> response = ApiResponse.error(
+                    HttpStatus.NOT_FOUND,
+                    "No Group Loan found for given Group Code."
             );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
+    }
+
+
+   // feach Apply loan group
+   
+
+    @PostMapping("/fetchByGroupCode")
+    public ApiResponse<List<ApplyForGroupLoan>> fetchApplyGroupLoanByGroupcode(@RequestParam("groupCode") String groupCode) {
+    	List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchApplyGroupLoanByGroupcode(groupCode);
+    	if (list != null && !list.isEmpty()) {
+    		return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
+    	} else {
+    		return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
+    	}
+
+    }
+   
+    // feath the property form Installment Re-Payment
+    @PostMapping("/fetchBygroupCode")
+    public ApiResponse<List<ApplyForGroupLoan>> fetchBygroupCode(@RequestParam("groupCode") String groupCode) {
+        List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchBygroupCode(groupCode);
+        if (list != null && !list.isEmpty()) {
+            return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
+        } else {
+            return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
+        }
+
     }
    
 }
-    
-    
+       
 
 
 

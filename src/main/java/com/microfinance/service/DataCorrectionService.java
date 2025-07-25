@@ -18,6 +18,7 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
+import com.microfinance.model.FlexiblepremiumrenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
@@ -30,6 +31,7 @@ import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
+import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
@@ -55,9 +57,12 @@ public class DataCorrectionService {
 
 	@Autowired
 	PolicyRenewalRepo policyRenewalRepo;
-	
+
 	@Autowired
 	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+
+	@Autowired
+	FlexibleRenewalRepo flexibleRenewalRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -360,8 +365,8 @@ public class DataCorrectionService {
 			existing.setFinancialConsultantName(loanapplication.getFinancialConsultantName());
 
 			// Approval
-			//existing.setApprovalDate(loanapplication.getApprovalDate());
-			//existing.setApprovalStatus(loanapplication.getApprovalStatus());
+			// existing.setApprovalDate(loanapplication.getApprovalDate());
+			// existing.setApprovalStatus(loanapplication.getApprovalStatus());
 
 			loanApplicationRepo.save(existing);
 			return true;
@@ -370,10 +375,32 @@ public class DataCorrectionService {
 		}
 	}
 
+<<<<<<< HEAD
 //	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
 //		return policyRenewalRepo.findByPolicyCode(policyCode);
 //	}
+=======
+
+	public List<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub return
+		return policyRenewalRepo.findByPolicyCode(policyCode);
+	}
+>>>>>>> 1c4ad5ab46e3e1e0016b7abcfa50633d5f313bb3
+
+
+//	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return policyRenewalRepo.findByPolicyCode(policyCode);
+//	}
+
+
+	/*
+	 * public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String
+	 * policyCode) { // TODO Auto-generated method stub return
+	 * policyRenewalRepo.findByPolicyCode(policyCode); }
+	 */
+
 
 	public boolean deletePolicyRenewalData(Long id) {
 		// TODO Auto-generated method stub
@@ -390,10 +417,32 @@ public class DataCorrectionService {
 		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
 	}
 
+<<<<<<< HEAD
 //	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
 //		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
 //	}
+=======
+
+	public List<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub return
+		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+	}
+>>>>>>> 1c4ad5ab46e3e1e0016b7abcfa50633d5f313bb3
+
+
+//	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+//	}
+
+	/*
+	 * public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String
+	 * policyCode) { // TODO Auto-generated method stub return
+	 * dailyPremiumRenewalRepo.findByPolicyCode(policyCode); }
+	 */
+
+
 
 	public boolean deleteDailyRenewal(Long id) {
 		// TODO Auto-generated method stub
