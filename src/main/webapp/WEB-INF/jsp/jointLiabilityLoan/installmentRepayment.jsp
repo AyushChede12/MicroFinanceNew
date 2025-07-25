@@ -61,31 +61,14 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Select Name ID & Name*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Find by Group Code*</label> <select
+									id="groupCode" name="groupCode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+								</select>
 							</div>
 						</div>
-
-
-
 					</div>
 
 
@@ -244,29 +227,17 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Fine Deduction*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="groupCode">Select deduction*</label> <select
+									id="groupCode" name="groupCode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+								</select>
 							</div>
 						</div>
+				
 						<div class="col-lg-3 ">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Agent Name* </label> <input type="text"
@@ -325,30 +296,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Paid By*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											<!-- Options will be dynamically added here -->
-
-										</ul>
-									</div>
-								</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields ">
+								<label for="groupCode">Paid BY*</label> <select
+									id="groupCode" name="groupCode" required
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Customer Name</option>
+								</select>
 							</div>
-
 						</div>
+				
 
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">

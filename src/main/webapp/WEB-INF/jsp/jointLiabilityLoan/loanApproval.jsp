@@ -52,7 +52,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</ol>
 				</nav>
 		</div>
-		
+
 
 		<div>
 			<form id="formid">
@@ -114,11 +114,12 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="branchName">Branch Name*</label> <select
-									id="branchName" name="branchName" required
-									class="form-control selectField" style="height: 30px;"></select>
+								<label for=""> Branch Name* </label> <input type="text"
+									name="branchName" id="branchName" required="required"
+									placeholder="Enter  Branch Name" />
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -138,7 +139,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> ContactNumber* </label> <input type="text"
+								<label for=""> Contact Number* </label> <input type="text"
 									name="contactNumber" id="contactNumber" required="required"
 									placeholder="Enter Location" />
 							</div>
@@ -166,15 +167,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date of Approval*</label> <input
-									type="date" name="dateOfApproval" id="dateOfApproval" required="required"
-									placeholder="Enter Vehicle No"
+									type="date" name="dateOfApproval" id="dateOfApproval"
+									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-<div class="col-lg-3">
+						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Approval Status:*</label> <select
+								<label for="approvalStatus">Approval Status:*</label> <select
 									id="approvalStatus" name="approvalStatus" required
 									class="form-control selectField" style="height: 30px;">
 									<option value="approved">Approved</option>
@@ -184,12 +185,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 
-						
+
 
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button  type="button"  id="approved" class="btnStyle bg-success"
+							<button type="button" id="approved" na class="btnStyle bg-success"
 								style="margin-left: 80%">Approved</button>
 
 						</div>
@@ -203,14 +204,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        let today = new Date();
-        let formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD
-        document.getElementById("dateOfApproval").value = formattedDate;
-    });
-</script>
-
+		
 
 
 
