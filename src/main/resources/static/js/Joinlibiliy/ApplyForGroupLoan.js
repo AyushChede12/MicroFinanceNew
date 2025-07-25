@@ -37,6 +37,7 @@ $(document).ready(function() {
 						$('#openingDate').val(customer.openingDate);
 						$('#selectedMember').val(customer.selectedMember);
 						$('#customerName').val(customer.customerName);
+						$('#communityaddress').val(customer.communityAddress);
 						$('#communityLeader').val(customer.communityLeader );
 						$('#contactNumber').val(customer.contactNo );
 						$('#branchName').val(customer.branchName );
@@ -135,6 +136,7 @@ $(document).ready(function() {
 						selectedMember: $('#selectedMember').val(),
 						customerName: $('#customerName').val(),
 			            communityName: $('#communityName').val(),
+						communityAddress: $('#communityaddress').val(),
 			            allocatedStaff: $('#allocatedStaff').val(),
 			            branchName: $('#branchName').val(),
 			            collectionDays: $('#collectionDays').val(),

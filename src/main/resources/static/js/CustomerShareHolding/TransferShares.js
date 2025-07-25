@@ -12,7 +12,7 @@ $(document).ready(function () {
 $(document).ready(function() {
 		alert("Welcome to Transfer Share");
 	    $.ajax({
-	        url: "/api/customershareholdingcontroller/findAllCustomerCode", // make sure this endpoint returns customer list
+	        url: "api/customershareholdingcontroller/findAllCustomerCode", // make sure this endpoint returns customer list
 	        type: "GET",
 	        success: function(response) {
 				console.log("API response:", response);
@@ -50,7 +50,7 @@ $(document).ready(function () {
 
         if (selectedCode !== "") {
             $.ajax({
-                url: '/api/customershareholdingcontroller/fetchByCustomerCode?memberCode=' + selectedCode, // ✅ send as query param
+                url: 'api/customershareholdingcontroller/fetchByCustomerCode?memberCode=' + selectedCode, // ✅ send as query param
                 type: 'POST',
                 success: function (response) {
                     if (response.status === "FOUND") {
@@ -112,7 +112,7 @@ $(document).ready(function () {
 $(document).ready(function() {
 		//alert("branch name");
 	    $.ajax({
-	        url: "/api/customershareholdingcontroller/findAllBranch", // make sure this endpoint returns customer list
+	        url: "api/customershareholdingcontroller/findAllBranch", // make sure this endpoint returns customer list
 	        type: "GET",
 	        success: function(response) {
 				console.log("API response:", response);
@@ -195,7 +195,7 @@ $(document).ready(function() {
         console.log("Sending:", tranfershareData);
 
         $.ajax({
-            url: "/api/customershareholdingcontroller/saveTransferShare",
+            url: "api/customershareholdingcontroller/saveTransferShare",
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(tranfershareData),
@@ -219,7 +219,7 @@ function TransferShareTable() {
     //alert("hill");
 
     $.ajax({
-        url: "/api/customershareholdingcontroller/allDataFetchTransferShareInTable", // ✅ FIXED: Added leading slash
+        url: "api/customershareholdingcontroller/allDataFetchTransferShareInTable", // ✅ FIXED: Added leading slash
         type: "GET",
         dataType: "json",
         success: function (response) {
@@ -317,7 +317,7 @@ function EditTransfershare(id) {
 	$("#saveBtn").hide();
 	//alert(id);
     $.ajax({
-        url: "/api/customershareholdingcontroller/getTransferShareIdEdite",
+        url: "api/customershareholdingcontroller/getTransferShareIdEdite",
         type: "GET",
         data: { id: id }, // Send ID as query param
         success: function(response) {
@@ -379,7 +379,7 @@ function updateShares() {
 
     // AJAX call to update data
     $.ajax({
-        url: "/api/customershareholdingcontroller/updateTransferShare",
+        url: "api/customershareholdingcontroller/updateTransferShare",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(transferData),
@@ -406,7 +406,7 @@ function updateShares() {
 function deleteTransfershare(id) {
     if (confirm("Are you sure you want to delete this loan?")) {
         $.ajax({
-            url: "/api/customershareholdingcontroller/deleteTransferShareById",
+            url: "api/customershareholdingcontroller/deleteTransferShareById",
             type: "POST",
             contentType: "application/x-www-form-urlencoded",  // 🟢 Important
             data: { id: id },  // Sent as form data

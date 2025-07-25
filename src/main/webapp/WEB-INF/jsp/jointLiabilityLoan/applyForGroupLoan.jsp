@@ -110,6 +110,13 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+								<label for="communityName">Community Address*</label> <input
+									type="text" name="communityaddress" id="communityaddress" required
+									placeholder="Enter Community Name" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
 								<label for="allocatedStaff">Allocated Staff*</label> <input
 									type="text" name="allocatedStaff" id="allocatedStaff" required
 									placeholder="Enter Allocated Staff" />

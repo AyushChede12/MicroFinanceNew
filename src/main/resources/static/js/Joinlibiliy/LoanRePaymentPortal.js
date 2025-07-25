@@ -47,22 +47,21 @@ $(document).ready(function () {
 						$('#openingdate').val(customer.openingDate);
 						$('#communityname').val(customer.communityName);
 						$('#branchname').val(customer.branchName);
-						//$('#loanschemename').val(customer.loanSchemeName);
-						//$('#communityaddress').val(customer.communityLeader);
+						$('#loanschemename').val(customer.loanSchemeName);/** */
+						$('#communityaddress').val(customer.communityaddress);/** */
 						$('#contactno').val(customer.contactNumber);
-						//$('#paymentmode').val(customer.branchName);
 						$('#loanpurpose').val(customer.loanPurpose);
-						//$('#term').val(customer.collectionDay);
+						$('#term').val(customer.Term);
 						$('#rateofinterest').val(customer.rateOfInterest);
-						//$('#interest').val(customer.loanPurpose);
-						$('#loanamount').val(customer.totalAmount);
+						$('#interest').val(customer.interestType);
+						$('#loa2namount').val(customer.totalAmount);
 						//$('#emiamount').val(customer.loanPurpose);
 						$('#Processingfee').val(customer.processingFee);
 						$('#gstvalue').val(customer.gstPercentage);
 						$('#legalfee').val(customer.legalCharges);
 						$('#insurencefee').val(customer.insuranceFee);
 						$('#Valuationfee').val(customer.valuationFee);
-						//$('#loanpurpose12').val(customer.loanPurpose);
+						
 						
 					} else {
 						alert('No customer data found!');

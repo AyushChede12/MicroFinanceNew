@@ -853,12 +853,13 @@ public class PolicyManagementController {
         );
 
 
-    }
+    
 
     
-   return ResponseEntity.ok(response);
+   //return ResponseEntity.ok(response);
 
 	}
+
 
 
 
@@ -911,9 +912,11 @@ public class PolicyManagementController {
 	            .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No policy data found for policyCode: " + policyCode));
 	}
 
-
-	
 	}
+	
+	
+	
+	
 
 
 
