@@ -22,6 +22,7 @@ import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.PolicyRenewal;
+import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.model.savingAccountFundTransfer;
@@ -271,4 +272,80 @@ public class RequestApprovalsController {
 	            ApiResponse.success(HttpStatus.OK, "Approval status updated for ID " + id, updatedRenewal)
 	    );
 	}
+	
+	//anjali  (21/7/25)
+	//get  savingAccountFundTransfer data
+		@GetMapping("/getUnapprovedsavingAccountFundTransfer")
+	  	public ResponseEntity<ApiResponse<List<savingAccountFundTransfer>>> getUnapprovedsavingAccountFundTransferData() {
+	  	    List<savingAccountFundTransfer> list = requestApprovalsService.getUnapprovedsavingAccountFundTransferData();
+
+	  	    if (!list.isEmpty()) {
+	  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+	  	    } else {
+	  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+	  	    }
+	  	}
+
+		//anjali  (21/7/25)
+	  	//approve Saving Account transfer
+		
+		 @PostMapping("/approvesavingAccountFundTransfer")
+		    public ResponseEntity<ApiResponse<savingAccountFundTransfer>> approveSavingAccountFundTransfer(
+		            @RequestParam("id") Long id,
+		            @RequestParam("isApproved") boolean isApproved) {
+
+		        Optional<savingAccountFundTransfer> optionalTransfer = requestApprovalsService.approvesavingAccountFundTransferData(id);
+
+		        if (!optionalTransfer.isPresent()) {
+		            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fund Transfer with ID " + id + " not found."));
+		        }
+
+		        savingAccountFundTransfer transfer = optionalTransfer.get();
+		        transfer.setApproved(isApproved);
+
+		        savingAccountFundTransfer updated = requestApprovalsService.saveAccount(transfer);
+
+		        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Updated successfully", updated));
+		    }
+		 
+		 
+		 //ANJALI (23/7/25)
+		 //get Transfer Share data
+		 @GetMapping("/getUnapprovedTransferShare")
+		  	public ResponseEntity<ApiResponse<List<TransferShare>>> getUnapprovedTransferShareData() {
+		  	    List<TransferShare> list = requestApprovalsService.getUnapprovedTransferShareData();
+
+		  	    if (!list.isEmpty()) {
+		  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved investments fetched", list));
+		  	    } else {
+		  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+		  	    }
+		 }
+		 
+		//ANJALI (23/7/25)
+		 //approve share Transaction Data
+		 @PostMapping("/approveShareTransaction")
+		    public ResponseEntity<ApiResponse<TransferShare>> approveShareTransactionData(
+		            @RequestParam("id") Long id,
+		            @RequestParam("isApproved") boolean isApproved) {
+
+		        Optional<TransferShare> optionalTransfer = requestApprovalsService.approveShareTransactionData(id);
+
+		        if (!optionalTransfer.isPresent()) {
+		            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fund Transfer with ID " + id + " not found."));
+		        }
+
+		        TransferShare share = optionalTransfer.get();
+		        share.setApproved(isApproved);
+
+		        TransferShare updated = requestApprovalsService.saveTransferShare(share);
+
+		        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Updated successfully", updated));
+		    }
+		 
+		 
 }

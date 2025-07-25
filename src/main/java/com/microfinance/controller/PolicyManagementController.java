@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Optional;
 
-import org.apache.commons.math3.analysis.function.Add;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +30,6 @@ import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 
 @RestController
@@ -964,50 +960,29 @@ public class PolicyManagementController {
 	}
 
 	
-	@GetMapping("/getAllRdRenewalData")
-	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getAllRdRenewalData() {
-	    List<PolicyRenewal> allRdPolicies = policyManagementService.getAllRdRenewalData();
-
-	    ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All RD Policy Data fetched successfully",
-	            allRdPolicies
-	    );
-
-	    return ResponseEntity.ok(response);
-	}
-	
-	@GetMapping("/getAllDdRenewalData")
-	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getAllDdRenewalData() {
-	    List<DailyPremiumRenewalPM> allRdPolicies = policyManagementService.getAllDdRenewalData();
-
-	    ApiResponse<List<DailyPremiumRenewalPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All DD Policy Data fetched successfully",
-	            allRdPolicies
-	    );
-
-	    return ResponseEntity.ok(response);
-	}
-	
-	@GetMapping("/getAllFdRenewalData")
-	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getAllFdRenewalData() {
-	    List<FlexibleRenewal> allFdPolicies = policyManagementService.getAllFdRenewalData();
-
-	    ApiResponse<List<FlexibleRenewal>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All FD Policy Data fetched successfully",
-	            allFdPolicies
-	    );
-
-	    return ResponseEntity.ok(response);
-	}
   
+	@GetMapping("/getApprovedPolicies")
+    public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
+        List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
+
+        if (approvedList.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+        }
+
+        return ResponseEntity.ok(
+                new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList)
+        );
+    }
+
 	
+
 	@PostMapping("/updateinvestment")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateInvestment(@RequestBody AddnewinvestmentPM invest) {
         AddnewinvestmentPM updated =  policyManagementService.updateInstalmentDetails(invest.getPolicyCode(), invest.getDepositAmount());
 
+   // Niraj Code Above
+    
         if (updated != null) {
             ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
                  HttpStatus.OK,
@@ -1023,6 +998,7 @@ public class PolicyManagementController {
              return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
          }
 	}
+    
 	
 }
 

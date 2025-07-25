@@ -11,7 +11,8 @@ public class ManualJournalEntry {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-	
+
+	private String branchName;
 	private String generatedReceiptID;
     private String dateOfEntry;
     private String creditLedger;
@@ -23,6 +24,13 @@ public class ManualJournalEntry {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getBranchName() {
+		return branchName;
+	}
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 	public String getGeneratedReceiptID() {
 		return generatedReceiptID;

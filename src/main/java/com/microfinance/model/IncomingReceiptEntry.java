@@ -15,7 +15,7 @@ public class IncomingReceiptEntry {
 	private String branchName;
     private String generatedReceiptID; 
     private String dateOfEntry;
-    private String selectLedger;
+    private String ledgerAccount;
     private String transferMode;
     private String transactionAmount;
     private String remarks;
@@ -44,11 +44,13 @@ public class IncomingReceiptEntry {
 	public void setDateOfEntry(String dateOfEntry) {
 		this.dateOfEntry = dateOfEntry;
 	}
-	public String getSelectLedger() {
-		return selectLedger;
+	
+	
+	public String getLedgerAccount() {
+		return ledgerAccount;
 	}
-	public void setSelectLedger(String selectLedger) {
-		this.selectLedger = selectLedger;
+	public void setLedgerAccount(String ledgerAccount) {
+		this.ledgerAccount = ledgerAccount;
 	}
 	public String getTransferMode() {
 		return transferMode;
@@ -68,6 +70,7 @@ public class IncomingReceiptEntry {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+	
 	
 
 }

@@ -80,7 +80,6 @@ function loadLoanTable() {
 					rows += `
                         <tr>
                             <td>${loan.id}</td>
-                            <td>${loan.loanSchemeCode || "-"}</td>
                             <td>${loan.loanPlaneName || "-"}</td>
                             <td>${loan.typeLoan || "-"}</td>
                             <td>${loan.age || "-"}</td>
