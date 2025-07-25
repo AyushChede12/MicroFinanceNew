@@ -382,6 +382,8 @@ public class JointLiabilityLoanController {
 
     
     }
+    
+   
     // feath the property form Installment Re-Payment
     @PostMapping("/fetchBygroupCode")
     public ApiResponse<List<ApplyForGroupLoan>> fetchBygroupCode(@RequestParam("groupCode") String groupCode) {
@@ -395,8 +397,7 @@ public class JointLiabilityLoanController {
     }
    
 }
-    
-    
+       
 
 
 
