@@ -999,6 +999,28 @@ public class PolicyManagementController {
          }
 	}
     
+	@GetMapping("/findPolicyData/{policyCode}")
+	public ResponseEntity<ApiResponse<?>> findPolicyData(@PathVariable String policyCode) {
+	    
+	    List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);
+	    if (!fdData.isEmpty()) {
+	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "FD data found", fdData));
+	    }
+
+	    List<DailyPremiumRenewalPM> drdData = policyManagementService.findDailyData(policyCode);
+	    if (!drdData.isEmpty()) {
+	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "DRD data found", drdData));
+	    }
+
+	    List<PolicyRenewal> renewalData = policyManagementService.findRenewalData(policyCode);
+	    if (!renewalData.isEmpty()) {
+	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "RD/MIS data found", renewalData));
+	    }
+
+	    return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	            .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No policy data found for policyCode: " + policyCode));
+	}
+
+
 	
 }
-
