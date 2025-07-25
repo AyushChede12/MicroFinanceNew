@@ -1,3 +1,4 @@
+
 package com.microfinance.repository;
 
 
@@ -18,12 +19,7 @@ public interface PolicyRenewalRepo extends JpaRepository<PolicyRenewal, Long> {
 	List<PolicyRenewal> findByPolicyCode(String policyCode);
  
 
-	
-
-
 	List<PolicyRenewal> findByIsApprovedFalse();
-
-
 
 
 	List<PolicyRenewal> findByIsApprovedTrue();

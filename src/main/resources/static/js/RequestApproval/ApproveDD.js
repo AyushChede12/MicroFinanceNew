@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function loadDailyPremiumRenewalPMData() {
 	$.ajax({	
-		url: "/api/requestapproval/getUnapprovedDailyPremiumRenewalPM",
+		url: "api/requestapproval/getUnapprovedDailyPremiumRenewalPM",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -106,7 +106,7 @@ $(document).ready(function() {
 		// Approve each selected investment
 		selectedIds.forEach(function(id) {
 			$.ajax({
-				url: "/api/requestapproval/approveDDFromDailyPremiumRenewalPM",
+				url: "api/requestapproval/approveDDFromDailyPremiumRenewalPM",
 				type: "POST",
 				data: {
 					id: id,
