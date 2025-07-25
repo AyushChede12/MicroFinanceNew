@@ -31,20 +31,25 @@ $(document).ready(function() {
 function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
-		url: "/getAllBranchModule",
 		contentType: "application/json",
-		success: function(data) {
+		url: '/api/preference/getAllBranchModule',
+		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
-			data.forEach(branch => {
-				options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
-			});
-			$("#searchBranchName, #entryBranchName").html(options);
+			// The actual branch array is inside response.data
+			if (response && Array.isArray(response.data)) {
+				response.data.forEach(branch => {
+					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
+				});
+			}
+			$("#searchBranchName").html(options);
+			$("#entryBranchName").html(options);
 		},
 		error: function() {
 			alert("Failed to load branch names.");
 		}
 	});
 }
+
 
 // 🔹 Load Ledgers for Manual Journal
 function loadManualJournalLedgers(branchName) {
