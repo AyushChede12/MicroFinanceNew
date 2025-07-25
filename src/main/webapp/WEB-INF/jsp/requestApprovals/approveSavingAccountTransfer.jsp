@@ -120,15 +120,11 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Debit Account Number</th>
 										<th scope="col">Debit Customer Code</th>
 										<th scope="col">Debit Account Branch</th>
-										<th scope="col">Debit Average Balance</th>
 										<th scope="col">Debit Contact Number</th>
 										<th scope="col">Credit Account Number</th>
 										<th scope="col">Credit Customer Code</th>
 										<th scope="col">Credit Account Branch</th>
-										<th scope="col">Credit Average Balance</th>
-										<th scope="col">Credit Contact Number</th>
-										<th scope="col">Amount</th>
-
+										
 									</tr>
 								</thead>
 								<tbody>

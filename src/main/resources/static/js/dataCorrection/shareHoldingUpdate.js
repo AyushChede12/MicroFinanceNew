@@ -16,7 +16,7 @@ $(document).ready(function() {
 			alert("Failed to load customer codes.");
 		}
 	});*/
-	
+
 	$.ajax({
 		url: '/api/customershareholdingcontroller/findAllTransferShare',
 		type: 'GET',
@@ -135,7 +135,7 @@ $(document).ready(function() {
 			previousAccountBalance: $('#previousAccountBalance').val(),
 			previousShareCount: $('#previousShareCount').val(),
 			baseValue: $('#baseValue').val(),
-			branch: $('#branch').val(),
+			branch: $('#branchName').val(),
 			dateOfTransfer: $('#dateOfTransfer').val(),
 			shareIssuedBy: $('#shareIssuedBy').val(),
 			noOfShare: $('#noOfShare').val(),
@@ -167,24 +167,30 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Transfer Share Data Of Customer?")) {
-			$.ajax({
-				url: "/api/customershareholdingcontroller/deleteTransferShareById",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Transfer Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let findByCode = $("#findByCode").val();
+		if (findByCode !== "") {
+			if (confirm("Are you sure you want to delete this Transfer Share Data Of Customer?")) {
+				$.ajax({
+					url: "/api/customershareholdingcontroller/deleteTransferShareById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Transfer Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Transfer Share Data.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Transfer Share Data.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
@@ -192,57 +198,57 @@ $(document).ready(function() {
 	$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 		var findByCode = $('#findByCode').val();
-		if(findByCode && findByCode !== ""){
-			
+		if (findByCode && findByCode !== "") {
+
 			const $formClone = $("#formid").clone();
 
-					// Remove buttons and extra dropdowns
-					$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
-					$formClone.find(".text-center").each(function() {
-						if ($(this).find("button").length > 0) {
-							$(this).remove();
-						}
-					});
+			// Remove buttons and extra dropdowns
+			$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
+			$formClone.find(".text-center").each(function() {
+				if ($(this).find("button").length > 0) {
+					$(this).remove();
+				}
+			});
 
-					// Convert selects to plain text
-					$formClone.find("select").each(function() {
-						const selectedText = $(this).find("option:selected").text();
-						$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
-					});
+			// Convert selects to plain text
+			$formClone.find("select").each(function() {
+				const selectedText = $(this).find("option:selected").text();
+				$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
+			});
 
-					// Convert inputs to plain text
-					$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
-						const value = $(this).val();
-						$(this).replaceWith(`<span class="form-value">${value}</span>`);
-					});
+			// Convert inputs to plain text
+			$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
+				const value = $(this).val();
+				$(this).replaceWith(`<span class="form-value">${value}</span>`);
+			});
 
-					// Convert textareas
-					$formClone.find("textarea").each(function() {
-						const value = $(this).val();
-						$(this).replaceWith(`<span class="form-value">${value}</span>`);
-					});
+			// Convert textareas
+			$formClone.find("textarea").each(function() {
+				const value = $(this).val();
+				$(this).replaceWith(`<span class="form-value">${value}</span>`);
+			});
 
-					// Convert checkboxes and radios
-					$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
-						const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
-						$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
-					});
+			// Convert checkboxes and radios
+			$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
+				const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
+				$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
+			});
 
-					// Optional: Resize images if any
-					$formClone.find("img").each(function() {
-						$(this).css({
-							width: "100px",
-							height: "auto",
-							border: "1px solid #ccc",
-							marginBottom: "10px"
-						});
-					});
+			// Optional: Resize images if any
+			$formClone.find("img").each(function() {
+				$(this).css({
+					width: "100px",
+					height: "auto",
+					border: "1px solid #ccc",
+					marginBottom: "10px"
+				});
+			});
 
-					// Open print window
-					const printWindow = window.open("", "_blank");
-					if (printWindow) {
-						printWindow.document.open();
-						printWindow.document.write(`
+			// Open print window
+			const printWindow = window.open("", "_blank");
+			if (printWindow) {
+				printWindow.document.open();
+				printWindow.document.write(`
 									<html>
 									<head>
 										<title>Print - Customer Form</title>
@@ -300,16 +306,16 @@ $(document).ready(function() {
 									</body>
 									</html>
 								`);
-						printWindow.document.close();
-					} else {
-						alert("Popup blocked. Please allow popups for this website.");
-					}
-			
+				printWindow.document.close();
+			} else {
+				alert("Popup blocked. Please allow popups for this website.");
+			}
+
 		}
-		else{
+		else {
 			alert("First Select Any One Data Then Proceed to Print");
 		}
-		
+
 	});
 
 });

@@ -14,5 +14,8 @@ public interface DailyPremiumRenewalRepo extends JpaRepository<DailyPremiumRenew
 	List<DailyPremiumRenewalPM> findByIsApprovedFalse();
 
 	List<DailyPremiumRenewalPM> findByPolicyCode(String policyCode);
+	List<DailyPremiumRenewalPM> findByIsApprovedTrue();
+
+	Optional<DailyPremiumRenewalPM> findByPolicyCode(String policyCode);
 
 }

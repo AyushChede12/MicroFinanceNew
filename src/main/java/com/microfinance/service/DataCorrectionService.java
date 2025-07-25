@@ -17,6 +17,7 @@ import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SavingAccountActivity;
@@ -27,6 +28,7 @@ import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
+import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
@@ -35,25 +37,28 @@ import com.microfinance.repository.TransferShareRepo;
 
 @Service
 public class DataCorrectionService {
-	
+
 	@Autowired
 	CustomerRepo customerRepo;
-	
+
 	@Autowired
 	SavingAccountActivityRepo savingAccountActivityRepo;
-	
+
 	@Autowired
 	AddInvestmentRepo addInvestmentRepo;
-	
+
 	@Autowired
 	CreateSavingAccountRepo createSavingAccountRepo;
-	
+
 	@Autowired
 	LoanApplicationRepo loanApplicationRepo;
-	
+
 	@Autowired
 	PolicyRenewalRepo policyRenewalRepo;
 	
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
@@ -265,7 +270,6 @@ public class DataCorrectionService {
 			company.setPaymentBy(adddnewinvestmentPM.getPaymentBy());
 			company.setRemark(adddnewinvestmentPM.getRemark());
 			company.setSmsSend(adddnewinvestmentPM.getSmsSend());
-			
 
 			addInvestmentRepo.save(company);
 			return 1;
@@ -275,8 +279,8 @@ public class DataCorrectionService {
 	}
 
 	public List<LoanApplication> getApprovedLoanApplications() {
-        return loanApplicationRepo.findByApprovalStatusTrue();
-    }
+		return loanApplicationRepo.findByApprovalStatusTrue();
+	}
 
 	public List<LoanApplication> fetchAllLoanApplication() {
 		// TODO Auto-generated method stub
@@ -288,15 +292,128 @@ public class DataCorrectionService {
 		return policyRenewalRepo.findByIsApprovedTrue();
 	}
 
+	public boolean deleteLoanApplication(Long id) {
+		// TODO Auto-generated method stub
+		if (loanApplicationRepo.existsById(id)) {
+			loanApplicationRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean updateLoanApplication(LoanApplication loanapplication) {
+		// TODO Auto-generated method stub
+		Optional<LoanApplication> optionalExisting = loanApplicationRepo.findById(loanapplication.getId());
+
+		if (optionalExisting.isPresent()) {
+			LoanApplication existing = optionalExisting.get();
+
+			// Copy fields manually
+			existing.setLoanId(loanapplication.getLoanId());
+			existing.setLoanDate(loanapplication.getLoanDate());
+			existing.setMemberId(loanapplication.getMemberId());
+			existing.setRelativeDetails(loanapplication.getRelativeDetails());
+			existing.setDateOfBirth(loanapplication.getDateOfBirth());
+			existing.setAge(loanapplication.getAge());
+			existing.setContactNo(loanapplication.getContactNo());
+			existing.setMessageStatus(loanapplication.getMessageStatus());
+			existing.setAddress(loanapplication.getAddress());
+			existing.setPinCode(loanapplication.getPinCode());
+			existing.setBranchName(loanapplication.getBranchName());
+			existing.setLoanPlanName(loanapplication.getLoanPlanName());
+			existing.setTypeOfLoan(loanapplication.getTypeOfLoan());
+			existing.setLoanMode(loanapplication.getLoanMode());
+			existing.setLoanTerm(loanapplication.getLoanTerm());
+			existing.setRateOfInterest(loanapplication.getRateOfInterest());
+			existing.setLoanAmount(loanapplication.getLoanAmount());
+			existing.setInterestType(loanapplication.getInterestType());
+			existing.setEmiPayment(loanapplication.getEmiPayment());
+			existing.setPurposeOfLoan(loanapplication.getPurposeOfLoan());
+
+			// Guarantor
+			existing.setGuarantorMemberId(loanapplication.getGuarantorMemberId());
+			existing.setGuarantorIdentity(loanapplication.getGuarantorIdentity());
+			existing.setGuarantorAddress(loanapplication.getGuarantorAddress());
+			existing.setGuarantorPinCode(loanapplication.getGuarantorPinCode());
+			existing.setGuarantorContactNo(loanapplication.getGuarantorContactNo());
+			existing.setGuarantorSecurityType(loanapplication.getGuarantorSecurityType());
+
+			// Co-Applicant
+			existing.setCoApplicantMemberId(loanapplication.getCoApplicantMemberId());
+			existing.setCoApplicantIdentity(loanapplication.getCoApplicantIdentity());
+			existing.setCoApplicantAddress(loanapplication.getCoApplicantAddress());
+			existing.setCoApplicantPinCode(loanapplication.getCoApplicantPinCode());
+			existing.setCoApplicantContactNo(loanapplication.getCoApplicantContactNo());
+			existing.setCoApplicantSecurityType(loanapplication.getCoApplicantSecurityType());
+
+			// Deduction
+			existing.setProcessingFee(loanapplication.getProcessingFee());
+			existing.setLegalCharges(loanapplication.getLegalCharges());
+			existing.setGst(loanapplication.getGst());
+			existing.setInsuranceFee(loanapplication.getInsuranceFee());
+			existing.setValuationFees(loanapplication.getValuationFees());
+			existing.setStationaryFee(loanapplication.getStationaryFee());
+
+			// Financial Consultant
+			existing.setFinancialConsultantId(loanapplication.getFinancialConsultantId());
+			existing.setFinancialConsultantName(loanapplication.getFinancialConsultantName());
+
+			// Approval
+			//existing.setApprovalDate(loanapplication.getApprovalDate());
+			//existing.setApprovalStatus(loanapplication.getApprovalStatus());
+
+			loanApplicationRepo.save(existing);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub
+		return policyRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public boolean deletePolicyRenewalData(Long id) {
+		// TODO Auto-generated method stub
+		if (policyRenewalRepo.existsById(id)) {
+			policyRenewalRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<DailyPremiumRenewalPM> getApprovedDailyRenewal() {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
+	}
+
+	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub
+		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public boolean deleteDailyRenewal(Long id) {
+		// TODO Auto-generated method stub
+		if (dailyPremiumRenewalRepo.existsById(id)) {
+			dailyPremiumRenewalRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+//	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return policyRenewalRepo.findByPolicyCode(policyCode);
+//	}
+
 //	public List<CreateSavingsAccount> fetchSavingDataByCustomerCode(String selectByCustomer) {
 //		// TODO Auto-generated method stub
 //		List<CreateSavingsAccount> list = createSavingAccountRepo.findBySelectByCustomer(selectByCustomer);
 //		return list;
 //	}
-	
-	
-	
-
-
 
 }

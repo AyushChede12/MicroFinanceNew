@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery ajax cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -62,9 +64,9 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="Branch" name="Branch"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">Branch Name</label> <select id="branchName"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
 									<option value="Blue">Blue</option>
 								</select>
@@ -102,40 +104,46 @@ pageEncoding="ISO-8859-1"%> -->
 		<div class="row mt-5">
 			<div class="col-12">
 				<div class="card recent-sales">
-
 					<div class="card-body table-responsive">
 						<h5 class="card-title">Search result</h5>
-
 						<div style="overflow-x: auto; white-space: nowrap;">
-						<table class="table table-borderless datatable">
-							<thead class="table-light">
-								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Sr No.</th>
-									<th scope="col">Customer Name</th>
-									<th scope="col">start Date</th>
-									<th scope="col">Shares Count</th>
-									<th scope="col">Previous Share Count</th>
-									<th scope="col">Amount Transferred</th>
-									<th scope="col">Share Count</th>
-									<th scope="col">Payment mode</th>
-									<th scope="col">Comments</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					    </div>
+							<table class="table table-borderless datatable overflow-scroll">
+								<thead class="table-light">
+									<tr style="font-family: 'Poppins', sans-serif;">
+										<th scope="col"></th>
+										<th scope="col">Sr No.</th>
+										<th scope="col">Customer Name</th>
+										<th scope="col">Branch Name</th>
+										<th scope="col">Start Date</th>
+										<th scope="col">Member Code</th>
+										<th scope="col">Number Of Share</th>
+										<th scope="col">Date of Transfer</th>
+										<th scope="col">Payment Mode</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Table rows will be inserted here dynamically -->
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<div class="row">
+			<div class="col-12 text-center mt-3">
+				<button id="approvedBtn" class="btnStyle"
+					style="background-color: #FFA500;">Approved</button>
+			</div>
+		</div>
 		</div>
 
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/RequestApproval/ApproveShareTransactions.js"></script>
 </body>
 
 </html>
