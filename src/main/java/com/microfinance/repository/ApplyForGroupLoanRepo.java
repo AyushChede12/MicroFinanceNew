@@ -29,7 +29,7 @@ public interface ApplyForGroupLoanRepo extends JpaRepository<ApplyForGroupLoan, 
 	
 
 
-	List<ApplyForGroupLoan> findByGroupCode(String groupCode);
+	
 
 
 }

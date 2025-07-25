@@ -9,7 +9,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	// Fetch all team members and populate the dropdown
 	$.ajax({
-		url: "/api/incentive/getAllTeamMember",
+		url: "api/incentive/getAllTeamMember",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Team Members:", data);
@@ -112,7 +112,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: "/api/incentive/saveDataInGenerateIncentivePayments",
+			url: "api/incentive/saveDataInGenerateIncentivePayments",
 			type: "POST",
 			contentType: "application/json",
 			data: JSON.stringify(data),

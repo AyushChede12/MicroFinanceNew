@@ -23,7 +23,7 @@ let allSavingTransactionData = [];
 
 function searchInTheSavingTransaction() {
 	$.ajax({
-		url: "/api/requestapproval/getUnapprovedSavingTransaction",
+		url: "api/requestapproval/getUnapprovedSavingTransaction",
 		type: "POST",
 		contentType: "application/json",
 		success: function(response) {
@@ -102,7 +102,7 @@ function filterByBranchName() {
 function updateSavingTransactionApprovalStatus(id, isApproved) {
 	 
     $.ajax({
-        url: "/api/requestapproval/approvedSavingTransactionData",
+        url: "api/requestapproval/approvedSavingTransactionData",
         type: "POST",
         data: {
             id: id,

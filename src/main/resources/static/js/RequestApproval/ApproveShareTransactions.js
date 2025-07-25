@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function loadTransferShareData() {
 	$.ajax({
-		url: "/api/requestapproval/getUnapprovedTransferShare",
+		url: "api/requestapproval/getUnapprovedTransferShare",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		// Approve each selected investment
 		selectedIds.forEach(function(id) {
 			$.ajax({
-				url: "/api/requestapproval/approveShareTransaction",
+				url: "api/requestapproval/approveShareTransaction",
 				type: "POST",
 				data: {
 					id: id,
