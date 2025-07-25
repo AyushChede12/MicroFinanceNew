@@ -511,6 +511,21 @@ public AddnewinvestmentPM updateInstalmentDetails(String policyCode, String Depo
     return null; // or throw custom exception if you prefer
 }
 
+public List<FlexibleRenewal> findBypolicyCode(String policyCode) {
+    return flexibleRenewalRepo.findByPolicyCode(policyCode);
+}
+
+
+public List<DailyPremiumRenewalPM> findDailyData(String policyCode) {
+    return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+}
+
+public List<PolicyRenewal> findRenewalData(String policyCode) {
+    return policyRenewalRepo.findByPolicyCode(policyCode);
+}
+
+
+
 
 }
 
