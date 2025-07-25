@@ -448,15 +448,6 @@ public List<AddnewinvestmentPM> getApprovedInvestments() {
 }
 
 
-/*
- * public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) { //
- * TODO Auto-generated method stub
- * 
- * return addinvestmentrepo.findByPolicyCode(policyCode); }
- */
- 
-
-
 
 public List<AddnewinvestmentPM> getApprovedRDPolicies() {
     return addinvestmentrepo.findApprovedRDPolicies();
@@ -472,19 +463,22 @@ public List<AddnewinvestmentPM> getApprovedDDPolicies() {
 	return addinvestmentrepo.findApprovedDDPolicies();
 }
 
-public List<PolicyRenewal> getAllRdRenewalData() {
+public List<AddnewinvestmentPM> getAllRdRenewalData() {
 	// TODO Auto-generated method stub
-	return policyRenewalRepo.findAll();
+	return addinvestmentrepo.findAll();
 }
 
-public List<DailyPremiumRenewalPM> getAllDdRenewalData() {
+public List<AddnewinvestmentPM> getAllDdRenewalData() {
 	// TODO Auto-generated method stub
-	return dailyPremiumRenewalRepo.findAll();
+	return addinvestmentrepo.findAll();
+}
+public List<AddnewinvestmentPM> getAllFdRenewalData() {
+	// TODO Auto-generated method stub
+	return addinvestmentrepo.findAll();
 }
 
-public List<FlexibleRenewal> getAllFdRenewalData() {
-	// TODO Auto-generated method stub
-	return flexibleRenewalRepo.findAll();
+public List<AddnewinvestmentPM> getAllApprovedPolicies() {
+    return addinvestmentrepo.findByIsApprovedTrue();
 }
 
 

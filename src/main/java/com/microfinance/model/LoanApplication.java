@@ -59,7 +59,21 @@ public class LoanApplication {
     private String financialConsultantId;
     private String financialConsultantName;
     private String approvalDate;
-    private String approvalStatus;
+    private boolean approvalStatus;
+    private String photo;
+    private String signature;
+    
+    // Loan Payment
+    private String paymentDate;
+    private String paymentStatus;
+    private String paymentMode;
+    private String accountNo;
+    private String ref_UpiId;
+    private String charges;
+    private String remarks;
+    private String chequeDate;
+    private String chequeNo;
+    
     
     
 	public long getId() {
@@ -296,10 +310,11 @@ public class LoanApplication {
 	public void setFinancialConsultantName(String financialConsultantName) {
 		this.financialConsultantName = financialConsultantName;
 	}
-	public String getApprovalStatus() {
+	
+	public boolean isApprovalStatus() {
 		return approvalStatus;
 	}
-	public void setApprovalStatus(String approvalStatus) {
+	public void setApprovalStatus(boolean approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 	public String getMessageStatus() {
@@ -326,8 +341,76 @@ public class LoanApplication {
 	public void setApprovalDate(String approvalDate) {
 		this.approvalDate = approvalDate;
 	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	public String getPaymentDate() {
+		return paymentDate;
+	}
+	public void setPaymentDate(String paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+	public String getPaymentStatus() {
+		return paymentStatus;
+	}
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
+	}
+	public String getPaymentMode() {
+		return paymentMode;
+	}
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
+	}
+	public String getAccountNo() {
+		return accountNo;
+	}
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+	public String getRef_UpiId() {
+		return ref_UpiId;
+	}
+	public void setRef_UpiId(String ref_UpiId) {
+		this.ref_UpiId = ref_UpiId;
+	}
+	public String getCharges() {
+		return charges;
+	}
+	public void setCharges(String charges) {
+		this.charges = charges;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public String getChequeDate() {
+		return chequeDate;
+	}
+	public void setChequeDate(String chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+	public String getChequeNo() {
+		return chequeNo;
+	}
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+	
+	
 	
 
+	
    
 }
-
