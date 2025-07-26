@@ -45,7 +45,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "POST",
-			url: "/api/loanmanegment/saveLoanManagment",
+			url: "api/loanmanegment/saveLoanManagment",
 			contentType: "application/json",
 			dataType: "json",
 			data: JSON.stringify(loanData),
@@ -69,7 +69,7 @@ $(document).ready(function() {
 // Js for fetching the data on the table
 function loadLoanTable() {
 	$.ajax({
-		url: "/api/loanmanegment/allDataFetchLoanSchemCatelog",
+		url: "api/loanmanegment/allDataFetchLoanSchemCatelog",
 		type: "GET",
 		dataType: "json",
 		success: function(response) {
@@ -171,7 +171,7 @@ function updateToggleColor(input) {
 function deleteLoan(id) {
 	if (confirm("Are you sure you want to delete this loan?")) {
 		$.ajax({
-			url: "/api/loanmanegment/deleteLoanById",
+			url: "api/loanmanegment/deleteLoanById",
 			type: 'POST',
 			contentType: 'application/json',
 			dataType: 'json',

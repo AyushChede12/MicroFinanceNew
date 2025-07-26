@@ -25,7 +25,7 @@ $(document).ready(function() {
 		// Approve each selected row
 		selectedIds.forEach(function(id) {
 			$.ajax({
-				url: "/api/requestapproval/approvesavingAccountFundTransfer",
+				url: "api/requestapproval/approvesavingAccountFundTransfer",
 				type: "POST",
 				data: {
 					id: id,
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 function loadSavingAccountFundTransfer() {
 	$.ajax({
-		url: "/api/requestapproval/getUnapprovedsavingAccountFundTransfer",
+		url: "api/requestapproval/getUnapprovedsavingAccountFundTransfer",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
