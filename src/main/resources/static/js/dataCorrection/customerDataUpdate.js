@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//Without Search in Dropdown
 	/*$.ajax({
-		url: "/api/financialconsultant/getAllCustomerCodes",
+		url: "api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -61,7 +61,7 @@ $(document).ready(function() {
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
-				url: "/api/customershareholdingcontroller/fetchByCustomerCode",
+				url: "api/customershareholdingcontroller/fetchByCustomerCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
 					if (response.status == "FOUND") {
@@ -169,7 +169,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -276,7 +276,7 @@ $(document).ready(function() {
 		if (customerCode !== "") {
 			if (confirm("Are you sure you want to delete this Customer Data?")) {
 				$.ajax({
-					url: "/api/datacorrection/deleteCustomerDataByForm",
+					url: "api/datacorrection/deleteCustomerDataByForm",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {

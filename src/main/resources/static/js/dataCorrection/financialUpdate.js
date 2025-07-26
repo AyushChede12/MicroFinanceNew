@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//Dropdown without search
 	/*$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//Dropdowns with search
 	$.ajax({
-		url: '/api/reports/getApprovedFinancialConsultant',
+		url: 'api/reports/getApprovedFinancialConsultant',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -113,7 +113,7 @@ $(document).ready(function() {
 		let financialCode = $("#financialCode").val();
 		$.ajax({
 			type: "GET",
-			url: "/api/financialconsultant/getfinancialHierarchyByFinancialCode",
+			url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
 			data: { financialCode: financialCode },
 			success: function(response) {
 				if (response.status == "OK") {
@@ -237,7 +237,7 @@ $(document).ready(function() {
 
 
 		$.ajax({
-			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+			url: "api/financialconsultant/saveOrUpdateFinancialConsultant",
 			type: "POST",
 			data: financialData,
 			enctype: 'multipart/form-data',
@@ -389,7 +389,7 @@ $(document).ready(function() {
 		if (financialCode !== "") {
 			if (confirm("Are you sure you want to delete this Financial Data?")) {
 				$.ajax({
-					url: "/api/financialconsultant/deleteFinancialConsultantById",
+					url: "api/financialconsultant/deleteFinancialConsultantById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
