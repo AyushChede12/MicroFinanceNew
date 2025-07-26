@@ -13,7 +13,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: "/api/incentive/saveIncentive",
+            url: "api/incentive/saveIncentive",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(incentiveData),
@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 function loadIncentiveData() {
     $.ajax({
-        url: "/api/incentive/getAllIncentives",
+        url: "api/incentive/getAllIncentives",
         type: "GET",
         contentType: "application/json",
         success: function (response) {
