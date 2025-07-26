@@ -34,6 +34,7 @@ public class partialMaturityPayment {
 	private String branchName;
 	private String payComment;
 	private String modeofPayment;
+	private boolean isApproved;
 	public long getId() {
 		return id;
 	}
@@ -171,6 +172,12 @@ public class partialMaturityPayment {
 	}
 	public void setMaturityDate(String maturityDate) {
 		this.maturityDate = maturityDate;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	
 	
