@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllRelativeModule",
+		url: "api/preference/getAllRelativeModule",
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
