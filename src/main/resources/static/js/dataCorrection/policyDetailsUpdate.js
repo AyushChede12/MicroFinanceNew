@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//Search Without Dropdown
 	/*$.ajax({
-		url: "/api/Policymangment/getaddinvestmentdetails",
+		url: "api/Policymangment/getaddinvestmentdetails",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//Search With Dropdown
 	$.ajax({
-		url: '/api/Policymangment/getaddinvestmentdetails',
+		url: 'api/Policymangment/getaddinvestmentdetails',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/Policymangment/getAllPolicyManagementData",
+		url: "api/Policymangment/getAllPolicyManagementData",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -177,7 +177,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: "/api/datacorrection/updateDataOfPolicyManagement",
+			url: "api/datacorrection/updateDataOfPolicyManagement",
 			type: "POST",
 			data: JSON.stringify(policyData),
 			contentType: "application/json",
@@ -202,7 +202,7 @@ $(document).ready(function() {
 		if (policyCode !== "") {
 			if (confirm("Are you sure you want to delete this Policy Data?")) {
 				$.ajax({
-					url: "/api/datacorrection/deletePolicyDataByForm",
+					url: "api/datacorrection/deletePolicyDataByForm",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {

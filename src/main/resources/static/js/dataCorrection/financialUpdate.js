@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//Dropdown without search
 	/*$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//Dropdowns with search
 	$.ajax({
-		url: '/api/reports/getApprovedFinancialConsultant',
+		url: 'api/reports/getApprovedFinancialConsultant',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -113,7 +113,7 @@ $(document).ready(function() {
 		let financialCode = $("#financialCode").val();
 		$.ajax({
 			type: "GET",
-			url: "/api/financialconsultant/getfinancialHierarchyByFinancialCode",
+			url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
 			data: { financialCode: financialCode },
 			success: function(response) {
 				if (response.status == "OK") {
@@ -220,15 +220,6 @@ $(document).ready(function() {
 		financialData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
 		financialData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
 
-		// Append image paths or Base64 values
-		//var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (photo) financialData.append("customerPhoto", photo);
-		//var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (signature) financialData.append("customerPhoto", signature);
-
-		/*financialData.append("customerPhoto", $('#financialphotoHidden').val());
-		financialData.append("customerSignature", $('#financialsignatureHidden').val());*/
-
 		let photoValue = $('#financialphotoHidden').val();
 		financialData.append("customerPhoto", photoValue || ""); // Always send string path
 
@@ -237,7 +228,7 @@ $(document).ready(function() {
 
 
 		$.ajax({
-			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+			url: "api/financialconsultant/saveOrUpdateFinancialConsultant",
 			type: "POST",
 			data: financialData,
 			enctype: 'multipart/form-data',
@@ -389,7 +380,7 @@ $(document).ready(function() {
 		if (financialCode !== "") {
 			if (confirm("Are you sure you want to delete this Financial Data?")) {
 				$.ajax({
-					url: "/api/financialconsultant/deleteFinancialConsultantById",
+					url: "api/financialconsultant/deleteFinancialConsultantById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
