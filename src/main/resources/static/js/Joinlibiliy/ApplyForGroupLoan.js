@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	// 1. Populate dropdown
 	$.ajax({
-		url: "/api/joinliability/viewGroupDirectories",
+		url: "api/joinliability/viewGroupDirectories",
 		type: "GET",
 		success: function(response) {
 			console.log("API response:", response);
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 		if (selectedCode !== "") {
 			$.ajax({
-				url: '/api/joinliability/fetchByGroupID?groupID=' + selectedCode, // ✅ send as query param
+				url: 'api/joinliability/fetchByGroupID?groupID=' + selectedCode, // ✅ send as query param
 				type: 'POST',
 				success: function(response) {
 					if (response.status === "FOUND") {
@@ -60,7 +60,7 @@ $(document).ready(function() {
 	//fecth data from the crete 
 	//fecth data from the create group Lending
 		$.ajax({
-				url: "/api/joinliability/viewlendinggroup",
+				url: "api/joinliability/viewlendinggroup",
 				type: "GET",
 				success: function(response) {
 					console.log("API response:", response);
@@ -87,7 +87,7 @@ $(document).ready(function() {
 
 				if (selectedCode !== "") {
 					$.ajax({
-						url: '/api/joinliability/fetchByPlanCode?planCode=' + selectedCode, // ✅ send as query param
+						url: 'api/joinliability/fetchByPlanCode?planCode=' + selectedCode, // ✅ send as query param
 						type: 'POST',
 						success: function(response) {
 							if (response.status === "FOUND") {
@@ -162,7 +162,7 @@ $(document).ready(function() {
 			        console.log("Sending group loan data:", groupLoanData);
 
 			        $.ajax({
-			            url: '/api/joinliability/saveGroupLoan',
+			            url: 'api/joinliability/saveGroupLoan',
 			            type: 'POST',
 			            contentType: 'application/json',
 			            data: JSON.stringify(groupLoanData),
@@ -181,7 +181,7 @@ $(document).ready(function() {
 				//feach data
 				function fetchGroupLoanData() {
 				       $.ajax({
-				           url: "/api/joinliability/viewgrouploans",
+				           url: "api/joinliability/viewgrouploans",
 				           type: "GET",
 				           dataType: "json",
 				           success: function (response) {
