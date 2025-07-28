@@ -11,10 +11,11 @@ $(document).ready(function() {
 			planCode: $('#planCode').val(),
 			loanSchemeInformation: $('#loanSchemeInformation').val(),
 			minimumAge: $('#minimumAge').val(),
-			minLoanDurationMonths: $('#minLoanDurationMonths').val(),
+		
+			term: $('#term').val(), 
 			branchName: $('#branchName').val(),
 			maximumAge: $('#maximumAge').val(),
-			maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
+			
 			emiFrequency: $('#emiFrequency').val(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
@@ -40,7 +41,7 @@ $(document).ready(function() {
 		console.log("Sending loanData:", loanData);
 
 		$.ajax({
-			url: '/api/joinliability/createLendingGroupsave',
+			url: 'api/joinliability/createLendingGroupsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(loanData),
@@ -59,7 +60,7 @@ $(document).ready(function() {
 	// Load loan data into table
 	function fetchLoanPlans() {
 		$.ajax({
-			url: "/api/joinliability/viewlendinggroup",
+			url: "api/joinliability/viewlendinggroup",
 			type: "GET",
 			dataType: "json",
 			success: function(response) {
@@ -114,7 +115,7 @@ $(document).ready(function() {
 		const id = $(this).data('id');
 
 		$.ajax({
-			url: `/api/joinliability/editLendingGroup/${id}`,
+			url: `api/joinliability/editLendingGroup/${id}`,
 			type: 'GET',
 			dataType: 'json',
 			success: function(res) {
@@ -126,8 +127,8 @@ $(document).ready(function() {
 					$('#loanSchemeInformation').val(item.loanSchemeInformation);
 					$('#minimumAge').val(item.minimumAge);
 					$('#maximumAge').val(item.maximumAge);
-					$('#minLoanDurationMonths').val(item.minLoanDurationMonths);
-					$('#maxLoanDurationMonths').val(item.maxLoanDurationMonths);
+					$('#Term').val(item.Term);
+					
 					$('#branchName').val(item.branchName);
 					$('#minLoanAmt').val(item.minLoanAmt);
 					$('#maximumLoanAmount').val(item.maximumLoanAmount);
@@ -176,8 +177,8 @@ $(document).ready(function() {
 			loanSchemeInformation: $('#loanSchemeInformation').val()?.trim(),
 			minimumAge: $('#minimumAge').val(),
 			maximumAge: $('#maximumAge').val(),
-			maxLoanDurationMonths: $('#maxLoanDurationMonths').val(),
-			minLoanDurationMonths: $('#minLoanDurationMonths').val(),
+			Term: $('#Term').val(),
+			
 			branchName: $('#branchName').val()?.trim(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			maximumLoanAmount: $('#maximumLoanAmount').val(),
@@ -200,7 +201,7 @@ $(document).ready(function() {
 		
 		// AJAX call to update the lending group
 		$.ajax({
-			url: `/api/joinliability/updateLendingGroup/${id}`,
+			url: `api/joinliability/updateLendingGroup/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(loanPlan),
@@ -225,7 +226,7 @@ $(document).ready(function() {
 
 		if (confirm("Are you sure you want to delete this record?")) {
 			$.ajax({
-				url: `/api/joinliability/deleteLendingGroup/${id}`,
+				url: `api/joinliability/deleteLendingGroup/${id}`,
 				type: "POST",
 				success: function(response) {
 					alert("Record deleted successfully!");

@@ -31,11 +31,8 @@ import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 @RequestMapping("/api/Policymangment")
@@ -840,73 +837,84 @@ public class PolicyManagementController {
 	}
 
 	@GetMapping("/getApprovedPolicies")
-    public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
-        List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
+		List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
 
-        if (approvedList.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
-        }
+		if (approvedList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+		}
 
-        return ResponseEntity.ok(
-                new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList)
-        );
 
-    }
+		return ResponseEntity
+				.ok(new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList));
 
 
 
-	
+
+
+
+
+
+
+    
+  // return ResponseEntity.ok(response);
+
+	}
+
+
+    
+   //return ResponseEntity.ok(response);
+
+
+
 
 
 	@PostMapping("/updateinvestment")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateInvestment(@RequestBody AddnewinvestmentPM invest) {
-        AddnewinvestmentPM updated =  policyManagementService.updateInstalmentDetails(invest.getPolicyCode(), invest.getDepositAmount());
+		AddnewinvestmentPM updated = policyManagementService.updateInstalmentDetails(invest.getPolicyCode(),
+				invest.getDepositAmount());
 
-   // Niraj Code Above
-    
-        if (updated != null) {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
-                 HttpStatus.OK,
-                "MIS deposit updated successfully.",
-                updated
-             );
-             return ResponseEntity.ok(response);
-        } else {
-             ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "MIS deposit not found or failed to update."
-             );
-             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-         }
+		// Niraj Code Above
+
+		if (updated != null) {
+			ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(HttpStatus.OK,
+					"MIS deposit updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"MIS deposit not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 	}
 
-    
 	@GetMapping("/findPolicyData/{policyCode}")
 	public ResponseEntity<ApiResponse<?>> findPolicyData(@PathVariable String policyCode) {
-	    
-	    List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);
-	    if (!fdData.isEmpty()) {
-	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "FD data found", fdData));
-	    }
 
-	    List<DailyPremiumRenewalPM> drdData = policyManagementService.findDailyData(policyCode);
-	    if (!drdData.isEmpty()) {
-	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "DRD data found", drdData));
-	    }
+		List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);
+		if (!fdData.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "FD data found", fdData));
+		}
 
-	    List<PolicyRenewal> renewalData = policyManagementService.findRenewalData(policyCode);
-	    if (!renewalData.isEmpty()) {
-	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "RD/MIS data found", renewalData));
-	    }
+		List<DailyPremiumRenewalPM> drdData = policyManagementService.findDailyData(policyCode);
+		if (!drdData.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "DRD data found", drdData));
+		}
 
-	    return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	            .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No policy data found for policyCode: " + policyCode));
+		List<PolicyRenewal> renewalData = policyManagementService.findRenewalData(policyCode);
+		if (!renewalData.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "RD/MIS data found", renewalData));
+		}
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(ApiResponse.error(HttpStatus.NOT_FOUND, "No policy data found for policyCode: " + policyCode));
 	}
 
 
-	
 }
+
+	
+	
 
 
 

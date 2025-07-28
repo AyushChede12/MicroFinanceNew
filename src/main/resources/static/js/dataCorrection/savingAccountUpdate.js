@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//dropdown without search
 	/*$.ajax({
-		url: "/api/customersavings/getAllSavingAccountData",
+		url: "api/customersavings/getAllSavingAccountData",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//dropdown with search
 	$.ajax({
-		url: '/api/reports/getApprovedSavingAccount',
+		url: 'api/reports/getApprovedSavingAccount',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/customersavings/getAllSavingAccountData",
+		url: "api/customersavings/getAllSavingAccountData",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/customersavings/getAllSavingAccountData",
+		url: "api/customersavings/getAllSavingAccountData",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "GET",
-			url: "/api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
+			url: "api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
 			data: { accountNumber: accountNumber },
 			success: function(response) {
 				if (response.status === "OK") {
@@ -255,7 +255,7 @@ $(document).ready(function() {
 
 
 		$.ajax({
-			url: "/api/customersavings/saveandupdatesavingaccount",
+			url: "api/customersavings/saveandupdatesavingaccount",
 			type: "POST",
 			data: savingData,
 			enctype: 'multipart/form-data',
@@ -284,7 +284,7 @@ $(document).ready(function() {
 		if (accountNumber !== "") {
 			if (confirm("Are you sure you want to delete this Saving Data?")) {
 				$.ajax({
-					url: "/api/customersavings/deleteSavingAccountDataById",
+					url: "api/customersavings/deleteSavingAccountDataById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
