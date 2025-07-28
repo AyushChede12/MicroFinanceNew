@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//Search With Dropdown
 	$.ajax({
-		url: 'api/Policymangment/getaddinvestmentdetails',
+		url: 'api/Policymangment/getApprovedPolicies',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
