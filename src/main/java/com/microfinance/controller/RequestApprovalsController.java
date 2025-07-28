@@ -25,6 +25,7 @@ import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
+import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.service.RequestApprovalsService;
 
@@ -347,5 +348,57 @@ public class RequestApprovalsController {
 		        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Updated successfully", updated));
 		    }
 		 
+		 //anjali on (26/7/25)
+		 //get all policy code
+		 @GetMapping("/getAllPolicyCodes")
+		 public ResponseEntity<ApiResponse<List<partialMaturityPayment>>> getAllPolicyCodes() {
+		     List<partialMaturityPayment> policyCodes = requestApprovalsService.getAllPolicyCodes();
+
+		     if (policyCodes != null && !policyCodes.isEmpty()) {
+		         return ResponseEntity.ok(
+		             ApiResponse.success(HttpStatus.OK, "Policy codes fetched successfully", policyCodes)
+		         );
+		     } else {
+		         return ResponseEntity.status(HttpStatus.NO_CONTENT)
+		             .body(ApiResponse.error(HttpStatus.NO_CONTENT, "No policy codes found"));
+		     }
+		 }
+
+		 
+		 
+		 //anjali on (26/7/25)
+		 //find all partialMaturitydata 
+		 @GetMapping("/getDetailsByPolicyCode")
+		    public ResponseEntity<ApiResponse<partialMaturityPayment>> getDetailsByPolicyCode(@RequestParam String policyCode) {
+		        partialMaturityPayment data = requestApprovalsService.findByPolicyCode(policyCode);
+
+		        if (data != null) {
+		            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Details found", data));
+		        } else {
+		            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No data found for policy code"));
+		        }
+		    }
+		//ANJALI (27/7/25)
+		 //approve Maturity Application
+		 @PostMapping("/approveMaturityApplication1")
+		    public ResponseEntity<ApiResponse<partialMaturityPayment>> approveMaturityApplication(
+		            @RequestParam("id") Long id,
+		            @RequestParam("approveStatus") boolean approveStatus) {
+
+		        Optional<partialMaturityPayment> optionalTransfer = requestApprovalsService.approveMaturityApplication(id);
+
+		        if (!optionalTransfer.isPresent()) {
+		            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fund Transfer with ID " + id + " not found."));
+		        }
+
+		        partialMaturityPayment maturity = optionalTransfer.get();
+		        maturity.setApproveStatus(approveStatus);
+
+		        partialMaturityPayment updated = requestApprovalsService.saveMaturity(maturity);
+
+		        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Updated successfully", updated));
+		    }
 		 
 }
