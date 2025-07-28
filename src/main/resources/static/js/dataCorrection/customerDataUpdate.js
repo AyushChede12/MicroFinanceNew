@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//With Search in Dropdown
 	$.ajax({
-		url: 'approved',
+		url: 'api/customermanagement/approved',
 		type: 'GET',
 		success: function(response) {
 			// response is a direct array of addCustomer
@@ -201,6 +201,7 @@ $(document).ready(function() {
 		customerData.append("id", id);
 		customerData.append("memberCode", $('#customerCode').val());
 		customerData.append("signupDate", $('#signupDate').val());
+		customerData.append("major", $('#major').val());
 		customerData.append("customerName", $('#customerName').val());
 		customerData.append("customerGender", $('#customerGender').val());
 		customerData.append("guardianName", $('#guardianName').val());
@@ -251,7 +252,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: 'POST',
-			url: 'saveOrUpdateCustomer',
+			url: 'api/customermanagement/saveOrUpdateCustomer',
 			data: customerData,
 			contentType: false,
 			processData: false,
@@ -303,8 +304,8 @@ $(document).ready(function() {
 	$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
-		var findByCode = $('#findByCode').val();
-		if (findByCode && findByCode !== "") {
+		var customerCode = $('#customerCode').val();
+		if (customerCode && customerCode !== "") {
 
 			const $formClone = $("#formid").clone();
 

@@ -220,15 +220,6 @@ $(document).ready(function() {
 		financialData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
 		financialData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
 
-		// Append image paths or Base64 values
-		//var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (photo) financialData.append("customerPhoto", photo);
-		//var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (signature) financialData.append("customerPhoto", signature);
-
-		/*financialData.append("customerPhoto", $('#financialphotoHidden').val());
-		financialData.append("customerSignature", $('#financialsignatureHidden').val());*/
-
 		let photoValue = $('#financialphotoHidden').val();
 		financialData.append("customerPhoto", photoValue || ""); // Always send string path
 
