@@ -174,6 +174,8 @@ public class PreferenceController {
 				"Relative modules fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
+	
+	
 
 	@PostMapping("/deleteRelativeModuleById") // Ayush
 	public ResponseEntity<ApiResponse<String>> deleteRelativeModule(@RequestParam("id") Long id) {
