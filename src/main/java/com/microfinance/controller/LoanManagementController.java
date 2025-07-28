@@ -214,4 +214,18 @@ public class LoanManagementController {
 		}
 		return null;
 	}
+	
+	// API to fetch all approved loan IDs (Vaibhav)
+		@GetMapping("/getApprovedLoanIds")
+		public ResponseEntity<ApiResponse<List<String>>> getApprovedLoanIds() {
+			List<String> approvedLoanIds = loanServices.getApprovedLoanIds();
+
+			if (!approvedLoanIds.isEmpty()) {
+				return ResponseEntity
+						.ok(new ApiResponse<>(HttpStatus.OK, "Approved loan IDs fetched successfully", approvedLoanIds));
+			} else {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved loans found", null));
+			}
+		}
 }

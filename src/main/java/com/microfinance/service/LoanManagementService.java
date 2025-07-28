@@ -168,5 +168,13 @@ public class LoanManagementService {
 			return "not_found";
 		}
 	}
+	
+	// Service for getting Approved loan Ids( Vaibhav)
+		public List<String> getApprovedLoanIds() {
+			List<LoanApplication> approvedLoans = loanApplicationRepo.findByApprovalStatusTrue();
+
+			return approvedLoans.stream().map(LoanApplication::getLoanId) // assuming loanId is a String like "LP00001"
+					.collect(Collectors.toList());
+		}
 
 }
