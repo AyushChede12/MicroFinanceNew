@@ -270,16 +270,11 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Approve Status</label> <input type="text"
-									name="ApproveStatus" id="ApproveStatus" required="required" placeholder="" />
-							</div>
-						</div>
+						
 					
 					<div class="row">
 						<div class="col-12 text-right mt-3">
-							<button id="saveBtn" class="btnStyle"
+							<button id="approvedBtn" class="btnStyle"
 								style="background-color: #FFA500;">Approve Maturity</button>
 						</div>
 					</div>

@@ -38,7 +38,7 @@ $(document).ready(function () {
     }
 
     $.ajax({
-      url: '/api/requestapproval/getDetailsByPolicyCode',
+      url: 'api/requestapproval/getDetailsByPolicyCode',
       type: 'GET',
       data: { policyCode: selectedPolicyCode },
       success: function (response) {
@@ -81,4 +81,45 @@ $(document).ready(function () {
       }
     });
   });
+});
+
+$(document).ready(function () {
+    $('#approvedBtn').click(function (e) {
+        e.preventDefault();
+
+        let id = $('#policyId').val();
+        let approveStatus = true;
+
+        if (!id) {
+            alert("plz select policy code");
+            return;
+        }
+
+        $.ajax({
+            url: 'api/requestapproval/approveMaturityApplication1',
+            method: 'POST',
+            data: {
+                id: id,
+                approveStatus: approveStatus
+            },
+            success: function (response) {
+                if (response.status === "OK") {
+                    if (response.data.approveStatus === true) {
+                        alert("This maturity is already approved.");
+                    } else {
+                        alert("Maturity Approved Successfully!");
+						location.reload();
+                    }
+                    console.log("Response:", response.data);
+                } else {
+                    alert("Approval failed.");
+                }
+				
+            },
+            error: function (xhr) {
+                alert("Error occurred during approval.");
+                console.error(xhr);
+            }
+        });
+    });
 });

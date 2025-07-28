@@ -220,4 +220,16 @@ public class RequestApprovalsService {
 		// TODO Auto-generated method stub
 		return partialMaturitypaymentRepo.findByPolicyCode(policyCode);
 	}
+
+
+	public Optional<partialMaturityPayment> approveMaturityApplication(Long id) {
+		// TODO Auto-generated method stub
+		return partialMaturitypaymentRepo.findById(id);
+	}
+
+
+	public partialMaturityPayment saveMaturity(partialMaturityPayment maturity) {
+		// TODO Auto-generated method stub
+		return partialMaturitypaymentRepo.save(maturity);
+	}
 }

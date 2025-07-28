@@ -379,5 +379,26 @@ public class RequestApprovalsController {
 		                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No data found for policy code"));
 		        }
 		    }
+		//ANJALI (27/7/25)
+		 //approve Maturity Application
+		 @PostMapping("/approveMaturityApplication1")
+		    public ResponseEntity<ApiResponse<partialMaturityPayment>> approveMaturityApplication(
+		            @RequestParam("id") Long id,
+		            @RequestParam("approveStatus") boolean approveStatus) {
 
+		        Optional<partialMaturityPayment> optionalTransfer = requestApprovalsService.approveMaturityApplication(id);
+
+		        if (!optionalTransfer.isPresent()) {
+		            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fund Transfer with ID " + id + " not found."));
+		        }
+
+		        partialMaturityPayment maturity = optionalTransfer.get();
+		        maturity.setApproveStatus(approveStatus);
+
+		        partialMaturityPayment updated = requestApprovalsService.saveMaturity(maturity);
+
+		        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Updated successfully", updated));
+		    }
+		 
 }
