@@ -113,7 +113,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveAndUpdateAllBranchModule',
+			url: 'api/preference/saveAndUpdateAllBranchModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
@@ -280,7 +280,7 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/preference/deleteBranchModuleById",
+			url: "api/preference/deleteBranchModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
@@ -316,7 +316,7 @@ function updateBranch() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBranchModule",
+		url: "api/preference/saveAndUpdateAllBranchModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),

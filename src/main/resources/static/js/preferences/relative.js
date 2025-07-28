@@ -23,7 +23,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveRelativeModule',
+			url: 'api/preference/saveRelativeModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
@@ -73,7 +73,7 @@ $(document).ready(function() {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this Relation?")) {
 		$.ajax({
-			url: "/api/preference/deleteRelativeModuleById",
+			url: "api/preference/deleteRelativeModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {

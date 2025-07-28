@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	/*$.ajax({
-		url: '/api/datacorrection/fetchAllLoanApplications',
+		url: 'api/datacorrection/fetchAllLoanApplications',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -47,7 +47,7 @@ $(document).ready(function() {
 	});*/
 
 	$.ajax({
-		url: "/api/datacorrection/fetchAllLoanApplications",
+		url: "api/datacorrection/fetchAllLoanApplications",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -65,7 +65,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/datacorrection/fetchAllLoanApplications",
+		url: "api/datacorrection/fetchAllLoanApplications",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		if (loanId !== "") {
 			$.ajax({
 				type: "GET",
-				url: "/api/loanmanegment/getLoanById",
+				url: "api/loanmanegment/getLoanById",
 				data: { loanId: loanId },
 				success: function(response) {
 					if (response.status == "OK") {
@@ -201,7 +201,7 @@ $(document).ready(function() {
 		if (loanId !== "") {
 			if (confirm("Are you sure you want to delete this Loan Data?")) {
 				$.ajax({
-					url: "/api/datacorrection/deleteLoanApplicationDataById",
+					url: "api/datacorrection/deleteLoanApplicationDataById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
