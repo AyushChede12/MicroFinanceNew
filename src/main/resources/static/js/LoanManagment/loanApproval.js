@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function populateLoanIdDropdown() {
 	$.ajax({
-		url: "/api/loanmanegment/getAllLoanIds",
+		url: "api/loanmanegment/getAllLoanIds",
 		type: "GET",
 		dataType: "json",
 		success: function(response) {
@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 		if (selectedLoanId) {
 			$.ajax({
-				url: "/api/loanmanegment/getLoanById", // your GET API
+				url: "api/loanmanegment/getLoanById", // your GET API
 				type: "GET",
 				data: { loanId: selectedLoanId }, // sending as query param
 				dataType: "json",
@@ -168,7 +168,7 @@ $('#approveBtn').click(function() {
 
 	$.ajax({
 		type: "POST",
-		url: "/api/loanmanegment/approve",
+		url: "api/loanmanegment/approve",
 		contentType: "application/json",
 		data: JSON.stringify(requestData),
 		success: function(response) {

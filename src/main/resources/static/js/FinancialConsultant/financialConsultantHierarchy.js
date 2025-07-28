@@ -55,7 +55,7 @@ $(document).ready(function () {
                                     <td>${item.joiningDate || ''}</td>
                                     <td>${item.address || ''}</td>
                                     <td>${item.branchName || ''}</td>
-                                    <td>${item.financialStatus === true || item.financialStatus === 1 ? 'Active' : 'Inactive'}</td>
+                                    <td>${item.financialStatus ==0 ? 'Active' : 'Inactive'}</td>
                                 </tr>
                             `;
                         });
