@@ -13,6 +13,7 @@ public class LedgerAccountMaster {
 	private long id;
 	
 	private String accountTitle;
+	private String groupName;
 	private String branchName;
 	
 	public long getId() {
@@ -32,6 +33,12 @@ public class LedgerAccountMaster {
 	}
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
+	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 	
 	

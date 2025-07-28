@@ -113,7 +113,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<tr style="font-family: 'Poppins', sans-serif;">
 								<th></th>
 									<th scope="col">Sr No.</th>
-									<th scope="col">Customer Name</th>
+									<th scope="col">Financial Name</th>
 									<th scope="col">Financial Code </th>									
 									<th scope="col">Date of Birth</th>
 									<th scope="col">Academic background</th>

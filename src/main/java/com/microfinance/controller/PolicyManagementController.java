@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Optional;
 
-import org.apache.commons.math3.analysis.function.Add;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,998 +30,891 @@ import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.service.PolicyManagementService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
-
 
 @RestController
 @RequestMapping("/api/Policymangment")
 public class PolicyManagementController {
 
-    @Autowired
-    private PolicyManagementService policyManagementService;
-    
-    
-    @Autowired
-    AddInvestmentRepo addinvestmentrepo;
-    
-    @Autowired
-    PolicyRenewalRepo policyRenewalRepo;
-    
-    @Autowired
-    FlexibleRenewalRepo flexibleRenewalRepo;
-    
-    @Autowired
-    DailyPremiumRenewalRepo dailyPremiumRenewalRepo;  
-    
-    //save daily Deposite
-    @PostMapping("/daily-depositsave")
-    public ResponseEntity<ApiResponse<DailyDepositPM>> savedailyDeposite(@RequestBody DailyDepositPM dailyDepositPM)
-    {
-    	boolean isSaved=policyManagementService.savedailydeposite(dailyDepositPM);
-    	
-    	if(isSaved)
-    	{
-    		ApiResponse<DailyDepositPM> response=ApiResponse.success(HttpStatus.CREATED, "Daily Deposite saved successfully", dailyDepositPM);
-    		 return ResponseEntity.status(HttpStatus.CREATED).body(response);
-    		
-    		
-    	}else
-    	 {
-            ApiResponse<DailyDepositPM> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save fixed deposit."
-            );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-    	
-    }
-    } 
-    // View All daily Deposits
-    @GetMapping("/daily-deposit/view")
-    public ResponseEntity<ApiResponse<List<DailyDepositPM>>> getAlldailyDeposits() {
-        List<DailyDepositPM> deposits = policyManagementService.getAlldailydepositedata();
+	@Autowired
+	private PolicyManagementService policyManagementService;
 
-        if (deposits != null && !deposits.isEmpty()) {
-            ApiResponse<List<DailyDepositPM>> response = ApiResponse.success(HttpStatus.OK,
-                "Daily deposits fetched successfully.",
-                deposits
-            );
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ApiResponse<List<DailyDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-                "No daily deposits found."
-            );
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
-    }
+	@Autowired
+	AddInvestmentRepo addinvestmentrepo;
+
+	@Autowired
+	PolicyRenewalRepo policyRenewalRepo;
+
+	@Autowired
+	FlexibleRenewalRepo flexibleRenewalRepo;
+
+	@Autowired
+	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
+
+	// save daily Deposite
+	@PostMapping("/daily-depositsave")
+	public ResponseEntity<ApiResponse<DailyDepositPM>> savedailyDeposite(@RequestBody DailyDepositPM dailyDepositPM) {
+		boolean isSaved = policyManagementService.savedailydeposite(dailyDepositPM);
+
+		if (isSaved) {
+			ApiResponse<DailyDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
+					"Daily Deposite saved successfully", dailyDepositPM);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+
+		} else {
+			ApiResponse<DailyDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save fixed deposit.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
+		}
+	}
+
+	// View All daily Deposits
+	@GetMapping("/daily-deposit/view")
+	public ResponseEntity<ApiResponse<List<DailyDepositPM>>> getAlldailyDeposits() {
+		List<DailyDepositPM> deposits = policyManagementService.getAlldailydepositedata();
+
+		if (deposits != null && !deposits.isEmpty()) {
+			ApiResponse<List<DailyDepositPM>> response = ApiResponse.success(HttpStatus.OK,
+					"Daily deposits fetched successfully.", deposits);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<List<DailyDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No daily deposits found.");
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
+
 // feacth by id daily deposite
-    @GetMapping("/dailyedit/{id}")
-    public ResponseEntity<ApiResponse<DailyDepositPM>> getDailyDepositById(@PathVariable Long id) {
-        DailyDepositPM deposit = policyManagementService.getDailyDepositById(id);
+	@GetMapping("/dailyedit/{id}")
+	public ResponseEntity<ApiResponse<DailyDepositPM>> getDailyDepositById(@PathVariable Long id) {
+		DailyDepositPM deposit = policyManagementService.getDailyDepositById(id);
 
-        if (deposit != null) {
-            ApiResponse<DailyDepositPM> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Daily deposit fetched successfully.",
-                deposit
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<DailyDepositPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Daily deposit not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		if (deposit != null) {
+			ApiResponse<DailyDepositPM> response = ApiResponse.success(HttpStatus.OK,
+					"Daily deposit fetched successfully.", deposit);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<DailyDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Daily deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
 // update the deposite daily data
-    @PostMapping("/dailyupdate/{id}")
-    public ResponseEntity<ApiResponse<DailyDepositPM>> updateDailyDeposit(
-            @PathVariable Long id,
-            @RequestBody DailyDepositPM updatedData) {
+	@PostMapping("/dailyupdate/{id}")
+	public ResponseEntity<ApiResponse<DailyDepositPM>> updateDailyDeposit(@PathVariable Long id,
+			@RequestBody DailyDepositPM updatedData) {
 
-        DailyDepositPM updated = policyManagementService.updateDailyDeposit(id, updatedData);
+		DailyDepositPM updated = policyManagementService.updateDailyDeposit(id, updatedData);
 
-        if (updated != null) {
-            ApiResponse<DailyDepositPM> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Daily deposit updated successfully.",
-                updated
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<DailyDepositPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Daily deposit not found or failed to update."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    //delete the data of the daily deposite
-    @PostMapping("/dailydelete/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteDailyDeposit(@PathVariable Long id) {
-        boolean deleted = policyManagementService.deleteDailyDeposit(id);
+		if (updated != null) {
+			ApiResponse<DailyDepositPM> response = ApiResponse.success(HttpStatus.OK,
+					"Daily deposit updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<DailyDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Daily deposit not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        if (deleted) {
-            ApiResponse<Void> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Daily deposit deleted successfully.",
-                null
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<Void> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Daily deposit not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
- // Save Recurring Deposit
-    @PostMapping("/recurring-depositsave")
-    public ResponseEntity<ApiResponse<RecurringDepositPM>>saveRecurringDeposit(@RequestBody RecurringDepositPM recurringDepositPM) {
-        boolean isSaved = policyManagementService.saveRecuringDailyDeposite(recurringDepositPM);
-        System.out.println("Received Term: " + recurringDepositPM.getRdterm());
+	// delete the data of the daily deposite
+	@PostMapping("/dailydelete/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteDailyDeposit(@PathVariable Long id) {
+		boolean deleted = policyManagementService.deleteDailyDeposit(id);
 
-        if (isSaved) {
-            ApiResponse<RecurringDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
-                "Recurring deposit saved successfully.",
-                recurringDepositPM
-            );
-            return new ResponseEntity<>(response, HttpStatus.CREATED);
-        } else {
-            ApiResponse<RecurringDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
-                "Failed to save recurring deposit."
-            );
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
-    }
+		if (deleted) {
+			ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Daily deposit deleted successfully.",
+					null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Daily deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
+	// Save Recurring Deposit
+	@PostMapping("/recurring-depositsave")
+	public ResponseEntity<ApiResponse<RecurringDepositPM>> saveRecurringDeposit(
+			@RequestBody RecurringDepositPM recurringDepositPM) {
+		boolean isSaved = policyManagementService.saveRecuringDailyDeposite(recurringDepositPM);
+		System.out.println("Received Term: " + recurringDepositPM.getRdterm());
 
+		if (isSaved) {
+			ApiResponse<RecurringDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
+					"Recurring deposit saved successfully.", recurringDepositPM);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			ApiResponse<RecurringDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save recurring deposit.");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
+	}
 
-    // View All Recurring Deposits
-    @GetMapping("/recurring-depositview")
-    public ResponseEntity<ApiResponse<List<RecurringDepositPM>>> getAllRecurringDeposits() {
-        List<RecurringDepositPM> deposits = policyManagementService.getAllData1();
-            
-        if (deposits != null && !deposits.isEmpty()) {
-            ApiResponse<List<RecurringDepositPM>> response = ApiResponse.success(HttpStatus.OK,
-                "Recurring deposits fetched successfully.",
-                deposits
-            );
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ApiResponse<List<RecurringDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-                "No recurring deposits found."
-            );
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
-    }
-    
+	// View All Recurring Deposits
+	@GetMapping("/recurring-depositview")
+	public ResponseEntity<ApiResponse<List<RecurringDepositPM>>> getAllRecurringDeposits() {
+		List<RecurringDepositPM> deposits = policyManagementService.getAllData1();
 
- // GET BY ID reccuring deposite
-    @GetMapping("/recurringedit/{id}")
-    public ResponseEntity<ApiResponse<RecurringDepositPM>> getRecurringDepositById(@PathVariable Long id) {
-        RecurringDepositPM deposit = policyManagementService.getRecurringDepositById(id);
+		if (deposits != null && !deposits.isEmpty()) {
+			ApiResponse<List<RecurringDepositPM>> response = ApiResponse.success(HttpStatus.OK,
+					"Recurring deposits fetched successfully.", deposits);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<List<RecurringDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No recurring deposits found.");
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
 
-        if (deposit != null) {
-            ApiResponse<RecurringDepositPM> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Recurring deposit fetched successfully.",
-                deposit
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<RecurringDepositPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Recurring deposit not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-   // Update reccuring deposite 
-    @PostMapping("/recurringupdate/{id}")
-    public ResponseEntity<ApiResponse<RecurringDepositPM>> updateRecurringDeposit(
-            @PathVariable Long id,
-            @RequestBody RecurringDepositPM updatedData) {
+	// GET BY ID reccuring deposite
+	@GetMapping("/recurringedit/{id}")
+	public ResponseEntity<ApiResponse<RecurringDepositPM>> getRecurringDepositById(@PathVariable Long id) {
+		RecurringDepositPM deposit = policyManagementService.getRecurringDepositById(id);
 
-        RecurringDepositPM updated = policyManagementService.updateRecurringDeposit(id, updatedData);
+		if (deposit != null) {
+			ApiResponse<RecurringDepositPM> response = ApiResponse.success(HttpStatus.OK,
+					"Recurring deposit fetched successfully.", deposit);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<RecurringDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Recurring deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        if (updated != null) {
-            ApiResponse<RecurringDepositPM> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Recurring deposit updated successfully.",
-                updated
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<RecurringDepositPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Recurring deposit not found or failed to update."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    //delete reccuring deposite
-    @PostMapping("/recurringdelete/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteRecurringDeposit(@PathVariable Long id) {
-        boolean deleted = policyManagementService.deleteRecurringDeposit(id);
+	// Update reccuring deposite
+	@PostMapping("/recurringupdate/{id}")
+	public ResponseEntity<ApiResponse<RecurringDepositPM>> updateRecurringDeposit(@PathVariable Long id,
+			@RequestBody RecurringDepositPM updatedData) {
 
-        if (deleted) {
-            ApiResponse<Void> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Recurring deposit deleted successfully.",
-                null
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<Void> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Recurring deposit not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		RecurringDepositPM updated = policyManagementService.updateRecurringDeposit(id, updatedData);
 
-    
-    
+		if (updated != null) {
+			ApiResponse<RecurringDepositPM> response = ApiResponse.success(HttpStatus.OK,
+					"Recurring deposit updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<RecurringDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Recurring deposit not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-    // Save Fixed Deposit
-    @PostMapping("/fixed-depositsave")
-    public ResponseEntity<ApiResponse<FixedDepositPM>> saveFixedDeposit(@RequestBody FixedDepositPM fixedDepositPM) {
-        boolean isSaved = policyManagementService.saveFixedDeposite(fixedDepositPM);
+	// delete reccuring deposite
+	@PostMapping("/recurringdelete/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteRecurringDeposit(@PathVariable Long id) {
+		boolean deleted = policyManagementService.deleteRecurringDeposit(id);
 
-        if (isSaved) {
-            ApiResponse<FixedDepositPM> response = ApiResponse.success(
-                HttpStatus.CREATED,
-                "Fixed deposit saved successfully.",
-                fixedDepositPM
-            );
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } else {
-            ApiResponse<FixedDepositPM> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save fixed deposit."
-            );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
+		if (deleted) {
+			ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Recurring deposit deleted successfully.",
+					null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Recurring deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
+	// Save Fixed Deposit
+	@PostMapping("/fixed-depositsave")
+	public ResponseEntity<ApiResponse<FixedDepositPM>> saveFixedDeposit(@RequestBody FixedDepositPM fixedDepositPM) {
+		boolean isSaved = policyManagementService.saveFixedDeposite(fixedDepositPM);
 
-    // View All Fixed Deposits
-    @GetMapping("/fixed-depositview")
-    public ResponseEntity<ApiResponse<List<FixedDepositPM>>> getAllFixedDeposits() {
-        List<FixedDepositPM> deposits = policyManagementService.getAllFixeddata();
+		if (isSaved) {
+			ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
+					"Fixed deposit saved successfully.", fixedDepositPM);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} else {
+			ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save fixed deposit.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
 
-        if (deposits != null && !deposits.isEmpty()) {
-            ApiResponse<List<FixedDepositPM>> response = ApiResponse.success(HttpStatus.OK,
-                "Fixed deposits fetched successfully.",
-                deposits
-            );
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ApiResponse<List<FixedDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-                "No fixed deposits found."
-            );
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
-    }
-    //fetch by id fixed deposit
-    @GetMapping("/fixededit/{id}")
-    public ResponseEntity<ApiResponse<FixedDepositPM>> getFixedDepositById(@PathVariable Long id) {
-        FixedDepositPM deposit = policyManagementService.getFixedDepositById(id);
+	// View All Fixed Deposits
+	@GetMapping("/fixed-depositview")
+	public ResponseEntity<ApiResponse<List<FixedDepositPM>>> getAllFixedDeposits() {
+		List<FixedDepositPM> deposits = policyManagementService.getAllFixeddata();
 
-        if (deposit != null) {
-            ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit fetched successfully.", deposit);
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed deposit not found for ID: " + id);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		if (deposits != null && !deposits.isEmpty()) {
+			ApiResponse<List<FixedDepositPM>> response = ApiResponse.success(HttpStatus.OK,
+					"Fixed deposits fetched successfully.", deposits);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<List<FixedDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No fixed deposits found.");
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
 
- // Update Fixed deposit
-    @PostMapping("/fixedupdate/{id}")
-    public ResponseEntity<ApiResponse<FixedDepositPM>> updateFixedDeposit(
-            @PathVariable Long id,
-            @RequestBody FixedDepositPM updatedData) {
+	// fetch by id fixed deposit
+	@GetMapping("/fixededit/{id}")
+	public ResponseEntity<ApiResponse<FixedDepositPM>> getFixedDepositById(@PathVariable Long id) {
+		FixedDepositPM deposit = policyManagementService.getFixedDepositById(id);
 
-        FixedDepositPM updated = policyManagementService.updateFixedDeposit(id, updatedData);
+		if (deposit != null) {
+			ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.OK,
+					"Fixed deposit fetched successfully.", deposit);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Fixed deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        if (updated != null) {
-            ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit updated successfully.", updated);
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed deposit not found or failed to update.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    
-    //  Delete fixed deposit
-    @PostMapping("/fixeddelete/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteFixedDeposit(@PathVariable Long id) {
-        boolean deleted = policyManagementService.deleteFixedDeposit(id);
+	// Update Fixed deposit
+	@PostMapping("/fixedupdate/{id}")
+	public ResponseEntity<ApiResponse<FixedDepositPM>> updateFixedDeposit(@PathVariable Long id,
+			@RequestBody FixedDepositPM updatedData) {
 
-        if (deleted) {
-            ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit deleted successfully.", null);
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed deposit not found for ID: " + id);
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		FixedDepositPM updated = policyManagementService.updateFixedDeposit(id, updatedData);
 
+		if (updated != null) {
+			ApiResponse<FixedDepositPM> response = ApiResponse.success(HttpStatus.OK,
+					"Fixed deposit updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<FixedDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Fixed deposit not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-    
-    //MIS Deposit save 
-    
-    @PostMapping("/mis-deposit/save")
-    public ResponseEntity<ApiResponse<MISDepositPM>> savemisdeposite(@RequestBody MISDepositPM misDepositPM)
-    {
-    	boolean isSaved=policyManagementService.savemistdeposite(misDepositPM);
-    	if(isSaved)
-    	{
-    		ApiResponse<MISDepositPM> response=ApiResponse.success(HttpStatus.CREATED, "The MIS Deposite saved succesfully", misDepositPM);
-    		 return new ResponseEntity<>(response, HttpStatus.CREATED);
-    		
-    		
-    	}else{
-            ApiResponse<MISDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
-                    "Failed to save MIS deposit."
-                );
-                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-            }
-    	
-    	
-    }
- // View All MIS Deposits
-    @GetMapping("/mis-deposit/view")
-    public ResponseEntity<ApiResponse<List<MISDepositPM>>> getAllMISDeposits() {
-        List<MISDepositPM> deposits = policyManagementService.getAllMISDepositData();
+	// Delete fixed deposit
+	@PostMapping("/fixeddelete/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteFixedDeposit(@PathVariable Long id) {
+		boolean deleted = policyManagementService.deleteFixedDeposit(id);
 
-        if (deposits != null && !deposits.isEmpty()) {
-            ApiResponse<List<MISDepositPM>> response = ApiResponse.success(
-                HttpStatus.OK,
-                "MIS deposits fetched successfully.",
-                deposits
-            );
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } else {
-            ApiResponse<List<MISDepositPM>> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "No MIS deposits found."
-            );
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
-    }
+		if (deleted) {
+			ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Fixed deposit deleted successfully.",
+					null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Fixed deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
+	// MIS Deposit save
 
+	@PostMapping("/mis-deposit/save")
+	public ResponseEntity<ApiResponse<MISDepositPM>> savemisdeposite(@RequestBody MISDepositPM misDepositPM) {
+		boolean isSaved = policyManagementService.savemistdeposite(misDepositPM);
+		if (isSaved) {
+			ApiResponse<MISDepositPM> response = ApiResponse.success(HttpStatus.CREATED,
+					"The MIS Deposite saved succesfully", misDepositPM);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
 
- //Get MIS deposit by ID
- @GetMapping("/misedit/{id}")
-   public ResponseEntity<ApiResponse<MISDepositPM>> getMISDepositById(@PathVariable Long id) {
-       MISDepositPM deposit = policyManagementService.getMISDepositById(id);
+		} else {
+			ApiResponse<MISDepositPM> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save MIS deposit.");
+			return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+		}
 
-      if (deposit != null) {
-           ApiResponse<MISDepositPM> response = ApiResponse.success(
-                HttpStatus.OK,
-               "MIS deposit fetched successfully.",
-               deposit
-          );
-          return ResponseEntity.ok(response);
-        } else {
-           ApiResponse<MISDepositPM> response = ApiResponse.error(
-               HttpStatus.NOT_FOUND,
-                "MIS deposit not found for ID: " + id
-           );
-          return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
- }
-    // Update MIS deposit
+	}
 
-    @PostMapping("/misupdate/{id}")
-   public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(
-            @PathVariable Long id,
-           @RequestBody MISDepositPM updatedData) {
+	// View All MIS Deposits
+	@GetMapping("/mis-deposit/view")
+	public ResponseEntity<ApiResponse<List<MISDepositPM>>> getAllMISDeposits() {
+		List<MISDepositPM> deposits = policyManagementService.getAllMISDepositData();
 
-       MISDepositPM updated = policyManagementService.updateMISDeposit(id, updatedData);
+		if (deposits != null && !deposits.isEmpty()) {
+			ApiResponse<List<MISDepositPM>> response = ApiResponse.success(HttpStatus.OK,
+					"MIS deposits fetched successfully.", deposits);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<List<MISDepositPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No MIS deposits found.");
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
 
-       if (updated != null) {
-           ApiResponse<MISDepositPM> response = ApiResponse.success(
-                HttpStatus.OK,
-               "MIS deposit updated successfully.",
-               updated
-            );
-            return ResponseEntity.ok(response);
-       } else {
-            ApiResponse<MISDepositPM> response = ApiResponse.error(
-               HttpStatus.NOT_FOUND,
-               "MIS deposit not found or failed to update."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+	// Get MIS deposit by ID
+	@GetMapping("/misedit/{id}")
+	public ResponseEntity<ApiResponse<MISDepositPM>> getMISDepositById(@PathVariable Long id) {
+		MISDepositPM deposit = policyManagementService.getMISDepositById(id);
 
-    // Delete MIS deposit
-    @DeleteMapping("/misdelete/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteMISDeposit(@PathVariable Long id) {
-       boolean deleted = policyManagementService.deleteMISDeposit(id);
+		if (deposit != null) {
+			ApiResponse<MISDepositPM> response = ApiResponse.success(HttpStatus.OK, "MIS deposit fetched successfully.",
+					deposit);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<MISDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"MIS deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+	// Update MIS deposit
 
-        if (deleted) {
-            ApiResponse<Void> response = ApiResponse.success(
-               HttpStatus.OK,
-                "MIS deposit deleted successfully.",
-               null
-          );
-            return ResponseEntity.ok(response);
-       } else {
-           ApiResponse<Void> response = ApiResponse.error(
-               HttpStatus.NOT_FOUND,
-                "MIS deposit not found for ID: " + id
-          );
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-   }
-    
+	@PostMapping("/misupdate/{id}")
+	public ResponseEntity<ApiResponse<MISDepositPM>> updateMISDeposit(@PathVariable Long id,
+			@RequestBody MISDepositPM updatedData) {
 
-   
-    
-    // Get Scheme Name by Scheme Term
-    
-    @GetMapping("/getSchemeNameBySchemeType")
-    public Map<String, List<String>> getSchemeNameBySchemeType(
-            @RequestParam(value = "drd", required = false) String drd,
-            @RequestParam(value = "rd", required = false) String rd,
-            @RequestParam(value = "fd", required = false) String fd,
-            @RequestParam(value = "mis", required = false) String mis) {
+		MISDepositPM updated = policyManagementService.updateMISDeposit(id, updatedData);
 
-        Map<String, List<String>> response = new HashMap<>();
+		if (updated != null) {
+			ApiResponse<MISDepositPM> response = ApiResponse.success(HttpStatus.OK, "MIS deposit updated successfully.",
+					updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<MISDepositPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"MIS deposit not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        if (drd != null) {
-            response.put("allBrands", policyManagementService.getSchemeNameBySchemeType(drd));
-        }
-        if (rd != null) {
-            response.put("allRds", policyManagementService.getRRDBySchemeType(rd));
-        }
-        if (fd != null) {
-            response.put("allFRDs", policyManagementService.getFRDBySchemeType(fd));
-        }
-        if (mis != null) {
-            response.put("allMISRDs", policyManagementService.getMISRDBySchemeType(mis));
-        }
+	// Delete MIS deposit
+	@DeleteMapping("/misdelete/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteMISDeposit(@PathVariable Long id) {
+		boolean deleted = policyManagementService.deleteMISDeposit(id);
 
-        return response;
-    }
+		if (deleted) {
+			ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "MIS deposit deleted successfully.", null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND, "MIS deposit not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-    
-    
-    
-    
-  
+	// Get Scheme Name by Scheme Term
 
+	@GetMapping("/getSchemeNameBySchemeType")
+	public Map<String, List<String>> getSchemeNameBySchemeType(
+			@RequestParam(value = "drd", required = false) String drd,
+			@RequestParam(value = "rd", required = false) String rd,
+			@RequestParam(value = "fd", required = false) String fd,
+			@RequestParam(value = "mis", required = false) String mis) {
 
+		Map<String, List<String>> response = new HashMap<>();
 
+		if (drd != null) {
+			response.put("allBrands", policyManagementService.getSchemeNameBySchemeType(drd));
+		}
+		if (rd != null) {
+			response.put("allRds", policyManagementService.getRRDBySchemeType(rd));
+		}
+		if (fd != null) {
+			response.put("allFRDs", policyManagementService.getFRDBySchemeType(fd));
+		}
+		if (mis != null) {
+			response.put("allMISRDs", policyManagementService.getMISRDBySchemeType(mis));
+		}
 
+		return response;
+	}
 
- // view add new Investment details
- 	//Ashwini
- 	@GetMapping("/getaddinvestmentdetails")
- 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAddInvestmentDetails() {
- 		 List<AddnewinvestmentPM> invest = policyManagementService.getAddInvestmentDetails();
- 		 
- 		 if (invest != null && !invest.isEmpty()) {
- 	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.success(HttpStatus.OK,
- 	                "Investment Details fetched successfully.",
- 	                invest
- 	            );
- 	            return new ResponseEntity<>(response, HttpStatus.OK);
- 	        } else {
- 	            ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
- 	                "No Details found."
- 	            );
- 	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
- 	        }
- 	}
- 	
- 	
- 	//fetch new investment details by BranchName
- 	//Ashwini
- 	
- 	@GetMapping("/getinvestmentdetails")
- 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> findByBranch(@RequestParam  String branchName) {
- 		 List<AddnewinvestmentPM> invest = policyManagementService.findByBranch(branchName);
- 		
- 		
- 			ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.FOUND, "investment fetched successfully.", invest);
-            return ResponseEntity.ok(response);
-      
- 	}
- 	
- 	
+	// view add new Investment details
+	// Ashwini
+	@GetMapping("/getaddinvestmentdetails")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAddInvestmentDetails() {
+		List<AddnewinvestmentPM> invest = policyManagementService.getAddInvestmentDetails();
 
- 	
- 	@GetMapping("/ddterm")
- 	public ResponseEntity<ApiResponse<DailyDepositPM>> getDDTermAndInterestRate(
- 	        @RequestParam(name = "planNameDD", required = true) String planNameDD) {
+		if (invest != null && !invest.isEmpty()) {
+			ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.success(HttpStatus.OK,
+					"Investment Details fetched successfully.", invest);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			ApiResponse<List<AddnewinvestmentPM>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Details found.");
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		}
+	}
 
- 	    DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
- 	    if (response != null) {
- 	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Daily Deposit plan details found", response));
- 	    } else {
- 	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
- 	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Daily Deposit plan not found"));
- 	    }
- 	}
+	// fetch new investment details by BranchName
+	// Ashwini
 
- 	
+	@GetMapping("/getinvestmentdetails")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> findByBranch(@RequestParam String branchName) {
+		List<AddnewinvestmentPM> invest = policyManagementService.findByBranch(branchName);
 
-    
- 
-    @GetMapping("/rdterm")
-    public ResponseEntity<ApiResponse<RecurringDepositPM>> getRDTermAndInterestRate(
-            @RequestParam(name = "planNameRD", required = true) String planNameRD) {
+		ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"investment fetched successfully.", invest);
+		return ResponseEntity.ok(response);
 
-        RecurringDepositPM response = policyManagementService.getRDTermAndInterestRate(planNameRD);
-        if (response != null) {
-            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Recurring Deposit plan details found", response));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Recurring Deposit plan not found"));
-        }
-    }
+	}
 
-	
-    @GetMapping("/fdterm")
-    public ResponseEntity<ApiResponse<FixedDepositPM>> getFDTermAndInterestRate(
-            @RequestParam(name = "planNameFD", required = true) String planNameFD) {
+	@GetMapping("/ddterm")
+	public ResponseEntity<ApiResponse<DailyDepositPM>> getDDTermAndInterestRate(
+			@RequestParam(name = "planNameDD", required = true) String planNameDD) {
 
-        FixedDepositPM response = policyManagementService.getFDTermAndInterestRate(planNameFD);
-        if (response != null) {
-            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Fixed Deposit plan details found", response));
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed Deposit plan not found"));
-        }
-    }
+		DailyDepositPM response = policyManagementService.getDDTermAndInterestRate(planNameDD);
+		if (response != null) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Daily Deposit plan details found", response));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Daily Deposit plan not found"));
+		}
+	}
 
-    
- 
+	@GetMapping("/rdterm")
+	public ResponseEntity<ApiResponse<RecurringDepositPM>> getRDTermAndInterestRate(
+			@RequestParam(name = "planNameRD", required = true) String planNameRD) {
 
-    
-	
+		RecurringDepositPM response = policyManagementService.getRDTermAndInterestRate(planNameRD);
+		if (response != null) {
+			return ResponseEntity
+					.ok(ApiResponse.success(HttpStatus.OK, "Recurring Deposit plan details found", response));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Recurring Deposit plan not found"));
+		}
+	}
+
+	@GetMapping("/fdterm")
+	public ResponseEntity<ApiResponse<FixedDepositPM>> getFDTermAndInterestRate(
+			@RequestParam(name = "planNameFD", required = true) String planNameFD) {
+
+		FixedDepositPM response = policyManagementService.getFDTermAndInterestRate(planNameFD);
+		if (response != null) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Fixed Deposit plan details found", response));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Fixed Deposit plan not found"));
+		}
+	}
+
 	@GetMapping("/misterm")
-	public ResponseEntity<?> getMISTermAndInterestRate(@RequestParam(name = "planNameMD", required = true) String planNameMD) {
-	    MISDepositPM response = policyManagementService.getMISTermAndInterestRate(planNameMD);
-	    if (response != null) {
-	        return ResponseEntity.ok(response);
-	    } else {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
-	    }
+	public ResponseEntity<?> getMISTermAndInterestRate(
+			@RequestParam(name = "planNameMD", required = true) String planNameMD) {
+		MISDepositPM response = policyManagementService.getMISTermAndInterestRate(planNameMD);
+		if (response != null) {
+			return ResponseEntity.ok(response);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Data not found");
+		}
 	}
 
 	@PostMapping("/saveInvestment")
-    public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveInvestment(@RequestBody AddnewinvestmentPM investment) {
-        try {
-            AddnewinvestmentPM savedInvestment = policyManagementService.saveInvestment(investment);
-            ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
-                    HttpStatus.OK,
-                    "✅ Investment saved successfully",
-                    savedInvestment
-            );
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace(); // Debugging only
-            ApiResponse<AddnewinvestmentPM> errorResponse = new ApiResponse<>(
-                    HttpStatus.INTERNAL_SERVER_ERROR,
-                    "❌ Failed to save investment",
-                    null
-            );
-            return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    
-	
-	@GetMapping("/getAllDDTerm")               //Niraj
-	public List<DailyDepositPM> getAllDDTerm(){
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveInvestment(@RequestBody AddnewinvestmentPM investment) {
+		try {
+			AddnewinvestmentPM savedInvestment = policyManagementService.saveInvestment(investment);
+			ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(HttpStatus.OK,
+					"✅ Investment saved successfully", savedInvestment);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace(); // Debugging only
+			ApiResponse<AddnewinvestmentPM> errorResponse = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR,
+					"❌ Failed to save investment", null);
+			return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@GetMapping("/getAllDDTerm") // Niraj
+	public List<DailyDepositPM> getAllDDTerm() {
 		List<DailyDepositPM> list = policyManagementService.getAllDDTerm();
 		return list;
 	}
-	
-	
+
 	@GetMapping("/getAllRDPolicies")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllRDPolicies() {
-	    List<AddnewinvestmentPM> rdPolicies = policyManagementService.getApprovedRDPolicies();
+		List<AddnewinvestmentPM> rdPolicies = policyManagementService.getApprovedRDPolicies();
 
-	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "Approved RD policies fetched successfully",
-	            rdPolicies
-	    );
+		ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.OK,
+				"Approved RD policies fetched successfully", rdPolicies);
 
-	    return ResponseEntity.ok(response);
+		return ResponseEntity.ok(response);
 	}
 
-
-	
 	@GetMapping("/getAllFDPolicies")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllFDPolicies() {
-	    List<AddnewinvestmentPM> fdPolicies = policyManagementService.getApprovedFDPolicies();
+		List<AddnewinvestmentPM> fdPolicies = policyManagementService.getApprovedFDPolicies();
 
-	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "Approved FD policies fetched successfully",
-	            fdPolicies
-	    );
+		ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.OK,
+				"Approved FD policies fetched successfully", fdPolicies);
 
-	    return ResponseEntity.ok(response);
+		return ResponseEntity.ok(response);
 	}
-	
+
 	@GetMapping("/getAllDDPolicies")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllDDPolicies() {
-	    List<AddnewinvestmentPM> ddPolicies = policyManagementService.getApprovedDDPolicies();
+		List<AddnewinvestmentPM> ddPolicies = policyManagementService.getApprovedDDPolicies();
 
-	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "Approved DD policies fetched successfully",
-	            ddPolicies
-	    );
+		ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.OK,
+				"Approved DD policies fetched successfully", ddPolicies);
 
-	    return ResponseEntity.ok(response);
+		return ResponseEntity.ok(response);
 	}
-	
 
 	@GetMapping("/getPolicyByPolicyCode")
-	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getPolicyByPolicyCode(@RequestParam("policyCode") String policyCode) {
-	    Optional<AddnewinvestmentPM> optionalPolicy = policyManagementService.findByPolicyCode(policyCode);
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> getPolicyByPolicyCode(
+			@RequestParam("policyCode") String policyCode) {
+		Optional<AddnewinvestmentPM> optionalPolicy = policyManagementService.findByPolicyCode(policyCode);
 
-	    if (optionalPolicy.isPresent()) {
-	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
-	                HttpStatus.OK,
-	                "Policy found successfully",
-	                optionalPolicy.get()
-	        );
-	        return ResponseEntity.ok(response);
-	    } else {
-	        ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(
-	                HttpStatus.NOT_FOUND,
-	                "Policy not found for code: " + policyCode,
-	                null
-	        );
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-	    }
+		if (optionalPolicy.isPresent()) {
+			ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(HttpStatus.OK, "Policy found successfully",
+					optionalPolicy.get());
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<AddnewinvestmentPM> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Policy not found for code: " + policyCode, null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 	}
 
-	
-	
 	@GetMapping("/getAllPolicyManagementData")
 	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getAllPolicyManagementData() {
-	    List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllPolicyManagementData();
+		List<AddnewinvestmentPM> allPolicies = policyManagementService.getAllPolicyManagementData();
 
-	    ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All policy management data fetched successfully",
-	            allPolicies
-	    );
+		ApiResponse<List<AddnewinvestmentPM>> response = new ApiResponse<>(HttpStatus.OK,
+				"All policy management data fetched successfully", allPolicies);
 
-	    return ResponseEntity.ok(response);
+		return ResponseEntity.ok(response);
 	}
 
-    
 	@GetMapping("/getNextPolicyCode")
 	public ResponseEntity<String> getNextPolicyCode(@RequestParam String schemeType) {
-	    String prefix = schemeType.toUpperCase(); // e.g., RD, FD, DRD
+		String prefix = schemeType.toUpperCase(); // e.g., RD, FD, DRD
 
-	    // Get the highest ID in the table
-	    Long maxId = addinvestmentrepo.findMaxId(); // Custom method
-	    long nextId = (maxId != null) ? maxId + 1 : 1;
+		// Get the highest ID in the table
+		Long maxId = addinvestmentrepo.findMaxId(); // Custom method
+		long nextId = (maxId != null) ? maxId + 1 : 1;
 
-	    // Generate a unique part (timestamp or 4-digit random)
-	    String uniquePart = String.valueOf((int)(Math.random() * 9000) + 1000); // Random 4-digit number
-	    // Alternative: String uniquePart = String.valueOf(System.currentTimeMillis()).substring(8); // Last 5 digits of timestamp
+		// Generate a unique part (timestamp or 4-digit random)
+		String uniquePart = String.valueOf((int) (Math.random() * 9000) + 1000); // Random 4-digit number
+		// Alternative: String uniquePart =
+		// String.valueOf(System.currentTimeMillis()).substring(8); // Last 5 digits of
+		// timestamp
 
-	    // Final policy code: e.g., RD-7284-0004
-	    String nextPolicyCode = String.format("%s-%s-%04d", prefix, uniquePart, nextId);
+		// Final policy code: e.g., RD-7284-0004
+		String nextPolicyCode = String.format("%s-%s-%04d", prefix, uniquePart, nextId);
 
-	    return ResponseEntity.ok(nextPolicyCode);
+		return ResponseEntity.ok(nextPolicyCode);
 	}
 
 	@PostMapping("/updateDueAndInstallment")
 	public ResponseEntity<ApiResponse<String>> updateDueAndInstallment(@RequestBody Map<String, Object> data) {
-	    try {
-	        String policyCode = (String) data.get("policyCode");
-	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
-	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+		try {
+			String policyCode = (String) data.get("policyCode");
+			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+			int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
-	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
-	        if (!optional.isPresent()) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
-	        }
+			Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+			if (!optional.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+			}
 
-	        AddnewinvestmentPM investment = optional.get();
+			AddnewinvestmentPM investment = optional.get();
 
-	        // Parse current values
-	        double currentDue = parseDoubleSafe(investment.getAmountDue());
-	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
-	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+			// Parse current values
+			double currentDue = parseDoubleSafe(investment.getAmountDue());
+			int currentPaid = parseIntSafe(investment.getLastInstPaid());
+			double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
 
-	        // Calculate updated values
-	        double totalDeduction = policyAmount * noOfInstallments;
-	        double updatedDue = currentDue - totalDeduction;
-	        int updatedPaid = currentPaid + noOfInstallments;
-	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
+			// Calculate updated values
+			double totalDeduction = policyAmount * noOfInstallments;
+			double updatedDue = currentDue - totalDeduction;
+			int updatedPaid = currentPaid + noOfInstallments;
+			double updatedPaidAmount = currentPaidAmount + totalDeduction;
 
-	        // Check if no payment is needed
-	        if (currentDue <= 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is already settled or overpaid.", null));
-	        }
+			// Check if no payment is needed
+			if (currentDue <= 0) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+						"No payment needed. Policy is already settled or overpaid.", null));
+			}
 
-	        // Update the investment
-	        investment.setAmountDue(String.valueOf(updatedDue));
-	        investment.setLastInstPaid(String.valueOf(updatedPaid));
-	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
-	        addinvestmentrepo.save(investment);
+			// Update the investment
+			investment.setAmountDue(String.valueOf(updatedDue));
+			investment.setLastInstPaid(String.valueOf(updatedPaid));
+			investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+			addinvestmentrepo.save(investment);
 
-	        // Save to PolicyRenewal
-	        PolicyRenewal renewal = new PolicyRenewal();
-	        renewal.setPolicyCode(investment.getPolicyCode());
-	        renewal.setRenewalDate(LocalDate.now().toString());
-	        renewal.setPolicyDate(investment.getPolicyStartDate());
-	        renewal.setMaturityDate(investment.getMaturityDate());
-	        renewal.setCustomerCode(investment.getMemberSelection());
-	        renewal.setClientName(investment.getCustomerName());
-	        renewal.setContactNo(investment.getContactNo());
-	        renewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
-	        renewal.setPolicyType(investment.getSchemeType());
-	        renewal.setPolicyTerm(investment.getSchemeTerm());
-	        renewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
-	        renewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
-	        renewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
-	        renewal.setLastPaymentDate(investment.getLastPaymentDate());
-	        renewal.setDueDate(investment.getDueDate());
-	        renewal.setBranchname(investment.getBranchName());
-	        renewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
-	        renewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
-	        renewal.setModeOfPayment(investment.getModeOfPayment());
-	        policyRenewalRepo.save(renewal);
+			// Save to PolicyRenewal
+			PolicyRenewal renewal = new PolicyRenewal();
+			renewal.setPolicyCode(investment.getPolicyCode());
+			renewal.setRenewalDate(LocalDate.now().toString());
+			renewal.setPolicyDate(investment.getPolicyStartDate());
+			renewal.setMaturityDate(investment.getMaturityDate());
+			renewal.setCustomerCode(investment.getMemberSelection());
+			renewal.setClientName(investment.getCustomerName());
+			renewal.setContactNo(investment.getContactNo());
+			renewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+			renewal.setPolicyType(investment.getSchemeType());
+			renewal.setPolicyTerm(investment.getSchemeTerm());
+			renewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+			renewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+			renewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+			renewal.setLastPaymentDate(investment.getLastPaymentDate());
+			renewal.setDueDate(investment.getDueDate());
+			renewal.setBranchname(investment.getBranchName());
+			renewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+			renewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+			renewal.setModeOfPayment(investment.getModeOfPayment());
+			policyRenewalRepo.save(renewal);
 
-	        // Final message based on updatedDue
-	        if (updatedDue == 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
-	        } else if (updatedDue < 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
-	        } else {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
-	        }
+			// Final message based on updatedDue
+			if (updatedDue == 0) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+			} else if (updatedDue < 0) {
+				return ResponseEntity
+						.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+			} else {
+				return ResponseEntity.ok(
+						new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+			}
 
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
-	    }
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+					new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+		}
 	}
 
 	private Double parseDoubleSafe(String value) {
-	    if (value == null || value.trim().isEmpty()) return 0.0;
-	    return Double.parseDouble(value);
+		if (value == null || value.trim().isEmpty())
+			return 0.0;
+		return Double.parseDouble(value);
 	}
 
 	private Integer parseIntSafe(String value) {
-	    if (value == null || value.trim().isEmpty()) return 0;
-	    return Integer.parseInt(value);
+		if (value == null || value.trim().isEmpty())
+			return 0;
+		return Integer.parseInt(value);
 	}
 
-	
 	@PostMapping("/updateFDDueAndInstallment")
 	public ResponseEntity<ApiResponse<String>> updateFDDueAndInstallment(@RequestBody Map<String, Object> data) {
-	    try {
-	        String policyCode = (String) data.get("policyCode");
-	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
-	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+		try {
+			String policyCode = (String) data.get("policyCode");
+			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+			int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
-	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
-	        if (!optional.isPresent()) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
-	        }
+			Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+			if (!optional.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+			}
 
-	        AddnewinvestmentPM investment = optional.get();
+			AddnewinvestmentPM investment = optional.get();
 
-	        // Parse current values
-	        double currentDue = parseDoubleSafe(investment.getAmountDue());
-	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
-	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+			// Parse current values
+			double currentDue = parseDoubleSafe(investment.getAmountDue());
+			int currentPaid = parseIntSafe(investment.getLastInstPaid());
+			double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
 
-	        // Calculate updated values
-	        double totalDeduction = policyAmount * noOfInstallments;
-	        double updatedDue = currentDue - totalDeduction;
-	        int updatedPaid = currentPaid + noOfInstallments;
-	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
+			// Calculate updated values
+			double totalDeduction = policyAmount * noOfInstallments;
+			double updatedDue = currentDue - totalDeduction;
+			int updatedPaid = currentPaid + noOfInstallments;
+			double updatedPaidAmount = currentPaidAmount + totalDeduction;
 
-	        // Check if no payment is needed
-	        if (currentDue <= 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is already settled or overpaid.", null));
-	        }
+			// Check if no payment is needed
+			if (currentDue <= 0) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+						"No payment needed. Policy is already settled or overpaid.", null));
+			}
 
-	        // Update the investment
-	        investment.setAmountDue(String.valueOf(updatedDue));
-	        investment.setLastInstPaid(String.valueOf(updatedPaid));
-	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
-	        addinvestmentrepo.save(investment);
+			// Update the investment
+			investment.setAmountDue(String.valueOf(updatedDue));
+			investment.setLastInstPaid(String.valueOf(updatedPaid));
+			investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+			addinvestmentrepo.save(investment);
 
-	        // Save to PolicyRenewal
-	        FlexibleRenewal fRenewal = new FlexibleRenewal();
-	        fRenewal.setPolicyCode(investment.getPolicyCode());
-	        fRenewal.setRenewalDate(LocalDate.now().toString());
-	        fRenewal.setPolicyDate(investment.getPolicyStartDate());
-	        fRenewal.setMaturityDate(investment.getMaturityDate());
-	        fRenewal.setCustomerCode(investment.getMemberSelection());
-	        fRenewal.setClientName(investment.getCustomerName());
-	        fRenewal.setContactNo(investment.getContactNo());
-	        fRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
-	        fRenewal.setPolicyType(investment.getSchemeType());
-	        fRenewal.setPolicyTerm(investment.getSchemeTerm());
-	        fRenewal.setBranchname(investment.getBranchName());
-	        fRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
-	        fRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
-	        fRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
-	        fRenewal.setLastPaymentDate(investment.getLastPaymentDate());
-	        fRenewal.setDueDate(investment.getDueDate());
-	        fRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
-	        fRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
-	        fRenewal.setModeOfPayment(investment.getModeOfPayment());
-	        flexibleRenewalRepo.save(fRenewal);
+			// Save to PolicyRenewal
+			FlexibleRenewal fRenewal = new FlexibleRenewal();
+			fRenewal.setPolicyCode(investment.getPolicyCode());
+			fRenewal.setRenewalDate(LocalDate.now().toString());
+			fRenewal.setPolicyDate(investment.getPolicyStartDate());
+			fRenewal.setMaturityDate(investment.getMaturityDate());
+			fRenewal.setCustomerCode(investment.getMemberSelection());
+			fRenewal.setClientName(investment.getCustomerName());
+			fRenewal.setContactNo(investment.getContactNo());
+			fRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+			fRenewal.setPolicyType(investment.getSchemeType());
+			fRenewal.setPolicyTerm(investment.getSchemeTerm());
+			fRenewal.setBranchname(investment.getBranchName());
+			fRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+			fRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+			fRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+			fRenewal.setLastPaymentDate(investment.getLastPaymentDate());
+			fRenewal.setDueDate(investment.getDueDate());
+			fRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+			fRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+			fRenewal.setModeOfPayment(investment.getModeOfPayment());
+			flexibleRenewalRepo.save(fRenewal);
 
-	        // Final message based on updatedDue
-	        if (updatedDue == 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
-	        } else if (updatedDue < 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
-	        } else {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
-	        }
+			// Final message based on updatedDue
+			if (updatedDue == 0) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+			} else if (updatedDue < 0) {
+				return ResponseEntity
+						.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+			} else {
+				return ResponseEntity.ok(
+						new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+			}
 
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
-	    }
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+					new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+		}
 	}
 
 	@PostMapping("/updateDDDueAndInstallment")
 	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallment(@RequestBody Map<String, Object> data) {
-	    try {
-	        String policyCode = (String) data.get("policyCode");
-	        double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
-	        int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+		try {
+			String policyCode = (String) data.get("policyCode");
+			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+			int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
-	        Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
-	        if (!optional.isPresent()) {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-	                    .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
-	        }
+			Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+			if (!optional.isPresent()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+			}
 
-	        AddnewinvestmentPM investment = optional.get();
+			AddnewinvestmentPM investment = optional.get();
 
-	        // Parse current values
-	        double currentDue = parseDoubleSafe(investment.getAmountDue());
-	        int currentPaid = parseIntSafe(investment.getLastInstPaid());
-	        double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+			// Parse current values
+			double currentDue = parseDoubleSafe(investment.getAmountDue());
+			int currentPaid = parseIntSafe(investment.getLastInstPaid());
+			double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
 
-	        // Calculate updated values
-	        double totalDeduction = policyAmount * noOfInstallments;
-	        double updatedDue = currentDue - totalDeduction;
-	        int updatedPaid = currentPaid + noOfInstallments;
-	        double updatedPaidAmount = currentPaidAmount + totalDeduction;
+			// Calculate updated values
+			double totalDeduction = policyAmount * noOfInstallments;
+			double updatedDue = currentDue - totalDeduction;
+			int updatedPaid = currentPaid + noOfInstallments;
+			double updatedPaidAmount = currentPaidAmount + totalDeduction;
 
-	        // Check if no payment is needed
-	        if (currentDue <= 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is already settled or overpaid.", null));
-	        }
+			// Check if no payment is needed
+			if (currentDue <= 0) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+						"No payment needed. Policy is already settled or overpaid.", null));
+			}
 
-	        // Update the investment
-	        investment.setAmountDue(String.valueOf(updatedDue));
-	        investment.setLastInstPaid(String.valueOf(updatedPaid));
-	        investment.setPaidAmount(String.valueOf(updatedPaidAmount));
-	        addinvestmentrepo.save(investment);
+			// Update the investment
+			investment.setAmountDue(String.valueOf(updatedDue));
+			investment.setLastInstPaid(String.valueOf(updatedPaid));
+			investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+			addinvestmentrepo.save(investment);
 
-	        // Save to PolicyRenewal
-	        DailyPremiumRenewalPM ddRenewal = new DailyPremiumRenewalPM();
-	        ddRenewal.setPolicyCode(investment.getPolicyCode());
-	        ddRenewal.setRenewalDate(LocalDate.now().toString());
-	        ddRenewal.setPolicyDate(investment.getPolicyStartDate());
-	        ddRenewal.setMaturityDate(investment.getMaturityDate());
-	        ddRenewal.setCustomerCode(investment.getMemberSelection());
-	        ddRenewal.setClientName(investment.getCustomerName());
-	        ddRenewal.setContactNo(investment.getContactNo());
-	        ddRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
-	        ddRenewal.setPolicyType(investment.getSchemeType());
-	        ddRenewal.setPolicyTerm(investment.getSchemeTerm());
-	        ddRenewal.setBranchname(investment.getBranchName());
-	        ddRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
-	        ddRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
-	        ddRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
-	        ddRenewal.setLastPaymentDate(investment.getLastPaymentDate());
-	        ddRenewal.setDueDate(investment.getDueDate());
-	        ddRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
-	        ddRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
-	        ddRenewal.setModeOfPayment(investment.getModeOfPayment());
-	        dailyPremiumRenewalRepo.save(ddRenewal);
+			// Save to PolicyRenewal
+			DailyPremiumRenewalPM ddRenewal = new DailyPremiumRenewalPM();
+			ddRenewal.setPolicyCode(investment.getPolicyCode());
+			ddRenewal.setRenewalDate(LocalDate.now().toString());
+			ddRenewal.setPolicyDate(investment.getPolicyStartDate());
+			ddRenewal.setMaturityDate(investment.getMaturityDate());
+			ddRenewal.setCustomerCode(investment.getMemberSelection());
+			ddRenewal.setClientName(investment.getCustomerName());
+			ddRenewal.setContactNo(investment.getContactNo());
+			ddRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+			ddRenewal.setPolicyType(investment.getSchemeType());
+			ddRenewal.setPolicyTerm(investment.getSchemeTerm());
+			ddRenewal.setBranchname(investment.getBranchName());
+			ddRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+			ddRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+			ddRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+			ddRenewal.setLastPaymentDate(investment.getLastPaymentDate());
+			ddRenewal.setDueDate(investment.getDueDate());
+			ddRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+			ddRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+			ddRenewal.setModeOfPayment(investment.getModeOfPayment());
+			dailyPremiumRenewalRepo.save(ddRenewal);
 
-	        // Final message based on updatedDue
-	        if (updatedDue == 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
-	        } else if (updatedDue < 0) {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
-	        } else {
-	            return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
-	        }
+			// Final message based on updatedDue
+			if (updatedDue == 0) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+			} else if (updatedDue < 0) {
+				return ResponseEntity
+						.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+			} else {
+				return ResponseEntity.ok(
+						new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+			}
 
-	    } catch (Exception e) {
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                .body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
-	    }
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+					new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+		}
 	}
 
-	
-	@GetMapping("/getAllRdRenewalData")
-	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getAllRdRenewalData() {
-	    List<PolicyRenewal> allRdPolicies = policyManagementService.getAllRdRenewalData();
+	@GetMapping("/getApprovedPolicies")
+	public ResponseEntity<ApiResponse<List<AddnewinvestmentPM>>> getApprovedPolicies() {
+		List<AddnewinvestmentPM> approvedList = policyManagementService.getAllApprovedPolicies();
 
-	    ApiResponse<List<PolicyRenewal>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All RD Policy Data fetched successfully",
-	            allRdPolicies
-	    );
+		if (approvedList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+		}
 
-	    return ResponseEntity.ok(response);
+
+		return ResponseEntity
+				.ok(new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList));
+
+
+
+
+
+
+
+
+
+    
+  // return ResponseEntity.ok(response);
+
 	}
-	
-	@GetMapping("/getAllDdRenewalData")
-	public ResponseEntity<ApiResponse<List<DailyPremiumRenewalPM>>> getAllDdRenewalData() {
-	    List<DailyPremiumRenewalPM> allRdPolicies = policyManagementService.getAllDdRenewalData();
 
-	    ApiResponse<List<DailyPremiumRenewalPM>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All DD Policy Data fetched successfully",
-	            allRdPolicies
-	    );
 
-	    return ResponseEntity.ok(response);
-	}
-	
-	@GetMapping("/getAllFdRenewalData")
-	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getAllFdRenewalData() {
-	    List<FlexibleRenewal> allFdPolicies = policyManagementService.getAllFdRenewalData();
+    
+   //return ResponseEntity.ok(response);
 
-	    ApiResponse<List<FlexibleRenewal>> response = new ApiResponse<>(
-	            HttpStatus.OK,
-	            "All FD Policy Data fetched successfully",
-	            allFdPolicies
-	    );
 
-	    return ResponseEntity.ok(response);
-	}
-  
-	
+
+
+
 	@PostMapping("/updateinvestment")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateInvestment(@RequestBody AddnewinvestmentPM invest) {
-        AddnewinvestmentPM updated =  policyManagementService.updateInstalmentDetails(invest.getPolicyCode(), invest.getDepositAmount());
+		AddnewinvestmentPM updated = policyManagementService.updateInstalmentDetails(invest.getPolicyCode(),
+				invest.getDepositAmount());
 
-        if (updated != null) {
-            ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(
-                 HttpStatus.OK,
-                "MIS deposit updated successfully.",
-                updated
-             );
-             return ResponseEntity.ok(response);
-        } else {
-             ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "MIS deposit not found or failed to update."
-             );
-             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-         }
+		// Niraj Code Above
+
+		if (updated != null) {
+			ApiResponse<AddnewinvestmentPM> response = ApiResponse.success(HttpStatus.OK,
+					"MIS deposit updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<AddnewinvestmentPM> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"MIS deposit not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 	}
-	
+
+	@GetMapping("/findPolicyData/{policyCode}")
+	public ResponseEntity<ApiResponse<?>> findPolicyData(@PathVariable String policyCode) {
+
+		List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);
+		if (!fdData.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "FD data found", fdData));
+		}
+
+		List<DailyPremiumRenewalPM> drdData = policyManagementService.findDailyData(policyCode);
+		if (!drdData.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "DRD data found", drdData));
+		}
+
+		List<PolicyRenewal> renewalData = policyManagementService.findRenewalData(policyCode);
+		if (!renewalData.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "RD/MIS data found", renewalData));
+		}
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND)
+				.body(ApiResponse.error(HttpStatus.NOT_FOUND, "No policy data found for policyCode: " + policyCode));
+	}
+
+
 }
+
+	
+	
+
+
 

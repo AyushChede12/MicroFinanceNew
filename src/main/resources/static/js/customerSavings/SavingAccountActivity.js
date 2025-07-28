@@ -64,6 +64,42 @@ $('#accountNumber').on('blur', function () {
                 clearAccountForm();
             }
         });
+         $.ajax({
+        type: "GET",
+        url: "/api/customersavings/getsavingaccountactivity",
+        data: { accountNumber: accountNumber }, // <-- Pass it here
+        success: function(response) {
+            console.log("Full Response from API:", response); 
+            if (response.status && response.status.toUpperCase() === "OK") {
+                let data = response.data;
+                let tableBody = $(".datatable tbody");
+                tableBody.empty();
+                data.forEach((item, index) => {
+                    let row = `<tr>
+                        <td>${index + 1}</td>
+                        <td>${item.selectBranchName || ''}</td>
+                        <td>${item.transactionDate || ''}</td>
+                        <td>${item.accountNumber || ''}</td>
+                        <td>${item.transactionType || ''}</td>
+                        <td>${item.transactionAmount || ''}</td>
+                        <td>${item.averageBalance || ''}</td>
+                        <td>${item.payBy || ''}</td>
+                        <td>${item.comments || ''}</td>
+                        <td>${item.selectSavingTransactionId || ''}</td>
+                        <td>${item.customerCode || ''}</td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+            } else {
+                alert("No transactions found.");
+            }
+        },
+        error: function(xhr) {
+            console.error("API Error:", xhr.responseText);
+            alert("Error fetching saving account activity.");
+        }
+    });
+      
     } else {
         clearAccountForm();
     }
@@ -77,7 +113,9 @@ $('#accountNumber').on('blur', function () {
         $('#averageBalance').val('');
         $('#selectBranchName').val('');
     }
+    
 });
+   
 });
 
 
@@ -159,6 +197,7 @@ $(document).ready(function () {
             refNumber1: $('#refNumber1').val(),
             depositAcc3: $('#depositAcc3').val(),
             refNumber2: $('#refNumber2').val()*/
+            
         };
 
         $.ajax({
@@ -177,6 +216,7 @@ $(document).ready(function () {
             }
         });
     });
+  
 });
 
 function getAccountNumberAndUpdateData(accountNumber) {

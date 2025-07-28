@@ -118,7 +118,13 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col" style="white-space: nowrap;">Sr.No</th>
 									<th scope="col" style="white-space: nowrap;">Policy Code</th>
 									<th scope="col" style="white-space: nowrap;">Policy Date</th>
-								
+									<th scope="col" style="white-space: nowrap;">Customer Name</th>
+									<th scope="col" style="white-space: nowrap;">Contact No.</th>
+									<th scope="col" style="white-space: nowrap;">Branch Name</th>
+									<th scope="col" style="white-space: nowrap;">Sggested Nominee</th>
+									<th scope="col" style="white-space: nowrap;">Scheme Type</th>
+									<th scope="col" style="white-space: nowrap;">scheme Term</th>
+									
 								</tr>
 							</thead>
 							<tbody>

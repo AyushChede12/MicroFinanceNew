@@ -103,60 +103,114 @@ $(document).ready(function() {
 		}
 	});
 
-	$("#accountNumber").on("change", function () {
-	    let accountNumber = $(this).val();
-		alert(accountNumber);
+	$("#accountNumber").on("change", function() {
+		let accountNumber = $(this).val();
 
-	    $.ajax({
-	        type: "GET",
-	        url: "/api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
-	        data: { accountNumber: accountNumber },
-	        success: function (response) {
-	            if (response.status === "FOUND") {
-	                const data = response.data[0]; // assuming single entry
+		$.ajax({
+			type: "GET",
+			url: "/api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
+			data: { accountNumber: accountNumber },
+			success: function(response) {
+				if (response.status === "OK") {
+					const data = response.data[0]; // assuming single entry
 
-	                // Now bind each field to your input elements
-	                $("#id").val(data.id);
-	                $("#typeofaccount").val(data.typeofaccount);
-	                $("#openingDate").val(data.openingDate);
-	                $("#selectByCustomer").val(data.selectByCustomer);
-	                $("#enterCustomerName").val(data.enterCustomerName);
-	                $("#dateOfBirth").val(data.dateOfBirth);
-	                $("#familyDetails").val(data.familyDetails);
-	                $("#contactNumber").val(data.contactNumber);
-	                $("#suggestedNomineeName").val(data.suggestedNomineeName);
-	                $("#suggestedNomineeAge").val(data.suggestedNomineeAge);
-	                $("#suggestedNomineeRelation").val(data.suggestedNomineeRelation);
-	                $("#address").val(data.address);
-	                $("#district").val(data.district);
-	                $("#branchName").val(data.branchName);
-	                $("#state").val(data.state);
-	                $("#pinCode").val(data.pinCode);
-	                $("#operationType").val(data.operationType);
-	                $("#jointOperationCode").val(data.jointOperationCode);
-	                $("#jointSurvivorCode").val(data.jointSurvivorCode);
-	                $("#familyRelation").val(data.familyRelation);
-	                $("#selectPlan").val(data.selectPlan);
-	                $("#openingAmount").val(data.openingAmount);
-	                $("#financialConsultantCode").val(data.financialConsultantCode);
-	                $("#financialConsultantName").val(data.financialConsultantName);
-	                $("#openingFees").val(data.openingFees);
-	                $("#authenticateWith").val(data.authenticateWith);
-	                $("#modeOfPayment").val(data.modeOfPayment);
-	                $("#comment").val(data.comment);
-	                $("#accountStatus").val(data.accountStatus);
-	                $("#messageSend").val(data.messageSend);
-	                $("#debitCardIssue").val(data.debitCardIssue);
-	                $("#accountNumber").val(data.accountNumber);
-					
-	            } else {
-	                alert(response.message);
-	            }
-	        },
-	        error: function (xhr) {
-	            alert("Error: " + xhr.responseJSON.message);
-	        }
-	    });
+					// Now bind each field to your input elements
+					$("#id").val(data.id);
+					$("#typeofaccount").val(data.typeofaccount);
+					$("#openingDate").val(data.openingDate);
+					$("#selectByCustomer").val(data.selectByCustomer);
+					$("#enterCustomerName").val(data.enterCustomerName);
+					$("#dateOfBirth").val(data.dateOfBirth);
+					$("#familyDetails").val(data.familyDetails);
+					$("#contactNumber").val(data.contactNumber);
+					$("#suggestedNomineeName").val(data.suggestedNomineeName);
+					$("#suggestedNomineeAge").val(data.suggestedNomineeAge);
+					$("#suggestedNomineeRelation").val(data.suggestedNomineeRelation);
+					$("#address").val(data.address);
+					$("#district").val(data.district);
+					$("#branchName").val(data.branchName);
+					$("#state").val(data.state);
+					$("#pinCode").val(data.pinCode);
+					$("#operationType").val(data.operationType);
+					$("#jointOperationCode").val(data.jointOperationCode);
+					$("#jointSurvivorCode").val(data.jointSurvivorCode);
+					$("#familyRelation").val(data.familyRelation);
+					$("#selectPlan").val(data.selectPlan);
+					$("#openingAmount").val(data.openingAmount);
+					$("#financialConsultantCode").val(data.financialConsultantCode);
+					$("#financialConsultantName").val(data.financialConsultantName);
+					$("#openingFees").val(data.openingFees);
+					$("#authenticateWith").val(data.authenticateWith);
+					$("#modeOfPayment").val(data.modeOfPayment);
+					$("#comment").val(data.comment);
+					$("#accountNumber").val(data.accountNumber);
+
+					if (data.photo) {
+						const photoPath = `Uploads/${data.photo}`;
+						$("#photoPreview").attr("src", photoPath);
+						$("#photoHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						photoSizeEdit(fakePhotoEvent);
+
+					} else {
+						$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#photoHidden").val("");
+					}
+
+					if (data.signature) {
+						const photoPath = `Uploads/${data.signature}`;
+						$("#signaturePreview").attr("src", photoPath);
+						$("#signatureHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						signatureSizeEdit(fakePhotoEvent);
+
+					} else {
+						$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#signatureHidden").val("");
+					}
+
+					if (data.jointPhoto) {
+						const photoPath = `Uploads/${data.jointPhoto}`;
+						$("#JointPhotoPreview").attr("src", photoPath);
+						$("#JointPhotoHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						jointPhotoSizeEdit(fakePhotoEvent);
+
+					} else {
+						$("#JointPhotoPreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#JointPhotoHidden").val("");
+					}
+
+					if (parseInt(data.accountStatus) === 1) {
+						$('#toggle-account-status').prop('checked', true);
+					} else {
+						$('#toggle-account-status').prop('checked', false);
+					}
+
+					if (parseInt(data.messageSend) === 1) {
+						$('#toggle-sms-send').prop('checked', true);
+					} else {
+						$('#toggle-sms-send').prop('checked', false);
+					}
+
+					if (parseInt(data.debitCardIssue) === 1) {
+						$('#toggle-debit-card').prop('checked', true);
+					} else {
+						$('#toggle-debit-card').prop('checked', false);
+					}
+
+					updateToggleColor(document.getElementById('toggle-account-status'));
+					updateToggleColor(document.getElementById('toggle-sms-send'));
+					updateToggleColor(document.getElementById('toggle-debit-card'));
+
+				} else {
+					alert("Failed");
+				}
+			},
+			error: function(xhr) {
+				alert("Error: " + xhr.responseJSON.message);
+			}
+		});
 	});
 
 
@@ -199,18 +253,6 @@ $(document).ready(function() {
 		savingData.append("messageSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 		savingData.append("debitCardIssue", $('#toggle-debit-card').is(':checked') ? 1 : 0);
 
-		//Image
-		const photoFile = $('#photo')[0].files[0];
-		const signatureFile = $('#signature')[0].files[0];
-
-		if (photoFile) {
-			savingData.append("photo", photoFile);
-		}
-
-		if (signatureFile) {
-			savingData.append("signature", signatureFile);
-		}
-
 
 		$.ajax({
 			url: "/api/customersavings/saveandupdatesavingaccount",
@@ -238,55 +280,61 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Customer Data?")) {
-			$.ajax({
-				url: "/api/customersavings/deleteSavingAccountDataById",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Customer Savings Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let accountNumber = $("#accountNumber").val();
+		if (accountNumber !== "") {
+			if (confirm("Are you sure you want to delete this Saving Data?")) {
+				$.ajax({
+					url: "/api/customersavings/deleteSavingAccountDataById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Customer Savings Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Saving Data.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Customer.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
 
-	$('#jointOperationCode').blur(function(event) {
-		let jointOperationCode = $("#jointOperationCode").val();
-		$.ajax({
-			type: "GET",
-			url: "api/customersavings/getallbyaccountnumber",
-			data: { accountNumber: jointOperationCode },
-			success: function(response, e) {
-				if (response.status == "FOUND") {
-					let data = response.data[0];
-					$("#id").val(data.id);
-				} else {
-					alert("Transfer Share Details Not Found For Customer");
-				}
-			},
-			error: function() {
-				alert("Shares not found or server error");
+$('#jointOperationCode').blur(function(event) {
+	let jointOperationCode = $("#jointOperationCode").val();
+	$.ajax({
+		type: "GET",
+		url: "api/customersavings/getallbyaccountnumber",
+		data: { accountNumber: jointOperationCode },
+		success: function(response, e) {
+			if (response.status == "FOUND") {
+				let data = response.data[0];
+				$("#id").val(data.id);
+			} else {
+				alert("Transfer Share Details Not Found For Customer");
 			}
-		});
-
-
-
+		},
+		error: function() {
+			alert("Shares not found or server error");
+		}
 	});
 
-	$('#newBtn').click(function(event) {
-		event.preventDefault();
-		location.reload();
-	});
+
+
+});
+
+$('#newBtn').click(function(event) {
+	event.preventDefault();
+	location.reload();
+});
 
 
 });
@@ -379,6 +427,20 @@ function signatureUpload() {
 	}
 }
 
+function JointPhotoUpload() {
+	const file = document.getElementById("jointPhoto").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			jointPhotoSizeEdit(e);
+			$("#JointPhotoHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for Joint photo.");
+	}
+}
+
 function photoSizeEdit(e) {
 	const previewimg = document.getElementById("photoPreview");
 	previewimg.src = e.target.result;
@@ -397,4 +459,25 @@ function signatureSizeEdit(e) {
 	previewimg.style.objectFit = "cover";
 	previewimg.style.overflow = "hidden";
 	previewimg.style.borderRadius = "20px";
+}
+
+function jointPhotoSizeEdit(e) {
+	const previewimg = document.getElementById("JointPhotoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function updateToggleColor(input) {
+	const label = input.nextElementSibling;
+	if (input.checked) {
+		label.style.backgroundColor = "#4caf50";  // green
+		label.style.borderColor = "#4caf50";
+	} else {
+		label.style.backgroundColor = "#ccc";  // gray
+		label.style.borderColor = "#ccc";
+	}
 }

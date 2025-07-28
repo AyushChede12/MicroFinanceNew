@@ -13,6 +13,8 @@ public interface TransferShareRepo extends JpaRepository<TransferShare, Long> {
 
 	List<TransferShare> findByFindByCode(String findByCode);
 
+	List<TransferShare> findByIsApprovedFalse();
+
 	
 
 }

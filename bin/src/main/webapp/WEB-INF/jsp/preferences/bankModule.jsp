@@ -145,11 +145,8 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-<<<<<<< HEAD
-
-=======
-					
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
+						<<<<<<< HEAD ======= >>>>>>>
+						e3773a7de865847a8e8e075ec8c9439c2869a181
 					</div>
 
 					<div class="row" style="margin-top: 30px;">
@@ -160,60 +157,50 @@ pageEncoding="ISO-8859-1"%> -->
 								onclick="hideTableData()">Hide</button>
 							<button type="button" id="saveBtn" class="btnStyle bg-warning"
 								onclick="saveBank()">Save</button>
-<<<<<<< HEAD
 							<button type="button" id="updateBtn" class="btnStyle bg-success"
 								onclick="updateBank()">Update</button>
 						</div>
 					</div>
 				</div>
-=======
-						</div>
-					</div>
-					</div>
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
-			</form>
+		</div>
+		</div>
+		</div>
+		</form>
 
-			<div class="mt-5">
-				<div class="row mt-5">
-					<div class="col-12">
-						<div class="card recent-sales">
+		<div class="mt-5">
+			<div class="row mt-5">
+				<div class="col-12">
+					<div class="card recent-sales">
 
-							<div class="card-body table-responsive">
-								<h5 class="card-title">
-									Bank Data <span>| Table View</span>
-								</h5>
+						<div class="card-body table-responsive">
+							<h5 class="card-title">
+								Bank Data <span>| Table View</span>
+							</h5>
 
-								<table class="table table-borderless datatable overflow-scroll">
-									<thead class="table-light">
-										<tr style="font-family: 'Poppins', sans-serif;">
-											<th scope="col">Sr No</th>
-											<th scope="col">Bank Name</th>
-											<th scope="col">Account No</th>
-											<th scope="col">Contact No</th>
-											<th scope="col">Address</th>
-											<th scope="col">Opening Date</th>
-											<th scope="col">Opening Balance</th>
-											<th scope="col">Edit</th>
-<<<<<<< HEAD
-=======
-											<th scope="col">View</th>
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
-											<th scope="col">Delete</th>
-										</tr>
-									</thead>
-									<tbody id="tableBody">
-<<<<<<< HEAD
+							<table class="table table-borderless datatable overflow-scroll">
+								<thead class="table-light">
+									<tr style="font-family: 'Poppins', sans-serif;">
+										<th scope="col">Sr No</th>
+										<th scope="col">Bank Name</th>
+										<th scope="col">Account No</th>
+										<th scope="col">Contact No</th>
+										<th scope="col">Address</th>
+										<th scope="col">Opening Date</th>
+										<th scope="col">Opening Balance</th>
+										<th scope="col">Edit</th>
+										<th scope="col">View</th>
+										<th scope="col">Delete</th>
+									</tr>
+								</thead>
+								<tbody id="tableBody">
 
-=======
-										
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
-									</tbody>
-								</table>
-							</div>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
 
 
@@ -224,11 +211,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/bank.js"></script>
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> e3773a7de865847a8e8e075ec8c9439c2869a181
 </body>
 
 </html>
