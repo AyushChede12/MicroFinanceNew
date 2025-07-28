@@ -268,7 +268,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/preference/saveExecutiveFounder',
+			url: 'api/preference/saveExecutiveFounder',
 			data: formData,
 			processData: false,  // Don't process the files
 			contentType: false,  // Let browser set correct content type
@@ -288,7 +288,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/fetchAllExecutiveFounder", // Updated path
+		url: "api/preference/fetchAllExecutiveFounder", // Updated path
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -336,7 +336,7 @@ function deleteData(id) {
 
 	if (confirm("Are you sure you want to delete this Executive Data?")) {
 		$.ajax({
-			url: "/api/preference/deleteExecutiveFounder",
+			url: "api/preference/deleteExecutiveFounder",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
@@ -370,7 +370,7 @@ function viewData(id) {
 	$("#showBtn").hide();
 
 	$.ajax({
-		url: "/api/preference/fetchExecutiveFounderById",
+		url: "api/preference/fetchExecutiveFounderById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -476,7 +476,7 @@ function updateBranch() {
 
 	// Send the data via AJAX
 	$.ajax({
-		url: "/api/preference/saveExecutiveFounder",
+		url: "api/preference/saveExecutiveFounder",
 		type: "POST",
 		data: formData,
 		processData: false,
