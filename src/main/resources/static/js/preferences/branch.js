@@ -113,7 +113,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveAndUpdateAllBranchModule',
+			url: 'api/preference/saveAndUpdateAllBranchModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
@@ -145,7 +145,7 @@ var pageSizeMISD = 5;
 function loadMISData() {
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllBranchModule",
+		url: "api/preference/getAllBranchModule",
 		contentType: "application/json",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -250,7 +250,7 @@ function viewData(id) {
 	$("#hideBtn").hide();
 	$("#showBtn").hide();
 	$.ajax({
-		url: "/api/preference/getBranchModuleById",
+		url: "api/preference/getBranchModuleById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -280,7 +280,7 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/preference/deleteBranchModuleById",
+			url: "api/preference/deleteBranchModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
@@ -316,7 +316,7 @@ function updateBranch() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBranchModule",
+		url: "api/preference/saveAndUpdateAllBranchModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
@@ -338,7 +338,7 @@ function updateBranch() {
 $(document).ready(function() {
 
 	$.ajax({
-		url: "/api/preference/getAllBranchModule",
+		url: "api/preference/getAllBranchModule",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Branches:", data);
