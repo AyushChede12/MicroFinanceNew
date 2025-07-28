@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +28,11 @@ import com.microfinance.model.states;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.service.CustomerManagementService;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("/api/customermanagement")
 public class CustomerManagementController {
 	@Autowired
 	CustomerManagementService customerService;
@@ -38,22 +42,32 @@ public class CustomerManagementController {
 
 	
 	
-	
+
 	@PostMapping("/saveOrUpdateCustomer")
 	public ResponseEntity<ApiResponse<addCustomer>> saveOrUpdateCustomer(
-			@ModelAttribute CustomerDto clientMasterDto,
-			@RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
-			@RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature) throws IOException{
+	        @ModelAttribute CustomerDto clientMasterDto,
+	        @RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
+	        @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature) {
 
-		// Debug log
-		System.out.println("Received file: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "No file uploaded"));
-		if (customerSignature != null) {
-	        System.out.println("Received file: " + customerSignature.getOriginalFilename());
+	    try {
+	        // Debug log
+	        System.out.println("Saving customer: " + clientMasterDto.getCustomerName());
+	        System.out.println("Photo: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "None"));
+	        System.out.println("Signature: " + (customerSignature != null ? customerSignature.getOriginalFilename() : "None"));
+
+	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature);
+	        return new ResponseEntity<>(response, response.getStatus());
+
+	    } catch (Exception e) {
+	        e.printStackTrace(); // Log to console
+	        return new ResponseEntity<>(
+	            ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving customer: " + e.getMessage()),
+	            HttpStatus.INTERNAL_SERVER_ERROR
+	        );
 	    }
-
-		ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature);
-		return new ResponseEntity<>(response, response.getStatus());
 	}
+
+	
 	
 	
 	
@@ -73,20 +87,32 @@ public class CustomerManagementController {
 	
 		// Add Member Kyc //
 		
-		 @PostMapping("/saveOrUpdateCustomerKYC")
-		    public ResponseEntity<ApiResponse<addCustomerKYC>> saveOrUpdateCustomerKYC(
-		            @ModelAttribute addCustomerKYC kyc,
-		            @RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
-		            @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature,
-		            @RequestParam(value = "aadharFrontPhoto", required = false) MultipartFile aadharFrontPhoto,
-		            @RequestParam(value = "aadharBackPhoto", required = false) MultipartFile aadharBackPhoto,
-		            @RequestParam(value = "panPhoto", required = false) MultipartFile panPhoto) {
-
-		        ApiResponse<addCustomerKYC> response = customerService.saveOrUpdateCustomerKYC(
-		                kyc, customerPhoto, customerSignature, aadharFrontPhoto, aadharBackPhoto, panPhoto);
-
-		        return new ResponseEntity<>(response, response.getStatus());
-		    }
+		/*
+		 * @PostMapping("/saveOrUpdateCustomerKYC") public
+		 * ResponseEntity<ApiResponse<addCustomerKYC>> saveOrUpdateCustomerKYC(
+		 * 
+		 * @ModelAttribute addCustomerKYC kyc,
+		 * 
+		 * @RequestParam(value = "customerPhoto", required = false) MultipartFile
+		 * customerPhoto,
+		 * 
+		 * @RequestParam(value = "customerSignature", required = false) MultipartFile
+		 * customerSignature,
+		 * 
+		 * @RequestParam(value = "aadharFrontPhoto", required = false) MultipartFile
+		 * aadharFrontPhoto,
+		 * 
+		 * @RequestParam(value = "aadharBackPhoto", required = false) MultipartFile
+		 * aadharBackPhoto,
+		 * 
+		 * @RequestParam(value = "panPhoto", required = false) MultipartFile panPhoto) {
+		 * 
+		 * ApiResponse<addCustomerKYC> response =
+		 * customerService.saveOrUpdateCustomerKYC( kyc, customerPhoto,
+		 * customerSignature, aadharFrontPhoto, aadharBackPhoto, panPhoto);
+		 * 
+		 * return new ResponseEntity<>(response, response.getStatus()); }
+		 */
 		
 		 
 		 @PostMapping("/verifyFetchedData")

@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function loadUnapprovedPolicyRenewalsData() {
 	$.ajax({
-		url: "/api/requestapproval/getUnapprovedPolicyRenewals",
+		url: "api/requestapproval/getUnapprovedPolicyRenewals",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		// Approve each selected investment
 		selectedIds.forEach(function(id) {
 			$.ajax({
-				url: "/api/requestapproval/approveRDFromPolicyRenewal",
+				url: "api/requestapproval/approveRDFromPolicyRenewal",
 				type: "POST",
 				data: {
 					id: id,

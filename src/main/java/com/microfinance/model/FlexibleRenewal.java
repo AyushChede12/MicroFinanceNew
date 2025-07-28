@@ -33,7 +33,7 @@ public class FlexibleRenewal {
     private Double totalDeposit;
     private Double paymentDue;
 
-    private String lastPaymentDate; // can be Date if it's stored as date
+    private String lastPaymentDate;         // can be Date if it's stored as date
     private String dueDate;
 
     private Integer noOfInst;

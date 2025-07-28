@@ -280,55 +280,61 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Customer Data?")) {
-			$.ajax({
-				url: "/api/customersavings/deleteSavingAccountDataById",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Customer Savings Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let accountNumber = $("#accountNumber").val();
+		if (accountNumber !== "") {
+			if (confirm("Are you sure you want to delete this Saving Data?")) {
+				$.ajax({
+					url: "/api/customersavings/deleteSavingAccountDataById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Customer Savings Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Saving Data.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Customer.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
 
-	$('#jointOperationCode').blur(function(event) {
-		let jointOperationCode = $("#jointOperationCode").val();
-		$.ajax({
-			type: "GET",
-			url: "api/customersavings/getallbyaccountnumber",
-			data: { accountNumber: jointOperationCode },
-			success: function(response, e) {
-				if (response.status == "FOUND") {
-					let data = response.data[0];
-					$("#id").val(data.id);
-				} else {
-					alert("Transfer Share Details Not Found For Customer");
-				}
-			},
-			error: function() {
-				alert("Shares not found or server error");
+$('#jointOperationCode').blur(function(event) {
+	let jointOperationCode = $("#jointOperationCode").val();
+	$.ajax({
+		type: "GET",
+		url: "api/customersavings/getallbyaccountnumber",
+		data: { accountNumber: jointOperationCode },
+		success: function(response, e) {
+			if (response.status == "FOUND") {
+				let data = response.data[0];
+				$("#id").val(data.id);
+			} else {
+				alert("Transfer Share Details Not Found For Customer");
 			}
-		});
-
-
-
+		},
+		error: function() {
+			alert("Shares not found or server error");
+		}
 	});
 
-	$('#newBtn').click(function(event) {
-		event.preventDefault();
-		location.reload();
-	});
+
+
+});
+
+$('#newBtn').click(function(event) {
+	event.preventDefault();
+	location.reload();
+});
 
 
 });
