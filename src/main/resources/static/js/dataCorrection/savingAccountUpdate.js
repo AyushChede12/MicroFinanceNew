@@ -249,6 +249,22 @@ $(document).ready(function() {
 		savingData.append("modeOfPayment", $('#modeOfPayment').val());
 		savingData.append("comment", $('#comment').val());
 
+		const photoFile = $('#photo')[0].files[0];
+		const signatureFile = $('#signature')[0].files[0];
+		const jointPhotoFile = $('#jointPhoto')[0].files[0];
+
+		if (photoFile) {
+			savingData.append("photo", photoFile);
+		}
+
+		if (signatureFile) {
+			savingData.append("signature", signatureFile);
+		}
+
+		if (jointPhotoFile) {
+			savingData.append("jointPhoto", jointPhotoFile);
+		}
+
 		savingData.append("accountStatus", $('#toggle-account-status').is(':checked') ? 1 : 0);
 		savingData.append("messageSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 		savingData.append("debitCardIssue", $('#toggle-debit-card').is(':checked') ? 1 : 0);
@@ -308,33 +324,33 @@ $(document).ready(function() {
 
 	});
 
-$('#jointOperationCode').blur(function(event) {
-	let jointOperationCode = $("#jointOperationCode").val();
-	$.ajax({
-		type: "GET",
-		url: "api/customersavings/getallbyaccountnumber",
-		data: { accountNumber: jointOperationCode },
-		success: function(response, e) {
-			if (response.status == "FOUND") {
-				let data = response.data[0];
-				$("#id").val(data.id);
-			} else {
-				alert("Transfer Share Details Not Found For Customer");
+	$('#jointOperationCode').blur(function(event) {
+		let jointOperationCode = $("#jointOperationCode").val();
+		$.ajax({
+			type: "GET",
+			url: "api/customersavings/getallbyaccountnumber",
+			data: { accountNumber: jointOperationCode },
+			success: function(response, e) {
+				if (response.status == "FOUND") {
+					let data = response.data[0];
+					$("#id").val(data.id);
+				} else {
+					alert("Transfer Share Details Not Found For Customer");
+				}
+			},
+			error: function() {
+				alert("Shares not found or server error");
 			}
-		},
-		error: function() {
-			alert("Shares not found or server error");
-		}
+		});
+
+
+
 	});
 
-
-
-});
-
-$('#newBtn').click(function(event) {
-	event.preventDefault();
-	location.reload();
-});
+	$('#newBtn').click(function(event) {
+		event.preventDefault();
+		location.reload();
+	});
 
 
 });

@@ -18,6 +18,7 @@ import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
+import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.FlexiblepremiumrenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.PolicyRenewal;
@@ -447,6 +448,26 @@ public class DataCorrectionService {
 		// TODO Auto-generated method stub
 		if (dailyPremiumRenewalRepo.existsById(id)) {
 			dailyPremiumRenewalRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<FlexibleRenewal> getApprovedFlexibleRenewal() {
+		// TODO Auto-generated method stub
+		return flexibleRenewalRepo.findByIsApprovedTrue();
+	}
+
+	public List<FlexibleRenewal> fetchFlexibleRenewalByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub
+		return flexibleRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public boolean deleteFlexibleRenewal(Long id) {
+		// TODO Auto-generated method stub
+		if (flexibleRenewalRepo.existsById(id)) {
+			flexibleRenewalRepo.deleteById(id);
 			return true;
 		} else {
 			return false;
