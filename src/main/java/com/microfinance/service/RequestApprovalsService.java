@@ -14,12 +14,14 @@ import com.microfinance.model.FlexibleRenewal;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.TransferShare;
 import com.microfinance.model.addCustomer;
+import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.model.savingAccountFundTransfer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
+import com.microfinance.repository.PartialMaturitypaymentRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.repository.TransferShareRepo;
@@ -52,6 +54,9 @@ public class RequestApprovalsService {
 	
 	@Autowired
 	TransferShareRepo transferShareRepo;
+	
+	@Autowired
+	PartialMaturitypaymentRepo partialMaturitypaymentRepo;
 	
 	public List<addCustomer> findAllMemberCode() {
 		// TODO Auto-generated method stub
@@ -202,5 +207,29 @@ public class RequestApprovalsService {
 	public TransferShare saveTransferShare(TransferShare share) {
 		// TODO Auto-generated method stub
 		return transferShareRepo.save(share);
+	}
+
+
+	public List<partialMaturityPayment> getAllPolicyCodes() {
+		// TODO Auto-generated method stub
+		return partialMaturitypaymentRepo.findAll();
+	}
+
+
+	public partialMaturityPayment findByPolicyCode(String policyCode) {
+		// TODO Auto-generated method stub
+		return partialMaturitypaymentRepo.findByPolicyCode(policyCode);
+	}
+
+
+	public Optional<partialMaturityPayment> approveMaturityApplication(Long id) {
+		// TODO Auto-generated method stub
+		return partialMaturitypaymentRepo.findById(id);
+	}
+
+
+	public partialMaturityPayment saveMaturity(partialMaturityPayment maturity) {
+		// TODO Auto-generated method stub
+		return partialMaturitypaymentRepo.save(maturity);
 	}
 }

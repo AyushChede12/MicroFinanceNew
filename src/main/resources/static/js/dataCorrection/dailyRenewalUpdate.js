@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: "/api/datacorrection/fetchAllApprovedDailyRenewal",
+		url: "api/datacorrection/fetchAllApprovedDailyRenewal",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});
 
 	/*$.ajax({
-			url: '/api/datacorrection/fetchAllApprovedDailyRenewal',
+			url: 'api/datacorrection/fetchAllApprovedDailyRenewal',
 			type: 'GET',
 			success: function(response) {
 				if (response.status === "FOUND") {
@@ -111,7 +111,7 @@ $(document).ready(function() {
 		if (policyCode !== "") {
 			if (confirm("Are you sure you want to delete this Daily Renewal Data?")) {
 				$.ajax({
-					url: "/api/datacorrection/deleteDailyRenewalDataById",
+					url: "api/datacorrection/deleteDailyRenewalDataById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {

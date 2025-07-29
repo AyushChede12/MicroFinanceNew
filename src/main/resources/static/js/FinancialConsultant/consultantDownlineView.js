@@ -6,7 +6,7 @@ $(document).ready(function() {
 	if (window.location.pathname !== "/updateFinacialConsultant") {
 		// Fetch all data once on page load
 		$.ajax({
-			url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+			url: "api/financialconsultant/getAllFinancialConsultantDetails",
 			type: "POST",
 			contentType: "application/json",
 			success: function(response) {
@@ -43,7 +43,8 @@ $(document).ready(function() {
                         <td>${item.joiningDate || ''}</td>
                         <td>${item.address || ''}</td>
                         <td>${item.branchName || ''}</td>
-                        <td>${item.financialStatus === true || item.financialStatus === 1 ? 'Active' : 'Inactive'}</td>
+						<td>${item.financialStatus == 0 ? 'Active' : 'Inactive'}</td>
+
                         <td>
                             <button class="iconbutton editBtn" data-id="${item.id}" title="Edit">
                                 <i class="fa-solid fa-pen-to-square text-primary"></i>
@@ -92,7 +93,7 @@ $(document).ready(function() {
 
 		if (id) {
 			$.ajax({
-				url: "/api/financialconsultant/getFinancialConsultantById",
+				url: "api/financialconsultant/getFinancialConsultantById",
 				type: "GET",
 				data: { id: id },
 				success: function(response) {
@@ -123,8 +124,8 @@ $(document).ready(function() {
 						$("#depositAccount").val(data.depositAccount || '');
 						$("#refNo").val(data.refNo || '');
 						$("#comments").val(data.comments || '');
-						document.getElementById("financialStatus").checked = data.financialStatus === true || data.financialStatus === '1';
-						document.getElementById("smsSend").checked = data.smsSend === true || data.smsSend === '1';
+						document.getElementById("financialStatus").checked = data.financialStatus === true || data.financialStatus === '0';
+						document.getElementById("smsSend").checked = data.smsSend === true || data.smsSend === '0';
 
 						if (data.financialPhoto) {
 							const img = `Uploads/${data.financialPhoto}`;
@@ -189,8 +190,8 @@ $(document).ready(function() {
 		formData.append("depositAccount", $('#depositAccount').val());
 		formData.append("refNo", $('#refNo').val());
 		formData.append("comments", $('#comments').val());
-		formData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
-		formData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
+		formData.append("financialStatus", $('#financialStatus').is(':checked') ? 0 : 1);
+		formData.append("smsSend", $('#smsSend').is(':checked') ? 0 : 1);
 
 		// Append image paths or Base64 values
 
@@ -208,7 +209,7 @@ $(document).ready(function() {
 		formData.append("finnacialSignature", $('#signatureHidden').val());*/
 
 		$.ajax({
-			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+			url: "api/financialconsultant/saveOrUpdateFinancialConsultant",
 			type: "POST",
 			data: formData,
 			enctype: 'multipart/form-data',
@@ -250,7 +251,7 @@ $(document).ready(function() {
 		// Optional: Confirmation prompt
 		if (confirm("Are you sure you want to delete this Financial Consultant?")) {
 			$.ajax({
-				url: '/api/financialconsultant/deleteFinancialConsultantById',
+				url: 'api/financialconsultant/deleteFinancialConsultantById',
 				type: 'POST',
 				data: { id: id },
 				success: function(response) {

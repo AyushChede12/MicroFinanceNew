@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	// ✅ Load Branches
 	$.ajax({
-		url: "/api/financialconsultant/getAllBranch",
+		url: "api/financialconsultant/getAllBranch",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK" && response.data) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 	// ✅ Load Relation to Applicant
 	$.ajax({
-		url: "/api/financialconsultant/getAllRelationToApplicant",
+		url: "api/financialconsultant/getAllRelationToApplicant",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK" && response.data) {
@@ -62,7 +62,7 @@ $(document).ready(function() {
 	$("#joiningDate").val(today);
 
 	// ✅ Auto-fill on Member Code Change
-	$("#memberCode").change(function() {
+	/*$("#memberCode").change(function() {
 		let memberCode = $(this).val();
 		if (memberCode !== "") {
 			$.ajax({
@@ -100,12 +100,12 @@ $(document).ready(function() {
 				}
 			});
 		}
-	});
+	});*/
 
 	// ✅ Fetch and Display All Financial Consultant Details
 	//$("#updateBtn").hide();
 	$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		contentType: "application/json",
 		success: function(response) {
@@ -144,10 +144,168 @@ $(document).ready(function() {
 	// ✅ Save Button Logic
 	$('#saveBtnFinacial').click(function(event) {
 		event.preventDefault();
-		var financialCode=$('#financialCode').val();
-		
+
+		let isValid = true;
+
+		// Clear all previous messages
+		$('#chkjoiningDate').text('');
+		$('#chkfinancialName').text('');
+		$('#chkdob').text('');
+		$('#chkage').text('');
+		$('#chkcontactNo').text('');
+		$('#chkbranchName').text('');
+		$('#chkaddress').text('');
+		$('#chkdistict').text('');
+		$('#chkstate').text('');
+		$('#chkpinCode').text('');
+		$('#chkprofession').text('');
+		$('#chkacademicBackground').text('');
+		$('#chkphoto').text('');
+		$('#chksignature').text('');
+		$('#chkposition').text('');
+		$('#chkreferralCode').text('');
+		$('#chkrefferalName').text('');
+		$('#chkmodeofPayment').text('');
+
+
+
+		// Fetch input values
+		var joiningDate = $('#joiningDate').val().trim();
+		var financialName = $('#financialName').val().trim();
+		var dob = $('#dob').val().trim();
+		var age = $('#age').val().trim();
+		var contactNo = $('#contactNo').val().trim();
+		var branchName = $('#branchName').val().trim();
+		var address = $('#address').val().trim();
+		var district = $('#district').val().trim();
+		var state = $('#state').val().trim();
+		var pinCode = $('#pinCode').val().trim();
+		var profession = $('#profession').val().trim();
+		var academicBackground = $('#academicBackground').val().trim();
+		var selectPosition = $('#selectPosition').val().trim();
+		var referralCode = $('#referralCode').val().trim();
+		var referralName = $('#referralName').val().trim();
+		var modeofPayment = $('#modeofPayment').val().trim();
+
 		const photo = $('#photo')[0].files[0];
-				const signature = $('#signature')[0].files[0];
+		const signature = $('#signature')[0].files[0];
+
+
+		if (joiningDate === '') {
+			$('#chkjoiningDate').text('* This field is required');
+			$('#joiningDate').focus();
+			isValid = false;
+		}
+
+		if (financialName === '') {
+			$('#chkfinancialName').text('* This field is required');
+			$('#financialName').focus();
+			isValid = false;
+		}
+
+		if (dob === '') {
+			$('#chkdob').text('* This field is required');
+			$('#dob').focus();
+			isValid = false;
+		}
+
+		if (age === '') {
+			$('#chkage').text('* This field is required');
+			$('#age').focus();
+			isValid = false;
+		}
+
+		if (contactNo === '') {
+			$('#chkcontactNo').text('* This field is required');
+			$('#contactNo').focus();
+			isValid = false;
+		}
+
+		if (branchName === '') {
+			$('#chkbranchName').text('* This field is required');
+			$('#branchName').focus();
+			isValid = false;
+		}
+
+		if (address === '') {
+			$('#chkaddress').text('* This field is required');
+			$('#address').focus();
+			isValid = false;
+		}
+
+		if (district === '') {
+			$('#chkdistict').text('* This field is required');
+			$('#district').focus();
+			isValid = false;
+		}
+
+		if (state === '') {
+			$('#chkstate').text('* This field is required');
+			$('#state').focus();
+			isValid = false;
+		}
+
+		if (pinCode === '') {
+			$('#chkpinCode').text('* This field is required');
+			$('#pinCode').focus();
+			isValid = false;
+		}
+
+		if (profession === '') {
+			$('#chkprofession').text('* This field is required');
+			$('#profession').focus();
+			isValid = false;
+		}
+
+		if (academicBackground === '') {
+			$('#chkacademicBackground').text('* This field is required');
+			$('#academicBackground').focus();
+			isValid = false;
+		}
+
+		if (!photo) {
+			$('#chkphoto').text('* Photo is required');
+			$('#photo').focus();
+			isValid = false;
+		}
+		if (!signature) {
+			$('#chksignature').text('* Signature is required');
+			$('#signature').focus();
+			isValid = false;
+		}
+
+		if (selectPosition === '') {
+			$('#chkposition').text('* This field is required');
+			$('#selectPosition').focus();
+			isValid = false;
+		}
+
+		if (referralCode === '') {
+			$('#chkreferralCode').text('* This field is required');
+			$('#referralCode').focus();
+			isValid = false;
+		}
+
+		if (referralName === '') {
+			$('#chkrefferalName').text('* This field is required');
+			$('#referralName').focus();
+			isValid = false;
+		}
+
+		if (modeofPayment === '') {
+			$('#chkmodeofPayment').text('* This field is required');
+			$('#modeofPayment').focus();
+			isValid = false;
+		}
+
+
+
+		if (!isValid) {
+			return false; // Stop AJAX call
+		}
+
+
+		var financialCode = $('#financialCode').val();
 
 		/*const financialPhotoSrc = $('#photoHidden').attr('src') || '';
 		const financialSignatureSrc = $('#signatureHidden').attr('src') || '';
@@ -183,18 +341,18 @@ $(document).ready(function() {
 		/*formData.append("financialPhoto", photo);
 		formData.append("finnacialSignature", signature);*/
 		if (photo) {
-					formData.append("financialPhoto", photo);
-				}
+			formData.append("financialPhoto", photo);
+		}
 
-				// File upload: signature
-				if (signature) {
-					formData.append("finnacialSignature", signature);
-				}
+		// File upload: signature
+		if (signature) {
+			formData.append("finnacialSignature", signature);
+		}
 
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/financialconsultant/saveOrUpdateFinancialConsultant',
+			url: 'api/financialconsultant/saveOrUpdateFinancialConsultant',
 			data: formData,
 			processData: false,
 			contentType: false,

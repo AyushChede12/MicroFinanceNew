@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//Dropdown without search
 	/*$.ajax({
-		url: "/api/datacorrection/fetchAllSavingAccountActivity",
+		url: "api/datacorrection/fetchAllSavingAccountActivity",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//Dropdown without search
 	$.ajax({
-		url: '/api/datacorrection/fetchAllSavingAccountActivity',
+		url: 'api/datacorrection/fetchAllSavingAccountActivity',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -136,7 +136,7 @@ $(document).ready(function() {
 		if (accountNumber !== "") {
 			if (confirm("Are you sure you want to delete this Saving Transaction?")) {
 				$.ajax({
-					url: "/api/datacorrection/deleteSavingTransactionRemoval",
+					url: "api/datacorrection/deleteSavingTransactionRemoval",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {

@@ -23,7 +23,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveCasteModule',
+			url: 'api/preference/saveCasteModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
@@ -44,7 +44,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllCasteModule",
+		url: "api/preference/getAllCasteModule",
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
@@ -73,7 +73,7 @@ $(document).ready(function() {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this Caste?")) {
 		$.ajax({
-			url: "/api/preference/deleteCasteModuleById",
+			url: "api/preference/deleteCasteModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {

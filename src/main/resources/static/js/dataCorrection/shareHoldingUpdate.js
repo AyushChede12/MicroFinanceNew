@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	/*$.ajax({
-		url: "/api/customershareholdingcontroller/findAllTransferShare",
+		url: "api/customershareholdingcontroller/findAllTransferShare",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});*/
 
 	$.ajax({
-		url: '/api/customershareholdingcontroller/findAllTransferShare',
+		url: 'api/customershareholdingcontroller/findAllTransferShare',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -146,7 +146,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/customershareholdingcontroller/updateTransferShare',
+			url: 'api/customershareholdingcontroller/updateTransferShare',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(transferData),
@@ -171,7 +171,7 @@ $(document).ready(function() {
 		if (findByCode !== "") {
 			if (confirm("Are you sure you want to delete this Transfer Share Data Of Customer?")) {
 				$.ajax({
-					url: "/api/customershareholdingcontroller/deleteTransferShareById",
+					url: "api/customershareholdingcontroller/deleteTransferShareById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
