@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: "/api/preference/fetchAllCompanyAdministration",
+		url: "api/preference/fetchAllCompanyAdministration",
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -245,7 +245,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: "/api/preference/updateDataOfCompanyAdministration",
+			url: "api/preference/updateDataOfCompanyAdministration",
 			type: "POST",
 			contentType: "application/json",
 			data: JSON.stringify(companyData),

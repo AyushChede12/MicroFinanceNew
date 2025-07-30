@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	//Without Search in Dropdown
 	/*$.ajax({
-		url: "/api/financialconsultant/getAllCustomerCodes",
+		url: "api/financialconsultant/getAllCustomerCodes",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	//With Search in Dropdown
 	$.ajax({
-		url: 'approved',
+		url: 'api/customermanagement/approved',
 		type: 'GET',
 		success: function(response) {
 			// response is a direct array of addCustomer
@@ -61,7 +61,7 @@ $(document).ready(function() {
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
-				url: "/api/customershareholdingcontroller/fetchByCustomerCode",
+				url: "api/customershareholdingcontroller/fetchByCustomerCode",
 				data: { memberCode: customerCode },
 				success: function(response) {
 					if (response.status == "FOUND") {
@@ -169,7 +169,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -201,6 +201,7 @@ $(document).ready(function() {
 		customerData.append("id", id);
 		customerData.append("memberCode", $('#customerCode').val());
 		customerData.append("signupDate", $('#signupDate').val());
+		customerData.append("major", $('#major').val());
 		customerData.append("customerName", $('#customerName').val());
 		customerData.append("customerGender", $('#customerGender').val());
 		customerData.append("guardianName", $('#guardianName').val());
@@ -251,7 +252,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: 'POST',
-			url: 'saveOrUpdateCustomer',
+			url: 'api/customermanagement/saveOrUpdateCustomer',
 			data: customerData,
 			contentType: false,
 			processData: false,
@@ -276,7 +277,7 @@ $(document).ready(function() {
 		if (customerCode !== "") {
 			if (confirm("Are you sure you want to delete this Customer Data?")) {
 				$.ajax({
-					url: "/api/datacorrection/deleteCustomerDataByForm",
+					url: "api/datacorrection/deleteCustomerDataByForm",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
@@ -303,8 +304,8 @@ $(document).ready(function() {
 	$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
-		var findByCode = $('#findByCode').val();
-		if (findByCode && findByCode !== "") {
+		var customerCode = $('#customerCode').val();
+		if (customerCode && customerCode !== "") {
 
 			const $formClone = $("#formid").clone();
 

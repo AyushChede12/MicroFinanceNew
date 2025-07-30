@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$.ajax({
-			url: "/api/Policymangment/getaddinvestmentdetails",
+			url: "api/Policymangment/getaddinvestmentdetails",
 			type: "GET",
 			success: function(response) {
 				if (response.status === "OK") {
