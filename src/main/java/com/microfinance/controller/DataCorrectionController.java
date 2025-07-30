@@ -86,6 +86,7 @@ public class DataCorrectionController {
 		}
 	}
 
+	//Ayush
 	@PostMapping("/deletePolicyDataByForm")
 	public ResponseEntity<ApiResponse<String>> deletePolicyData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deletePolicyData(id);
@@ -142,15 +143,6 @@ public class DataCorrectionController {
 					"No approved customers found.", null);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
-	}
-
-	// Ayush
-	@GetMapping("/fetchAllLoanApplications")
-	public ResponseEntity<ApiResponse<List<LoanApplication>>> fetchAllLoanApplicationsData() {
-		List<LoanApplication> list = dataCorrectionService.fetchAllLoanApplication();
-		ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.FOUND,
-				"Loan Application fetched successfully", list);
-		return ResponseEntity.ok(response);
 	}
 
 	// Ayush
@@ -329,5 +321,20 @@ public class DataCorrectionController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
+//	@GetMapping("/fetchAllApprovedSavingAccountActivity")
+//	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> getApprovedSavingAccountActivity() {
+//		List<SavingAccountActivity> activity = dataCorrectionService.getApprovedSavingAccountActivity();
+//		if (activity != null && !activity.isEmpty()) {
+//
+//			ApiResponse<List<SavingAccountActivity>> response = new ApiResponse<>(HttpStatus.FOUND,
+//					"Saving Account Activity Data fetched successfully.", activity);
+//			return ResponseEntity.ok(response);
+//		} else {
+//			ApiResponse<List<SavingAccountActivity>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+//					"No approved Saving Account Activity found.", null);
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+//		}
+//	}
 
 }

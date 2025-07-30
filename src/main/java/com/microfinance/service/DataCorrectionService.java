@@ -474,6 +474,11 @@ public class DataCorrectionService {
 		}
 	}
 
+//	public List<SavingAccountActivity> getApprovedSavingAccountActivity() {
+//		// TODO Auto-generated method stub
+//		return savingAccountActivityRepo.findByIsApprovedTrue();
+//	}
+
 //	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
 //		return policyRenewalRepo.findByPolicyCode(policyCode);

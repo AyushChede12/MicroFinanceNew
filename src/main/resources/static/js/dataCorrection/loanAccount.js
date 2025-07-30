@@ -96,7 +96,6 @@ $(document).ready(function() {
 				data: { loanId: loanId },
 				success: function(response) {
 					if (response.status == "OK") {
-						alert("if condition");
 						let data = response.data;
 						$("#id").val(data.id);
 						$("#loanDate").val(data.loanDate);
@@ -147,8 +146,8 @@ $(document).ready(function() {
 
 						//$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
 
-						/*if (data.customerPhoto) {
-							const photoPath = `Uploads/${data.customerPhoto}`;
+						if (data.photo) {
+							const photoPath = `Uploads/${data.photo}`;
 							$("#photoPreview").attr("src", photoPath);
 							$("#photoHidden").val(photoPath);
 							const fakePhotoEvent = { target: { result: photoPath } };
@@ -160,8 +159,8 @@ $(document).ready(function() {
 						}
 
 						// Image: Signature
-						if (data.customerSignature) {
-							const signPath = `Uploads/${data.customerSignature}`;
+						if (data.signature) {
+							const signPath = `Uploads/${data.signature}`;
 							$("#signaturePreview").attr("src", signPath);
 							$("#signatureHidden").val(signPath);
 							const fakeSignEvent = { target: { result: signPath } };
@@ -170,7 +169,7 @@ $(document).ready(function() {
 						} else {
 							$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
 							$("#signatureHidden").val("");
-						}*/
+						}
 
 						if (parseInt(data.messageStatus) === 1) {
 							$('#toggle-sms-send').prop('checked', true);
@@ -236,4 +235,55 @@ function updateToggleColor(input) {
 		label.style.backgroundColor = "#ccc";  // gray
 		label.style.borderColor = "#ccc";
 	}
+}
+
+function photoUpload() {
+	const file = document.getElementById("photo").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("signature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }
