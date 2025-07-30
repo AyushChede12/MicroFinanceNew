@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 		if (financialCode) {
 			$.ajax({
-				url: '/api/financialconsultant/getfinancialHierarchyByFinancialCode',
+				url: 'api/financialconsultant/getfinancialHierarchyByFinancialCode',
 				type: 'GET',
 				data: { financialCode: financialCode },
 				success: function(response) {
@@ -39,7 +39,7 @@ $(document).ready(function () {
 
         if (financialCode1) {
             $.ajax({
-                url: '/api/financialconsultant/getfinancialHierarchyByFinancialCode',
+                url: 'api/financialconsultant/getfinancialHierarchyByFinancialCode',
                 type: 'GET',
                 data: { financialCode: financialCode1 },
                 success: function (response) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
                                     <td>${item.joiningDate || ''}</td>
                                     <td>${item.address || ''}</td>
                                     <td>${item.branchName || ''}</td>
-                                    <td>${item.financialStatus === true || item.financialStatus === 1 ? 'Active' : 'Inactive'}</td>
+                                    <td>${item.financialStatus ==0 ? 'Active' : 'Inactive'}</td>
                                 </tr>
                             `;
                         });

@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- jQuery ajax cdn -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -57,11 +59,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy ID</label> <select id="memberSelection"
-									name="memberSelection" required="required"
+								<label for="">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="Blue">Blue</option>
 								</select>
 							</div>
 						</div>
@@ -252,40 +253,28 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" placeholder="" />
 							</div>
 						</div>
-
+						
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Approve Branch Name</label> <select id="Branch"
-									name="Branch" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value=""></option>
-									<option value="Blue">Blue</option>
-								</select>
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Approve Branch Name</label> <input type="text"
+									name="Branch" id="Branch" required="required" placeholder="" />
 							</div>
 						</div>
-
+						
+					
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Approve Comments</label> <input type="text"
 									name="ApproveComments" id="ApproveComments" required="required" placeholder="" />
 							</div>
 						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Approve Status</label> <select id="ApproveStatus"
-									name="ApproveStatus" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Status</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
-					</div>
-
+						
+						
+					
 					<div class="row">
 						<div class="col-12 text-right mt-3">
-							<button id="saveBtn" class="btnStyle"
+							<button id="approvedBtn" class="btnStyle"
 								style="background-color: #FFA500;">Approve Maturity</button>
 						</div>
 					</div>
@@ -301,6 +290,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/RequestApproval/ApproveMaturityApplication.js"></script>
 </body>
 
 </html>
