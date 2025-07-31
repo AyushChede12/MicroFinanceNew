@@ -21,7 +21,8 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	Optional<CreateSavingsAccount> findByAccountNumber(String accountNumber);
 
-	List<CreateSavingsAccount> findByTypeofaccountContainingIgnoreCase(String keyword);
+	List<CreateSavingsAccount> findByTypeofaccountContainingIgnoreCaseAndIsApproved(String keyword, boolean isApproved);
+
 
 	List<CreateSavingsAccount> findAllByAccountNumberAndIsApprovedTrue(String accountNumber);
 

@@ -12,10 +12,11 @@ $(document).ready(function () {
     });
 });
 
+//janvi : fetch account numbers on dropdown
 function fetchAccountNumbers(accountType) {
     $.ajax({
         type: "GET",
-        url: "/api/customersavings/fetchAccountNumbers",
+        url: "api/customersavings/fetchAccountNumbers",
         data: { accountType: accountType },
         success: function (response) {
             const $dropdown = $("#accountNumber");
@@ -37,9 +38,63 @@ function fetchAccountNumbers(accountType) {
 
 
 
-// Js for fetching the data on the tabel according to account number (vaibhav)
+// Js for fetching the data on the tabel according to account number (All transactions)
+$(document).ready(function () {
+    $('#btnTransactionPageOnSavingPassbook').click(function () {
+        let accountNumber = $("#accountNumber").val().trim(); // correct fetch
 
-     function displayTransactionDataList() {
+        if (accountNumber !== "") {
+            $.ajax({
+                type: "GET",
+                url: "api/customersavings/getsavingaccountactivity",
+                data: { accountNumber: accountNumber },
+                success: function(response) {
+                    console.log("API Response:", response);
+
+                    if (response.status && response.status.toUpperCase() === "OK") {
+                        let data = response.data;
+                        let tableBody = $("#tableBody1"); // correct tbody ID
+                        tableBody.empty();
+
+                        if (data.length > 0) {
+                            $('#TransactionSection').show(); // show the hidden div
+
+                            data.forEach((item, index) => {
+                                let row = `<tr>
+                                <td>${item.transactionDate || ''}</td>
+                                <td>${item.accountNumber || ''}</td>
+                                <td>${item.transactionType || ''}</td>
+                                <td>${item.transactionAmount || ''}</td>
+                                <td>${item.averageBalance || ''}</td>                                   
+                                </tr>`;
+                                tableBody.append(row);
+                            });
+                            $("#tableSection").hide();
+                $('#printbtnSection').show();
+                $('#passbookSection').hide();
+                $("#headingSection").hide();
+                $("#TransactionSection").show();
+                        } else {
+                            alert("No transactions found.");
+                            $('#TransactionSection').hide();
+                        }
+                    } else {
+                        alert("No transactions found.");
+                        $('#TransactionSection').hide();
+                    }
+                },
+                
+            });
+        } else {
+            alert("Please select an Account Number.");
+            $('#TransactionSection').hide();
+        }
+    });
+});
+
+
+//janvi: Show saving acc details in table format
+function displayTransactionDataList() {
        // const accountNumber = $(this).val();
  let accountNumber = document.getElementById("accountNumber").value; // Get the selected Account No.
     // $("#tabl").show();
@@ -50,7 +105,7 @@ function fetchAccountNumbers(accountType) {
         if (accountNumber !== "") {
             $.ajax({
                 type: "GET",
-                url: "/api/customersavings/getDataByAccountNumber",
+                url: "api/customersavings/getDataByAccountNumber",
                 data: { accountNumber: accountNumber },
                 success: function (response) {
                     if (response.status === "OK" && response.data) {
@@ -89,53 +144,6 @@ function fetchAccountNumbers(accountType) {
         }
     }
 
-//Janvi passbook data fetch
- /*function displaySavingfrontPage() {
-       // var accountNo = $("#accountNoList").val(); // Get the account number from input field
-            let accountNo = document.getElementById("accountNumber").value; // Get the selected Account No.
-        if (!accountNo) {
-            alert("Please enter an account number!");
-            return;
-        }
-        if (accountNo !== "") {
-
-        $.ajax({
-            type: "GET",
-            url: "/api/customersavings/getDataByAccountNumber",
-            data: { accountNo: accountNo },
-            success: function (response) {
-				if (response.status === "OK" && response.data) {
-                        const data = response.data;
-				 // Concatenate address, state, and pin into a single string
-                 let fullAddress = `${data.address}, ${data.state}, ${data.pinCode}`;
-    
-                // Populate HTML elements with API response
-                $("#customerNo").text(data.selectByCustomer);
-                $("#accountNo").text(data.accountNumber);
-                $("#customerName").text(data.enterCustomerName);
-                $("#familyDetails").text(data.familyDetails);
-                $("#dateOfBirth").text(data.dateOfBirth);
-                $("#contactNo").text(response.contactNumber);
-                $("#emailId").text(response.emailId);
-                $("#operationType").text(response.operationType);
-                $("#aadharNo").text(response.aadharNo);
-                $("#address").text(fullAddress);
-                $("#openingDate").text(response.openingDate);
-                $("#typeofaccount").text(response.typeofaccount);
-                $("#branch").text(response.branchName);
-                
-				
-			 } else {
-                alert("No account numbers found for selected type.");
-            }
-            },
-            error: function (xhr) {
-                alert("Error: " + xhr.responseJSON.error);
-            }
-        });
-      }
-    }
-*/
 
 function displaySavingfrontPage() {
     let accountNumber = document.getElementById("accountNumber").value;
@@ -147,7 +155,7 @@ function displaySavingfrontPage() {
 
     $.ajax({
         type: "GET",
-        url: "/api/customersavings/getDataByAccountNumber",
+        url: "api/customersavings/getDataByAccountNumber",
         data: { accountNumber: accountNumber },  // 🔥 make sure name matches @RequestParam
         success: function (response) {
             if (response.status === "OK" && response.data) {
@@ -192,17 +200,11 @@ function displaySavingfrontPage() {
 
 //Janvi : Print Button
 // print Code
-$("#printBtn").on("click", function (e) {
+/*$("#printBtn").on("click", function (e) {
 		e.preventDefault();
 
 		// Clone the form
 		const $formClone = $("#passbookId").clone();
-
-		/*// Remove the button row from cloned form
-		$formClone.find("#editmember").remove();
-		$formClone.find("#printBtn").remove();
-		$formClone.find("#updateBtn").remove();
-		$formClone.find("#deleteBtn").remove();*/
 
 		// Optional: remove any row that holds the buttons
 		$formClone.find(".text-center").each(function () {
@@ -253,7 +255,7 @@ $("#printBtn").on("click", function (e) {
 		} else {
 			alert("Popup blocked. Please allow popups for this website.");
 		}
-	});
+	});*/
 	
 function displayHeadingSA(){
 	$("#tableSection").hide();
@@ -263,55 +265,63 @@ function displayHeadingSA(){
 	$("#TransactionSection").hide();
 }
 
-function displaySavingTransaction(){
-	let accountNumber = document.getElementById("accountNumber").value; // Get the selected Account No.
-    if (!accountNumber) {
-        alert("Please select an Account Number.");
+//janvi : print button code
+function printTransactionSection1() {
+    let visibleSection = null;
+
+    if ($("#passbookSection").is(":visible")) {
+        visibleSection = document.getElementById("passbookSection");
+    } else if ($("#TransactionSection").is(":visible")) {
+        visibleSection = document.getElementById("TransactionSection");
+    }
+    else if ($("#headingSection").is(":visible")) {
+        visibleSection = document.getElementById("headingSection");
+    } else {
+        alert("No section visible to print.");
         return;
     }
 
-    var input = {
-        accountNo: accountNumber // Match the backend expectation
+    const printWindow = window.open('', '', 'width=1000,height=800');
+
+    printWindow.document.write(`
+        <html>
+        <head>
+            <title>Print Page</title>
+            <!-- Include your main CSS and Bootstrap -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+            <style>
+                body {
+                    margin: 20px;
+                    font-family: Arial, sans-serif;
+                }
+                .card {
+                    box-shadow: none !important;
+                    border: 1px solid #ccc;
+                }
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                th, td {
+                    border: 1px solid #000;
+                    padding: 6px;
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+            ${visibleSection.outerHTML}
+        </body>
+        </html>
+    `);
+
+    printWindow.document.close();
+
+    printWindow.onload = function () {
+        setTimeout(() => {
+            printWindow.print();
+            printWindow.close();
+        }, 500); // wait for styles to apply
     };
-   // const myJson = JSON.stringify(input);
-
-    //AJAX call to fetch SavingTransactionEntry details
-    $.ajax({
-        type: "GET",
-        contentType: "application/json",
-        data: JSON.stringify({ accountNumber: accountNumber }), // Ensure correct parameter name
-        url: '/api/customersavings/getsavingaccountactivity',
-        async: false,
-        success: function(data) {
-            if (data && data.length > 0) {
-				//let j=1;
-                const tableData = data.map(function(value) {
-                    return (
-                        `<tr>                      
-                          
-                            <td>${value.transactionDate}</td>
-                            <td>${value.accountNumber}</td>
-                            <td>${value.transactionAmount}</td>
-                            <td>${value.transactionAmount}</td>                           
-                            <td>${value.averageBalance}</td>
-                        </tr>`
-                    );
-                }).join('');
-
-                document.querySelector("#tableBody1").innerHTML = tableData;
-                document.getElementById("transaction-tabl").style.display = "table";
-				$("#tableSection").hide();
-	            $('#printbtnSection').show();
-                $('#passbookSection').hide();
-	            $("#headingSection").hide();
-	            $("#TransactionSection").show();
-            } else {
-                document.querySelector("#tableBody").innerHTML = "<tr><td colspan='11' class='text-center'>No transactions found.</td></tr>";
-                document.getElementById("tabl").style.display = "table"; 
-            }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            alert("Failed to fetch transactions. Error: " + textStatus + ", " + errorThrown);
-        }
-    });	
 }
+

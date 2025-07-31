@@ -186,6 +186,7 @@ $(document).ready(function () {
             creditCustomerCode: $('#creditCustomerCode').val(),
             creditAccountBranch: $('#creditAccountBranch').val(),
             creditAverageBalance: $('#creditAverageBalance').val(),
+            creditAverageBalance: $('#creditContactNumber').val(),
             transferDate: $('#transferDate').val(),
             amount: $('#amount').val(),
             comment: $('#comment').val()
