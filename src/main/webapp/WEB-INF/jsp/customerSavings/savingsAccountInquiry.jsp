@@ -21,6 +21,7 @@ pageEncoding="ISO-8859-1"%> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="./css/admin.css" />
     <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -54,30 +55,20 @@ pageEncoding="ISO-8859-1"%> -->
                     </nav>
                     <div class="row">
                         <div class="col-lg-3">
-                            <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                                <label>Select Branch Name</label>
-                                <div class="position-relative">
-                                    <div class="select-btn1" style="cursor: pointer;">
-                                        <span name="cityName" id="cityNameId" style="font-size: 12px;"> Branch
-                                            Name</span> <i class="fa-solid fa-angle-down"></i>
-                                    </div>
-                                    <div class="content" id="contentCityName" style="display: none;">
-                                        <div class="search">
-                                            <input type="text" id="city-search" class="m-0" placeholder="Search" />
-                                        </div>
-                                        <ul class="options" id="city-options">
-                                            <!-- Options will be dynamically added here -->
-
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px;">
+								<label for="">Branch Name</label> <select id="branchName" name="branchName"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Branch</option>									
+								</select>
+							</div>
+						</div>
 
                         <div class="col-lg-3">
                             <div class="d-flex flex-column formFields">
                                 <label for="vehicalNo">From Date</label>
-                                <input type="date" name="vehicalNo" id="vehicalNo" required="required"
+                                <input type="date" name="fromDate" id="fromDate" required="required"
                                     placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
                             </div>
                         </div>
@@ -85,44 +76,43 @@ pageEncoding="ISO-8859-1"%> -->
                         <div class="col-lg-3">
                             <div class="d-flex flex-column formFields">
                                 <label for="vehicalNo">To Date</label>
-                                <input type="date" name="vehicalNo" id="vehicalNo" required="required"
+                                <input type="date" name="toDate" id="toDate" required="required"
                                     placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
                             </div>
                         </div>
 
                          <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Customer Name</label> <input type="text" name="price" id="price"
+                                <label for="">Customer Name</label> <input type="text" name="customerName" id="customerName"
                                     required="required" placeholder="Member Code" />
                             </div>
                         </div>
 
                         <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Account Number</label> <select id="colour" name="colour"
+                                <label for="">Account Number</label> <select id="accountNumber" name="accountNumber"
                                     required="required" class="form-control selectField" style="height: 30px;">
-                                    <option value=""> Select Colour</option>
-                                    <option value="Blue">Blue</option>
+                                    <option value=""> Select Account Number</option>
                                 </select>
                             </div>
                         </div>
 
                          <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Customer Code</label> <input type="text" name="price" id="price"
-                                    required="required" placeholder="Member Code" />
+                                <label for="">Customer Code</label> <input type="text" name="customerCode" id="customerCode"
+                                    required="required" placeholder="Enter Customer Code" />
                             </div>
                         </div>
 
                          <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Financial Consultant Code</label> <input type="text" name="price" id="price"
-                                    required="required" placeholder="Member Code" />
+                                <label for="">Financial Consultant Code</label> <input type="text" name="financialConsultantCode" id="financialConsultantCode"
+                                    required="required" placeholder="Enter Financial Consultant Code" />
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Policy name</label> <select id="colour" name="colour"
+                                <label for="">Plan name</label> <select id="planName" name="planName"
                                     required="required" class="form-control selectField" style="height: 30px;">
                                     <option value=""> Select Colour</option>
                                     <option value="Blue">Blue</option>
@@ -147,21 +137,43 @@ pageEncoding="ISO-8859-1"%> -->
                                     Search Result <span>| Today</span>
                                 </h5>
 
-                                <table class="table table-borderless datatable overflow-scroll">
-                                    
-                                </table>
-                            </div>
+								<table class="table table-borderless datatable overflow-scroll">
+									<thead class="table-light">
+										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">Sr No</th>
+											<th scope="col">Account Number</th>
+											<th scope="col">Account Type</th>
+											<th scope="col">Customer Code</th>
+											<th scope="col">Customer Name</th>
+											<th scope="col">Mobile</th>
+											<th scope="col">Branch Name</th>
+											<th scope="col">Address</th>
+											<th scope="col">City</th>
+											<th scope="col">State</th>											
+										</tr>
+									</thead>
+									<tbody id="tableSavingAcc">
+
+									</tbody>
+								</table>
+							</div>
                         </div>
                     </div>
                 </div>
             </form>
 
         </div>
-
+<script>
+$(document).ready(function() {
+	searchInTheSavingAcc();
+	
+});	
+</script>
 
     </main>
     <!-- <script src="js/chartScript.js"></script> -->
     <script src="./js/adminscript.js"></script>
+    <script src="./js/customerSavings/savingsAccountEnquiry.js"></script>
 </body>
 
 </html>
