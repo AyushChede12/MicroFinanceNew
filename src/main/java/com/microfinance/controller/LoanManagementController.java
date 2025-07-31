@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.LoanApplication;
+import com.microfinance.model.LoanPayment;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.service.LoanManagementService;
@@ -226,6 +227,19 @@ public class LoanManagementController {
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved loans found", null));
+			}
+		}
+		
+		//API for Paying Emi (Vaibhav) 
+		@PostMapping("/payEmi")
+		public ResponseEntity<ApiResponse<String>> payEmi(@RequestBody LoanPayment request) {
+			boolean success = loanServices.processEmiPayment(request, "1"); // Pass entire object
+
+			if (success) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "EMI paid successfully", null));
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "Payment failed", null));
 			}
 		}
 }

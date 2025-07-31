@@ -162,6 +162,69 @@ $('#modeofPayment').change(function() {
 	}
 });
 
+//Js for paying the emi (Vaibhav)
+$('#paymentBtn').click(function(e) {
+	e.preventDefault();
+
+	const paymentData = {
+		loanId: $('#findByLoanId').val(),
+		loanDate: $('#loanDate').val(),
+		memberId: $('#memberId').val(),
+
+		loanPlanName: $('#loanPlanName').val(),
+		typeOfLoan: $('#typeOfLoan').val(),
+		loanMode: $('#loanMode').val(),
+		loanTerm: $('#loanTerm').val(),
+		rateOfInterest: $('#rateOfInterest').val(),
+		loanAmount: $('#loanAmount').val(),
+		interestType: $('#interestType').val(),
+		emiPayment: $('#emiPayment').val(),
+
+
+
+		// Deductions
+		processingFee: $('#processingFee').val(),
+		legalCharges: $('#legalCharges').val(),
+		gst: $('#gst').val(),
+		insuranceFee: $('#insuranceFee').val(),
+		valuationFees: $('#valuationFees').val(),
+		stationaryFee: $('#stationaryFee').val(),
+		financialConsultantId: $('#financialConsultantId').val(),
+		financialConsultantName: $('#financialConsultantName').val(),
+
+
+		// Payment
+		paymentDate: $('#paymentDate').val(),
+		paymentStatus: $('#paymentStatus').val(),
+		paymentMode: $('#paymentMode').val(),
+		accountNo: $('#accountNo').val(),
+		ref_UpiId: $('#ref_UpiId').val(),
+		charges: $('#charges').val(),
+		remarks: $('#remarks').val(),
+		chequeDate: $('#chequeDate').val(),
+		chequeNo: $('#chequeNo').val(),
+
+		noOfInst: $('#noOfInst').val() || "1"
+	};
+
+
+
+	$.ajax({
+		type: 'POST',
+		url: '/api/loanmanegment/payEmi',
+		contentType: 'application/json',
+		data: JSON.stringify(paymentData),
+		success: function(response) {
+			alert(response.message);
+			location.reload();
+			// Optional: $('#paymentForm')[0].reset();
+		},
+		error: function(xhr) {
+			const errorMsg = xhr.responseJSON?.message || "Unknown error occurred";
+			alert("❌ Payment failed: " + errorMsg);
+		}
+	});
+});
 
 
 
