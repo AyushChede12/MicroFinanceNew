@@ -34,6 +34,31 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  @media print {
+    body * {
+      visibility: hidden !important;
+    }
+
+    #passbookSection, #TransactionSection {
+      visibility: visible !important;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
+
+    /* Hide sidebar, navbar, buttons during print */
+    .sidebar, .navbar, .print-button, .download-button, .footer, .header, .btn, .action-buttons {
+      display: none !important;
+    }
+
+    /* Optional: Remove page margins */
+    @page {
+      margin: 20mm;
+    }
+  }
+</style>
 
 </head>
 
@@ -141,7 +166,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-4">
 			<div id="printbtnSection"  style="display: none;">
 							<div class="col-12 d-flex justify-content-end gap-2">
-								<button type="button" class="btn btn-success" id="printBtn">
+								<button type="button" class="btn btn-success" id="printBtn" onclick="printTransactionSection1()">
 									<i class="fa-solid fa-print"></i>
 								</button>
 								<button type="button" class="btn btn-success" id="downloadBtn">
@@ -149,17 +174,17 @@ pageEncoding="ISO-8859-1"%> -->
 								</button>
 					</div>
 			</div>
-				<div class="row mt-5">
-					<div class="col-12" id="passbookSection"  style="display: none;">
-						<div class="card recent-sales" id="passbookId">
+				<div class="row mt-5" id="passbookId">
+					<!-- <div class="col-12" id="passbookSection"  style="display: none;">
+						<div class="card recent-sales" >
 							<div class="card-body table-responsive">
-								<!-- Certificate Form Starts Here -->
+								Certificate Form Starts Here
 								<div class="p-3">
 									<h5 class="text-center mb-3" style="font-size: 20px;">
 										<strong>Microfinance Pvt. Ltd</strong>
 									</h5>
 
-									<!-- Applicant Information -->
+									Applicant Information
 									
 									<div class="row border">
 										<div class="col-md-6" style="padding-top: 15px;">
@@ -225,16 +250,125 @@ pageEncoding="ISO-8859-1"%> -->
 
 									
 								</div>
-								<!-- Certificate Form Ends Here -->
+								Certificate Form Ends Here
 
 							</div>
 						</div>
-					</div>
+					</div> -->
+					<div id="passbookSection" class="passbookSection"
+			style="display: none;">
+			<div style="width: 100%; margin: auto">
+				<h1>Microfinance Services</h1>
+				<p>Address : Nagpur(440024) - Maharashtra</p>
+				<hr />
+				<div class="d-flex justify-content-between">
+					<p>
+						Customer No. <span id="customerNo"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Account No.: <span id="accountNo"
+							style="width: 20vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p>
+						Account Holder Name: <span id="customerName"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						S/D/W/H/O : <span id="familyDetails"
+							style="width: 20vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<div class="d-flex justify-content-between">
+				<p>
+					Date Of Birth: <span id="dateOfBirth"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
+				<p>
+					Contact No.: <span id="contactNo"
+						style="width: 20vw; display: inline-block;"></span>
+				</p>
+				</div>
+				<div class="d-flex justify-content-between">
+				<p>
+					Email ID: <span id="emailId"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
+				<p>
+					Mode Of Operation: <span id="operationType"
+						style="width: 17vw; display: inline-block;"></span>
+				</p>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p>
+						Aadhar No.: <span id="aadharNo"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Address: <span id="address"
+							style="width: 22vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p>
+						opening Date : <span id="openingDate"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Account Type: <span id="typeofaccount"
+							style="width: 20vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p>
+						IFSC Code: <span id="IFSCCode"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Date Of Issue: <span id="dateOfIssue"
+							style="width: 20vw; display: inline-block;"></span>
+					</p>
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<p>
+						Nomination Registered: <span id="nominationStatus"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Nomination Name: <span id="nominationName"
+							style="width: 17vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p>
+						Branch and Code: <span id="branch"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						UPI: <span id="upi"
+							style="width: 25vw; display: inline-block;"></span>
+					</p>					
+				</div>
+
+				
+
+
+
+				<div class="d-flex justify-content-end">
+					<hr style="border-color: black; width: 20vw;">
+					<p style="position: relative; top: 23px; right: 17rem">Authorized
+						Signature</p>
+				</div>
+			</div>
+		</div>
 				</div>
 
 			<div class="row mt-5">
 				<div class="col-12" id="headingSection" style="display: none;">
-					<div class="card recent-sales" id="passbookId">
+					<div class="card recent-sales" id="headingId">
 						<div class="card-body table-responsive">
 							<!-- Certificate Form Starts Here -->
 							<table id="heading-tabl">
@@ -244,13 +378,13 @@ pageEncoding="ISO-8859-1"%> -->
 											style="text-align: center; width: 100px; font-weight: 400;">TXN
 											DATE</th>
 										<th scope="col"
-											style="text-align: center; width: 100px; font-weight: 400;">PARTICULARS</th>
+											style="text-align: center; width: 160px; font-weight: 400;">PARTICULARS</th>
 										<th scope="col"
-											style="text-align: center; width: 100px; font-weight: 400;">DEBIT</th>
+											style="text-align: center; width: 160px; font-weight: 400;">TRANSACTION TYPE</th>
 										<th scope="col"
-											style="text-align: center; width: 100px; font-weight: 400;">CREDIT</th>
+											style="text-align: center; width: 160px; font-weight: 400;">DEBIT/CREDIT</th>
 										<th scope="col"
-											style="text-align: center; width: 100px; font-weight: 400;">BALANCE</th>
+											style="text-align: center; width: 160px; font-weight: 400;">BALANCE</th>
 									</tr>
 								</thead>
 
@@ -276,10 +410,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 			<div class="row mt-5">
 				<div class="col-12" id="TransactionSection" style="display: none;">
-					<div class="card recent-sales" id="passbookId">
+					<div class="card recent-sales" id="transactionId">
 						<div class="card-body table-responsive">
 							<!-- Certificate Form Starts Here -->
-                             <table class="table table-bordered" id="transaction-tabl">
+                             <table class="table " id="transaction-tabl">
 								<thead>
 									<tr style="color: White; background-color: #008385;">
 										<th scope="col" style="text-align: center; width: 100px"></th>
