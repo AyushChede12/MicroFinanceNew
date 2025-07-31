@@ -809,7 +809,7 @@ public class PageController {
 
 	@GetMapping("/fullMaturityPayment")
 	public String getullMaturityPayment() {
-		return "maturityManagement/fullMaturityPayment";
+		return "maturityManagement/partialMaturityStatus";
 	}
 
 	@GetMapping("/partialMaturityPayment")
@@ -834,7 +834,7 @@ public class PageController {
 	
 	@GetMapping("/partialPaymentStatusMaturityApplication")
 	public String getPartialPaymentStatusMaturityApplication() {
-		return "maturityManagement/partialPaymentStatus";
+		return "maturityManagement/fullMaturity";
 	}
 
 	@GetMapping("/maturityReceiptPrint")
