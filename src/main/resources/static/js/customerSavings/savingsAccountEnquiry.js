@@ -1,40 +1,3 @@
-/* $(document).ready(function () {
-	$.ajax({
-			type: "GET",
-			url: "api/customersavings/getAllSavingAccountData",
-			contentType: "application/json",
-			success: function(response) {
-				console.log("Full Response from API:", response); 
-				if (response.status =="FOUND" ) {
-					let data = response.data;
-					let tableBody = $(".datatable tbody");
-					tableBody.empty();
-					data.forEach((item, index) => {
-						let row = `<tr>
-			                        <td>${index + 1}</td>
-			                        <td>${item.accountNumber}</td>
-									<td>${item.typeofaccount}</td>
-			                        <td>${item.selectByCustomer}</td>
-			                        <td>${item.enterCustomerName}</td>
-									<td>${item.contactNumber}</td>
-									<td>${item.branchName}</td>
-									<td>${item.address}</td>
-									<td>${item.district}</td>
-									<td>${item.state}</td>
-									<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-									<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-			                    </tr>`;
-						tableBody.append(row);
-					});
-				} else {
-					alert("Failed to fetch saving account data: " + response.message);
-				}
-			},
-			error: function() {
-				alert("Error while calling the API.");
-			}
-		});
-}); */
 
 //janvi : today 
 
@@ -80,10 +43,104 @@ function renderTable(data) {
 									<td>${value.address}</td>
 									<td>${value.district}</td>
 									<td>${value.state}</td>
+									<td>${value.openingDate}</td>
+									<td>${value.financialConsultantCode}</td>
+									<td>${value.selectPlan}</td>
             </tr>`
 		);
 	}).join('');
 	$('#tableSavingAcc').html(tableData);
 }
 
+//today : Janvi
+
+//janvi sonkusare
+// Branch Filter (Column 9)
+const inputBranch = document.getElementById("branchName");
+inputBranch.addEventListener("change", filterBranchAndDate);
+
+// From Date Filter (Registration Date)
+const inputFromDate = document.getElementById("fromDate");
+inputFromDate.addEventListener("input", filterBranchAndDate);
+
+// To Date Filter (Registration Date)
+const inputToDate = document.getElementById("toDate");
+inputToDate.addEventListener("input", filterBranchAndDate);
+
+// Function to filter by both Branch and Date together
+function filterBranchAndDate() {
+    const branchKeyword = document.getElementById("branchName").value;
+    const fromDate = document.getElementById("fromDate").value;
+    const toDate = document.getElementById("toDate").value;
+
+    const rows = document.querySelectorAll("#tableSavingAcc tr");
+
+    rows.forEach(row => {
+        const branch = row.cells[6] ? row.cells[6].textContent.trim() : ''; // Column 9: Branch
+        const dateCell = row.cells[10] ? row.cells[10].textContent.trim() : ''; // Column 5: Registration Date
+        const rowDate = new Date(dateCell);
+
+        // Filter by Branch and Date Range
+        let showRow = true;
+        
+        if (branchKeyword && branch !== branchKeyword) {
+            showRow = false;
+        }
+
+        // Filter by Date Range
+        if (fromDate && new Date(fromDate) > rowDate) {
+            showRow = false;
+        }
+
+        if (toDate && new Date(toDate) < rowDate) {
+            showRow = false;
+        }
+
+        row.style.display = showRow ? "" : "none";
+    });
+}
+
+// Applicant name Filter (Column 2)
+const inputaccHolderName = document.getElementById("customerName");
+inputaccHolderName.addEventListener("input", function() {
+    filterTableByColumn(4, inputaccHolderName.value);
+});
+
+// Account no. Filter (Column 1)
+const inputaccountNo = document.getElementById("accountNumber");
+inputaccountNo.addEventListener("input", function() {
+    filterTableByColumn(1, inputaccountNo.value); // Column 2: Member Name
+});
+
+// Member code Filter (Column 6)
+const inputmemberCode = document.getElementById("customerCode");
+inputmemberCode.addEventListener("input", function() {
+    filterTableByColumn(3, inputmemberCode.value); // Column 7: Mobile No.
+});
+
+// Advisor/collector code Filter (Column 9)
+const inputadvisorCode = document.getElementById("financialConsultantCode");
+inputadvisorCode.addEventListener("input", function() {
+    filterTableByColumn(11, inputadvisorCode.value); // Column 5: Aadhar No.
+});
+
+// Scheme name Filter (Column 3)
+const inputsBPlan = document.getElementById("schemename");
+inputsBPlan.addEventListener("change", function() {
+    filterTableByColumn(13, inputsBPlan.value); // Column 6: PAN No.
+}); 
+
+
+function filterTableByColumn(index, keyword) {
+	const rows = document.querySelectorAll("#tableSavingAcc tr");
+	keyword = keyword.toLowerCase();
+
+	rows.forEach(row => {
+		const cell = row.cells[index];
+		if (cell) {
+			const text = cell.textContent.toLowerCase();
+			row.style.display = text.includes(keyword) ? "" : "none";			
+		}
+	});
+}
 
