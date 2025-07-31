@@ -194,7 +194,7 @@ $(document).ready(function () {
     const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
 
     $.ajax({
-        url: "api/preference/getAllRelativeModule", // Ensure correct server path
+        url: "/api/preference/getAllRelativeModule", // Ensure correct server path
         method: "GET",
         success: function (data) {
             console.log("Received relation data:", data);
@@ -229,7 +229,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     // Fetch all branches and populate the dropdown
     $.ajax({
-        url: "api/preference/getAllBranchModule", // Ensure correct API path
+        url: "/api/preference/getAllBranchModule", // Ensure correct API path
         method: "GET",
         success: function (data) {
             console.log("Fetched Branches:", data);
