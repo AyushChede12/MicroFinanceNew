@@ -77,6 +77,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for="loanId">Select Loan ID</label> <select id="loanId"
 								name="loanId" required="required"
 								class="form-control selectField" style="height: 30px;">
+								<option value="">-- Search Loan ID --</option>
 							</select>
 						</div>
 					</div>
@@ -275,7 +276,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label style="margin-left: 20px;" class="mb-2">SMS Send</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-sms-send" name="smsSend"
+									<input type="checkbox" id="toggle-sms-send" name="messageStatus"
 										class="toggle__input" data-toggle-type="sms-send"> <label
 										for="toggle-sms-send" class="toggle__label"></label>
 								</div>

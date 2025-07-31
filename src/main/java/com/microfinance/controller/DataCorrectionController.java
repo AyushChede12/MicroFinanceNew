@@ -86,7 +86,7 @@ public class DataCorrectionController {
 		}
 	}
 
-	//Ayush
+	// Ayush
 	@PostMapping("/deletePolicyDataByForm")
 	public ResponseEntity<ApiResponse<String>> deletePolicyData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deletePolicyData(id);
@@ -135,7 +135,7 @@ public class DataCorrectionController {
 		List<LoanApplication> loan = dataCorrectionService.getApprovedLoanApplications();
 
 		if (loan != null && !loan.isEmpty()) {
-			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.OK,
+			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.FOUND,
 					"Approved Loan Application fetched successfully.", loan);
 			return ResponseEntity.ok(response);
 		} else {
@@ -143,6 +143,15 @@ public class DataCorrectionController {
 					"No approved customers found.", null);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
+	}
+
+	// Ayush
+	@GetMapping("/fetchAllLoanApplications")
+	public ResponseEntity<ApiResponse<List<LoanApplication>>> fetchAllLoanApplicationsData() {
+		List<LoanApplication> list = dataCorrectionService.fetchAllLoanApplication();
+		ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"Loan Application fetched successfully", list);
+		return ResponseEntity.ok(response);
 	}
 
 	// Ayush
@@ -258,7 +267,7 @@ public class DataCorrectionController {
 		}
 	}
 
-	//Ayush
+	// Ayush
 	@PostMapping("/deleteDailyRenewalDataById")
 	public ResponseEntity<ApiResponse<String>> deleteDailyRenewalData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteDailyRenewal(id);
@@ -273,7 +282,7 @@ public class DataCorrectionController {
 		}
 	}
 
-	//Ayush
+	// Ayush
 	@GetMapping("/fetchAllApprovedFlexibleRenewal")
 	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getApprovedFlexibleRenewalData() {
 		List<FlexibleRenewal> dailyrenewal = dataCorrectionService.getApprovedFlexibleRenewal();
@@ -288,8 +297,8 @@ public class DataCorrectionController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 	}
-	
-	//Ayush
+
+	// Ayush
 	@GetMapping("/getFlexibleRenewalByPolicyCode")
 	public ResponseEntity<ApiResponse<List<FlexibleRenewal>>> getFlexibleRenewalDataByPolicyCode(
 			@RequestParam String policyCode) {
@@ -306,8 +315,8 @@ public class DataCorrectionController {
 			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
 		}
 	}
-	
-	//Ayush
+
+	// Ayush
 	@PostMapping("/deleteFlexibleRenewalDataById")
 	public ResponseEntity<ApiResponse<String>> deleteFlexibleRenewalData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteFlexibleRenewal(id);
@@ -321,7 +330,7 @@ public class DataCorrectionController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
+
 //	@GetMapping("/fetchAllApprovedSavingAccountActivity")
 //	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> getApprovedSavingAccountActivity() {
 //		List<SavingAccountActivity> activity = dataCorrectionService.getApprovedSavingAccountActivity();
@@ -336,5 +345,23 @@ public class DataCorrectionController {
 //			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 //		}
 //	}
+	
+	//Ayush
+	@PostMapping("/updateDataOfLoanApplication")
+	public ResponseEntity<ApiResponse<String>> updateLoanApplication(
+			@RequestBody LoanApplication loanApplication) {
+
+		int result = dataCorrectionService.updateCompanyAdministration(loanApplication);
+
+		if (result > 0) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
+					"Loan data updated successfully.", "success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
+					"Failed to update Loan Data.", "failure");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
 
 }

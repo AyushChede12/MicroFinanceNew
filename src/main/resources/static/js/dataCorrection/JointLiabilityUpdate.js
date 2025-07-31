@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	alert("ready Function");
 	$.ajax({
 		url: 'api/joinliability/viewgrouploans',
 		type: 'GET',

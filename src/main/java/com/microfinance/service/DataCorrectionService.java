@@ -376,32 +376,26 @@ public class DataCorrectionService {
 		}
 	}
 
-
 //	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
 //		return policyRenewalRepo.findByPolicyCode(policyCode);
 //	}
-
 
 	public List<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
 		// TODO Auto-generated method stub return
 		return policyRenewalRepo.findByPolicyCode(policyCode);
 	}
 
-
-
 //	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
 //		return policyRenewalRepo.findByPolicyCode(policyCode);
 //	}
-
 
 	/*
 	 * public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String
 	 * policyCode) { // TODO Auto-generated method stub return
 	 * policyRenewalRepo.findByPolicyCode(policyCode); }
 	 */
-
 
 	public boolean deletePolicyRenewalData(Long id) {
 		// TODO Auto-generated method stub
@@ -418,18 +412,15 @@ public class DataCorrectionService {
 		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
 	}
 
-
 //	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
 //		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
 //	}
 
-
 	public List<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
 		// TODO Auto-generated method stub return
 		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
 	}
-
 
 //	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
 //		// TODO Auto-generated method stub
@@ -441,8 +432,6 @@ public class DataCorrectionService {
 	 * policyCode) { // TODO Auto-generated method stub return
 	 * dailyPremiumRenewalRepo.findByPolicyCode(policyCode); }
 	 */
-
-
 
 	public boolean deleteDailyRenewal(Long id) {
 		// TODO Auto-generated method stub
@@ -471,6 +460,67 @@ public class DataCorrectionService {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	public int updateCompanyAdministration(LoanApplication loanApplication) {
+		// TODO Auto-generated method stub
+		Optional<LoanApplication> optional = loanApplicationRepo.findById(loanApplication.getId());
+
+		if (optional.isPresent()) {
+			LoanApplication loan = optional.get();
+
+			loan.setLoanDate(loanApplication.getLoanDate());
+			loan.setMemberId(loanApplication.getMemberId());
+			loan.setRelativeDetails(loanApplication.getRelativeDetails());
+			loan.setDateOfBirth(loanApplication.getDateOfBirth());
+			loan.setAge(loanApplication.getAge());
+			loan.setContactNo(loanApplication.getContactNo());
+			loan.setAddress(loanApplication.getAddress());
+			loan.setPinCode(loanApplication.getPinCode());
+			loan.setBranchName(loanApplication.getBranchName());
+			loan.setLoanPlanName(loanApplication.getLoanPlanName());
+			loan.setTypeOfLoan(loanApplication.getTypeOfLoan());
+			loan.setLoanMode(loanApplication.getLoanMode());
+			loan.setLoanTerm(loanApplication.getLoanTerm());
+			loan.setRateOfInterest(loanApplication.getRateOfInterest());
+			loan.setLoanAmount(loanApplication.getLoanAmount());
+			loan.setInterestType(loanApplication.getInterestType());
+			loan.setEmiPayment(loanApplication.getEmiPayment());
+			loan.setPurposeOfLoan(loanApplication.getPurposeOfLoan());
+			loan.setMessageStatus(loanApplication.getMessageStatus());
+			
+			//Guarantor Details
+			loan.setGuarantorMemberId(loanApplication.getGuarantorMemberId());
+			loan.setGuarantorIdentity(loanApplication.getGuarantorIdentity());
+			loan.setGuarantorAddress(loanApplication.getGuarantorAddress());
+			loan.setPinCode(loanApplication.getPinCode());
+			loan.setGuarantorContactNo(loanApplication.getGuarantorContactNo());
+			loan.setGuarantorSecurityType(loanApplication.getGuarantorSecurityType()); 	
+			
+			//CoApplicant Details
+			loan.setCoApplicantMemberId(loanApplication.getCoApplicantMemberId());
+			loan.setCoApplicantIdentity(loanApplication.getCoApplicantIdentity());
+			loan.setCoApplicantAddress(loanApplication.getCoApplicantAddress());
+			loan.setCoApplicantPinCode(loanApplication.getCoApplicantPinCode());
+			loan.setCoApplicantContactNo(loanApplication.getCoApplicantContactNo());
+			loan.setCoApplicantSecurityType(loanApplication.getCoApplicantSecurityType()); 	
+			
+			//Deduction Details
+			loan.setProcessingFee(loanApplication.getProcessingFee());
+			loan.setLegalCharges(loanApplication.getLegalCharges());
+			loan.setGst(loanApplication.getGst());
+			loan.setInsuranceFee(loanApplication.getInsuranceFee());
+			loan.setValuationFees(loanApplication.getValuationFees());
+			loan.setStationaryFee(loanApplication.getStationaryFee()); 	
+			loan.setFinancialConsultantId(loanApplication.getFinancialConsultantId());
+			loan.setFinancialConsultantName(loanApplication.getFinancialConsultantName()); 	
+			
+
+			loanApplicationRepo.save(loan);
+			return 1;
+		} else {
+			return 0;
 		}
 	}
 
