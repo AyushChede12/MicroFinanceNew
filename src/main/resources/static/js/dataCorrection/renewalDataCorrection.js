@@ -73,7 +73,7 @@ $(document).ready(function() {
 				data: { policyCode: policyCode },
 				success: function(response) {
 					if (response.status == "FOUND") {
-						let data = response.data;
+						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#renewalDate").val(data.renewalDate);
 						$("#policyDate").val(data.policyDate);

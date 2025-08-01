@@ -217,8 +217,8 @@ $(document).ready(function() {
 		financialData.append("fees", $('#fees').val());
 		financialData.append("modeofPayment", $('#modeofPayment').val());
 		financialData.append("comments", $('#comments').val());
-		financialData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
-		financialData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
+		financialData.append("financialStatus", $('#toggle-financial-status').is(':checked') ? 1 : 0);
+		financialData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 
 		let photoValue = $('#financialphotoHidden').val();
 		financialData.append("customerPhoto", photoValue || ""); // Always send string path

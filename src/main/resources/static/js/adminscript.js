@@ -19,7 +19,7 @@ $(document).ready(function() {
 
 	//Branch
 	$.ajax({
-		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -50,7 +50,7 @@ $(document).ready(function() {
 
 	//Relatives
 	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {

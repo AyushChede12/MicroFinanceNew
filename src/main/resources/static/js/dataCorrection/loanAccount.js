@@ -1,6 +1,6 @@
 $(document).ready(function() {
-	/*$.ajax({
-		url: 'api/datacorrection/fetchAllLoanApplications',
+	$.ajax({
+		url: 'api/datacorrection/fetchAllApprovedLoanApplications',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -44,24 +44,6 @@ $(document).ready(function() {
 		error: function() {
 			alert("Failed to load ID");
 		}
-	});*/
-
-	$.ajax({
-		url: "api/datacorrection/fetchAllLoanApplications",
-		type: "GET",
-		success: function(response) {
-			if (response.status === "FOUND") {
-				$("#loanId").empty().append("<option value=''>-- Select Code --</option>");
-				response.data.forEach(function(item) {
-					$("#loanId").append(`<option value='${item.loanId}'>${item.loanId}</option>`);
-				});
-			} else {
-				alert("No Loan Application found.");
-			}
-		},
-		error: function() {
-			alert("Failed to load Data");
-		}
 	});
 
 	$.ajax({
@@ -96,7 +78,6 @@ $(document).ready(function() {
 				data: { loanId: loanId },
 				success: function(response) {
 					if (response.status == "OK") {
-						alert("if condition");
 						let data = response.data;
 						$("#id").val(data.id);
 						$("#loanDate").val(data.loanDate);
@@ -147,8 +128,8 @@ $(document).ready(function() {
 
 						//$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
 
-						/*if (data.customerPhoto) {
-							const photoPath = `Uploads/${data.customerPhoto}`;
+						if (data.photo) {
+							const photoPath = `Uploads/${data.photo}`;
 							$("#photoPreview").attr("src", photoPath);
 							$("#photoHidden").val(photoPath);
 							const fakePhotoEvent = { target: { result: photoPath } };
@@ -160,8 +141,8 @@ $(document).ready(function() {
 						}
 
 						// Image: Signature
-						if (data.customerSignature) {
-							const signPath = `Uploads/${data.customerSignature}`;
+						if (data.signature) {
+							const signPath = `Uploads/${data.signature}`;
 							$("#signaturePreview").attr("src", signPath);
 							$("#signatureHidden").val(signPath);
 							const fakeSignEvent = { target: { result: signPath } };
@@ -170,9 +151,9 @@ $(document).ready(function() {
 						} else {
 							$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
 							$("#signatureHidden").val("");
-						}*/
+						}
 
-						if (parseInt(data.messageStatus) === 1) {
+						if (data.messageStatus === 'on') {
 							$('#toggle-sms-send').prop('checked', true);
 						} else {
 							$('#toggle-sms-send').prop('checked', false);
@@ -189,6 +170,70 @@ $(document).ready(function() {
 				}
 			});
 		}
+	});
+
+	$('#updateBtn').click(async function(event) {
+		event.preventDefault();
+
+		const loanData = {
+			id: $("#id").val(),
+			loanDate: $("#loanDate").val(),
+			memberId: $("#memberId").val(),
+			relativeDetails: $("#relativeDetails").val(),
+			dateOfBirth: $("#dateOfBirth").val(),
+			age: $("#age").val(),
+			contactNo: $("#contactNo").val(),
+			address: $("#address").val(),
+			pinCode: $("#pinCode").val(),
+			branchName: $("#branchName").val(),
+			loanPlanName: $("#loanPlanName").val(),
+			typeOfLoan: $("#typeOfLoan").val(),
+			loanMode: $("#loanMode").val(),
+			loanTerm: $("#loanTerm").val(),
+			rateOfInterest: $("#rateOfInterest").val(),
+			loanAmount: $("#loanAmount").val(),
+			interestType: $("#interestType").val(),
+			emiPayment: $("#emiPayment").val(),
+			purposeOfLoan: $("#purposeOfLoan").val(),
+			guarantorMemberId: $("#guarantorMemberId").val(),
+			guarantorIdentity: $("#guarantorIdentity").val(),
+			guarantorAddress: $("#guarantorAddress").val(),
+			guarantorPinCode: $("#guarantorPinCode").val(),
+			guarantorContactNo: $("#guarantorContactNo").val(),
+			guarantorSecurityType: $("#guarantorSecurityType").val(),
+			coApplicantMemberId: $("#coApplicantMemberId").val(),
+			coApplicantIdentity: $("#coApplicantIdentity").val(),
+			coApplicantAddress: $("#coApplicantAddress").val(),
+			coApplicantPinCode: $("#coApplicantPinCode").val(),
+			coApplicantContactNo: $("#coApplicantContactNo").val(),
+			coApplicantSecurityType: $("#coApplicantSecurityType").val(),
+			processingFee: $("#processingFee").val(),
+			legalCharges: $("#legalCharges").val(),
+			gst: $("#gst").val(),
+			insuranceFee: $("#insuranceFee").val(),
+			valuationFees: $("#valuationFees").val(),
+			stationaryFee: $("#stationaryFee").val(),
+			financialConsultantId: $("#financialConsultantId").val(),
+			financialConsultantName: $("#financialConsultantName").val()
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: 'api/datacorrection/updateDataOfLoanApplication',
+			contentType: "application/json",
+			data: JSON.stringify(loanData),
+			success: function(response) {
+				if (response.status === "OK") {
+					alert("Loan Data Updated Successfully");
+					location.reload();
+				} else {
+					alert("Something went wrong: " + response.message);
+				}
+			},
+			error: function(xhr) {
+				alert("Error while Updating data: " + xhr.responseText);
+			}
+		});
 	});
 
 	$("#newBtn").click(function() {
@@ -236,4 +281,55 @@ function updateToggleColor(input) {
 		label.style.backgroundColor = "#ccc";  // gray
 		label.style.borderColor = "#ccc";
 	}
+}
+
+function photoUpload() {
+	const file = document.getElementById("photo").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("signature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
 }
