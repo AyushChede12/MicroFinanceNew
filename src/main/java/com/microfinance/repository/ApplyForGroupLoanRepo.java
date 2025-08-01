@@ -23,6 +23,8 @@ public interface ApplyForGroupLoanRepo extends JpaRepository<ApplyForGroupLoan, 
 
 	    // ✅ For fetching multiple records
 	    List<ApplyForGroupLoan> findByGroupCode(String groupCode);
+
+
 	
 	
 

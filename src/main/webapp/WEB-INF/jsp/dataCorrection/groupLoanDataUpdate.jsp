@@ -70,15 +70,18 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Find by Group Code*</label> <select
-									id="groupCode" name="groupCode" required
+						<div class="col-lg-5">
+							<input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 20px;">
+								<label for="groupCode">Find By Group Code</label> <select
+									id="groupCode" name="groupCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">-- Search Group Code --</option>
 								</select>
 							</div>
 						</div>
+
 					</div>
 				</div>
 
@@ -198,7 +201,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3" style="display: none;">
 							<div class="d-flex flex-column formFields">
 								<label>Plan ID*</label> <input type="hidden" id="planCode"
-									name="planCode" value="${memberCodePI}" class="form-control"
+									name="planCode" class="form-control"
 									required />
 							</div>
 						</div>
@@ -312,15 +315,6 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="approvalStatus">Approval Status</label> <input
-									type="text" id="approvalStatus" name="approvalStatus"
-									value="Not Approved" class="form-control" readonly />
-							</div>
-						</div>
-
 					</div>
 
 					<div class="mt-5">
@@ -339,7 +333,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/dataCorrection/JointLiabilityUpdate.js"></script>
+	<script src="./js/dataCorrection/jointLiabiliyUpdate.js"></script>
+
 </body>
 
 </html>

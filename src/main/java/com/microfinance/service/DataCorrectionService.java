@@ -15,6 +15,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
 import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
+import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
@@ -28,6 +29,7 @@ import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.AddInvestmentRepo;
+import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
@@ -64,6 +66,9 @@ public class DataCorrectionService {
 
 	@Autowired
 	FlexibleRenewalRepo flexibleRenewalRepo;
+
+	@Autowired
+	ApplyForGroupLoanRepo applyForGroupLoanRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -470,6 +475,7 @@ public class DataCorrectionService {
 		if (optional.isPresent()) {
 			LoanApplication loan = optional.get();
 
+			loan.setLoanId(loanApplication.getLoanId());
 			loan.setLoanDate(loanApplication.getLoanDate());
 			loan.setMemberId(loanApplication.getMemberId());
 			loan.setRelativeDetails(loanApplication.getRelativeDetails());
@@ -489,33 +495,32 @@ public class DataCorrectionService {
 			loan.setEmiPayment(loanApplication.getEmiPayment());
 			loan.setPurposeOfLoan(loanApplication.getPurposeOfLoan());
 			loan.setMessageStatus(loanApplication.getMessageStatus());
-			
-			//Guarantor Details
+
+			// Guarantor Details
 			loan.setGuarantorMemberId(loanApplication.getGuarantorMemberId());
 			loan.setGuarantorIdentity(loanApplication.getGuarantorIdentity());
 			loan.setGuarantorAddress(loanApplication.getGuarantorAddress());
 			loan.setPinCode(loanApplication.getPinCode());
 			loan.setGuarantorContactNo(loanApplication.getGuarantorContactNo());
-			loan.setGuarantorSecurityType(loanApplication.getGuarantorSecurityType()); 	
-			
-			//CoApplicant Details
+			loan.setGuarantorSecurityType(loanApplication.getGuarantorSecurityType());
+
+			// CoApplicant Details
 			loan.setCoApplicantMemberId(loanApplication.getCoApplicantMemberId());
 			loan.setCoApplicantIdentity(loanApplication.getCoApplicantIdentity());
 			loan.setCoApplicantAddress(loanApplication.getCoApplicantAddress());
 			loan.setCoApplicantPinCode(loanApplication.getCoApplicantPinCode());
 			loan.setCoApplicantContactNo(loanApplication.getCoApplicantContactNo());
-			loan.setCoApplicantSecurityType(loanApplication.getCoApplicantSecurityType()); 	
-			
-			//Deduction Details
+			loan.setCoApplicantSecurityType(loanApplication.getCoApplicantSecurityType());
+
+			// Deduction Details
 			loan.setProcessingFee(loanApplication.getProcessingFee());
 			loan.setLegalCharges(loanApplication.getLegalCharges());
 			loan.setGst(loanApplication.getGst());
 			loan.setInsuranceFee(loanApplication.getInsuranceFee());
 			loan.setValuationFees(loanApplication.getValuationFees());
-			loan.setStationaryFee(loanApplication.getStationaryFee()); 	
+			loan.setStationaryFee(loanApplication.getStationaryFee());
 			loan.setFinancialConsultantId(loanApplication.getFinancialConsultantId());
-			loan.setFinancialConsultantName(loanApplication.getFinancialConsultantName()); 	
-			
+			loan.setFinancialConsultantName(loanApplication.getFinancialConsultantName());
 
 			loanApplicationRepo.save(loan);
 			return 1;
@@ -524,20 +529,66 @@ public class DataCorrectionService {
 		}
 	}
 
-//	public List<SavingAccountActivity> getApprovedSavingAccountActivity() {
-//		// TODO Auto-generated method stub
-//		return savingAccountActivityRepo.findByIsApprovedTrue();
-//	}
+	public List<ApplyForGroupLoan> getApprovedJointLiability() {
+		// TODO Auto-generated method stub
+		return applyForGroupLoanRepo.findAll();
+	}
 
-//	public List<PolicyRenewal> fetchRenewalByPolicyCode(String policyCode) {
-//		// TODO Auto-generated method stub
-//		return policyRenewalRepo.findByPolicyCode(policyCode);
-//	}
+	public List<ApplyForGroupLoan> fetchJointLiabilityByGroupCode(String groupCode) {
+		// TODO Auto-generated method stub
+		return applyForGroupLoanRepo.findByGroupCode(groupCode);
+	}
 
-//	public List<CreateSavingsAccount> fetchSavingDataByCustomerCode(String selectByCustomer) {
-//		// TODO Auto-generated method stub
-//		List<CreateSavingsAccount> list = createSavingAccountRepo.findBySelectByCustomer(selectByCustomer);
-//		return list;
-//	}
+	public int updateJointLiability(ApplyForGroupLoan applyForGroupLoan) {
+		// TODO Auto-generated method stub
+		Optional<ApplyForGroupLoan> optional = applyForGroupLoanRepo.findById(applyForGroupLoan.getId());
+
+		if (optional.isPresent()) {
+			ApplyForGroupLoan group = optional.get();
+
+			group.setGroupCode(applyForGroupLoan.getGroupCode());
+			group.setOpeningDate(applyForGroupLoan.getOpeningDate());
+			group.setSelectedMember(applyForGroupLoan.getSelectedMember());
+			group.setCustomerName(applyForGroupLoan.getCustomerName());
+			group.setCommunityName(applyForGroupLoan.getCommunityName());
+			group.setAllocatedStaff(applyForGroupLoan.getAllocatedStaff());
+			group.setBranchName(applyForGroupLoan.getBranchName());
+			group.setCollectionDays(applyForGroupLoan.getCollectionDays());
+			group.setCommunityLeader(applyForGroupLoan.getCommunityLeader());
+			group.setContactNumber(applyForGroupLoan.getContactNumber());
+			group.setLoanPurpose(applyForGroupLoan.getLoanPurpose());
+			group.setPlanCode(applyForGroupLoan.getPlanCode());
+			group.setLoanSchemeName(applyForGroupLoan.getLoanSchemeName());
+			group.setProcessingFee(applyForGroupLoan.getProcessingFee());
+			group.setLegalCharges(applyForGroupLoan.getLegalCharges());
+			group.setGstPercentage(applyForGroupLoan.getGstPercentage());
+			group.setInsuranceFee(applyForGroupLoan.getInsuranceFee());
+			group.setValuationFee(applyForGroupLoan.getValuationFee());
+			group.setPenaltyMode(applyForGroupLoan.getPenaltyMode());
+			group.setMonthlyPenalty(applyForGroupLoan.getMonthlyPenalty());
+			group.setEmiFrequency(applyForGroupLoan.getEmiFrequency());
+			group.setRateOfInterest(applyForGroupLoan.getRateOfInterest());
+			group.setTerm(applyForGroupLoan.getTerm());
+			group.setTotalAmount(applyForGroupLoan.getTotalAmount());
+			group.setInterestType(applyForGroupLoan.getInterestType());
+			group.setEmiType(applyForGroupLoan.getEmiType());
+			group.setApprovalDate(applyForGroupLoan.getApprovalDate());
+
+			applyForGroupLoanRepo.save(group);
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+
+	public boolean deleteJointLiability(Long id) {
+		// TODO Auto-generated method stub
+		if (applyForGroupLoanRepo.existsById(id)) {
+			applyForGroupLoanRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }

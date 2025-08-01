@@ -24,6 +24,7 @@ import com.microfinance.dto.CustomerDto;
 import com.microfinance.dto.FinancialConsultantDto;
 import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
+import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
@@ -363,5 +364,51 @@ public class DataCorrectionController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
+	
+	@GetMapping("/fetchAllApprovedJointLiabilityData")
+	public ResponseEntity<ApiResponse<List<ApplyForGroupLoan>>> getApprovedJointLiabilityData() {
+		List<ApplyForGroupLoan> group = dataCorrectionService.getApprovedJointLiability();
+		if (group != null && !group.isEmpty()) {
 
+			ApiResponse<List<ApplyForGroupLoan>> response = new ApiResponse<>(HttpStatus.FOUND,
+					"Group Loan Application Data fetched successfully.", group);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<ApplyForGroupLoan>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved Group Loan Application found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+	
+	@PostMapping("/updateDataOfJointLiability")
+	public ResponseEntity<ApiResponse<String>> updateJointLiability(
+			@RequestBody ApplyForGroupLoan applyForGroupLoan) {
+
+		int result = dataCorrectionService.updateJointLiability(applyForGroupLoan);
+
+		if (result > 0) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
+					"Joint Liability data updated successfully.", "success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
+					"Failed to update Joint Liability Data.", "failure");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
+	
+	@PostMapping("/deleteJointLiabilityDataById")
+	public ResponseEntity<ApiResponse<String>> deleteJointLiabilityData(@RequestParam("id") Long id) {
+		boolean isDeleted = dataCorrectionService.deleteJointLiability(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Joint Liability deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Joint Liability deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
 }
