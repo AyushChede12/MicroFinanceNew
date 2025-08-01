@@ -171,9 +171,17 @@ public class CustomerManagementController {
 		 }
 
 		 @GetMapping("/approved")
-		    public ResponseEntity<List<addCustomer>> getApprovedCustomers() {
-		        List<addCustomer> customers = customerService.getApprovedCustomers();
-		        return ResponseEntity.ok(customers);
-		    }
+		 public ResponseEntity<ApiResponse<List<addCustomer>>> getApprovedCustomers() {
+		     List<addCustomer> customers = customerService.getApprovedCustomers();
+
+		     ApiResponse<List<addCustomer>> response = ApiResponse.success(
+		         HttpStatus.OK,
+		         "Approved customers fetched successfully.",
+		         customers
+		     );
+
+		     return ResponseEntity.ok(response);
+		 }
+
 
 }

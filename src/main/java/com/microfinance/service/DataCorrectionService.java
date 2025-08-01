@@ -376,10 +376,17 @@ public class DataCorrectionService {
 	}
 
 
+//	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return policyRenewalRepo.findByPolicyCode(policyCode);
+//	}
+
+
 	public List<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
 		// TODO Auto-generated method stub return
 		return policyRenewalRepo.findByPolicyCode(policyCode);
 	}
+
 
 
 //	public Optional<PolicyRenewal> fetchPolicyRenewalByPolicyCode(String policyCode) {
@@ -409,6 +416,12 @@ public class DataCorrectionService {
 		// TODO Auto-generated method stub
 		return dailyPremiumRenewalRepo.findByIsApprovedTrue();
 	}
+
+
+//	public Optional<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
+//		// TODO Auto-generated method stub
+//		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+//	}
 
 
 	public List<DailyPremiumRenewalPM> fetchDailyRenewalByPolicyCode(String policyCode) {
