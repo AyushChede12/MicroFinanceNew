@@ -29,6 +29,14 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -61,35 +69,20 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-							
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No. <span id="star"> *</span> </label> <select id="policyNo"
-									name="policyNo" required="required"
+								<label for="policyCode">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="">Policy Code</option>
 
 								</select>
 							</div>
-
 						</div>
 
-
 					</div>
-					<div class="row">
-						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
-						</div>
-					</div>
+					
 				</div>
-
-
-
-
-
-
-
-
-
 
 
 				<div class="mt-5">
@@ -99,22 +92,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-								<label for="">Policy No:</label> <input type="text"
-									name="policyNo" id="policyNo" required="required"
-									placeholder="" style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
+					<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Applicant Name:</label> <input
-									type="text" name="applicantName" id="applicantName" required="required"
-									placeholder="" style="text-transform: uppercase;" />
+								<label for="">plan code:</label> <input type="text"
+									name="planCode" id="planCode" required="required"
+									placeholder="" />
 							</div>
 						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -126,21 +111,19 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">plan code:</label> <input type="text"
-									name="planCode" id="planCode" required="required"
-									placeholder="" />
+								<label for="vehicalNo">Customer Name :</label> <input
+									type="text" name="customerName" id="customerName" required="required"
+									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
-
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Term:</label> <input type="text" name="term" id="term"
+								<label>Duration:</label> <input type="text" name="duration" id="duration"
 									required="required" placeholder="" />
 
 							</div>
-
 						</div>
 
 						<div class="col-lg-3">
@@ -192,15 +175,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
-									id="adjeustment" required="required" placeholder="" />
-
-							</div>
-
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -222,21 +196,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Date:</label> <input type="date" name="approvalDate"
-									id="approvalDate" required="required" placeholder="" />
-
-							</div>
-
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Approve Remarks:</label> <input type="text" name="approveRemarks"
-									id="approveRemarks" required="required" placeholder="" />
+								<label>Approve Status:</label> <input type="text" name="approveStatus"
+									id="approveStatus" required="required" value="NotApproved" readonly="readonly" />
 
 							</div>
 
@@ -246,12 +211,20 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve User:</label> <input type="text" name="approveUser"
-									id="approveUser" required="required" placeholder="" />
+								 <input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields">
+								<label> User Approver:</label> <select id="userApprover"
+									name="userApprover" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Team Member</option>
+
+								</select>
+							</div>
 
 							</div>
 
 						</div>
+
 
 					</div>
 				</div>
@@ -353,7 +326,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" style="color: white; background-color: #B33791 ; border: none;" class="btn btn-warning">Approve</button>
+							<button id="saveBtn" class="btn btn-success">Update</button>
 						</div>
 					</div>
 				</div>
@@ -374,6 +347,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/maturitypayment.js"></script>
 </body>
 
 </html>
