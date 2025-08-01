@@ -112,7 +112,7 @@ pageEncoding="ISO-8859-1"%> -->
                         </div>
                         <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Plan name</label> <select id="planName" name="planName"
+                                <label for="">Plan name</label> <select id="schemename" name="schemename"
                                     required="required" class="form-control selectField" style="height: 30px;">
                                     <option value=""> Select Colour</option>
                                     <option value="Blue">Blue</option>
@@ -149,7 +149,10 @@ pageEncoding="ISO-8859-1"%> -->
 											<th scope="col">Branch Name</th>
 											<th scope="col">Address</th>
 											<th scope="col">City</th>
-											<th scope="col">State</th>											
+											<th scope="col">State</th>
+											<th scope="col">Opening Date</th>
+											<th scope="col">Financial Consultant Code</th>
+											<th scope="col">Plan Name</th>											
 										</tr>
 									</thead>
 									<tbody id="tableSavingAcc">
