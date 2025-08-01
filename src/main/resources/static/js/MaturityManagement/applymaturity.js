@@ -142,6 +142,38 @@ $(document).ready(function () {
 											   
 									       });
 									   });
+									   
+		 $("#Add").click(function() {
+									   																	
+			$('#chkbranch').text('');
+			$('#chkpolicycode').text('');
+			$('#chkremark').text('');
+			
+			
+			let branch = $('#branchName').val();
+			let policycode = $('#policyCode').val();
+			let remark = $('#remark').val();
+																					
+			let isValid = true;
+																					
+			if (policycode === '') {
+				$('#chkpolicycode').text('* This field is required');
+				$('#policyCode').focus();
+				isValid = false;
+				}
+			
+			if (branch === '') {
+				$('#chkbranch').text('* This field is required');
+				$('#branchName').focus();
+				isValid = false;
+				}
+				
+			if (remark === '') {
+				$('#chkremark').text('* This field is required');
+				$('#remark').focus();
+				isValid = false;
+				}
+		});
 
-										  });
+});
 
