@@ -486,7 +486,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Cheque Number <span id="star">*</span></label> <input
-									type="text" name="chequeNo" id="chequeNo" required="required"
+									type="text" name="chequeNo" id="chequeNo"
 									placeholder="Enter Cheque No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -497,7 +497,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Cheque Date <span id="star">*</span></label> <input
 									type="date" name="chequeDate" id="chequeDate"
-									required="required" placeholder="Enter Cheque Date"
+									 placeholder="Enter Cheque Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -508,7 +508,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Deposit Account <span id="star">*</span></label> <input
 									type="text" name="depositAccount" id="depositAccount"
-									required="required" placeholder="Enter Deposit Account"
+									 placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -517,7 +517,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3" id="displayRef">
 							<div class="d-flex flex-column formFields">
 								<label for="">Ref Number/UPI ID</label> <input type="text"
-									name="refNo" id="refNo" required="required"
+									name="refNo" id="refNo"
 									placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
@@ -547,7 +547,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-12 text-center">
-							<button id="paymentButton" class="btnStyle"
+							<button type="button" id="paymentButton" class="btnStyle"
 								style="background-color: #FFA500;">Payment</button>
 
 						</div>
