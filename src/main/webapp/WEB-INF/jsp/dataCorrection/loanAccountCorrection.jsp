@@ -276,8 +276,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<label style="margin-left: 20px;" class="mb-2">SMS Send</label>
 							<div class="cont">
 								<div class="toggle">
-									<input type="checkbox" id="toggle-sms-send" name="messageStatus"
-										class="toggle__input" data-toggle-type="sms-send"> <label
+									<input type="checkbox" id="toggle-sms-send"
+										name="messageStatus" class="toggle__input"
+										data-toggle-type="sms-send"> <label
 										for="toggle-sms-send" class="toggle__label"></label>
 								</div>
 							</div>
@@ -297,9 +298,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<label for=""
 						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 						Photo <span class="star">*</span>
-					</label> <label for="photo" id="drop-area"> <input
-						type="file" accept="image/*" name="photo"
-						id="photo" hidden="hidden" onchange="photoUpload();"
+					</label> <label for="photo" id="drop-area"> <input accept="image/*"
+						name="photo" id="photo" hidden="hidden"
 						style="background-size: cover; background-repeat: no-repeat" />
 						<div id="img-view">
 							<img src="../images/upload/upload.png" alt="upload_icon"
@@ -321,9 +321,7 @@ pageEncoding="ISO-8859-1"%> -->
 						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 						Signature <span class="star">*</span>
 					</label> <label for="signature" id="drop-area"> <input
-						type="file" accept="image/*" name="signature"
-						id="signature" hidden="hidden"
-						onchange="signatureUpload();"
+						accept="image/*" name="signature" id="signature" hidden="hidden"
 						style="background-size: cover; background-repeat: no-repeat" />
 						<div id="img-view">
 							<img src="../images/upload/upload.png" alt="upload_icon"
