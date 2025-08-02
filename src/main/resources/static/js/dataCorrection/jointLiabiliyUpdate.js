@@ -116,9 +116,14 @@ $(document).ready(function() {
 
 	$('#updateBtn').click(function(event) {
 		event.preventDefault();
+		let groupCode = $("#groupCode").val();
+		if (!groupCode) {
+			alert("First select the data, then proceed to update.");
+			return;
+		}
 		const groupData = {
 			id: $("#id").val(),
-			groupCode: $("#groupCode").val(),
+			groupCode: groupCode,
 			openingDate: $("#openingDate").val(),
 			communityName: $("#communityName").val(),
 			allocatedStaff: $("#allocatedStaff").val(),

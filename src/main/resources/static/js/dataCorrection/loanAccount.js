@@ -174,9 +174,15 @@ $(document).ready(function() {
 
 	$('#updateBtn').click(async function(event) {
 		event.preventDefault();
+		const loanId = $("#loanId").val();
+		if (!loanId) {
+			alert("First select the data, then proceed to update.");
+			return;
+		}
 
 		const loanData = {
 			id: $("#id").val(),
+			loanId: loanId,
 			loanDate: $("#loanDate").val(),
 			memberId: $("#memberId").val(),
 			relativeDetails: $("#relativeDetails").val(),
