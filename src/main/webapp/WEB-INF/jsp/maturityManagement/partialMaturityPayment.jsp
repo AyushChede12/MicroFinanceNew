@@ -78,8 +78,8 @@ pageEncoding="ISO-8859-1"%> -->
 									name="plantype" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="Select">Select</option>
-									<option value="DD">DD</option>
 									<option value="RD">RD</option>
+									<option value="FD">FD</option>
 									<option value="MIS">MIS</option>
 								</select>
 							</div>

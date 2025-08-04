@@ -69,18 +69,34 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+							
+							<div class="d-flex flex-column formFields">
+								<label for="">Plan type :<span id="star"> *</span></label> 
+								<select id="plantype"
+									name="plantype" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="Select">Select</option>
+									<option value="DD">DD</option>
+									<option value="RD">RD</option>
+									<option value="FD">FD</option>
+									<option value="MIS">MIS</option>
+								</select>
+							</div>
+						</div>
+				
+						<div class="col-lg-3">
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="policyCode">Policy Code</label> <select id="policyCode"
 									name="policyCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Policy Code</option>
+									<option value="">-- Policy Code --</option>
 
 								</select>
 							</div>
 						</div>
-
-					</div>
+					
+				</div>
 					
 				</div>
 
@@ -103,8 +119,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Plan Name:</label> <input type="text" name="planName"
-									id="planName" required="required" placeholder=""
+								<label>Policy Name:</label> <input type="text" name="policyName"
+									id="policyName" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -139,8 +155,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Actual Maturity:</label> <input type="text" name="actualMaturity"
-									id="actualMaturity" required="required" placeholder="" />
+								<label>Actual Maturity:</label> <input type="text" name="maturityAmount"
+									id="maturityAmount" required="required" placeholder="" />
 
 							</div>
 
@@ -240,11 +256,12 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount: <span id="star"> *</span></label> <input type="date"
+								<label for="">Amount: <span id="star"> *</span></label> <input type="text"
 									name="amount" id="amount" required="required"
-									placeholder="" style="text-transform: uppercase;" />
+									 style="text-transform: uppercase;" />
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
