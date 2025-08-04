@@ -1020,11 +1020,26 @@
           </li>
           
           <li>
+            <a href="maturityApplicationStatus">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Maturity Application Status</span>
+            </a>
+          </li>
+          
+          <li>
             <a href="fullMaturityPayment">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Full Maturity Payment</span>
             </a>
           </li>
+          
+           <li>
+            <a href="fullPaymentStatus">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Full Payment Status</span>
+            </a>
+          </li>
+          
           
           <li>
             <a href="partialMaturityPayment">
@@ -1033,12 +1048,13 @@
             </a>
           </li>
           
-          <li>
-            <a href="maturityApplicationStatus">
+           <li>
+            <a href="partialPaymentStatusMaturityApplication">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Maturity Application Status</span>
+              <span style="font-family: 'Poppins', sans-serif">Partial Payment Status</span>
             </a>
           </li>
+          
           
           <li>
             <a href="approvedStatusMaturityManagement">
@@ -1047,20 +1063,8 @@
             </a>
           </li>
           
-          <li>
-            <a href="fullPaymentStatus">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Full Payment Status</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="partialPaymentStatusMaturityApplication">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Partial Payment Status</span>
-            </a>
-          </li>
-          
+         
+         
           <li>
             <a href="maturityReceiptPrint">
               <i class="bi bi-circle"></i>

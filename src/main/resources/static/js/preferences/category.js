@@ -22,7 +22,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveCategoryModule',
+			url: 'api/preference/saveCategoryModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllCategoryModule",
+		url: "api/preference/getAllCategoryModule",
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
@@ -72,7 +72,7 @@ $(document).ready(function() {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this Category?")) {
 		$.ajax({
-			url: "/api/preference/deleteCategoryModuleById",
+			url: "api/preference/deleteCategoryModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {

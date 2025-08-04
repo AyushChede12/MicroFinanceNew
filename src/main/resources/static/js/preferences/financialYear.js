@@ -58,7 +58,7 @@ $(document).ready(function() {
 
 		// AJAX Call
 		$.ajax({
-			url: '/api/preference/saveAndUpdateAllFinancialYear',
+			url: 'api/preference/saveAndUpdateAllFinancialYear',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllFinancialYear",
+		url: "api/preference/getAllFinancialYear",
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
@@ -113,7 +113,7 @@ $(document).ready(function() {
 function viewData(id) {
 
 	$.ajax({
-		url: "/api/preference/getFinancialYearById",
+		url: "api/preference/getFinancialYearById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -136,7 +136,7 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/preference/deleteFinancialYearById",
+			url: "api/preference/deleteFinancialYearById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
@@ -165,7 +165,7 @@ function updateFY() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllFinancialYear",
+		url: "api/preference/saveAndUpdateAllFinancialYear",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),

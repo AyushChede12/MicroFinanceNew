@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	/*$.ajax({
-		url: "/api/Policymangment/getaddinvestmentdetails",
+		url: "api/Policymangment/getaddinvestmentdetails",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -18,7 +18,7 @@ $(document).ready(function() {
 	});*/
 
 	$.ajax({
-		url: '/api/datacorrection/fetchAllApprovedPolicyRenewal',
+		url: 'api/datacorrection/fetchAllApprovedPolicyRenewal',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -69,11 +69,11 @@ $(document).ready(function() {
 		if (policyCode !== "") {
 			$.ajax({
 				type: "GET",
-				url: "/api/datacorrection/getPolicyRenewalByPolicyCode",
+				url: "api/datacorrection/getPolicyRenewalByPolicyCode",
 				data: { policyCode: policyCode },
 				success: function(response) {
 					if (response.status == "FOUND") {
-						let data = response.data;
+						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#renewalDate").val(data.renewalDate);
 						$("#policyDate").val(data.policyDate);
@@ -110,7 +110,7 @@ $(document).ready(function() {
 		if (policyCode !== "") {
 			if (confirm("Are you sure you want to delete this Policy Renewal Data?")) {
 				$.ajax({
-					url: "/api/datacorrection/deletePolicyRenewalDataById",
+					url: "api/datacorrection/deletePolicyRenewalDataById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {

@@ -113,7 +113,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveAndUpdateAllBranchModule',
+			url: 'api/preference/saveAndUpdateAllBranchModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
@@ -137,21 +137,22 @@ $(document).ready(function() {
 
 });
 
-var totalDataMISD = [];
-var currentPageMISD = 1;
-var pageSizeMISD = 5;
+var totalDataBranch = [];
+var currentPageBranch = 1;
+var pageSizeBranch = 5;
 
-// Load data once
-function loadMISData() {
+// Load all branch data initially
+function loadBranchData() {
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllBranchModule",
+		url: "api/preference/getAllBranchModule",
 		contentType: "application/json",
 		success: function(response) {
 			if (response.status === "FOUND") {
-				totalDataMISD = response.data;
-				renderTable(currentPageMISD);
-				togglePageNavigationMISD();
+				totalDataBranch = response.data;
+				currentPageBranch = 1; // Reset to first page
+				renderBranchTable(currentPageBranch);
+				togglePageNavigationBranch();
 			} else {
 				alert("Failed to fetch data: " + response.message);
 			}
@@ -162,73 +163,84 @@ function loadMISData() {
 	});
 }
 
-// Render paginated table
-function renderTable(page) {
+// Function to add new branch data and refresh table
+function addNewBranchData(newBranch) {
+	totalDataBranch.unshift(newBranch); // Add new data at the top
+	currentPageBranch = 1; // Show first page with new data
+	renderBranchTable(currentPageBranch);
+	togglePageNavigationBranch();
+}
+
+// Render paginated branch table
+function renderBranchTable(page) {
 	let tableBody = $(".datatable tbody");
 	tableBody.empty();
 
-	let startIndex = (page - 1) * pageSizeMISD;
-	let endIndex = Math.min(startIndex + pageSizeMISD, totalDataMISD.length);
+	let startIndex = (page - 1) * pageSizeBranch;
+	let endIndex = Math.min(startIndex + pageSizeBranch, totalDataBranch.length);
 
 	for (let i = startIndex; i < endIndex; i++) {
-		let person = totalDataMISD[i];
+		let branch = totalDataBranch[i];
 		let row = `<tr>
-				<td>${i + 1}</td>
-                <td>${person.branchCode}</td>
-                <td>${person.branchName}</td>
-                <td>${person.openingDate}</td>
-                <td>${person.address}</td>
-                <td>${person.pin}</td>
-                <td>${person.state}</td>
-				<td>${person.primaryContact}</td>
-				<td>${person.contact}</td>
-                <td>
-                  <button class="iconbutton" onclick="viewData(${person.id})" title="View">
-                    <i class="fa-solid fa-pen-to-square text-primary"></i>
-                  </button>
-                </td>
-                <td>
-                  <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
-                    <i class="fa-solid fa-trash text-danger"></i>
-                  </button>
-                </td>
-              </tr>`;
+			<td>${i + 1}</td>
+			<td>${branch.branchCode}</td>
+			<td>${branch.branchName}</td>
+			<td>${branch.openingDate}</td>
+			<td>${branch.address}</td>
+			<td>${branch.pin}</td>
+			<td>${branch.state}</td>
+			<td>${branch.primaryContact}</td>
+			<td>${branch.contact}</td>
+			<td>
+				<button class="iconbutton" onclick="viewData(${branch.id})" title="View">
+					<i class="fa-solid fa-pen-to-square text-primary"></i>
+				</button>
+			</td>
+			<td>
+				<button class="iconbutton" onclick="deleteData(${branch.id})" title="Delete">
+					<i class="fa-solid fa-trash text-danger"></i>
+				</button>
+			</td>
+		</tr>`;
 		tableBody.append(row);
 	}
 
 	// Update page info
-	$("#pageInfo").text(`Page ${currentPageMISD} of ${Math.ceil(totalDataMISD.length / pageSizeMISD)}`);
+	$("#pageInfo").text(`Page ${currentPageBranch} of ${Math.ceil(totalDataBranch.length / pageSizeBranch)}`);
 }
 
-// Button state toggling
-function togglePageNavigationMISD() {
-	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
-	$("#prevBtn").prop("disabled", currentPageMISD === 1);
-	$("#nextBtn").prop("disabled", currentPageMISD === totalPages || totalPages === 0);
+// Toggle page navigation buttons
+function togglePageNavigationBranch() {
+	let totalPages = Math.ceil(totalDataBranch.length / pageSizeBranch);
+	$("#prevBtn").prop("disabled", currentPageBranch === 1);
+	$("#nextBtn").prop("disabled", currentPageBranch >= totalPages || totalPages === 0);
 }
 
-// Button click handlers
-$("#prevBtn").click(function() {
-	if (currentPageMISD > 1) {
-		currentPageMISD--;
-		renderTable(currentPageMISD);
-		togglePageNavigationMISD();
+// Previous button click
+$("#prevBtn").click(function () {
+	if (currentPageBranch > 1) {
+		currentPageBranch--;
+		renderBranchTable(currentPageBranch);
+		togglePageNavigationBranch();
 	}
 });
 
-$("#nextBtn").click(function() {
-	let totalPages = Math.ceil(totalDataMISD.length / pageSizeMISD);
-	if (currentPageMISD < totalPages) {
-		currentPageMISD++;
-		renderTable(currentPageMISD);
-		togglePageNavigationMISD();
+// Next button click
+$("#nextBtn").click(function () {
+	let totalPages = Math.ceil(totalDataBranch.length / pageSizeBranch);
+	if (currentPageBranch < totalPages) {
+		currentPageBranch++;
+		renderBranchTable(currentPageBranch);
+		togglePageNavigationBranch();
 	}
 });
 
 // Call on page load
-$(document).ready(function() {
-	loadMISData();
+$(document).ready(function () {
+	loadBranchData();
 });
+
+
 
 function showTableData() {
 	$("#tableBody").show();
@@ -250,7 +262,7 @@ function viewData(id) {
 	$("#hideBtn").hide();
 	$("#showBtn").hide();
 	$.ajax({
-		url: "/api/preference/getBranchModuleById",
+		url: "api/preference/getBranchModuleById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -280,7 +292,7 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/preference/deleteBranchModuleById",
+			url: "api/preference/deleteBranchModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
@@ -316,7 +328,7 @@ function updateBranch() {
 	};
 
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBranchModule",
+		url: "api/preference/saveAndUpdateAllBranchModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),
@@ -338,7 +350,7 @@ function updateBranch() {
 $(document).ready(function() {
 
 	$.ajax({
-		url: "/api/preference/getAllBranchModule",
+		url: "api/preference/getAllBranchModule",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Branches:", data);
