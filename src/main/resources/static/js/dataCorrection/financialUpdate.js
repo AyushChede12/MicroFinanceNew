@@ -194,11 +194,17 @@ $(document).ready(function() {
 	$('#updateBtn').click(function(e) {
 		e.preventDefault();
 
+		const financialCode = $('#financialCode').val();
+		if (!financialCode) {
+			alert("First select the data, then proceed to update.");
+			return;
+		}
+
 		let financialData = new FormData();
 
-		// Append regular text fields
+		// Append all form fields
 		financialData.append("id", $('#id').val());
-		financialData.append("financialCode", $('#financialCode').val());
+		financialData.append("financialCode", financialCode);
 		financialData.append("joiningDate", $('#joiningDate').val());
 		financialData.append("financialName", $('#financialName').val());
 		financialData.append("dob", $('#dob').val());
@@ -217,16 +223,24 @@ $(document).ready(function() {
 		financialData.append("fees", $('#fees').val());
 		financialData.append("modeofPayment", $('#modeofPayment').val());
 		financialData.append("comments", $('#comments').val());
-		financialData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
-		financialData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
 
-		let photoValue = $('#financialphotoHidden').val();
-		financialData.append("customerPhoto", photoValue || ""); // Always send string path
+		// Checkbox/toggle fields
+		financialData.append("financialStatus", $('#toggle-financial-status').is(':checked') ? 1 : 0);
+		financialData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 
-		let signatureValue = $('#financialsignatureHidden').val();
-		financialData.append("customerSignature", signatureValue || "");
+		// File inputs
+		const photoFile = $('#financialPhoto')[0]?.files[0];
+		const signatureFile = $('#finnacialSignature')[0]?.files[0];
 
+		if (photoFile) {
+			financialData.append("financialPhoto", photoFile);
+		}
 
+		if (signatureFile) {
+			financialData.append("finnacialSignature", signatureFile);
+		}
+
+		// AJAX call
 		$.ajax({
 			url: "api/financialconsultant/saveOrUpdateFinancialConsultant",
 			type: "POST",
@@ -236,19 +250,20 @@ $(document).ready(function() {
 			processData: false,
 			cache: false,
 			success: function(response) {
-				if (response.status === "OK") {
-					alert("Updated Successfully");
+				if (response.status === "OK" || response.status === "success") {
+					alert("Financial data updated successfully.");
 					location.reload();
-					// Optionally refresh the table or UI
 				} else {
 					alert("Something went wrong: " + response.message);
 				}
 			},
 			error: function(xhr) {
-				alert("Error while saving data: " + xhr.responseText);
+				const message = xhr.responseJSON?.message || xhr.responseText || "Unknown error";
+				alert("Error while saving data: " + message);
 			}
 		});
 	});
+
 
 
 

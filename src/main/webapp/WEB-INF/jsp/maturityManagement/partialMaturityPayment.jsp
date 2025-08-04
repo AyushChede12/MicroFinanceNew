@@ -80,7 +80,6 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Select">Select</option>
 									<option value="DD">DD</option>
 									<option value="RD">RD</option>
-									<option value="FD">FD</option>
 									<option value="MIS">MIS</option>
 								</select>
 							</div>
