@@ -344,9 +344,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
-							</label> <label for="photo" id="drop-area"> <input type="file"
+							</label> <label for="photo" id="drop-area"> <input
 								accept="image/*" name="photo" id="photo" hidden="hidden"
-								onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -368,8 +367,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span class="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
-								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="signatureUpload();"
+								accept="image/*" name="signature" id="signature" hidden="hidden"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -390,13 +388,13 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Joint
 								Photo <span class="star">*</span>
 							</label> <label for="jointPhoto" id="drop-area"> <input
-								type="file" accept="image/*" name="jointPhoto" id="jointPhoto"
-								hidden="hidden" onchange="JointPhotoUpload();"
+								accept="image/*" name="jointPhoto" id="jointPhoto"
+								hidden="hidden"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="JointPhotoPreview" /><input type="hidden"
-										name="JointPhotoHidden" id="JointPhotoHidden">
+										id="jointPhotoPreview" /><input type="hidden"
+										name="jointPhotoHidden" id="jointPhotoHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
