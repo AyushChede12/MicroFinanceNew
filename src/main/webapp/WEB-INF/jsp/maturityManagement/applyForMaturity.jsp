@@ -139,8 +139,8 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
-
 								</select>
+								<small id="chkbranch" style="color: red;"></small>
 							</div>
 						</div>
 						
@@ -151,13 +151,14 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">select Policy ID</option>
 								</select>
+								<small id="chkpolicycode" style="color: red;"></small>
 							</div>
 						</div>
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Maturity Date <span id="star"> *</span></label> <input type="date" name="maturityDate"
+								<label>Maturity Date </label> <input type="date" name="maturityDate"
 									id="maturityDate" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
@@ -166,7 +167,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Customer Name <span id="star"> *</span></label> <input type="text"
+								<label for="vehicalNo">Customer Name ></label> <input type="text"
 									name="customerName" id="customerName" required="required"
 									style="text-transform: uppercase;" />
 							</div>
@@ -174,7 +175,7 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Type <span id="star"> *</span></label> <input type="text"
+								<label for="">Scheme Type</label> <input type="text"
 									name="schemeType" id="schemeType" required="required"	
 									style="text-transform: uppercase;" />
 							</div>
@@ -182,7 +183,7 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Scheme Mode <span id="star"> *</span></label> <input type="text"
+								<label for="">Scheme Mode</label> <input type="text"
 									name="schemeMode" id="schemeMode" required="required"	
 									style="text-transform: uppercase;" />
 							</div>
@@ -190,7 +191,7 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy Amount <span id="star"> *</span></label> <input type="text"
+								<label for="">Policy Amount</label> <input type="text"
 									name="policyAmount" id="policyAmount" required="required"
 									placeholder="Enter Voter No" />
 							</div>
@@ -198,7 +199,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Deposit Amount <span id="star"> *</span></label> <input type="text"
+								<label for="">Deposit Amount </label> <input type="text"
 									name="depositAmount" id="depositAmount" required="required"
 									placeholder="Enter Licence No" />
 							</div>
@@ -206,7 +207,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Maturity Amount <span id="star"> *</span></label> <input type="text"
+								<label for="">Maturity Amount </label> <input type="text"
 									name="maturityAmount" id="maturityAmount" required="required"
 									placeholder="Enter Intro Member Name" />
 							</div>
@@ -217,6 +218,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Remark <span id="star"> *</span></label> <input type="text"
 									name="remark" id="remark" required="required"
 									placeholder="Enter Voter No" />
+									<small id="chkremark" style="color: red;"></small>
 							</div>
 						</div>
 

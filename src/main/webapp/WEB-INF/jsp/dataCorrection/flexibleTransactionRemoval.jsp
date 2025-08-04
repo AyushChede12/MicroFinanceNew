@@ -73,6 +73,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+						<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="Agent">Policy Code*</label> <select id="policyCode"
 									name="policyCode" required class="form-control selectField"
@@ -289,8 +290,6 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
 	<script src="./js/dataCorrection/flexibleTransactionRemoval.js"></script>
 </body>
 

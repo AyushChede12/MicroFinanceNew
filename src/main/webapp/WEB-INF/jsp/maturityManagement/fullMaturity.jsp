@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-calendar-check"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Partial Payment Status</li>
+					<li class="breadcrumb-item action">Full Maturity Payment</li>
 				</ol>
 			</nav>
 		</div>
