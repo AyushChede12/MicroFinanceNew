@@ -259,8 +259,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minLoanDurationMonths">Term * </label> <input
-									type="text" name="Term"
-									id="Term" required placeholder="Enter Term" />
+									type="text" name="term"
+									id="term" required placeholder="Enter Term" />
 							</div>
 						</div>
 						<div class="col-lg-3">

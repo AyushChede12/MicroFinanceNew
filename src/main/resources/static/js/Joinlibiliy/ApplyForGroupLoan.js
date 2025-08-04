@@ -106,7 +106,7 @@ $(document).ready(function() {
 													$('#rateOfInterest').val(customer.rateOfInterest);
 													$('#interestType').val(customer.interestType);
 													$('#emiType').val(customer.emiType);
-													$('#Term').val(customer.Term);
+													$('#term').val(customer.term);
 													$('#totalAmount').val(customer.totalAmount);
 													
 													
