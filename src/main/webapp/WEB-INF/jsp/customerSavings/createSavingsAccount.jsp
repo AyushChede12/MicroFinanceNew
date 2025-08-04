@@ -93,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<select
 									id="selectByCustomer" name="selectByCustomer" required
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Customer Name</option>
+									<option value="">Select</option>
 									<!-- Add options here -->
 								</select>
 							</div>
@@ -455,15 +455,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
-							</label> <label for="photo" id="drop-area"> <!-- <input type="file"
-								accept="image/*" name="photo" id="photo" hidden="hidden"
-								onchange="photoUpload();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" /><input type="hidden" name="photoHidden"
-										id="photoHidden"> -->
-
+							</label> <label for="photo" id="drop-area"> 
 									<img id="photo" src="../images/upload/upload.png" alt="Photo Preview" style="width: 250px; height: 200px">
 						            <input type="hidden" id="photoHidden" name="photo" value="">
 							</label> <small id="chkphoto" style="color: red;"></small>
@@ -473,15 +465,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<label for=""
 						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 						Signature <span class="star">*</span>
-					</label> <label for="signature" id="drop-area"> <!-- <input
-								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="signatureUpload();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="signaturePreview" /><input type="hidden"
-										name="signatureHidden" id="signatureHidden"> --> <img
-						id="signature" src="../images/upload/upload.png"
+					</label> <label for="signature" id="drop-area"> 
+					 <img id="signature" src="../images/upload/upload.png"
 						alt="signature Preview" style="width: 250px; height: 200px">
 						<input type="hidden" id="signatureHidden" name="photo" value="">
 					</label> <small id="chksignature" style="color: red;"></small>
@@ -491,15 +476,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<label for=""
 						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 						Joint Photo <span class="star">*</span>
-					</label> <label for="jointPhoto" id="drop-area"> <!-- <input
-								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="signatureUpload();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="signaturePreview" /><input type="hidden"
-										name="signatureHidden" id="signatureHidden"> --> <img
-						id="jointPhoto" src="../images/upload/upload.png"
+					</label> <label for="jointPhoto" id="drop-area"> 
+					 <img id="jointPhoto" src="../images/upload/upload.png"
 						alt="jointPhoto Preview" style="width: 250px; height: 200px">
 						<input type="hidden" id="jointPhotoHidden" name="jointPhoto" value="">
 					</label> <small id="chkjointPhoto" style="color: red;"></small>

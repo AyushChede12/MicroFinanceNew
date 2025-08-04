@@ -74,10 +74,12 @@ public class CustomerSavingsService {
 	}
 
 
-	public List<SavingSchemeCatalog> findBySchemeType() {
-		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll();
-		return list;
-	}
+	/*
+	 * public List<SavingSchemeCatalog> findBySchemeType() {
+	 * List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll(); return
+	 * list; }
+	 */
+	
 
 	public List<SavingSchemeCatalog> findByPolicyName(String policyName) {
 		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findByPolicyName(policyName);
@@ -349,6 +351,11 @@ public class CustomerSavingsService {
 		public savingAccountFundTransfer saveSavingAccountFundTransfer(savingAccountFundTransfer savingAccFundTransfer) {
 			// TODO Auto-generated method stub
 			return savingAccFundTransferRepo.save(savingAccFundTransfer);
+		}
+
+		public List<String> findBySchemeType() {
+			// TODO Auto-generated method stub
+			return savingSchmeCatalogRepo.findDistinctPolicyNames();
 		}
 
 		

@@ -12,7 +12,7 @@ $(document).ready(function() {
 
             if (response.status === "FOUND" && response.data) {
                 $.each(response.data, function(index, item) {
-                   dropdown.append('<option value="' + item.policyName+ '">' + item.policyName + '</option>');
+                   dropdown.append('<option value="' + item+ '">' + item + '</option>');
                 });
             } else {
                 dropdown.append('<option value="">No Policyname found</option>');
@@ -52,69 +52,39 @@ $('#selectPlan').on('change', function () {
 });
 
 
-//shubham kewat 18/06/25
-//fetch customer name 
- /*$(document).ready(function() {
-    $.ajax({
-        url: "/api/customershareholdingcontroller/findAllCustomerCode",
-        type: "GET",
-        success: function(response) {
-            console.log("API response:", response);
-
-            var dropdown1 = $('#selectByCustomer');       // shows: memberCode - customerName
-            var dropdown2 = $('#jointOperationCode');     // shows: memberCode only
-
-            dropdown1.empty();
-            dropdown2.empty();
-
-            dropdown1.append('<option value="">Select</option>');
-            dropdown2.append('<option value="">Select</option>');
-
-            if (response.status === "OK" && response.data) {
-                $.each(response.data, function(index, customer) {
-                    dropdown1.append('<option value="' + customer.memberCode + '">' + customer.memberCode + ' - ' + customer.customerName + '</option>');
-                    dropdown2.append('<option value="' + customer.memberCode + '">' + customer.memberCode + '</option>');
-                });
-            } else {
-                dropdown1.append('<option value="">No customers found</option>');
-                dropdown2.append('<option value="">No customers found</option>');
-            }
-        },
-        error: function() {
-            alert("Failed to fetch customer list.");
-        }
-    });
-});*/
-
 //janvi : Customer name list fetch
 $(document).ready(function() {
 	// Fetch all customers and populate the "select by code" dropdown
-	$.ajax({
-		url: "approved",
-		method: "GET",
-		success: function(data) {
-			console.log("Fetched Members:", data);
-			data.forEach(function(customer) {
-				const optionText = `${customer.memberCode} - ${customer.customerName}`;
-				const optionText1 = `${customer.memberCode}`;
-				$('#selectByCustomer').append(
-					$('<option>', {
-						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText
-					})
-				);
-				$('#jointOperationCode').append(
-					$('<option>', {
-						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText1
-					})
-				);
-			});
-		},
-		error: function(err) {
-			console.error("Error fetching customers:", err);
-		}
-	});
+	 $.ajax({
+        url: '/api/customermanagement/approved', // Make sure this path is correct
+        type: 'GET',
+        success: function (response) {
+            if (response.status === "OK" && Array.isArray(response.data)) {
+                const $select = $('#selectByCustomer');
+                const $select1 = $('#jointOperationCode');
+                $select.empty().append('<option value="">Select</option>');
+                $select1.empty().append('<option value="">Select</option>');
+
+                response.data.forEach(customer => {
+                    if (customer.customerName && customer.memberCode) {
+                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
+                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
+                        $select.append(`<option value="${optionValue}">${optionText}</option>`);
+                    }
+                    if (customer.customerName && customer.memberCode) {
+                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
+                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
+                        $select1.append(`<option value="${optionValue}">${optionText}</option>`);
+                    }
+                });
+            } else {
+                alert("No approved customers found.");
+            }
+        },
+        error: function () {
+            alert("Failed to fetch approved customers.");
+        }
+    });
 });
 
 

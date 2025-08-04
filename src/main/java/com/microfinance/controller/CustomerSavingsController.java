@@ -100,7 +100,7 @@ public class CustomerSavingsController {
   	}
   	
   	//fetching saving scheme catalog data
-  	@GetMapping("/fetchsavingchemecatalog")
+  /*	@GetMapping("/fetchsavingchemecatalog")
   	public ApiResponse<List<SavingSchemeCatalog>> findBySchemeType() {
   		List<SavingSchemeCatalog>  list = customersaving.findBySchemeType();
   		if(list!=null && !list.isEmpty()) {
@@ -108,7 +108,17 @@ public class CustomerSavingsController {
   		}else
   			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
   		
+  	}*/
+  	@GetMapping("/fetchsavingchemecatalog")
+  	public ApiResponse<List<String>> findBySchemeType() {
+  	    List<String> list = customersaving.findBySchemeType();
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successful", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "No Data Found");
+  	    }
   	}
+
   	
   	// find saving scheme catalog by id
   	 @GetMapping("/getSavingSchemeCatalogById")
@@ -521,5 +531,7 @@ public class CustomerSavingsController {
 		else
 			return ResponseEntity.badRequest().body("Failure");
 	}*/
+    
+    
 	
 }

@@ -13,6 +13,7 @@ $(document).ready(function() {
 
 
 	$('#paymentDate').val(today);
+	$('#closingDate').val(today);
 
 	$('#dateloan').val(today);
 	$('#transferDate').val(today); //savingAccountFundTransfer
@@ -26,15 +27,15 @@ $(document).ready(function() {
 				const branchList = response.data;
 				$("#branchName").empty(); // Clear existing options
 				$("#branchName").append("<option value=''>-- Select Branch --</option>");
-				$("#selectBranchName").empty(); // Clear existing options
-				$("#selectBranchName").append("<option value=''>-- Select Branch --</option>");
+				$("#closingbranchName").empty(); // Clear existing options
+				$("#closingbranchName").append("<option value=''>-- Select Branch --</option>");
 
 				for (let i = 0; i < branchList.length; i++) {
 					let branch = branchList[i];
 					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
 					$("#branchName").append(option);
 
-					$("#selectBranchName").append(option);
+					$("#closingbranchName").append(option);
 					$("#branch").append(option);
 
 				}
