@@ -34,6 +34,15 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- In <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 
 
@@ -64,11 +73,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px;">
+							<div class="d-flex flex-column formFields">
 								<label for="">Branch Name </label> <select id="branchName1"
 									name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
+									class="form-control selectField" >
 									<option value="">Select</option>
 								</select>
 							</div>
@@ -145,6 +153,31 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 
 		</div>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="printModalLabel">Policy Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalDataContainer">
+        <!-- Policy details will be populated here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="printBtn" class="btn btn-primary">Print</button>
+        <button type="button" id="downloadBtn" class="btn btn-success">Download PDF</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
 	</main>
