@@ -6,7 +6,7 @@ $(document).ready(function() {
 function populateapprovedLoanIdDropdown() {
 
 	$.ajax({
-		url: "api/loanmanegment/getApprovedLoanIds",
+		url: "/api/loanmanegment/getApprovedLoanIds",
 		type: "GET",
 		dataType: "json",
 		success: function(response) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 		if (selectedLoanId) {
 			$.ajax({
-				url: "api/loanmanegment/getLoanById", // your GET API
+				url: "/api/loanmanegment/getLoanById", // your GET API
 				type: "GET",
 				data: { loanId: selectedLoanId }, // sending as query param
 				dataType: "json",
@@ -59,7 +59,7 @@ $(document).ready(function() {
 						$("#address").val(data.address);
 						$("#pinCode").val(data.pinCode);
 						$("#branchName").val(data.branchName);
-
+						$("#approvalStatus").val(data.approvalStatus);
 						$("#loanPlanName").val(data.loanPlanName);
 						$("#typeOfLoan").val(data.typeOfLoan);
 						$("#loanMode").val(data.loanMode);
@@ -162,9 +162,9 @@ $('#modeofPayment').change(function() {
 	}
 });
 
+
 //Js for paying the emi (Vaibhav)
 $('#paymentBtn').click(function(e) {
-	alert("Hello");
 	e.preventDefault();
 
 	const paymentData = {
@@ -212,7 +212,7 @@ $('#paymentBtn').click(function(e) {
 
 	$.ajax({
 		type: 'POST',
-		url: 'api/loanmanegment/payEmi',
+		url: '/api/loanmanegment/payEmi',
 		contentType: 'application/json',
 		data: JSON.stringify(paymentData),
 		success: function(response) {
@@ -226,6 +226,11 @@ $('#paymentBtn').click(function(e) {
 		}
 	});
 });
+
+
+
+
+
 
 
 

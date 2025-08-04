@@ -460,8 +460,12 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Payment Status</label> <input type="text"
-									name="notificationPayment" id="notificationPayment"
-									required="required" style="text-transform: uppercase;" />
+									name="paymentStatus" id="paymentStatus" 
+									readonly
+									style="color: red; font-weight: bold; font-size: 12px; text-transform: uppercase;"
+									required="required" />
+
+
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -486,7 +490,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Cheque Number <span id="star">*</span></label> <input
-									type="text" name="chequeNo" id="chequeNo"
+									type="text" name="chequeNo" id="chequeNo" required="required"
 									placeholder="Enter Cheque No"
 									style="text-transform: uppercase;" />
 							</div>
@@ -497,7 +501,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Cheque Date <span id="star">*</span></label> <input
 									type="date" name="chequeDate" id="chequeDate"
-									 placeholder="Enter Cheque Date"
+									required="required" placeholder="Enter Cheque Date"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -508,7 +512,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Deposit Account <span id="star">*</span></label> <input
 									type="text" name="depositAccount" id="depositAccount"
-									 placeholder="Enter Deposit Account"
+									required="required" placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -517,7 +521,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3" id="displayRef">
 							<div class="d-flex flex-column formFields">
 								<label for="">Ref Number/UPI ID</label> <input type="text"
-									name="refNo" id="refNo"
+									name="refNo" id="refNo" required="required"
 									placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
@@ -539,15 +543,24 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Remarks</label> <input type="text"
-									name="paymentMark" id="paymentMark" required="required"
+									name="remarks" id="remarks" required="required"
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanName">Amount Due</label> <input type="text"
+									name="noOfInst" id="noOfInst" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 
 
+
 						<div class="col-12 text-center">
-							<button type="button" id="paymentButton" class="btnStyle"
+							<button id="paymentBtn" class="btnStyle"
 								style="background-color: #FFA500;">Payment</button>
 
 						</div>
