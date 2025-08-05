@@ -62,7 +62,7 @@ $(document).ready(function () {
 						$('#legalfee').val(customer.legalCharges);
 						$('#insurencefee').val(customer.insuranceFee);
 						$('#Valuationfee').val(customer.valuationFee);
-						alert(emicollection);
+						alert(emicollection); alert(tensure);  alert(interestinyear);  alert(roitype);  alert(loanamount); 
 						
 						calculateEMI(emicollection, tensure, interestinyear, loanamount, roitype);
 
