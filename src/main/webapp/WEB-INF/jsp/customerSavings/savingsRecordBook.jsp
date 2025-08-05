@@ -146,11 +146,12 @@ pageEncoding="ISO-8859-1"%> -->
 											<th>ID</th>
 											<th>Branch Name</th>
 											<th>Account No</th>
+											<th>Customer Name</th>
+											<th> Customer Code</th>
 											<th>Mobile No</th>
 											<th>Address</th>
 											<th>Opening Date</th>
-											<th>Opening Balance</th>
-											<th>Mapped Branch</th>
+											<th>Opening Balance</th>											
 										</tr>
 									</thead>
 									<tbody id="customerDetails">
@@ -168,10 +169,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-12 d-flex justify-content-end gap-2">
 								<button type="button" class="btn btn-success" id="printBtn" onclick="printTransactionSection1()">
 									<i class="fa-solid fa-print"></i>
-								</button>
-								<button type="button" class="btn btn-success" id="downloadBtn">
-									<i class="fa-solid fa-download"></i>
-								</button>
+								</button>								
 					</div>
 			</div>
 				<div class="row mt-5" id="passbookId">
@@ -312,39 +310,26 @@ pageEncoding="ISO-8859-1"%> -->
 					</p>
 				</div>
 				<div class="d-flex justify-content-between">
-					<p>
-						opening Date : <span id="openingDate"
-							style="width: 12vw; display: inline-block;"></span>
-					</p>
+					
 					<p>
 						Account Type: <span id="typeofaccount"
 							style="width: 20vw; display: inline-block;"></span>
-					</p>
-				</div>
-				<div class="d-flex justify-content-between">
-					<p>
-						IFSC Code: <span id="IFSCCode"
-							style="width: 12vw; display: inline-block;"></span>
 					</p>
 					<p>
 						Date Of Issue: <span id="dateOfIssue"
 							style="width: 20vw; display: inline-block;"></span>
 					</p>
 				</div>
-
-				<div class="d-flex justify-content-between">
+				<!-- <div class="d-flex justify-content-between">
 					<p>
-						Nomination Registered: <span id="nominationStatus"
+						IFSC Code: <span id="IFSCCode"
 							style="width: 12vw; display: inline-block;"></span>
-					</p>
-					<p>
-						Nomination Name: <span id="nominationName"
-							style="width: 17vw; display: inline-block;"></span>
-					</p>
-				</div>
+					</p>					
+				</div> -->
+				
 				<div class="d-flex justify-content-between">
 					<p>
-						Branch and Code: <span id="branch"
+						Branch: <span id="branchName"
 							style="width: 12vw; display: inline-block;"></span>
 					</p>
 					<p>
