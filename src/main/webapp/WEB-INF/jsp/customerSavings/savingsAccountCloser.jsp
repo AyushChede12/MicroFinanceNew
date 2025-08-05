@@ -29,6 +29,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -62,11 +63,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Select Account Number</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Select Account Number</label> <select id="accountNumber"
+									name="accountNumber" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Colour</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select</option>
 								</select>
 							</div>
 						</div>
@@ -74,67 +74,66 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Customer Code </label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="customerCode" id="customerCode" required="required" placeholder="" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Customer Name </label> <input type="text"
+									name="customerName" id="customerName" required="required" placeholder="" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Contact Number</label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="contactNumber" id="contactNumber" required="required" placeholder="" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Branch</label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="branchName" id="branchName" required="required" placeholder="" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Date</label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="openingDate" id="openingDate" required="required" placeholder="" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Current Balace</label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="currentBalance" id="currentBalance" required="required" placeholder="" />
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Interest Disbursement</label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="interestDisbursement" id="interestDisbursement" required="required" placeholder="" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Outstanding Interest</label> <input type="text"
-									name="price" id="price" required="required" placeholder="" />
+									name="outstandingInterest" id="outstandingInterest" required="required" placeholder="" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Net Balance</label> <input type="text" name="price"
-									id="price" required="required" placeholder="" />
+								<label for="">Net Balance</label> <input type="text" name="netBalance"
+									id="netBalance" required="required" placeholder="" />
 							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">From Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
+						</div> -->
+						
 					</div>
 				</div>
 
@@ -149,11 +148,11 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Closing Branch</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Closing Branch</label> <select id="closingbranchName"
+									name="closingbranchName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Colour</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select Branch</option>
+
 								</select>
 							</div>
 						</div>
@@ -162,77 +161,57 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Closing Date</label> <input type="date"
-									name="vehicalNo" id="vehicalNo" required="required"
-									placeholder="Enter Vehicle No"
+									name="closingDate" id="closingDate" required="required"									
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Pay By</label> <select id="colour"
-									name="colour" required="required"
+								<label for="">Pay By</label> <select id="payBy"
+									name="payBy" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Colour</option>
-									<option value="Blue">Blue</option>
+									<option value="">Select</option>
+									<option value="Blue">Cash</option>
 								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comments</label> <input type="text" name="location"
-									id="location" required="required" placeholder="Enter Location" />
+								<label for="">Comments</label> <input type="text" name="comments"
+									id="comments" required="required" placeholder="Enter Location" />
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500; margin-left: 80%;">Close
-								Account</button>
+							<button id="saveAccountCloseBtn" class="btnStyle"
+								style="background-color: #FFA500; margin-left: 80%;">Close Account</button>
 						</div>
 					</div>
 
 					<div class="row mt-4">
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="bike1image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike1image" id="bike1image"
-								hidden="hidden" onchange="bike1Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike1imagePreview" />
-									<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
+								Photo <span class="star">*</span>
+							</label> <label for="photo" id="drop-area"> <img id="photo"
+								src="../images/upload/upload.png" alt="Photo Preview"
+								style="width: 250px; height: 200px"> <input type="hidden"
+								id="photoHidden" name="photo" value="">
+							</label> <small id="chkphoto" style="color: red;"></small>
 						</div>
 
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="bike2image" id="bike2image"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-									<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-								</div>
-							</label>
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <img
+								id="signature" src="../images/upload/upload.png"
+								alt="signature Preview" style="width: 250px; height: 200px">
+								<input type="hidden" id="signatureHidden" name="photo" value="">
+							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
 					</div>
@@ -245,6 +224,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/customerSavings/savingsAccountCloser.js"></script>
 </body>
 
 </html>
