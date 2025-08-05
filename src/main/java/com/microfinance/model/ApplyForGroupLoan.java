@@ -18,15 +18,19 @@ public class ApplyForGroupLoan {
     private String openingDate;
     private String selectedMember;
     private String customerName;
-    
+   
     private String communityName;
     private String communityaddress;
     private String allocatedStaff;
     private String branchName;
     private String collectionDays;
+    private String communityAddress;
     private String communityLeader;
     private String contactNumber;
+    private String minLoanAmt;
     private String loanPurpose;
+    private String maximumLoanAmount;
+    
 
     // Financial Deductions
     private String planCode;
@@ -36,6 +40,7 @@ public class ApplyForGroupLoan {
     private String insuranceFee;
     private String valuationFee;
     private String lateAllowanceDays;
+    private String loanSchemeInformation;
     private String penaltyMode;
     private String monthlyPenalty;
     private String emiFrequency;
@@ -236,6 +241,33 @@ public class ApplyForGroupLoan {
 	public void setLoanSchemeName(String loanSchemeName) {
 		this.loanSchemeName = loanSchemeName;
 	}
+
+	public String getCommunityAddress() {
+		return communityAddress;
+	}
+	public void setCommunityAddress(String communityAddress) {
+		this.communityAddress = communityAddress;
+	}
+	public String getLoanSchemeInformation() {
+		return loanSchemeInformation;
+	}
+	public void setLoanSchemeInformation(String loanSchemeInformation) {
+		this.loanSchemeInformation = loanSchemeInformation;
+	}
+	public String getMinLoanAmt() {
+		return minLoanAmt;
+	}
+	public void setMinLoanAmt(String minLoanAmt) {
+		this.minLoanAmt = minLoanAmt;
+	}
+	public String getMaximumLoanAmount() {
+		return maximumLoanAmount;
+	}
+	public void setMaximumLoanAmount(String maximumLoanAmount) {
+		this.maximumLoanAmount = maximumLoanAmount;
+	}
+	
+    
 
 	
 

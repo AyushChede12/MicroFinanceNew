@@ -110,13 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 										id="term" required placeholder="Enter Term" />
 								</div>
 							</div>
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mb-4">
-									<label for="minLoanDurationMonths">Total Amount* </label> <input
-										type="text" name="totalAmount"
-										id="totalAmount" required placeholder="Enter totalAmount" />
-								</div>
-							</div>
+							
 
 							<div class="col-lg-3 ">
 								<div class="d-flex flex-column formFields">
@@ -141,7 +135,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
-									<label for="minLoanAmount"> Min Loan Amt* </label> <input
+									<label for="minLoanAmount"> Minimum Loan Amount* </label> <input
 										type="text" name="minLoanAmt" id="minLoanAmt" required
 										placeholder="Enter Amount" />
 								</div>
@@ -153,7 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 										required placeholder="Enter Max Loan" />
 								</div>
 							</div>
-
+							
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
 									<label for="rateOfInterest"> Rate of Interest (% p.a.)*
