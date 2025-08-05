@@ -37,7 +37,7 @@ $('#accountNumber').on('blur', function () {
 
     if (accountNumber !== "") {
         $.ajax({
-            url: '/api/customersavings/getallbyaccountnumber',
+            url: 'api/customersavings/getallbyaccountnumber',
             type: 'GET',
             data: { accountNumber: accountNumber },
             success: function (response) {
@@ -66,7 +66,7 @@ $('#accountNumber').on('blur', function () {
         });
          $.ajax({
         type: "GET",
-        url: "/api/customersavings/getsavingaccountactivity",
+        url: "api/customersavings/getsavingaccountactivity",
         data: { accountNumber: accountNumber }, // <-- Pass it here
         success: function(response) {
             console.log("Full Response from API:", response); 
@@ -201,7 +201,7 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: '/api/customersavings/savesavingaccountactivity',
+            url: 'api/customersavings/savesavingaccountactivity',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(accountData),
@@ -222,7 +222,7 @@ $(document).ready(function () {
 function getAccountNumberAndUpdateData(accountNumber) {
     $.ajax({
         type: "GET",
-        url: "/api/customersavings/getsavingaccountactivity",
+        url: "api/customersavings/getsavingaccountactivity",
         data: { accountNumber: accountNumber },
         success: function(response) {
             if (response.data && response.data.length > 0) {
@@ -248,7 +248,7 @@ function getAccountNumberAndUpdateData(accountNumber) {
 function updateMainAccountBalance(accountNumber, newBalance) {
     $.ajax({
         type: "POST",
-        url: "/api/customersavings/updateaveragebalance",
+        url: "api/customersavings/updateaveragebalance",
         contentType: "application/json",
         data: JSON.stringify({
             accountNumber: accountNumber,

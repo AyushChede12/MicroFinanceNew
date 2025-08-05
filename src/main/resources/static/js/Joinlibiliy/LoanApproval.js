@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-	url: "/api/joinliability/viewgrouploans",
+	url: "api/joinliability/viewgrouploans",
 	type: "GET",
 	success: function(response) {
 		console.log("API response:", response);
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 				if (selectedCode !== "") {
 					$.ajax({
-						url: '/api/joinliability/fetchByGroupCode?groupCode=' + selectedCode, // ✅ send as query param
+						url: 'api/joinliability/fetchByGroupCode?groupCode=' + selectedCode, // ✅ send as query param
 						type: 'POST',
 						success: function(response) {
 							if (response.status === "FOUND") {
@@ -69,7 +69,7 @@ $(document).ready(function() {
 			    }
 
 			    $.ajax({
-			        url: "/api/joinliability/updateApprovalStatusApplyGroupLoan",
+			        url: "api/joinliability/updateApprovalStatusApplyGroupLoan",
 			        type: "POST",
 			        contentType: "application/json",
 			        data: JSON.stringify({

@@ -1,27 +1,8 @@
 $(document).ready(function() {
 
-	//dropdown without search
-	/*$.ajax({
-		url: "/api/customersavings/getAllSavingAccountData",
-		type: "GET",
-		success: function(response) {
-			if (response.status === "FOUND") {
-				$("#accountNumber").empty().append("<option value=''>-- Select Account No --</option>");
-				response.data.forEach(function(item) {
-					$("#accountNumber").append(`<option value='${item.accountNumber}'>${item.accountNumber}-${item.enterCustomerName}</option>`);
-				});
-			} else {
-				alert("No Account Number found.");
-			}
-		},
-		error: function() {
-			alert("Failed to load Account Numbers.");
-		}
-	});*/
-
 	//dropdown with search
 	$.ajax({
-		url: '/api/reports/getApprovedSavingAccount',
+		url: 'api/reports/getApprovedSavingAccount',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
@@ -68,7 +49,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/customersavings/getAllSavingAccountData",
+		url: "api/customersavings/getAllSavingAccountData",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -86,7 +67,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/customersavings/getAllSavingAccountData",
+		url: "api/customersavings/getAllSavingAccountData",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -108,7 +89,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "GET",
-			url: "/api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
+			url: "api/customersavings/getallbyaccountnumber", // ✅ Update to your actual API path
 			data: { accountNumber: accountNumber },
 			success: function(response) {
 				if (response.status === "OK") {
@@ -145,7 +126,7 @@ $(document).ready(function() {
 					$("#comment").val(data.comment);
 					$("#accountNumber").val(data.accountNumber);
 
-					if (data.photo) {
+					/*if (data.photo) {
 						const photoPath = `Uploads/${data.photo}`;
 						$("#photoPreview").attr("src", photoPath);
 						$("#photoHidden").val(photoPath);
@@ -179,7 +160,43 @@ $(document).ready(function() {
 					} else {
 						$("#JointPhotoPreview").attr("src", "Uploads/default-placeholder.jpg");
 						$("#JointPhotoHidden").val("");
+					}*/
+					// Photo
+					if (data.photo) {
+						const imagePath = `Uploads/${data.photo}`;
+						document.getElementById("photoPreview").src = imagePath; // ✅ Correct: update preview image
+						document.getElementById("photoHidden").value = data.photo;
+						const fakePhotoEvent = { target: { result: imagePath } };
+						photoSizeEdit(fakePhotoEvent);
+					} else {
+						document.getElementById("photoPreview").src = 'Uploads/upload.jpg';
+						document.getElementById("photoHidden").value = '';
 					}
+
+					// Signature
+					if (data.signature) {
+						const imagePath = `Uploads/${data.signature}`;
+						document.getElementById("signaturePreview").src = imagePath; // ✅ Correct
+						document.getElementById("signatureHidden").value = data.signature;
+						const fakePhotoEvent = { target: { result: imagePath } };
+						signatureSizeEdit(fakePhotoEvent);
+					} else {
+						document.getElementById("signaturePreview").src = 'Uploads/upload.jpg';
+						document.getElementById("signatureHidden").value = '';
+					}
+
+					// Joint Photo
+					if (data.jointPhoto) {
+						const imagePath = `Uploads/${data.jointPhoto}`;
+						document.getElementById("jointPhotoPreview").src = imagePath; // ✅ Correct
+						document.getElementById("jointPhotoHidden").value = data.jointPhoto;
+						const fakePhotoEvent = { target: { result: imagePath } };
+						jointPhotoSizeEdit(fakePhotoEvent);
+					} else {
+						document.getElementById("jointPhotoPreview").src = 'Uploads/upload.jpg';
+						document.getElementById("jointPhotoHidden").value = '';
+					}
+
 
 					if (parseInt(data.accountStatus) === 1) {
 						$('#toggle-account-status').prop('checked', true);
@@ -217,12 +234,17 @@ $(document).ready(function() {
 
 	$('#updateBtn').click(function(e) {
 		e.preventDefault();
+		const accountNumber = $('#accountNumber').val();
+		if (!accountNumber) {
+			alert("First select the data, then proceed to update.");
+			return;
+		}
 
 		let savingData = new FormData();
 
 		// Append regular text fields
 		savingData.append("id", $('#id').val());
-		savingData.append("accountNumber", $('#accountNumber').val());
+		savingData.append("accountNumber", accountNumber);
 		savingData.append("openingDate", $('#openingDate').val());
 		savingData.append("selectByCustomer", $('#selectByCustomer').val());
 		savingData.append("enterCustomerName", $('#enterCustomerName').val());
@@ -253,9 +275,8 @@ $(document).ready(function() {
 		savingData.append("messageSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 		savingData.append("debitCardIssue", $('#toggle-debit-card').is(':checked') ? 1 : 0);
 
-
 		$.ajax({
-			url: "/api/customersavings/saveandupdatesavingaccount",
+			url: "api/customersavings/saveandupdatesavingaccount",
 			type: "POST",
 			data: savingData,
 			enctype: 'multipart/form-data',
@@ -284,7 +305,7 @@ $(document).ready(function() {
 		if (accountNumber !== "") {
 			if (confirm("Are you sure you want to delete this Saving Data?")) {
 				$.ajax({
-					url: "/api/customersavings/deleteSavingAccountDataById",
+					url: "api/customersavings/deleteSavingAccountDataById",
 					type: "POST",
 					data: { id: id },
 					success: function(response) {
@@ -308,33 +329,33 @@ $(document).ready(function() {
 
 	});
 
-$('#jointOperationCode').blur(function(event) {
-	let jointOperationCode = $("#jointOperationCode").val();
-	$.ajax({
-		type: "GET",
-		url: "api/customersavings/getallbyaccountnumber",
-		data: { accountNumber: jointOperationCode },
-		success: function(response, e) {
-			if (response.status == "FOUND") {
-				let data = response.data[0];
-				$("#id").val(data.id);
-			} else {
-				alert("Transfer Share Details Not Found For Customer");
+	$('#jointOperationCode').blur(function(event) {
+		let jointOperationCode = $("#jointOperationCode").val();
+		$.ajax({
+			type: "GET",
+			url: "api/customersavings/getallbyaccountnumber",
+			data: { accountNumber: jointOperationCode },
+			success: function(response, e) {
+				if (response.status == "FOUND") {
+					let data = response.data[0];
+					$("#id").val(data.id);
+				} else {
+					alert("Transfer Share Details Not Found For Customer");
+				}
+			},
+			error: function() {
+				alert("Shares not found or server error");
 			}
-		},
-		error: function() {
-			alert("Shares not found or server error");
-		}
+		});
+
+
+
 	});
 
-
-
-});
-
-$('#newBtn').click(function(event) {
-	event.preventDefault();
-	location.reload();
-});
+	$('#newBtn').click(function(event) {
+		event.preventDefault();
+		location.reload();
+	});
 
 
 });
@@ -433,7 +454,7 @@ function JointPhotoUpload() {
 		const reader = new FileReader();
 		reader.onload = function(e) {
 			jointPhotoSizeEdit(e);
-			$("#JointPhotoHidden").val("");
+			$("#jointPhotoHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -462,7 +483,7 @@ function signatureSizeEdit(e) {
 }
 
 function jointPhotoSizeEdit(e) {
-	const previewimg = document.getElementById("JointPhotoPreview");
+	const previewimg = document.getElementById("jointPhotoPreview");
 	previewimg.src = e.target.result;
 	previewimg.style.width = "100%";
 	previewimg.style.height = "100%";

@@ -321,13 +321,15 @@ public class CustomerSavingsService {
 	}
 
 	// Service for fetching the account numbers for passbook (vaibhav)
-		public List<String> getAccountNumbersByType(String accountType) {
-		    return createSavingAccountRepo.findByTypeofaccountContainingIgnoreCase(accountType)
-		            .stream()
-		            .map(CreateSavingsAccount::getAccountNumber)
-		            .filter(Objects::nonNull)
-		            .collect(Collectors.toList());
-		}
+	public List<String> getAccountNumbersByType(String accountType) {
+	    return createSavingAccountRepo
+	            .findByTypeofaccountContainingIgnoreCaseAndIsApproved(accountType.trim(), true)
+	            .stream()
+	            .map(CreateSavingsAccount::getAccountNumber)
+	            .filter(Objects::nonNull)
+	            .collect(Collectors.toList());
+	}
+
 		
 		// Service for fetching the data according to the account number (vaibhav)
 		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {

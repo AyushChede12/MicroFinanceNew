@@ -1,104 +1,95 @@
-$(document).ready(function() {
-	$('#saveBtn').click(function(event) {
-		event.preventDefault();
+$(document).ready(function () {
+    $('#saveBtn').click(function (event) {
+        event.preventDefault();
 
-		// Create FormData object to send data and files
-		var formData = new FormData();
+        var formData = new FormData();
 
-		// Append all form data (text values)
-		formData.append("memberCode", $('#memberCode').val());
-		formData.append("authenticateFor", $('#authenticateFor').val());
-		formData.append("signupDate", $('#signupDate').val());
-		formData.append("customerName", $('#customerName').val());
-		formData.append("customerGender", $('#customerGender').val());
-		formData.append("guardianName", $('#guardianName').val());
-		formData.append("relationToApplicant", $('#relationToApplicant').val());
-		formData.append("dob", $('#dob').val());
-		formData.append("customerAge", $('#customerAge').val());
-		formData.append("relationshipStatus", $('#relationshipStatus').val());
-		formData.append("customerAddress", $('#customerAddress').val());
+        // Text fields
+        formData.append("memberCode", $('#memberCode').val());
+        formData.append("authenticateFor", $('#authenticateFor').val());
+        formData.append("signupDate", $('#signupDate').val());
+        formData.append("major", $('#major').val());
+        formData.append("customerName", $('#customerName').val());
+        formData.append("minor", $('#minor').val());
+        formData.append("customerGender", $('#customerGender').val());
+        formData.append("guardianName", $('#guardianName').val());
+        formData.append("relationToApplicant", $('#relationToApplicant').val());
+        formData.append("dob", $('#dob').val());
+        formData.append("customerAge", $('#customerAge').val());
+        formData.append("relationshipStatus", $('#relationshipStatus').val());
+        formData.append("customerAddress", $('#customerAddress').val());
+        formData.append("state", $('#state').val());
+        formData.append("district", $('#district').val());
+        formData.append("aadharNo", $('#aadharNo').val());
+        formData.append("pinCode", $('#pinCode').val());
+        formData.append("branchName", $('#branchName').val());
+        formData.append("panNo", $('#panNo').val());
+        formData.append("voterNo", $('#voterNo').val());
+        formData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
+        formData.append("referralCode", $('#referralCode').val());
+        formData.append("referralName", $('#referralName').val());
+        formData.append("contactNo", $('#contactNo').val());
+        formData.append("emailId", $('#emailId').val());
+        formData.append("profession", $('#profession').val());
+        formData.append("academicBackground", $('#academicBackground').val());
 
-		formData.append("state", $('#state').val());
-		formData.append("district", $('#district').val());
-		formData.append("aadharNo", $('#aadharNo').val());
-		formData.append("pinCode", $('#pinCode').val());
-		formData.append("branchName", $('#branchName').val());
-		formData.append("panNo", $('#panNo').val());
-		formData.append("voterNo", $('#voterNo').val());
-		formData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
-		formData.append("referralCode", $('#referralCode').val());
-		formData.append("referralName", $('#referralName').val());
-		formData.append("contactNo", $('#contactNo').val());
-		formData.append("emailId", $('#emailId').val());
-		formData.append("profession", $('#profession').val());
-		formData.append("academicBackground", $('#academicBackground').val());
+        formData.append("nomineeName", $('#nomineeName').val());
+        formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
+        formData.append("nomineeAge", $('#nomineeAge').val());
+        formData.append("nomineeAddress", $('#nomineeAddress').val());
+        formData.append("nomineePanNo", $('#nomineePanNo').val());
+        formData.append("nomineeKycNo", $('#nomineeKycNo').val());
+        formData.append("nomineeKycType", $('#nomineeKycType').val());
+        formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
 
-		// Nominee Details
-		formData.append("nomineeName", $('#nomineeName').val());
-		formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
-		formData.append("nomineeAddress", $('#nomineeAddress').val());
-		formData.append("nomineeKycNo", $('#nomineeKycNo').val());
-		formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
-		formData.append("nomineeAge", $('#nomineeAge').val());
-		formData.append("nomineePanNo", $('#nomineePanNo').val());
-		formData.append("nomineeKycType", $('#nomineeKycType').val());
-		formData.append("memberFees", $('#memberFees').val());
-		formData.append("chequeNo", $('#chequeNo').val());
-		formData.append("chequeDate", $('#chequeDate').val());
-		formData.append("depositAcNo", $('#depositAcNo').val());
-		formData.append("referenceNo", $('#referenceNo').val());
-		formData.append("remarks", $('#remarks').val());
-		formData.append("paymentBy", $('#paymentBy').val());
+        formData.append("memberFees", $('#memberFees').val());
+        formData.append("chequeNo", $('#chequeNo').val());
+        formData.append("chequeDate", $('#chequeDate').val());
+        formData.append("depositAcNo", $('#depositAcNo').val());
+        formData.append("referenceNo", $('#referenceNo').val());
+        formData.append("remarks", $('#remarks').val());
+        formData.append("paymentBy", $('#paymentBy').val());
 
-		// Before your AJAX call
-		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
-		formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
-		formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
-		formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
+        // File uploads
+        const customerPhoto = $('#customerPhoto')[0].files[0];
+        const customerSignature = $('#customerSignature')[0].files[0];
+        if (customerPhoto) formData.append("customerPhoto", customerPhoto);
+        if (customerSignature) formData.append("customerSignature", customerSignature);
 
-		// Fees/Setting Details
+        // Toggle checkboxes (convert to 1 or 0)
+        formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
+        formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
+        formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
+        formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
 
+        // Dynamic base path for both localhost and online server
+        const contextPath = window.location.pathname.split('/')[1]; // e.g., "Microfinance"
+        const fullUrl = `${window.location.origin}/${contextPath}/api/customermanagement/saveOrUpdateCustomer`;
 
+        // Optional: log for debugging
+        console.log("POST to URL: ", fullUrl);
 
-
-
-		// Handle file uploads
-		var photoWithAadhar = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		if (photoWithAadhar) formData.append("customerPhoto", photoWithAadhar);
-
-		// Handle file uploads
-		var signature = $('#customerSignature')[0].files[0];
-		if (signature) {
-			formData.append("customerSignature", signature);
-		}
-
-		// Debugging: Log FormData to check entries
-		for (var pair of formData.entries()) {
-			console.log(pair[0] + ':', pair[1]);
-		}
-		console.log(formData);
-
-		// Make the AJAX request to your API
-		$.ajax({
-			type: 'POST',
-			url: '/saveOrUpdateCustomer', // Update URL if necessary
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function(response) {
-				if (response.status === "OK" || response.status === "CREATED") {
-					alert(response.message); // Message includes the Member Code
-					location.reload(); // Reload the page
-				} else {
-					alert("Error: " + response.message);
-				}
-			},
-			error: function(xhr, status, error) {
-				console.error("Error: ", xhr.responseText); // Log the error details
-				alert('An error occurred while saving the data. Please try again.');
-			}
-		});
-	});
+        // AJAX call
+        $.ajax({
+            type: 'POST',
+            url: fullUrl,
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                if (response.status === "OK" || response.status === "CREATED") {
+                    alert(response.message);
+                    location.reload();
+                } else {
+                    alert("Server error: " + response.message);
+                }
+            },
+            error: function (xhr) {
+                console.error("Error response: ", xhr.responseText);
+                alert("Something went wrong while saving. Please try again.");
+            }
+        });
+    });
 });
 
 
@@ -199,69 +190,84 @@ $(document).ready(function () {
     });
 
 
+$(document).ready(function () {
+    const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
 
-document.addEventListener("DOMContentLoaded", function() {
-	fetch('/getAllRelativeModule')
-		.then(response => {
-			if (!response.ok) {
-				throw new Error("Network error: " + response.statusText);
-			}
-			return response.json();
-		})
-		.then(data => {
-			console.log("Received relation data:", data);
+    $.ajax({
+        url: "/api/preference/getAllRelativeModule", // Ensure correct server path
+        method: "GET",
+        success: function (data) {
+            console.log("Received relation data:", data);
 
-			const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
+            dropdownIds.forEach(function (id) {
+                const $select = $("#" + id);
+                if ($select.length === 0) {
+                    console.warn(`Dropdown with ID '${id}' not found.`);
+                    return;
+                }
 
-			dropdownIds.forEach(id => {
-				const select = document.getElementById(id);
-				if (!select) {
-					console.warn(`Dropdown with ID '${id}' not found.`);
-					return;
-				}
+                // Clear old options except the first placeholder
+                $select.find("option:not(:first)").remove();
 
-				// Remove any existing options except the first one
-				while (select.options.length > 1) {
-					select.remove(1);
-				}
-
-				// Add new options
-				data.forEach(item => {
-					const option = document.createElement("option");
-					option.value = item.relation;
-					option.textContent = item.relation;
-					select.appendChild(option);
-				});
-			});
-		})
-		.catch(error => {
-			console.error("Error loading relations:", error);
-		});
+                // Loop through data.data array
+                data.data.forEach(function (item) {
+                    $select.append(
+                        $("<option>", {
+                            value: item.relation,
+                            text: item.relation
+                        })
+                    );
+                });
+            });
+        },
+        error: function (err) {
+            console.error("Error loading relations:", err);
+        }
+    });
 });
 
+$(document).ready(function () {
+    // Fetch all branches and populate the dropdown
+    $.ajax({
+        url: "/api/preference/getAllBranchModule", // Ensure correct API path
+        method: "GET",
+        success: function (data) {
+            console.log("Fetched Branches:", data);
 
+            const $branchDropdown = $('#branchName');
+            const addedBranches = new Set(); // ✅ Track added names
 
-$(document).ready(function() {
-	// Fetch all branches and populate the dropdown
-	$.ajax({
-		url: "getAllBranchModule",
-		method: "GET",
-		success: function(data) {
-			console.log("Fetched Branches:", data);
-			data.forEach(function(branch) {
-				$('#branchName').append(
-					$('<option>', {
-						value: branch.branchName,
-						text: branch.branchName
-					})
-				);
-			});
-		},
-		error: function(err) {
-			console.error("Error fetching branches:", err);
-		}
-	});
+            // Clear existing options
+            $branchDropdown.empty();
+
+            // Add default option
+            $branchDropdown.append('<option value="">-- Select Branch --</option>');
+
+            // Loop through and add only unique branch names
+            if (Array.isArray(data.data)) {
+                data.data.forEach(function (branch) {
+                    const branchName = branch.branchName;
+
+                    if (branchName && !addedBranches.has(branchName)) {
+                        $branchDropdown.append(
+                            $('<option>', {
+                                value: branchName,
+                                text: branchName
+                            })
+                        );
+                        addedBranches.add(branchName); // ✅ Mark as added
+                    }
+                });
+            } else {
+                console.warn("Unexpected data format:", data);
+            }
+        },
+        error: function (err) {
+            console.error("Error fetching branches:", err);
+        }
+    });
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
 	const paymentBy = document.getElementById("paymentBy");
@@ -309,7 +315,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.addEventListener("DOMContentLoaded", function() {
 	// Function to fetch and bind bank accounts
 	function loadBankAccounts() {
-		fetch("/getAllBankModule")
+		fetch("api/preference/getAllBankModule")
 			.then(response => {
 				if (!response.ok) {
 					throw new Error("Network response was not ok");

@@ -72,7 +72,7 @@ $(document).ready(function () {
 						   console.log("Data"+data.instFrom);
 					       $.ajax({
 							
-					           url: "/api/Maturitymanagement/savematurityscheme",  
+					           url: "api/Maturitymanagement/savematurityscheme",  
 					           type: "POST",
 					           contentType: "application/json",
 					           data: JSON.stringify(data),
@@ -134,7 +134,7 @@ $(document).ready(function () {
 							   console.log("Data"+data.instFrom);
 						       $.ajax({
 								
-						           url: "/api/Maturitymanagement/savematurityscheme",  
+						           url: "api/Maturitymanagement/savematurityscheme",  
 						           type: "POST",
 						           contentType: "application/json",
 						           data: JSON.stringify(data),
@@ -198,7 +198,7 @@ $(document).ready(function () {
 									   
 								       $.ajax({
 										
-								           url: "/api/Maturitymanagement/savematurityscheme",  
+								           url: "api/Maturitymanagement/savematurityscheme",  
 								           type: "POST",
 								           contentType: "application/json",
 								           data: JSON.stringify(data),
@@ -259,7 +259,7 @@ $(document).ready(function () {
 					   console.log("Data"+data.policyCode);
 				       $.ajax({
 						
-				           url: "/api/Maturitymanagement/savematurityscheme",  
+				           url: "api/Maturitymanagement/savematurityscheme",  
 				           type: "POST",
 				           contentType: "application/json",
 				           data: JSON.stringify(data),
@@ -281,26 +281,219 @@ $(document).ready(function () {
 				       });
 				   });
 				   
-				  
-				   	$("#saveBtn").click(function() {
-						$('#chkpolicycode').text('');
+	//Applying validation on fields
+	const monthMap = {
+	           "January": 1, "February": 2, "March": 3, "April": 4,
+	           "May": 5, "June": 6, "July": 7, "August": 8,
+	           "September": 9, "October": 10, "November": 11, "December": 12
+	       };
+		   
+		  					 	
+		   
+				   	$("#ddsaveBtn").click(function() {
 						
+							$('#chkpolicycodeD').text('');
+							$('#finstallD').text('');
+							$('#tinstallD').text('');
+							$('#chkintrestD').text('');
+							$('#chkdeductionD').text('');
 						
-						
-						var bankName = $('#ddPolicyCode').val().trim();
-					
+						var policyCode = $('#ddPolicyCode').val().trim();
+						let fromMonth = $('#ddInstFrom').val();
+						let toMonth = $('#ddInstTo').val();
+						let intrest = $('#ddInterestRate').val();
+						let deduction = $('#ddInterestRate').val();
 						
 						let isValid = true;
 						
 						
-						if (bankName === '') {
-									$('#chkpolicycode').text('* This field is required');
+						if (policyCode === '') {
+									$('#chkpolicycodeD').text('* This field is required');
 									$('#ddPolicyCode').focus();
 									isValid = false;
 								}
 						
+						if (fromMonth !== "" && toMonth !== "") {
+								let from = monthMap[fromMonth];
+								let to = monthMap[toMonth];
+
+								 if ((to - from) < 1) {
+								 $('#tinstallD').text("* There must be at least one month difference.");
+								  isValid = false;
+								               }
+								           }
+										   
+						 if (intrest === '') {
+							$('#chkintrestD').text('* This field is required');
+								$('#ddInterestRate').focus();
+								isValid = false;
+								}
+								
+						if (deduction === '') {
+							$('#chkdeductionD').text('* This field is required');
+								$('#ddDeduction').focus();
+								isValid = false;
+								}
+								
+								if (!isValid) {
+								                e.preventDefault(); // Stops form submission
+								            }
 						
 					});
+					
+					$("#rdsaveBtn").click(function() {
+														$('#chkpolicycodeR').text('');
+								   						$('#finstallR').text('');
+								   						$('#tinstallR').text('');
+								   						$('#chkintrestR').text('');
+								   						$('#chkdeductionR').text('');
+										
+										var policyCode = $('#rdPolicyCode').val().trim();
+										let fromMonth = $('#rdInstFrom').val();
+										let toMonth = $('#rdInstTo').val();
+										let intrest = $('#rdInterestRate').val();
+										let deduction = $('#rdInterestRate').val();
+										
+										let isValid = true;
+										
+										
+										if (policyCode === '') {
+													$('#chkpolicycodeR').text('* This field is required');
+													$('#rdPolicyCode').focus();
+													isValid = false;
+												}
+										
+										if (fromMonth !== "" && toMonth !== "") {
+												let from = monthMap[fromMonth];
+												let to = monthMap[toMonth];
+
+												 if ((to - from) < 1) {
+												 $('#tinstallR').text("* There must be at least one month difference.");
+												  isValid = false;
+												               }
+												           }
+														   
+										 if (intrest === '') {
+											$('#chkintrestR').text('* This field is required');
+												$('#rdInterestRate').focus();
+												isValid = false;
+												}
+												
+										if (deduction === '') {
+											$('#chkdeductionR').text('* This field is required');
+												$('#rdDeduction').focus();
+												isValid = false;
+												}
+												
+												if (!isValid) {
+												                e.preventDefault(); // Stops form submission
+												            }
+										
+									});
+								
+									$("#fdsaveBtn").click(function() {
+														
+															$('#chkpolicycodeF').text('');
+															$('#finstallF').text('');
+															$('#tinstallF').text('');
+															$('#chkintrestF').text('');
+															$('#chkdeductionF').text('');
+														
+														var policyCode = $('#ddPolicyCode').val().trim();
+														let fromMonth = $('#ddInstFrom').val();
+														let toMonth = $('#ddInstTo').val();
+														let intrest = $('#ddInterestRate').val();
+														let deduction = $('#ddInterestRate').val();
+														
+														let isValid = true;
+														
+														
+														if (policyCode === '') {
+																	$('#chkpolicycodeF').text('* This field is required');
+																	$('#ddPolicyCode').focus();
+																	isValid = false;
+																}
+														
+														if (fromMonth !== "" && toMonth !== "") {
+																let from = monthMap[fromMonth];
+																let to = monthMap[toMonth];
+
+																 if ((to - from) < 1) {
+																 $('#tinstallF').text("* There must be at least one month difference.");
+																  isValid = false;
+																               }
+																           }
+																		   
+														 if (intrest === '') {
+															$('#chkintrestF').text('* This field is required');
+																$('#ddInterestRate').focus();
+																isValid = false;
+																}
+																
+														if (deduction === '') {
+															$('#chkdeductionF').text('* This field is required');
+																$('#ddDeduction').focus();
+																isValid = false;
+																}
+																
+																if (!isValid) {
+																                e.preventDefault(); // Stops form submission
+																            }
+														
+													});
+
+													$("#missaveBtn").click(function() {
+																		
+																			$('#chkpolicycodeM').text('');
+																			$('#finstallM').text('');
+																			$('#tinstallM').text('');
+																			$('#chkintrestM').text('');
+																			$('#chkdeductionM').text('');
+																		
+																		var policyCode = $('#ddPolicyCode').val().trim();
+																		let fromMonth = $('#ddInstFrom').val();
+																		let toMonth = $('#ddInstTo').val();
+																		let intrest = $('#ddInterestRate').val();
+																		let deduction = $('#ddInterestRate').val();
+																		
+																		let isValid = true;
+																		
+																		
+																		if (policyCode === '') {
+																					$('#chkpolicycodeM').text('* This field is required');
+																					$('#ddPolicyCode').focus();
+																					isValid = false;
+																				}
+																		
+																		if (fromMonth !== "" && toMonth !== "") {
+																				let from = monthMap[fromMonth];
+																				let to = monthMap[toMonth];
+
+																				 if ((to - from) < 1) {
+																				 $('#tinstallM').text("* There must be at least one month difference.");
+																				  isValid = false;
+																				               }
+																				           }
+																						   
+																		 if (intrest === '') {
+																			$('#chkintrestM').text('* This field is required');
+																				$('#ddInterestRate').focus();
+																				isValid = false;
+																				}
+																				
+																		if (deduction === '') {
+																			$('#chkdeductionM').text('* This field is required');
+																				$('#ddDeduction').focus();
+																				isValid = false;
+																				}
+																				
+																				if (!isValid) {
+																				                e.preventDefault(); // Stops form submission
+																				            }
+																		
+																	});
+																	
+									
 
 });
 
