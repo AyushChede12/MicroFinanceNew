@@ -144,63 +144,6 @@ $(document).ready(function() {
 
 
 
-//EMI Calculation 
-function calculateEMI(emicollection, tensure, interestinyear, loanamount, roitype) {
-	const periods = tensure; // ✅ ALWAYS use entered term — no conversion!
-	let periodicRate;
-
-	// ✅ Only adjust the rate — periods stays fixed
-	switch (emicollection) {
-		case "Daily":
-			periodicRate = interestinyear / 365 / 100;
-			break;
-		case "Weekly":
-			periodicRate = interestinyear / 52 / 100;
-			break;
-		case "Fortnightly":
-			periodicRate = interestinyear / 24 / 100;
-			break;
-		case "Monthly":
-			periodicRate = interestinyear / 12 / 100;
-			break;
-		case "Quarterly":
-			periodicRate = interestinyear / 4 / 100;
-			break;
-	}
-
-	let emi;
-
-	if (roitype === "Flat Interest") {
-		const totalInterest = loanamount * periodicRate * periods;
-		const totalAmount = loanamount + totalInterest;
-		emi = totalAmount / periods;
-
-		document.getElementById("emiPayment").value = emi.toFixed(2);
-
-	}
-
-	else if (roitype === "Reducing Interest") {
-		const r = periodicRate;
-		emi = (loanamount * r * Math.pow(1 + r, periods)) / (Math.pow(1 + r, periods) - 1);
-
-		document.getElementById("emiPayment").value = emi.toFixed(2);
-	}
-
-	else if (roitype === "Rule 78") {
-		const totalInterest = loanamount * periodicRate * periods;
-		const sumOfDigits = (periods * (periods + 1)) / 2;
-
-		let interestPerPeriod = [];
-		for (let i = periods; i >= 1; i--) {
-			interestPerPeriod.push((i / sumOfDigits) * totalInterest);
-		}
-
-		const totalAmount = loanamount + totalInterest;
-		emi = totalAmount / periods;
-
-		document.getElementById("emiPayment").value = emi.toFixed(2);
-	}
-}
 
 
 function calculateCharges(feeProcessing,chargesLegal,gst,feeInsurence,feeValuation,loanamount){
