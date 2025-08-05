@@ -4,7 +4,7 @@ $(document).ready(function() {
 	console.log("Document ready");
 
 	$.ajax({
-		url: '/approved',
+		url: 'approved',
 		type: 'GET',
 		success: function(response) {
 			if (Array.isArray(response) && response.length > 0) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 		if (selectedCode !== "") {
 			$.ajax({
-				url: '/api/loanmanegment/getByMemberCodeNewLoanApplication',
+				url: 'api/loanmanegment/getByMemberCodeNewLoanApplication',
 				type: 'GET',
 				data: { memberCode: selectedCode },
 				success: function(response) {
@@ -153,7 +153,7 @@ function signatureSizeEdit(e) {
 
 $(document).ready(function() {
 	$.ajax({
-		url: "/api/loanmanegment/fetchLoanSchemeCatalog",
+		url: "api/loanmanegment/fetchLoanSchemeCatalog",
 		type: "GET",
 		success: function(response) {
 			console.log("API response:", response);
@@ -181,7 +181,7 @@ $('#loanPlanName').on('change', function() {
 
 	if (selectedName !== "") {
 		$.ajax({
-			url: '/api/loanmanegment/allfetchdataLoanPlanName?loanPlanName=' + encodeURIComponent(selectedName), // Pass as query param
+			url: 'api/loanmanegment/allfetchdataLoanPlanName?loanPlanName=' + encodeURIComponent(selectedName), // Pass as query param
 			type: 'GET',
 			success: function(response) {
 				if (response.status === "FOUND") {
@@ -355,7 +355,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/loanmanegment/saveloanapplication',
+			url: 'api/loanmanegment/saveloanapplication',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(loanApplication),
@@ -378,7 +378,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$.ajax({
-		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
+		url: 'api/financialconsultant/getAllFinancialConsultantDetails',
 		type: 'POST',
 		success: function(response) {
 			console.log("API Response:", response); // ✅ Debug to check!

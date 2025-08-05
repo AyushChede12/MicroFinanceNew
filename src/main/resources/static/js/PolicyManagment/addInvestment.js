@@ -1,34 +1,40 @@
-// Get All Customers
-$(document).ready(function() {
-	// Fetch all customers and populate the "select by code" dropdown
-	$.ajax({
-		url: "approved",
-		method: "GET",
-		success: function(data) {
-			console.log("Fetched Members:", data);
-			data.forEach(function(customer) {
-				const optionText = `${customer.memberCode} - ${customer.customerName}`;
-				$('#selectCustomer').append(
-					$('<option>', {
-						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText
-					})
-				);
-			});
-		},
-		error: function(err) {
-			console.error("Error fetching customers:", err);
-		}
-	});
+$(document).ready(function () {
+    $.ajax({
+        url: '/api/customermanagement/approved', // Make sure this path is correct
+        type: 'GET',
+        success: function (response) {
+            if (response.status === "OK" && Array.isArray(response.data)) {
+                const $select = $('#selectCustomer');
+                $select.empty().append('<option value="">Select Customer Name</option>');
+
+                response.data.forEach(customer => {
+                    if (customer.customerName && customer.memberCode) {
+                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
+                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
+                        $select.append(`<option value="${optionValue}">${optionText}</option>`);
+                    }
+                });
+            } else {
+                alert("No approved customers found.");
+            }
+        },
+        error: function () {
+            alert("Failed to fetch approved customers.");
+        }
+    });
 });
 
 
-// Get Data By Selected Customer
+
+
+
+
+
+
 
 function fetchBySelectedCustomer() {
 	const memberCode = $("#selectCustomer").val();
 	if (!memberCode) return;
-
 	const input = { memberCode };
 
 	$.ajax({

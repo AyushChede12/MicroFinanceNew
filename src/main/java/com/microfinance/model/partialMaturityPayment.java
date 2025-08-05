@@ -34,6 +34,7 @@ public class partialMaturityPayment {
 	private String branchName;
 	private String payComment;
 	private String modeofPayment;
+	
 	public long getId() {
 		return id;
 	}
@@ -172,6 +173,7 @@ public class partialMaturityPayment {
 	public void setMaturityDate(String maturityDate) {
 		this.maturityDate = maturityDate;
 	}
+	
 	
 	
 }

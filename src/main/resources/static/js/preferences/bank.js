@@ -79,7 +79,7 @@ $(document).ready(function() {
 		};
 
 		$.ajax({
-			url: '/api/preference/saveAndUpdateAllBankModule',
+			url: 'api/preference/saveAndUpdateAllBankModule',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
@@ -113,7 +113,7 @@ var pageSizeMISD = 5;
 function loadMISData() {
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/getAllBankModule",
+		url: "api/preference/getAllBankModule",
 		contentType: "application/json",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -218,7 +218,7 @@ function viewData(id) {
 	$("#showBtn").hide();
 
 	$.ajax({
-		url: "/api/preference/getBankModuleById",
+		url: "api/preference/getBankModuleById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -245,7 +245,7 @@ function viewData(id) {
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this bank?")) {
 		$.ajax({
-			url: "/api/preference/deleteBankModuleById",
+			url: "api/preference/deleteBankModuleById",
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
@@ -275,7 +275,7 @@ function updateBank() {
 		openingBalance: $("#openingBalance").val()
 	};
 	$.ajax({
-		url: "/api/preference/saveAndUpdateAllBankModule",
+		url: "api/preference/saveAndUpdateAllBankModule",
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(payload),

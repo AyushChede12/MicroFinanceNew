@@ -39,7 +39,7 @@ $(document).ready(function () {
 
 		if (selectedCode !== "") {
 			$.ajax({
-				url: '/api/joinliability/fetchBygroupCode?groupCode=' + selectedCode, // ✅ fixed here
+				url: 'api/joinliability/fetchBygroupCode?groupCode=' + selectedCode, // ✅ fixed here
 				type: 'POST',
 				success: function(response) {
 					if (response.status === "FOUND") {

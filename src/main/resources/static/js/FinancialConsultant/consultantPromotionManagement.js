@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response && response.data) {
@@ -22,7 +22,7 @@ $(document).ready(function() {
 	});
 	
 	$.ajax({
-	    url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+	    url: "api/financialconsultant/getAllFinancialConsultantDetails",
 	    type: 'POST',
 	    contentType: 'application/json',
 	    success: function(response) {
@@ -82,7 +82,7 @@ $(document).ready(function() {
 	    formData.append("seniorPosition", $('#newseniorposition').val());
 
 	    $.ajax({
-	        url: "/api/financialconsultant/saveOrUpdatePromotionData",
+	        url: "api/financialconsultant/saveOrUpdatePromotionData",
 	        type: "POST",
 	        data: formData,
 	        processData: false,  // Don't process as query string
@@ -99,7 +99,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-			url: "/api/financialconsultant/getAllPromotionManagementDetails",
+			url: "api/financialconsultant/getAllPromotionManagementDetails",
 			type: "POST",
 			contentType: "application/json",
 			success: function(response) {

@@ -2,7 +2,7 @@
 //fetch Policy Name
 $(document).ready(function() {
     $.ajax({
-        url: "/api/customersavings/fetchsavingchemecatalog",
+        url: "api/customersavings/fetchsavingchemecatalog",
         type: "GET",
         success: function(response) {
 			console.log("API response:", response);
@@ -30,7 +30,7 @@ $('#selectPlan').on('change', function () {
 
     if (selectedName !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchpolicyname?policyName=' + encodeURIComponent(selectedName), // Pass as query param
+            url: 'api/customersavings/fetchpolicyname?policyName=' + encodeURIComponent(selectedName), // Pass as query param
             type: 'GET',
             success: function (response) {
                 if (response.status === "FOUND") {
@@ -125,7 +125,7 @@ $('#selectByCustomer').on('change', function () {
 
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchCustomerCode',
+            url: 'api/customersavings/fetchCustomerCode',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ memberCode: selectedCode }),
@@ -188,7 +188,7 @@ $('#jointOperationCode').on('change', function () {
 
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchCustomerCode',
+            url: 'api/customersavings/fetchCustomerCode',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ memberCode: selectedCode }),
@@ -227,7 +227,7 @@ $('#financialConsultantCode').on('blur', function () {
 
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchfinancialcode?financialCode=' + encodeURIComponent(selectedCode), // Pass as query param
+            url: 'api/customersavings/fetchfinancialcode?financialCode=' + encodeURIComponent(selectedCode), // Pass as query param
             type: 'GET',
             success: function (response) {
                 if (response.status === "FOUND") {
@@ -396,7 +396,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/customersavings/saveandupdatesavingaccount',
+			url: 'api/customersavings/saveandupdatesavingaccount',
 			data: formData,
 			processData: false,
 			contentType: false,
@@ -413,7 +413,7 @@ $(document).ready(function () {
 	
 	$.ajax({
 			type: "GET",
-			url: "/api/customersavings/getAllSavingAccountData",
+			url: "api/customersavings/getAllSavingAccountData",
 			contentType: "application/json",
 			success: function(response) {
 				console.log("Full Response from API:", response); 
@@ -450,7 +450,7 @@ $(document).ready(function () {
 
 function viewData(id) {
 	$.ajax({
-		url: "/api/customersavings/getSavingAccountDataById",
+		url: "api/customersavings/getSavingAccountDataById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -550,7 +550,7 @@ console.log(data.debitCardIssue)
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/customersavings/deleteSavingAccountDataById", 
+			url: "api/customersavings/deleteSavingAccountDataById", 
 			type: "POST",
 			data: { id: id }, 
 			success: function(response) {
@@ -741,7 +741,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/customersavings/saveandupdatesavingaccount',
+			url: 'api/customersavings/saveandupdatesavingaccount',
 			data: formData,
 			processData: false,
 			contentType: false,

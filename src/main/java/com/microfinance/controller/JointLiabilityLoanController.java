@@ -381,6 +381,8 @@ public class JointLiabilityLoanController {
     	}
     }
     
+    }
+    
    
     // feath the property form Installment Re-Payment
     @PostMapping("/fetchBygroupCode")
@@ -395,8 +397,7 @@ public class JointLiabilityLoanController {
     }
    
 }
-    
-    
+       
 
 
 

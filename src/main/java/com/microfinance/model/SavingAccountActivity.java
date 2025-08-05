@@ -31,7 +31,7 @@ public class SavingAccountActivity {
     private String refNumber1;
     private String depositAcc3;
     private String refNumber2;
-	
+	private String isApproved;
 	
 	public Long getId() {
 		return id;
@@ -170,6 +170,12 @@ public class SavingAccountActivity {
 	}
 	public void setRefNumber2(String refNumber2) {
 		this.refNumber2 = refNumber2;
+	}
+	public String getIsApproved() {
+		return isApproved;
+	}
+	public void setIsApproved(String isApproved) {
+		this.isApproved = isApproved;
 	}
 	
 	
