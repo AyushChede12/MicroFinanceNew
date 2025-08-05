@@ -20,6 +20,7 @@ public class ApplyForGroupLoan {
     private String customerName;
     
     private String communityName;
+    private String communityaddress;
     private String allocatedStaff;
     private String branchName;
     private String collectionDays;
@@ -41,15 +42,14 @@ public class ApplyForGroupLoan {
     private String rateOfInterest;
     private String interestType;
     private String emiType;
-    private String Term;
+    private String term;
     private String totalAmount;
 
     
     private String approvalStatus;
     private String approvalDate;
-
     private String loanSchemeName;
-
+    
 	public Long getId() {
 		return id;
 	}
@@ -85,6 +85,12 @@ public class ApplyForGroupLoan {
 	}
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
+	}
+	public String getCommunityaddress() {
+		return communityaddress;
+	}
+	public void setCommunityaddress(String communityaddress) {
+		this.communityaddress = communityaddress;
 	}
 	public String getAllocatedStaff() {
 		return allocatedStaff;
@@ -200,6 +206,18 @@ public class ApplyForGroupLoan {
 	public void setEmiType(String emiType) {
 		this.emiType = emiType;
 	}
+	public String getTerm() {
+		return term;
+	}
+	public void setTerm(String term) {
+		this.term = term;
+	}
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 	public String getApprovalStatus() {
 		return approvalStatus;
 	}
@@ -212,25 +230,13 @@ public class ApplyForGroupLoan {
 	public void setApprovalDate(String approvalDate) {
 		this.approvalDate = approvalDate;
 	}
-	public String getTerm() {
-		return Term;
-	}
-	public void setTerm(String term) {
-		Term = term;
-	}
-	public String getTotalAmount() {
-		return totalAmount;
-	}
-	public void setTotalAmount(String totalAmount) {
-		this.totalAmount = totalAmount;
-	}
 	public String getLoanSchemeName() {
 		return loanSchemeName;
 	}
 	public void setLoanSchemeName(String loanSchemeName) {
 		this.loanSchemeName = loanSchemeName;
 	}
-    
+
 	
 
 }
