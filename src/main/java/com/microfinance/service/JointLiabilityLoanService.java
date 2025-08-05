@@ -307,7 +307,7 @@ public class JointLiabilityLoanService {
 		 return applyForGroupLoanRepo.findByGroupCode(groupCode);
 
 	}
-}
+
 
 	public boolean saveRepayment(InstallmentRepayment repayment) {
 		 try {
@@ -322,7 +322,7 @@ public class JointLiabilityLoanService {
 		return installmentRepymentRepo.findAll();
 	}
 
-	
+}
 
 	
 

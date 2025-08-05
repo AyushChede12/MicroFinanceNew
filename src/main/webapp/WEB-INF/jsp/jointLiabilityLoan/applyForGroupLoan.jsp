@@ -276,8 +276,6 @@ pageEncoding="ISO-8859-1"%> -->
 									type="text" name="Term" id="Term" required
 									placeholder="Enter Term" />
 
-									type="text" name="term"
-									id="term" required placeholder="Enter Term" />
 
 							</div>
 						</div>

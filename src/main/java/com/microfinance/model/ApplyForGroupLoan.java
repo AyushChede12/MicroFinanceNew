@@ -20,7 +20,6 @@ public class ApplyForGroupLoan {
     private String customerName;
    
     private String communityName;
-    private String communityaddress;
     private String allocatedStaff;
     private String branchName;
     private String collectionDays;
@@ -91,12 +90,7 @@ public class ApplyForGroupLoan {
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
 	}
-	public String getCommunityaddress() {
-		return communityaddress;
-	}
-	public void setCommunityaddress(String communityaddress) {
-		this.communityaddress = communityaddress;
-	}
+	
 	public String getAllocatedStaff() {
 		return allocatedStaff;
 	}
