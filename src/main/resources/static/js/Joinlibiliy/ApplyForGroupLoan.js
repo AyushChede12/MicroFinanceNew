@@ -43,6 +43,7 @@ $(document).ready(function() {
 						$('#branchName').val(customer.branchName );
 						$('#allocatedStaff').val(customer.allocatedStaff);
 						$('#collectionDays').val(customer.collectionDay);
+						$('#communityAddress').val(customer.communityAddress);
 
 					} else {
 						alert('No customer data found!');
@@ -93,12 +94,14 @@ $(document).ready(function() {
 						success: function(response) {
 							if (response.status === "FOUND") {
 								let customer = response.data[0];
-													$('#loanSchemeName').val(customer.loanSchemeInformation);
+													$('#loanSchemeInformation').val(customer.loanSchemeInformation);
 													$('#processingFee').val(customer.processingFeePercent);
 													$('#legalCharges').val(customer.legalChargesPercent);
 													$('#gstPercentage').val(customer.gstPercent );
 													$('#insuranceFee').val(customer.insuranceFeePercent );
 													$('#valuationFee').val(customer.valuationFeePercent );
+													$('#minLoanAmt').val(customer.minLoanAmt );
+													$('#maximumLoanAmount').val(customer.maximumLoanAmount );
 													$('#lateAllowanceDays').val(customer.lateAllowanceDays);
 													$('#penaltyMode').val(customer.penaltyMode);
 													$('#monthlyPenalty').val(customer.monthlyPenalty);
@@ -128,7 +131,12 @@ $(document).ready(function() {
 			// save code 
 			
 			    $('#saveBtn').on('click', function (e) {
-			        e.preventDefault();
+					if (!validateTotalAmount()) {
+							     e.preventDefault(); // prevent form save if invalid
+							     $("#totalAmount").focus();
+							   } 
+
+					           
 
 			        const groupLoanData = {
 			            groupCode: $('#groupCode').val(),
@@ -141,10 +149,12 @@ $(document).ready(function() {
 			            branchName: $('#branchName').val(),
 			            collectionDays: $('#collectionDays').val(),
 			            communityLeader: $('#communityLeader').val(),
+						communityAddress: $('#communityAddress').val(),
 			            contactNumber: $('#contactNumber').val(),
 			            loanPurpose: $('#loanPurpose').val(),
 			            planCode: $('#planCode').val(),
-						loanSchemeInformation: $('#loanSchemeName').val(),
+						totalAmount: $('#totalAmount').val(),
+						loanSchemeInformation: $('#loanSchemeInformation').val(),
 			            processingFee: $('#processingFee').val(),
 			            legalCharges: $('#legalCharges').val(),
 			            gstPercentage: $('#gstPercentage').val(),
@@ -206,6 +216,7 @@ $(document).ready(function() {
 				                               <td>${item.emiType || ''}</td>
 				                               <td>${item.contactNumber || ''}</td>
 				                               <td>${item.allocatedStaff || ''}</td>
+											   <td>${item.loanSchemeInformation || ''}</td>
 				                           </tr>
 				                       `;
 				                       tableBody.append(row);
@@ -222,6 +233,33 @@ $(document).ready(function() {
 				   }
 
 				   fetchGroupLoanData();
+				   //total amount
+				   	function validateTotalAmount() {
+				   	    const enteredAmount = parseFloat($("#totalAmount").val()) || 0;
+				   	    const minAmt = parseFloat($("#minLoanAmt").val()) || 0;
+				   	    const maxAmt = parseFloat($("#maximumLoanAmount").val()) || 0;
+
+				   	    if (enteredAmount < minAmt || enteredAmount > maxAmt) {
+				   	      $("#totalAmountError")
+				   	        .text(`You can apply for a loan between ${minAmt} to ${maxAmt}.`)
+				   	        .removeClass("d-none");
+				   	      $("#totalAmount").addClass("is-invalid");
+				   	      return false;
+				   	    } else {
+				   	      $("#totalAmountError").text("").addClass("d-none");
+				   	      $("#totalAmount").removeClass("is-invalid");
+				   	      return true;
+				   	    }
+				   	  }
+
+				   	  // Validate on blur (field leave)
+				   	  $("#totalAmount").on("blur", function () {
+				   	    validateTotalAmount();
+				   	  });
+
+				 
+
+				   
 
 			});
 

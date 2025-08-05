@@ -143,6 +143,16 @@ pageEncoding="ISO-8859-1"%> -->
 									required placeholder="Enter Community Leader" />
 							</div>
 						</div>
+
+
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields">
+								<label>Community Address*</label> <input type="text"
+									id="communityAddress" name="communityAddress"
+									class="form-control" required placeholder="Enter Address" />
+							</div>
+						</div>
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="contactNumber">Contact Number*</label> <input
@@ -177,12 +187,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="communityLeader">loan Scheme Name*</label> <input
-									type="text" name="loanSchemeName" id="loanSchemeName"
-									required placeholder="Enter Community Leader" />
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanSchemeInformation"> Loan Scheme
+									Information </label> <input type="text" name="loanSchemeInformation"
+									id="loanSchemeInformation" required
+									placeholder="Enter Loan Scheme" />
 							</div>
 						</div>
+						
+
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="processingFee">Processing Fee (%)*</label> <input
@@ -259,17 +272,28 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minLoanDurationMonths">Term * </label> <input
+
+									type="text" name="Term" id="Term" required
+									placeholder="Enter Term" />
+
 									type="text" name="term"
 									id="term" required placeholder="Enter Term" />
+
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="minLoanDurationMonths">Total Amount* </label> <input
-									type="text" name="totalAmount"
-									id="totalAmount" required placeholder="Enter Term" />
+								<label for="totalAmount">Total Amount* </label> <input
+									type="text" name="totalAmount" id="totalAmount"
+									placeholder="Enter Total Amount" /> <small
+									id="totalAmountError" class="text-danger d-none"></small>
 							</div>
 						</div>
+						<!-- Hidden fields to store min/max loan limits (you can fill them dynamically) -->
+						<input type="hidden" id="minLoanAmt" name="minLoanAmt" > <input
+							type="hidden" id="maximumLoanAmount" name="maximumLoanAmount" >
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="interestType">Interest Type*</label>
@@ -368,6 +392,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/ApplyForGroupLoan.js"></script>
+
 </body>
 
 </html>
