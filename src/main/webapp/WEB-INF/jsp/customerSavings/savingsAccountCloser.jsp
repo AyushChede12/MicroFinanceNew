@@ -186,9 +186,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btnStyle"
-								style="background-color: #FFA500; margin-left: 80%;">Close
-								Account</button>
+							<button id="saveAccountCloseBtn" class="btnStyle"
+								style="background-color: #FFA500; margin-left: 80%;">Close Account</button>
 						</div>
 					</div>
 

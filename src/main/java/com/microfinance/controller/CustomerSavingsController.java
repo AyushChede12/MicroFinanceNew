@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.ExecutiveFounderDto;
+import com.microfinance.dto.FinancialConsultantDto;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
@@ -34,6 +36,7 @@ import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.model.savingAccountFundTransfer;
+import com.microfinance.model.savingsAccountCloser;
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -318,7 +321,7 @@ public class CustomerSavingsController {
     @PostMapping("/updateaveragebalance")
     public ResponseEntity<ApiResponse<String>> updateAverageBalance(@RequestBody CreateSavingsAccount createSavingsAccount) {
         String accountNumber = createSavingsAccount.getAccountNumber();
-        String newBalance = createSavingsAccount.getOpeningAmount();
+        String newBalance = createSavingsAccount.getBalance();
 
         boolean isUpdated = customersaving.updateAverageBalance(accountNumber, newBalance);
 
@@ -456,8 +459,8 @@ public class CustomerSavingsController {
             CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
                     .orElseThrow(() -> new RuntimeException("Credit account not found"));
 
-            double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
-            double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+            double debitBalance = Double.parseDouble(debitAccount.getBalance());
+            double creditBalance = Double.parseDouble(creditAccount.getBalance());
 
             if (debitBalance < amount) {
                 Map<String, String> response = new HashMap<>();
@@ -466,8 +469,8 @@ public class CustomerSavingsController {
             }
 
             // Update balances
-            debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
-            creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+            debitAccount.setBalance(String.valueOf(debitBalance - amount));
+            creditAccount.setBalance(String.valueOf(creditBalance + amount));
 
             // Save updated accounts
             createSavingAccountRepo.save(debitAccount);
@@ -532,6 +535,31 @@ public class CustomerSavingsController {
 			return ResponseEntity.badRequest().body("Failure");
 	}*/
     
+    //janvi : Save Saving Acc Closer Data
+    @PostMapping("/saveAccountCloseInfo")	
+	public ResponseEntity<savingsAccountCloser> saveAccountCloseInfo(@RequestBody savingsAccountCloser accountCloser) {
+	    // 1. Save the account close record
+	    savingsAccountCloser savedAccCloseEntry = customersaving.saveAccountCloseInfo(accountCloser);
+
+	    // 2. Get account number from accountCloser
+	   /* String accountNo = accountCloser.getSelectaccountNo(); // make sure this is correct
+
+	    // 3. Fetch SavingOpening records by account number
+	    List<SavingOpening> savingOpenings = savingopeningrepo.findByAccountNo(accountNo); 
+
+	    // 4. Update chkIsActive to false for each matched entry
+	    if (!savingOpenings.isEmpty()) {
+	        for (SavingOpening savingOpening : savingOpenings) {
+	            savingOpening.setChkisactive(false); // set chkisactive = false for each one
+	            savingOpening.setOpeningAmount("0");
+	        }
+	        savingopeningrepo.saveAll(savingOpenings); // save all changes in one go
+	    } else {
+	        System.out.println("No SavingOpening records found for accountNo: " + accountNo);
+	    }*/
+	    return new ResponseEntity<>(savedAccCloseEntry, HttpStatus.CREATED);
+	}
+	
     
 	
 }

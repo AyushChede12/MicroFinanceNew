@@ -35,19 +35,19 @@ $('#selectPlan').on('change', function () {
             success: function (response) {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
-                    $('#openingAmount').val(customer.monthlyMinimumBalance);
+                    $('#balance').val(customer.monthlyMinimumBalance);
                 } else {
                     alert('No data found!');
-                    $('#openingAmount').val('');
+                    $('#balance').val('');
                 }
             },
             error: function () {
                 alert('Error while fetching data!');
-                $('#openingAmount').val('');
+                $('#balance').val('');
             }
         });
     } else {
-        $('#openingAmount').val('');
+        $('#balance').val('');
     }
 });
 
@@ -72,7 +72,7 @@ $(document).ready(function() {
                         $select.append(`<option value="${optionValue}">${optionText}</option>`);
                     }
                     if (customer.customerName && customer.memberCode) {
-                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
+                        const optionText = `${customer.memberCode}`;
                         const optionValue = customer.memberCode; // or use customer.id or full object if needed
                         $select1.append(`<option value="${optionValue}">${optionText}</option>`);
                     }
@@ -114,7 +114,8 @@ $('#selectByCustomer').on('change', function () {
 					$('#pinCode').val(customer.pinCode);
 					$('#state').val(customer.state);
 					$('#dateOfBirth').val(customer.dob);
-                    //$('#panCardNumber').val(customer.panCardNumber);
+					$('#emailId').val(customer.emailId);
+                    $('#aadharNo').val(customer.aadharNo);
                     //photo
                     if (customer.customerPhoto) {
 						const imagePath = `Uploads/${customer.customerPhoto}`; // Construct full image path
@@ -218,46 +219,7 @@ $('#financialConsultantCode').on('blur', function () {
     }
 });
 
-//photo upload
-/*function photoUpload() {
-	const file = document.getElementById("photo").files[0];
-	if (file && file.type.startsWith("image/")) {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			document.getElementById("photoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("photoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
-		};
-		reader.readAsDataURL(file);
-	} else {
-		alert("Please upload a valid image file for photo.");
-	}
-}*/
 
-/*function signatureUpload() {
-	const file = document.getElementById("signature").files[0];
-	if (file && file.type.startsWith("image/")) {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			document.getElementById("signaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("signaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
-		};
-		reader.readAsDataURL(file);
-	} else {
-		alert("Please upload a valid image file for signature.");
-	}
-}*/
 
 // save saving account details 
 $(document).ready(function () {
@@ -316,10 +278,12 @@ $(document).ready(function () {
 		formData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
 		formData.append("familyRelation", $('#familyRelation').val());
 		formData.append("selectPlan", $('#selectPlan').val());
-		formData.append("openingAmount", $('#openingAmount').val());
+		formData.append("balance", $('#balance').val());
 		formData.append("financialConsultantCode", $('#financialConsultantCode').val());
 		formData.append("financialConsultantName", $('#financialConsultantName').val());
 		formData.append("openingFees", $('#openingFees').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("aadharNo", $('#aadharNo').val());
 		formData.append("authenticateWith", $('#authenticateWith').val());
 		formData.append("modeOfPayment", $('#modeOfPayment').val());
 		formData.append("chequeNo", $('#chequeNo').val());
@@ -446,10 +410,12 @@ function viewData(id) {
 				$("#jointSurvivorCode").val(data.jointSurvivorCode);
 				$("#familyRelation").val(data.familyRelation);
 				$("#selectPlan").val(data.selectPlan);
-				$("#openingAmount").val(data.openingAmount);
+				$("#balance").val(data.balance);
 				$("#financialConsultantCode").val(data.financialConsultantCode);
 				$("#financialConsultantName").val(data.financialConsultantName);
 				$("#openingFees").val(data.openingFees);
+				$("#emailId").val(data.emailId);
+				$("#aadharNo").val(data.aadharNo);
 				$("#authenticateWith").val(data.authenticateWith);
 				$("#modeOfPayment").val(data.modeOfPayment);
 				$("#chequeNo").val(data.chequeNo);
@@ -540,71 +506,6 @@ function deleteData(id) {
 
 }
 
-/*function updateSavingAccountData() {
-	let payload = {
-		id: $("#id").val(),
-		openingDate: $("#openingDate").val(),
-		selectByCustomer: $("#selectByCustomer").val(),
-		enterCustomerName: $("#enterCustomerName").val(),
-		dateOfBirth: $("#dateOfBirth").val(),
-		familyDetails: $("#familyDetails").val(),
-		contactNumber: $("#contactNumber").val(),
-		suggestedNomineeName: $("#suggestedNomineeName").val(),
-		suggestedNomineeAge: $("#suggestedNomineeAge").val(),
-		suggestedNomineeRelation: $("#suggestedNomineeRelation").val(),
-		address: $("#address").val(),
-		district: $("#district").val(),
-		branchName: $("#branchName").val(),
-		state: $("#state").val(),
-		pinCode: $("#pinCode").val(),
-		operationType: $("#operationType").val(),
-		jointOperationCode: $("#jointOperationCode").val(),
-		jointSurvivorCode: $("#jointSurvivorCode").val(),
-		familyRelation: $("#familyRelation").val(),
-		selectPlan: $("#selectPlan").val(),
-		openingAmount: $("#openingAmount").val(),
-		financialConsultantCode: $("#financialConsultantCode").val(),
-		financialConsultantName: $("#financialConsultantName").val(),
-		openingFees: $("#openingFees").val(),
-		authenticateWith: $("#authenticateWith").val(),
-		modeOfPayment: $("#modeOfPayment").val(),
-		
-		chequeNo: $("#chequeNo").val(),
-		chequeDate: $("#chequeDate").val(),
-		depositAcc1: $("#depositAcc1").val(),
-		depositAcc2: $("#depositAcc2").val(),
-		refNumber1: $("#refNumber1").val(),
-		depositAcc3: $("#depositAcc3").val(),
-		refNumber2: $("#refNumber2").val(),
-		comment: $("#comment").val(),
-		
-
-		// Toggle/radio/checkbox values as 1 or 0
-		accountStatus: parseInt($("input[name='toggle-member-status']:checked").val()) || 0,
-		messageSend: parseInt($("input[name='toggle-member-status1']:checked").val()) || 0,
-		debitCardIssue: parseInt($("input[name='toggle-member-status2']:checked").val()) || 0
-
-	};
-
-	alert(payload.id);
-	$.ajax({
-		url: "/api/customersavings/saveandupdatesavingaccount",
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(payload),
-		success: function(response) {
-			if (response.status == "OK") {
-				alert(response.message);
-				location.reload();
-			} else {
-				alert("Operation failed: " + response.message);
-			}
-		},
-		error: function(xhr) {
-			alert("Update failed: " + xhr.responseText);
-		}
-	});
-}*/
 
 $(document).ready(function () {
 	let imageSrc = $('#photo').attr('src');
@@ -661,10 +562,12 @@ $(document).ready(function () {
 		formData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
 		formData.append("familyRelation", $('#familyRelation').val());
 		formData.append("selectPlan", $('#selectPlan').val());
-		formData.append("openingAmount", $('#openingAmount').val());
+		formData.append("balance", $('#balance').val());
 		formData.append("financialConsultantCode", $('#financialConsultantCode').val());
 		formData.append("financialConsultantName", $('#financialConsultantName').val());
 		formData.append("openingFees", $('#openingFees').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("aadharNo", $('#aadharNo').val());
 		formData.append("authenticateWith", $('#authenticateWith').val());
 		formData.append("modeOfPayment", $('#modeOfPayment').val());
 		formData.append("chequeNo", $('#chequeNo').val());

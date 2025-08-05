@@ -257,7 +257,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Amount</label> <input type="text"
-									name="openingAmount" id="openingAmount" required="required"
+									name="balance" id="balance" required="required"
 									placeholder="Enter opening Amount" />
 							</div>
 						</div>
@@ -285,6 +285,22 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Opening Fees (if any)</label> <input type="text"
 									name="openingFees" id="openingFees" required="required"
 									placeholder="Enter Opening Fees" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="emailId"> </label> <input type="hidden"
+									name="emailId" id="emailId" required="required"
+									placeholder="Enter contact Number" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="aadharNo"> </label> <input type="hidden"
+									name="aadharNo" id="aadharNo" required="required"
+									placeholder="Enter contact Number" />
 							</div>
 						</div>
 					</div>

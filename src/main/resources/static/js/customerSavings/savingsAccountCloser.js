@@ -41,7 +41,7 @@ $('#accountNumber').on('change', function () {
 					$('#contactNumber').val(customer.contactNumber);
 					$('#branchName').val(customer.branchName);
 					$('#openingDate').val(customer.openingDate);
-					$('#currentBalance').val(customer.openingAmount);
+					$('#currentBalance').val(customer.balance);
 					//photo
                     if (customer.photo) {
 						const imagePath = `Uploads/${customer.photo}`; // Construct full image path
@@ -73,4 +73,45 @@ $('#accountNumber').on('change', function () {
     } else {
         $('#customerCode').val('');
     }
+});
+
+//janvi : Save Acc Closer Data
+$('#saveAccountCloseBtn').click(function(event) {
+    event.preventDefault();
+
+    let updatedImageSrc = $('#photo').attr('src');
+    let updatedImageName = updatedImageSrc.split('/').pop(); 
+    
+    let updatedImageSrc1 = $('#signature').attr('src');
+    let updatedImageName1 = updatedImageSrc1.split('/').pop(); 
+
+    let data = {
+        accountNumber: $('#accountNumber').val(),
+        customerCode: $('#customerCode').val(),
+        customerName: $('#customerName').val(),
+        contactNumber: $('#contactNumber').val(),
+        branchName: $('#branchName').val(),
+        openingDate: $('#openingDate').val(),
+        currentBalance: $('#currentBalance').val(),
+        closingDate: $('#closingDate').val(),
+        payBy: $('#payBy').val(),
+        comments: $('#comments').val(),       
+        photo: updatedImageName,
+        signature: updatedImageName1
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: 'api/customersavings/saveAccountCloseInfo',
+        data: JSON.stringify(data),
+        contentType: 'application/json',
+        success: function(response) {
+            alert("Successfully closed Saving Account!");
+            location.reload();
+        },
+        error: function(xhr) {
+            console.error("Error: ", xhr.responseText);
+            alert('An error occurred. Please try again.');
+        }
+    });
 });
