@@ -6,7 +6,7 @@ $(document).ready(function() {
 	// 1. Load dropdown data on page load
 	alert("Welcome to  Generate Share Certificate");
 	$.ajax({
-		url: "/api/customershareholdingcontroller/getAllTransferShare",
+		url: "api/customershareholdingcontroller/getAllTransferShare",
 		type: "GET",
 		success: function(response) {
 			var dropdown = $('#referralCodeEntry');
@@ -41,7 +41,7 @@ $('#referralCodeEntry').on('change', function() {
 
 		$.ajax({
 			type: "POST",
-			url: "/api/customershareholdingcontroller/fetchByCertificateNo",
+			url: "api/customershareholdingcontroller/fetchByCertificateNo",
 			data: { findByCode: selectedCode },
 			success: function(response) {
 				if (response.status === "FOUND" && response.data) {
