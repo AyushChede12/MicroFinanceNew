@@ -66,7 +66,7 @@ public class PreferenceService {
 
 	@Autowired
 	Staterepo stateRepo;
-	
+
 	@Autowired
 	CodeModuleRepo codeModuleRepo;
 
@@ -477,23 +477,26 @@ public class PreferenceService {
 		return stateRepo.findAll();
 	}
 
-	public CodeModule saveOrUpdate(CodeModule module) {
+	public CodeModule saveOrUpdateCodeModule(CodeModule module) {
 		CodeModule entity;
 
+		// If ID is present and exists, fetch for update
 		if (module.getId() != null && codeModuleRepo.existsById(module.getId())) {
 			entity = codeModuleRepo.findById(module.getId()).get();
+		} else {
+			// Otherwise, create a new instance
+			entity = new CodeModule();
 		}
 
 		entity.setName(module.getName());
-		entity.setBranchPrefix(module.getBranchPrefix() != null ? module.getBranchPrefix() : false);
+		entity.setBranchPrefix(module.isBranchPrefix());
 		entity.setCodePrefix(module.getCodePrefix());
-		entity.setNumberOfDigits(module.getNumberOfDigits());
-		entity.setLastNumber(module.getLastNumber());
+		entity.setNoOfDigit(module.getNoOfDigit());
+		entity.setLastNo(module.getLastNo());
 
-		// Generate Preview Code
-		String preview = generatePreviewCode(module.getCodePrefix(), module.getNumberOfDigits(),
-				module.getLastNumber());
-		entity.setPreviewCode(preview);
+		// Generate Preview Code like "EMP00012"
+		String preview = generatePreviewCode(module.getCodePrefix(), module.getNoOfDigit(), module.getLastNo());
+		entity.setPreview(preview);
 
 		return codeModuleRepo.save(entity);
 	}
