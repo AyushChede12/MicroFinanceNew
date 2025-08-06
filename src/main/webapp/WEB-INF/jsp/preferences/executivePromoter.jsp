@@ -395,7 +395,8 @@ pageEncoding="ISO-8859-1"%> -->
 							Executive Founder Data <span>| Table View</span>
 						</h5>
 
-						<table class="table table-borderless datatable overflow-scroll" id="tableBody">
+						<table class="table table-borderless datatable overflow-scroll"
+							id="tableBody">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">Sr No</th>
@@ -413,10 +414,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 							</tbody>
 						</table>
-						<div
-							class="d-flex justify-content-between align-items-center mt-3">
-							<button id="prevBtn" class="btn btn-primary"><i class="bi bi-arrow-left-circle-fill"></i></button>
-							<button id="nextBtn" class="btn btn-primary"><i class="bi bi-arrow-right-circle-fill"></i></button>
+						<div class="mt-2 text-center">
+							<button id="prevBtn" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-left"></i>
+							</button>
+							<span id="pageInfo" class="mx-2"></span>
+							<button id="nextBtn" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-right"></i>
+							</button>
 						</div>
 					</div>
 				</div>

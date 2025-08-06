@@ -29,6 +29,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -54,11 +55,11 @@ pageEncoding="ISO-8859-1"%> -->
 		<div class="row">
 		<div class="col-lg-3">
 			<div class="d-flex flex-column formFields mb-4">
-				<label for="">Select Loan Id & Name</label> <select id="loanID"
+				<label for="">Select Loan Id </label> <select id="loanID"
 					name="loanID" required="required" class="form-control selectField"
 					style="height: 30px;">
-					<option value="">Select Colour</option>
-					<option value="Blue">Blue</option>
+					<option value="">Select Loan Id</option>
+					
 				</select>
 			</div>
 		</div>
@@ -73,16 +74,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Find Loan Id & Name</label> <select
-									id="loanIdname" name="loanIdname" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Colour</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -339,19 +330,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-				</div>
+		</div>
 
 				<div class="row mt-4">
 					<div class="col-12 text-center">
@@ -370,6 +349,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/LoanManagment/RegularInsatllmentPayment.js"></script>
+	
 </body>
 
 </html>
