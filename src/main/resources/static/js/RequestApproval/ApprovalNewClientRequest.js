@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 function loadCustomerKYCData() {
 	$.ajax({
-		url: "/api/requestapproval/unapproved",
+		url: "api/requestapproval/unapproved",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -131,7 +131,7 @@ $(document).ready(function() {
 			const isApproved = 1; // because you're only approving selected ones
 
 			$.ajax({
-				url: `/api/requestapproval/approvedCustomerData?id=${id}&isApproved=${isApproved}`,
+				url: `api/requestapproval/approvedCustomerData?id=${id}&isApproved=${isApproved}`,
 				type: 'POST',
 				success: function(response) {
 					if (response.status === "OK") {

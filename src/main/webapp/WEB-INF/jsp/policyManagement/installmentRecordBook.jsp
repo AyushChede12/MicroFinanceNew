@@ -37,216 +37,186 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
-
 	<main id="main" class="main">
 		<div class="pagetitle">
 			<h1>Policy Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-piggy-bank"></i>
-					</a></li>
-					<li class="breadcrumb-item action">Installment Record Book</li>
+					<li class="breadcrumb-item"><a href="home"><i
+							class="bi bi-piggy-bank"></i></a></li>
+					<li class="breadcrumb-item active">Installment Record Book</li>
 				</ol>
 			</nav>
 		</div>
 
-		<div>
-			<form id="formid">
-				<div>
-					<nav>
-						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Print Search Results</li>
-						</ol>
-					</nav>
-					<div class="row">
-						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
+		<!-- Main Form -->
+		<form id="formid">
+			<div>
+				<nav>
+					<ol class="breadcrumb breadcrumb-title">
+						<li class="breadcrumb-item active">Print Search Results</li>
+					</ol>
+				</nav>
+
+				<!-- Combined Row with Dropdown and Buttons -->
+				<div class="row align-items-center mb-4">
+					<!-- Dropdown -->
+					<div class="col-md-6 d-flex align-items-center">
+						<label class="mr-2 mb-0">Find by Policy Number*</label> <select
+							id="findByPolicyNumber" name="findByPolicyNumber"
+							class="form-control w-50">
+							<option value="">Select Branch Name</option>
+						</select>
+					</div>
+
+					<!-- Buttons -->
+					<!-- <div class="col-md-6 text-right"> -->
+					<div class="col-md-6 d-flex justify-content-center">
 
 						
+						<button type="button" class="btn btn-dark mr-2" onclick="toggleTransaction()">Transaction</button>
+						
+						<button type="button" class="btn btn-dark"
+							onclick="printTransactionSection()">
+							<i class="bi bi-download"></i>
+						</button>
 
-						<div class="col-lg-12 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Find by Policy Number*</label> <select
-									id="findByPolicyNumber" name="findByPolicyNumber" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch Name</option>
-									
-								</select>
-							</div>
-						</div>
-
-
-
-
-
-						</div>
-
-						<div class="row" style="margin-top: 20px; margin-left: 450px;">
-							<div class="col-12 text-center">
-								<button id="saveBtn" class="btn btn-dark">Find</button>
-								<button id="saveBtn" class="btn btn-dark"
-									>Front
-									Page</button>
-								<button id="saveBtn" class="btn btn-dark">Transaction</button>
-								<button id="saveBtn" class="btn btn-dark">Heading</button>
-							</div>
-						</div>
-
-
-
-
-
-
-
-					</div>
-
-
-					<div class="mt-5">
-
-						<div class="row">
-
-
-							<div class="col-12">
-								<div class="card recent-sales">
-
-									<div class="card-body table-responsive">
-										<h5 class="card-title">
-											Recent Sales <span>| Today</span>
-										</h5>
-
-										<table
-											class="table table-borderless datatable overflow-scroll">
-											<thead class="table-light">
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="col">#</th>
-													<th scope="col">Customer</th>
-													<th scope="col">Product</th>
-													<th scope="col">Price</th>
-													<th scope="col">Status</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="row"><a href="#">1</a></th>
-													<td>Arun Kumar</td>
-													<td><a href="#" className="text-primary">Milk</a></td>
-													<td>$29</td>
-													<td><span class="badge bg-success text-white">Approved</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-
-						</div>
 					</div>
 				</div>
+			</div>
+		</form>
+
+		<!-- Transaction Section (Initially Hidden) -->
+		<div id="transactionSection" class="transaction-section"
+			style="display: none;">
+			<div style="width: 70%; margin: auto">
+				<h1>Microfinance Services</h1>
+				<p>Address : Nagpur(440024) - Maharashtra</p>
+				<hr />
+				<div class="d-flex justify-content-between">
+					<p>
+						Branch and Code: <span id="branchCodeSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						DOC: <span id="docSpan"
+							style="width: 15vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<div class="d-flex justify-content-between">
+					<p>
+						Policy No.: <span id="policyNoSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Member Code: <span id="memberCodeSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+				</div>
+				<p>
+					Applicant Name: <span id="applicantNameSpan"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
+				<p>
+					Father/Husband Name: <span id="fatherNameSpan"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
+				<p>
+					Nominee Name: <span id="nomineeNameSpan"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
+				<p>
+					Address: <span id="addressSpan"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
+
+				<div class="d-flex justify-content-between">
+					<p>
+						Scheme: <span id="schemeSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Plan: <span id="planSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Relationship: <span id="relationshipSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<p>
+						ROI: <span id="roiSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Mode: <span id="modeSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Maturity: <span id="maturitySpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<p>
+						Renewal Amount: <span id="renewalAmountSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Total Value: <span id="totalValueSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Term: <span id="termSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+				</div>
+
+				<div class="d-flex justify-content-between">
+					<p>
+						Maturity Date: <span id="maturityDateSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+					<p>
+						Mobile No: <span id="mobileSpan"
+							style="width: 12vw; display: inline-block;"></span>
+					</p>
+				</div>
+
+				<p>
+					Collector Name: <span id="collectorSpan"
+						style="width: 12vw; display: inline-block;"></span>
+				</p>
 
 
-			</form>
 
-
-
+				<div class="d-flex justify-content-end">
+					<hr style="border-color: black; width: 20vw;">
+					<p style="position: relative; top: 23px; right: 17rem">Authorized
+						Signature</p>
+				</div>
+			</div>
 		</div>
 
-
 	</main>
-	<!-- <script src="js/chartScript.js"></script> -->
-	<script src="./js/adminscript.js"></script>
-</body>
 
+	<!-- Toggle Script -->
+
+
+	<script>
+		function onFrontPageClick() {
+			const selectedPolicyCode = $("#policyCodeDropdown").val();
+			fetchPolicyData(selectedPolicyCode);
+		}
+	</script>
+
+
+	<!-- External Scripts -->
+	<script src="./js/adminscript.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="./js/PolicyManagment/policyReport.js"></script>
+</body>
 </html>

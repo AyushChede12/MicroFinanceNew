@@ -18,14 +18,18 @@ public class ApplyForGroupLoan {
     private String openingDate;
     private String selectedMember;
     private String customerName;
-    
+   
     private String communityName;
     private String allocatedStaff;
     private String branchName;
     private String collectionDays;
+    private String communityAddress;
     private String communityLeader;
     private String contactNumber;
+    private String minLoanAmt;
     private String loanPurpose;
+    private String maximumLoanAmount;
+    
 
     // Financial Deductions
     private String planCode;
@@ -35,14 +39,21 @@ public class ApplyForGroupLoan {
     private String insuranceFee;
     private String valuationFee;
     private String lateAllowanceDays;
+    private String loanSchemeInformation;
     private String penaltyMode;
     private String monthlyPenalty;
     private String emiFrequency;
     private String rateOfInterest;
     private String interestType;
     private String emiType;
-    private String approvalStatus;
+    private String term;
     private String totalAmount;
+
+    
+    private String approvalStatus;
+    private String approvalDate;
+    private String loanSchemeName;
+    
 	public Long getId() {
 		return id;
 	}
@@ -60,6 +71,18 @@ public class ApplyForGroupLoan {
 	}
 	public void setOpeningDate(String openingDate) {
 		this.openingDate = openingDate;
+	}
+	public String getSelectedMember() {
+		return selectedMember;
+	}
+	public void setSelectedMember(String selectedMember) {
+		this.selectedMember = selectedMember;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 	public String getCommunityName() {
 		return communityName;
@@ -181,23 +204,11 @@ public class ApplyForGroupLoan {
 	public void setEmiType(String emiType) {
 		this.emiType = emiType;
 	}
-	public String getSelectedMember() {
-		return selectedMember;
+	public String getTerm() {
+		return term;
 	}
-	public void setSelectedMember(String selectedMember) {
-		this.selectedMember = selectedMember;
-	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-	public String getApprovalStatus() {
-		return approvalStatus;
-	}
-	public void setApprovalStatus(String approvalStatus) {
-		this.approvalStatus = approvalStatus;
+	public void setTerm(String term) {
+		this.term = term;
 	}
 	public String getTotalAmount() {
 		return totalAmount;
@@ -205,7 +216,52 @@ public class ApplyForGroupLoan {
 	public void setTotalAmount(String totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	public String getApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(String approvalStatus) {
+		this.approvalStatus = approvalStatus;
+	}
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+	public String getLoanSchemeName() {
+		return loanSchemeName;
+	}
+	public void setLoanSchemeName(String loanSchemeName) {
+		this.loanSchemeName = loanSchemeName;
+	}
+
+	public String getCommunityAddress() {
+		return communityAddress;
+	}
+	public void setCommunityAddress(String communityAddress) {
+		this.communityAddress = communityAddress;
+	}
+	public String getLoanSchemeInformation() {
+		return loanSchemeInformation;
+	}
+	public void setLoanSchemeInformation(String loanSchemeInformation) {
+		this.loanSchemeInformation = loanSchemeInformation;
+	}
+	public String getMinLoanAmt() {
+		return minLoanAmt;
+	}
+	public void setMinLoanAmt(String minLoanAmt) {
+		this.minLoanAmt = minLoanAmt;
+	}
+	public String getMaximumLoanAmount() {
+		return maximumLoanAmount;
+	}
+	public void setMaximumLoanAmount(String maximumLoanAmount) {
+		this.maximumLoanAmount = maximumLoanAmount;
+	}
 	
     
+
+	
 
 }

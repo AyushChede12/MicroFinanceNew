@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	
+
 	//Dropdown without search
 	/*$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -18,11 +18,11 @@ $(document).ready(function() {
 			alert("Failed to load Financial codes.");
 		}
 	});*/
-	
+
 	//Dropdowns with search
 	$.ajax({
-		url: '/api/financialconsultant/getAllFinancialConsultantDetails',
-		type: 'POST',
+		url: 'api/reports/getApprovedFinancialConsultant',
+		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {
 				let financialOptions = response.data.map(function(item) {
@@ -68,7 +68,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
 		type: "POST",
 		success: function(response) {
 			if (response.status === "OK") {
@@ -86,7 +86,7 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "/api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllRelativeModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -113,7 +113,7 @@ $(document).ready(function() {
 		let financialCode = $("#financialCode").val();
 		$.ajax({
 			type: "GET",
-			url: "/api/financialconsultant/getfinancialHierarchyByFinancialCode",
+			url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
 			data: { financialCode: financialCode },
 			success: function(response) {
 				if (response.status == "OK") {
@@ -134,17 +134,25 @@ $(document).ready(function() {
 
 					// Image bindings (photo and signature)
 					if (data.financialPhoto) {
-						$('#financialPhotoPreview').attr('src', '/Uploads/' + data.financialPhoto);
-						$('#financialphotoHidden').val(data.financialPhoto); // Store file name for fallback
+						const photoPath = `Uploads/${data.financialPhoto}`;
+						$("#financialPhotoPreview").attr("src", photoPath);
+						$("#financialphotoHidden").val(photoPath);
+						const fakePhotoEvent = { target: { result: photoPath } };
+						photoSizeEdit(fakePhotoEvent);
 					} else {
-						$('#financialPhotoPreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#financialPhotoPreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#financialphotoHidden").val("");
 					}
 
 					if (data.finnacialSignature) {
-						$('#financialSignaturePreview').attr('src', '/Uploads/' + data.finnacialSignature);
-						$('#financialsignatureHidden').val(data.finnacialSignature); // Store file name for fallback
+						const signPath = `Uploads/${data.finnacialSignature}`;
+						$("#financialSignaturePreview").attr("src", signPath);
+						$("#financialsignatureHidden").val(signPath);
+						const fakeSignEvent = { target: { result: signPath } };
+						signatureSizeEdit(fakeSignEvent);
 					} else {
-						$('#financialSignaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+						$("#financialSignaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+						$("#financialsignatureHidden").val("");
 					}
 
 
@@ -186,11 +194,17 @@ $(document).ready(function() {
 	$('#updateBtn').click(function(e) {
 		e.preventDefault();
 
+		const financialCode = $('#financialCode').val();
+		if (!financialCode) {
+			alert("First select the data, then proceed to update.");
+			return;
+		}
+
 		let financialData = new FormData();
 
-		// Append regular text fields
+		// Append all form fields
 		financialData.append("id", $('#id').val());
-		financialData.append("financialCode", $('#financialCode').val());
+		financialData.append("financialCode", financialCode);
 		financialData.append("joiningDate", $('#joiningDate').val());
 		financialData.append("financialName", $('#financialName').val());
 		financialData.append("dob", $('#dob').val());
@@ -209,27 +223,26 @@ $(document).ready(function() {
 		financialData.append("fees", $('#fees').val());
 		financialData.append("modeofPayment", $('#modeofPayment').val());
 		financialData.append("comments", $('#comments').val());
-		financialData.append("financialStatus", $('#financialStatus').is(':checked') ? 1 : 0);
-		financialData.append("smsSend", $('#smsSend').is(':checked') ? 1 : 0);
 
-		// Append image paths or Base64 values
-		//var photo = $('#customerPhoto')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (photo) financialData.append("customerPhoto", photo);
-		//var signature = $('#customerSignature')[0].files[0]; // Match 'photoWithAadhar' with backend
-		//if (signature) financialData.append("customerPhoto", signature);
+		// Checkbox/toggle fields
+		financialData.append("financialStatus", $('#toggle-financial-status').is(':checked') ? 1 : 0);
+		financialData.append("smsSend", $('#toggle-sms-send').is(':checked') ? 1 : 0);
 
-		/*financialData.append("customerPhoto", $('#financialphotoHidden').val());
-		financialData.append("customerSignature", $('#financialsignatureHidden').val());*/
+		// File inputs
+		const photoFile = $('#financialPhoto')[0]?.files[0];
+		const signatureFile = $('#finnacialSignature')[0]?.files[0];
 
-		let photoValue = $('#financialphotoHidden').val();
-		financialData.append("customerPhoto", photoValue || ""); // Always send string path
+		if (photoFile) {
+			financialData.append("financialPhoto", photoFile);
+		}
 
-		let signatureValue = $('#financialsignatureHidden').val();
-		financialData.append("customerSignature", signatureValue || "");
+		if (signatureFile) {
+			financialData.append("finnacialSignature", signatureFile);
+		}
 
-
+		// AJAX call
 		$.ajax({
-			url: "/api/financialconsultant/saveOrUpdateFinancialConsultant",
+			url: "api/financialconsultant/saveOrUpdateFinancialConsultant",
 			type: "POST",
 			data: financialData,
 			enctype: 'multipart/form-data',
@@ -237,19 +250,20 @@ $(document).ready(function() {
 			processData: false,
 			cache: false,
 			success: function(response) {
-				if (response.status === "OK") {
-					alert("Updated Successfully");
+				if (response.status === "OK" || response.status === "success") {
+					alert("Financial data updated successfully.");
 					location.reload();
-					// Optionally refresh the table or UI
 				} else {
 					alert("Something went wrong: " + response.message);
 				}
 			},
 			error: function(xhr) {
-				alert("Error while saving data: " + xhr.responseText);
+				const message = xhr.responseJSON?.message || xhr.responseText || "Unknown error";
+				alert("Error while saving data: " + message);
 			}
 		});
 	});
+
 
 
 
@@ -377,24 +391,30 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Financial Data?")) {
-			$.ajax({
-				url: "/api/financialconsultant/deleteFinancialConsultantById",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Financial Data Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let financialCode = $("#financialCode").val();
+		if (financialCode !== "") {
+			if (confirm("Are you sure you want to delete this Financial Data?")) {
+				$.ajax({
+					url: "api/financialconsultant/deleteFinancialConsultantById",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Financial Data Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Financial Data.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Financial Share Data.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
+		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
 		}
 
 	});
@@ -414,18 +434,12 @@ function updateToggleColor(input) {
 }
 
 function photoUpload() {
-	const file = document.getElementById("customerPhoto").files[0];
+	const file = document.getElementById("financialPhoto").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("financialPhotoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("financialPhotoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			photoSizeEdit(e);
+			$("#financialphotoHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -436,18 +450,12 @@ function photoUpload() {
 
 //Ayush
 function signatureUpload() {
-	const file = document.getElementById("customerSignature").files[0];
+	const file = document.getElementById("finnacialSignature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			document.getElementById("financialSignaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("financialSignaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
+			signatureSizeEdit(e);
+			$("#financialsignatureHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
@@ -476,3 +484,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("financialPhotoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("financialSignaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}

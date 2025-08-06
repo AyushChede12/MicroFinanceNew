@@ -2,6 +2,7 @@ package com.microfinance.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,10 +17,12 @@ import com.microfinance.dto.GroupDirectoryDto;
 import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.InstallmentRepayment;
 import com.microfinance.model.LoanAprroval;
 import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
+import com.microfinance.repository.InstallmentRepymentRepo;
 import com.microfinance.repository.LoanApprovalRepo;
 
 @Service
@@ -35,6 +38,9 @@ public class JointLiabilityLoanService {
 	
 	@Autowired
 	LoanApprovalRepo loanApprovalRepo;
+	
+	@Autowired
+	InstallmentRepymentRepo installmentRepymentRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -66,8 +72,9 @@ public class JointLiabilityLoanService {
 			existing.setPlanCode(updatedGroup.getPlanCode());
 			existing.setLoanSchemeInformation(updatedGroup.getLoanSchemeInformation());
 			existing.setMinimumAge(updatedGroup.getMinimumAge());
-			existing.setMaxLoanDurationMonths(updatedGroup.getMaxLoanDurationMonths());
-			existing.setMinLoanDurationMonths(updatedGroup.getMinLoanDurationMonths());
+
+
+			existing.setTerm(updatedGroup.getTerm());
 			existing.setBranchName(updatedGroup.getBranchName());
 			existing.setMaximumAge(updatedGroup.getMaximumAge());
 			existing.setMinLoanAmt(updatedGroup.getMinLoanAmt());
@@ -278,8 +285,45 @@ public class JointLiabilityLoanService {
 		}
 	}
 
+
+	public ApplyForGroupLoan updateApprovalStatusApplyGroupLoan(String groupCode, String approvalStatus) {
+		 ApplyForGroupLoan existingLoan = applyForGroupLoanRepo.findSingleByGroupCode(groupCode);
+
+	        if (existingLoan != null) {
+	            existingLoan.setApprovalStatus(approvalStatus);
+	            return applyForGroupLoanRepo.save(existingLoan); // ✅ update होईल
+	        } else {
+	            return null; // group नाही सापडला
+	        }
+	    }
+
+	    // ✅ Fetch Method (list)
+	    public List<ApplyForGroupLoan> fetchApplyGroupLoanByGroupcode(String groupCode) {
+	        return applyForGroupLoanRepo.findByGroupCode(groupCode);
+	    }
+
+	public List<ApplyForGroupLoan> fetchBygroupCode(String groupCode) {
+		// TODO Auto-generated method stub
+		 return applyForGroupLoanRepo.findByGroupCode(groupCode);
+
+	}
+
+
+	public boolean saveRepayment(InstallmentRepayment repayment) {
+		 try {
+			 installmentRepymentRepo.save(repayment);
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+	}
+
+	public List<InstallmentRepayment> getAllRepayments() {
+		return installmentRepymentRepo.findAll();
+	}
+
 	
-	
+}
 	
 
-}
+

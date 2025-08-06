@@ -68,13 +68,14 @@ pageEncoding="ISO-8859-1"%> -->
 								placeholder="Enter Plan id" style="text-transform: uppercase;" />
 						</div>
 
-						
-				<div class="col-lg-3" style="display: none;">
-					<div class="d-flex flex-column formFields">
-						<label>Plan ID*</label> <input type="hidden" id="planCode" name="planCode" value="${memberCodePI}"
-							class="form-control" required />
-					</div>
-				</div>
+
+						<div class="col-lg-3" style="display: none;">
+							<div class="d-flex flex-column formFields">
+								<label>Plan ID*</label> <input type="hidden" id="planCode"
+									name="planCode" value="${memberCodePI}" class="form-control"
+									required />
+							</div>
+						</div>
 
 
 						<div class="row">
@@ -94,15 +95,22 @@ pageEncoding="ISO-8859-1"%> -->
 										placeholder="Enter Minimum Age" />
 								</div>
 							</div>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mb-4">
+									<label for="maximumAge"> Maximum Age* </label> <input
+										type="text" name="maximumAge" id="maximumAge" required
+										placeholder="Enter Maximum Age" />
+								</div>
+							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
-									<label for="minLoanDurationMonths">Min. Loan
-										Duration(months)* </label> <input type="text"
-										name="minLoanDurationMonths" id="minLoanDurationMonths"
-										required placeholder="Enter Duration" />
+									<label for="minLoanDurationMonths">Term * </label> <input
+										type="text" name="term"
+										id="term" required placeholder="Enter Term" />
 								</div>
 							</div>
+							
 
 							<div class="col-lg-3 ">
 								<div class="d-flex flex-column formFields">
@@ -114,22 +122,8 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mb-4">
-									<label for="maximumAge"> Maximum Age* </label> <input
-										type="text" name="maximumAge" id="maximumAge" required
-										placeholder="Enter Maximum Age" />
-								</div>
-							</div>
+							
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mb-4">
-									<label for="maxLoanDurationMonths"> Max.Loan
-										Duration(months)* </label> <input type="text"
-										name="maxLoanDurationMonths" id="maxLoanDurationMonths"
-										required placeholder="Enter Duration" />
-								</div>
-							</div>
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
@@ -141,12 +135,19 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
-									<label for="minLoanAmount"> Min Loan Amt* </label> <input
+									<label for="minLoanAmount"> Minimum Loan Amount* </label> <input
 										type="text" name="minLoanAmt" id="minLoanAmt" required
 										placeholder="Enter Amount" />
 								</div>
 							</div>
-
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mb-4">
+									<label for="maximumLoanAmount"> Maximum Loan Amount* </label> <input
+										type="text" name="maximumLoanAmount" id="maximumLoanAmount"
+										required placeholder="Enter Max Loan" />
+								</div>
+							</div>
+							
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
 									<label for="rateOfInterest"> Rate of Interest (% p.a.)*
@@ -157,19 +158,19 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
-									<label for="interestType">Interest Type*</label> <input
-										type="text" name="interestType" id="interestType" required
-										placeholder="Enter Interest Type" />
+									<label for="interestType">Interest Type*</label> <select
+										name="interestType" id="interestType" required class="form-control selectField" style="height: 30px;">
+										
+										<option value="">-- Select Interest Type --</option>
+										<option value="flatInterest">Flat Interest</option>
+										<option value="reducingInterest">Reducing Interest</option>
+										<option value="Rule78">Rule 78</option>
+										
+									</select>
 								</div>
 							</div>
 
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mb-4">
-									<label for="maximumLoanAmount"> Maximum Loan Amount* </label> <input
-										type="text" name="maximumLoanAmount" id="maximumLoanAmount"
-										required placeholder="Enter Max Loan" />
-								</div>
-							</div>
+							
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
@@ -181,9 +182,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="emiType">EMI Type*</label> <input type="text"
-										name="emiType" id="emiType" required
-										placeholder="Enter EMI Type" />
+									<label for="emiType">EMI mode*</label><select name="emiType"
+										id="emiType" required class="form-control selectField" style="height: 30px;">
+										<option value="">-- Select EMI Mode --</option>
+										<option value="daily">Daily</option>
+										<option value="weekly">Weekly</option>
+										<option value="monthly">Monthly</option>
+										<option value="fortnightly">Fortnightly</option>
+										<option value="quarterly">Quarterly</option>
+									</select>
+
 								</div>
 							</div>
 
@@ -358,7 +366,6 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 	</main>
-	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/CreateLendingGroup.js"></script>
 </body>

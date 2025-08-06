@@ -1,8 +1,8 @@
 $(document).ready(function() {
-	
+
 	//Dropdown without search
 	/*$.ajax({
-		url: "/api/datacorrection/fetchAllSavingAccountActivity",
+		url: "api/datacorrection/fetchAllSavingAccountActivity",
 		type: "GET",
 		success: function(response) {
 			if (response.status === "FOUND") {
@@ -18,57 +18,57 @@ $(document).ready(function() {
 			alert("Failed to load Account Numbers.");
 		}
 	});*/
-	
+
 	//Dropdown without search
 	$.ajax({
-			url: '/api/datacorrection/fetchAllSavingAccountActivity',
-			type: 'GET',
-			success: function(response) {
-				if (response.status === "FOUND") {
-					let savingOptions = response.data.map(function(item) {
-						return {
-							id: item.accountNumber,
-							text: item.accountNumber
-						};
-					});
+		url: 'api/datacorrection/fetchAllSavingAccountActivity',
+		type: 'GET',
+		success: function(response) {
+			if (response.status === "FOUND") {
+				let savingOptions = response.data.map(function(item) {
+					return {
+						id: item.accountNumber,
+						text: item.accountNumber
+					};
+				});
 
-					// Initialize Select2 with full data and custom search matcher
-					$('#accountNumber').select2({
-						placeholder: '-- Search Account Number',
-						data: savingOptions,
-						matcher: function(params, data) {
-							// If no search term, return all
-							if ($.trim(params.term) === '') {
-								return data;
-							}
+				// Initialize Select2 with full data and custom search matcher
+				$('#accountNumber').select2({
+					placeholder: '-- Search Account Number',
+					data: savingOptions,
+					matcher: function(params, data) {
+						// If no search term, return all
+						if ($.trim(params.term) === '') {
+							return data;
+						}
 
-							if (typeof data.text === 'undefined') {
-								return null;
-							}
-
-							// Case-insensitive match on memberCode or customerName
-							const term = params.term.toLowerCase();
-							const text = data.text.toLowerCase();
-
-							if (text.includes(term)) {
-								return data;
-							}
-
+						if (typeof data.text === 'undefined') {
 							return null;
 						}
-					});
 
-				} else {
-					alert("No Account Number found.");
-				}
-			},
-			error: function() {
-				alert("Failed to load Account Number.");
+						// Case-insensitive match on memberCode or customerName
+						const term = params.term.toLowerCase();
+						const text = data.text.toLowerCase();
+
+						if (text.includes(term)) {
+							return data;
+						}
+
+						return null;
+					}
+				});
+
+			} else {
+				alert("No Account Number found.");
 			}
-		});
+		},
+		error: function() {
+			alert("Failed to load Account Number.");
+		}
+	});
 
 	$.ajax({
-		url: "/api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
+		url: "api/preference/getAllBranchModule", // Add base path if needed like /api/preference/getAllBranchModule
 		type: "GET",
 		success: function(response) {
 			if (response.status == "FOUND") {
@@ -132,25 +132,32 @@ $(document).ready(function() {
 
 	$('#deleteBtn').click(function(event) {
 		var id = $("#id").val();
-		if (confirm("Are you sure you want to delete this Customer Data?")) {
-			$.ajax({
-				url: "/api/datacorrection/deleteSavingTransactionRemoval",
-				type: "POST",
-				data: { id: id },
-				success: function(response) {
-					if (response.status == "OK") {
-						alert("Saving Transaction Deleted Successfully");
-						location.reload();
-					} else {
-						alert("Delete failed: " + response.message);
+		let accountNumber = $("#accountNumber").val();
+		if (accountNumber !== "") {
+			if (confirm("Are you sure you want to delete this Saving Transaction?")) {
+				$.ajax({
+					url: "api/datacorrection/deleteSavingTransactionRemoval",
+					type: "POST",
+					data: { id: id },
+					success: function(response) {
+						if (response.status == "OK") {
+							alert("Saving Transaction Deleted Successfully");
+							location.reload();
+						} else {
+							alert("Delete failed: " + response.message);
+						}
+					},
+					error: function(xhr, status, error) {
+						alert("Failed to delete Saving Transaction.");
+						console.error("Error:", error);
 					}
-				},
-				error: function(xhr, status, error) {
-					alert("Failed to delete Customer.");
-					console.error("Error:", error);
-				}
-			});
+				});
+			}
 		}
+		else {
+			alert("First Select Any One Data Then Proceed To Delete!");
+		}
+
 
 	});
 

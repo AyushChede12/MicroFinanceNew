@@ -92,17 +92,18 @@ pageEncoding="ISO-8859-1"%> -->
 								type="hidden" id="financialCode" name="financialCode"
 								value="${financialCode }"> --%>
 							<div class="d-flex flex-column formFields">
-								<label for="joiningDate">Joining Date<span id="star">*</span></label>
+								<label for="joiningDate">Joining Date<span class="star">*</span></label>
 								<input type="date" name="joiningDate" id="joiningDate" required
 									placeholder="Enter Joining Date"
 									style="text-transform: uppercase;" />
+									<small
+									id="chkjoiningDate" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="selectCustomer">Financial Code<span
-									id="star">*</span></label> <input type="text" id="financialCode" name="financialCode"
+								<label for="selectCustomer">Financial Code</label> <input type="text" id="financialCode" name="financialCode"
 									required="required" class="form-control selectField" value="${financialCode }"
 									style="height: 30px;" readonly="readonly">
 							</div>
@@ -116,15 +117,19 @@ pageEncoding="ISO-8859-1"%> -->
 								<input type="text" name="financialName" id="financialName"
 									required="required" placeholder="Enter Financial Name"
 									style="text-transform: uppercase;" />
+									<small
+									id="chkfinancialName" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="dob">Date of Birth <span id="star">*</span></label>
+								<label for="dob">Date of Birth <span class="star">*</span></label>
 								<input type="date" name="dob" id="dob" required="required"
 									placeholder="Enter Date Of Birth"
 									style="text-transform: uppercase;" />
+									<small
+									id="chkdob" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -132,9 +137,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Age <span id="star">*</span></label> <input type="text"
+								<label>Age <span class="star">*</span></label> <input type="text"
 									name="age" id="age" required="required"
 									placeholder="Enter Age" style="text-transform: uppercase;" />
+									<small
+									id="chkage" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -164,9 +171,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label for="contactNo">Contact No <span id="star">*</span></label>
+								<label for="contactNo">Contact No <span class="star">*</span></label>
 								<input type="text" name="contactNo" id="contactNo"
 									required="required" placeholder="Enter Contact No" />
+									<small
+									id="chkcontactNo" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -192,11 +201,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name <span id="star">*</span></label> <select
+								<label>Branch Name <span class="star">*</span></label> <select
 									id="branchName" name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 
 								</select>
+								<small
+									id="chkbranchName" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -211,33 +222,41 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Address <span id="star">*</span></label>
+								<label>Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+							<small
+									id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="district">District <span id="star">*</span></label>
+								<label for="district">District <span class="star">*</span></label>
 								<input type="text" name="district" id="district"
 									required="required" placeholder="Enter District" />
+									<small
+									id="chkdistict" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="state">State <span id="star">*</span></label> <input
+								<label for="state">State <span class="star">*</span></label> <input
 									type="text" name="state" id="state" required="required"
 									placeholder="Enter State" />
+									<small
+									id="chkstate" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="pinCode">Pin Code <span id="star">*</span></label> <input
+								<label for="pinCode">Pin Code <span class="star">*</span></label> <input
 									type="text" name="pinCode" id="pinCode" required="required"
 									placeholder="Enter Pincode" />
+									<small
+									id="chkpinCode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -246,18 +265,22 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Profession <span id="star">*</span></label> <input
+								<label>Profession <span class="star">*</span></label> <input
 									type="text" name="profession" id="profession"
 									required="required" placeholder="Enter Profession" />
+									<small
+									id="chkprofession" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="academicBackground">Academic Background <span
-									id="star">*</span></label> <input type="text" name="academicBackground"
+									class="star">*</span></label> <input type="text" name="academicBackground"
 									id="academicBackground" required="required"
 									placeholder="Enter Academic Background" />
+									<small
+									id="chkacademicBackground" style="color: red;"></small>
 							</div>
 						</div>
 					</div>
@@ -322,30 +345,36 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Select Position <span id="star">*</span></label> <input
+								<label>Select Position <span class="star">*</span></label> <input
 									type="text" name="selectPosition" id="selectPosition"
 									required="required" placeholder="Enter Position"
 									style="text-transform: uppercase;" />
+									<small
+									id="chkposition" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="referenceCode">Reference Code <span
-									id="star">*</span></label> <input type="text" name="referralCode"
+									class="star">*</span></label> <input type="text" name="referralCode"
 									id="referralCode" required="required"
 									placeholder="Enter Reference Code"
 									style="text-transform: uppercase;" />
+									<small
+									id="chkreferralCode" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Reference Name <span id="star">*</span></label> <input
+								<label>Reference Name <span class="star">*</span></label> <input
 									type="text" name="referralName" id="referralName"
 									required="required" placeholder="Enter Reference Name"
 									style="text-transform: uppercase;" />
+									<small
+									id="chkrefferalName" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -369,7 +398,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Fees(If Any) <span id="star">*</span></label> <input
+									<label>Fees(If Any)</label> <input
 										type="text" name="fees" id="fees" required="required"
 										placeholder="Enter Fees" style="text-transform: uppercase;" />
 								</div>
@@ -378,7 +407,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="referenceCode">Mode of Payment <span
-										id="star">*</span></label> <select onchange="displayDetails()"
+										class="star">*</span></label> <select onchange="displayDetails()"
 										id="modeofPayment" name="modeofPayment" required="required"
 										class="form-control selectField" style="height: 30px;">
 										<option value="">Enter Mode of Payment</option>
@@ -389,13 +418,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 									</select>
+									<small
+									id="chkmodeofPayment" style="color: red;"></small>
 								</div>
 							</div>
 
 							<div class="col-lg-3" id="displayCheque">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Cheque Number <span id="star">*</span></label> <input
+									<label>Cheque Number</label> <input
 										type="text" name="chequeNo" id="chequeNo" required="required"
 										placeholder="Enter Cheque No"
 										style="text-transform: uppercase;" />
@@ -405,7 +436,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3" id="displaycheqdate">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Cheque Date <span id="star">*</span></label> <input
+									<label>Cheque Date</label> <input
 										type="date" name="chequeDate" id="chequeDate"
 										required="required" placeholder="Enter Cheque Date"
 										style="text-transform: uppercase;" />
@@ -416,7 +447,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3" id="displaydeposit">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Deposit Account <span id="star">*</span></label> <input
+									<label>Deposit Account</label> <input
 										type="text" name="depositAccount" id="depositAccount"
 										required="required" placeholder="Enter Deposit Account"
 										style="text-transform: uppercase;" />
@@ -456,7 +487,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields"
 									style="margin-bottom: 30px">
-									<label>Comments<span id="star">*</span></label> <input
+									<label>Comments</label> <input
 										type="text" name="comments" id="comments" required="required"
 										placeholder="Enter Comments "
 										style="text-transform: uppercase;" />
@@ -482,7 +513,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-lg-3">
 								<div class="h-100">
 									<div class="formFields d-flex flex-column">
-										<label>SMS Send</label>
+										<label>SMS Send </label>
 										<div class="cont">
 											<div class="toggle">
 												<input type="checkbox" id="smsSend" class="toggle__input"

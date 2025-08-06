@@ -2,7 +2,7 @@
 //fetch Policy Name
 $(document).ready(function() {
     $.ajax({
-        url: "/api/customersavings/fetchsavingchemecatalog",
+        url: "api/customersavings/fetchsavingchemecatalog",
         type: "GET",
         success: function(response) {
 			console.log("API response:", response);
@@ -12,7 +12,7 @@ $(document).ready(function() {
 
             if (response.status === "FOUND" && response.data) {
                 $.each(response.data, function(index, item) {
-                   dropdown.append('<option value="' + item.policyName+ '">' + item.policyName + '</option>');
+                   dropdown.append('<option value="' + item+ '">' + item + '</option>');
                 });
             } else {
                 dropdown.append('<option value="">No Policyname found</option>');
@@ -30,91 +30,61 @@ $('#selectPlan').on('change', function () {
 
     if (selectedName !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchpolicyname?policyName=' + encodeURIComponent(selectedName), // Pass as query param
+            url: 'api/customersavings/fetchpolicyname?policyName=' + encodeURIComponent(selectedName), // Pass as query param
             type: 'GET',
             success: function (response) {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
-                    $('#openingAmount').val(customer.monthlyMinimumBalance);
+                    $('#balance').val(customer.monthlyMinimumBalance);
                 } else {
                     alert('No data found!');
-                    $('#openingAmount').val('');
+                    $('#balance').val('');
                 }
             },
             error: function () {
                 alert('Error while fetching data!');
-                $('#openingAmount').val('');
+                $('#balance').val('');
             }
         });
     } else {
-        $('#openingAmount').val('');
+        $('#balance').val('');
     }
 });
 
 
-//shubham kewat 18/06/25
-//fetch customer name 
- /*$(document).ready(function() {
-    $.ajax({
-        url: "/api/customershareholdingcontroller/findAllCustomerCode",
-        type: "GET",
-        success: function(response) {
-            console.log("API response:", response);
-
-            var dropdown1 = $('#selectByCustomer');       // shows: memberCode - customerName
-            var dropdown2 = $('#jointOperationCode');     // shows: memberCode only
-
-            dropdown1.empty();
-            dropdown2.empty();
-
-            dropdown1.append('<option value="">Select</option>');
-            dropdown2.append('<option value="">Select</option>');
-
-            if (response.status === "OK" && response.data) {
-                $.each(response.data, function(index, customer) {
-                    dropdown1.append('<option value="' + customer.memberCode + '">' + customer.memberCode + ' - ' + customer.customerName + '</option>');
-                    dropdown2.append('<option value="' + customer.memberCode + '">' + customer.memberCode + '</option>');
-                });
-            } else {
-                dropdown1.append('<option value="">No customers found</option>');
-                dropdown2.append('<option value="">No customers found</option>');
-            }
-        },
-        error: function() {
-            alert("Failed to fetch customer list.");
-        }
-    });
-});*/
-
 //janvi : Customer name list fetch
 $(document).ready(function() {
 	// Fetch all customers and populate the "select by code" dropdown
-	$.ajax({
-		url: "approved",
-		method: "GET",
-		success: function(data) {
-			console.log("Fetched Members:", data);
-			data.forEach(function(customer) {
-				const optionText = `${customer.memberCode} - ${customer.customerName}`;
-				const optionText1 = `${customer.memberCode}`;
-				$('#selectByCustomer').append(
-					$('<option>', {
-						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText
-					})
-				);
-				$('#jointOperationCode').append(
-					$('<option>', {
-						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText1
-					})
-				);
-			});
-		},
-		error: function(err) {
-			console.error("Error fetching customers:", err);
-		}
-	});
+	 $.ajax({
+        url: '/api/customermanagement/approved', // Make sure this path is correct
+        type: 'GET',
+        success: function (response) {
+            if (response.status === "OK" && Array.isArray(response.data)) {
+                const $select = $('#selectByCustomer');
+                const $select1 = $('#jointOperationCode');
+                $select.empty().append('<option value="">Select</option>');
+                $select1.empty().append('<option value="">Select</option>');
+
+                response.data.forEach(customer => {
+                    if (customer.customerName && customer.memberCode) {
+                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
+                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
+                        $select.append(`<option value="${optionValue}">${optionText}</option>`);
+                    }
+                    if (customer.customerName && customer.memberCode) {
+                        const optionText = `${customer.memberCode}`;
+                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
+                        $select1.append(`<option value="${optionValue}">${optionText}</option>`);
+                    }
+                });
+            } else {
+                alert("No approved customers found.");
+            }
+        },
+        error: function () {
+            alert("Failed to fetch approved customers.");
+        }
+    });
 });
 
 
@@ -125,7 +95,7 @@ $('#selectByCustomer').on('change', function () {
 
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchCustomerCode',
+            url: 'api/customersavings/fetchCustomerCode',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ memberCode: selectedCode }),
@@ -144,7 +114,8 @@ $('#selectByCustomer').on('change', function () {
 					$('#pinCode').val(customer.pinCode);
 					$('#state').val(customer.state);
 					$('#dateOfBirth').val(customer.dob);
-                    //$('#panCardNumber').val(customer.panCardNumber);
+					$('#emailId').val(customer.emailId);
+                    $('#aadharNo').val(customer.aadharNo);
                     //photo
                     if (customer.customerPhoto) {
 						const imagePath = `Uploads/${customer.customerPhoto}`; // Construct full image path
@@ -188,7 +159,7 @@ $('#jointOperationCode').on('change', function () {
 
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchCustomerCode',
+            url: 'api/customersavings/fetchCustomerCode',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({ memberCode: selectedCode }),
@@ -227,7 +198,7 @@ $('#financialConsultantCode').on('blur', function () {
 
     if (selectedCode !== "") {
         $.ajax({
-            url: '/api/customersavings/fetchfinancialcode?financialCode=' + encodeURIComponent(selectedCode), // Pass as query param
+            url: 'api/customersavings/fetchfinancialcode?financialCode=' + encodeURIComponent(selectedCode), // Pass as query param
             type: 'GET',
             success: function (response) {
                 if (response.status === "FOUND") {
@@ -248,46 +219,7 @@ $('#financialConsultantCode').on('blur', function () {
     }
 });
 
-//photo upload
-/*function photoUpload() {
-	const file = document.getElementById("photo").files[0];
-	if (file && file.type.startsWith("image/")) {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			document.getElementById("photoPreview").src = e.target.result;
-			const previewimg = document.getElementById("photoPreview");
-			document.getElementById("photoPreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
-		};
-		reader.readAsDataURL(file);
-	} else {
-		alert("Please upload a valid image file for photo.");
-	}
-}*/
 
-/*function signatureUpload() {
-	const file = document.getElementById("signature").files[0];
-	if (file && file.type.startsWith("image/")) {
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			document.getElementById("signaturePreview").src = e.target.result;
-			const previewimg = document.getElementById("signaturePreview");
-			document.getElementById("signaturePreview").src = e.target.result;
-			previewimg.style.width = "100%";
-			previewimg.style.height = "100%";
-			previewimg.style.objectFit = "cover"
-			previewimg.style.overflow = "hidden"
-			previewimg.style.borderRadius = "20px"
-		};
-		reader.readAsDataURL(file);
-	} else {
-		alert("Please upload a valid image file for signature.");
-	}
-}*/
 
 // save saving account details 
 $(document).ready(function () {
@@ -346,10 +278,12 @@ $(document).ready(function () {
 		formData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
 		formData.append("familyRelation", $('#familyRelation').val());
 		formData.append("selectPlan", $('#selectPlan').val());
-		formData.append("openingAmount", $('#openingAmount').val());
+		formData.append("balance", $('#balance').val());
 		formData.append("financialConsultantCode", $('#financialConsultantCode').val());
 		formData.append("financialConsultantName", $('#financialConsultantName').val());
 		formData.append("openingFees", $('#openingFees').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("aadharNo", $('#aadharNo').val());
 		formData.append("authenticateWith", $('#authenticateWith').val());
 		formData.append("modeOfPayment", $('#modeOfPayment').val());
 		formData.append("chequeNo", $('#chequeNo').val());
@@ -396,7 +330,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/customersavings/saveandupdatesavingaccount',
+			url: 'api/customersavings/saveandupdatesavingaccount',
 			data: formData,
 			processData: false,
 			contentType: false,
@@ -413,7 +347,7 @@ $(document).ready(function () {
 	
 	$.ajax({
 			type: "GET",
-			url: "/api/customersavings/getAllSavingAccountData",
+			url: "api/customersavings/getAllSavingAccountData",
 			contentType: "application/json",
 			success: function(response) {
 				console.log("Full Response from API:", response); 
@@ -450,7 +384,7 @@ $(document).ready(function () {
 
 function viewData(id) {
 	$.ajax({
-		url: "/api/customersavings/getSavingAccountDataById",
+		url: "api/customersavings/getSavingAccountDataById",
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
@@ -476,10 +410,12 @@ function viewData(id) {
 				$("#jointSurvivorCode").val(data.jointSurvivorCode);
 				$("#familyRelation").val(data.familyRelation);
 				$("#selectPlan").val(data.selectPlan);
-				$("#openingAmount").val(data.openingAmount);
+				$("#balance").val(data.balance);
 				$("#financialConsultantCode").val(data.financialConsultantCode);
 				$("#financialConsultantName").val(data.financialConsultantName);
 				$("#openingFees").val(data.openingFees);
+				$("#emailId").val(data.emailId);
+				$("#aadharNo").val(data.aadharNo);
 				$("#authenticateWith").val(data.authenticateWith);
 				$("#modeOfPayment").val(data.modeOfPayment);
 				$("#chequeNo").val(data.chequeNo);
@@ -550,7 +486,7 @@ console.log(data.debitCardIssue)
 function deleteData(id) {
 	if (confirm("Are you sure you want to delete this branch?")) {
 		$.ajax({
-			url: "/api/customersavings/deleteSavingAccountDataById", 
+			url: "api/customersavings/deleteSavingAccountDataById", 
 			type: "POST",
 			data: { id: id }, 
 			success: function(response) {
@@ -570,71 +506,6 @@ function deleteData(id) {
 
 }
 
-/*function updateSavingAccountData() {
-	let payload = {
-		id: $("#id").val(),
-		openingDate: $("#openingDate").val(),
-		selectByCustomer: $("#selectByCustomer").val(),
-		enterCustomerName: $("#enterCustomerName").val(),
-		dateOfBirth: $("#dateOfBirth").val(),
-		familyDetails: $("#familyDetails").val(),
-		contactNumber: $("#contactNumber").val(),
-		suggestedNomineeName: $("#suggestedNomineeName").val(),
-		suggestedNomineeAge: $("#suggestedNomineeAge").val(),
-		suggestedNomineeRelation: $("#suggestedNomineeRelation").val(),
-		address: $("#address").val(),
-		district: $("#district").val(),
-		branchName: $("#branchName").val(),
-		state: $("#state").val(),
-		pinCode: $("#pinCode").val(),
-		operationType: $("#operationType").val(),
-		jointOperationCode: $("#jointOperationCode").val(),
-		jointSurvivorCode: $("#jointSurvivorCode").val(),
-		familyRelation: $("#familyRelation").val(),
-		selectPlan: $("#selectPlan").val(),
-		openingAmount: $("#openingAmount").val(),
-		financialConsultantCode: $("#financialConsultantCode").val(),
-		financialConsultantName: $("#financialConsultantName").val(),
-		openingFees: $("#openingFees").val(),
-		authenticateWith: $("#authenticateWith").val(),
-		modeOfPayment: $("#modeOfPayment").val(),
-		
-		chequeNo: $("#chequeNo").val(),
-		chequeDate: $("#chequeDate").val(),
-		depositAcc1: $("#depositAcc1").val(),
-		depositAcc2: $("#depositAcc2").val(),
-		refNumber1: $("#refNumber1").val(),
-		depositAcc3: $("#depositAcc3").val(),
-		refNumber2: $("#refNumber2").val(),
-		comment: $("#comment").val(),
-		
-
-		// Toggle/radio/checkbox values as 1 or 0
-		accountStatus: parseInt($("input[name='toggle-member-status']:checked").val()) || 0,
-		messageSend: parseInt($("input[name='toggle-member-status1']:checked").val()) || 0,
-		debitCardIssue: parseInt($("input[name='toggle-member-status2']:checked").val()) || 0
-
-	};
-
-	alert(payload.id);
-	$.ajax({
-		url: "/api/customersavings/saveandupdatesavingaccount",
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(payload),
-		success: function(response) {
-			if (response.status == "OK") {
-				alert(response.message);
-				location.reload();
-			} else {
-				alert("Operation failed: " + response.message);
-			}
-		},
-		error: function(xhr) {
-			alert("Update failed: " + xhr.responseText);
-		}
-	});
-}*/
 
 $(document).ready(function () {
 	let imageSrc = $('#photo').attr('src');
@@ -691,10 +562,12 @@ $(document).ready(function () {
 		formData.append("jointSurvivorCode", $('#jointSurvivorCode').val());
 		formData.append("familyRelation", $('#familyRelation').val());
 		formData.append("selectPlan", $('#selectPlan').val());
-		formData.append("openingAmount", $('#openingAmount').val());
+		formData.append("balance", $('#balance').val());
 		formData.append("financialConsultantCode", $('#financialConsultantCode').val());
 		formData.append("financialConsultantName", $('#financialConsultantName').val());
 		formData.append("openingFees", $('#openingFees').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("aadharNo", $('#aadharNo').val());
 		formData.append("authenticateWith", $('#authenticateWith').val());
 		formData.append("modeOfPayment", $('#modeOfPayment').val());
 		formData.append("chequeNo", $('#chequeNo').val());
@@ -741,7 +614,7 @@ $(document).ready(function () {
 
 		$.ajax({
 			type: 'POST',
-			url: '/api/customersavings/saveandupdatesavingaccount',
+			url: 'api/customersavings/saveandupdatesavingaccount',
 			data: formData,
 			processData: false,
 			contentType: false,

@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,18 +21,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.ExecutiveFounderDto;
+import com.microfinance.dto.FinancialConsultantDto;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
+import com.microfinance.model.ManageDepartment;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.states;
 import com.microfinance.repository.CreateSavingAccountRepo;
+import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
-
+import com.microfinance.model.savingAccountFundTransfer;
+import com.microfinance.model.savingsAccountCloser;
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +58,12 @@ public class CustomerSavingsController {
 	
 	
 	  @Autowired CreateSavingAccountRepo createSavingAccountRepo;
+	  
+	  @Autowired
+	  CreateSavingAccountRepo creSavingAccountRepo;
+	  
+	  @Autowired
+	  SavingAccountFundTransferRepo savingAccountFundTransferRepo;
 	 
 	
 	@Value("${upload.directory}")
@@ -92,7 +103,7 @@ public class CustomerSavingsController {
   	}
   	
   	//fetching saving scheme catalog data
-  	@GetMapping("/fetchsavingchemecatalog")
+  /*	@GetMapping("/fetchsavingchemecatalog")
   	public ApiResponse<List<SavingSchemeCatalog>> findBySchemeType() {
   		List<SavingSchemeCatalog>  list = customersaving.findBySchemeType();
   		if(list!=null && !list.isEmpty()) {
@@ -100,7 +111,17 @@ public class CustomerSavingsController {
   		}else
   			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
   		
+  	}*/
+  	@GetMapping("/fetchsavingchemecatalog")
+  	public ApiResponse<List<String>> findBySchemeType() {
+  	    List<String> list = customersaving.findBySchemeType();
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successful", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "No Data Found");
+  	    }
   	}
+
   	
   	// find saving scheme catalog by id
   	 @GetMapping("/getSavingSchemeCatalogById")
@@ -236,6 +257,7 @@ public class CustomerSavingsController {
     }
 
     
+    
     @GetMapping("/getSavingAccountDataById")
 	public ResponseEntity<ApiResponse<CreateSavingsAccount>> findSavingAccountDataById(@RequestParam("id") Long id) {
 		Optional<CreateSavingsAccount> fyear = customersaving.findSavingAccountDataById(id);
@@ -299,7 +321,7 @@ public class CustomerSavingsController {
     @PostMapping("/updateaveragebalance")
     public ResponseEntity<ApiResponse<String>> updateAverageBalance(@RequestBody CreateSavingsAccount createSavingsAccount) {
         String accountNumber = createSavingsAccount.getAccountNumber();
-        String newBalance = createSavingsAccount.getOpeningAmount();
+        String newBalance = createSavingsAccount.getBalance();
 
         boolean isUpdated = customersaving.updateAverageBalance(accountNumber, newBalance);
 
@@ -319,12 +341,13 @@ public class CustomerSavingsController {
         }
     }
 
-    @PostMapping("/transferAmount")
+    /*@PostMapping("/transferAmount")
     @Transactional
     public ResponseEntity<?> transferAmount(
             @RequestParam("debitAccountNo") String debitAccountNo,
             @RequestParam("creditAccountNo") String creditAccountNo,
-            @RequestParam("amount") double amount) {
+            @RequestParam("amount") double amount, 
+            @RequestBody savingAccountFundTransfer savingAccFundTransfer) {
         try {
             
           CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
@@ -336,7 +359,7 @@ public class CustomerSavingsController {
           double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
           System.out.println("debitBalance" +debitBalance);
           double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
-          System.out.println("creditBalance" +creditBalance);
+          System.out.println("-creditBalance" +creditBalance);
 
           
           if (debitBalance < amount) {
@@ -361,7 +384,111 @@ public class CustomerSavingsController {
             response.put("message", "Transfer failed: " + e.getMessage());
             return ResponseEntity.badRequest().body(response);
         }
+        
+        // Save the intra-transfer record
+	    savingAccountFundTransfer savedEntry = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+
+	    return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+    } */
+    
+   /* @PostMapping("/transferAmount")
+    @Transactional
+    public ResponseEntity<?> transferAmount(
+            @RequestParam("debitAccountNo") String debitAccountNo,
+            @RequestParam("creditAccountNo") String creditAccountNo,
+            @RequestParam("amount") double amount, 
+            @RequestBody savingAccountFundTransfer savingAccFundTransfer) {
+
+        try {
+            CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Debit account not found"));
+
+            CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Credit account not found"));
+
+            double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
+            double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+
+            if (debitBalance < amount) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Insufficient balance in debit account");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            // Update balances
+            debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
+            creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+
+            // Save updated accounts
+            createSavingAccountRepo.save(debitAccount);
+            createSavingAccountRepo.save(creditAccount);
+
+            // Save the transfer record
+            savingAccountFundTransfer savedEntry = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+
+            // Send response
+            return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Transfer failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
+    }*/
+    
+    //janvi 21/07
+    @PostMapping("/transferAmount")
+    @Transactional
+    public ResponseEntity<?> transferAmount(@RequestBody savingAccountFundTransfer savingAccFundTransfer) {
+
+        try {
+        	String debitAccountNo = savingAccFundTransfer.getDebitAccountNumber();
+            String creditAccountNo = savingAccFundTransfer.getCreditAccountNumber();
+            double amount = Double.parseDouble(savingAccFundTransfer.getAmount());
+            
+         // Check if there are any unapproved transactions for the sender
+    	    List<savingAccountFundTransfer> unapprovedTransfers = savingAccountFundTransferRepo.findByDebitAccountNumberAndIsApproved(debitAccountNo, false);
+
+    	    if (!unapprovedTransfers.isEmpty()) {
+    	        return new ResponseEntity<>("Previous transaction is pending approval. Complete approval before proceeding.", HttpStatus.FORBIDDEN );
+    	    }
+            
+            CreateSavingsAccount debitAccount = createSavingAccountRepo.findByAccountNumber(debitAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Debit account not found"));
+
+            CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
+                    .orElseThrow(() -> new RuntimeException("Credit account not found"));
+
+            double debitBalance = Double.parseDouble(debitAccount.getBalance());
+            double creditBalance = Double.parseDouble(creditAccount.getBalance());
+
+            if (debitBalance < amount) {
+                Map<String, String> response = new HashMap<>();
+                response.put("message", "Insufficient balance in debit account");
+                return ResponseEntity.badRequest().body(response);
+            }
+
+            // Update balances
+            debitAccount.setBalance(String.valueOf(debitBalance - amount));
+            creditAccount.setBalance(String.valueOf(creditBalance + amount));
+
+            // Save updated accounts
+            createSavingAccountRepo.save(debitAccount);
+            createSavingAccountRepo.save(creditAccount);
+
+            // Save the transfer record
+            savingAccountFundTransfer savedEntry = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+
+            // Send response
+            return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+
+        } catch (Exception e) {
+            Map<String, String> response = new HashMap<>();
+            response.put("message", "Transfer failed: " + e.getMessage());
+            return ResponseEntity.badRequest().body(response);
+        }
     }
+
 
  // Api For fetching account numbers (Vaibhav)
     @GetMapping("/fetchAccountNumbers")
@@ -397,6 +524,42 @@ public class CustomerSavingsController {
         return ResponseEntity.ok(response);
     }
 
- 
+ //Janvi : save fund transfer entry
+    /*@PostMapping("/saveSavingAccountFundTransfer")
+	@ResponseBody
+	public ResponseEntity<String> saveSavingAccountFundTransfer(@RequestBody savingAccountFundTransfer savingAccFundTransfer) {    	
+    	savingAccountFundTransfer fund = customersaving.saveSavingAccountFundTransfer(savingAccFundTransfer);
+		if (fund != null)
+			return ResponseEntity.ok("success");
+		else
+			return ResponseEntity.badRequest().body("Failure");
+	}*/
+    
+    //janvi : Save Saving Acc Closer Data
+    @PostMapping("/saveAccountCloseInfo")	
+	public ResponseEntity<savingsAccountCloser> saveAccountCloseInfo(@RequestBody savingsAccountCloser accountCloser) {
+	    // 1. Save the account close record
+	    savingsAccountCloser savedAccCloseEntry = customersaving.saveAccountCloseInfo(accountCloser);
+
+	    // 2. Get account number from accountCloser
+	   /* String accountNo = accountCloser.getSelectaccountNo(); // make sure this is correct
+
+	    // 3. Fetch SavingOpening records by account number
+	    List<SavingOpening> savingOpenings = savingopeningrepo.findByAccountNo(accountNo); 
+
+	    // 4. Update chkIsActive to false for each matched entry
+	    if (!savingOpenings.isEmpty()) {
+	        for (SavingOpening savingOpening : savingOpenings) {
+	            savingOpening.setChkisactive(false); // set chkisactive = false for each one
+	            savingOpening.setOpeningAmount("0");
+	        }
+	        savingopeningrepo.saveAll(savingOpenings); // save all changes in one go
+	    } else {
+	        System.out.println("No SavingOpening records found for accountNo: " + accountNo);
+	    }*/
+	    return new ResponseEntity<>(savedAccCloseEntry, HttpStatus.CREATED);
+	}
+	
+    
 	
 }

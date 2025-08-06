@@ -16,14 +16,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.ManageDepartment;
 import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.SavingSchemeCatalog;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
+import com.microfinance.model.savingAccountFundTransfer;
+import com.microfinance.model.savingsAccountCloser;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.SavingAccountActivityRepo;
+import com.microfinance.repository.SavingAccountCloserRepo;
+import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.repository.SavingSchmeCatalogRepo;
 
 @Service
@@ -43,6 +48,12 @@ public class CustomerSavingsService {
 	
 	@Autowired
 	SavingAccountActivityRepo savingAccountActivityRepo;
+	
+	@Autowired
+	SavingAccountFundTransferRepo savingAccFundTransferRepo;
+	
+	@Autowired
+	SavingAccountCloserRepo savingAccCloserRepo;
 	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -68,10 +79,12 @@ public class CustomerSavingsService {
 	}
 
 
-	public List<SavingSchemeCatalog> findBySchemeType() {
-		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll();
-		return list;
-	}
+	/*
+	 * public List<SavingSchemeCatalog> findBySchemeType() {
+	 * List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll(); return
+	 * list; }
+	 */
+	
 
 	public List<SavingSchemeCatalog> findByPolicyName(String policyName) {
 		List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findByPolicyName(policyName);
@@ -133,10 +146,12 @@ public class CustomerSavingsService {
 				createSavingsAccount.setJointSurvivorCode(savingAccountDto.getJointSurvivorCode());
 				createSavingsAccount.setFamilyRelation(savingAccountDto.getFamilyRelation());
 				createSavingsAccount.setSelectPlan(savingAccountDto.getSelectPlan());
-				createSavingsAccount.setOpeningAmount(savingAccountDto.getOpeningAmount());
+				createSavingsAccount.setBalance(savingAccountDto.getBalance());
 				createSavingsAccount.setFinancialConsultantCode(savingAccountDto.getFinancialConsultantCode());
 				createSavingsAccount.setFinancialConsultantName(savingAccountDto.getFinancialConsultantName());
 				createSavingsAccount.setOpeningFees(savingAccountDto.getOpeningFees());
+				createSavingsAccount.setEmailId(savingAccountDto.getEmailId());
+				createSavingsAccount.setAadharNo(savingAccountDto.getAadharNo());				
 				createSavingsAccount.setAuthenticateWith(savingAccountDto.getAuthenticateWith());
 				createSavingsAccount.setModeOfPayment(savingAccountDto.getModeOfPayment());
 				
@@ -307,7 +322,7 @@ public class CustomerSavingsService {
 		 Optional<CreateSavingsAccount> optionalAccount = createSavingAccountRepo.findByAccountNumber(accountNumber);
 		    if (optionalAccount.isPresent()) {
 		        CreateSavingsAccount account = optionalAccount.get();
-		        account.setOpeningAmount(newBalance); // or use `setAverageBalance()` if that's your actual field
+		        account.setBalance(newBalance); // or use `setAverageBalance()` if that's your actual field
 		        createSavingAccountRepo.save(account);
 		        return true;
 		    }
@@ -315,13 +330,15 @@ public class CustomerSavingsService {
 	}
 
 	// Service for fetching the account numbers for passbook (vaibhav)
-		public List<String> getAccountNumbersByType(String accountType) {
-		    return createSavingAccountRepo.findByTypeofaccountContainingIgnoreCase(accountType)
-		            .stream()
-		            .map(CreateSavingsAccount::getAccountNumber)
-		            .filter(Objects::nonNull)
-		            .collect(Collectors.toList());
-		}
+	public List<String> getAccountNumbersByType(String accountType) {
+	    return createSavingAccountRepo
+	            .findByTypeofaccountContainingIgnoreCaseAndIsApproved(accountType.trim(), true)
+	            .stream()
+	            .map(CreateSavingsAccount::getAccountNumber)
+	            .filter(Objects::nonNull)
+	            .collect(Collectors.toList());
+	}
+
 		
 		// Service for fetching the data according to the account number (vaibhav)
 		public Optional<CreateSavingsAccount> getAccountByNumber(String accountNumber) {
@@ -337,6 +354,24 @@ public class CustomerSavingsService {
 			// TODO Auto-generated method stub
 			return createSavingAccountRepo.existsBySelectByCustomer(customerId);
 		}
+
+		public savingAccountFundTransfer saveSavingAccountFundTransfer(savingAccountFundTransfer savingAccFundTransfer) {
+			// TODO Auto-generated method stub
+			return savingAccFundTransferRepo.save(savingAccFundTransfer);
+		}
+
+		public List<String> findBySchemeType() {
+			// TODO Auto-generated method stub
+			return savingSchmeCatalogRepo.findDistinctPolicyNames();
+		}
+
+		public savingsAccountCloser saveAccountCloseInfo(savingsAccountCloser accountCloser) {
+			// TODO Auto-generated method stub
+			return savingAccCloserRepo.save(accountCloser);
+		}
+
+		
+		
 
 		
 		

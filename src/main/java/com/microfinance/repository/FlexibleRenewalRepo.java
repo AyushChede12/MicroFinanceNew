@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.FlexiblepremiumrenewalPM;
 
 @EnableJpaRepositories
 public interface FlexibleRenewalRepo extends JpaRepository<FlexibleRenewal, Long>{
@@ -18,7 +19,10 @@ public interface FlexibleRenewalRepo extends JpaRepository<FlexibleRenewal, Long
 	List<FlexibleRenewal> findByIsApprovedFalse();
 
 
-	Optional<FlexibleRenewal> findByPolicyCode(String policyCode);
+	List<FlexibleRenewal> findByPolicyCode(String policyCode);
+
+
+	List<FlexibleRenewal> findByIsApprovedTrue();
 
 
 }

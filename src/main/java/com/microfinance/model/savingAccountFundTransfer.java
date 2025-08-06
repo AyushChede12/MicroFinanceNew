@@ -1,9 +1,10 @@
 package com.microfinance.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+@Entity
 public class savingAccountFundTransfer {
 
 	@Id
@@ -22,6 +23,7 @@ public class savingAccountFundTransfer {
 	private String transferDate;
 	private String amount;
 	private String comment;
+	private boolean isApproved;
 	
 	public Long getId() {
 		return id;
@@ -106,6 +108,12 @@ public class savingAccountFundTransfer {
 	}
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	
 	

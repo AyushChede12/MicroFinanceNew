@@ -1,43 +1,11 @@
 //fetch saving account details by account number
-/*$('#accountNumber').on('blur', function () {
-    let selectedCode = $(this).val().trim();
-	alert(selectedCode);
-    if (selectedCode !== "") {
-        $.ajax({
-            url: '/api/customersavings/getallbyaccountnumber?accountNumber=' + encodeURIComponent(selectedCode),
-            type: 'GET',
-            success: function (response) {
-                if (response.status === 302  || response.status === "FOUND" && response.data.length > 0) {
-                    let customer = response.data[0];
-                    $('#customerCode').val(customer.selectByCustomer);
-					$('#customerName').val(customer.enterCustomerName);
-					$('#contactNumber').val(customer.contactNumber);
-					$('#jointHolderName').val(customer.jointSurvivorCode);
-					$('#savingPlanName').val(customer.selectPlan);
-					$('#averageBalance').val(customer.openingAmount);
-					$('#selectBranchName').val(customer.branchName);
-                } else {
-                    alert('No data found!');
-                    $('#customerCode').val('');
-                }
-            },
-            error: function () {
-                alert('Error while fetching data!');
-                $('#customerCode').val('');
-            }
-        });
-    } else {
-        $('#customerCode').val('');
-    }
-});
-*/
 $(document).ready(function () {
 $('#accountNumber').on('blur', function () {
     let accountNumber = $(this).val().trim();
 
     if (accountNumber !== "") {
         $.ajax({
-            url: '/api/customersavings/getallbyaccountnumber',
+            url: 'api/customersavings/getallbyaccountnumber',
             type: 'GET',
             data: { accountNumber: accountNumber },
             success: function (response) {
@@ -51,7 +19,7 @@ $('#accountNumber').on('blur', function () {
                     $('#contactNumber').val(customer.contactNumber || '');
                     $('#jointHolderName').val(customer.jointSurvivorCode || '');
                     $('#savingPlanName').val(customer.selectPlan || '');
-                    $('#averageBalance').val(customer.openingAmount || '');
+                    $('#averageBalance').val(customer.balance || '');
                     $('#selectBranchName').val(customer.branchName || '');
                 } else {
                     alert('No data found!');
@@ -64,6 +32,38 @@ $('#accountNumber').on('blur', function () {
                 clearAccountForm();
             }
         });
+         $.ajax({
+        type: "GET",
+        url: "api/customersavings/getsavingaccountactivity",
+        data: { accountNumber: accountNumber }, // <-- Pass it here
+        success: function(response) {
+            console.log("Full Response from API:", response); 
+            if (response.status && response.status.toUpperCase() === "OK") {
+                let data = response.data;
+                let tableBody = $(".datatable tbody");
+                tableBody.empty();
+                data.forEach((item, index) => {
+                    let row = `<tr>
+                        <td>${index + 1}</td>
+                        <td>${item.selectBranchName || ''}</td>
+                        <td>${item.transactionDate || ''}</td>
+                        <td>${item.accountNumber || ''}</td>
+                        <td>${item.transactionType || ''}</td>
+                        <td>${item.transactionAmount || ''}</td>
+                        <td>${item.averageBalance || ''}</td>
+                        <td>${item.payBy || ''}</td>
+                        <td>${item.comments || ''}</td>
+                        <td>${item.selectSavingTransactionId || ''}</td>
+                        <td>${item.customerCode || ''}</td>
+                    </tr>`;
+                    tableBody.append(row);
+                });
+            } else {
+                alert("No transactions found.");
+            }
+        },       
+    });
+      
     } else {
         clearAccountForm();
     }
@@ -77,7 +77,9 @@ $('#accountNumber').on('blur', function () {
         $('#averageBalance').val('');
         $('#selectBranchName').val('');
     }
+    
 });
+   
 });
 
 
@@ -159,10 +161,11 @@ $(document).ready(function () {
             refNumber1: $('#refNumber1').val(),
             depositAcc3: $('#depositAcc3').val(),
             refNumber2: $('#refNumber2').val()*/
+            
         };
 
         $.ajax({
-            url: '/api/customersavings/savesavingaccountactivity',
+            url: 'api/customersavings/savesavingaccountactivity',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(accountData),
@@ -177,12 +180,13 @@ $(document).ready(function () {
             }
         });
     });
+  
 });
 
 function getAccountNumberAndUpdateData(accountNumber) {
     $.ajax({
         type: "GET",
-        url: "/api/customersavings/getsavingaccountactivity",
+        url: "api/customersavings/getsavingaccountactivity",
         data: { accountNumber: accountNumber },
         success: function(response) {
             if (response.data && response.data.length > 0) {
@@ -208,11 +212,11 @@ function getAccountNumberAndUpdateData(accountNumber) {
 function updateMainAccountBalance(accountNumber, newBalance) {
     $.ajax({
         type: "POST",
-        url: "/api/customersavings/updateaveragebalance",
+        url: "api/customersavings/updateaveragebalance",
         contentType: "application/json",
         data: JSON.stringify({
             accountNumber: accountNumber,
-            openingAmount: parseFloat(newBalance)
+            balance: parseFloat(newBalance)
         }),
         success: function (response) {
             alert("Main account balance updated successfully!");

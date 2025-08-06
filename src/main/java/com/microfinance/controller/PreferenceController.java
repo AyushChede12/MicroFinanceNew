@@ -24,6 +24,7 @@ import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
+import com.microfinance.model.CodeModule;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.RelativeModule;
@@ -50,17 +51,17 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<BranchModule>> saveBranch(@RequestBody BranchModule branchModule) {
 		boolean isCreate = (branchModule.getId() == null); // Check BEFORE saving
 
-	    BranchModule savedEntity = preferenceService.saveBranchModule(branchModule);
+		BranchModule savedEntity = preferenceService.saveBranchModule(branchModule);
 
-	    ApiResponse<BranchModule> response;
+		ApiResponse<BranchModule> response;
 
-	    if (isCreate) {
-	        response = new ApiResponse<>(HttpStatus.CREATED, "Branch created successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.CREATED);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.OK, "Branch updated successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+		if (isCreate) {
+			response = new ApiResponse<>(HttpStatus.CREATED, "Branch created successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			response = new ApiResponse<>(HttpStatus.OK, "Branch updated successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/getAllBranchModule") // Ayush (without DTO)
@@ -71,7 +72,6 @@ public class PreferenceController {
 		return ResponseEntity.ok(response);
 
 	}
-
 
 	@GetMapping("/getBranchModuleById") // Ayush
 	public ResponseEntity<ApiResponse<BranchModule>> findBranchModuleById(@RequestParam("id") Long id) {
@@ -95,8 +95,8 @@ public class PreferenceController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
-					"Branch module deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST, "Branch module deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
@@ -106,14 +106,14 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<BankModule>> saveBank(@RequestBody BankModule bankModule) {
 		boolean isCreate = (bankModule.getId() == null); // Check BEFORE saving
 		BankModule savedEntity = preferenceService.saveBankModule(bankModule);
-	    ApiResponse<BankModule> response;
-	    if (isCreate) {
-	        response = new ApiResponse<>(HttpStatus.CREATED, "Bank created successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.CREATED);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.OK, "Bank updated successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+		ApiResponse<BankModule> response;
+		if (isCreate) {
+			response = new ApiResponse<>(HttpStatus.CREATED, "Bank created successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			response = new ApiResponse<>(HttpStatus.OK, "Bank updated successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/getAllBankModule") // Ayush (without DTO)
@@ -128,8 +128,8 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<BankModule>> findBankModuleById(@RequestParam("id") Long id) {
 		Optional<BankModule> bank = preferenceService.findBankDataById(id);
 		if (bank.isPresent()) {
-			ApiResponse<BankModule> response = new ApiResponse<>(HttpStatus.FOUND,
-					"Bank Module fetched successfully", bank.get());
+			ApiResponse<BankModule> response = new ApiResponse<>(HttpStatus.FOUND, "Bank Module fetched successfully",
+					bank.get());
 			return ResponseEntity.ok(response);
 		} else {
 			ApiResponse<BankModule> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
@@ -157,14 +157,14 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<RelativeModule>> saveRelative(@RequestBody RelativeModule relativeModule) {
 		boolean isCreate = (relativeModule.getId() == null); // Check BEFORE saving
 		RelativeModule savedEntity = preferenceService.saveRelativeModule(relativeModule);
-	    ApiResponse<RelativeModule> response;
-	    if (isCreate) {
-	        response = new ApiResponse<>(HttpStatus.CREATED, "Relative created successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.CREATED);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.OK, "Relative updated successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+		ApiResponse<RelativeModule> response;
+		if (isCreate) {
+			response = new ApiResponse<>(HttpStatus.CREATED, "Relative created successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			response = new ApiResponse<>(HttpStatus.OK, "Relative updated successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/getAllRelativeModule") // Ayush (without DTO)
@@ -179,34 +179,33 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<String>> deleteRelativeModule(@RequestParam("id") Long id) {
 		boolean isDeleted = preferenceService.deleteRelativeModule(id);
 		if (isDeleted) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.FOUND,
-					"Relative module deleted successfully", "success");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.FOUND, "Relative module deleted successfully",
+					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Relative module deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Relative module deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
 
 	@GetMapping("/getAllStates") // Niraj
 	public ResponseEntity<ApiResponse<List<states>>> getAllStates() {
-	    List<states> list = preferenceService.getAllStates();
-	    
-	    ApiResponse<List<states>> response;
-	    
-	    if (list.isEmpty()) {
-	        response = new ApiResponse<>(HttpStatus.NOT_FOUND, "No states found", null);
-	        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.FOUND, "States fetched successfully", list);
-	        return ResponseEntity.ok(response); // or new ResponseEntity<>(response, HttpStatus.FOUND)
-	    }
+		List<states> list = preferenceService.getAllStates();
+
+		ApiResponse<List<states>> response;
+
+		if (list.isEmpty()) {
+			response = new ApiResponse<>(HttpStatus.NOT_FOUND, "No states found", null);
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		} else {
+			response = new ApiResponse<>(HttpStatus.FOUND, "States fetched successfully", list);
+			return ResponseEntity.ok(response); // or new ResponseEntity<>(response, HttpStatus.FOUND)
+		}
 	}
 
-
 	@GetMapping("/getAllDistrictsByStateId") // Niraj
-	
+
 	public Map<String, List<Statedistricts>> getAllDistrictsByStateId(@RequestParam("stateId") int stateId) {
 		List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
 		Map<String, List<Statedistricts>> response = new HashMap<>();
@@ -219,14 +218,14 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<CasteModule>> saveCaste(@RequestBody CasteModule casteModule) {
 		boolean isCreate = (casteModule.getId() == null); // Check BEFORE saving
 		CasteModule savedEntity = preferenceService.saveCasteModule(casteModule);
-	    ApiResponse<CasteModule> response;
-	    if (isCreate) {
-	        response = new ApiResponse<>(HttpStatus.CREATED, "Caste created successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.CREATED);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.OK, "Caste updated successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+		ApiResponse<CasteModule> response;
+		if (isCreate) {
+			response = new ApiResponse<>(HttpStatus.CREATED, "Caste created successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			response = new ApiResponse<>(HttpStatus.OK, "Caste updated successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/getAllCasteModule") // Ayush (without DTO)
@@ -245,25 +244,25 @@ public class PreferenceController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Caste module deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Caste module deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
 
 	// Category Module - Ayush
 	@PostMapping("/saveCategoryModule")
-	public ResponseEntity<ApiResponse<CategoryModule>> saveCaste(@RequestBody CategoryModule categoryModule) {		
+	public ResponseEntity<ApiResponse<CategoryModule>> saveCaste(@RequestBody CategoryModule categoryModule) {
 		boolean isCreate = (categoryModule.getId() == null); // Check BEFORE saving
 		CategoryModule savedEntity = preferenceService.saveCategoryModule(categoryModule);
-	    ApiResponse<CategoryModule> response;
-	    if (isCreate) {
-	        response = new ApiResponse<>(HttpStatus.CREATED, "Category created successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.CREATED);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.OK, "Category updated successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+		ApiResponse<CategoryModule> response;
+		if (isCreate) {
+			response = new ApiResponse<>(HttpStatus.CREATED, "Category created successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			response = new ApiResponse<>(HttpStatus.OK, "Category updated successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/getAllCategoryModule")
@@ -278,29 +277,29 @@ public class PreferenceController {
 	public ResponseEntity<ApiResponse<String>> deleteCategoryModule(@RequestParam("id") Long id) {
 		boolean isDeleted = preferenceService.deleteCategoryModule(id);
 		if (isDeleted) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
-					"Category module deleted successfully", "success");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Category module deleted successfully",
+					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Category module deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Category module deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
 
 	// Financial Year - Ayush
 	@PostMapping("/saveAndUpdateAllFinancialYear") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<FinancialYear>> saveFinancialYear(@RequestBody FinancialYear financialYear) {	
+	public ResponseEntity<ApiResponse<FinancialYear>> saveFinancialYear(@RequestBody FinancialYear financialYear) {
 		boolean isCreate = (financialYear.getId() == null); // Check BEFORE saving
 		FinancialYear savedEntity = preferenceService.saveFinancialYear(financialYear);
-	    ApiResponse<FinancialYear> response;
-	    if (isCreate) {
-	        response = new ApiResponse<>(HttpStatus.CREATED, "Financial Year created successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.CREATED);
-	    } else {
-	        response = new ApiResponse<>(HttpStatus.OK, "Financial Year updated successfully", savedEntity);
-	        return new ResponseEntity<>(response, HttpStatus.OK);
-	    }
+		ApiResponse<FinancialYear> response;
+		if (isCreate) {
+			response = new ApiResponse<>(HttpStatus.CREATED, "Financial Year created successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.CREATED);
+		} else {
+			response = new ApiResponse<>(HttpStatus.OK, "Financial Year updated successfully", savedEntity);
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 	}
 
 	@GetMapping("/getAllFinancialYear")
@@ -333,8 +332,8 @@ public class PreferenceController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Financial Year deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Financial Year deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
@@ -357,13 +356,11 @@ public class PreferenceController {
 		ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo,
 				signature);
 		// return new ResponseEntity<>(response, response.getStatus());
-		return ResponseEntity.ok(new ApiResponse<>(
-                HttpStatus.OK,
-                executiveFounderDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
-                response.getData()
-        ));
+		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+				executiveFounderDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
+				response.getData()));
 	}
-	
+
 	@GetMapping("/fetchAllExecutiveFounder")
 	public ResponseEntity<ApiResponse<List<ExecutiveFounder>>> fetchAllExecutiveFounder() {
 		List<ExecutiveFounder> list = preferenceService.fetchAllExecutiveFounder();
@@ -371,7 +368,7 @@ public class PreferenceController {
 				"Executive Founder fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@PostMapping("/deleteExecutiveFounder") // Ayush
 	public ResponseEntity<ApiResponse<String>> deleteExecutiveFounder(@RequestParam("id") Long id) {
 		boolean isDeleted = preferenceService.deleteExecutiveFounder(id);
@@ -380,12 +377,12 @@ public class PreferenceController {
 					"success");
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"Executive Founder deletion failed", "failure");
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Executive Founder deletion failed",
+					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
+
 	@GetMapping("/fetchExecutiveFounderById") // Ayush
 	public ResponseEntity<ApiResponse<ExecutiveFounder>> findExecutiveFounderById(@RequestParam("id") Long id) {
 		Optional<ExecutiveFounder> exePromoter = preferenceService.findExecutiveFounderById(id);
@@ -426,7 +423,16 @@ public class PreferenceController {
 		}
 	}
 
+	// Ayush
+//	@PostMapping("/saveOrUpdateCodeModules")
+//	public ResponseEntity<ApiResponse> saveOrUpdateCodeModule(@RequestBody CodeModule module) {
+//		try {
+//			CodeModule saved = preferenceService.saveOrUpdateCodeModule(module);
+//			return ResponseEntity.ok(new ApiResponse("success", "Code Module saved successfully", saved));
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//					.body(new ApiResponse("error", "Failed to save Code Module", null));
+//		}
+//	}
 
 }
-
-

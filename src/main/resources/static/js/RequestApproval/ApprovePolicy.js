@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function loadCustomerKYCData() {
 	$.ajax({	
-		url: "/api/requestapproval/unapprovedAddNewInvestment",
+		url: "api/requestapproval/unapprovedAddNewInvestment",
 		type: "GET",
 		contentType: "application/json",
 		success: function(response) {
@@ -107,7 +107,7 @@ $(document).ready(function () {
         // Approve each selected investment
         selectedIds.forEach(function (id) {
             $.ajax({
-                url: "/api/requestapproval/approveInvestmentData",
+                url: "api/requestapproval/approveInvestmentData",
                 type: "POST",
                 data: {
                     id: id,

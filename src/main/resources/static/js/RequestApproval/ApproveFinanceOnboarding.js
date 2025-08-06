@@ -4,7 +4,7 @@ let allFinancialConsultantData = [];
 
 function searchInTheFinanceOnboarding() {
 	$.ajax({
-		url: "/api/financialconsultant/getUnapprovedFinancialConsultants",
+		url: "api/financialconsultant/getUnapprovedFinancialConsultants",
 		type: "POST",
 		contentType: "application/json",
 		success: function(response) {
@@ -32,7 +32,7 @@ function renderTable(data) {
             <tr style="font-family: 'Poppins', sans-serif;">
                 <td><input type="checkbox" class="member-checkbox" value="${item.id}"></td>
 				<td>${index + 1}</td>
-				<td>${item.customerName || '-'}</td>
+				<td>${item.financialName || '-'}</td>
 				<td>${item.financialCode || '-'}</td>
 				<td>${item.dob || '-'}</td>
 				<td>${item.academicBackground || '-'}</td>
@@ -105,7 +105,7 @@ function filterBranchNameData() {
 function updateMemberApprovalStatus(id, isApproved) {
 	 
     $.ajax({
-        url: "/api/financialconsultant/approvedFinancialConsultantData",
+        url: "api/financialconsultant/approvedFinancialConsultantData",
         type: "POST",
         data: {
             id: id,

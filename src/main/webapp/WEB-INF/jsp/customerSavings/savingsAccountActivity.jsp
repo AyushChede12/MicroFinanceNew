@@ -78,15 +78,13 @@ pageEncoding="ISO-8859-1"%> -->
               </div>
             </div>
             
-               <div class="col-lg-3">           
-                <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Select Branch Name</label> <select id="selectBranchName" name="selectBranchName" required="required"
-                    class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="">Blue</option>
-                  </select>
-                </div>
+             <div class="col-lg-3">
+              <div class="d-flex flex-column formFields mb-4">
+                <label for="">Select Branch Name</label> <input type="text" name="selectBranchName" id="selectBranchName" required="required"
+                  placeholder="Enter Branch Name" />
               </div>
+            </div>
+                           
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">
@@ -265,7 +263,39 @@ pageEncoding="ISO-8859-1"%> -->
       </form>
 
     </div>
+    <div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
 
+					<div class="card-body table-responsive">
+						<h5 class="card-title">
+							Saving Account Data <span>| Table View</span>
+						</h5>
+
+						<table class="table table-borderless datatable overflow-scroll">
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+									<th scope="col">Sr No</th>
+									<th scope="col">Branch Name</th>
+									<th scope="col">Opening Date</th>
+									<th scope="col">Account Number</th>
+									<th scope="col">Transaction Type</th>
+									<th scope="col">Credit/Debit</th>
+									<th scope="col">Balance</th>
+									<th scope="col">Pay Mode</th>
+									<th scope="col">Remarks</th>
+									<th scope="col">TXN ID</th>
+									<th scope="col">User ID</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
   </main>
   <!-- <script src="js/chartScript.js"></script> -->
