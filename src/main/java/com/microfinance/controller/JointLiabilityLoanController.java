@@ -382,7 +382,7 @@ public class JointLiabilityLoanController {
     	}
     }
     
-    }
+    
     
    
     // feath the property form Installment Re-Payment
