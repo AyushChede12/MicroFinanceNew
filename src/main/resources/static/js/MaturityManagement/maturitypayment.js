@@ -128,3 +128,28 @@ function calDuration(data){
 		         }
 				 return durationText;
 }
+
+function sysPayable(data){
+	
+		 let depositAmount = parseFloat(data.depositAmount);                    
+		 let rateOfIntrest = parseFloat(data.roi);   
+		 let syspayable=0;
+		 let intrest=0;
+		
+		
+		 intrest=(depositAmount*rateOfIntrest*1)/100;
+		 syspayable=syspayable+intrest;
+		
+		return syspayable;
+		
+		
+		
+}
+
+
+
+
+
+
+
+
