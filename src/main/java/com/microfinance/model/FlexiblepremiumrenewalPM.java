@@ -25,6 +25,7 @@ public class FlexiblepremiumrenewalPM {
 	private String txnType;
 	private String amount;
 	private String modeOfPayment;
+	private boolean isApproved;
 	private String image1;
 	private String image2;
 	public long getId() {
@@ -122,6 +123,12 @@ public class FlexiblepremiumrenewalPM {
 	}
 	public void setModeOfPayment(String modeOfPayment) {
 		this.modeOfPayment = modeOfPayment;
+	}
+	public boolean isApproved() {
+		return isApproved;
+	}
+	public void setApproved(boolean isApproved) {
+		this.isApproved = isApproved;
 	}
 	public String getImage1() {
 		return image1;
