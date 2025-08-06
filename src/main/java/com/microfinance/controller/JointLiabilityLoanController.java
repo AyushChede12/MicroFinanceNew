@@ -28,6 +28,7 @@ import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.InstallmentRepayment;
 import com.microfinance.model.LoanAprroval;
 import com.microfinance.service.JointLiabilityLoanService;
 
@@ -379,7 +380,7 @@ public class JointLiabilityLoanController {
     	} else {
     		return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
     	}
-
+    }
     
     }
     
@@ -395,8 +396,49 @@ public class JointLiabilityLoanController {
         }
 
     }
-   
+    // save installment repayments
+    @PostMapping("/saveRepayment")
+    public ResponseEntity<ApiResponse<InstallmentRepayment>> saveRepayment(@RequestBody InstallmentRepayment repayment) {
+        boolean isSaved = jointLiabilityLoanService.saveRepayment(repayment);
+
+        if (isSaved) {
+            ApiResponse<InstallmentRepayment> response = ApiResponse.success(
+                HttpStatus.CREATED,
+                "Repayment saved successfully",
+                repayment
+            );
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } else {
+            ApiResponse<InstallmentRepayment> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save repayment."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+    
+    @GetMapping("/view")
+    public ResponseEntity<ApiResponse<List<InstallmentRepayment>>> viewAllRepayments() {
+        List<InstallmentRepayment> all = jointLiabilityLoanService.getAllRepayments();
+
+        if (all != null && !all.isEmpty()) {
+            ApiResponse<List<InstallmentRepayment>> response = ApiResponse.success(
+                HttpStatus.OK,
+                "All repayments fetched successfully.",
+                all
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<List<InstallmentRepayment>> response = ApiResponse.error(
+                HttpStatus.NOT_FOUND,
+                "No repayment records found."
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 }
+   
+
        
 
 
