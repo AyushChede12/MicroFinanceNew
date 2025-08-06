@@ -90,8 +90,8 @@ public class ApplyForGroupLoan {
 	public void setCommunityName(String communityName) {
 		this.communityName = communityName;
 	}
-	public String getCommunityaddress() {
-		return communityaddress;
+	public String getAllocatedStaff() {
+		return allocatedStaff;
 	}
 	public void setAllocatedStaff(String allocatedStaff) {
 		this.allocatedStaff = allocatedStaff;
