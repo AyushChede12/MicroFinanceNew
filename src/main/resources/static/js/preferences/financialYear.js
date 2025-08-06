@@ -63,7 +63,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(branchData),
 			success: function(response) {
-				if (response.status=='CREATED') {
+				if (response.status == 'CREATED') {
 					alert("Financial Year Saved Successfully"); // Show custom message from controller
 					location.reload(); // Reload page or update table
 				} else {
@@ -84,7 +84,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.status=="FOUND") {
+			if (response.status == "FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -117,7 +117,7 @@ function viewData(id) {
 		type: "GET",
 		data: { id: id },
 		success: function(response) {
-			if (response.status=="FOUND") {
+			if (response.status == "FOUND") {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#financialYearName").val(branch.financialYearName);
@@ -140,7 +140,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.status=="OK") {
+				if (response.status == "OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -157,6 +157,37 @@ function deleteData(id) {
 }
 
 function updateFY() {
+	// Clear all previous messages
+	$('#chkfyname').text('');
+	$('#chkdatefrom').text('');
+	$('#chkdateto').text('');
+
+	// Fetch input values
+	var fyName = $('#financialYearName').val().trim();
+	var dateFrom = $('#dateFrom').val().trim();
+	var dateTo = $('#dateTo').val().trim();
+
+	let isValid = true;
+
+	// Validation: Financial Year Name
+	if (fyName === '' || dateFrom === '' || dateTo === '') {
+		alert("First Select Any Data then Proceed to Update");
+		isValid = false;
+	}
+
+	// Optional: Additional Date Range Validation
+	if (dateFrom !== '' && dateTo !== '') {
+		if (new Date(dateFrom) > new Date(dateTo)) {
+			$('#chkdateto').text('* Date To must be after Date From');
+			if (isValid) $('#dateTo').focus();
+			isValid = false;
+		}
+	}
+
+	if (!isValid) {
+		return false; // Stop AJAX call
+	}
+
 	let payload = {
 		id: $("#id").val(),
 		financialYearName: $("#financialYearName").val(),
@@ -170,7 +201,7 @@ function updateFY() {
 		contentType: "application/json",
 		data: JSON.stringify(payload),
 		success: function(response) {
-			if (response.status="OK") {
+			if (response.status = "OK") {
 				alert(response.message);
 				location.reload();
 			} else {
