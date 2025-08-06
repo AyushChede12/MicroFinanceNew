@@ -4,7 +4,7 @@ $(document).ready(function() {
 	console.log("Document ready");
 
 	$.ajax({
-		url: 'approved',
+		url: 'api/customermanagement/approved',
 		type: 'GET',
 		success: function(response) {
 			if (Array.isArray(response) && response.length > 0) {
