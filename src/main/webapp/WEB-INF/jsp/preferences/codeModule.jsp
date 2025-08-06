@@ -177,7 +177,7 @@ button {
 										<th class="text-left">Branch Prefix</th>
 										<th>Code Prefix</th>
 										<th>No.of Digit</th>
-										<th>Last No.</th>
+										<th>Last No (ID).</th>
 										<th>Preview</th>
 										<th>Action</th>
 									</tr>
@@ -189,11 +189,11 @@ button {
 										<td data-label="Code Prefix"><input class="ip-center"
 											type="text" value="M" readonly="readonly"></td>
 										<td data-label="No.of Digit"><input class="ip-center"
-											type="number"></td>
+											type="number" value="5" readonly="readonly"></td>
 										<td data-label="Last No."><input class="ip-center"
-											type="number"></td>
+											type="number" value="1" readonly="readonly"></td>
 										<td data-label="Preview"><input class="ip-center"
-											type="text" readonly></td>
+											type="text" value="M00001";	" readonly></td>
 										<td data-label="Action"><button class="btn btn-success">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;">
