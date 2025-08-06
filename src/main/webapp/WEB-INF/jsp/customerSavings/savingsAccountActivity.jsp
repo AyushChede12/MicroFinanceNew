@@ -78,15 +78,13 @@ pageEncoding="ISO-8859-1"%> -->
               </div>
             </div>
             
-               <div class="col-lg-3">           
-                <div class="d-flex flex-column formFields mb-4">
-                  <label for="">Select Branch Name</label> <select id="selectBranchName" name="selectBranchName" required="required"
-                    class="form-control selectField" style="height: 30px;">
-                    <option value=""> Select Colour</option>
-                    <option value="">Blue</option>
-                  </select>
-                </div>
+             <div class="col-lg-3">
+              <div class="d-flex flex-column formFields mb-4">
+                <label for="">Select Branch Name</label> <input type="text" name="selectBranchName" id="selectBranchName" required="required"
+                  placeholder="Enter Branch Name" />
               </div>
+            </div>
+                           
 
             <div class="col-lg-3">
               <div class="d-flex flex-column formFields mb-4">

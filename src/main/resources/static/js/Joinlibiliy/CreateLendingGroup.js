@@ -5,8 +5,9 @@ $(document).ready(function() {
 	$('#updatelendingBtn').hide(); // Hide update initially
 
 	$('#savelendingBtn').on('click', function(e) {
-		e.preventDefault(); // Prevent default form submission
-
+		
+		     e.preventDefault(); // prevent form save if invalid
+		   
 		const loanData = {
 			planCode: $('#planCode').val(),
 			loanSchemeInformation: $('#loanSchemeInformation').val(),
@@ -20,6 +21,7 @@ $(document).ready(function() {
 			minLoanAmt: $('#minLoanAmt').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
 			interestType: $('#interestType').val(),
+			totalAmount: $('#totalAmount').val(),
 			maximumLoanAmount: $('#maximumLoanAmount').val(),
 			securityType: $('#securityType').val(),
 			emiType: $('#emiType').val(),
@@ -239,5 +241,6 @@ $(document).ready(function() {
 			});
 		}
 	});
-
+	
+	
 });

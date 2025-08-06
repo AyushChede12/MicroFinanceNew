@@ -26,6 +26,7 @@ public class CreateLendingGroup {
     private String securityType;
     private String emiType;
     private String planActivationStatus;
+    private String totalAmount;
 
     // Payment Deductions
     private String processingFeePercent;
@@ -176,6 +177,12 @@ public class CreateLendingGroup {
 	}
 	public void setTerm(String term) {
 		this.term = term;
+	}
+	public String getTotalAmount() {
+		return totalAmount;
+	}
+	public void setTotalAmount(String totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
 
