@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -63,9 +67,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch:</label>
-								<select id="Branch"
-									name="Branch" required="required"
+								<label for="">Branch:</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
@@ -117,7 +120,7 @@ pageEncoding="ISO-8859-1"%> -->
 												</tr>
 											</thead>
 											<tbody>
-												
+
 											</tbody>
 										</table>
 									</div>
@@ -137,6 +140,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+
+
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 </body>

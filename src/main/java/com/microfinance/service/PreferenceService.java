@@ -506,4 +506,14 @@ public class PreferenceService {
 		return prefix + String.format(format, number);
 	}
 
+	public boolean deleteCodeModule(Long id) {
+		// TODO Auto-generated method stub
+		if (codeModuleRepo.existsById(id)) {
+			codeModuleRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
