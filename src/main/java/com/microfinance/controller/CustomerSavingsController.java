@@ -536,30 +536,35 @@ public class CustomerSavingsController {
 	}*/
     
     //janvi : Save Saving Acc Closer Data
-    @PostMapping("/saveAccountCloseInfo")	
+   /* @PostMapping("/saveAccountCloseInfo")	
 	public ResponseEntity<savingsAccountCloser> saveAccountCloseInfo(@RequestBody savingsAccountCloser accountCloser) {
 	    // 1. Save the account close record
-	    savingsAccountCloser savedAccCloseEntry = customersaving.saveAccountCloseInfo(accountCloser);
-
-	    // 2. Get account number from accountCloser
-	   /* String accountNo = accountCloser.getSelectaccountNo(); // make sure this is correct
-
-	    // 3. Fetch SavingOpening records by account number
-	    List<SavingOpening> savingOpenings = savingopeningrepo.findByAccountNo(accountNo); 
-
-	    // 4. Update chkIsActive to false for each matched entry
-	    if (!savingOpenings.isEmpty()) {
-	        for (SavingOpening savingOpening : savingOpenings) {
-	            savingOpening.setChkisactive(false); // set chkisactive = false for each one
-	            savingOpening.setOpeningAmount("0");
-	        }
-	        savingopeningrepo.saveAll(savingOpenings); // save all changes in one go
-	    } else {
-	        System.out.println("No SavingOpening records found for accountNo: " + accountNo);
-	    }*/
+	    savingsAccountCloser savedAccCloseEntry = customersaving.saveAccountCloseInfo(accountCloser);	 
+	   
 	    return new ResponseEntity<>(savedAccCloseEntry, HttpStatus.CREATED);
-	}
-	
+	}*/
     
-	
+    @PostMapping("/saveAccountCloseInfo")	
+    public ResponseEntity<savingsAccountCloser> saveAccountCloseInfo(@RequestBody savingsAccountCloser accountCloser) {
+        // 1. Save to savingsAccountCloser table
+        savingsAccountCloser savedEntry = customersaving.saveAccountCloseInfo(accountCloser);
+
+        // 2. Fetch the CreateSavingsAccount using Optional
+        Optional<CreateSavingsAccount> optionalAccount = createSavingAccountRepo.findByAccountNumber(accountCloser.getAccountNumber());
+
+        // 3. Delete if present
+        if (optionalAccount.isPresent()) {
+            createSavingAccountRepo.delete(optionalAccount.get());
+        } else {
+            // Optional: log or notify that account was not found for deletion
+            System.out.println("No CreateSavingsAccount found for account number: " + accountCloser.getAccountNumber());
+        }
+
+        // 4. Return the saved entry
+        return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+    }
+
+    
+   
+
 }
