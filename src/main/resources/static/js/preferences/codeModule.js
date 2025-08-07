@@ -260,7 +260,7 @@ $(document).ready(function() {
 	$("#saveMISPolicyNo").click(function() {
 		const $row = $(this).closest("tr");
 
-		//const id = $row.data("id") || null;
+		const id = $row.data("id") || null;
 		const name = $row.find('td[data-label="Name MIS"]').text().trim();
 		const branchPrefix = $row.find('td[data-label="Branch Prefix MIS"] input[type="checkbox"]').is(":checked");
 		const codePrefix = $row.find('td[data-label="Code Prefix MIS"] input').val().trim();
@@ -274,6 +274,7 @@ $(document).ready(function() {
 		}
 
 		const data = {
+			id: id,
 			name: name,
 			branchPrefix: branchPrefix,
 			codePrefix: codePrefix,
@@ -291,6 +292,135 @@ $(document).ready(function() {
 				$row.find('td[data-label="Preview MIS"] input').val(preview);
 				$row.attr("data-id", response.data.id); // Save ID in case it was a new entry
 				alert("✅ MIS Policy No saved successfully For Code Module!");
+			},
+			error: function(xhr) {
+				const msg = xhr.responseJSON?.message || "Something went wrong!";
+				alert("❌ " + msg);
+			}
+		});
+	});
+
+	$("#saveSavingACCNo").click(function() {
+		const $row = $(this).closest("tr");
+
+		const id = $row.data("id") || null;
+		const name = $row.find('td[data-label="Name ACC"]').text().trim();
+		const branchPrefix = $row.find('td[data-label="Branch Prefix ACC"] input[type="checkbox"]').is(":checked");
+		const codePrefix = $row.find('td[data-label="Code Prefix ACC"] input').val().trim();
+		const noOfDigit = parseInt($row.find('td[data-label="No. of Digit ACC"] input').val());
+		const lastNo = parseInt($row.find('td[data-label="Last No ACC"] input').val());
+
+		// Simple validation
+		if (isNaN(noOfDigit) || isNaN(lastNo) || !codePrefix) {
+			alert("⚠️ Please ensure Code Prefix, No. of Digit, and Last No. are correctly filled.");
+			return;
+		}
+
+		const data = {
+			id: id,
+			name: name,
+			branchPrefix: branchPrefix,
+			codePrefix: codePrefix,
+			noOfDigit: noOfDigit,
+			lastNo: lastNo
+		};
+
+		$.ajax({
+			url: "api/preference/saveOrUpdateCodeModules",
+			method: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(response) {
+				const preview = response.data.preview;
+				$row.find('td[data-label="Preview ACC"] input').val(preview);
+				$row.attr("data-id", response.data.id); // Save ID in case it was a new entry
+				alert("✅ Saving Account No saved successfully For Code Module!");
+			},
+			error: function(xhr) {
+				const msg = xhr.responseJSON?.message || "Something went wrong!";
+				alert("❌ " + msg);
+			}
+		});
+	});
+
+	$("#saveLoanID").click(function() {
+		const $row = $(this).closest("tr");
+
+		const id = $row.data("id") || null;
+		const name = $row.find('td[data-label="Name LOAN"]').text().trim();
+		const branchPrefix = $row.find('td[data-label="Branch Prefix LOAN"] input[type="checkbox"]').is(":checked");
+		const codePrefix = $row.find('td[data-label="Code Prefix LOAN"] input').val().trim();
+		const noOfDigit = parseInt($row.find('td[data-label="No. of Digit LOAN"] input').val());
+		const lastNo = parseInt($row.find('td[data-label="Last No LOAN"] input').val());
+
+		// Simple validation
+		if (isNaN(noOfDigit) || isNaN(lastNo) || !codePrefix) {
+			alert("⚠️ Please ensure Code Prefix, No. of Digit, and Last No. are correctly filled.");
+			return;
+		}
+
+		const data = {
+			id: id,
+			name: name,
+			branchPrefix: branchPrefix,
+			codePrefix: codePrefix,
+			noOfDigit: noOfDigit,
+			lastNo: lastNo
+		};
+
+		$.ajax({
+			url: "api/preference/saveOrUpdateCodeModules",
+			method: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(response) {
+				const preview = response.data.preview;
+				$row.find('td[data-label="Preview LOAN"] input').val(preview);
+				$row.attr("data-id", response.data.id); // Save ID in case it was a new entry
+				alert("✅ Loan ID saved successfully For Code Module!");
+			},
+			error: function(xhr) {
+				const msg = xhr.responseJSON?.message || "Something went wrong!";
+				alert("❌ " + msg);
+			}
+		});
+	});
+
+	$("#saveGroupCode").click(function() {
+		const $row = $(this).closest("tr");
+
+		const id = $row.data("id") || null;
+		const name = $row.find('td[data-label="Name GROUP"]').text().trim();
+		const branchPrefix = $row.find('td[data-label="Branch Prefix GROUP"] input[type="checkbox"]').is(":checked");
+		const codePrefix = $row.find('td[data-label="Code Prefix GROUP"] input').val().trim();
+		const noOfDigit = parseInt($row.find('td[data-label="No. of Digit GROUP"] input').val());
+		const lastNo = parseInt($row.find('td[data-label="Last No GROUP"] input').val());
+
+		// Simple validation
+		if (isNaN(noOfDigit) || isNaN(lastNo) || !codePrefix) {
+			alert("⚠️ Please ensure Code Prefix, No. of Digit, and Last No. are correctly filled.");
+			return;
+		}
+
+		const data = {
+			id: id,
+			name: name,
+			branchPrefix: branchPrefix,
+			codePrefix: codePrefix,
+			noOfDigit: noOfDigit,
+			lastNo: lastNo
+		};
+
+		$.ajax({
+			url: "api/preference/saveOrUpdateCodeModules",
+			method: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(response) {
+				const preview = response.data.preview;
+				$row.find('td[data-label="Preview GROUP"] input').val(preview);
+				$row.attr("data-id", response.data.id); // Save ID in case it was a new entry
+				alert("✅ Group Code saved successfully For Code Module!");
 			},
 			error: function(xhr) {
 				const msg = xhr.responseJSON?.message || "Something went wrong!";
