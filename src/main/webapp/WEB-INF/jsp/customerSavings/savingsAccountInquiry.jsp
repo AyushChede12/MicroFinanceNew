@@ -151,7 +151,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<th scope="col">State</th>
 											<th scope="col">Opening Date</th>
 											<th scope="col">Financial Consultant Code</th>
-											<th scope="col">Plan Name</th>											
+											<th scope="col">Plan Name</th>	
+											<th scope="col">Approve Status</th>											
 										</tr>
 									</thead>
 									<tbody id="tableSavingAcc">
