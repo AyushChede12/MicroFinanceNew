@@ -424,15 +424,29 @@ public class PreferenceController {
 	}
 
 	// Ayush
-//	@PostMapping("/saveOrUpdateCodeModules")
-//	public ResponseEntity<ApiResponse> saveOrUpdateCodeModule(@RequestBody CodeModule module) {
-//		try {
-//			CodeModule saved = preferenceService.saveOrUpdateCodeModule(module);
-//			return ResponseEntity.ok(new ApiResponse("success", "Code Module saved successfully", saved));
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//					.body(new ApiResponse("error", "Failed to save Code Module", null));
-//		}
-//	}
+	@PostMapping("/saveOrUpdateCodeModules")
+	public ResponseEntity<ApiResponse> saveOrUpdateCodeModule(@RequestBody CodeModule module) {
+		try {
+			CodeModule code = preferenceService.saveOrUpdateCodeModule(module);
+			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "Code Module saved successfully", code));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse("error", "Failed to save Code Module", null));
+		}
+	}
+
+	@PostMapping("/deleteCodeModuleById") // Ayush
+	public ResponseEntity<ApiResponse<String>> deleteCodeModule(@RequestParam("id") Long id) {
+		boolean isDeleted = preferenceService.deleteCodeModule(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Code Module deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Code Module deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
 
 }
