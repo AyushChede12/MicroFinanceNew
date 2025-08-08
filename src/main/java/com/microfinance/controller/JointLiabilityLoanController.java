@@ -379,9 +379,9 @@ public class JointLiabilityLoanController {
     	} else {
     		return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
     	}
-
-    
     }
+    
+    
     
    
     // feath the property form Installment Re-Payment

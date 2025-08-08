@@ -1,7 +1,55 @@
 
 //janvi : today 
+function AccNoDropdown() {
+    $.ajax({
+        url: "api/customersavings/getAllSavingAccountData",
+        type: "GET",
+        success: function(response) {
+			console.log("API response:", response);
+            var dropdown1 = $('#accountNumber');
+            dropdown1.empty();
+            dropdown1.append('<option value="">Select</option>');
 
-	//search team member
+            if (response.status === "FOUND" && response.data) {
+                $.each(response.data, function(index, item) {
+                   dropdown1.append('<option value="' + item.accountNumber+ '">' + item.accountNumber + '</option>');
+                });
+            } else {
+                dropdown1.append('<option value="">No Account Number found</option>');
+            }
+        },
+        error: function() {
+            alert("Failed to fetch Policyname.");
+        }
+    });
+}
+
+//fetch Policy Name
+function schemeNameDropdown() {
+    $.ajax({
+        url: "api/customersavings/fetchsavingchemecatalog",
+        type: "GET",
+        success: function(response) {
+			console.log("API response:", response);
+            var dropdown = $('#schemename');
+            dropdown.empty();
+            dropdown.append('<option value="">Select</option>');
+
+            if (response.status === "FOUND" && response.data) {
+                $.each(response.data, function(index, item) {
+                   dropdown.append('<option value="' + item+ '">' + item + '</option>');
+                });
+            } else {
+                dropdown.append('<option value="">No Policyname found</option>');
+            }
+        },
+        error: function() {
+            alert("Failed to fetch Policyname.");
+        }
+    });
+}
+
+//search team member
 let allSavingAccData = []; 
  // Global array to store all team member data
 
@@ -108,7 +156,7 @@ inputaccHolderName.addEventListener("input", function() {
 
 // Account no. Filter (Column 1)
 const inputaccountNo = document.getElementById("accountNumber");
-inputaccountNo.addEventListener("input", function() {
+inputaccountNo.addEventListener("change", function() {
     filterTableByColumn(1, inputaccountNo.value); // Column 2: Member Name
 });
 
@@ -127,7 +175,7 @@ inputadvisorCode.addEventListener("input", function() {
 // Scheme name Filter (Column 3)
 const inputsBPlan = document.getElementById("schemename");
 inputsBPlan.addEventListener("change", function() {
-    filterTableByColumn(13, inputsBPlan.value); // Column 6: PAN No.
+    filterTableByColumn(12, inputsBPlan.value); // Column 6: PAN No.
 }); 
 
 
