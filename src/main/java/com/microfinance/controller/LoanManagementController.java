@@ -242,4 +242,31 @@ public class LoanManagementController {
 						.body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "Payment failed", null));
 			}
 		}
+		
+		//API for fetching all data of loan payment
+		@GetMapping("/fetchLoanPaymentsByLoanId")
+		public ResponseEntity<ApiResponse<List<LoanPayment>>> fetchLoanPaymentsByLoanId(
+		        @RequestParam String loanId) {
+
+		    List<LoanPayment> list = loanServices.fetchLoanPaymentsByLoanId(loanId);
+
+		    if (list != null && !list.isEmpty()) {
+		        ApiResponse<List<LoanPayment>> response = new ApiResponse<>(
+		            HttpStatus.OK,
+		            "Loan Payments fetched successfully",
+		            list
+		        );
+		        return ResponseEntity.ok(response);
+		    } else {
+		        ApiResponse<List<LoanPayment>> response = new ApiResponse<>(
+		            HttpStatus.NOT_FOUND,
+		            "No data found for Loan ID: " + loanId,
+		            null
+		        );
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		    }
+		}
+
+
+		
 }

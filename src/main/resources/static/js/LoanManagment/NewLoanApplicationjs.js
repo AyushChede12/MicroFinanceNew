@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 	console.log("Document ready");
 
@@ -7,7 +5,12 @@ $(document).ready(function() {
 		url: 'api/customermanagement/approved',
 		type: 'GET',
 		success: function(response) {
-			if (Array.isArray(response) && response.length > 0) {
+			console.log("API response:", response);
+
+			// Extract the actual customer list from response.data
+			const customers = response.data;
+
+			if (Array.isArray(customers) && customers.length > 0) {
 				const memberDropdown = $('#memberId');
 				const guarantorDropdown = $('#guarantorMemberId');
 				const coApplicantDropdown = $('#coApplicantMemberId');
@@ -21,25 +24,26 @@ $(document).ready(function() {
 				guarantorDropdown.append(defaultOption);
 				coApplicantDropdown.append(defaultOption);
 
-				response.forEach(function(customer) {
-					// ✅ ✅ ✅ FIX: Use memberCode as the value!
-					const option = `<option value="${customer.memberCode}">${customer.customerName} - ${customer.memberCode}</option>`;
-					memberDropdown.append(option);
-					guarantorDropdown.append(option);
-					coApplicantDropdown.append(option);
+				customers.forEach(function(customer) {
+					// Only add if memberCode and customerName exist
+					if (customer.memberCode && customer.customerName) {
+						const option = `<option value="${customer.memberCode}">${customer.customerName} - ${customer.memberCode}</option>`;
+						memberDropdown.append(option);
+						guarantorDropdown.append(option);
+						coApplicantDropdown.append(option);
+					}
 				});
-
 			} else {
 				alert('No member data found');
 			}
 		},
+
 		error: function(xhr, status, error) {
 			console.error('AJAX Error:', status, error);
 			alert('Failed to fetch members');
 		}
 	});
 });
-
 
 
 $(document).ready(function() {

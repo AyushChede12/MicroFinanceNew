@@ -283,4 +283,9 @@ public class LoanManagementService {
 
 			return true;
 		}
+
+		public List<LoanPayment> fetchLoanPaymentsByLoanId(String loanId) {
+			
+			return loanPaymentRepo.findByLoanId(loanId);
+		}
 }
