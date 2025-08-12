@@ -81,8 +81,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row mt-3" style="margin-left: 20px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning">Search</button>
-								<button id="saveBtn" class="btnStyle bg-danger">All
+								<button type="button" id="searchBranch" class="btnStyle bg-warning">Search</button>
+								<button type="button" id="searchAllBranch" class="btnStyle bg-danger">All
 									Branch</button>
 							</div>
 						</div>
@@ -104,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 									<div class="card-body table-responsive">
 										<h5 class="card-title">
-											Recent Sales <span>| Today</span>
+											Transactions <span>| Today</span>
 										</h5>
 
 										<table
@@ -112,11 +112,11 @@ pageEncoding="ISO-8859-1"%> -->
 											<thead class="table-light">
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">#</th>
-													<th scope="col">Customer</th>
-													<th scope="col">Product</th>
-													<th scope="col">Price</th>
-													<th scope="col">Status</th>
-													<th scope="col">Action</th>
+													<th scope="col">Branch</th>
+													<th scope="col">Transaction Date</th>
+													<th scope="col">Customer Code</th>
+													<th scope="col">Amount</th>
+													<th scope="col">Payment Mode</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -145,6 +145,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/balanceSheet.js"></script>
 </body>
 
 </html>

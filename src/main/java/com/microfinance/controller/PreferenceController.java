@@ -29,6 +29,7 @@ import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.RelativeModule;
 import com.microfinance.model.Statedistricts;
+import com.microfinance.model.Transactions;
 import com.microfinance.model.states;
 import com.microfinance.repository.StateDistrictRepo;
 import com.microfinance.model.FinancialYear;
@@ -447,6 +448,23 @@ public class PreferenceController {
 					"failure");
 			return ResponseEntity.badRequest().body(response);
 		}
+	}
+
+	@GetMapping("/fetchAllTransactions")
+	public ResponseEntity<ApiResponse<List<Transactions>>> fetchAllTransactions(
+			@RequestParam(required = false) String branchName) {
+
+		List<Transactions> list;
+		if (branchName != null && !branchName.isEmpty()) {
+			list = preferenceService.fetchTransactionsByBranch(branchName);
+		} else {
+			list = preferenceService.fetchAllTransactions();
+		}
+
+		ApiResponse<List<Transactions>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"Transactions fetched successfully", list);
+
+		return ResponseEntity.ok(response);
 	}
 
 }
