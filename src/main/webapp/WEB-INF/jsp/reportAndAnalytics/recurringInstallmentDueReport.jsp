@@ -33,6 +33,14 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 
@@ -65,11 +73,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
+								<label for="">Branch </label> <select id="branchName1" name="branchname"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
 								</select>
 							</div>
 						</div>
@@ -77,15 +84,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">From Date :</label> <input type="date"
-									name="fDate" id="fDate" required="required"
+									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter fDate" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">TO Date :</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
+								<label for="">TO Date :</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder="Enter tDate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -94,7 +101,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="searchBtn" class="btn btn-dark">Find</button>
+							<button id="findBtn" class="btn btn-dark">Find</button>
 						</div>
 					</div>
 
@@ -118,31 +125,20 @@ pageEncoding="ISO-8859-1"%> -->
 								<table class="table table-borderless datatable">
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
-											<th scope="col">Policy No</th>
-											<th scope="col">Applicant Name</th>
-											<th scope="col">Branch Name</th>
-											<th scope="col">Plan Code</th>
-											<th scope="col">Mobile No</th>
-											<th scope="col">TXN Date</th>
-											<th scope="col">Paid Inst</th>
-											<th scope="col">Due Amount</th>
-											<th scope="col">Advisor</th>
-											<th scope="col">Advisor Name</th>
+											<th scope="col">Sr No.</th>
+											<th scope="col">Policy Code</th>
+											<th scope="col">Policy Date</th>
+											<th scope="col">Client Name</th>
+											<th scope="col">Contact No</th>
+											<th scope="col">Policy Amount</th>
+											<th scope="col">Policy Type</th>
+											<th scope="col">Policy Term</th>
+											<th scope="col">Approval Status</th>
+											<th scope="col">Print</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr style="font-family: 'Poppins', sans-serif;">
-											<td>P001</td>
-											<td>Poonam</td>
-											<td>Umrer</td>
-											<td>P001</td>
-											<td>8999240768</td>
-											<td>11-04-2024</td>
-											<td>7</td>
-											<td>300</td>
-											<td>AD</td>
-											<td>Poonam</td>
-										</tr>
+										
 									</tbody>
 								</table>
 							</div>
@@ -154,9 +150,29 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 
+<!-- Modal -->
+<div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="printModalLabel">Loan Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalDataContainer">
+        <!-- Policy details will be populated here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="printBtn" class="btn btn-primary">Print</button>
+        <button type="button" id="downloadBtn" class="btn btn-success">Download PDF</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/recurringInstallmentDueReport.js"></script>
 </body>
 
 </html>
