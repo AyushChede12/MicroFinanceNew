@@ -25,6 +25,7 @@ import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
+import com.microfinance.model.Transactions;
 import com.microfinance.model.states;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
@@ -36,6 +37,7 @@ import com.microfinance.repository.ExecutiveFounderRepo;
 import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
 import com.microfinance.repository.Staterepo;
+import com.microfinance.repository.TransactionsRepo;
 
 @Service
 public class PreferenceService {
@@ -69,6 +71,9 @@ public class PreferenceService {
 
 	@Autowired
 	CodeModuleRepo codeModuleRepo;
+
+	@Autowired
+	TransactionsRepo transactionsRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -504,6 +509,27 @@ public class PreferenceService {
 	private String generatePreviewCode(String prefix, int digits, int number) {
 		String format = "%0" + digits + "d";
 		return prefix + String.format(format, number);
+	}
+
+	public boolean deleteCodeModule(Long id) {
+		// TODO Auto-generated method stub
+		if (codeModuleRepo.existsById(id)) {
+			codeModuleRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<Transactions> fetchAllTransactions() {
+		return transactionsRepo.findAll();
+	}
+
+	public List<Transactions> fetchTransactionsByBranch(String branchName) {
+		if (branchName == null || branchName.trim().isEmpty()) {
+			return transactionsRepo.findAll(); // return all if filter is empty
+		}
+		return transactionsRepo.findByBranchNameIgnoreCase(branchName);
 	}
 
 }

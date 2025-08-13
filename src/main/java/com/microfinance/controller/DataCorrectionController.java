@@ -102,17 +102,7 @@ public class DataCorrectionController {
 		}
 	}
 
-	// Ayush
-//	@PostMapping("/fetchSavingAccountByCustomerCode")
-//	public ApiResponse<List<CreateSavingsAccount>> fetchSavingByCustomerCode(@RequestParam("selectByCustomer") String selectByCustomer) {
-//		List<CreateSavingsAccount> list = dataCorrectionService.fetchSavingDataByCustomerCode(selectByCustomer);
-//		if (list != null && !list.isEmpty()) {
-//			return ApiResponse.success(HttpStatus.FOUND, "Saving Account Fetched Successfully", list);
-//		} else {
-//			return ApiResponse.error(HttpStatus.NOT_FOUND, "Saving Account Share Not Found");
-//		}
-//	}
-
+	//Ayush
 	@PostMapping("/updateDataOfPolicyManagement")
 	public ResponseEntity<ApiResponse<String>> updatePolicyManagement(
 			@RequestBody AddnewinvestmentPM adddnewinvestmentPM) {
@@ -147,12 +137,20 @@ public class DataCorrectionController {
 	}
 
 	// Ayush
-	@GetMapping("/fetchAllLoanApplications")
-	public ResponseEntity<ApiResponse<List<LoanApplication>>> fetchAllLoanApplicationsData() {
-		List<LoanApplication> list = dataCorrectionService.fetchAllLoanApplication();
-		ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.FOUND,
-				"Loan Application fetched successfully", list);
-		return ResponseEntity.ok(response);
+	@PostMapping("/updateDataOfLoanApplication")
+	public ResponseEntity<ApiResponse<String>> updateLoanApplication(@RequestBody LoanApplication loanApplication) {
+
+		int result = dataCorrectionService.updateCompanyAdministration(loanApplication);
+
+		if (result > 0) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Loan data updated successfully.",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST, "Failed to update Loan Data.",
+					"failure");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
 	}
 
 	// Ayush
@@ -171,6 +169,7 @@ public class DataCorrectionController {
 		}
 	}
 
+	// Ayush
 	@PostMapping("/deleteLoanApplicationDataById")
 	public ResponseEntity<ApiResponse<String>> deleteLoanApplication(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteLoanApplication(id);
@@ -186,22 +185,6 @@ public class DataCorrectionController {
 	}
 
 	// Ayush
-	@PostMapping("/updateLoanApplication")
-	public ResponseEntity<ApiResponse<String>> updateLoanApplicationData(@RequestBody LoanApplication loanapplication) {
-		boolean result = dataCorrectionService.updateLoanApplication(loanapplication);
-		if (result) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
-					"Loan Application Data Updated Successfully", "success");
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
-					"Loan Application Data Not Updated", "failure");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-		}
-	}
-
-	// Ayush
-
 	@GetMapping("/getPolicyRenewalByPolicyCode")
 	public ResponseEntity<ApiResponse<List<PolicyRenewal>>> getPolicyRenewalDataByPolicyCode(
 			@RequestParam String policyCode) {
@@ -332,39 +315,7 @@ public class DataCorrectionController {
 		}
 	}
 
-//	@GetMapping("/fetchAllApprovedSavingAccountActivity")
-//	public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> getApprovedSavingAccountActivity() {
-//		List<SavingAccountActivity> activity = dataCorrectionService.getApprovedSavingAccountActivity();
-//		if (activity != null && !activity.isEmpty()) {
-//
-//			ApiResponse<List<SavingAccountActivity>> response = new ApiResponse<>(HttpStatus.FOUND,
-//					"Saving Account Activity Data fetched successfully.", activity);
-//			return ResponseEntity.ok(response);
-//		} else {
-//			ApiResponse<List<SavingAccountActivity>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-//					"No approved Saving Account Activity found.", null);
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-//		}
-//	}
-	
 	//Ayush
-	@PostMapping("/updateDataOfLoanApplication")
-	public ResponseEntity<ApiResponse<String>> updateLoanApplication(
-			@RequestBody LoanApplication loanApplication) {
-
-		int result = dataCorrectionService.updateCompanyAdministration(loanApplication);
-
-		if (result > 0) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
-					"Loan data updated successfully.", "success");
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
-					"Failed to update Loan Data.", "failure");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-		}
-	}
-	
 	@GetMapping("/fetchAllApprovedJointLiabilityData")
 	public ResponseEntity<ApiResponse<List<ApplyForGroupLoan>>> getApprovedJointLiabilityData() {
 		List<ApplyForGroupLoan> group = dataCorrectionService.getApprovedJointLiability();
@@ -379,10 +330,10 @@ public class DataCorrectionController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 	}
-	
+
+	//Ayush
 	@PostMapping("/updateDataOfJointLiability")
-	public ResponseEntity<ApiResponse<String>> updateJointLiability(
-			@RequestBody ApplyForGroupLoan applyForGroupLoan) {
+	public ResponseEntity<ApiResponse<String>> updateJointLiability(@RequestBody ApplyForGroupLoan applyForGroupLoan) {
 
 		int result = dataCorrectionService.updateJointLiability(applyForGroupLoan);
 
@@ -396,7 +347,8 @@ public class DataCorrectionController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 		}
 	}
-	
+
+	//Ayush
 	@PostMapping("/deleteJointLiabilityDataById")
 	public ResponseEntity<ApiResponse<String>> deleteJointLiabilityData(@RequestParam("id") Long id) {
 		boolean isDeleted = dataCorrectionService.deleteJointLiability(id);
@@ -410,5 +362,5 @@ public class DataCorrectionController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
-	
+
 }
