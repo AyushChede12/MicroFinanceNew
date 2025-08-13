@@ -162,9 +162,9 @@ pageEncoding="ISO-8859-1"%> -->
 										name="interestType" id="interestType" required class="form-control selectField" style="height: 30px;">
 										
 										<option value="">-- Select Interest Type --</option>
-										<option value="flatInterest">Flat Interest</option>
-										<option value="reducingInterest">Reducing Interest</option>
-										<option value="Rule78">Rule 78</option>
+										<option value="Flat Interest">Flat Interest</option>
+										<option value="Reducing Interest">Reducing Interest</option>
+										<option value="Rule 78">Rule 78</option>
 										
 									</select>
 								</div>
@@ -185,11 +185,11 @@ pageEncoding="ISO-8859-1"%> -->
 									<label for="emiType">EMI mode*</label><select name="emiType"
 										id="emiType" required class="form-control selectField" style="height: 30px;">
 										<option value="">-- Select EMI Mode --</option>
-										<option value="daily">Daily</option>
-										<option value="weekly">Weekly</option>
-										<option value="monthly">Monthly</option>
-										<option value="fortnightly">Fortnightly</option>
-										<option value="quarterly">Quarterly</option>
+										<option value="Daily">Daily</option>
+										<option value="Weekly">Weekly</option>
+										<option value="Monthly">Monthly</option>
+										<option value="Fortnightly">Fortnightly</option>
+										<option value="Quarterly">Quarterly</option>
 									</select>
 
 								</div>
