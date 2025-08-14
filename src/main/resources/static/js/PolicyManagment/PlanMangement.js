@@ -8,6 +8,8 @@ $(document).ready(function() {
 	$('#saveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planDD').is(':checked') ? 1 : 0;
+
 		const dailyDeposit = {
 			drd: $('#drd').val(),
 			planCodeDD: $('#planCodeDD').val(),
@@ -26,7 +28,7 @@ $(document).ready(function() {
 			flexiblePlan: $('#flexiblePlan').val(),          // ⬅️ Dropdown value
 			graceDays: $('#graceDays').val(),
 			penaltyRate: $('#penaltyRate').val(),
-			statusOfPlan: $('#statusOfPlan').val()
+			statusOfPlan: statusPlanValue
 		};
 
 		// Optional: Debug log before sending
@@ -136,7 +138,7 @@ $(document).ready(function() {
 					$('#maturityAmount').val(data.maturityAmount);
 					$('#graceDays').val(data.graceDays);
 					$('#penaltyRate').val(data.penaltyRate);
-					$('#statusOfPlan').val(data.statusOfPlan);
+					$('#toggle-status-planDD').val(data.statusOfPlan);
 
 					setDropdownValue("#installmentType", data.installmentType);
 					setDropdownValue("#flexiblePlan", data.flexiblePlan);
@@ -204,7 +206,7 @@ $(document).ready(function() {
 			flexiblePlan: $('#flexiblePlan').val(),
 			graceDays: $('#graceDays').val(),
 			penaltyRate: $('#penaltyRate').val(),
-			statusOfPlan: $('#statusOfPlan').val()
+			statusOfPlan: $('#toggle-status-planDD').val()
 		};
 	}
 
@@ -248,6 +250,38 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#ddcompoundIntrval").change(function(){
+		
+		const minAmount = parseFloat(document.getElementById("ddminimumAmount").value);
+		alert(minAmount);
+		//alert(minAmount);
+		const term = parseInt(document.getElementById("ddterm").value);
+		const interestRate = parseFloat(document.getElementById("ddinterestRate").value) / 100;
+		const compoundInterval = (document.getElementById("ddcompoundIntrval").value);
+		alert(term);
+		alert(interestRate);
+		alert(compoundInterval);
+
+		let n; // Number of compounding periods per year
+		if (compoundInterval === "Daily") n = 365;
+		else if (compoundInterval === "Monthly") n = 12;
+		else if (compoundInterval === "Quaterly") n = 4;
+		else if (compoundInterval === "Half-Yearly") n = 2;
+		else if (compoundInterval === "Yearly") n = 1;
+		else if (compoundInterval === "On Maturity") n = 1;
+
+
+alert(n);
+		const totalDeposit = minAmount * term;
+		const termInYears = term / 365;
+		const maturityAmount = totalDeposit * Math.pow((1 + interestRate / n), n * termInYears);
+
+
+		document.getElementById("ddtotalDeposit").value = totalDeposit.toFixed(2);
+		document.getElementById("ddmaturityAmount").value = maturityAmount.toFixed(2);
+
+	});
+
 	// save the Reccuring deposite
 	$("#ReccuringsaveBtn").show();
 	$("#ReccuringgenrateBtn").show();
@@ -258,6 +292,7 @@ $(document).ready(function() {
 	$('#ReccuringsaveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planRD').is(':checked') ? 1 : 0;
 		const reccuringDeposite = {
 			rd: $('#rd').val(),
 			planCodeRD: $('#planCodeRD').val(),
@@ -276,7 +311,7 @@ $(document).ready(function() {
 			flexiblePlanRD: $('#flexiblePlanRD').val(),
 			graceDaysRD: $('#graceDaysRD').val(),
 			penltyfineRD: $('#penltyfineRD').val(),
-			statusOfPlanRD: $('#statusOfPlanRD').val()
+			statusOfPlanRD: statusPlanValue
 		};
 
 		// Debug log
@@ -436,7 +471,7 @@ $(document).ready(function() {
 			flexiblePlanRD: $('#flexiblePlanRD').val(),
 			graceDaysRD: $('#graceDaysRD').val(),
 			penltyfineRD: $('#penltyfineRD').val(),
-			statusOfPlanRD: $('#statusOfPlanRD').val()
+			statusOfPlanRD: $('#toggle-status-planRD').val()
 		};
 	}
 
@@ -487,6 +522,8 @@ $(document).ready(function() {
 	$('#FixedsaveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planFD').is(':checked') ? 1 : 0;
+
 		const fixedDeposit = {
 			fd: $('#fd').val(),
 			planCodeFD: $('#planCodeFD').val(),
@@ -505,7 +542,7 @@ $(document).ready(function() {
 			flexiblePlanFD: $('#flexiblePlanFD').val(),
 			graceDaysFD: $('#graceDaysFD').val(),
 			penltyfineFD: $('#penltyfineFD').val(),
-			statusOfPlanFD: $('#statusOfPlanFD').val()
+			statusOfPlanFD: statusPlanValue
 		};
 
 		console.log("Sending FD Data:", fixedDeposit);
@@ -662,7 +699,7 @@ $(document).ready(function() {
 			commissionOnNewFD: $('#commissionOnNewFD').val(),
 			penltyfineFD: $('#penltyfineFD').val(),
 			renewalCommissionFD: $('#renewalCommissionFD').val(),
-			statusOfPlanFD: $('#statusOfPlanFD').val()
+			statusOfPlanFD: $('#toggle-status-planFD').val()
 		};
 	}
 	$(document).on('click', '.fixeddelete-btn', function() {
@@ -710,25 +747,27 @@ $(document).ready(function() {
 	$('#missaveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planMIS').is(':checked') ? 1 : 0;
+
 		const misDeposit = {
 			mis: $('#mis').val(),
-			planCodeMD: $('#planCodeMD').val(),                   
-				planNameMD: $('#planNameMD').val(),                   
-				minimumAmountMD: $('#minimumAmountMD').val(),         
-				rateOfInterestMD: $('#rateOfInterestMD').val(),       
-				installmentTypeMD: $('#installmentTypeMD').val(),    
-				termModeMD: $('#termModeMD').val(),                  
-				misTerm: $('#misTerm').val(),                           
-				durationMD: $('#durationMD').val(),                   
-				commissionOnNewMD: $('#commissionOnNewMD').val(),     
-				renewalCommissionMD: $('#renewalCommissionMD').val(),
-				MISIntervalMD: $('#MISIntervalMD').val(),             
-				MISInterestMD: $('#MISInterestMD').val(),             
-				maturityAmountMD: $('#maturityAmountMD').val(),       
-				flexiblePlanMD: $('#flexiblePlanMD').val(),         
-				graceDaysMD: $('#graceDaysMD').val(),                 
-				penaltyRateMD: $('#penaltyRateMD').val(),           
-				statusOfPlanMDRD2: $('#statusOfPlanMDRD2').val() 
+			planCodeMD: $('#planCodeMD').val(),
+			planNameMD: $('#planNameMD').val(),
+			minimumAmountMD: $('#minimumAmountMD').val(),
+			rateOfInterestMD: $('#rateOfInterestMD').val(),
+			installmentTypeMD: $('#installmentTypeMD').val(),
+			termModeMD: $('#termModeMD').val(),
+			misTerm: $('#misTerm').val(),
+			durationMD: $('#durationMD').val(),
+			commissionOnNewMD: $('#commissionOnNewMD').val(),
+			renewalCommissionMD: $('#renewalCommissionMD').val(),
+			MISIntervalMD: $('#MISIntervalMD').val(),
+			MISInterestMD: $('#MISInterestMD').val(),
+			maturityAmountMD: $('#maturityAmountMD').val(),
+			flexiblePlanMD: $('#flexiblePlanMD').val(),
+			graceDaysMD: $('#graceDaysMD').val(),
+			penaltyRateMD: $('#penaltyRateMD').val(),
+			statusOfPlanMDRD2: statusPlanValue
 		};
 
 		console.log("Sending MIS Data:", misDeposit);
@@ -801,7 +840,7 @@ $(document).ready(function() {
 	}
 
 	fetchMISDeposits();
-	
+
 	// Fix this line (change `.misdelete-btn` to `.misedit-btn`)
 	$(document).on('click', '.misedit-btn', function() {
 		const id = $(this).data('id');
@@ -821,23 +860,23 @@ $(document).ready(function() {
 
 					$('#misdepositeid').data('id', id); // ✅ Consistent ID holder
 
-					$('#planCodeMD').val(data.planCodeMD);                            
-					$('#planNameMD').val(data.planNameMD);                           
-					$('#minimumAmountMD').val(data.minimumAmountMD);                  
-					$('#rateOfInterestMD').val(data.rateOfInterestMD);               
-					setDropdownValue("#installmentTypeMD", data.installmentTypeMD); 
-					$('#termModeMD').val(data.termModeMD);                            
-					$('#misTerm').val(data.misTerm);                                    
-					$('#durationMD').val(data.durationMD);                            
-					$('#commissionOnNewMD').val(data.commissionOnNewMD);              
-					$('#renewalCommissionMD').val(data.renewalCommissionMD);          
-					setDropdownValue("#MISIntervalMD", data.MISIntervalMD);           
-					$('#MISInterestMD').val(data.MISInterestMD);                      
-					$('#maturityAmountMD').val(data.maturityAmountMD);                
-					setDropdownValue("#flexiblePlanMD", data.flexiblePlanMD);         
-					$('#graceDaysMD').val(data.graceDaysMD);                         
-					$('#penltyfineMD').val(data.penltyfineMD);                     
-					$('#statusOfPlanMDRD2').val(data.statusOfPlanMDRD2);
+					$('#planCodeMD').val(data.planCodeMD);
+					$('#planNameMD').val(data.planNameMD);
+					$('#minimumAmountMD').val(data.minimumAmountMD);
+					$('#rateOfInterestMD').val(data.rateOfInterestMD);
+					setDropdownValue("#installmentTypeMD", data.installmentTypeMD);
+					$('#termModeMD').val(data.termModeMD);
+					$('#misTerm').val(data.misTerm);
+					$('#durationMD').val(data.durationMD);
+					$('#commissionOnNewMD').val(data.commissionOnNewMD);
+					$('#renewalCommissionMD').val(data.renewalCommissionMD);
+					setDropdownValue("#MISIntervalMD", data.MISIntervalMD);
+					$('#MISInterestMD').val(data.MISInterestMD);
+					$('#maturityAmountMD').val(data.maturityAmountMD);
+					setDropdownValue("#flexiblePlanMD", data.flexiblePlanMD);
+					$('#graceDaysMD').val(data.graceDaysMD);
+					$('#penltyfineMD').val(data.penltyfineMD);
+					$('#toggle-status-planMIS').val(data.statusOfPlanMDRD2);
 
 					$("#missaveBtn").hide();
 					$("#misgenrateBtn").hide();
@@ -851,7 +890,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-//update code of the mis deposite
+	//update code of the mis deposite
 	$('#misdupdateBtn').on('click', function(e) {
 		e.preventDefault();
 		const id = $('#misdepositeid').data('id'); // ✅ fix here
@@ -881,7 +920,7 @@ $(document).ready(function() {
 
 	// DELETE
 	// DELETE HANDLER
-	$(document).on('click', '.misdelete-btn', function () {
+	$(document).on('click', '.misdelete-btn', function() {
 		const id = $(this).data('id');
 
 		if (!id) {
@@ -899,11 +938,11 @@ $(document).ready(function() {
 			url: `/api/Policymangment/misdelete/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
-			success: function (response) {
+			success: function(response) {
 				alert(response.message || "MIS Deposit deleted successfully.");
 				fetchMISDeposits(); // Refresh the table
 			},
-			error: function (xhr) {
+			error: function(xhr) {
 				const message = xhr.responseJSON?.message || "Failed to delete the MIS Deposit.";
 				alert("Error: " + message);
 				console.error("Delete error:", xhr.responseText);
@@ -914,23 +953,23 @@ $(document).ready(function() {
 	// HELPER FUNCTION TO GET FORM DATA
 	function getMISFormData() {
 		return {
-			planCodeMD: $('#planCodeMD').val(),                      
-			planNameMD: $('#planNameMD').val(),                     
-			minimumAmountMD: $('#minimumAmountMD').val(),            
-			rateOfInterestMD: $('#rateOfInterestMD').val(),          
-			installmentTypeMD: $('#installmentTypeMD').val(),        
-			termModeMD: $('#termModeMD').val(),                      
-			misTerm: $('#misTerm').val(),                              
-			durationMD: $('#durationMD').val(),                     
-			commissionOnNewMD: $('#commissionOnNewMD').val(),        
-			renewalCommissionMD: $('#renewalCommissionMD').val(),    
-			MISIntervalMD: $('#MISIntervalMD').val(),                
-			MISInterestMD: $('#MISInterestMD').val(),               
-			maturityAmountMD: $('#maturityAmountMD').val(),          
-			flexiblePlanMD: $('#flexiblePlanMD').val(),              
-			graceDaysMD: $('#graceDaysMD').val(),                    
-			penaltyRateMD: $('#penaltyRateMD').val(),                
-			statusOfPlanMDRD2: $('#statusOfPlanMDRD2').val()          
+			planCodeMD: $('#planCodeMD').val(),
+			planNameMD: $('#planNameMD').val(),
+			minimumAmountMD: $('#minimumAmountMD').val(),
+			rateOfInterestMD: $('#rateOfInterestMD').val(),
+			installmentTypeMD: $('#installmentTypeMD').val(),
+			termModeMD: $('#termModeMD').val(),
+			misTerm: $('#misTerm').val(),
+			durationMD: $('#durationMD').val(),
+			commissionOnNewMD: $('#commissionOnNewMD').val(),
+			renewalCommissionMD: $('#renewalCommissionMD').val(),
+			MISIntervalMD: $('#MISIntervalMD').val(),
+			MISInterestMD: $('#MISInterestMD').val(),
+			maturityAmountMD: $('#maturityAmountMD').val(),
+			flexiblePlanMD: $('#flexiblePlanMD').val(),
+			graceDaysMD: $('#graceDaysMD').val(),
+			penaltyRateMD: $('#penaltyRateMD').val(),
+			statusOfPlanMDRD2: $('#toggle-status-planMIS').val()
 
 		};
 	}
@@ -946,4 +985,24 @@ $(document).ready(function() {
 
 
 
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+	const toggles = document.querySelectorAll('.toggle__input');
+
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
+
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
 });
