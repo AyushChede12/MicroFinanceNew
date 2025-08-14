@@ -1,4 +1,4 @@
-//janvi : Customer name list fetch
+//janvi : Customer Account no. list fetch
 $(document).ready(function() {
     $.ajax({
         url: "/api/reports/getApprovedSavingAccount",

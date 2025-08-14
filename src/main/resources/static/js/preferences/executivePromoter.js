@@ -287,7 +287,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$.ajax({
+	/*$.ajax({
 		url: "api/preference/fetchAllExecutiveFounder", // Updated path
 		type: "GET",
 		contentType: "application/json",
@@ -299,24 +299,24 @@ $(document).ready(function() {
 
 				$.each(data, function(index, item) {
 					var row = `<tr style="font-family: 'Poppins', sans-serif;">
-		                    <th scope="row"><a href="#">${index + 1}</a></th>
-		                    <td>${item.fullName || ''}</td>
-		                    <td>${item.branchName || ''}</td>
-		                    <td>${item.appointmentDate || ''}</td>
-		                    <td>${item.address || ''}</td>
-		                    <td>${item.emailId || ''}</td>
-		                    <td>${item.contactNo || ''}</td>
-		                    <td>
-		                        <button class="iconbutton" onclick="viewData(${item.id})" title="View">
-		                            <i class="fa-solid fa-pen-to-square text-primary"></i>
-		                        </button>
-		                    </td>
-		                    <td>
-		                        <button class="iconbutton" onclick="deleteData(${item.id})" title="Delete">
-		                            <i class="fa-solid fa-trash text-danger"></i>
-		                        </button>
-		                    </td>
-		                </tr>`;
+							<th scope="row"><a href="#">${index + 1}</a></th>
+							<td>${item.fullName || ''}</td>
+							<td>${item.branchName || ''}</td>
+							<td>${item.appointmentDate || ''}</td>
+							<td>${item.address || ''}</td>
+							<td>${item.emailId || ''}</td>
+							<td>${item.contactNo || ''}</td>
+							<td>
+								<button class="iconbutton" onclick="viewData(${item.id})" title="View">
+									<i class="fa-solid fa-pen-to-square text-primary"></i>
+								</button>
+							</td>
+							<td>
+								<button class="iconbutton" onclick="deleteData(${item.id})" title="Delete">
+									<i class="fa-solid fa-trash text-danger"></i>
+								</button>
+							</td>
+						</tr>`;
 					tbody.append(row);
 				});
 			} else {
@@ -327,7 +327,7 @@ $(document).ready(function() {
 			console.error("❌ Error fetching data:", error);
 			alert("Failed to load executive founder data.");
 		}
-	});
+	});*/
 
 
 });
@@ -357,10 +357,16 @@ function deleteData(id) {
 
 function showTableData() {
 	$("#tableBody").show();
+	$("#prevBtn").show();
+	$("#nextBtn").show();
+	$("#pageInfo").show();
 }
 
 function hideTableData() {
 	$("#tableBody").hide();
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
 }
 
 function viewData(id) {
@@ -435,7 +441,6 @@ function viewData(id) {
 	});
 }
 
-
 function updateBranch() {
 	let formData = new FormData();
 
@@ -495,52 +500,6 @@ function updateBranch() {
 	});
 }
 
-$(document).ready(function() {
-	const rowsPerPage = 10;
-	let currentPage = 1;
-
-	function showPage(page) {
-		let rows = $("#tableBody tr");
-		let totalRows = rows.length;
-		let totalPages = Math.ceil(totalRows / rowsPerPage);
-
-		// Boundary check
-		if (page < 1) page = 1;
-		if (page > totalPages) page = totalPages;
-
-		// Hide all rows initially
-		rows.hide();
-
-		// Show only the relevant rows
-		let start = (page - 1) * rowsPerPage;
-		let end = start + rowsPerPage;
-		rows.slice(start, end).show();
-
-		// Disable/Enable buttons
-		$("#prevBtn").prop("disabled", page === 1);
-		$("#nextBtn").prop("disabled", page === totalPages);
-
-		currentPage = page;
-	}
-
-	// Button click handlers
-	$("#prevBtn").click(function() {
-		if (currentPage > 1) {
-			showPage(currentPage - 1);
-		}
-	});
-
-	$("#nextBtn").click(function() {
-		let rows = $("#tableBody tr").length;
-		if (currentPage * rowsPerPage < rows) {
-			showPage(currentPage + 1);
-		}
-	});
-
-	// Initialize the table on page load
-	showPage(currentPage);
-});
-
 function photoSizeEdit(e) {
 	const previewimg = document.getElementById("photoPreview");
 	previewimg.src = e.target.result;
@@ -560,3 +519,97 @@ function signatureSizeEdit(e) {
 	previewimg.style.overflow = "hidden";
 	previewimg.style.borderRadius = "20px";
 }
+
+var totalDataExecutive = [];
+var currentPageExecutive = 1;
+var pageSizeExecutive = 5;
+
+// Load data once
+function loadExecutiveData() {
+	$.ajax({
+		type: "GET",
+		url: "api/preference/fetchAllExecutiveFounder",
+		contentType: "application/json",
+		success: function(response) {
+			if (response.status === "FOUND") {
+				totalDataExecutive = response.data;
+				renderTable(currentPageExecutive);
+				togglePageNavigationExecutive();
+			} else {
+				alert("Failed to fetch data: " + response.message);
+			}
+		},
+		error: function() {
+			alert("Error while calling the API.");
+		}
+	});
+}
+
+// Render paginated table
+function renderTable(page) {
+	let tableBody = $(".datatable tbody");
+	tableBody.empty();
+
+	let startIndex = (page - 1) * pageSizeExecutive;
+	let endIndex = Math.min(startIndex + pageSizeExecutive, totalDataExecutive.length);
+
+	for (let i = startIndex; i < endIndex; i++) {
+		let person = totalDataExecutive[i];
+		let row = `<tr>
+				<td>${i + 1}</td>
+                <td>${person.fullName}</td>
+                <td>${person.branchName}</td>
+                <td>${person.appointmentDate}</td>
+                <td>${person.address}</td>
+                <td>${person.emailId}</td>
+                <td>${person.contactNo}</td>
+                <td>
+                  <button class="iconbutton" onclick="viewData(${person.id})" title="View">
+                    <i class="fa-solid fa-pen-to-square text-primary"></i>
+                  </button>
+                </td>
+                <td>
+                  <button class="iconbutton" onclick="deleteData(${person.id})" title="Delete">
+                    <i class="fa-solid fa-trash text-danger"></i>
+                  </button>
+                </td>
+              </tr>`;
+		tableBody.append(row);
+	}
+
+	// Update page info
+	$("#pageInfo").text(`Page ${currentPageExecutive} of ${Math.ceil(totalDataExecutive.length / pageSizeExecutive)}`);
+}
+
+// Button state toggling
+function togglePageNavigationExecutive() {
+	let totalPages = Math.ceil(totalDataExecutive.length / pageSizeExecutive);
+	$("#prevBtn").prop("disabled", currentPageExecutive === 1);
+	$("#nextBtn").prop("disabled", currentPageExecutive === totalPages || totalPages === 0);
+}
+
+// Button click handlers
+$("#prevBtn").click(function() {
+	if (currentPageExecutive > 1) {
+		currentPageExecutive--;
+		renderTable(currentPageExecutive);
+		togglePageNavigationExecutive();
+	}
+});
+
+$("#nextBtn").click(function() {
+	let totalPages = Math.ceil(totalDataExecutive.length / pageSizeExecutive);
+	if (currentPageExecutive < totalPages) {
+		currentPageExecutive++;
+		renderTable(currentPageExecutive);
+		togglePageNavigationExecutive();
+	}
+});
+
+// Call on page load
+$(document).ready(function() {
+	$("#prevBtn").hide();
+	$("#nextBtn").hide();
+	$("#pageInfo").hide();
+	loadExecutiveData();
+});
