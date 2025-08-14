@@ -413,9 +413,8 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
-				</div>
-				
-				
+				</div>				
+								
 			</div>
 			<!-- Cheque input fields -->
 					 <div id="chequeInputs" style="display: none;" >
