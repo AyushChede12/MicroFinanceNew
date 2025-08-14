@@ -298,6 +298,7 @@ $(document).ready(function () {
 		formData.append("accountStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
 		formData.append("messageSend", $('#toggle-member-status1').is(':checked') ? 1 : 0);
 		formData.append("debitCardIssue", $('#toggle-member-status2').is(':checked') ? 1 : 0);
+		formData.append("isLocker", $('#toggle-member-status3').is(':checked') ? 1 : 0);
 		
 		// Append the extracted photoWithAadhar file name
 		formData.append("photo", $('#photoHidden').val());
@@ -466,13 +467,16 @@ function viewData(id) {
 				 document.getElementById("toggle-member-status").checked = data.accountStatus === true || data.accountStatus === '1';
                  document.getElementById("toggle-member-status1").checked = data.messageSend === true || data.messageSend === '1';
                  document.getElementById("toggle-member-status2").checked = data.debitCardIssue === true || data.debitCardIssue === '1';
+                 document.getElementById("toggle-member-status3").checked = data.isLocker === true || data.isLocker === '1';
 				// Call updateToggleColor manually
 				updateToggleColor(document.getElementById("toggle-member-status"));
 				updateToggleColor(document.getElementById("toggle-member-status1"));
 				updateToggleColor(document.getElementById("toggle-member-status2"));
+				updateToggleColor(document.getElementById("toggle-member-status3"));
 console.log(data.accountStatus)
 console.log(data.messageSend)
 console.log(data.debitCardIssue)
+console.log(dataisLocker)
 			} else {
 				alert("Account not found: " + response.message);
 			}
@@ -582,7 +586,7 @@ $(document).ready(function () {
 		formData.append("accountStatus", $('#toggle-member-status').is(':checked') ? 1 : 0);
 		formData.append("messageSend", $('#toggle-member-status1').is(':checked') ? 1 : 0);
 		formData.append("debitCardIssue", $('#toggle-member-status2').is(':checked') ? 1 : 0);
-		
+		formData.append("isLocker", $('#toggle-member-status3').is(':checked') ? 1 : 0);
 		// Append the extracted photoWithAadhar file name
 		formData.append("photo", $('#photoHidden').val());
 		
