@@ -276,8 +276,6 @@ pageEncoding="ISO-8859-1"%> -->
 									type="text" name="Term" id="Term" required
 									placeholder="Enter Term" />
 
-									type="text" name="term"
-									id="term" required placeholder="Enter Term" />
 
 							</div>
 						</div>
@@ -296,29 +294,35 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="interestType">Interest Type*</label> <select
+								<label for="interestType">Interest Type*</label>
+								<input type="text" name="interestType"
+									   id="interestType" required placeholder= "Enter Term" />
+								 <!-- <select
 									name="interestType" id="interestType" required
 									class="form-control selectField" style="height: 30px;">
 
 									<option value="">-- Select Interest Type --</option>
-									<option value="flatInterest">Flat Interest</option>
-									<option value="reducingInterest">Reducing Interest</option>
-									<option value="Rule78">Rule 78</option>
+									<option value="Flat Interest">Flat Interest</option>
+									<option value="Reducing Interest">Reducing Interest</option>
+									<option value="Rule 78">Rule 78</option>
 
-								</select>
+								</select> -->
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="emiType">EMI mode*</label><select name="emiType"
+								<label for="emiType">EMI mode*</label>
+								<input type="text" name="emiType"
+									   id="emiType" required placeholder= "Enter Term" />
+								<!-- <select name="emiType"
 									id="emiType" required class="form-control selectField">
 									<option value="">-- Select EMI Mode --</option>
-									<option value="daily">Daily</option>
-									<option value="weekly">Weekly</option>
-									<option value="monthly">Monthly</option>
-									<option value="fortnightly">Fortnightly</option>
-									<option value="quarterly">Quarterly</option>
-								</select>
+									<option value="Daily">Daily</option>
+									<option value="Weekly">Weekly</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Fortnightly">Fortnightly</option>
+									<option value="Quarterly">Quarterly</option>
+								</select> -->
 
 							</div>
 						</div>
