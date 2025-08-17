@@ -198,7 +198,7 @@ td {
 							<div class="d-flex flex-column formFields  mb-4">
 								<label for="vehicalNo">Minimum Deposit <span
 									class="star">*</span></label> <input type="text" name="minimumDeposit"
-									id="ddminimumAmount" required="required"
+									id="minimumDeposit" required="required"
 									placeholder="Enter Minimum Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -208,7 +208,7 @@ td {
 							<div class="d-flex flex-column formFields  mb-4">
 								<label for="vehicalNo">Rate of Interest (%) <span
 									class="star">*</span></label> <input type="text" name="rateOfInterest"
-									id="ddinterestRate" required="required"
+									id="rateOfInterest" required="required"
 									placeholder="Enter Interest Rate"
 									style="text-transform: uppercase;" />
 							</div>
@@ -259,7 +259,7 @@ td {
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
 								<label for="">Interest Interval <span class="star">*</span></label>
-								<select id="ddcompoundIntrval" name="interestInterval"
+								<select id="interestInterval" name="interestInterval"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Interest Interval</option>
@@ -279,7 +279,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Paid <span class="star">*</span></label> <input
-									type="text" name="totalPaid" id="ddtotalDeposit" required="required"
+									type="text" name="totalPaid" id="totalPaid" required="required"
 									placeholder="Enter Total Paid" />
 							</div>
 						</div>
@@ -287,7 +287,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmount" id="ddmaturityAmount"
+								<input type="text" name="maturityAmount" id="maturityAmount"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
@@ -359,7 +359,6 @@ td {
 					<div class="row mt-5">
 						<div class="col-12">
 							<div class="card recent-sales">
-
 								<div class="card-body table-responsive">
 									<h5 class="card-title">
 										Recent Sales <span>| Today</span>
@@ -368,25 +367,17 @@ td {
 									<table class="table table-bordered">
 										<thead class="table-light">
 											<tr>
-												<th>Plan Code</th>
-												<th>Plan Name</th>
-												<th>Minimum Deposit</th>
-												<th>Rate Of Interest</th>
-												<th>Installment Type</th>
-												<th>Term Mode</th>
-												<th>Term</th>
-
-												<th>Duration</th>
-												<th>Commission On New</th>
-												<th>Renewal Commission</th>
-												<th>Interest Interval</th>
-												<th>Total Paid</th>
-												<th>Maturity Amount</th>
-												<th>Flexible Plan</th>
-												<th>Grace Days</th>
-												<th>Penalty Rate</th>
-												<th>Status</th>
-												<th>Action</th>
+												<th style="white-space: nowrap;">Sr. No</th>
+												<th style="white-space: nowrap;">Plan Code</th>
+												<th style="white-space: nowrap;">Plan Name</th>
+												<th style="white-space: nowrap;">Minimum Deposit</th>
+												<th style="white-space: nowrap;">Rate of Interest</th>
+												<th style="white-space: nowrap;">Installment Type</th>
+												<th style="white-space: nowrap;">Term (Duration)</th>
+												<th style="white-space: nowrap;">Maturity Amount</th>
+												<th style="white-space: nowrap;">Status
+													(Active/Inactive)</th>
+												<th style="white-space: nowrap;">Action</th>
 											</tr>
 										</thead>
 										<tbody id="depositTableBody">
@@ -394,8 +385,16 @@ td {
 										</tbody>
 									</table>
 
-
 								</div>
+							</div>
+							<div class="mt-2 text-center">
+								<button id="prevBtn" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-left"></i>
+								</button>
+								<span id="pageInfo" class="mx-2"></span>
+								<button id="nextBtn" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-right"></i>
+								</button>
 							</div>
 						</div>
 					</div>
