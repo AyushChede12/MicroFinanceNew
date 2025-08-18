@@ -10,7 +10,7 @@ public class RecurringDepositPM {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String rd;
     private String planCodeRD;
     private String planNameRD;
@@ -18,9 +18,6 @@ public class RecurringDepositPM {
     private String rateOfInterestRD;
     
     private String installmentTypeRD;
-    private String durationRD;
-   
-    private String termMode;
     private String rdterm;
     private String commissionOnNewRD;
     private String renewalCommissionRD;
@@ -30,20 +27,30 @@ public class RecurringDepositPM {
     private String maturityAmountRD;
     private String penltyfineRD;
     private String graceDaysRD;
-    
-  
     private String statusOfPlanRD;
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getRd() {
+		return rd;
+	}
+	public void setRd(String rd) {
+		this.rd = rd;
 	}
 	public String getPlanCodeRD() {
 		return planCodeRD;
 	}
 	public void setPlanCodeRD(String planCodeRD) {
 		this.planCodeRD = planCodeRD;
+	}
+	public String getPlanNameRD() {
+		return planNameRD;
+	}
+	public void setPlanNameRD(String planNameRD) {
+		this.planNameRD = planNameRD;
 	}
 	public String getMinimumAmountRD() {
 		return minimumAmountRD;
@@ -57,15 +64,12 @@ public class RecurringDepositPM {
 	public void setRateOfInterestRD(String rateOfInterestRD) {
 		this.rateOfInterestRD = rateOfInterestRD;
 	}
-	public String getTermMode() {
-		return termMode;
+	public String getInstallmentTypeRD() {
+		return installmentTypeRD;
 	}
-	public void setTermMode(String termMode) {
-		this.termMode = termMode;
+	public void setInstallmentTypeRD(String installmentTypeRD) {
+		this.installmentTypeRD = installmentTypeRD;
 	}
-	
-	
-	
 	public String getRdterm() {
 		return rdterm;
 	}
@@ -96,68 +100,35 @@ public class RecurringDepositPM {
 	public void setTotalPaidRD(String totalPaidRD) {
 		this.totalPaidRD = totalPaidRD;
 	}
-	public String getMaturityAmountRD() {
-		return maturityAmountRD;
-	}
-	public void setMaturityAmountRD(String maturityAmountRD) {
-		this.maturityAmountRD = maturityAmountRD;
-	}
-	
-	public String getGraceDaysRD() {
-		return graceDaysRD;
-	}
-	public void setGraceDaysRD(String graceDaysRD) {
-		this.graceDaysRD = graceDaysRD;
-	}
-	
-	public String getStatusOfPlanRD() {
-		return statusOfPlanRD;
-	}
-	public void setStatusOfPlanRD(String statusOfPlanRD) {
-		this.statusOfPlanRD = statusOfPlanRD;
-	}
-
-	
-	public String getInstallmentTypeRD() {
-		return installmentTypeRD;
-	}
-	public void setInstallmentTypeRD(String installmentTypeRD) {
-		this.installmentTypeRD = installmentTypeRD;
-	}
-	public String getDurationRD() {
-		return durationRD;
-	}
-	public void setDurationRD(String durationRD) {
-		this.durationRD = durationRD;
-	}
 	public String getFlexiblePlanRD() {
 		return flexiblePlanRD;
 	}
 	public void setFlexiblePlanRD(String flexiblePlanRD) {
 		this.flexiblePlanRD = flexiblePlanRD;
 	}
-
-	public String getPlanNameRD() {
-		return planNameRD;
+	public String getMaturityAmountRD() {
+		return maturityAmountRD;
 	}
-	public void setPlanNameRD(String planNameRD) {
-		this.planNameRD = planNameRD;
+	public void setMaturityAmountRD(String maturityAmountRD) {
+		this.maturityAmountRD = maturityAmountRD;
 	}
-
 	public String getPenltyfineRD() {
 		return penltyfineRD;
 	}
 	public void setPenltyfineRD(String penltyfineRD) {
 		this.penltyfineRD = penltyfineRD;
 	}
-	public String getRd() {
-		return rd;
+	public String getGraceDaysRD() {
+		return graceDaysRD;
 	}
-	public void setRd(String rd) {
-		this.rd = rd;
+	public void setGraceDaysRD(String graceDaysRD) {
+		this.graceDaysRD = graceDaysRD;
 	}
-
-
-    
+	public String getStatusOfPlanRD() {
+		return statusOfPlanRD;
+	}
+	public void setStatusOfPlanRD(String statusOfPlanRD) {
+		this.statusOfPlanRD = statusOfPlanRD;
+	}
     
 }

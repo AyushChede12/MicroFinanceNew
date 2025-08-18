@@ -170,14 +170,6 @@ td {
 					<div class="row">
 						<div class="col-lg-3">
 
-
-							<div class="col-lg-3 ">
-								<div class="d-flex flex-column formFields  mb-4 ">
-									<input type="hidden" value="DRD" name="drd" id="drd"
-										required="required" placeholder="Enter Plan Name" />
-								</div>
-							</div>
-
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Code <span class="star">*</span></label> <input
 									type="text" name="planCodeDD" id="planCodeDD"
@@ -361,7 +353,7 @@ td {
 							<div class="card recent-sales">
 								<div class="card-body table-responsive">
 									<h5 class="card-title">
-										Recent Sales <span>| Today</span>
+										Daily Deposit <span>| Table View</span>
 									</h5>
 
 									<table class="table table-bordered">
@@ -388,11 +380,11 @@ td {
 								</div>
 							</div>
 							<div class="mt-2 text-center">
-								<button id="prevBtn" class="btn btn-sm btn-primary">
+								<button id="prevBtnDD" class="btn btn-sm btn-primary">
 									<i class="bi bi-chevron-double-left"></i>
 								</button>
-								<span id="pageInfo" class="mx-2"></span>
-								<button id="nextBtn" class="btn btn-sm btn-primary">
+								<span id="pageInfoDD" class="mx-2"></span>
+								<button id="nextBtnDD" class="btn btn-sm btn-primary">
 									<i class="bi bi-chevron-double-right"></i>
 								</button>
 							</div>
@@ -412,16 +404,6 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-
-							<div class="col-lg-3 ">
-								<div class="d-flex flex-column formFields  mb-4 ">
-									<input type="hidden" name="rd" id="rd" value="RD"
-										required="required" placeholder="Enter Minimum Amount"
-										style="text-transform: uppercase;" />
-								</div>
-							</div>
-
-
 
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code <span class="star">*</span></label> <input
@@ -609,34 +591,25 @@ td {
 					<div class="row mt-5">
 						<div class="col-12">
 							<div class="card recent-sales">
-
 								<div class="card-body table-responsive">
 									<h5 class="card-title">
-										Recent Sales <span>| Today</span>
+										Recurring Deposit <span>| Table View</span>
 									</h5>
 
 									<table class="table table-bordered">
 										<thead class="table-light">
 											<tr>
-												<th>Plan Code</th>
-												<th>Plan Name</th>
-												<th>Minimum Deposit</th>
-												<th>Rate Of Interest</th>
-												<th>Installment Type</th>
-												<th>Term Mode</th>
-												<th>Term</th>
-
-												<th>Duration</th>
-												<th>Commission On New</th>
-												<th>Renewal Commission</th>
-												<th>Interest Interval</th>
-												<th>Total Paid</th>
-												<th>Maturity Amount</th>
-												<th>Flexible Plan</th>
-												<th>Grace Days</th>
-												<th>Penalty Rate</th>
-												<th>Status</th>
-												<th>Action</th>
+												<th style="white-space: nowrap;">Sr. No</th>
+												<th style="white-space: nowrap;">Plan Code</th>
+												<th style="white-space: nowrap;">Plan Name</th>
+												<th style="white-space: nowrap;">Minimum Deposit</th>
+												<th style="white-space: nowrap;">Rate of Interest</th>
+												<th style="white-space: nowrap;">Installment Type</th>
+												<th style="white-space: nowrap;">Term (Duration)</th>
+												<th style="white-space: nowrap;">Maturity Amount</th>
+												<th style="white-space: nowrap;">Status
+													(Active/Inactive)</th>
+												<th style="white-space: nowrap;">Action</th>
 											</tr>
 										</thead>
 										<tbody id="recurringTableBody">
@@ -644,8 +617,16 @@ td {
 										</tbody>
 									</table>
 
-
 								</div>
+							</div>
+							<div class="mt-2 text-center">
+								<button id="prevBtnRD" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-left"></i>
+								</button>
+								<span id="pageInfoRD" class="mx-2"></span>
+								<button id="nextBtnRD" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-right"></i>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -663,15 +644,7 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-
-
-							<div class="col-lg-3 ">
-								<div class="d-flex flex-column formFields  mb-4 ">
-									<input type="hidden" name="fd" id="fd" value="FD"
-										required="required" placeholder="Enter Minimum Amount"
-										style="text-transform: uppercase;" />
-								</div>
-							</div>
+						
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code <span class="star">*</span></label> <input
 									type="text" name="planCodeFD" id="planCodeFD"
@@ -856,46 +829,47 @@ td {
 				</div>
 
 				<div class="row mt-5">
-					<div class="col-12">
-						<div class="card recent-sales">
+						<div class="col-12">
+							<div class="card recent-sales">
+								<div class="card-body table-responsive">
+									<h5 class="card-title">
+										Fixed Deposit <span>| Table View</span>
+									</h5>
 
-							<div class="card-body table-responsive">
-								<h5 class="card-title">
-									Recent Sales <span>| Today</span>
-								</h5>
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th style="white-space: nowrap;">Sr. No</th>
+												<th style="white-space: nowrap;">Plan Code</th>
+												<th style="white-space: nowrap;">Plan Name</th>
+												<th style="white-space: nowrap;">Minimum Deposit</th>
+												<th style="white-space: nowrap;">Rate of Interest</th>
+												<th style="white-space: nowrap;">Installment Type</th>
+												<th style="white-space: nowrap;">Term (Duration)</th>
+												<th style="white-space: nowrap;">Maturity Amount</th>
+												<th style="white-space: nowrap;">Status
+													(Active/Inactive)</th>
+												<th style="white-space: nowrap;">Action</th>
+											</tr>
+										</thead>
+										<tbody id="fixedTableBody">
+											<!-- Dynamic rows will be injected here -->
+										</tbody>
+									</table>
 
-								<table class="table table-bordered">
-									<thead class="table-light">
-										<tr>
-											<th>Plan Code</th>
-											<th>Plan Name</th>
-											<th>Minimum Deposit</th>
-											<th>Rate Of Interest</th>
-											<th>Installment Type</th>
-											<th>Duration</th>
-											<th>Term Mode</th>
-											<th>Term</th>
-											<th>Interest Interval</th>
-											<th>Total Paid</th>
-											<th>Maturity Amount</th>
-											<th>Flexible Plan</th>
-											<th>Grace Days</th>
-											<th>Penalty Rate</th>
-											<th>Commission On New</th>
-											<th>Renewal Commission</th>
-											<th>Status</th>
-											<th>Action</th>
-										</tr>
-									</thead>
-									<tbody id="fixedTableBody">
-										<!-- Dynamic rows will be injected here -->
-									</tbody>
-								</table>
-
+								</div>
+							</div>
+							<div class="mt-2 text-center">
+								<button id="prevBtnFD" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-left"></i>
+								</button>
+								<span id="pageInfoFD" class="mx-2"></span>
+								<button id="nextBtnFD" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-right"></i>
+								</button>
 							</div>
 						</div>
 					</div>
-				</div>
 			</form>
 		</div>
 
@@ -911,13 +885,6 @@ td {
 					<div class="row">
 						<div class="col-lg-3">
 
-							<div class="col-lg-3 ">
-								<div class="d-flex flex-column formFields  mb-4 ">
-									<input type="hidden" name="mis" id="mis" value="MIS"
-										required="required" placeholder="Enter Minimum Amount"
-										style="text-transform: uppercase;" />
-								</div>
-							</div>
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code <span class="star">*</span></label> <input
 									type="text" name="planCodeMD" id="planCodeMD"
