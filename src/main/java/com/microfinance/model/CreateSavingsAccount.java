@@ -44,6 +44,7 @@ public class CreateSavingsAccount {
 	private String debitCardIssue;
 	private String accountNumber;
 	private boolean isApproved;
+	private String isLocker;
 	
 	private String chequeNo;
     private String chequeDate;
@@ -272,6 +273,13 @@ public class CreateSavingsAccount {
 	}
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+	
+	public String getIsLocker() {
+		return isLocker;
+	}
+	public void setIsLocker(String isLocker) {
+		this.isLocker = isLocker;
 	}
 	public String getPhoto() {
 		return photo;
