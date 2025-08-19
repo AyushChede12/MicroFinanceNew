@@ -21,7 +21,7 @@ pageEncoding="ISO-8859-1"%> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <title>Admin Dashboard</title>
+    <title> Dashboard</title>
     <link rel="stylesheet" href="./css/admin.css" />
     <jsp:include page="../sidebar.jsp"></jsp:include>
     <jsp:include page="../header.jsp"></jsp:include>
@@ -58,8 +58,7 @@ pageEncoding="ISO-8859-1"%> -->
                             <div class="d-flex flex-column formFields mb-4">
                                 <label for="">By Date</label> <select id="colour" name="colour"
                                     required="required" class="form-control selectField" style="height: 30px;">
-                                    <option value=""> Select Colour</option>
-                                    <option value="Blue">Blue</option>
+                                    <option value=""> Select</option>
                                 </select>
                             </div>
                         </div>
