@@ -110,7 +110,7 @@
           <li>
             <a href="customerBalanceReport">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Customer Balance Report</span>
+              <span style="font-family: 'Poppins', sans-serif">Balance Sheet</span>
             </a>
           </li>
           
