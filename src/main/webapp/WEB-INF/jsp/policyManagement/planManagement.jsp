@@ -169,6 +169,8 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+							<input type="hidden" value="DRD" name="drd" id="drd"
+								required="required" />
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Plan Code <span class="star">*</span></label> <input
@@ -392,6 +394,7 @@ td {
 					</div>
 			</form>
 		</div>
+		<br> <br>
 
 
 		<div>
@@ -404,6 +407,8 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+							<input type="hidden" name="rd" id="rd" value="RD"
+								required="required" style="text-transform: uppercase;" />
 
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code <span class="star">*</span></label> <input
@@ -551,7 +556,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Penalty Fine(%) <span class="star">*</span></label>
-								<input type="text" name="penltyfineRD" id="penltyfineRD"
+								<input type="text" name="penaltyfineRD" id="penaltyfineRD"
 									required="required" placeholder="Enter Penalty Fine" />
 							</div>
 						</div>
@@ -632,6 +637,7 @@ td {
 					</div>
 			</form>
 		</div>
+		<br> <br>
 
 
 		<div>
@@ -644,7 +650,9 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
-						
+							<input type="hidden" name="fd" id="fd" value="FD"
+								required="required" style="text-transform: uppercase;" />
+
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code <span class="star">*</span></label> <input
 									type="text" name="planCodeFD" id="planCodeFD"
@@ -720,7 +728,7 @@ td {
 
 						<div class="col-lg-3 mb-4 ">
 							<div class="d-flex flex-column formFields">
-								<label for="">Interst Interval <span class="star">*</span></label>
+								<label for="">Interest Interval <span class="star">*</span></label>
 								<select id="componentIntervalFD" name="componentIntervalFD"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
@@ -829,49 +837,50 @@ td {
 				</div>
 
 				<div class="row mt-5">
-						<div class="col-12">
-							<div class="card recent-sales">
-								<div class="card-body table-responsive">
-									<h5 class="card-title">
-										Fixed Deposit <span>| Table View</span>
-									</h5>
+					<div class="col-12">
+						<div class="card recent-sales">
+							<div class="card-body table-responsive">
+								<h5 class="card-title">
+									Fixed Deposit <span>| Table View</span>
+								</h5>
 
-									<table class="table table-bordered">
-										<thead class="table-light">
-											<tr>
-												<th style="white-space: nowrap;">Sr. No</th>
-												<th style="white-space: nowrap;">Plan Code</th>
-												<th style="white-space: nowrap;">Plan Name</th>
-												<th style="white-space: nowrap;">Minimum Deposit</th>
-												<th style="white-space: nowrap;">Rate of Interest</th>
-												<th style="white-space: nowrap;">Installment Type</th>
-												<th style="white-space: nowrap;">Term (Duration)</th>
-												<th style="white-space: nowrap;">Maturity Amount</th>
-												<th style="white-space: nowrap;">Status
-													(Active/Inactive)</th>
-												<th style="white-space: nowrap;">Action</th>
-											</tr>
-										</thead>
-										<tbody id="fixedTableBody">
-											<!-- Dynamic rows will be injected here -->
-										</tbody>
-									</table>
+								<table class="table table-bordered">
+									<thead class="table-light">
+										<tr>
+											<th style="white-space: nowrap;">Sr. No</th>
+											<th style="white-space: nowrap;">Plan Code</th>
+											<th style="white-space: nowrap;">Plan Name</th>
+											<th style="white-space: nowrap;">Minimum Deposit</th>
+											<th style="white-space: nowrap;">Rate of Interest</th>
+											<th style="white-space: nowrap;">Installment Type</th>
+											<th style="white-space: nowrap;">Term (Duration)</th>
+											<th style="white-space: nowrap;">Maturity Amount</th>
+											<th style="white-space: nowrap;">Status
+												(Active/Inactive)</th>
+											<th style="white-space: nowrap;">Action</th>
+										</tr>
+									</thead>
+									<tbody id="fixedTableBody">
+										<!-- Dynamic rows will be injected here -->
+									</tbody>
+								</table>
 
-								</div>
-							</div>
-							<div class="mt-2 text-center">
-								<button id="prevBtnFD" class="btn btn-sm btn-primary">
-									<i class="bi bi-chevron-double-left"></i>
-								</button>
-								<span id="pageInfoFD" class="mx-2"></span>
-								<button id="nextBtnFD" class="btn btn-sm btn-primary">
-									<i class="bi bi-chevron-double-right"></i>
-								</button>
 							</div>
 						</div>
+						<div class="mt-2 text-center">
+							<button id="prevBtnFD" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-left"></i>
+							</button>
+							<span id="pageInfoFD" class="mx-2"></span>
+							<button id="nextBtnFD" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-right"></i>
+							</button>
+						</div>
 					</div>
+				</div>
 			</form>
 		</div>
+		<br> <br>
 
 
 		<div>
@@ -884,6 +893,8 @@ td {
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
+							<input type="hidden" name="mis" id="mis" value="MIS"
+								required="required" style="text-transform: uppercase;" />
 
 							<div class="d-flex flex-column formFields">
 								<label for="">Plan Code <span class="star">*</span></label> <input
@@ -943,7 +954,6 @@ td {
 							</div>
 						</div>
 
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
@@ -951,12 +961,6 @@ td {
 									required="required" placeholder="Enter Total Deposit" />
 							</div>
 						</div>
-
-
-
-
-
-
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -991,8 +995,6 @@ td {
 									required="required" placeholder="Enter Grace Period" />
 							</div>
 						</div>
-
-
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -1049,33 +1051,25 @@ td {
 					<div class="row mt-5">
 						<div class="col-12">
 							<div class="card recent-sales">
-
 								<div class="card-body table-responsive">
 									<h5 class="card-title">
-										Recent Sales <span>| Today</span>
+										MIS Deposit <span>| Table View</span>
 									</h5>
 
 									<table class="table table-bordered">
 										<thead class="table-light">
 											<tr>
-												<th>Plan Code</th>
-												<th>Plan Name</th>
-												<th>Minimum Deposit</th>
-												<th>Rate Of Interest</th>
-												<th>Installment Type</th>
-												<th>Term Mode</th>
-												<th>Term</th>
-												<th>Duration</th>
-												<th>Commission On New</th>
-												<th>Renewal Commission</th>
-												<th>Interest Interval</th>
-												<th>Total Paid</th>
-												<th>Maturity Amount</th>
-												<th>Flexible Plan</th>
-												<th>Grace Days</th>
-												<th>Penalty Rate</th>
-												<th>Status</th>
-												<th>Action</th>
+												<th style="white-space: nowrap;">Sr. No</th>
+												<th style="white-space: nowrap;">Plan Code</th>
+												<th style="white-space: nowrap;">Plan Name</th>
+												<th style="white-space: nowrap;">Minimum Deposit</th>
+												<th style="white-space: nowrap;">Rate of Interest</th>
+												<th style="white-space: nowrap;">Installment Type</th>
+												<th style="white-space: nowrap;">Term (Duration)</th>
+												<th style="white-space: nowrap;">Maturity Amount</th>
+												<th style="white-space: nowrap;">Status
+													(Active/Inactive)</th>
+												<th style="white-space: nowrap;">Action</th>
 											</tr>
 										</thead>
 										<tbody id="misdepositeTableBody">
@@ -1083,8 +1077,16 @@ td {
 										</tbody>
 									</table>
 
-
 								</div>
+							</div>
+							<div class="mt-2 text-center">
+								<button id="prevBtnMIS" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-left"></i>
+								</button>
+								<span id="pageInfoMIS" class="mx-2"></span>
+								<button id="nextBtnMIS" class="btn btn-sm btn-primary">
+									<i class="bi bi-chevron-double-right"></i>
+								</button>
 							</div>
 						</div>
 					</div>

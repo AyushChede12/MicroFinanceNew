@@ -25,7 +25,7 @@ public class RecurringDepositPM {
     private String totalPaidRD;
     private String flexiblePlanRD;
     private String maturityAmountRD;
-    private String penltyfineRD;
+    private String penaltyfineRD;
     private String graceDaysRD;
     private String statusOfPlanRD;
 	public Long getId() {
@@ -112,11 +112,11 @@ public class RecurringDepositPM {
 	public void setMaturityAmountRD(String maturityAmountRD) {
 		this.maturityAmountRD = maturityAmountRD;
 	}
-	public String getPenltyfineRD() {
-		return penltyfineRD;
+	public String getPenaltyfineRD() {
+		return penaltyfineRD;
 	}
-	public void setPenltyfineRD(String penltyfineRD) {
-		this.penltyfineRD = penltyfineRD;
+	public void setPenaltyfineRD(String penaltyfineRD) {
+		this.penaltyfineRD = penaltyfineRD;
 	}
 	public String getGraceDaysRD() {
 		return graceDaysRD;
