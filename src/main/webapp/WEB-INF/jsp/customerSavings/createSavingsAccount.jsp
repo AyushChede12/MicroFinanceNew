@@ -399,7 +399,22 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 				
-				
+				<div class="col-lg-3">
+					<div class="h-100 d-flex justify-content-start align-items-center">
+						<div
+							class="d-flex justify-content-start align-items-center formFields">
+							<label style="margin-left: 20px;" class="mb-2">Check Locker</label>
+							<div class="cont">
+								<div class="toggle">
+									<input type="checkbox" id="toggle-member-status3" name="toggle-member-status3"
+										class="toggle__input" data-toggle-type="member-status">
+									<label for="toggle-member-status3" class="toggle__label"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+								
 			</div>
 			<!-- Cheque input fields -->
 					 <div id="chequeInputs" style="display: none;" >
