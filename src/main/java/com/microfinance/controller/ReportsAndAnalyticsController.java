@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.DailyPremiumRenewalPM;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.ReportsAndAnalyticsService;
 
@@ -43,5 +45,18 @@ public class ReportsAndAnalyticsController {
 	                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No approved customers found"));
 	        }
 	    }
+	 
+	 //poonam : Fetch Unapproved Loan Application on 08-08-2025
+	 @GetMapping("/getUnapprovedLoanApplication")
+	  	public ResponseEntity<ApiResponse<List<LoanApplication>>> getUnapprovedLoanApplication() {
+	  	    List<LoanApplication> list = reportsAndAnalyticsService.getUnapprovedLoanApplication();
+
+	  	    if (!list.isEmpty()) {
+	  	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Unapproved loan fetched", list));
+	  	    } else {
+	  	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
+	  	    }
+	  	}
 
 }

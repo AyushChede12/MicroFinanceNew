@@ -20,20 +20,24 @@ import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
 import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
+import com.microfinance.model.CodeModule;
 import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
+import com.microfinance.model.Transactions;
 import com.microfinance.model.states;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.CasteModuleRepo;
 import com.microfinance.repository.CategoryModuleRepo;
+import com.microfinance.repository.CodeModuleRepo;
 import com.microfinance.repository.CompanyAdministrationRepo;
 import com.microfinance.repository.ExecutiveFounderRepo;
 import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
 import com.microfinance.repository.Staterepo;
+import com.microfinance.repository.TransactionsRepo;
 
 @Service
 public class PreferenceService {
@@ -65,6 +69,12 @@ public class PreferenceService {
 	@Autowired
 	Staterepo stateRepo;
 
+	@Autowired
+	CodeModuleRepo codeModuleRepo;
+
+	@Autowired
+	TransactionsRepo transactionsRepo;
+
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
@@ -72,22 +82,22 @@ public class PreferenceService {
 	public BranchModule saveBranchModule(BranchModule branchModule) {
 		// TODO Auto-generated method stub
 		if (branchModule.getId() != null) {
-            BranchModule existing = branchModuleRepo.findById(branchModule.getId())
-                    .orElseThrow(() -> new RuntimeException("Branch not found with ID: " + branchModule.getId()));
+			BranchModule existing = branchModuleRepo.findById(branchModule.getId())
+					.orElseThrow(() -> new RuntimeException("Branch not found with ID: " + branchModule.getId()));
 
-            existing.setBranchCode(branchModule.getBranchCode());
-            existing.setBranchName(branchModule.getBranchName());
-            existing.setOpeningDate(branchModule.getOpeningDate());
-            existing.setAddress(branchModule.getAddress());
-            existing.setPin(branchModule.getPin());
-            existing.setState(branchModule.getState());
-            existing.setPrimaryContact(branchModule.getPrimaryContact());
-            existing.setContact(branchModule.getContact());
+			existing.setBranchCode(branchModule.getBranchCode());
+			existing.setBranchName(branchModule.getBranchName());
+			existing.setOpeningDate(branchModule.getOpeningDate());
+			existing.setAddress(branchModule.getAddress());
+			existing.setPin(branchModule.getPin());
+			existing.setState(branchModule.getState());
+			existing.setPrimaryContact(branchModule.getPrimaryContact());
+			existing.setContact(branchModule.getContact());
 
-            return branchModuleRepo.save(existing);
-        } else {
-            return branchModuleRepo.save(branchModule);
-        }
+			return branchModuleRepo.save(existing);
+		} else {
+			return branchModuleRepo.save(branchModule);
+		}
 	}
 
 	public List<BranchModule> fetchAllBranchModule() {
@@ -106,37 +116,37 @@ public class PreferenceService {
 		}
 		return false;
 	}
+
 	public void validateBranchNameExists(String branchName) {
-	    if (branchName == null || branchName.trim().isEmpty()) {
-	        throw new BadRequestException("Branch name is required");
-	    }
+		if (branchName == null || branchName.trim().isEmpty()) {
+			throw new BadRequestException("Branch name is required");
+		}
 
-	    Optional<BranchModule> branchOpt = branchModuleRepo.findByBranchNameIgnoreCase(branchName.trim());
+		Optional<BranchModule> branchOpt = branchModuleRepo.findByBranchNameIgnoreCase(branchName.trim());
 
-	    if (branchOpt.isPresent()) {
-	        throw new BadRequestException("Invalid branch name: " + branchName);
-	    }
+		if (branchOpt.isPresent()) {
+			throw new BadRequestException("Invalid branch name: " + branchName);
+		}
 	}
-
 
 	// Bank Module
 	public BankModule saveBankModule(BankModule bankModule) {
 		// TODO Auto-generated method stub
 		if (bankModule.getId() != null) {
 			BankModule existing = bankModuleRepo.findById(bankModule.getId())
-                    .orElseThrow(() -> new RuntimeException("Bank not found with ID: " + bankModule.getId()));
+					.orElseThrow(() -> new RuntimeException("Bank not found with ID: " + bankModule.getId()));
 
-            existing.setBankName(bankModule.getBankName());
-            existing.setAccountNo(bankModule.getAccountNo());
-            existing.setContactNo(bankModule.getContactNo());
-            existing.setAddress(bankModule.getAddress());
-            existing.setOpeningDate(bankModule.getOpeningDate());
-            existing.setOpeningBalance(bankModule.getOpeningBalance());
+			existing.setBankName(bankModule.getBankName());
+			existing.setAccountNo(bankModule.getAccountNo());
+			existing.setContactNo(bankModule.getContactNo());
+			existing.setAddress(bankModule.getAddress());
+			existing.setOpeningDate(bankModule.getOpeningDate());
+			existing.setOpeningBalance(bankModule.getOpeningBalance());
 
-            return bankModuleRepo.save(existing);
-        } else {
-            return bankModuleRepo.save(bankModule);
-        }
+			return bankModuleRepo.save(existing);
+		} else {
+			return bankModuleRepo.save(bankModule);
+		}
 	}
 
 	public List<BankModule> fetchAllBankModule() {
@@ -162,14 +172,14 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		if (relativeModule.getId() != null) {
 			RelativeModule existing = relativeModuleRepo.findById(relativeModule.getId())
-                    .orElseThrow(() -> new RuntimeException("Relative not found with ID: " + relativeModule.getId()));
+					.orElseThrow(() -> new RuntimeException("Relative not found with ID: " + relativeModule.getId()));
 
-            existing.setRelation(relativeModule.getRelation());
+			existing.setRelation(relativeModule.getRelation());
 
-            return relativeModuleRepo.save(existing);
-        } else {
-            return relativeModuleRepo.save(relativeModule);
-        }
+			return relativeModuleRepo.save(existing);
+		} else {
+			return relativeModuleRepo.save(relativeModule);
+		}
 	}
 
 	public List<RelativeModule> fetchAllRelativeModule() {
@@ -191,14 +201,14 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		if (castemodule.getId() != null) {
 			CasteModule existing = casteModuleRepo.findById(castemodule.getId())
-                    .orElseThrow(() -> new RuntimeException("Caste not found with ID: " + castemodule.getId()));
+					.orElseThrow(() -> new RuntimeException("Caste not found with ID: " + castemodule.getId()));
 
-            existing.setCaste(castemodule.getCaste());
+			existing.setCaste(castemodule.getCaste());
 
-            return casteModuleRepo.save(existing);
-        } else {
-            return casteModuleRepo.save(castemodule);
-        }
+			return casteModuleRepo.save(existing);
+		} else {
+			return casteModuleRepo.save(castemodule);
+		}
 	}
 
 	public List<CasteModule> fetchAllCasteModule() {
@@ -220,14 +230,14 @@ public class PreferenceService {
 		// TODO Auto-generated method stub
 		if (categorymodule.getId() != null) {
 			CategoryModule existing = categoryModuleRepo.findById(categorymodule.getId())
-                    .orElseThrow(() -> new RuntimeException("Category not found with ID: " + categorymodule.getId()));
+					.orElseThrow(() -> new RuntimeException("Category not found with ID: " + categorymodule.getId()));
 
-            existing.setCategory(categorymodule.getCategory());
+			existing.setCategory(categorymodule.getCategory());
 
-            return categoryModuleRepo.save(existing);
-        } else {
-            return categoryModuleRepo.save(categorymodule);
-        }
+			return categoryModuleRepo.save(existing);
+		} else {
+			return categoryModuleRepo.save(categorymodule);
+		}
 	}
 
 	public List<CategoryModule> fetchAllCategoryModule() {
@@ -248,17 +258,17 @@ public class PreferenceService {
 	public FinancialYear saveFinancialYear(FinancialYear financialyear) {
 		// TODO Auto-generated method stub
 		if (financialyear.getId() != null) {
-			FinancialYear existing = financialYearRepo.findById(financialyear.getId())
-                    .orElseThrow(() -> new RuntimeException("Financial Year not found with ID: " + financialyear.getId()));
+			FinancialYear existing = financialYearRepo.findById(financialyear.getId()).orElseThrow(
+					() -> new RuntimeException("Financial Year not found with ID: " + financialyear.getId()));
 
-            existing.setFinancialYearName(financialyear.getFinancialYearName());
-            existing.setDateFrom(financialyear.getDateFrom());
-            existing.setDateTo(financialyear.getDateTo());
+			existing.setFinancialYearName(financialyear.getFinancialYearName());
+			existing.setDateFrom(financialyear.getDateFrom());
+			existing.setDateTo(financialyear.getDateTo());
 
-            return financialYearRepo.save(existing);
-        } else {
-            return financialYearRepo.save(financialyear);
-        }
+			return financialYearRepo.save(existing);
+		} else {
+			return financialYearRepo.save(financialyear);
+		}
 	}
 
 	public List<FinancialYear> fetchAllFinancialYear() {
@@ -470,6 +480,56 @@ public class PreferenceService {
 	public List<states> getAllStates() {
 		// TODO Auto-generated method stub
 		return stateRepo.findAll();
+	}
+
+	public CodeModule saveOrUpdateCodeModule(CodeModule module) {
+		CodeModule entity;
+
+		// If ID is present and exists, fetch for update
+		if (module.getId() != null && codeModuleRepo.existsById(module.getId())) {
+			entity = codeModuleRepo.findById(module.getId()).get();
+		} else {
+			// Otherwise, create a new instance
+			entity = new CodeModule();
+		}
+
+		entity.setName(module.getName());
+		entity.setBranchPrefix(module.isBranchPrefix());
+		entity.setCodePrefix(module.getCodePrefix());
+		entity.setNoOfDigit(module.getNoOfDigit());
+		entity.setLastNo(module.getLastNo());
+
+		// Generate Preview Code like "EMP00012"
+		String preview = generatePreviewCode(module.getCodePrefix(), module.getNoOfDigit(), module.getLastNo());
+		entity.setPreview(preview);
+
+		return codeModuleRepo.save(entity);
+	}
+
+	private String generatePreviewCode(String prefix, int digits, int number) {
+		String format = "%0" + digits + "d";
+		return prefix + String.format(format, number);
+	}
+
+	public boolean deleteCodeModule(Long id) {
+		// TODO Auto-generated method stub
+		if (codeModuleRepo.existsById(id)) {
+			codeModuleRepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public List<Transactions> fetchAllTransactions() {
+		return transactionsRepo.findAll();
+	}
+
+	public List<Transactions> fetchTransactionsByBranch(String branchName) {
+		if (branchName == null || branchName.trim().isEmpty()) {
+			return transactionsRepo.findAll(); // return all if filter is empty
+		}
+		return transactionsRepo.findByBranchNameIgnoreCase(branchName);
 	}
 
 }

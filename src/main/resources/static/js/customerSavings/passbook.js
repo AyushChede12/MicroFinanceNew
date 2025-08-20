@@ -115,12 +115,14 @@ function displayTransactionDataList() {
                         $("#customerDetails").html(`
                             <tr>
                                 <td>${data.id || ''}</td>
-                                <td>${data.branchName|| ''}</td>
-                                <td>${data.accountNumber|| ''}</td>
+                                <td>${data.branchName || ''}</td>
+                                <td>${data.accountNumber || ''}</td>
+                                <td>${data.enterCustomerName || ''}</td>
+                                <td>${data.selectByCustomer || ''}</td>
                                 <td>${data.contactNumber || ''}</td>
                                 <td>${data.address || ''}</td>
                                 <td>${data.openingDate || ''}</td>
-                                <td>${data.openingAmount || ''}</td>
+                                <td>${data.balance || ''}</td>
                                 <td></td>
                             </tr>
                         `);
@@ -172,13 +174,13 @@ function displaySavingfrontPage() {
                 $("#operationType").text(data.operationType);
                 $("#aadharNo").text(data.aadharNo);
                 $("#address").text(fullAddress);
-                $("#openingDate").text(data.openingDate);
+                $("#dateOfIssue").text(data.openingDate);
                 $("#typeofaccount").text(data.typeofaccount);
-                $("#branch").text(data.branchName);
+                $("#branchName").text(data.branchName);
 
                 // If you have these fields in your data, else remove
                 $("#IFSCCode").text(data.ifscCode || '');
-                $("#dateOfIssue").text(data.dateOfIssue || '');
+                //$("#dateOfIssue").text(data.dateOfIssue || '');
                 $("#nominationStatus").text(data.nominationStatus || '');
                 $("#nominationName").text(data.nominationName || '');
                 $("#upi").text(data.upi || '');

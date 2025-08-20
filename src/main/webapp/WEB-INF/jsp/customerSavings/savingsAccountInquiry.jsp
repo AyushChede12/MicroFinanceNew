@@ -92,7 +92,7 @@ pageEncoding="ISO-8859-1"%> -->
                             <div class="d-flex flex-column formFields mb-4">
                                 <label for="">Account Number</label> <select id="accountNumber" name="accountNumber"
                                     required="required" class="form-control selectField" style="height: 30px;">
-                                    <option value=""> Select Account Number</option>
+                                    <option value="">Select</option>
                                 </select>
                             </div>
                         </div>
@@ -114,18 +114,17 @@ pageEncoding="ISO-8859-1"%> -->
                             <div class="d-flex flex-column formFields mb-4">
                                 <label for="">Plan name</label> <select id="schemename" name="schemename"
                                     required="required" class="form-control selectField" style="height: 30px;">
-                                    <option value=""> Select Colour</option>
-                                    <option value="Blue">Blue</option>
+                                    <option value="">Select</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-12 text-center">
                             <button id="saveBtn" class="btn btn-warning" style="margin-left: 80%;">Search</button>
                             <button id="saveBtn" class="btn btn-warning" style="background-color: orangered;">Print</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="row mt-5">
@@ -152,7 +151,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<th scope="col">State</th>
 											<th scope="col">Opening Date</th>
 											<th scope="col">Financial Consultant Code</th>
-											<th scope="col">Plan Name</th>											
+											<th scope="col">Plan Name</th>	
+											<th scope="col">Approve Status</th>											
 										</tr>
 									</thead>
 									<tbody id="tableSavingAcc">
@@ -169,7 +169,8 @@ pageEncoding="ISO-8859-1"%> -->
 <script>
 $(document).ready(function() {
 	searchInTheSavingAcc();
-	
+	AccNoDropdown();
+	schemeNameDropdown();
 });	
 </script>
 

@@ -140,7 +140,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Community Address* </label> <input type="text"
-									name="communityaddress" id="communityaddress" required="required"
+									name="communityAddress" id="communityaddress" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
@@ -151,14 +151,6 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-
-						<div class="col-lg-3  mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Payment Mode* </label> <input type="text"
-									name="paymentmode" id="paymentmode" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Loan Purpose* </label> <input type="text"
@@ -166,6 +158,14 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
+						<div class="col-lg-3  mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for=""> EMI Mode* </label> <input type="text"
+									name="emimode" id="emimode" required="required"
+									placeholder="Enter Location" />
+							</div>
+						</div>
+						
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Term* </label> <input type="text"
