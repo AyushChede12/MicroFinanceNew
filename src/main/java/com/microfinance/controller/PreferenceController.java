@@ -29,6 +29,7 @@ import com.microfinance.model.CompanyAdministration;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.RelativeModule;
 import com.microfinance.model.Statedistricts;
+import com.microfinance.model.Transactions;
 import com.microfinance.model.states;
 import com.microfinance.repository.StateDistrictRepo;
 import com.microfinance.model.FinancialYear;
@@ -424,15 +425,46 @@ public class PreferenceController {
 	}
 
 	// Ayush
-//	@PostMapping("/saveOrUpdateCodeModules")
-//	public ResponseEntity<ApiResponse> saveOrUpdateCodeModule(@RequestBody CodeModule module) {
-//		try {
-//			CodeModule saved = preferenceService.saveOrUpdateCodeModule(module);
-//			return ResponseEntity.ok(new ApiResponse("success", "Code Module saved successfully", saved));
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-//					.body(new ApiResponse("error", "Failed to save Code Module", null));
-//		}
-//	}
+	@PostMapping("/saveOrUpdateCodeModules")
+	public ResponseEntity<ApiResponse> saveOrUpdateCodeModule(@RequestBody CodeModule module) {
+		try {
+			CodeModule code = preferenceService.saveOrUpdateCodeModule(module);
+			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "Code Module saved successfully", code));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse("error", "Failed to save Code Module", null));
+		}
+	}
+
+	@PostMapping("/deleteCodeModuleById") // Ayush
+	public ResponseEntity<ApiResponse<String>> deleteCodeModule(@RequestParam("id") Long id) {
+		boolean isDeleted = preferenceService.deleteCodeModule(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Code Module deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Code Module deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+
+	@GetMapping("/fetchAllTransactions")
+	public ResponseEntity<ApiResponse<List<Transactions>>> fetchAllTransactions(
+			@RequestParam(required = false) String branchName) {
+
+		List<Transactions> list;
+		if (branchName != null && !branchName.isEmpty()) {
+			list = preferenceService.fetchTransactionsByBranch(branchName);
+		} else {
+			list = preferenceService.fetchAllTransactions();
+		}
+
+		ApiResponse<List<Transactions>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"Transactions fetched successfully", list);
+
+		return ResponseEntity.ok(response);
+	}
 
 }
