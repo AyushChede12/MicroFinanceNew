@@ -355,11 +355,11 @@ public class PageController {
 		return "jointLiabilityLoan/statementOfAccount";
 	}
 
-	@GetMapping("/earlyLoanClosure")
+	@GetMapping("/earlyLoanClosureJointLiability")
 	public String getEarlyLoanClosure() {
 		return "jointLiabilityLoan/earlyLoanClosure";
 	}
-
+	
 	@GetMapping("/completedLoansRecord")
 	public String getClosedLoanDetails() {
 		return "jointLiabilityLoan/completedLoansRecord";
@@ -889,6 +889,11 @@ public class PageController {
 	@GetMapping("/irregularLoanStatementLoanManagement")
 	public String getIrregularLoanStatementLoanSection() {
 		return "loanManagement/irregularLoanStatement";
+	}
+	
+	@GetMapping("/earlyLoanClosureLoan")
+	public String getEarlyLoanClosureLoan() {
+		return "loanManagement/earlyLoanClosure";
 	}
 	
 	@GetMapping("/preSettlementLoanManagement")

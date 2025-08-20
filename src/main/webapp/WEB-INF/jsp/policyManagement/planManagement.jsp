@@ -273,7 +273,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Paid <span class="star">*</span></label> <input
-									type="text" name="totalPaid" id="totalPaid" required="required"
+									type="text" name="totalPaid" id="totalPaid" required="required" readonly="readonly"
 									placeholder="Enter Total Paid" />
 							</div>
 						</div>
@@ -281,7 +281,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmount" id="maturityAmount"
+								<input type="text" name="maturityAmount" id="maturityAmount" readonly="readonly"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
@@ -512,7 +512,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
-								<input type="text" name="totalPaidRD" id="totalPaidRD"
+								<input type="text" name="totalPaidRD" id="totalPaidRD" readonly="readonly"
 									required="required" placeholder="Enter Total Deposit" />
 							</div>
 						</div>
@@ -520,7 +520,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmountRD" id="maturityAmountRD"
+								<input type="text" name="maturityAmountRD" id="maturityAmountRD" readonly="readonly"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
@@ -712,11 +712,6 @@ td {
 							</div>
 						</div>
 
-
-
-
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Renewal Commission(%) <span class="star">*</span></label>
@@ -743,13 +738,10 @@ td {
 							</div>
 						</div>
 
-
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
-								<input type="text" name="totalPaidFD" id="totalPaidFD"
+								<input type="text" name="totalPaidFD" id="totalPaidFD" readonly="readonly"
 									required="required" placeholder="Enter Total Deposit" />
 							</div>
 						</div>
@@ -757,7 +749,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmountFD" id="maturityAmountFD"
+								<input type="text" name="maturityAmountFD" id="maturityAmountFD" readonly="readonly"
 									required="required" placeholder="Enter maturityAmountFD" />
 							</div>
 						</div>
@@ -957,7 +949,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
-								<input type="text" name="totalPaidMD" id="totalPaidMD"
+								<input type="text" name="totalPaidMD" id="totalPaidMD" readonly="readonly"
 									required="required" placeholder="Enter Total Deposit" />
 							</div>
 						</div>
@@ -965,7 +957,7 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmountMD" id="maturityAmountMD"
+								<input type="text" name="maturityAmountMD" id="maturityAmountMD" readonly="readonly"
 									required="required" placeholder="Enter Maturity Amount" />
 							</div>
 						</div>

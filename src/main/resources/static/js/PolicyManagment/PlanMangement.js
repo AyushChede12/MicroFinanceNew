@@ -334,8 +334,8 @@ $(document).ready(function() {
 	});
 
 	$("#interestInterval").change(function() {
-		const P = parseFloat(document.getElementById("minimumDeposit").value);     // installment per period (for RD) OR principal (for FD)
-		const termInput = parseFloat(document.getElementById("ddterm").value);     // assume YEARS unless you add a unit selector
+		const P = parseFloat(document.getElementById("minimumDeposit").value); // installment per period (RD) OR principal (FD)
+		const termInput = parseFloat(document.getElementById("ddterm").value); // raw duration input
 		const r_annual = parseFloat(document.getElementById("rateOfInterest").value) / 100;
 		const interval = document.getElementById("interestInterval").value;
 
@@ -343,49 +343,59 @@ $(document).ready(function() {
 		const freqMap = {
 			"Daily": 365,
 			"Monthly": 12,
-			"Quaterly": 4,
+			"Quarterly": 4,
 			"Half-Yearly": 2,
 			"Yearly": 1,
 			"On Maturity": 1
 		};
 
-		const m = freqMap[interval];              // periods per year
-		const years = termInput;                   // <-- If your ddterm is in months/days, convert here.
-		// e.g., months: years = termInput / 12; days: years = termInput / 365;
+		// --- Step 1. Convert term to years ---
+		// Change this if your input is not in years:
+		// If termInput is in months → const years = termInput / 12;
+		// If termInput is in days → const years = termInput / 365;
+		const years = termInput;   // assume input is already in years
 
+		// --- Step 2. Main calculation ---
 		let totalDeposit, maturity;
+		const m = freqMap[interval];  // periods per year
 
 		if (interval === "On Maturity") {
-			// Treat as a one-time deposit (FD) with annual compounding
-			// Total deposit is just the principal P
+			// One-time FD with compounding
 			totalDeposit = P;
-			const n = m * years;                     // here m = 1
+			const n = m * years;       // m = 1 here
 			const i = r_annual / m;
-			maturity = P * Math.pow(1 + i, n);       // compound annually by default
+			maturity = P * Math.pow(1 + i, n);
+
 		} else {
-			// Recurring deposit (ordinary annuity: payment at END of each period)
-			const periods = Math.round(m * years);   // total number of installments
+			// Recurring deposit (ordinary annuity by default)
+			const periods = Math.round(m * years);   // number of installments
 			const i = r_annual / m;                  // periodic rate
 
 			totalDeposit = P * periods;
 
 			if (i === 0) {
-				// no interest edge case
 				maturity = totalDeposit;
 			} else {
-				// Ordinary annuity: M = P * [((1+i)^n - 1) / i]
+				// Ordinary annuity formula
 				maturity = P * ((Math.pow(1 + i, periods) - 1) / i);
-				// If your product credits as annuity-due (payment at START), multiply by (1+i):
-				// maturity = maturity * (1 + i);
+
+				// --- If your product credits interest from day 1 (annuity-due):
+				// maturity *= (1 + i);
 			}
 		}
 
+		// --- Step 3. Output ---
 		document.getElementById("totalPaid").value = totalDeposit.toFixed(2);
 		document.getElementById("maturityAmount").value = maturity.toFixed(2);
 
-		// (Optional) also show interest earned if you have a field for it:
-		// document.getElementById("interestEarned").value = (maturity - totalDeposit).toFixed(2);
+		// Optional: also show interest earned if you have such a field
+		const interest = maturity - totalDeposit;
+		const interestField = document.getElementById("interestEarned");
+		if (interestField) {
+			interestField.value = interest.toFixed(2);
+		}
 	});
+
 
 
 	// save the Reccuring deposite
@@ -665,36 +675,32 @@ $(document).ready(function() {
 	});
 
 	$("#componentIntervalRD").change(function() {
-		const P = parseFloat(document.getElementById("minimumAmountRD").value);   // installment per period
-		const termMonths = parseFloat(document.getElementById("rdterm").value);   // total term in months
-		const r_annual = parseFloat(document.getElementById("rateOfInterestRD").value) / 100; // annual rate
+		/*const P = parseFloat(document.getElementById("minimumAmountRD").value); // Installment per period
+		const termMonths = parseFloat(document.getElementById("rdterm").value); // Term in months
+		const r_annual = parseFloat(document.getElementById("rateOfInterestRD").value) / 100; // Annual interest
 		const interval = document.getElementById("componentIntervalRD").value;
 
-		// Map for payment/compounding frequency
+		// Payment/compounding frequency map
 		const freqMap = {
 			"Daily": 365,
 			"Monthly": 12,
-			"Quaterly": 4,      // keep spelling as in dropdown
+			"Quarterly": 4,      // spelling must match dropdown
 			"Half-Yearly": 2,
 			"Yearly": 1
 		};
 
-		const m = freqMap[interval] || 12;    // fallback to monthly if not found
-		const i = r_annual / m;               // periodic interest rate
+		const m = freqMap[interval] || 12; // fallback to monthly if interval not found
+		const i = r_annual / m;            // periodic interest rate
 
-		// Convert term in months to number of payment periods
-		// Examples:
-		// - Monthly (m=12): n = termMonths
-		// - Quarterly (m=4): n = termMonths/3
-		// - Half-Yearly (m=2): n = termMonths/6
-		// - Yearly (m=1): n = termMonths/12
-		// - Daily (m=365): n = (termMonths/12)*365
-		let nPeriods = (termMonths / 12) * m;
+		// Calculate number of installments/periods
+		let nPeriods;
+		if (interval === "Daily") {
+			nPeriods = Math.round((termMonths / 12) * 365); // term in days
+		} else {
+			nPeriods = Math.round((termMonths / 12) * m);   // term in months/quarters/half-years/years
+		}
 
-		// Round to nearest full period (avoid fractional periods)
-		nPeriods = Math.round(nPeriods);
-
-		// Total deposit = P × nPeriods
+		// Total deposit
 		let totalDeposit = P * nPeriods;
 		let maturity;
 
@@ -702,22 +708,27 @@ $(document).ready(function() {
 			maturity = 0;
 			totalDeposit = 0;
 		} else if (i === 0) {
-			maturity = totalDeposit; // no interest case
+			maturity = totalDeposit; // no interest
 		} else {
-			// Ordinary annuity (installment at END of each period)
-			maturity = P * ((Math.pow(1 + i, nPeriods) - 1) / i);
-
-			// If your RD installments are at START of period (annuity-due), use:
-			// maturity = maturity * (1 + i);
+			// **RD formula (annuity-due)**: installments credited at start of period
+			maturity = P * ((Math.pow(1 + i, nPeriods) - 1) / i) * (1 + i);
 		}
 
-		// Set values in your form fields
+		// Update form fields
 		document.getElementById("totalPaidRD").value = totalDeposit.toFixed(2);
 		document.getElementById("maturityAmountRD").value = maturity.toFixed(2);
 
-		// If you also want to display interest earned:
-		// document.getElementById("interestEarnedRD").value = (maturity - totalDeposit).toFixed(2);
+		// Interest earned
+		const interest = maturity - totalDeposit;
+		const interestField = document.getElementById("interestEarnedRD");
+		if (interestField) {
+			interestField.value = interest.toFixed(2);
+		}*/
 	});
+	
+	
+
+
 
 
 
@@ -994,6 +1005,58 @@ $(document).ready(function() {
 			dropdown.append(`<option value="${value}">${value}</option>`).val(value);
 		}
 	}
+	
+	function calculateFixedDeposit() {
+		// Get values from the form
+		const minAmount = parseFloat(document.getElementById("minimumAmountFD").value);
+		const interestRate = parseFloat(document.getElementById("rateOfInterestFD").value);
+		const term = parseInt(document.getElementById("fdterm").value);
+		const compoundInterval = document.getElementById("componentIntervalFD").value;
+
+		// Total Deposit is the principal amount
+		const totalDeposit = minAmount;
+
+		let maturityAmount;
+
+		if (interestType === "Simple") {
+			// Simple Interest Formula
+			maturityAmount = minAmount * (1 + (interestRate / 100) * (term / 12));
+		} else if (interestType === "Compound") {
+			// Determine compounding frequency (n)
+			let n;
+			if (compoundInterval === "Daily") {
+				n = 365;
+			} else if (compoundInterval === "Monthly") {
+				n = 12;
+			} else if (compoundInterval === "Quarterly") {
+				n = 4;
+			} else if (compoundInterval === "Half-Yearly") {
+				n = 2;
+			} else if (compoundInterval === "Yearly") {
+				n = 1;
+			} else {
+				throw new Error("Invalid Compounding Interval");
+			}
+
+			// Compound Interest Formula
+			const compoundRate = (interestRate / 100) / n;
+			const periods = n * (term / 12);
+			maturityAmount = minAmount * Math.pow(1 + compoundRate, periods);
+		} else {
+			throw new Error("Invalid Interest Type");
+		}
+
+		// Update the fields
+		document.getElementById("totalPaidFD").value = totalDeposit.toFixed(2);
+		document.getElementById("maturityAmountFD").value = maturityAmount.toFixed(2);
+	}
+
+	// Add event listeners to dropdowns and inputs
+	document.getElementById("minimumAmountFD").addEventListener("input", calculateFixedDeposit);
+	document.getElementById("rateOfInterestFD").addEventListener("input", calculateFixedDeposit);
+	document.getElementById("fdterm").addEventListener("input", calculateFixedDeposit);
+	document.getElementById("componentIntervalFD").addEventListener("change", calculateFixedDeposit);
+
 
 	//Mis deposite save
 	$("#missaveBtn").show();
@@ -1171,7 +1234,7 @@ $(document).ready(function() {
 					} else {
 						$('#toggle-status-planMIS').prop('checked', false);
 					}
-					
+
 					updateToggleColor(document.getElementById('toggle-status-planMIS'));
 
 					$("#missaveBtn").hide();
