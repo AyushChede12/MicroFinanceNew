@@ -1279,12 +1279,12 @@
             </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="unApprovedLoanApplications">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Unapproved Loan Applications</span>
             </a>
-          </li>
+          </li> -->
           
           <li>
             <a href="approvedLoanReport">
