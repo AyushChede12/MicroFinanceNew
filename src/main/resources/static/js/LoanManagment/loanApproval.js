@@ -90,6 +90,12 @@ $(document).ready(function() {
 						$("#financialConsultantId").val(data.financialConsultantId);
 						$("#financialConsultantName").val(data.financialConsultantName);
 
+						if (data.approvalStatus === true || data.approvalStatus === 1 || data.approvalStatus === "1") {
+							$('#approvalStatus').val("Approved").css('color', 'red');
+						} else {
+							$('#approvalStatus').val("Not Approved").css('color', 'green');
+						}
+
 						// ✅ PHOTO block
 						if (data.photo) {
 
@@ -156,13 +162,12 @@ function signatureSizeEdit(e) {
 // js for approving the loan application (Vaibhav)
 $('#approveBtn').click(function() {
 	const loanId = $('#findByLoanId').val(); // hidden input or fetched dynamically
-	const approvalStatus = $('#approvalStatus').val().toLowerCase() === "approve"; // FIXED
 	const approvalDate = $('#approvalDate').val(); // format: yyyy-MM-dd
 
 
 	const requestData = {
 		loanId: loanId,
-		approvalStatus: approvalStatus,
+		approvalStatus: true,
 		approvalDate: approvalDate
 	};
 

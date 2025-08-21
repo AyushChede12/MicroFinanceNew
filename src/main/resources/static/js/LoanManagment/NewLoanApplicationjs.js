@@ -25,13 +25,14 @@ $(document).ready(function() {
 				coApplicantDropdown.append(defaultOption);
 
 				customers.forEach(function(customer) {
-					// Only add if memberCode and customerName exist
-					if (customer.memberCode && customer.customerName) {
-						const option = `<option value="${customer.memberCode}">${customer.customerName} - ${customer.memberCode}</option>`;
-						memberDropdown.append(option);
-						guarantorDropdown.append(option);
-						coApplicantDropdown.append(option);
-					}
+				    if (customer.memberCode && customer.customerName) {
+				        const option = `<option value="${customer.memberCode}" data-name="${customer.customerName}">
+				                            ${customer.customerName} - ${customer.memberCode}
+				                        </option>`;
+				        memberDropdown.append(option);
+				        guarantorDropdown.append(option);
+				        coApplicantDropdown.append(option);
+				    }
 				});
 			} else {
 				alert('No member data found');
@@ -304,11 +305,14 @@ function calculateCharges(feeProcessing,chargesLegal,gst,feeInsurence,feeValuati
 //saving loan application details
 $(document).ready(function() {
 	$('#saveBtn').on('click', function() {
+		const memberId = $('#memberId').val();
+		const memberName = $('#memberId option:selected').data('name');
 
 		var loanApplication = {
 			loanId: $('#loanId').val(),
 			loanDate: $('#loanDate').val(),
-			memberId: $('#memberId').val(),
+			memberId: memberId,
+			memberName: memberName,
 			relativeDetails: $('#relativeDetails').val(),
 			dateOfBirth: $('#dateOfBirth').val(),
 			age: $('#age').val(),

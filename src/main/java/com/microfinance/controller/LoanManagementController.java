@@ -267,6 +267,35 @@ public class LoanManagementController {
 		    }
 		}
 
+		//Api for fetching all the loan id's for loan statement(Vaibhav)
+		@GetMapping("/getStatementLoanId")
+		public ResponseEntity<ApiResponse<List<String>>> getStatementLoanId() {
+			List<String> loanIds = loanServices.getStatementLoanId();
+
+			if (loanIds != null && !loanIds.isEmpty()) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan IDs fetched successfully", loanIds));
+			} else {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT)
+						.body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No Loan IDs found", null));
+			}
+		}
+		
+		
+		
+		// Api for fetching the loan details by loan id(Vaibhav)
+		@GetMapping("/fetchLoanStatement")
+		public ResponseEntity<ApiResponse<List<LoanPayment>>> fetchLoanStatement(@RequestParam String loanId) {
+		    List<LoanPayment> loanPayments = loanServices.fetchLoanStatement(loanId);
+
+		    if (loanPayments != null && !loanPayments.isEmpty()) {
+		        return ResponseEntity.ok(
+		            new ApiResponse<>(HttpStatus.OK, "Loan payments found", loanPayments)
+		        );
+		    } else {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		            .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No loan payments found for this Loan ID", null));
+		    }
+		}
 
 		
 }

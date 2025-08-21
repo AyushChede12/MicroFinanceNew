@@ -65,6 +65,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 					<div class="row">
 						<input type="hidden" id="loanId" name="loanId" value="${loanCode}">
+						<input type="hidden" id="memberName" name="memberName">
 
 						<div class="col-lg-3">
 
