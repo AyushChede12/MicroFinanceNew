@@ -106,6 +106,7 @@ $(document).ready(function () {
                 if (response.status === "OK") {
                     if (response.data.approveStatus === true) {
                         alert("This maturity is already approved.");
+						location.reload();
                     } else {
                         alert("Maturity Approved Successfully!");
 						location.reload();
