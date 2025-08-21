@@ -1,6 +1,7 @@
 $(document).ready(function() {
-function populateapprovedLoanIdDropdown() {
-	alert("Hello");
+	approvedLoanIdDropdown();
+});
+function approvedLoanIdDropdown() {
 
 	$.ajax({
 		url: "api/loanmanegment/getApprovedLoanIds",
@@ -28,4 +29,120 @@ function populateapprovedLoanIdDropdown() {
 		}
 	});
 }
+
+$(document).ready(function() {
+	$("#loanID").on("change", function() {
+		const selectedLoanId = $(this).val();
+
+		if (selectedLoanId) {
+
+			// First AJAX - Loan Details
+			$.ajax({
+				url: "/api/loanmanegment/getLoanById",
+				type: "GET",
+				data: { loanId: selectedLoanId },
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "OK" && response.data) {
+						const data = response.data;
+
+						// Populate form fields
+						$("#date").val(data.loanDate);
+						$("#customercode").val(data.memberId);
+						$("#familyMembername").val(data.relativeDetails);
+						$("#contact").val(data.contactNo);
+						$("#BranchAddress").val(data.address);
+						$("#branchName").val(data.branchName);
+						$("#loanplanname").val(data.loanPlanName);
+						$("#typeOfLoan").val(data.typeOfLoan);
+						$("#loanmode").val(data.loanMode);
+						$("#term").val(data.loanTerm);
+						$("#rateofinterest").val(data.rateOfInterest);
+						$("#amountLoan").val(data.loanAmount);
+						$("#intesteType").val(data.interestType);
+						$("#paymnetEmi").val(data.emiPayment);
+						$("#financialConsultantId").val(data.financialConsultantId);
+						$("#financialConsultantName").val(data.financialConsultantName);
+
+					} else {
+						alert("Loan data not found.");
+					}
+				},
+				error: function(xhr) {
+					alert("Error fetching data: " + xhr.responseText);
+				}
+			});
+
+			$.ajax({
+				url: "api/loanmanegment/fetchLoanPaymentsByLoanId",
+				type: "GET",
+				data: { loanId: selectedLoanId },
+				dataType: "json",
+				success: function(response) {
+					if (response.status === "OK" && response.data) {
+						const payments = response.data;
+
+						let dropdown = $("#installment");
+						dropdown.empty();
+
+						dropdown.append('<option value="">Select Installment</option>');
+
+						payments.forEach(payment => {
+							dropdown.append(`<option value="${payment.remarks}">${payment.remarks}</option>`);
+						});
+					} else {
+						alert("No payments found for this loan.");
+					}
+				},
+				error: function(xhr) {
+					alert("Error fetching Payment Data: " + xhr.responseText);
+				}
+			});
+		}
+	});
+});
+
+$(document).ready(function() {
+	$("#installment").on("change", function() {
+		const selectedLoanId = $(this).val();
+
+				if (selectedLoanId) {
+					$.ajax({
+						url: "/api/loanmanegment/getLoanById",
+						type: "GET",
+						data: { loanId: selectedLoanId },
+						dataType: "json",
+						success: function(response) {
+							if (response.status === "OK" && response.data) {
+								const data = response.data;
+
+								// Populate form fields
+								$("#date").val(data.loanDate);
+								$("#customercode").val(data.memberId);
+								$("#familyMembername").val(data.relativeDetails);
+								$("#contact").val(data.contactNo);
+								$("#BranchAddress").val(data.address);
+								$("#branchName").val(data.branchName);
+								$("#loanplanname").val(data.loanPlanName);
+								$("#typeOfLoan").val(data.typeOfLoan);
+								$("#loanmode").val(data.loanMode);
+								$("#term").val(data.loanTerm);
+								$("#rateofinterest").val(data.rateOfInterest);
+								$("#amountLoan").val(data.loanAmount);
+								$("#intesteType").val(data.interestType);
+								$("#paymnetEmi").val(data.emiPayment);
+								$("#financialConsultantId").val(data.financialConsultantId);
+								$("#financialConsultantName").val(data.financialConsultantName);
+
+							} else {
+								alert("Loan data not found.");
+							}
+						},
+						error: function(xhr) {
+							alert("Error fetching data: " + xhr.responseText);
+						}
+					});
+
+			}
+	});
 });
