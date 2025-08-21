@@ -273,16 +273,17 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Paid <span class="star">*</span></label> <input
-									type="text" name="totalPaid" id="totalPaid" required="required" readonly="readonly"
-									placeholder="Enter Total Paid" />
+									type="text" name="totalPaid" id="totalPaid" required="required"
+									readonly="readonly" placeholder="Enter Total Paid" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmount" id="maturityAmount" readonly="readonly"
-									required="required" placeholder="Enter Maturity Amount" />
+								<input type="text" name="maturityAmount" id="maturityAmount"
+									readonly="readonly" required="required"
+									placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
@@ -512,16 +513,18 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
-								<input type="text" name="totalPaidRD" id="totalPaidRD" readonly="readonly"
-									required="required" placeholder="Enter Total Deposit" />
+								<input type="text" name="totalPaidRD" id="totalPaidRD"
+									readonly="readonly" required="required"
+									placeholder="Enter Total Deposit" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmountRD" id="maturityAmountRD" readonly="readonly"
-									required="required" placeholder="Enter Maturity Amount" />
+								<input type="text" name="maturityAmountRD" id="maturityAmountRD"
+									readonly="readonly" required="required"
+									placeholder="Enter Maturity Amount" />
 							</div>
 						</div>
 
@@ -741,18 +744,40 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
-								<input type="text" name="totalPaidFD" id="totalPaidFD" readonly="readonly"
-									required="required" placeholder="Enter Total Deposit" />
+								<input type="text" name="totalPaidFD" id="totalPaidFD"
+									readonly="readonly" required="required"
+									placeholder="Enter Total Deposit" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmountFD" id="maturityAmountFD" readonly="readonly"
-									required="required" placeholder="Enter maturityAmountFD" />
+								<input type="text" name="maturityAmountFD" id="maturityAmountFD"
+									readonly="readonly" required="required"
+									placeholder="Enter maturityAmountFD" />
 							</div>
 						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px;">
+								<label for="">Interest Earned <span class="star">*</span></label>
+								<input type="text" name="interestEarnedFD" id="interestEarnedFD"
+									readonly="readonly" required="required"
+									placeholder="Interest Earned" />
+							</div>
+						</div>
+
+						<!-- New field: Interest Per Interval -->
+						<!-- <div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Interest Per Interval <span class="star">*</span></label>
+								<input type="text" name="interestPerIntervalFD"
+									id="interestPerIntervalFD" readonly="readonly"
+									required="required" placeholder="Interest Per Interval" />
+							</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -949,16 +974,28 @@ td {
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Total Deposit <span class="star">*</span></label>
-								<input type="text" name="totalPaidMD" id="totalPaidMD" readonly="readonly"
-									required="required" placeholder="Enter Total Deposit" />
+								<input type="text" name="totalPaidMD" id="totalPaidMD"
+									readonly="readonly" required="required"
+									placeholder="Enter Total Deposit" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Maturity Amount <span class="star">*</span></label>
-								<input type="text" name="maturityAmountMD" id="maturityAmountMD" readonly="readonly"
-									required="required" placeholder="Enter Maturity Amount" />
+								<input type="text" name="maturityAmountMD" id="maturityAmountMD"
+									readonly="readonly" required="required"
+									placeholder="Enter Maturity Amount" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px;">
+								<label for="">Interest Earned <span class="star">*</span></label>
+								<input type="text" name="interestEarnedMD" id="interestEarnedMD"
+									readonly="readonly" required="required"
+									placeholder="Interest Earned" />
 							</div>
 						</div>
 
@@ -1030,58 +1067,58 @@ td {
 							</div>
 						</div>
 
-
 					</div>
+				</div>
 
-					<div class="row" style="margin-left: 80%;">
-						<div class="col-12 text-center">
-							<button id="missaveBtn" class="btnStyle bg-warning ">Save</button>
-							<button id="misdupdateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
-						</div>
+				<div class="row" style="margin-left: 80%;">
+					<div class="col-12 text-center">
+						<button id="missaveBtn" class="btnStyle bg-warning ">Save</button>
+						<button id="misdupdateBtn" class="btnStyle bg-warning style="display:none;">Update</button>
 					</div>
+				</div>
 
-					<div class="row mt-5">
-						<div class="col-12">
-							<div class="card recent-sales">
-								<div class="card-body table-responsive">
-									<h5 class="card-title">
-										MIS Deposit <span>| Table View</span>
-									</h5>
+				<div class="row mt-5">
+					<div class="col-12">
+						<div class="card recent-sales">
+							<div class="card-body table-responsive">
+								<h5 class="card-title">
+									MIS Deposit <span>| Table View</span>
+								</h5>
 
-									<table class="table table-bordered">
-										<thead class="table-light">
-											<tr>
-												<th style="white-space: nowrap;">Sr. No</th>
-												<th style="white-space: nowrap;">Plan Code</th>
-												<th style="white-space: nowrap;">Plan Name</th>
-												<th style="white-space: nowrap;">Minimum Deposit</th>
-												<th style="white-space: nowrap;">Rate of Interest</th>
-												<th style="white-space: nowrap;">Installment Type</th>
-												<th style="white-space: nowrap;">Term (Duration)</th>
-												<th style="white-space: nowrap;">Maturity Amount</th>
-												<th style="white-space: nowrap;">Status
-													(Active/Inactive)</th>
-												<th style="white-space: nowrap;">Action</th>
-											</tr>
-										</thead>
-										<tbody id="misdepositeTableBody">
-											<!-- Dynamic rows will be injected here -->
-										</tbody>
-									</table>
+								<table class="table table-bordered">
+									<thead class="table-light">
+										<tr>
+											<th style="white-space: nowrap;">Sr. No</th>
+											<th style="white-space: nowrap;">Plan Code</th>
+											<th style="white-space: nowrap;">Plan Name</th>
+											<th style="white-space: nowrap;">Minimum Deposit</th>
+											<th style="white-space: nowrap;">Rate of Interest</th>
+											<th style="white-space: nowrap;">Installment Type</th>
+											<th style="white-space: nowrap;">Term (Duration)</th>
+											<th style="white-space: nowrap;">Maturity Amount</th>
+											<th style="white-space: nowrap;">Status
+												(Active/Inactive)</th>
+											<th style="white-space: nowrap;">Action</th>
+										</tr>
+									</thead>
+									<tbody id="misdepositeTableBody">
+										<!-- Dynamic rows will be injected here -->
+									</tbody>
+								</table>
 
-								</div>
-							</div>
-							<div class="mt-2 text-center">
-								<button id="prevBtnMIS" class="btn btn-sm btn-primary">
-									<i class="bi bi-chevron-double-left"></i>
-								</button>
-								<span id="pageInfoMIS" class="mx-2"></span>
-								<button id="nextBtnMIS" class="btn btn-sm btn-primary">
-									<i class="bi bi-chevron-double-right"></i>
-								</button>
 							</div>
 						</div>
+						<div class="mt-2 text-center">
+							<button id="prevBtnMIS" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-left"></i>
+							</button>
+							<span id="pageInfoMIS" class="mx-2"></span>
+							<button id="nextBtnMIS" class="btn btn-sm btn-primary">
+								<i class="bi bi-chevron-double-right"></i>
+							</button>
+						</div>
 					</div>
+				</div>
 			</form>
 		</div>
 		<%--  <button class="btn btn-sm btn-primary" onclick="editPlan(${item.id})">

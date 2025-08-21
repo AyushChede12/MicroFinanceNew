@@ -617,6 +617,7 @@ $(document).ready(function() {
 	});
 	// Get form Data
 	function getRDFormData() {
+		const statusPlanValue = $('#toggle-status-planRD').is(':checked') ? 1 : 0;
 		return {
 			planCodeRD: $('#planCodeRD').val(),
 			planNameRD: $('#planNameRD').val(),
@@ -634,7 +635,7 @@ $(document).ready(function() {
 			flexiblePlanRD: $('#flexiblePlanRD').val(),
 			graceDaysRD: $('#graceDaysRD').val(),
 			penltyfineRD: $('#penltyfineRD').val(),
-			statusOfPlanRD: $('#toggle-status-planRD').val()
+			statusOfPlanRD: statusPlanValue
 		};
 	}
 
@@ -675,7 +676,7 @@ $(document).ready(function() {
 	});
 
 	$("#componentIntervalRD").change(function() {
-		/*const P = parseFloat(document.getElementById("minimumAmountRD").value); // Installment per period
+		const P = parseFloat(document.getElementById("minimumAmountRD").value); // Installment per period
 		const termMonths = parseFloat(document.getElementById("rdterm").value); // Term in months
 		const r_annual = parseFloat(document.getElementById("rateOfInterestRD").value) / 100; // Annual interest
 		const interval = document.getElementById("componentIntervalRD").value;
@@ -723,15 +724,8 @@ $(document).ready(function() {
 		const interestField = document.getElementById("interestEarnedRD");
 		if (interestField) {
 			interestField.value = interest.toFixed(2);
-		}*/
+		}
 	});
-	
-	
-
-
-
-
-
 
 	// save ajax code for fixed deposite
 	// Initial Button Setup
@@ -951,6 +945,7 @@ $(document).ready(function() {
 	});
 	// get all the data from the database
 	function getFDFormData() {
+		const statusPlanValue = $('#toggle-status-planFD').is(':checked') ? 1 : 0;
 		return {
 			planCodeFD: $('#planCodeFD').val(),
 			planNameFD: $('#planNameFD').val(),
@@ -968,7 +963,7 @@ $(document).ready(function() {
 			commissionOnNewFD: $('#commissionOnNewFD').val(),
 			penltyfineFD: $('#penltyfineFD').val(),
 			renewalCommissionFD: $('#renewalCommissionFD').val(),
-			statusOfPlanFD: $('#toggle-status-planFD').val()
+			statusOfPlanFD: statusPlanValue
 		};
 	}
 	$(document).on('click', '.fixeddelete-btnFD', function() {
@@ -1005,58 +1000,52 @@ $(document).ready(function() {
 			dropdown.append(`<option value="${value}">${value}</option>`).val(value);
 		}
 	}
-	
-	function calculateFixedDeposit() {
-		// Get values from the form
-		const minAmount = parseFloat(document.getElementById("minimumAmountFD").value);
-		const interestRate = parseFloat(document.getElementById("rateOfInterestFD").value);
-		const term = parseInt(document.getElementById("fdterm").value);
-		const compoundInterval = document.getElementById("componentIntervalFD").value;
 
-		// Total Deposit is the principal amount
-		const totalDeposit = minAmount;
+	function calculateFixedDepositCI() {
+		// Get values from form
+		const principal = parseFloat(document.getElementById("minimumAmountFD").value) || 0;
+		const interestRate = parseFloat(document.getElementById("rateOfInterestFD").value) || 0; // annual %
+		const termYears = parseFloat(document.getElementById("fdterm").value) || 0; // term in years
+		const interval = document.getElementById("componentIntervalFD").value; // Monthly, Quarterly, etc.
 
-		let maturityAmount;
-
-		if (interestType === "Simple") {
-			// Simple Interest Formula
-			maturityAmount = minAmount * (1 + (interestRate / 100) * (term / 12));
-		} else if (interestType === "Compound") {
-			// Determine compounding frequency (n)
-			let n;
-			if (compoundInterval === "Daily") {
-				n = 365;
-			} else if (compoundInterval === "Monthly") {
-				n = 12;
-			} else if (compoundInterval === "Quarterly") {
-				n = 4;
-			} else if (compoundInterval === "Half-Yearly") {
-				n = 2;
-			} else if (compoundInterval === "Yearly") {
-				n = 1;
-			} else {
-				throw new Error("Invalid Compounding Interval");
-			}
-
-			// Compound Interest Formula
-			const compoundRate = (interestRate / 100) / n;
-			const periods = n * (term / 12);
-			maturityAmount = minAmount * Math.pow(1 + compoundRate, periods);
-		} else {
-			throw new Error("Invalid Interest Type");
+		// Determine compounding periods per year
+		let n = 1; // default yearly
+		switch (interval) {
+			case "Monthly": n = 12; break;
+			case "Quarterly": n = 4; break;
+			case "Half-Yearly": n = 2; break;
+			case "Yearly": n = 1; break;
+			case "On Maturity": n = 1; break;
 		}
 
-		// Update the fields
+		// Compound Interest formula: A = P * (1 + r/n)^(n*t)
+		const r = interestRate / 100;
+		const maturityAmount = principal * Math.pow(1 + r / n, n * termYears);
+
+		// Interest Earned
+		const interestEarned = maturityAmount - principal;
+
+		// Total intervals
+		const totalIntervals = n * termYears;
+
+		// Interest per interval
+		const interestPerInterval = totalIntervals > 0 ? interestEarned / totalIntervals : interestEarned;
+
+		// Total Deposit (Principal)
+		const totalDeposit = principal;
+
+		// Update fields
 		document.getElementById("totalPaidFD").value = totalDeposit.toFixed(2);
 		document.getElementById("maturityAmountFD").value = maturityAmount.toFixed(2);
+		document.getElementById("interestEarnedFD").value = interestEarned.toFixed(2);
+		document.getElementById("interestPerIntervalFD").value = interestPerInterval.toFixed(2);
 	}
 
-	// Add event listeners to dropdowns and inputs
-	document.getElementById("minimumAmountFD").addEventListener("input", calculateFixedDeposit);
-	document.getElementById("rateOfInterestFD").addEventListener("input", calculateFixedDeposit);
-	document.getElementById("fdterm").addEventListener("input", calculateFixedDeposit);
-	document.getElementById("componentIntervalFD").addEventListener("change", calculateFixedDeposit);
-
+	// Event listeners
+	document.getElementById("minimumAmountFD").addEventListener("input", calculateFixedDepositCI);
+	document.getElementById("rateOfInterestFD").addEventListener("input", calculateFixedDepositCI);
+	document.getElementById("fdterm").addEventListener("input", calculateFixedDepositCI);
+	document.getElementById("componentIntervalFD").addEventListener("change", calculateFixedDepositCI);
 
 	//Mis deposite save
 	$("#missaveBtn").show();
@@ -1310,6 +1299,7 @@ $(document).ready(function() {
 
 	// HELPER FUNCTION TO GET FORM DATA
 	function getMISFormData() {
+		const statusPlanValue = $('#toggle-status-planMIS').is(':checked') ? 1 : 0;
 		return {
 			planCodeMD: $('#planCodeMD').val(),
 			planNameMD: $('#planNameMD').val(),
@@ -1327,7 +1317,7 @@ $(document).ready(function() {
 			flexiblePlanMD: $('#flexiblePlanMD').val(),
 			graceDaysMD: $('#graceDaysMD').val(),
 			penaltyRateMD: $('#penaltyRateMD').val(),
-			statusOfPlanMDRD2: $('#toggle-status-planMIS').val()
+			statusOfPlanMDRD2: statusPlanValue
 
 		};
 	}
@@ -1364,3 +1354,38 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	}
 });
+
+function calculateMISDeposit() {
+    const principal = parseFloat(document.getElementById("minimumAmountMD").value) || 0;
+    const interestRate = parseFloat(document.getElementById("rateOfInterestMD").value) || 0; // annual %
+    const termYears = parseFloat(document.getElementById("misTerm").value) || 0; // term in years
+
+    // Total Deposit is just principal
+    const totalDeposit = principal;
+
+    // Interest per month
+    const monthlyInterest = (principal * interestRate) / (100 * 12);
+
+    // Total interest over the term
+    const totalInterest = monthlyInterest * 12 * termYears;
+
+    // Maturity amount
+    const maturityAmount = principal + totalInterest;
+	
+	const interestEarned = maturityAmount - principal;
+
+    // Interest per interval (monthly payout)
+    const interestPerInterval = monthlyInterest;
+
+    // Update fields
+    document.getElementById("totalPaidMD").value = totalDeposit.toFixed(2);
+    document.getElementById("maturityAmountMD").value = maturityAmount.toFixed(2);
+	document.getElementById("interestEarnedMD").value = interestEarned.toFixed(2);
+	//document.getElementById("interestPerIntervalMD").value = interestPerInterval.toFixed(2);
+}
+
+// Event listeners
+document.getElementById("minimumAmountMD").addEventListener("input", calculateMISDeposit);
+document.getElementById("rateOfInterestMD").addEventListener("input", calculateMISDeposit);
+document.getElementById("misTerm").addEventListener("input", calculateMISDeposit);
+
