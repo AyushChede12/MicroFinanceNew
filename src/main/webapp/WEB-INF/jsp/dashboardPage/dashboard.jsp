@@ -151,8 +151,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-money-check-dollar"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>3246</h6>
+										<div class="ps-3" id="FinancialConsultantCount">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -185,8 +185,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-user"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>3246</h6>
+										<div class="ps-3" id="SavingAccountCount">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -216,11 +216,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-tags"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>145</h6>
-											<span class="text-success small pt-1"
-												style="font-weight: 700">12%</span> <span
-												class="text-muted small pt-2 ps-1">increase</span>
+										<div class="ps-3" id="loanApplication">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -284,11 +281,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-wallet"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>206</h6>
-											<span class="text-success small pt-1"
-												style="font-weight: 700">12%</span> <span
-												class="text-muted small pt-2 ps-1">increase</span>
+										<div class="ps-3"id="policyCount">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
