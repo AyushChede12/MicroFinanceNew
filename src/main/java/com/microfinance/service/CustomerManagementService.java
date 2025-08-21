@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.CustomerDto;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addCustomerKYC;
 import com.microfinance.repository.AddCustomerKycRepo;
@@ -230,4 +231,5 @@ public class CustomerManagementService {
 		return customerRepo.findByIsApprovedTrue();
 	}
 
+	
 }

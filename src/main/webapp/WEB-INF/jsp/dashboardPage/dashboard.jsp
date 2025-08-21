@@ -33,6 +33,7 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -82,8 +83,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-users"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>3220</h6>
+										<div class="ps-3" id="CustomerCount">
+										<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -116,8 +117,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-file-invoice"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>3288</h6>
+										<div class="ps-3" id="ShareIssueCount">
+											<h6>3246</h6>
 										</div>
 									</div>
 								</div>
@@ -142,7 +143,7 @@ pageEncoding="ISO-8859-1"%> -->
 									</ul>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Finance</h5>
+									<h5 class="card-title">Financial Consultant</h5>
 
 									<div class="d-flex align-items-center" style="gap: 0.6rem">
 										<div
@@ -150,8 +151,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-money-check-dollar"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>3246</h6>
+										<div class="ps-3" id="FinancialConsultantCount">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -176,7 +177,7 @@ pageEncoding="ISO-8859-1"%> -->
 									</ul>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">Account</h5>
+									<h5 class="card-title"> Saving Account</h5>
 
 									<div class="d-flex align-items-center" style="gap: 0.6rem">
 										<div
@@ -184,8 +185,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-user"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>3246</h6>
+										<div class="ps-3" id="SavingAccountCount">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -215,11 +216,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-tags"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>145</h6>
-											<span class="text-success small pt-1"
-												style="font-weight: 700">12%</span> <span
-												class="text-muted small pt-2 ps-1">increase</span>
+										<div class="ps-3" id="loanApplication">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -283,11 +281,8 @@ pageEncoding="ISO-8859-1"%> -->
 											<i class="fa-solid fa-wallet"></i>
 										</div>
 
-										<div class="ps-3">
-											<h6>206</h6>
-											<span class="text-success small pt-1"
-												style="font-weight: 700">12%</span> <span
-												class="text-muted small pt-2 ps-1">increase</span>
+										<div class="ps-3"id="policyCount">
+											<h6></h6>
 										</div>
 									</div>
 								</div>
@@ -512,6 +507,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/Dashboard/DashboardCard.js"></script>
 </body>
 
 </html>

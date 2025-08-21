@@ -911,6 +911,11 @@ public class PageController {
 		return "loanManagement/generateNOCCertificate";
 	}
 	
+	@GetMapping("/loanDocumentPrintLoanManagement")
+	public String getloanDocumentPrintSection() {
+		return "loanManagement/loanDocumentPrint";
+	}
+	
 	@GetMapping("/searchLoanAccounts")
 	public String getSearchLoanAccounts() {
 		return "loanManagement/searchLoanAccounts";
