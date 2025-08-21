@@ -12,7 +12,8 @@ import com.microfinance.model.SavingSchemeCatalog;
 
 public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAccount, Long> {
 	@Transactional
-	
+	@Query("select coalesce(max(id), 0) from CreateSavingsAccount")
+	long getMaxId();
 
 	List<CreateSavingsAccount> findByIsApprovedFalse();
 
