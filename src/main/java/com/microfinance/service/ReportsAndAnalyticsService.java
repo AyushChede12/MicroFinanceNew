@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.LoanApplication;
+import com.microfinance.model.LoanPayment;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.repository.ReportsAndAnalyticsRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.LoanApplicationRepo;
+import com.microfinance.repository.LoanPaymentRepo;
 
 
 
@@ -26,6 +28,9 @@ public class ReportsAndAnalyticsService {
 	
 	@Autowired
 	LoanApplicationRepo loanApplicationRepo;
+	
+	@Autowired
+	LoanPaymentRepo loanPaymentRepo;
 
 	public List<addFinancialConsultant> getApprovedFinancialConsultant() {
 		// TODO Auto-generated method stub
@@ -40,6 +45,11 @@ public class ReportsAndAnalyticsService {
 	public List<LoanApplication> getUnapprovedLoanApplication() {
 		// TODO Auto-generated method stub
 		return loanApplicationRepo.findByApprovalStatusFalse();
+	}
+
+	public List<LoanPayment> getLoanPaymentReport() {
+		// TODO Auto-generated method stub
+		return loanPaymentRepo.findAll();
 	}
 	
 

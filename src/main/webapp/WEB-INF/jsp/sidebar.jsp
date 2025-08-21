@@ -652,7 +652,7 @@
           </li>
           
           <li>
-            <a href="model">
+            <a href="loanDocumentPrintLoanManagement">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Generate Loan Documents</span>
             </a>
