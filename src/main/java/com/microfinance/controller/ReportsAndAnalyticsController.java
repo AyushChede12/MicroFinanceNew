@@ -13,6 +13,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.LoanApplication;
+import com.microfinance.model.LoanPayment;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.ReportsAndAnalyticsService;
 
@@ -58,5 +59,17 @@ public class ReportsAndAnalyticsController {
 	  	                .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No unapproved investments found"));
 	  	    }
 	  	}
+	 
+	 //poonam : Fetch Loan Payment 20-08-2025
+	 @GetMapping("/getLoanPaymentReport")
+	 public ResponseEntity<ApiResponse<List<LoanPayment>>> getLoanPaymentReport(){
+		 List<LoanPayment> list=reportsAndAnalyticsService.getLoanPaymentReport();
+		 if(!list.isEmpty()) {
+			 return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Loan Payment Fetched Succesfully", list));
+		 }else {
+			 return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					 .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No Loan Payment Found"));
+		 }
+	 }
 
 }
