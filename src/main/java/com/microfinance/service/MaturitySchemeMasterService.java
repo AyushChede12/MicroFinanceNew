@@ -1,6 +1,12 @@
 package com.microfinance.service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,4 +63,12 @@ public class MaturitySchemeMasterService {
 		return partialmaturityrepo.save(partialmaturity) ;
 	}
 
-}
+	public List<partialMaturityPayment> findByPolicyNo(String policyCode) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	}
+
+

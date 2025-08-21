@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 	$('#plantype').on('change', function () {
 	        let plantype = $(this).val();
@@ -67,19 +68,24 @@ $(document).ready(function () {
 			                    $('#policyName').val(data.schemeName);
 			                    $('#schemeType').val(data.schemeType);
 			                    $('#policyAmount').val(data.policyAmount);
-			                    $('#depositAmount').val(data.depositAmount);
 			                    $('#maturityAmount').val(data.maturityAmount);
 			                    $('#maturityDate').val(data.maturityDate);
 								$('#Approvebranch').val(data.branchName);
 			                    $('#duration').val(calDuration(data)); //function calDuration(data)
 								$('#sysPayable').val(sysPayable(data)); //function sysPayable(data)
 								$('#deduction').val(Deduction(data));	//function Deduction(data)					
-								$('#netPayable').val(netPayment(data)); //dunction netpay(data)
-							$('#amount').off('blur').on('blur', function () {
-								$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
-								});
-								
-								
+								$('#netPayable').val(netPayment(data)); //function netpay(data)
+								$('#panelty').val(Panelty(data));	//function Panelty(data)
+								$("#amount").on("blur", function () {
+									let modal = new bootstrap.Modal(document.getElementById('exampleModalLong'));
+									modal.show();
+								totalPayment();
+								    });
+									$("#Pay").on("click", function () {
+										var amount=$('#amount').val(data.amount);
+										$('#depositAmount').val((data.depositAmount)+amount);
+										//$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
+									});
 
 			                } else {
 			                    alert("No data found for this policy.");
@@ -93,7 +99,44 @@ $(document).ready(function () {
 			        $('#customerName, #schemeMode, #schemeType, #policyAmount, #depositAmount, #maturityAmount, #maturityDate, #duration').val('');
 			    }
 			});
+//getting team member name
+			$.ajax({
+				    url: "getAllteamMember",
+				    type: "GET",
+				    success: function (response) {
+				        if (response && response.length > 0) {
+				           
+				            const teamOptions = response.map(function (team) {
+				                return {
+				                    id: team.teamMemberCode,
+				                    text: team.teamMemberCode + " - " + team.teamMemberName
+				                };
+				            });
 
+				            
+				            $('#userApprover').empty().select2({
+				                placeholder: '-- Select Team Member --',
+				                data: teamOptions,
+				                matcher: function (params, data) {
+				                    if ($.trim(params.term) === '') return data;
+
+				                    if (typeof data.text === 'undefined') return null;
+
+				                    const term = params.term.toLowerCase();
+				                    const text = data.text.toLowerCase();
+
+				                    return text.includes(term) ? data : null;
+				                }
+				            });
+				        } else {
+				            alert("No team members found.");
+				        }
+				    },
+				    error: function () {
+				        alert("Failed to load team members.");
+				    }
+				});
+				
 });
 
 //calculate duration
@@ -138,17 +181,63 @@ function sysPayable(data){
 		
 		
 		 intrest=(depositAmount*rateOfIntrest*1)/100;
-		 syspayable=syspayable+intrest;
+		 syspayable=depositAmount+intrest;
 		
 		return syspayable;
-		
-		
+	
 		
 }
 
+function Deduction(data){
+	let deduct=(200*18)/100;
+	
+	return deduct;
+}
 
+function netPayment(data){
+	let sysPayable = parseFloat($('#sysPayable').val()) || 0;
+	let deduction = parseFloat($('#deduction').val()) || 0;
+	let netpay = 0;
 
+	if (!isNaN(sysPayable) && !isNaN(deduction)) {
+	    netpay = sysPayable - deduction;
+	    alert("Net Payable: " + netpay);
+	}
+	return netpay;
+}
 
+function Panelty(data){
+	let openingDate = new Date(data.policyStartDate);
+	let lastTrans = new Date(data.lastPaymentDate);
+	let paymentdate = new Date(document.getElementById("paymentDate").value); 
+	let policyAmount = parseFloat(data.policyAmount);  
+	
+	let expected = new Date(lastTrans);
+	    expected.setMonth(expected.getMonth() + 1);
+	    expected.setDate(openingDate.getDate());  // keep same day as opening date
+
+	    console.log("Opening Date:", openingDate.toDateString());
+	    console.log("Last Transaction:", lastTrans.toDateString());
+	    console.log("Expected Payment Date:", expected.toDateString());
+	    console.log("Actual Payment Date:", paymentdate.toDateString());
+
+	    // Months gap between last and actual payment
+	    let monthsGap = (paymentdate.getFullYear() - lastTrans.getFullYear()) * 12 +
+	                    (paymentdate.getMonth() - lastTrans.getMonth());
+					
+
+	    // If actual payment is after expected → late
+	    let penalty = 0;
+	    if (paymentdate > expected) {
+	        penalty = monthsGap * (1.5 / 100) * policyAmount;
+	    }
+
+	    console.log("Months Gap:", monthsGap);
+	    console.log("Penalty:", penalty.toFixed(2));
+
+	    return penalty;
+	
+}
 
 
 

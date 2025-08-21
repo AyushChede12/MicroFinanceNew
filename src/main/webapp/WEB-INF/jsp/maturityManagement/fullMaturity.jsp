@@ -37,10 +37,13 @@ pageEncoding="ISO-8859-1"%> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 	
+	
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
 </head>
 
 
@@ -205,8 +208,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch:</label> <input type="text" name="approvalBranch"
-									id="approvalBranch" required="required" placeholder="" />
+								<label>Approval Branch:</label> <input type="text" name="Approvebranch"
+									id="Approvebranch" required="required" placeholder="" />
 
 							</div>
 
@@ -253,6 +256,15 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					
+					<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Panelty (if any):</label> <input type="text" name="panelty"
+									id="panelty" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
@@ -266,7 +278,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
-									name="paidAmount" id="paidAmount" required="required"
+									name="depositAmount" id="depositAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -362,6 +374,40 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+	
+	
+	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Total payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You Have to Pay : 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="Pay" class="btn btn-primary" >Pay</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function totalPayment() {
+    let amount = parseFloat($('#amount').val()) || 0;
+    let panelty = parseFloat($('#panelty').val()) || 0;
+    let total = amount + panelty;
+
+    $(".modal-body").html(
+        "You Have to Pay : <strong>" + total + "</strong><br>( Amount: " + amount + ", Penalty: " + panelty + " )"
+    );
+}
+</script>
+
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/MaturityManagement/maturitypayment.js"></script>
