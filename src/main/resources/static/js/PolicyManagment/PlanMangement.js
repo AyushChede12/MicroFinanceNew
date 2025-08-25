@@ -8,6 +8,8 @@ $(document).ready(function() {
 	$('#saveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planDD').is(':checked') ? 1 : 0;
+
 		const dailyDeposit = {
 			drd: $('#drd').val(),
 			planCodeDD: $('#planCodeDD').val(),
@@ -26,14 +28,14 @@ $(document).ready(function() {
 			flexiblePlan: $('#flexiblePlan').val(),          // ⬅️ Dropdown value
 			graceDays: $('#graceDays').val(),
 			penaltyRate: $('#penaltyRate').val(),
-			statusOfPlan: $('#statusOfPlan').val()
+			statusOfPlan: statusPlanValue
 		};
 
 		// Optional: Debug log before sending
 		console.log("Sending Data:", dailyDeposit);
 
 		$.ajax({
-			url: '/api/Policymangment/daily-depositsave',
+			url: 'api/Policymangment/daily-depositsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(dailyDeposit),
@@ -48,64 +50,112 @@ $(document).ready(function() {
 		});
 	});
 
-	// FETCH DATA
+	var totalDataDD = [];
+	var currentPageDD = 1;
+	var pageSizeDD = 5;
+
+	// Load data once
 	function fetchDailyDeposits() {
 		$.ajax({
-			url: "/api/Policymangment/daily-deposit/view",
 			type: "GET",
+			url: "api/Policymangment/daily-deposit/view",
 			dataType: "json",
 			success: function(response) {
-				const data = response.data || [];
-				const tableBody = $("#depositTableBody").empty();
-
-				if (data.length > 0) {
-					$.each(data, function(index, item) {
-						const row = `
-                            <tr>
-                                <td>${item.planCodeDD || ''}</td>
-								<td>${item.planNameDD || ''}</td>
-								
-                                <td>${item.minimumDeposit || ''}</td>
-                                <td>${item.rateOfInterest || ''}</td>
-                                <td>${item.installmentType || ''}</td>
-                                <td>${item.duration || ''}</td>
-								<td>${item.termModeDD || ''}</td>
-								<td>${item.ddterm || ''}</td>
-                                <td>${item.commissionOnNew || ''}</td>
-                                <td>${item.renewalCommission || ''}</td>
-                                <td>${item.interestInterval || ''}</td>
-                                <td>${item.totalPaid || ''}</td>
-                                <td>${item.maturityAmount || ''}</td>
-                                <td>${item.flexiblePlan || ''}</td>
-                                <td>${item.graceDays || ''}</td>
-                                <td>${item.penaltyRate || ''}</td>
-                                <td>${item.statusOfPlan || ''}</td>
-                                <td class="d-flex" style="gap: .7rem;">
-                                    <button class="iconbutton edit-btn" data-id="${item.id}">
-                                        <i class="fa-solid fa-pen-to-square text-success"></i>
-                                    </button>
-                                    
-                                    <button class="iconbutton delete-btn" data-id="${item.id}">
-                                        <i class="fa-solid fa-trash text-danger"></i>
-                                    </button>
-                                </td>
-                            </tr>`;
-						tableBody.append(row);
-					});
+				if (response.status === "OK") {
+					totalDataDD = response.data;
+					renderTableDD(currentPageDD);
+					togglePageNavigationDD();
 				} else {
-					tableBody.html(`<tr><td colspan="16" class="text-center text-warning">No data found.</td></tr>`);
+					alert("Failed to fetch data: " + response.message);
 				}
 			},
 			error: function() {
-				$("#depositTableBody").html(`<tr><td colspan="16" class="text-center text-danger">Something went wrong.</td></tr>`);
+				alert("Error while calling the API.");
 			}
 		});
 	}
 
-	fetchDailyDeposits();
+	// Render paginated table
+	function renderTableDD(page) {
+		let tableBody = $("#depositTableBody");
+		tableBody.empty();
+
+		let startIndex = (page - 1) * pageSizeDD;
+		let endIndex = Math.min(startIndex + pageSizeDD, totalDataDD.length);
+
+		for (let i = startIndex; i < endIndex; i++) {
+			let person = totalDataDD[i];
+			const statusText = person.statusOfPlan == 1 ? 'Active' : 'Inactive';
+			let row = `<tr>
+					<td>${i + 1}</td>
+	                <td>${person.planCodeDD}</td>
+	                <td>${person.planNameDD}</td>
+	                <td>${person.minimumDeposit}</td>
+	                <td>${person.rateOfInterest}</td>
+	                <td>${person.installmentType}</td>
+	                <td>${person.ddterm}</td>
+					<td>${person.maturityAmount}</td>
+					<td>${statusText}</td>
+					<td class="d-flex" style="gap: .7rem;">
+						<button type="button" class="iconbutton edit-btnDD" data-id="${person.id}">
+						<i class="fa-solid fa-pen-to-square text-success"></i>
+						</button>
+						<button type="button" class="iconbutton delete-btnDD" data-id="${person.id}">
+						<i class="fa-solid fa-trash text-danger"></i>
+						</button>
+					</td>
+	              </tr>`;
+			tableBody.append(row);
+		}
+
+		// Update page info
+		$("#pageInfoDD").text(`Page ${currentPageDD} of ${Math.ceil(totalDataDD.length / pageSizeDD)}`);
+	}
+
+	// Button state toggling
+	function togglePageNavigationDD() {
+		let totalPages = Math.ceil(totalDataDD.length / pageSizeDD);
+		$("#prevBtnDD").prop("disabled", currentPageDD === 1);
+		$("#nextBtnDD").prop("disabled", currentPageDD === totalPages || totalPages === 0);
+	}
+
+	// Button click handlers
+	$("#prevBtnDD").click(function() {
+		if (currentPageDD > 1) {
+			currentPageDD--;
+			renderTableDD(currentPageDD);
+			togglePageNavigationDD();
+		}
+	});
+
+	$("#nextBtnDD").click(function() {
+		let totalPages = Math.ceil(totalDataDD.length / pageSizeDD);
+		if (currentPageDD < totalPages) {
+			currentPageDD++;
+			renderTableDD(currentPageDD);
+			togglePageNavigationDD();
+		}
+	});
+
+	// Call on page load
+	$(document).ready(function() {
+		fetchDailyDeposits();
+	});
+
+	$(document).ready(function() {
+		fetchRecurringDeposits();
+	});
+
+	$(document).ready(function() {
+		fetchFixedDeposits();
+	});
+
+	$(document).ready(function() {
+		fetchMISDeposits();
+	});
 
 	// DELEGATED EVENT for edit button
-	$('#depositTableBody').on('click', '.edit-btn', function() {
+	$('#depositTableBody').on('click', '.edit-btnDD', function() {
 		const id = $(this).data('id');
 		editDailyDeposit(id);
 	});
@@ -113,7 +163,7 @@ $(document).ready(function() {
 	// EDIT FUNCTION
 	function editDailyDeposit(id) {
 		$.ajax({
-			url: `/api/Policymangment/dailyedit/${id}`,
+			url: `api/Policymangment/dailyedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -136,16 +186,18 @@ $(document).ready(function() {
 					$('#maturityAmount').val(data.maturityAmount);
 					$('#graceDays').val(data.graceDays);
 					$('#penaltyRate').val(data.penaltyRate);
-					$('#statusOfPlan').val(data.statusOfPlan);
+					$('#toggle-status-planDD').val(data.statusOfPlan);
 
-					setDropdownValue("#installmentType", data.installmentType);
-					setDropdownValue("#flexiblePlan", data.flexiblePlan);
-					setDropdownValue("#interestInterval", data.interestInterval);
+					if (parseInt(data.statusOfPlan) === 1) {
+						$('#toggle-status-planDD').prop('checked', true);
+					} else {
+						$('#toggle-status-planDD').prop('checked', false);
+					}
+
+					updateToggleColor(document.getElementById('toggle-status-planDD'));
 
 					$('#saveBtn').hide();
 					$('#updateBtn').show();
-					$('#deleteBtn').show();
-					$('#genrateBtn').hide();
 				} else {
 					alert('No data found for this ID');
 				}
@@ -155,6 +207,38 @@ $(document).ready(function() {
 			}
 		});
 	}
+
+	document.addEventListener('DOMContentLoaded', function() {
+		const toggles = document.querySelectorAll('.toggle__input');
+
+		toggles.forEach((toggle) => {
+			updateToggleColor(toggle);
+
+			toggle.addEventListener('change', () => {
+				updateToggleColor(toggle);
+				console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+			});
+		});
+
+		function updateToggleColor(input) {
+			const label = input.nextElementSibling;
+			if (label) {
+				label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+			}
+		}
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (input.checked) {
+			label.style.backgroundColor = "#4caf50";  // green
+			label.style.borderColor = "#4caf50";
+		} else {
+			label.style.backgroundColor = "#ccc";  // gray
+			label.style.borderColor = "#ccc";
+		}
+	}
+
 
 	// UPDATE BUTTON
 	$('#updateBtn').on('click', function(e) {
@@ -170,7 +254,7 @@ $(document).ready(function() {
 		const updatedDailyDeposit = getFormData();
 
 		$.ajax({
-			url: `/api/Policymangment/dailyupdate/${id}`,
+			url: `api/Policymangment/dailyupdate/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedDailyDeposit),
@@ -187,6 +271,7 @@ $(document).ready(function() {
 
 	// GET FORM DATA
 	function getFormData() {
+		const statusPlanValue = $('#toggle-status-planDD').is(':checked') ? 1 : 0;
 		return {
 			planCode: $('#planCodeDD').val(),
 			planNameDD: $('#planNameDD').val(),
@@ -204,7 +289,7 @@ $(document).ready(function() {
 			flexiblePlan: $('#flexiblePlan').val(),
 			graceDays: $('#graceDays').val(),
 			penaltyRate: $('#penaltyRate').val(),
-			statusOfPlan: $('#statusOfPlan').val()
+			statusOfPlan: statusPlanValue
 		};
 	}
 
@@ -221,7 +306,7 @@ $(document).ready(function() {
 
 	// DELETE BUTTON (when editing a record)
 
-	$(document).on('click', '.delete-btn', function() {
+	$(document).on('click', '.delete-btnDD', function() {
 		const id = $(this).data('id');
 
 		if (!id) {
@@ -234,7 +319,7 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/Policymangment/dailydelete/${id}`,
+			url: `api/Policymangment/dailydelete/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
@@ -248,16 +333,80 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#interestInterval").change(function() {
+		const P = parseFloat(document.getElementById("minimumDeposit").value); // installment per period (RD) OR principal (FD)
+		const termInput = parseFloat(document.getElementById("ddterm").value); // raw duration input
+		const r_annual = parseFloat(document.getElementById("rateOfInterest").value) / 100;
+		const interval = document.getElementById("interestInterval").value;
+
+		// Helper: compounding/payment frequency per year
+		const freqMap = {
+			"Daily": 365,
+			"Monthly": 12,
+			"Quarterly": 4,
+			"Half-Yearly": 2,
+			"Yearly": 1,
+			"On Maturity": 1
+		};
+
+		// --- Step 1. Convert term to years ---
+		// Change this if your input is not in years:
+		// If termInput is in months → const years = termInput / 12;
+		// If termInput is in days → const years = termInput / 365;
+		const years = termInput;   // assume input is already in years
+
+		// --- Step 2. Main calculation ---
+		let totalDeposit, maturity;
+		const m = freqMap[interval];  // periods per year
+
+		if (interval === "On Maturity") {
+			// One-time FD with compounding
+			totalDeposit = P;
+			const n = m * years;       // m = 1 here
+			const i = r_annual / m;
+			maturity = P * Math.pow(1 + i, n);
+
+		} else {
+			// Recurring deposit (ordinary annuity by default)
+			const periods = Math.round(m * years);   // number of installments
+			const i = r_annual / m;                  // periodic rate
+
+			totalDeposit = P * periods;
+
+			if (i === 0) {
+				maturity = totalDeposit;
+			} else {
+				// Ordinary annuity formula
+				maturity = P * ((Math.pow(1 + i, periods) - 1) / i);
+
+				// --- If your product credits interest from day 1 (annuity-due):
+				// maturity *= (1 + i);
+			}
+		}
+
+		// --- Step 3. Output ---
+		document.getElementById("totalPaid").value = totalDeposit.toFixed(2);
+		document.getElementById("maturityAmount").value = maturity.toFixed(2);
+
+		// Optional: also show interest earned if you have such a field
+		const interest = maturity - totalDeposit;
+		const interestField = document.getElementById("interestEarned");
+		if (interestField) {
+			interestField.value = interest.toFixed(2);
+		}
+	});
+
+
+
 	// save the Reccuring deposite
 	$("#ReccuringsaveBtn").show();
-	$("#ReccuringgenrateBtn").show();
 	$("#ReccuringupdateBtn").hide();
-	$("#ReccuringdeleteBtn").hide();
 
 	// SAVE BUTTON
 	$('#ReccuringsaveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planRD').is(':checked') ? 1 : 0;
 		const reccuringDeposite = {
 			rd: $('#rd').val(),
 			planCodeRD: $('#planCodeRD').val(),
@@ -275,15 +424,15 @@ $(document).ready(function() {
 			maturityAmountRD: $('#maturityAmountRD').val(),
 			flexiblePlanRD: $('#flexiblePlanRD').val(),
 			graceDaysRD: $('#graceDaysRD').val(),
-			penltyfineRD: $('#penltyfineRD').val(),
-			statusOfPlanRD: $('#statusOfPlanRD').val()
+			penaltyfineRD: $('#penaltyfineRD').val(),
+			statusOfPlanRD: statusPlanValue
 		};
 
 		// Debug log
 		console.log("Sending Recurring Deposit Data:", reccuringDeposite);
 
 		$.ajax({
-			url: '/api/Policymangment/recurring-depositsave', // ✅ Corrected endpoint
+			url: 'api/Policymangment/recurring-depositsave', // ✅ Corrected endpoint
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(reccuringDeposite),
@@ -298,60 +447,95 @@ $(document).ready(function() {
 		});
 	});
 	// feacth recuuring deposite
+
+	var totalDataRD = [];
+	var currentPageRD = 1;
+	var pageSizeRD = 5;
+
+	// Load data once
 	function fetchRecurringDeposits() {
 		$.ajax({
-			url: "/api/Policymangment/recurring-depositview",  // ✅ Make sure this matches your controller mapping
 			type: "GET",
+			url: "api/Policymangment/recurring-depositview",
 			dataType: "json",
 			success: function(response) {
-				const data = response.data || [];
-				const tableBody = $("#recurringTableBody").empty();
-
-				if (data.length > 0) {
-					$.each(data, function(index, item) {
-						const row = `
-	                        <tr>
-	                            <td>${item.planCodeRD || ''}</td>
-	                            <td>${item.planNameRD || ''}</td>
-	                            <td>${item.minimumAmountRD || ''}</td>
-	                            <td>${item.rateOfInterestRD || ''}</td>
-	                            <td>${item.installmentTypeRD || ''}</td>
-	                            <td>${item.durationRD || ''}</td>
-	                            <td>${item.termMode || ''}</td>
-	                            <td>${item.rdterm || ''}</td>
-	                            <td>${item.commissionOnNewRD || ''}</td>
-	                            <td>${item.renewalCommissionRD || ''}</td>
-	                            <td>${item.componentIntervalRD || ''}</td>
-	                            <td>${item.totalPaidRD || ''}</td>
-	                            <td>${item.maturityAmountRD || ''}</td>
-	                            <td>${item.flexiblePlanRD || ''}</td>
-	                            <td>${item.graceDaysRD || ''}</td>
-	                            <td>${item.penltyfineRD || ''}</td>
-	                            <td>${item.statusOfPlanRD || ''}</td>
-	                            <td class="d-flex" style="gap: .7rem;">
-	                                <button class="iconbutton reccuringedit-btn" data-id="${item.id}">
-	                                    <i class="fa-solid fa-pen-to-square text-success"></i>
-	                                </button>
-	                                <button class="iconbutton reccuringdelete-btn" data-id="${item.id}">
-	                                    <i class="fa-solid fa-trash text-danger"></i>
-	                                </button>
-	                            </td>
-	                        </tr>`;
-						tableBody.append(row);
-					});
+				if (response.status === "OK") {
+					totalDataRD = response.data;
+					renderTableRD(currentPageRD);
+					togglePageNavigationRD();
 				} else {
-					tableBody.html(`<tr><td colspan="17" class="text-center text-warning">No data found.</td></tr>`);
+					alert("Failed to fetch data: " + response.message);
 				}
 			},
 			error: function() {
-				$("#recurringTableBody").html(`<tr><td colspan="17" class="text-center text-danger">Something went wrong.</td></tr>`);
+				alert("Error while calling the API.");
 			}
 		});
 	}
 
-	fetchRecurringDeposits();
+	// Render paginated table
+	function renderTableRD(page) {
+		let tableBody = $("#recurringTableBody");
+		tableBody.empty();
 
-	$(document).on('click', '.reccuringedit-btn', function() {
+		let startIndex = (page - 1) * pageSizeRD;
+		let endIndex = Math.min(startIndex + pageSizeRD, totalDataRD.length);
+
+		for (let i = startIndex; i < endIndex; i++) {
+			let person = totalDataRD[i];
+			const statusText = person.statusOfPlanRD == 1 ? 'Active' : 'Inactive';
+			let row = `<tr>
+						<td>${i + 1}</td>
+		                <td>${person.planCodeRD}</td>
+		                <td>${person.planNameRD}</td>
+		                <td>${person.minimumAmountRD}</td>
+		                <td>${person.rateOfInterestRD}</td>
+		                <td>${person.installmentTypeRD}</td>
+		                <td>${person.rdterm}</td>
+						<td>${person.maturityAmountRD}</td>
+						<td>${statusText}</td>
+						<td class="d-flex" style="gap: .7rem;">
+							<button type="button" class="iconbutton reccuringedit-btnRD" data-id="${person.id}">
+							<i class="fa-solid fa-pen-to-square text-success"></i>
+							</button>
+							<button type="button" class="iconbutton reccuringdelete-btnRD" data-id="${person.id}">
+							<i class="fa-solid fa-trash text-danger"></i>
+							</button>
+						</td>
+		              </tr>`;
+			tableBody.append(row);
+		}
+
+		// Update page info
+		$("#pageInfoRD").text(`Page ${currentPageRD} of ${Math.ceil(totalDataRD.length / pageSizeRD)}`);
+	}
+
+	// Button state toggling
+	function togglePageNavigationRD() {
+		let totalPages = Math.ceil(totalDataRD.length / pageSizeRD);
+		$("#prevBtnRD").prop("disabled", currentPageRD === 1);
+		$("#nextBtnRD").prop("disabled", currentPageRD === totalPages || totalPages === 0);
+	}
+
+	// Button click handlers
+	$("#prevBtnRD").click(function() {
+		if (currentPageRD > 1) {
+			currentPageRD--;
+			renderTableRD(currentPageRD);
+			togglePageNavigationRD();
+		}
+	});
+
+	$("#nextBtnRD").click(function() {
+		let totalPages = Math.ceil(totalDataRD.length / pageSizeRD);
+		if (currentPageRD < totalPages) {
+			currentPageRD++;
+			renderTableRD(currentPageRD);
+			togglePageNavigationRD();
+		}
+	});
+
+	$(document).on('click', '.reccuringedit-btnRD', function() {
 		const id = $(this).data('id');
 		editRecurringDeposit(id);
 	});
@@ -360,32 +544,46 @@ $(document).ready(function() {
 		console.log("🔍 Fetching Recurring Deposit with ID:", id);
 
 		$.ajax({
-			url: `/api/Policymangment/recurringedit/${id}`,
+			url: `api/Policymangment/recurringedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
 				if (response && response.data) {
 					const data = response.data;
 
-					$('#recurringformid').data('id', id);
+					$('#recurringformid').data('id', id); // ✅ Set the ID for update
 
-					// Fill fields
-					Object.keys(data).forEach(key => {
-						$(`#${key}`).val(data[key]);
-						setDropdownValue(`#${key}`, data[key]);
-					});
+					$('#planCodeRD').val(data.planCodeRD);
+					$('#planNameRD').val(data.planNameRD);
+					$('#minimumAmountRD').val(data.minimumAmountRD);
+					$('#rateOfInterestRD').val(data.rateOfInterestRD);
+					$('#rdterm').val(data.rdterm);
+					$('#installmentTypeRD').val(data.installmentTypeRD);
+					$('#commissionOnNewRD').val(data.commissionOnNewRD);
+					$('#renewalCommissionRD').val(data.renewalCommissionRD);
+					$('#componentIntervalRD').val(data.componentIntervalRD);
+					$('#totalPaidRD').val(data.totalPaidRD);
+					$('#maturityAmountRD').val(data.maturityAmountRD);
+					$('#flexiblePlanRD').val(data.flexiblePlanRD);
+					$('#graceDaysRD').val(data.graceDaysRD);
+					$('#penaltyfineRD').val(data.penaltyfineRD);
+
+					if (parseInt(data.statusOfPlanRD) === 1) {
+						$('#toggle-status-planRD').prop('checked', true);
+					} else {
+						$('#toggle-status-planRD').prop('checked', false);
+					}
+
+					updateToggleColor(document.getElementById('toggle-status-planRD'));
 
 					$('#ReccuringsaveBtn').hide();
 					$('#ReccuringupdateBtn').show();
-					$('#ReccuringdeleteBtn').show();
-					$('#ReccuringgenrateBtn').hide();
 				} else {
-					alert('⚠️ No data found for this ID');
+					alert('No data found for this ID');
 				}
 			},
-			error: function(xhr) {
-				console.error("❌ Error fetching RD details:", xhr);
-				alert(`Failed to fetch recurring deposit details.\nStatus: ${xhr.status}`);
+			error: function() {
+				alert('Failed to fetch daily deposit details.');
 			}
 		});
 	}
@@ -403,7 +601,7 @@ $(document).ready(function() {
 		const updatedRecurringDeposit = getRDFormData();
 
 		$.ajax({
-			url: `/api/Policymangment/recurringupdate/${id}`,
+			url: `api/Policymangment/recurringupdate/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedRecurringDeposit),
@@ -419,6 +617,7 @@ $(document).ready(function() {
 	});
 	// Get form Data
 	function getRDFormData() {
+		const statusPlanValue = $('#toggle-status-planRD').is(':checked') ? 1 : 0;
 		return {
 			planCodeRD: $('#planCodeRD').val(),
 			planNameRD: $('#planNameRD').val(),
@@ -436,7 +635,7 @@ $(document).ready(function() {
 			flexiblePlanRD: $('#flexiblePlanRD').val(),
 			graceDaysRD: $('#graceDaysRD').val(),
 			penltyfineRD: $('#penltyfineRD').val(),
-			statusOfPlanRD: $('#statusOfPlanRD').val()
+			statusOfPlanRD: statusPlanValue
 		};
 	}
 
@@ -449,7 +648,7 @@ $(document).ready(function() {
 		}
 	}
 	// DELETE BUTTON Reccuring Deposite
-	$(document).on('click', '.reccuringdelete-btn', function() {
+	$(document).on('click', '.reccuringdelete-btnRD', function() {
 		const id = $(this).data('id');
 
 		if (!id) {
@@ -462,7 +661,7 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/Policymangment/recurringdelete/${id}`,
+			url: `api/Policymangment/recurringdelete/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
@@ -476,16 +675,69 @@ $(document).ready(function() {
 		});
 	});
 
+	$("#componentIntervalRD").change(function() {
+		const P = parseFloat(document.getElementById("minimumAmountRD").value); // Installment per period
+		const termMonths = parseFloat(document.getElementById("rdterm").value); // Term in months
+		const r_annual = parseFloat(document.getElementById("rateOfInterestRD").value) / 100; // Annual interest
+		const interval = document.getElementById("componentIntervalRD").value;
+
+		// Payment/compounding frequency map
+		const freqMap = {
+			"Daily": 365,
+			"Monthly": 12,
+			"Quarterly": 4,      // spelling must match dropdown
+			"Half-Yearly": 2,
+			"Yearly": 1
+		};
+
+		const m = freqMap[interval] || 12; // fallback to monthly if interval not found
+		const i = r_annual / m;            // periodic interest rate
+
+		// Calculate number of installments/periods
+		let nPeriods;
+		if (interval === "Daily") {
+			nPeriods = Math.round((termMonths / 12) * 365); // term in days
+		} else {
+			nPeriods = Math.round((termMonths / 12) * m);   // term in months/quarters/half-years/years
+		}
+
+		// Total deposit
+		let totalDeposit = P * nPeriods;
+		let maturity;
+
+		if (!isFinite(P) || !isFinite(nPeriods) || !isFinite(i)) {
+			maturity = 0;
+			totalDeposit = 0;
+		} else if (i === 0) {
+			maturity = totalDeposit; // no interest
+		} else {
+			// **RD formula (annuity-due)**: installments credited at start of period
+			maturity = P * ((Math.pow(1 + i, nPeriods) - 1) / i) * (1 + i);
+		}
+
+		// Update form fields
+		document.getElementById("totalPaidRD").value = totalDeposit.toFixed(2);
+		document.getElementById("maturityAmountRD").value = maturity.toFixed(2);
+
+		// Interest earned
+		const interest = maturity - totalDeposit;
+		const interestField = document.getElementById("interestEarnedRD");
+		if (interestField) {
+			interestField.value = interest.toFixed(2);
+		}
+	});
+
 	// save ajax code for fixed deposite
 	// Initial Button Setup
 	$("#FixedsaveBtn").show();
-	$("#FixedgenrateBtn").show();
 	$("#FixedupdateBtn").hide();
 
 
 	// SAVE BUTTON
 	$('#FixedsaveBtn').on('click', function(e) {
 		e.preventDefault();
+
+		const statusPlanValue = $('#toggle-status-planFD').is(':checked') ? 1 : 0;
 
 		const fixedDeposit = {
 			fd: $('#fd').val(),
@@ -505,13 +757,13 @@ $(document).ready(function() {
 			flexiblePlanFD: $('#flexiblePlanFD').val(),
 			graceDaysFD: $('#graceDaysFD').val(),
 			penltyfineFD: $('#penltyfineFD').val(),
-			statusOfPlanFD: $('#statusOfPlanFD').val()
+			statusOfPlanFD: statusPlanValue
 		};
 
 		console.log("Sending FD Data:", fixedDeposit);
 
 		$.ajax({
-			url: '/api/Policymangment/fixed-depositsave',
+			url: 'api/Policymangment/fixed-depositsave',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(fixedDeposit),
@@ -525,61 +777,95 @@ $(document).ready(function() {
 			}
 		});
 	});
-	// featch Fixed deposite
+
+	var totalDataFD = [];
+	var currentPageFD = 1;
+	var pageSizeFD = 5;
+
+	// Load data once
 	function fetchFixedDeposits() {
 		$.ajax({
-			url: "/api/Policymangment/fixed-depositview",  // ✅ Controller mapping बरोबर आहे याची खात्री कर
 			type: "GET",
+			url: "api/Policymangment/fixed-depositview",
 			dataType: "json",
 			success: function(response) {
-				const data = response.data || [];
-				const tableBody = $("#fixedTableBody").empty();
-
-				if (data.length > 0) {
-					$.each(data, function(index, item) {
-						const row = `
-                        <tr>
-						<td>${item.planCodeFD || ''}</td>
-						                           <td>${item.planNameFD || ''}</td>
-						                           <td>${item.minimumAmountFD || ''}</td>
-						                           <td>${item.rateOfInterestFD || ''}</td>
-						                           <td>${item.installmentTypeFD || ''}</td>
-						                           <td>${item.durationFD || ''}</td>
-						                           <td>${item.termModeFD || ''}</td>
-						                           <td>${item.fdterm || ''}</td>
-						                           <td>${item.componentIntervalFD || ''}</td>
-						                           <td>${item.totalPaidFD || ''}</td>
-						                           <td>${item.maturityAmountFD || ''}</td>
-						                           <td>${item.flexiblePlanFD || ''}</td>
-						                           <td>${item.graceDaysFD || ''}</td>
-						                           <td>${item.penltyfineFD || ''}</td>
-						                           <td>${item.commissionOnNewFD || ''}</td>
-						                           <td>${item.renewalCommissionFD || ''}</td>
-						                           <td>${item.statusOfPlanFD || ''}</td>
-                            <td class="d-flex" style="gap: .7rem;">
-                                <button class="iconbutton fixededit-btn" data-id="${item.id}">
-                                    <i class="fa-solid fa-pen-to-square text-success"></i>
-                                </button>
-                                <button class="iconbutton fixeddelete-btn" data-id="${item.id}">
-                                    <i class="fa-solid fa-trash text-danger"></i>
-                                </button>
-                            </td>
-                        </tr>`;
-						tableBody.append(row);
-					});
+				if (response.status === "OK") {
+					totalDataFD = response.data;
+					renderTableFD(currentPageFD);
+					togglePageNavigationFD();
 				} else {
-					tableBody.html(`<tr><td colspan="17" class="text-center text-warning">No data found.</td></tr>`);
+					alert("Failed to fetch data: " + response.message);
 				}
 			},
 			error: function() {
-				$("#fixedTableBody").html(`<tr><td colspan="17" class="text-center text-danger">Something went wrong.</td></tr>`);
+				alert("Error while calling the API.");
 			}
 		});
 	}
 
-	fetchFixedDeposits();  // Call once page loads
+	// Render paginated table
+	function renderTableFD(page) {
+		let tableBody = $("#fixedTableBody");
+		tableBody.empty();
 
-	$(document).on('click', '.fixededit-btn', function() {
+		let startIndex = (page - 1) * pageSizeFD;
+		let endIndex = Math.min(startIndex + pageSizeFD, totalDataFD.length);
+
+		for (let i = startIndex; i < endIndex; i++) {
+			let person = totalDataFD[i];
+			const statusText = person.statusOfPlanFD == 1 ? 'Active' : 'Inactive';
+			let row = `<tr>
+							<td>${i + 1}</td>
+			                <td>${person.planCodeFD}</td>
+			                <td>${person.planNameFD}</td>
+			                <td>${person.minimumAmountFD}</td>
+			                <td>${person.rateOfInterestFD}</td>
+			                <td>${person.installmentTypeFD}</td>
+			                <td>${person.fdterm}</td>
+							<td>${person.maturityAmountFD}</td>
+							<td>${statusText}</td>
+							<td class="d-flex" style="gap: .7rem;">
+								<button type="button" class="iconbutton fixededit-btnFD" data-id="${person.id}">
+								<i class="fa-solid fa-pen-to-square text-success"></i>
+								</button>
+								<button type="button" class="iconbutton fixeddelete-btnFD" data-id="${person.id}">
+								<i class="fa-solid fa-trash text-danger"></i>
+								</button>
+							</td>
+			              </tr>`;
+			tableBody.append(row);
+		}
+
+		// Update page info
+		$("#pageInfoFD").text(`Page ${currentPageFD} of ${Math.ceil(totalDataFD.length / pageSizeFD)}`);
+	}
+
+	// Button state toggling
+	function togglePageNavigationFD() {
+		let totalPages = Math.ceil(totalDataFD.length / pageSizeFD);
+		$("#prevBtnFD").prop("disabled", currentPageFD === 1);
+		$("#nextBtnFD").prop("disabled", currentPageFD === totalPages || totalPages === 0);
+	}
+
+	// Button click handlers
+	$("#prevBtnFD").click(function() {
+		if (currentPageFD > 1) {
+			currentPageFD--;
+			renderTableFD(currentPageFD);
+			togglePageNavigationFD();
+		}
+	});
+
+	$("#nextBtnFD").click(function() {
+		let totalPages = Math.ceil(totalDataFD.length / pageSizeFD);
+		if (currentPageFD < totalPages) {
+			currentPageFD++;
+			renderTableFD(currentPageFD);
+			togglePageNavigationFD();
+		}
+	});
+
+	$(document).on('click', '.fixededit-btnFD', function() {
 		const id = $(this).data('id');
 		editFixedDeposit(id);
 	});
@@ -587,32 +873,46 @@ $(document).ready(function() {
 		console.log("🔍 Fetching Fixed Deposit with ID:", id);
 
 		$.ajax({
-			url: `/api/Policymangment/fixededit/${id}`,
+			url: `api/Policymangment/fixededit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
 				if (response && response.data) {
 					const data = response.data;
 
-					$('#fixedformid').data('id', id);
+					$('#fixedformid').data('id', id); // ✅ Set the ID for update
 
-					// Fill form fields
-					Object.keys(data).forEach(key => {
-						$(`#${key}`).val(data[key]);
-						setDropdownValue(`#${key}`, data[key]);  // Reuse same dropdown setter
-					});
+					$('#planCodeFD').val(data.planCodeFD);
+					$('#planNameFD').val(data.planNameFD);
+					$('#minimumAmountFD').val(data.minimumAmountFD);
+					$('#rateOfInterestFD').val(data.rateOfInterestFD);
+					$('#fdterm').val(data.fdterm);
+					$('#installmentTypeFD').val(data.installmentTypeFD);
+					$('#commissionOnNewFD').val(data.commissionOnNewFD);
+					$('#renewalCommissionFD').val(data.renewalCommissionFD);
+					$('#componentIntervalFD').val(data.componentIntervalFD);
+					$('#totalPaidFD').val(data.totalPaidFD);
+					$('#maturityAmountFD').val(data.maturityAmountFD);
+					$('#flexiblePlanFD').val(data.flexiblePlanFD);
+					$('#graceDaysFD').val(data.graceDaysFD);
+					$('#penltyfineFD').val(data.penltyfineFD);
+
+					if (parseInt(data.statusOfPlanFD) === 1) {
+						$('#toggle-status-planFD').prop('checked', true);
+					} else {
+						$('#toggle-status-planFD').prop('checked', false);
+					}
+
+					updateToggleColor(document.getElementById('toggle-status-planFD'));
 
 					$('#FixedsaveBtn').hide();
 					$('#FixedupdateBtn').show();
-					$('#FixeddeleteBtn').show();
-					$('#FixedgenrateBtn').hide();
 				} else {
-					alert('⚠️ No data found for this ID');
+					alert('No data found for this ID');
 				}
 			},
-			error: function(xhr) {
-				console.error("❌ Error fetching FD details:", xhr);
-				alert(`Failed to fetch fixed deposit details.\nStatus: ${xhr.status}`);
+			error: function() {
+				alert('Failed to fetch daily deposit details.');
 			}
 		});
 	}
@@ -629,7 +929,7 @@ $(document).ready(function() {
 		const updatedFixedDeposit = getFDFormData();
 
 		$.ajax({
-			url: `/api/Policymangment/fixedupdate/${id}`,
+			url: `api/Policymangment/fixedupdate/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedFixedDeposit),
@@ -645,6 +945,7 @@ $(document).ready(function() {
 	});
 	// get all the data from the database
 	function getFDFormData() {
+		const statusPlanValue = $('#toggle-status-planFD').is(':checked') ? 1 : 0;
 		return {
 			planCodeFD: $('#planCodeFD').val(),
 			planNameFD: $('#planNameFD').val(),
@@ -662,10 +963,10 @@ $(document).ready(function() {
 			commissionOnNewFD: $('#commissionOnNewFD').val(),
 			penltyfineFD: $('#penltyfineFD').val(),
 			renewalCommissionFD: $('#renewalCommissionFD').val(),
-			statusOfPlanFD: $('#statusOfPlanFD').val()
+			statusOfPlanFD: statusPlanValue
 		};
 	}
-	$(document).on('click', '.fixeddelete-btn', function() {
+	$(document).on('click', '.fixeddelete-btnFD', function() {
 		const id = $(this).data('id');
 
 		if (!id) {
@@ -678,7 +979,7 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: `/api/Policymangment/fixeddelete/${id}`,
+			url: `api/Policymangment/fixeddelete/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			success: function(response) {
@@ -700,6 +1001,52 @@ $(document).ready(function() {
 		}
 	}
 
+	function calculateFixedDepositCI() {
+		// Get values from form
+		const principal = parseFloat(document.getElementById("minimumAmountFD").value) || 0;
+		const interestRate = parseFloat(document.getElementById("rateOfInterestFD").value) || 0; // annual %
+		const termYears = parseFloat(document.getElementById("fdterm").value) || 0; // term in years
+		const interval = document.getElementById("componentIntervalFD").value; // Monthly, Quarterly, etc.
+
+		// Determine compounding periods per year
+		let n = 1; // default yearly
+		switch (interval) {
+			case "Monthly": n = 12; break;
+			case "Quarterly": n = 4; break;
+			case "Half-Yearly": n = 2; break;
+			case "Yearly": n = 1; break;
+			case "On Maturity": n = 1; break;
+		}
+
+		// Compound Interest formula: A = P * (1 + r/n)^(n*t)
+		const r = interestRate / 100;
+		const maturityAmount = principal * Math.pow(1 + r / n, n * termYears);
+
+		// Interest Earned
+		const interestEarned = maturityAmount - principal;
+
+		// Total intervals
+		const totalIntervals = n * termYears;
+
+		// Interest per interval
+		const interestPerInterval = totalIntervals > 0 ? interestEarned / totalIntervals : interestEarned;
+
+		// Total Deposit (Principal)
+		const totalDeposit = principal;
+
+		// Update fields
+		document.getElementById("totalPaidFD").value = totalDeposit.toFixed(2);
+		document.getElementById("maturityAmountFD").value = maturityAmount.toFixed(2);
+		document.getElementById("interestEarnedFD").value = interestEarned.toFixed(2);
+		document.getElementById("interestPerIntervalFD").value = interestPerInterval.toFixed(2);
+	}
+
+	// Event listeners
+	document.getElementById("minimumAmountFD").addEventListener("input", calculateFixedDepositCI);
+	document.getElementById("rateOfInterestFD").addEventListener("input", calculateFixedDepositCI);
+	document.getElementById("fdterm").addEventListener("input", calculateFixedDepositCI);
+	document.getElementById("componentIntervalFD").addEventListener("change", calculateFixedDepositCI);
+
 	//Mis deposite save
 	$("#missaveBtn").show();
 	$("#misgenrateBtn").show();
@@ -710,31 +1057,32 @@ $(document).ready(function() {
 	$('#missaveBtn').on('click', function(e) {
 		e.preventDefault();
 
+		const statusPlanValue = $('#toggle-status-planMIS').is(':checked') ? 1 : 0;
+
 		const misDeposit = {
 			mis: $('#mis').val(),
-			planCodeMD: $('#planCodeMD').val(),                   
-				planNameMD: $('#planNameMD').val(),                   
-				minimumAmountMD: $('#minimumAmountMD').val(),         
-				rateOfInterestMD: $('#rateOfInterestMD').val(),       
-				installmentTypeMD: $('#installmentTypeMD').val(),    
-				termModeMD: $('#termModeMD').val(),                  
-				misTerm: $('#misTerm').val(),                           
-				durationMD: $('#durationMD').val(),                   
-				commissionOnNewMD: $('#commissionOnNewMD').val(),     
-				renewalCommissionMD: $('#renewalCommissionMD').val(),
-				MISIntervalMD: $('#MISIntervalMD').val(),             
-				MISInterestMD: $('#MISInterestMD').val(),             
-				maturityAmountMD: $('#maturityAmountMD').val(),       
-				flexiblePlanMD: $('#flexiblePlanMD').val(),         
-				graceDaysMD: $('#graceDaysMD').val(),                 
-				penaltyRateMD: $('#penaltyRateMD').val(),           
-				statusOfPlanMDRD2: $('#statusOfPlanMDRD2').val() 
+			planCodeMD: $('#planCodeMD').val(),
+			planNameMD: $('#planNameMD').val(),
+			minimumAmountMD: $('#minimumAmountMD').val(),
+			rateOfInterestMD: $('#rateOfInterestMD').val(),
+			installmentTypeMD: $('#installmentTypeMD').val(),
+			misTerm: $('#misTerm').val(),
+			totalPaidMD: $('#totalPaidMD').val(),
+			commissionOnNewMD: $('#commissionOnNewMD').val(),
+			renewalCommissionMD: $('#renewalCommissionMD').val(),
+			MISIntervalMD: $('#MISIntervalMD').val(),
+			MISInterestMD: $('#MISInterestMD').val(),
+			maturityAmountMD: $('#maturityAmountMD').val(),
+			flexiblePlanMD: $('#flexiblePlanMD').val(),
+			graceDaysMD: $('#graceDaysMD').val(),
+			penltyfineMD: $('#penltyfineMD').val(),
+			statusOfPlanMDRD2: statusPlanValue
 		};
 
 		console.log("Sending MIS Data:", misDeposit);
 
 		$.ajax({
-			url: '/api/Policymangment/mis-deposit/save',
+			url: 'api/Policymangment/mis-deposit/save',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(misDeposit),
@@ -749,59 +1097,94 @@ $(document).ready(function() {
 		});
 	});
 	// FETCH MIS DEPOSITS
+
+	var totalDataMIS = [];
+	var currentPageMIS = 1;
+	var pageSizeMIS = 5;
+
+	// Load data once
 	function fetchMISDeposits() {
 		$.ajax({
-			url: "/api/Policymangment/mis-deposit/view",
 			type: "GET",
+			url: "api/Policymangment/mis-deposit/view",
 			dataType: "json",
 			success: function(response) {
-				const data = response.data || [];
-				const tableBody = $("#misdepositeTableBody").empty();
-
-				if (data.length > 0) {
-					$.each(data, function(index, item) {
-						const row = `
-						<tr>
-						<td>${item.planCodeMD || ''}</td>                 
-						<td>${item.planNameMD || ''}</td>                 
-						<td>${item.minimumAmountMD || ''}</td>            
-						<td>${item.rateOfInterestMD || ''}</td>           
-						<td>${item.installmentTypeMD || ''}</td>          
-						<td>${item.termModeMD || ''}</td>                 
-						<td>${item.misTerm || ''}</td>                     
-						<td>${item.durationMD || ''}</td>                 
-						<td>${item.commissionOnNewMD || ''}</td>         
-						<td>${item.renewalCommissionMD || ''}</td>       
-						<td>${item.MISIntervalMD || ''}</td>              
-						<td>${item.MISInterestMD || ''}</td>              
-						<td>${item.maturityAmountMD || ''}</td>          
-						<td>${item.flexiblePlanMD || ''}</td>             
-						<td>${item.graceDaysMD || ''}</td>                
-						<td>${item.penaltyRateMD || ''}</td>             
-						<td>${item.statusOfPlanMDRD2 || ''}</td>  
-							<td class="d-flex" style="gap: .7rem;">
-								<button class="iconbutton misedit-btn" data-id="${item.id}">
-									<i class="fa-solid fa-pen-to-square text-success"></i>
-								</button>
-								<button class="iconbutton misdelete-btn" data-id="${item.id}">
-									<i class="fa-solid fa-trash text-danger"></i>
-								</button>
-							</td>
-						</tr>`;
-						tableBody.append(row);
-					});
+				if (response.status === "OK") {
+					totalDataMIS = response.data;
+					renderTableMIS(currentPageMIS);
+					togglePageNavigationMIS();
 				} else {
-					tableBody.html(`<tr><td colspan="17" class="text-center text-warning">No data found.</td></tr>`);
+					alert("Failed to fetch data: " + response.message);
 				}
 			},
 			error: function() {
-				$("#misdepositeTableBody").html(`<tr><td colspan="17" class="text-center text-danger">Something went wrong.</td></tr>`);
+				alert("Error while calling the API.");
 			}
 		});
 	}
 
-	fetchMISDeposits();
-	
+	// Render paginated table
+	function renderTableMIS(page) {
+		let tableBody = $("#misdepositeTableBody");
+		tableBody.empty();
+
+		let startIndex = (page - 1) * pageSizeMIS;
+		let endIndex = Math.min(startIndex + pageSizeMIS, totalDataMIS.length);
+
+		for (let i = startIndex; i < endIndex; i++) {
+			let person = totalDataMIS[i];
+			const statusText = person.statusOfPlanMDRD2 == 1 ? 'Active' : 'Inactive';
+			let row = `<tr>
+								<td>${i + 1}</td>
+				                <td>${person.planCodeMD}</td>
+				                <td>${person.planNameMD}</td>
+				                <td>${person.minimumAmountMD}</td>
+				                <td>${person.rateOfInterestMD}</td>
+				                <td>${person.installmentTypeMD}</td>
+				                <td>${person.misTerm}</td>
+								<td>${person.maturityAmountMD}</td>
+								<td>${statusText}</td>
+								<td class="d-flex" style="gap: .7rem;">
+									<button type="button" class="iconbutton misedit-btn" data-id="${person.id}">
+									<i class="fa-solid fa-pen-to-square text-success"></i>
+									</button>
+									<button type="button" class="iconbutton misdelete-btn" data-id="${person.id}">
+									<i class="fa-solid fa-trash text-danger"></i>
+									</button>
+								</td>
+				              </tr>`;
+			tableBody.append(row);
+		}
+
+		// Update page info
+		$("#pageInfoMIS").text(`Page ${currentPageMIS} of ${Math.ceil(totalDataMIS.length / pageSizeMIS)}`);
+	}
+
+	// Button state toggling
+	function togglePageNavigationMIS() {
+		let totalPages = Math.ceil(totalDataMIS.length / pageSizeMIS);
+		$("#prevBtnMIS").prop("disabled", currentPageMIS === 1);
+		$("#nextBtnMIS").prop("disabled", currentPageMIS === totalPages || totalPages === 0);
+	}
+
+	// Button click handlers
+	$("#prevBtnMIS").click(function() {
+		if (currentPageMIS > 1) {
+			currentPageMIS--;
+			renderTableMIS(currentPageMIS);
+			togglePageNavigationMIS();
+		}
+	});
+
+	$("#nextBtnMIS").click(function() {
+		let totalPages = Math.ceil(totalDataMIS.length / pageSizeMIS);
+		if (currentPageMIS < totalPages) {
+			currentPageMIS++;
+			renderTableMIS(currentPageMIS);
+			togglePageNavigationMIS();
+		}
+	});
+
 	// Fix this line (change `.misdelete-btn` to `.misedit-btn`)
 	$(document).on('click', '.misedit-btn', function() {
 		const id = $(this).data('id');
@@ -811,7 +1194,7 @@ $(document).ready(function() {
 
 	function editMISDeposit(id) {
 		$.ajax({
-			url: `/api/Policymangment/misedit/${id}`,
+			url: `api/Policymangment/misedit/${id}`,
 			method: 'GET',
 			contentType: 'application/json',
 			success: function(response) {
@@ -821,26 +1204,29 @@ $(document).ready(function() {
 
 					$('#misdepositeid').data('id', id); // ✅ Consistent ID holder
 
-					$('#planCodeMD').val(data.planCodeMD);                            
-					$('#planNameMD').val(data.planNameMD);                           
-					$('#minimumAmountMD').val(data.minimumAmountMD);                  
-					$('#rateOfInterestMD').val(data.rateOfInterestMD);               
-					setDropdownValue("#installmentTypeMD", data.installmentTypeMD); 
-					$('#termModeMD').val(data.termModeMD);                            
-					$('#misTerm').val(data.misTerm);                                    
-					$('#durationMD').val(data.durationMD);                            
-					$('#commissionOnNewMD').val(data.commissionOnNewMD);              
-					$('#renewalCommissionMD').val(data.renewalCommissionMD);          
-					setDropdownValue("#MISIntervalMD", data.MISIntervalMD);           
-					$('#MISInterestMD').val(data.MISInterestMD);                      
-					$('#maturityAmountMD').val(data.maturityAmountMD);                
-					setDropdownValue("#flexiblePlanMD", data.flexiblePlanMD);         
-					$('#graceDaysMD').val(data.graceDaysMD);                         
-					$('#penltyfineMD').val(data.penltyfineMD);                     
-					$('#statusOfPlanMDRD2').val(data.statusOfPlanMDRD2);
+					$('#planCodeMD').val(data.planCodeMD);
+					$('#planNameMD').val(data.planNameMD);
+					$('#minimumAmountMD').val(data.minimumAmountMD);
+					$('#rateOfInterestMD').val(data.rateOfInterestMD);
+					setDropdownValue("#installmentTypeMD", data.installmentTypeMD);
+					$('#misTerm').val(data.misTerm);
+					$('#commissionOnNewMD').val(data.commissionOnNewMD);
+					$('#renewalCommissionMD').val(data.renewalCommissionMD);
+					$('#totalPaidMD').val(data.totalPaidMD);
+					$('#maturityAmountMD').val(data.maturityAmountMD);
+					setDropdownValue("#flexiblePlanMD", data.flexiblePlanMD);
+					$('#graceDaysMD').val(data.graceDaysMD);
+					$('#penltyfineMD').val(data.penltyfineMD);
+
+					if (parseInt(data.statusOfPlanMDRD2) === 1) {
+						$('#toggle-status-planMIS').prop('checked', true);
+					} else {
+						$('#toggle-status-planMIS').prop('checked', false);
+					}
+
+					updateToggleColor(document.getElementById('toggle-status-planMIS'));
 
 					$("#missaveBtn").hide();
-					$("#misgenrateBtn").hide();
 					$("#misdupdateBtn").show();
 				} else {
 					alert('No data found for this ID');
@@ -851,7 +1237,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-//update code of the mis deposite
+	//update code of the mis deposite
 	$('#misdupdateBtn').on('click', function(e) {
 		e.preventDefault();
 		const id = $('#misdepositeid').data('id'); // ✅ fix here
@@ -864,7 +1250,7 @@ $(document).ready(function() {
 		const updatedMIS = getMISFormData();
 
 		$.ajax({
-			url: `/api/Policymangment/misupdate/${id}`,
+			url: `api/Policymangment/misupdate/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify(updatedMIS),
@@ -881,7 +1267,7 @@ $(document).ready(function() {
 
 	// DELETE
 	// DELETE HANDLER
-	$(document).on('click', '.misdelete-btn', function () {
+	$(document).on('click', '.misdelete-btn', function() {
 		const id = $(this).data('id');
 
 		if (!id) {
@@ -896,14 +1282,14 @@ $(document).ready(function() {
 
 		// Perform AJAX DELETE request
 		$.ajax({
-			url: `/api/Policymangment/misdelete/${id}`,
+			url: `api/Policymangment/misdelete/${id}`,
 			type: 'POST',
 			contentType: 'application/json',
-			success: function (response) {
+			success: function(response) {
 				alert(response.message || "MIS Deposit deleted successfully.");
 				fetchMISDeposits(); // Refresh the table
 			},
-			error: function (xhr) {
+			error: function(xhr) {
 				const message = xhr.responseJSON?.message || "Failed to delete the MIS Deposit.";
 				alert("Error: " + message);
 				console.error("Delete error:", xhr.responseText);
@@ -913,24 +1299,25 @@ $(document).ready(function() {
 
 	// HELPER FUNCTION TO GET FORM DATA
 	function getMISFormData() {
+		const statusPlanValue = $('#toggle-status-planMIS').is(':checked') ? 1 : 0;
 		return {
-			planCodeMD: $('#planCodeMD').val(),                      
-			planNameMD: $('#planNameMD').val(),                     
-			minimumAmountMD: $('#minimumAmountMD').val(),            
-			rateOfInterestMD: $('#rateOfInterestMD').val(),          
-			installmentTypeMD: $('#installmentTypeMD').val(),        
-			termModeMD: $('#termModeMD').val(),                      
-			misTerm: $('#misTerm').val(),                              
-			durationMD: $('#durationMD').val(),                     
-			commissionOnNewMD: $('#commissionOnNewMD').val(),        
-			renewalCommissionMD: $('#renewalCommissionMD').val(),    
-			MISIntervalMD: $('#MISIntervalMD').val(),                
-			MISInterestMD: $('#MISInterestMD').val(),               
-			maturityAmountMD: $('#maturityAmountMD').val(),          
-			flexiblePlanMD: $('#flexiblePlanMD').val(),              
-			graceDaysMD: $('#graceDaysMD').val(),                    
-			penaltyRateMD: $('#penaltyRateMD').val(),                
-			statusOfPlanMDRD2: $('#statusOfPlanMDRD2').val()          
+			planCodeMD: $('#planCodeMD').val(),
+			planNameMD: $('#planNameMD').val(),
+			minimumAmountMD: $('#minimumAmountMD').val(),
+			rateOfInterestMD: $('#rateOfInterestMD').val(),
+			installmentTypeMD: $('#installmentTypeMD').val(),
+			termModeMD: $('#termModeMD').val(),
+			misTerm: $('#misTerm').val(),
+			durationMD: $('#durationMD').val(),
+			commissionOnNewMD: $('#commissionOnNewMD').val(),
+			renewalCommissionMD: $('#renewalCommissionMD').val(),
+			MISIntervalMD: $('#MISIntervalMD').val(),
+			MISInterestMD: $('#MISInterestMD').val(),
+			maturityAmountMD: $('#maturityAmountMD').val(),
+			flexiblePlanMD: $('#flexiblePlanMD').val(),
+			graceDaysMD: $('#graceDaysMD').val(),
+			penaltyRateMD: $('#penaltyRateMD').val(),
+			statusOfPlanMDRD2: statusPlanValue
 
 		};
 	}
@@ -947,3 +1334,58 @@ $(document).ready(function() {
 
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+	const toggles = document.querySelectorAll('.toggle__input');
+
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
+
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
+});
+
+function calculateMISDeposit() {
+    const principal = parseFloat(document.getElementById("minimumAmountMD").value) || 0;
+    const interestRate = parseFloat(document.getElementById("rateOfInterestMD").value) || 0; // annual %
+    const termYears = parseFloat(document.getElementById("misTerm").value) || 0; // term in years
+
+    // Total Deposit is just principal
+    const totalDeposit = principal;
+
+    // Interest per month
+    const monthlyInterest = (principal * interestRate) / (100 * 12);
+
+    // Total interest over the term
+    const totalInterest = monthlyInterest * 12 * termYears;
+
+    // Maturity amount
+    const maturityAmount = principal + totalInterest;
+	
+	const interestEarned = maturityAmount - principal;
+
+    // Interest per interval (monthly payout)
+    const interestPerInterval = monthlyInterest;
+
+    // Update fields
+    document.getElementById("totalPaidMD").value = totalDeposit.toFixed(2);
+    document.getElementById("maturityAmountMD").value = maturityAmount.toFixed(2);
+	document.getElementById("interestEarnedMD").value = interestEarned.toFixed(2);
+	//document.getElementById("interestPerIntervalMD").value = interestPerInterval.toFixed(2);
+}
+
+// Event listeners
+document.getElementById("minimumAmountMD").addEventListener("input", calculateMISDeposit);
+document.getElementById("rateOfInterestMD").addEventListener("input", calculateMISDeposit);
+document.getElementById("misTerm").addEventListener("input", calculateMISDeposit);
+

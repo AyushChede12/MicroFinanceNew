@@ -659,7 +659,7 @@
           </li>
           
           <li>
-            <a href="earlyLoanClosure">
+            <a href="earlyLoanClosureLoan">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Early Loan Closure</span>
             </a>
@@ -751,7 +751,7 @@
           </li>
           
           <li>
-            <a href="earlyLoanClosure">
+            <a href="earlyLoanClosureJointLiability">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Early Loan Closure</span>
             </a>
