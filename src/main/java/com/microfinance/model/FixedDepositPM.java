@@ -15,9 +15,7 @@ public class FixedDepositPM {
 	private String planNameFD;
 	private String minimumAmountFD;
 	private String rateOfInterestFD;
-	private String termModeFD;
 	private String fdterm;
-	private String durationFD;
 	private String installmentTypeFD;
 	private String commissionOnNewFD;
 	private String componentIntervalFD;
@@ -58,26 +56,11 @@ public class FixedDepositPM {
 	public void setRateOfInterestFD(String rateOfInterestFD) {
 		this.rateOfInterestFD = rateOfInterestFD;
 	}
-	public String getTermModeFD() {
-		return termModeFD;
-	}
-	public void setTermModeFD(String termModeFD) {
-		this.termModeFD = termModeFD;
-	}
-	
-	
-	
 	public String getFdterm() {
 		return fdterm;
 	}
 	public void setFdterm(String fdterm) {
 		this.fdterm = fdterm;
-	}
-	public String getDurationFD() {
-		return durationFD;
-	}
-	public void setDurationFD(String durationFD) {
-		this.durationFD = durationFD;
 	}
 	public String getInstallmentTypeFD() {
 		return installmentTypeFD;

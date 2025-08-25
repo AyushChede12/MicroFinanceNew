@@ -14,11 +14,9 @@ public class MISDepositPM {
 	private String planCodeMD;
 	private String planNameMD;
 	private String rateOfInterestMD;
-	private String durationMD;
 	private String installmentTypeMD;
 	private String minimumAmountMD;
 	private String maturityROIMD;
-	private String termModeMD;
 	private String misTerm;
 	private String MISIntROIMD;
 	private String MISIntervalMD;
@@ -57,12 +55,6 @@ public class MISDepositPM {
 	public void setRateOfInterestMD(String rateOfInterestMD) {
 		this.rateOfInterestMD = rateOfInterestMD;
 	}
-	public String getDurationMD() {
-		return durationMD;
-	}
-	public void setDurationMD(String durationMD) {
-		this.durationMD = durationMD;
-	}
 	public String getInstallmentTypeMD() {
 		return installmentTypeMD;
 	}
@@ -81,15 +73,6 @@ public class MISDepositPM {
 	public void setMaturityROIMD(String maturityROIMD) {
 		this.maturityROIMD = maturityROIMD;
 	}
-	public String getTermModeMD() {
-		return termModeMD;
-	}
-	public void setTermModeMD(String termModeMD) {
-		this.termModeMD = termModeMD;
-	}
-	
-	
-	
 	public String getMisTerm() {
 		return misTerm;
 	}

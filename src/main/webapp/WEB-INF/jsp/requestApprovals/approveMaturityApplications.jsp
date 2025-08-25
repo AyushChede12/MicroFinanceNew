@@ -179,27 +179,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Rate Of Interest(%)</label> <input type="text" name="rateOfInterest"
-									id="rateOfInterest" required="required" placeholder="" disabled />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Fine</label> <input type="text" name="fine"
-									id="fine" required="required" placeholder="" disabled />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Req. User</label> <input type="text"
-									name="reqUser" id="reqUser" required="required"
-									placeholder="" disabled />
-							</div>
-						</div>
 					</div>
 
 					<div class="row">

@@ -33,6 +33,14 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 
 
@@ -65,11 +73,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
+								<label for="">Loan ID </label> <select id="loanId" name="loanId"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
+									<option value="">Select LoanID</option>
+									
 								</select>
 							</div>
 						</div>
@@ -77,15 +85,15 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">From Date :</label> <input type="date"
-									name="fDate" id="fDate" required="required"
+									name="fromDate" id="fromDate" required="required"
 									placeholder="Enter fDate" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">TO Date :</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
+								<label for="">TO Date :</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder="Enter tDate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -120,19 +128,12 @@ pageEncoding="ISO-8859-1"%> -->
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">SN</th>
 											<th scope="col">Loan ID</th>
-											<th scope="col">Member Code</th>
-											<th scope="col">Member Name</th>
-											<th scope="col">Loan Date</th>
-											<th scope="col">Branch</th>
-											<th scope="col">Loan Name</th>
+											<th scope="col">Loan Plan Name</th>
 											<th scope="col">Loan Amount</th>
-											<th scope="col">Term</th>
-											<th scope="col">Mode</th>
-											<th scope="col">ROI</th>
-											<th scope="col">Approval Date</th>
-											<th scope="col">Pay Date</th>
-											<th scope="col">Pay Mode</th>
-											<th scope="col">Pay Details</th>
+											<th scope="col">EMI Payment</th>
+											<th scope="col">Payment Date</th>
+											<th scope="col">Payment Status</th>
+											<th scope="col">Print</th>
 
 										</tr>
 									</thead>
@@ -152,6 +153,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/LoanPaymentReport.js"></script>
 </body>
 
 </html>
