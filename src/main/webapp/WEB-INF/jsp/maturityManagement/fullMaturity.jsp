@@ -390,7 +390,7 @@ pageEncoding="ISO-8859-1"%> -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" id="Pay" class="btn btn-primary" >Pay</button>
+        <button type="submit" id="Pay" class="btn btn-primary" data-dismiss="modal">Pay</button>
       </div>
     </div>
   </div>

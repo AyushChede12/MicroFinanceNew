@@ -76,15 +76,20 @@ $(document).ready(function () {
 								$('#deduction').val(Deduction(data));	//function Deduction(data)					
 								$('#netPayable').val(netPayment(data)); //function netpay(data)
 								$('#panelty').val(Panelty(data));	//function Panelty(data)
+								
 								$("#amount").on("blur", function () {
 									let modal = new bootstrap.Modal(document.getElementById('exampleModalLong'));
 									modal.show();
+									
 								totalPayment();
 								    });
-									$("#Pay").on("click", function () {
-										var amount=$('#amount').val(data.amount);
-										$('#depositAmount').val((data.depositAmount)+amount);
-										//$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
+									$("#Pay").on("click", function () {									
+										let amount = parseFloat($('#amount').val()) || 0;
+										let depositAmount = parseFloat(data.depositAmount); 
+										let paidamount=amount+depositAmount;
+										$('#depositAmount').val(paidamount);
+											$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
+										
 									});
 
 			                } else {
@@ -239,6 +244,20 @@ function Panelty(data){
 	
 }
 
-
+function DueAmount(data)
+{
+	let amount = parseFloat($('#amount').val()) || 0;
+	let paidAmount = parseInt(data.depositAmount);             
+	let policyAmount = parseInt(data.policyAmount);
+	let dueamount=0;
+	
+	if (!isNaN(amount) && !isNaN(paidAmount) && !isNaN(policyAmount))
+		{
+			dueamount=policyAmount-(amount+paidAmount);
+			alert(dueamount);
+		}
+		return dueamount;
+		
+}
 
 
