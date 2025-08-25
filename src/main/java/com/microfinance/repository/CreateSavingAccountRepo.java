@@ -32,6 +32,8 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	boolean existsBySelectByCustomer(String customerId);
 
+	List<CreateSavingsAccount> findByIsApprovedTrueAndMessageSend(String messageSend);
+
 	
 
 	//CreateSavingsAccount findByaAccountNumber(String accountNumber);

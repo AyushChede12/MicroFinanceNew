@@ -1,7 +1,11 @@
 package com.microfinance.service;
 
 import java.io.File;
+
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -370,6 +374,38 @@ public class CustomerSavingsService {
 			// TODO Auto-generated method stub
 			return savingAccCloserRepo.save(accountCloser);
 		}
+
+		public List<CreateSavingsAccount> fetchSavingAccountDataSMSEnable() {
+			// TODO Auto-generated method stub
+			return createSavingAccountRepo.findByIsApprovedTrueAndMessageSend("1");
+		}
+
+		
+		 private static final double SMS_CHARGE_PER_MONTH = 10.0;  // Example charge
+		 private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+		    public double calculateBalanceAfterSmsCharges(CreateSavingsAccount account) {
+		        try {
+		            // Parse openingDate (String → LocalDate)
+		            LocalDate openingDate = LocalDate.parse(account.getOpeningDate(), DATE_FORMAT);
+		            LocalDate today = LocalDate.now();
+
+		            // Calculate months passed
+		            Period period = Period.between(openingDate, today);
+		            int monthsPassed = period.getYears() * 12 + period.getMonths();
+
+		            // Parse balance (String → double)
+		            double balance = Double.parseDouble(account.getBalance());
+
+		            // Deduct SMS charges
+		            double totalCharges = monthsPassed * SMS_CHARGE_PER_MONTH;
+		            double newBalance = balance - totalCharges;
+
+		            return Math.max(newBalance, 0); // Prevent negative balance
+		        } catch (Exception e) {
+		            throw new RuntimeException("Invalid date or balance format", e);
+		        }
+		    }
 
 		
 		

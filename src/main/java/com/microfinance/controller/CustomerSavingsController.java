@@ -563,7 +563,26 @@ public class CustomerSavingsController {
         // 4. Return the saved entry
         return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
     }
+    
 
+
+    
+  //Janvi : Fetch Data whose sms charges enabled
+  	@PostMapping("/getSavingAccountDataSMSEnable")
+      public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> fetchSavingAccountDataSMSEnable() {
+          List<CreateSavingsAccount> list = customersaving.fetchSavingAccountDataSMSEnable();
+          ApiResponse<List<CreateSavingsAccount>> response = ApiResponse.success(
+              HttpStatus.OK, 
+              "Unapproved Saving Transaction fetched successfully", 
+              list
+          );
+          return new ResponseEntity<>(response, HttpStatus.OK);
+      }
+  	
+  	@PostMapping("/deduct-sms-charges")
+    public double deductSmsCharges(@RequestBody CreateSavingsAccount account) {
+        return customersaving.calculateBalanceAfterSmsCharges(account);
+    }
     
    
 
