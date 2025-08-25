@@ -659,7 +659,7 @@
           </li>
           
           <li>
-            <a href="earlyLoanClosure">
+            <a href="earlyLoanClosureLoan">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Early Loan Closure</span>
             </a>
@@ -751,7 +751,7 @@
           </li>
           
           <li>
-            <a href="earlyLoanClosure">
+            <a href="earlyLoanClosureJointLiability">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Early Loan Closure</span>
             </a>
@@ -836,13 +836,6 @@
           </li>
           
           <li>
-            <a href="approveRecurring">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Approve Recurring Deposits</span>
-            </a>
-          </li>
-          
-          <li>
             <a href="approveSaving">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Approve Saving Transactions</span>
@@ -883,14 +876,7 @@
               <span style="font-family: 'Poppins', sans-serif">Approve Maturity Applications</span>
             </a>
           </li>
-          
-          <li>
-            <a href="deleteMaturityApp">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Delete Maturity Application Request</span>
-            </a>
-          </li>
-          
+         
           <li>
             <a href="approveInterBranchCashTransfer">
               <i class="bi bi-circle"></i>

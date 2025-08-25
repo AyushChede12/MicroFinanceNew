@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $.ajax({
-        url: '/api/customermanagement/approved', // Make sure this path is correct
+        url: 'api/customermanagement/approved', // Make sure this path is correct
         type: 'GET',
         success: function (response) {
             if (response.status === "OK" && Array.isArray(response.data)) {
                 const $select = $('#selectCustomer');
-                $select.empty().append('<option value="">Select Customer Name</option>');
+                $select.empty().append('<option value="">Select Customer Code</option>');
 
                 response.data.forEach(customer => {
                     if (customer.customerName && customer.memberCode) {
@@ -24,14 +24,6 @@ $(document).ready(function () {
     });
 });
 
-
-
-
-
-
-
-
-
 function fetchBySelectedCustomer() {
 	const memberCode = $("#selectCustomer").val();
 	if (!memberCode) return;
@@ -41,7 +33,7 @@ function fetchBySelectedCustomer() {
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(input),
-		url: 'fetchBySelectedCustomer',
+		url: 'api/customermanagement/fetchBySelectedCustomer',
 		async: false,
 		success: function(data) {
 			if (data && data.length > 0) {
@@ -426,7 +418,7 @@ $("#saveBtn").click(function (e) {
             const amountDue = depositAmount - policyAmount;
 
             alert("Amount Due: ₹" + amountDue.toFixed(2)); // Optional for confirmation
-
+			const statusPlanValue = $('#toggle-sms-send').is(':checked') ? 1 : 0;
             const formData = {
                 policyCode: policyCode,
                 policyStartDate: $("#policyStartDate").val(),
@@ -463,14 +455,14 @@ $("#saveBtn").click(function (e) {
                 paymentBy: $("#paymentBy").val(),
                 remark: $("#remark").val(),
                 agent: $("#Agent").val(),
-                smsSend: $("#smsSend").val(),
+                smsSend: statusPlanValue,
                 
                 lastInstPaid: 1
             };
 
             // Step 3: Save data to backend
             $.ajax({
-                url: "/api/Policymangment/saveInvestment",
+                url: "api/Policymangment/saveInvestment",
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(formData),
@@ -492,7 +484,7 @@ $("#saveBtn").click(function (e) {
 
 $(document).ready(function () {
     $.ajax({
-        url: "/api/financialconsultant/getAllFinancialConsultantDetails",
+        url: "api/financialconsultant/getAllFinancialConsultantDetails",
         type: "POST",
         success: function (response) {
             const consultants = response.data;

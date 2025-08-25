@@ -56,8 +56,10 @@ public class CustomerSavingsController {
 	@Autowired
 	CustomerSavingsService customersaving;
 	
-	
-	  @Autowired CreateSavingAccountRepo createSavingAccountRepo;
+	  
+	 
+	  @Autowired 
+	  CreateSavingAccountRepo createSavingAccountRepo;
 	  
 	  @Autowired
 	  CreateSavingAccountRepo creSavingAccountRepo;
@@ -564,7 +566,6 @@ public class CustomerSavingsController {
         return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
     }
 
-    
-   
+  
 
 }
