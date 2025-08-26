@@ -31,36 +31,13 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
+
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
-<!--
-	private String loanId;
-    private String loanDate;
-    private String memberId;
-    private String relativeDetails;
-    private String dateOfBirth;
-    private String age;
-    private String contactNo;
-    private String messageStatus;
-    private String address;
-    private String pinCode;
-    private String branchName;
-    private String loanPlanName;
-    private String typeOfLoan;
-    private String loanMode;
-    private String loanTerm;
-    private String rateOfInterest;
-    private String loanAmount;
-    private String interestType;
-    private String emiPayment;
-    private String purposeOfLoan;
-
-    
-  
-      -->
 
 <body>
 
@@ -89,31 +66,35 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Id</label> <select id="loanId&Name"
-									name="loanId&Name" required="required"
+								<label for="">Find By Loan Id</label> <select id="loanId"
+									name="loanId" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Loan Type</option>
-									<option value="Regular">Regular Loan Statement</option>
-									<option value="Irregular">Irregular Loan Statement</option>
-								</select>
-							</div>
-						</div>
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Select loan Document</label> <select
-									id="loanStatementID" name="loanStatementID" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option>Applicant Print</option>
-									<option>Applicant Print</option>
-									<option>Applicant Print</option>
-									<option>Applicant Print</option>
+									<option value="">Select Loan Id</option>
+
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Select loan Document</label> <select
+									id="loanDocument" name="loanDocument" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option>Select Document</option>
+									<option value="applicantForm">Applicant Form</option>
+									<option value="sanctionLetter">Sanction Letter</option>
+									<option value="loanAgreement">Loan Agreement</option>
+
+								</select> <span id="docTypeError"
+									style="color: red; font-size: 13px; display: none;">
+									Please select a document type To Print </span>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
 							<div class="col-12 text-center mb-4 mt-3">
-								<button id="searchLoanStatement" class="btnStyle bg-success">search</button>
+								<button class="btnStyle bg-warning" id="generateDoc">Generate
+									DOC</button>
 
 							</div>
 						</div>
@@ -191,9 +172,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Loan Mode</label>
-								<textarea name="loanMode" id="loanMode" readonly="readonly"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+								<label for="">Loan Mode</label> <input type="text"
+									readonly="readonly" name="loanMode" id="loanMode"
+									required="required" placeholder=" Enter Loan Mode" />
 							</div>
 						</div>
 
@@ -228,10 +209,24 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 			</form>
+
+			<div class="row mt-5">
+				<div class="col-12">
+					<div class="card recent-sales" id="receiptArea"></div>
+				</div>
+			</div>
+
+			<!-- Print Button (hidden by default) -->
+			<div style="text-align: center; margin-top: 20px;">
+				<button id="printBtn" onclick="printDocument()"
+					style="display: none; padding: 8px 20px; font-size: 16px; font-weight: bold; background: #007bff; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+					Print</button>
+			</div>
+
 		</div>
 	</main>
 	<script src="./js/adminscript.js"></script>
-	<!-- <script src="./js/LoanManagment/LoanApproval.js"></script> -->
+	<script src="./js/LoanManagment/LoanDocumentPrint.js"></script>
 </body>
 
 </html>

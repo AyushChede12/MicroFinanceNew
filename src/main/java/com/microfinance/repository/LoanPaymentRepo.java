@@ -12,6 +12,4 @@ import com.microfinance.model.LoanPayment;
 @Repository
 public interface LoanPaymentRepo extends JpaRepository<LoanPayment,Long> {
 	List<LoanPayment> findByLoanId(String loanId);
-
-
 }
