@@ -124,7 +124,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
 						<label for="">Voucher ID <span class="star">*</span></label> <input
-							type="text" name="voucherId" id="voucherId" required="required"
+							type="text" name="voucherID" id="voucherID" required="required"
 							placeholder="Enter receipt no." disabled />
 					</div>
 				</div>
@@ -149,9 +149,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for=""> Debit Ledger (Destination)<span class="star">*</span></label>
-						<select id="debitLedger" name="debitLedger" required="required"
-							class="form-control selectField" style="height: 30px;">
+						<label for=""> Debit Ledger (Destination)<span
+							class="star">*</span></label> <select id="debitLedger" name="debitLedger"
+							required="required" class="form-control selectField"
+							style="height: 30px;">
 							<option value="">--Select Dr. Ledger--</option>
 						</select>
 					</div>
@@ -163,8 +164,8 @@ pageEncoding="ISO-8859-1"%> -->
 							class="form-control selectField" style="height: 30px;"
 							onchange="toggleTransferFields(this.value)">
 							<option value="">Select Transfer Mode</option>
-							<option value="Cash">Cash Deposit</option>
-							<option value="Bank">Cash Withdrawal</option>
+							<option value="Cash Deposit">Cash Deposit</option>
+							<option value="Cash Withdrawal">Cash Withdrawal</option>
 							<option value="Cheque">Cheque</option>
 							<option value="Online Transfer">Online Transfer</option>
 						</select>
@@ -222,9 +223,11 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 text-right mt-3">
+				<div class="col-12 text-center mt-3">
 					<button id="saveBtn" class="btnStyle"
 						style="background-color: #FFA500;">Save</button>
+					<button type="button" id="toggleBtn" class="btnStyle bg-primary"
+						onclick="showTableData()">Show</button>
 				</div>
 			</div>
 		</form>
@@ -243,6 +246,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">ID.</th>
 									<th scope="col">Branch</th>
+									<th scope="col">Voucher ID</th>
 									<th scope="col">Date Of Entry</th>
 									<th scope="col">Cr.Ledger</th>
 									<th scope="col">Dr.Ledger</th>
