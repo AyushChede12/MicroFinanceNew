@@ -104,7 +104,7 @@ function saveIncomingReceipt() {
 
 	$.ajax({
 		type: "POST",
-		url: "/accountManagement/createIncomingReceipt",
+		url: "accountManagement/createIncomingReceipt",
 		contentType: "application/json",
 		data: JSON.stringify(receiptData),
 		success: function(response) {
@@ -135,7 +135,7 @@ function saveIncomingReceipt() {
 function loadIncomingReceipts() {
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/allIncomingReceipt",
+		url: "accountManagement/allIncomingReceipt",
 		contentType: "application/json",
 		success: function(response) {
 			const tbody = $("#tableBody");
@@ -181,7 +181,7 @@ function loadIncomingReceipts() {
 function viewIncomingReceipt(id) {
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/incomingReceipt/${id}`,
+		url: `accountManagement/incomingReceipt/${id}`,
 		contentType: "application/json",
 		success: function(response) {
 			const data = response.data;
@@ -229,7 +229,7 @@ function searchIncomingReceipts() {
 
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/searchIncomingReceipt",
+		url: "accountManagement/searchIncomingReceipt",
 		data: {
 			branchName: branchName,
 			startDate: startDate,
@@ -281,7 +281,7 @@ function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/api/preference/getAllBranchModule',
+		url: 'api/preference/getAllBranchModule',
 		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
 			// The actual branch array is inside response.data
@@ -306,7 +306,7 @@ function LedgerDropdown(branchName, selectedCr = "", selectedDr = "") {
 	}
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/ledgerByBranch/${branchName}`,
+		url: `accountManagement/ledgerByBranch/${branchName}`,
 		contentType: "application/json",
 		success: function(data) {
 			const ledgers = data.data || [];
