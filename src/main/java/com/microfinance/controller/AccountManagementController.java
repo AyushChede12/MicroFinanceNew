@@ -188,12 +188,12 @@ public class AccountManagementController {
 		BankCashTransferDto dto= accountManagementService.getBankCashTransfer(id);
 		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "BankCashTransfer Entry retrieved successfully With Id", dto));
 	}
-	@GetMapping("/ledgerByBranchAndGroup/{branchName}")
+/*	@GetMapping("/ledgerByBranchAndGroup/{branchName}")
 	public ResponseEntity<ApiResponse<List<LedgerAccountMaster>>> getBankCashLedgersByBranch(
 	        @PathVariable String branchName) {
 	    List<LedgerAccountMaster> ledgers = accountManagementService.getBankCashLedgersByBranch(branchName);
 	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Filtered Ledgers", ledgers));
-	}
+	}*/
 
 
 

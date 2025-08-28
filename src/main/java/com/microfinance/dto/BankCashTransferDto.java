@@ -1,30 +1,42 @@
 package com.microfinance.dto;
 
+import java.time.LocalDate;
+
 import javax.validation.constraints.NotBlank;
 
 public class BankCashTransferDto {
-	
-    private long id;
-	
-    @NotBlank(message = "Branch name is required")
-    private String branchName;
-    
 
-    private String generatedReceiptID;
-    
-    @NotBlank(message = "Date of entry is required")
-    private String dateOfEntry;
-    
-    @NotBlank(message = "Credit ledger is required")
-    private String creditLedger;
-    
-    @NotBlank(message = "Debit ledger is required")
-    private String debitLedger;
-    
-    @NotBlank(message = "Transaction amount is required")
-    private String transactionAmount;
-    
-    private String remarks;
+	private long id;
+
+	@NotBlank(message = "Branch name is required")
+	private String branchName;
+
+	private String voucherID;
+
+	@NotBlank(message = "Date of entry is required")
+	private String dateOfEntry;
+
+	@NotBlank(message = "Credit ledger is required")
+	private String creditLedger;
+
+	@NotBlank(message = "Debit ledger is required")
+	private String debitLedger;
+
+	@NotBlank(message = "Transfer mode is required")
+	private String transferMode;
+
+	private LocalDate chequeDate;
+
+	private String chequeNo;
+
+	private String bankName;
+
+	private String transactionRef;
+
+	@NotBlank(message = "Transaction amount is required")
+	private String transactionAmount;
+
+	private String remarks;
 
 	public long getId() {
 		return id;
@@ -42,12 +54,12 @@ public class BankCashTransferDto {
 		this.branchName = branchName;
 	}
 
-	public String getGeneratedReceiptID() {
-		return generatedReceiptID;
+	public String getVoucherID() {
+		return voucherID;
 	}
 
-	public void setGeneratedReceiptID(String generatedReceiptID) {
-		this.generatedReceiptID = generatedReceiptID;
+	public void setVoucherID(String voucherID) {
+		this.voucherID = voucherID;
 	}
 
 	public String getDateOfEntry() {
@@ -73,6 +85,47 @@ public class BankCashTransferDto {
 	public void setDebitLedger(String debitLedger) {
 		this.debitLedger = debitLedger;
 	}
+	
+
+	public String getTransferMode() {
+		return transferMode;
+	}
+
+	public void setTransferMode(String transferMode) {
+		this.transferMode = transferMode;
+	}
+
+	public LocalDate getChequeDate() {
+		return chequeDate;
+	}
+
+	public void setChequeDate(LocalDate chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+
+	public String getChequeNo() {
+		return chequeNo;
+	}
+
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getTransactionRef() {
+		return transactionRef;
+	}
+
+	public void setTransactionRef(String transactionRef) {
+		this.transactionRef = transactionRef;
+	}
 
 	public String getTransactionAmount() {
 		return transactionAmount;
@@ -89,10 +142,5 @@ public class BankCashTransferDto {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-	
-	
-    
-    
 
 }

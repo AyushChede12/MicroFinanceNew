@@ -1,5 +1,7 @@
 package com.microfinance.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,13 +16,23 @@ public class BankCashTransferEntry {
 	
     private String branchName;
     
-    private String generatedReceiptID;
+    private String voucherID;
 
     private String dateOfEntry;
 
     private String creditLedger;
 
     private String debitLedger;
+    
+    private String transferMode;
+    
+	private LocalDate chequeDate;
+	
+	private String chequeNo;
+	
+	private String bankName;
+	
+	private String transactionRef;
 
     private String transactionAmount;
     
@@ -43,12 +55,13 @@ public class BankCashTransferEntry {
 		this.branchName = branchName;
 	}
 
-	public String getGeneratedReceiptID() {
-		return generatedReceiptID;
+
+	public String getVoucherID() {
+		return voucherID;
 	}
 
-	public void setGeneratedReceiptID(String generatedReceiptID) {
-		this.generatedReceiptID = generatedReceiptID;
+	public void setVoucherID(String voucherID) {
+		this.voucherID = voucherID;
 	}
 
 	public String getDateOfEntry() {
@@ -73,6 +86,47 @@ public class BankCashTransferEntry {
 
 	public void setDebitLedger(String debitLedger) {
 		this.debitLedger = debitLedger;
+	}
+	
+
+	public String getTransferMode() {
+		return transferMode;
+	}
+
+	public void setTransferMode(String transferMode) {
+		this.transferMode = transferMode;
+	}
+
+	public LocalDate getChequeDate() {
+		return chequeDate;
+	}
+
+	public void setChequeDate(LocalDate chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+
+	public String getChequeNo() {
+		return chequeNo;
+	}
+
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getTransactionRef() {
+		return transactionRef;
+	}
+
+	public void setTransactionRef(String transactionRef) {
+		this.transactionRef = transactionRef;
 	}
 
 	public String getTransactionAmount() {
