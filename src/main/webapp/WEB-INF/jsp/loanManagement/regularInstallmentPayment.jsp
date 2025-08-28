@@ -260,8 +260,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="vehicalNo">Due Date</label> <input type="date"
-									name="DueDate" id="DueDate" required="required"
+								<label for="vehicalNo">Payment Date</label> <input type="date"
+									name="PaymentDate" id="PaymentDate" required="required"
 									placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>

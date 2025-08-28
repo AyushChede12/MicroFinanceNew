@@ -27,28 +27,8 @@ $(document).ready(function() {
 	});
 });
 
-// 🔹 Load Branch Dropdown
-function BranchNameDropdown() {
-	$.ajax({
-		type: "GET",
-		contentType: "application/json",
-		url: '/api/preference/getAllBranchModule',
-		success: function(response) {
-			let options = "<option value=''>Select Branch Name</option>";
-			// The actual branch array is inside response.data
-			if (response && Array.isArray(response.data)) {
-				response.data.forEach(branch => {
-					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
-				});
-			}
-			$("#searchBranchName").html(options);
-			$("#entryBranchName").html(options);
-		},
-		error: function() {
-			alert("Failed to load branch names.");
-		}
-	});
-}
+
+
 
 
 // 🔹 Load Ledgers for Manual Journal
@@ -248,6 +228,28 @@ function searchManualJournal() {
 				if (res?.message) msg = res.message;
 			} catch (e) { }
 			alert(msg);
+		}
+	});
+}
+// 🔹 Load Branch Dropdown
+function BranchNameDropdown() {
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: '/api/preference/getAllBranchModule',
+		success: function(response) {
+			let options = "<option value=''>Select Branch Name</option>";
+			// The actual branch array is inside response.data
+			if (response && Array.isArray(response.data)) {
+				response.data.forEach(branch => {
+					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
+				});
+			}
+			$("#searchBranchName").html(options);
+			$("#entryBranchName").html(options);
+		},
+		error: function() {
+			alert("Failed to load branch names.");
 		}
 	});
 }

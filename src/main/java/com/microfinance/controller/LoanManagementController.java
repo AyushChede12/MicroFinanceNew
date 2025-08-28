@@ -296,6 +296,37 @@ public class LoanManagementController {
 		            .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No loan payments found for this Loan ID", null));
 		    }
 		}
+		
+		//API for fetching single installment data by loanId and installment number
+		@GetMapping("/fetchLoanPaymentByLoanIdAndInst")
+		public ResponseEntity<ApiResponse<LoanPayment>> fetchLoanPaymentByLoanIdAndInst(
+		        @RequestParam String loanId,
+		        @RequestParam String remarks) {
+
+		    String normalizedRemarks = remarks.trim().toLowerCase();
+		    List<LoanPayment> payments = loanServices.fetchLoanPaymentsByLoanId(loanId);
+		    LoanPayment payment = payments.stream()
+		            .filter(p -> p.getRemarks() != null && p.getRemarks().trim().toLowerCase().equals(normalizedRemarks))
+		            .findFirst()
+		            .orElse(null);
+
+		    if (payment != null) {
+		        ApiResponse<LoanPayment> response = new ApiResponse<>(
+		            HttpStatus.OK,
+		            "Loan Installment fetched successfully",
+		            payment
+		        );
+		        return ResponseEntity.ok(response);
+		    } else {
+		        ApiResponse<LoanPayment> response = new ApiResponse<>(
+		            HttpStatus.NOT_FOUND,
+		            "No installment found for Loan ID: " + loanId + " and Installment: " + remarks,
+		            null
+		        );
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		    }
+		}
+
 
 		
 }
