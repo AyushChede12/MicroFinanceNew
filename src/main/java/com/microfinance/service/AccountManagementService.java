@@ -122,20 +122,20 @@ public class AccountManagementService {
 	}
 
 	// Minimal guardrail mapping
-	private static final Map<String, List<String>> ALLOWED_COMBINATIONS = Map.of("ASSETS",
-			List.of("CASH", "BANK", "LOAN", "MEMBER"), "LIABILITIES", List.of("LOAN", "MEMBER", "SHARE"), "INCOME",
-			List.of("SHARE", "MEMBER", "BANK"), "EQUITY", List.of("SHARE", "MEMBER"), "EXPENSES",
-			List.of("CASH", "BANK", "MEMBER"));
-
-	private boolean isValidCombination(String group, String type) {
-		if (group == null || type == null)
-			return false;
-		group = group.trim().toUpperCase();
-		type = type.trim().toUpperCase();
-
-		List<String> allowedTypes = ALLOWED_COMBINATIONS.getOrDefault(group, List.of());
-		return allowedTypes.contains(type);
-	}
+//	private static final Map<String, List<String>> ALLOWED_COMBINATIONS = Map.of("ASSETS",
+//			List.of("CASH", "BANK", "LOAN", "MEMBER"), "LIABILITIES", List.of("LOAN", "MEMBER", "SHARE"), "INCOME",
+//			List.of("SHARE", "MEMBER", "BANK"), "EQUITY", List.of("SHARE", "MEMBER"), "EXPENSES",
+//			List.of("CASH", "BANK", "MEMBER"));
+//
+//	private boolean isValidCombination(String group, String type) {
+//		if (group == null || type == null)
+//			return false;
+//		group = group.trim().toUpperCase();
+//		type = type.trim().toUpperCase();
+//
+//		List<String> allowedTypes = ALLOWED_COMBINATIONS.getOrDefault(group, List.of());
+//		return allowedTypes.contains(type);
+//	}
 
 	/**
 	 * Fetch all ledger accounts.
