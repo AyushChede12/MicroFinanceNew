@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-piggy-bank"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Flexible Premium Renewal</li>
+					<li class="breadcrumb-item action">Daily Premium Renewal</li>
 				</ol>
 			</nav>
 		</div>

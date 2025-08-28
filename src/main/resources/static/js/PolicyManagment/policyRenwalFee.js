@@ -45,11 +45,11 @@ $(document).ready(function () {
 						$("#renewalDate").val(renewalDate);
 						$("#maturityDate").val(data.maturityDate);
 						$("#customerCode").val(data.memberSelection);
-						$("#clientName").val(data.customerName);
+						$("#customerName").val(data.customerName);
 						$("#contactNo").val(data.contactNo);
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
-						$("#branchname").val(data.branchName);
+						$("#branchName").val(data.branchName);
 						$("#policyTerm").val(data.schemeTerm);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);

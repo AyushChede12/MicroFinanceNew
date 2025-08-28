@@ -105,7 +105,6 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Maturity Date*</label> <input type="date"
 										name="maturityDate" id="maturityDate" required="required"
-										placeholder="Enter Vehicle No"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
@@ -115,24 +114,25 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Customer Code* </label> <input type="text"
 										name="customerCode" id="customerCode" required="required"
-										placeholder="Enter Advisor/Collector Code" />
+										placeholder="Enter Customer Code" />
 								</div>
 							</div>
 
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Client Name </label> <input type="text"
-										name="clientName" id="clientName" required="required"
-										placeholder="Enter Relative Name" />
+									<label for="">Customer Name </label> <input type="text"
+										name="customerName" id="customerName" required="required"
+										placeholder="Enter Customer Name" />
 								</div>
 							</div>
-							
+
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Branch Name </label> <input type="text"
-										name="branchname" id="branchname" required="required"
-										placeholder="Enter Relative Name" />
+									<label for="">Branch Name </label> <select id="branchName"
+										name="branchName" required class="form-control selectField"
+										style="height: 30px;">
+									</select>
 								</div>
 							</div>
 
@@ -141,7 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Contact No*</label> <input type="text"
 										name="contactNo" id="contactNo" required="required"
-										placeholder="Enter Mobile No." />
+										placeholder="Enter Contact No." />
 								</div>
 							</div>
 
@@ -149,7 +149,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Policy Amount*</label> <input type="text"
 										name="policyAmount" id="policyAmount" required="required"
-										placeholder="Enter Nominee Name" />
+										placeholder="Enter Policy Amount" />
 								</div>
 							</div>
 
@@ -161,7 +161,7 @@ pageEncoding="ISO-8859-1"%> -->
 									style="margin-bottom: 30px">
 									<label>Policy Type </label> <input type="text"
 										name="policyType" id="policyType" required="required"
-										placeholder="Enter Nominee Name" />
+										placeholder="Enter Policy Type" />
 								</div>
 							</div>
 
@@ -169,9 +169,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<!-- in this two text fieldds are required -->
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="">Policy Trem </label> <input type="text"
+									<label for="">Policy Term </label> <input type="text"
 										name="policyTerm" id="policyTerm" required="required"
-										placeholder="Enter Education" />
+										placeholder="Enter Policy Term" />
 								</div>
 							</div>
 
@@ -179,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Maturity Amt.*</label> <input type="text"
 										name="maturityAmount" id="maturityAmount" required="required"
-										placeholder="Enter Education" />
+										placeholder="Enter Maturity Amount" />
 								</div>
 							</div>
 
@@ -188,7 +188,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Total Deposits*</label> <input type="text"
 										name="totalDeposit" id="totalDeposit" required="required"
-										placeholder="Enter Education" />
+										placeholder="Enter Total Deposits" />
 								</div>
 							</div>
 
@@ -197,7 +197,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields">
 									<label for="">Payment Due*</label> <input type="text"
 										name="paymentDue" id="paymentDue" required="required"
-										placeholder="Enter Education" />
+										placeholder="Enter Payment Due" />
 								</div>
 							</div>
 
@@ -206,7 +206,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields mt-4">
 									<label for="">Last Payment Date *</label> <input type="text"
 										name="lastPaymentDate" id="lastPaymentDate"
-										required="required" placeholder="Enter Education" />
+										required="required" placeholder="Enter Last Payment Date" />
 								</div>
 							</div>
 
@@ -214,7 +214,6 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields mt-4">
 									<label for="">Due Date*</label> <input type="date"
 										name="dueDate" id="dueDate" required="required"
-										placeholder="Enter Vehicle No"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
@@ -223,7 +222,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields mt-4">
 									<label for="">No Of Installment*</label> <input type="text"
 										name="noOfInst" id="noOfInst" required="required"
-										placeholder="Enter Education" />
+										placeholder="Enter No of Installment" />
 								</div>
 							</div>
 
@@ -232,7 +231,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields mt-4">
 									<label for="">Installments Completed*</label> <input
 										type="text" name="noOfInstPaid" id="noOfInstPaid"
-										required="required" placeholder="Enter Education" />
+										required="required" placeholder="Enter Installments Completed" />
 								</div>
 							</div>
 
@@ -241,7 +240,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex flex-column formFields mt-4">
 									<label for="">Mode Of Payment*</label> <input type="text"
 										name="modeOfPayment" id="modeOfPayment" required="required"
-										placeholder="Enter Education" />
+										placeholder="Enter Payment Mode" />
 								</div>
 							</div>
 
