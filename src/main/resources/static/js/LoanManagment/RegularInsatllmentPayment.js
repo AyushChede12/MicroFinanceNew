@@ -98,51 +98,51 @@ $(document).ready(function() {
 					alert("Error fetching Payment Data: " + xhr.responseText);
 				}
 			});
+			
+			$("#installment").on("change", function () {
+			        const selectedInstallment = $(this).val(); 
+					alert(selectedInstallment);
+			        const loanId = $("#loanID").val(); 
+					alert(loanId);
+			        if (loanId && selectedInstallment) {
+			            $.ajax({
+			                url: "/api/loanmanegment/fetchLoanPaymentsByLoanId",
+			                type: "GET",
+			                data: { selectedInstallment: selectedInstallment },
+			                dataType: "json",
+			                success: function (response) {
+			                    if (response.status === "OK" && response.data) {
+			                        const installments = response.data.installments; 
+			                       
+			                        const installmentData = installments.find(i => i.installmentNo == selectedInstallment);
+
+			                        if (installmentData) {
+			                            // Populate Payment Details form
+			                            $("#dueInterest").val(installmentData.interestDue);
+			                            $("#duePrincipal").val(installmentData.principalDue);
+			                            $("#dueAmounttotal").val(installmentData.amountDue);
+			                            $("#paymentAmount").val(installmentData.emiPayment);
+			                            $("#netAmount").val(installmentData.loanAmount);
+			                            //$("#registrationDate").val(installmentData.registrationDate);
+			                            //$("#dueDate").val(installmentData.dueDate);
+			                        } else {
+			                            alert("Installment data not found.");
+			                        }
+
+			                    } else {
+			                        alert("Loan payment data not found.");
+			                    }
+			                },
+			                error: function (xhr) {
+			                    alert("Error fetching installment data: " + xhr.responseText);
+			                }
+			            });
+			        }
+			    });
 		}
 	});
 });
 
-$(document).ready(function() {
-	$("#installment").on("change", function() {
-		const selectedLoanId = $(this).val();
-
-				if (selectedLoanId) {
-					$.ajax({
-						url: "/api/loanmanegment/getLoanById",
-						type: "GET",
-						data: { loanId: selectedLoanId },
-						dataType: "json",
-						success: function(response) {
-							if (response.status === "OK" && response.data) {
-								const data = response.data;
-
-								// Populate form fields
-								$("#date").val(data.loanDate);
-								$("#customercode").val(data.memberId);
-								$("#familyMembername").val(data.relativeDetails);
-								$("#contact").val(data.contactNo);
-								$("#BranchAddress").val(data.address);
-								$("#branchName").val(data.branchName);
-								$("#loanplanname").val(data.loanPlanName);
-								$("#typeOfLoan").val(data.typeOfLoan);
-								$("#loanmode").val(data.loanMode);
-								$("#term").val(data.loanTerm);
-								$("#rateofinterest").val(data.rateOfInterest);
-								$("#amountLoan").val(data.loanAmount);
-								$("#intesteType").val(data.interestType);
-								$("#paymnetEmi").val(data.emiPayment);
-								$("#financialConsultantId").val(data.financialConsultantId);
-								$("#financialConsultantName").val(data.financialConsultantName);
-
-							} else {
-								alert("Loan data not found.");
-							}
-						},
-						error: function(xhr) {
-							alert("Error fetching data: " + xhr.responseText);
-						}
-					});
-
-			}
-	});
-});
+/*$(document).ready(function () {
+    
+});*/

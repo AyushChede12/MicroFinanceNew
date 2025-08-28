@@ -163,43 +163,48 @@ public class LoanManagementService {
 	}
 
 	// Service for approving the loan application (Vaibhav)
-	public String updateApproval(LoanApplication approval) {
-		LoanApplication loan = loanApplicationRepo.findByLoanId(approval.getLoanId());
+		public String updateApproval(LoanApplication approval) {
+			LoanApplication loan = loanApplicationRepo.findByLoanId(approval.getLoanId());
 
-		if (loan != null) {
-			if (loan.isApprovalStatus()) {
-				return "already_approved";
+			if (loan != null) {
+				if (loan.isApprovalStatus()) {
+					return "already_approved";
+				}
+
+				// Step 1: Add loan amount to openingFees in CreateSavingsAccount
+				List<CreateSavingsAccount> accounts = createSavingRepo.findBySelectByCustomer(loan.getMemberId());
+
+				if (accounts != null && !accounts.isEmpty()) {
+					CreateSavingsAccount account = accounts.get(0); // assuming one account per member
+					double existingBalance = Double.parseDouble(account.getBalance()); // current amount like 3000
+					System.out.println("Balance fees :" + existingBalance);
+					double loanAmount = Double.parseDouble(loan.getLoanAmount()); // loan amount like 500000
+					double processingFee = Double.parseDouble(loan.getProcessingFee());
+					double gst = Double.parseDouble(loan.getGst());
+					double legalCharge = Double.parseDouble(loan.getLegalCharges());
+					double extraCharges = processingFee + gst + legalCharge;
+					double updatedBalance = existingBalance + (loanAmount - extraCharges);
+					double sanctionedAmount = loanAmount - extraCharges;
+
+					account.setBalance(String.valueOf(updatedBalance)); // update the balance
+
+					createSavingRepo.save(account); // save changes
+					
+					// Step 2: Approve the loan
+					
+					loan.setApprovalStatus(approval.isApprovalStatus());
+					loan.setApprovalDate(approval.getApprovalDate());
+					loan.setSanctionedAmount(String.valueOf(sanctionedAmount));
+					loanApplicationRepo.save(loan);
+
+				}
+
+				
+				return "success";
+			} else {
+				return "not_found";
 			}
-
-			// Step 1: Approve the loan
-			loan.setApprovalStatus(approval.isApprovalStatus());
-			loan.setApprovalDate(approval.getApprovalDate());
-			loanApplicationRepo.save(loan);
-
-			// Step 2: Add loan amount to openingFees in CreateSavingsAccount
-			List<CreateSavingsAccount> accounts = createSavingRepo.findBySelectByCustomer(loan.getMemberId());
-
-			if (accounts != null && !accounts.isEmpty()) {
-				CreateSavingsAccount account = accounts.get(0); // assuming one account per member
-				double existingBalance = Double.parseDouble(account.getBalance()); // current amount like 3000
-				System.out.println("Balance fees :" + existingBalance);
-				double loanAmount = Double.parseDouble(loan.getLoanAmount()); // loan amount like 500000
-				double processingFee = Double.parseDouble(loan.getProcessingFee());
-				double gst = Double.parseDouble(loan.getGst());
-				double legalCharge = Double.parseDouble(loan.getLegalCharges());
-				double extraCharges = processingFee + gst + legalCharge;
-				double updatedBalance = existingBalance + (loanAmount - extraCharges);
-
-				account.setBalance(String.valueOf(updatedBalance)); // update the balance
-
-				createSavingRepo.save(account); // save changes
-			}
-
-			return "success";
-		} else {
-			return "not_found";
 		}
-	}
 
 	// Service for getting Approved loan Ids( Vaibhav)
 	public List<String> getApprovedLoanIds() {
@@ -356,4 +361,6 @@ public class LoanManagementService {
 
 		return loanPaymentRepo.findByLoanId(loanId);
 	}
+
+	
 }

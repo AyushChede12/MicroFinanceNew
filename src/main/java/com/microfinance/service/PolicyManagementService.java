@@ -135,11 +135,9 @@ public class PolicyManagementService {
 			existing.setRateOfInterest(updatedData.getRateOfInterest());
 			existing.setInstallmentType(updatedData.getInstallmentType());
 			existing.setPlanNameDD(updatedData.getPlanNameDD());
-			existing.setDuration(updatedData.getDuration()); // Fixed here
 			existing.setCommissionOnNew(updatedData.getCommissionOnNew());
 			existing.setRenewalCommission(updatedData.getRenewalCommission());
 			existing.setDdterm(updatedData.getDdterm());
-			existing.setTermModeDD(updatedData.getTermModeDD());
 			existing.setInterestInterval(updatedData.getInterestInterval());
 			existing.setTotalPaid(updatedData.getTotalPaid());
 			existing.setMaturityAmount(updatedData.getMaturityAmount());
@@ -181,8 +179,6 @@ public class PolicyManagementService {
 			existing.setMinimumAmountRD(updatedData.getMinimumAmountRD());
 			existing.setRateOfInterestRD(updatedData.getRateOfInterestRD());
 			existing.setInstallmentTypeRD(updatedData.getInstallmentTypeRD());
-			existing.setDurationRD(updatedData.getDurationRD());
-			existing.setTermMode(updatedData.getTermMode());
 			existing.setRdterm(updatedData.getRdterm());
 			existing.setCommissionOnNewRD(updatedData.getCommissionOnNewRD());
 			existing.setRenewalCommissionRD(updatedData.getRenewalCommissionRD());
@@ -191,7 +187,7 @@ public class PolicyManagementService {
 			existing.setMaturityAmountRD(updatedData.getMaturityAmountRD());
 			existing.setFlexiblePlanRD(updatedData.getFlexiblePlanRD());
 			existing.setGraceDaysRD(updatedData.getGraceDaysRD());
-			existing.setPenltyfineRD(updatedData.getPenltyfineRD());
+			existing.setPenaltyfineRD(updatedData.getPenaltyfineRD());
 			existing.setStatusOfPlanRD(updatedData.getStatusOfPlanRD());
 
 			// Save updated object
@@ -230,9 +226,7 @@ public class PolicyManagementService {
 			existing.setPlanNameFD(updatedData.getPlanNameFD());
 			existing.setMinimumAmountFD(updatedData.getMinimumAmountFD());
 			existing.setRateOfInterestFD(updatedData.getRateOfInterestFD());
-			existing.setTermModeFD(updatedData.getTermModeFD());
 			existing.setFdterm(updatedData.getFdterm());
-			existing.setDurationFD(updatedData.getDurationFD());
 			existing.setInstallmentTypeFD(updatedData.getInstallmentTypeFD());
 			existing.setCommissionOnNewFD(updatedData.getCommissionOnNewFD());
 			existing.setComponentIntervalFD(updatedData.getComponentIntervalFD());
@@ -275,11 +269,9 @@ public class PolicyManagementService {
 			existing.setPlanCodeMD(updatedData.getPlanCodeMD());
 			existing.setPlanNameMD(updatedData.getPlanNameMD());
 			existing.setRateOfInterestMD(updatedData.getRateOfInterestMD());
-			existing.setDurationMD(updatedData.getDurationMD());
 			existing.setInstallmentTypeMD(updatedData.getInstallmentTypeMD());
 			existing.setMinimumAmountMD(updatedData.getMinimumAmountMD());
 			existing.setMaturityROIMD(updatedData.getMaturityROIMD());
-			existing.setTermModeMD(updatedData.getTermModeMD());
 			existing.setMisTerm(updatedData.getMisTerm());
 			existing.setMISIntROIMD(updatedData.getMISIntROIMD());
 			existing.setMISIntervalMD(updatedData.getMISIntervalMD());

@@ -1,5 +1,7 @@
 package com.microfinance.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,18 +9,23 @@ import javax.persistence.Id;
 
 @Entity
 public class IncomingReceiptEntry {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	private String branchName;
-    private String generatedReceiptID; 
-    private String dateOfEntry;
-    private String ledgerAccount;
-    private String transferMode;
+	private String ReceiptID;
+	private String dateOfEntry;
+	private String creditLedger;
+	private String debitLedger;
+	private String transferMode;
+	private LocalDate chequeDate;
+	private String chequeNo;
+	private String bankName;
+	private String transactionRef;
     private String transactionAmount;
-    private String remarks;
+	private String remarks;
 	
 	public long getId() {
 		return id;
@@ -32,11 +39,11 @@ public class IncomingReceiptEntry {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	public String getGeneratedReceiptID() {
-		return generatedReceiptID;
+	public String getReceiptID() {
+		return ReceiptID;
 	}
-	public void setGeneratedReceiptID(String generatedReceiptID) {
-		this.generatedReceiptID = generatedReceiptID;
+	public void setReceiptID(String receiptID) {
+		ReceiptID = receiptID;
 	}
 	public String getDateOfEntry() {
 		return dateOfEntry;
@@ -44,19 +51,47 @@ public class IncomingReceiptEntry {
 	public void setDateOfEntry(String dateOfEntry) {
 		this.dateOfEntry = dateOfEntry;
 	}
-	
-	
-	public String getLedgerAccount() {
-		return ledgerAccount;
+	public String getCreditLedger() {
+		return creditLedger;
 	}
-	public void setLedgerAccount(String ledgerAccount) {
-		this.ledgerAccount = ledgerAccount;
+	public void setCreditLedger(String creditLedger) {
+		this.creditLedger = creditLedger;
+	}
+	public String getDebitLedger() {
+		return debitLedger;
+	}
+	public void setDebitLedger(String debitLedger) {
+		this.debitLedger = debitLedger;
 	}
 	public String getTransferMode() {
 		return transferMode;
 	}
 	public void setTransferMode(String transferMode) {
 		this.transferMode = transferMode;
+	}
+	public LocalDate getChequeDate() {
+		return chequeDate;
+	}
+	public void setChequeDate(LocalDate chequeDate) {
+		this.chequeDate = chequeDate;
+	}
+	public String getChequeNo() {
+		return chequeNo;
+	}
+	public void setChequeNo(String chequeNo) {
+		this.chequeNo = chequeNo;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+	public String getTransactionRef() {
+		return transactionRef;
+	}
+	public void setTransactionRef(String transactionRef) {
+		this.transactionRef = transactionRef;
 	}
 	public String getTransactionAmount() {
 		return transactionAmount;
@@ -70,7 +105,7 @@ public class IncomingReceiptEntry {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-	
+
 	
 
 }
