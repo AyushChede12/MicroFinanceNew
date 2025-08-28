@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
 	$('#plantype').on('change', function () {
 	        let plantype = $(this).val();
@@ -141,8 +140,119 @@ $(document).ready(function () {
 				        alert("Failed to load team members.");
 				    }
 				});
+				//Save
+				/*$("#formid").submit(function (event) {
+					    event.preventDefault();
+				 
+						  const selectedCode = $('#userApprover').val(); // Will give "TM0001"
+						  const selectedText = $('#userApprover option:selected').text(); // Will give "TM0001 - Ashwini Rajurkar"
+						    
+						  let teamMemberCode = selectedCode;
+						  let teamMemberName = selectedText.split(" - ")[1].trim();
+					
+						  console.log("Parsed Code:", teamMemberCode);
+						  console.log("Parsed Name:", teamMemberName);
+						  
+						 let newdeposit=calculateDepositAmount();
+
+					    var data = {
+					        policyCode: $("#policyCode").val(),
+					        planCode: $("#planCode").val(),
+					        maturityDate: $("#maturityDate").val(),
+					        customerName: $("#customerName").val(),
+					        policyName: $("#policyName").val(),
+					        duration: $("#duration").val(),
+					        policyAmount: $("#policyAmount").val(),
+					        maturityAmount: $("#maturityAmount").val(),
+					        sysPayable: $("#sysPayable").val(),
+					        deduction: $("#deduction").val(),
+					        netPayable: $("#netPayable").val(),
+					        approveBranch: $("#Approvebranch").val(),
+					        teamMemberCode: teamMemberCode,
+					        teamMemberName: teamMemberName,
+					        amount: $("#amount").val(),
+					        depositAmount: newdeposit,
+							panelty:$("#panelty").val(),
+					        dueAmount: $("#dueAmount").val(),
+					        paymentDate: $("#paymentDate").val(),
+					        branchName: $("#branchName").val(),
+					        payComment: $("#payComment").val(),
+					        modeofPayment: $("#modeofPayment").val()
+					    };
+
+						$.ajax({
+						    url: "/api/Maturitymanagement/savePartialmaturity",
+						    type: "POST",
+						    contentType: "application/json",
+						    data: JSON.stringify(data),
+						    success: function(response) {
+						      alert(response.status === "OK"
+						        ? "Saved: " + response.message
+						        : "Failed: " + response.message
+						      );
+						      if (response.status === "OK"){
+								updateAddNewInvestmentAmount(data);
+								 $("#formid")[0].reset();
+									 
+							 }
+							
+						    },
+						    error: function(xhr, status, error) {
+						      console.error("Save error:", error, xhr.responseText);
+						      alert("Something went wrong while saving the data.");
+						    }
+						  });
+					});	*/	
 				
 });
+
+/*function calculateDepositAmount(){
+	let amount = parseFloat($('#amount').val()) || 0;
+	let paidAmount = parseFloat($('#depositAmount').val()) || 0;
+	let deposit=0;
+	
+	if (!isNaN(amount) && !isNaN(paidAmount)) {
+		    deposit = amount + paidAmount;
+		    alert("depositAmount " + deposit);
+		}
+		return deposit;
+	
+}
+
+
+function updateAddNewInvestmentAmount(data)
+{
+	
+	let policyCode = $("#policyCode").val();
+	let depositamount =  calculateDepositAmount(data);
+
+	   
+	    if (!policyCode || !depositAmount) {
+	        alert("Please enter both Policy Code and Deposit Amount.");
+	        return;
+	    }
+	let details = {
+	        policyCode: policyCode,
+	        depositAmount: depositamount
+	    };
+
+	    
+	    $.ajax({
+	        url: "/api/Policymangment/updateinvestment",  
+	        type: "POST",
+	        contentType: "application/json",
+	        data: JSON.stringify(details),
+	        success: function (response) {
+	            alert("Update successful!");
+	            console.log("Updated record:", response);
+	        },
+	        error: function (xhr, status, error) {
+	            console.error("Update failed:", error);
+	            alert("Failed to update installment details.");
+	        }
+	    });
+}
+*/
 
 //calculate duration
 function calDuration(data){
