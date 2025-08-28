@@ -51,6 +51,11 @@ public class ReportsAndAnalyticsService {
 		// TODO Auto-generated method stub
 		return loanPaymentRepo.findAll();
 	}
+
+	public List<LoanApplication> getLoanConfirmationDocument() {
+		// TODO Auto-generated method stub
+		return loanApplicationRepo.findAll();
+	}
 	
 
 }
