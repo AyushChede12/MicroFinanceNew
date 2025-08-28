@@ -1,3 +1,4 @@
+
 package com.microfinance.service;
 
 import java.math.BigDecimal;
@@ -125,7 +126,7 @@ public class AccountManagementService {
 			List.of("CASH", "BANK", "LOAN", "MEMBER"), "LIABILITIES", List.of("LOAN", "MEMBER", "SHARE"), "INCOME",
 			List.of("SHARE", "MEMBER", "BANK"), "EQUITY", List.of("SHARE", "MEMBER"), "EXPENSES",
 			List.of("CASH", "BANK", "MEMBER"));
-	
+
 	private boolean isValidCombination(String group, String type) {
 		if (group == null || type == null)
 			return false;
