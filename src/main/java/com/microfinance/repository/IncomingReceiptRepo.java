@@ -11,10 +11,7 @@ public interface IncomingReceiptRepo extends JpaRepository<IncomingReceiptEntry,
 	
     List<IncomingReceiptEntry> findByBranchNameAndDateOfEntryBetween(String branchName, String startDate, String endDate);
 
-	boolean existsByBranchNameIgnoreCaseAndLedgerAccountIgnoreCaseAndDateOfEntryAndTransactionAmountAndTransferModeIgnoreCaseAndRemarksIgnoreCase(
-			String branchName, String ledgerAccount, String dateOfEntry, String transactionAmount, String transferMode,
-			String remarks);
-
+	
 	
 
 }

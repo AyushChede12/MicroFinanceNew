@@ -10,14 +10,7 @@ public interface OutgoingPaymentRepo extends JpaRepository<OutgoingPaymentEntry,
 	
 	List<OutgoingPaymentEntry> findByBranchNameAndDateOfEntryBetween(String branchName, String startDate, String endDate);
 	
-	boolean existsByBranchNameIgnoreCaseAndLedgerAccountIgnoreCaseAndDateOfEntryAndTransactionAmountAndTransferModeIgnoreCaseAndRemarksIgnoreCase(
-		    String branchName,
-		    String ledgerAccount,
-		    String dateOfEntry,
-		    String transactionAmount,
-		    String transferMode,
-		    String remarks
-		);
+	
 
 
 
