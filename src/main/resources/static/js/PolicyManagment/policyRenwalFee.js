@@ -55,7 +55,7 @@ $(document).ready(function () {
 						$("#totalDeposit").val(data.depositAmount);
 						$("#paymentDue").val(data.amountDue);
 						$("#financialCode").val(data.introMCode);
-						$("#lastPaymentDate").val(data.lastInstPaid);
+						$("#lastInstPaid").val(data.lastInstPaid);
 						$("#dueDate").val(data.maturityDate);
 						$("#noOfInstPaid").val(data.lastInstPaid);
 						$("#installmentsCompleted").val(data.lastInstPaid);
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
         // Send to backend
         $.ajax({
-            url: "/api/Policymangment/updateDueAndInstallment",
+            url: "api/Policymangment/updateDueAndInstallment",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
     function fetchApprovedPolicies() {
         $.ajax({
-            url: '/api/Policymangment/getApprovedPolicies',
+            url: 'api/Policymangment/getApprovedPolicies',
             method: 'GET',
             success: function (response) {
                 if (response.status === 'OK' && Array.isArray(response.data)) {
@@ -152,7 +152,7 @@ function toggleTransaction() {
     return;
   }
 
-  fetch(`/api/Policymangment/getPolicyByPolicyCode?policyCode=${policyCode}`)
+  fetch(`api/Policymangment/getPolicyByPolicyCode?policyCode=${policyCode}`)
     .then(response => {
       if (!response.ok) {
         throw new Error("Policy not found");

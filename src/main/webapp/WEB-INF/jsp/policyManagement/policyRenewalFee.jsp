@@ -4,6 +4,7 @@ pageEncoding="ISO-8859-1"%> -->
 <html>
 
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/ae73087723.js"
@@ -204,9 +205,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mt-4">
-									<label for="">Last Payment Date *</label> <input type="text"
-										name="lastPaymentDate" id="lastPaymentDate"
-										required="required" placeholder="Enter Last Payment Date" />
+									<label for="">Last Installment Pay *</label> <input type="text"
+										name="lastInstPaid" id="lastInstPaid" required="required"
+										placeholder="Enter Last Payment Date" />
 								</div>
 							</div>
 
@@ -258,8 +259,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="row" style="margin-left: 80%;">
 					<div class="col-12 text-center">
-						<button id="viewBtn" type="button" class="btn btn-primary">View
-							Installment</button>
+						<!-- Trigger button -->
+						<button id="viewBtn" type="button" class="btn btn-primary"
+							data-toggle="modal" data-target="#installmentModal">
+							View Installment</button>
 						<button id="saveBtn" type="button" class="btn btn-info">Save</button>
 					</div>
 				</div>
@@ -272,6 +275,66 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+
+	<!-- MODAL FOR VIEW INSTALLMENT -->
+	<div class="modal fade" id="installmentModal" tabindex="-1"
+		role="dialog" aria-labelledby="installmentModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered"
+			role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-primary text-white">
+					<h5 class="modal-title" id="installmentModalLabel">Installment
+						Details</h5>
+					<button type="button" class="close text-white" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<div class="modal-body">
+					<div class="table-responsive">
+						<table class="table table-bordered table-hover text-center">
+							<thead class="thead-dark">
+								<tr>
+									<th>Installment No</th>
+									<th>Due Date</th>
+									<th>Amount</th>
+									<th>Status</th>
+									<th>Payment Date</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Example static data -->
+								<tr>
+									<td>1</td>
+									<td>2025-09-10</td>
+									<td>&#8377;5,000</td>
+									<!-- Rupee symbol as entity -->
+									<td>Paid</td>
+									<td>2025-09-11</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>2025-10-10</td>
+									<td>&#8377;5,000</td>
+									<!-- Rupee symbol as entity -->
+									<td>Pending</td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
