@@ -24,7 +24,25 @@ $(document).ready(function() {
 		BankCashLedgerDropdown(selectedBranch);
 	});
 });
+function showTableData() {
+	const tableBody = $("#tableBody");
+	const toggleBtn = $("#toggleBtn");
 
+	if (tableBody.children().length === 0) {
+		// No data loaded yet — load and show
+		loadBankCashTransferData();
+		toggleBtn.html('Hide');
+	} else {
+		// Data exists — toggle visibility
+		if (tableBody.is(":visible")) {
+			tableBody.hide();
+			toggleBtn.html('Show');
+		} else {
+			tableBody.show();
+			toggleBtn.html('Hide');
+		}
+	}
+}
 
 
 
@@ -88,7 +106,7 @@ function saveBankCashTransfer() {
 
 	$.ajax({
 		type: "POST",
-		url: "/accountManagement/createBankCashTransfer",
+		url: "accountManagement/createBankCashTransfer",
 		contentType: "application/json",
 		data: JSON.stringify(bankData),
 		success: function(response) {
@@ -117,7 +135,7 @@ function saveBankCashTransfer() {
 function loadBankCashTransferData() {
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/allBankCashTransfer",
+		url: "accountManagement/allBankCashTransfer",
 		contentType: "application/json",
 		success: function(response) {
 			const list = response.data || [];
@@ -160,7 +178,7 @@ function loadBankCashTransferData() {
 function viewBankCashTransfer(id) {
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/bankCashTransfer/${id}`,
+		url: `accountManagement/bankCashTransfer/${id}`,
 		contentType: "application/json",
 		success: function(response) {
 			const data = response.data;
@@ -174,7 +192,7 @@ function viewBankCashTransfer(id) {
 
 
 
-			$("#voucherID").val(data.voucherID || '');
+			$("#voucherID").val(data.voucherID);
 			$("#transferMode").val(data.transferMode);
 			$("#dateOfEntry").val(data.dateOfEntry);
 			$("#transactionAmount").val(data.transactionAmount);
@@ -209,7 +227,7 @@ function searchBankCashTransfers() {
 
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/searchBankCashTransfer",
+		url: "accountManagement/searchBankCashTransfer",
 		data: { branchName, startDate, endDate },
 		contentType: "application/json",
 		success: function(response) {
@@ -226,13 +244,14 @@ function searchBankCashTransfers() {
 				                    <tr>
 									<td>${entry.id || ''}</td>
 									<td>${entry.branchName || ''}</td>
+									<td>${entry.voucherID || ''}</td>
 									<td>${entry.dateOfEntry || ''}</td>
-									<td>${entry.transferMode || ''}</td>
 									<td>${entry.creditLedger || ''}</td>
 									<td>${entry.debitLedger || ''}</td>
+									<td>${entry.transferMode || ''}</td>
 									<td>${entry.transactionAmount || ''}</td>
 									<td>${entry.remarks || ''}</td>
-									<td>${entry.voucherID || ''}</td>
+									
 										<td>
 																	<button class="iconbutton" onclick="viewBankCashTransfer(${entry.id})" title="View">
 																		<i class="fa-solid fa-eye text-primary"></i>
@@ -254,7 +273,7 @@ function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/api/preference/getAllBranchModule',
+		url: 'api/preference/getAllBranchModule',
 		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
 			// The actual branch array is inside response.data
@@ -280,7 +299,7 @@ function BankCashLedgerDropdown(branchName, selectedCr = "", selectedDr = "") {
 
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/ledgerByBranch/${branchName}`,
+		url: `accountManagement/ledgerByBranch/${branchName}`,
 		contentType: "application/json",
 		success: function(data) {
 			const ledgers = data.data || [];
