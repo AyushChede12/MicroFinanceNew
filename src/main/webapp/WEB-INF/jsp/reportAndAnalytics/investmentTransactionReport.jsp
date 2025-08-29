@@ -33,6 +33,16 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- In <head> -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Before </body> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
 
 
@@ -46,7 +56,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Investment Transaction Report</li>
+					<li class="breadcrumb-item action">Investment Transaction
+						Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -62,65 +73,27 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px;">
-								<label for="">Plan Name </label> <select id="planName"
-									name="planName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Plan Name</option>
-									<option value="Home">Home</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px;">
-								<label for="">Plan Code </label> <select id="planCode"
-									name="planCode" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Plan Code</option>
-									<option value="1001">1001</option>
-								</select>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px;">
-								<label for="">Biz Type </label> <select id="bizType"
-									name="bizType" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Biz Type</option>
-									<option value="aaa">aaa</option>
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch Name </label> <select id="branchName1"
+									name="branchName" required="required"
+									class="form-control selectField" >
+									<option value="">Select</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">From Date :</label> <input type="date"
-									name="fDate" id="fDate" required="required"
-									placeholder="Enter fDate" style="text-transform: uppercase;" />
+								<label for="fromDate">From Date :</label> <input type="date"
+									name="fromDate" id="fromDate" required="required"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">TO Date :</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
+								<label for="toDate">TO Date :</label> <input type="date"
+									name="toDate" id="toDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -156,34 +129,22 @@ pageEncoding="ISO-8859-1"%> -->
 								<table class="table table-borderless datatable">
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">Sr No.</th>
+											<th scope="col">Policy Code</th>
+											<th scope="col">Customer Name</th>
+											<th scope="col">Policy Name</th>
+											<th scope="col">Policy Date</th>
+											<th scope="col">Policy Amount</th>
+											<th scope="col">Contact Number</th>
 											<th scope="col">Branch</th>
-											<th scope="col">Txn Date</th>
-											<th scope="col">Policy No.</th>
-											<th scope="col">Applicant Name</th>
-											<th scope="col">Member Code</th>
-											<th scope="col">INO</th>
-											<th scope="col">Advisor Code</th>
-											<th scope="col">Biz Amount</th>
-											<th scope="col">bizType</th>
-											<th scope="col">Plan Code</th>
-											<th scope="col">Plan Name</th>
+											<th scope="col">Approved</th>
+											<th scope="col">Print</th>
+
 										</tr>
 									</thead>
 									<tbody>
-										<tr style="font-family: 'Poppins', sans-serif;">
-											<td>Umrer</td>
-											<td>13-05-2025</td>
-											<td>pk001</td>
-											<td>Poonam</td>
-											<td>Moo1</td>
-											<td>aaa</td>
-											<td>A001</td>
-											<td>500</td>
-											<td>a</td>
-											<td>P001</td>
-											<td>HomeLoan</td>
-										</tr>
 									</tbody>
+
 								</table>
 							</div>
 						</div>
@@ -194,9 +155,35 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="printModalLabel">Policy Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalDataContainer">
+        <!-- Policy details will be populated here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="printBtn" class="btn btn-primary">Print</button>
+        <button type="button" id="downloadBtn" class="btn btn-success">Download PDF</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/InvestmentTransactionReport.js"></script>
 </body>
 
 </html>

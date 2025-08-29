@@ -355,11 +355,11 @@ public class PageController {
 		return "jointLiabilityLoan/statementOfAccount";
 	}
 
-	@GetMapping("/earlyLoanClosure")
+	@GetMapping("/earlyLoanClosureJointLiability")
 	public String getEarlyLoanClosure() {
 		return "jointLiabilityLoan/earlyLoanClosure";
 	}
-
+	
 	@GetMapping("/completedLoansRecord")
 	public String getClosedLoanDetails() {
 		return "jointLiabilityLoan/completedLoansRecord";
@@ -807,9 +807,9 @@ public class PageController {
 		return "maturityManagement/applyForMaturity";
 	}
 
-	@GetMapping("/fullMaturityPayment")
+	@GetMapping("/partialPaymentStatusMaturityApplication")
 	public String getullMaturityPayment() {
-		return "maturityManagement/fullMaturityPayment";
+		return "maturityManagement/partialMaturityStatus";
 	}
 
 	@GetMapping("/partialMaturityPayment")
@@ -832,9 +832,9 @@ public class PageController {
 		return "maturityManagement/fullPaymentStatus";
 	}
 	
-	@GetMapping("/partialPaymentStatusMaturityApplication")
+	@GetMapping("/fullMaturityPayment")
 	public String getPartialPaymentStatusMaturityApplication() {
-		return "maturityManagement/partialPaymentStatus";
+		return "maturityManagement/fullMaturity";
 	}
 
 	@GetMapping("/maturityReceiptPrint")
@@ -891,6 +891,11 @@ public class PageController {
 		return "loanManagement/irregularLoanStatement";
 	}
 	
+	@GetMapping("/earlyLoanClosureLoan")
+	public String getEarlyLoanClosureLoan() {
+		return "loanManagement/earlyLoanClosure";
+	}
+	
 	@GetMapping("/preSettlementLoanManagement")
 	public String getPreSettlementLoanSection() {
 		return "loanManagement/preSettlement";
@@ -904,6 +909,11 @@ public class PageController {
 	@GetMapping("/generateNOCCertificateLoanManagement")
 	public String getGenerateNOCCertificateLoanManagement() {
 		return "loanManagement/generateNOCCertificate";
+	}
+	
+	@GetMapping("/loanDocumentPrintLoanManagement")
+	public String getloanDocumentPrintSection() {
+		return "loanManagement/loanDocumentPrint";
 	}
 	
 	@GetMapping("/searchLoanAccounts")

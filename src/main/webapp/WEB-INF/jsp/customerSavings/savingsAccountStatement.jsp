@@ -23,6 +23,7 @@ pageEncoding="ISO-8859-1"%> -->
         crossorigin="anonymous"></script>
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="./css/admin.css" />
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <jsp:include page="../sidebar.jsp"></jsp:include>
     <jsp:include page="../header.jsp"></jsp:include>
 </head>
@@ -55,35 +56,19 @@ pageEncoding="ISO-8859-1"%> -->
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="d-flex flex-column formFields mb-4">
-                                <label for="">Select Account Number</label> <select id="colour" name="colour"
+                                <label for="">Select Account Number</label> <select id="accountNumber" name="accountNumber"
                                     required="required" class="form-control selectField" style="height: 30px;">
-                                    <option value=""> Select Colour</option>
-                                    <option value="Blue">Blue</option>
+                                    <option value=""> Select</option>
                                 </select>
                             </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="d-flex flex-column formFields">
-                                <label for="vehicalNo">From Date</label>
-                                <input type="date" name="vehicalNo" id="vehicalNo" required="required"
-                                    placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="d-flex flex-column formFields">
-                                <label for="vehicalNo">To Date</label>
-                                <input type="date" name="vehicalNo" id="vehicalNo" required="required"
-                                    placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
-                            </div>
-                        </div>
+                        </div>                                               
                     </div>
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <button id="saveBtn" class="btn btn-warning" style="margin-left: 80%;">Search</button>
+                     <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <button id="searchByAccNo" class="btn btn-warning" style="margin-left: 80%;">Search</button>
                         </div>
-                    </div>
+                     </div>
+                   
                 </div>
 
                 <div class="row mt-5">
@@ -94,6 +79,89 @@ pageEncoding="ISO-8859-1"%> -->
                                 <h5 class="card-title">
                                     Search Result <span>| Today</span>
                                 </h5>
+                                <div class="form-div" id="form-div" style="margin-top: 20px;">
+											<div class="form-header">
+												<h2 style="color: red; margin-top: 0px;">BHOYARNATH
+													URBAN</h2>
+												<p style="margin-top: -10px">Kolkata - WEST BENGAL
+													700107</p>
+											</div>
+											<div class="form-div-main" style="padding: 5px;">
+												<div
+													style="display: flex; text-align: center; justify-item: center; width: 100%; border-bottom: 2px solid black; padding-bottom: 10px;">
+													<h4 style="margin: auto;">NEW RECEIPT</h4>
+												</div>
+
+												<div style="width: 55%; float: left; padding-top: 20px;">
+													<p style="font-weight: 600;">
+														Account No : <span id="accountNoDisplay"></span>
+													</p>
+													<p style="font-weight: 600;">
+														A/C Holder Name : <span id="memberName"></span>
+													</p>
+													<p style="font-weight: 600;">
+														Relative Name/Relation : <span id="relativeDetails"></span>
+													</p>
+													<p style="font-weight: 600;">
+														Address :<span id="address"></span>
+													</p>
+												</div>
+
+
+												<div style="width: 43%; float: right; padding-top: 20px;+">
+													<!-- <p style="font-weight: 600;">Print Date : <span></span></p> -->
+													<p style="font-weight: 600;">
+														Op. Date : <span id="opDate"></span>
+													</p>
+													<p style="font-weight: 600;">
+														Member Code : <span id="selectMember"></span>
+													</p>
+													<!-- <p style="font-weight: 600;">
+														PAN : <span id="pan"></span>
+													</p> -->
+													<p style="font-weight: 600;">
+														Mode of op. : <span id="modeOfOp"></span>
+													</p>
+													<p style="font-weight: 600;">
+														Op. Branch : <span id="BranchName"></span>
+													</p>
+
+
+													<!-- <p style="font-weight: 600;">Consideration Amount : 36500</p> -->
+													<!-- <p style="font-weight: 600;">Transaction Date : 22/11/2024</p> -->
+													<!-- <p style="font-weight: 600;">Maturity Date : 21/11/2025</p> -->
+												</div>
+												<div
+													style="width: 200px; height: 150px; display: flex; flex-direction: column; text-align: center; font-weight: 600;">
+													<div
+														style="width: 800%; height: 40px; border-bottom: 2px solid black;">
+													</div>
+
+
+												</div>
+												<div class="box-body">
+													<div class="clearfix margin-bottom-10"
+														style="margin-top: -50px;"></div>												
+													<table class="table table-borderless datatable overflow-scroll">
+									<thead class="table-light">
+										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">Account No.</th>
+											<th scope="col">Txn Date</th>
+											<th scope="col">Deposit/Withdrawal</th>
+											<th scope="col">Balance</th>
+											<th scope="col">Paymode</th>
+											<th scope="col">Branch</th>
+											<th scope="col">Remarks</th>																			
+										</tr>
+									</thead>
+									<tbody id="tableSavingAcc">
+
+									</tbody>
+								</table>
+												</div>
+											</div>
+
+										</div>
 
                                 <table class="table table-borderless datatable overflow-scroll">
                                     
@@ -110,6 +178,7 @@ pageEncoding="ISO-8859-1"%> -->
     </main>
     <!-- <script src="js/chartScript.js"></script> -->
     <script src="./js/adminscript.js"></script>
+     <script src="./js/customerSavings/savingsAccountStatement.js"></script>
 </body>
 
 </html>

@@ -1,32 +1,13 @@
 $(document).ready(function() {
 
-	//Without Search in Dropdown
-	/*$.ajax({
-		url: "api/financialconsultant/getAllCustomerCodes",
-		type: "POST",
-		success: function(response) {
-			if (response.status === "FOUND") {
-				$("#customerCode").empty().append("<option value=''>-- Select Code --</option>");
-				response.data.forEach(function(item) {
-					$("#customerCode").append(<option value='${item.memberCode}'>${item.memberCode}-${item.customerName}</option>);
-				});
-			} else {
-				alert("No customer codes found.");
-			}
-		},
-		error: function() {
-			alert("Failed to load customer codes.");
-		}
-	}); */
-
 	//With Search in Dropdown
 	$.ajax({
 		url: 'api/customermanagement/approved',
 		type: 'GET',
 		success: function(response) {
-			// response is a direct array of addCustomer
-			if (Array.isArray(response) && response.length > 0) {
-				let customerOptions = response.map(function(item) {
+			// Check if response has data array inside `data`
+			if (response && response.data && Array.isArray(response.data) && response.data.length > 0) {
+				let customerOptions = response.data.map(function(item) {
 					return {
 						id: item.memberCode,
 						text: item.memberCode + " - " + item.customerName
@@ -49,12 +30,11 @@ $(document).ready(function() {
 				alert("No approved customers found.");
 			}
 		},
-		error: function() {
+		error: function(xhr, status, error) {
+			console.error("Error fetching customers:", error);
 			alert("Failed to load customer codes.");
 		}
 	});
-
-
 
 	$("#customerCode").change(function() {
 		let customerCode = $("#customerCode").val();
@@ -196,10 +176,15 @@ $(document).ready(function() {
 
 	$('#updateBtn').click(async function(event) {
 		event.preventDefault();
+		const customerCode = $('#customerCode').val();
+		if (!customerCode) {
+			alert("First select the data, then proceed to update.");
+			return;
+		}
 		var customerData = new FormData();
 		var id = $('#id').val();
 		customerData.append("id", id);
-		customerData.append("memberCode", $('#customerCode').val());
+		customerData.append("memberCode", customerCode);
 		customerData.append("signupDate", $('#signupDate').val());
 		customerData.append("major", $('#major').val());
 		customerData.append("customerName", $('#customerName').val());

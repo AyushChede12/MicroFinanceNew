@@ -15,6 +15,7 @@ public class LoanApplication {
 	private String loanId;
     private String loanDate;
     private String memberId;
+    private String memberName;
     private String relativeDetails;
     private String dateOfBirth;
     private String age;
@@ -73,6 +74,7 @@ public class LoanApplication {
     private String remarks;
     private String chequeDate;
     private String chequeNo;
+    private String sanctionedAmount;
     
     
     
@@ -99,6 +101,13 @@ public class LoanApplication {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public String getRelativeDetails() {
 		return relativeDetails;
@@ -406,6 +415,12 @@ public class LoanApplication {
 	}
 	public void setChequeNo(String chequeNo) {
 		this.chequeNo = chequeNo;
+	}
+	public String getSanctionedAmount() {
+		return sanctionedAmount;
+	}
+	public void setSanctionedAmount(String sanctionedAmount) {
+		this.sanctionedAmount = sanctionedAmount;
 	}
 	
 	

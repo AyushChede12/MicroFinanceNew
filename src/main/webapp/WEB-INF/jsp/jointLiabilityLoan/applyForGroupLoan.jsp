@@ -110,6 +110,13 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+								<label for="communityName">Community Address*</label> <input
+									type="text" name="communityaddress" id="communityaddress" required
+									placeholder="Enter Community Name" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
 								<label for="allocatedStaff">Allocated Staff*</label> <input
 									type="text" name="allocatedStaff" id="allocatedStaff" required
 									placeholder="Enter Allocated Staff" />
@@ -136,6 +143,16 @@ pageEncoding="ISO-8859-1"%> -->
 									required placeholder="Enter Community Leader" />
 							</div>
 						</div>
+
+
+						<div class="col-lg-3 ">
+							<div class="d-flex flex-column formFields">
+								<label>Community Address*</label> <input type="text"
+									id="communityAddress" name="communityAddress"
+									class="form-control" required placeholder="Enter Address" />
+							</div>
+						</div>
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="contactNumber">Contact Number*</label> <input
@@ -170,12 +187,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="communityLeader">loan Scheme Name*</label> <input
-									type="text" name="loanSchemeName" id="loanSchemeName"
-									required placeholder="Enter Community Leader" />
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanSchemeInformation"> Loan Scheme
+									Information </label> <input type="text" name="loanSchemeInformation"
+									id="loanSchemeInformation" required
+									placeholder="Enter Loan Scheme" />
 							</div>
 						</div>
+						
+
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="processingFee">Processing Fee (%)*</label> <input
@@ -252,42 +272,57 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minLoanDurationMonths">Term * </label> <input
-									type="text" name="Term"
-									id="Term" required placeholder="Enter Term" />
+
+									type="text" name="Term" id="Term" required
+									placeholder="Enter Term" />
+
+
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="minLoanDurationMonths">Total Amount* </label> <input
-									type="text" name="totalAmount"
-									id="totalAmount" required placeholder="Enter Term" />
+								<label for="totalAmount">Total Amount* </label> <input
+									type="text" name="totalAmount" id="totalAmount"
+									placeholder="Enter Total Amount" /> <small
+									id="totalAmountError" class="text-danger d-none"></small>
 							</div>
 						</div>
+						<!-- Hidden fields to store min/max loan limits (you can fill them dynamically) -->
+						<input type="hidden" id="minLoanAmt" name="minLoanAmt" > <input
+							type="hidden" id="maximumLoanAmount" name="maximumLoanAmount" >
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="interestType">Interest Type*</label> <select
+								<label for="interestType">Interest Type*</label>
+								<input type="text" name="interestType"
+									   id="interestType" required placeholder= "Enter Term" />
+								 <!-- <select
 									name="interestType" id="interestType" required
 									class="form-control selectField" style="height: 30px;">
 
 									<option value="">-- Select Interest Type --</option>
-									<option value="flatInterest">Flat Interest</option>
-									<option value="reducingInterest">Reducing Interest</option>
-									<option value="Rule78">Rule 78</option>
+									<option value="Flat Interest">Flat Interest</option>
+									<option value="Reducing Interest">Reducing Interest</option>
+									<option value="Rule 78">Rule 78</option>
 
-								</select>
+								</select> -->
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="emiType">EMI mode*</label><select name="emiType"
+								<label for="emiType">EMI mode*</label>
+								<input type="text" name="emiType"
+									   id="emiType" required placeholder= "Enter Term" />
+								<!-- <select name="emiType"
 									id="emiType" required class="form-control selectField">
 									<option value="">-- Select EMI Mode --</option>
-									<option value="daily">Daily</option>
-									<option value="weekly">Weekly</option>
-									<option value="monthly">Monthly</option>
-									<option value="fortnightly">Fortnightly</option>
-									<option value="quarterly">Quarterly</option>
-								</select>
+									<option value="Daily">Daily</option>
+									<option value="Weekly">Weekly</option>
+									<option value="Monthly">Monthly</option>
+									<option value="Fortnightly">Fortnightly</option>
+									<option value="Quarterly">Quarterly</option>
+								</select> -->
 
 							</div>
 						</div>
@@ -355,6 +390,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/ApplyForGroupLoan.js"></script>
+
 </body>
 
 </html>

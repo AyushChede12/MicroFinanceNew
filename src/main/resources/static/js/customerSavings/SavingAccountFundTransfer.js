@@ -1,4 +1,4 @@
-//janvi : Customer name list fetch
+//janvi : Customer Account no. list fetch
 $(document).ready(function() {
     $.ajax({
         url: "/api/reports/getApprovedSavingAccount",
@@ -43,7 +43,7 @@ $('#debitAccountNumber').on('change', function () {
                     let customer = response.data[0];
                     $('#debitCustomerCode').val(customer.selectByCustomer);
 					$('#debitAccountBranch').val(customer.branchName);
-					$('#debitAverageBalance').val(customer.openingAmount);
+					$('#debitAverageBalance').val(customer.balance);
 					$('#debitContactNumber').val(customer.contactNumber);
                 } else {
                     alert('No data found!');
@@ -73,7 +73,7 @@ $('#creditAccountNumber').on('change', function () {
                     let customer = response.data[0];
                     $('#creditCustomerCode').val(customer.selectByCustomer);
 					$('#creditAccountBranch').val(customer.branchName);
-					$('#creditAverageBalance').val(customer.openingAmount);
+					$('#creditAverageBalance').val(customer.balance);
 					$('#creditContactNumber').val(customer.contactNumber);
                 } else {
                     alert('No data found!');
@@ -90,88 +90,6 @@ $('#creditAccountNumber').on('change', function () {
     }
 });
 
-/*$(document).ready(function () {
-    $('#saveBtn').click(function (e) {
-        e.preventDefault();
-
-        let debitAccountNo = $('#debitAccountNo').val();
-        let creditAccountNo = $('#creditAccountNo').val();
-        let amount = $('#amount').val();
-
-        $.ajax({
-            url: '/api/customersavings/transferAmount',
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                debitAccountNo: debitAccountNo,
-                creditAccountNo: creditAccountNo,
-                amount: amount
-            }),
-            success: function (response) {
-                alert(response.message); // Transfer successful message
-                // Optionally, reload balances on the page
-                location.reload();
-            },
-            error: function (xhr, status, error) {
-                alert('Transfer failed: ' + xhr.responseText);
-            }
-        });
-    });
-});
-*/
-
-/*$(document).ready(function () {
-    $('#saveBtn').click(function (e) {
-        e.preventDefault();
-
-        let debitAccountNo = $('#debitAccountNumber').val();
-        let creditAccountNo = $('#creditAccountNumber').val();
-        let amount = $('#amount').val();
-
-        console.log('debitAccountNo:', debitAccountNo);
-        console.log('creditAccountNo:', creditAccountNo);
-        console.log('amount:', amount);
-
-        $.ajax({
-            url: '/api/customersavings/transferAmount',
-            type: 'POST',
-            data: {
-                debitAccountNo: debitAccountNo,
-                creditAccountNo: creditAccountNo,
-                amount: amount
-            },
-            success: function (response) {
-                alert(response.message);
-                location.reload();
-            },
-            error: function (xhr, status, error) {
-                alert('Transfer failed: ' + xhr.responseText);
-            }
-        });
-        
-   
-    event.preventDefault();
-    const accountData = {
-            debitAccountNumber: $('#debitAccountNumber').val(),
-            debitCustomerCode: $('#debitCustomerCode').val(),
-            debitAccountBranch: $('#debitAccountBranch').val(),
-            debitAverageBalance: $('#debitAverageBalance').val(),
-            debitContactNumber: $('#debitContactNumber').val(),
-            creditAccountNumber: $('#creditAccountNumber').val(),
-            creditCustomerCode: $('#creditCustomerCode').val(),
-            creditAccountBranch: $('#creditAccountBranch').val(),
-            creditAverageBalance: $('#creditAverageBalance').val(),
-            transferDate:  $('#transferDate').val(),
-            amount: $('#amount').val(),
-            comment: $('#comment').val()
-            
-            
-        };
-        
-    });
-});
-*/
-
 $(document).ready(function () {
     $('#saveBtn').click(function (e) {
         e.preventDefault();
@@ -186,6 +104,7 @@ $(document).ready(function () {
             creditCustomerCode: $('#creditCustomerCode').val(),
             creditAccountBranch: $('#creditAccountBranch').val(),
             creditAverageBalance: $('#creditAverageBalance').val(),
+            creditAverageBalance: $('#creditContactNumber').val(),
             transferDate: $('#transferDate').val(),
             amount: $('#amount').val(),
             comment: $('#comment').val()

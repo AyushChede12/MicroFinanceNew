@@ -110,7 +110,7 @@
           <li>
             <a href="customerBalanceReport">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Customer Balance Report</span>
+              <span style="font-family: 'Poppins', sans-serif">Balance Sheet</span>
             </a>
           </li>
           
@@ -652,14 +652,14 @@
           </li>
           
           <li>
-            <a href="model">
+            <a href="loanDocumentPrintLoanManagement">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Generate Loan Documents</span>
             </a>
           </li>
           
           <li>
-            <a href="earlyLoanClosure">
+            <a href="earlyLoanClosureLoan">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Early Loan Closure</span>
             </a>
@@ -751,7 +751,7 @@
           </li>
           
           <li>
-            <a href="earlyLoanClosure">
+            <a href="earlyLoanClosureJointLiability">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Early Loan Closure</span>
             </a>
@@ -836,13 +836,6 @@
           </li>
           
           <li>
-            <a href="approveRecurring">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Approve Recurring Deposits</span>
-            </a>
-          </li>
-          
-          <li>
             <a href="approveSaving">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Approve Saving Transactions</span>
@@ -883,14 +876,7 @@
               <span style="font-family: 'Poppins', sans-serif">Approve Maturity Applications</span>
             </a>
           </li>
-          
-          <li>
-            <a href="deleteMaturityApp">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Delete Maturity Application Request</span>
-            </a>
-          </li>
-          
+         
           <li>
             <a href="approveInterBranchCashTransfer">
               <i class="bi bi-circle"></i>
@@ -1020,11 +1006,26 @@
           </li>
           
           <li>
+            <a href="maturityApplicationStatus">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Maturity Application Status</span>
+            </a>
+          </li>
+          
+          <li>
             <a href="fullMaturityPayment">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Full Maturity Payment</span>
             </a>
           </li>
+          
+           <li>
+            <a href="fullPaymentStatus">
+              <i class="bi bi-circle"></i>
+              <span style="font-family: 'Poppins', sans-serif">Full Payment Status</span>
+            </a>
+          </li>
+          
           
           <li>
             <a href="partialMaturityPayment">
@@ -1033,12 +1034,13 @@
             </a>
           </li>
           
-          <li>
-            <a href="maturityApplicationStatus">
+           <li>
+            <a href="partialPaymentStatusMaturityApplication">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Maturity Application Status</span>
+              <span style="font-family: 'Poppins', sans-serif">Partial Payment Status</span>
             </a>
           </li>
+          
           
           <li>
             <a href="approvedStatusMaturityManagement">
@@ -1047,20 +1049,8 @@
             </a>
           </li>
           
-          <li>
-            <a href="fullPaymentStatus">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Full Payment Status</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="partialPaymentStatusMaturityApplication">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Partial Payment Status</span>
-            </a>
-          </li>
-          
+         
+         
           <li>
             <a href="maturityReceiptPrint">
               <i class="bi bi-circle"></i>
@@ -1275,12 +1265,12 @@
             </a>
           </li>
           
-          <li>
+          <!-- <li>
             <a href="unApprovedLoanApplications">
               <i class="bi bi-circle"></i>
               <span style="font-family: 'Poppins', sans-serif">Unapproved Loan Applications</span>
             </a>
-          </li>
+          </li> -->
           
           <li>
             <a href="approvedLoanReport">

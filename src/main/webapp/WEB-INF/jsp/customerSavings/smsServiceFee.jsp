@@ -21,7 +21,8 @@ pageEncoding="ISO-8859-1"%> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <title>Admin Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <title> Dashboard</title>
     <link rel="stylesheet" href="./css/admin.css" />
     <jsp:include page="../sidebar.jsp"></jsp:include>
     <jsp:include page="../header.jsp"></jsp:include>
@@ -58,8 +59,7 @@ pageEncoding="ISO-8859-1"%> -->
                             <div class="d-flex flex-column formFields mb-4">
                                 <label for="">By Date</label> <select id="colour" name="colour"
                                     required="required" class="form-control selectField" style="height: 30px;">
-                                    <option value=""> Select Colour</option>
-                                    <option value="Blue">Blue</option>
+                                    <option value=""> Select</option>
                                 </select>
                             </div>
                         </div>
@@ -81,8 +81,21 @@ pageEncoding="ISO-8859-1"%> -->
               </h5>
 
               <table class="table table-borderless datatable overflow-scroll">
-                
-              </table>
+							<thead class="table-light">
+								<tr style="font-family: 'Poppins', sans-serif;">
+								    <th></th>
+									<th scope="col">Sr. No.</th>
+									<th scope="col">Account Number</th>
+									<th scope="col">Opening Date</th>
+									<th scope="col">Balance</th>
+									<th scope="col">SMS Status</th>									
+									<th scope="col">Apply</th>
+								</tr>
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
             </div>
           </div>
         </div>
@@ -95,6 +108,12 @@ pageEncoding="ISO-8859-1"%> -->
     </main>
     <!-- <script src="js/chartScript.js"></script> -->
     <script src="./js/adminscript.js"></script>
+    <script src="./js/customerSavings/SMSServiceFee.js"></script>
+    <script>
+    $(document).ready(function(){
+    	searchInThemessageSend();
+    });
+    </script>
 </body>
 
 </html>

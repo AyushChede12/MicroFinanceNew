@@ -110,13 +110,7 @@ pageEncoding="ISO-8859-1"%> -->
 										id="term" required placeholder="Enter Term" />
 								</div>
 							</div>
-							<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mb-4">
-									<label for="minLoanDurationMonths">Total Amount* </label> <input
-										type="text" name="totalAmount"
-										id="totalAmount" required placeholder="Enter totalAmount" />
-								</div>
-							</div>
+							
 
 							<div class="col-lg-3 ">
 								<div class="d-flex flex-column formFields">
@@ -141,7 +135,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
-									<label for="minLoanAmount"> Min Loan Amt* </label> <input
+									<label for="minLoanAmount"> Minimum Loan Amount* </label> <input
 										type="text" name="minLoanAmt" id="minLoanAmt" required
 										placeholder="Enter Amount" />
 								</div>
@@ -153,7 +147,7 @@ pageEncoding="ISO-8859-1"%> -->
 										required placeholder="Enter Max Loan" />
 								</div>
 							</div>
-
+							
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields mb-4">
 									<label for="rateOfInterest"> Rate of Interest (% p.a.)*
@@ -168,9 +162,9 @@ pageEncoding="ISO-8859-1"%> -->
 										name="interestType" id="interestType" required class="form-control selectField" style="height: 30px;">
 										
 										<option value="">-- Select Interest Type --</option>
-										<option value="flatInterest">Flat Interest</option>
-										<option value="reducingInterest">Reducing Interest</option>
-										<option value="Rule78">Rule 78</option>
+										<option value="Flat Interest">Flat Interest</option>
+										<option value="Reducing Interest">Reducing Interest</option>
+										<option value="Rule 78">Rule 78</option>
 										
 									</select>
 								</div>
@@ -191,11 +185,11 @@ pageEncoding="ISO-8859-1"%> -->
 									<label for="emiType">EMI mode*</label><select name="emiType"
 										id="emiType" required class="form-control selectField" style="height: 30px;">
 										<option value="">-- Select EMI Mode --</option>
-										<option value="daily">Daily</option>
-										<option value="weekly">Weekly</option>
-										<option value="monthly">Monthly</option>
-										<option value="fortnightly">Fortnightly</option>
-										<option value="quarterly">Quarterly</option>
+										<option value="Daily">Daily</option>
+										<option value="Weekly">Weekly</option>
+										<option value="Monthly">Monthly</option>
+										<option value="Fortnightly">Fortnightly</option>
+										<option value="Quarterly">Quarterly</option>
 									</select>
 
 								</div>

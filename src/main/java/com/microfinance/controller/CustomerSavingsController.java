@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.ExecutiveFounderDto;
+import com.microfinance.dto.FinancialConsultantDto;
 import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CreateSavingsAccount;
@@ -34,6 +36,7 @@ import com.microfinance.repository.SavingAccountFundTransferRepo;
 import com.microfinance.model.addCustomer;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.model.savingAccountFundTransfer;
+import com.microfinance.model.savingsAccountCloser;
 import com.microfinance.service.CustomerSavingsService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,8 +56,10 @@ public class CustomerSavingsController {
 	@Autowired
 	CustomerSavingsService customersaving;
 	
-	
-	  @Autowired CreateSavingAccountRepo createSavingAccountRepo;
+	  
+	 
+	  @Autowired 
+	  CreateSavingAccountRepo createSavingAccountRepo;
 	  
 	  @Autowired
 	  CreateSavingAccountRepo creSavingAccountRepo;
@@ -100,7 +105,7 @@ public class CustomerSavingsController {
   	}
   	
   	//fetching saving scheme catalog data
-  	@GetMapping("/fetchsavingchemecatalog")
+  /*	@GetMapping("/fetchsavingchemecatalog")
   	public ApiResponse<List<SavingSchemeCatalog>> findBySchemeType() {
   		List<SavingSchemeCatalog>  list = customersaving.findBySchemeType();
   		if(list!=null && !list.isEmpty()) {
@@ -108,7 +113,17 @@ public class CustomerSavingsController {
   		}else
   			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
   		
+  	}*/
+  	@GetMapping("/fetchsavingchemecatalog")
+  	public ApiResponse<List<String>> findBySchemeType() {
+  	    List<String> list = customersaving.findBySchemeType();
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successful", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "No Data Found");
+  	    }
   	}
+
   	
   	// find saving scheme catalog by id
   	 @GetMapping("/getSavingSchemeCatalogById")
@@ -308,7 +323,7 @@ public class CustomerSavingsController {
     @PostMapping("/updateaveragebalance")
     public ResponseEntity<ApiResponse<String>> updateAverageBalance(@RequestBody CreateSavingsAccount createSavingsAccount) {
         String accountNumber = createSavingsAccount.getAccountNumber();
-        String newBalance = createSavingsAccount.getOpeningAmount();
+        String newBalance = createSavingsAccount.getBalance();
 
         boolean isUpdated = customersaving.updateAverageBalance(accountNumber, newBalance);
 
@@ -446,8 +461,8 @@ public class CustomerSavingsController {
             CreateSavingsAccount creditAccount = createSavingAccountRepo.findByAccountNumber(creditAccountNo)
                     .orElseThrow(() -> new RuntimeException("Credit account not found"));
 
-            double debitBalance = Double.parseDouble(debitAccount.getOpeningAmount());
-            double creditBalance = Double.parseDouble(creditAccount.getOpeningAmount());
+            double debitBalance = Double.parseDouble(debitAccount.getBalance());
+            double creditBalance = Double.parseDouble(creditAccount.getBalance());
 
             if (debitBalance < amount) {
                 Map<String, String> response = new HashMap<>();
@@ -456,8 +471,8 @@ public class CustomerSavingsController {
             }
 
             // Update balances
-            debitAccount.setOpeningAmount(String.valueOf(debitBalance - amount));
-            creditAccount.setOpeningAmount(String.valueOf(creditBalance + amount));
+            debitAccount.setBalance(String.valueOf(debitBalance - amount));
+            creditAccount.setBalance(String.valueOf(creditBalance + amount));
 
             // Save updated accounts
             createSavingAccountRepo.save(debitAccount);
@@ -521,5 +536,56 @@ public class CustomerSavingsController {
 		else
 			return ResponseEntity.badRequest().body("Failure");
 	}*/
-	
+    
+    //janvi : Save Saving Acc Closer Data
+   /* @PostMapping("/saveAccountCloseInfo")	
+	public ResponseEntity<savingsAccountCloser> saveAccountCloseInfo(@RequestBody savingsAccountCloser accountCloser) {
+	    // 1. Save the account close record
+	    savingsAccountCloser savedAccCloseEntry = customersaving.saveAccountCloseInfo(accountCloser);	 
+	   
+	    return new ResponseEntity<>(savedAccCloseEntry, HttpStatus.CREATED);
+	}*/
+    
+    @PostMapping("/saveAccountCloseInfo")	
+    public ResponseEntity<savingsAccountCloser> saveAccountCloseInfo(@RequestBody savingsAccountCloser accountCloser) {
+        // 1. Save to savingsAccountCloser table
+        savingsAccountCloser savedEntry = customersaving.saveAccountCloseInfo(accountCloser);
+
+        // 2. Fetch the CreateSavingsAccount using Optional
+        Optional<CreateSavingsAccount> optionalAccount = createSavingAccountRepo.findByAccountNumber(accountCloser.getAccountNumber());
+
+        // 3. Delete if present
+        if (optionalAccount.isPresent()) {
+            createSavingAccountRepo.delete(optionalAccount.get());
+        } else {
+            // Optional: log or notify that account was not found for deletion
+            System.out.println("No CreateSavingsAccount found for account number: " + accountCloser.getAccountNumber());
+        }
+
+        // 4. Return the saved entry
+        return new ResponseEntity<>(savedEntry, HttpStatus.CREATED);
+    }
+    
+
+
+
+    
+  //Janvi : Fetch Data whose sms charges enabled
+  	@PostMapping("/getSavingAccountDataSMSEnable")
+      public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> fetchSavingAccountDataSMSEnable() {
+          List<CreateSavingsAccount> list = customersaving.fetchSavingAccountDataSMSEnable();
+          ApiResponse<List<CreateSavingsAccount>> response = ApiResponse.success(
+              HttpStatus.OK, 
+              "Unapproved Saving Transaction fetched successfully", 
+              list
+          );
+          return new ResponseEntity<>(response, HttpStatus.OK);
+      }
+  	
+  	@PostMapping("/deduct-sms-charges")
+    public double deductSmsCharges(@RequestBody CreateSavingsAccount account) {
+        return customersaving.calculateBalanceAfterSmsCharges(account);
+    }
+    
+
 }

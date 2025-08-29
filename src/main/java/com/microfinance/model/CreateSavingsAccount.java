@@ -29,10 +29,13 @@ public class CreateSavingsAccount {
 	private String jointSurvivorCode;
 	private String familyRelation;
 	private String selectPlan;
-	private String openingAmount;
+	//private String openingAmount;
+	private String balance; 
 	private String financialConsultantCode;
 	private String financialConsultantName;
 	private String openingFees;
+	private String emailId;
+	private String aadharNo;
 	private String authenticateWith;
 	private String modeOfPayment;
 	private String comment;
@@ -41,6 +44,7 @@ public class CreateSavingsAccount {
 	private String debitCardIssue;
 	private String accountNumber;
 	private boolean isApproved;
+	private String isLocker;
 	
 	private String chequeNo;
     private String chequeDate;
@@ -184,11 +188,12 @@ public class CreateSavingsAccount {
 	public void setSelectPlan(String selectPlan) {
 		this.selectPlan = selectPlan;
 	}
-	public String getOpeningAmount() {
-		return openingAmount;
+	
+	public String getBalance() {
+		return balance;
 	}
-	public void setOpeningAmount(String openingAmount) {
-		this.openingAmount = openingAmount;
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 	public String getFinancialConsultantCode() {
 		return financialConsultantCode;
@@ -207,6 +212,19 @@ public class CreateSavingsAccount {
 	}
 	public void setOpeningFees(String openingFees) {
 		this.openingFees = openingFees;
+	}
+	
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getAadharNo() {
+		return aadharNo;
+	}
+	public void setAadharNo(String aadharNo) {
+		this.aadharNo = aadharNo;
 	}
 	public String getAuthenticateWith() {
 		return authenticateWith;
@@ -255,6 +273,13 @@ public class CreateSavingsAccount {
 	}
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+	
+	public String getIsLocker() {
+		return isLocker;
+	}
+	public void setIsLocker(String isLocker) {
+		this.isLocker = isLocker;
 	}
 	public String getPhoto() {
 		return photo;

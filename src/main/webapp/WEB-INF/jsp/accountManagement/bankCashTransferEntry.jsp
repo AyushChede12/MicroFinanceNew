@@ -64,9 +64,10 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="d-flex flex-column formFields">
-							<label for="">Branch Name</label> <select id="searchBranchName"
-								name="searchBranchName" required="required"
-								class="form-control selectField" style="height: 30px;">
+							<label for="">Branch Name <span class="star">*</span></label> <select
+								id="searchBranchName" name="searchBranchName"
+								required="required" class="form-control selectField"
+								style="height: 30px;">
 								<option value="">Select Branch</option>
 							</select>
 						</div>
@@ -74,17 +75,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="col-lg-4">
 						<div class="d-flex flex-column formFields">
-							<label for="vehicalNo">Start Date</label> <input type="date"
-								name="startDate" id="startDate" required="required"
-								style="text-transform: uppercase;" />
+							<label for="vehicalNo">Start Date <span class="star">*</span></label>
+							<input type="date" name="startDate" id="startDate"
+								required="required" style="text-transform: uppercase;" />
 						</div>
 					</div>
 
 					<div class="col-lg-4">
 						<div class="d-flex flex-column formFields">
-							<label for="vehicalNo">End Date</label> <input type="date"
-								name="endDate" id="endDate" required="required"
-								style="text-transform: uppercase;" />
+							<label for="vehicalNo">End Date <span class="star">*</span></label>
+							<input type="date" name="endDate" id="endDate"
+								required="required" style="text-transform: uppercase;" />
 						</div>
 					</div>
 				</div>
@@ -112,8 +113,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Branch Name</label> <select id="entryBranchName"
-							name="entryBranchName" required="required"
+						<label for="">Branch Name <span class="star">*</span></label> <select
+							id="entryBranchName" name="entryBranchName" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select Branch</option>
 						</select>
@@ -122,24 +123,24 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Generated Receipt ID</label> <input type="text"
-							name="genratedReceiptId" id="genratedReceiptId"
-							required="required" placeholder="Enter receipt no." disabled />
+						<label for="">Voucher ID <span class="star">*</span></label> <input
+							type="text" name="voucherID" id="voucherID" required="required"
+							placeholder="Enter receipt no." disabled />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Date of Entry</label> <input type="date"
-							name="dateOfEntry" id="dateOfEntry" required="required"
-							placeholder="Enter Registration Date" />
+						<label for="">Date of Entry <span class="star">*</span></label> <input
+							type="date" name="dateOfEntry" id="dateOfEntry"
+							required="required" placeholder="Enter Registration Date" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Choose Credit Ledger</label> <select
-							id="creditLedger" name="creditLedger" required="required"
+						<label for=""> Credit Ledger (Source)<span class="star">*</span></label>
+						<select id="creditLedger" name="creditLedger" required="required"
 							class="form-control selectField" style="height: 30px;">
 							<option value="">Select Cr. ledger</option>
 						</select>
@@ -148,19 +149,67 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Choose Debit Ledger</label> <select id="debitLedger"
-							name="debitLedger" required="required"
-							class="form-control selectField" style="height: 30px;">
+						<label for=""> Debit Ledger (Destination)<span
+							class="star">*</span></label> <select id="debitLedger" name="debitLedger"
+							required="required" class="form-control selectField"
+							style="height: 30px;">
 							<option value="">--Select Dr. Ledger--</option>
 						</select>
+					</div>
+				</div>
+				<div class="col-lg-3">
+					<div class="d-flex flex-column formFields">
+						<label for="">Transfer Mode <span class="star">*</span></label> <select
+							id="transferMode" name="transferMode"
+							class="form-control selectField" style="height: 30px;"
+							onchange="toggleTransferFields(this.value)">
+							<option value="">Select Transfer Mode</option>
+							<option value="Cash Deposit">Cash Deposit</option>
+							<option value="Cash Withdrawal">Cash Withdrawal</option>
+							<option value="Cheque">Cheque</option>
+							<option value="Online Transfer">Online Transfer</option>
+						</select>
+
+					</div>
+				</div>
+				<!-- Cheque Fields (hidden by default) -->
+				<div class="col-lg-3 chequeFields d-none">
+					<div class="d-flex flex-column formFields">
+						<label for="">Cheque No <span class="star">*</span></label> <input
+							type="text" name="chequeNo" id="chequeNo"
+							placeholder="Enter Cheque No" />
+					</div>
+				</div>
+
+				<div class="col-lg-3 chequeFields d-none">
+					<div class="d-flex flex-column formFields">
+						<label for="">Cheque Date <span class="star">*</span></label> <input
+							type="date" name="chequeDate" id="chequeDate" />
+					</div>
+				</div>
+
+				<div class="col-lg-3 chequeFields d-none">
+					<div class="d-flex flex-column formFields">
+						<label for="">Bank Name <span class="star">*</span></label> <input
+							type="text" name="bankName" id="bankName"
+							placeholder="Enter Bank Name" />
+					</div>
+				</div>
+
+				<!-- Online Transfer Field (hidden by default) -->
+				<div class="col-lg-3 onlineFields d-none">
+					<div class="d-flex flex-column formFields">
+						<label for="">Transaction Ref No <span class="star">*</span></label>
+						<input type="text" name="transactionRef" id="transactionRef"
+							placeholder="Enter Transaction Reference No" />
 					</div>
 				</div>
 
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Transaction Amount</label> <input type="text"
-							name="transactionAmount" id="transactionAmount"
+						<label for="">Transaction Amount <span class="star">*</span></label>
+						<input type="text" name="transactionAmount" id="transactionAmount"
 							required="required" placeholder="Enter Amount" />
 					</div>
 				</div>
@@ -174,9 +223,11 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 text-right mt-3">
+				<div class="col-12 text-center mt-3">
 					<button id="saveBtn" class="btnStyle"
 						style="background-color: #FFA500;">Save</button>
+					<button type="button" id="toggleBtn" class="btnStyle bg-primary"
+						onclick="showTableData()">Show</button>
 				</div>
 			</div>
 		</form>
@@ -195,9 +246,11 @@ pageEncoding="ISO-8859-1"%> -->
 								<tr style="font-family: 'Poppins', sans-serif;">
 									<th scope="col">ID.</th>
 									<th scope="col">Branch</th>
+									<th scope="col">Voucher ID</th>
 									<th scope="col">Date Of Entry</th>
-									<th scope="col">Cr. Ledger</th>
-									<th scope="col">Dr. Ledger</th>
+									<th scope="col">Cr.Ledger</th>
+									<th scope="col">Dr.Ledger</th>
+									<th scope="col">Mode</th>
 									<th scope="col">Transaction Amount</th>
 									<th scope="col">Remarks</th>
 									<th scope="col">View</th>
@@ -221,7 +274,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<script>
 		$(document).ready(function() {
 			BranchNameDropdown();
-			LedgerDropdown()
+			BankCashLedgerDropdown()
 		});
 	</script>
 </body>

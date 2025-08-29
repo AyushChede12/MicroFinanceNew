@@ -1,3 +1,4 @@
+
 <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
@@ -29,7 +30,9 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<title>Approve Recurring Deposits</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+<title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
@@ -40,13 +43,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Request Approval</h1>
+			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-check-circle"></i>
+							class="bi bi-calendar-check"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Approve Recurring Deposits</li>
+					<li class="breadcrumb-item action">Partial Maturity Status</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,74 +59,85 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Find Box</li>
+							<li class="breadcrumb-item action">Serach box</li>
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-3">
+
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="Branch" name="Branch"
+								<label for="">Branch <span id="star"> *</span></label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
+
 								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date From</label> <input type="date"
+								<label for="vehicalNo">From Date <span id="star"> *</span> :</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date"
+									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date To</label> <input type="date"
-									name="toDate" id="toDate" required="required"
-									placeholder="Enter To Date" style="text-transform: uppercase;" />
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4"
+								style="margin-bottom: 30px">
+								<label>To Date <span id="star"> *</span> :</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
+
+
+					</div>
+					<div class="row">
+						<div class="col-12 text-center">
+							<button id="searchBtn" class="btn btn-dark">Search</button>
+
+						</div>
+					</div>
+				</div>
+
+				<div class="row mt-5">
+					<div class="col-12">
+						<div class="card recent-sales">
+
+							<div class="card-body table-responsive">
+								<h5 class="card-title">
+									<center>Marurity Payment Report</center>
+									<span>|</span>
+								</h5>
+
+								<table class="table table-borderless datatable overflow-scroll" id="table">
+									<thead class="table-light">
+										<tr style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">Policy No.</th>
+	            						<th scope="col">Branch Name</th>
+	            						<th scope="col">Maturity Date</th>
+	           						  	<th scope="col">Customer Name</th>
+	            						<th scope="col">Scheme Name</th>
+	            						<th scope="col">Scheme Type</th>
+	            						<th scope="col">Policy Amount</th>
+	            						<th scope="col">Maturity Amount</th>
+	            						<th scope="col">Remark</th>
+										</tr>
+									</thead>
+									<tbody>
+
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
 				</div>
-		</div>
 
-		<div class="row">
-			<div class="col-12 text-center mt-3">
-				<button id="saveBtn" class="btnStyle"
-					style="background-color: #FFA500;">FIND</button>
-			</div>
-		</div>
-		</form>
+			</form>
 
-		<div class="row mt-5">
-			<div class="col-12">
-				<div class="card recent-sales">
-
-					<div class="card-body table-responsive">
-						<h5 class="card-title">Search result</h5>
-
-						<div style="overflow-x: auto; white-space: nowrap;">
-							<table class="table table-borderless datatable">
-								<thead class="table-light">
-									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">Sr No.</th>
-										<th scope="col">Id</th>
-										<th scope="col">Policy No</th>
-										<th scope="col">Branch Name</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		</div>
 
@@ -131,6 +145,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/fullmaturitypayment.js"></script>
+	
 </body>
 
 </html>

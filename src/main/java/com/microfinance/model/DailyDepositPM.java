@@ -7,11 +7,9 @@ import javax.persistence.Id;
 
 @Entity
 public class DailyDepositPM {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
-	
-
 	private Long id;
 	private String drd;
 	private String planCodeDD;
@@ -20,9 +18,7 @@ public class DailyDepositPM {
 	private String minimumDeposit;
 	private String rateOfInterest;
 	private String installmentType;
-	private String termModeDD;
 	private String ddterm;
-	private String duration;
 	private String commissionOnNew;
 	private String renewalCommission;
 	private String interestInterval;
@@ -32,18 +28,29 @@ public class DailyDepositPM {
 	private String graceDays;
 	private String  penaltyRate;
 	private String statusOfPlan;
-	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public String getDrd() {
+		return drd;
+	}
+	public void setDrd(String drd) {
+		this.drd = drd;
+	}
 	public String getPlanCodeDD() {
 		return planCodeDD;
 	}
 	public void setPlanCodeDD(String planCodeDD) {
 		this.planCodeDD = planCodeDD;
+	}
+	public String getPlanNameDD() {
+		return planNameDD;
+	}
+	public void setPlanNameDD(String planNameDD) {
+		this.planNameDD = planNameDD;
 	}
 	public String getMinimumDeposit() {
 		return minimumDeposit;
@@ -63,11 +70,11 @@ public class DailyDepositPM {
 	public void setInstallmentType(String installmentType) {
 		this.installmentType = installmentType;
 	}
-	public String getDuration() {
-		return duration;
+	public String getDdterm() {
+		return ddterm;
 	}
-	public void setDuration(String duration) {
-		this.duration = duration;
+	public void setDdterm(String ddterm) {
+		this.ddterm = ddterm;
 	}
 	public String getCommissionOnNew() {
 		return commissionOnNew;
@@ -123,34 +130,5 @@ public class DailyDepositPM {
 	public void setStatusOfPlan(String statusOfPlan) {
 		this.statusOfPlan = statusOfPlan;
 	}
-	public String getPlanNameDD() {
-		return planNameDD;
-	}
-	public void setPlanNameDD(String planNameDD) {
-		this.planNameDD = planNameDD;
-	}
-
-	public String getTermModeDD() {
-		return termModeDD;
-	}
-	public void setTermModeDD(String termModeDD) {
-		this.termModeDD = termModeDD;
-	}
-	
-	
-	public String getDrd() {
-		return drd;
-	}
-	public void setDrd(String drd) {
-		this.drd = drd;
-	}
-	public String getDdterm() {
-		return ddterm;
-	}
-	public void setDdterm(String ddterm) {
-		this.ddterm = ddterm;
-	}
-	
-
 	
 }
