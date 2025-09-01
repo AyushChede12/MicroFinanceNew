@@ -499,7 +499,7 @@
           <li>
             <a href="policyRenewalFee">
               <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Policy Renewal Fee</span>
+              <span style="font-family: 'Poppins', sans-serif">Recurring Premium Renewal</span>
             </a>
           </li>
           
