@@ -1074,7 +1074,67 @@ public class PageController {
 	}
 
 	
-
+//Secured Gold Loan by Poonam on 29/08/2025
+    @GetMapping("/applyforGold")
+    public String getapplyforGold()
+    {
+    	return "goldLoan/applyforGold";
+    }
+    
+    @GetMapping("/emiInstallmentPayment")
+    public String getemiInstallmentPayment()
+    {
+    	return "goldLoan/emiInstallmentPayment";
+    }
+    
+    @GetMapping("/emiStatement")
+    public String getemiStatement()
+    {
+    	return "goldLoan/emiStatement";
+    }
+    
+    @GetMapping("/goldDirectory")
+    public String getgoldDirectory()
+    {
+    	return "goldLoan/goldDirectory";
+    }
+    
+    @GetMapping("/goldLoanApproval")
+    public String getgoldLoanApproval()
+    {
+    	return "goldLoan/goldLoanApproval";
+    }
+    
+    @GetMapping("/goldLoanPayment")
+    public String getgoldLoanPayment()
+    {
+    	return "goldLoan/goldLoanPayment";
+    }
+    
+    @GetMapping("/goldLoanStatement")
+    public String getgoldLoanStatement()
+    {
+    	return "goldLoan/goldLoanStatement";
+    }
+    
+    @GetMapping("/goldSecurePlan")
+    public String getgoldSecurePlan()
+    {
+    	return "goldLoan/goldSecurePlan";
+    }
+    
+    @GetMapping("/printNOC")
+    public String getprintNOC()
+    {
+    	return "goldLoan/printNOC";
+    }
+    
+    @GetMapping("/searchGoldLoan")
+    public String getsearchGoldLoan()
+    {
+    	return "goldLoan/searchGoldLoan";
+    }
+    
 	
 
 }
