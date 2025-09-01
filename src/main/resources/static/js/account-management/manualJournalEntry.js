@@ -27,28 +27,8 @@ $(document).ready(function() {
 	});
 });
 
-// 🔹 Load Branch Dropdown
-function BranchNameDropdown() {
-	$.ajax({
-		type: "GET",
-		contentType: "application/json",
-		url: '/api/preference/getAllBranchModule',
-		success: function(response) {
-			let options = "<option value=''>Select Branch Name</option>";
-			// The actual branch array is inside response.data
-			if (response && Array.isArray(response.data)) {
-				response.data.forEach(branch => {
-					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
-				});
-			}
-			$("#searchBranchName").html(options);
-			$("#entryBranchName").html(options);
-		},
-		error: function() {
-			alert("Failed to load branch names.");
-		}
-	});
-}
+
+
 
 
 // 🔹 Load Ledgers for Manual Journal
@@ -57,7 +37,7 @@ function loadManualJournalLedgers(branchName) {
 
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/eligibleLedgersForManualJournal/${branchName}`,
+		url: `accountManagement/eligibleLedgersForManualJournal/${branchName}`,
 		contentType: "application/json",
 		success: function(response) {
 			const ledgers = response.data || [];
@@ -91,7 +71,7 @@ function saveManualJournal() {
 
 	$.ajax({
 		type: "POST",
-		url: "/accountManagement/createManualJournal",
+		url: "accountManagement/createManualJournal",
 		contentType: "application/json",
 		data: JSON.stringify(data),
 		success: function(response) {
@@ -123,7 +103,7 @@ function saveManualJournal() {
 function loadManualJournalData() {
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/allManualJournal",
+		url: "accountManagement/allManualJournal",
 		contentType: "application/json",
 		success: function(response) {
 			const list = response.data || [];
@@ -168,7 +148,7 @@ function loadManualJournalData() {
 function viewManualJournal(id) {
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/manualJournal/${id}`,
+		url: `accountManagement/manualJournal/${id}`,
 		contentType: "application/json",
 		success: function(response) {
 			const entry = response.data;
@@ -210,7 +190,7 @@ function searchManualJournal() {
 
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/searchManualJournal",
+		url: "accountManagement/searchManualJournal",
 		data: { branchName, startDate, endDate },
 		contentType: "application/json",
 		success: function(response) {
@@ -248,6 +228,28 @@ function searchManualJournal() {
 				if (res?.message) msg = res.message;
 			} catch (e) { }
 			alert(msg);
+		}
+	});
+}
+// 🔹 Load Branch Dropdown
+function BranchNameDropdown() {
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: 'api/preference/getAllBranchModule',
+		success: function(response) {
+			let options = "<option value=''>Select Branch Name</option>";
+			// The actual branch array is inside response.data
+			if (response && Array.isArray(response.data)) {
+				response.data.forEach(branch => {
+					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
+				});
+			}
+			$("#searchBranchName").html(options);
+			$("#entryBranchName").html(options);
+		},
+		error: function() {
+			alert("Failed to load branch names.");
 		}
 	});
 }
