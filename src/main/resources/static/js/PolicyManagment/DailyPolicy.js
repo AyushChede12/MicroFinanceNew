@@ -86,7 +86,7 @@ $(document).ready(function () {
 
         // Send to backend
         $.ajax({
-            url: "/api/Policymangment/updateDDDueAndInstallment",
+            url: "api/Policymangment/updateDDDueAndInstallment",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
