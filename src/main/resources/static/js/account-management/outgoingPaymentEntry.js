@@ -109,7 +109,7 @@ function saveOutgoingPayment() {
 
 	$.ajax({
 		type: "POST",
-		url: "/accountManagement/createOutgoingPayment",
+		url: "accountManagement/createOutgoingPayment",
 		contentType: "application/json",
 		data: JSON.stringify(paymentData),
 		success: function(response) {
@@ -139,7 +139,7 @@ function saveOutgoingPayment() {
 function loadOutgoingPaymentData() {
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/allOutgoingPayment",
+		url: "accountManagement/allOutgoingPayment",
 		contentType: "application/json",
 		success: function(response) {
 			const tbody = $("#tableBody");
@@ -183,7 +183,7 @@ function loadOutgoingPaymentData() {
 function viewOutgoingPayment(id) {
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/outgoingPayment/${id}`,
+		url: `accountManagement/outgoingPayment/${id}`,
 		contentType: "application/json",
 		success: function(response) {
 			const data = response.data;
@@ -229,7 +229,7 @@ function searchOutgoingPayments() {
 
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/search",
+		url: "accountManagement/search",
 		data: { branchName, startDate, endDate },
 		success: function(response) {
 			const tbody = $("#tableBody");
@@ -278,7 +278,7 @@ function LedgerDropdown(branchName, selectedCr = "", selectedDr = "") {
 	}
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/ledgerByBranch/${branchName}`,
+		url: `accountManagement/ledgerByBranch/${branchName}`,
 		contentType: "application/json",
 		success: function(data) {
 			const ledgers = data.data || [];
@@ -318,7 +318,7 @@ function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/api/preference/getAllBranchModule',
+		url: 'api/preference/getAllBranchModule',
 		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
 			if (response && Array.isArray(response.data)) {

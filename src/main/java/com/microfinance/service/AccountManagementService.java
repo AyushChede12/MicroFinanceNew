@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -121,21 +123,29 @@ public class AccountManagementService {
 		return mapToDto(saved);
 	}
 
-	// Minimal guardrail mapping
-//	private static final Map<String, List<String>> ALLOWED_COMBINATIONS = Map.of("ASSETS",
-//			List.of("CASH", "BANK", "LOAN", "MEMBER"), "LIABILITIES", List.of("LOAN", "MEMBER", "SHARE"), "INCOME",
-//			List.of("SHARE", "MEMBER", "BANK"), "EQUITY", List.of("SHARE", "MEMBER"), "EXPENSES",
-//			List.of("CASH", "BANK", "MEMBER"));
-//
-//	private boolean isValidCombination(String group, String type) {
-//		if (group == null || type == null)
-//			return false;
-//		group = group.trim().toUpperCase();
-//		type = type.trim().toUpperCase();
-//
-//		List<String> allowedTypes = ALLOWED_COMBINATIONS.getOrDefault(group, List.of());
-//		return allowedTypes.contains(type);
-//	}
+	 // Minimal guardrail mapping (Java 8 version)
+    private static final Map<String, List<String>> ALLOWED_COMBINATIONS;
+    static {
+        Map<String, List<String>> map = new HashMap<>();
+        map.put("ASSETS", Arrays.asList("CASH", "BANK", "LOAN", "MEMBER"));
+        map.put("LIABILITIES", Arrays.asList("LOAN", "MEMBER", "SHARE"));
+        map.put("INCOME", Arrays.asList("SHARE", "MEMBER", "BANK"));
+        map.put("EQUITY", Arrays.asList("SHARE", "MEMBER"));
+        map.put("EXPENSES", Arrays.asList("CASH", "BANK", "MEMBER"));
+        ALLOWED_COMBINATIONS = Collections.unmodifiableMap(map);
+    }
+
+    private boolean isValidCombination(String group, String type) {
+        if (group == null || type == null) {
+            return false;
+        }
+
+        group = group.trim().toUpperCase();
+        type = type.trim().toUpperCase();
+
+        List<String> allowedTypes = ALLOWED_COMBINATIONS.get(group);
+        return allowedTypes != null && allowedTypes.contains(type);
+    }
 
 	/**
 	 * Fetch all ledger accounts.
@@ -873,6 +883,10 @@ public class AccountManagementService {
 		entity.setCreditLedger(dto.getCreditLedger());
 		entity.setDebitLedger(dto.getDebitLedger());
 		entity.setTransferMode(dto.getTransferMode());
+		entity.setChequeDate(dto.getChequeDate());
+		entity.setChequeNo(dto.getChequeNo());
+		entity.setBankName(dto.getBankName());
+		entity.setTransactionRef(dto.getTransactionRef());
 		entity.setTransactionAmount(dto.getTransactionAmount());
 		entity.setRemarks(dto.getRemarks());
 		return entity;
@@ -886,7 +900,11 @@ public class AccountManagementService {
 		dto.setDateOfEntry(entity.getDateOfEntry());
 		dto.setCreditLedger(entity.getCreditLedger());
 		dto.setDebitLedger(entity.getDebitLedger());
-		dto.setTransferMode(dto.getTransferMode());
+		dto.setTransferMode(entity.getTransferMode());
+		dto.setChequeDate(entity.getChequeDate());
+		dto.setChequeNo(entity.getChequeNo());
+		dto.setBankName(entity.getBankName());
+		dto.setTransactionRef(entity.getTransactionRef());
 		dto.setTransactionAmount(entity.getTransactionAmount());
 		dto.setRemarks(entity.getRemarks());
 		return dto;
