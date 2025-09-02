@@ -249,31 +249,36 @@ function fetchTermBySchemeName() {
 	let dataParam = {};
 	let termField = "";
 	let interestRateField = "";
+	let planCodeField = "";
 
 	switch (schemeType) {
 		case "DRD":
-			apiUrl = "/api/Policymangment/ddterm";
+			apiUrl = "api/Policymangment/ddterm";
 			dataParam = { planNameDD: selectedSchemeName };
 			termField = "ddterm";
 			interestRateField = "rateOfInterest";
+			planCodeField = "planCodeDD";
 			break;
 		case "RD":
-			apiUrl = "/api/Policymangment/rdterm";
+			apiUrl = "api/Policymangment/rdterm";
 			dataParam = { planNameRD: selectedSchemeName };
 			termField = "rdterm";
 			interestRateField = "rateOfInterestRD";
+			planCodeField = "planCodeRD";
 			break;
 		case "FD":
-			apiUrl = "/api/Policymangment/fdterm";
+			apiUrl = "api/Policymangment/fdterm";
 			dataParam = { planNameFD: selectedSchemeName };
 			termField = "fdterm";
 			interestRateField = "rateOfInterestFD";
+			planCodeField = "planCodeFD";
 			break;
 		case "MIS":
-			apiUrl = "/api/Policymangment/misterm";
+			apiUrl = "api/Policymangment/misterm";
 			dataParam = { planNameMD: selectedSchemeName };
 			termField = "misterm";
 			interestRateField = "rateOfInterestMD";
+			planCodeField = "planCodeMD";
 			break;
 		default:
 			alert("Invalid scheme type selected.");
@@ -287,14 +292,16 @@ function fetchTermBySchemeName() {
 		dataType: "json",
 		success: function(response) {
 			let data = response.data || response;
-
 			if (data) {
 				// Set term and ROI
 				const term = data[termField] || "";
 				const roi = data[interestRateField] || "";
+				const hiddenSchemeCode = data[planCodeField] || "";
 
 				$("#schemeTerm").val(term);
 				$("#roi").val(roi);
+				$("#hiddenSchemeCode").val(hiddenSchemeCode);
+
 
 				// Update mode (e.g., Monthly/Yearly)
 				updateSchemeMode();
@@ -365,130 +372,138 @@ $(document).ready(function() {
 		calculateDepositAndMaturity();
 	});
 
-	function calculateDepositAndMaturity() {
-		const policyAmount = parseFloat($("#policyAmount").val()); // This is per-installment amount
-		const term = parseInt($("#schemeTerm").val());
-		const schemeMode = $("#schemeMode").val();
-		const roi = parseFloat($("#roi").val());
 
-		if (isNaN(policyAmount) || isNaN(term) || !schemeMode || isNaN(roi)) {
-			$("#depositAmount").val("");
-			$("#maturityAmount").val("");
-			return;
-		}
-
-		let installmentsPerYear = 0;
-
-		switch (schemeMode) {
-			case "Daily":
-				installmentsPerYear = 1;
-				break;
-			case "Monthly":
-				installmentsPerYear = 1;
-				break;
-			case "Quarterly":
-				installmentsPerYear = 4;
-				break;
-			case "Half-Yearly":
-				installmentsPerYear = 2;
-				break;
-			case "Yearly":
-				installmentsPerYear = 1;
-				break;
-			default:
-				alert("Unknown scheme mode selected.");
-				return;
-		}
-
-		const totalInstallments = installmentsPerYear * term;
-		const totalDepositAmount = policyAmount * totalInstallments;
-		const r = roi / 100;
-		const n = installmentsPerYear;
-		const t = term;
-
-		// Use Future Value of Ordinary Annuity Formula:
-		// M = P × [((1 + r/n)^(nt) - 1) / (r/n)]
-		const compoundRate = r / n;
-		const maturityAmount = policyAmount * ((Math.pow(1 + compoundRate, n * t) - 1) / compoundRate);
-
-		$("#depositAmount").val(totalDepositAmount.toFixed(2));
-		$("#maturityAmount").val(maturityAmount.toFixed(2));
-	}
 });
+
+function calculateDepositAndMaturity() {
+	const policyAmount = parseFloat($("#policyAmount").val()); // This is per-installment amount
+	const term = parseInt($("#schemeTerm").val());
+	const schemeMode = $("#schemeMode").val();
+	const roi = parseFloat($("#roi").val());
+
+	if (isNaN(policyAmount) || isNaN(term) || !schemeMode || isNaN(roi)) {
+		$("#depositAmount").val("");
+		$("#maturityAmount").val("");
+		return;
+	}
+
+	let installmentsPerYear = 0;
+
+	switch (schemeMode) {
+		case "Daily":
+			installmentsPerYear = 1;
+			break;
+		case "Monthly":
+			installmentsPerYear = 1;
+			break;
+		case "Quarterly":
+			installmentsPerYear = 4;
+			break;
+		case "Half-Yearly":
+			installmentsPerYear = 2;
+			break;
+		case "Yearly":
+			installmentsPerYear = 1;
+			break;
+		default:
+			alert("Unknown scheme mode selected.");
+			return;
+	}
+
+	const totalInstallments = installmentsPerYear * term;
+	const totalDepositAmount = policyAmount * totalInstallments;
+	const r = roi / 100;
+	const n = installmentsPerYear;
+	const t = term;
+
+	// Use Future Value of Ordinary Annuity Formula:
+	// M = P × [((1 + r/n)^(nt) - 1) / (r/n)]
+	const compoundRate = r / n;
+	const maturityAmount = policyAmount * ((Math.pow(1 + compoundRate, n * t) - 1) / compoundRate);
+
+	$("#depositAmount").val(totalDepositAmount.toFixed(2));
+	$("#maturityAmount").val(maturityAmount.toFixed(2));
+}
 
 $("#saveBtn").click(function(e) {
 	e.preventDefault();
 
 	const schemeType = $("#schemeType").val();
-
 	if (!schemeType) {
 		alert("Please select a Scheme Type first.");
 		return;
 	}
 
+	let imageSrc = $('#photoPreview').attr('src');
+	let imageName = imageSrc.split('/').pop(); // Extract the file name
+	$('#photoHidden').val(imageName);
+
+	// Ensure the hidden input is updated with the image file name
+	let imageSrc1 = $('#signaturePreview').attr('src');
+	let imageName1 = imageSrc1.split('/').pop(); // Extract the file name
+	$('#signatureHidden').val(imageName1);
+
 	// Step 1: Get next policy code from backend
 	$.ajax({
-		url: `api/Policymangment/getNextPolicyCode`,
+		url: "api/Policymangment/getNextPolicyCode",
 		type: "GET",
 		data: { schemeType: schemeType },
 		success: function(policyCode) {
-			$("#policyCode").val(policyCode); // ✅ Set in form
+			$("#policyCode").val(policyCode); // set code in hidden field
 
-			// Step 2: Gather form data
-			const policyAmount = parseFloat($("#policyAmount").val()) || 0;
-			const depositAmount = parseFloat($("#depositAmount").val()) || 0;
-			const paidAmount = parseFloat($("#policyAmount").val()) || 0;
-			const amountDue = depositAmount - policyAmount;
 
-			alert("Amount Due: ₹" + amountDue.toFixed(2)); // Optional for confirmation
-			const statusPlanValue = $('#toggle-sms-send').is(':checked') ? 1 : 0;
-			const formData = {
-				policyCode: policyCode,
-				policyStartDate: $("#policyStartDate").val(),
-				memberSelection: $("#selectCustomer").val(),
-				customerName: $("#customerName").val(),
-				dateofBirth: $("#dateofBirth").val(),
-				relationDetails: $("#relationDetails").val(),
-				contactNo: $("#contactNo").val(),
-				suggestedNominee: $("#suggestedNominee").val(),
-				ageOfNominee: $("#ageOfNominee").val(),
-				relation: $("#relation").val(),
-				address: $("#address").val(),
-				district: $("#district").val(),
-				state: $("#state").val(),
-				pinCode: $("#pinCode").val(),
-				tds: $("#tds").val(),
-				branchName: $("#branchName").val(),
-				modeOfOperation: $("#ModeOfOperation").val(),
-				jointName: $("#jointName").val(),
-				jointMemCode: $("#jointMemCode").val(),
-				schemeType: $("#schemeType").val(),
-				schemeTerm: $("#schemeTerm").val(),
-				schemeName: $("#schemeName").val(),
-				schemeMode: $("#schemeMode").val(),
-				roi: $("#roi").val(),
-				maturityDate: $("#maturityDate").val(),
-				policyAmount: $("#policyAmount").val(),
-				depositAmount: depositAmount.toFixed(2),   // ✅ correct deposit value
-				paidAmount: paidAmount.toFixed(2),         // ✅ paid amount
-				amountDue: amountDue.toFixed(2),           // ✅ calculated value
-				introMCode: $("#introMCode").val(),
-				maturityAmount: $("#maturityAmount").val(),
-				MISInterest: $("#MISInterest").val(),
-				paymentBy: $("#paymentBy").val(),
-				remark: $("#remark").val(),
-				agent: $("#Agent").val(),
-				smsSend: statusPlanValue,
 
-				lastInstPaid: 1
-			};
+			// Step 2: Prepare FormData (for multipart request)
+			let formData = new FormData();
+			formData.append("policyCode", policyCode);
+			formData.append("policyStartDate", $("#policyStartDate").val());
+			formData.append("memberSelection", $("#selectCustomer").val());
+			formData.append("customerName", $("#customerName").val());
+			formData.append("dateofBirth", $("#dateofBirth").val());
+			formData.append("relationDetails", $("#relationDetails").val());
+			formData.append("contactNo", $("#contactNo").val());
+			formData.append("suggestedNominee", $("#suggestedNominee").val());
+			formData.append("ageOfNominee", $("#ageOfNominee").val());
+			formData.append("relation", $("#relation").val());
+			formData.append("address", $("#address").val());
+			formData.append("district", $("#district").val());
+			formData.append("state", $("#state").val());
+			formData.append("pinCode", $("#pinCode").val());
+			formData.append("tds", $("#tds").val());
+			formData.append("branchName", $("#branchName").val());
+			formData.append("modeOfOperation", $("#ModeOfOperation").val());
+			formData.append("jointName", $("#jointName").val());
+			formData.append("jointMemCode", $("#jointMemCode").val());
+			formData.append("schemeType", $("#schemeType").val());
+			formData.append("schemeTerm", $("#schemeTerm").val());
+			formData.append("schemeName", $("#schemeName").val());
+			formData.append("schemeMode", $("#schemeMode").val());
+			formData.append("schemeCode", $("#hiddenSchemeCode").val());
+			formData.append("roi", $("#roi").val());
+			formData.append("maturityDate", $("#maturityDate").val());
+			formData.append("policyAmount", $("#policyAmount").val());
+			formData.append("depositAmount", $("#depositAmount").val());
+			formData.append("paidAmount", $("#policyAmount").val());
+			formData.append("amountDue", (parseFloat($("#depositAmount").val()) - parseFloat($("#policyAmount").val())).toFixed(2));
+			formData.append("introMCode", $("#introMCode").val());
+			formData.append("maturityAmount", $("#maturityAmount").val());
+			formData.append("MISInterest", $("#MISInterest").val());
+			formData.append("paymentBy", $("#paymentBy").val());
+			formData.append("remark", $("#remark").val());
+			formData.append("agent", $("#Agent").val());
+			formData.append("smsSend", $('#toggle-sms-send').is(':checked') ? "1" : "0");
+			formData.append("lastInstPaid", "1");
 
-			// Step 3: Save data to backend
+			formData.append("photo", $('#photoHidden').val());
+			formData.append("signature", $('#signatureHidden').val());
+
+			// Step 4: Send POST request with multipart/form-data
 			$.ajax({
-				url: "api/Policymangment/saveInvestment",
+				url: "api/Policymangment/saveandupdateAddInvestment",
 				type: "POST",
-				contentType: "application/json",
-				data: JSON.stringify(formData),
+				data: formData,
+				processData: false, // prevent automatic processing
+				contentType: false, // let browser set content type
 				success: function(response) {
 					alert("✅ " + response.message);
 					$("#formid")[0].reset();
@@ -503,6 +518,7 @@ $("#saveBtn").click(function(e) {
 		}
 	});
 });
+
 
 
 $(document).ready(function() {
@@ -538,7 +554,7 @@ $(document).ready(function() {
 });
 
 function photopreview() {
-	const file = document.getElementById("policyPhoto").files[0];
+	const file = document.getElementById("photo").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -559,7 +575,7 @@ function photopreview() {
 
 //Ayush
 function signpreview() {
-	const file = document.getElementById("policySignature").files[0];
+	const file = document.getElementById("signature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -578,7 +594,7 @@ function signpreview() {
 }
 
 function photoUpload() {
-	const file = document.getElementById("customerPhoto").files[0];
+	const file = document.getElementById("photo").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
@@ -595,7 +611,7 @@ function photoUpload() {
 
 //Ayush
 function signatureUpload() {
-	const file = document.getElementById("customerSignature").files[0];
+	const file = document.getElementById("signature").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
