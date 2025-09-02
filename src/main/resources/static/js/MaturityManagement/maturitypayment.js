@@ -1,3 +1,5 @@
+let lastInstall = 0; 
+
 $(document).ready(function () {
 	$('#plantype').on('change', function () {
 	        let plantype = $(this).val();
@@ -90,6 +92,10 @@ $(document).ready(function () {
 											$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
 										
 									});
+									let lastinstall = parseFloat(data.lastInstPaid) || 0;
+									lastInstall = lastinstall+1;   // save it globally
+									console.log("Saved Last Installment:", lastInstall);
+								
 
 			                } else {
 			                    alert("No data found for this policy.");
@@ -140,8 +146,10 @@ $(document).ready(function () {
 				        alert("Failed to load team members.");
 				    }
 				});
-				//Save
-				/*$("#formid").submit(function (event) {
+				
+				//Save full maturity data
+				$("#formid").submit(function (event) {
+					
 					    event.preventDefault();
 				 
 						  const selectedCode = $('#userApprover').val(); // Will give "TM0001"
@@ -153,7 +161,11 @@ $(document).ready(function () {
 						  console.log("Parsed Code:", teamMemberCode);
 						  console.log("Parsed Name:", teamMemberName);
 						  
-						 let newdeposit=calculateDepositAmount();
+						 
+						 let newdeposit=calculateDepositAmount(data);
+						 
+						 
+						 
 
 					    var data = {
 					        policyCode: $("#policyCode").val(),
@@ -172,16 +184,19 @@ $(document).ready(function () {
 					        teamMemberName: teamMemberName,
 					        amount: $("#amount").val(),
 					        depositAmount: newdeposit,
-							panelty:$("#panelty").val(),
+ 							installment: lastInstall, 							
+ 							panelty:$("#panelty").val(),
 					        dueAmount: $("#dueAmount").val(),
 					        paymentDate: $("#paymentDate").val(),
 					        branchName: $("#branchName").val(),
-					        payComment: $("#payComment").val(),
+					        payComment: $("#payRemark").val(),
 					        modeofPayment: $("#modeofPayment").val()
 					    };
-
+						
+						
+						
 						$.ajax({
-						    url: "/api/Maturitymanagement/savePartialmaturity",
+						    url: "/api/Maturitymanagement/saveFullmaturity",
 						    type: "POST",
 						    contentType: "application/json",
 						    data: JSON.stringify(data),
@@ -202,11 +217,13 @@ $(document).ready(function () {
 						      alert("Something went wrong while saving the data.");
 						    }
 						  });
-					});	*/	
+					});		
 				
 });
 
-/*function calculateDepositAmount(){
+
+//calculate depost amount
+function calculateDepositAmount(){
 	let amount = parseFloat($('#amount').val()) || 0;
 	let paidAmount = parseFloat($('#depositAmount').val()) || 0;
 	let deposit=0;
@@ -219,21 +236,22 @@ $(document).ready(function () {
 	
 }
 
-
+// update in addinvestment table
 function updateAddNewInvestmentAmount(data)
 {
 	
 	let policyCode = $("#policyCode").val();
-	let depositamount =  calculateDepositAmount(data);
-
-	   
+	let depositAmount =  calculateDepositAmount(data);
+	
+	
 	    if (!policyCode || !depositAmount) {
 	        alert("Please enter both Policy Code and Deposit Amount.");
 	        return;
 	    }
 	let details = {
 	        policyCode: policyCode,
-	        depositAmount: depositamount
+	        depositAmount: depositAmount,
+			lastInstPaid:lastInstall, 
 	    };
 
 	    
@@ -252,7 +270,7 @@ function updateAddNewInvestmentAmount(data)
 	        }
 	    });
 }
-*/
+
 
 //calculate duration
 function calDuration(data){
@@ -287,6 +305,7 @@ function calDuration(data){
 				 return durationText;
 }
 
+//calculate syspayable
 function sysPayable(data){
 	
 		 let depositAmount = parseFloat(data.depositAmount);                    
@@ -303,12 +322,15 @@ function sysPayable(data){
 		
 }
 
+
+//calculate duration
 function Deduction(data){
 	let deduct=(200*18)/100;
 	
 	return deduct;
 }
 
+//calculate netpayment
 function netPayment(data){
 	let sysPayable = parseFloat($('#sysPayable').val()) || 0;
 	let deduction = parseFloat($('#deduction').val()) || 0;
@@ -321,6 +343,8 @@ function netPayment(data){
 	return netpay;
 }
 
+
+//calculate panelty
 function Panelty(data){
 	let openingDate = new Date(data.policyStartDate);
 	let lastTrans = new Date(data.lastPaymentDate);
@@ -329,19 +353,19 @@ function Panelty(data){
 	
 	let expected = new Date(lastTrans);
 	    expected.setMonth(expected.getMonth() + 1);
-	    expected.setDate(openingDate.getDate());  // keep same day as opening date
+	    expected.setDate(openingDate.getDate());  
 
 	    console.log("Opening Date:", openingDate.toDateString());
 	    console.log("Last Transaction:", lastTrans.toDateString());
 	    console.log("Expected Payment Date:", expected.toDateString());
 	    console.log("Actual Payment Date:", paymentdate.toDateString());
 
-	    // Months gap between last and actual payment
+	    
 	    let monthsGap = (paymentdate.getFullYear() - lastTrans.getFullYear()) * 12 +
 	                    (paymentdate.getMonth() - lastTrans.getMonth());
 					
 
-	    // If actual payment is after expected → late
+	    
 	    let penalty = 0;
 	    if (paymentdate > expected) {
 	        penalty = monthsGap * (1.5 / 100) * policyAmount;
@@ -354,6 +378,7 @@ function Panelty(data){
 	
 }
 
+//calculate dueamount
 function DueAmount(data)
 {
 	let amount = parseFloat($('#amount').val()) || 0;

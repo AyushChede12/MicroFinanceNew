@@ -151,7 +151,22 @@ public class MaturityManagementController {
 
 	}
 	
-	
+	//save and Update Full Maturity Payment
+		//Ashwini
+		@PostMapping("/saveFullmaturity")
+		@ResponseBody
+		public ApiResponse<FullMaturity> saveFullmaturity(@RequestBody FullMaturity fullmaturity) {
+			FullMaturity maturity = maturityservice.saveFullmaturity(fullmaturity);
+			
+			if (maturity != null) {
+				return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
+		    } 
+			else {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
+		       
+		    }
+
+		}
 
 	
 }

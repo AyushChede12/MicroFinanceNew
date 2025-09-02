@@ -319,8 +319,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch:<span id="star"> *</span></label> <select id="payBranch"
-									name="payBranch" required="required"
+								<label for="vehicalNo">Pay Branch:<span id="star"> *</span></label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -339,14 +339,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment By <span id="star"> *</span></label> <select id="paymentBy"
-									name="paymentBy" required="required"
+								<label for="">Mode of Payment <span id="star"> *</span></label> <select id="modeofPayment"
+									name="modeofPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="Select">Select</option>
+									<option value="Online">Online</option>
+									<option value="Cash">Cash</option>
 
 								</select>
 							</div>
 						</div>
+
 
 
 

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                                                 
     
+=======
+                                            
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
     
     
     
@@ -11,8 +15,12 @@
     
     
     <wb-module deploy-name="societybank-0.0.1-SNAPSHOT">
+<<<<<<< HEAD
                                                                                             
         
+=======
+                                                                                    
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
         
         
         
@@ -23,8 +31,12 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+<<<<<<< HEAD
                                                                                                 
         
+=======
+                                                                                        
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
         
         
         
@@ -35,8 +47,12 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
                                                                                                 
         
+=======
+                                                                                        
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
         
         
         
@@ -47,8 +63,12 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+<<<<<<< HEAD
                                                                                                 
         
+=======
+                                                                                        
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
         
         
         
@@ -60,8 +80,12 @@
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+<<<<<<< HEAD
                                                                                                 
         
+=======
+                                                                                        
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
         
         
         
@@ -72,8 +96,12 @@
         
         
         <property name="context-root" value="societybank"/>
+<<<<<<< HEAD
                                                                                                 
         
+=======
+                                                                                        
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
         
         
         
@@ -84,8 +112,12 @@
         
         
         <property name="java-output-path" value="/MicroFinanceSoftware/target/classes"/>
+<<<<<<< HEAD
                                                                                             
     
+=======
+                                                                                    
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
     
     
     
@@ -96,7 +128,11 @@
     
     
     </wb-module>
+<<<<<<< HEAD
                                             
+=======
+                                        
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
 
 
             
@@ -109,5 +145,8 @@
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 43ea0acbc741477fdbbbcd5d04238a27ce37a404
 </project-modules>
