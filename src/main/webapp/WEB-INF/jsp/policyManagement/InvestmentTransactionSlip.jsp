@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row" style="margin-top: 20px; margin-left: 750px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btn btn-dark">Find</button>
+								<button type="button" id="findBtn" class="btn btn-dark">Find</button>
 							</div>
 						</div>
 
