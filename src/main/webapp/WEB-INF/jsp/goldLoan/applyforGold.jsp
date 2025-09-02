@@ -48,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-cash-coin"></i>
+							class="bi bi-coin"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Apply For Gold</li>
 				</ol>
