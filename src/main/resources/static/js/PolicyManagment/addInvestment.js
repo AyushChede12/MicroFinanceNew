@@ -1,27 +1,27 @@
-$(document).ready(function () {
-    $.ajax({
-        url: 'api/customermanagement/approved', // Make sure this path is correct
-        type: 'GET',
-        success: function (response) {
-            if (response.status === "OK" && Array.isArray(response.data)) {
-                const $select = $('#selectCustomer');
-                $select.empty().append('<option value="">Select Customer Code</option>');
+$(document).ready(function() {
+	$.ajax({
+		url: 'api/customermanagement/approved', // Make sure this path is correct
+		type: 'GET',
+		success: function(response) {
+			if (response.status === "OK" && Array.isArray(response.data)) {
+				const $select = $('#selectCustomer');
+				$select.empty().append('<option value="">Select Customer Code</option>');
 
-                response.data.forEach(customer => {
-                    if (customer.customerName && customer.memberCode) {
-                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
-                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
-                        $select.append(`<option value="${optionValue}">${optionText}</option>`);
-                    }
-                });
-            } else {
-                alert("No approved customers found.");
-            }
-        },
-        error: function () {
-            alert("Failed to fetch approved customers.");
-        }
-    });
+				response.data.forEach(customer => {
+					if (customer.customerName && customer.memberCode) {
+						const optionText = `${customer.customerName} - ${customer.memberCode}`;
+						const optionValue = customer.memberCode; // or use customer.id or full object if needed
+						$select.append(`<option value="${optionValue}">${optionText}</option>`);
+					}
+				});
+			} else {
+				alert("No approved customers found.");
+			}
+		},
+		error: function() {
+			alert("Failed to fetch approved customers.");
+		}
+	});
 });
 
 function fetchBySelectedCustomer() {
@@ -33,12 +33,12 @@ function fetchBySelectedCustomer() {
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(input),
-		url: 'api/customermanagement/fetchBySelectedCustomer',
-		async: false,
+		url: "api/customermanagement/fetchBySelectedCustomer",
 		success: function(data) {
 			if (data && data.length > 0) {
 				const c = data[0];
 
+				// Populate text fields safely
 				$("#customerName").val(c.customerName || "");
 				$("#memberCode").val(c.memberCode || "");
 				$("#contactNo").val(c.contactNo || "");
@@ -58,7 +58,29 @@ function fetchBySelectedCustomer() {
 				$("#ageOfNominee").val(c.nomineeAge || "");
 				$("#branchName").val(c.branchName || "");
 				$("#relation").val(c.relationToApplicant || "");
-				
+
+				// Photo
+				if (c.customerPhoto) {
+					const photoPath = `Uploads/${c.customerPhoto}`;
+					$("#photoPreview").attr("src", photoPath);
+					$("#photoHidden").val(photoPath);
+					photoSizeEdit({ target: { result: photoPath } });
+				} else {
+					$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+					$("#photoHidden").val("");
+				}
+
+				// Signature
+				if (c.customerSignature) {
+					const signPath = `Uploads/${c.customerSignature}`;
+					$("#signaturePreview").attr("src", signPath);
+					$("#signatureHidden").val(signPath);
+					signatureSizeEdit({ target: { result: signPath } });
+				} else {
+					$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+					$("#signatureHidden").val("");
+				}
+
 			} else {
 				alert("No data found for the selected member.");
 				clearCustomerFields();
@@ -69,6 +91,7 @@ function fetchBySelectedCustomer() {
 		}
 	});
 }
+
 
 $(document).ready(function() {
 	// If already selected on load
@@ -87,9 +110,9 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 	// Trigger the function when schemeType dropdown value changes
-	$("#schemeType").on("change", function () {
+	$("#schemeType").on("change", function() {
 		getSchemeNameBySchemeType();
 	});
 
@@ -99,8 +122,8 @@ $(document).ready(function () {
 	}
 });
 
-$(document).ready(function () {
-	$("#schemeType").on("change", function () {
+$(document).ready(function() {
+	$("#schemeType").on("change", function() {
 		getSchemeNameBySchemeType();
 	});
 
@@ -127,34 +150,34 @@ function getSchemeNameBySchemeType() {
 	$.ajax({
 		type: "GET",
 		url: "api/Policymangment/getSchemeNameBySchemeType",
- // ✅ Include prefix if controller uses @RequestMapping("/api")
+		// ✅ Include prefix if controller uses @RequestMapping("/api")
 		data: requestData,
-		success: function (response) {
+		success: function(response) {
 			console.log("Response received:", response);
 			$("#schemeName").empty().append(`<option value="">Select Scheme Name</option>`);
 
 			if (response.allBrands) {
-				response.allBrands.forEach(function (planNameDD) {
+				response.allBrands.forEach(function(planNameDD) {
 					$("#schemeName").append(`<option value="${planNameDD}">${planNameDD}</option>`);
 				});
 			}
 			if (response.allRds) {
-				response.allRds.forEach(function (planNameRD) {
+				response.allRds.forEach(function(planNameRD) {
 					$("#schemeName").append(`<option value="${planNameRD}">${planNameRD}</option>`);
 				});
 			}
 			if (response.allFRDs) {
-				response.allFRDs.forEach(function (planNameFD) {
+				response.allFRDs.forEach(function(planNameFD) {
 					$("#schemeName").append(`<option value="${planNameFD}">${planNameFD}</option>`);
 				});
 			}
 			if (response.allMISRDs) {
-				response.allMISRDs.forEach(function (planNameMD) {
+				response.allMISRDs.forEach(function(planNameMD) {
 					$("#schemeName").append(`<option value="${planNameMD}">${planNameMD}</option>`);
 				});
 			}
 		},
-		error: function (xhr, status, error) {
+		error: function(xhr, status, error) {
 			console.error(`Error fetching schemes (Status: ${status}):`, error);
 			alert("An error occurred while fetching scheme data. Please try again.");
 		}
@@ -185,26 +208,26 @@ function updateSchemeMode() {
 	}
 }
 
-$(document).ready(function () {
-	$("#schemeType").on("change", function () {
+$(document).ready(function() {
+	$("#schemeType").on("change", function() {
 		updateSchemeMode();
 	});
 });
 
 
-$(document).ready(function () {
+$(document).ready(function() {
 	// Auto-set policy start date to today
 	const today = new Date();
 	const formattedToday = today.toISOString().split("T")[0];
 	$("#policyStartDate").val(formattedToday);
 
 	// Trigger on schemeName change
-	$("#schemeName").on("change", function () {
+	$("#schemeName").on("change", function() {
 		fetchTermBySchemeName();
 	});
 
 	// Trigger recalculation when policyStartDate is changed manually
-	$("#policyStartDate").on("change", function () {
+	$("#policyStartDate").on("change", function() {
 		displayMaturityDate();
 	});
 });
@@ -262,7 +285,7 @@ function fetchTermBySchemeName() {
 		url: apiUrl,
 		data: dataParam,
 		dataType: "json",
-		success: function (response) {
+		success: function(response) {
 			let data = response.data || response;
 
 			if (data) {
@@ -285,7 +308,7 @@ function fetchTermBySchemeName() {
 				alert("No scheme data found.");
 			}
 		},
-		error: function (xhr, status, error) {
+		error: function(xhr, status, error) {
 			console.error("Error fetching scheme data:", error);
 			alert("Error fetching scheme data. Please try again.");
 		}
@@ -337,8 +360,8 @@ function displayMaturityDate() {
 }
 
 
-$(document).ready(function () {
-	$("#policyAmount, #schemeTerm, #schemeMode, #roi").on("change keyup", function () {
+$(document).ready(function() {
+	$("#policyAmount, #schemeTerm, #schemeMode, #roi").on("change keyup", function() {
 		calculateDepositAndMaturity();
 	});
 
@@ -393,123 +416,214 @@ $(document).ready(function () {
 	}
 });
 
-$("#saveBtn").click(function (e) {
-    e.preventDefault();
+$("#saveBtn").click(function(e) {
+	e.preventDefault();
 
-    const schemeType = $("#schemeType").val();
+	const schemeType = $("#schemeType").val();
 
-    if (!schemeType) {
-        alert("Please select a Scheme Type first.");
-        return;
-    }
+	if (!schemeType) {
+		alert("Please select a Scheme Type first.");
+		return;
+	}
 
-    // Step 1: Get next policy code from backend
-    $.ajax({
-        url: `/api/Policymangment/getNextPolicyCode`,
-        type: "GET",
-        data: { schemeType: schemeType },
-        success: function (policyCode) {
-            $("#policyCode").val(policyCode); // ✅ Set in form
+	// Step 1: Get next policy code from backend
+	$.ajax({
+		url: `api/Policymangment/getNextPolicyCode`,
+		type: "GET",
+		data: { schemeType: schemeType },
+		success: function(policyCode) {
+			$("#policyCode").val(policyCode); // ✅ Set in form
 
-            // Step 2: Gather form data
-            const policyAmount = parseFloat($("#policyAmount").val()) || 0;
-            const depositAmount = parseFloat($("#depositAmount").val()) || 0;
-            const paidAmount = parseFloat($("#policyAmount").val()) || 0;
-            const amountDue = depositAmount - policyAmount;
+			// Step 2: Gather form data
+			const policyAmount = parseFloat($("#policyAmount").val()) || 0;
+			const depositAmount = parseFloat($("#depositAmount").val()) || 0;
+			const paidAmount = parseFloat($("#policyAmount").val()) || 0;
+			const amountDue = depositAmount - policyAmount;
 
-            alert("Amount Due: ₹" + amountDue.toFixed(2)); // Optional for confirmation
+			alert("Amount Due: ₹" + amountDue.toFixed(2)); // Optional for confirmation
 			const statusPlanValue = $('#toggle-sms-send').is(':checked') ? 1 : 0;
-            const formData = {
-                policyCode: policyCode,
-                policyStartDate: $("#policyStartDate").val(),
-                memberSelection: $("#selectCustomer").val(),
-                customerName: $("#customerName").val(),
-                dateofBirth: $("#dateofBirth").val(),
-                relationDetails: $("#relationDetails").val(),
-                contactNo: $("#contactNo").val(),
-                suggestedNominee: $("#suggestedNominee").val(),
-                ageOfNominee: $("#ageOfNominee").val(),
-                relation: $("#relation").val(),
-                address: $("#address").val(),
-                district: $("#district").val(),
-                state: $("#state").val(),
-                pinCode: $("#pinCode").val(),
-                tds: $("#tds").val(),
-                branchName: $("#branchName").val(),
-                modeOfOperation: $("#ModeOfOperation").val(),
-                jointName: $("#jointName").val(),
-                jointMemCode: $("#jointMemCode").val(),
-                schemeType: $("#schemeType").val(),
-                schemeTerm: $("#schemeTerm").val(),
-                schemeName: $("#schemeName").val(),
-                schemeMode: $("#schemeMode").val(),
-                roi: $("#roi").val(),
-                maturityDate: $("#maturityDate").val(),
-                policyAmount: $("#policyAmount").val(),
-                depositAmount: depositAmount.toFixed(2),   // ✅ correct deposit value
-                paidAmount: paidAmount.toFixed(2),         // ✅ paid amount
-                amountDue: amountDue.toFixed(2),           // ✅ calculated value
-                introMCode: $("#introMCode").val(),
-                maturityAmount: $("#maturityAmount").val(),
-                MISInterest: $("#MISInterest").val(),
-                paymentBy: $("#paymentBy").val(),
-                remark: $("#remark").val(),
-                agent: $("#Agent").val(),
-                smsSend: statusPlanValue,
-                
-                lastInstPaid: 1
-            };
+			const formData = {
+				policyCode: policyCode,
+				policyStartDate: $("#policyStartDate").val(),
+				memberSelection: $("#selectCustomer").val(),
+				customerName: $("#customerName").val(),
+				dateofBirth: $("#dateofBirth").val(),
+				relationDetails: $("#relationDetails").val(),
+				contactNo: $("#contactNo").val(),
+				suggestedNominee: $("#suggestedNominee").val(),
+				ageOfNominee: $("#ageOfNominee").val(),
+				relation: $("#relation").val(),
+				address: $("#address").val(),
+				district: $("#district").val(),
+				state: $("#state").val(),
+				pinCode: $("#pinCode").val(),
+				tds: $("#tds").val(),
+				branchName: $("#branchName").val(),
+				modeOfOperation: $("#ModeOfOperation").val(),
+				jointName: $("#jointName").val(),
+				jointMemCode: $("#jointMemCode").val(),
+				schemeType: $("#schemeType").val(),
+				schemeTerm: $("#schemeTerm").val(),
+				schemeName: $("#schemeName").val(),
+				schemeMode: $("#schemeMode").val(),
+				roi: $("#roi").val(),
+				maturityDate: $("#maturityDate").val(),
+				policyAmount: $("#policyAmount").val(),
+				depositAmount: depositAmount.toFixed(2),   // ✅ correct deposit value
+				paidAmount: paidAmount.toFixed(2),         // ✅ paid amount
+				amountDue: amountDue.toFixed(2),           // ✅ calculated value
+				introMCode: $("#introMCode").val(),
+				maturityAmount: $("#maturityAmount").val(),
+				MISInterest: $("#MISInterest").val(),
+				paymentBy: $("#paymentBy").val(),
+				remark: $("#remark").val(),
+				agent: $("#Agent").val(),
+				smsSend: statusPlanValue,
 
-            // Step 3: Save data to backend
-            $.ajax({
-                url: "api/Policymangment/saveInvestment",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(formData),
-                success: function (response) {
-                    alert("✅ " + response.message);
-                    $("#formid")[0].reset();
-                },
-                error: function (xhr) {
-                    alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
-                }
-            });
-        },
-        error: function () {
-            alert("❌ Failed to generate policy code.");
-        }
-    });
+				lastInstPaid: 1
+			};
+
+			// Step 3: Save data to backend
+			$.ajax({
+				url: "api/Policymangment/saveInvestment",
+				type: "POST",
+				contentType: "application/json",
+				data: JSON.stringify(formData),
+				success: function(response) {
+					alert("✅ " + response.message);
+					$("#formid")[0].reset();
+				},
+				error: function(xhr) {
+					alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+				}
+			});
+		},
+		error: function() {
+			alert("❌ Failed to generate policy code.");
+		}
+	});
 });
 
 
-$(document).ready(function () {
-    $.ajax({
-        url: "api/financialconsultant/getAllFinancialConsultantDetails",
-        type: "POST",
-        success: function (response) {
-            const consultants = response.data;
-            const $agentDropdown = $("#Agent");
+$(document).ready(function() {
+	$.ajax({
+		url: "api/financialconsultant/getAllFinancialConsultantDetails",
+		type: "POST",
+		success: function(response) {
+			const consultants = response.data;
+			const $agentDropdown = $("#Agent");
 
-            $agentDropdown.empty(); // Clear any existing options
-            $agentDropdown.append('<option value="">Select Payment By</option>');
+			$agentDropdown.empty(); // Clear any existing options
+			$agentDropdown.append('<option value="">Select Payment By</option>');
 
-            // Create a Set to avoid duplicate codes
-            const addedCodes = new Set();
+			// Create a Set to avoid duplicate codes
+			const addedCodes = new Set();
 
-            consultants.forEach(consultant => {
-                const code = consultant.financialCode;
+			consultants.forEach(consultant => {
+				const code = consultant.financialCode;
 
-                // Add only if it's not null/empty/"undefined"
-                if (code && code.trim() !== "" && code.trim().toLowerCase() !== "undefined") {
-                    if (!addedCodes.has(code)) {
-                        $agentDropdown.append(`<option value="${code}">${code}</option>`);
-                        addedCodes.add(code);
-                    }
-                }
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error("Failed to fetch financial consultant details:", error);
-        }
-    });
+				// Add only if it's not null/empty/"undefined"
+				if (code && code.trim() !== "" && code.trim().toLowerCase() !== "undefined") {
+					if (!addedCodes.has(code)) {
+						$agentDropdown.append(`<option value="${code}">${code}</option>`);
+						addedCodes.add(code);
+					}
+				}
+			});
+		},
+		error: function(xhr, status, error) {
+			console.error("Failed to fetch financial consultant details:", error);
+		}
+	});
 });
+
+function photopreview() {
+	const file = document.getElementById("policyPhoto").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewimg = document.getElementById("bike1imagePreview");
+			document.getElementById("bike1imagePreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signpreview() {
+	const file = document.getElementById("policySignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previevimg = document.getElementById("bike2imagePreview");
+			document.getElementById("bike2imagePreview").src = e.target.result;
+			previevimg.style.width = "100%";
+			previevimg.style.height = "100%";
+			previevimg.style.objectFit = "cover"
+			previevimg.style.overflow = "hidden"
+			previevimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function photoUpload() {
+	const file = document.getElementById("customerPhoto").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			photoSizeEdit(e);
+			$("#photoHidden").val("");
+
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+
+//Ayush
+function signatureUpload() {
+	const file = document.getElementById("customerSignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			signatureSizeEdit(e);
+			$("#signatureHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function signatureSizeEdit(e) {
+	const previewimg = document.getElementById("signaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
