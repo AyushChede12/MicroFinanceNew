@@ -1,9 +1,9 @@
-$(document).ready(function () {
+$(document).ready(function() {
 	// 1. Populate dropdown with approved RD policies
 	$.ajax({
 		url: "api/Policymangment/getAllDDPolicies",
 		type: "GET",
-		success: function (response) {
+		success: function(response) {
 			if (response.data && response.data.length > 0) {
 				const policySelect = $("#policyCode");
 				response.data.forEach(policy => {
@@ -12,20 +12,20 @@ $(document).ready(function () {
 				});
 			}
 		},
-		error: function () {
+		error: function() {
 			alert("Failed to load policies.");
 		}
 	});
 
 	// 2. On policyCode change, fetch full policy data
-	$("#policyCode").on("change", function () {
+	$("#policyCode").on("change", function() {
 		const selectedPolicyCode = $(this).val();
 		if (selectedPolicyCode) {
 			$.ajax({
 				url: "api/Policymangment/getPolicyByPolicyCode",
 				type: "GET",
 				data: { policyCode: selectedPolicyCode },
-				success: function (response) {
+				success: function(response) {
 					if (response.data) {
 						const data = response.data;
 
@@ -63,9 +63,30 @@ $(document).ready(function () {
 						$("#nomineeName").val(data.suggestedNominee);
 						$("#comment").val(data.remark);
 						$("#agentName").val(data.agent);
+
+						if (data.customerPhoto) {
+							const photoPath = `Uploads/${data.customerPhoto}`;
+							$("#photoPreview").attr("src", photoPath);
+							$("#photoHidden").val(photoPath);
+							photoSizeEdit({ target: { result: photoPath } });
+						} else {
+							$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+							$("#photoHidden").val("");
+						}
+
+						// Signature
+						if (data.customerSignature) {
+							const signPath = `Uploads/${data.customerSignature}`;
+							$("#signaturePreview").attr("src", signPath);
+							$("#signatureHidden").val(signPath);
+							signatureSizeEdit({ target: { result: signPath } });
+						} else {
+							$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+							$("#signatureHidden").val("");
+						}
 					}
 				},
-				error: function () {
+				error: function() {
 					alert("Policy not found!");
 				}
 			});
@@ -73,33 +94,33 @@ $(document).ready(function () {
 	});
 });
 
-$(document).ready(function () {
-    $("#buttonSave").click(function (e) {
-        e.preventDefault(); // Prevent default form submission
+$(document).ready(function() {
+	$("#buttonSave").click(function(e) {
+		e.preventDefault(); // Prevent default form submission
 
-        // Collect only required data for the API
-        const formData = {
-            policyCode: $("#policyCode").val(),
-            policyAmount: $("#policyAmount").val(),
-            noOfInstallments: $("#noOfInst").val() // ✅ Fixed key name
-        };
+		// Collect only required data for the API
+		const formData = {
+			policyCode: $("#policyCode").val(),
+			policyAmount: $("#policyAmount").val(),
+			noOfInstallments: $("#noOfInst").val() // ✅ Fixed key name
+		};
 
-        // Send to backend
-        $.ajax({
-            url: "/api/Policymangment/updateDDDueAndInstallment",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-            success: function (response) {
-                 alert("✅ " + response.message);
-                
-                  location.reload();
-                // Optionally reset form or reload table
-                // $("#formid")[0].reset();
-            },
-            error: function (xhr) {
-                alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
-            }
-        });
-    });
+		// Send to backend
+		$.ajax({
+			url: "api/Policymangment/updateDDDueAndInstallment",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(formData),
+			success: function(response) {
+				alert("✅ " + response.message);
+
+				location.reload();
+				// Optionally reset form or reload table
+				// $("#formid")[0].reset();
+			},
+			error: function(xhr) {
+				alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+			}
+		});
+	});
 });

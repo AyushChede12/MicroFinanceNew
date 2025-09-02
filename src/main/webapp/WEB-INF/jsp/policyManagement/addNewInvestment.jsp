@@ -335,6 +335,42 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
+
+
+					</div>
+					<div class="row mt-4">
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Photo</label> <label for="customerPhoto" id="drop-area"> <input
+								accept="image/*" name="customerPhoto" id="customerPhoto"
+								hidden="hidden" onchange="photopreview();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
+
+								</div>
+							</label>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								Signature</label> <label for="customerSignature" id="drop-area"> <input
+								accept="image/*" name="customerSignature"
+								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+
+								</div>
+							</label>
+						</div>
+
 					</div>
 
 					<div class="mt-5">
