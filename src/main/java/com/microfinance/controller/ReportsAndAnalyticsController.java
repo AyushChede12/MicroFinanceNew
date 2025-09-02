@@ -71,5 +71,17 @@ public class ReportsAndAnalyticsController {
 					 .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No Loan Payment Found"));
 		 }
 	 }
+	 
+	 //poonam : Fetch Loan Confirmation Document  28/08/2025
+	 @GetMapping("/getLoanConfirmationDocument")
+	 public ResponseEntity<ApiResponse<List<LoanApplication>>> getLoanConfirmationDocument(){
+		 List<LoanApplication> list=reportsAndAnalyticsService.getLoanConfirmationDocument();
+		 if(!list.isEmpty()) {
+			 return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Loan Confirmation Document Fetch Succesfully", list));
+		 }else {
+			 return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					 .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No Loan Confirmation Document Found"));
+		 }
+	 }
 
 }
