@@ -60,6 +60,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					<input type="hidden" name="hiddenSchemeCode" id="hiddenSchemeCode">
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -342,8 +343,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="customerPhoto" id="drop-area"> <input
-								accept="image/*" name="customerPhoto" id="customerPhoto"
+								Photo</label> <label for="photo" id="drop-area"> <input
+								accept="image/*" name="photo" id="photo"
 								hidden="hidden" onchange="photopreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -358,11 +359,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="customerSignature" id="drop-area"> <input
-								accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								Signature</label> <label for="signature" id="drop-area"> <input
+								accept="image/*" name="signature"
+								id="signature" hidden="hidden" onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
+								<div id="img-view">								
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="signaturePreview" /><input type="hidden"
 										name="signatureHidden" id="signatureHidden">

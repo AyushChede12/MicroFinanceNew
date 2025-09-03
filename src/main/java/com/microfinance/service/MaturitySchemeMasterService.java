@@ -1,6 +1,10 @@
 package com.microfinance.service;
 
+
+
+
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,9 +12,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.microfinance.model.ApplyForMaturity;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MaturitySchemeMaster;
 import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.repository.ApplyForMaturityRepo;
+import com.microfinance.repository.FullMaturityRepo;
 import com.microfinance.repository.MaturitySchemeMasterRepo;
 import com.microfinance.repository.PartialMaturitypaymentRepo;
 
@@ -25,6 +31,9 @@ public class MaturitySchemeMasterService {
 	
 	@Autowired
 	PartialMaturitypaymentRepo partialmaturityrepo;
+	
+	@Autowired
+	FullMaturityRepo fullmaturityrepo;
 
 	public MaturitySchemeMaster saveAllDailyDeposit(MaturitySchemeMaster maturityscheme) {
 		// TODO Auto-generated method stub
@@ -55,6 +64,20 @@ public class MaturitySchemeMasterService {
 	public partialMaturityPayment savePartialmaturity(partialMaturityPayment partialmaturity) {
 		// TODO Auto-generated method stub
 		return partialmaturityrepo.save(partialmaturity) ;
+		
 	}
 
-}
+	public FullMaturity saveFullmaturity(FullMaturity fullmaturity) {
+		// TODO Auto-generated method stub
+		return fullmaturityrepo.save(fullmaturity);
+	}
+
+	
+
+	
+	
+
+	
+	}
+
+
