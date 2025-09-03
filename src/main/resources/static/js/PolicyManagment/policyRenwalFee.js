@@ -78,6 +78,7 @@ $(document).ready(function() {
 						$("#nomineeName").val(data.suggestedNominee);
 						$("#comment").val(data.remark);
 						$("#agentName").val(data.agent);
+						alert(data.customerPhoto);
 
 						if (data.customerPhoto) {
 							const photoPath = `Uploads/${data.customerPhoto}`;
