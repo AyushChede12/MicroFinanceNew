@@ -2,7 +2,7 @@ $(document).ready(function() {
 	const $policyDropdown = $('#findByPolicyNumber');
 
 	// Clear and set default option
-	$policyDropdown.empty().append('<option value="">Select Branch Name</option>');
+	$policyDropdown.empty().append('<option value="">Select Policy Number</option>');
 
 	// Fetch approved policy data
 	fetchApprovedPolicies();
@@ -137,7 +137,7 @@ $(document).ready(function() {
 	const $policyDropdown = $('#findPolicyNumber');
 
 	// Clear and set default option
-	$policyDropdown.empty().append('<option value="">Select Branch Name</option>');
+	$policyDropdown.empty().append('<option value="">Select Policy Number</option>');
 
 	// Fetch approved policy data
 	fetchApprovedPolicies();
@@ -222,65 +222,62 @@ $(document).ready(function() {
 });
 
 $("#findBtn").click(function() {
-	
-	const policyCode = $(this).val();
+
+	const policyCode = $("#findPolicyNumber").val();
+	alert(policyCode);
+
 	if (!policyCode) {
 		$('#policyTableBody').empty(); // Clear table if no policy selected
 		return;
 	}
 
-	//const apiUrl = `api/Policymangment/findPolicyData/${policyCode}`;
-	// Make sure this matches your backend endpoint EXACTLY
-alert("before");
-	$.ajax({
-		url: `api/Policymangment/findPolicyData/${policyCode}`,
-		method: 'GET',
-		dataType: 'json', // ensure JSON parsing
-		success: function(response) {
-			if (
-				(response.status === "OK" || response.status === 200) &&
-				Array.isArray(response.data) &&
-				response.data.length > 0
-			) {
-				const rowsHtml = response.data.map(data => `
-	                        <tr>
-	                            <td>${data.policyCode || ''}</td>
-	                            <td>${data.clientName || data.customerName || ''}</td>
-	                            <td>${data.policyAmount || ''}</td>
-	                            <td>${data.renewalDate || ''}</td>
-	                            <td>${data.policyType || ''}</td>
-	                            <td>${data.maturityAmount || ''}</td>
-	                            <td>${data.totalDeposit || ''}</td>
-	                            <td>${data.policyDate || ''}</td>
-	                            <td>${data.policyTerm || ''}</td>
-	                            <td>${data.maturityDate || ''}</td>
-	                            <td>${data.customerCode || ''}</td>
-	                            <td>${data.contactNo || ''}</td>
-	                            <td>${data.totalDeposit || ''}</td>
-	                            <td>${data.paymentDue || ''}</td>
-	                            <td>${data.noOfInstPaid || ''}</td>
-	                            <td>${data.isApproved ? 'Yes' : 'No'}</td>
-	                            <td>${data.branchname || ''}</td>
-	                            <td><button class="btn btn-primary print-btn">Print</button></td>
-	                        </tr>
-	                    `).join("");
+	const apiUrl = `api/Policymangment / findPolicyData / ${ policyCode }`;
 
-				$('#policyTableBody').html(rowsHtml);
+	$.ajax({
+		url: apiUrl,
+		method: 'GET',
+		success: function(response) {
+			if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
+				const dataList = response.data;
+
+				// Clear old rows
+				$('#policyTableBody').empty();
+
+				dataList.forEach(function(data) {
+					const newRow = `
+	                             <tr>
+	        <td>${data.policyCode || ''}</td>
+	        <td>${data.clientName || data.customerName || ''}</td>
+	        <td>${data.policyAmount || ''}</td>
+	        <td>${data.renewalDate || ''}</td>
+	        <td>${data.policyType || ''}</td>
+	        <td>${data.maturityAmount || ''}</td>
+	        <td>${data.totalDeposit || ''}</td>
+	        <td>${data.policyDate || ''}</td>
+	        <td>${data.policyTerm || ''}</td>
+	        <td>${data.maturityDate || ''}</td>
+	        <td>${data.customerCode || ''}</td>
+	        <td>${data.contactNo || ''}</td>
+	        <td>${data.totalDeposit || ''}</td>
+	        <td>${data.paymentDue || ''}</td>
+	        <td>${data.noOfInstPaid || ''}</td>
+	        <td>${data.isApproved ? 'Yes' : 'No'}</td>
+	        <td>${data.branchname || ''}</td>
+	        <td><button class="btn btn-primary print-btn">Print</button></td>
+	    </tr>
+	                        `;
+					$('#policyTableBody').append(newRow);
+				});
 			} else {
-				$('#policyTableBody').html(`
-	                        <tr>
-	                            <td colspan="18" class="text-center text-danger">
-	                                No policy data found for policy code: ${policyCode}
-	                            </td>
-	                        </tr>
-	                    `);
+				alert("No data found for the selected policy.");
+				$('#policyTableBody').empty();
 			}
 		},
-		error: function(xhr, status, error) {
-			console.error("AJAX Error:", status, error);
+		error: function() {
 			alert("Error while fetching policy data.");
 		}
 	});
+
 });
 
 

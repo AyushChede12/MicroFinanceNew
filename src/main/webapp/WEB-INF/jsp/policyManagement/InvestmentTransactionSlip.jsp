@@ -70,7 +70,7 @@ pageEncoding="ISO-8859-1"%> -->
 										id="findPolicyNumber" name="findPolicyNumber"
 										required="required" class="form-control selectField"
 										style="height: 30px;">
-										<option value="">Select Branch Name</option>
+										<option value="">Select Policy Number</option>
 
 									</select>
 								</div>

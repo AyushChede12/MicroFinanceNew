@@ -44,8 +44,8 @@ public class AddnewinvestmentPM {
 	private String remark;
 	private String Agent;
 	private String smsSend;
-	private String photo;
-	private String signature;
+	private String image1;
+	private String image2;
 	private boolean isApproved;
 	private String lastInstPaid;
 	private String paidAmount;
@@ -320,20 +320,20 @@ public class AddnewinvestmentPM {
 		this.smsSend = smsSend;
 	}
 
-	public String getPhoto() {
-		return photo;
+	public String getImage1() {
+		return image1;
 	}
 
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setImage1(String image1) {
+		this.image1 = image1;
 	}
 
-	public String getSignature() {
-		return signature;
+	public String getImage2() {
+		return image2;
 	}
 
-	public void setSignature(String signature) {
-		this.signature = signature;
+	public void setImage2(String image2) {
+		this.image2 = image2;
 	}
 
 	public boolean isApproved() {

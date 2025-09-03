@@ -466,7 +466,7 @@ public class PolicyManagementService {
 	}
 
 	public ApiResponse<AddnewinvestmentPM> saveandupdateAddInvestmentDetails(PolicyManagementDto policyManagementDto,
-			String photo, String signature) {
+			String image1, String image2) {
 		// TODO Auto-generated method stub
 		AddnewinvestmentPM addnewinvestmentPM = new AddnewinvestmentPM();
 		boolean isNew = true;
@@ -515,13 +515,13 @@ public class PolicyManagementService {
 		addnewinvestmentPM.setAgent(policyManagementDto.getAgent());
 		addnewinvestmentPM.setSmsSend(policyManagementDto.getSmsSend());
 		// Set photo path (already fetched)
-		if (photo != null && !photo.isEmpty()) {
-			addnewinvestmentPM.setPhoto(photo);
+		if (image1 != null && !image1.isEmpty()) {
+			addnewinvestmentPM.setImage1(image1);
 		}
 
 		// Handle signature upload
-		if (signature != null && !signature.isEmpty()) {
-			addnewinvestmentPM.setSignature(signature);
+		if (image2 != null && !image2.isEmpty()) {
+			addnewinvestmentPM.setImage2(image2);
 		}
 
 		// Handle photo upload
@@ -550,7 +550,8 @@ public class PolicyManagementService {
 					"Saved successfully. Director Name: " + saveaddinvestmentPM.getCustomerName(), saveaddinvestmentPM);
 		} else {
 			return ApiResponse.success(HttpStatus.OK,
-					"Updated successfully. Director Name: " + saveaddinvestmentPM.getCustomerName(), saveaddinvestmentPM);
+					"Updated successfully. Director Name: " + saveaddinvestmentPM.getCustomerName(),
+					saveaddinvestmentPM);
 		}
 	}
 
