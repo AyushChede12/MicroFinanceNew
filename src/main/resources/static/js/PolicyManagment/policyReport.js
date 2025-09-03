@@ -222,6 +222,7 @@ $(document).ready(function() {
 });
 
 $("#findBtn").click(function() {
+	
 	const policyCode = $(this).val();
 	if (!policyCode) {
 		$('#policyTableBody').empty(); // Clear table if no policy selected
