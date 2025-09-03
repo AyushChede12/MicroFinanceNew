@@ -76,7 +76,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Loan Plan Name</label> <input type="text"
-									name="loanPlaneName" id="loanPlaneName" required="required"
+									name="loanPlanName" id="loanPlanName" required="required"
 									placeholder="Enter Loan Plan Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -84,14 +84,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Type Of Loan</label> <select id="typeLoan"
-									name="typeLoan" required="required"
+								<label for="">Type Of Loan</label> <select id="typeOfLoan"
+									name="typeOfLoan" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Type Of Loan</option>
-									<option value="Business Loan">Business Loan</option>
-									<option value="Vehicle Loan">Vehicle Loan</option>
-									<option value="Home Loan">Home Loan</option>
-									<option value="personal Loan">personal Loan</option>
+									<option value="Gold Loan">Gold Loan</option>
+									<option value="Silver Loan">Silver Loan</option>
 								</select>
 							</div>
 						</div>
@@ -115,8 +113,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Interest Type</label> <select id="typeIntrest"
-									name="typeIntrest" required="required"
+								<label for=""> Interest Type</label> <select id="interestType"
+									name="interestType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select ROI Type</option>
 									<option value="Flat Interest">Flat Interest</option>
@@ -129,10 +127,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Emi Type</label> <select id="emiType"
+								<label for="">EMI Type</label> <select id="emiType"
 									name="emiType" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Emi Type</option>
+									<option value="">Select EMI Type</option>
 									<option value="Regular">Regular</option>
 									<option value="Irregular">Irregular</option>
 
@@ -143,7 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minage">Min Age</label> <input type="text" name="minAge"
-									id="minAge" required="required" placeholder="Enter Your Age"
+									id="minAge" required="required" placeholder="Enter Minimum Age"
 									style="text-transform: uppercase;" /> <span id="message"></span>
 							</div>
 
@@ -151,8 +149,8 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="minage">Max Age</label> <input type="text" name="maxAge"
-									id="maxAge" required="required" placeholder="Enter Your Age"
+								<label for="maxage">Max Age</label> <input type="text" name="maxAge"
+									id="maxAge" required="required" placeholder="Enter Maximum Age"
 									style="text-transform: uppercase;" /> <span id="message"></span>
 							</div>
 
@@ -162,8 +160,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="loanName">Min Loan Amount</label> <input type="text"
-									name="minLoanAmount" id="minLoanAmount" required="required"
+								<label for="minamt">Min Loan Amount</label> <input type="text"
+									name="minAmt" id="minAmt" required="required"
 									placeholder="Enter Minimum Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -171,8 +169,8 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="loanName">Max Loan Amount</label> <input type="text"
-									name="maxLoanAmount" id="maxLoanAmount" required="required"
+								<label for="maxamt">Max Loan Amount</label> <input type="text"
+									name="maxAmt" id="maxAmt" required="required"
 									placeholder="Enter Maximum Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
@@ -180,8 +178,8 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="minloanTerm">Min Loan Term</label> <input type="text"
-									name="minLoanTerm" id="minLoanTerm" required="required"
+								<label for="minterm">Min Loan Term</label> <input type="text"
+									name="minTerm" id="minTerm" required="required"
 									placeholder="Enter Minimum Loan Term"
 									style="text-transform: uppercase;" />
 							</div>
@@ -189,8 +187,8 @@ pageEncoding="ISO-8859-1"%> -->
 						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="maxloanTerm">Max Loan Term</label> <input type="text"
-									name="maxLoanTerm" id="maxLoanTerm" required="required"
+								<label for="maxterm">Max Loan Term</label> <input type="text"
+									name="maxTerm" id="maxTerm" required="required"
 									placeholder="Enter Maximum Loan Term"
 									style="text-transform: uppercase;" />
 							</div>
@@ -200,8 +198,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields" style="margin-bottom:30px;">
-								<label for="">Rate Interest Type(%p.a.)</label> <input
-									type="text" name="rateIntrestType" id="rateIntrestType"
+								<label for="rateInteresttype">Rate Interest Type(%p.a.)</label> <input
+									type="text" name="rateInterestType" id="rateInterestType"
 									required="required" placeholder="Enter Rate Interest Type" />
 							</div>
 						</div>
@@ -210,13 +208,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Security Type</label> <select id="typesecurity"
-									name="typesecurity" required="required"
+								<label for="">Security Type</label> <select id="securityType"
+									name="securityType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Security</option>
 									<option value="Pledge">Pledge</option>
-									<option value="Mortgage">Mortgage</option>
-									<option value="Property">Property</option>
+									<option value="Mortgage">Gold Bars</option>
 									<option value="Gold">Gold</option>
 								</select>
 							</div>
@@ -226,16 +223,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div
-								class="h-100 d-flex justify-content-start align-items-center">
+								class=" h-100 d-flex justify-content-start align-items-center"
+								style="margin-bottom: 30px;">
 								<div
-									class="d-flex justify-content-start align-items-center formFields">
-									<label for="planStatus" style="margin-left: 20px;" class="mb-2">Plan
-										Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									class="d-flex justify-content-start align-items-center  formFields">
+									<label style="margin-left: 20px;" class="mb-2">Plan Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="planStatus" name="planStatus"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="planStatus" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-plan-status" name="planStatus"
+												class="toggle__input" data-toggle-type="plan-status"> <label
+												for="toggle-plan-status" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -256,31 +253,31 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Processing Fee(%) </label> <input type="text"
-									name="feeProcessing" id="feeProcessing" required="required"
+								<label for="procfee">Processing Fee(%) </label> <input type="text"
+									name="procFee" id="procFee" required="required"
 									placeholder="Enter Processing Fee" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Legal Charges(%)</label> <input type="text"
-									name="chargesLegal" id="chargesLegal" required="required"
+								<label for="legalcharge"> Legal Charges(%)</label> <input type="text"
+									name="legalCharge" id="legalCharge" required="required"
 									placeholder="Enter Legal Charges" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">GST(%)</label> <input type="text" name="gst"
+								<label for="Gst">GST(%)</label> <input type="text" name="gst"
 									id="gst" required="required" placeholder="Enter GST" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Insurence Fee(%)</label> <input type="text"
-									name="feeInsurence" id="feeInsurence" required="required"
+								<label for="insufee">Insurance Fee(%)</label> <input type="text"
+									name="insuFee" id="insuFee" required="required"
 									placeholder="Enter Insurance Fee" />
 							</div>
 						</div>
@@ -288,8 +285,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Valuation Fee(%) </label> <input type="text"
-									name="feeValuation" id="feeValuation" required="required"
+								<label for="valufee">Valuation Fee(%) </label> <input type="text"
+									name="valuFee" id="valuFee" required="required"
 									placeholder="Enter Valuation Fee" />
 							</div>
 						</div>
@@ -308,15 +305,15 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Late Allowance Days</label> <input type="text"
-									name="lateAllowanceday" id="lateAllowanceday"
+								<label for="lateallowanceDay">Late Allowance Days</label> <input type="text"
+									name="lateAllowanceDay" id="lateAllowanceDay"
 									required="required" placeholder="Enter Late Allowance Days" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">penalty mode</label> <select id="modePanalty"
-									name="modePanalty" required="required"
+								<label for="penaltymode">penalty mode</label> <select id="penaltyMode"
+									name="penaltyMode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Penalty Type</option>
 									<option value="Percentage">Percentage</option>
@@ -326,8 +323,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Monthly Penalty </label> <input type="numbtexter"
-									name="pennaltyMonthly" id="pennaltyMonthly" required="required"
+								<label for="monthlypenalty"> Monthly Penalty </label> <input type="text"
+									name="monthlyPenalty" id="monthlyPenalty" required="required"
 									placeholder="" />
 							</div>
 						</div>
@@ -335,7 +332,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 				</div>
-				<input type="hidden" id="loanId" value="" />
+				<input type="hidden" id="goldLoanId" value="" />
 				<div class="row">
 					<div class="col-12 text-center">
 						<button id="saveBtn" class="btnStyle bg-success">Save</button>
@@ -388,7 +385,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/LoanManagment/LoanSchemCatalog.js"></script>
+	<script src="./js/SecuredGoldLoan/GoldSecurePlan.js"></script>
 
 
 </body>
