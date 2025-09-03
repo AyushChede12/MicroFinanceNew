@@ -873,7 +873,7 @@ public class PolicyManagementController {
 	}
 
 	@GetMapping("/findPolicyData/{policyCode}")
-	public ResponseEntity<ApiResponse<?>> findPolicyData(@PathVariable String policyCode) {
+	public ResponseEntity<ApiResponse<?>> findPolicyData(@RequestParam String policyCode) {
 
 		List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);
 		if (!fdData.isEmpty()) {
@@ -898,8 +898,8 @@ public class PolicyManagementController {
 	@PostMapping("/saveandupdateAddInvestment")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveandupdateAddInvestmentDetails(
 			@ModelAttribute PolicyManagementDto policyManagementDto,
-			@RequestParam(value = "photo", required = false) String photo,
-			@RequestParam(value = "signature", required = false) String signature) {
+			@RequestParam(value = "image1", required = false) String image1,
+			@RequestParam(value = "image2", required = false) String image2) {
 
 		String customerCode = policyManagementDto.getMemberSelection(); // assuming it's Long
 
@@ -909,15 +909,15 @@ public class PolicyManagementController {
 					.body(new ApiResponse<>(HttpStatus.CONFLICT, "Customer already exists in Policy", null));
 		}
 
-		System.out.println("Received photo: " + photo);
+		System.out.println("Received photo: " + image1);
 
-		System.out.println("Received signature: " + signature);
+		System.out.println("Received signature: " + image2);
 
-		ApiResponse<AddnewinvestmentPM> response = policyManagementService.saveandupdateAddInvestmentDetails(policyManagementDto, photo,
-				signature);
+		ApiResponse<AddnewinvestmentPM> response = policyManagementService.saveandupdateAddInvestmentDetails(policyManagementDto, image1,
+				image2);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-				policyManagementDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
+				policyManagementDto.getId() != null ? "✅ Investment Updated successfully" : "✅ Investment saved successfully",
 				response.getData()));
 	}
 
