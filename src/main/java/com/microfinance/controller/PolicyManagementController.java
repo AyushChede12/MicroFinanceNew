@@ -872,7 +872,7 @@ public class PolicyManagementController {
 		}
 	}
 
-	@GetMapping("/findPolicyData/{policyCode}")
+	@GetMapping("/findPolicyData")
 	public ResponseEntity<ApiResponse<?>> findPolicyData(@RequestParam String policyCode) {
 
 		List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);

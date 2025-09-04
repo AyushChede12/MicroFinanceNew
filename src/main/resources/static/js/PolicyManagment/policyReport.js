@@ -222,62 +222,59 @@ $(document).ready(function() {
 });
 
 $("#findBtn").click(function() {
+    const policyCode = $("#findPolicyNumber").val();
 
-	const policyCode = $("#findPolicyNumber").val();
-	alert(policyCode);
+    if (!policyCode) {
+        $('#policyTableBody').empty();
+        return;
+    }
 
-	if (!policyCode) {
-		$('#policyTableBody').empty(); // Clear table if no policy selected
-		return;
-	}
+    $.ajax({
+        url: 'api/Policymangment/findPolicyData',  // ✅ endpoint
+        method: 'GET',
+        data: { policyCode: policyCode },          // ✅ pass as query param
+        dataType: 'json',                          // ✅ specify dataType
+        success: function(response) {
+            if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
+                const dataList = response.data;
 
-	const apiUrl = `api/Policymangment / findPolicyData / ${ policyCode }`;
+                $('#policyTableBody').empty();
 
-	$.ajax({
-		url: apiUrl,
-		method: 'GET',
-		success: function(response) {
-			if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
-				const dataList = response.data;
-
-				// Clear old rows
-				$('#policyTableBody').empty();
-
-				dataList.forEach(function(data) {
-					const newRow = `
-	                             <tr>
-	        <td>${data.policyCode || ''}</td>
-	        <td>${data.clientName || data.customerName || ''}</td>
-	        <td>${data.policyAmount || ''}</td>
-	        <td>${data.renewalDate || ''}</td>
-	        <td>${data.policyType || ''}</td>
-	        <td>${data.maturityAmount || ''}</td>
-	        <td>${data.totalDeposit || ''}</td>
-	        <td>${data.policyDate || ''}</td>
-	        <td>${data.policyTerm || ''}</td>
-	        <td>${data.maturityDate || ''}</td>
-	        <td>${data.customerCode || ''}</td>
-	        <td>${data.contactNo || ''}</td>
-	        <td>${data.totalDeposit || ''}</td>
-	        <td>${data.paymentDue || ''}</td>
-	        <td>${data.noOfInstPaid || ''}</td>
-	        <td>${data.isApproved ? 'Yes' : 'No'}</td>
-	        <td>${data.branchname || ''}</td>
-	        <td><button class="btn btn-primary print-btn">Print</button></td>
-	    </tr>
-	                        `;
-					$('#policyTableBody').append(newRow);
-				});
-			} else {
-				alert("No data found for the selected policy.");
-				$('#policyTableBody').empty();
-			}
-		},
-		error: function() {
-			alert("Error while fetching policy data.");
-		}
-	});
-
+                dataList.forEach(function(data) {
+                    const newRow = `
+                        <tr>
+                            <td>${data.policyCode || ''}</td>
+                            <td>${data.clientName || data.customerName || ''}</td>
+                            <td>${data.policyAmount || ''}</td>
+                            <td>${data.renewalDate || ''}</td>
+                            <td>${data.policyType || ''}</td>
+                            <td>${data.maturityAmount || ''}</td>
+                            <td>${data.totalDeposit || ''}</td>
+                            <td>${data.policyDate || ''}</td>
+                            <td>${data.policyTerm || ''}</td>
+                            <td>${data.maturityDate || ''}</td>
+                            <td>${data.customerCode || ''}</td>
+                            <td>${data.contactNo || ''}</td>
+                            <td>${data.totalDeposit || ''}</td>
+                            <td>${data.paymentDue || ''}</td>
+                            <td>${data.noOfInstPaid || ''}</td>
+                            <td>${data.isApproved ? 'Yes' : 'No'}</td>
+                            <td>${data.branchname || ''}</td>
+                            <td><button class="btn btn-primary print-btn">Print</button></td>
+                        </tr>`;
+                    $('#policyTableBody').append(newRow);
+                });
+            } else {
+                alert("No data found for the selected policy.");
+                $('#policyTableBody').empty();
+            }
+        },
+        error: function(xhr) {
+            console.error("❌ Error:", xhr);
+            alert("Error while fetching policy data.");
+        }
+    });
 });
+
 
 
