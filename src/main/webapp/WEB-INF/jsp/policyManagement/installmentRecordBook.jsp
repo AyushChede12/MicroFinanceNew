@@ -65,7 +65,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<label class="mr-2 mb-0">Find by Policy Number*</label> <select
 							id="findByPolicyNumber" name="findByPolicyNumber"
 							class="form-control w-50">
-							<option value="">Select Branch Name</option>
+							<option value="">Select Policy Number</option>
 						</select>
 					</div>
 
