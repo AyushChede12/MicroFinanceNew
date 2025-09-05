@@ -8,7 +8,7 @@ function fetchBySelectedCustomer() {
 		type: "POST",
 		contentType: "application/json",
 		data: JSON.stringify(input),
-		url: 'fetchBySelectedCustomer',
+		url: 'api/customermanagement/fetchBySelectedCustomer',
 		async: false,
 		success: function(data) {
 			if (data && data.length > 0) {
@@ -76,7 +76,7 @@ $(document).ready(function() {
 $(document).ready(function() {
 	// Fetch all customers and populate the "select by code" dropdown
 	$.ajax({
-		url: "getAllCustomer",
+		url: "api/customermanagement/getAllCustomer",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Members:", data);

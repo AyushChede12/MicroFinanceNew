@@ -45,17 +45,17 @@ $(document).ready(function () {
 						$("#renewalDate").val(renewalDate);
 						$("#maturityDate").val(data.maturityDate);
 						$("#customerCode").val(data.memberSelection);
-						$("#clientName").val(data.customerName);
+						$("#customerName").val(data.customerName);
 						$("#contactNo").val(data.contactNo);
 						$("#policyAmount").val(data.policyAmount);
 						$("#policyType").val(data.schemeType);
-						$("#branchname").val(data.branchName);
+						$("#branchName").val(data.branchName);
 						$("#policyTerm").val(data.schemeTerm);
 						$("#maturityAmount").val(data.maturityAmount);
 						$("#totalDeposit").val(data.depositAmount);
 						$("#paymentDue").val(data.amountDue);
 						$("#financialCode").val(data.introMCode);
-						$("#lastPaymentDate").val(data.lastInstPaid);
+						$("#lastInstPaid").val(data.lastInstPaid);
 						$("#dueDate").val(data.maturityDate);
 						$("#noOfInstPaid").val(data.lastInstPaid);
 						$("#installmentsCompleted").val(data.lastInstPaid);
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
         // Send to backend
         $.ajax({
-            url: "/api/Policymangment/updateDueAndInstallment",
+            url: "api/Policymangment/updateDueAndInstallment",
             type: "POST",
             contentType: "application/json",
             data: JSON.stringify(formData),
@@ -115,7 +115,7 @@ $(document).ready(function () {
 
     function fetchApprovedPolicies() {
         $.ajax({
-            url: '/api/Policymangment/getApprovedPolicies',
+            url: 'api/Policymangment/getApprovedPolicies',
             method: 'GET',
             success: function (response) {
                 if (response.status === 'OK' && Array.isArray(response.data)) {
@@ -152,7 +152,7 @@ function toggleTransaction() {
     return;
   }
 
-  fetch(`/api/Policymangment/getPolicyByPolicyCode?policyCode=${policyCode}`)
+  fetch(`api/Policymangment/getPolicyByPolicyCode?policyCode=${policyCode}`)
     .then(response => {
       if (!response.ok) {
         throw new Error("Policy not found");
