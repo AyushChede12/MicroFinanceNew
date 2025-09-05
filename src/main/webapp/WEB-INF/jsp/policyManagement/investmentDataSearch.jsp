@@ -33,6 +33,16 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 </head>
 
 
@@ -60,48 +70,18 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
-                <label>Verify With</label>
-                <div class="position-relative">
-                  <div class="select-btn1" style="cursor: pointer;">
-                    <span name="cityName" id="cityNameId" style="font-size: 12px;">Select</span> <i
-                      class="fa-solid fa-angle-down"></i>
-                  </div>
-                  <div class="content" id="contentCityName" style="display: none;">
-                    <div class="search">
-                      <input type="text" id="city-search" class="m-0" placeholder="Search City" />
-                    </div>
-                    <ul class="options" id="city-options">
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                      <li>ABC</li>
-                    </ul>
-                  </div>
-                </div>
-              </div> -->
-
-							<div class="col-lg-12 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Find by Policy Number*</label> <select
-									id="findByPolicyNumber" name="findByPolicyNumber" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Policy Number</option>
-									
+						<div class="col-lg-5">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 20px;">
+								<label for="policyCode" id="policySelection">Policy
+									Number </label> <select id="policyCode" name="policyCode"
+									class="form-control selectField" style="width: 100%;">
+									<option value="">-- Search Policy Number --</option>
 								</select>
 							</div>
 						</div>
 
-
-
-
-
-						</div>
-
-						<div class="row" style="margin-top: 20px; margin-left: 750px;">
+						<div class="row" style="margin-top: 20px;">
 							<div class="col-12 text-center">
 								<button id="saveBtn" class="btn btn-dark">Find</button>
 							</div>
@@ -233,6 +213,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/PolicyManagment/investmentSearch.js"></script>
 </body>
 
 </html>
