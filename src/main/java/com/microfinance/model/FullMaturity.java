@@ -1,15 +1,12 @@
 package com.microfinance.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
 @Entity
-public class partialMaturityPayment {
-
+public class FullMaturity {
+		
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
@@ -29,14 +26,15 @@ public class partialMaturityPayment {
 	private boolean approveStatus;
 	private String teamMemberCode;
 	private String teamMemberName;
+	private String panelty;
+	private String installment;
 	private String amount;
 	private String depositAmount;
 	private String dueAmount;
-	private LocalDate paymentDate;
+	private String paymentDate;
 	private String branchName;
 	private String payComment;
 	private String modeofPayment;
-	
 	public long getId() {
 		return id;
 	}
@@ -85,6 +83,12 @@ public class partialMaturityPayment {
 	public void setMaturityAmount(String maturityAmount) {
 		this.maturityAmount = maturityAmount;
 	}
+	public String getMaturityDate() {
+		return maturityDate;
+	}
+	public void setMaturityDate(String maturityDate) {
+		this.maturityDate = maturityDate;
+	}
 	public String getSysPayable() {
 		return sysPayable;
 	}
@@ -127,6 +131,18 @@ public class partialMaturityPayment {
 	public void setTeamMemberName(String teamMemberName) {
 		this.teamMemberName = teamMemberName;
 	}
+	public String getPanelty() {
+		return panelty;
+	}
+	public void setPanelty(String panelty) {
+		this.panelty = panelty;
+	}
+	public String getInstallment() {
+		return installment;
+	}
+	public void setInstallment(String installment) {
+		this.installment = installment;
+	}
 	public String getAmount() {
 		return amount;
 	}
@@ -145,10 +161,10 @@ public class partialMaturityPayment {
 	public void setDueAmount(String dueAmount) {
 		this.dueAmount = dueAmount;
 	}
-	public LocalDate getPaymentDate() {
+	public String getPaymentDate() {
 		return paymentDate;
 	}
-	public void setPaymentDate(LocalDate paymentDate) {
+	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	public String getBranchName() {
@@ -169,13 +185,6 @@ public class partialMaturityPayment {
 	public void setModeofPayment(String modeofPayment) {
 		this.modeofPayment = modeofPayment;
 	}
-	public String getMaturityDate() {
-		return maturityDate;
-	}
-	public void setMaturityDate(String maturityDate) {
-		this.maturityDate = maturityDate;
-	}
-	
 	
 	
 }

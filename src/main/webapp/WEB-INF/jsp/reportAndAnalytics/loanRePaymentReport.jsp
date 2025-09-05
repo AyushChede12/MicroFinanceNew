@@ -149,7 +149,25 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 
-
+<!-- Modal -->
+<div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="printModalLabel">Loan Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalDataContainer">
+        <!-- Policy details will be populated here -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="printBtn" class="btn btn-primary">Print</button>
+        <button type="button" id="downloadBtn" class="btn btn-success">Download PDF</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
