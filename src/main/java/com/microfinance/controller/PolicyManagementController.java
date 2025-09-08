@@ -14,7 +14,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.PolicyManagementDto;
+import com.microfinance.dto.SavingAccountDto;
 import com.microfinance.model.AddnewinvestmentPM;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
@@ -28,11 +31,6 @@ import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.service.PolicyManagementService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/api/Policymangment")
@@ -845,30 +843,16 @@ public class PolicyManagementController {
 					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
 		}
 
-
 		return ResponseEntity
 				.ok(new ApiResponse<>(HttpStatus.OK, "Approved policies fetched successfully", approvedList));
 
+		// return ResponseEntity.ok(response);
 
-
-    
-  // return ResponseEntity.ok(response);
-
-    
-
-    
-   //return ResponseEntity.ok(response);
-
+		// return ResponseEntity.ok(response);
 
 	}
 
-
-    
-   //return ResponseEntity.ok(response);
-
-
-
-
+	// return ResponseEntity.ok(response);
 
 	@PostMapping("/updateinvestment")
 	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> updateInvestment(@RequestBody AddnewinvestmentPM invest) {
@@ -888,8 +872,8 @@ public class PolicyManagementController {
 		}
 	}
 
-	@GetMapping("/findPolicyData/{policyCode}")
-	public ResponseEntity<ApiResponse<?>> findPolicyData(@PathVariable String policyCode) {
+	@GetMapping("/findPolicyData")
+	public ResponseEntity<ApiResponse<?>> findPolicyData(@RequestParam String policyCode) {
 
 		List<FlexibleRenewal> fdData = policyManagementService.findBypolicyCode(policyCode);
 		if (!fdData.isEmpty()) {
@@ -910,9 +894,31 @@ public class PolicyManagementController {
 				.body(ApiResponse.error(HttpStatus.NOT_FOUND, "No policy data found for policyCode: " + policyCode));
 	}
 
+	// Ayush
+	@PostMapping("/saveandupdateAddInvestment")
+	public ResponseEntity<ApiResponse<AddnewinvestmentPM>> saveandupdateAddInvestmentDetails(
+			@ModelAttribute PolicyManagementDto policyManagementDto,
+			@RequestParam(value = "image1", required = false) String image1,
+			@RequestParam(value = "image2", required = false) String image2) {
 
+		String customerCode = policyManagementDto.getMemberSelection(); // assuming it's Long
+
+		// Check for existing record before saving (only for new entries)
+		if (policyManagementDto.getId() == null && policyManagementService.existByMemberSelection(customerCode)) {
+			return ResponseEntity.status(HttpStatus.CONFLICT)
+					.body(new ApiResponse<>(HttpStatus.CONFLICT, "Customer already exists in Policy", null));
+		}
+
+		System.out.println("Received photo: " + image1);
+
+		System.out.println("Received signature: " + image2);
+
+		ApiResponse<AddnewinvestmentPM> response = policyManagementService.saveandupdateAddInvestmentDetails(policyManagementDto, image1,
+				image2);
+		// return new ResponseEntity<>(response, response.getStatus());
+		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+				policyManagementDto.getId() != null ? "✅ Investment Updated successfully" : "✅ Investment saved successfully",
+				response.getData()));
+	}
 
 }
-
-
-	

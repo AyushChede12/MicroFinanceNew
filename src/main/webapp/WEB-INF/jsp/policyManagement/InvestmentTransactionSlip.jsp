@@ -66,11 +66,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="col-lg-12 mb-4 ">
 								<div class="d-flex flex-column formFields">
-									<label for="">Find by Policy Number*</label> <select
+									<label for="">Find by Policy Code <span class="star">*</span></label> <select
 										id="findPolicyNumber" name="findPolicyNumber"
 										required="required" class="form-control selectField"
 										style="height: 30px;">
-										<option value="">Select Branch Name</option>
+										<option value="">Select Policy Code</option>
 
 									</select>
 								</div>
@@ -84,7 +84,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row" style="margin-top: 20px; margin-left: 750px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btn btn-dark">Find</button>
+								<button type="button" id="findBtn" class="btn btn-dark">Find</button>
 							</div>
 						</div>
 

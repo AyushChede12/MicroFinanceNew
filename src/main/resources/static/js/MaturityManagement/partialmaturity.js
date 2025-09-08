@@ -77,6 +77,7 @@ $(document).ready(function () {
 						$('#netPayable').val(netPayment(data)); //dunction netpay(data)
 					$('#amount').off('blur').on('blur', function () {
 						$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
+						
 						});
 						
 						
