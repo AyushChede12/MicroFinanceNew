@@ -98,29 +98,42 @@ $(document).ready(function() {
 	$("#buttonSave").click(function(e) {
 		e.preventDefault(); // Prevent default form submission
 
-		// Collect only required data for the API
+		// Prepare data for API
 		const formData = {
-			policyCode: $("#policyCode").val(),
-			policyAmount: $("#policyAmount").val(),
-			noOfInstallments: $("#noOfInst").val() // ✅ Fixed key name
+			policyCode: $("#policyCode").val()?.trim() || "",
+			policyAmount: parseFloat($("#policyAmount").val()) || 0,
+			noOfInstallments: parseInt($("#noOfInst").val()) || 0
 		};
 
-		// Send to backend
+		// Basic validation before sending
+		if (!formData.policyCode) {
+			alert("❌ Policy Code is required.");
+			return;
+		}
+		if (formData.policyAmount <= 0) {
+			alert("❌ Policy Amount must be greater than 0.");
+			return;
+		}
+		if (formData.noOfInstallments <= 0) {
+			alert("❌ Number of Installments must be greater than 0.");
+			return;
+		}
+
+		// Send AJAX request
 		$.ajax({
 			url: "api/Policymangment/updateDDDueAndInstallment",
 			type: "POST",
-			contentType: "application/json",
 			data: JSON.stringify(formData),
+			contentType: "application/json",
 			success: function(response) {
 				alert("✅ " + response.message);
-
-				location.reload();
-				// Optionally reset form or reload table
-				// $("#formid")[0].reset();
+				location.reload(); // Reload page to reflect updates
 			},
 			error: function(xhr) {
-				alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+				const errMsg = xhr.responseJSON?.message || "Something went wrong.";
+				alert("❌ Error: " + errMsg);
 			}
 		});
 	});
 });
+
