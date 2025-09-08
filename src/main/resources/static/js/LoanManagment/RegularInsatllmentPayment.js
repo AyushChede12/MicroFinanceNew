@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 			// First AJAX - Loan Details
 			$.ajax({
-				url: "/api/loanmanegment/getLoanById",
+				url: "api/loanmanegment/getLoanById",
 				type: "GET",
 				data: { loanId: selectedLoanId },
 				dataType: "json",

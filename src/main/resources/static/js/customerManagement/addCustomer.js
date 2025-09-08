@@ -64,9 +64,10 @@ $(document).ready(function () {
 
         // Dynamic base path for both localhost and online server
         const contextPath = window.location.pathname.split('/')[1]; // e.g., "Microfinance"
-        const fullUrl = `${window.location.origin}/${contextPath}/api/customermanagement/saveOrUpdateCustomer`;
+        const fullUrl = `${window.location.origin}/api/customermanagement/saveOrUpdateCustomer`;
 
         // Optional: log for debugging
+		console.log("Context Pth: ", contextPath);
         console.log("POST to URL: ", fullUrl);
 
         // AJAX call
@@ -194,7 +195,7 @@ $(document).ready(function () {
     const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
 
     $.ajax({
-        url: "/api/preference/getAllRelativeModule", // Ensure correct server path
+        url: "api/preference/getAllRelativeModule", // Ensure correct server path
         method: "GET",
         success: function (data) {
             console.log("Received relation data:", data);
@@ -229,7 +230,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     // Fetch all branches and populate the dropdown
     $.ajax({
-        url: "/api/preference/getAllBranchModule", // Ensure correct API path
+        url: "api/preference/getAllBranchModule", // Ensure correct API path
         method: "GET",
         success: function (data) {
             console.log("Fetched Branches:", data);
@@ -347,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function() {
 $(document).ready(function() {
 	// Fetch all customers and populate the "select by code" dropdown
 	$.ajax({
-		url: "getAllCustomer",
+		url: "api/customermanagement/getAllCustomer",
 		method: "GET",
 		success: function(data) {
 			console.log("Fetched Members:", data);

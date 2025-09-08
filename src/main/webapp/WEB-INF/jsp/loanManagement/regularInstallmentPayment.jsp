@@ -168,13 +168,13 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Total Principle Of Loan</label> <input type="text"
 									name="totalPrincipalloan" id="totalPrincipalloan"
 									required="required" placeholder="Enter Total Principle Of Loan" />
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -211,13 +211,13 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Interest Due </label> <input type="text"
 									name="dueInterest" id="dueInterest" required="required"
 									placeholder="Enter Location" />
 							</div>
-						</div>
+						</div> -->
 
 
 						<div class="col-lg-3">
@@ -231,13 +231,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for=""> Principle Due </label> <input type="text"
 									name="duePrincipal" id="duePrincipal" required="required"
 									placeholder="Enter Location" />
 							</div>
-						</div>
+						</div> -->
 
 
 						<div class="col-lg-3">
@@ -292,13 +292,13 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Down Payment</label>
 								<textarea name="downPayment" id="downPayment"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -326,14 +326,14 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-				<div class="row mt-4">
+				<!-- <div class="row mt-4">
 					<div class="col-12 text-center">
 						<button id="saveBtn" class="btnStyle bg-success">Save</button>
 						<button id="saveBtn" class="btnStyle"
 							style="background-color: #FFA500;">Update</button>
 						<button id="saveBtn" class="btnStyle bg-primary">Print</button>
 					</div>
-				</div>
+				</div> -->
 			</form>
 
 
