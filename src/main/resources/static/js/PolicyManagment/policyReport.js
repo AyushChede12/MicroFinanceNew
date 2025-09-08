@@ -2,7 +2,7 @@ $(document).ready(function() {
 	const $policyDropdown = $('#findByPolicyNumber');
 
 	// Clear and set default option
-	$policyDropdown.empty().append('<option value="">Select Policy Number</option>');
+	$policyDropdown.empty().append('<option value="">Select Policy Code</option>');
 
 	// Fetch approved policy data
 	fetchApprovedPolicies();
@@ -137,7 +137,7 @@ $(document).ready(function() {
 	const $policyDropdown = $('#findPolicyNumber');
 
 	// Clear and set default option
-	$policyDropdown.empty().append('<option value="">Select Policy Number</option>');
+	$policyDropdown.empty().append('<option value="">Select Policy Code</option>');
 
 	// Fetch approved policy data
 	fetchApprovedPolicies();

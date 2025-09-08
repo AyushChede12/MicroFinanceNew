@@ -62,10 +62,10 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="row align-items-center mb-4">
 					<!-- Dropdown -->
 					<div class="col-md-6 d-flex align-items-center">
-						<label class="mr-2 mb-0">Find by Policy Number*</label> <select
+						<label class="mr-2 mb-0">Find by Policy Code*</label> <select
 							id="findByPolicyNumber" name="findByPolicyNumber"
 							class="form-control w-50">
-							<option value="">Select Policy Number</option>
+							<option value="">Select Policy Code</option>
 						</select>
 					</div>
 

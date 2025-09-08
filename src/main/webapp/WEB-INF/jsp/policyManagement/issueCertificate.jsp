@@ -90,10 +90,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="col-lg-12 mb-4 ">
 								<div class="d-flex flex-column formFields">
-									<label for="">Find by Policy Number*</label> <select
+									<label for="">Find by Policy Code <span class="star">*</span></label> <select
 										id="policyCode" name="policyCode" required="required"
 										class="form-control selectField" style="height: 30px;">
-										<option value="">Select Policy Number</option>
+										<option value="">Select Policy Code</option>
 
 									</select>
 								</div>

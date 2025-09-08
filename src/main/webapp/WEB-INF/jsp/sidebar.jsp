@@ -431,7 +431,7 @@
 								Certificate</span>
 					</a></li>
 
-					<li><a href="reissueCertificate"> <i class="bi bi-circle"></i>
+					<!-- <li><a href="reissueCertificate"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">ReIssue
 								Certificate</span>
 					</a></li>
@@ -444,7 +444,7 @@
 					<li><a href="interestPayable"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Interest
 								Payable</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="investmentDataSearch"> <i
 							class="bi bi-circle"></i> <span
