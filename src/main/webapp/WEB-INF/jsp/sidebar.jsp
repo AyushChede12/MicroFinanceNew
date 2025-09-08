@@ -339,119 +339,11 @@
             </a>
           </li> -->
 
-
 					<li><a href="savingsAccountStatement"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Customer
 								Savings Statement</span>
 					</a></li>
-
-          <li>
-            <a href="addNewInvestment">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Add New Investment</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="policyRenewalFee">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Recurring Premium Renewal</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="dailyPremiumRenewal">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Daily premium Renewal</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="flexiblePremiumRenewal">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Flexible Premium Renewal</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="installmentRecordBook">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Installment Record Book</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="InvestmentTransactionSlip">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Investment Transaction Slip</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="recurringPaymentReceipt">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Recurring Payment Receipt</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="issueCertificate">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Issue Certificate</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="reissueCertificate">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">ReIssue Certificate</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="interestDetails">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Interest Details</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="interestPayable">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Interest Payable</span>
-            </a>
-          </li>
-          
-          <li>
-            <a href="investmentDataSearch">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Investment Data Search</span>
-            </a>
-          </li>
-          
-        </ul>
-      </li>
-      
-      
-     <!--  Loan Management -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#loan-section" data-toggle="collapse">
-          <div class="d-flex">
-            <i class="bi bi-cash-coin text-white"></i>
-            <span style="font-family: 'Poppins', sans-serif">Loan Management</span>
-          </div>
-          <i class="bi bi-chevron-down"></i>
-        </a>
-
-        <ul id="loan-section" class="nav-content collapse">
-          <li>
-            <a href="loanSchemeCatalog">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Loan Scheme Catalog</span>
-            </a>
-          </li>
-
 
 					<li><a href="savingsAccountCloser"> <i
 							class="bi bi-circle"></i> <span
@@ -539,7 +431,7 @@
 								Certificate</span>
 					</a></li>
 
-					<li><a href="reissueCertificate"> <i class="bi bi-circle"></i>
+					<!-- <li><a href="reissueCertificate"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">ReIssue
 								Certificate</span>
 					</a></li>
@@ -552,12 +444,11 @@
 					<li><a href="interestPayable"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Interest
 								Payable</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="investmentDataSearch"> <i
 							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Investment Data
-								Search</span>
+							style="font-family: 'Poppins', sans-serif">Search Policy </span>
 					</a></li>
 
 				</ul></li>
@@ -622,16 +513,14 @@
 								Statement</span>
 					</a></li>
 
-					<li><a href="loanDocumentPrintLoanManagement"> <i
-							class="bi bi-circle"></i> <span
+					<li><a href="model"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Generate Loan
 								Documents</span>
 					</a></li>
 
-					<li><a href="earlyLoanClosureLoan"> <i
-							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Early Loan
-								Closure</span>
+					<li><a href="earlyLoanClosure"> <i class="bi bi-circle"></i>
+							<span style="font-family: 'Poppins', sans-serif">Early
+								Loan Closure</span>
 					</a></li>
 
 					<li><a href="settleLoanRecords"> <i class="bi bi-circle"></i>
@@ -721,6 +610,8 @@
 
 				</ul></li>
 
+
+
 			<!-- Joint Liability Loan -->
 			<li class="nav-item"><a class="nav-link collapsed"
 				href="#group-loan-section" data-toggle="collapse">
@@ -767,10 +658,9 @@
 								of Account</span>
 					</a></li>
 
-					<li><a href="earlyLoanClosureJointLiability"> <i
-							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Early Loan
-								Closure</span>
+					<li><a href="earlyLoanClosure"> <i class="bi bi-circle"></i>
+							<span style="font-family: 'Poppins', sans-serif">Early
+								Loan Closure</span>
 					</a></li>
 
 					<li><a href="completedLoansRecord"> <i
@@ -830,6 +720,11 @@
 							style="font-family: 'Poppins', sans-serif">Approve DD</span>
 					</a></li>
 
+					<li><a href="approveRecurring"> <i class="bi bi-circle"></i>
+							<span style="font-family: 'Poppins', sans-serif">Approve
+								Recurring Deposits</span>
+					</a></li>
+
 					<li><a href="approveSaving"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Approve
 								Saving Transactions</span>
@@ -860,6 +755,11 @@
 					<li><a href="approveMaturityApp"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Approve
 								Maturity Applications</span>
+					</a></li>
+
+					<li><a href="deleteMaturityApp"> <i class="bi bi-circle"></i>
+							<span style="font-family: 'Poppins', sans-serif">Delete
+								Maturity Application Request</span>
 					</a></li>
 
 					<li><a href="approveInterBranchCashTransfer"> <i
@@ -1188,12 +1088,11 @@
 								Installment Due Report</span>
 					</a></li>
 
-					<!-- <li>
-            <a href="unApprovedLoanApplications">
-              <i class="bi bi-circle"></i>
-              <span style="font-family: 'Poppins', sans-serif">Unapproved Loan Applications</span>
-            </a>
-          </li> -->
+					<li><a href="unApprovedLoanApplications"> <i
+							class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Unapproved Loan
+								Applications</span>
+					</a></li>
 
 					<li><a href="approvedLoanReport"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Approved

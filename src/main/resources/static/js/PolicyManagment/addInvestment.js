@@ -494,8 +494,8 @@ $("#saveBtn").click(function(e) {
 			formData.append("smsSend", $('#toggle-sms-send').is(':checked') ? "1" : "0");
 			formData.append("lastInstPaid", "1");
 
-			formData.append("photo", $('#photoHidden').val());
-			formData.append("signature", $('#signatureHidden').val());
+			formData.append("image1", $('#photoHidden').val());
+			formData.append("image2", $('#signatureHidden').val());
 
 			// Step 4: Send POST request with multipart/form-data
 			$.ajax({
@@ -510,6 +510,7 @@ $("#saveBtn").click(function(e) {
 				},
 				error: function(xhr) {
 					alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+					location.reload();
 				}
 			});
 		},

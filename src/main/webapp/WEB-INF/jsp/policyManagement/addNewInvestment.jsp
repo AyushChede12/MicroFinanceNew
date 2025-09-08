@@ -343,8 +343,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="photo" id="drop-area"> <input
-								accept="image/*" name="photo" id="photo"
+								Photo</label> <label for="image1" id="drop-area"> <input
+								accept="image/*" name="image1" id="image1"
 								hidden="hidden" onchange="photopreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
@@ -359,9 +359,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="signature" id="drop-area"> <input
-								accept="image/*" name="signature"
-								id="signature" hidden="hidden" onchange="signpreview();"
+								Signature</label> <label for="image2" id="drop-area"> <input
+								accept="image/*" name="image2"
+								id="image2" hidden="hidden" onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">								
 									<img src="../images/upload/upload.png" alt="upload_icon"
