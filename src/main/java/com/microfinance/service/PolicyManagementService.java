@@ -371,8 +371,13 @@ public class PolicyManagementService {
 	public List<AddnewinvestmentPM> getAllInvestments() {
 		return addinvestmentrepo.findAll();
 	}
-
+	
 	public List<AddnewinvestmentPM> getAllPolicyManagementData() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findAll();
+	}
+
+	public List<AddnewinvestmentPM> x() {
 		// TODO Auto-generated method stub
 		return addinvestmentrepo.findAll();
 	}
