@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	// SAVE Button
 	$("#saveBtn").on("click", function() {
 		submitGoldLoanForm("save");
@@ -15,7 +14,6 @@ $(document).ready(function() {
 
 		const goldLoanData = {
 			id: mode === "update" && id ? parseInt(id) : null,
-			//loanSchemeCode: $("#loanSchemeCode").val(),
 			loanPlanName: $("#loanPlanName").val(),
 			typeOfLoan: $("#typeOfLoan").val(),
 			loanMode: $("#loanMode").val(),
@@ -26,8 +24,6 @@ $(document).ready(function() {
 			minAmt: $("#minAmt").val(),
 			maxAmt: $("#maxAmt").val(),
 			minTerm: $("#minTerm").val(),
-
-
 			maxTerm: $("#maxTerm").val(),
 			rateInterestType: $("#rateInterestType").val(),
 			securityType: $("#securityType").val(),
@@ -39,11 +35,9 @@ $(document).ready(function() {
 			gst: $("#gst").val(),
 			insuFee: $("#insuFee").val(),
 			valuFee: $("#valuFee").val(),
-			
+
 			lateAllowanceDay: $("#lateAllowanceDay").val(),
 			penaltyMode: $("#penaltyMode").val(),
-
-			// ✅ Toggle value for Plan Status
 			monthlyPenalty: $("#monthlyPenalty").val()
 		};
 
@@ -54,7 +48,8 @@ $(document).ready(function() {
 			dataType: "json",
 			data: JSON.stringify(goldLoanData),
 			success: function(response) {
-				if (response.status === "OK") {
+				// ✅ Check numeric status code instead of "OK"
+				if ((response.status === 200 || response.status === "OK")) {
 					alert("Gold Data Saved Successfully");
 					loadLoanTable(); // refresh the table
 				} else {
@@ -67,5 +62,99 @@ $(document).ready(function() {
 		});
 	}
 
+	// Initial table load
 	loadLoanTable();
 });
+
+function loadLoanTable() {
+	$.ajax({
+		url: "api/securedGoldLoan/allDataFetchGoldSecurePlan",
+		type: "GET",
+		dataType: "json",
+		success: function(response) {
+			let rows = "";
+
+			// ✅ Handle status properly (200 or "OK")
+			if ((response.status === 200 || response.status === "OK") && Array.isArray(response.data)) {
+				response.data.forEach(function(loan) {
+					rows += `
+                        <tr>
+                            <td>${loan.id}</td>
+                            <td>${loan.loanPlanName || "-"}</td>
+                            <td>${loan.typeOfLoan || "-"}</td>
+                            <td>${loan.minAge || "-"}</td>
+                            <td>${loan.maxAge || "-"}</td>
+                            <td>${loan.emiType || "-"}</td>
+                            <td>
+                                <button class="btn btn-sm btn-warning" onclick="editLoanById(${loan.id})">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" onclick="deleteLoan(${loan.id})">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+				});
+			} else {
+				rows = "<tr><td colspan='9'>No data found</td></tr>";
+			}
+
+			$("#loanTableBody").html(rows);
+		},
+		error: function(xhr) {
+			console.error("Error loading table:", xhr.statusText);
+			$("#loanTableBody").html("<tr><td colspan='9'>Error loading data</td></tr>");
+		}
+	});
+}
+
+function editLoanById(id) {
+	$.ajax({
+		url: "api/securedGoldLoan/getGoldLoanByIdEdite",
+		type: "GET",
+		data: { id: id },
+		success: function(response) {
+			if (response.status === "OK") {
+				const loan = response.data;
+
+				$('#goldLoanId').val(loan.id); // Hidden field
+				$('#loanPlanName').val(loan.loanPlanName);
+				$('#typeOfLoan').val(loan.typeOfLoan);
+				$('#loanMode').val(loan.loanMode);
+				$('#interestType').val(loan.interestType);
+				$('#emiType').val(loan.emiType);
+				$('#minAge').val(loan.minAge);
+				$('#maxAge').val(loan.maxAge);
+				$('#minAmt').val(loan.minAmt);
+				$('#maxAmt').val(loan.maxAmt);
+				$('#minTerm').val(loan.minTerm);
+
+				$('#maxTerm').val(loan.maxTerm);
+				$('#rateInterestType').val(loan.rateInterestType);
+				$('#securityType').val(loan.securityType);
+
+
+				$('#procFee').val(loan.procFee);
+				$('#legalCharge').val(loan.legalCharge);
+				$('#gst').val(loan.gst);
+				$('#insuFee').val(loan.insuFee);
+				$('#valuFee').val(loan.valuFee);
+				$('#lateAllowanceDay').val(loan.lateAllowanceDay);
+				$('#penaltyMode').val(loan.penaltyMode);
+				$('#monthlyPenalty').val(loan.monthlyPenalty);
+
+				// ✅ Set toggle checked based on planStatus value
+				$('#toggle-plan-status').prop('checked', parseInt(loan.planStatus) === 1);
+				updateToggleColor(document.getElementById('planStatus'));
+			} else {
+				alert("Gold Loan not found: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			alert("Error fetching loan details: " + xhr.responseText);
+		}
+	});
+}
