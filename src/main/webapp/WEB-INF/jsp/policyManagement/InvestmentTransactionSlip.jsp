@@ -29,9 +29,10 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-        integrity="sha512-YcsIPjYnCmvYp+3mYImENxPlzCP5kafO9ZqzPIP0Lg3AzAv6r6kTTZf1TzLn14RwK55CUNIMSuq66UQBqkzgog=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+	integrity="sha512-YcsIPjYnCmvYp+3mYImENxPlzCP5kafO9ZqzPIP0Lg3AzAv6r6kTTZf1TzLn14RwK55CUNIMSuq66UQBqkzgog=="
+	crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -66,11 +67,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="col-lg-12 mb-4 ">
 								<div class="d-flex flex-column formFields">
-									<label for="">Find by Policy Number*</label> <select
-										id="findPolicyNumber" name="findPolicyNumber"
+									<label for="">Find by Policy Code <span class="star">*</span></label>
+									<select id="findPolicyNumber" name="findPolicyNumber"
 										required="required" class="form-control selectField"
 										style="height: 30px;">
-										<option value="">Select Policy Number</option>
+										<option value="">Select Policy Code</option>
 
 									</select>
 								</div>
@@ -128,12 +129,10 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
-
+					
 					<br> <br> <br> <br> <br> <br> <br>
-					<div class="mb-3" style="display:flex; justify-content: end">
-						<button id="printBtn" class="btn btn-success">Print
-							</button>
-					</div>	
+
+
 					<div id="transactionSection" class="transaction-section">
 						<div style="width: 70%; margin: auto">
 							<h1>Microfinance Services</h1>
@@ -224,6 +223,11 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 
+					<br> <br> <br> <br> <br> <br> <br>
+					<div class="mb-4" style="display: flex; justify-content: center; margin-top: -55px;">
+						<button id="printBtn" class="btn btn-success">Print</button>
+					</div>
+
 
 				</div>
 			</form>
@@ -234,10 +238,11 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/PolicyManagment/policyReport.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!-- Load html2pdf -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+	<!-- Load html2pdf -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-<script>
+	<script>
     document.getElementById("printBtn").addEventListener("click", function () {
         const printContent = document.getElementById("transactionSection").innerHTML;
 
