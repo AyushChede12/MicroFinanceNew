@@ -644,3 +644,23 @@ function signatureSizeEdit(e) {
 	previewimg.style.overflow = "hidden";
 	previewimg.style.borderRadius = "20px";
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+	const toggles = document.querySelectorAll('.toggle__input');
+
+	toggles.forEach((toggle) => {
+		updateToggleColor(toggle);
+
+		toggle.addEventListener('change', () => {
+			updateToggleColor(toggle);
+			console.log(`${toggle.dataset.toggleType} is now ${toggle.checked}`);
+		});
+	});
+
+	function updateToggleColor(input) {
+		const label = input.nextElementSibling;
+		if (label) {
+			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
+		}
+	}
+});

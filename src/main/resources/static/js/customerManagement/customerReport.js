@@ -2,7 +2,7 @@ let allCustomers = []; // ⬅️ Add this at the top
 
 $(document).ready(function () {
     $.ajax({
-        url: "/api/customermanagement/getAllCustomer",
+        url: "api/customermanagement/getAllCustomer",
         type: "GET",
         success: function (data) {
             allCustomers = data; // Store data globally

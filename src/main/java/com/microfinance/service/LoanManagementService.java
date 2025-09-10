@@ -362,5 +362,9 @@ public class LoanManagementService {
 		return loanPaymentRepo.findByLoanId(loanId);
 	}
 
+	public LoanPayment fetchLoanPaymentByLoanIdAndInst(String loanId, String remarks) {
+	    return loanPaymentRepo.findByLoanIdAndNoOfInst(loanId, remarks);
+	}
+
 	
 }

@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 			// First AJAX - Loan Details
 			$.ajax({
-				url: "/api/loanmanegment/getLoanById",
+				url: "api/loanmanegment/getLoanById",
 				type: "GET",
 				data: { loanId: selectedLoanId },
 				dataType: "json",
@@ -98,51 +98,44 @@ $(document).ready(function() {
 					alert("Error fetching Payment Data: " + xhr.responseText);
 				}
 			});
-			
+		}	
+		
+		});
+		});
+		
 			$("#installment").on("change", function () {
-			        const selectedInstallment = $(this).val(); 
-					alert(selectedInstallment);
-			        const loanId = $("#loanID").val(); 
-					alert(loanId);
-			        if (loanId && selectedInstallment) {
-			            $.ajax({
-			                url: "/api/loanmanegment/fetchLoanPaymentsByLoanId",
-			                type: "GET",
-			                data: { selectedInstallment: selectedInstallment },
-			                dataType: "json",
-			                success: function (response) {
-			                    if (response.status === "OK" && response.data) {
-			                        const installments = response.data.installments; 
-			                       
-			                        const installmentData = installments.find(i => i.installmentNo == selectedInstallment);
+			    const selectedInstallment = $(this).val();
+			    const loanId = $("#loanID").val(); 
 
-			                        if (installmentData) {
-			                            // Populate Payment Details form
-			                            $("#dueInterest").val(installmentData.interestDue);
-			                            $("#duePrincipal").val(installmentData.principalDue);
-			                            $("#dueAmounttotal").val(installmentData.amountDue);
-			                            $("#paymentAmount").val(installmentData.emiPayment);
-			                            $("#netAmount").val(installmentData.loanAmount);
-			                            //$("#registrationDate").val(installmentData.registrationDate);
-			                            //$("#dueDate").val(installmentData.dueDate);
-			                        } else {
-			                            alert("Installment data not found.");
-			                        }
+			    if (loanId && selectedInstallment) {
+			        $.ajax({
+			            url: "api/loanmanegment/fetchLoanPaymentByLoanIdAndInst",
+			            type: "GET",
+			            data: { 
+			                loanId: loanId, 
+			                remarks: selectedInstallment 
+			            },
+			            dataType: "json",
+			            success: function (response) {
+			                if (response.status === "OK" && response.data) {
+			                    const installmentData = response.data; 
 
-			                    } else {
-			                        alert("Loan payment data not found.");
-			                    }
-			                },
-			                error: function (xhr) {
-			                    alert("Error fetching installment data: " + xhr.responseText);
+			                    // Populate Payment Details form
+			                    $("#dueInterest").val(installmentData.interestDue || "");
+			                    $("#duePrincipal").val(installmentData.principalDue || "");
+			                    $("#dueAmounttotal").val(installmentData.amountDue || "");
+			                    $("#paymentAmount").val(installmentData.emiPayment || "");
+			                    $("#netAmount").val(installmentData.loanAmount || "");
+			                    $("#PaymentDate").val(installmentData.paymentDate || "");
+			                    $("#registrationDate").val(installmentData.loanDate || "");
+
+			                } else {
+			                    alert("Loan payment data not found.");
 			                }
-			            });
-			        }
-			    });
-		}
-	});
-});
-
-/*$(document).ready(function () {
-    
-});*/
+			            },
+			            error: function (xhr) {
+			                alert("Error fetching installment data: " + xhr.responseText);
+			            }
+			        });
+			    }
+			});

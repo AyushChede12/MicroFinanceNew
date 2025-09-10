@@ -78,7 +78,6 @@ $(document).ready(function() {
 						$("#nomineeName").val(data.suggestedNominee);
 						$("#comment").val(data.remark);
 						$("#agentName").val(data.agent);
-						alert(data.customerPhoto);
 
 						if (data.customerPhoto) {
 							const photoPath = `Uploads/${data.customerPhoto}`;
@@ -289,45 +288,54 @@ $("#viewBtn").on("click", function() {
 		dataType: "json", // ensure response is parsed as JSON
 		data: { policyCode: selectedPolicyCode },
 		success: function(response) {
-			const $tbody = $("#installmentModal tbody"); // make sure your modal table has tbody
+			console.log("✅ Full Response:", response);
+
+			const $tbody = $("#installmentModal tbody");
 			let rowsHtml = "";
 
-			if (response && response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
-				response.data.forEach((inst, index) => {
+			let installments = [];
+
+			if (response && response.status === "OK") {
+				if (Array.isArray(response.data)) {
+					installments = response.data;
+				} else if (response.data) {
+					installments = [response.data]; // wrap single object into array
+				}
+			}
+
+			if (installments.length > 0) {
+				installments.forEach((inst, index) => {
 					const srNo = index + 1;
 					const dueDate = inst.dueDate || "-";
-					const paymentDate = inst.paymentDate || "-"; // <-- FIXED FIELD NAME
+					const paymentDate = inst.paymentDate || "-";
 					const amount = inst.amount
-						? `₹${Number(inst.amount).toLocaleString("en-IN")}`
-						: "₹0";
+						? `INR ${Number(inst.amount).toLocaleString("en-IN")}`
+						: "INR 0";
 					const status = inst.status || "-";
 
 					rowsHtml += `
-                        <tr>
-                            <td>${srNo}</td>
-                            <td>${dueDate}</td>
-                            <td>${amount}</td>
-                            <td>${status}</td>
-                            <td>${paymentDate}</td>
-                        </tr>
-                    `;
+		        <tr>
+		          <td>${srNo}</td>
+		          <td>${dueDate}</td>
+		          <td>${amount}</td>
+		          <td>${status}</td>
+		          <td>${paymentDate}</td>
+		        </tr>
+		      `;
 				});
 			} else {
 				rowsHtml = `
-                    <tr>
-                        <td colspan="5" class="text-center text-danger">
-                            No installment data found for this policy.
-                        </td>
-                    </tr>
-                `;
+		      <tr>
+		        <td colspan="5" class="text-center text-danger">
+		          No installment data found for this policy.
+		        </td>
+		      </tr>
+		    `;
 			}
 
-			$tbody.html(rowsHtml); // Update table at once
-		},
-		error: function(xhr, status, error) {
-			console.error("AJAX Error:", status, error);
-			alert("Failed to fetch installments! Please try again.");
+			$tbody.html(rowsHtml);
 		}
+
 	});
 });
 
