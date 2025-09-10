@@ -1,12 +1,17 @@
 package com.microfinance.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
 
+import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.FullMaturity;
 
 @Repository
 public interface FullMaturityRepo extends JpaRepository<FullMaturity, Long> {
+	
+	Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode);
 
 }

@@ -283,9 +283,9 @@ $("#viewBtn").on("click", function() {
 	}
 
 	$.ajax({
-		url: "api/Policymangment/getPolicyByPolicyCode", // <-- your API endpoint
+		url: "api/Policymangment/getFullMaturityByPolicyCode",
 		type: "GET",
-		dataType: "json", // ensure response is parsed as JSON
+		dataType: "json",
 		data: { policyCode: selectedPolicyCode },
 		success: function(response) {
 			console.log("✅ Full Response:", response);
@@ -299,44 +299,60 @@ $("#viewBtn").on("click", function() {
 				if (Array.isArray(response.data)) {
 					installments = response.data;
 				} else if (response.data) {
-					installments = [response.data]; // wrap single object into array
+					installments = [response.data];
 				}
 			}
 
 			if (installments.length > 0) {
 				installments.forEach((inst, index) => {
 					const srNo = index + 1;
-					const dueDate = inst.dueDate || "-";
-					const paymentDate = inst.paymentDate || "-";
+
+					// Dates parsing
+					const paymentDateStr = inst.paymentDate || null;
+					const currentDate = new Date();
+
+					// Difference calculation
+					let diffDays = "-";
+					if (paymentDateStr) {
+						const paymentDate = new Date(paymentDateStr);
+						const diffMs = paymentDate - currentDate;
+						diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+					}
+
+					// ✅ Status Logic
+					const status = paymentDateStr && paymentDateStr.trim() !== ""
+						? `<span class="text-success fw-bold">Paid</span>`
+						: `<span class="text-danger fw-bold">Unpaid</span>`;
+
 					const amount = inst.amount
 						? `INR ${Number(inst.amount).toLocaleString("en-IN")}`
 						: "INR 0";
-					const status = inst.status || "-";
 
 					rowsHtml += `
-		        <tr>
-		          <td>${srNo}</td>
-		          <td>${dueDate}</td>
-		          <td>${amount}</td>
-		          <td>${status}</td>
-		          <td>${paymentDate}</td>
-		        </tr>
-		      `;
+						<tr>
+						  <td>${srNo}</td>
+						  <td>${diffDays} days</td>
+						  <td>${amount}</td>
+						  <td>${status}</td>
+						  <td>${paymentDateStr || "-"}</td>
+						</tr>
+					`;
 				});
 			} else {
 				rowsHtml = `
-		      <tr>
-		        <td colspan="5" class="text-center text-danger">
-		          No installment data found for this policy.
-		        </td>
-		      </tr>
-		    `;
+					<tr>
+					  <td colspan="5" class="text-center text-danger">
+						No installment data found for this policy.
+					  </td>
+					</tr>
+				`;
 			}
 
 			$tbody.html(rowsHtml);
 		}
-
 	});
 });
+
+
 
 

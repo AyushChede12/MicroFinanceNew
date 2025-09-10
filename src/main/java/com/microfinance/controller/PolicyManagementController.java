@@ -22,6 +22,7 @@ import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
@@ -913,12 +914,29 @@ public class PolicyManagementController {
 
 		System.out.println("Received signature: " + image2);
 
-		ApiResponse<AddnewinvestmentPM> response = policyManagementService.saveandupdateAddInvestmentDetails(policyManagementDto, image1,
-				image2);
+		ApiResponse<AddnewinvestmentPM> response = policyManagementService
+				.saveandupdateAddInvestmentDetails(policyManagementDto, image1, image2);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-				policyManagementDto.getId() != null ? "✅ Investment Updated successfully" : "✅ Investment saved successfully",
+				policyManagementDto.getId() != null ? "✅ Investment Updated successfully"
+						: "✅ Investment saved successfully",
 				response.getData()));
+	}
+
+	@GetMapping("/getFullMaturityByPolicyCode")
+	public ResponseEntity<ApiResponse<FullMaturity>> fetchFullMaturityByPolicyCode(
+			@RequestParam("policyCode") String policyCode) {
+		Optional<FullMaturity> optionalPolicy = policyManagementService.fetchFullMaturityByPolicyCode(policyCode);
+
+		if (optionalPolicy.isPresent()) {
+			ApiResponse<FullMaturity> response = new ApiResponse<>(HttpStatus.OK, "Payment Data found successfully",
+					optionalPolicy.get());
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<FullMaturity> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Payment Data not found for code: " + policyCode, null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 	}
 
 }
