@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.SecuredGoldPlan;
 import com.microfinance.service.SecuredGoldLoanService;
@@ -20,11 +21,11 @@ import com.microfinance.service.SecuredGoldLoanService;
 @RestController
 @RequestMapping("/api/securedGoldLoan")
 public class SecuredGoldLoanController {
-	
+
 	@Autowired
 	private SecuredGoldLoanService secureGoldLoanService;
-	
-	//by poonam for saving and updating Gold Secure Plan on 03/09/2025
+
+	// by poonam for saving and updating Gold Secure Plan on 03/09/2025
 	@PostMapping("/saveGoldSecurePlan")
 	public ResponseEntity<ApiResponse<SecuredGoldPlan>> saveGoldSecurePlanData(@RequestBody SecuredGoldPlan goldLoan) {
 		SecuredGoldPlan savedGoldLoan = secureGoldLoanService.saveLoanManagmentData(goldLoan);
@@ -39,7 +40,7 @@ public class SecuredGoldLoanController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
 		}
 	}
-	
+
 	@GetMapping("/allDataFetchGoldSecurePlan")
 	public ResponseEntity<ApiResponse<List<SecuredGoldPlan>>> allDataFetchGoldSecurePlan() {
 		List<SecuredGoldPlan> list = secureGoldLoanService.allDataFetchGoldSecurePlan();
@@ -54,7 +55,7 @@ public class SecuredGoldLoanController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
 		}
 	}
-	
+
 	@GetMapping("/getGoldLoanByIdEdite")
 	public ResponseEntity<ApiResponse<SecuredGoldPlan>> getLoanById(@RequestParam Long id) {
 		SecuredGoldPlan goldLoan = secureGoldLoanService.getGoldLoanById(id);
@@ -74,5 +75,78 @@ public class SecuredGoldLoanController {
 		}
 	}
 
+	@PostMapping("/deleteGoldLoanById")
+	public ResponseEntity<ApiResponse<SecuredGoldPlan>> deleteGoldLoan(@RequestParam Long id) {
+		boolean deleted = secureGoldLoanService.deleteGoldLoanLoanById(id);
 
+		if (deleted) {
+			ApiResponse<SecuredGoldPlan> response = new ApiResponse<>(HttpStatus.OK, "Gold Loan deleted successfully",
+					null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<SecuredGoldPlan> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Gold Loan not found",
+					null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	// By poonam for GoldDirectory on 11/09/2025
+
+	@PostMapping("/saveGoldDirectory")
+	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestParam(required = false) Long id,
+			@RequestParam String karat, @RequestParam String silverRate, @RequestParam String goldRate,
+			@RequestParam String itemMasterType, @RequestParam String itemName, @RequestParam String lockerLocation,
+			@RequestParam String lockerAddress, @RequestParam String purityName, @RequestParam String purity,
+			@RequestParam String itemPurityType) {
+
+		GoldDirectory saved = secureGoldLoanService.saveOrUpdateGoldDirectory(id, karat, silverRate, goldRate,
+				itemMasterType, itemName, lockerLocation, lockerAddress, purityName, purity, itemPurityType);
+
+		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+				(id == null ? "Row created successfully" : "Row updated successfully"), saved));
+	}
 }
+
+// 1. Save Today's Rate
+/*
+ * @PostMapping("/saveGoldDirectory") public
+ * ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestParam
+ * String karat,
+ * 
+ * @RequestParam String silverRate, @RequestParam String goldRate, @RequestParam
+ * String itemMasterType,
+ * 
+ * @RequestParam String itemName, @RequestParam String
+ * lockerLocation, @RequestParam String lockerAddress,
+ * 
+ * @RequestParam String purityName, @RequestParam String purity, @RequestParam
+ * String itemPurityType) { GoldDirectory saved =
+ * secureGoldLoanService.saveGoldDirectory(karat, silverRate, goldRate,
+ * itemMasterType, itemName, lockerLocation, lockerAddress, purityName, purity,
+ * itemPurityType); return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+ * "Today's rate saved successfully", saved)); }
+ */
+
+// 2. Save Item Master
+//	@PostMapping("/saveItemMaster")
+//	public ResponseEntity<ApiResponse<GoldDirectory>> saveItemMaster(@RequestParam String itemMasterType,
+//			@RequestParam String itemName) {
+//		GoldDirectory saved = secureGoldLoanService.saveItemMaster(itemMasterType, itemName);
+//		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Item Master saved successfully", saved));
+//	}
+//
+//	// 3. Save Locker Master
+//	@PostMapping("/saveLockerMaster")
+//	public ResponseEntity<ApiResponse<GoldDirectory>> saveLockerMaster(@RequestParam String lockerLocation,
+//			@RequestParam String lockerAddress) {
+//		GoldDirectory saved = secureGoldLoanService.saveLockerMaster(lockerLocation, lockerAddress);
+//		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Locker Master saved successfully", saved));
+//	}
+//
+//	// 4. Save Purity Master
+//	@PostMapping("/savePurityMaster")
+//	public ResponseEntity<ApiResponse<GoldDirectory>> savePurityMaster(@RequestParam String purityName,
+//			@RequestParam String purity, @RequestParam String itemPurityType) {
+//		GoldDirectory saved = secureGoldLoanService.savePurityMaster(purityName, purity, itemPurityType);
+//		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Purity Master saved successfully", saved));
+//	}

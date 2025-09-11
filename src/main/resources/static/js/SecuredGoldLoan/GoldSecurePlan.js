@@ -50,7 +50,12 @@ $(document).ready(function() {
 			success: function(response) {
 				// ✅ Check numeric status code instead of "OK"
 				if ((response.status === 200 || response.status === "OK")) {
-					alert("Gold Data Saved Successfully");
+					if(mode=="save"){
+						alert("Gold Data Saved Successfully");
+					}
+					else{
+						alert("Gold Data Updated Successfully");
+					}
 					loadLoanTable(); // refresh the table
 				} else {
 					alert("Failed: " + response.message);
@@ -158,3 +163,35 @@ function editLoanById(id) {
 		}
 	});
 }
+
+function updateToggleColor(input) {
+	const label = input.nextElementSibling;
+	if (input.checked) {
+		label.style.backgroundColor = "#4caf50";  // green
+		label.style.borderColor = "#4caf50";
+	} else {
+		label.style.backgroundColor = "#ccc";  // gray
+		label.style.borderColor = "#ccc";
+	}
+}
+
+function deleteLoan(id) {
+    if (confirm("Are you sure you want to delete this Goldloan?")) {
+        $.ajax({
+            url: "api/securedGoldLoan/deleteGoldLoanById?id=" + id, // pass id as query param
+            type: "POST", // must remain POST because backend uses @PostMapping
+            success: function(response) {
+                if (response.status === "OK" || response.status === 200) {
+                    alert("Loan deleted successfully");
+                    loadLoanTable();
+                } else {
+                    alert("Failed to delete: " + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                alert("Error while deleting loan: " + error);
+            }
+        });
+    }
+}
+
