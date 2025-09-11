@@ -758,7 +758,7 @@ public class PolicyManagementController {
 	}
 
 	@PostMapping("/updateDDDueAndInstallment")
-	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallment(@RequestBody Map<String, Object> data) {
+	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallments(@RequestBody Map<String, Object> data) {
 		try {
 			String policyCode = (String) data.get("policyCode");
 			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
@@ -924,16 +924,17 @@ public class PolicyManagementController {
 	}
 
 	@GetMapping("/getFullMaturityByPolicyCode")
-	public ResponseEntity<ApiResponse<FullMaturity>> fetchFullMaturityByPolicyCode(
+	public ResponseEntity<ApiResponse<List<FullMaturity>>> fetchFullMaturityByPolicyCode(
 			@RequestParam("policyCode") String policyCode) {
-		Optional<FullMaturity> optionalPolicy = policyManagementService.fetchFullMaturityByPolicyCode(policyCode);
 
-		if (optionalPolicy.isPresent()) {
-			ApiResponse<FullMaturity> response = new ApiResponse<>(HttpStatus.OK, "Payment Data found successfully",
-					optionalPolicy.get());
+		List<FullMaturity> policyList = policyManagementService.fetchFullMaturityByPolicyCode(policyCode);
+
+		if (!policyList.isEmpty()) {
+			ApiResponse<List<FullMaturity>> response = new ApiResponse<>(HttpStatus.OK,
+					"Payment Data found successfully", policyList);
 			return ResponseEntity.ok(response);
 		} else {
-			ApiResponse<FullMaturity> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+			ApiResponse<List<FullMaturity>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
 					"Payment Data not found for code: " + policyCode, null);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}

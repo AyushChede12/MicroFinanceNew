@@ -1,5 +1,6 @@
 package com.microfinance.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,7 +12,7 @@ import com.microfinance.model.FullMaturity;
 
 @Repository
 public interface FullMaturityRepo extends JpaRepository<FullMaturity, Long> {
-	
-	Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode);
+
+	List<FullMaturity> findByPolicyCodeIgnoreCase(String policyCode);
 
 }

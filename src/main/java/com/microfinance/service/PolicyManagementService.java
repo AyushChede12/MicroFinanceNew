@@ -570,18 +570,11 @@ public class PolicyManagementService {
 		return addinvestmentrepo.existsByMemberSelection(customerCode);
 	}
 
-	public Optional<FullMaturity> fetchFullMaturityByPolicyCode(String policyCode) {
-		// TODO Auto-generated method stub
-		if (policyCode == null)
-			return Optional.empty();
-
-		// Clean input: trim and convert to uppercase
-		String normalizedCode = policyCode.trim().toUpperCase();
-
-		// Fetch all and match manually
-		return fullMaturityRepo.findAll().stream()
-				.filter(p -> p.getPolicyCode() != null && p.getPolicyCode().trim().equalsIgnoreCase(normalizedCode))
-				.findFirst();
-	}
+	public List<FullMaturity> fetchFullMaturityByPolicyCode(String policyCode) {
+        if (policyCode == null || policyCode.trim().isEmpty()) {
+            return List.of(); // empty list
+        }
+        return fullMaturityRepo.findByPolicyCodeIgnoreCase(policyCode.trim());
+    }
 
 }
