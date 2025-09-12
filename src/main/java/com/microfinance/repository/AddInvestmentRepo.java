@@ -55,6 +55,8 @@ public interface AddInvestmentRepo extends JpaRepository<AddnewinvestmentPM, Lon
 	List<AddnewinvestmentPM> findApprovedDDPolicies();
 
 	boolean existsByMemberSelection(String customerCode);
+	
+	List<AddnewinvestmentPM> findAllByPolicyCode(String policyCode);
 
 	
 
