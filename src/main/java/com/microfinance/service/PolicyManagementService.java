@@ -19,6 +19,7 @@ import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
@@ -27,6 +28,7 @@ import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
+import com.microfinance.repository.FullMaturityRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.RecurringDepositRepo;
@@ -56,6 +58,9 @@ public class PolicyManagementService {
 
 	@Autowired
 	FlexibleRenewalRepo flexibleRenewalRepo;
+	
+	@Autowired
+	FullMaturityRepo fullMaturityRepo;
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 		try {
@@ -564,5 +569,12 @@ public class PolicyManagementService {
 		// TODO Auto-generated method stub
 		return addinvestmentrepo.existsByMemberSelection(customerCode);
 	}
+
+	public List<FullMaturity> fetchFullMaturityByPolicyCode(String policyCode) {
+        if (policyCode == null || policyCode.trim().isEmpty()) {
+            return List.of(); // empty list
+        }
+        return fullMaturityRepo.findByPolicyCodeIgnoreCase(policyCode.trim());
+    }
 
 }

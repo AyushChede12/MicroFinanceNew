@@ -22,6 +22,7 @@ import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
@@ -757,7 +758,7 @@ public class PolicyManagementController {
 	}
 
 	@PostMapping("/updateDDDueAndInstallment")
-	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallment(@RequestBody Map<String, Object> data) {
+	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallments(@RequestBody Map<String, Object> data) {
 		try {
 			String policyCode = (String) data.get("policyCode");
 			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
@@ -913,12 +914,30 @@ public class PolicyManagementController {
 
 		System.out.println("Received signature: " + image2);
 
-		ApiResponse<AddnewinvestmentPM> response = policyManagementService.saveandupdateAddInvestmentDetails(policyManagementDto, image1,
-				image2);
+		ApiResponse<AddnewinvestmentPM> response = policyManagementService
+				.saveandupdateAddInvestmentDetails(policyManagementDto, image1, image2);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-				policyManagementDto.getId() != null ? "✅ Investment Updated successfully" : "✅ Investment saved successfully",
+				policyManagementDto.getId() != null ? "✅ Investment Updated successfully"
+						: "✅ Investment saved successfully",
 				response.getData()));
+	}
+
+	@GetMapping("/getFullMaturityByPolicyCode")
+	public ResponseEntity<ApiResponse<List<FullMaturity>>> fetchFullMaturityByPolicyCode(
+			@RequestParam("policyCode") String policyCode) {
+
+		List<FullMaturity> policyList = policyManagementService.fetchFullMaturityByPolicyCode(policyCode);
+
+		if (!policyList.isEmpty()) {
+			ApiResponse<List<FullMaturity>> response = new ApiResponse<>(HttpStatus.OK,
+					"Payment Data found successfully", policyList);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<FullMaturity>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Payment Data not found for code: " + policyCode, null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
 	}
 
 }
