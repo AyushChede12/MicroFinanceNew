@@ -75,10 +75,8 @@ $(document).ready(function () {
 						$('#sysPayable').val(sysPayable(data)); //function sysPayable(data)
 						$('#deduction').val(Deduction(data));	//function Deduction(data)					
 						$('#netPayable').val(netPayment(data)); //dunction netpay(data)
-					$('#amount').off('blur').on('blur', function () {
 						$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
 						
-						});
 						
 						
 
