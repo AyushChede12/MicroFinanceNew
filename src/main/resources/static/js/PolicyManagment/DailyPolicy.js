@@ -126,23 +126,33 @@ $(document).ready(function() {
 
 		// ✅ Send AJAX request
 		$.ajax({
-			url: "api/Policymangment/updateDDDueAndInstallment", // ✅ add leading slash
+			url: "api/Policymangment/updateDDDueAndInstallment", // note the leading slash
 			type: "POST",
 			data: JSON.stringify(payload),
-			contentType: "application/json",
-			dataType: "json", // ensure response is parsed as JSON
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
 			success: function(response) {
-				console.log("✅ Response:", response);
-				alert("✅ " + (response.message || "Update successful!"));
-				location.reload(); // Refresh after success
+				console.log("✅ Success Response:", response);
+
+				// ApiResponse wrapper → use response.message
+				const msg = response.message || "Update successful!";
+				alert("✅ " + msg);
+
+				// refresh page if needed
+				location.reload();
 			},
 			error: function(xhr) {
 				console.error("❌ AJAX Error:", xhr);
-				const errMsg = xhr.responseJSON?.message || "Something went wrong.";
+
+				let errMsg = "Something went wrong.";
+				if (xhr.responseJSON) {
+					errMsg = xhr.responseJSON.message || JSON.stringify(xhr.responseJSON);
+				}
 				alert("❌ Error: " + errMsg);
 			}
 		});
 	});
+
 
 
 });
@@ -165,7 +175,6 @@ $("#viewBtn").on("click", function() {
 
 			const $tbody = $("#installmentModal tbody");
 			let rowsHtml = "";
-
 			let installments = [];
 
 			if (response && response.status === "OK") {
@@ -177,23 +186,33 @@ $("#viewBtn").on("click", function() {
 			}
 
 			if (installments.length > 0) {
+				// ✅ Base date (policyStartDate → agar available ho)
+				let baseDate = installments[0].policyStartDate
+					? new Date(installments[0].policyStartDate)
+					: new Date();
+
 				installments.forEach((inst, index) => {
 					const srNo = index + 1;
 
-					// Dates parsing
-					const paymentDateStr = inst.paymentDate || null;
-					const currentDate = new Date();
+					// ✅ Har installment ka dueDate = baseDate + index days
+					let dueDate = new Date(baseDate);
+					dueDate.setDate(dueDate.getDate() + index);
 
-					// Difference calculation
-					let diffDays = "-";
-					if (paymentDateStr) {
-						const paymentDate = new Date(paymentDateStr);
-						const diffMs = paymentDate - currentDate;
-						diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
-					}
+					// Format function
+					const formatDate = (dateObj) => {
+						const day = String(dateObj.getDate()).padStart(2, "0");
+						const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+						const year = dateObj.getFullYear();
+						return `${day}-${month}-${year}`;
+					};
+
+					const dueDateFormatted = formatDate(dueDate);
+					const paymentDateStr = inst.paymentDate
+						? formatDate(new Date(inst.paymentDate))
+						: "-";
 
 					// ✅ Status Logic
-					const status = paymentDateStr && paymentDateStr.trim() !== ""
+					const status = inst.paymentDate && inst.paymentDate.trim() !== ""
 						? `<span class="text-success fw-bold">Paid</span>`
 						: `<span class="text-danger fw-bold">Unpaid</span>`;
 
@@ -204,10 +223,10 @@ $("#viewBtn").on("click", function() {
 					rowsHtml += `
 						<tr>
 						  <td>${srNo}</td>
-						  <td>${diffDays} days</td>
+						  <td>${dueDateFormatted}</td>   <!-- ✅ Daily Due Date -->
 						  <td>${amount}</td>
 						  <td>${status}</td>
-						  <td>${paymentDateStr || "-"}</td>
+						  <td>${paymentDateStr}</td>
 						</tr>
 					`;
 				});
@@ -222,7 +241,12 @@ $("#viewBtn").on("click", function() {
 			}
 
 			$tbody.html(rowsHtml);
+		},
+		error: function(xhr) {
+			console.error("❌ Error:", xhr);
+			alert("❌ Failed to fetch installment data.");
 		}
 	});
 });
+
 
