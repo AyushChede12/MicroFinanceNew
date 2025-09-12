@@ -256,15 +256,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					
-					<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Panelty (if any):</label> <input type="text" name="panelty"
-									id="panelty" required="required" placeholder=""
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
 
 
 						<div class="col-lg-3">
@@ -300,7 +291,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
+							<button id="saveBtn" class="btn btn-danger">Break</button>
 						</div>
 					</div>
 				</div>
