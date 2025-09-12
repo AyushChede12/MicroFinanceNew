@@ -577,4 +577,14 @@ public class PolicyManagementService {
         return fullMaturityRepo.findByPolicyCodeIgnoreCase(policyCode.trim());
     }
 
+	public boolean deletePolicyDataById(Long id) {
+		// TODO Auto-generated method stub
+		if (addinvestmentrepo.existsById(id)) {
+			addinvestmentrepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
