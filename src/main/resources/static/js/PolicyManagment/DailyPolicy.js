@@ -96,44 +96,133 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#buttonSave").click(function(e) {
-		e.preventDefault(); // Prevent default form submission
+		e.preventDefault(); // Stop default form submission
 
-		// Prepare data for API
-		const formData = {
-			policyCode: $("#policyCode").val()?.trim() || "",
-			policyAmount: parseFloat($("#policyAmount").val()) || 0,
-			noOfInstallments: parseInt($("#noOfInst").val()) || 0
-		};
+		// Collect form values
+		const policyCode = $("#policyCode").val()?.trim();
+		const policyAmount = $("#policyAmount").val()?.trim();
+		const noOfInstallments = $("#noOfInst").val()?.trim();
 
-		// Basic validation before sending
-		if (!formData.policyCode) {
+		// ✅ Basic validation
+		if (!policyCode) {
 			alert("❌ Policy Code is required.");
 			return;
 		}
-		if (formData.policyAmount <= 0) {
-			alert("❌ Policy Amount must be greater than 0.");
+		if (!policyAmount || isNaN(policyAmount) || parseFloat(policyAmount) <= 0) {
+			alert("❌ Policy Amount must be a number greater than 0.");
 			return;
 		}
-		if (formData.noOfInstallments <= 0) {
-			alert("❌ Number of Installments must be greater than 0.");
+		if (!noOfInstallments || isNaN(noOfInstallments) || parseInt(noOfInstallments) <= 0) {
+			alert("❌ Number of Installments must be a number greater than 0.");
 			return;
 		}
 
-		// Send AJAX request
+		// ✅ Prepare payload
+		const payload = {
+			policyCode: policyCode,
+			policyAmount: parseFloat(policyAmount),
+			noOfInstallments: parseInt(noOfInstallments)
+		};
+
+		// ✅ Send AJAX request
 		$.ajax({
-			url: "api/Policymangment/updateDDDueAndInstallment",
+			url: "api/Policymangment/updateDDDueAndInstallment", // ✅ add leading slash
 			type: "POST",
-			data: JSON.stringify(formData),
+			data: JSON.stringify(payload),
 			contentType: "application/json",
+			dataType: "json", // ensure response is parsed as JSON
 			success: function(response) {
-				alert("✅ " + response.message);
-				location.reload(); // Reload page to reflect updates
+				console.log("✅ Response:", response);
+				alert("✅ " + (response.message || "Update successful!"));
+				location.reload(); // Refresh after success
 			},
 			error: function(xhr) {
+				console.error("❌ AJAX Error:", xhr);
 				const errMsg = xhr.responseJSON?.message || "Something went wrong.";
 				alert("❌ Error: " + errMsg);
 			}
 		});
+	});
+
+
+});
+
+$("#viewBtn").on("click", function() {
+	const selectedPolicyCode = $("#policyCode").val();
+
+	if (!selectedPolicyCode) {
+		alert("Please select a policy code first!");
+		return;
+	}
+
+	$.ajax({
+		url: "api/Policymangment/getFullMaturityByPolicyCode",
+		type: "GET",
+		dataType: "json",
+		data: { policyCode: selectedPolicyCode },
+		success: function(response) {
+			console.log("✅ Full Response:", response);
+
+			const $tbody = $("#installmentModal tbody");
+			let rowsHtml = "";
+
+			let installments = [];
+
+			if (response && response.status === "OK") {
+				if (Array.isArray(response.data)) {
+					installments = response.data;
+				} else if (response.data) {
+					installments = [response.data];
+				}
+			}
+
+			if (installments.length > 0) {
+				installments.forEach((inst, index) => {
+					const srNo = index + 1;
+
+					// Dates parsing
+					const paymentDateStr = inst.paymentDate || null;
+					const currentDate = new Date();
+
+					// Difference calculation
+					let diffDays = "-";
+					if (paymentDateStr) {
+						const paymentDate = new Date(paymentDateStr);
+						const diffMs = paymentDate - currentDate;
+						diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+					}
+
+					// ✅ Status Logic
+					const status = paymentDateStr && paymentDateStr.trim() !== ""
+						? `<span class="text-success fw-bold">Paid</span>`
+						: `<span class="text-danger fw-bold">Unpaid</span>`;
+
+					const amount = inst.amount
+						? `INR ${Number(inst.amount).toLocaleString("en-IN")}`
+						: "INR 0";
+
+					rowsHtml += `
+						<tr>
+						  <td>${srNo}</td>
+						  <td>${diffDays} days</td>
+						  <td>${amount}</td>
+						  <td>${status}</td>
+						  <td>${paymentDateStr || "-"}</td>
+						</tr>
+					`;
+				});
+			} else {
+				rowsHtml = `
+					<tr>
+					  <td colspan="5" class="text-center text-danger">
+						No installment data found for this policy.
+					  </td>
+					</tr>
+				`;
+			}
+
+			$tbody.html(rowsHtml);
+		}
 	});
 });
 
