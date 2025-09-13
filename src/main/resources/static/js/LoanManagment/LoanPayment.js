@@ -1,12 +1,12 @@
 // ✅ Js for populating the approved loanid in the dropdown (Vaibhav)
 $(document).ready(function() {
-	populateapprovedLoanIdDropdown();
+	populateDropdown();
 });
 
-function populateapprovedLoanIdDropdown() {
+function populateDropdown() {
 
 	$.ajax({
-		url: "/api/loanmanegment/getApprovedLoanIds",
+		url: "api/loanmanegment/getApprovedLoanIds",
 		type: "GET",
 		dataType: "json",
 		success: function(response) {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 		if (selectedLoanId) {
 			$.ajax({
-				url: "/api/loanmanegment/getLoanById", // your GET API
+				url: "api/loanmanegment/getLoanById", // your GET API
 				type: "GET",
 				data: { loanId: selectedLoanId }, // sending as query param
 				dataType: "json",
@@ -50,7 +50,8 @@ $(document).ready(function() {
 
 						// Now populate the form fields with received data
 						$("#loanPaymentDate").val(data.loanDate);
-						$("#memberId").val(data.memberId);
+						$("#memberId").val(`${data.memberId} - ${data.memberName || "-"}`);
+						$("#memberName").val(data.memberName || "-");
 						$("#relativeDetails").val(data.relativeDetails);
 						$("#dateOfBirth").val(data.dateOfBirth);
 						$("#age").val(data.age);
@@ -92,37 +93,7 @@ $(document).ready(function() {
 						$("#insuranceFee").val(data.insuranceFee);
 						$("#financialConsultantId").val(data.financialConsultantId);
 						$("#financialConsultantName").val(data.financialConsultantName);
-						/*
-												// ✅ PHOTO block
-												if (data.photo) {
-						
-													const fileName = data.photo;
-													const photoPath = `/Uploads/${encodeURIComponent(fileName)}`;
-						
-													$("#photoPreview").attr("src", photoPath);  // ✅ Shows preview
-													$("#photoHidden").val(fileName);            // ✅ Save only the filename, not full path
-													photoSizeEdit({ target: { result: photoPath } }); // ✅ Resizes preview
-												} else {
-													$("#photoPreview").attr("src", "/Uploads/default-placeholder.jpg");
-													$("#photoHidden").val("");
-													photoSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
-												}
-						
-												// ✅ SIGNATURE block
-												if (data.signature) {
-						
-													const fileName = data.signature;
-													const signPath = `/Uploads/${encodeURIComponent(fileName)}`;
-						
-													$('#signaturePreview').attr('src', signPath);
-													$('#signatureHidden').val(fileName);
-													signatureSizeEdit({ target: { result: signPath } }); // ✅ Resize preview
-												} else {
-													$('#signaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
-													$('#signatureHidden').val("");
-													signatureSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
-												}
-						*/
+
 
 					} else {
 						alert("Loan data not found.");
@@ -162,8 +133,6 @@ $('#modeofPayment').change(function() {
 	}
 });
 
-
-//Js for paying the emi (Vaibhav)
 $('#paymentBtn').click(function(e) {
 	e.preventDefault();
 
@@ -171,7 +140,7 @@ $('#paymentBtn').click(function(e) {
 		loanId: $('#findByLoanId').val(),
 		loanDate: $('#loanDate').val(),
 		memberId: $('#memberId').val(),
-
+		memberName: $('#memberName').val(),
 		loanPlanName: $('#loanPlanName').val(),
 		typeOfLoan: $('#typeOfLoan').val(),
 		loanMode: $('#loanMode').val(),
@@ -180,10 +149,6 @@ $('#paymentBtn').click(function(e) {
 		loanAmount: $('#loanAmount').val(),
 		interestType: $('#interestType').val(),
 		emiPayment: $('#emiPayment').val(),
-
-
-
-		// Deductions
 		processingFee: $('#processingFee').val(),
 		legalCharges: $('#legalCharges').val(),
 		gst: $('#gst').val(),
@@ -192,9 +157,6 @@ $('#paymentBtn').click(function(e) {
 		stationaryFee: $('#stationaryFee').val(),
 		financialConsultantId: $('#financialConsultantId').val(),
 		financialConsultantName: $('#financialConsultantName').val(),
-
-
-		// Payment
 		paymentDate: $('#paymentDate').val(),
 		paymentStatus: $('#paymentStatus').val(),
 		paymentMode: $('#paymentMode').val(),
@@ -204,21 +166,27 @@ $('#paymentBtn').click(function(e) {
 		remarks: $('#remarks').val(),
 		chequeDate: $('#chequeDate').val(),
 		chequeNo: $('#chequeNo').val(),
-
 		noOfInst: $('#noOfInst').val() || "1"
 	};
 
-
-
 	$.ajax({
 		type: 'POST',
-		url: '/api/loanmanegment/payEmi',
+		url: 'api/loanmanegment/payEmi',
 		contentType: 'application/json',
 		data: JSON.stringify(paymentData),
 		success: function(response) {
-			alert(response.message);
-			location.reload();
-			// Optional: $('#paymentForm')[0].reset();
+			if (response.status === "OK") {
+				alert(response.message);
+
+				if (response.data && response.data.loanStatus === "CLOSED") {
+					alert("This was your last installment. The loan is now CLOSED.");
+					$('#paymentBtn').prop('disabled', true); // Optional: disable further payments
+				}
+
+				location.reload();
+			} else {
+				alert("❌ Something went wrong.");
+			}
 		},
 		error: function(xhr) {
 			const errorMsg = xhr.responseJSON?.message || "Unknown error occurred";
@@ -226,7 +194,6 @@ $('#paymentBtn').click(function(e) {
 		}
 	});
 });
-
 
 
 
