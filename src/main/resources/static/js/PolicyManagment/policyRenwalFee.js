@@ -78,7 +78,6 @@ $(document).ready(function() {
 						$("#nomineeName").val(data.suggestedNominee);
 						$("#comment").val(data.remark);
 						$("#agentName").val(data.agent);
-						alert(data.customerPhoto);
 
 						if (data.customerPhoto) {
 							const photoPath = `Uploads/${data.customerPhoto}`;
@@ -116,29 +115,39 @@ $(document).ready(function() {
 
 		// Collect only required data for the API
 		const formData = {
-			policyCode: $("#policyCode").val(),
-			policyAmount: $("#policyAmount").val(),
-			noOfInstallments: $("#noOfInst").val() // ✅ Fixed key name
+			policyCode: $("#policyCode").val()?.trim(),
+			policyAmount: $("#policyAmount").val()?.trim(),
+			noOfInstallments: $("#noOfInst").val()?.trim()
 		};
+
+		// Basic validation before sending
+		if (!formData.policyCode || !formData.policyAmount || !formData.noOfInstallments) {
+			alert("⚠️ Please fill all required fields (Policy Code, Amount, No. of Installments).");
+			return;
+		}
 
 		// Send to backend
 		$.ajax({
-			url: "api/Policymangment/updateDueAndInstallment",
+			url: "api/Policymangment/updateFDDueAndInstallment", // ✅ match controller endpoint
 			type: "POST",
 			contentType: "application/json",
 			data: JSON.stringify(formData),
 			success: function(response) {
 				alert("✅ " + response.message);
 
+				// Refresh page or reload data table
 				location.reload();
-				// Optionally reset form or reload table
+
+				// Optionally reset form (if you don't want reload)
 				// $("#formid")[0].reset();
 			},
 			error: function(xhr) {
 				alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
+				console.error(xhr);
 			}
 		});
 	});
+
 });
 
 $(document).ready(function() {
@@ -284,51 +293,93 @@ $("#viewBtn").on("click", function() {
 	}
 
 	$.ajax({
-		url: "api/Policymangment/getPolicyByPolicyCode", // <-- your API endpoint
+		url: "/api/Policymangment/getFullMaturityByPolicyCode", // ✅ leading slash
 		type: "GET",
-		dataType: "json", // ensure response is parsed as JSON
+		dataType: "json",
 		data: { policyCode: selectedPolicyCode },
 		success: function(response) {
-			const $tbody = $("#installmentModal tbody"); // make sure your modal table has tbody
-			let rowsHtml = "";
+			console.log("✅ Full Response:", response);
 
-			if (response && response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
-				response.data.forEach((inst, index) => {
+			const $tbody = $("#installmentModal tbody");
+			let rowsHtml = "";
+			let installments = [];
+
+			if (response && response.status === "OK") {
+				if (Array.isArray(response.data)) {
+					installments = response.data;
+				} else if (response.data) {
+					installments = [response.data];
+				}
+			}
+
+			if (installments.length > 0) {
+				// ✅ Base date (agar paymentDate available nahi hai to policyStartDate use karo)
+				let baseDate = installments[0].paymentDate
+					? new Date(installments[0].paymentDate)
+					: (installments[0].policyStartDate
+						? new Date(installments[0].policyStartDate)
+						: new Date());
+
+				installments.forEach((inst, index) => {
 					const srNo = index + 1;
-					const dueDate = inst.dueDate || "-";
-					const paymentDate = inst.paymentDate || "-"; // <-- FIXED FIELD NAME
+
+					// ✅ Daily Deposit ke liye: har installment ek din aage
+					let dueDate = new Date(baseDate);
+					dueDate.setDate(dueDate.getDate() + index);
+
+					// Format function
+					const formatDate = (dateObj) => {
+						const day = String(dateObj.getDate()).padStart(2, "0");
+						const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+						const year = dateObj.getFullYear();
+						return `${day}-${month}-${year}`;
+					};
+
+					const dueDateFormatted = formatDate(dueDate);
+					const paymentDateStr = inst.paymentDate
+						? formatDate(new Date(inst.paymentDate))
+						: "-";
+
+					// ✅ Status check
+					const status = inst.paymentDate && inst.paymentDate.trim() !== ""
+						? `<span class="text-success fw-bold">Paid</span>`
+						: `<span class="text-danger fw-bold">Unpaid</span>`;
+
 					const amount = inst.amount
-						? `₹${Number(inst.amount).toLocaleString("en-IN")}`
-						: "₹0";
-					const status = inst.status || "-";
+						? `INR ${Number(inst.amount).toLocaleString("en-IN")}`
+						: "INR 0";
 
 					rowsHtml += `
                         <tr>
-                            <td>${srNo}</td>
-                            <td>${dueDate}</td>
-                            <td>${amount}</td>
-                            <td>${status}</td>
-                            <td>${paymentDate}</td>
+                          <td>${srNo}</td>
+                          <td>${dueDateFormatted}</td>   <!-- ✅ Daily Due Date -->
+                          <td>${amount}</td>
+                          <td>${status}</td>
+                          <td>${paymentDateStr}</td>
                         </tr>
                     `;
 				});
 			} else {
 				rowsHtml = `
                     <tr>
-                        <td colspan="5" class="text-center text-danger">
-                            No installment data found for this policy.
-                        </td>
+                      <td colspan="5" class="text-center text-danger">
+                        No installment data found for this policy.
+                      </td>
                     </tr>
                 `;
 			}
 
-			$tbody.html(rowsHtml); // Update table at once
+			$tbody.html(rowsHtml);
 		},
-		error: function(xhr, status, error) {
-			console.error("AJAX Error:", status, error);
-			alert("Failed to fetch installments! Please try again.");
+		error: function(xhr) {
+			console.error("❌ Error:", xhr);
+			alert("❌ Failed to fetch installment data.");
 		}
 	});
 });
+
+
+
+
 
 

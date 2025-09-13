@@ -29,6 +29,14 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+.table tbody td {
+	white-space: nowrap;
+	font-size: 14px;
+	padding: 8px;
+}
+</style>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -55,22 +63,21 @@ pageEncoding="ISO-8859-1"%> -->
 			<form id="formid">
 				<div class="row">
 
+
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Branch Address</label> <select id="AdressBranch6" name="AdressBranch6"
-								required="required" class="form-control selectField"
-								style="height: 30px;">
-								<option value="">Select Branch</option>
-								<option value="Blue">Branch1</option>
-								<option value="Blue">Branch2</option>
-								<option value="Blue">Branch3</option>
+							<label for="">Find By Loan Id</label> <select id="loanId"
+								name="loanId" required="required"
+								class="form-control selectField" style="height: 30px;">
+								<option value="">Select Loan Id</option>
+
 							</select>
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="loanName"> Beginning Date</label> <input type="date"
-								name="beginningdate" id="beginningdate" required="required"
+								name="DateofLoan" id="DateofLoan" required="required"
 								placeholder="" style="text-transform: uppercase;" />
 						</div>
 					</div>
@@ -84,123 +91,97 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Applicant Name: </label> <input type="text"
-								name="applicantName" id="applicantName" required="required"
+							<label for="">Member Name: </label> <input type="text"
+								name="memberName" id="memberName" required="required"
 								placeholder="Enter Application Name" />
-						</div>
-					</div>
-
-
-					<div class="col-lg-3">
-
-						<div class="d-flex flex-column formFields"
-							style="margin-bottom: 30px">
-							<label> Loan Id: </label>
-							<div class="position-relative">
-								<div class="select-btn1" style="cursor: pointer;">
-									<span name="cityName" id="cityNameId" style="font-size: 12px;">Select
-										Loan Id </span> <i class="fa-solid fa-angle-down"></i>
-								</div>
-								<div class="content" id="contentCityName" style="display: none;">
-									<div class="search">
-										<input type="text" id="loanid" name="loanid" class="m-0"
-											placeholder="Search City" />
-									</div>
-									<ul class="options" id="city-options">
-										<li>A</li>
-										<li>A</li>
-										<li>A</li>
-										<li>A</li>
-										<li>A</li>
-									</ul>
-								</div>
-
-							</div>
 						</div>
 					</div>
 
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
 							<label for="">Member ID: </label> <input type="text"
-								name="memberID" id="memberID" required="required"
+								name="memberId" id="memberId" required="required"
 								placeholder="Enter Member Code" />
 						</div>
 					</div>
 					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Plan Name: </label> <input type="text"
-								name="planeName" id="planeName" required="required"
+							<label for="">Loan Plan Name: </label> <input type="text"
+								name="loanPlanName" id="loanPlanName" required="required"
 								placeholder="Enter Plan Name" />
 						</div>
 					</div>
 					<div class="col-lg-3">
+						<div class="d-flex flex-column formFields mb-4"
+							style="margin-bottom: 30px">
+							<label> Financial Consultant Id</label>
+							<div class="d-flex flex-column formFields mb-4">
+								<input type="text" name="financialConsultantId"
+									id="financialConsultantId" required="required"
+									placeholder="Enter Member ID" />
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
 						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Advisor ID: </label> <input type="text"
-								name="advisorId" id="advisorId" required="required"
-								placeholder="Enter Advisor Code" />
+							<label for="">Financial Consultant Name</label> <input
+								type="text" name="financialConsultantName"
+								id="financialConsultantName" required="required"
+								placeholder="Enter Advisor/Collector Name"
+								style="text-transform: uppercase;" />
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-12 text-center">
+			</form>
+			<div class="row">
+				<div class="col-12 text-center">
 
-						<button id="saveBtn" class="btnStyle"
-							style="background-color: #FFA500;">Search</button>
-						<button id="saveBtn" class="btnStyle bg-primary">Print</button>
-
-					</div>
-				</div>
-		</div>
-
-
-
-
-
-
-
-		</form>
-		<div class="row mt-5">
-			<div class="col-12">
-				<div class="card recent-sales">
-
-					<div class="card-body table-responsive">
-						<h5 class="card-title">
-							Search Results <span>| Today</span>
-						</h5>
-
-						<table class="table table-borderless datatable overflow-scroll">
-							<thead class="table-light">
-								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Member Name</th>
-									<th scope="col">DOB</th>
-									<th scope="col">Age</th>
-									<th scope="col">Phone no.</th>
-									<th scope="col">Address</th>
-									<th scope="col">Loan Plan Name</th>
-									<th scope="col">Loan Date</th>
-									<th scope="col">Loan Amount</th>
-									<th scope="col">Loan Purpose</th>
-
-
-								</tr>
-							</thead>
-							<tbody>
-
-
-
-
-							</tbody>
-						</table>
-					</div>
+					<button id="searchButton" class="btnStyle"
+						style="background-color: #FFA500;">Search</button>
 				</div>
 			</div>
 		</div>
 
 
+		<div class="row mt-5">
+			<div class="col-12">
+				<div class="card recent-sales">
 
+					<div class="card-body table-responsive">
+						<h5 class="card-title">Loan Records</h5>
+
+						<div class="table-responsive">
+							<table class="table table-borderless datatable">
+								<thead class="table-light">
+									<tr
+										style="font-family: 'Poppins', sans-serif; white-space: nowrap;">
+										<th scope="col">Sr No.</th>
+										<th scope="col">Member Id</th>
+										<th scope="col">Member Name</th>
+										<th scope="col">DOB</th>
+										<th scope="col">Age</th>
+										<th scope="col">Phone no.</th>
+										<th scope="col">Address</th>
+										<th scope="col">Loan Plan Name</th>
+										<th scope="col">Loan Date</th>
+										<th scope="col">Loan Amount</th>
+										<th scope="col">Loan Purpose</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- rows go here -->
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/LoanManagment/SearchLoans.js"></script>
 </body>
 
 </html>
