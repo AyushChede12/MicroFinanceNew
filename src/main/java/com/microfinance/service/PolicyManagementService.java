@@ -1,5 +1,6 @@
 package com.microfinance.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import java.util.Optional;
@@ -571,11 +572,12 @@ public class PolicyManagementService {
 	}
 
 	public List<FullMaturity> fetchFullMaturityByPolicyCode(String policyCode) {
-        if (policyCode == null || policyCode.trim().isEmpty()) {
-            return List.of(); // empty list
-        }
-        return fullMaturityRepo.findByPolicyCodeIgnoreCase(policyCode.trim());
-    }
+	    if (policyCode == null || policyCode.trim().isEmpty()) {
+	        return Collections.emptyList(); // returns an immutable empty list
+	    }
+	    return fullMaturityRepo.findByPolicyCodeIgnoreCase(policyCode.trim());
+	}
+
 
 	public boolean deletePolicyDataById(Long id) {
 		// TODO Auto-generated method stub
