@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.LoanSchemCatalog;
-import com.microfinance.model.SecureGoldPlan;
 import com.microfinance.model.SecuredGoldPlan;
 import com.microfinance.service.SecuredGoldLoanService;
 
