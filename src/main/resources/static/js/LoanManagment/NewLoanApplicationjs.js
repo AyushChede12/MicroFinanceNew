@@ -346,6 +346,7 @@ $(document).ready(function() {
 			coApplicantPinCode: $('#coApplicantPinCode').val(),
 			coApplicantContactNo: $('#coApplicantContactNo').val(),
 			coApplicantSecurityType: $('#coApplicantSecurityType').val(),
+			loanStatus:"ACTIVE",
 
 			// Deduction Details
 			processingFee: $('#processingFee').val(),

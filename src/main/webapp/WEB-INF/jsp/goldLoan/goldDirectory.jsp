@@ -58,15 +58,17 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					<input type="hidden" id="goldDirectoryId" name="id" value="">
+					
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Karat</label>
 								<select id="karat" name="karat" required="required" class="form-control selectField" style="height: 30px;">
 									<option value="">Select Karat</option>
-									<option value="Business Loan">24K</option>
-									<option value="Vehicle Loan">22K</option>
-									<option value="Home Loan">20K</option>
-									<option value="personal Loan">18K</option>
+									<option value="24K">24K</option>
+									<option value="22K">22K</option>
+									<option value="20K">20K</option>
+									<option value="18K">18K</option>
 								</select>
 							</div>
 						</div>
@@ -85,7 +87,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex">
 									<input type="text" name="goldRate" id="goldRate" required="required"
 										placeholder="Enter Rate" style="text-transform: uppercase; margin-right: 10px;" />
-									<button id="saveBtn" class="btnStyle bg-success">Save</button>
+									<button id="saveTodaysRateBtn" class="btnStyle bg-success">Save</button>
 								</div>
 							</div>
 						</div>
@@ -113,8 +115,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Item Type</label>
-								<select id="itemType" name="itemType" required="required" class="form-control selectField" style="height: 30px;">
+								<label for="">Item Master Type</label>
+								<select id="itemMasterType" name="itemMasterType" required="required" class="form-control selectField" style="height: 30px;">
 									<option value="">Select Item Type</option>
 									<option value="Gold">Gold</option>
 									<option value="Silver">Silver</option>
@@ -128,7 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<div class="d-flex">
 									<input type="text" name="itemName" id="ItemName" required="required"
 										placeholder="Enter Item Name" style="text-transform: uppercase; margin-right: 10px;" />
-									<button id="saveBtn" class="btnStyle bg-success">Save</button>
+									<button id="saveItemMasterBtn" class="btnStyle bg-success">Save</button>
 								</div>
 							</div>
 						</div>
@@ -169,7 +171,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<input type="text" name="lockerAddress" id="lockerAddress"
 										required="required" placeholder="Enter Address"
 										style="text-transform: uppercase; margin-right: 10px;" />
-									<button id="saveBtn" class="btnStyle bg-success">Save</button>
+									<button id="saveLockerMasterBtn" class="btnStyle bg-success">Save</button>
 								</div>
 							</div>
 						</div>
@@ -216,16 +218,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-6">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="itemType">Item Type</label>
+								<label for="itemType">Item Purity Type</label>
 								<div class="d-flex">
-									<select id="itemType" name="itemType" required="required"
+									<select id="itemPurityType" name="itemPurityType" required="required"
 										class="form-control selectField"
 										style="height: 30px; margin-right: 10px;">
 										<option value="">Item Type</option>
 										<option value="Gold">Gold</option>
 										<option value="Silver">Silver</option>
 									</select>
-									<button id="saveBtn" class="btnStyle bg-success">Save</button>
+									<button id="savePurityMasterBtn" class="btnStyle bg-success">Save</button>
 								</div>
 							</div>
 						</div>
@@ -252,7 +254,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/LoanManagment/LoanSchemCatalog.js"></script>
+	<script src="./js/SecuredGoldLoan/GoldDirectory.js"></script>
 </body>
 
 <script>
