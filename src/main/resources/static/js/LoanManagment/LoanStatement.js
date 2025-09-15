@@ -45,7 +45,7 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: "/api/loanmanegment/fetchLoanStatement?loanId=" + loanId,
+			url: "api/loanmanegment/fetchLoanStatement?loanId=" + loanId,
 			method: "GET",
 			success: function(response) {
 				console.log("Response:", response);  // ✅ Debugging
@@ -66,11 +66,14 @@ $(document).ready(function() {
 
         <!-- Customer Name and Loan Type in same row -->
         <div style="display:flex; justify-content:space-between; margin-top:10px;">
-            <p><b>Customer Name:</b> ${first.loanPlanName}</p>
+            <p><b>Customer Name:</b> ${first.memberName}</p>
             <p><b>Interest Type:</b> ${first.interestType}</p>
         </div>
 
-        <p><b>Loan ID:</b> ${first.loanId}</p>
+        <div style="display:flex; justify-content:space-between; margin-top:10px;">
+           <p><b>Loan ID:</b> ${first.loanId}</p>
+           <p style="margin-left:5px;"><b>Plan Name:</b> ${first.loanPlanName}</p>
+        </div>
         <hr/>
 
         <h5>Payments</h5>
