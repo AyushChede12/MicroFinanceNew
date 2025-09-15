@@ -136,7 +136,6 @@ $(document).ready(function () {
 						${createField("Financial Consultant ID", selectedPolicy.financialConsultantId)}
 						${createField("Financial Consultant Name", selectedPolicy.financialConsultantName)}
 						${createField("Approval Date", selectedPolicy.approvalDate)}
-						${createField("Approval Status", selectedPolicy.approvalStatus ? "Yes" : "No")}
 						${createField("Photo", selectedPolicy.photo)}
 						${createField("Signature", selectedPolicy.signature)}
 						${createField("Payment Date", selectedPolicy.paymentDate)}

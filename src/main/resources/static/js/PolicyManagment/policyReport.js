@@ -2,14 +2,14 @@ $(document).ready(function() {
 	const $policyDropdown = $('#findByPolicyNumber');
 
 	// Clear and set default option
-	$policyDropdown.empty().append('<option value="">Select Branch Name</option>');
+	$policyDropdown.empty().append('<option value="">Select Policy Code</option>');
 
 	// Fetch approved policy data
 	fetchApprovedPolicies();
 
 	function fetchApprovedPolicies() {
 		$.ajax({
-			url: '/api/Policymangment/getApprovedPolicies',
+			url: 'api/Policymangment/getApprovedPolicies',
 			method: 'GET',
 			success: function(response) {
 				if (response.status === 'OK' && Array.isArray(response.data)) {
@@ -46,7 +46,7 @@ function toggleTransaction() {
 		return;
 	}
 
-	fetch(`/api/Policymangment/getPolicyByPolicyCode?policyCode=${policyCode}`)
+	fetch(`api/Policymangment/getPolicyByPolicyCode?policyCode=${policyCode}`)
 		.then(response => {
 			if (!response.ok) {
 				throw new Error("Policy not found");
@@ -137,14 +137,14 @@ $(document).ready(function() {
 	const $policyDropdown = $('#findPolicyNumber');
 
 	// Clear and set default option
-	$policyDropdown.empty().append('<option value="">Select Branch Name</option>');
+	$policyDropdown.empty().append('<option value="">Select Policy Code</option>');
 
 	// Fetch approved policy data
 	fetchApprovedPolicies();
 
 	function fetchApprovedPolicies() {
 		$.ajax({
-			url: '/api/Policymangment/getApprovedPolicies',
+			url: 'api/Policymangment/getApprovedPolicies',
 			method: 'GET',
 			success: function(response) {
 				if (response.status === 'OK' && Array.isArray(response.data)) {
@@ -173,113 +173,109 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-	$('#findPolicyNumber').on('change', function() {
-		const policyCode = $(this).val();
+	$('#policyTableBody').on('click', '.print-btn', function(e) {
+		e.preventDefault(); // ✅ Prevent page reload
 
-		if (!policyCode) {
-			$('#policyTableBody').empty(); // Clear table if no policy selected
-			return;
-		}
+		const $row = $(this).closest('tr');
 
-		const apiUrl = `/api/Policymangment/findPolicyData/${policyCode}`;
+		const policyCode = $row.find('td:eq(0)').text();
+		const customerName = $row.find('td:eq(1)').text();
+		const policyAmount = $row.find('td:eq(2)').text();
+		const renewalDate = $row.find('td:eq(3)').text();
+		const policyType = $row.find('td:eq(4)').text();
+		const maturityAmount = $row.find('td:eq(5)').text();
+		const depositAmount = $row.find('td:eq(6)').text();
+		const policyDate = $row.find('td:eq(7)').text();
+		const policyTerm = $row.find('td:eq(8)').text();
+		const maturityDate = $row.find('td:eq(9)').text();
+		const customerCode = $row.find('td:eq(10)').text();
+		const contactNo = $row.find('td:eq(11)').text();
+		const totalDeposit = $row.find('td:eq(12)').text();
+		const paymentDue = $row.find('td:eq(13)').text();
+		const noOfInstPaid = $row.find('td:eq(14)').text();
+		const isApproved = $row.find('td:eq(15)').text();
+		const branchname = $row.find('td:eq(16)').text();
 
-		$.ajax({
-			url: apiUrl,
-			method: 'GET',
-			success: function(response) {
-				if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
-					const dataList = response.data;
+		// Populate spans
+		$('#policyNoSpan').text(policyCode);
+		$('#applicantNameSpan').text(customerName);
+		$('#renewalAmountSpan').text(policyAmount);
+		$('#docSpan').text(policyDate);
+		$('#planSpan').text(policyType);
+		$('#maturitySpan').text(maturityAmount);
+		$('#totalValueSpan').text(totalDeposit);
+		$('#termSpan').text(policyTerm);
+		$('#maturityDateSpan').text(maturityDate);
+		$('#memberCodeSpan').text(customerCode);
+		$('#mobileSpan').text(contactNo);
+		$('#branchCodeSpan').text(branchname);
+		$('#paymentDueSpan').text(paymentDue);
+		$('#approvedSpan').text(isApproved);
+		$('#installmentsPaidSpan').text(noOfInstPaid);
+		// lastPaymentDate, dueDate, modeOfPayment, fees are missing from your table
 
-					// Clear old rows
-					$('#policyTableBody').empty();
-
-					dataList.forEach(function(data) {
-						const newRow = `
-                             <tr>
-        <td>${data.policyCode || ''}</td>
-        <td>${data.clientName || data.customerName || ''}</td>
-        <td>${data.policyAmount || ''}</td>
-        <td>${data.renewalDate || ''}</td>
-        <td>${data.policyType || ''}</td>
-        <td>${data.maturityAmount || ''}</td>
-        <td>${data.totalDeposit || ''}</td>
-        <td>${data.policyDate || ''}</td>
-        <td>${data.policyTerm || ''}</td>
-        <td>${data.maturityDate || ''}</td>
-        <td>${data.customerCode || ''}</td>
-        <td>${data.contactNo || ''}</td>
-        <td>${data.totalDeposit || ''}</td>
-        <td>${data.paymentDue || ''}</td>
-        <td>${data.noOfInstPaid || ''}</td>
-        <td>${data.isApproved ? 'Yes' : 'No'}</td>
-        <td>${data.branchname || ''}</td>
-        <td><button class="btn btn-primary print-btn">Print</button></td>
-    </tr>
-                        `;
-						$('#policyTableBody').append(newRow);
-					});
-				} else {
-					alert("No data found for the selected policy.");
-					$('#policyTableBody').empty();
-				}
-			},
-			error: function() {
-				alert("Error while fetching policy data.");
-			}
-		});
+		// Scroll to transaction section
+		$('html, body').animate({
+			scrollTop: $('#transactionSection').offset().top
+		}, 500);
 	});
 });
 
+$("#findBtn").click(function() {
+    const policyCode = $("#findPolicyNumber").val();
 
-$(document).ready(function () {
-    $('#policyTableBody').on('click', '.print-btn', function (e) {
-        e.preventDefault(); // ✅ Prevent page reload
+    if (!policyCode) {
+        $('#policyTableBody').empty();
+        return;
+    }
 
-        const $row = $(this).closest('tr');
+    $.ajax({
+        url: 'api/Policymangment/findPolicyData',  // ✅ endpoint
+        method: 'GET',
+        data: { policyCode: policyCode },          // ✅ pass as query param
+        dataType: 'json',                          // ✅ specify dataType
+        success: function(response) {
+            if (response.status === "OK" && Array.isArray(response.data) && response.data.length > 0) {
+                const dataList = response.data;
 
-        const policyCode = $row.find('td:eq(0)').text();
-        const customerName = $row.find('td:eq(1)').text();
-        const policyAmount = $row.find('td:eq(2)').text();
-        const renewalDate = $row.find('td:eq(3)').text();
-        const policyType = $row.find('td:eq(4)').text();
-        const maturityAmount = $row.find('td:eq(5)').text();
-        const depositAmount = $row.find('td:eq(6)').text();
-        const policyDate = $row.find('td:eq(7)').text();
-        const policyTerm = $row.find('td:eq(8)').text();
-        const maturityDate = $row.find('td:eq(9)').text();
-        const customerCode = $row.find('td:eq(10)').text();
-        const contactNo = $row.find('td:eq(11)').text();
-        const totalDeposit = $row.find('td:eq(12)').text();
-        const paymentDue = $row.find('td:eq(13)').text();
-        const noOfInstPaid = $row.find('td:eq(14)').text();
-        const isApproved = $row.find('td:eq(15)').text();
-        const branchname = $row.find('td:eq(16)').text();
+                $('#policyTableBody').empty();
 
-        // Populate spans
-        $('#policyNoSpan').text(policyCode);
-        $('#applicantNameSpan').text(customerName);
-        $('#renewalAmountSpan').text(policyAmount);
-        $('#docSpan').text(policyDate);
-        $('#planSpan').text(policyType);
-        $('#maturitySpan').text(maturityAmount);
-        $('#totalValueSpan').text(totalDeposit);
-        $('#termSpan').text(policyTerm);
-        $('#maturityDateSpan').text(maturityDate);
-        $('#memberCodeSpan').text(customerCode);
-        $('#mobileSpan').text(contactNo);
-        $('#branchCodeSpan').text(branchname);
-        $('#paymentDueSpan').text(paymentDue);
-        $('#approvedSpan').text(isApproved);
-        $('#installmentsPaidSpan').text(noOfInstPaid);
-        // lastPaymentDate, dueDate, modeOfPayment, fees are missing from your table
-
-        // Scroll to transaction section
-        $('html, body').animate({
-            scrollTop: $('#transactionSection').offset().top
-        }, 500);
+                dataList.forEach(function(data) {
+					alert(data.approved);
+                    const newRow = `
+                        <tr>
+                            <td>${data.policyCode || ''}</td>
+                            <td>${data.clientName || data.customerName || ''}</td>
+                            <td>${data.policyAmount || ''}</td>
+                            <td>${data.renewalDate || ''}</td>
+                            <td>${data.policyType || ''}</td>
+                            <td>${data.maturityAmount || ''}</td>
+                            <td>${data.totalDeposit || ''}</td>
+                            <td>${data.policyDate || ''}</td>
+                            <td>${data.policyTerm || ''}</td>
+                            <td>${data.maturityDate || ''}</td>
+                            <td>${data.customerCode || ''}</td>
+                            <td>${data.contactNo || ''}</td>
+                            <td>${data.totalDeposit || ''}</td>
+                            <td>${data.paymentDue || ''}</td>
+                            <td>${data.noOfInstPaid || ''}</td>
+                            <td>${data.approved==true ? 'Yes' : 'No'}</td>
+                            <td>${data.branchname || ''}</td>
+                            <td><button class="btn btn-primary print-btn">Print</button></td>
+                        </tr>`;
+                    $('#policyTableBody').append(newRow);
+                });
+            } else {
+                alert("No data found for the selected policy.");
+                $('#policyTableBody').empty();
+            }
+        },
+        error: function(xhr) {
+            console.error("❌ Error:", xhr);
+            alert("Error while fetching policy data.");
+        }
     });
 });
 
 
 
-  

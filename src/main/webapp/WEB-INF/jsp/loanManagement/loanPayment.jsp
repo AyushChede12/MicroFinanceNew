@@ -101,6 +101,8 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						<input type="hidden" id="memberName" name="memberName">
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -459,7 +461,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Payment Status</label> <input type="text"
+								<label for="loanName">Payment Status</label> <input   type="text" value="Paid"
 									name="paymentStatus" id="paymentStatus" 
 									readonly
 									style="color: red; font-weight: bold; font-size: 12px; text-transform: uppercase;"
@@ -471,8 +473,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="referenceCode">Mode of Payment <span
-									id="star">*</span></label> <select id="modeofPayment"
-									name="modeofPayment" required="required"
+									id="star">*</span></label> <select id="paymentMode"
+									name="paymentMode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Enter Mode of Payment</option>
 									<option value="Cash">CASH</option>
@@ -511,17 +513,17 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Deposit Account <span id="star">*</span></label> <input
-									type="text" name="depositAccount" id="depositAccount"
+									type="text" name="accountNo" id="accountNo"
 									required="required" placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
+						<input type="hidden" id="noOfInst" name="noOfInst">
 
 						<div class="col-lg-3" id="displayRef">
 							<div class="d-flex flex-column formFields">
 								<label for="">Ref Number/UPI ID</label> <input type="text"
-									name="refNo" id="refNo" required="required"
+									name="ref_UpiId" id="ref_UpiId" required="required"
 									placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
@@ -530,12 +532,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Chrg. Deduct Cash</label> <select
-									id="chargDeductCash" name="chargDeductCash" required="required"
+									id="charges" name="charges" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Yes/No</option>
-									<option value="Blue">Yes</option>
-									<option value="Blue">No</option>
-
+									<option value="YES">Yes</option>
+									<option value="NO">No</option>
 								</select>
 							</div>
 						</div>
@@ -547,17 +548,6 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Amount Due</label> <input type="text"
-									name="noOfInst" id="noOfInst" required="required"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-
-
 
 						<div class="col-12 text-center">
 							<button id="paymentBtn" class="btnStyle"

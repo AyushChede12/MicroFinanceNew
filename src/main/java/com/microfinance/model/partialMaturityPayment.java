@@ -1,5 +1,7 @@
 package com.microfinance.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,7 +32,7 @@ public class partialMaturityPayment {
 	private String amount;
 	private String depositAmount;
 	private String dueAmount;
-	private String paymentDate;
+	private LocalDate paymentDate;
 	private String branchName;
 	private String payComment;
 	private String modeofPayment;
@@ -143,10 +145,10 @@ public class partialMaturityPayment {
 	public void setDueAmount(String dueAmount) {
 		this.dueAmount = dueAmount;
 	}
-	public String getPaymentDate() {
+	public LocalDate getPaymentDate() {
 		return paymentDate;
 	}
-	public void setPaymentDate(String paymentDate) {
+	public void setPaymentDate(LocalDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	public String getBranchName() {

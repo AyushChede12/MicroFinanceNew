@@ -78,8 +78,8 @@ pageEncoding="ISO-8859-1"%> -->
 									name="plantype" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="Select">Select</option>
-									<option value="DD">DD</option>
 									<option value="RD">RD</option>
+									<option value="FD">FD</option>
 									<option value="MIS">MIS</option>
 								</select>
 							</div>
@@ -256,14 +256,16 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-							
-							<div class="d-flex flex-column formFields">
-								<label for="">Amount: <span id="star"> *</span></label> <input type="text"
-									name="amount" id="amount" required="required"
-									 style="text-transform: uppercase;" />
+					
+					<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Panelty (if any):</label> <input type="text" name="panelty"
+									id="panelty" required="required" placeholder=""
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -281,69 +283,20 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-					</div>
-				</div>
-
-
-
-
-
-
-
-
-				<div class="mt-5">
-					<nav>
-						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Payment Detail</li>
-						</ol>
-					</nav>
-					<div class="row">
-						<div class="col-lg-3">
-							
-							<div class="d-flex flex-column formFields">
-								<label for="">Payment Date <span id="star"> *</span>:</label> <input type="date"
-									name="paymentDate" id="paymentDate" required="required"
-									placeholder="" style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch <span id="star"> *</span> :</label> <select id="branchName"
-									name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
-
-								</select>
-							</div>
-						</div>
-
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Pay Comment:</label> <input type="text" name="payComment"
-									id="payComment" required="required" placeholder=""
+								<label>Remark :</label> <input type="text" name="remark"
+									id="remark" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Mode of Payment <span id="star"> *</span></label> <select id="modeofPayment"
-									name="modeofPayment" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="Select">Select</option>
-									<option value="Online">Online</option>
-									<option value="Cash">Cash</option>
-
-								</select>
-							</div>
-						</div>
-
-
-
-
 					</div>
+					
+				</div>
+
+
 
 					<div class="row">
 						<div class="col-12 text-center">

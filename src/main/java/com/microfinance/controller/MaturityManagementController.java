@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.AddnewinvestmentPM;
 import com.microfinance.model.ApplyForMaturity;
 import com.microfinance.model.DailyDepositPM;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MaturitySchemeMaster;
 import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.service.MaturitySchemeMasterService;
@@ -36,9 +38,6 @@ public class MaturityManagementController {
 	
 	@Autowired
 	PolicyManagementService policyManagementService;
-	
-	
-	
 	
 	
 	//Save Apply Maturity
@@ -151,5 +150,23 @@ public class MaturityManagementController {
 	    }
 
 	}
+	
+	//save and Update Full Maturity Payment
+		//Ashwini
+		@PostMapping("/saveFullmaturity")
+		@ResponseBody
+		public ApiResponse<FullMaturity> saveFullmaturity(@RequestBody FullMaturity fullmaturity) {
+			FullMaturity maturity = maturityservice.saveFullmaturity(fullmaturity);
+			
+			if (maturity != null) {
+				return ApiResponse.success(HttpStatus.OK,"Data saved successfully",maturity);
+		    } 
+			else {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,"Data could not be saved");
+		       
+		    }
+
+		}
+
 	
 }
