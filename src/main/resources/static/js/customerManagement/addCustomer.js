@@ -33,6 +33,7 @@ $(document).ready(function () {
         formData.append("profession", $('#profession').val());
         formData.append("academicBackground", $('#academicBackground').val());
 
+        // Nominee
         formData.append("nomineeName", $('#nomineeName').val());
         formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
         formData.append("nomineeAge", $('#nomineeAge').val());
@@ -42,6 +43,7 @@ $(document).ready(function () {
         formData.append("nomineeKycType", $('#nomineeKycType').val());
         formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
 
+        // Payment
         formData.append("memberFees", $('#memberFees').val());
         formData.append("chequeNo", $('#chequeNo').val());
         formData.append("chequeDate", $('#chequeDate').val());
@@ -56,18 +58,23 @@ $(document).ready(function () {
         if (customerPhoto) formData.append("customerPhoto", customerPhoto);
         if (customerSignature) formData.append("customerSignature", customerSignature);
 
-        // Toggle checkboxes (convert to 1 or 0)
+        // Toggles
         formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
         formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
         formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
         formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
 
-        // Dynamic base path for both localhost and online server
-        const contextPath = window.location.pathname.split('/')[1]; // e.g., "Microfinance"
-        const fullUrl = `${window.location.origin}api/customermanagement/saveOrUpdateCustomer`;
+        // ✅ Build correct base URL (works local + server)
+        let baseUrl = window.location.origin;
+        const pathParts = window.location.pathname.split('/');
 
-        // Optional: log for debugging
-		console.log("Context Pth: ", contextPath);
+        if (pathParts.length > 1 && pathParts[1] !== "" && pathParts[1] !== "index.jsp") {
+            // if deployed as /Microfinance
+            baseUrl += "/" + pathParts[1];
+        }
+
+        const fullUrl = `${baseUrl}/api/customermanagement/saveOrUpdateCustomer`;
+
         console.log("POST to URL: ", fullUrl);
 
         // AJAX call
