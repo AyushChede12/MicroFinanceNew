@@ -362,8 +362,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<th>Loan Plan Name</th>
 
 										<th>Type Of Loan</th>
-										<th>Age</th>
-										<th>Loan Term</th>
+										<th>MinAge</th>
+										<th>MaxAge</th>
 										<th>EMI Type</th>
 										<th>Edit</th>
 										<th>Delete</th>

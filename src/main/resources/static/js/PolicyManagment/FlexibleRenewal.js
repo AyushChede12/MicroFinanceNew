@@ -98,29 +98,130 @@ $(document).ready(function() {
 	$("#btnSave").click(function(e) {
 		e.preventDefault(); // Prevent default form submission
 
-		// Collect only required data for the API
+		// Collect required data
 		const formData = {
 			policyCode: $("#policyCode").val(),
-			policyAmount: $("#policyAmount").val(),
-			noOfInstallments: $("#noOfInst").val() // ✅ Fixed key name
+			policyAmount: parseFloat($("#policyAmount").val()) || 0,
+			noOfInstallments: parseInt($("#noOfInst").val()) || 0
 		};
+
+		// Validation
+		if (!formData.policyCode) {
+			alert("⚠️ Please select a Policy Code.");
+			return;
+		}
+		if (formData.noOfInstallments <= 0) {
+			alert("⚠️ Enter valid No of Installments.");
+			return;
+		}
 
 		// Send to backend
 		$.ajax({
-			url: "/api/Policymangment/updateFDDueAndInstallment",
+			url: "/api/Policymangment/updateFDDueAndInstallment",  // ✅ must match controller
 			type: "POST",
 			contentType: "application/json",
 			data: JSON.stringify(formData),
 			success: function(response) {
 				alert("✅ " + response.message);
 
-				location.reload();
-				// Optionally reset form or reload table
-				// $("#formid")[0].reset();
+				// reload after short delay
+				setTimeout(() => location.reload(), 500);
 			},
 			error: function(xhr) {
 				alert("❌ Error: " + (xhr.responseJSON?.message || "Something went wrong."));
 			}
 		});
+	});
+
+
+
+});
+
+$("#viewBtn").on("click", function() {
+	const selectedPolicyCode = $("#policyCode").val();
+
+	if (!selectedPolicyCode) {
+		alert("Please select a policy code first!");
+		return;
+	}
+
+	$.ajax({
+		url: "api/Policymangment/getFullMaturityByPolicyCode",
+		type: "GET",
+		dataType: "json",
+		data: { policyCode: selectedPolicyCode },
+		success: function(response) {
+			console.log("✅ Full Response:", response);
+
+			const $tbody = $("#installmentModal tbody");
+			let rowsHtml = "";
+
+			let installments = [];
+
+			if (response && response.status === "OK") {
+				if (Array.isArray(response.data)) {
+					installments = response.data;
+				} else if (response.data) {
+					installments = [response.data];
+				}
+			}
+
+			if (installments.length > 0) {
+				// ✅ Assume first installment date as base (paymentDate or policy startDate)
+				let baseDate = installments[0].paymentDate
+					? new Date(installments[0].paymentDate)
+					: new Date();
+
+				installments.forEach((inst, index) => {
+					const srNo = index + 1;
+
+					// ✅ Calculate Due Date = baseDate + index months
+					let dueDate = new Date(baseDate);
+					dueDate.setMonth(dueDate.getMonth() + index);
+
+					// Format function
+					const formatDate = (dateObj) => {
+						const day = String(dateObj.getDate()).padStart(2, "0");
+						const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+						const year = dateObj.getFullYear();
+						return `${day}-${month}-${year}`;
+					};
+
+					const dueDateFormatted = formatDate(dueDate);
+					const paymentDateStr = inst.paymentDate
+						? formatDate(new Date(inst.paymentDate))
+						: "-";
+
+					// ✅ Status Logic
+					const status = inst.paymentDate && inst.paymentDate.trim() !== ""
+						? `<span class="text-success fw-bold">Paid</span>`
+						: `<span class="text-danger fw-bold">Unpaid</span>`;
+
+					const amount = inst.amount
+						? `INR ${Number(inst.amount).toLocaleString("en-IN")}`
+						: "INR 0";
+
+					rowsHtml += `
+                        <tr>
+                          <td>${srNo}</td>
+                          <td>${inst.maturityDate}</td>   <!-- ✅ Due Date in month -->
+                          <td>${amount}</td>
+                          <td>${status}</td>
+                          <td>${paymentDateStr}</td>
+                        </tr>
+                    `;
+				});
+			} else {
+				rowsHtml = `
+                    <tr>
+                      <td colspan="5" class="text-center text-danger">
+                        No installment data found for this policy.
+                      </td>
+                    </tr>
+                `;
+			}
+
+			$tbody.html(rowsHtml);
+		}
 	});
 });

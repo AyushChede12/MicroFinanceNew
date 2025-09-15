@@ -64,7 +64,7 @@ $(document).ready(function () {
 
         // Dynamic base path for both localhost and online server
         const contextPath = window.location.pathname.split('/')[1]; // e.g., "Microfinance"
-        const fullUrl = `${window.location.origin}/api/customermanagement/saveOrUpdateCustomer`;
+        const fullUrl = `${window.location.origin}api/customermanagement/saveOrUpdateCustomer`;
 
         // Optional: log for debugging
 		console.log("Context Pth: ", contextPath);
