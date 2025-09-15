@@ -513,12 +513,12 @@
 								Statement</span>
 					</a></li>
 
-					<li><a href="model"> <i class="bi bi-circle"></i> <span
+					<li><a href="loanDocumentPrintLoanManagement"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Generate Loan
 								Documents</span>
 					</a></li>
 
-					<li><a href="earlyLoanClosure"> <i class="bi bi-circle"></i>
+					<li><a href="earlyLoanClosureLoan"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Early
 								Loan Closure</span>
 					</a></li>

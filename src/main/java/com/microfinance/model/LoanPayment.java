@@ -12,6 +12,8 @@ public class LoanPayment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	private String memberName;
+	private String memberId;
 	private String loanId;
 	private String loanPlanName;
     private String loanMode;
@@ -42,6 +44,20 @@ public class LoanPayment {
     private String chequeNo;
     private String noOfInst;
     private String amountDue;
+    
+    
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public long getId() {
 		return id;
 	}
