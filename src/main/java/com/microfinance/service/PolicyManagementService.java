@@ -591,7 +591,7 @@ public class PolicyManagementService {
 
 	public List<FullMaturity> getAllApprovedRDPolicies() {
 		// TODO Auto-generated method stub
-		return fullMaturityRepo.findByIsApprovedTrue();
+		return fullMaturityRepo.findByApproveStatusTrue();
 	}
 
 }

@@ -108,7 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row" style="margin-top: 20px; margin-left: 750px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btn btn-dark">Find</button>
+								<button type="button" id="findBtn" class="btn btn-dark">Find</button>
 							</div>
 						</div>
 
@@ -122,13 +122,14 @@ pageEncoding="ISO-8859-1"%> -->
 										Recurring Policy Details <span>| Table View</span>
 									</h5>
 
-									<table class="table table-bordered">
+									<table class="table table-bordered" style="text-align: center;">
 										<thead class="table-light">
 											<tr>
 												<th style="white-space: nowrap;">Sr. No</th>
 												<th style="white-space: nowrap;">Policy Code</th>
 												<th style="white-space: nowrap;">Customer Name</th>
 												<th style="white-space: nowrap;">Payment Date</th>
+												<th style="white-space: nowrap;">Policy Amount</th>
 												<th style="white-space: nowrap;">Plan Code</th>
 												<th style="white-space: nowrap;">Maturity Date</th>
 												<th style="white-space: nowrap;">Maturity Amount</th>
@@ -145,20 +146,59 @@ pageEncoding="ISO-8859-1"%> -->
 
 								</div>
 							</div>
-							<div class="mt-2 text-center">
-								<button id="prevBtnDD" class="btn btn-sm btn-primary">
-									<i class="bi bi-chevron-double-left"></i>
-								</button>
-								<span id="pageInfoDD" class="mx-2"></span>
-								<button id="nextBtnDD" class="btn btn-sm btn-primary">
-									<i class="bi bi-chevron-double-right"></i>
-								</button>
-							</div>
+
 						</div>
 					</div>
-				</div>
 
+					<!-- RD Receipt Template -->
+					<div id="receiptTemplate"
+						style="display: none; font-family: 'Poppins', sans-serif;">
+						<div
+							style="width: 700px; margin: auto; padding: 20px; border: 2px solid #000; border-radius: 8px;">
+							<h2
+								style="text-align: center; margin-bottom: 5px; text-transform: uppercase;">Recurring
+								Deposit (RD) Receipt</h2>
+							<p style="text-align: center; font-size: 13px; margin-top: 0;">This
+								is a system generated receipt</p>
+							<hr style="margin: 10px 0;">
 
+							<table
+								style="width: 100%; border-collapse: collapse; font-size: 14px;">
+								<tr>
+									<td style="padding: 6px;"><b>Policy Code:</b></td>
+									<td style="padding: 6px;" id="rPolicyCode"></td>
+									<td style="padding: 6px;"><b>Payment Date:</b></td>
+									<td style="padding: 6px;" id="rPaymentDate"></td>
+								</tr>
+								<tr style="background: #f9f9f9;">
+									<td style="padding: 6px;"><b>Customer Name:</b></td>
+									<td style="padding: 6px;" id="rCustomerName"></td>
+									<td style="padding: 6px;"><b>Branch:</b></td>
+									<td style="padding: 6px;" id="rBranchName"></td>
+								</tr>
+								<tr>
+									<td style="padding: 6px;"><b>Policy Amount:</b></td>
+									<td style="padding: 6px;">&#8377; <span id="rPolicyAmount"></span></td>
+									<td style="padding: 6px;"><b>Plan Code:</b></td>
+									<td style="padding: 6px;" id="rPlanCode"></td>
+								</tr>
+								<tr style="background: #f9f9f9;">
+									<td style="padding: 6px;"><b>Maturity Date:</b></td>
+									<td style="padding: 6px;" id="rMaturityDate"></td>
+									<td style="padding: 6px;"><b>Maturity Amount:</b></td>
+									<td style="padding: 6px;">&#8377; <span
+										id="rMaturityAmount"></span></td>
+								</tr>
+								<tr>
+									<td style="padding: 6px;"><b>Duration:</b></td>
+									<td style="padding: 6px;" id="rDuration"></td>
+									<td style="padding: 6px;"><b>Mode of Payment:</b></td>
+									<td style="padding: 6px;" id="rModeOfPayment"></td>
+								</tr>
+							</table>
+
+							<hr style=
+						</div>
 			</form>
 
 
