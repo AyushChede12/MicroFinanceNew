@@ -13,7 +13,7 @@ public class ManualJournalEntry {
     private long id;
 
 	private String branchName;
-	private String generatedReceiptID;
+	private String voucherID;
     private String dateOfEntry;
     private String creditLedger;
     private String debitLedger;
@@ -32,11 +32,12 @@ public class ManualJournalEntry {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	public String getGeneratedReceiptID() {
-		return generatedReceiptID;
+	
+	public String getVoucherID() {
+		return voucherID;
 	}
-	public void setGeneratedReceiptID(String generatedReceiptID) {
-		this.generatedReceiptID = generatedReceiptID;
+	public void setVoucherID(String voucherID) {
+		this.voucherID = voucherID;
 	}
 	public String getDateOfEntry() {
 		return dateOfEntry;
