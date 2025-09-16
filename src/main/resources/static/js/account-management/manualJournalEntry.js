@@ -81,8 +81,8 @@ function saveManualJournal() {
 				$("#creditLedger, #debitLedger").html("<option value=''>Select Ledger</option>");
 				loadManualJournalData();
 
-				if (response.data?.generatedReceiptID) {
-					$("#generatedReceiptID").val(response.data.generatedReceiptID);
+				if (response.data?.voucherID) {
+					$("#voucherID").val(response.data.voucherID);
 				}
 			} else {
 				alert(response.message || "Unexpected response.");
@@ -119,6 +119,7 @@ function loadManualJournalData() {
                     <tr>
                         <td>${entry.id || ''}</td>
                         <td>${entry.branchName || ''}</td>
+						<td>${entry.voucherID ?? ''}</td>
                         <td>${entry.dateOfEntry || ''}</td>
                         <td>${entry.creditLedger || ''}</td>
                         <td>${entry.debitLedger || ''}</td>
@@ -164,7 +165,7 @@ function viewManualJournal(id) {
 			$("#dateOfEntry").val(entry.dateOfEntry);
 			$("#transactionAmount").val(entry.transactionAmount);
 			$("#remarks").val(entry.remarks);
-			$("#generatedReceiptID").val(entry.generatedReceiptID || '');
+			$("#voucherID").val(entry.voucherID || '');
 		},
 		error: function(xhr) {
 			let msg = "Error loading entry.";
