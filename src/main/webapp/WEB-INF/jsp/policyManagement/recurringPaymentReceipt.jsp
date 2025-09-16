@@ -154,51 +154,53 @@ pageEncoding="ISO-8859-1"%> -->
 					<div id="receiptTemplate"
 						style="display: none; font-family: 'Poppins', sans-serif;">
 						<div
-							style="width: 700px; margin: auto; padding: 20px; border: 2px solid #000; border-radius: 8px;">
-							<h2
-								style="text-align: center; margin-bottom: 5px; text-transform: uppercase;">Recurring
+							style="width: 650px; margin: auto; padding: 20px; border: 2px solid #000; border-radius: 8px;">
+							<h2 style="text-align: center; margin-bottom: 10px;">Recurring
 								Deposit (RD) Receipt</h2>
-							<p style="text-align: center; font-size: 13px; margin-top: 0;">This
-								is a system generated receipt</p>
-							<hr style="margin: 10px 0;">
-
-							<table
-								style="width: 100%; border-collapse: collapse; font-size: 14px;">
-								<tr>
-									<td style="padding: 6px;"><b>Policy Code:</b></td>
-									<td style="padding: 6px;" id="rPolicyCode"></td>
-									<td style="padding: 6px;"><b>Payment Date:</b></td>
-									<td style="padding: 6px;" id="rPaymentDate"></td>
-								</tr>
-								<tr style="background: #f9f9f9;">
-									<td style="padding: 6px;"><b>Customer Name:</b></td>
-									<td style="padding: 6px;" id="rCustomerName"></td>
-									<td style="padding: 6px;"><b>Branch:</b></td>
-									<td style="padding: 6px;" id="rBranchName"></td>
-								</tr>
-								<tr>
-									<td style="padding: 6px;"><b>Policy Amount:</b></td>
-									<td style="padding: 6px;">&#8377; <span id="rPolicyAmount"></span></td>
-									<td style="padding: 6px;"><b>Plan Code:</b></td>
-									<td style="padding: 6px;" id="rPlanCode"></td>
-								</tr>
-								<tr style="background: #f9f9f9;">
-									<td style="padding: 6px;"><b>Maturity Date:</b></td>
-									<td style="padding: 6px;" id="rMaturityDate"></td>
-									<td style="padding: 6px;"><b>Maturity Amount:</b></td>
-									<td style="padding: 6px;">&#8377; <span
-										id="rMaturityAmount"></span></td>
-								</tr>
-								<tr>
-									<td style="padding: 6px;"><b>Duration:</b></td>
-									<td style="padding: 6px;" id="rDuration"></td>
-									<td style="padding: 6px;"><b>Mode of Payment:</b></td>
-									<td style="padding: 6px;" id="rModeOfPayment"></td>
-								</tr>
-							</table>
-
-							<hr style=
+							<hr>
+							<p>
+								<b>Policy Code:</b> <span id="rPolicyCode"></span>
+							</p>
+							<p>
+								<b>Customer Name:</b> <span id="rCustomerName"></span>
+							</p>
+							<p>
+								<b>Payment Date:</b> <span id="rPaymentDate"></span>
+							</p>
+							<p>
+								<b>Policy Amount:</b> &#8377; <span id="rPolicyAmount"></span>
+							</p>
+							<p>
+								<b>Plan Code:</b> <span id="rPlanCode"></span>
+							</p>
+							<p>
+								<b>Maturity Date:</b> <span id="rMaturityDate"></span>
+							</p>
+							<p>
+								<b>Maturity Amount:</b> &#8377; <span id="rMaturityAmount"></span>
+							</p>
+							<p>
+								<b>Duration:</b> <span id="rDuration"></span>
+							</p>
+							<p>
+								<b>Branch:</b> <span id="rBranchName"></span>
+							</p>
+							<p>
+								<b>Mode of Payment:</b> <span id="rModeOfPayment"></span>
+							</p>
+							<br> <br>
+							<p style="text-align: right; margin-top: 40px;">
+								<b>Authorized Signature</b>
+							</p>
 						</div>
+					</div>
+
+
+
+
+				</div>
+
+
 			</form>
 
 
