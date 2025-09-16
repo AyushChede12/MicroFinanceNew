@@ -141,7 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Branch Name </label> <input type="text"
+								<label for="">branchName Name </label> <input type="text"
 									name="branchName" id="branchName" required="required"
 									placeholder="Branch Name" />
 							</div>

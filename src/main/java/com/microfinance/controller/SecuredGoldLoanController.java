@@ -106,44 +106,40 @@ public class SecuredGoldLoanController {
 		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
 				(id == null ? "Row created successfully" : "Row updated successfully"), saved));
 	}
-	
-	
-	@GetMapping("/getAllGoldDirectories")
-    public ResponseEntity<ApiResponse<List<GoldDirectory>>> getAllGoldDirectories() {
-        List<GoldDirectory> list = secureGoldLoanService.getAllGoldDirectories();
 
-        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
-                        list.isEmpty() ? "No records found" : "Records fetched successfully",
-                        list));
-    }
-	
+	@GetMapping("/getAllGoldDirectories")
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getAllGoldDirectories() {
+		List<GoldDirectory> list = secureGoldLoanService.getAllGoldDirectories();
+
+		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+				list.isEmpty() ? "No records found" : "Records fetched successfully", list));
+	}
+
 	@GetMapping("/getAllMembersForGoldLoan")
-    public ResponseEntity<ApiResponse<List<addCustomer>>> getAllMembersforGold() {
-        List<addCustomer> list = secureGoldLoanService.getAllCustomers();
-        ApiResponse<List<addCustomer>> response = ApiResponse.success(
-                HttpStatus.OK, "All Members Fetched Successfully", list
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-	
-	
-	/*
-	 * @GetMapping("/getByMemberCodeApplyForGold") public
-	 * ResponseEntity<ApiResponse<List<addCustomer>>>
-	 * getGoldLoanByMemberCode(@RequestParam String memberCode) { try {
-	 * List<addCustomer> customerList =
-	 * secureGoldLoanService.getLoanApplicationById(memberCode);
-	 * 
-	 * if (customerList == null || customerList.isEmpty()) { return
-	 * ResponseEntity.status(HttpStatus.NOT_FOUND) .body(new
-	 * ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code",
-	 * null)); }
-	 * 
-	 * return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-	 * "Customer(s) found", customerList)); } catch (RuntimeException ex) { return
-	 * ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR) .body(new
-	 * ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null)); } }
-	 */
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllMembersforGold() {
+		List<addCustomer> list = secureGoldLoanService.getAllCustomers();
+		ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK, "All Members Fetched Successfully",
+				list);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("/getByMemberCodeApplyForGold")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getGoldLoanByMemberCode(@RequestParam String memberCode) {
+		try {
+			List<addCustomer> customerList = secureGoldLoanService.getLoanApplicationById(memberCode);
+
+			if (customerList == null || customerList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Customer(s) found", customerList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
+
 }
 
 // 1. Save Today's Rate
@@ -189,6 +185,3 @@ public class SecuredGoldLoanController {
 //		GoldDirectory saved = secureGoldLoanService.savePurityMaster(purityName, purity, itemPurityType);
 //		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Purity Master saved successfully", saved));
 //	}
-
-
-

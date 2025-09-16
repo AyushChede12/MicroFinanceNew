@@ -141,16 +141,19 @@ public class SecuredGoldLoanService {
 		return goldDirectoryRepo.findAll();
 	}
 
-	/*
-	 * public List<addCustomer> getLoanApplicationById(String memberCode) { // TODO
-	 * Auto-generated method stub return
-	 * applyForGoldRepo.findByMemberCode(memberCode); }
-	 */
+	
+	  public List<addCustomer> getLoanApplicationById(String memberCode) { 
+		  // TODO Auto-generated method stub 
+		  return applyForGoldRepo.findByMemberCode(memberCode);
+		  }
+	 
 
 	public List<addCustomer> getAllCustomers() {
 		// TODO Auto-generated method stub
 		return applyForGoldRepo.findAll();
 	}
+
+	
 
 //	public GoldDirectory saveItemMaster(String itemMasterType, String itemName) {
 //		// TODO Auto-generated method stub
