@@ -6,9 +6,12 @@ pageEncoding="ISO-8859-1"%> -->
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script src="https://kit.fontawesome.com/ae73087723.js" crossorigin="anonymous"></script>
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.46.0/apexcharts.min.js"></script>
+<script src="https://kit.fontawesome.com/ae73087723.js"
+	crossorigin="anonymous"></script>
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.46.0/apexcharts.min.js"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -18,10 +21,12 @@ pageEncoding="ISO-8859-1"%> -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 	crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
@@ -42,7 +47,8 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Secured Gold Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i class="bi bi-coin"></i></a></li>
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-coin"></i></a></li>
 					<li class="breadcrumb-item action">Gold Directory</li>
 				</ol>
 			</nav>
@@ -58,12 +64,13 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					<input type="hidden" id="goldDirectoryId" name="id" value="">
-					
+						<input type="hidden" id="goldDirectoryId" name="id" value="">
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Karat</label>
-								<select id="karat" name="karat" required="required" class="form-control selectField" style="height: 30px;">
+								<label for="">Karat</label> <select id="karat" name="karat"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Karat</option>
 									<option value="24K">24K</option>
 									<option value="22K">22K</option>
@@ -75,9 +82,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="silverrate">Silver Rate/1 gm</label>
-								<input type="text" name="silverRate" id="silverRate" required="required"
-									placeholder="Enter Rate" style="text-transform: uppercase;" />
+								<label for="silverrate">Silver Rate/1 gm</label> <input
+									type="text" name="silverRate" id="silverRate"
+									required="required" placeholder="Enter Rate"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -85,24 +93,44 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="goldrate">Gold Rate/1 gm</label>
 								<div class="d-flex">
-									<input type="text" name="goldRate" id="goldRate" required="required"
-										placeholder="Enter Rate" style="text-transform: uppercase; margin-right: 10px;" />
+									<input type="text" name="goldRate" id="goldRate"
+										required="required" placeholder="Enter Rate"
+										style="text-transform: uppercase; margin-right: 10px;" />
 									<button id="saveTodaysRateBtn" class="btnStyle bg-success">Save</button>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<table class="table table-borderless datatable overflow-scroll" id="loanTableWrapper">
-						<thead class="table-light">
-							<tr style="font-family: 'Poppins', sans-serif;">
-								<th>Karat</th>
-								<th>Silver Rate</th>
-								<th>Gold Rate</th>
-							</tr>
-						</thead>
-						<tbody id=""></tbody>
-					</table>
+					
+					<div class="row mt-5" id="policyDataRow">
+						<div class="col-12">
+							<div class="card recent-sales">
+								<div class="card-body table-responsive">
+									<h5 class="card-title">
+										Todays Rate Details <span>| Data</span>
+									</h5>
+
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th style="white-space: nowrap;">Karat</th>
+												<th style="white-space: nowrap;">Silver Rate</th>
+												<th style="white-space: nowrap;">Gold Rate</th>
+												
+											</tr>
+										</thead>
+										<tbody id="todaysRateTable">
+											<!-- Dynamic rows will be injected here -->
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					
 				</div>
 
 				<!-- ================= Item Master ================= -->
@@ -115,8 +143,9 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Item Master Type</label>
-								<select id="itemMasterType" name="itemMasterType" required="required" class="form-control selectField" style="height: 30px;">
+								<label for="">Item Master Type</label> <select
+									id="itemMasterType" name="itemMasterType" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Item Type</option>
 									<option value="Gold">Gold</option>
 									<option value="Silver">Silver</option>
@@ -128,24 +157,44 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="itemName">Item Name</label>
 								<div class="d-flex">
-									<input type="text" name="itemName" id="ItemName" required="required"
-										placeholder="Enter Item Name" style="text-transform: uppercase; margin-right: 10px;" />
+									<input type="text" name="itemName" id="ItemName"
+										required="required" placeholder="Enter Item Name"
+										style="text-transform: uppercase; margin-right: 10px;" />
 									<button id="saveItemMasterBtn" class="btnStyle bg-success">Save</button>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					<table class="table table-borderless datatable overflow-scroll" id="loanTableWrapper">
-						<thead class="table-light">
-							<tr style="font-family: 'Poppins', sans-serif;">
-								<th>ID</th>
-								<th>Item Type</th>
-								<th>Item Name</th>
-							</tr>
-						</thead>
-						<tbody id=""></tbody>
-					</table>
+					
+					
+					<div class="row mt-5" id="policyDataRow">
+						<div class="col-12">
+							<div class="card recent-sales">
+								<div class="card-body table-responsive">
+									<h5 class="card-title">
+										Item Master Details <span>| Data</span>
+									</h5>
+
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th style="white-space: nowrap;">ID</th>
+												<th style="white-space: nowrap;">Item Type</th>
+												<th style="white-space: nowrap;">Item Name</th>
+												
+											</tr>
+										</thead>
+										<tbody id="itemMasterTable">
+											<!-- Dynamic rows will be injected here -->
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+							
+						</div>
+					</div>
 				</div>
 
 				<!-- ================= Locker Master ================= -->
@@ -158,9 +207,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="lockerLocation">Locker Location</label>
-								<input type="text" name="lockerLocation" id="lockerLocation"
-									required="required" placeholder="Enter Location" style="text-transform: uppercase;" />
+								<label for="lockerLocation">Locker Location</label> <input
+									type="text" name="lockerLocation" id="lockerLocation"
+									required="required" placeholder="Enter Location"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -177,16 +227,35 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 
-					<table class="table table-borderless datatable overflow-scroll" id="loanTableWrapper">
-						<thead class="table-light">
-							<tr style="font-family: 'Poppins', sans-serif;">
-								<th>ID</th>
-								<th>Locker Location</th>
-								<th>Locker Address</th>
-							</tr>
-						</thead>
-						<tbody id=""></tbody>
-					</table>
+					
+					
+					<div class="row mt-5" id="policyDataRow">
+						<div class="col-12">
+							<div class="card recent-sales">
+								<div class="card-body table-responsive">
+									<h5 class="card-title">
+										Locker Master Details <span>| Data</span>
+									</h5>
+
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th style="white-space: nowrap;">ID</th>
+												<th style="white-space: nowrap;">Locker Location</th>
+												<th style="white-space: nowrap;">Locker Address</th>
+												
+											</tr>
+										</thead>
+										<tbody id="lockerMasterTable">
+											<!-- Dynamic rows will be injected here -->
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+							
+						</div>
+					</div>
 				</div>
 
 				<!-- ================= Purity Master ================= -->
@@ -200,19 +269,18 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="purityName">Purity Name</label>
-								<input type="text" name="purityName" id="purityName"
-									required="required" placeholder="Enter Purity Name"
+								<label for="purityName">Purity Name</label> <input type="text"
+									name="purityName" id="purityName" required="required"
+									placeholder="Enter Purity Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="purity">Purity (%)</label>
-								<input type="text" name="purity" id="purity"
-									required="required" placeholder="Enter Purity"
-									style="text-transform: uppercase;" />
+								<label for="purity">Purity (%)</label> <input type="text"
+									name="purity" id="purity" required="required"
+									placeholder="Enter Purity" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -220,8 +288,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="itemType">Item Purity Type</label>
 								<div class="d-flex">
-									<select id="itemPurityType" name="itemPurityType" required="required"
-										class="form-control selectField"
+									<select id="itemPurityType" name="itemPurityType"
+										required="required" class="form-control selectField"
 										style="height: 30px; margin-right: 10px;">
 										<option value="">Item Type</option>
 										<option value="Gold">Gold</option>
@@ -233,7 +301,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div>
 
-					<table class="table table-borderless datatable overflow-scroll" id="loanTableWrapper">
+					<!-- <table class="table table-borderless datatable overflow-scroll" id="loanTableWrapper">
 						<thead class="table-light">
 							<tr style="font-family: 'Poppins', sans-serif;">
 								<th>ID</th>
@@ -241,15 +309,43 @@ pageEncoding="ISO-8859-1"%> -->
 								<th>Type</th>
 							</tr>
 						</thead>
-						<tbody id=""></tbody>
-					</table>
+						 <tbody id="purityMasterTable"></tbody>
+					</table> -->
+
+					<div class="row mt-5" id="policyDataRow">
+						<div class="col-12">
+							<div class="card recent-sales">
+								<div class="card-body table-responsive">
+									<h5 class="card-title">
+										Purity Master Details <span>| Data</span>
+									</h5>
+
+									<table class="table table-bordered">
+										<thead class="table-light">
+											<tr>
+												<th style="white-space: nowrap;">ID</th>
+												<th style="white-space: nowrap;">Purity Name</th>
+												<th style="white-space: nowrap;">Type</th>
+												
+											</tr>
+										</thead>
+										<tbody id="purityMasterTable">
+											<!-- Dynamic rows will be injected here -->
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+							
+						</div>
+					</div>
 				</div>
 
 				<input type="hidden" id="loanId" value="" />
-				
+
 			</form>
 
-			
+
 		</div>
 	</main>
 
