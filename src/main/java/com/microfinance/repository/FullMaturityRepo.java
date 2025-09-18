@@ -15,4 +15,6 @@ public interface FullMaturityRepo extends JpaRepository<FullMaturity, Long> {
 
 	List<FullMaturity> findByPolicyCodeIgnoreCase(String policyCode);
 
+	List<FullMaturity> findByApproveStatusTrue();
+
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.SecuredGoldPlan;
+import com.microfinance.model.addCustomer;
+import com.microfinance.repository.ApplyForGoldRepo;
 import com.microfinance.repository.GoldDirectoryRepo;
 import com.microfinance.repository.GoldSecurePlanRepo;
 
@@ -19,6 +21,9 @@ public class SecuredGoldLoanService {
 
 	@Autowired
 	GoldDirectoryRepo goldDirectoryRepo;
+	
+	@Autowired
+	ApplyForGoldRepo applyForGoldRepo;
 
 	public SecuredGoldPlan saveLoanManagmentData(SecuredGoldPlan goldLoan) {
 		if (goldLoan.getId() != null && goldSecurePlanRepo.existsById(goldLoan.getId())) {
@@ -129,6 +134,22 @@ public class SecuredGoldLoanService {
         goldDirectory.setItemPurityType(itemPurityType);
 
         return goldDirectoryRepo.save(goldDirectory);
+	}
+
+	public List<GoldDirectory> getAllGoldDirectories() {
+		// TODO Auto-generated method stub
+		return goldDirectoryRepo.findAll();
+	}
+
+	/*
+	 * public List<addCustomer> getLoanApplicationById(String memberCode) { // TODO
+	 * Auto-generated method stub return
+	 * applyForGoldRepo.findByMemberCode(memberCode); }
+	 */
+
+	public List<addCustomer> getAllCustomers() {
+		// TODO Auto-generated method stub
+		return applyForGoldRepo.findAll();
 	}
 
 //	public GoldDirectory saveItemMaster(String itemMasterType, String itemName) {

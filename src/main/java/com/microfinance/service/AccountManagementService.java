@@ -1001,9 +1001,9 @@ public class AccountManagementService {
 		String branch = dto.getBranchName().toUpperCase();
 		String dateStr = dto.getDateOfEntry().replace("-", "");
 		String shortUUID = UUID.randomUUID().toString().substring(0, 8);
-		String receiptId = "RCPT-" + branch + "-" + dateStr + "-" + shortUUID;
+		String voucherId = "JV-" + branch + "-" + dateStr + "-" + shortUUID;
 
-		entity.setGeneratedReceiptID(receiptId);
+		entity.setVoucherID(voucherId);
 
 		return mapToDto(manualJournalRepo.save(entity));
 	}
@@ -1065,41 +1065,52 @@ public class AccountManagementService {
 	 * @param branchName   Branch name.
 	 * @throws IllegalArgumentException if any validation fails.
 	 */
-
 	private void validateLedgerGroupsManual(String debitLedger, String creditLedger, String branchName) {
 
-		List<String> allowedGroups = Arrays.asList("ASSETS", "LIABILITIES", "INCOME", "EXPENSES", "EQUITY");
+	    List<String> allowedGroups = Arrays.asList("ASSETS", "LIABILITIES", "INCOME", "EXPENSES", "EQUITY");
 
-		String sanitizedDebitLedger = debitLedger.trim();
-		String sanitizedCreditLedger = creditLedger.trim();
-		String sanitizedBranch = branchName.trim();
+	    String sanitizedDebitLedger = debitLedger.trim();
+	    String sanitizedCreditLedger = creditLedger.trim();
+	    String sanitizedBranch = branchName.trim();
 
-		LedgerAccountMaster debit = ledgerAccountRepository
-				.findByAccountTitleAndBranchName(sanitizedDebitLedger, sanitizedBranch)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid debit ledger: " + sanitizedDebitLedger));
+	    LedgerAccountMaster debit = ledgerAccountRepository
+	            .findByAccountTitleAndBranchName(sanitizedDebitLedger, sanitizedBranch)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid debit ledger: " + sanitizedDebitLedger));
 
-		LedgerAccountMaster credit = ledgerAccountRepository
-				.findByAccountTitleAndBranchName(sanitizedCreditLedger, sanitizedBranch)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid credit ledger: " + sanitizedCreditLedger));
+	    LedgerAccountMaster credit = ledgerAccountRepository
+	            .findByAccountTitleAndBranchName(sanitizedCreditLedger, sanitizedBranch)
+	            .orElseThrow(() -> new IllegalArgumentException("Invalid credit ledger: " + sanitizedCreditLedger));
 
-		if (!allowedGroups.contains(debit.getGroupName())) {
-			throw new IllegalArgumentException("Debit and Credit ledgers cannot be the same.");
-		}
+	    // 1. Ledger groups must be valid
+	    if (!allowedGroups.contains(debit.getGroupName())) {
+	    	throw new BadRequestException("Invalid group for Debit Ledger '" 
+	            + debit.getAccountTitle() + "'. Allowed groups: " + allowedGroups);
+	    }
+	    if (!allowedGroups.contains(credit.getGroupName())) {
+	    	throw new BadRequestException("Invalid group for Credit Ledger '" 
+	            + credit.getAccountTitle() + "'. Allowed groups: " + allowedGroups);
+	    }
 
-		if (!allowedGroups.contains(credit.getGroupName())) {
-			throw new IllegalArgumentException("Both ledgers must belong to the same branch.");
-		}
+	    // 2. Debit and Credit ledger cannot be the same
+	    if (sanitizedDebitLedger.equalsIgnoreCase(sanitizedCreditLedger)) {
+	    	throw new BadRequestException("Debit and Credit ledgers cannot be the same.");
+	    }
 
-		if (sanitizedDebitLedger.equalsIgnoreCase(sanitizedCreditLedger)) {
-			throw new IllegalArgumentException("Debit and Credit ledgers cannot be the same.");
-		}
+	    // 3. Branch validation
+	    if (!debit.getBranchName().equalsIgnoreCase(credit.getBranchName())) {
+	    	throw new BadRequestException("Debit and Credit Ledgers must belong to the same branch.");
+	    }
 
-		if (!debit.getBranchName().equalsIgnoreCase(credit.getBranchName())) {
-			throw new IllegalArgumentException("Invalid group for Credit Ledger '" + credit.getAccountTitle()
-					+ "'. Found group: '" + credit.getGroupName() + "'. Allowed groups: " + allowedGroups);
-
-		}
+	    // 4. Optional JV-specific validation
+	    // Normally Cash/Bank should not be in JV (only in PMT/RCPT/CONTRA)
+	    if ((debit.getAccountType().equalsIgnoreCase("Cash") 
+	            || debit.getAccountType().equalsIgnoreCase("Bank")) ||
+	        (credit.getAccountType().equalsIgnoreCase("Cash") 
+	            || credit.getAccountType().equalsIgnoreCase("Cash"))) {
+	    	throw new BadRequestException("Cash/Bank ledgers are not allowed in Journal Entry. Use Payment/Receipt/Contra instead.");
+	    }
 	}
+
 
 	public List<ManualJournalDto> getAllManualJournal() {
 		return manualJournalRepo.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
@@ -1127,7 +1138,7 @@ public class AccountManagementService {
 		ManualJournalDto dto = new ManualJournalDto();
 		dto.setId(entity.getId());
 		dto.setBranchName(entity.getBranchName());
-		dto.setGeneratedReceiptID(entity.getGeneratedReceiptID());
+		dto.setVoucherID(entity.getVoucherID());
 		dto.setDateOfEntry(entity.getDateOfEntry());
 		dto.setCreditLedger(entity.getCreditLedger());
 		dto.setDebitLedger(entity.getDebitLedger());
