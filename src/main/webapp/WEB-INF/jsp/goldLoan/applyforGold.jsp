@@ -237,10 +237,10 @@ pageEncoding="ISO-8859-1"%> -->
 										class="mb-2">Message Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="messageStatus"
-												name="messageStatus" class="toggle__input"
-												data-toggle-type="member-status"> <label
-												for="messageStatus" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-sms-send"
+												name="smsSend" class="toggle__input"
+												data-toggle-type="smsSend"> <label
+												for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
