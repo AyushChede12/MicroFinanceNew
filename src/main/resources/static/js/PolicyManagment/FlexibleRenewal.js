@@ -117,7 +117,7 @@ $(document).ready(function() {
 
 		// Send to backend
 		$.ajax({
-			url: "/api/Policymangment/updateFDDueAndInstallment",  // ✅ must match controller
+			url: "api/Policymangment/updateFDDueAndInstallment",  // ✅ must match controller
 			type: "POST",
 			contentType: "application/json",
 			data: JSON.stringify(formData),
