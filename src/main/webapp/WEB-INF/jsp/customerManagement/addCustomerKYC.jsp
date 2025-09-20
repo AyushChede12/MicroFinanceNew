@@ -33,6 +33,27 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<style>
+#img-view {
+    width: 100%;
+    height: 200px;              /* adjust to your preferred box height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #ccc;    /* optional: border like upload box */
+    border-radius: 10px;
+    overflow: hidden;           /* ensures image stays inside box */
+    background: #f9f9f9;        /* optional light background */
+}
+
+#photoPreview,
+#signaturePreview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;  /* keeps whole image visible */
+}
+
+</style>
 </head>
 
 
