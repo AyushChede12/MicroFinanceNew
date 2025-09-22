@@ -1031,5 +1031,21 @@ public class PolicyManagementController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+	
+	@GetMapping("/getApprovedRDFromFullMaturity")
+	public ResponseEntity<ApiResponse<List<FullMaturity>>> getApprovedRD() {
+		List<FullMaturity> approvedList = policyManagementService.getAllApprovedRDPolicies();
+
+		if (approvedList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+		}
+
+		return ResponseEntity
+				.ok(new ApiResponse<>(HttpStatus.OK, "Approved RD policies fetched successfully", approvedList));
+
+	}
+	
+	
 
 }

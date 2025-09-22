@@ -1,9 +1,79 @@
 $(document).ready(function() {
 
+    // ====== FETCH & POPULATE TABLES ======
+    function fetchGoldDirectoryData() {
+        $.ajax({
+            url: "/api/securedGoldLoan/getAllGoldDirectories",
+            type: "GET",
+            success: function(response) {
+                if (response && response.data) {
+                    let data = response.data;
+
+                    // Clear existing rows
+                    $("#todaysRateTable").empty();
+                    $("#itemMasterTable").empty();
+                    $("#lockerMasterTable").empty();
+                    $("#purityMasterTable").empty();
+
+                    // Loop and append rows
+                    data.forEach(function(row) {
+                        // Today's Rate table
+                        if (row.karat || row.silverRate || row.goldRate) {
+                            $("#todaysRateTable").append(
+                                `<tr>
+                                    <td>${row.karat || "-"}</td>
+                                    <td>${row.silverRate || "-"}</td>
+                                    <td>${row.goldRate || "-"}</td>
+                                </tr>`
+                            );
+                        }
+
+                        // Item Master table
+                        if (row.itemMasterType || row.itemName) {
+                            $("#itemMasterTable").append(
+                                `<tr>
+                                    <td>${row.id}</td>
+                                    <td>${row.itemMasterType || "-"}</td>
+                                    <td>${row.itemName || "-"}</td>
+                                </tr>`
+                            );
+                        }
+
+                        // Locker Master table
+                        if (row.lockerLocation || row.lockerAddress) {
+                            $("#lockerMasterTable").append(
+                                `<tr>
+                                    <td>${row.id}</td>
+                                    <td>${row.lockerLocation || "-"}</td>
+                                    <td>${row.lockerAddress || "-"}</td>
+                                </tr>`
+                            );
+                        }
+
+                        // Purity Master table
+                        if (row.purityName || row.purity || row.itemPurityType) {
+                            $("#purityMasterTable").append(
+                                `<tr>
+                                    <td>${row.id}</td>
+                                    <td>${row.purityName || "-"}</td>
+                                    <td>${row.itemPurityType || "-"}</td>
+                                </tr>`
+                            );
+                        }
+                    });
+                }
+            },
+            error: function(xhr) {
+                console.error("Error fetching data:", xhr);
+                alert("Failed to fetch data!");
+            }
+        });
+    }
+
+    // ====== SAVE GOLD DIRECTORY ======
     function saveGoldDirectory(newData, successMsg) {
         let id = $("#goldDirectoryId").val(); // hidden field
 
-        // Merge all current values
         let payload = {
             id: id || null,
             karat: newData.karat || $("#karat").val() || "",
@@ -24,11 +94,13 @@ $(document).ready(function() {
             data: payload,
             success: function(response) {
                 if (response && response.data) {
-                    // First save → set ID
                     if (!id) {
                         $("#goldDirectoryId").val(response.data.id);
                     }
                     alert(successMsg);
+
+                    // Refresh tables after save
+                    fetchGoldDirectoryData();
                 } else {
                     alert("Error: Invalid response from server");
                 }
@@ -40,7 +112,7 @@ $(document).ready(function() {
         });
     }
 
-    // ======= Button Events =======
+    // ====== BUTTON EVENTS ======
     $("#saveTodaysRateBtn").on("click", function(e) {
         e.preventDefault();
         let idExists = $("#goldDirectoryId").val();
@@ -78,4 +150,8 @@ $(document).ready(function() {
             itemPurityType: $("#itemPurityType").val()
         }, idExists ? "Purity Master updated successfully!" : "Purity Master saved successfully!");
     });
+
+    // ====== INITIAL LOAD ======
+    fetchGoldDirectoryData();
+
 });
