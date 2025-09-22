@@ -64,16 +64,8 @@ $(document).ready(function () {
         formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
         formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
 
-        // ✅ Build correct base URL (works local + server)
-        let baseUrl = window.location.origin;
-        const pathParts = window.location.pathname.split('/');
-
-        if (pathParts.length > 1 && pathParts[1] !== "" && pathParts[1] !== "index.jsp") {
-            // if deployed as /Microfinance
-            baseUrl += "/" + pathParts[1];
-        }
-
-        const fullUrl = `${baseUrl}/api/customermanagement/saveOrUpdateCustomer`;
+        // ✅ Auto domain + context path
+        const fullUrl = window.location.origin + "/api/customermanagement/saveOrUpdateCustomer";
 
         console.log("POST to URL: ", fullUrl);
 
@@ -84,17 +76,25 @@ $(document).ready(function () {
             data: formData,
             processData: false,
             contentType: false,
-            success: function (response) {
-                if (response.status === "OK" || response.status === "CREATED") {
-                    alert(response.message);
+            success: function (response, textStatus, xhr) {
+                console.log("✅ Response:", response);
+
+                if (xhr.status === 200 || xhr.status === 201) {
+                    alert(response.message || "Customer saved successfully!");
                     location.reload();
                 } else {
-                    alert("Server error: " + response.message);
+                    alert("Unexpected response: " + (response.message || "Unknown error"));
                 }
             },
             error: function (xhr) {
-                console.error("Error response: ", xhr.responseText);
-                alert("Something went wrong while saving. Please try again.");
+                console.error("❌ Error response: ", xhr);
+                let msg = "Something went wrong while saving.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                } else if (xhr.responseText) {
+                    msg = xhr.responseText;
+                }
+                alert(msg);
             }
         });
     });
