@@ -96,6 +96,108 @@ $(document).ready(function() {
 			$("#customerName, #dateOfBirth, #age, #contactNo, #address, #pinCode, #branchName").val("");
 		}
 	});
+	
+	$.ajax({
+	    url: "api/securedGoldLoan/allDataFetchGoldSecurePlan",
+	    type: "GET",
+	    data: { loanPlanName: "" },
+	    success: function(response) {
+	        var select = $("#loanPlanName");
+	        select.empty();
+	        select.append('<option value="">Select LoanPlanName</option>');
+
+	        if (response && response.data && response.data.length > 0) {
+	            var addedValues = new Set(); // duplicate avoid karne ke liye
+
+	            response.data.forEach(function(planName) {
+	                var optionText = planName.loanPlanName ? planName.loanPlanName.trim() : "";
+
+	                if (optionText !== "" && !addedValues.has(optionText)) {
+	                    select.append(
+	                        '<option value="' + optionText + '">' + optionText + "</option>"
+	                    );
+	                    addedValues.add(optionText);
+	                }
+	            });
+	        } else {
+	            console.log("No LoanPlanName found");
+	        }
+	    },
+	    error: function(err) {
+	        console.error("Error fetching members", err);
+	    },
+	});
+	
+	$("#loanPlanName").on("change", function() {
+			var loanPlanName = $(this).val();
+			if (loanPlanName) {
+				$.ajax({
+					url: "api/securedGoldLoan/getLoanPlanNameApplyForGold",
+					type: "GET",
+					data: { loanPlanName: loanPlanName },
+					success: function(response) {
+						if (response && response.data && response.data.length > 0) {
+							var planName = response.data[0]; // assuming first record
+
+							// Populate form fields
+							$("#typeOfLoan").val(planName.typeOfLoan || "");
+							$("#loanMode").val(planName.loanMode || "");
+							$("#loanTerm").val(planName.minTerm || "");
+							$("#rateOfInterest").val(planName.rateInterestType || "");
+							$("#loanAmount").val(planName.minAmt || "");
+							$("#interestType").val(planName.interestType || "");
+							//$("#emiPayment").val(planName.branchName || "");
+							//formData.append("smsSend", $('#toggle-sms-send').is(':checked') ? "1" : "0");
+							// ✅ Toggle button status set karna
+							/*  if (customer.smsSend === "1") {
+								  $("#toggle-sms-send").prop("checked", true);
+							  } else {
+								  $("#toggle-sms-send").prop("checked", false);
+							  }*/
+
+							if (parseInt(customer.smsSend) === 1) {
+								$('#toggle-sms-send').prop('checked', true);
+							} else {
+								$('#toggle-sms-send').prop('checked', false);
+							}
+
+							// Photo
+							if (customer.customerPhoto) {
+								const photoPath = `Uploads/${customer.customerPhoto}`;
+								$("#photoPreview").attr("src", photoPath);
+								$("#photoHidden").val(photoPath);
+								photoSizeEdit({ target: { result: photoPath } });
+							} else {
+								$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+								$("#photoHidden").val("");
+							}
+
+							// Signature
+							if (customer.customerSignature) {
+								const signPath = `Uploads/${customer.customerSignature}`;
+								$("#signaturePreview").attr("src", signPath);
+								$("#signatureHidden").val(signPath);
+								signatureSizeEdit({ target: { result: signPath } });
+							} else {
+								$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+								$("#signatureHidden").val("");
+							}
+							updateToggleColor(document.getElementById('toggle-sms-send'));
+
+						} else {
+							alert("No details found for this member");
+						}
+					},
+					error: function(err) {
+						console.error("Error fetching customer details", err);
+					},
+				});
+			} else {
+				// clear fields if no member selected
+				$("#customerName, #dateOfBirth, #age, #contactNo, #address, #pinCode, #branchName").val("");
+			}
+		});
+
 });
 
 

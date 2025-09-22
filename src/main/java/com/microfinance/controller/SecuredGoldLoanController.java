@@ -139,6 +139,26 @@ public class SecuredGoldLoanController {
 					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
 		}
 	}
+	
+	
+	//for Apply for gold by using loanPlanName 
+	
+	@GetMapping("/getLoanPlanNameApplyForGold")
+	public ResponseEntity<ApiResponse<List<SecuredGoldPlan>>> getLoanPlanNameApplyForGold(@RequestParam String loanPlanName) {
+		try {
+			List<SecuredGoldPlan> goldLoanList = secureGoldLoanService.getLoanPlanNameApplyForGoldByLoanPlan(loanPlanName);
+
+			if (goldLoanList == null || goldLoanList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "LoanPlan found", goldLoanList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
 
 }
 
