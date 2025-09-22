@@ -195,6 +195,7 @@ pageEncoding="ISO-8859-1"%> -->
 											<th scope="col">Account Type</th>
 											<th scope="col">Opening Balance</th>
 											<th scope="col">Opening Balance Type</th>
+											<th scope="col">Current Balance</th>
 											<th scope="col">Status</th>
 											<th scope="col">Branch Name</th>
 											<th scope="col">View</th>
