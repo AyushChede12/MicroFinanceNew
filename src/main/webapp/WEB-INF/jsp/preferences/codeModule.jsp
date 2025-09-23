@@ -42,7 +42,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 </head>
- <style>
+<style>
 * {
 	margin: 0;
 	padding: 0;
@@ -148,7 +148,7 @@ button {
 		margin-left: auto;
 	}
 }
-</style> 
+</style>
 
 <body>
 
@@ -164,9 +164,7 @@ button {
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-							<h5 class="card-title">
-								Code Module <span>| Table</span>
-							</h5>
+
 
 							<table class="table table-borderless datatable overflow-scroll">
 
@@ -184,45 +182,52 @@ button {
 								</thead>
 								<tbody>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="1">
-										<td data-label="Name Customer">Customer Code</td>
-										<td data-label="Branch Prefix Customer"><input type="checkbox"></td>
-										<td data-label="Code Prefix Customer"><input class="ip-center"
-											type="text" value="M"></td>
-										<td data-label="No.of Digit Customer"><input class="ip-center"
-											type="number" value="5"></td>
-										<td data-label="Last No Customer"><input class="ip-center"
-											type="number" value="1"></td>
-										<td data-label="Preview Customer"><input class="ip-center"
-											type="text" value="M00001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveCustomerCode">Save</button></td>
+										<td data-label="Name Customer" class="label-text">Customer
+											Code</td>
+										<td data-label="Branch Prefix Customer"><input
+											type="checkbox"></td>
+										<td data-label="Code Prefix Customer"><input
+											class="ip-center" type="text" value="CC"></td>
+										<td data-label="No.of Digit Customer"><input
+											class="ip-center" type="number" value="5"></td>
+										<td data-label="Last No Customer"><input
+											class="ip-center" type="number" value="1"></td>
+										<td data-label="Preview Customer"><input
+											class="ip-center" type="text"></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveCustomerCode">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="2">
 										<td data-label="Name Financial">Financial Code</td>
-										<td data-label="Branch Prefix Financial"><input type="checkbox"></td>
-										<td data-label="Code Prefix Financial"><input class="ip-center"
-											type="text" value="FC"></td>
-										<td data-label="No.of Digit Financial"><input class="ip-center"
-											type="number" value="6"></td>
-										<td data-label="Last No Financial"><input class="ip-center"
-											type="number" value="1"></td>
-										<td data-label="Preview Financial"><input class="ip-center"
-											type="text" value="FC00001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveFinancialCode">Save</button></td>
+										<td data-label="Branch Prefix Financial"><input
+											type="checkbox"></td>
+										<td data-label="Code Prefix Financial"><input
+											class="ip-center" type="text" value="FC"></td>
+										<td data-label="No.of Digit Financial"><input
+											class="ip-center" type="number" value="6"></td>
+										<td data-label="Last No Financial"><input
+											class="ip-center" type="number" value="1"></td>
+										<td data-label="Preview Financial"><input
+											class="ip-center" type="text"></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveFinancialCode">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="3">
 										<td data-label="Name Team">Team Member Code</td>
-										<td data-label="Branch Prefix Team"><input type="checkbox"></td>
-										<td data-label="Code Prefix Team"><input class="ip-center"
-											type="text" value="TM"></td>
-										<td data-label="No.of Digit Team"><input class="ip-center"
-											type="number" value="5"></td>
+										<td data-label="Branch Prefix Team"><input
+											type="checkbox"></td>
+										<td data-label="Code Prefix Team"><input
+											class="ip-center" type="text" value="TM"></td>
+										<td data-label="No.of Digit Team"><input
+											class="ip-center" type="number" value="5"></td>
 										<td data-label="Last No Team"><input class="ip-center"
 											type="number" value="1"></td>
 										<td data-label="Preview Team"><input class="ip-center"
 											type="text" value="TM00001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveTeamMemberCode">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveTeamMemberCode">Save</button></td>
 									</tr>
-									<tr style="font-family: 'Poppins', sans-serif;" data-id="4">
+									<!-- <tr style="font-family: 'Poppins', sans-serif;" data-id="4">
 										<td data-label="Name RD">RD Policy No.</td>
 										<td data-label="Branch Prefix RD"><input type="checkbox"></td>
 										<td data-label="Code Prefix RD"><input class="ip-center"
@@ -233,7 +238,8 @@ button {
 											type="number" value="1"></td>
 										<td data-label="Preview RD"><input class="ip-center"
 											type="text" value="RD0000001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveRDPolicyNo">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveRDPolicyNo">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="5">
 										<td data-label="Name FD">FD Policy No.</td>
@@ -246,7 +252,8 @@ button {
 											type="number" value="1"></td>
 										<td data-label="Preview FD"><input class="ip-center"
 											type="text" value="FD0000001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveFDPolicyNo">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveFDPolicyNo">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="6">
 										<td data-label="Name DD">Daily Policy No.</td>
@@ -259,61 +266,68 @@ button {
 											type="number" value="1"></td>
 										<td data-label="Preview DD"><input class="ip-center"
 											type="text" value="DD0000001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveDDPolicyNo">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveDDPolicyNo">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="7">
 										<td data-label="Name MIS">MIS Policy No.</td>
 										<td data-label="Branch Prefix MIS"><input type="checkbox"></td>
 										<td data-label="Code Prefix MIS"><input class="ip-center"
 											type="text" value="MIS"></td>
-										<td data-label="No. of Digit MIS"><input class="ip-center"
-											type="number" value="7"></td>
+										<td data-label="No. of Digit MIS"><input
+											class="ip-center" type="number" value="7"></td>
 										<td data-label="Last No MIS"><input class="ip-center"
 											type="number" value="1"></td>
 										<td data-label="Preview MIS"><input class="ip-center"
 											type="text" value="MIS0000001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveMISPolicyNo">Save</button></td>
-									</tr>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveMISPolicyNo">Save</button></td>
+									</tr> -->
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="8">
 										<td data-label="Name ACC">Saving Account No.</td>
 										<td data-label="Branch Prefix ACC"><input type="checkbox"></td>
 										<td data-label="Code Prefix ACC"><input class="ip-center"
 											type="text" value="2025" readonly="readonly"></td>
-										<td data-label="No. of Digit ACC"><input class="ip-center"
-											type="number" value="12"></td>
+										<td data-label="No. of Digit ACC"><input
+											class="ip-center" type="number" value="12"></td>
 										<td data-label="Last No ACC"><input class="ip-center"
 											type="number" value="1"></td>
 										<td data-label="Preview ACC"><input class="ip-center"
 											type="text" value="202500000001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveSavingACCNo">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveSavingACCNo">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="9">
 										<td data-label="Name LOAN">Loan ID</td>
-										<td data-label="Branch Prefix LOAN"><input type="checkbox"></td>
-										<td data-label="Code Prefix LOAN"><input class="ip-center"
-											type="text" value="LP" readonly="readonly"></td>
-										<td data-label="No. of Digit LOAN"><input class="ip-center"
-											type="number" value="4"></td>
+										<td data-label="Branch Prefix LOAN"><input
+											type="checkbox"></td>
+										<td data-label="Code Prefix LOAN"><input
+											class="ip-center" type="text" value="LP" readonly="readonly"></td>
+										<td data-label="No. of Digit LOAN"><input
+											class="ip-center" type="number" value="4"></td>
 										<td data-label="Last No LOAN"><input class="ip-center"
 											type="number" value="1"></td>
 										<td data-label="Preview LOAN"><input class="ip-center"
 											type="text" value="LP0001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveLoanID">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveLoanID">Save</button></td>
 									</tr>
 									<tr style="font-family: 'Poppins', sans-serif;" data-id="10">
 										<td data-label="Name GROUP">Group Code</td>
-										<td data-label="Branch Prefix GROUP"><input type="checkbox"></td>
-										<td data-label="Code Prefix GROUP"><input class="ip-center"
-											type="text" value="GD" readonly="readonly"></td>
-										<td data-label="No. of Digit GROUP"><input class="ip-center"
-											type="number" value="5"></td>
+										<td data-label="Branch Prefix GROUP"><input
+											type="checkbox"></td>
+										<td data-label="Code Prefix GROUP"><input
+											class="ip-center" type="text" value="GD" readonly="readonly"></td>
+										<td data-label="No. of Digit GROUP"><input
+											class="ip-center" type="number" value="5"></td>
 										<td data-label="Last No GROUP"><input class="ip-center"
 											type="number" value="1"></td>
 										<td data-label="Preview GROUP"><input class="ip-center"
 											type="text" value="GD00001"></td>
-										<td data-label="Action"><button class="btn btn-success" id="saveGroupCode">Save</button></td>
+										<td data-label="Action"><button class="btn btn-success"
+												id="saveGroupCode">Save</button></td>
 									</tr>
-									
+
 
 
 								</tbody>
