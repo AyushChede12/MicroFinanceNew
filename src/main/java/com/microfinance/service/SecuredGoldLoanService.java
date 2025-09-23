@@ -38,10 +38,8 @@ public class SecuredGoldLoanService {
 			existingGoldLoan.setEmiType(goldLoan.getEmiType());
 			existingGoldLoan.setMinAge(goldLoan.getMinAge());
 			existingGoldLoan.setMaxAge(goldLoan.getMaxAge());
-			existingGoldLoan.setMinAmt(goldLoan.getMinAmt());
-			existingGoldLoan.setMaxAmt(goldLoan.getMaxAmt());
-			existingGoldLoan.setMinTerm(goldLoan.getMinTerm());
-			existingGoldLoan.setMaxTerm(goldLoan.getMaxTerm());
+			existingGoldLoan.setLoanAmt(goldLoan.getLoanAmt());
+			existingGoldLoan.setLoanTerm(goldLoan.getLoanTerm());
 			existingGoldLoan.setRateInterestType(goldLoan.getRateInterestType());
 			existingGoldLoan.setSecurityType(goldLoan.getSecurityType());
 			existingGoldLoan.setPlanStatus(goldLoan.getPlanStatus());
@@ -141,16 +139,26 @@ public class SecuredGoldLoanService {
 		return goldDirectoryRepo.findAll();
 	}
 
-	/*
-	 * public List<addCustomer> getLoanApplicationById(String memberCode) { // TODO
-	 * Auto-generated method stub return
-	 * applyForGoldRepo.findByMemberCode(memberCode); }
-	 */
+	
+	  public List<addCustomer> getLoanApplicationById(String memberCode) { 
+		  // TODO Auto-generated method stub 
+		  return applyForGoldRepo.findByMemberCode(memberCode);
+		  }
+	 
 
 	public List<addCustomer> getAllCustomers() {
 		// TODO Auto-generated method stub
 		return applyForGoldRepo.findAll();
 	}
+
+	public List<SecuredGoldPlan> getLoanPlanNameApplyForGoldByLoanPlan(String loanPlanName) {
+		// TODO Auto-generated method stub
+		return goldSecurePlanRepo.findByloanPlanName(loanPlanName);
+	}
+
+	
+
+	
 
 //	public GoldDirectory saveItemMaster(String itemMasterType, String itemName) {
 //		// TODO Auto-generated method stub
