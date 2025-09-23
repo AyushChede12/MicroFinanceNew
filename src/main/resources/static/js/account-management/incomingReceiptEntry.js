@@ -194,7 +194,7 @@ function viewIncomingReceipt(id) {
 			});
 
 
-			$("#voucherID").val(data.receiptID);
+			$("#receiptID").val(data.receiptID);
 			$("#dateOfEntry").val(data.dateOfEntry);
 			$("#transferMode").val(data.transferMode);
 			$("#transactionAmount").val(data.transactionAmount);
@@ -252,13 +252,14 @@ function searchIncomingReceipts() {
                     <tr>
 					<td>${receipt.id || ''}</td>
 					<td>${receipt.branchName || ''}</td>
+					<td>${receipt.receiptID || ''}</td>
 					<td>${receipt.dateOfEntry || ''}</td>
-					<td>${receipt.transferMode || ''}</td>
 					<td>${receipt.creditLedger || ''}</td>
 					<td>${receipt.debitLedger || ''}</td>
+					<td>${receipt.transferMode || ''}</td>
 					<td>${receipt.transactionAmount || ''}</td>
 					<td>${receipt.remarks || ''}</td>
-					<td>${receipt.receiptID || ''}</td>
+					
 						<td>
 													<button class="iconbutton" onclick="viewIncomingReceipt(${receipt.id})" title="View">
 														<i class="fa-solid fa-eye text-primary"></i>
