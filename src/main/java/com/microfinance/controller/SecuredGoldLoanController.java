@@ -123,7 +123,7 @@ public class SecuredGoldLoanController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("/getByMemberCodeApplyForGold")
+	@GetMapping("/getByMemberCodeGoldLoan")
 	public ResponseEntity<ApiResponse<List<addCustomer>>> getGoldLoanByMemberCode(@RequestParam String memberCode) {
 		try {
 			List<addCustomer> customerList = secureGoldLoanService.getLoanApplicationById(memberCode);
