@@ -47,10 +47,10 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Category Module</li>
+					<li class="breadcrumb-item action">Category-Caste Module</li>
 				</ol>
 			</nav>
 		</div>
@@ -89,11 +89,18 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Add Category <span class="star">*</span></label> <input type="text"
-									name="category" id="category" 
+								<label for="">Add Category <span class="star">*</span></label> <input
+									type="text" name="category" id="category"
 									placeholder="Enter Category" style="text-transform: uppercase;" />
-									<small id="chkcategory" style="color: red;"></small>
+								<small id="chkcategory" style="color: red;"></small>
 							</div>
+						</div>
+
+						<div class="d-flex flex-column formFields">
+							<label for="">Add Caste <span class="star">*</span></label> <input
+								type="text" name="caste" id="caste" required="required"
+								placeholder="Enter Caste" style="text-transform: uppercase;" />
+							<small id="chkcaste" style="color: red;"></small>
 						</div>
 
 						<div class="row" style="margin-top: 15px; margin-left: 10px;">
@@ -138,6 +145,7 @@ pageEncoding="ISO-8859-1"%> -->
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">Sr No</th>
 													<th scope="col">Category</th>
+													<th scope="col">Caste</th>
 													<th scope="col">Delete</th>
 												</tr>
 											</thead>

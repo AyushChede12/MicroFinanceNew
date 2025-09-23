@@ -14,6 +14,7 @@ import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanPayment;
+import com.microfinance.model.SavingAccountActivity;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.ReportsAndAnalyticsService;
 
@@ -83,5 +84,18 @@ public class ReportsAndAnalyticsController {
 					 .body(ApiResponse.error(HttpStatus.NOT_FOUND, "No Loan Confirmation Document Found"));
 		 }
 	 }
+	 
+	 @GetMapping("/getPayByFromSavingAccountActivity")
+	    public ResponseEntity<ApiResponse<List<SavingAccountActivity>>> getPayByFromSavingAccountActivity() {
+	        List<SavingAccountActivity> list = reportsAndAnalyticsService.fetchPayByFromSavingAccountActivity();
+	        if (!list.isEmpty()) {
+	            return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Cheque Data fetched Successfully", list));
+	        } else {
+	            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                    .body(ApiResponse.error(HttpStatus.NOT_FOUND, "Cheque Data Not found"));
+	        }
+	    }
+	 
+	 
 
 }
