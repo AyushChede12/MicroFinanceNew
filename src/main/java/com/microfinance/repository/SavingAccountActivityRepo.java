@@ -12,6 +12,7 @@ public interface SavingAccountActivityRepo extends JpaRepository<SavingAccountAc
 
 	List<SavingAccountActivity> findAllByAccountNumber(String accountNumber);
 	List<SavingAccountActivity> findByIsApprovedTrue();
+	List<SavingAccountActivity> findByPayBy(String string);
 
 
 

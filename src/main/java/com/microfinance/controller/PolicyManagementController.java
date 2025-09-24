@@ -22,6 +22,7 @@ import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
@@ -756,20 +757,100 @@ public class PolicyManagementController {
 		}
 	}
 
+//	@PostMapping("/updateDDDueAndInstallment")
+//	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallments(@RequestBody Map<String, Object> data) {
+//		try {
+//			String policyCode = (String) data.get("policyCode");
+//			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
+//			int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
+//
+//			Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
+//			if (!optional.isPresent()) {
+//				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
+//			}
+//
+//			AddnewinvestmentPM investment = optional.get();
+//
+//			// Parse current values
+//			double currentDue = parseDoubleSafe(investment.getAmountDue());
+//			int currentPaid = parseIntSafe(investment.getLastInstPaid());
+//			double currentPaidAmount = parseDoubleSafe(investment.getPaidAmount());
+//
+//			// Calculate updated values
+//			double totalDeduction = policyAmount * noOfInstallments;
+//			double updatedDue = currentDue - totalDeduction;
+//			int updatedPaid = currentPaid + noOfInstallments;
+//			double updatedPaidAmount = currentPaidAmount + totalDeduction;
+//
+//			// Check if no payment is needed
+//			if (currentDue <= 0) {
+//				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+//						"No payment needed. Policy is already settled or overpaid.", null));
+//			}
+//
+//			// Update the investment
+//			investment.setAmountDue(String.valueOf(updatedDue));
+//			investment.setLastInstPaid(String.valueOf(updatedPaid));
+//			investment.setPaidAmount(String.valueOf(updatedPaidAmount));
+//			addinvestmentrepo.save(investment);
+//
+//			// Save to PolicyRenewal
+//			DailyPremiumRenewalPM ddRenewal = new DailyPremiumRenewalPM();
+//			ddRenewal.setPolicyCode(investment.getPolicyCode());
+//			ddRenewal.setRenewalDate(LocalDate.now().toString());
+//			ddRenewal.setPolicyDate(investment.getPolicyStartDate());
+//			ddRenewal.setMaturityDate(investment.getMaturityDate());
+//			ddRenewal.setCustomerCode(investment.getMemberSelection());
+//			ddRenewal.setClientName(investment.getCustomerName());
+//			ddRenewal.setContactNo(investment.getContactNo());
+//			ddRenewal.setPolicyAmount(parseDoubleSafe(investment.getPolicyAmount()));
+//			ddRenewal.setPolicyType(investment.getSchemeType());
+//			ddRenewal.setPolicyTerm(investment.getSchemeTerm());
+//			ddRenewal.setBranchname(investment.getBranchName());
+//			ddRenewal.setMaturityAmount(parseDoubleSafe(investment.getMaturityAmount()));
+//			ddRenewal.setTotalDeposit(parseDoubleSafe(investment.getPaidAmount()));
+//			ddRenewal.setPaymentDue(parseDoubleSafe(investment.getAmountDue()));
+//			ddRenewal.setLastPaymentDate(investment.getLastPaymentDate());
+//			ddRenewal.setDueDate(investment.getDueDate());
+//			ddRenewal.setNoOfInst(parseIntSafe(investment.getNoOfInstallments()));
+//			ddRenewal.setNoOfInstPaid(parseIntSafe(investment.getLastInstPaid()));
+//			ddRenewal.setModeOfPayment(investment.getModeOfPayment());
+//			dailyPremiumRenewalRepo.save(ddRenewal);
+//
+//			// Final message based on updatedDue
+//			if (updatedDue == 0) {
+//				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
+//			} else if (updatedDue < 0) {
+//				return ResponseEntity
+//						.ok(new ApiResponse<>(HttpStatus.OK, "No payment needed. Policy is overpaid.", null));
+//			} else {
+//				return ResponseEntity.ok(
+//						new ApiResponse<>(HttpStatus.OK, "Installment updated and renewal saved successfully", null));
+//			}
+//
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
+//					new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, "Update failed: " + e.getMessage(), null));
+//		}
+//	}
+
 	@PostMapping("/updateDDDueAndInstallment")
-	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallment(@RequestBody Map<String, Object> data) {
+	public ResponseEntity<ApiResponse<String>> updateDDDueAndInstallments(@RequestBody Map<String, Object> data) {
 		try {
 			String policyCode = (String) data.get("policyCode");
 			double policyAmount = Double.parseDouble(data.get("policyAmount").toString());
 			int noOfInstallments = Integer.parseInt(data.get("noOfInstallments").toString());
 
-			Optional<AddnewinvestmentPM> optional = addinvestmentrepo.findByPolicyCode(policyCode);
-			if (!optional.isPresent()) {
+			// fetch all records
+			List<AddnewinvestmentPM> investments = addinvestmentrepo.findAllByPolicyCode(policyCode);
+			if (investments.isEmpty()) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
 						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy not found", null));
 			}
 
-			AddnewinvestmentPM investment = optional.get();
+			// if multiple records → handle first or loop all
+			AddnewinvestmentPM investment = investments.get(0);
 
 			// Parse current values
 			double currentDue = parseDoubleSafe(investment.getAmountDue());
@@ -782,19 +863,18 @@ public class PolicyManagementController {
 			int updatedPaid = currentPaid + noOfInstallments;
 			double updatedPaidAmount = currentPaidAmount + totalDeduction;
 
-			// Check if no payment is needed
 			if (currentDue <= 0) {
 				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
 						"No payment needed. Policy is already settled or overpaid.", null));
 			}
 
-			// Update the investment
+			// Update investment
 			investment.setAmountDue(String.valueOf(updatedDue));
 			investment.setLastInstPaid(String.valueOf(updatedPaid));
 			investment.setPaidAmount(String.valueOf(updatedPaidAmount));
 			addinvestmentrepo.save(investment);
 
-			// Save to PolicyRenewal
+			// Save to DailyPremiumRenewalPM
 			DailyPremiumRenewalPM ddRenewal = new DailyPremiumRenewalPM();
 			ddRenewal.setPolicyCode(investment.getPolicyCode());
 			ddRenewal.setRenewalDate(LocalDate.now().toString());
@@ -817,7 +897,6 @@ public class PolicyManagementController {
 			ddRenewal.setModeOfPayment(investment.getModeOfPayment());
 			dailyPremiumRenewalRepo.save(ddRenewal);
 
-			// Final message based on updatedDue
 			if (updatedDue == 0) {
 				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Policy is ready for maturity.", null));
 			} else if (updatedDue < 0) {
@@ -913,12 +992,60 @@ public class PolicyManagementController {
 
 		System.out.println("Received signature: " + image2);
 
-		ApiResponse<AddnewinvestmentPM> response = policyManagementService.saveandupdateAddInvestmentDetails(policyManagementDto, image1,
-				image2);
+		ApiResponse<AddnewinvestmentPM> response = policyManagementService
+				.saveandupdateAddInvestmentDetails(policyManagementDto, image1, image2);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-				policyManagementDto.getId() != null ? "✅ Investment Updated successfully" : "✅ Investment saved successfully",
+				policyManagementDto.getId() != null ? "✅ Investment Updated successfully"
+						: "✅ Investment saved successfully",
 				response.getData()));
 	}
+
+	@GetMapping("/getFullMaturityByPolicyCode")
+	public ResponseEntity<ApiResponse<List<FullMaturity>>> fetchFullMaturityByPolicyCode(
+			@RequestParam("policyCode") String policyCode) {
+
+		List<FullMaturity> policyList = policyManagementService.fetchFullMaturityByPolicyCode(policyCode);
+
+		if (!policyList.isEmpty()) {
+			ApiResponse<List<FullMaturity>> response = new ApiResponse<>(HttpStatus.OK,
+					"Payment Data found successfully", policyList);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<FullMaturity>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Payment Data not found for code: " + policyCode, null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+	
+	@PostMapping("/deletePolicyDataById")
+	public ResponseEntity<ApiResponse<String>> deletePolicyDataById(@RequestParam("id") Long id) {
+		boolean isDeleted = policyManagementService.deletePolicyDataById(id);
+		if (isDeleted) {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Policy Data deleted successfully",
+					"success");
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Policy Data deletion failed",
+					"failure");
+			return ResponseEntity.badRequest().body(response);
+		}
+	}
+	
+	@GetMapping("/getApprovedRDFromFullMaturity")
+	public ResponseEntity<ApiResponse<List<FullMaturity>>> getApprovedRD() {
+		List<FullMaturity> approvedList = policyManagementService.getAllApprovedRDPolicies();
+
+		if (approvedList.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved policies found", null));
+		}
+
+		return ResponseEntity
+				.ok(new ApiResponse<>(HttpStatus.OK, "Approved RD policies fetched successfully", approvedList));
+
+	}
+	
+	
 
 }

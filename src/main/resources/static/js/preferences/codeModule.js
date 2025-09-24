@@ -430,3 +430,42 @@ $(document).ready(function() {
 	});
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+	document.querySelectorAll("tr").forEach(function(row) {
+		let label = row.querySelector("td:first-child")?.innerText.trim();
+
+		if (label) {
+			// 🔹 Get initials (first letters of each word)
+			let initials = label.split(" ")
+				.map(word => word.charAt(0).toUpperCase())
+				.join("");
+
+			// Inputs in the row
+			let prefixInput = row.querySelector('input[type="text"].ip-center');   // Code Prefix
+			alert(prefixInput.value);
+			let digitInput = row.querySelector('input[type="number"]:nth-of-type(1)'); // No. of digits
+			let lastNoInput = row.querySelector('input[type="number"]:nth-of-type(2)'); // Last no
+			let previewInput = row.querySelectorAll('input[type="text"].ip-center')[1]; // Preview
+
+			if (prefixInput) prefixInput.value = initials;
+
+			// Function to update preview
+			function updatePreview() {
+				let prefix = prefixInput.value || "";
+				let digits = parseInt(digitInput?.value) || 0;
+				let lastNo = parseInt(lastNoInput?.value) || 0;
+				let padded = lastNo.toString().padStart(digits, "0");
+				if (previewInput) previewInput.value = prefix + padded;
+			}
+
+			// Run once initially
+			updatePreview();
+
+			// Update live on changes
+			[prefixInput, digitInput, lastNoInput].forEach(el => {
+				if (el) el.addEventListener("input", updatePreview);
+			});
+		}
+	});
+});
+

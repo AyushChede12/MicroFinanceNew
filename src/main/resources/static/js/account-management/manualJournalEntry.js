@@ -1,59 +1,45 @@
 $(document).ready(function() {
 	BranchNameDropdown();
-	loadManualJournalData();
 
-	// 🔸 Form Submit
+	// Form submission
 	$("#formid").submit(function(e) {
 		e.preventDefault();
 		saveManualJournal();
 	});
 
-	// 🔸 Clear Button
-	$("#clearBtn").click(function() {
-		$("#formid")[0].reset();
-		$("#creditLedger, #debitLedger").html("<option value=''>Select Ledger</option>");
-	});
-
-	// 🔸 Search Button
-	$("#searchBtn").click(function(e) {
+	// Search button
+	$('#searchBtn').click(function(e) {
 		e.preventDefault();
 		searchManualJournal();
 	});
 
-	// 🔸 Branch Dropdown Change
-	$("#entryBranchName").change(function() {
+	// Branch change triggers ledger dropdown
+	$("#entryBranchName").on("change", function() {
 		const selectedBranch = $(this).val();
-		loadManualJournalLedgers(selectedBranch);
+		LedgerDropdown(selectedBranch);
 	});
 });
 
+// Show/hide table data
+function showTableData() {
+	const tableBody = $("#tableBody");
+	const toggleBtn = $("#toggleBtn");
 
-
-
-
-// 🔹 Load Ledgers for Manual Journal
-function loadManualJournalLedgers(branchName) {
-	if (!branchName) return;
-
-	$.ajax({
-		type: "GET",
-		url: `accountManagement/eligibleLedgersForManualJournal/${branchName}`,
-		contentType: "application/json",
-		success: function(response) {
-			const ledgers = response.data || [];
-			let options = "<option value=''>Select Ledger</option>";
-			ledgers.forEach(ledger => {
-				options += `<option value="${ledger.accountTitle}">${ledger.accountTitle}</option>`;
-			});
-			$("#debitLedger, #creditLedger").html(options);
-		},
-		error: function(xhr) {
-			alert("Failed to load ledgers: " + (xhr.responseText || "Unknown error"));
+	if (tableBody.children().length === 0) {
+		loadManualJournalData(); // Will populate #tableBody
+		toggleBtn.html('Hide');
+	} else {
+		if (tableBody.is(":visible")) {
+			tableBody.hide();
+			toggleBtn.html('Show');
+		} else {
+			tableBody.show();
+			toggleBtn.html('Hide');
 		}
-	});
+	}
 }
 
-// 🔹 Save Manual Journal Entry
+// Save Manual Journal Entry
 function saveManualJournal() {
 	const data = {
 		branchName: $("#entryBranchName").val().trim(),
@@ -75,15 +61,14 @@ function saveManualJournal() {
 		contentType: "application/json",
 		data: JSON.stringify(data),
 		success: function(response) {
-			if (response.status == 201 || response.status === "CREATED") {
+			if (response?.status === "CREATED" || response.status == 201) {
 				alert(response.message || "Entry saved successfully.");
 				$("#formid")[0].reset();
 				$("#creditLedger, #debitLedger").html("<option value=''>Select Ledger</option>");
-				loadManualJournalData();
-
-				if (response.data?.generatedReceiptID) {
-					$("#generatedReceiptID").val(response.data.generatedReceiptID);
+				if (response.data?.voucherID) {
+					$("#voucherID").val(response.data.voucherID);
 				}
+				loadManualJournalData();
 			} else {
 				alert(response.message || "Unexpected response.");
 			}
@@ -99,7 +84,7 @@ function saveManualJournal() {
 	});
 }
 
-// 🔹 Load All Manual Journal Entries
+// Load all Manual Journal Entries
 function loadManualJournalData() {
 	$.ajax({
 		type: "GET",
@@ -116,21 +101,22 @@ function loadManualJournalData() {
 
 			list.forEach(entry => {
 				tbody.append(`
-                    <tr>
-                        <td>${entry.id || ''}</td>
-                        <td>${entry.branchName || ''}</td>
-                        <td>${entry.dateOfEntry || ''}</td>
-                        <td>${entry.creditLedger || ''}</td>
-                        <td>${entry.debitLedger || ''}</td>
-                        <td>${entry.transactionAmount || ''}</td>
-                        <td>${entry.remarks || ''}</td>
-                        <td>
-                            <button class="iconbutton" onclick="viewManualJournal(${entry.id})" title="View">
-                                <i class="fa-solid fa-eye text-primary"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `);
+          <tr>
+            <td>${entry.id || ''}</td>
+            <td>${entry.branchName || ''}</td>
+            <td>${entry.voucherID ?? ''}</td>
+            <td>${entry.dateOfEntry || ''}</td>
+            <td>${entry.creditLedger || ''}</td>
+            <td>${entry.debitLedger || ''}</td>
+            <td>${entry.transactionAmount || ''}</td>
+            <td>${entry.remarks || ''}</td>
+            <td>
+              <button class="iconbutton" onclick="viewManualJournal(${entry.id})" title="View">
+                <i class="fa-solid fa-eye text-primary"></i>
+              </button>
+            </td>
+          </tr>
+        `);
 			});
 		},
 		error: function(xhr) {
@@ -144,7 +130,7 @@ function loadManualJournalData() {
 	});
 }
 
-// 🔹 View Manual Journal Entry
+// View a single Manual Journal Entry
 function viewManualJournal(id) {
 	$.ajax({
 		type: "GET",
@@ -154,17 +140,21 @@ function viewManualJournal(id) {
 			const entry = response.data;
 			if (!entry) return alert("No entry data found.");
 
-			$("#entryBranchName").val(entry.branchName).trigger("change");
-
-			setTimeout(() => {
-				$("#creditLedger").val(entry.creditLedger);
-				$("#debitLedger").val(entry.debitLedger);
-			}, 300);
+			// Branch preselect
+			$("#entryBranchName option").each(function() {
+				if ($(this).val()?.trim().toLowerCase() === entry.branchName?.trim().toLowerCase()) {
+					$(this).prop("selected", true);
+					return false;
+				}
+			});
 
 			$("#dateOfEntry").val(entry.dateOfEntry);
 			$("#transactionAmount").val(entry.transactionAmount);
 			$("#remarks").val(entry.remarks);
-			$("#generatedReceiptID").val(entry.generatedReceiptID || '');
+			$("#voucherID").val(entry.voucherID || '');
+
+			// Reload ledgers and preselect
+			LedgerDropdown(entry.branchName, entry.creditLedger, entry.debitLedger);
 		},
 		error: function(xhr) {
 			let msg = "Error loading entry.";
@@ -177,7 +167,7 @@ function viewManualJournal(id) {
 	});
 }
 
-// 🔹 Search Manual Journal Entries
+// Search Manual Journal Entries
 function searchManualJournal() {
 	const branchName = $('#searchBranchName').val();
 	const startDate = $('#startDate').val();
@@ -204,21 +194,22 @@ function searchManualJournal() {
 
 			list.forEach(entry => {
 				tbody.append(`
-                    <tr>
-                        <td>${entry.id || ''}</td>
-                        <td>${entry.branchName || ''}</td>
-                        <td>${entry.dateOfEntry || ''}</td>
-                        <td>${entry.creditLedger || ''}</td>
-                        <td>${entry.debitLedger || ''}</td>
-                        <td>${entry.transactionAmount || ''}</td>
-                        <td>${entry.remarks || ''}</td>
-                        <td>
-                            <button class="iconbutton" onclick="viewManualJournal(${entry.id})" title="View">
-                                <i class="fa-solid fa-eye text-primary"></i>
-                            </button>
-                        </td>
-                    </tr>
-                `);
+          <tr>
+            <td>${entry.id || ''}</td>
+            <td>${entry.branchName || ''}</td>
+            <td>${entry.voucherID ?? ''}</td>
+            <td>${entry.dateOfEntry || ''}</td>
+            <td>${entry.creditLedger || ''}</td>
+            <td>${entry.debitLedger || ''}</td>
+            <td>${entry.transactionAmount || ''}</td>
+            <td>${entry.remarks || ''}</td>
+            <td>
+              <button class="iconbutton" onclick="viewManualJournal(${entry.id})" title="View">
+                <i class="fa-solid fa-eye text-primary"></i>
+              </button>
+            </td>
+          </tr>
+        `);
 			});
 		},
 		error: function(xhr) {
@@ -231,7 +222,8 @@ function searchManualJournal() {
 		}
 	});
 }
-// 🔹 Load Branch Dropdown
+
+// Branch Dropdown Loader
 function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
@@ -239,7 +231,6 @@ function BranchNameDropdown() {
 		url: 'api/preference/getAllBranchModule',
 		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
-			// The actual branch array is inside response.data
 			if (response && Array.isArray(response.data)) {
 				response.data.forEach(branch => {
 					options += `<option value='${branch.branchName}'>${branch.branchName}</option>`;
@@ -250,6 +241,40 @@ function BranchNameDropdown() {
 		},
 		error: function() {
 			alert("Failed to load branch names.");
+		}
+	});
+}
+
+// Load Credit & Debit Ledgers by branch (Manual Journal version)
+function LedgerDropdown(branchName, selectedCr = "", selectedDr = "") {
+	if (!branchName || branchName.trim() === "") {
+		console.warn("Branch name is missing. Skipping ledger dropdown load.");
+		return;
+	}
+	$.ajax({
+		type: "GET",
+		url: `accountManagement/eligibleLedgersForManualJournal/${branchName}`,
+		contentType: "application/json",
+		success: function(data) {
+			const ledgers = data.data || [];
+
+			// Options for Credit and Debit (all ledgers given for manual journal)
+			let crOptions = "<option value=''>Select Credit Ledger</option>";
+			let drOptions = "<option value=''>Select Debit Ledger</option>";
+
+			ledgers.forEach(ledger => {
+				const title = ledger.accountTitle;
+				const crSelected = title.trim().toLowerCase() === (selectedCr || "").trim().toLowerCase() ? "selected" : "";
+				const drSelected = title.trim().toLowerCase() === (selectedDr || "").trim().toLowerCase() ? "selected" : "";
+				crOptions += `<option value="${title}" ${crSelected}>${title}</option>`;
+				drOptions += `<option value="${title}" ${drSelected}>${title}</option>`;
+			});
+
+			$("#creditLedger").html(crOptions);
+			$("#debitLedger").html(drOptions);
+		},
+		error: function() {
+			alert("Failed to load ledger accounts for selected branch");
 		}
 	});
 }

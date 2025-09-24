@@ -6,7 +6,7 @@ $(document).ready(function() {
 function populateapprovedLoanIdDropdown() {
 
 	$.ajax({
-		url: "/api/loanmanegment/getApprovedLoanIds",
+		url: "api/loanmanegment/getApprovedLoanIds",
 		type: "GET",
 		dataType: "json",
 		success: function(response) {
@@ -97,7 +97,7 @@ $(document).ready(function() {
 		}
 
 		$.ajax({
-			url: "/api/loanmanegment/getLoanById",
+			url: "api/loanmanegment/getLoanById",
 			method: "GET",
 			data: { loanId: loanId }, // request param
 			success: function(result) {

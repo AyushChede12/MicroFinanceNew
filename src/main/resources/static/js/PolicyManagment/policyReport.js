@@ -241,7 +241,7 @@ $("#findBtn").click(function() {
                 $('#policyTableBody').empty();
 
                 dataList.forEach(function(data) {
-					alert(data.approved);
+
                     const newRow = `
                         <tr>
                             <td>${data.policyCode || ''}</td>

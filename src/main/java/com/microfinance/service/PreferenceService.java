@@ -532,4 +532,14 @@ public class PreferenceService {
 		return transactionsRepo.findByBranchNameIgnoreCase(branchName);
 	}
 
+	public Optional<RelativeModule> fetchRelativeModuleById(Long id) {
+		// TODO Auto-generated method stub
+		return relativeModuleRepo.findById(id);
+	}
+
+	public List<CodeModule> fetchAllCodeModule() {
+		// TODO Auto-generated method stub
+		return codeModuleRepo.findAll();
+	}
+
 }

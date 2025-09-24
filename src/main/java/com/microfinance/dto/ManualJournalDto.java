@@ -9,7 +9,7 @@ public class ManualJournalDto {
     @NotBlank(message = "Branch name is required")
 	private String branchName;
     
-	private String generatedReceiptID;
+	private String voucherID;
 	
     @NotBlank(message = "Date of entry is required")
     private String dateOfEntry;
@@ -37,11 +37,12 @@ public class ManualJournalDto {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	public String getGeneratedReceiptID() {
-		return generatedReceiptID;
+	
+	public String getVoucherID() {
+		return voucherID;
 	}
-	public void setGeneratedReceiptID(String generatedReceiptID) {
-		this.generatedReceiptID = generatedReceiptID;
+	public void setVoucherID(String voucherID) {
+		this.voucherID = voucherID;
 	}
 	public String getDateOfEntry() {
 		return dateOfEntry;

@@ -325,7 +325,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="modal-body">
 					<div class="table-responsive">
-						<table class="table table-bordered table-hover text-center">
+						<table class="table table-bordered table-hover text-center" id="installmentModal">
 							<thead class="thead-dark">
 								<tr>
 									<th>Installment No</th>
@@ -336,23 +336,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</tr>
 							</thead>
 							<tbody>
-								<!-- Example static data -->
-								<tr>
-									<td>1</td>
-									<td>2025-09-10</td>
-									<td>&#8377;5,000</td>
-									<!-- Rupee symbol as entity -->
-									<td>Paid</td>
-									<td>2025-09-11</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>2025-10-10</td>
-									<td>&#8377;5,000</td>
-									<!-- Rupee symbol as entity -->
-									<td>Pending</td>
-									<td>-</td>
-								</tr>
+								
 							</tbody>
 						</table>
 					</div>
