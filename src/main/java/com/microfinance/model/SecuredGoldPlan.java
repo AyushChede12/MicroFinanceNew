@@ -19,10 +19,8 @@ public class SecuredGoldPlan {
 	private String emiType;
 	private String minAge;
 	private String maxAge;
-	private String minAmt;
-	private String maxAmt;
-	private String minTerm;
-	private String maxTerm;
+	private String loanAmt;
+	private String loanTerm;
 	private String rateInterestType;
 	private String securityType;
 	private String planStatus;
@@ -103,36 +101,25 @@ public class SecuredGoldPlan {
 		this.maxAge = maxAge;
 	}
 
-	public String getMinAmt() {
-		return minAmt;
+	
+
+	
+
+
+	public String getLoanAmt() {
+		return loanAmt;
 	}
 
-	public void setMinAmt(String minAmt) {
-		this.minAmt = minAmt;
+	public void setLoanAmt(String loanAmt) {
+		this.loanAmt = loanAmt;
 	}
 
-	public String getMaxAmt() {
-		return maxAmt;
+	public String getLoanTerm() {
+		return loanTerm;
 	}
 
-	public void setMaxAmt(String maxAmt) {
-		this.maxAmt = maxAmt;
-	}
-
-	public String getMinTerm() {
-		return minTerm;
-	}
-
-	public void setMinTerm(String minTerm) {
-		this.minTerm = minTerm;
-	}
-
-	public String getMaxTerm() {
-		return maxTerm;
-	}
-
-	public void setMaxTerm(String maxTerm) {
-		this.maxTerm = maxTerm;
+	public void setLoanTerm(String loanTerm) {
+		this.loanTerm = loanTerm;
 	}
 
 	public String getRateInterestType() {

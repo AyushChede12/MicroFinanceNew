@@ -96,44 +96,157 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	$("#buttonSave").click(function(e) {
-		e.preventDefault(); // Prevent default form submission
+		e.preventDefault(); // Stop default form submission
 
-		// Prepare data for API
-		const formData = {
-			policyCode: $("#policyCode").val()?.trim() || "",
-			policyAmount: parseFloat($("#policyAmount").val()) || 0,
-			noOfInstallments: parseInt($("#noOfInst").val()) || 0
-		};
+		// Collect form values
+		const policyCode = $("#policyCode").val()?.trim();
+		const policyAmount = $("#policyAmount").val()?.trim();
+		const noOfInstallments = $("#noOfInst").val()?.trim();
 
-		// Basic validation before sending
-		if (!formData.policyCode) {
+		// ✅ Basic validation
+		if (!policyCode) {
 			alert("❌ Policy Code is required.");
 			return;
 		}
-		if (formData.policyAmount <= 0) {
-			alert("❌ Policy Amount must be greater than 0.");
+		if (!policyAmount || isNaN(policyAmount) || parseFloat(policyAmount) <= 0) {
+			alert("❌ Policy Amount must be a number greater than 0.");
 			return;
 		}
-		if (formData.noOfInstallments <= 0) {
-			alert("❌ Number of Installments must be greater than 0.");
+		if (!noOfInstallments || isNaN(noOfInstallments) || parseInt(noOfInstallments) <= 0) {
+			alert("❌ Number of Installments must be a number greater than 0.");
 			return;
 		}
 
-		// Send AJAX request
+		// ✅ Prepare payload
+		const payload = {
+			policyCode: policyCode,
+			policyAmount: parseFloat(policyAmount),
+			noOfInstallments: parseInt(noOfInstallments)
+		};
+
+		// ✅ Send AJAX request
 		$.ajax({
-			url: "api/Policymangment/updateDDDueAndInstallment",
+			url: "api/Policymangment/updateDDDueAndInstallment", // note the leading slash
 			type: "POST",
-			data: JSON.stringify(formData),
-			contentType: "application/json",
+			data: JSON.stringify(payload),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
 			success: function(response) {
-				alert("✅ " + response.message);
-				location.reload(); // Reload page to reflect updates
+				console.log("✅ Success Response:", response);
+
+				// ApiResponse wrapper → use response.message
+				const msg = response.message || "Update successful!";
+				alert("✅ " + msg);
+
+				// refresh page if needed
+				location.reload();
 			},
 			error: function(xhr) {
-				const errMsg = xhr.responseJSON?.message || "Something went wrong.";
+				console.error("❌ AJAX Error:", xhr);
+
+				let errMsg = "Something went wrong.";
+				if (xhr.responseJSON) {
+					errMsg = xhr.responseJSON.message || JSON.stringify(xhr.responseJSON);
+				}
 				alert("❌ Error: " + errMsg);
 			}
 		});
 	});
+
+
+
 });
+
+$("#viewBtn").on("click", function() {
+	const selectedPolicyCode = $("#policyCode").val();
+
+	if (!selectedPolicyCode) {
+		alert("Please select a policy code first!");
+		return;
+	}
+
+	$.ajax({
+		url: "api/Policymangment/getFullMaturityByPolicyCode",
+		type: "GET",
+		dataType: "json",
+		data: { policyCode: selectedPolicyCode },
+		success: function(response) {
+			console.log("✅ Full Response:", response);
+
+			const $tbody = $("#installmentModal tbody");
+			let rowsHtml = "";
+			let installments = [];
+
+			if (response && response.status === "OK") {
+				if (Array.isArray(response.data)) {
+					installments = response.data;
+				} else if (response.data) {
+					installments = [response.data];
+				}
+			}
+
+			if (installments.length > 0) {
+				// ✅ Base date (policyStartDate → agar available ho)
+				let baseDate = installments[0].policyStartDate
+					? new Date(installments[0].policyStartDate)
+					: new Date();
+
+				installments.forEach((inst, index) => {
+					const srNo = index + 1;
+
+					// ✅ Har installment ka dueDate = baseDate + index days
+					let dueDate = new Date(baseDate);
+					dueDate.setDate(dueDate.getDate() + index);
+
+					// Format function
+					const formatDate = (dateObj) => {
+						const day = String(dateObj.getDate()).padStart(2, "0");
+						const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+						const year = dateObj.getFullYear();
+						return `${day}-${month}-${year}`;
+					};
+
+					const dueDateFormatted = formatDate(dueDate);
+					const paymentDateStr = inst.paymentDate
+						? formatDate(new Date(inst.paymentDate))
+						: "-";
+
+					// ✅ Status Logic
+					const status = inst.paymentDate && inst.paymentDate.trim() !== ""
+						? `<span class="text-success fw-bold">Paid</span>`
+						: `<span class="text-danger fw-bold">Unpaid</span>`;
+
+					const amount = inst.amount
+						? `INR ${Number(inst.amount).toLocaleString("en-IN")}`
+						: "INR 0";
+
+					rowsHtml += `
+						<tr>
+						  <td>${srNo}</td>
+						  <td>${dueDateFormatted}</td>   <!-- ✅ Daily Due Date -->
+						  <td>${amount}</td>
+						  <td>${status}</td>
+						  <td>${paymentDateStr}</td>
+						</tr>
+					`;
+				});
+			} else {
+				rowsHtml = `
+					<tr>
+					  <td colspan="5" class="text-center text-danger">
+						No installment data found for this policy.
+					  </td>
+					</tr>
+				`;
+			}
+
+			$tbody.html(rowsHtml);
+		},
+		error: function(xhr) {
+			console.error("❌ Error:", xhr);
+			alert("❌ Failed to fetch installment data.");
+		}
+	});
+});
+
 

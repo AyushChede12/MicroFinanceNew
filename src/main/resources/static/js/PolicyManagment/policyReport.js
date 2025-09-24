@@ -241,6 +241,7 @@ $("#findBtn").click(function() {
                 $('#policyTableBody').empty();
 
                 dataList.forEach(function(data) {
+
                     const newRow = `
                         <tr>
                             <td>${data.policyCode || ''}</td>
@@ -258,7 +259,7 @@ $("#findBtn").click(function() {
                             <td>${data.totalDeposit || ''}</td>
                             <td>${data.paymentDue || ''}</td>
                             <td>${data.noOfInstPaid || ''}</td>
-                            <td>${data.isApproved ? 'Yes' : 'No'}</td>
+                            <td>${data.approved==true ? 'Yes' : 'No'}</td>
                             <td>${data.branchname || ''}</td>
                             <td><button class="btn btn-primary print-btn">Print</button></td>
                         </tr>`;

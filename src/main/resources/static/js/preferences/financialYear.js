@@ -95,7 +95,6 @@ $(document).ready(function() {
 		                        <td>${item.dateFrom}</td>
 		                        <td>${item.dateTo}</td>
 								<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-								<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
 		                    </tr>`;
 					tableBody.append(row);
 				});

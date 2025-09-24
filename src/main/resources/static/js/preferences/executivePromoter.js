@@ -29,6 +29,35 @@ function signatureUpload() {
 	}
 }
 
+function exephotoUpload() {
+	const file = document.getElementById("executivePhoto").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			exephotoSizeEdit(e);
+			$("#exephotoHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
+function exesignatureUpload() {
+	alert("hi");
+	const file = document.getElementById("executiveSignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			exesignatureSizeEdit(e);
+			$("#exesignatureHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
 $(document).ready(function() {
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
@@ -520,6 +549,26 @@ function signatureSizeEdit(e) {
 	previewimg.style.borderRadius = "20px";
 }
 
+function exephotoSizeEdit(e) {
+	const previewimg = document.getElementById("exephotoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function exesignatureSizeEdit(e) {
+	const previewimg = document.getElementById("exesignaturePreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
 var totalDataExecutive = [];
 var currentPageExecutive = 1;
 var pageSizeExecutive = 5;
@@ -613,3 +662,17 @@ $(document).ready(function() {
 	$("#pageInfo").hide();
 	loadExecutiveData();
 });
+
+// Function to calculate Share Amount
+function calculateShareAmount() {
+	let baseValue = parseFloat(document.getElementById("baseValue").value) || 0;
+	let shareCount = parseFloat(document.getElementById("shareCount").value) || 0;
+	let shareAmount = baseValue * shareCount;
+
+	document.getElementById("shareAmount").value = shareAmount.toFixed(2); // 2 decimal places
+}
+
+// Event listeners for real-time calculation
+document.getElementById("baseValue").addEventListener("input", calculateShareAmount);
+document.getElementById("shareCount").addEventListener("input", calculateShareAmount);
+

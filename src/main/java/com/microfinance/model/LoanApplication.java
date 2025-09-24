@@ -75,6 +75,7 @@ public class LoanApplication {
     private String chequeDate;
     private String chequeNo;
     private String sanctionedAmount;
+    private String loanStatus;
     
     
     
@@ -421,6 +422,12 @@ public class LoanApplication {
 	}
 	public void setSanctionedAmount(String sanctionedAmount) {
 		this.sanctionedAmount = sanctionedAmount;
+	}
+	public String getLoanStatus() {
+		return loanStatus;
+	}
+	public void setLoanStatus(String loanStatus) {
+		this.loanStatus = loanStatus;
 	}
 	
 	

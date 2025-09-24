@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#updateBtn").hide();
 
 	$("#saveBtn").click(function() {
 
@@ -28,7 +29,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				if (response.status=='CREATED') {
+				if (response.status == 'CREATED') {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -48,7 +49,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.status=="FOUND") {
+			if (response.status == "FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -56,8 +57,11 @@ $(document).ready(function() {
 					let row = `<tr>
 			                        <td>${index + 1}</td>
 			                        <td>${item.relation}</td>
-									<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
-			                    </tr>`;
+									<td>
+										<button type="button" class="iconbutton" onclick="viewData(${item.id})" title="View">
+										<i class="fa-solid fa-pen-to-square text-primary"></i>
+										</button>
+									</td>			                    </tr>`;
 					tableBody.append(row);
 				});
 			} else {
@@ -77,7 +81,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.status="OK") {
+				if (response.status = "OK") {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -90,4 +94,55 @@ function deleteData(id) {
 			}
 		});
 	}
+
+
+}
+
+function viewData(id) {
+	$("#updateBtn").show();
+	$("#saveBtn").hide();
+	$.ajax({
+		url: "api/preference/getRelativeModuleById",
+		type: "GET",
+		data: { id: id },
+		success: function(response) {
+			if (response.status == "FOUND") {
+				const branch = response.data;
+				$("#id").val(branch.id);
+				$("#relation").val(branch.relation);
+			} else {
+				alert("Branch not found: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			alert("Request failed: " + xhr.responseText);
+		}
+	});
+
+
+}
+
+function updateRelative() {
+	let payload = {
+		id: $("#id").val(),
+		relation: $("#relation").val(),
+	};
+
+	$.ajax({
+		url: "api/preference/saveRelativeModule",
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(payload),
+		success: function(response) {
+			if (response.status == "OK") {
+				alert("Relative Updated Successfully");
+				location.reload();
+			} else {
+				alert("Operation failed: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			alert("Update failed: " + xhr.responseText);
+		}
+	});
 }

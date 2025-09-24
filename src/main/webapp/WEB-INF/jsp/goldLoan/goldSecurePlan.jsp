@@ -160,39 +160,25 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="minamt">Min Loan Amount</label> <input type="text"
-									name="minAmt" id="minAmt" required="required"
-									placeholder="Enter Minimum Loan Amount"
+								<label for="minamt">Loan Amount</label> <input type="text"
+									name="loanAmt" id="loanAmt" required="required"
+									placeholder="Enter Loan Amount"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
+						
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="maxamt">Max Loan Amount</label> <input type="text"
-									name="maxAmt" id="maxAmt" required="required"
-									placeholder="Enter Maximum Loan Amount"
+								<label for="minterm">loanTerm</label> <input type="text"
+									name="loanTerm" id="loanTerm" required="required"
+									placeholder="Enter Loan Term"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="minterm">Min Loan Term</label> <input type="text"
-									name="minTerm" id="minTerm" required="required"
-									placeholder="Enter Minimum Loan Term"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
 						
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="maxterm">Max Loan Term</label> <input type="text"
-									name="maxTerm" id="maxTerm" required="required"
-									placeholder="Enter Maximum Loan Term"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
 
 
 
@@ -362,8 +348,8 @@ pageEncoding="ISO-8859-1"%> -->
 										<th>Loan Plan Name</th>
 
 										<th>Type Of Loan</th>
-										<th>Age</th>
-										<th>Loan Term</th>
+										<th>MinAge</th>
+										<th>MaxAge</th>
 										<th>EMI Type</th>
 										<th>Edit</th>
 										<th>Delete</th>
