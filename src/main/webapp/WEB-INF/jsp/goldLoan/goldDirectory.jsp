@@ -117,18 +117,18 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="silverrate">Silver Rate/1 gm</label> <input
-									type="text" name="silverRate" id="silverRate"
-									required="required" placeholder="Enter Rate"
+								<label for="silverrate">Today's Rate/1 gm</label> <input
+									type="text" name="todayRate" id="todayRate"
+									required="required" placeholder="Enter Today's Rate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-6">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="goldrate">Gold Rate/1 gm</label>
+								<label for="goldrate">Customer Gold Rate/1 gm</label>
 								<div class="d-flex">
-									<input type="text" name="goldRate" id="goldRate"
+									<input type="text" name="custgoldRate" id="custgoldRate"
 										required="required" placeholder="Enter Rate"
 										style="text-transform: uppercase; margin-right: 10px;" />
 									<!-- <button id="saveTodaysRateBtn" class="btnStyle bg-success">Save</button> -->
@@ -242,19 +242,19 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="lockerLocation">Locker Location</label> <input
-									type="text" name="lockerLocation" id="lockerLocation"
-									required="required" placeholder="Enter Location"
+								<label for="lockerLocation">Locker Branch</label> <input
+									type="text" name="lockerBranch" id="lockerBranch"
+									required="required" placeholder="Enter Loacker Branch"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-6">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="lockerAddress">Locker Address</label>
+								<label for="lockerAddress">Locker Number</label>
 								<div class="d-flex">
-									<input type="text" name="lockerAddress" id="lockerAddress"
-										required="required" placeholder="Enter Address"
+									<input type="text" name="lockerNumber" id="lockerNumber"
+										required="required" placeholder="Enter Locker Number"
 										style="text-transform: uppercase; margin-right: 10px;" />
 									<!-- <button id="saveLockerMasterBtn" class="btnStyle bg-success">Save</button> -->
 								</div>
@@ -446,14 +446,17 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">EMI Payment</label> <input type="text"
-									onclick="calculateEMI()" name="emiPayment" id="emiPayment"
-									required="required" placeholder="Enter EMI Payment"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
+						<!-- EMI Payment -->
+<div class="col-lg-3">
+    <div class="d-flex flex-column formFields mb-4">
+        <label for="">EMI Payment</label> 
+        <input type="text"
+            name="emiPayment" id="emiPayment"
+            required="required" placeholder="Auto Calculated"
+            readonly style="text-transform: uppercase; background:#f5f5f5;" />
+    </div>
+</div>
+
 
 						
 					</div>	
@@ -496,5 +499,58 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 });
 </script>
+
+
+<script type="text/javascript">
+function calculateEMI() {
+    var loanMode = document.getElementById("loanMode").value;
+    var loanTerm = parseInt(document.getElementById("loanTerm").value, 10);
+    var rateOfInterest = parseFloat(document.getElementById("rateOfInterest").value);
+    var loanAmount = parseFloat(document.getElementById("loanAmount").value);
+    var interestType = document.getElementById("typeIntrest").value;
+
+    if (!loanMode || isNaN(loanTerm) || isNaN(rateOfInterest) || isNaN(loanAmount) || !interestType) {
+        document.getElementById("emiPayment").value = "";
+        return;
+    }
+
+    // Monthly default
+    var n = loanTerm;  
+    if (loanMode === "Quarterly") { n = loanTerm * 3; }
+    else if (loanMode === "Yearly") { n = loanTerm * 12; }
+
+    var monthlyRate = rateOfInterest / 100 / 12;
+    var emi = 0;
+
+    if (interestType === "Flat Interest") {
+        var total = loanAmount + (loanAmount * rateOfInterest * loanTerm / 100);
+        emi = total / n;
+    } else if (interestType === "Reducing Interest") {
+        emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, n)) /
+              (Math.pow(1 + monthlyRate, n) - 1);
+    } else if (interestType === "Rule 78") {
+        var totalInterest = loanAmount * rateOfInterest * loanTerm / 100;
+        emi = (loanAmount + totalInterest) / n;
+    }
+
+    document.getElementById("emiPayment").value = emi.toFixed(2);
+}
+
+// Auto trigger on change/input
+document.addEventListener("DOMContentLoaded", function() {
+    var fields = ["loanMode", "loanTerm", "rateOfInterest", "loanAmount", "typeIntrest"];
+    for (var i = 0; i < fields.length; i++) {
+        var el = document.getElementById(fields[i]);
+        if (el) {
+            el.addEventListener("input", calculateEMI);
+            el.addEventListener("change", calculateEMI);
+        }
+    }
+});
+</script>
+
+
+
+
 
 </html>
