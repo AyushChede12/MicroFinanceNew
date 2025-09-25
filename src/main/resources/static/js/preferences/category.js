@@ -4,6 +4,7 @@ $(document).ready(function() {
 		$('#chkcategory').text('');
 
 		var category = $('#category').val().trim();
+		var caste = $('#caste').val().trim();
 
 		let isValid = true;
 
@@ -13,12 +14,19 @@ $(document).ready(function() {
 			isValid = false;
 		}
 
+		if (caste === '') {
+			$('#chkcaste').text('* This field is required');
+			$('#caste').focus();
+			isValid = false;
+		}
+
 		if (!isValid) {
 			return false; // Stop AJAX call
 		}
 
 		const formData = {
-			category: $('input[name="category"]').val()
+			category: $('input[name="category"]').val(),
+			caste: $('input[name="caste"]').val()
 		};
 
 		$.ajax({
@@ -27,7 +35,7 @@ $(document).ready(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(formData),
 			success: function(response) {
-				if (response.status=='CREATED') {
+				if (response.status == 'CREATED') {
 					alert(response.message);
 					location.reload();
 				} else {
@@ -47,7 +55,7 @@ $(document).ready(function() {
 		contentType: "application/json",
 		success: function(response) {
 			console.log("Full Response from API:", response);
-			if (response.status=="FOUND") {
+			if (response.status == "FOUND") {
 				let data = response.data;
 				let tableBody = $(".datatable tbody");
 				tableBody.empty();
@@ -55,6 +63,7 @@ $(document).ready(function() {
 					let row = `<tr>
 					                        <td>${index + 1}</td>
 					                        <td>${item.category}</td>
+											<td>${item.caste}</td>
 											<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
 					                    </tr>`;
 					tableBody.append(row);
@@ -76,7 +85,7 @@ function deleteData(id) {
 			type: "POST",
 			data: { id: id },
 			success: function(response) {
-				if (response.status="OK") {
+				if (response.status = "OK") {
 					alert("Category Deleted Successfully");
 					location.reload();
 				} else {

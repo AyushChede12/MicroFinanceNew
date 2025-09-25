@@ -8,17 +8,23 @@ $(document).ready(function() {
 
 		$('#chkbankname').text('');
 		$('#chkaccountno').text('');
+		$('#chkifsccode').text('');
+		$('#chkmicrcode').text('');
 		$('#chkcontactno').text('');
 		$('#chkaddress').text('');
 		$('#chkopeningdate').text('');
 		$('#chkopeningbalance').text('');
+		$('#chkclosingdate').text('');
 
 		var bankName = $('#bankName').val().trim();
 		var accountNo = $('#accountNo').val().trim();
+		var ifscCode = $('#ifscCode').val().trim();
+		var micrCode = $('#micrCode').val().trim();
 		var contactNo = $('#contactNo').val().trim();
 		var address = $('#address').val().trim();
 		var openingDate = $('#openingDate').val().trim();
 		var openingBalance = $('#openingBalance').val().trim();
+		var closingDate = $('#closingDate').val().trim();
 
 		var contactPattern = /^[6-9][0-9]{9}$/;
 
@@ -42,6 +48,18 @@ $(document).ready(function() {
 			isValid = false;
 		}
 
+		if (ifscCode === '') {
+			$('#chkifsccode').text('* This field is required');
+			$('#ifscCode').focus();
+			isValid = false;
+		}
+
+		if (micrCode === '') {
+			$('#chkmicrcode').text('* This field is required');
+			$('#micrCode').focus();
+			isValid = false;
+		}
+
 		if (openingDate === '') {
 			$('#chkopeningdate').text('* This field is required');
 			$('#openingDate').focus();
@@ -51,6 +69,12 @@ $(document).ready(function() {
 		if (openingBalance === '') {
 			$('#chkopeningbalance').text('* This field is required');
 			$('#openingBalance').focus();
+			isValid = false;
+		}
+
+		if (closingDate === '') {
+			$('#chkclosingdate').text('* This field is required');
+			$('#closingDate').focus();
 			isValid = false;
 		}
 
@@ -72,10 +96,13 @@ $(document).ready(function() {
 		const formData = {
 			bankName: $('input[name="bankName"]').val(),
 			accountNo: $('input[name="accountNo"]').val(),
+			ifscCode: $('input[name="ifscCode"]').val(),
+			micrCode: $('input[name="micrCode"]').val(),
 			contactNo: $('input[name="contactNo"]').val(),
 			address: $('textarea[name="address"]').val(),
 			openingDate: $('input[name="openingDate"]').val(),
-			openingBalance: $('input[name="openingBalance"]').val()
+			openingBalance: $('input[name="openingBalance"]').val(),
+			closingDate: $('input[name="closingDate"]').val()
 		};
 
 		$.ajax({
@@ -141,13 +168,17 @@ function renderTable(page) {
 	for (let i = startIndex; i < endIndex; i++) {
 		let person = totalDataMISD[i];
 		let row = `<tr>
+				<td><input type="checkbox"></td>
 				<td>${i + 1}</td>
                 <td>${person.bankName}</td>
                 <td>${person.accountNo}</td>
+				<td>${person.ifscCode}</td>
+				<td>${person.micrCode}</td>
                 <td>${person.contactNo}</td>
                 <td>${person.address}</td>
                 <td>${person.openingDate}</td>
                 <td>${person.openingBalance}</td>
+				<td>${person.closingDate}</td>
                 <td>
                   <button class="iconbutton" onclick="viewData(${person.id})" title="View">
                     <i class="fa-solid fa-pen-to-square text-primary"></i>

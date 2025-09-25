@@ -43,10 +43,10 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear text-blue"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Customer Creation</li>
+					<li class="breadcrumb-item action">User Creation</li>
 				</ol>
 			</nav>
 		</div>

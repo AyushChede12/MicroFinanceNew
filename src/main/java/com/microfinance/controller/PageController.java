@@ -1134,7 +1134,5 @@ public class PageController {
     {
     	return "goldLoan/searchGoldLoan";
     }
-    
-	
 
 }

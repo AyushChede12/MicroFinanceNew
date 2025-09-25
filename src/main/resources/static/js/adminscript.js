@@ -48,6 +48,7 @@ $(document).ready(function() {
 			alert("Failed to load dropdown data.");
 		}
 	});
+	
 
 	//Relatives
 	$.ajax({
