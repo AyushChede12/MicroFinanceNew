@@ -342,7 +342,7 @@ public class PageController {
 
 	@GetMapping("/loanRepaymentPortal")
 	public String getLoanRepaymentPortal() {
-		return "jointLiabilityLoan/loanRepaymentPortal";
+		return "jointLiabilityLoan/grouploanPayment";
 	}
 
 	@GetMapping("/installmentRepayment")

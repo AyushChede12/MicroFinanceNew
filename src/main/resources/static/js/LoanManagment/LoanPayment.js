@@ -50,7 +50,7 @@ $(document).ready(function() {
 
 						// Now populate the form fields with received data
 						$("#loanPaymentDate").val(data.loanDate);
-						$("#memberId").val(`${data.memberId} - ${data.memberName || "-"}`);
+						$("#memberId").val(data.memberId);
 						$("#memberName").val(data.memberName || "-");
 						$("#relativeDetails").val(data.relativeDetails);
 						$("#dateOfBirth").val(data.dateOfBirth);

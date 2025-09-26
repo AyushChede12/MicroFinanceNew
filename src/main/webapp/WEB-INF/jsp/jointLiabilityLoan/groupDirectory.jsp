@@ -108,12 +108,13 @@
 				</div>
 				<div class="col-lg-3" style="display: none;">
 					<div class="d-flex flex-column formFields">
-						<label>Group ID*</label> <input type="text" id="groupID" name="groupID" value="${memberCodeGD}"
-							class="form-control" required />
+						<label>Group ID*</label> <input type="text" id="groupID"
+							name="groupID" value="${memberCodeGD}" class="form-control"
+							required />
 					</div>
 				</div>
 
-				<div class="col-lg-3 ">	
+				<div class="col-lg-3 ">
 					<div class="d-flex flex-column formFields">
 						<label>Community Name*</label> <input type="text"
 							id="communityName" name="communityName" class="form-control"
@@ -141,13 +142,25 @@
 					</div>
 				</div>
 
-				<div class="col-lg-3 ">
+				<!-- <div class="col-lg-3 ">
 					<div class="d-flex flex-column formFields">
-						<label>Community Leader*</label> <input type="text"
+						<label></label> <input type="text"
 							id="communityLeader" name="communityLeader" class="form-control"
 							required placeholder="Enter Leader Name" />
 					</div>
+				</div> -->
+				
+				<div class="col-lg-3 mb-4 ">
+					<div class="d-flex flex-column formFields">
+						<label for="">Community Leader*</label> <select id="communityLeader"
+							name="communityLeader"
+							required="required" class="form-control selectField"
+							style="height: 30px;">
+							<option value="">Select Member</option>
+						</select>
+					</div>
 				</div>
+				
 
 				<div class="col-lg-3 ">
 					<div class="d-flex flex-column formFields">
@@ -204,51 +217,46 @@
 					</div>
 				</div>
 
-
-
-
-				<div class="col-12 text-right">
-					<button id="savegroupdirectory" type="button"
-						class="btn btn-success mt-3">Save</button>
-					<button id="updategroupdirectory" type="button"
-						class="btn btn-success mt-3">Update</button>
-				</div>
-
-
 			</div>
-			<div class="row mt-5">
-				<div class="col-12">
-					<div class="card recent-sales">
-						<div class="card-body table-responsive">
-							<h5 class="card-title">Details Search List</h5>
-							<table class="table table-bordered">
-								<thead class="thead-light">
-									<tr>
-										<th>Group ID</th>
-										<th>Community Name</th>
-										<th>Opening Date</th>
-										<th>Assigned Branch</th>
-										<th>Community Leader</th>
-										<th>Contact No</th>
-										<th>Community Address</th>
-										<th>Allocated Staff</th>
-										<th>Collection Day</th>
-										<th>Collection Time</th>
 
+			<div class="row mt-4">
+				<div class="col-lg-3 mb-5">
+					<label for=""
+						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+						Photo <span class="star">*</span>
+					</label> <label for="uploadPhoto" id="drop-area"> <input
+						type="file" accept="image/*" name="uploadPhoto" id="uploadPhoto"
+						hidden="hidden" onchange="photoUpload();"
+						style="background-size: cover; background-repeat: no-repeat" />
+						<div id="img-view">
+							<img src="../images/upload/upload.png" alt="upload_icon"
+								id="photoPreview" /><input type="hidden" name="photoHidden"
+								id="photoHidden">
 
-										<th>Active</th>
-									</tr>
-								</thead>
-								<tbody id="groupDirectoryBody">
-
-
-									<!-- More rows -->
-								</tbody>
-							</table>
 						</div>
-					</div>
+					</label> <small id="chkphoto" style="color: red;"></small>
 				</div>
+
+				<div class="col-lg-3 mb-5">
+					<label for=""
+						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+						Signature <span class="star">*</span>
+					</label> <label for="uploadSignature" id="drop-area"> <input
+						type="file" accept="image/*" name="uploadSignature"
+						id="uploadSignature" hidden="hidden" onchange="signatureUpload();"
+						style="background-size: cover; background-repeat: no-repeat" />
+						<div id="img-view">
+							<img src="../images/upload/upload.png" alt="upload_icon"
+								id="signaturePreview" /><input type="hidden"
+								name="signatureHidden" id="signatureHidden">
+
+						</div>
+					</label> <small id="chksignature" style="color: red;"></small>
+				</div>
+
+
 			</div>
+
 
 			<hr class="mt-5" />
 			<div class="col-12">
@@ -259,12 +267,10 @@
 				<div class="col-lg-3 mb-4 ">
 					<div class="d-flex flex-column formFields">
 						<label for="">Select Member*</label> <select id="selectedMember"
-							name="selectedMember" onchange="SelectMember()"  required="required"
-							class="form-control selectField" style="height: 30px;">
+							name="selectedMember" 
+							required="required" class="form-control selectField"
+							style="height: 30px;">
 							<option value="">Select Member</option>
-							<option>Member 1</option>
-							<option>Member 2</option>
-
 						</select>
 					</div>
 				</div>
@@ -294,12 +300,13 @@
 					</div>
 				</div>
 
-				
+
 
 			</div>
 
 			<div class="col-12 text-right">
-				<button type="button"  id="addque"  class="btn btn-success mt-3">Add Que</button>
+				<button type="button" id="addque" class="btn btn-success mt-3">Add
+					Que</button>
 			</div>
 			<div class="row mt-5">
 				<div class="col-12">
@@ -313,12 +320,11 @@
 										<th>Customer Name</th>
 										<th>Referral Details</th>
 										<th>Contact</th>
-										
 										<th>Action</th>
 									</tr>
 								</thead>
 								<tbody>
-									
+
 
 								</tbody>
 							</table>
@@ -326,55 +332,56 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="row mt-4">
-				<div class="col-lg-3 mb-5">
-					<label for=""
-						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-						Photo <span class="star">*</span>
-					</label> <label for="uploadPhoto" id="drop-area"> <input
-						type="file" accept="image/*" name="uploadPhoto" id="uploadPhoto"
-						hidden="hidden" onchange="photoUpload();"
-						style="background-size: cover; background-repeat: no-repeat" />
-						<div id="img-view">
-							<img src="../images/upload/upload.png" alt="upload_icon"
-								id="photoPreview" /><input type="hidden" name="photoHidden"
-								id="photoHidden">
-
-							<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
-						</div>
-					</label> <small id="chkphoto" style="color: red;"></small>
+			
+			
+				<div class="col-12 text-right">
+					<button id="savegroupdirectory" type="button"
+						class="btn btn-success mt-3">Save</button>
+					<!-- <button id="updategroupdirectory" type="button"
+						class="btn btn-success mt-3">Update</button> -->
+					<button id="showGroupDirectory" type="button"
+						class="btn btn-warning mt-3">Show Tabel</button>	
 				</div>
+			
 
-				<div class="col-lg-3 mb-5">
-					<label for=""
-						style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-						Signature <span class="star">*</span>
-					</label> <label for="uploadSignature" id="drop-area"> <input
-						type="file" accept="image/*" name="uploadSignature"
-						id="uploadSignature" hidden="hidden" onchange="signatureUpload();"
-						style="background-size: cover; background-repeat: no-repeat" />
-						<div id="img-view">
-							<img src="../images/upload/upload.png" alt="upload_icon"
-								id="signaturePreview" /><input type="hidden"
-								name="signatureHidden" id="signatureHidden">
-							<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+			<div class="row mt-5">
+				<div class="col-12">
+					<div class="card recent-sales">
+						<div class="card-body table-responsive">
+							<h5 class="card-title">Details Search List</h5>
+							<table class="table table-bordered" id="">
+								<thead class="thead-light">
+									<tr>
+										<th>Group ID</th>
+										<th>Group Name</th>
+										<th>Opening Date</th>
+										<th>Assigned Branch</th>
+										<th>Group Leader</th>
+										<th>GL Contact No</th>
+										<th>Community Address</th>
+										<th>Allocated Staff</th>
+										<th>Collection Day</th>
+										<th>Collection Time</th>
+										<th>Group Members ID's</th>
+										<th>Group Members Name</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody id="groupDirectoryBody">
+
+
+									<!-- More rows -->
+								</tbody>
+							</table>
 						</div>
-					</label> <small id="chksignature" style="color: red;"></small>
+					</div>
 				</div>
-
 			</div>
 		</form>
+
+
+
+
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/GroupDirectory.js"></script>

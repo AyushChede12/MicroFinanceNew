@@ -643,8 +643,8 @@
 					</a></li>
 
 					<li><a href="loanRepaymentPortal"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Loan
-								Repayment Portal</span>
+							<span style="font-family: 'Poppins', sans-serif">Group Loan Payment
+								</span>
 					</a></li>
 
 					<li><a href="installmentRepayment"> <i

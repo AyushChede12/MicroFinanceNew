@@ -236,18 +236,31 @@ public class LoanManagementController {
 			}
 		}
 		
-		// API for Paying Emi (Vaibhav)
+    	// API for Paying Emi (Vaibhav)
 		@PostMapping("/payEmi")
 		public ResponseEntity<ApiResponse<Map<String, Object>>> payEmi(@RequestBody LoanPayment request) {
-		    boolean isClosed = loanServices.processEmiPayment(request, "1");
+		    try {
+		        boolean isClosed = loanServices.processEmiPayment(request, "1");
 
-		    Map<String, Object> data = new HashMap<>();
-		    data.put("loanStatus", isClosed ? "CLOSED" : "ACTIVE");
+		        Map<String, Object> data = new HashMap<>();
+		        data.put("loanStatus", isClosed ? "CLOSED" : "ACTIVE");
 
-		    String message = isClosed ? "EMI paid successfully. Loan is now closed." : "EMI paid successfully.";
+		        String message = isClosed 
+		            ? "EMI paid successfully. Loan is now closed." 
+		            : "EMI paid successfully. Remaining balance updated.";
 
-		    return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, message, data));
+		        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, message, data));
+		    } catch (RuntimeException e) {
+		        // e.g. Insufficient balance
+		        Map<String, Object> data = new HashMap<>();
+		        data.put("error", e.getMessage());
+		        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+		                             .body(new ApiResponse<>(HttpStatus.BAD_REQUEST, e.getMessage(), data));
+		    }
 		}
+
+		
+		
 		//API for fetching all data of loan payment
 		@GetMapping("/fetchLoanPaymentsByLoanId")
 		public ResponseEntity<ApiResponse<List<LoanPayment>>> fetchLoanPaymentsByLoanId(
