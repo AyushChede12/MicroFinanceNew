@@ -10,9 +10,10 @@
 	<header id="header" class="header fixed-top d-flex align-items-center">
 		<!-- Logo Section -->
 		<div class="d-flex align-items-center justify-content-between">
-			<a href="/" class="logo d-flex align-items-center"> <!-- <img
-				src="uploads/bikelogo.png" /> -->
-				<p style="color:white; margin:0; font-size:25px; font-weight:600; margin-left:10px;">MicroFinance</p>
+			<a href="/" class="logo d-flex align-items-center">
+				<p id="bindUserName"
+					style="color: white; margin: 0; font-size: 25px; font-weight: 600; margin-left: 10px;">
+				</p>
 			</a> <i class="bi bi-list toggle-sidebar-btn"></i>
 		</div>
 
@@ -29,5 +30,21 @@
 		</div> -->
 	</header>
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/login.js"></script>
+
+	<script>
+		$(document).ready(function() {
+			// ✅ Get username from sessionStorage
+			let username = sessionStorage.getItem("username");
+
+			if (username) {
+				$("#bindUserName").text(username);
+			} else {
+				// ❌ If user tries to open dashboard without login, go back to login page
+				window.location.href = "index";
+			}
+		});
+	</script>
+
 </body>
 </html>
