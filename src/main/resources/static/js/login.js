@@ -18,10 +18,11 @@ $(document).ready(function() {
 			success: function(response) {
 				// Assuming ApiResponse has integer status and message
 				if (response.status === 'OK') {
-					alert("Login Successfully");
+					alert(response.data.username);
+					sessionStorage.setItem("username", response.data.username);
 					window.location.href = 'openDashboard'; // replace with your homepage
+					
 				} else {
-					alert("Login Failed");
 					$("#errorMsg").text(response.message).show();
 				}
 			},
@@ -34,4 +35,38 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	
+
+	/*$(document).ready(function() {
+		$("#form1").submit(function(e) {
+			e.preventDefault();
+
+			let userData = {
+				username: $("#username").val(),
+				password: $("#password").val()
+			};
+
+			$.ajax({
+				url: "api/loginPage/loginValidate",
+				type: "POST",
+				contentType: "application/json",
+				data: JSON.stringify(userData),
+				success: function(response) {
+					if (response.status === "OK") {
+						// Save username in sessionStorage
+						sessionStorage.setItem("username", response.data.username);
+
+						// Redirect to dashboard
+						window.location.href = "/openDashboard";
+					} else {
+						alert(response.message);
+					}
+				},
+				error: function() {
+					alert("Login failed!");
+				}
+			});
+		});
+	});*/
 });
