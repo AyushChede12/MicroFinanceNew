@@ -1,59 +1,65 @@
 function fetchBySelectedCustomer() {
-	const memberCode = $("#selectMember").val();
-	if (!memberCode) return;
+    const memberCode = $("#selectMember").val();
+    if (!memberCode) return;
 
-	const input = { memberCode };
+    const input = { memberCode };
 
-	$.ajax({
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(input),
-		url: 'api/customermanagement/fetchBySelectedCustomer',
-		async: false,
-		success: function(data) {
-			if (data && data.length > 0) {
-				const c = data[0];
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(input),
+        url: window.location.origin + "/api/customermanagement/fetchBySelectedCustomer",
+        async: false,
+        success: function (data) {
+            if (data && data.length > 0) {
+                const c = data[0];
 
-				$("#customerName").val(c.customerName || "");
-				$("#memberCode").val(c.memberCode || "");
-				$("#contactNo").val(c.contactNo || "");
-				$("#singupDate").val(c.signupDate || "");
-				$("#aadharNo").val(c.aadharNo || "");
-				$("#pan").val(c.panNo || "");
-				$("#state").val(c.state || "");
-				$("#drivingLicenceNo").val(c.drivingLicenceNo || "");
-				$("#voterNo").val(c.voterNo || "");
-				$("#guardianName").val(c.guardianName || "");
-				$("#customerAddress").val(c.customerAddress || "");
-				$("#pinCode").val(c.pinCode || "");
-				$("#nomineeName").val(c.nomineeName || "");
-				$("#emailId").val(c.emailId || "");
-				$("#dob").val(c.dob || "");
-				$("#customerAge").val(c.customerAge || "");
-				$("#branchName").val(c.branchName || "");
-				$("#customerGender").val(c.customerGender || "");
-				// Customer Photo
-				// Customer Photo
-				// Customer Photo
-				if (c.customerPhoto) {
-					const imagePath = `Uploads/${c.customerPhoto}`;
-					$("#bike1imagePreview").attr("src", imagePath);
-					$("#bike1imagePath").val(imagePath);
-				} else {
-					$("#bike1imagePreview").attr("src", 'Uploads/default-placeholder.jpg');
-					$("#bike1imagePath").val('');
-				}
+                // 🔹 Text fields
+                $("#customerName").val(c.customerName || "");
+                $("#memberCode").val(c.memberCode || "");
+                $("#contactNo").val(c.contactNo || "");
+                $("#singupDate").val(c.signupDate || "");
+                $("#aadharNo").val(c.aadharNo || "");
+                $("#pan").val(c.panNo || "");
+                $("#state").val(c.state || "");
+                $("#drivingLicenceNo").val(c.drivingLicenceNo || "");
+                $("#voterNo").val(c.voterNo || "");
+                $("#guardianName").val(c.guardianName || "");
+                $("#customerAddress").val(c.customerAddress || "");
+                $("#pinCode").val(c.pinCode || "");
+                $("#nomineeName").val(c.nomineeName || "");
+                $("#emailId").val(c.emailId || "");
+                $("#dob").val(c.dob || "");
+                $("#customerAge").val(c.customerAge || "");
+                $("#branchName").val(c.branchName || "");
+                $("#customerGender").val(c.customerGender || "");
 
-			} else {
-				alert("No data found for the selected member.");
-				clearCustomerFields();
-			}
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
-		}
-	});
+                // 🔹 Images (customer photo & signature)
+                const baseUrl = window.location.origin + "/Uploads/";
+
+                if (c.customerPhoto) {
+                    $("#photoPreview").attr("src", baseUrl + c.customerPhoto);
+                } else {
+                    $("#photoPreview").attr("src", baseUrl + "default-placeholder.jpg");
+                }
+
+                if (c.customerSignature) {
+                    $("#signaturePreview").attr("src", baseUrl + c.customerSignature);
+                } else {
+                    $("#signaturePreview").attr("src", baseUrl + "default-placeholder.jpg");
+                }
+
+            } else {
+                alert("No data found for the selected member.");
+                clearCustomerFields();
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
+        }
+    });
 }
+
 
 
 $(document).ready(function() {

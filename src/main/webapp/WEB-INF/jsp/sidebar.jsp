@@ -52,12 +52,8 @@
 								Module</span>
 					</a></li>
 
-					<li><a href="casteModule"> <i class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Caste Module</span>
-					</a></li>
-
 					<li><a href="categoryModule"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Category
+							<span style="font-family: 'Poppins', sans-serif">Category/Caste
 								Module</span>
 					</a></li>
 
@@ -70,15 +66,15 @@
 					</a></li>
 
 					<li><a href="customerCreation"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Customer
+							<span style="font-family: 'Poppins', sans-serif">User
 								Creation</span>
 					</a></li>
 
 					<li><a href="customerMenuAccess"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Customer
+							<span style="font-family: 'Poppins', sans-serif">User
 								Menu Access</span>
 					</a></li>
-
+					<!-- 
 					<li><a href="customerBalanceReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Balance Sheet</span>
@@ -87,7 +83,7 @@
 					<li><a href="lockerManagement"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Locker
 								Management</span>
-					</a></li>
+					</a></li> -->
 				</ul></li>
 
 
@@ -513,14 +509,16 @@
 								Statement</span>
 					</a></li>
 
-					<li><a href="loanDocumentPrintLoanManagement"> <i class="bi bi-circle"></i> <span
+					<li><a href="loanDocumentPrintLoanManagement"> <i
+							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Generate Loan
 								Documents</span>
 					</a></li>
 
-					<li><a href="earlyLoanClosureLoan"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Early
-								Loan Closure</span>
+					<li><a href="earlyLoanClosureLoan"> <i
+							class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Early Loan
+								Closure</span>
 					</a></li>
 
 					<li><a href="settleLoanRecords"> <i class="bi bi-circle"></i>

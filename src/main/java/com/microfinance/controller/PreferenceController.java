@@ -175,6 +175,20 @@ public class PreferenceController {
 				"Relative modules fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
+	
+	@GetMapping("/getRelativeModuleById") // Ayush
+	public ResponseEntity<ApiResponse<RelativeModule>> getRelativeModuleById(@RequestParam("id") Long id) {
+		Optional<RelativeModule> branch = preferenceService.fetchRelativeModuleById(id);
+		if (branch.isPresent()) {
+			ApiResponse<RelativeModule> response = new ApiResponse<>(HttpStatus.FOUND,
+					"Relative Module fetched successfully", branch.get());
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<RelativeModule> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Relative Module not found for ID: " + id, null);
+			return ResponseEntity.status(404).body(response);
+		}
+	}
 
 	@PostMapping("/deleteRelativeModuleById") // Ayush
 	public ResponseEntity<ApiResponse<String>> deleteRelativeModule(@RequestParam("id") Long id) {
@@ -435,6 +449,14 @@ public class PreferenceController {
 					.body(new ApiResponse("error", "Failed to save Code Module", null));
 		}
 	}
+	
+	@GetMapping("/getAllCodeModule") // Ayush (without DTO)
+	public ResponseEntity<ApiResponse<List<CodeModule>>> fetchAllCodeModule() {
+		List<CodeModule> list = preferenceService.fetchAllCodeModule();
+		ApiResponse<List<CodeModule>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"Code modules fetched successfully", list);
+		return ResponseEntity.ok(response);
+	}
 
 	@PostMapping("/deleteCodeModuleById") // Ayush
 	public ResponseEntity<ApiResponse<String>> deleteCodeModule(@RequestParam("id") Long id) {
@@ -466,5 +488,8 @@ public class PreferenceController {
 
 		return ResponseEntity.ok(response);
 	}
+	
+	
+	
 
 }

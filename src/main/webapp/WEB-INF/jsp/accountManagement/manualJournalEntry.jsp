@@ -90,7 +90,7 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 
 			<div class="row">
-				<div class="col-12 text-right mt-3">
+				<div class="col-12 text-center mt-3">
 					<button id="searchBtn" class="btnStyle"
 						style="background-color: #FFA500;">Search</button>
 				</div>
@@ -172,11 +172,14 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 text-right mt-3">
+				<div class="col-12 text-center mt-3">
 					<button id="saveBtn" class="btnStyle"
 						style="background-color: #FFA500;">Save</button>
+					<button type="button" id="toggleBtn" class="btnStyle bg-primary"
+						onclick="showTableData()">Show</button>
 				</div>
 			</div>
+
 		</form>
 
 		<div class="row mt-5">
