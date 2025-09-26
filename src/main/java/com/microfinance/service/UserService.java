@@ -32,4 +32,12 @@ public class UserService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
+
+    public User validateUser(String username, String password) {
+        // Fetch user by username & password
+        return repo.findByUsernameAndPassword(username, password)
+                .orElse(null);
+    }
+    
+  
 }

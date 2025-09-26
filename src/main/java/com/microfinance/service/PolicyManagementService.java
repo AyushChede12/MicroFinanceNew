@@ -1,5 +1,6 @@
 package com.microfinance.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import java.util.Optional;
@@ -8,14 +9,18 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.PolicyManagementDto;
 import com.microfinance.model.AddnewinvestmentPM;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.DailyDepositPM;
 import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.FixedDepositPM;
 import com.microfinance.model.FlexibleRenewal;
+import com.microfinance.model.FullMaturity;
 import com.microfinance.model.MISDepositPM;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.RecurringDepositPM;
@@ -24,6 +29,7 @@ import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.DailyPremiumRenewalRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
 import com.microfinance.repository.FlexibleRenewalRepo;
+import com.microfinance.repository.FullMaturityRepo;
 import com.microfinance.repository.MisDepositePMRepo;
 import com.microfinance.repository.PolicyRenewalRepo;
 import com.microfinance.repository.RecurringDepositRepo;
@@ -44,15 +50,18 @@ public class PolicyManagementService {
 
 	@Autowired
 	AddInvestmentRepo addinvestmentrepo;
-	
+
 	@Autowired
 	PolicyRenewalRepo policyRenewalRepo;
-	
+
 	@Autowired
 	DailyPremiumRenewalRepo dailyPremiumRenewalRepo;
-	
+
 	@Autowired
 	FlexibleRenewalRepo flexibleRenewalRepo;
+	
+	@Autowired
+	FullMaturityRepo fullMaturityRepo;
 
 	public boolean saveRecuringDailyDeposite(RecurringDepositPM deposit) {
 		try {
@@ -135,11 +144,9 @@ public class PolicyManagementService {
 			existing.setRateOfInterest(updatedData.getRateOfInterest());
 			existing.setInstallmentType(updatedData.getInstallmentType());
 			existing.setPlanNameDD(updatedData.getPlanNameDD());
-			existing.setDuration(updatedData.getDuration()); // Fixed here
 			existing.setCommissionOnNew(updatedData.getCommissionOnNew());
 			existing.setRenewalCommission(updatedData.getRenewalCommission());
 			existing.setDdterm(updatedData.getDdterm());
-			existing.setTermModeDD(updatedData.getTermModeDD());
 			existing.setInterestInterval(updatedData.getInterestInterval());
 			existing.setTotalPaid(updatedData.getTotalPaid());
 			existing.setMaturityAmount(updatedData.getMaturityAmount());
@@ -181,8 +188,6 @@ public class PolicyManagementService {
 			existing.setMinimumAmountRD(updatedData.getMinimumAmountRD());
 			existing.setRateOfInterestRD(updatedData.getRateOfInterestRD());
 			existing.setInstallmentTypeRD(updatedData.getInstallmentTypeRD());
-			existing.setDurationRD(updatedData.getDurationRD());
-			existing.setTermMode(updatedData.getTermMode());
 			existing.setRdterm(updatedData.getRdterm());
 			existing.setCommissionOnNewRD(updatedData.getCommissionOnNewRD());
 			existing.setRenewalCommissionRD(updatedData.getRenewalCommissionRD());
@@ -191,7 +196,7 @@ public class PolicyManagementService {
 			existing.setMaturityAmountRD(updatedData.getMaturityAmountRD());
 			existing.setFlexiblePlanRD(updatedData.getFlexiblePlanRD());
 			existing.setGraceDaysRD(updatedData.getGraceDaysRD());
-			existing.setPenltyfineRD(updatedData.getPenltyfineRD());
+			existing.setPenaltyfineRD(updatedData.getPenaltyfineRD());
 			existing.setStatusOfPlanRD(updatedData.getStatusOfPlanRD());
 
 			// Save updated object
@@ -230,9 +235,7 @@ public class PolicyManagementService {
 			existing.setPlanNameFD(updatedData.getPlanNameFD());
 			existing.setMinimumAmountFD(updatedData.getMinimumAmountFD());
 			existing.setRateOfInterestFD(updatedData.getRateOfInterestFD());
-			existing.setTermModeFD(updatedData.getTermModeFD());
 			existing.setFdterm(updatedData.getFdterm());
-			existing.setDurationFD(updatedData.getDurationFD());
 			existing.setInstallmentTypeFD(updatedData.getInstallmentTypeFD());
 			existing.setCommissionOnNewFD(updatedData.getCommissionOnNewFD());
 			existing.setComponentIntervalFD(updatedData.getComponentIntervalFD());
@@ -275,11 +278,9 @@ public class PolicyManagementService {
 			existing.setPlanCodeMD(updatedData.getPlanCodeMD());
 			existing.setPlanNameMD(updatedData.getPlanNameMD());
 			existing.setRateOfInterestMD(updatedData.getRateOfInterestMD());
-			existing.setDurationMD(updatedData.getDurationMD());
 			existing.setInstallmentTypeMD(updatedData.getInstallmentTypeMD());
 			existing.setMinimumAmountMD(updatedData.getMinimumAmountMD());
 			existing.setMaturityROIMD(updatedData.getMaturityROIMD());
-			existing.setTermModeMD(updatedData.getTermModeMD());
 			existing.setMisTerm(updatedData.getMisTerm());
 			existing.setMISIntROIMD(updatedData.getMISIntROIMD());
 			existing.setMISIntervalMD(updatedData.getMISIntervalMD());
@@ -311,64 +312,35 @@ public class PolicyManagementService {
 	 * Auto-generated method stub return addinvestmentrepo.findAll(); }
 	 */
 
+	public List<String> getSchemeNameBySchemeType(String drd) {
+		List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
+		return allDrdPlans.stream().map(DailyDepositPM::getPlanNameDD).distinct().collect(Collectors.toList());
+	}
 
+	public List<String> getRRDBySchemeType(String rd) {
+		List<RecurringDepositPM> allRrdPlans = recurringDepositRepo.findByrd(rd);
+		return allRrdPlans.stream().map(RecurringDepositPM::getPlanNameRD).distinct().collect(Collectors.toList());
+	}
 
-public List<String> getSchemeNameBySchemeType(String drd) {
-    List<DailyDepositPM> allDrdPlans = dailyDepositPMRepo.findBydrd(drd);
-    return allDrdPlans.stream()
-                      .map(DailyDepositPM::getPlanNameDD)
-                      .distinct()
-                      .collect(Collectors.toList());
-}
+	public List<String> getFRDBySchemeType(String fd) {
+		List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
+		return allFrdPlans.stream().map(FixedDepositPM::getPlanNameFD).distinct().collect(Collectors.toList());
 
-public List<String> getRRDBySchemeType(String rd) {
-    List<RecurringDepositPM> allRrdPlans = recurringDepositRepo.findByrd(rd);
-    return allRrdPlans.stream()
-                     .map(RecurringDepositPM::getPlanNameRD)
-                     .distinct()
-                     .collect(Collectors.toList());
-}
+	}
 
+	public List<String> getMISRDBySchemeType(String mis) {
+		List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
+		return allMisrdPlans.stream().map(MISDepositPM::getPlanNameMD).distinct().collect(Collectors.toList());
+	}
 
-public List<String> getFRDBySchemeType(String fd) {
-	List<FixedDepositPM> allFrdPlans = fixedDepositPMRepo.findByfd(fd);
-    return allFrdPlans.stream()
-    		         .map(FixedDepositPM::getPlanNameFD)
-                     .distinct()
-                     .collect(Collectors.toList()); 
-	
-	
-}
-
-
-public List<String> getMISRDBySchemeType(String mis) {
-	List<MISDepositPM> allMisrdPlans = misDepositePMRepo.findBymis(mis);
-    return allMisrdPlans.stream()
-    		         .map(MISDepositPM::getPlanNameMD)
-                     .distinct()
-                     .collect(Collectors.toList());
-}
-
-
-
-
-
-
-public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
-    return dailyDepositPMRepo.findByplanNameDD(planNameDD);
-}
-
+	public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
+		return dailyDepositPMRepo.findByplanNameDD(planNameDD);
+	}
 
 	public List<AddnewinvestmentPM> getAddInvestmentDetails() {
 		// TODO Auto-generated method stub
 		return addinvestmentrepo.findAll();
 	}
-
-
-	
-	
-	
-	
 
 	public RecurringDepositPM getRDTermAndInterestRate(String planNameRD) {
 		return recurringDepositRepo.findByplanNameRD(planNameRD);
@@ -382,164 +354,244 @@ public DailyDepositPM getDDTermAndInterestRate(String planNameDD) {
 		return misDepositePMRepo.findByplanNameMD(planNameMD);
 	}
 
+	public List<AddnewinvestmentPM> findByBranch(String branchName) {
+		// TODO Auto-generated method stub
+		List<AddnewinvestmentPM> list = addinvestmentrepo.findByBranchName(branchName);
+		return list;
+	}
+
+	public AddnewinvestmentPM getDetailsById(Long id) {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findById(id).orElse(null);
+	}
+
+	public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
+		return addinvestmentrepo.save(investment);
+	}
+
+	public List<DailyDepositPM> getAllDDTerm() {
+		// TODO Auto-generated method stub
+		return dailyDepositPMRepo.findAll();
+	}
+
+	public List<AddnewinvestmentPM> getAllInvestments() {
+		return addinvestmentrepo.findAll();
+	}
+	
+	public List<AddnewinvestmentPM> getAllPolicyManagementData() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findAll();
+	}
+
+	public List<AddnewinvestmentPM> x() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findAll();
+	}
+
+	public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
+		if (policyCode == null)
+			return Optional.empty();
+
+		// Clean input: trim and convert to uppercase
+		String normalizedCode = policyCode.trim().toUpperCase();
+
+		// Fetch all and match manually
+		return addinvestmentrepo.findAll().stream()
+				.filter(p -> p.getPolicyCode() != null && p.getPolicyCode().trim().equalsIgnoreCase(normalizedCode))
+				.findFirst();
+	}
+
+	public List<AddnewinvestmentPM> getApprovedInvestments() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findByIsApprovedTrue();
+	}
+
+	public List<AddnewinvestmentPM> getApprovedRDPolicies() {
+		return addinvestmentrepo.findApprovedRDPolicies();
+	}
+
+	public List<AddnewinvestmentPM> getApprovedFDPolicies() {
+		return addinvestmentrepo.findApprovedFDPolicies();
+	}
+
+	public List<AddnewinvestmentPM> getApprovedDDPolicies() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findApprovedDDPolicies();
+	}
+
+	public List<AddnewinvestmentPM> getAllRdRenewalData() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findAll();
+	}
+
+	public List<AddnewinvestmentPM> getAllDdRenewalData() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findAll();
+	}
+
+	public List<AddnewinvestmentPM> getAllFdRenewalData() {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.findAll();
+	}
+
+	public List<AddnewinvestmentPM> getAllApprovedPolicies() {
+		return addinvestmentrepo.findByIsApprovedTrue();
+	}
+
+	public AddnewinvestmentPM updateInstalmentDetails(String policyCode, String DepositAmount) {
+		Optional<AddnewinvestmentPM> optionalInvestment = addinvestmentrepo.findByPolicyCode(policyCode);
+
+		if (optionalInvestment.isPresent()) {
+			AddnewinvestmentPM investment = optionalInvestment.get();
+
+			// Set the new deposit amount
+			investment.setDepositAmount(DepositAmount);
+
+			// Increment lastInstPaid
+			try {
+				int last = Integer
+						.parseInt(investment.getLastInstPaid() == null || investment.getLastInstPaid().isEmpty() ? "0"
+								: investment.getLastInstPaid());
+				investment.setLastInstPaid(String.valueOf(last + 1));
+			} catch (NumberFormatException e) {
+				investment.setLastInstPaid("1");
+			}
+
+			// Save and return updated investment
+			return addinvestmentrepo.save(investment);
+		}
+
+		return null; // or throw custom exception if you prefer
+	}
+
+	public List<FlexibleRenewal> findBypolicyCode(String policyCode) {
+		return flexibleRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public List<DailyPremiumRenewalPM> findDailyData(String policyCode) {
+		return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public List<PolicyRenewal> findRenewalData(String policyCode) {
+		return policyRenewalRepo.findByPolicyCode(policyCode);
+	}
+
+	public ApiResponse<AddnewinvestmentPM> saveandupdateAddInvestmentDetails(PolicyManagementDto policyManagementDto,
+			String image1, String image2) {
+		// TODO Auto-generated method stub
+		AddnewinvestmentPM addnewinvestmentPM = new AddnewinvestmentPM();
+		boolean isNew = true;
+
+		// Check if the ClientMaster is being updated
+		if (policyManagementDto.getId() != null && policyManagementDto.getId() > 0) {
+			addnewinvestmentPM = addinvestmentrepo.findById(policyManagementDto.getId())
+					.orElse(new AddnewinvestmentPM());
+			isNew = false;
+		}
+
+		// Map fields from DTO to entity
+		addnewinvestmentPM.setPolicyCode(policyManagementDto.getPolicyCode());
+		addnewinvestmentPM.setPolicyStartDate(policyManagementDto.getPolicyStartDate());
+		addnewinvestmentPM.setMemberSelection(policyManagementDto.getMemberSelection());
+		addnewinvestmentPM.setCustomerName(policyManagementDto.getCustomerName());
+		addnewinvestmentPM.setDateofBirth(policyManagementDto.getDateofBirth());
+		addnewinvestmentPM.setRelationDetails(policyManagementDto.getRelationDetails());
+		addnewinvestmentPM.setContactNo(policyManagementDto.getContactNo());
+		addnewinvestmentPM.setSuggestedNominee(policyManagementDto.getSuggestedNominee());
+		addnewinvestmentPM.setAgeOfNominee(policyManagementDto.getAgeOfNominee());
+		addnewinvestmentPM.setRelation(policyManagementDto.getRelation());
+		addnewinvestmentPM.setAddress(policyManagementDto.getAddress());
+		addnewinvestmentPM.setDistrict(policyManagementDto.getDistrict());
+		addnewinvestmentPM.setState(policyManagementDto.getState());
+		addnewinvestmentPM.setPinCode(policyManagementDto.getPinCode());
+		addnewinvestmentPM.setTds(policyManagementDto.getTds());
+		addnewinvestmentPM.setBranchName(policyManagementDto.getBranchName());
+		addnewinvestmentPM.setModeOfOperation(policyManagementDto.getModeOfOperation());
+		addnewinvestmentPM.setJointMemCode(policyManagementDto.getJointMemCode());
+		addnewinvestmentPM.setJointName(policyManagementDto.getJointName());
+		addnewinvestmentPM.setMaturityDate(policyManagementDto.getMaturityDate());
+		addnewinvestmentPM.setSchemeType(policyManagementDto.getSchemeType());
+		addnewinvestmentPM.setSchemeTerm(policyManagementDto.getSchemeTerm());
+		addnewinvestmentPM.setSchemeMode(policyManagementDto.getSchemeMode());
+		addnewinvestmentPM.setRoi(policyManagementDto.getRoi());
+		addnewinvestmentPM.setPolicyAmount(policyManagementDto.getPolicyAmount());
+		addnewinvestmentPM.setDepositAmount(policyManagementDto.getDepositAmount());
+		addnewinvestmentPM.setIntroMCode(policyManagementDto.getIntroMCode());
+		addnewinvestmentPM.setMaturityAmount(policyManagementDto.getMaturityAmount());
+		addnewinvestmentPM.setMISInterest(policyManagementDto.getMISInterest());
+
+		addnewinvestmentPM.setPaymentBy(policyManagementDto.getPaymentBy());
+		addnewinvestmentPM.setSchemeCode(policyManagementDto.getSchemeCode());
+		addnewinvestmentPM.setRemark(policyManagementDto.getRemark());
+		addnewinvestmentPM.setAgent(policyManagementDto.getAgent());
+		addnewinvestmentPM.setSmsSend(policyManagementDto.getSmsSend());
+		// Set photo path (already fetched)
+		if (image1 != null && !image1.isEmpty()) {
+			addnewinvestmentPM.setImage1(image1);
+		}
+
+		// Handle signature upload
+		if (image2 != null && !image2.isEmpty()) {
+			addnewinvestmentPM.setImage2(image2);
+		}
+
+		// Handle photo upload
+		/*
+		 * if (photo != null && !photo.isEmpty()) { try { String fileName1 =
+		 * saveFile(photo); // Save the signature
+		 * createSavingsAccount.setPhoto(fileName1); } catch (IOException e) { return
+		 * ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed"); }
+		 * }
+		 */
+
+		// Handle signature upload
+		/*
+		 * if (signature != null && !signature.isEmpty()) { try { String fileName1 =
+		 * saveFile1(signature); // Save the signature
+		 * createSavingsAccount.setSignature(fileName1); } catch (IOException e) {
+		 * return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR,
+		 * "File upload failed"); } }
+		 */
+
+		// Save entity to the database
+		AddnewinvestmentPM saveaddinvestmentPM = addinvestmentrepo.save(addnewinvestmentPM);
+
+		if (isNew) {
+			return ApiResponse.success(HttpStatus.CREATED,
+					"Saved successfully. Director Name: " + saveaddinvestmentPM.getCustomerName(), saveaddinvestmentPM);
+		} else {
+			return ApiResponse.success(HttpStatus.OK,
+					"Updated successfully. Director Name: " + saveaddinvestmentPM.getCustomerName(),
+					saveaddinvestmentPM);
+		}
+	}
+
+	public boolean existByMemberSelection(String customerCode) {
+		// TODO Auto-generated method stub
+		return addinvestmentrepo.existsByMemberSelection(customerCode);
+	}
+
+	public List<FullMaturity> fetchFullMaturityByPolicyCode(String policyCode) {
+	    if (policyCode == null || policyCode.trim().isEmpty()) {
+	        return Collections.emptyList(); // returns an immutable empty list
+	    }
+	    return fullMaturityRepo.findByPolicyCodeIgnoreCase(policyCode.trim());
+	}
 
 
+	public boolean deletePolicyDataById(Long id) {
+		// TODO Auto-generated method stub
+		if (addinvestmentrepo.existsById(id)) {
+			addinvestmentrepo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-public List<AddnewinvestmentPM> findByBranch(String branchName) {
-	// TODO Auto-generated method stub
-	List<AddnewinvestmentPM> list= addinvestmentrepo.findByBranchName(branchName);
-	return list;
+	public List<FullMaturity> getAllApprovedRDPolicies() {
+		// TODO Auto-generated method stub
+		return fullMaturityRepo.findByApproveStatusTrue();
+	}
+
 }
-
-
-
-
-public AddnewinvestmentPM getDetailsById(Long id) {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findById(id).orElse(null);
-}
-
-
-
-public AddnewinvestmentPM saveInvestment(AddnewinvestmentPM investment) {
-    return addinvestmentrepo.save(investment);
-}
-
-
-public List<DailyDepositPM> getAllDDTerm() {
-	// TODO Auto-generated method stub
-	return dailyDepositPMRepo.findAll();
-}
-
-
-
-
-
-public List<AddnewinvestmentPM> getAllInvestments() {
-    return addinvestmentrepo.findAll();
-}
-
-
-public List<AddnewinvestmentPM> getAllPolicyManagementData() {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findAll();
-}
-
-
-public Optional<AddnewinvestmentPM> findByPolicyCode(String policyCode) {
-    if (policyCode == null) return Optional.empty();
-
-    // Clean input: trim and convert to uppercase
-    String normalizedCode = policyCode.trim().toUpperCase();
-
-    // Fetch all and match manually
-    return addinvestmentrepo.findAll().stream()
-            .filter(p -> p.getPolicyCode() != null &&
-                         p.getPolicyCode().trim().equalsIgnoreCase(normalizedCode))
-            .findFirst();
-}
-
-
-
-
-public List<AddnewinvestmentPM> getApprovedInvestments() {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findByIsApprovedTrue();
-}
-
-
-
-public List<AddnewinvestmentPM> getApprovedRDPolicies() {
-    return addinvestmentrepo.findApprovedRDPolicies();
-}
-
-
-public List<AddnewinvestmentPM> getApprovedFDPolicies() {
-    return addinvestmentrepo.findApprovedFDPolicies();
-}
-
-public List<AddnewinvestmentPM> getApprovedDDPolicies() {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findApprovedDDPolicies();
-}
-
-public List<AddnewinvestmentPM> getAllRdRenewalData() {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findAll();
-}
-
-public List<AddnewinvestmentPM> getAllDdRenewalData() {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findAll();
-}
-public List<AddnewinvestmentPM> getAllFdRenewalData() {
-	// TODO Auto-generated method stub
-	return addinvestmentrepo.findAll();
-}
-
-public List<AddnewinvestmentPM> getAllApprovedPolicies() {
-    return addinvestmentrepo.findByIsApprovedTrue();
-}
-
-
-
-public AddnewinvestmentPM updateInstalmentDetails(String policyCode, String DepositAmount) {
-    Optional<AddnewinvestmentPM> optionalInvestment = addinvestmentrepo.findByPolicyCode(policyCode);
-
-    if (optionalInvestment.isPresent()) {
-        AddnewinvestmentPM investment = optionalInvestment.get();
-
-        // Set the new deposit amount
-        investment.setDepositAmount(DepositAmount);
-
-        // Increment lastInstPaid
-        try {
-            int last = Integer.parseInt(
-                    investment.getLastInstPaid() == null || investment.getLastInstPaid().isEmpty()
-                            ? "0"
-                            : investment.getLastInstPaid()
-            );
-            investment.setLastInstPaid(String.valueOf(last + 1));
-        } catch (NumberFormatException e) {
-            investment.setLastInstPaid("1");
-        }
-
-        // Save and return updated investment
-        return addinvestmentrepo.save(investment);
-    }
-
-    return null; // or throw custom exception if you prefer
-}
-
-public List<FlexibleRenewal> findBypolicyCode(String policyCode) {
-    return flexibleRenewalRepo.findByPolicyCode(policyCode);
-}
-
-
-public List<DailyPremiumRenewalPM> findDailyData(String policyCode) {
-    return dailyPremiumRenewalRepo.findByPolicyCode(policyCode);
-}
-
-public List<PolicyRenewal> findRenewalData(String policyCode) {
-    return policyRenewalRepo.findByPolicyCode(policyCode);
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

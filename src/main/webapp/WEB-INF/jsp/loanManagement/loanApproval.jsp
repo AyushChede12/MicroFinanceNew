@@ -62,15 +62,15 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					<div class="col-lg-5">
-						<div class="d-flex flex-column formFields mb-4">
-							<label for="">Find Loan By ID</label> <select id="findByLoanId"
-								name="findByLoanId" class="form-control selectField"
-								style="height: 30px;">
-								<option value="">Select Loan ID</option>
-							</select>
+						<div class="col-lg-5">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Find Loan By ID</label> <select id="findByLoanId"
+									name="findByLoanId" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Loan ID</option>
+								</select>
+							</div>
 						</div>
-					</div>
 					</div>
 				</div>
 				<div>
@@ -132,8 +132,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Message Status</label> <input type="text"
-									name="messageStatus" id="messageStatus"
-									required="required" placeholder=" messageStatus" />
+									name="messageStatus" id="messageStatus" required="required"
+									placeholder=" messageStatus" />
 							</div>
 						</div>
 
@@ -493,14 +493,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Approval Status</label> <select
-									id="approvalStatus" name="approvalStatus"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Approval Status</option>
-									<option value="Approve">Approve</option>
-								</select>
+								<label for="loanName">Approval Status</label> <input type="text"
+									id="approvalStatus" name="approvalStatus" class="form-control"
+									readonly
+									style="font-size: 12px; font-weight: bold; text-transform: uppercase;" />
+
 							</div>
 						</div>
 

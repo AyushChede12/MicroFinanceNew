@@ -131,7 +131,7 @@ pageEncoding="ISO-8859-1"%> -->
 <script>
 $(document).ready(function () {
     $.ajax({
-        url: "/getAllCustomer",
+        url: "api/customermanagement/getAllCustomer",
         type: "GET",
         success: function (data) {
             var tbody = $("table tbody");

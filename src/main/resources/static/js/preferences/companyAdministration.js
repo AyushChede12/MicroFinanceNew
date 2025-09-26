@@ -37,6 +37,11 @@ $(document).ready(function() {
 	});
 
 	$('#updateBtn').click(function(event) {
+		$("#formid").find("input[type=text], textarea").each(function() {
+			if ($(this).val()) {
+				$(this).val($(this).val().toUpperCase());
+			}
+		});
 		event.preventDefault();
 
 		$('#chkcompanyname').text('');
@@ -219,6 +224,10 @@ $(document).ready(function() {
 		if (!isValid) {
 			return false; // Stop AJAX call
 		}
+		
+		var declaredValue=$("#declaredValue").val();
+		var paidUpCapital=$("#paidUpCapital").val();
+		var noOfShares=paidUpCapital/declaredValue;
 
 		const companyData = {
 			id: $("#id").val(),
@@ -236,7 +245,7 @@ $(document).ready(function() {
 			emailId: $("#emailId").val(),
 			authorizedShareCapital: $("#authorizedShareCapital").val(),
 			paidUpCapital: $("#paidUpCapital").val(),
-			nof: $("#nof").val(),
+			nof: noOfShares,
 			contactNo: $("#contactNo").val(),
 			tdsWithPan: $("#tdsWithPan").val(),
 			tdsWithoutPan: $("#tdsWithoutPan").val(),

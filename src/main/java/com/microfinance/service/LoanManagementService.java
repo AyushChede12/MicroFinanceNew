@@ -11,14 +11,19 @@ import org.springframework.stereotype.Service;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.BranchModule;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.LoanApplication;
+import com.microfinance.model.LoanClosure;
 import com.microfinance.model.LoanPayment;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.NewLoanApplication;
 import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.BranchModuleRepo;
+import com.microfinance.repository.CreateSavingAccountRepo;
+
 import com.microfinance.repository.LoanApplicationRepo;
+import com.microfinance.repository.LoanClosureRepo;
 import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.LoanPaymentRepo;
 import com.microfinance.repository.NewLoanAppicationRepo;
@@ -34,9 +39,15 @@ public class LoanManagementService {
 
 	@Autowired
 	LoanApplicationRepo loanApplicationRepo;
-	
+
 	@Autowired
 	LoanPaymentRepo loanPaymentRepo;
+
+	@Autowired
+	CreateSavingAccountRepo createSavingRepo;
+
+	@Autowired
+	LoanClosureRepo loanClosurerepo;
 
 	// Service fo saving and updating the loan scheme data
 	public LoanSchemCatalog saveLoanManagmentData(LoanSchemCatalog loan) {
@@ -143,12 +154,10 @@ public class LoanManagementService {
 		return addCustomerRepo.findByMemberCode(memberCode);
 	}
 
-	// Service for fetching Loan Id In the dropdown (Vaibhav)
+	// Service for fetching Active Loan Id's In the dropdown (Vaibhav)
 	public List<String> fetchAllLoanIds() {
-
-		// This assumes you have a loanId field in your Loan entity.
-		return loanApplicationRepo.findAll().stream().map(LoanApplication::getLoanId) // adjust class name if needed
-				.filter(Objects::nonNull).collect(Collectors.toList());
+		return loanApplicationRepo.findAll().stream().filter(loan -> "ACTIVE".equalsIgnoreCase(loan.getLoanStatus()))
+				.map(LoanApplication::getLoanId).filter(Objects::nonNull).collect(Collectors.toList());
 	}
 
 	// Service for fetching the data in the textfields (Vaibhav)
@@ -165,122 +174,277 @@ public class LoanManagementService {
 				return "already_approved";
 			}
 
-			loan.setApprovalStatus(approval.isApprovalStatus());
-			loan.setApprovalDate(approval.getApprovalDate());
-			loanApplicationRepo.save(loan);
+			// Step 1: Add loan amount to openingFees in CreateSavingsAccount
+			List<CreateSavingsAccount> accounts = createSavingRepo.findBySelectByCustomer(loan.getMemberId());
+
+			if (accounts != null && !accounts.isEmpty()) {
+				CreateSavingsAccount account = accounts.get(0); // assuming one account per member
+				double existingBalance = Double.parseDouble(account.getBalance()); // current amount like 3000
+				System.out.println("Balance fees :" + existingBalance);
+				double loanAmount = Double.parseDouble(loan.getLoanAmount()); // loan amount like 500000
+				double processingFee = Double.parseDouble(loan.getProcessingFee());
+				double gst = Double.parseDouble(loan.getGst());
+				double legalCharge = Double.parseDouble(loan.getLegalCharges());
+				double extraCharges = processingFee + gst + legalCharge;
+				double updatedBalance = existingBalance + (loanAmount - extraCharges);
+				double sanctionedAmount = loanAmount - extraCharges;
+
+				account.setBalance(String.valueOf(updatedBalance)); // update the balance
+
+				createSavingRepo.save(account); // save changes
+
+				// Step 2: Approve the loan
+
+				loan.setApprovalStatus(approval.isApprovalStatus());
+				loan.setApprovalDate(approval.getApprovalDate());
+				loan.setSanctionedAmount(String.valueOf(sanctionedAmount));
+				loanApplicationRepo.save(loan);
+
+			}
+
 			return "success";
 		} else {
 			return "not_found";
 		}
 	}
-	
-	// Service for getting Approved loan Ids( Vaibhav)
-		public List<String> getApprovedLoanIds() {
-			List<LoanApplication> approvedLoans = loanApplicationRepo.findByApprovalStatusTrue();
 
-			return approvedLoans.stream().map(LoanApplication::getLoanId) // assuming loanId is a String like "LP00001"
+	// Service for getting Approved & Active loan Ids( Vaibhav)
+	public List<String> getApprovedLoanIds() {
+		List<LoanApplication> approvedActiveLoans = loanApplicationRepo.findByApprovalStatusTrueAndLoanStatus("ACTIVE");
+		return approvedActiveLoans.stream().map(LoanApplication::getLoanId).collect(Collectors.toList());
+	}
+
+	public boolean processEmiPayment(LoanPayment request, String noOfInst) {
+		String loanId = request.getLoanId();
+
+		LoanApplication loanApp = loanApplicationRepo.findByLoanId(loanId);
+		if (loanApp == null) {
+			throw new RuntimeException("Loan ID not found");
+		}
+
+		String loanDate = loanApp.getLoanDate();
+		double policyAmount = Double.parseDouble(loanApp.getLoanAmount()); // Principal
+		double emiAmount = Double.parseDouble(loanApp.getEmiPayment());
+		double roi = Double.parseDouble(loanApp.getRateOfInterest()); // Annual ROI
+		double term = Double.parseDouble(loanApp.getLoanTerm());
+		String frequency = loanApp.getLoanMode();
+		String interestType = loanApp.getInterestType(); // "Flat" or "Reducing"
+
+		double periodDivisor;
+		switch (frequency) {
+		case "Daily":
+			periodDivisor = 365;
+			break;
+		case "Weekly":
+			periodDivisor = 52;
+			break;
+		case "Fortnightly":
+			periodDivisor = 26;
+			break;
+		case "Monthly":
+			periodDivisor = 12;
+			break;
+		case "Quarterly":
+			periodDivisor = 4;
+			break;
+		default:
+			throw new IllegalArgumentException("Invalid frequency: " + frequency);
+		}
+
+		int numberOfInstallments = Integer.parseInt(noOfInst);
+		List<LoanPayment> allPayments = loanPaymentRepo.findByLoanId(loanId);
+
+		double lastAmountDue;
+		double remainingPrincipal = policyAmount;
+
+		if (!allPayments.isEmpty()) {
+			LoanPayment lastPayment = allPayments.get(allPayments.size() - 1);
+			lastAmountDue = Double.parseDouble(lastPayment.getAmountDue());
+			if ("Reducing Interest".equalsIgnoreCase(interestType)) {
+				remainingPrincipal = Double.parseDouble(lastPayment.getAmountDue());
+			}
+		} else {
+			if ("Flat Interest".equalsIgnoreCase(interestType)) {
+				double interest = (policyAmount * roi * term) / (100 * periodDivisor);
+				lastAmountDue = policyAmount + interest;
+			} else {
+				lastAmountDue = policyAmount;
+			}
+		}
+
+		boolean isLoanClosed = false;
+
+		for (int i = 1; i <= numberOfInstallments; i++) {
+			if (lastAmountDue <= 0)
+				break;
+
+			double interestThisPeriod = 0;
+
+			if ("Reducing Interest".equalsIgnoreCase(interestType)) {
+				interestThisPeriod = (remainingPrincipal * roi) / (100 * periodDivisor);
+				remainingPrincipal = remainingPrincipal - (emiAmount - interestThisPeriod);
+				if (remainingPrincipal < 0)
+					remainingPrincipal = 0;
+
+				lastAmountDue = remainingPrincipal;
+			} else {
+				lastAmountDue -= emiAmount;
+				if (lastAmountDue < 0)
+					lastAmountDue = 0;
+			}
+
+			LoanPayment payment = new LoanPayment();
+			payment.setLoanId(request.getLoanId());
+			payment.setLoanPlanName(request.getLoanPlanName());
+			payment.setLoanMode(request.getLoanMode());
+			payment.setLoanTerm(request.getLoanTerm());
+			payment.setRateOfInterest(request.getRateOfInterest());
+			payment.setLoanAmount(request.getLoanAmount());
+			payment.setInterestType(request.getInterestType());
+			payment.setEmiPayment(String.valueOf(emiAmount));
+			payment.setLoanDate(loanDate);
+			payment.setMemberId(request.getMemberId());
+			payment.setMemberName(request.getMemberName());
+
+			payment.setProcessingFee(request.getProcessingFee());
+			payment.setLegalCharges(request.getLegalCharges());
+			payment.setGst(request.getGst());
+			payment.setInsuranceFee(request.getInsuranceFee());
+			payment.setValuationFees(request.getValuationFees());
+			payment.setStationaryFee(request.getStationaryFee());
+
+			payment.setPaymentDate(request.getPaymentDate());
+			payment.setPaymentStatus("Paid");
+			payment.setPaymentMode(request.getPaymentMode());
+			payment.setAccountNo(request.getAccountNo());
+			payment.setRef_UpiId(request.getRef_UpiId());
+			payment.setCharges(request.getCharges());
+			payment.setRemarks("Installment " + (allPayments.size() + i));
+			payment.setChequeDate(request.getChequeDate());
+			payment.setChequeNo(request.getChequeNo());
+			payment.setNoOfInst("1");
+			payment.setAmountDue(String.valueOf(lastAmountDue));
+
+			loanPaymentRepo.save(payment);
+
+			double instCount = allPayments.size() + i;
+
+			if (term == instCount) {
+				// Last installment → close loan
+				loanApp.setLoanStatus("CLOSED");
+				loanApplicationRepo.save(loanApp);
+
+				// Save to LoanClosure table
+				LoanClosure closure = new LoanClosure();
+				closure.setLoanId(loanApp.getLoanId());
+				closure.setLoanPlanName(loanApp.getLoanPlanName());
+				closure.setLoanMode(loanApp.getLoanMode());
+				closure.setLoanTerm(loanApp.getLoanTerm());
+				closure.setRateOfInterest(loanApp.getRateOfInterest());
+				closure.setLoanAmount(loanApp.getLoanAmount());
+				closure.setInterestType(loanApp.getInterestType());
+				closure.setLoanDate(loanApp.getLoanDate());
+				closure.setLoanStatus("CLOSED");
+				closure.setFinancialConsultantName(loanApp.getFinancialConsultantName());
+				closure.setMemberId(loanApp.getMemberId());
+				closure.setMemberName(loanApp.getMemberName());
+				closure.setBranchName(loanApp.getBranchName());
+				closure.setContactNo(loanApp.getContactNo());
+				closure.setRelativeDetails(loanApp.getRelativeDetails());
+				closure.setTypeOfLoan(loanApp.getTypeOfLoan());
+				closure.setEmiPayment(loanApp.getEmiPayment());
+				closure.setNoOfInst(payment.getNoOfInst());
+
+				closure.setFinancialConsultantId(loanApp.getFinancialConsultantId());
+				closure.setPaymentDate(loanApp.getPaymentDate());
+				closure.setPaymentMode(loanApp.getPaymentMode());
+
+				// closure.setClosureDate(request.getPaymentDate()); // Set closure date
+				closure.setRemarks("Loan closed after final EMI");
+				closure.setCharges(loanApp.getChequeDate());
+				closure.setChequeNo(loanApp.getChequeNo());
+				closure.setCharges(loanApp.getCharges());
+				closure.setRef_UpiId(loanApp.getRef_UpiId());
+				/*
+				 * 
+				 * private String totalinterestofLoan; private String sanctionedAmount; private
+				 * String totalPayableofLoan;
+				 * 
+				 * private String interestDue; private String principaldue; private String
+				 * amountPaid; private String balanceLoanAmount; private String dueDate; private
+				 * String paymentBranch; private String fine; private String netAmount;
+				 * 
+				 * 
+				 * 
+				 * 
+				 * 
+				 */
+				loanClosurerepo.save(closure);
+
+				isLoanClosed = true;
+				break;
+			}
+		}
+
+		return isLoanClosed;
+	}
+
+	// Service for getting loan id's for loan payment statement(Vaibhav)
+	public List<String> getStatementLoanId() {
+		return loanApplicationRepo.findAll().stream().map(LoanApplication::getLoanId) // adjust class name if needed
+				.filter(Objects::nonNull).collect(Collectors.toList());
+	}
+
+	// Service for fetching loan details from loan id(Vaibhav)
+	public List<LoanPayment> fetchLoanStatement(String loanId) {
+		return loanPaymentRepo.findByLoanId(loanId); // Make sure this method exists
+	}
+
+	public List<LoanPayment> fetchLoanPaymentsByLoanId(String loanId) {
+
+		return loanPaymentRepo.findByLoanId(loanId);
+	}
+
+	public LoanPayment fetchLoanPaymentByLoanIdAndInst(String loanId, String remarks) {
+		return loanPaymentRepo.findByLoanIdAndNoOfInst(loanId, remarks);
+	}
+
+	//Service for closing the loan (Vaibhav)
+		public LoanClosure closeLoan(LoanClosure paymentDetails) {
+
+		    // Ensure loanId is present
+		    if (paymentDetails.getLoanId() == null) {
+		        throw new RuntimeException("Loan ID is required to update LoanApplication status");
+		    }
+
+		    // Retrieve the loan application from the database
+		    LoanApplication loan = loanApplicationRepo.findByLoanId(paymentDetails.getLoanId());
+		    if (loan == null) {
+		        throw new RuntimeException("Loan not found for loanId: " + paymentDetails.getLoanId());
+		    }
+
+		    // Set memberName from the retrieved loan application
+		    paymentDetails.setMemberName(loan.getMemberName());
+		    paymentDetails.setLoanStatus("CLOSED");
+
+		    // Save the closure details in the LoanClosure table
+		    LoanClosure savedClosure = loanClosurerepo.save(paymentDetails);
+
+		    // Update the loan status in the LoanApplication table
+		    loan.setLoanStatus("CLOSED");
+		    loanApplicationRepo.save(loan);
+
+		    return savedClosure;
+		}
+		
+		// Api for getting closed loan ids
+		public List<String> getClosedLoanIds() {
+			return loanClosurerepo.findAll().stream().map(LoanClosure::getLoanId).filter(Objects::nonNull).distinct()
 					.collect(Collectors.toList());
 		}
 
-		//Service for Paying and calculating Amount Due (Vaibhav)
-		public boolean processEmiPayment(LoanPayment request, String noOfInst) {
-			String loanId = request.getLoanId();
-
-			LoanApplication loanApp = loanApplicationRepo.findByLoanId(loanId);
-			if (loanApp == null) {
-				throw new RuntimeException("Loan ID not found");
-			}
-			String loanDate = loanApp.getLoanDate();
-			double policyAmount = Double.parseDouble(loanApp.getLoanAmount());
-			double emiAmount = Double.parseDouble(loanApp.getEmiPayment());
-			double roi = Double.parseDouble(loanApp.getRateOfInterest());
-			double term = Double.parseDouble(loanApp.getLoanTerm());
-			String frequency = loanApp.getLoanMode();
-
-			double interest = 0.0;
-			switch (frequency) {
-			case "Daily":
-				interest = (policyAmount * roi * term) / (100 * 365);
-				break;
-			case "Weekly":
-				interest = (policyAmount * roi * term) / (100 * 52);
-				break;
-			case "Fortnightly":
-				interest = (policyAmount * roi * term) / (100 * 26);
-				break;
-			case "Monthly":
-				interest = (policyAmount * roi * term) / (100 * 12);
-				break;
-			case "Quarterly":
-				interest = (policyAmount * roi * term) / (100 * 4);
-				break;
-			default:
-				throw new IllegalArgumentException("Invalid frequency: " + frequency);
-			}
-
-			double totalDue = policyAmount + interest;
-			int numberOfInstallments = Integer.parseInt(noOfInst);
-			List<LoanPayment> allPayments = loanPaymentRepo.findByLoanId(loanId);
-			double lastAmountDue = totalDue;
-
-			if (!allPayments.isEmpty()) {
-				LoanPayment lastPayment = allPayments.get(allPayments.size() - 1);
-				lastAmountDue = Double.parseDouble(lastPayment.getAmountDue());
-			}
-
-			for (int i = 1; i <= numberOfInstallments; i++) {
-				if (lastAmountDue <= 0)
-					break;
-
-				double newAmountDue = lastAmountDue - emiAmount;
-				if (newAmountDue < 0)
-					newAmountDue = 0;
-
-				LoanPayment payment = new LoanPayment();
-
-				// ✅ Set all data from request
-				payment.setLoanId(request.getLoanId());
-
-				payment.setLoanMode(request.getLoanMode());
-				payment.setLoanTerm(request.getLoanTerm());
-				payment.setRateOfInterest(request.getRateOfInterest());
-				payment.setLoanAmount(request.getLoanAmount());
-				payment.setInterestType(request.getInterestType());
-				payment.setEmiPayment(String.valueOf(emiAmount));
-				payment.setLoanDate(loanDate);
-
-				// Deductions
-				payment.setProcessingFee(request.getProcessingFee());
-				payment.setLegalCharges(request.getLegalCharges());
-				payment.setGst(request.getGst());
-				payment.setInsuranceFee(request.getInsuranceFee());
-				payment.setValuationFees(request.getValuationFees());
-				payment.setStationaryFee(request.getStationaryFee());
-
-				// Payment Info
-				payment.setPaymentDate(request.getPaymentDate());
-				payment.setPaymentStatus("Paid");
-				payment.setPaymentMode(request.getPaymentMode());
-				payment.setAccountNo(request.getAccountNo());
-				payment.setRef_UpiId(request.getRef_UpiId());
-				payment.setCharges(request.getCharges());
-				payment.setRemarks("Installment " + (allPayments.size() + i));
-				payment.setChequeDate(request.getChequeDate());
-				payment.setChequeNo(request.getChequeNo());
-				payment.setNoOfInst("1");
-				payment.setAmountDue(String.valueOf(newAmountDue));
-
-				loanPaymentRepo.save(payment);
-
-				lastAmountDue = newAmountDue;
-
-				if (newAmountDue == 0) {
-					loanApp.setApprovalStatus(true); // Mark as closed
-					loanApplicationRepo.save(loanApp);
-					break;
-				}
-			}
-
-			return true;
+		//
+		public List<LoanClosure> getLoanClosuresByLoanId(String loanId) {
+			return loanClosurerepo.findByLoanId(loanId);
 		}
 }

@@ -1,6 +1,8 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.LoanApplication;
+import com.microfinance.model.LoanClosure;
 import com.microfinance.model.LoanPayment;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.addCustomer;
@@ -174,18 +177,18 @@ public class LoanManagementController {
 		}
 	}
 
-//Api for fetching Loan Id In the dropdown (Vaibhav)
-	@GetMapping("/getAllLoanIds")
-	public ResponseEntity<ApiResponse<List<String>>> getAllLoanIds() {
-		List<String> loanIds = loanServices.fetchAllLoanIds();
+	// Api for fetching Active Loan Id In the dropdown (Vaibhav)
+		@GetMapping("/getAllActiveLoanIds")
+		public ResponseEntity<ApiResponse<List<String>>> getAllLoanIds() {
+			List<String> loanIds = loanServices.fetchAllLoanIds();
 
-		if (loanIds != null && !loanIds.isEmpty()) {
-			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan IDs fetched successfully", loanIds));
-		} else {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT)
-					.body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No Loan IDs found", null));
+			if (loanIds != null && !loanIds.isEmpty()) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan IDs fetched successfully", loanIds));
+			} else {
+				return ResponseEntity.status(HttpStatus.NO_CONTENT)
+						.body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No Loan IDs found", null));
+			}
 		}
-	}
 
 	// Api for fething the details on the textfiled (Vaibhav)
 	@GetMapping("/getLoanById")
@@ -201,45 +204,174 @@ public class LoanManagementController {
 	}
 
 	// Api for approving the loan application (Vaibhav)
-	@PostMapping("/approve")
-	public ResponseEntity<ApiResponse<LoanApplication>> approveLoan(@RequestBody LoanApplication approval) {
-		String result = loanServices.updateApproval(approval);
+		@PostMapping("/approve")
+		public ResponseEntity<ApiResponse<LoanApplication>> approveLoan(@RequestBody LoanApplication approval) {
+			System.out.println("Approval request received for Loan ID: " + approval.getLoanId());
+			String result = loanServices.updateApproval(approval);
 
-		switch (result) {
-		case "already_approved":
-			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan is already approved.", null));
+			switch (result) {
+			case "already_approved":
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan is already approved.", null));
 
-		case "success":
-			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan approved successfully.", approval));
+			case "success":
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan approved successfully.", approval));
 
+			default:
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+						.body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "Unknown result", null));
+			}
 		}
-		return null;
-	}
 	
-	// API to fetch all approved loan IDs (Vaibhav)
+		// API to fetch all approved and active loan id's loan IDs (Vaibhav)
 		@GetMapping("/getApprovedLoanIds")
 		public ResponseEntity<ApiResponse<List<String>>> getApprovedLoanIds() {
 			List<String> approvedLoanIds = loanServices.getApprovedLoanIds();
 
 			if (!approvedLoanIds.isEmpty()) {
-				return ResponseEntity
-						.ok(new ApiResponse<>(HttpStatus.OK, "Approved loan IDs fetched successfully", approvedLoanIds));
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Approved & Active loan IDs fetched successfully",
+						approvedLoanIds));
 			} else {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved loans found", null));
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved and active loans found", null));
 			}
 		}
 		
-		//API for Paying Emi (Vaibhav) 
+		// API for Paying Emi (Vaibhav)
 		@PostMapping("/payEmi")
-		public ResponseEntity<ApiResponse<String>> payEmi(@RequestBody LoanPayment request) {
-			boolean success = loanServices.processEmiPayment(request, "1"); // Pass entire object
+		public ResponseEntity<ApiResponse<Map<String, Object>>> payEmi(@RequestBody LoanPayment request) {
+		    boolean isClosed = loanServices.processEmiPayment(request, "1");
 
-			if (success) {
-				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "EMI paid successfully", null));
+		    Map<String, Object> data = new HashMap<>();
+		    data.put("loanStatus", isClosed ? "CLOSED" : "ACTIVE");
+
+		    String message = isClosed ? "EMI paid successfully. Loan is now closed." : "EMI paid successfully.";
+
+		    return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, message, data));
+		}
+		//API for fetching all data of loan payment
+		@GetMapping("/fetchLoanPaymentsByLoanId")
+		public ResponseEntity<ApiResponse<List<LoanPayment>>> fetchLoanPaymentsByLoanId(
+		        @RequestParam String loanId) {
+
+		    List<LoanPayment> list = loanServices.fetchLoanPaymentsByLoanId(loanId);
+
+		    if (list != null && !list.isEmpty()) {
+		        ApiResponse<List<LoanPayment>> response = new ApiResponse<>(
+		            HttpStatus.OK,
+		            "Loan Payments fetched successfully",
+		            list
+		        );
+		        return ResponseEntity.ok(response);
+		    } else {
+		        ApiResponse<List<LoanPayment>> response = new ApiResponse<>(
+		            HttpStatus.NOT_FOUND,
+		            "No data found for Loan ID: " + loanId,
+		            null
+		        );
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		    }
+		}
+
+		// Api for fetching all the loan id's for loan statement(Vaibhav)
+		@GetMapping("/getStatementLoanId")
+		public ResponseEntity<ApiResponse<List<String>>> getStatementLoanId() {
+			List<String> loanIds = loanServices.getStatementLoanId();
+
+			if (loanIds != null && !loanIds.isEmpty()) {
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan IDs fetched successfully", loanIds));
 			} else {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-						.body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "Payment failed", null));
+				return ResponseEntity.status(HttpStatus.NO_CONTENT)
+						.body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No Loan IDs found", null));
 			}
 		}
+		
+		
+		
+		// Api for fetching the loan details by loan id(Vaibhav)
+		@GetMapping("/fetchLoanStatement")
+		public ResponseEntity<ApiResponse<List<LoanPayment>>> fetchLoanStatement(@RequestParam String loanId) {
+		    List<LoanPayment> loanPayments = loanServices.fetchLoanStatement(loanId);
+
+		    if (loanPayments != null && !loanPayments.isEmpty()) {
+		        return ResponseEntity.ok(
+		            new ApiResponse<>(HttpStatus.OK, "Loan payments found", loanPayments)
+		        );
+		    } else {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+		            .body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No loan payments found for this Loan ID", null));
+		    }
+		}
+		
+		//API for fetching single installment data by loanId and installment number
+		@GetMapping("/fetchLoanPaymentByLoanIdAndInst")
+		public ResponseEntity<ApiResponse<LoanPayment>> fetchLoanPaymentByLoanIdAndInst(
+		        @RequestParam String loanId,
+		        @RequestParam String remarks) {
+
+		    String normalizedRemarks = remarks.trim().toLowerCase();
+		    List<LoanPayment> payments = loanServices.fetchLoanPaymentsByLoanId(loanId);
+		    LoanPayment payment = payments.stream()
+		            .filter(p -> p.getRemarks() != null && p.getRemarks().trim().toLowerCase().equals(normalizedRemarks))
+		            .findFirst()
+		            .orElse(null);
+
+		    if (payment != null) {
+		        ApiResponse<LoanPayment> response = new ApiResponse<>(
+		            HttpStatus.OK,
+		            "Loan Installment fetched successfully",
+		            payment
+		        );
+		        return ResponseEntity.ok(response);
+		    } else {
+		        ApiResponse<LoanPayment> response = new ApiResponse<>(
+		            HttpStatus.NOT_FOUND,
+		            "No installment found for Loan ID: " + loanId + " and Installment: " + remarks,
+		            null
+		        );
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		    }
+		}
+		
+		// Api for closing the loan and saving the data in the loan closure
+		@PostMapping("/closeLoan")
+		public ResponseEntity<ApiResponse<LoanClosure>> closeLoan(@RequestBody LoanClosure paymentDetails) {
+			try {
+				LoanClosure savedDetails = loanServices.closeLoan(paymentDetails);
+
+				return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan closed successfully", savedDetails));
+			} catch (RuntimeException e) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, e.getMessage(), null));
+			}
+		}
+		
+		//--------------------------Settled Loan Records--------------------
+		// API to fetch all closed loan record IDs
+		@GetMapping("/getClosedLoanIds")
+		public ResponseEntity<ApiResponse<List<String>>> getClosedLoanIds() {
+		    List<String> closedLoanIds = loanServices.getClosedLoanIds();
+
+		    if (closedLoanIds != null && !closedLoanIds.isEmpty()) {
+		        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Closed loan IDs fetched successfully", closedLoanIds));
+		    } else {
+		        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+		                .body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No closed loan records found", null));
+		    }
+		}
+		
+		// API to fetch all loan closure records
+		@GetMapping("/getLoanClosuresByLoanId")
+		public ResponseEntity<ApiResponse<List<LoanClosure>>> getLoanClosuresByLoanId(@RequestParam String loanId) {
+		    List<LoanClosure> closures = loanServices.getLoanClosuresByLoanId(loanId);
+
+		    if (closures != null && !closures.isEmpty()) {
+		        return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan closure records fetched successfully", closures));
+		    } else {
+		        return ResponseEntity.status(HttpStatus.NO_CONTENT)
+		                .body(new ApiResponse<>(HttpStatus.NO_CONTENT, "No loan closure records found for this loan ID", null));
+		    }
+		}
+
+
+		
 }

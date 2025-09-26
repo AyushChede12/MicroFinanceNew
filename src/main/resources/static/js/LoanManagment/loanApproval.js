@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 function populateLoanIdDropdown() {
 	$.ajax({
-		url: "api/loanmanegment/getAllLoanIds",
+		url: "api/loanmanegment/getAllActiveLoanIds",
 		type: "GET",
 		dataType: "json",
 		success: function(response) {
@@ -47,7 +47,7 @@ $(document).ready(function() {
 						const data = response.data;
 
 						// Now populate the form fields with received data
-						$("#memberId").val(data.memberId);
+						$("#memberId").val(`${data.memberId} - ${data.memberName || "-"}`);
 						$("#relativeDetails").val(data.relativeDetails);
 						$("#dateOfBirth").val(data.dateOfBirth);
 						$("#age").val(data.age);
@@ -89,6 +89,12 @@ $(document).ready(function() {
 						$("#insuranceFee").val(data.insuranceFee);
 						$("#financialConsultantId").val(data.financialConsultantId);
 						$("#financialConsultantName").val(data.financialConsultantName);
+
+						if (data.approvalStatus === true || data.approvalStatus === 1 || data.approvalStatus === "1") {
+							$('#approvalStatus').val("Approved").css('color', 'red');
+						} else {
+							$('#approvalStatus').val("Not Approved").css('color', 'green');
+						}
 
 						// ✅ PHOTO block
 						if (data.photo) {
@@ -153,30 +159,29 @@ function signatureSizeEdit(e) {
 	previewimg.style.borderRadius = "20px";
 }
 
-// js for approving the loan application (Vaibhav)
-$('#approveBtn').click(function() {
-	const loanId = $('#findByLoanId').val(); // hidden input or fetched dynamically
-	const approvalStatus = $('#approvalStatus').val().toLowerCase() === "approve"; // FIXED
-	const approvalDate = $('#approvalDate').val(); // format: yyyy-MM-dd
+$('#approveBtn').click(function(event) {
+    event.preventDefault(); // Prevent the form from submitting
 
+    const loanId = $('#findByLoanId').val();
+    const approvalDate = $('#approvalDate').val();
 
-	const requestData = {
-		loanId: loanId,
-		approvalStatus: approvalStatus,
-		approvalDate: approvalDate
-	};
+    const requestData = {
+        loanId: loanId,
+        approvalStatus: true,
+        approvalDate: approvalDate
+    };
 
-	$.ajax({
-		type: "POST",
-		url: "api/loanmanegment/approve",
-		contentType: "application/json",
-		data: JSON.stringify(requestData),
-		success: function(response) {
-			alert(response.message); // shows: "Loan is already approved." or "Loan approved successfully."
-			location.reload();
-		},
-		error: function(xhr) {
-			alert("Error: " + xhr.responseText);
-		}
-	});
+    $.ajax({
+        type: "POST",
+        url: "api/loanmanegment/approve",
+        contentType: "application/json",
+        data: JSON.stringify(requestData),
+        success: function(response) {
+            alert(response.message);
+            location.reload();
+        },
+        error: function(xhr) {
+            alert("Error: " + xhr.responseText);
+        }
+    });
 });

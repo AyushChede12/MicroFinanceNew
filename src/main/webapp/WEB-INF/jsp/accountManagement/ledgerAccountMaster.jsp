@@ -62,36 +62,102 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">New Ledger Entry</li>
 						</ol>
 					</nav>
-					<div class="row">
-						<div class="col-lg-4">
+					<!-- Hidden fields -->
+					<input type="hidden" name="accountId" id="accountId" /> <input
+						type="hidden" name="currentBalance" id="currentBalance"
+						value="0.00" />
+					<div class="row mb-3">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Account Title</label> <input type="text"
-									name="accountTitle" id="accountTitle" required="required"
-									placeholder="Enter Ledger name" />
+								<label for="">Account Code <span class="star">*</span></label> <input
+									type="text" name="accountCode" id="accountCode"
+									placeholder="Enter Code" /> <span id="accountCodeError"
+									style="color: red; font-size: 12px;"></span>
 							</div>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Group Name</label> <select id="groupName"
-									name="groupName" required="required"
+								<label for="">Account Title <span class="star">*</span></label>
+								<input type="text" name="accountTitle" id="accountTitle"
+									placeholder="Enter Ledger name" /> <span
+									id="accountTitleError" style="color: red; font-size: 12px;"></span>
+
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Account Group<span class="star">*</span></label> <select
+									id="groupName" name="groupName"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Group</option>
+								</select> <span id="groupNameError" style="color: red; font-size: 12px;"></span>
+
+							</div>
+						</div>
+
+						<!-- Account Type -->
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Account Type <span class="star">*</span></label> <select
+									id="accountType" name="accountType"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Type</option>
+									<option value="Cash">Cash</option>
+									<option value="Bank">Bank</option>
+									<option value="Member">Member</option>
+									<option value="Loan">Loan</option>
+								</select> <span id="accountTypeError"
+									style="color: red; font-size: 12px;"></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- Opening Balance -->
+					<div class="row mb-3">
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Opening Balance</label> <input type="number"
+									name="openingBalance" id="openingBalance"
+									placeholder="Enter Opening Balance" step="0.01" min="0"
+									value="0.00" />
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="openingBalanceType">Balance Type</label> <select
+									id="openingBalanceType" name="openingBalanceType"
+									class="form-control selectField" style="height: 30px;" disabled>
+									<option value="DR">DR</option>
+									<option value="CR">CR</option>
 								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-4">
+
+						<!-- Status -->
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name </label> <select id="branchName"
-									name="branchName" required="required"
+								<label for="">Status</label> <select id="status" name="status"
+									class="form-control selectField" style="height: 30px;">
+									<option value="Active">Active</option>
+									<option value="Inactive">Inactive</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">Branch Name <span class="star">*</span>
+								</label> <select id="branchName" name="branchName"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch Name</option>
-								</select>
+								</select> <span id="branchNameError" style="color: red; font-size: 12px;"></span>
+
 							</div>
 
 
 
-							<div class="col-lg-8 mt-3 text-center mx-auto">
+							<div class="d-flex justify-content-start gap-3 mt-4">
 								<button id="saveBtn" type="submit" class="btnStyle"
 									style="background-color: #FFA500;">Save</button>
 								<button id="clearBtn" type="reset" class="btnStyle bg-primary">Clear</button>
@@ -123,8 +189,14 @@ pageEncoding="ISO-8859-1"%> -->
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">ID</th>
-											<th scope="col">Ledger Name</th>
-											<th scope="col">Group Name</th>
+											<th scope="col">Account Code</th>
+											<th scope="col">Account Title</th>
+											<th scope="col">Account Group</th>
+											<th scope="col">Account Type</th>
+											<th scope="col">Opening Balance</th>
+											<th scope="col">Opening Balance Type</th>
+											<th scope="col">Current Balance</th>
+											<th scope="col">Status</th>
 											<th scope="col">Branch Name</th>
 											<th scope="col">View</th>
 										</tr>

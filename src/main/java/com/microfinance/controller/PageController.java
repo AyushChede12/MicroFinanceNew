@@ -355,11 +355,11 @@ public class PageController {
 		return "jointLiabilityLoan/statementOfAccount";
 	}
 
-	@GetMapping("/earlyLoanClosure")
+	@GetMapping("/earlyLoanClosureJointLiability")
 	public String getEarlyLoanClosure() {
 		return "jointLiabilityLoan/earlyLoanClosure";
 	}
-
+	
 	@GetMapping("/completedLoansRecord")
 	public String getClosedLoanDetails() {
 		return "jointLiabilityLoan/completedLoansRecord";
@@ -891,6 +891,11 @@ public class PageController {
 		return "loanManagement/irregularLoanStatement";
 	}
 	
+	@GetMapping("/earlyLoanClosureLoan")
+	public String getEarlyLoanClosureLoan() {
+		return "loanManagement/earlyLoanClosure";
+	}
+	
 	@GetMapping("/preSettlementLoanManagement")
 	public String getPreSettlementLoanSection() {
 		return "loanManagement/preSettlement";
@@ -904,6 +909,11 @@ public class PageController {
 	@GetMapping("/generateNOCCertificateLoanManagement")
 	public String getGenerateNOCCertificateLoanManagement() {
 		return "loanManagement/generateNOCCertificate";
+	}
+	
+	@GetMapping("/loanDocumentPrintLoanManagement")
+	public String getloanDocumentPrintSection() {
+		return "loanManagement/loanDocumentPrint";
 	}
 	
 	@GetMapping("/searchLoanAccounts")
@@ -1064,7 +1074,65 @@ public class PageController {
 	}
 
 	
-
-	
+//Secured Gold Loan by Poonam on 29/08/2025
+    @GetMapping("/applyforGold")
+    public String getapplyforGold()
+    {
+    	return "goldLoan/applyforGold";
+    }
+    
+    @GetMapping("/emiInstallmentPayment")
+    public String getemiInstallmentPayment()
+    {
+    	return "goldLoan/emiInstallmentPayment";
+    }
+    
+    @GetMapping("/emiStatement")
+    public String getemiStatement()
+    {
+    	return "goldLoan/emiStatement";
+    }
+    
+    @GetMapping("/goldDirectory")
+    public String getgoldDirectory()
+    {
+    	return "goldLoan/goldDirectory";
+    }
+    
+    @GetMapping("/goldLoanApproval")
+    public String getgoldLoanApproval()
+    {
+    	return "goldLoan/goldLoanApproval";
+    }
+    
+    @GetMapping("/goldLoanPayment")
+    public String getgoldLoanPayment()
+    {
+    	return "goldLoan/goldLoanPayment";
+    }
+    
+    @GetMapping("/goldLoanStatement")
+    public String getgoldLoanStatement()
+    {
+    	return "goldLoan/goldLoanStatement";
+    }
+    
+    @GetMapping("/goldSecurePlan")
+    public String getgoldSecurePlan()
+    {
+    	return "goldLoan/goldSecurePlan";
+    }
+    
+    @GetMapping("/printNOC")
+    public String getprintNOC()
+    {
+    	return "goldLoan/printNOC";
+    }
+    
+    @GetMapping("/searchGoldLoan")
+    public String getsearchGoldLoan()
+    {
+    	return "goldLoan/searchGoldLoan";
+    }
 
 }

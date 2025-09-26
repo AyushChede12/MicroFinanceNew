@@ -39,7 +39,7 @@ public class SavingAccountDto {
 	private String debitCardIssue;
 	private String accountNumber;
 	private boolean isApproved;
-	
+	private String isLocker;
 	private String chequeNo;
     private String chequeDate;
     private String depositAcc1;
@@ -264,6 +264,13 @@ public class SavingAccountDto {
 	}
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
+	}
+	
+	public String getIsLocker() {
+		return isLocker;
+	}
+	public void setIsLocker(String isLocker) {
+		this.isLocker = isLocker;
 	}
 	public String getChequeNo() {
 		return chequeNo;

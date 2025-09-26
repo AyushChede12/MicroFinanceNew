@@ -322,8 +322,12 @@ public class JointLiabilityLoanService {
 		return installmentRepymentRepo.findAll();
 	}
 
-	
-}
+
+}	
+
+
+
+
 	
 
 

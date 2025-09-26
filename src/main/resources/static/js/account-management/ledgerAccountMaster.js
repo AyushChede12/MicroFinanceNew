@@ -1,16 +1,36 @@
 $(document).ready(function() {
 	BranchNameDropdown();
-	GroupNameDropdown(); // 🔹 Load group names too
+	GroupNameDropdown();
+	AccountTypeDropdown(); // new: loads account types if needed
 
-
+	// Form submit
 	$("#formid").submit(function(e) {
 		e.preventDefault();
-		saveLedger();
+		if (validateLedgerForm()) {
+			saveLedger();
+		}
 	});
 
+	// Clear form
 	$("#clearBtn").click(function() {
 		$("#formid")[0].reset();
+		clearErrorMessages();
+		$("#accountId").val("");
+		$("#currentBalance").val("0.00");
 	});
+	// Auto set Dr/Cr when group changes
+	$("#groupName").change(function() {
+		const group = $(this).val();
+		let drcr = "";
+
+		if (group === "ASSETS" || group === "EXPENSES") {
+			drcr = "DR";
+		} else if (group === "LIABILITIES" || group === "EQUITY" || group === "INCOME") {
+			drcr = "CR";
+		}
+		$("#openingBalanceType").val(drcr); // ✅ just set value
+	});
+
 });
 
 function showTableData() {
@@ -33,26 +53,83 @@ function showTableData() {
 	}
 }
 
+// ✅ Validation
+function validateLedgerForm() {
+	let isValid = true;
 
+	const accountCode = $('#accountCode').val().trim();
+	const accountTitle = $('#accountTitle').val().trim();
+	const groupName = $('#groupName').val();
+	const accountType = $('#accountType').val();
+	const status = $('#status').val();
+	const branchName = $('#branchName').val().trim();
 
-// Save New Ledger
+	clearErrorMessages();
+
+	if (accountCode === "") {
+		$('#accountCodeError').text("* This field is required");
+		isValid = false;
+	}
+	if (accountTitle === "") {
+		$('#accountTitleError').text("* This field is required");
+		isValid = false;
+	}
+	if (groupName === "") {
+		$('#groupNameError').text("* This field is required");
+		isValid = false;
+	}
+	if (accountType === "") {
+		$('#accountTypeError').text("* This field is required");
+		isValid = false;
+	}
+	if (status === "") {
+		$('#statusError').text("* This field is required");
+		isValid = false;
+	}
+	if (branchName === "") {
+		$('#branchNameError').text("* This field is required");
+		isValid = false;
+	}
+
+	return isValid;
+}
+
+function clearErrorMessages() {
+	$('#accountCodeError').text("");
+	$('#accountTitleError').text("");
+	$('#groupNameError').text("");
+	$('#accountTypeError').text("");
+	$('#statusError').text("");
+	$('#branchNameError').text("");
+}
+
+// Save Ledger
 function saveLedger() {
 	const ledgerData = {
-		accountTitle: $('#accountTitle').val(),
-		branchName: $('#branchName').val(),
-		groupName: $('#groupName').val() // ✅ include Group Name
-
+		accountId: $('#accountId').val() || null,
+		accountCode: $('#accountCode').val().trim(),
+		accountTitle: $('#accountTitle').val().trim(),
+		groupName: $('#groupName').val(),
+		accountType: $('#accountType').val(),
+		openingBalance: parseFloat($('#openingBalance').val()) || 0.00,
+		openingBalanceType: $('#openingBalanceType').val(),   // <-- NEW
+		currentBalance: $('#accountId').val()
+			? parseFloat($('#currentBalance').val()) || 0.00   // update case
+			: parseFloat($('#openingBalance').val()) || 0.00,  // new ledger case
+		status: $('#status').val(),
+		branchName: $('#branchName').val()
 	};
 
 	$.ajax({
 		type: "POST",
-		url: "/accountManagement/create",
+		url: "accountManagement/create",
 		contentType: "application/json",
 		data: JSON.stringify(ledgerData),
 		success: function(response, status, xhr) {
 			if (xhr.status === 201) {
 				alert(response.message);
 				$("#formid")[0].reset();
+				$("#accountId").val("");
 				loadLedgerData();
 			} else {
 				alert("Unexpected response: " + response.message);
@@ -66,11 +143,11 @@ function saveLedger() {
 	});
 }
 
-// Load all ledger accounts
+// Load data table
 function loadLedgerData() {
 	$.ajax({
 		type: "GET",
-		url: "/accountManagement/all",
+		url: "accountManagement/all",
 		contentType: "application/json",
 		success: function(response) {
 			const ledgers = response.data;
@@ -80,42 +157,57 @@ function loadLedgerData() {
 			if (Array.isArray(ledgers) && ledgers.length > 0) {
 				$.each(ledgers, function(index, ledger) {
 					const row = `
-						<tr>
-						<td>${ledger.id || ''}</td>
-							<td>${ledger.accountTitle || ''}</td>
-							<td>${ledger.groupName || ''}</td> <!-- ✅ Group column -->
-							<td>${ledger.branchName || ''}</td>
-							<td>
-								<button class="iconbutton" onclick="viewLedger(${ledger.id})" title="View">
-									<i class="fa-solid fa-eye text-primary"></i>
-								</button>
-							</td>
-						</tr>
-					`;
+                        <tr>
+                            <td>${ledger.accountId || ''}</td>
+                            <td>${ledger.accountCode || ''}</td>
+                            <td>${ledger.accountTitle || ''}</td>
+                            <td>${ledger.groupName || ''}</td>
+                            <td>${ledger.accountType || ''}</td>
+                            <td>${ledger.openingBalance != null ? ledger.openingBalance.toFixed(2) : ''}</td>
+							<td>${ledger.openingBalanceType || ''}</td>
+							<td>${ledger.currentBalance != null ? ledger.currentBalance.toFixed(2) : ''}</td> <!-- ✅ NEW -->
+
+
+                            <td>${ledger.status || ''}</td>
+                            <td>${ledger.branchName || ''}</td>
+                            <td>
+                                <button class="iconbutton" onclick="viewLedger(${ledger.accountId})" title="View">
+                                    <i class="fa-solid fa-eye text-primary"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
 					tbody.append(row);
 				});
 			} else {
-				tbody.append(`<tr><td colspan="3">No ledgers found.</td></tr>`);
+				tbody.append(`<tr><td colspan="9">No ledgers found.</td></tr>`);
 			}
 		},
 		error: function(xhr) {
 			const err = xhr.responseJSON;
 			const message = err && err.message ? err.message : "Failed to load ledger account list.";
 			alert(message);
-			$("#tableBody").html(`<tr><td colspan="3">${message}</td></tr>`);
+			$("#tableBody").html(`<tr><td colspan="9">${message}</td></tr>`);
 		}
 	});
 }
 
-// View single ledger and populate the form
+// View ledger by ID
 function viewLedger(id) {
 	$.ajax({
 		type: "GET",
-		url: `/accountManagement/${id}`,
+		url: `accountManagement/${id}`,
 		success: function(response) {
 			const ledger = response.data;
+			$('#accountId').val(ledger.accountId);
+			$('#accountCode').val(ledger.accountCode);
 			$('#accountTitle').val(ledger.accountTitle);
-			$('#groupName').val(ledger.groupName); // ✅ Prefill group name
+			$('#groupName').val(ledger.groupName);
+			$('#accountType').val(ledger.accountType);
+			$('#openingBalance').val(ledger.openingBalance);
+			$('#openingBalanceType').val(ledger.openingBalanceType);
+			$('#currentBalance').val(ledger.currentBalance);
+			$('#status').val(ledger.status);
 			$('#branchName').val(ledger.branchName);
 		},
 		error: function(xhr) {
@@ -126,13 +218,12 @@ function viewLedger(id) {
 	});
 }
 
-// Populate Branch Name Dropdown
-
+// Branch Dropdown
 function BranchNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/api/preference/getAllBranchModule',
+		url: 'api/preference/getAllBranchModule',
 		success: function(response) {
 			let options = "<option value=''>Select Branch Name</option>";
 			if (response && Array.isArray(response.data)) {
@@ -148,12 +239,12 @@ function BranchNameDropdown() {
 	});
 }
 
-// 🔹 Populate Group Name Dropdown
+// Group Dropdown
 function GroupNameDropdown() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json",
-		url: '/accountManagement/groupNames',
+		url: 'accountManagement/groupNames',
 		success: function(response) {
 			const groupNames = response.data;
 			let options = "<option value=''>Select Group Name</option>";
@@ -166,4 +257,14 @@ function GroupNameDropdown() {
 			alert("Failed to load group names.");
 		}
 	});
+}
+
+// Account Type Dropdown (optional if not static)
+function AccountTypeDropdown() {
+	const types = ["Cash", "Bank", "Member", "Loan", "Share"];
+	let options = "<option value=''>Select Type</option>";
+	types.forEach(type => {
+		options += `<option value='${type}'>${type}</option>`;
+	});
+	$("#accountType").html(options);
 }

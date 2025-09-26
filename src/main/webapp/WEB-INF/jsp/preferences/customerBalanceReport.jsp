@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -43,7 +47,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear text-blue"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Customer Balance Report</li>
@@ -63,9 +67,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch:</label>
-								<select id="Branch"
-									name="Branch" required="required"
+								<label for="">Branch:</label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
@@ -78,8 +81,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row mt-3" style="margin-left: 20px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning">Search</button>
-								<button id="saveBtn" class="btnStyle bg-danger">All
+								<button type="button" id="searchBranch" class="btnStyle bg-warning">Search</button>
+								<button type="button" id="searchAllBranch" class="btnStyle bg-danger">All
 									Branch</button>
 							</div>
 						</div>
@@ -101,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 									<div class="card-body table-responsive">
 										<h5 class="card-title">
-											Recent Sales <span>| Today</span>
+											Transactions <span>| Today</span>
 										</h5>
 
 										<table
@@ -109,15 +112,15 @@ pageEncoding="ISO-8859-1"%> -->
 											<thead class="table-light">
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">#</th>
-													<th scope="col">Customer</th>
-													<th scope="col">Product</th>
-													<th scope="col">Price</th>
-													<th scope="col">Status</th>
-													<th scope="col">Action</th>
+													<th scope="col">Branch</th>
+													<th scope="col">Transaction Date</th>
+													<th scope="col">Customer Code</th>
+													<th scope="col">Amount</th>
+													<th scope="col">Payment Mode</th>
 												</tr>
 											</thead>
 											<tbody>
-												
+
 											</tbody>
 										</table>
 									</div>
@@ -137,8 +140,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+
+
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/balanceSheet.js"></script>
 </body>
 
 </html>

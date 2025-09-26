@@ -12,8 +12,10 @@ public class LoanPayment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	private String memberName;
+	private String memberId;
 	private String loanId;
-   
+	private String loanPlanName;
     private String loanMode;
     private String loanTerm;
     private String rateOfInterest;
@@ -21,17 +23,7 @@ public class LoanPayment {
     private String interestType;
     private String emiPayment;
     private String loanDate;
-    
-
    
-
-
-    public String getLoanDate() {
-		return loanDate;
-	}
-	public void setLoanDate(String loanDate) {
-		this.loanDate = loanDate;
-	}
 	// Deduction Details
     private String processingFee;
     private String legalCharges;
@@ -39,11 +31,7 @@ public class LoanPayment {
     private String insuranceFee;
     private String valuationFees;
     private String stationaryFee;
-   
-    
-  
-    
-    
+
     // Loan Payment
     private String paymentDate;
     private String paymentStatus;
@@ -58,6 +46,18 @@ public class LoanPayment {
     private String amountDue;
     
     
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	public long getId() {
 		return id;
 	}
@@ -70,8 +70,12 @@ public class LoanPayment {
 	public void setLoanId(String loanId) {
 		this.loanId = loanId;
 	}
-	
-	
+	public String getLoanPlanName() {
+		return loanPlanName;
+	}
+	public void setLoanPlanName(String loanPlanName) {
+		this.loanPlanName = loanPlanName;
+	}
 	public String getLoanMode() {
 		return loanMode;
 	}
@@ -108,8 +112,12 @@ public class LoanPayment {
 	public void setEmiPayment(String emiPayment) {
 		this.emiPayment = emiPayment;
 	}
-	
-	
+	public String getLoanDate() {
+		return loanDate;
+	}
+	public void setLoanDate(String loanDate) {
+		this.loanDate = loanDate;
+	}
 	public String getProcessingFee() {
 		return processingFee;
 	}
@@ -146,9 +154,6 @@ public class LoanPayment {
 	public void setStationaryFee(String stationaryFee) {
 		this.stationaryFee = stationaryFee;
 	}
-	
-	
-	
 	public String getPaymentDate() {
 		return paymentDate;
 	}
@@ -215,6 +220,8 @@ public class LoanPayment {
 	public void setAmountDue(String amountDue) {
 		this.amountDue = amountDue;
 	}
+    
+   
 	
     
     

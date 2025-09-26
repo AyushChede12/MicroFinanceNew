@@ -19,7 +19,7 @@ public class AuthController {
     private JwtTokenUtil jwtUtil;
 
     @Autowired
-    private UserService userService;
+    private UserService userservice;
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password) throws Exception {
@@ -29,7 +29,7 @@ public class AuthController {
             throw new Exception("Invalid credentials");
         }
 
-        UserDetails userDetails = userService.loadUserByUsername(username);
+        UserDetails userDetails = userservice.loadUserByUsername(username);
         return jwtUtil.generateToken(userDetails.getUsername());
     }
 }

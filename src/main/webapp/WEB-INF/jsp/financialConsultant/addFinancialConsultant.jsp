@@ -725,7 +725,7 @@ function photoUpload() {
 }
 
 
-//Ayush
+
 function signatureUpload() {
 	const file = document.getElementById("signature").files[0];
 	if (file && file.type.startsWith("image/")) {

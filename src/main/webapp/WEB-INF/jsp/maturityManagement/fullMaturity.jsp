@@ -29,10 +29,21 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
+	<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	
+	
+	
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
 </head>
 
 
@@ -63,33 +74,34 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Policy No. <span id="star"> *</span> </label> <select id="policyNo"
-									name="policyNo" required="required"
+								<label for="">Plan type :<span id="star"> *</span></label> 
+								<select id="plantype"
+									name="plantype" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="Select">Select</option>
+									<option value="DRD">DRD</option>
+									<option value="RD">RD</option>
+									<option value="FD">FD</option>
+									<option value="MIS">MIS</option>
+								</select>
+							</div>
+						</div>
+				
+						<div class="col-lg-3">
+							<input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields">
+								<label for="policyCode">Policy Code</label> <select id="policyCode"
+									name="policyCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">-- Policy Code --</option>
 
 								</select>
 							</div>
-
 						</div>
-
-
-					</div>
-					<div class="row">
-						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
-						</div>
-					</div>
+					
 				</div>
-
-
-
-
-
-
-
-
-
+					
+				</div>
 
 
 				<div class="mt-5">
@@ -99,48 +111,38 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-						<div class="col-lg-3">
-								<div class="d-flex flex-column formFields">
-								<label for="">Policy No:</label> <input type="text"
-									name="policyNo" id="policyNo" required="required"
-									placeholder="" style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Applicant Name:</label> <input
-									type="text" name="applicantName" id="applicantName" required="required"
-									placeholder="" style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Plan Name:</label> <input type="text" name="planName"
-									id="planName" required="required" placeholder=""
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
-
-						<div class="col-lg-3">
+					<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">plan code:</label> <input type="text"
 									name="planCode" id="planCode" required="required"
 									placeholder="" />
 							</div>
 						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Policy Name:</label> <input type="text" name="policyName"
+									id="policyName" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="vehicalNo">Customer Name :</label> <input
+									type="text" name="customerName" id="customerName" required="required"
+									placeholder="" style="text-transform: uppercase;" />
+							</div>
+						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Term:</label> <input type="text" name="term" id="term"
+								<label>Duration:</label> <input type="text" name="duration" id="duration"
 									required="required" placeholder="" />
 
 							</div>
-
 						</div>
 
 						<div class="col-lg-3">
@@ -156,8 +158,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Actual Maturity:</label> <input type="text" name="actualMaturity"
-									id="actualMaturity" required="required" placeholder="" />
+								<label>Actual Maturity:</label> <input type="text" name="maturityAmount"
+									id="maturityAmount" required="required" placeholder="" />
 
 							</div>
 
@@ -192,15 +194,6 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Adjeustment(+):</label> <input type="text" name="adjeustment"
-									id="adjeustment" required="required" placeholder="" />
-
-							</div>
-
-						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
@@ -215,28 +208,19 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Branch:</label> <input type="text" name="approvalBranch"
-									id="approvalBranch" required="required" placeholder="" />
+								<label>Approval Branch:</label> <input type="text" name="Approvebranch"
+									id="Approvebranch" required="required" placeholder="" />
 
 							</div>
 
 						</div>
 
+						
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approval Date:</label> <input type="date" name="approvalDate"
-									id="approvalDate" required="required" placeholder="" />
-
-							</div>
-
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Approve Remarks:</label> <input type="text" name="approveRemarks"
-									id="approveRemarks" required="required" placeholder="" />
+								<label>Approve Status:</label> <input type="text" name="approveStatus"
+									id="approveStatus" required="required" value="NotApproved" readonly="readonly" />
 
 							</div>
 
@@ -246,12 +230,20 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Approve User:</label> <input type="text" name="approveUser"
-									id="approveUser" required="required" placeholder="" />
+								 <input type="hidden" name="id" id="id">
+							<div class="d-flex flex-column formFields">
+								<label> User Approver:</label> <select id="userApprover"
+									name="userApprover" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Team Member</option>
+
+								</select>
+							</div>
 
 							</div>
 
 						</div>
+
 
 					</div>
 				</div>
@@ -264,19 +256,29 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					
+					<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Panelty (if any):</label> <input type="text" name="panelty"
+									id="panelty" required="required" placeholder=""
+									style="text-transform: uppercase;" />
+							</div>
+						</div>
 						<div class="col-lg-3">
 							
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount: <span id="star"> *</span></label> <input type="date"
+								<label for="">Amount: <span id="star"> *</span></label> <input type="text"
 									name="amount" id="amount" required="required"
-									placeholder="" style="text-transform: uppercase;" />
+									 style="text-transform: uppercase;" />
 							</div>
 						</div>
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
-									name="paidAmount" id="paidAmount" required="required"
+									name="depositAmount" id="depositAmount" required="required"
 									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -317,8 +319,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Pay Branch:<span id="star"> *</span></label> <select id="payBranch"
-									name="payBranch" required="required"
+								<label for="vehicalNo">Pay Branch:<span id="star"> *</span></label> <select id="branchName"
+									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 
@@ -337,10 +339,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Payment By <span id="star"> *</span></label> <select id="paymentBy"
-									name="paymentBy" required="required"
+								<label for="">Mode of Payment <span id="star"> *</span></label> <select id="modeofPayment"
+									name="modeofPayment" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
+									<option value="Select">Select</option>
+									<option value="Online">Online</option>
+									<option value="Cash">Cash</option>
 
 								</select>
 							</div>
@@ -349,11 +353,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
+
 					</div>
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" style="color: white; background-color: #B33791 ; border: none;" class="btn btn-warning">Approve</button>
+							<button id="saveBtn" class="btn btn-success">Update</button>
 						</div>
 					</div>
 				</div>
@@ -372,8 +377,43 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+	
+	
+	<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Total payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You Have to Pay : 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="Pay" class="btn btn-primary" data-dismiss="modal">Pay</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+function totalPayment() {
+    let amount = parseFloat($('#amount').val()) || 0;
+    let panelty = parseFloat($('#panelty').val()) || 0;
+    let total = amount + panelty;
+
+    $(".modal-body").html(
+        "You Have to Pay : <strong>" + total + "</strong><br>( Amount: " + amount + ", Penalty: " + panelty + " )"
+    );
+}
+</script>
+
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/maturitypayment.js"></script>
 </body>
 
 </html>

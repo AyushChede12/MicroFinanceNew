@@ -82,6 +82,7 @@ function renderTable(data) {
 		return (
 			`<tr>
                 <td>${j++}</td>
+                
                <td>${value.accountNumber}</td>
 									<td>${value.typeofaccount}</td>
 			                        <td>${value.selectByCustomer}</td>
@@ -94,6 +95,7 @@ function renderTable(data) {
 									<td>${value.openingDate}</td>
 									<td>${value.financialConsultantCode}</td>
 									<td>${value.selectPlan}</td>
+									<td>${value.approved}</td>
             </tr>`
 		);
 	}).join('');
