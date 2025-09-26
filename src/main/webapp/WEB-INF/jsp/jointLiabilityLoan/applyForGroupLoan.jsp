@@ -93,7 +93,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 					<div class="row">
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="openingDate">Opening Date*</label> <input
 									type="date" name="openingDate" id="openingDate" required
@@ -101,7 +101,7 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="communityName">Community Name*</label> <input
 									type="text" name="communityName" id="communityName" required
@@ -111,18 +111,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="communityName">Community Address*</label> <input
-									type="text" name="communityaddress" id="communityaddress" required
-									placeholder="Enter Community Name" />
+									type="text" name="communityaddress" id="communityaddress"
+									required placeholder="Enter Community Name" />
 							</div>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="allocatedStaff">Allocated Staff*</label> <input
 									type="text" name="allocatedStaff" id="allocatedStaff" required
 									placeholder="Enter Allocated Staff" />
 							</div>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="branchName">Branch Name*</label> <select
 									id="branchName" name="branchName" required
@@ -136,7 +136,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Collection Days" />
 							</div>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="communityLeader">Community Leader*</label> <input
 									type="text" name="communityLeader" id="communityLeader"
@@ -145,7 +145,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3 ">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label>Community Address*</label> <input type="text"
 									id="communityAddress" name="communityAddress"
@@ -194,7 +194,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Loan Scheme" />
 							</div>
 						</div>
-						
+
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
@@ -272,77 +272,36 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minLoanDurationMonths">Term * </label> <input
-
 									type="text" name="Term" id="Term" required
 									placeholder="Enter Term" />
 
 
 							</div>
 						</div>
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="totalAmount">Total Amount* </label> <input
-									type="text" name="totalAmount" id="totalAmount"
-									placeholder="Enter Total Amount" /> <small
-									id="totalAmountError" class="text-danger d-none"></small>
-							</div>
-						</div>
+
 						<!-- Hidden fields to store min/max loan limits (you can fill them dynamically) -->
-						<input type="hidden" id="minLoanAmt" name="minLoanAmt" > <input
-							type="hidden" id="maximumLoanAmount" name="maximumLoanAmount" >
+						<input type="hidden" id="minLoanAmt" name="minLoanAmt"> <input
+							type="hidden" id="maximumLoanAmount" name="maximumLoanAmount">
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="interestType">Interest Type*</label>
-								<input type="text" name="interestType"
-									   id="interestType" required placeholder= "Enter Term" />
-								 <!-- <select
-									name="interestType" id="interestType" required
-									class="form-control selectField" style="height: 30px;">
+								<label for="interestType">Interest Type*</label> <input
+									type="text" name="interestType" id="interestType" required
+									placeholder="Enter Term" />
 
-									<option value="">-- Select Interest Type --</option>
-									<option value="Flat Interest">Flat Interest</option>
-									<option value="Reducing Interest">Reducing Interest</option>
-									<option value="Rule 78">Rule 78</option>
-
-								</select> -->
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="emiType">EMI mode*</label>
-								<input type="text" name="emiType"
-									   id="emiType" required placeholder= "Enter Term" />
-								<!-- <select name="emiType"
-									id="emiType" required class="form-control selectField">
-									<option value="">-- Select EMI Mode --</option>
-									<option value="Daily">Daily</option>
-									<option value="Weekly">Weekly</option>
-									<option value="Monthly">Monthly</option>
-									<option value="Fortnightly">Fortnightly</option>
-									<option value="Quarterly">Quarterly</option>
-								</select> -->
+								<label for="emiType">EMI mode*</label> <input type="text"
+									name="emiType" id="emiType" required placeholder="Enter Term" />
+
 
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Date of Approval*</label> <input
-									type="date" name="approvalDate" id="approvalDate"
-									required="required" placeholder="Enter Vehicle No"
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
 
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for="approvalStatus">Approval Status</label> <input
-									type="text" id="approvalStatus" name="approvalStatus"
-									value="Not Approved" class="form-control" readonly />
-							</div>
-						</div>
 
 					</div>
 
@@ -364,17 +323,14 @@ pageEncoding="ISO-8859-1"%> -->
 							<thead class="thead-light">
 								<tr>
 									<th>Group ID</th>
-									<th>Plan Name</th>
-									<th>Customer Name</th>
-									<th>Selected Member</th>
+									<th>Plan Code</th>
+									<th>Group Leader</th>
+								    <th>Loan Plan Name</th>
+									<th>Group Member ID's</th>
+									<th>Group Member Name</th>
 									<th>Emi Type</th>
-									<th>Contact No</th>
-									<th>Allocated Staff</th>
-
-
-
-
-
+									<th>GL Contact No</th>
+									
 								</tr>
 							</thead>
 							<tbody id="groupLoanBody">

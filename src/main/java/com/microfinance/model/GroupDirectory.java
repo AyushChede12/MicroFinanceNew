@@ -30,8 +30,8 @@ public class GroupDirectory {
     
 
     // Uploads
-    private String uploadPhoto;        
-    private String uploadSignature;
+    private String photo;
+    private String signature;
 	
 	public Long getId() {
 		return id;
@@ -126,18 +126,18 @@ public class GroupDirectory {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public String getUploadPhoto() {
-		return uploadPhoto;
+	public String getPhoto() {
+		return photo;
 	}
-	public void setUploadPhoto(String uploadPhoto) {
-		this.uploadPhoto = uploadPhoto;
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
-	public String getUploadSignature() {
-		return uploadSignature;
+	public String getSignature() {
+		return signature;
 	}
-	public void setUploadSignature(String uploadSignature) {
-		this.uploadSignature = uploadSignature;
-	} 
-    
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	
 
 }
