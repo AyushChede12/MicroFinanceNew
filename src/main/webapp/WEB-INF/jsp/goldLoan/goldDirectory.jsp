@@ -117,7 +117,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="silverrate">Today's Rate/1 gm</label> <input
+								<label for="silverrate">Today's Rate / gm</label> <input
 									type="text" name="todayRate" id="todayRate"
 									required="required" placeholder="Enter Today's Rate"
 									style="text-transform: uppercase;" />
@@ -126,7 +126,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-6">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="goldrate">Customer Gold Rate/1 gm</label>
+								<label for="goldrate">Customer Gold Rate / gm</label>
 								<div class="d-flex">
 									<input type="text" name="custgoldRate" id="custgoldRate"
 										required="required" placeholder="Enter Rate"
@@ -138,33 +138,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 
-					<!-- <div class="row mt-5" id="policyDataRow">
-						<div class="col-12">
-							<div class="card recent-sales">
-								<div class="card-body table-responsive">
-									<h5 class="card-title">
-										Todays Rate Details <span>| Data</span>
-									</h5>
-
-									<table class="table table-bordered">
-										<thead class="table-light">
-											<tr>
-												<th style="white-space: nowrap;">Karat</th>
-												<th style="white-space: nowrap;">Silver Rate</th>
-												<th style="white-space: nowrap;">Gold Rate</th>
-												
-											</tr>
-										</thead>
-										<tbody id="todaysRateTable">
-											Dynamic rows will be injected here
-										</tbody>
-									</table>
-
-								</div>
-							</div>
-							
-						</div>
-					</div> -->
+					
 
 				</div>
 
@@ -183,7 +157,6 @@ pageEncoding="ISO-8859-1"%> -->
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Item Type</option>
 									<option value="Gold">Gold</option>
-									<option value="Silver">Silver</option>
 								</select>
 							</div>
 						</div>
@@ -242,10 +215,12 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="lockerLocation">Locker Branch</label> <input
-									type="text" name="lockerBranch" id="lockerBranch"
-									required="required" placeholder="Enter Loacker Branch"
-									style="text-transform: uppercase;" />
+								<label for="">Locker Branch</label> <select
+									id="lockerBranch" name="lockerBranch" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select Branch</option>
+									
+								</select>
 							</div>
 						</div>
 
@@ -319,7 +294,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="itemType">Item Purity Type</label>
 								<div class="d-flex">
@@ -328,7 +303,6 @@ pageEncoding="ISO-8859-1"%> -->
 										style="height: 30px; margin-right: 10px;">
 										<option value="">Item Type</option>
 										<option value="Gold">Gold</option>
-										<option value="Silver">Silver</option>
 									</select>
 									<!-- <button id="saveButtonforGoldDirectory" class="btnStyle bg-success">Save</button> -->
 								</div>

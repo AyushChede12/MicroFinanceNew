@@ -52,4 +52,81 @@ $(document).ready(function() {
 				$("#customerName").val("");
 			}
 		});
+		
+		//for bind the branch in dropdown
+		$.ajax({
+		        url: "api/customermanagement/approved",
+		        type: "GET",
+		        success: function (response) {
+		            var select = $("#lockerBranch");
+		            select.empty(); 
+		            select.append('<option value="">Select Branch</option>');
+
+		            if (response && response.data) {
+		                // Store distinct branch names in a Set
+		                var branchSet = new Set();
+
+		                $.each(response.data, function (index, customer) {
+		                    if (customer.branchName) {
+		                        branchSet.add(customer.branchName.trim());
+		                    }
+		                });
+
+		                // Append distinct branches
+		                branchSet.forEach(function (branch) {
+		                    select.append('<option value="' + branch + '">' + branch + '</option>');
+		                });
+		            }
+		        },
+		        error: function () {
+		            alert("Failed to fetch branches.");
+		        }
+		    });
+			
+			//for save the data 
+			
+			$("#saveButtonforGoldDirectory").click(function (e) {
+			       e.preventDefault(); // form submit ko stop kare
+
+			       // Form data collect
+			       var formData = {
+			           //id: $("#goldDirectoryId").val(), // agar id empty hai to null bhejega
+			           customerCode: $("#customerCode").val(),
+			           customerName: $("#customerName").val(),
+			           karat: $("#karat").val(),
+			           todayRate: $("#todayRate").val(),
+			           custgoldRate: $("#custgoldRate").val(),
+			           itemMasterType: $("#itemMasterType").val(),
+			           itemName: $("#ItemName").val(),
+			           lockerBranch: $("#lockerBranch").val(),
+			           lockerNumber: $("#lockerNumber").val(),
+			           purityName: $("#purityName").val(),
+			           purity: $("#purity").val(),
+			           itemPurityType: $("#itemPurityType").val(),
+			           loanPlanName: $("#loanPlanName").val(),
+			           typeOfLoan: $("#typeOfLoan").val(),
+			           loanMode: $("#loanMode").val(),
+			           loanTerm: $("#loanTerm").val(),
+			           rateOfInterest: $("#rateOfInterest").val(),
+			           loanAmount: $("#loanAmount").val(),
+			           typeIntrest: $("#typeIntrest").val(),
+			           emiPayment: $("#emiPayment").val()
+			       };
+
+			       // Ajax call
+			       $.ajax({
+			           url: "/api/securedGoldLoan/saveGoldDirectory",
+			           type: "POST",
+			           contentType: "application/json",
+			           data: JSON.stringify(formData),
+			           success: function (response) {
+			               alert(response.message || "Saved successfully");
+			               $("#formid")[0].reset(); // form reset
+			               $("#goldDirectoryId").val(""); // hidden id clear
+			           },
+			           error: function (xhr) {
+			               alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+			           }
+			       });
+			   });
 	});
