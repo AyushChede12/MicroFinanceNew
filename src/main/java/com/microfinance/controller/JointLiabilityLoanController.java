@@ -1,10 +1,7 @@
 package com.microfinance.controller;
 
-import java.io.File;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,420 +26,350 @@ import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.GroupDirectory;
 import com.microfinance.model.InstallmentRepayment;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanAprroval;
 import com.microfinance.service.JointLiabilityLoanService;
-
-
 
 @RestController
 @RequestMapping("/api/joinliability")
 public class JointLiabilityLoanController {
-	@Autowired 
-	JointLiabilityLoanService jointLiabilityLoanService;
 	
+
 	@Value("${upload.directory}")
 	private String uploadDirectory;
-	
-
 
 	
-	
+	@Autowired
+	JointLiabilityLoanService jointLiabilityLoanService;
+
+
 	@PostMapping("/createLendingGroupsave")
-    public ResponseEntity<ApiResponse<CreateLendingGroup>> saveLendingGroup(@RequestBody CreateLendingGroup createLendingGroup) {
-        boolean isSaved = jointLiabilityLoanService.saveLendingGroup(createLendingGroup);
+	public ResponseEntity<ApiResponse<CreateLendingGroup>> saveLendingGroup(
+			@RequestBody CreateLendingGroup createLendingGroup) {
+		boolean isSaved = jointLiabilityLoanService.saveLendingGroup(createLendingGroup);
 
-        if (isSaved) {
-            ApiResponse<CreateLendingGroup> response = ApiResponse.success(
-                HttpStatus.CREATED,
-                "Lending Group saved successfully",
-                createLendingGroup
-            );
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } else {
-            ApiResponse<CreateLendingGroup> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save Lending Group."
-            );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-	 // View All createlendinggroup
-    @GetMapping("/viewlendinggroup")
-    public ResponseEntity<ApiResponse<List<CreateLendingGroup>>> getAlllendinggroup() {
-        List<CreateLendingGroup> plans = jointLiabilityLoanService.getAlllendinggroup();
+		if (isSaved) {
+			ApiResponse<CreateLendingGroup> response = ApiResponse.success(HttpStatus.CREATED,
+					"Lending Group saved successfully", createLendingGroup);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} else {
+			ApiResponse<CreateLendingGroup> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save Lending Group.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
 
-        if (plans != null && !plans.isEmpty()) {
-            ApiResponse<List<CreateLendingGroup>> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Lending Group fetched successfully.",
-                plans
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<CreateLendingGroup>> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "No Lending Group found."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    @GetMapping("/editLendingGroup/{id}")
-    public ResponseEntity<ApiResponse<CreateLendingGroup>> getLendingGroupById(@PathVariable Long id) {
-        CreateLendingGroup plan = jointLiabilityLoanService.getLendingGroupById(id);
+	// View All createlending group
+	@GetMapping("/viewlendinggroup")
+	public ResponseEntity<ApiResponse<List<CreateLendingGroup>>> getAlllendinggroup() {
+		List<CreateLendingGroup> plans = jointLiabilityLoanService.getAlllendinggroup();
 
-        if (plan != null) {
-            ApiResponse<CreateLendingGroup> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Lending Group fetched successfully.",
-                plan
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<CreateLendingGroup> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Lending Group not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		if (plans != null && !plans.isEmpty()) {
+			ApiResponse<List<CreateLendingGroup>> response = ApiResponse.success(HttpStatus.OK,
+					"Lending Group fetched successfully.", plans);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<CreateLendingGroup>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Lending Group found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-    // Update Loan Plan
-    @PostMapping("/updateLendingGroup/{id}")
-    public ResponseEntity<ApiResponse<CreateLendingGroup>> updateLoanPlan(
-            @PathVariable Long id,
-            @RequestBody CreateLendingGroup updatedGroup) {
+	@GetMapping("/editLendingGroup/{id}")
+	public ResponseEntity<ApiResponse<CreateLendingGroup>> getLendingGroupById(@PathVariable Long id) {
+		CreateLendingGroup plan = jointLiabilityLoanService.getLendingGroupById(id);
 
-        CreateLendingGroup updated = jointLiabilityLoanService.updategroupLending(id, updatedGroup);
+		if (plan != null) {
+			ApiResponse<CreateLendingGroup> response = ApiResponse.success(HttpStatus.OK,
+					"Lending Group fetched successfully.", plan);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<CreateLendingGroup> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Lending Group not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        if (updated != null) {
-            ApiResponse<CreateLendingGroup> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Lending Group updated successfully.",
-                updated
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<CreateLendingGroup> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Lending Group not found or failed to update."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    // Delete Create group Lending
-    @PostMapping("/deleteLendingGroup/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteLoanPlan(@PathVariable Long id) {
-        boolean deleted = jointLiabilityLoanService.deleteLendingGroup(id);
+	// Update Loan Plan
+	@PostMapping("/updateLendingGroup/{id}")
+	public ResponseEntity<ApiResponse<CreateLendingGroup>> updateLoanPlan(@PathVariable Long id,
+			@RequestBody CreateLendingGroup updatedGroup) {
 
-        if (deleted) {
-            ApiResponse<Void> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Lending Group deleted successfully.",
-                null
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<Void> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Lending Group not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    
-    //Group Directory Controller
-    @PostMapping("/saveGroupDirectory")
-    public ResponseEntity<ApiResponse<GroupDirectory>> saveGroupDirectoryData(
-            @ModelAttribute GroupDirectoryDto groupDirectoryDto,
-            @RequestParam(value = "uploadPhoto", required = false) MultipartFile uploadPhoto,
-            @RequestParam(value = "uploadSignature", required = false) MultipartFile uploadSignature) {
+		CreateLendingGroup updated = jointLiabilityLoanService.updategroupLending(id, updatedGroup);
 
-        if (uploadPhoto != null) {
-            System.out.println("Received photo: " + uploadPhoto.getOriginalFilename());
-        }
-        if (uploadSignature != null) {
-            System.out.println("Received signature: " + uploadSignature.getOriginalFilename());
-        }
+		if (updated != null) {
+			ApiResponse<CreateLendingGroup> response = ApiResponse.success(HttpStatus.OK,
+					"Lending Group updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<CreateLendingGroup> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Lending Group not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        ApiResponse<GroupDirectory> response = jointLiabilityLoanService.saveGroupDirectory(groupDirectoryDto, uploadPhoto, uploadSignature);
+	// Delete Create group Lending
+	@PostMapping("/deleteLendingGroup/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteLoanPlan(@PathVariable Long id) {
+		boolean deleted = jointLiabilityLoanService.deleteLendingGroup(id);
 
-        return ResponseEntity.ok(new ApiResponse<>(
-                HttpStatus.OK,
-                groupDirectoryDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
-                response.getData()
-        ));
-    }
-
-    
-	
-    // Fetch all the data from group directory
-    @GetMapping("/viewGroupDirectories")
-    public ResponseEntity<ApiResponse<List<GroupDirectory>>> getAllGroupDirectories() {
-        List<GroupDirectory> groups = jointLiabilityLoanService.getAllGroupDirectories();
-
-        if (groups != null && !groups.isEmpty()) {
-            ApiResponse<List<GroupDirectory>> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Group Directories fetched successfully.",
-                groups
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<GroupDirectory>> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "No Group Directory found."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    //Append the group directory in the form
-    @GetMapping("/editGroupDirectory/{id}")
-    public ResponseEntity<ApiResponse<GroupDirectory>> getGroupDirectoryById(@PathVariable Long id) {
-        GroupDirectory group = jointLiabilityLoanService.getGroupDirectoryById(id);
-
-        if (group != null) {
-            ApiResponse<GroupDirectory> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Group Directory fetched successfully.",
-                group
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<GroupDirectory> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Group Directory not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
- // UPDATE the group directory form data
-    @PostMapping("/updateGroupDirectory/{id}")
-    public ResponseEntity<ApiResponse<GroupDirectory>> updateGroupDirectory(
-            @PathVariable Long id,
-            @RequestBody GroupDirectory updatedDirectory) {
-
-        GroupDirectory updated = jointLiabilityLoanService.updateGroupDirectory(id, updatedDirectory);
-
-        if (updated != null) {
-            ApiResponse<GroupDirectory> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Group Directory updated successfully.",
-                updated
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<GroupDirectory> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Group Directory not found or failed to update."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    // DELETE the group directory data
-    @PostMapping("/deleteGroupDirectory/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteGroupDirectory(@PathVariable Long id) {
-        boolean deleted = jointLiabilityLoanService.deleteGroupDirectory(id);
-
-        if (deleted) {
-            ApiResponse<Void> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Group Directory deleted successfully.",
-                null
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<Void> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "Group Directory not found for ID: " + id
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-    
-    @GetMapping("/feachdatagroupdirectory")
-    public ResponseEntity<ApiResponse<List<GroupDirectory>>> getAllGroupDirectories1() {
-        List<GroupDirectory> groups = jointLiabilityLoanService.getaddquedata();
-
-        if (groups != null && !groups.isEmpty()) {
-            ApiResponse<List<GroupDirectory>> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Group Directories fetched successfully.",
-                groups
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<GroupDirectory>> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "No Group Directory found."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
-	
-// Apply For group loan
-    @PostMapping("/saveGroupLoan")
-    public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
-        boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
-
-        if (isSaved) {
-            ApiResponse<ApplyForGroupLoan> response = ApiResponse.success(
-                HttpStatus.CREATED,
-                "Group Loan saved successfully",
-                applyGroupLoan
-            );
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } else {
-            ApiResponse<ApplyForGroupLoan> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save Group Loan."
-            );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-    //faeth the group directory code
-    @PostMapping("/fetchByGroupID")
-    public ApiResponse<List<GroupDirectory>> fetchByGroupID(@RequestParam("groupID") String groupID) {
-    	List<GroupDirectory> list = jointLiabilityLoanService.fetchByGroupID(groupID);
-    	if (list != null && !list.isEmpty()) {
-    		return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
-    	} else {
-    		return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
-    	}
-    }
-    // feath the property form lending group
-    @PostMapping("/fetchByPlanCode")
-    public ApiResponse<List<CreateLendingGroup>> fetchByPlanCode(@RequestParam("planCode") String planCode) {
-        List<CreateLendingGroup> list = jointLiabilityLoanService.fetchByPlanCode(planCode);
-        if (list != null && !list.isEmpty()) {
-            return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
-        } else {
-            return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
-        }
-    }
-    
-    // feath group loan
-    @GetMapping("/viewgrouploans")
-    public ResponseEntity<ApiResponse<List<ApplyForGroupLoan>>> getAllGroupLoanApplications() {
-        List<ApplyForGroupLoan> applications = jointLiabilityLoanService.getAllgroupdata();
-
-        if (applications != null && !applications.isEmpty()) {
-            ApiResponse<List<ApplyForGroupLoan>> response = ApiResponse.success(
-                HttpStatus.OK,
-                "Group loan applications fetched successfully.",
-                applications
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<ApplyForGroupLoan>> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "No group loan applications found."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		if (deleted) {
+			ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Lending Group deleted successfully.",
+					null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Lending Group not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
 
-    @PostMapping("/updateApprovalStatusApplyGroupLoan")
-    public ResponseEntity<ApiResponse<ApplyForGroupLoan>> updateApprovalStatusApplyGroupLoan(
-            @RequestBody Map<String, String> request) {
-        
-        String groupCode = request.get("groupCode");
-        String approvalStatus = request.get("approvalStatus"); // "approved" / "not_approved"
+	//Api for Saving Group Directory details
+	@PostMapping("/savegroupdirectory")
+	public ResponseEntity<ApiResponse<GroupDirectory>> saveGroupDirectory(@RequestBody GroupDirectory groupDirectory) {
 
-        ApplyForGroupLoan updatedLoan = jointLiabilityLoanService
-                .updateApprovalStatusApplyGroupLoan(groupCode, approvalStatus);
+		boolean isSaved = jointLiabilityLoanService.saveGroupDirectoryData(groupDirectory);
 
-        if (updatedLoan != null) {
-            ApiResponse<ApplyForGroupLoan> response = ApiResponse.success(
-                    HttpStatus.OK,
-                    "Loan Approval Status updated successfully.",
-                    updatedLoan
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<ApplyForGroupLoan> response = ApiResponse.error(
-                    HttpStatus.NOT_FOUND,
-                    "No Group Loan found for given Group Code."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		if (isSaved) {
+			ApiResponse<GroupDirectory> response = ApiResponse.success(HttpStatus.CREATED,
+					"Group Directory saved successfully.", groupDirectory);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<GroupDirectory> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save Group Directory.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
 
+	// Fetch all the data from group directory
+	@GetMapping("/viewGroupDirectories")
+	public ResponseEntity<ApiResponse<List<GroupDirectory>>> getAllGroupDirectories() {
+		List<GroupDirectory> groups = jointLiabilityLoanService.getAllGroupDirectories();
 
-   // feach Apply loan group
-   
+		if (groups != null && !groups.isEmpty()) {
+			ApiResponse<List<GroupDirectory>> response = ApiResponse.success(HttpStatus.OK,
+					"Group Directories fetched successfully.", groups);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<GroupDirectory>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Group Directory found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-    @PostMapping("/fetchByGroupCode")
-    public ApiResponse<List<ApplyForGroupLoan>> fetchApplyGroupLoanByGroupcode(@RequestParam("groupCode") String groupCode) {
-    	List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchApplyGroupLoanByGroupcode(groupCode);
-    	if (list != null && !list.isEmpty()) {
-    		return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
-    	} else {
-    		return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
-    	}
-    }
-    
-    
-    
-   
-    // feath the property form Installment Re-Payment
-    @PostMapping("/fetchBygroupCode")
-    public ApiResponse<List<ApplyForGroupLoan>> fetchBygroupCode(@RequestParam("groupCode") String groupCode) {
-        List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchBygroupCode(groupCode);
-        if (list != null && !list.isEmpty()) {
-            return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
-        } else {
-            return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
-        }
+	// Append the group directory in the form
+	@GetMapping("/editGroupDirectory/{id}")
+	public ResponseEntity<ApiResponse<GroupDirectory>> getGroupDirectoryById(@PathVariable Long id) {
+		GroupDirectory group = jointLiabilityLoanService.getGroupDirectoryById(id);
 
-    }
-    // save installment repayments
-    @PostMapping("/saveRepayment")
-    public ResponseEntity<ApiResponse<InstallmentRepayment>> saveRepayment(@RequestBody InstallmentRepayment repayment) {
-        boolean isSaved = jointLiabilityLoanService.saveRepayment(repayment);
+		if (group != null) {
+			ApiResponse<GroupDirectory> response = ApiResponse.success(HttpStatus.OK,
+					"Group Directory fetched successfully.", group);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<GroupDirectory> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Group Directory not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
 
-        if (isSaved) {
-            ApiResponse<InstallmentRepayment> response = ApiResponse.success(
-                HttpStatus.CREATED,
-                "Repayment saved successfully",
-                repayment
-            );
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } else {
-            ApiResponse<InstallmentRepayment> response = ApiResponse.error(
-                HttpStatus.BAD_REQUEST,
-                "Failed to save repayment."
-            );
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-        }
-    }
-    
-    @GetMapping("/view")
-    public ResponseEntity<ApiResponse<List<InstallmentRepayment>>> viewAllRepayments() {
-        List<InstallmentRepayment> all = jointLiabilityLoanService.getAllRepayments();
+	// UPDATE the group directory form data
+	@PostMapping("/updateGroupDirectory/{id}")
+	public ResponseEntity<ApiResponse<GroupDirectory>> updateGroupDirectory(@PathVariable Long id,
+			@RequestBody GroupDirectory updatedDirectory) {
 
-        if (all != null && !all.isEmpty()) {
-            ApiResponse<List<InstallmentRepayment>> response = ApiResponse.success(
-                HttpStatus.OK,
-                "All repayments fetched successfully.",
-                all
-            );
-            return ResponseEntity.ok(response);
-        } else {
-            ApiResponse<List<InstallmentRepayment>> response = ApiResponse.error(
-                HttpStatus.NOT_FOUND,
-                "No repayment records found."
-            );
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-        }
-    }
+		GroupDirectory updated = jointLiabilityLoanService.updateGroupDirectory(id, updatedDirectory);
+
+		if (updated != null) {
+			ApiResponse<GroupDirectory> response = ApiResponse.success(HttpStatus.OK,
+					"Group Directory updated successfully.", updated);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<GroupDirectory> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Group Directory not found or failed to update.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	// DELETE the group directory data
+	@PostMapping("/deleteGroupDirectory/{id}")
+	public ResponseEntity<ApiResponse<Void>> deleteGroupDirectory(@PathVariable Long id) {
+		boolean deleted = jointLiabilityLoanService.deleteGroupDirectory(id);
+
+		if (deleted) {
+			ApiResponse<Void> response = ApiResponse.success(HttpStatus.OK, "Group Directory deleted successfully.",
+					null);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<Void> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"Group Directory not found for ID: " + id);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	@GetMapping("/feachdatagroupdirectory")
+	public ResponseEntity<ApiResponse<List<GroupDirectory>>> getAllGroupDirectories1() {
+		List<GroupDirectory> groups = jointLiabilityLoanService.getaddquedata();
+
+		if (groups != null && !groups.isEmpty()) {
+			ApiResponse<List<GroupDirectory>> response = ApiResponse.success(HttpStatus.OK,
+					"Group Directories fetched successfully.", groups);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<GroupDirectory>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No Group Directory found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+    // Apply For group loan
+	@PostMapping("/saveGroupLoan")
+	public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
+		boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
+
+		if (isSaved) {
+			ApiResponse<ApplyForGroupLoan> response = ApiResponse.success(HttpStatus.CREATED,
+					"Group Loan saved successfully", applyGroupLoan);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} else {
+			ApiResponse<ApplyForGroupLoan> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save Group Loan.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
+
+	// fetch the group directory code
+	@PostMapping("/fetchByGroupID")
+	public ApiResponse<List<GroupDirectory>> fetchByGroupID(@RequestParam("groupID") String groupID) {
+		List<GroupDirectory> list = jointLiabilityLoanService.fetchByGroupID(groupID);
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
+		}
+	}
+
+	// fetch the property form lending group
+	@PostMapping("/fetchByPlanCode")
+	public ApiResponse<List<CreateLendingGroup>> fetchByPlanCode(@RequestParam("planCode") String planCode) {
+		List<CreateLendingGroup> list = jointLiabilityLoanService.fetchByPlanCode(planCode);
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
+		}
+	}
+
+	// feath group loan
+	@GetMapping("/viewgrouploans")
+	public ResponseEntity<ApiResponse<List<ApplyForGroupLoan>>> getAllGroupLoanApplications() {
+		List<ApplyForGroupLoan> applications = jointLiabilityLoanService.getAllgroupdata();
+
+		if (applications != null && !applications.isEmpty()) {
+			ApiResponse<List<ApplyForGroupLoan>> response = ApiResponse.success(HttpStatus.OK,
+					"Group loan applications fetched successfully.", applications);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<ApplyForGroupLoan>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No group loan applications found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	// Api for approving the group loan application
+	@PostMapping("/approveGroupLoan")
+	public ResponseEntity<ApiResponse<ApplyForGroupLoan>> approveGroupLoan(@RequestBody ApplyForGroupLoan approval) {
+
+		System.out.println("Approval request received for Group Code: " + approval.getGroupCode());
+
+		String result = jointLiabilityLoanService.approveGroupLoan(approval);
+
+		switch (result) {
+		case "already_approved":
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Group Loan is already approved.", null));
+
+		case "success":
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Group Loan approved successfully.", approval));
+
+		case "not_found":
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "Group Loan not found.", null));
+
+		default:
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body(new ApiResponse<>(HttpStatus.BAD_REQUEST, "Unknown result", null));
+		}
+	}
+
+	// feach Apply loan group
+	@PostMapping("/fetchByGroupCode")
+	public ApiResponse<List<ApplyForGroupLoan>> fetchApplyGroupLoanByGroupcode(
+			@RequestParam("groupCode") String groupCode) {
+		List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchApplyGroupLoanByGroupcode(groupCode);
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
+		}
+	}
+
+	// feath the property form Installment Re-Payment
+	@PostMapping("/fetchBygroupCode")
+	public ApiResponse<List<ApplyForGroupLoan>> fetchBygroupCode(@RequestParam("groupCode") String groupCode) {
+		List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchBygroupCode(groupCode);
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
+		}
+
+	}
+
+	// save installment repayments
+	@PostMapping("/saveRepayment")
+	public ResponseEntity<ApiResponse<InstallmentRepayment>> saveRepayment(
+			@RequestBody InstallmentRepayment repayment) {
+		boolean isSaved = jointLiabilityLoanService.saveRepayment(repayment);
+
+		if (isSaved) {
+			ApiResponse<InstallmentRepayment> response = ApiResponse.success(HttpStatus.CREATED,
+					"Repayment saved successfully", repayment);
+			return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		} else {
+			ApiResponse<InstallmentRepayment> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
+					"Failed to save repayment.");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+		}
+	}
+
+	@GetMapping("/view")
+	public ResponseEntity<ApiResponse<List<InstallmentRepayment>>> viewAllRepayments() {
+		List<InstallmentRepayment> all = jointLiabilityLoanService.getAllRepayments();
+
+		if (all != null && !all.isEmpty()) {
+			ApiResponse<List<InstallmentRepayment>> response = ApiResponse.success(HttpStatus.OK,
+					"All repayments fetched successfully.", all);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<InstallmentRepayment>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+					"No repayment records found.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	// ✅ API for fetching Approved & Active Group Loan IDs (Vaibhav)
+	@GetMapping("/getApprovedGroupLoanIds")
+	public ResponseEntity<ApiResponse<List<String>>> getApprovedGroupLoanIds() {
+		List<String> approvedGroupLoanIds = jointLiabilityLoanService.getApprovedGroupLoanIds();
+
+		if (!approvedGroupLoanIds.isEmpty()) {
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+					"Approved & Active Group Loan IDs fetched successfully", approvedGroupLoanIds));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved and active group loans found", null));
+		}
+	}
+
 }
-   
-
-       
-
-
-
-    
-
-

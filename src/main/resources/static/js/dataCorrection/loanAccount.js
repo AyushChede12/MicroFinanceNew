@@ -3,7 +3,7 @@ $(document).ready(function() {
 		url: 'api/datacorrection/fetchAllApprovedLoanApplications',
 		type: 'GET',
 		success: function(response) {
-			if (response.status === "FOUND") {
+			if (response.status === "OK") {
 				let loanOptions = response.data.map(function(item) {
 					return {
 						id: item.loanId,
@@ -47,10 +47,10 @@ $(document).ready(function() {
 	});
 
 	$.ajax({
-		url: "api/datacorrection/fetchAllLoanApplications",
+		url: "api/datacorrection/fetchAllApprovedLoanApplications",
 		type: "GET",
 		success: function(response) {
-			if (response.status === "FOUND") {
+			if (response.status === "OK") {
 				$("#memberId").empty().append("<option value=''>-- Select Code --</option>");
 				$("#guarantorMemberId").empty().append("<option value=''>-- Select Code --</option>");
 				$("#coApplicantMemberId").empty().append("<option value=''>-- Select Code --</option>");

@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.microfinance.model.ApplyForGroupLoan;
+import com.microfinance.model.LoanApplication;
 @Repository
 public interface ApplyForGroupLoanRepo extends JpaRepository<ApplyForGroupLoan, Long> {
 
@@ -25,7 +26,8 @@ public interface ApplyForGroupLoanRepo extends JpaRepository<ApplyForGroupLoan, 
 	    List<ApplyForGroupLoan> findByGroupCode(String groupCode);
 
 
-	
+	    List<ApplyForGroupLoan> findByApprovalStatusTrueAndGroupLoanStatus(String groupLoanStatus);
+
 	
 
 	

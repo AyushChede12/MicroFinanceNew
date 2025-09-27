@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.GroupDirectory;
 import com.microfinance.model.InstallmentRepayment;
+import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanAprroval;
 import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
@@ -32,13 +34,13 @@ public class JointLiabilityLoanService {
 
 	@Autowired
 	GroupDirectoryRepo groupDirectoryRepo;
-	
+
 	@Autowired
 	ApplyForGroupLoanRepo applyForGroupLoanRepo;
-	
+
 	@Autowired
 	LoanApprovalRepo loanApprovalRepo;
-	
+
 	@Autowired
 	InstallmentRepymentRepo installmentRepymentRepo;
 
@@ -72,7 +74,6 @@ public class JointLiabilityLoanService {
 			existing.setPlanCode(updatedGroup.getPlanCode());
 			existing.setLoanSchemeInformation(updatedGroup.getLoanSchemeInformation());
 			existing.setMinimumAge(updatedGroup.getMinimumAge());
-
 
 			existing.setTerm(updatedGroup.getTerm());
 			existing.setBranchName(updatedGroup.getBranchName());
@@ -132,10 +133,9 @@ public class JointLiabilityLoanService {
 			existing.setCustomerName(updatedDirectory.getCustomerName());
 			existing.setReferralDetails(updatedDirectory.getReferralDetails());
 			existing.setContact(updatedDirectory.getContact());
-			
 
-			existing.setUploadPhoto(updatedDirectory.getUploadPhoto());
-			existing.setUploadSignature(updatedDirectory.getUploadSignature());
+			// existing.setUploadPhoto(updatedDirectory.getUploadPhoto());
+			// existing.setUploadSignature(updatedDirectory.getUploadSignature());
 
 			return groupDirectoryRepo.save(existing);
 		} else {
@@ -151,63 +151,14 @@ public class JointLiabilityLoanService {
 		return false;
 	}
 
-	public ApiResponse<GroupDirectory> saveGroupDirectory(GroupDirectoryDto groupDirectoryDto,
-			MultipartFile uploadPhoto, MultipartFile uploadSignature) {
-		GroupDirectory groupDirectory = new GroupDirectory();
-		boolean isNew = true;
-
-		// Existing record check
-		if (groupDirectoryDto.getId() != null && groupDirectoryDto.getId() > 0) {
-			groupDirectory = groupDirectoryRepo.findById(groupDirectoryDto.getId()).orElse(new GroupDirectory());
-			isNew = false;
-		}
-
-		// Map DTO to entity
-		groupDirectory.setGroupID(groupDirectoryDto.getGroupID());
-		groupDirectory.setCommunityName(groupDirectoryDto.getCommunityName());
-		groupDirectory.setOpeningDate(groupDirectoryDto.getOpeningDate());
-		groupDirectory.setBranchName(groupDirectoryDto.getBranchName());
-		groupDirectory.setCommunityLeader(groupDirectoryDto.getCommunityLeader());
-		groupDirectory.setContactNo(groupDirectoryDto.getContactNo());
-		groupDirectory.setCommunityAddress(groupDirectoryDto.getCommunityAddress());
-		groupDirectory.setAllocatedStaff(groupDirectoryDto.getAllocatedStaff());
-		groupDirectory.setCollectionDay(groupDirectoryDto.getCollectionDay());
-		groupDirectory.setCollectionTime(groupDirectoryDto.getCollectionTime());
-		groupDirectory.setSelectedMember(groupDirectoryDto.getSelectedMember());
-		groupDirectory.setCustomerName(groupDirectoryDto.getCustomerName());
-		groupDirectory.setReferralDetails(groupDirectoryDto.getReferralDetails());
-		groupDirectory.setContact(groupDirectoryDto.getContact());
-		
-
-		// Photo save
-		if (uploadPhoto != null && !uploadPhoto.isEmpty()) {
-			try {
-				String photoFileName = saveFile(uploadPhoto);
-				groupDirectory.setUploadPhoto(photoFileName);
-			} catch (IOException e) {
-				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Photo upload failed");
-			}
-		}
-
-		// Signature save
-		if (uploadSignature != null && !uploadSignature.isEmpty()) {
-			try {
-				String signatureFileName = saveFile(uploadSignature);
-				groupDirectory.setUploadSignature(signatureFileName);
-			} catch (IOException e) {
-				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Signature upload failed");
-			}
-		}
-
-		// Save to DB
-		GroupDirectory savedData = groupDirectoryRepo.save(groupDirectory);
-
-		if (isNew) {
-			return ApiResponse.success(HttpStatus.CREATED,
-					"Saved successfully. Community: " + savedData.getCommunityName(), savedData);
-		} else {
-			return ApiResponse.success(HttpStatus.OK,
-					"Updated successfully. Community: " + savedData.getCommunityName(), savedData);
+	// Service for saving group directory
+	public boolean saveGroupDirectoryData(GroupDirectory groupDirectory) {
+		try {
+			groupDirectoryRepo.save(groupDirectory);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
 		}
 	}
 
@@ -244,12 +195,16 @@ public class JointLiabilityLoanService {
 		return groupDirectoryRepo.findAll();
 	}
 
+	// Service for group laon application
 	public boolean saveGroupLoan(ApplyForGroupLoan applyGroupLoan) {
-		// TODO Auto-generated method stub
-		 try {
+		try {
+			// force values before saving
+			applyGroupLoan.setGroupLoanStatus("ACTIVE"); // default: active loan
+
 			applyForGroupLoanRepo.save(applyGroupLoan);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace(); // helpful for debugging
 			return false;
 		}
 	}
@@ -264,10 +219,8 @@ public class JointLiabilityLoanService {
 		return groupDirectoryRepo.findByGroupID(groupID);
 	}
 
-	
-
 	public List<CreateLendingGroup> fetchByPlanCode(String planCode) {
-		   return createLendingGroupRepo.findByPlanCode(planCode);
+		return createLendingGroupRepo.findByPlanCode(planCode);
 	}
 
 	public List<ApplyForGroupLoan> getAllgroupdata() {
@@ -285,49 +238,63 @@ public class JointLiabilityLoanService {
 		}
 	}
 
+	// Service for approving the group loan application
+	public String approveGroupLoan(ApplyForGroupLoan approvalRequest) {
 
-	public ApplyForGroupLoan updateApprovalStatusApplyGroupLoan(String groupCode, String approvalStatus) {
-		 ApplyForGroupLoan existingLoan = applyForGroupLoanRepo.findSingleByGroupCode(groupCode);
+		// Step 1: Find the existing group loan by groupCode
+		ApplyForGroupLoan existingLoan = applyForGroupLoanRepo.findSingleByGroupCode(approvalRequest.getGroupCode());
 
-	        if (existingLoan != null) {
-	            existingLoan.setApprovalStatus(approvalStatus);
-	            return applyForGroupLoanRepo.save(existingLoan); // ✅ update होईल
-	        } else {
-	            return null; // group नाही सापडला
-	        }
-	    }
+		if (existingLoan != null) {
 
-	    // ✅ Fetch Method (list)
-	    public List<ApplyForGroupLoan> fetchApplyGroupLoanByGroupcode(String groupCode) {
-	        return applyForGroupLoanRepo.findByGroupCode(groupCode);
-	    }
+			// ✅ Check if already approved
+			if (existingLoan.isApprovalStatus()) {
+				return "already_approved";
+			}
+
+			// Step 2: Update approval status and date
+			existingLoan.setApprovalStatus(true); // approved
+			existingLoan.setApprovalDate(approvalRequest.getApprovalDate()); // today's date
+
+			// Step 3: Save updated group loan
+			applyForGroupLoanRepo.save(existingLoan);
+
+			return "success";
+		} else {
+			return "not_found"; // group loan not found
+		}
+	}
+
+	// ✅ Fetch Method (list)
+	public List<ApplyForGroupLoan> fetchApplyGroupLoanByGroupcode(String groupCode) {
+		return applyForGroupLoanRepo.findByGroupCode(groupCode);
+	}
 
 	public List<ApplyForGroupLoan> fetchBygroupCode(String groupCode) {
 		// TODO Auto-generated method stub
-		 return applyForGroupLoanRepo.findByGroupCode(groupCode);
+		return applyForGroupLoanRepo.findByGroupCode(groupCode);
 
 	}
 
-
 	public boolean saveRepayment(InstallmentRepayment repayment) {
-		 try {
-			 installmentRepymentRepo.save(repayment);
-				return true;
-			} catch (Exception e) {
-				return false;
-			}
+		try {
+			installmentRepymentRepo.save(repayment);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	public List<InstallmentRepayment> getAllRepayments() {
 		return installmentRepymentRepo.findAll();
 	}
 
+	// Service for getting Approved & Active loan Ids( Vaibhav)
 
-}	
+	public List<String> getApprovedGroupLoanIds() {
+		List<ApplyForGroupLoan> approvedActiveLoans = applyForGroupLoanRepo
+				.findByApprovalStatusTrueAndGroupLoanStatus("ACTIVE");
 
+		return approvedActiveLoans.stream().map(ApplyForGroupLoan::getGroupCode).collect(Collectors.toList());
+	}
 
-
-
-	
-
-
+}
