@@ -216,11 +216,11 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
-
+				<!-- Payment Deductions Section -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Deduction Details</li>
+							<li class="breadcrumb-item action">Payment Deductions</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -265,8 +265,6 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 					</div>
-
-
 				</div>
 
 				<div class="mt-5">

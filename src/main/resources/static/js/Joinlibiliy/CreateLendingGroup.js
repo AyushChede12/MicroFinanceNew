@@ -5,18 +5,18 @@ $(document).ready(function() {
 	$('#updatelendingBtn').hide(); // Hide update initially
 
 	$('#savelendingBtn').on('click', function(e) {
-		
-		     e.preventDefault(); // prevent form save if invalid
-		   
+
+		e.preventDefault(); // prevent form save if invalid
+
 		const loanData = {
 			planCode: $('#planCode').val(),
 			loanSchemeInformation: $('#loanSchemeInformation').val(),
 			minimumAge: $('#minimumAge').val(),
-		
-			term: $('#term').val(), 
+
+			term: $('#term').val(),
 			branchName: $('#branchName').val(),
 			maximumAge: $('#maximumAge').val(),
-			
+
 			emiFrequency: $('#emiFrequency').val(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			rateOfInterest: $('#rateOfInterest').val(),
@@ -78,17 +78,13 @@ $(document).ready(function() {
                 <td>${item.branchName || ''}</td>
                 <td>${item.rateOfInterest || ''}</td>
                 <td>${item.interestType || ''}</td>
-                <td>${item.emiType || ''}</td>
-                <td>${item.emiFrequency || ''}</td>
-                <td>${item.planActivationStatus || ''}</td>
+               
                 <td>${item.processingFeePercent || ''}</td>
                 <td>${item.legalChargesPercent || ''}</td>
                 <td>${item.gstPercent || ''}</td>
                 <td>${item.insuranceFeePercent || ''}</td>
                 <td>${item.valuationFeePercent || ''}</td>
-                <td>${item.lateAllowanceDays || ''}</td>
-                <td>${item.penaltyMode || ''}</td>
-                <td>${item.monthlyPenalty || ''}</td>
+               
                 <td class="d-flex" style="gap: .7rem;">
                   <button class="iconbutton edit-btn" data-id="${item.id}">
                     <i class="fa-solid fa-pen-to-square text-success"></i>
@@ -123,14 +119,14 @@ $(document).ready(function() {
 			success: function(res) {
 				const item = res.data;
 				if (item) {
-					
+
 					$('#id').val(item.id);
 					$('#planCode').val(item.planCode);
 					$('#loanSchemeInformation').val(item.loanSchemeInformation);
 					$('#minimumAge').val(item.minimumAge);
 					$('#maximumAge').val(item.maximumAge);
 					$('#Term').val(item.Term);
-					
+
 					$('#branchName').val(item.branchName);
 					$('#minLoanAmt').val(item.minLoanAmt);
 					$('#maximumLoanAmount').val(item.maximumLoanAmount);
@@ -164,7 +160,7 @@ $(document).ready(function() {
 
 	// Update
 	$('#updatelendingBtn').on('click', function() {
-			const id = $('#id').val();// Ensure this is correctly set in your HTML
+		const id = $('#id').val();// Ensure this is correctly set in your HTML
 
 		console.log("Updating Lending Group ID:", id); // Debug
 
@@ -175,12 +171,12 @@ $(document).ready(function() {
 
 		// Gather form values
 		const loanPlan = {
-			
+
 			loanSchemeInformation: $('#loanSchemeInformation').val()?.trim(),
 			minimumAge: $('#minimumAge').val(),
 			maximumAge: $('#maximumAge').val(),
 			Term: $('#Term').val(),
-			
+
 			branchName: $('#branchName').val()?.trim(),
 			minLoanAmt: $('#minLoanAmt').val(),
 			maximumLoanAmount: $('#maximumLoanAmount').val(),
@@ -200,7 +196,7 @@ $(document).ready(function() {
 			monthlyPenalty: $('#monthlyPenalty').val()
 		};
 
-		
+
 		// AJAX call to update the lending group
 		$.ajax({
 			url: `api/joinliability/updateLendingGroup/${id}`,
@@ -241,6 +237,6 @@ $(document).ready(function() {
 			});
 		}
 	});
-	
-	
+
+
 });
