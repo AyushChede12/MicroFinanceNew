@@ -160,6 +160,15 @@ public class SecuredGoldLoanController {
 	        ApiResponse.success(HttpStatus.OK, "Data Saved successfully", saved)
 	    );
 	}
+	
+	@GetMapping("/getAllCustomers")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomers() {
+	    List<addCustomer> list = secureGoldLoanService.getAllCustomers();
+
+	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+	            list.isEmpty() ? "No records found" : "Records fetched successfully", list));
+	}
+
 
 
 }
