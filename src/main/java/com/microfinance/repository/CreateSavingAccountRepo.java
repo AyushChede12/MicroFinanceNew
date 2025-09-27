@@ -34,6 +34,7 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	List<CreateSavingsAccount> findByIsApprovedTrueAndMessageSend(String messageSend);
 
+
 	
 	
 //	
