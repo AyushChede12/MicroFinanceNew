@@ -591,4 +591,9 @@ public class DataCorrectionService {
 		}
 	}
 
+	public List<LoanApplication> getApprovedLoan() {
+		// TODO Auto-generated method stub
+		return loanApplicationRepo.findByApprovalStatusTrue();
+	}
+
 }
