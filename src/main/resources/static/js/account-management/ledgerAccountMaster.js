@@ -28,9 +28,7 @@ $(document).ready(function() {
 		} else if (group === "LIABILITIES" || group === "EQUITY" || group === "INCOME") {
 			drcr = "CR";
 		}
-		$("#openingBalanceType").val(drcr);
-		$("#groupName").trigger("change");
-
+		$("#openingBalanceType").val(drcr); // ✅ just set value
 	});
 
 });
@@ -115,7 +113,9 @@ function saveLedger() {
 		accountType: $('#accountType').val(),
 		openingBalance: parseFloat($('#openingBalance').val()) || 0.00,
 		openingBalanceType: $('#openingBalanceType').val(),   // <-- NEW
-		currentBalance: parseFloat($('#currentBalance').val()) || parseFloat($('#openingBalance').val()) || 0.00,
+		currentBalance: $('#accountId').val()
+			? parseFloat($('#currentBalance').val()) || 0.00   // update case
+			: parseFloat($('#openingBalance').val()) || 0.00,  // new ledger case
 		status: $('#status').val(),
 		branchName: $('#branchName').val()
 	};
@@ -165,6 +165,8 @@ function loadLedgerData() {
                             <td>${ledger.accountType || ''}</td>
                             <td>${ledger.openingBalance != null ? ledger.openingBalance.toFixed(2) : ''}</td>
 							<td>${ledger.openingBalanceType || ''}</td>
+							<td>${ledger.currentBalance != null ? ledger.currentBalance.toFixed(2) : ''}</td> <!-- ✅ NEW -->
+
 
                             <td>${ledger.status || ''}</td>
                             <td>${ledger.branchName || ''}</td>
@@ -262,7 +264,7 @@ function AccountTypeDropdown() {
 	const types = ["Cash", "Bank", "Member", "Loan", "Share"];
 	let options = "<option value=''>Select Type</option>";
 	types.forEach(type => {
-		options += `<option value='${type.toUpperCase()}'>${type}</option>`;
+		options += `<option value='${type}'>${type}</option>`;
 	});
 	$("#accountType").html(options);
 }

@@ -153,14 +153,14 @@ $(document).ready(function () {
             comments: $('#comments').val(),
             transactionType: transactionType,
             transactionAmount: txnAmount.toFixed(2),
-            payBy: $('#payBy').val()
-            /*chequeNo: $('#chequeNo').val(),
+            payBy: $('#payBy').val(),
+            chequeNo: $('#chequeNo').val(),
             chequeDate: $('#chequeDate').val(),
             depositAcc1: $('#depositAcc1').val(),
             depositAcc2: $('#depositAcc2').val(),
             refNumber1: $('#refNumber1').val(),
             depositAcc3: $('#depositAcc3').val(),
-            refNumber2: $('#refNumber2').val()*/
+            refNumber2: $('#refNumber2').val()
             
         };
 

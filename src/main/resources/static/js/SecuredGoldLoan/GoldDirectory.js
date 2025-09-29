@@ -1,81 +1,132 @@
 $(document).ready(function() {
+	// Populate member codes
+	$.ajax({
+		url: "api/customermanagement/approved",
+		type: "GET",
+		data: { memberCode: "" },
+		success: function(response) {
+			var select = $("#customerCode");
+			select.empty();
+			select.append('<option value="">Select member Code</option>');
 
-    function saveGoldDirectory(newData, successMsg) {
-        let id = $("#goldDirectoryId").val(); // hidden field
+			if (response && response.data && response.data.length > 0) {
+				response.data.forEach(function(customer) {
+					var optionText = customer.memberCode + "-" + customer.customerName;
+					var optionValue = customer.memberCode;
+					select.append(
+						'<option value="' + optionValue + '">' + optionText + "</option>"
+					);
+				});
+			} else {
+				console.log("No members found");
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching members", err);
+		},
+	});
+	$("#customerCode").on("change", function() {
+			var memberCode = $(this).val();
+			if (memberCode) {
+				$.ajax({
+					url: "api/securedGoldLoan/getByMemberCodeGoldLoan",
+					type: "GET",
+					data: { memberCode: memberCode },
+					success: function(response) {
+						if (response && response.data && response.data.length > 0) {
+							var customer = response.data[0]; // assuming first record
 
-        // Merge all current values
-        let payload = {
-            id: id || null,
-            karat: newData.karat || $("#karat").val() || "",
-            silverRate: newData.silverRate || $("#silverRate").val() || "",
-            goldRate: newData.goldRate || $("#goldRate").val() || "",
-            itemMasterType: newData.itemMasterType || $("#itemMasterType").val() || "",
-            itemName: newData.itemName || $("#ItemName").val() || "",
-            lockerLocation: newData.lockerLocation || $("#lockerLocation").val() || "",
-            lockerAddress: newData.lockerAddress || $("#lockerAddress").val() || "",
-            purityName: newData.purityName || $("#purityName").val() || "",
-            purity: newData.purity || $("#purity").val() || "",
-            itemPurityType: newData.itemPurityType || $("#itemPurityType").val() || ""
-        };
+							// Populate form fields
+							$("#customerName").val(customer.customerName || "");
 
-        $.ajax({
-            url: "/api/securedGoldLoan/saveGoldDirectory",
-            type: "POST",
-            data: payload,
-            success: function(response) {
-                if (response && response.data) {
-                    // First save → set ID
-                    if (!id) {
-                        $("#goldDirectoryId").val(response.data.id);
-                    }
-                    alert(successMsg);
-                } else {
-                    alert("Error: Invalid response from server");
-                }
-            },
-            error: function(xhr) {
-                console.error("Error Response:", xhr);
-                alert("Something went wrong! " + xhr.status + " " + xhr.statusText);
-            }
-        });
-    }
+						} else {
+							alert("No details found for this member");
+						}
+					},
+					error: function(err) {
+						console.error("Error fetching customer details", err);
+					},
+				});
+			} else {
+				// clear fields if no member selected
+				$("#customerName").val("");
+			}
+		});
+		
+		//for bind the branch in dropdown
+		$.ajax({
+		        url: "api/customermanagement/approved",
+		        type: "GET",
+		        success: function (response) {
+		            var select = $("#lockerBranch");
+		            select.empty(); 
+		            select.append('<option value="">Select Branch</option>');
 
-    // ======= Button Events =======
-    $("#saveTodaysRateBtn").on("click", function(e) {
-        e.preventDefault();
-        let idExists = $("#goldDirectoryId").val();
-        saveGoldDirectory({
-            karat: $("#karat").val(),
-            silverRate: $("#silverRate").val(),
-            goldRate: $("#goldRate").val()
-        }, idExists ? "Today's Rate updated successfully!" : "Today's Rate saved successfully!");
-    });
+		            if (response && response.data) {
+		                // Store distinct branch names in a Set
+		                var branchSet = new Set();
 
-    $("#saveItemMasterBtn").on("click", function(e) {
-        e.preventDefault();
-        let idExists = $("#goldDirectoryId").val();
-        saveGoldDirectory({
-            itemMasterType: $("#itemMasterType").val(),
-            itemName: $("#ItemName").val()
-        }, idExists ? "Item Master updated successfully!" : "Item Master saved successfully!");
-    });
+		                $.each(response.data, function (index, customer) {
+		                    if (customer.branchName) {
+		                        branchSet.add(customer.branchName.trim());
+		                    }
+		                });
 
-    $("#saveLockerMasterBtn").on("click", function(e) {
-        e.preventDefault();
-        let idExists = $("#goldDirectoryId").val();
-        saveGoldDirectory({
-            lockerLocation: $("#lockerLocation").val(),
-            lockerAddress: $("#lockerAddress").val()
-        }, idExists ? "Locker Master updated successfully!" : "Locker Master saved successfully!");
-    });
+		                // Append distinct branches
+		                branchSet.forEach(function (branch) {
+		                    select.append('<option value="' + branch + '">' + branch + '</option>');
+		                });
+		            }
+		        },
+		        error: function () {
+		            alert("Failed to fetch branches.");
+		        }
+		    });
+			
+			//for save the data 
+			
+			$("#saveButtonforGoldDirectory").click(function (e) {
+			       e.preventDefault(); // form submit ko stop kare
 
-    $("#savePurityMasterBtn").on("click", function(e) {
-        e.preventDefault();
-        let idExists = $("#goldDirectoryId").val();
-        saveGoldDirectory({
-            purityName: $("#purityName").val(),
-            purity: $("#purity").val(),
-            itemPurityType: $("#itemPurityType").val()
-        }, idExists ? "Purity Master updated successfully!" : "Purity Master saved successfully!");
-    });
-});
+			       // Form data collect
+			       var formData = {
+			           //id: $("#goldDirectoryId").val(), // agar id empty hai to null bhejega
+			           customerCode: $("#customerCode").val(),
+			           customerName: $("#customerName").val(),
+			           karat: $("#karat").val(),
+			           todayRate: $("#todayRate").val(),
+			           custgoldRate: $("#custgoldRate").val(),
+			           itemMasterType: $("#itemMasterType").val(),
+			           itemName: $("#ItemName").val(),
+			           lockerBranch: $("#lockerBranch").val(),
+			           lockerNumber: $("#lockerNumber").val(),
+			           purityName: $("#purityName").val(),
+			           purity: $("#purity").val(),
+			           itemPurityType: $("#itemPurityType").val(),
+			           loanPlanName: $("#loanPlanName").val(),
+			           typeOfLoan: $("#typeOfLoan").val(),
+			           loanMode: $("#loanMode").val(),
+			           loanTerm: $("#loanTerm").val(),
+			           rateOfInterest: $("#rateOfInterest").val(),
+			           loanAmount: $("#loanAmount").val(),
+			           typeIntrest: $("#typeIntrest").val(),
+			           emiPayment: $("#emiPayment").val()
+			       };
+
+			       // Ajax call
+			       $.ajax({
+			           url: "/api/securedGoldLoan/saveGoldDirectory",
+			           type: "POST",
+			           contentType: "application/json",
+			           data: JSON.stringify(formData),
+			           success: function (response) {
+			               alert(response.message || "Saved successfully");
+			               $("#formid")[0].reset(); // form reset
+			               $("#goldDirectoryId").val(""); // hidden id clear
+			           },
+			           error: function (xhr) {
+			               alert("Error: " + (xhr.responseJSON?.message || "Something went wrong"));
+			           }
+			       });
+			   });
+	});

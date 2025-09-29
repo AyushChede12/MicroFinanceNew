@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Executive/Founder</li>
@@ -154,8 +154,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relation Name <span class="star">*</span></label>
-								<input type="text" name="relationName" id="relationName"
+								<label for="">Nominee Name <span class="star">*</span></label> <input
+									type="text" name="relationName" id="relationName"
 									required="required" placeholder="Enter Relation Name" /> <small
 									id="chkrelationname" style="color: red;"></small>
 							</div>
@@ -288,8 +288,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mt-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Share Amount</label> <input type="text"
-									name="shareAmount" id="shareAmount" required="required"
-									placeholder="Enter Share Amount" />
+									readonly="readonly" name="shareAmount" id="shareAmount"
+									required="required" placeholder="Enter Share Amount" />
 							</div>
 						</div>
 
@@ -298,7 +298,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 
-					<div class="row mt-4">
+					<div class="row mt-5">
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
@@ -334,6 +334,51 @@ pageEncoding="ISO-8859-1"%> -->
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="signaturePreview" /><input type="hidden"
 										name="signatureHidden" id="signatureHidden">
+									<!-- <p
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
+								</div>
+							</label> <small id="chksignature" style="color: red;"></small>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Executive
+								Photo <span class="star">*</span>
+							</label> <label for="executivePhoto" id="drop-area"> <input type="file"
+								accept="image/*" name="executivePhoto" id="executivePhoto" hidden="hidden"
+								onchange="exephotoUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="exephotoPreview" /><input type="hidden" name="exephotoHidden"
+										id="exephotoHidden">
+
+									<!-- <p id="upload-text"
+                    style="font-size: 12px; margin-top: 15px"
+                    class="text-muted"
+                  >
+                    Drag and drop or Choose File to upload the image
+                  </p> -->
+								</div>
+							</label> <small id="chkphoto" style="color: red;"></small>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Executive
+								Signature <span class="star">*</span>
+							</label> <label for="executiveSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="executiveSignature" id="executiveSignature"
+								hidden="hidden" onchange="exesignatureUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="exesignaturePreview" /><input type="hidden"
+										name="exesignatureHidden" id="exesignatureHidden">
 									<!-- <p
                     style="font-size: 12px; margin-top: 15px"
                     class="text-muted"
