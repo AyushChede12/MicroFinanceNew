@@ -107,33 +107,7 @@ public class SecuredGoldLoanService {
 	 * 
 	 * return goldDirectoryRepo.save(goldDirectory); }
 	 */
-	public GoldDirectory saveOrUpdateGoldDirectory(Long id, String karat, String silverRate, String goldRate,
-			String itemMasterType, String itemName, String lockerLocation, String lockerAddress, String purityName,
-			String purity, String itemPurityType) {
-		
-		GoldDirectory goldDirectory;
-
-        if (id != null) {
-            goldDirectory = goldDirectoryRepo.findById(id).orElse(new GoldDirectory());
-        } else {
-            goldDirectory = new GoldDirectory();
-        }
-
-        // Set all fields
-        goldDirectory.setKarat(karat);
-        goldDirectory.setSilverRate(silverRate);
-        goldDirectory.setGoldRate(goldRate);
-        goldDirectory.setItemMasterType(itemMasterType);
-        goldDirectory.setItemName(itemName);
-        goldDirectory.setLockerLocation(lockerLocation);
-        goldDirectory.setLockerAddress(lockerAddress);
-        goldDirectory.setPurityName(purityName);
-        goldDirectory.setPurity(purity);
-        goldDirectory.setItemPurityType(itemPurityType);
-
-        return goldDirectoryRepo.save(goldDirectory);
-	}
-
+	
 	public List<GoldDirectory> getAllGoldDirectories() {
 		// TODO Auto-generated method stub
 		return goldDirectoryRepo.findAll();
@@ -154,6 +128,11 @@ public class SecuredGoldLoanService {
 	public List<SecuredGoldPlan> getLoanPlanNameApplyForGoldByLoanPlan(String loanPlanName) {
 		// TODO Auto-generated method stub
 		return goldSecurePlanRepo.findByloanPlanName(loanPlanName);
+	}
+
+	public GoldDirectory saveGoldDirectory(GoldDirectory goldDirectory) {
+		// TODO Auto-generated method stub
+		return goldDirectoryRepo.save(goldDirectory);
 	}
 
 	
