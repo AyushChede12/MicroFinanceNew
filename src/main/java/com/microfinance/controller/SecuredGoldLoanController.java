@@ -127,16 +127,16 @@ public class SecuredGoldLoanController {
 	}
 	
 	
-	//for Apply for gold by using loanPlanName 
+	//fetching data by using loanPlanName 
 	
 	@GetMapping("/getLoanPlanNameApplyForGold")
-	public ResponseEntity<ApiResponse<List<SecuredGoldPlan>>> getLoanPlanNameApplyForGold(@RequestParam String loanPlanName) {
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getLoanPlanNameApplyForGold(@RequestParam String loanPlanName) {
 		try {
-			List<SecuredGoldPlan> goldLoanList = secureGoldLoanService.getLoanPlanNameApplyForGoldByLoanPlan(loanPlanName);
+			List<GoldDirectory> goldLoanList = secureGoldLoanService.getLoanPlanNameApplyForGoldByLoanPlan(loanPlanName);
 
 			if (goldLoanList == null || goldLoanList.isEmpty()) {
 				return ResponseEntity.status(HttpStatus.NOT_FOUND)
-						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No Loan Found", null));
 			}
 
 			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "LoanPlan found", goldLoanList));
@@ -169,6 +169,22 @@ public class SecuredGoldLoanController {
 	            list.isEmpty() ? "No records found" : "Records fetched successfully", list));
 	}
 
+	@GetMapping("/getByMemberCodeApplyForGold")
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getByMemberCodeApplyForGold(@RequestParam String customerCode) {
+		try {
+			List<GoldDirectory> goldLoanList = secureGoldLoanService.getByMemberCodeApplyForGoldByLoanPlan(customerCode);
+
+			if (goldLoanList == null || goldLoanList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No Loan Found", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "LoanPlan found", goldLoanList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
 
 
 }

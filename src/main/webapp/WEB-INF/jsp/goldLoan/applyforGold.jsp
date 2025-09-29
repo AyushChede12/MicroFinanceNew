@@ -141,7 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">branchName Name </label> <input type="text"
+								<label for="">BranchName</label> <input type="text"
 									name="branchName" id="branchName" required="required"
 									placeholder="Branch Name" />
 							</div>
@@ -183,7 +183,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Loan Term</label> <input type="text"
 									name="loanTerm" id="loanTerm" required="required"
-									placeholder="Plan Duration" style="text-transform: uppercase;" />
+									placeholder="Enter Loan Term" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -340,13 +340,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Item Name</label> <select id="itemName"
+								<label for="itemName">Item Name</label> <input type="text" id="itemName"
 									name="itemName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">-Select-</option>
-									<option value="Gold">Gold</option>
-									<option value="Silver">Silver</option>
-								</select>
+									placeholder="Enter Karat Rate">
 							</div>
 						</div>
 

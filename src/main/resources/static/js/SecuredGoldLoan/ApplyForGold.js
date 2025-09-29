@@ -346,39 +346,135 @@ $(document).ready(function() {
 										  $("#toggle-sms-send").prop("checked", false);
 									  }
 */
-									if (parseInt(cust.smsSend) === 1) {
-										$('#toggle-sms-send').prop('checked', true);
-									} else {
-										$('#toggle-sms-send').prop('checked', false);
-									}									// Photo
-									if (cust.customerPhoto) {
-									    const photoPath = "Uploads/" + cust.customerPhoto; // ya jo bhi aapka folder path ho
-									    $("#photoPreview").attr("src", photoPath);
-									    $("#photoHidden").val(photoPath);
-									    photoSizeEdit({ target: { result: photoPath } });
-									} else {
-									    $("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
-									    $("#photoHidden").val("");
-									}
+			if (parseInt(cust.smsSend) === 1) {
+				$('#toggle-sms-send').prop('checked', true);
+			} else {
+				$('#toggle-sms-send').prop('checked', false);
+			}									// Photo
+			if (cust.customerPhoto) {
+				const photoPath = "Uploads/" + cust.customerPhoto; // ya jo bhi aapka folder path ho
+				$("#photoPreview").attr("src", photoPath);
+				$("#photoHidden").val(photoPath);
+				photoSizeEdit({ target: { result: photoPath } });
+			} else {
+				$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+				$("#photoHidden").val("");
+			}
 
-									if (cust.customerSignature) {
-									    const signPath = "Uploads/" + cust.customerSignature; // ya jo bhi folder path ho
-									    $("#signaturePreview").attr("src", signPath);
-									    $("#signatureHidden").val(signPath);
-									    signatureSizeEdit({ target: { result: signPath } });
-									} else {
-									    $("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
-									    $("#signatureHidden").val("");
-									}
+			if (cust.customerSignature) {
+				const signPath = "Uploads/" + cust.customerSignature; // ya jo bhi folder path ho
+				$("#signaturePreview").attr("src", signPath);
+				$("#signatureHidden").val(signPath);
+				signatureSizeEdit({ target: { result: signPath } });
+			} else {
+				$("#signaturePreview").attr("src", "Uploads/default-placeholder.jpg");
+				$("#signatureHidden").val("");
+			}
 
-									
-									updateToggleColor(document.getElementById('toggle-sms-send'));
+
+			updateToggleColor(document.getElementById('toggle-sms-send'));
 
 
 		} else {
 			alert("No matching data found!");
 		}
 	});
+
+	//for binding LoanPlanName on Dropdown
+	$.ajax({
+		url: "api/securedGoldLoan/getAllGoldDirectories",
+		type: "GET",
+		data: { loanPlanName: "" },
+		success: function(response) {
+			var select = $("#loanPlanName");
+			select.empty();
+			select.append('<option value="">Select LoanPlanName</option>');
+
+			if (response && response.data && response.data.length > 0) {
+				response.data.forEach(function(directory) {
+					var optionText = directory.loanPlanName;
+					var optionValue = directory.loanPlanName;
+					select.append(
+						'<option value="' + optionValue + '">' + optionText + "</option>"
+					);
+				});
+			} else {
+				console.log("No LoanPlanName found");
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching members", err);
+		},
+	});
+	//for fetching by using LoanPlanName
+	$("#loanPlanName").on("change", function() {
+		var loanPlanName = $(this).val();
+		if (loanPlanName) {
+			$.ajax({
+				url: "api/securedGoldLoan/getLoanPlanNameApplyForGold",
+				type: "GET",
+				data: { loanPlanName: loanPlanName },
+				success: function(response) {
+					if (response && response.data && response.data.length > 0) {
+						var planName = response.data[0]; // assuming first record
+
+						// Populate form fields
+						$("#typeOfLoan").val(planName.typeOfLoan || "");
+						$("#loanMode").val(planName.loanMode || "");
+						$("#loanTerm").val(planName.loanTerm || "");
+						$("#rateOfInterest").val(planName.rateOfInterest || "");
+						$("#loanAmount").val(planName.loanAmount || "");
+						$("#interestType").val(planName.typeIntrest || "");
+						$("#emiPayment").val(planName.emiPayment || "");
+
+
+
+					} else {
+						alert("No details found for this member");
+					}
+				},
+				error: function(err) {
+					console.error("Error fetching customer details", err);
+				},
+			});
+		} else {
+			// clear fields if no member selected
+			$("#typeOfLoan, #loanMode, #loanTerm, #rateOfInterest, #loanAmount, #interestType, #emiPayment").val("");
+		}
+	});
+	
+	//onchange on CustomerCode by poonam
+	$("#memberCode").on("change", function() {
+				var customerCode = $(this).val();
+				if (customerCode) {
+					$.ajax({
+						url: "api/securedGoldLoan/getByMemberCodeApplyForGold",
+						type: "GET",
+						data: { customerCode: customerCode },
+						success: function(response) {
+							if (response && response.data && response.data.length > 0) {
+								var customer = response.data[0]; // assuming first record				
+								// Populate form fields
+								$("#karat").val(customer.karat || "");
+								$("#itemName").val(customer.itemName || "");
+								$("#loanTerm").val(customer.minTerm || "");
+								$("#rateOfInterest").val(customer.rateInterestType || "");
+								$("#loanAmount").val(customer.minAmt || "");
+								$("#interestType").val(customer.interestType || "");
+
+							} else {
+								alert("No details found for this member");
+							}
+						},
+						error: function(err) {
+							console.error("Error fetching customer details", err);
+						},
+					});
+				} else {
+					// clear fields if no member selected
+					$("#customerName, #dateOfBirth, #age, #contactNo, #address, #pinCode, #branchName").val("");
+				}
+			});
 });
 
 function photoSizeEdit(e) {

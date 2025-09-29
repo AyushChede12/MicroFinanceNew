@@ -125,14 +125,19 @@ public class SecuredGoldLoanService {
 		return applyForGoldRepo.findAll();
 	}
 
-	public List<SecuredGoldPlan> getLoanPlanNameApplyForGoldByLoanPlan(String loanPlanName) {
+	public List<GoldDirectory> getLoanPlanNameApplyForGoldByLoanPlan(String loanPlanName) {
 		// TODO Auto-generated method stub
-		return goldSecurePlanRepo.findByloanPlanName(loanPlanName);
+		return goldDirectoryRepo.findByloanPlanName(loanPlanName);
 	}
 
 	public GoldDirectory saveGoldDirectory(GoldDirectory goldDirectory) {
 		// TODO Auto-generated method stub
 		return goldDirectoryRepo.save(goldDirectory);
+	}
+
+	public List<GoldDirectory> getByMemberCodeApplyForGoldByLoanPlan(String customerCode) {
+		// TODO Auto-generated method stub
+		return goldDirectoryRepo.findBycustomerCode(customerCode);
 	}
 
 	
