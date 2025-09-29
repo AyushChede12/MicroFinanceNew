@@ -551,10 +551,10 @@
 
 				<ul id="Goldloan-section" class="nav-content collapse">
 
-					<li><a href="goldSecurePlan"> <i class="bi bi-circle"></i>
+					<!-- <li><a href="goldSecurePlan"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Gold
 								Secure Plan</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="goldDirectory"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Gold

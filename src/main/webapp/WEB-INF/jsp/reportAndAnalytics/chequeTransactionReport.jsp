@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -68,7 +72,13 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Type</option>
-									<option value="RD">RD</option>
+									<option value="RD">Cheque Issued</option>
+									<option value="RD">Cheque Received</option>
+									<option value="RD">Cleared Cheque</option>
+									<option value="RD">Bounced Cheque</option>
+									<option value="RD">Pending Cheque</option>
+									<option value="RD">Cancelled Cheque</option>
+									<option value="RD">Transferred Cheque</option>
 								</select>
 							</div>
 						</div>
@@ -76,11 +86,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
+								<label for="branchName">Branch </label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
 								</select>
 							</div>
 						</div>

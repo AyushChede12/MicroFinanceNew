@@ -91,21 +91,7 @@ public class SecuredGoldLoanController {
 		}
 	}
 
-	// By poonam for GoldDirectory on 11/09/2025
-
-	@PostMapping("/saveGoldDirectory")
-	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestParam(required = false) Long id,
-			@RequestParam String karat, @RequestParam String silverRate, @RequestParam String goldRate,
-			@RequestParam String itemMasterType, @RequestParam String itemName, @RequestParam String lockerLocation,
-			@RequestParam String lockerAddress, @RequestParam String purityName, @RequestParam String purity,
-			@RequestParam String itemPurityType) {
-
-		GoldDirectory saved = secureGoldLoanService.saveOrUpdateGoldDirectory(id, karat, silverRate, goldRate,
-				itemMasterType, itemName, lockerLocation, lockerAddress, purityName, purity, itemPurityType);
-
-		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
-				(id == null ? "Row created successfully" : "Row updated successfully"), saved));
-	}
+	
 
 	@GetMapping("/getAllGoldDirectories")
 	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getAllGoldDirectories() {
@@ -123,7 +109,7 @@ public class SecuredGoldLoanController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("/getByMemberCodeApplyForGold")
+	@GetMapping("/getByMemberCodeGoldLoan")
 	public ResponseEntity<ApiResponse<List<addCustomer>>> getGoldLoanByMemberCode(@RequestParam String memberCode) {
 		try {
 			List<addCustomer> customerList = secureGoldLoanService.getLoanApplicationById(memberCode);
@@ -159,6 +145,22 @@ public class SecuredGoldLoanController {
 					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
 		}
 	}
+	
+	@PostMapping("/saveGoldDirectory")
+	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestBody GoldDirectory goldDirectory) {
+	    if (goldDirectory.getId() != 0) {
+	        return ResponseEntity.badRequest().body(
+	            ApiResponse.error(HttpStatus.BAD_REQUEST, "Id should not be provided while saving new record")
+	        );
+	    }
+
+	    GoldDirectory saved = secureGoldLoanService.saveGoldDirectory(goldDirectory);
+
+	    return ResponseEntity.ok(
+	        ApiResponse.success(HttpStatus.OK, "Data Saved successfully", saved)
+	    );
+	}
+
 
 }
 
