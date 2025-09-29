@@ -33,6 +33,7 @@ $(document).ready(function () {
         formData.append("profession", $('#profession').val());
         formData.append("academicBackground", $('#academicBackground').val());
 
+        // Nominee
         formData.append("nomineeName", $('#nomineeName').val());
         formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
         formData.append("nomineeAge", $('#nomineeAge').val());
@@ -42,6 +43,7 @@ $(document).ready(function () {
         formData.append("nomineeKycType", $('#nomineeKycType').val());
         formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
 
+        // Payment
         formData.append("memberFees", $('#memberFees').val());
         formData.append("chequeNo", $('#chequeNo').val());
         formData.append("chequeDate", $('#chequeDate').val());
@@ -56,18 +58,15 @@ $(document).ready(function () {
         if (customerPhoto) formData.append("customerPhoto", customerPhoto);
         if (customerSignature) formData.append("customerSignature", customerSignature);
 
-        // Toggle checkboxes (convert to 1 or 0)
+        // Toggles
         formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
         formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
         formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
         formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
 
-        // Dynamic base path for both localhost and online server
-        const contextPath = window.location.pathname.split('/')[1]; // e.g., "Microfinance"
-        const fullUrl = `${window.location.origin}api/customermanagement/saveOrUpdateCustomer`;
+        // ✅ Auto domain + context path
+        const fullUrl = window.location.origin + "/api/customermanagement/saveOrUpdateCustomer";
 
-        // Optional: log for debugging
-		console.log("Context Pth: ", contextPath);
         console.log("POST to URL: ", fullUrl);
 
         // AJAX call
@@ -77,17 +76,25 @@ $(document).ready(function () {
             data: formData,
             processData: false,
             contentType: false,
-            success: function (response) {
-                if (response.status === "OK" || response.status === "CREATED") {
-                    alert(response.message);
+            success: function (response, textStatus, xhr) {
+                console.log("✅ Response:", response);
+
+                if (xhr.status === 200 || xhr.status === 201) {
+                    alert(response.message || "Customer saved successfully!");
                     location.reload();
                 } else {
-                    alert("Server error: " + response.message);
+                    alert("Unexpected response: " + (response.message || "Unknown error"));
                 }
             },
             error: function (xhr) {
-                console.error("Error response: ", xhr.responseText);
-                alert("Something went wrong while saving. Please try again.");
+                console.error("❌ Error response: ", xhr);
+                let msg = "Something went wrong while saving.";
+                if (xhr.responseJSON && xhr.responseJSON.message) {
+                    msg = xhr.responseJSON.message;
+                } else if (xhr.responseText) {
+                    msg = xhr.responseText;
+                }
+                alert(msg);
             }
         });
     });

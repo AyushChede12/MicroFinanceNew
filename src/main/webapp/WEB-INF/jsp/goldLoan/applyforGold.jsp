@@ -79,10 +79,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Find Members</label> <select id="memberId"
-									name="memberId" required="required"
+								<label>Find Members</label> <select id="memberCode"
+									name="memberCode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select member name</option>
+									<option value="">Select member Code</option>
 
 								</select>
 							</div>
@@ -90,9 +90,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Relative Details</label> <input
-									type="text" name="relativeDetails" id="relativeDetails"
-									required="required" placeholder="Enter Relative Deatils"
+								<label for="loanName">Customer Name</label> <input
+									type="text" name="customerName" id="customerName"
+									required="required" placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -141,7 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Branch Name </label> <input type="text"
+								<label for="">branchName Name </label> <input type="text"
 									name="branchName" id="branchName" required="required"
 									placeholder="Branch Name" />
 							</div>
@@ -237,10 +237,10 @@ pageEncoding="ISO-8859-1"%> -->
 										class="mb-2">Message Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="messageStatus"
-												name="messageStatus" class="toggle__input"
-												data-toggle-type="member-status"> <label
-												for="messageStatus" class="toggle__label"></label>
+											<input type="checkbox" id="toggle-sms-send"
+												name="smsSend" class="toggle__input"
+												data-toggle-type="smsSend"> <label
+												for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
 								</div>
@@ -253,14 +253,14 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span id="star">*</span>
-							</label> <label for="Photo" id="drop-area"> <input type="file"
-								accept="image/*" name="photo" id="photo" hidden="hidden"
-								onchange=""
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="photo" id="photo"
+								hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="../upload/upload.png" alt="upload_icon"
-										id="photoPreview" /> <input type="hidden" id="photoHidden"
-										name="photoHidden">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="photoPreview" /> <input type="hidden"
+										id="photoHidden" name="photoHidden">
 
 								</div>
 							</label>
@@ -747,7 +747,8 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/LoanManagment/NewLoanApplicationjs.js"></script>
+	<script src="./js/SecuredGoldLoan/ApplyForGold.js"></script>
+	
 </body>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
@@ -770,6 +771,39 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 });
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const LOAN_PERCENTAGE = 0.75; // 75%
+
+        const karatRate = document.getElementById("karatRate");
+        const grossWt = document.getElementById("grossWt");
+        const stoneWt = document.getElementById("stoneWt");
+        const netWt = document.getElementById("netWr");
+        const marketValuation = document.getElementById("marketValuation");
+        const eligibleLoan = document.getElementById("eligibleLoan");
+
+        function calculateValues() {
+            let gross = parseFloat(grossWt.value) || 0;
+            let stone = parseFloat(stoneWt.value) || 0;
+            let rate = parseFloat(karatRate.value) || 0;
+
+            let net = gross - stone;
+            if (net < 0) net = 0;
+
+            let valuation = net * rate;
+            let loan = valuation * LOAN_PERCENTAGE;
+
+            netWt.value = net.toFixed(2);
+            marketValuation.value = valuation.toFixed(2);
+            eligibleLoan.value = loan.toFixed(2);
+        }
+
+        [karatRate, grossWt, stoneWt].forEach(input => {
+            input.addEventListener("input", calculateValues);
+        });
+    });
+  </script>
 
 </html>
 

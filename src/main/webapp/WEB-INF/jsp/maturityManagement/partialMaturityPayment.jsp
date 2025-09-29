@@ -256,6 +256,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
+					<div class="col-lg-3">
+							
+							<div class="d-flex flex-column formFields">
+								<label for="">Closing Date: <span id="star"> *</span></label> <input type="date"
+									name="closingDate" id="closingDate" required="required"
+									placeholder="" style="text-transform: uppercase;" />
+							</div>
+						</div>
 
 
 						<div class="col-lg-3">

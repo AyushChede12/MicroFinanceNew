@@ -55,6 +55,8 @@ $(document).ready(function () {
                 $("#FinancialConsultantCount h6").text(count); // Update in card
             } else {
                 $("#FinancialConsultantCount h6").text("0");
+				
+				
             }
         },
         error: function (xhr, status, error) {
@@ -89,7 +91,7 @@ $(document).ready(function () {
 //anjali (loan Application)
 $(document).ready(function () {
     $.ajax({
-        url: "/api/loanmanegment/getAllLoanIds",  // your API endpoint
+        url: "api/loanmanegment/getAllLoanIds",  // your API endpoint
         type: "GET",
         dataType: "json",
         success: function (response) {

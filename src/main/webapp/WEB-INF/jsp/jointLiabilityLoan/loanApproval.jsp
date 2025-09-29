@@ -106,7 +106,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="allocatedStaff">Allocated Staff*</label> <input
 									type="text" name="allocatedStaff" id="allocatedStaff" required
@@ -114,15 +114,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						
-						<div class="col-lg-3">
+
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Branch Name* </label> <input type="text"
 									name="branchName" id="branchName" required="required"
 									placeholder="Enter  Branch Name" />
 							</div>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Collection Schedule* </label> <input type="text"
 									name="collectionDays" id="collectionDays" required="required"
@@ -130,7 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Payment Mode* </label> <input type="text"
 									name="location" id="location" required="required"
@@ -167,22 +167,19 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Date of Approval*</label> <input
-									type="date" name="dateOfApproval" id="dateOfApproval"
+									type="date" name="approvalDate" id="approvalDate"
 									required="required" placeholder="Enter Vehicle No"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
+
 						<div class="col-lg-3">
-
-							<div class="d-flex flex-column formFields">
-								<label for="approvalStatus">Approval Status:*</label> <select
-									id="approvalStatus" name="approvalStatus" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="approved">Approved</option>
-									<option value="not_approved">Not Approved</option>
-								</select>
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="loanName">Approval Status</label> <input type="text"
+									id="approvalStatus" name="approvalStatus" class="form-control"
+									readonly
+									style="font-size: 12px; font-weight: bold; text-transform: uppercase;" />
 							</div>
-
 						</div>
 
 
@@ -190,8 +187,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button type="button" id="approved" na class="btnStyle bg-success"
-								style="margin-left: 80%">Approved</button>
+							<button type="button" id="approveBtn" 
+								class="btnStyle bg-success" style="margin-left: 80%">Approve</button>
 
 						</div>
 					</div>
@@ -204,7 +201,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		</div>
 
-		
+
 
 
 

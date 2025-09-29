@@ -17,6 +17,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.SecuredGoldPlan;
+import com.microfinance.model.addCustomer;
 import com.microfinance.service.SecuredGoldLoanService;
 
 @RestController
@@ -91,21 +92,77 @@ public class SecuredGoldLoanController {
 		}
 	}
 
-	// By poonam for GoldDirectory on 11/09/2025
+	
 
-	@PostMapping("/saveGoldDirectory")
-	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestParam(required = false) Long id,
-			@RequestParam String karat, @RequestParam String silverRate, @RequestParam String goldRate,
-			@RequestParam String itemMasterType, @RequestParam String itemName, @RequestParam String lockerLocation,
-			@RequestParam String lockerAddress, @RequestParam String purityName, @RequestParam String purity,
-			@RequestParam String itemPurityType) {
-
-		GoldDirectory saved = secureGoldLoanService.saveOrUpdateGoldDirectory(id, karat, silverRate, goldRate,
-				itemMasterType, itemName, lockerLocation, lockerAddress, purityName, purity, itemPurityType);
+	@GetMapping("/getAllGoldDirectories")
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getAllGoldDirectories() {
+		List<GoldDirectory> list = secureGoldLoanService.getAllGoldDirectories();
 
 		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
-				(id == null ? "Row created successfully" : "Row updated successfully"), saved));
+				list.isEmpty() ? "No records found" : "Records fetched successfully", list));
 	}
+
+	@GetMapping("/getAllMembersForGoldLoan")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllMembersforGold() {
+		List<addCustomer> list = secureGoldLoanService.getAllCustomers();
+		ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK, "All Members Fetched Successfully",
+				list);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("/getByMemberCodeGoldLoan")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getGoldLoanByMemberCode(@RequestParam String memberCode) {
+		try {
+			List<addCustomer> customerList = secureGoldLoanService.getLoanApplicationById(memberCode);
+
+			if (customerList == null || customerList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Customer(s) found", customerList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
+	
+	
+	//for Apply for gold by using loanPlanName 
+	
+	@GetMapping("/getLoanPlanNameApplyForGold")
+	public ResponseEntity<ApiResponse<List<SecuredGoldPlan>>> getLoanPlanNameApplyForGold(@RequestParam String loanPlanName) {
+		try {
+			List<SecuredGoldPlan> goldLoanList = secureGoldLoanService.getLoanPlanNameApplyForGoldByLoanPlan(loanPlanName);
+
+			if (goldLoanList == null || goldLoanList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "LoanPlan found", goldLoanList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
+	
+	@PostMapping("/saveGoldDirectory")
+	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestBody GoldDirectory goldDirectory) {
+	    if (goldDirectory.getId() != 0) {
+	        return ResponseEntity.badRequest().body(
+	            ApiResponse.error(HttpStatus.BAD_REQUEST, "Id should not be provided while saving new record")
+	        );
+	    }
+
+	    GoldDirectory saved = secureGoldLoanService.saveGoldDirectory(goldDirectory);
+
+	    return ResponseEntity.ok(
+	        ApiResponse.success(HttpStatus.OK, "Data Saved successfully", saved)
+	    );
+	}
+
+
 }
 
 // 1. Save Today's Rate

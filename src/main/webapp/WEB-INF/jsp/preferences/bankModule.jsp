@@ -48,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Bank Module</li>
@@ -112,6 +112,28 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
+								<label>IFSC Code <span class="star">*</span></label> <input
+									type="text" name="ifscCode" id="ifscCode" required="required"
+									placeholder="Enter IFSC Code"
+									style="text-transform: uppercase;" /> <small id="chkifsccode"
+									style="color: red;"></small>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>MICR Code <span class="star">*</span></label> <input
+									type="text" name="micrCode" id="micrCode" required="required"
+									placeholder="Enter MICR Code"
+									style="text-transform: uppercase;" /> <small id="chkmicrcode"
+									style="color: red;"></small>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
 								<label>Contact No <span class="star">*</span></label> <input
 									type="text" name="contactNo" id="contactNo" required="required"
 									placeholder="Enter Contact No"
@@ -123,18 +145,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Address <span class="star">*</span></label>
-								<textarea name="address" id="address"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
-								<small id="chkaddress" style="color: red;"></small>
-							</div>
-						</div>
-
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Opening Date <span class="star">*</span></label> <input
-									type="date" name="openingDate" id="openingDate"
+								<label>Account Opening Date <span class="star">*</span></label>
+								<input type="date" name="openingDate" id="openingDate"
 									required="required" style="text-transform: uppercase;" /> <small
 									id="chkopeningdate" style="color: red;"></small>
 							</div>
@@ -151,6 +163,26 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Account Closing Date <span class="star">*</span></label>
+								<input type="date" name="closingDate" id="closingDate"
+									required="required" style="text-transform: uppercase;" /> <small
+									id="chkclosingdate" style="color: red;"></small>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px">
+								<label>Address <span class="star">*</span></label>
+								<textarea name="address" id="address"
+									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+								<small id="chkaddress" style="color: red;"></small>
+							</div>
+						</div>
+
 
 					</div>
 
@@ -158,7 +190,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-12 text-center">
 							<button type="button" id="showBtn" class="btnStyle bg-primary"
 								onclick="showTableData()">Show</button>
-								<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
 							<button type="button" id="updateBtn" class="btnStyle bg-success"
@@ -178,29 +210,38 @@ pageEncoding="ISO-8859-1"%> -->
 									Bank Data <span>| Table View</span>
 								</h5>
 
-								<table class="table table-borderless datatable overflow-scroll"
-									id="tableBody">
+								<table class="table table-bordered table-hover text-nowrap datatable" id="tableBody">
 									<thead class="table-light">
-										<tr style="font-family: 'Poppins', sans-serif;">
+										<tr
+											style="font-family: 'Poppins', sans-serif; white-space: nowrap;">
+											<th scope="col"></th>
 											<th scope="col">Sr No</th>
 											<th scope="col">Bank Name</th>
 											<th scope="col">Account No</th>
+											<th scope="col">IFSC Code</th>
+											<th scope="col">MICR Code</th>
 											<th scope="col">Contact No</th>
 											<th scope="col">Address</th>
 											<th scope="col">Opening Date</th>
 											<th scope="col">Opening Balance</th>
+											<th scope="col">Account Closing Date</th>
 											<th scope="col">Edit</th>
 											<th scope="col">Delete</th>
 										</tr>
 									</thead>
 									<tbody id="tableBody">
-
+										<!-- Data rows dynamically -->
 									</tbody>
 								</table>
+
 								<div class="mt-2 text-center">
-									<button id="prevBtn" class="btn btn-sm btn-primary"><i class="bi bi-chevron-double-left"></i></button>
+									<button id="prevBtn" class="btn btn-sm btn-primary">
+										<i class="bi bi-chevron-double-left"></i>
+									</button>
 									<span id="pageInfo" class="mx-2"></span>
-									<button id="nextBtn" class="btn btn-sm btn-primary"><i class="bi bi-chevron-double-right"></i></button>
+									<button id="nextBtn" class="btn btn-sm btn-primary">
+										<i class="bi bi-chevron-double-right"></i>
+									</button>
 								</div>
 							</div>
 						</div>

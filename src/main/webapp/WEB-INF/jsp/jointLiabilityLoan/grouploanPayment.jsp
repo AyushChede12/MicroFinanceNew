@@ -47,7 +47,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-person-bounding-box"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Loan Re-Payment Portal</li>
+					<li class="breadcrumb-item action">Group Loan Payment</li>
 				</ol>
 			</nav>
 		</div>
@@ -60,41 +60,17 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Loan Search Details</li>
 						</ol>
 					</nav>
+
 					<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Select BY GroupID*</label> <select
-									id="groupid" name="groupid" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select GroupID</option>
-								</select>
-							</div>
+						<div class="d-flex flex-column formFields mb-4">
+							<label for="">Select BY GroupID*</label> <select id="groupid"
+								name="groupid" required="required"
+								class="form-control selectField" style="height: 30px;">
+								<option value="">Select Group ID</option>
 
+							</select>
 						</div>
-						
-					<!-- <div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Select BY GroupID*</label>
-								<div class="position-relative">
-									<div class="select-btn1" style="cursor: pointer;">
-										<span name="loanName" id="loanNameId" style="font-size: 12px;">Select
-											GroupID</span> <i class="fa-solid fa-angle-down"></i>
-									</div>
-									<div class="content" id="contentCityName"
-										style="display: none;">
-										<div class="search">
-											<input type="text" id="city-search" class="m-0"
-												placeholder="Search" />
-										</div>
-										<ul class="options" id="city-options">
-											Options will be dynamically added here
-
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> </div> -->
+					</div>
 				</div>
 
 
@@ -120,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch Name*</label> <input type="text"
@@ -128,7 +104,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-					
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Loan Scheme Name*</label> <input type="text"
@@ -136,12 +112,12 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Community Address* </label> <input type="text"
-									name="communityAddress" id="communityaddress" required="required"
-									placeholder="Enter Location" />
+									name="communityAddress" id="communityaddress"
+									required="required" placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
@@ -165,12 +141,11 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Term* </label> <input type="text"
-									name="term" id="term" required="required"
-									placeholder="Enter Location" />
+								<label for=""> Term* </label> <input type="text" name="term"
+									id="term" required="required" placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
@@ -187,7 +162,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Loan Amount* </label> <input type="text"
@@ -195,8 +170,8 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						
-						
+
+
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> EMI Amount* </label> <input type="text"
@@ -204,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 									placeholder="Enter Location" />
 							</div>
 						</div>
-						
+
 
 
 
@@ -213,10 +188,48 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 
+				<div class="row mt-4">
+					<div class="col-lg-3 mb-5">
+						<label for=""
+							style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+							Photo <span id="star">*</span>
+						</label> <label for="Photo" id="drop-area"> <input type="file"
+							accept="image/*" name="photo" id="photo" hidden="hidden"
+							onchange=""
+							style="background-size: cover; background-repeat: no-repeat" />
+							<div id="img-view">
+								<img src="../images/upload/upload.png" alt="photo"
+									id="photoPreview" /> <input type="hidden" id="photoHidden"
+									name="photoHidden">
+
+							</div>
+						</label>
+					</div>
+
+
+					<div class="col-lg-3 mb-5">
+						<label for=""
+							style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+							Signature <span id="star">*</span>
+						</label> <label for="signature" id="drop-area"> <input type="file"
+							accept="image/*" name="signature" id="signature" hidden="hidden"
+							onchange="signatureUpload();"
+							style="background-size: cover; background-repeat: no-repeat" />
+							<div id="img-view">
+								<img src="../images/upload/upload.png" alt="signature"
+									id="signaturePreview" /> <input type="hidden"
+									id="signatureHidden" name="signatureHidden">
+
+							</div>
+						</label>
+					</div>
+
+				</div>
+
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Payment Detalis</li>
+							<li class="breadcrumb-item action">Deduction Details</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -229,8 +242,9 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for=""> GST Value* </label> <input type="text" name="gstvalue"
-									id="gstvalue" required="required" placeholder="Enter Location" />
+								<label for=""> GST Value* </label> <input type="text"
+									name="gstvalue" id="gstvalue" required="required"
+									placeholder="Enter Location" />
 							</div>
 						</div>
 						<div class="col-lg-3  mb-4">
@@ -258,8 +272,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="groupCode">FinancialConsultant Code*</label> <select
-									id="financialconsultantcode" name="financialconsultantcode" required
-									class="form-control selectField" style="height: 30px;">
+									id="financialconsultantcode" name="financialconsultantcode"
+									required class="form-control selectField" style="height: 30px;">
 									<option value="">Select FinancialConsultant Code</option>
 								</select>
 							</div>
@@ -268,12 +282,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3  ">
 							<div class="d-flex flex-column formFields">
 								<label for=""> FinancialConsultant Name* </label> <input
-									type="text" name="financialconsultantname" id="financialconsultantname" required="required"
+									type="text" name="financialconsultantname"
+									id="financialconsultantname" required="required"
 									placeholder="Enter Location" />
 							</div>
 						</div>
 
 					</div>
+
+
+
 
 					<div class="mt-5">
 						<nav>
@@ -282,40 +300,17 @@ pageEncoding="ISO-8859-1"%> -->
 							</ol>
 						</nav>
 						<div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Cheque Deducted InCash*</label> <select
-									id="groupcode" name="groupcode" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Cheque Deducted InCash*</option>
-								</select>
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="groupCode">Cheque Deducted InCash*</label> <select
+										id="groupcode" name="groupcode" required
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Select Cheque Deducted InCash*</option>
+									</select>
+								</div>
+
 							</div>
 
-						</div>
-							<!-- <div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Cheque Deducted InCash*</label>
-									<div class="position-relative">
-										<div class="select-btn1" style="cursor: pointer;">
-											<span name="loanName" id="loanNameId"
-												style="font-size: 12px;">Select GroupID</span> <i
-												class="fa-solid fa-angle-down"></i>
-										</div>
-										<div class="content" id="contentCityName"
-											style="display: none;">
-											<div class="search">
-												<input type="text" id="city-search" class="m-0"
-													placeholder="Search" />
-											</div>
-											<ul class="options" id="city-options">
-												Options will be dynamically added here
-
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div> -->
 							<div class="col-lg-3  mb-4">
 								<div class="d-flex flex-column formFields">
 									<label for=""> Payment Remarks* </label> <input type="text"
@@ -325,9 +320,9 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
-									<label for="vehicalNo">Transaction Date</label> <input type="date"
-										name="vehicalNo" id="vehicalNo" required="required"
-										placeholder="Enter Vehicle No"
+									<label for="vehicalNo">Transaction Date</label> <input
+										type="date" name="vehicalNo" id="vehicalNo"
+										required="required" placeholder="Enter Vehicle No"
 										style="text-transform: uppercase;" />
 								</div>
 							</div>
@@ -340,39 +335,15 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 							<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="groupCode">Paid By*</label> <select
-									id="groupcode" name="groupcode" required
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Paid By</option>
-								</select>
-							</div>
-
-						</div>
-							<!-- <div class="col-lg-3">
-								<div class="d-flex flex-column formFields"
-									style="margin-bottom: 30px">
-									<label>Paid By*</label>
-									<div class="position-relative">
-										<div class="select-btn1" style="cursor: pointer;">
-											<span name="loanName" id="loanNameId"
-												style="font-size: 12px;">Select GroupID</span> <i
-												class="fa-solid fa-angle-down"></i>
-										</div>
-										<div class="content" id="contentCityName"
-											style="display: none;">
-											<div class="search">
-												<input type="text" id="city-search" class="m-0"
-													placeholder="Search" />
-											</div>
-											<ul class="options" id="city-options">
-												Options will be dynamically added here
-
-											</ul>
-										</div>
-									</div>
+								<div class="d-flex flex-column formFields">
+									<label for="groupCode">Paid By*</label> <select id="groupcode"
+										name="groupcode" required class="form-control selectField"
+										style="height: 30px;">
+										<option value="">Select Paid By</option>
+									</select>
 								</div>
-							</div> -->
+
+							</div>
 
 
 
@@ -381,48 +352,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						</div>
-						<div class="row mt-4">
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Customer Photo
-									</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="bike1image" id="bike1image"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
-									<div id="img-view">
-										<img src="./upload.png" alt="upload_icon"
-											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                            style="font-size: 12px; margin-top: 15px"
-                            class="text-muted"
-                          >
-                            Drag and drop or Choose File to upload the image
-                          </p> -->
-									</div>
-								</label>
-							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Customer
-									Signature</label> <label for="bike2image" id="drop-area"> <input
-									type="file" accept="image/*" name="bike2image" id="bike2image"
-									hidden="hidden" onchange="bike2Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
-									<div id="img-view">
-										<img src="./upload.png" alt="upload_icon"
-											id="bike2imagePreview" />
-										<!-- <p
-                            style="font-size: 12px; margin-top: 15px"
-                            class="text-muted"
-                          >
-                            Drag and drop or Choose File to upload the image
-                          </p> -->
-									</div>
-								</label>
-							</div>
-
-						</div>
 					</div>
 
 					<div class="row">
@@ -432,7 +362,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						</div>
 					</div>
-					</div>
+				</div>
 			</form>
 
 
@@ -448,7 +378,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/LoanRePaymentPortal.js"></script>
-	
+
 </body>
 
 </html>
