@@ -49,7 +49,6 @@ public class ReportsAndAnalyticsController {
 		}
 	}
 
-	// poonam : Fetch Unapproved Loan Application on 08-08-2025
 	@GetMapping("/getUnapprovedLoanApplication")
 	public ResponseEntity<ApiResponse<List<LoanApplication>>> getUnapprovedLoanApplication() {
 		List<LoanApplication> list = reportsAndAnalyticsService.getUnapprovedLoanApplication();
@@ -62,7 +61,6 @@ public class ReportsAndAnalyticsController {
 		}
 	}
 
-	// poonam : Fetch Loan Payment 20-08-2025
 	@GetMapping("/getLoanPaymentReport")
 	public ResponseEntity<ApiResponse<List<LoanPayment>>> getLoanPaymentReport() {
 		List<LoanPayment> list = reportsAndAnalyticsService.getLoanPaymentReport();
@@ -74,7 +72,6 @@ public class ReportsAndAnalyticsController {
 		}
 	}
 
-	// poonam : Fetch Loan Confirmation Document 28/08/2025
 	@GetMapping("/getLoanConfirmationDocument")
 	public ResponseEntity<ApiResponse<List<LoanApplication>>> getLoanConfirmationDocument() {
 		List<LoanApplication> list = reportsAndAnalyticsService.getLoanConfirmationDocument();
@@ -95,6 +92,30 @@ public class ReportsAndAnalyticsController {
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Cheque Data Not found"));
+		}
+	}
+
+	@GetMapping("/getCheckDataFromLoanPayment")
+	public ResponseEntity<ApiResponse<List<LoanPayment>>> getCheckDataFromLoanPayment() {
+		List<LoanPayment> list = reportsAndAnalyticsService.fetchCheckDataFromLoanPayment();
+		if (!list.isEmpty()) {
+			return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Loan Cheque Data fetched Successfully", list));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Loan Cheque Data Not found"));
+		}
+	}
+
+	@GetMapping("/getCheckDataFromCreateSavings")
+	public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> getCheckDataFromCreateSavings() {
+		List<CreateSavingsAccount> list = reportsAndAnalyticsService.fetchCheckDataFromCreateSavings();
+
+		if (!list.isEmpty()) {
+			return ResponseEntity
+					.ok(ApiResponse.success(HttpStatus.OK, "Saving Cheque Data fetched Successfully", list));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Saving Cheque Data Not Found"));
 		}
 	}
 

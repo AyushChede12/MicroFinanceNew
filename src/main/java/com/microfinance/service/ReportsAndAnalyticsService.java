@@ -66,6 +66,18 @@ public class ReportsAndAnalyticsService {
 		// TODO Auto-generated method stub
 		return savingAccountActivityRepo.findByPayBy("Cheque");
 	}
+
+	public List<LoanPayment> fetchCheckDataFromLoanPayment() {
+		// TODO Auto-generated method stub
+		return loanPaymentRepo.findByPaymentMode("Cheque");
+	}
+
+	public List<CreateSavingsAccount> fetchCheckDataFromCreateSavings() {
+        // Fetch only Cheque-based records
+        return createSavingAccountRepo.findByModeOfPayment("Cheque");
+    }
+
+	
 	
 
 }
