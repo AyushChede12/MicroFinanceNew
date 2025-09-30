@@ -268,7 +268,7 @@ function updateToggleColor(input) {
 
 
 
-
+const LTV = 0.75;
 
 $(document).ready(function() {
 	$.ajax({
@@ -340,12 +340,24 @@ $(document).ready(function() {
 			$("#address").val(cust.customerAddress || "");
 			$("#pinCode").val(cust.pinCode || "");
 			$("#branchName").val(cust.branchName || "");
-			/*if (cust.smsSend === "1") {
-										  $("#toggle-sms-send").prop("checked", true);
-									  } else {
-										  $("#toggle-sms-send").prop("checked", false);
-									  }
-*/
+			$("#loanPlanName").val(gold.loanPlanName || "");
+			$("#typeOfLoan").val(gold.typeOfLoan || "");
+			$("#loanMode").val(gold.loanMode || "");
+			$("#loanTerm").val(gold.loanTerm || "");
+			$("#rateOfInterest").val(gold.rateOfInterest || "");
+			$("#loanAmount").val(gold.loanAmount || "");
+			$("#interestType").val(gold.typeIntrest || "");
+			$("#emiPayment").val(gold.emiPayment || "");
+			$("#karat").val(gold.karat || "");
+			$("#itemType").val(gold.itemMasterType || "");
+			$("#custgoldRate").val(gold.custgoldRate || "");
+			$("#itemName").val(gold.itemName || "");
+			$("#lockerBranch").val(gold.lockerBranch || "");
+			$("#purity").val(gold.purity || "");
+			
+			
+			
+
 			if (parseInt(cust.smsSend) === 1) {
 				$('#toggle-sms-send').prop('checked', true);
 			} else {
@@ -380,102 +392,98 @@ $(document).ready(function() {
 		}
 	});
 
-	//for binding LoanPlanName on Dropdown
+
 	$.ajax({
-		url: "api/securedGoldLoan/getAllGoldDirectories",
-		type: "GET",
-		data: { loanPlanName: "" },
-		success: function(response) {
-			var select = $("#loanPlanName");
-			select.empty();
-			select.append('<option value="">Select LoanPlanName</option>');
+			url: "api/securedGoldLoan/getAllCustomers",
+			type: "GET",
+			data: { memberCode: "" },
+			success: function(response) {
+				var select = $("#guarantorcustomerCode,#coApplicantMemberId");
+				select.empty();
+				select.append('<option value="">Select member Code</option>');
 
-			if (response && response.data && response.data.length > 0) {
-				response.data.forEach(function(directory) {
-					var optionText = directory.loanPlanName;
-					var optionValue = directory.loanPlanName;
-					select.append(
-						'<option value="' + optionValue + '">' + optionText + "</option>"
-					);
-				});
-			} else {
-				console.log("No LoanPlanName found");
-			}
-		},
-		error: function(err) {
-			console.error("Error fetching members", err);
-		},
-	});
-	//for fetching by using LoanPlanName
-	$("#loanPlanName").on("change", function() {
-		var loanPlanName = $(this).val();
-		if (loanPlanName) {
-			$.ajax({
-				url: "api/securedGoldLoan/getLoanPlanNameApplyForGold",
-				type: "GET",
-				data: { loanPlanName: loanPlanName },
-				success: function(response) {
-					if (response && response.data && response.data.length > 0) {
-						var planName = response.data[0]; // assuming first record
-
-						// Populate form fields
-						$("#typeOfLoan").val(planName.typeOfLoan || "");
-						$("#loanMode").val(planName.loanMode || "");
-						$("#loanTerm").val(planName.loanTerm || "");
-						$("#rateOfInterest").val(planName.rateOfInterest || "");
-						$("#loanAmount").val(planName.loanAmount || "");
-						$("#interestType").val(planName.typeIntrest || "");
-						$("#emiPayment").val(planName.emiPayment || "");
-
-
-
-					} else {
-						alert("No details found for this member");
-					}
-				},
-				error: function(err) {
-					console.error("Error fetching customer details", err);
-				},
-			});
-		} else {
-			// clear fields if no member selected
-			$("#typeOfLoan, #loanMode, #loanTerm, #rateOfInterest, #loanAmount, #interestType, #emiPayment").val("");
-		}
-	});
-	
-	//onchange on CustomerCode by poonam
-	$("#memberCode").on("change", function() {
-				var customerCode = $(this).val();
-				if (customerCode) {
-					$.ajax({
-						url: "api/securedGoldLoan/getByMemberCodeApplyForGold",
-						type: "GET",
-						data: { customerCode: customerCode },
-						success: function(response) {
-							if (response && response.data && response.data.length > 0) {
-								var customer = response.data[0]; // assuming first record				
-								// Populate form fields
-								$("#karat").val(customer.karat || "");
-								$("#itemName").val(customer.itemName || "");
-								$("#loanTerm").val(customer.minTerm || "");
-								$("#rateOfInterest").val(customer.rateInterestType || "");
-								$("#loanAmount").val(customer.minAmt || "");
-								$("#interestType").val(customer.interestType || "");
-
-							} else {
-								alert("No details found for this member");
-							}
-						},
-						error: function(err) {
-							console.error("Error fetching customer details", err);
-						},
+				if (response && response.data && response.data.length > 0) {
+					response.data.forEach(function(customer) {
+						var optionText = customer.memberCode + "-" + customer.customerName;
+						var optionValue = customer.memberCode;
+						select.append(
+							'<option value="' + optionValue + '">' + optionText + "</option>"
+						);
 					});
 				} else {
-					// clear fields if no member selected
-					$("#customerName, #dateOfBirth, #age, #contactNo, #address, #pinCode, #branchName").val("");
+					console.log("No members found");
 				}
-			});
+			},
+			error: function(err) {
+				console.error("Error fetching members", err);
+			},
+		});
+		
+		$("#guarantorcustomerCode").on("change", function() {
+					var memberCode = $(this).val();
+					if (memberCode) {
+						$.ajax({
+							url: "api/securedGoldLoan/getByMemberCodeGoldLoan",
+							type: "GET",
+							data: { memberCode: memberCode },
+							success: function(response) {
+								if (response && response.data && response.data.length > 0) {
+									var code = response.data[0]; // assuming first record
+
+									// Populate form fields
+									$("#gurantorIdentity").val(code.customerName || "");
+									$("#guarantorAddress").val(code.customerAddress || "");
+									$("#guarantorPinCode").val(code.pinCode || "");
+									$("#guarantorContactNo").val(code.contactNo || "");
+									$("#loanAmount").val(planName.minAmt || "");
+									$("#interestType").val(planName.interestType || "");
+									
+
+								} else {
+									alert("No details found for this member");
+								}
+							},
+							error: function(err) {
+								console.error("Error fetching customer details", err);
+							},
+						});
+					} else {
+						// clear fields if no member selected
+						$("#customerName, #dateOfBirth, #age, #contactNo, #address, #pinCode, #branchName").val("");
+					}
+				});
+
+
+	// 75% Loan to Value fixed
+
+	// Jab bhi user input kare to calculation trigger ho
+	$("#grossWt, #stoneWt, #purity, #custgoldRate").on("input", function() {
+		calculateValuation();
+	});
 });
+
+function calculateValuation() {
+	// Get values
+	let grossWeight = parseFloat($("#grossWt").val()) || 0;
+	let stoneWeight = parseFloat($("#stoneWt").val()) || 0;
+	let purity = parseFloat($("#purity").val()) || 0;
+	let customerKaratRate = parseFloat($("#custgoldRate").val()) || 0;
+
+	// Net weight
+	let netWeight = grossWeight - stoneWeight;
+	if (netWeight < 0) netWeight = 0;
+
+	// Market Valuation
+	let marketValuation = (netWeight * purity * customerKaratRate) / 100;
+
+	// Eligible Loan
+	let eligibleLoan = marketValuation * LTV;
+
+	// Set values back to form
+	$("#netWt").val(netWeight.toFixed(2));
+	$("#marketValuation").val(marketValuation.toFixed(2));
+	$("#eligibleLoan").val(eligibleLoan.toFixed(2));
+}
 
 function photoSizeEdit(e) {
 	const previewimg = document.getElementById("photoPreview");
