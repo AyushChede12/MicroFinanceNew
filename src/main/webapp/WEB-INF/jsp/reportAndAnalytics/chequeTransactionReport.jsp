@@ -125,7 +125,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="findBtn" class="btn btn-dark">Find</button>
+							<button type="button" id="findBtn" class="btn btn-dark">Find</button>
 						</div>
 					</div>
 

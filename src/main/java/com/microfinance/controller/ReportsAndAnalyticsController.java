@@ -15,6 +15,7 @@ import com.microfinance.model.DailyPremiumRenewalPM;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanPayment;
 import com.microfinance.model.SavingAccountActivity;
+import com.microfinance.model.TeamMember;
 import com.microfinance.model.addFinancialConsultant;
 import com.microfinance.service.ReportsAndAnalyticsService;
 
@@ -116,6 +117,32 @@ public class ReportsAndAnalyticsController {
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Saving Cheque Data Not Found"));
+		}
+	}
+
+	@GetMapping("/getCheckDataFromFinancialConsultant")
+	public ResponseEntity<ApiResponse<List<addFinancialConsultant>>> getCheckDataFromFinancialConsultant() {
+		List<addFinancialConsultant> list = reportsAndAnalyticsService.fetchCheckDataFromFinancialConsultant();
+
+		if (!list.isEmpty()) {
+			return ResponseEntity
+					.ok(ApiResponse.success(HttpStatus.OK, "Financial Cheque Data fetched Successfully", list));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Financial Cheque Data Not Found"));
+		}
+	}
+	
+	@GetMapping("/getCheckDataFromTeamMember")
+	public ResponseEntity<ApiResponse<List<TeamMember>>> getCheckDataFromTeamMember() {
+		List<TeamMember> list = reportsAndAnalyticsService.fetchCheckDataFromTeamMember();
+
+		if (!list.isEmpty()) {
+			return ResponseEntity
+					.ok(ApiResponse.success(HttpStatus.OK, "Team Member Cheque Data fetched Successfully", list));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Team Member Cheque Data Not Found"));
 		}
 	}
 
