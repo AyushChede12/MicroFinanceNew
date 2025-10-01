@@ -1,103 +1,105 @@
-$(document).ready(function () {
-    $('#saveBtn').click(function (event) {
-        event.preventDefault();
+$(document).ready(function() {
+	$("#guardianDetails").hide();
+	$("#guardianAccount").hide();
+	$('#saveBtn').click(function(event) {
+		event.preventDefault();
 
-        var formData = new FormData();
+		var formData = new FormData();
 
-        // Text fields
-        formData.append("memberCode", $('#memberCode').val());
-        formData.append("authenticateFor", $('#authenticateFor').val());
-        formData.append("signupDate", $('#signupDate').val());
-        formData.append("major", $('#major').val());
-        formData.append("customerName", $('#customerName').val());
-        formData.append("minor", $('#minor').val());
-        formData.append("customerGender", $('#customerGender').val());
-        formData.append("guardianName", $('#guardianName').val());
-        formData.append("relationToApplicant", $('#relationToApplicant').val());
-        formData.append("dob", $('#dob').val());
-        formData.append("customerAge", $('#customerAge').val());
-        formData.append("relationshipStatus", $('#relationshipStatus').val());
-        formData.append("customerAddress", $('#customerAddress').val());
-        formData.append("state", $('#state').val());
-        formData.append("district", $('#district').val());
-        formData.append("aadharNo", $('#aadharNo').val());
-        formData.append("pinCode", $('#pinCode').val());
-        formData.append("branchName", $('#branchName').val());
-        formData.append("panNo", $('#panNo').val());
-        formData.append("voterNo", $('#voterNo').val());
-        formData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
-        formData.append("referralCode", $('#referralCode').val());
-        formData.append("referralName", $('#referralName').val());
-        formData.append("contactNo", $('#contactNo').val());
-        formData.append("emailId", $('#emailId').val());
-        formData.append("profession", $('#profession').val());
-        formData.append("academicBackground", $('#academicBackground').val());
+		// Text fields
+		formData.append("memberCode", $('#memberCode').val());
+		formData.append("authenticateFor", $('#authenticateFor').val());
+		formData.append("signupDate", $('#signupDate').val());
+		formData.append("major", $('#major').val());
+		formData.append("customerName", $('#customerName').val());
+		formData.append("minor", $('#minor').val());
+		formData.append("customerGender", $('#customerGender').val());
+		formData.append("guardianName", $('#guardianName').val());
+		formData.append("relationToApplicant", $('#relationToApplicant').val());
+		formData.append("dob", $('#dob').val());
+		formData.append("customerAge", $('#customerAge').val());
+		formData.append("relationshipStatus", $('#relationshipStatus').val());
+		formData.append("customerAddress", $('#customerAddress').val());
+		formData.append("state", $('#state').val());
+		formData.append("district", $('#district').val());
+		formData.append("aadharNo", $('#aadharNo').val());
+		formData.append("pinCode", $('#pinCode').val());
+		formData.append("branchName", $('#branchName').val());
+		formData.append("panNo", $('#panNo').val());
+		formData.append("voterNo", $('#voterNo').val());
+		formData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
+		formData.append("referralCode", $('#referralCode').val());
+		formData.append("referralName", $('#referralName').val());
+		formData.append("contactNo", $('#contactNo').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("profession", $('#profession').val());
+		formData.append("academicBackground", $('#academicBackground').val());
 
-        // Nominee
-        formData.append("nomineeName", $('#nomineeName').val());
-        formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
-        formData.append("nomineeAge", $('#nomineeAge').val());
-        formData.append("nomineeAddress", $('#nomineeAddress').val());
-        formData.append("nomineePanNo", $('#nomineePanNo').val());
-        formData.append("nomineeKycNo", $('#nomineeKycNo').val());
-        formData.append("nomineeKycType", $('#nomineeKycType').val());
-        formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
+		// Nominee
+		formData.append("nomineeName", $('#nomineeName').val());
+		formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
+		formData.append("nomineeAge", $('#nomineeAge').val());
+		formData.append("nomineeAddress", $('#nomineeAddress').val());
+		formData.append("nomineePanNo", $('#nomineePanNo').val());
+		formData.append("nomineeKycNo", $('#nomineeKycNo').val());
+		formData.append("nomineeKycType", $('#nomineeKycType').val());
+		formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
 
-        // Payment
-        formData.append("memberFees", $('#memberFees').val());
-        formData.append("chequeNo", $('#chequeNo').val());
-        formData.append("chequeDate", $('#chequeDate').val());
-        formData.append("depositAcNo", $('#depositAcNo').val());
-        formData.append("referenceNo", $('#referenceNo').val());
-        formData.append("remarks", $('#remarks').val());
-        formData.append("paymentBy", $('#paymentBy').val());
+		// Payment
+		formData.append("memberFees", $('#memberFees').val());
+		formData.append("chequeNo", $('#chequeNo').val());
+		formData.append("chequeDate", $('#chequeDate').val());
+		formData.append("depositAcNo", $('#depositAcNo').val());
+		formData.append("referenceNo", $('#referenceNo').val());
+		formData.append("remarks", $('#remarks').val());
+		formData.append("paymentBy", $('#paymentBy').val());
 
-        // File uploads
-        const customerPhoto = $('#customerPhoto')[0].files[0];
-        const customerSignature = $('#customerSignature')[0].files[0];
-        if (customerPhoto) formData.append("customerPhoto", customerPhoto);
-        if (customerSignature) formData.append("customerSignature", customerSignature);
+		// File uploads
+		const customerPhoto = $('#customerPhoto')[0].files[0];
+		const customerSignature = $('#customerSignature')[0].files[0];
+		if (customerPhoto) formData.append("customerPhoto", customerPhoto);
+		if (customerSignature) formData.append("customerSignature", customerSignature);
 
-        // Toggles
-        formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
-        formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
-        formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
-        formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
+		// Toggles
+		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
+		formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
+		formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
+		formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
 
-        // ✅ Auto domain + context path
-        const fullUrl = window.location.origin + "/api/customermanagement/saveOrUpdateCustomer";
+		// ✅ Auto domain + context path
+		const fullUrl = window.location.origin + "/api/customermanagement/saveOrUpdateCustomer";
 
-        console.log("POST to URL: ", fullUrl);
+		console.log("POST to URL: ", fullUrl);
 
-        // AJAX call
-        $.ajax({
-            type: 'POST',
-            url: fullUrl,
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (response, textStatus, xhr) {
-                console.log("✅ Response:", response);
+		// AJAX call
+		$.ajax({
+			type: 'POST',
+			url: fullUrl,
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response, textStatus, xhr) {
+				console.log("✅ Response:", response);
 
-                if (xhr.status === 200 || xhr.status === 201) {
-                    alert(response.message || "Customer saved successfully!");
-                    location.reload();
-                } else {
-                    alert("Unexpected response: " + (response.message || "Unknown error"));
-                }
-            },
-            error: function (xhr) {
-                console.error("❌ Error response: ", xhr);
-                let msg = "Something went wrong while saving.";
-                if (xhr.responseJSON && xhr.responseJSON.message) {
-                    msg = xhr.responseJSON.message;
-                } else if (xhr.responseText) {
-                    msg = xhr.responseText;
-                }
-                alert(msg);
-            }
-        });
-    });
+				if (xhr.status === 200 || xhr.status === 201) {
+					alert(response.message || "Customer saved successfully!");
+					location.reload();
+				} else {
+					alert("Unexpected response: " + (response.message || "Unknown error"));
+				}
+			},
+			error: function(xhr) {
+				console.error("❌ Error response: ", xhr);
+				let msg = "Something went wrong while saving.";
+				if (xhr.responseJSON && xhr.responseJSON.message) {
+					msg = xhr.responseJSON.message;
+				} else if (xhr.responseText) {
+					msg = xhr.responseText;
+				}
+				alert(msg);
+			}
+		});
+	});
 });
 
 
@@ -140,140 +142,140 @@ function signpreview() {
 		alert("Please upload a valid image file for signature.");
 	}
 }
-$(document).ready(function () {
-    // Load States
-    $.ajax({
-        url: 'api/preference/getAllStates',
-        method: "GET",
-        success: function (response) {
-            if (response && response.data && Array.isArray(response.data)) {
-                console.log("Fetched states:", response.data);
-                response.data.forEach(function (state) {
-                    $('#state').append(
-                        $('<option>', {
-                            value: state.stateName,  // What will be saved to DB
-                            text: state.stateName,   // What user sees
-                            'data-id': state.stateId // Optional: internal use
-                        })
-                    );
-                });
-            } else {
-                console.warn("No state data available.");
-            }
-        },
-        error: function (err) {
-            console.error("Error fetching states:", err);
-        }
-    });
+$(document).ready(function() {
+	// Load States
+	$.ajax({
+		url: 'api/preference/getAllStates',
+		method: "GET",
+		success: function(response) {
+			if (response && response.data && Array.isArray(response.data)) {
+				console.log("Fetched states:", response.data);
+				response.data.forEach(function(state) {
+					$('#state').append(
+						$('<option>', {
+							value: state.stateName,  // What will be saved to DB
+							text: state.stateName,   // What user sees
+							'data-id': state.stateId // Optional: internal use
+						})
+					);
+				});
+			} else {
+				console.warn("No state data available.");
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching states:", err);
+		}
+	});
 });
 
 
-    // Load Districts when state is selected
-    $('#state').on('change', function () {
-        const selectedStateId = $(this).find(':selected').data('id'); // ✅ Get ID from selected option
-        $('#district').empty().append('<option value="">Select District</option>');
+// Load Districts when state is selected
+$('#state').on('change', function() {
+	const selectedStateId = $(this).find(':selected').data('id'); // ✅ Get ID from selected option
+	$('#district').empty().append('<option value="">Select District</option>');
 
-        if (selectedStateId) {
-            $.ajax({
-                url: 'api/preference/getAllDistrictsByStateId',
-                method: 'GET',
-                data: { stateId: selectedStateId },  // ✅ Now correct ID passed
-                success: function (response) {
-                    console.log("Fetched districts:", response);
-                    const districts = response.allDistricts;
-                    districts.forEach(function (district) {
-                        $('#district').append(
-                            $('<option>', {
-                                value: district.districtName,
-                                text: district.districtName
-                            })
-                        );
-                    });
-                },
-                error: function (err) {
-                    console.error("Error fetching districts:", err);
-                }
-            });
-        }
-    });
-
-
-$(document).ready(function () {
-    const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
-
-    $.ajax({
-        url: "api/preference/getAllRelativeModule", // Ensure correct server path
-        method: "GET",
-        success: function (data) {
-            console.log("Received relation data:", data);
-
-            dropdownIds.forEach(function (id) {
-                const $select = $("#" + id);
-                if ($select.length === 0) {
-                    console.warn(`Dropdown with ID '${id}' not found.`);
-                    return;
-                }
-
-                // Clear old options except the first placeholder
-                $select.find("option:not(:first)").remove();
-
-                // Loop through data.data array
-                data.data.forEach(function (item) {
-                    $select.append(
-                        $("<option>", {
-                            value: item.relation,
-                            text: item.relation
-                        })
-                    );
-                });
-            });
-        },
-        error: function (err) {
-            console.error("Error loading relations:", err);
-        }
-    });
+	if (selectedStateId) {
+		$.ajax({
+			url: 'api/preference/getAllDistrictsByStateId',
+			method: 'GET',
+			data: { stateId: selectedStateId },  // ✅ Now correct ID passed
+			success: function(response) {
+				console.log("Fetched districts:", response);
+				const districts = response.allDistricts;
+				districts.forEach(function(district) {
+					$('#district').append(
+						$('<option>', {
+							value: district.districtName,
+							text: district.districtName
+						})
+					);
+				});
+			},
+			error: function(err) {
+				console.error("Error fetching districts:", err);
+			}
+		});
+	}
 });
 
-$(document).ready(function () {
-    // Fetch all branches and populate the dropdown
-    $.ajax({
-        url: "api/preference/getAllBranchModule", // Ensure correct API path
-        method: "GET",
-        success: function (data) {
-            console.log("Fetched Branches:", data);
 
-            const $branchDropdown = $('#branchName');
-            const addedBranches = new Set(); // ✅ Track added names
+$(document).ready(function() {
+	const dropdownIds = ["relationToApplicant", "nomineeRelationToApplicant"];
 
-            // Clear existing options
-            $branchDropdown.empty();
+	$.ajax({
+		url: "api/preference/getAllRelativeModule", // Ensure correct server path
+		method: "GET",
+		success: function(data) {
+			console.log("Received relation data:", data);
 
-            // Add default option
-            $branchDropdown.append('<option value="">-- Select Branch --</option>');
+			dropdownIds.forEach(function(id) {
+				const $select = $("#" + id);
+				if ($select.length === 0) {
+					console.warn(`Dropdown with ID '${id}' not found.`);
+					return;
+				}
 
-            // Loop through and add only unique branch names
-            if (Array.isArray(data.data)) {
-                data.data.forEach(function (branch) {
-                    const branchName = branch.branchName;
+				// Clear old options except the first placeholder
+				$select.find("option:not(:first)").remove();
 
-                    if (branchName && !addedBranches.has(branchName)) {
-                        $branchDropdown.append(
-                            $('<option>', {
-                                value: branchName,
-                                text: branchName
-                            })
-                        );
-                        addedBranches.add(branchName); // ✅ Mark as added
-                    }
-                });
-            } else {
-                console.warn("Unexpected data format:", data);
-            }
-        },
-        error: function (err) {
-            console.error("Error fetching branches:", err);
-        }
-    });
+				// Loop through data.data array
+				data.data.forEach(function(item) {
+					$select.append(
+						$("<option>", {
+							value: item.relation,
+							text: item.relation
+						})
+					);
+				});
+			});
+		},
+		error: function(err) {
+			console.error("Error loading relations:", err);
+		}
+	});
+});
+
+$(document).ready(function() {
+	// Fetch all branches and populate the dropdown
+	$.ajax({
+		url: "api/preference/getAllBranchModule", // Ensure correct API path
+		method: "GET",
+		success: function(data) {
+			console.log("Fetched Branches:", data);
+
+			const $branchDropdown = $('#branchName');
+			const addedBranches = new Set(); // ✅ Track added names
+
+			// Clear existing options
+			$branchDropdown.empty();
+
+			// Add default option
+			$branchDropdown.append('<option value="">-- Select Branch --</option>');
+
+			// Loop through and add only unique branch names
+			if (Array.isArray(data.data)) {
+				data.data.forEach(function(branch) {
+					const branchName = branch.branchName;
+
+					if (branchName && !addedBranches.has(branchName)) {
+						$branchDropdown.append(
+							$('<option>', {
+								value: branchName,
+								text: branchName
+							})
+						);
+						addedBranches.add(branchName); // ✅ Mark as added
+					}
+				});
+			} else {
+				console.warn("Unexpected data format:", data);
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching branches:", err);
+		}
+	});
 });
 
 
@@ -448,6 +450,18 @@ function fetchBySelectedCustomer() {
 			alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
 		}
 	});
+}
+
+function ifMinor() {
+	var minor = $("#minor").val();
+	if (minor === 'Yes') {
+		$("#guardianDetails").show();
+		$("#guardianAccount").show();
+	}
+	else {
+		$("#guardianDetails").hide();
+		$("#guardianAccount").hide();
+	}
 }
 
 
