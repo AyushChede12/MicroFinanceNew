@@ -47,7 +47,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Secured Gold Plan</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="#"> <i
 							class="bi bi-coin"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Apply For Gold</li>
@@ -141,7 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">branchName Name </label> <input type="text"
+								<label for="">BranchName</label> <input type="text"
 									name="branchName" id="branchName" required="required"
 									placeholder="Branch Name" />
 							</div>
@@ -151,13 +151,10 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Loan Plan Name</label> <select id="loanPlanName"
+								<label>Loan Plan Name</label> <input type="text" id="loanPlanName"
 									name="loanPlanName" required="required"
-									onchange="calculateCharges()" class="form-control selectField"
+									class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Loan Plan</option>
-
-								</select>
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -183,7 +180,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Loan Term</label> <input type="text"
 									name="loanTerm" id="loanTerm" required="required"
-									placeholder="Plan Duration" style="text-transform: uppercase;" />
+									placeholder="Enter Loan Term" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -301,38 +298,28 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label> Karat </label>
 								<div class="position-relative">
-									<select id="karat" name="karat" required="required"
+									<input type="text" id="karat" name="karat" required="required"
 										class="form-control selectField" style="height: 30px;">
-										<option value="">Select Karat</option>
-										<option value="24K">24K</option>
-										<option value="22K">22K</option>
-										<option value="20K">20K</option>
-										<option value="18K">18K</option>
-
-
-									</select>
+										
 								</div>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Item Type</label> <select id="itemType"
+								<label for="">Item Type</label> <input type="text" id="itemType"
 									name="itemType" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">-Select-</option>
-									<option value="Gold">Gold</option>
-									<option value="Silver">Silver</option>
-								</select>
+									
 							</div>
 						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Karat Rate</label> <input type="text"
-									name="karatRate" id="karatRate" required="required"
-									placeholder="Enter Karat Rate" />
+								<label for="">Customer Karat Rate</label> <input type="text"
+									name="custgoldRate" id="custgoldRate" required="required"
+									placeholder="Enter Customer Karat Rate" />
 							</div>
 						</div>
 
@@ -340,37 +327,28 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Item Name</label> <select id="itemName"
+								<label for="itemName">Item Name</label> <input type="text" id="itemName"
 									name="itemName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">-Select-</option>
-									<option value="Gold">Gold</option>
-									<option value="Silver">Silver</option>
-								</select>
+									placeholder="Enter Karat Rate">
 							</div>
 						</div>
 
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Locker Location</label> <select
-									id="lockerLocation" name="lockerLocation" required="required"
+								<label for="">Locker Branch</label> <input type="text"
+									id="lockerBranch" name="lockerBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">-Select-</option>
-									<option value="Gold">Sadar</option>
-									<option value="Silver">Reshimbagh</option>
-								</select>
+									
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Purity</label> <select id="purity" name="purity"
+								<label for="">Purity</label> <input type="text" id="purity" name="purity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Purity</option>
-									<option value="Pledge">Test12</option>
-								</select>
+									
 							</div>
 						</div>
 
@@ -409,7 +387,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Net Weight</label> <input type="text" name="netWt"
-									id="netWr" required="required" placeholder="Enter Net Weight" />
+									id="netWt" required="required" placeholder="Enter Net Weight" />
 							</div>
 						</div>
 
@@ -447,7 +425,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label> Customer Code </label>
 								<div class="position-relative">
-									<select id="customerCode" name="customerCode"
+									<select id="guarantorcustomerCode" name="guarantorcustomerCode"
 										required="required" class="form-control selectField"
 										style="height: 30px;">
 										<option value="">Select Customer Code</option>
@@ -462,7 +440,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Guarantor Identity</label> <input type="text"
-									id=gurantorIdentity name="guarantorIdentity"
+									id="gurantorIdentity" name="guarantorIdentity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 
@@ -502,9 +480,6 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Security</option>
-									<option value="Pledge">Pledge</option>
-									<option value="Mortgage">Mortgage</option>
-									<option value="Property">Property</option>
 									<option value="Gold">Gold</option>
 								</select>
 							</div>
