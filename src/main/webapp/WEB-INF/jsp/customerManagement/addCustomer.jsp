@@ -103,7 +103,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Customer Name </label> <input type="text"
 									name="customerName" id="customerName" required="required"
@@ -111,24 +111,31 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Minor</label> <select id="minor" name="minor"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Yes(Below 18)</option>
-									<option value="">No(Above 18)</option>
+									onchange="ifMinor()" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
+									<option value="Yes">Yes(Below 18)</option>
+									<option value="No">No(Above 18)</option>
 								</select>
 							</div>
 						</div>
 
-
-
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4" id="guardianDetails">
 							<div class="d-flex flex-column formFields">
-								<label for="">Family Member Name</label> <input type="text"
-									name="guardianName" id="guardianName" required="required"
-									placeholder="Enter Family Member Name" />
+								<label for="guardianName">Guardian Name(if Minor)</label> <input
+									type="text" name="guardianName" id="guardianName"
+									required="required" placeholder="Enter Guardian Name" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4" id="guardianAccount">
+							<div class="d-flex flex-column formFields">
+								<label for="guardianAccNo">Guardian Account No</label> <input
+									type="text" name="guardianAccNo" id="guardianAccNo"
+									required="required" placeholder="Enter Account No" />
 							</div>
 						</div>
 
@@ -311,7 +318,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Profession</label> <input type="text"
 									name="profession" id="profession" required="required"
@@ -326,13 +333,29 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" placeholder="Enter Academic background" />
 							</div>
 						</div>
+
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="lightBill">Light Bill</label> <input type="text"
+									name="lightBill" id="lightBill" required="required"
+									placeholder="Enter Light Bill No" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="taxBill">Tax Bill</label> <input type="text"
+									name="taxBill" id="taxBill" required="required"
+									placeholder="Enter Tax Bill No" />
+							</div>
+						</div>
 					</div>
 
 					<div class="row mt-4">
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Photo</label> <label for="customerPhoto" id="drop-area"> <input
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Aadhar
+								Card </label> <label for="customerPhoto" id="drop-area"> <input
 								type="file" accept="image/*" name="customerPhoto"
 								id="customerPhoto" hidden="hidden" onchange="photopreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -346,8 +369,38 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
-								Signature</label> <label for="customerSignature" id="drop-area">
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Pan
+								Card </label> <label for="customerSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="customerSignature"
+								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="bike2imagePreview" />
+
+								</div>
+							</label>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Voter
+								ID </label> <label for="customerSignature" id="drop-area"> <input
+								type="file" accept="image/*" name="customerSignature"
+								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="bike2imagePreview" />
+
+								</div>
+							</label>
+						</div>
+
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Driving
+								Licence </label> <label for="customerSignature" id="drop-area">
 								<input type="file" accept="image/*" name="customerSignature"
 								id="customerSignature" hidden="hidden" onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
@@ -397,8 +450,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
-
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Nominee Age</label> <input type="text"
@@ -407,9 +458,17 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="nomineeDOB"> Nominee DOB</label> <input type="date"
+									name="nomineeDOB" id="nomineeDOB" required="required"
+									placeholder="Enter DOB" />
+							</div>
+						</div>
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for=""> Nominee Mobile No</label> <input type="text"
+								<label for="">Nominee Mobile No</label> <input type="text"
 									name="nomineeMobileNo" id="nomineeMobileNo" required="required"
 									placeholder="Enter Age" />
 							</div>
@@ -435,7 +494,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Nominee Kyc No</label> <input type="text"
 									name="nomineeKycNo" id="nomineeKycNo" required="required"
@@ -443,11 +502,19 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Nominee Kyc Type</label> <input type="text"
-									name="nomineeKycType" id="nomineeKycType" required="required"
-									placeholder="Enter PAN No" />
+								<label for="">Nominee Kyc Type</label> <select type="text"
+									class="form-control selectField" name="nomineeKycType"
+									id="nomineeKycType" required="required" style="height: 30px;">
+									<option>Select Type</option>
+									<option>Aadhar Based eKYC</option>
+									<option>Offline Aadhar KYC</option>
+									<option>CKYC(Central KYC)</option>
+									<option>Full KYC / Physical KYC</option>
+									<option>Video KYC</option>
+									<option>Digital KYC</option>
+								</select>
 							</div>
 						</div>
 
@@ -478,6 +545,43 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
+								<label>Building Fund</label> <input type="text"
+									id="buildingFund" name="buildingFund"
+									placeholder="Enter Building Fund" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Admin Charge</label> <input type="text" id="adminCharge"
+									name="adminCharge" placeholder="Enter Admin Charge" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label>Document Charge</label> <input type="text"
+									id="documentCharge" name="documentCharge"
+									placeholder="Enter Document Charge" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Entry Fee</label> <input type="text" id="entryFee"
+									name="entryFee" placeholder="Enter Entry Fee" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label>Other Charge</label> <input type="text" id="otherCharge"
+									name="otherCharge" placeholder="Enter Other Charge" />
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
 								<label>Payment By</label> <select id="paymentBy"
 									name="paymentBy" class="form-control selectField"
 									style="height: 30px;">
@@ -490,7 +594,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label>Remarks</label> <input type="text" id="remarks"
 									name="remarks" placeholder="Enter Remarks" />
@@ -530,7 +634,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<!-- Reference No -->
-						<div class="col-lg-3" id="refNoDiv" style="display: none;">
+						<div class="col-lg-3 mb-4" id="refNoDiv" style="display: none;">
 							<div class="d-flex flex-column formFields">
 								<label>Reference No</label> <input type="text" id="referenceNo"
 									name="referenceNo" placeholder="Enter Reference No" />
@@ -576,7 +680,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class=" h-100">
 								<div class="formFields d-flex flex-column">
-									<label>Member Banking</label>
+									<label>Mobile Banking</label>
 									<div class="cont">
 										<div class="toggle">
 											<input type="checkbox" id="toggle-banking-status"
@@ -629,7 +733,7 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</form>
 
-			
+
 		</div>
 
 
@@ -664,8 +768,6 @@ pageEncoding="ISO-8859-1"%> -->
 			}
 		}
 	}); 
-	
-	
 	
 	</script>
 

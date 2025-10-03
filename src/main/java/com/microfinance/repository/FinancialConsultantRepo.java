@@ -27,6 +27,8 @@ public interface FinancialConsultantRepo extends JpaRepository<addFinancialConsu
 
 	List<addFinancialConsultant> findByIsApprovedFalse();
 
+	List<addFinancialConsultant> findByModeofPayment(String string);
+
 	
 
 	

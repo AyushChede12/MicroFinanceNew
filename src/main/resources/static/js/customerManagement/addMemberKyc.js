@@ -1,75 +1,75 @@
 function fetchBySelectedCustomer() {
-    const memberCode = $("#selectMember").val();
-    if (!memberCode) return;
+	const memberCode = $("#selectByCode").val();
+	if (!memberCode) return;
 
-    const input = { memberCode };
+	const input = { memberCode };
 
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(input),
-        url: window.location.origin + "/api/customermanagement/fetchBySelectedCustomer",
-        async: false,
-        success: function (data) {
-            if (data && data.length > 0) {
-                const c = data[0];
+	$.ajax({
+		type: "POST",
+		contentType: "application/json",
+		data: JSON.stringify(input),
+		url: window.location.origin + "/api/customermanagement/fetchBySelectedCustomer",
+		async: false,
+		success: function(data) {
+			if (data && data.length > 0) {
+				const c = data[0];
 
-                // 🔹 Text fields
-                $("#customerName").val(c.customerName || "");
-                $("#memberCode").val(c.memberCode || "");
-                $("#contactNo").val(c.contactNo || "");
-                $("#singupDate").val(c.signupDate || "");
-                $("#aadharNo").val(c.aadharNo || "");
-                $("#pan").val(c.panNo || "");
-                $("#state").val(c.state || "");
-                $("#drivingLicenceNo").val(c.drivingLicenceNo || "");
-                $("#voterNo").val(c.voterNo || "");
-                $("#guardianName").val(c.guardianName || "");
-                $("#customerAddress").val(c.customerAddress || "");
-                $("#pinCode").val(c.pinCode || "");
-                $("#nomineeName").val(c.nomineeName || "");
-                $("#emailId").val(c.emailId || "");
-                $("#dob").val(c.dob || "");
-                $("#customerAge").val(c.customerAge || "");
-                $("#branchName").val(c.branchName || "");
-                $("#customerGender").val(c.customerGender || "");
+				// 🔹 Text fields
+				$("#customerName").val(c.customerName || "");
+				$("#memberCode").val(c.memberCode || "");
+				$("#contactNo").val(c.contactNo || "");
+				$("#singupDate").val(c.signupDate || "");
+				$("#aadharNo").val(c.aadharNo || "");
+				$("#pan").val(c.panNo || "");
+				$("#state").val(c.state || "");
+				$("#drivingLicenceNo").val(c.drivingLicenceNo || "");
+				$("#voterNo").val(c.voterNo || "");
+				$("#guardianName").val(c.guardianName || "");
+				$("#customerAddress").val(c.customerAddress || "");
+				$("#pinCode").val(c.pinCode || "");
+				$("#nomineeName").val(c.nomineeName || "");
+				$("#emailId").val(c.emailId || "");
+				$("#dob").val(c.dob || "");
+				$("#customerAge").val(c.customerAge || "");
+				$("#branchName").val(c.branchName || "");
+				$("#customerGender").val(c.customerGender || "");
 
-                // 🔹 Images (customer photo & signature)
-                const baseUrl = window.location.origin + "/Uploads/";
+				// 🔹 Images (customer photo & signature)
+				const baseUrl = window.location.origin + "/Uploads/";
 
-                if (c.customerPhoto) {
-                    $("#photoPreview").attr("src", baseUrl + c.customerPhoto);
-                } else {
-                    $("#photoPreview").attr("src", baseUrl + "default-placeholder.jpg");
-                }
+				if (c.customerPhoto) {
+					$("#photoPreview").attr("src", baseUrl + c.customerPhoto);
+				} else {
+					$("#photoPreview").attr("src", baseUrl + "default-placeholder.jpg");
+				}
 
-                if (c.customerSignature) {
-                    $("#signaturePreview").attr("src", baseUrl + c.customerSignature);
-                } else {
-                    $("#signaturePreview").attr("src", baseUrl + "default-placeholder.jpg");
-                }
+				if (c.customerSignature) {
+					$("#signaturePreview").attr("src", baseUrl + c.customerSignature);
+				} else {
+					$("#signaturePreview").attr("src", baseUrl + "default-placeholder.jpg");
+				}
 
-            } else {
-                alert("No data found for the selected member.");
-                clearCustomerFields();
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
-        }
-    });
+			} else {
+				alert("No data found for the selected member.");
+				clearCustomerFields();
+			}
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
+		}
+	});
 }
 
 
 
 $(document).ready(function() {
 	// If already selected on load
-	if ($("#selectMember").val()) {
+	if ($("#selectByCode").val()) {
 		fetchBySelectedCustomer();
 	}
 
 	// On dropdown change
-	$("#selectMember").on("change", function() {
+	$("#selectByCode").on("change", function() {
 		if ($(this).val()) {
 			fetchBySelectedCustomer();
 		} else {
@@ -81,7 +81,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 	// Fetch all customers and populate the "select by code" dropdown
-	$.ajax({
+	/*$.ajax({
 		url: "api/customermanagement/getAllCustomer",
 		method: "GET",
 		success: function(data) {
@@ -99,8 +99,43 @@ $(document).ready(function() {
 		error: function(err) {
 			console.error("Error fetching customers:", err);
 		}
+	});*/
+
+	$.ajax({
+		url: 'api/customermanagement/getAllCustomer',
+		type: 'GET',
+		success: function(response) {
+			// response is a list of addCustomer objects
+			let customerOptions = response.map(function(item) {
+				return {
+					id: item.memberCode,
+					text: item.memberCode + " - " + item.customerName
+				};
+			});
+
+			$('#selectByCode').select2({
+				placeholder: '-- Search Customer Code or Name --',
+				data: customerOptions,
+				matcher: function(params, data) {
+					if ($.trim(params.term) === '') return data;
+					if (typeof data.text === 'undefined') return null;
+
+					const term = params.term.toLowerCase();
+					const text = data.text.toLowerCase();
+					return text.includes(term) ? data : null;
+				}
+			});
+		},
+		error: function(xhr, status, error) {
+			console.error("Error fetching customers:", error);
+			alert("Failed to load customer codes.");
+		}
 	});
+
+
 });
+
+
 
 
 
@@ -130,26 +165,26 @@ function verifyFetchedData() {
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(fetchedData)
 	})
-	.then(response => response.json())
-	.then(data => {
-		const button = document.getElementById("saveBtn");
+		.then(response => response.json())
+		.then(data => {
+			const button = document.getElementById("saveBtn");
 
-		if (data.isVerified) {
-			alert(data.message);
-			verifiedMembers.add(customerCode);
-			button.style.backgroundColor = "green";
-			button.style.color = "white"; // Optional: make text readable
-			button.innerText = "Verified";
-			button.disabled = true;
-		} else {
-			alert(data.message);
-			button.style.backgroundColor = "red";
-			button.style.color = "white";
-			button.innerText = "Not Verified";
-		}
-	})
-	.catch(error => {
-		console.error("Error verifying data:", error);
-		alert("Something went wrong while verifying.");
-	});
+			if (data.isVerified) {
+				alert(data.message);
+				verifiedMembers.add(customerCode);
+				button.style.backgroundColor = "green";
+				button.style.color = "white"; // Optional: make text readable
+				button.innerText = "Verified";
+				button.disabled = true;
+			} else {
+				alert(data.message);
+				button.style.backgroundColor = "red";
+				button.style.color = "white";
+				button.innerText = "Not Verified";
+			}
+		})
+		.catch(error => {
+			console.error("Error verifying data:", error);
+			alert("Something went wrong while verifying.");
+		});
 }

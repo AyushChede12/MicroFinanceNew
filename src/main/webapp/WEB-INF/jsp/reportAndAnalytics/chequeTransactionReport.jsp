@@ -33,6 +33,10 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -68,7 +72,13 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Type</option>
-									<option value="RD">RD</option>
+									<option value="RD">Cheque Issued</option>
+									<option value="RD">Cheque Received</option>
+									<option value="RD">Cleared Cheque</option>
+									<option value="RD">Bounced Cheque</option>
+									<option value="RD">Pending Cheque</option>
+									<option value="RD">Cancelled Cheque</option>
+									<option value="RD">Transferred Cheque</option>
 								</select>
 							</div>
 						</div>
@@ -76,11 +86,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
+								<label for="branchName">Branch </label> <select id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
 								</select>
 							</div>
 						</div>
@@ -117,7 +125,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="findBtn" class="btn btn-dark">Find</button>
+							<button type="button" id="findBtn" class="btn btn-dark">Find</button>
 						</div>
 					</div>
 
@@ -130,29 +138,23 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-							<h5 class="card-title"> Search list Detail</h5>
-
-
-
+							<h5 class="card-title">Cheque Details</h5>
 
 							<div style="overflow-x: auto; white-space: nowrap;">
-								<table class="table table-borderless datatable">
+								<table class="table table-borderless datatable" style="text-align: center;">
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
-											<th scope="col">Type</th>
-											<th scope="col">Branch</th>
+											<th scope="col">Sr. No</th>
+											<th scope="col">Account Holder Name</th>
 											<th scope="col">Txn Date</th>
 											<th scope="col">Cheque No.</th>
+											<th scope="col">Payment Status</th>
+											<th scope="col">Print</th>
 
 										</tr>
 									</thead>
 									<tbody>
-										<tr style="font-family: 'Poppins', sans-serif;">
-											<td>aa</td>
-											<td>Umrer</td>
-											<td>11-05-2025</td>
-											<td>ch001</td>
-										</tr>
+										
 									</tbody>
 								</table>
 							</div>
@@ -167,6 +169,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/ChequeTransactionReport.js"></script>
 </body>
 
 </html>
