@@ -1,5 +1,6 @@
 package com.microfinance.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,7 @@ public class CreateSavingsAccount {
 	private Long id;
 	private String typeofaccount;
 	private String openingDate;
+	@Column(name = "select_by_customer")
 	private String selectByCustomer;
 	private String enterCustomerName;
 	private String dateOfBirth;

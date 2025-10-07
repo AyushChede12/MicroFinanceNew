@@ -36,7 +36,7 @@ public class CustomerManagementService {
 	private String uploadDirectory;
 
 	public ApiResponse<addCustomer> saveOrUpdateCustomer(CustomerDto clientMasterDto, MultipartFile customerPhoto,
-			MultipartFile customerSignature) {
+			MultipartFile customerSignature,MultipartFile customerVoter,MultipartFile customerDriving) {
 		addCustomer addcustomer = new addCustomer();
 		boolean isNew = true;
 
@@ -74,6 +74,11 @@ public class CustomerManagementService {
 		addcustomer.setReferralCode(clientMasterDto.getReferralCode());
 		addcustomer.setReferralName(clientMasterDto.getReferralName());
 		addcustomer.setDrivingLicenceNo(clientMasterDto.getDrivingLicenceNo());
+		addcustomer.setShareAmount(clientMasterDto.getShareAmount());
+		addcustomer.setNoOfShare(clientMasterDto.getNoOfShare());
+		addcustomer.setLightBill(clientMasterDto.getLightBill());
+		addcustomer.setTaxBill(clientMasterDto.getTaxBill());
+		
 
 // Nominee Details
 		addcustomer.setNomineeName(clientMasterDto.getNomineeName());
@@ -84,9 +89,16 @@ public class CustomerManagementService {
 		addcustomer.setNomineeAge(clientMasterDto.getNomineeAge());
 		addcustomer.setNomineePanNo(clientMasterDto.getNomineePanNo());
 		addcustomer.setNomineeKycType(clientMasterDto.getNomineeKycType());
+		addcustomer.setNomineeDOB(clientMasterDto.getNomineeDOB());
+		
 
 // Payment details
 		addcustomer.setMemberFees(clientMasterDto.getMemberFees());
+		addcustomer.setBuildingFund(clientMasterDto.getBuildingFund());
+		addcustomer.setAdminCharge(clientMasterDto.getAdminCharge());
+		addcustomer.setDocumentCharge(clientMasterDto.getDocumentCharge());
+		addcustomer.setEntryFee(clientMasterDto.getEntryFee());
+		addcustomer.setOtherCharge(clientMasterDto.getOtherCharge());
 		addcustomer.setChequeNo(clientMasterDto.getChequeNo());
 		addcustomer.setChequeDate(clientMasterDto.getChequeDate());
 		addcustomer.setDepositAcNo(clientMasterDto.getDepositAcNo());
@@ -110,6 +122,16 @@ public class CustomerManagementService {
 			if (customerSignature != null && !customerSignature.isEmpty()) {
 				String signFileName = saveFile(customerSignature);
 				addcustomer.setCustomerSignature(signFileName);
+			}
+			
+			if (customerVoter != null && !customerVoter.isEmpty()) {
+				String voterFileName = saveFile(customerVoter);
+				addcustomer.setCustomerSignature(voterFileName);
+			}
+			
+			if (customerDriving != null && !customerDriving.isEmpty()) {
+				String drivingFileName = saveFile(customerDriving);
+				addcustomer.setCustomerSignature(drivingFileName);
 			}
 		} catch (IOException e) {
 			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed: " + e.getMessage());

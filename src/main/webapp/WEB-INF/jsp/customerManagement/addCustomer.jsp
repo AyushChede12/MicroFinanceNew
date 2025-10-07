@@ -125,9 +125,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3 mb-4" id="guardianDetails">
 							<div class="d-flex flex-column formFields">
-								<label for="guardianName">Guardian Name(if Minor)</label> <input
-									type="text" name="guardianName" id="guardianName"
-									required="required" placeholder="Enter Guardian Name" />
+								<label for="guardianName">Guardian Name(if Minor)</label> <select
+									id="guardianName" name="guardianName" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="No">No(Above 18)</option>
+								</select>
+
 							</div>
 						</div>
 
@@ -326,13 +329,40 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">Academic background</label> <input type="text"
 									name="academicBackground" id="academicBackground"
 									required="required" placeholder="Enter Academic background" />
 							</div>
 						</div>
+
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="shareValue">Share Value</label> <input type="text"
+									name="shareValue" id="shareValue" value="10"
+									required="required" placeholder="Share Value" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="noOfShare">No Of Share</label> <input type="text"
+									name="noOfShare" id="noOfShare" required="required"
+									placeholder="No Of Share" />
+							</div>
+						</div>
+
+						<div class="col-lg-3 mb-4">
+							<div class="d-flex flex-column formFields">
+								<label for="shareAmount">Share Amount</label> <input type="text"
+									name="shareAmount" id="shareAmount" required="required"
+									placeholder="Share Amount" readonly />
+							</div>
+						</div>
+
+
+
 
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
@@ -385,13 +415,13 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Voter
-								ID </label> <label for="customerSignature" id="drop-area"> <input
-								type="file" accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								ID </label> <label for="customerVoter" id="drop-area"> <input
+								type="file" accept="image/*" name="customerVoter"
+								id="customerVoter" hidden="hidden" onchange="voterpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+										id="bike3imagePreview" />
 
 								</div>
 							</label>
@@ -400,13 +430,14 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Driving
-								Licence </label> <label for="customerSignature" id="drop-area">
-								<input type="file" accept="image/*" name="customerSignature"
-								id="customerSignature" hidden="hidden" onchange="signpreview();"
+								Licence </label> <label for="customerDriving" id="drop-area"> <input
+								type="file" accept="image/*" name="customerDriving"
+								id="customerDriving" hidden="hidden"
+								onchange="drivingpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+										id="bike4imagePreview" />
 
 								</div>
 							</label>
@@ -742,6 +773,15 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 	<script src="./js/customerManagement/addCustomer.js"></script>
+	<script>
+    document.getElementById("noOfShare").addEventListener("input", function () {
+        let shareValue = parseFloat(document.getElementById("shareValue").value) || 0;
+        let noOfShare = parseFloat(this.value) || 0;
+        let shareAmount = shareValue * noOfShare;
+
+        document.getElementById("shareAmount").value = shareAmount.toFixed(2); // show 2 decimals
+    });
+</script>
 	<script>
 	document.addEventListener('DOMContentLoaded', () => {
 		const toggles = document.querySelectorAll('.toggle__input');
