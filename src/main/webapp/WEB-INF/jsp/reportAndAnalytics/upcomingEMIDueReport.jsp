@@ -136,13 +136,15 @@ pageEncoding="ISO-8859-1"%> -->
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">SN</th>
 											<th scope="col">Loan ID</th>
-											<th scope="col">Member Code</th>
-											<th scope="col">Member Name</th>
+											<th scope="col">Customer Code</th>
+											<th scope="col">Customer Name</th>
 											<th scope="col">Branch</th>
+											<th scope="col">Loan Type</th>
 											<th scope="col">Mobile No</th>
 											<th scope="col">Loan Amount</th>
 											<th scope="col">EMI Amount</th>
 											<th scope="col">Due Date</th>
+											<th scope="col">Outstanding Amount</th>
 											<th scope="col">Status</th>
 										</tr>
 									</thead>
@@ -162,6 +164,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/upcomingLoanReport.js"></script>
 </body>
 
 </html>
