@@ -296,6 +296,21 @@ $(document).ready(function() {
 			console.error("Error fetching members", err);
 		},
 	});
+	
+	$.ajax({
+	    url: "api/securedGoldLoan/getAllCustomers",
+	    type: "GET",
+	    success: function(response) {
+	        var select = $("#guarantorcustomerCode");
+	        select.empty().append('<option value="">Select Customer Code</option>');
+	        response.data.forEach(function(c) {
+	            select.append('<option value="' + c.memberCode + '">' + c.memberCode + '</option>');
+	        });
+	        // Value set karo yahan par
+	        select.val(cust.memberCode || "");
+	    }
+	});
+
 	let goldDirectories = [];
 	let customers = [];
 
@@ -354,8 +369,12 @@ $(document).ready(function() {
 			$("#itemName").val(gold.itemName || "");
 			$("#lockerBranch").val(gold.lockerBranch || "");
 			$("#purity").val(gold.purity || "");
+			$("#guarantorcustomerCode").val(cust.memberCode || "");
+			$("#guarantorAddress").val(cust.customerAddress || "");
+			$("#guarantorPinCode").val(cust.pinCode || "");
+			$("#guarantorContactNo").val(cust.contactNo || "");
 			
-			
+			alert(cust.memberCode);
 			
 
 			if (parseInt(cust.smsSend) === 1) {
@@ -393,7 +412,7 @@ $(document).ready(function() {
 	});
 
 
-	$.ajax({
+	/*$.ajax({
 			url: "api/securedGoldLoan/getAllCustomers",
 			type: "GET",
 			data: { memberCode: "" },
@@ -431,12 +450,10 @@ $(document).ready(function() {
 									var code = response.data[0]; // assuming first record
 
 									// Populate form fields
-									$("#gurantorIdentity").val(code.customerName || "");
 									$("#guarantorAddress").val(code.customerAddress || "");
 									$("#guarantorPinCode").val(code.pinCode || "");
 									$("#guarantorContactNo").val(code.contactNo || "");
-									$("#loanAmount").val(planName.minAmt || "");
-									$("#interestType").val(planName.interestType || "");
+									
 									
 
 								} else {
@@ -451,7 +468,7 @@ $(document).ready(function() {
 						// clear fields if no member selected
 						$("#customerName, #dateOfBirth, #age, #contactNo, #address, #pinCode, #branchName").val("");
 					}
-				});
+				});*/
 
 
 	// 75% Loan to Value fixed

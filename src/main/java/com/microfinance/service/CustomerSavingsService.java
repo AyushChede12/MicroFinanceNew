@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -406,6 +408,34 @@ public class CustomerSavingsService {
 		        } catch (Exception e) {
 		            throw new RuntimeException("Invalid date or balance format", e);
 		        }
+		    }
+
+		    
+		    
+		    public Map<String, List<String>> getAccountNumbersByCustomers(List<String> customerCodes) {
+		        if (customerCodes == null || customerCodes.isEmpty()) return Map.of();
+
+		        Map<String, List<String>> result = new HashMap<>();
+
+		        for (String code : customerCodes) {
+		            // Remove spaces and newlines
+		            String cleanedCode = code.trim();
+		            if(cleanedCode.isEmpty()) continue;
+
+		            List<CreateSavingsAccount> accounts = createSavingAccountRepo.findBySelectByCustomerIgnoreCase(cleanedCode);
+		            List<String> accountNumbers = accounts.stream()
+		                    .map(CreateSavingsAccount::getAccountNumber)
+		                    .collect(Collectors.toList());
+
+		            // Put only if key not already present
+		            if(!result.containsKey(cleanedCode)) {
+		                result.put(cleanedCode, accountNumbers);
+		            }
+
+		            System.out.println("Accounts for " + cleanedCode + ": " + accountNumbers);
+		        }
+
+		        return result;
 		    }
 
 

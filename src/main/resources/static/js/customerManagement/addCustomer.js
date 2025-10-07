@@ -53,12 +53,28 @@ $(document).ready(function() {
 		formData.append("referenceNo", $('#referenceNo').val());
 		formData.append("remarks", $('#remarks').val());
 		formData.append("paymentBy", $('#paymentBy').val());
-
+		formData.append("lightBill", $('#lightBill').val());
+		formData.append("taxBill", $('#taxBill').val());
+		formData.append("nomineeDOB", $('#nomineeDOB').val());
+		formData.append("buildingFund", $('#buildingFund').val());
+		formData.append("adminCharge", $('#adminCharge').val());
+		formData.append("documentCharge", $('#documentCharge').val());
+		formData.append("otherCharge", $('#otherCharge').val());
+		formData.append("entryFee", $('#entryFee').val());
+		formData.append("noOfShare", $('#noOfShare').val());
+		formData.append("shareAmount", $('#shareAmount').val());
+		
 		// File uploads
 		const customerPhoto = $('#customerPhoto')[0].files[0];
 		const customerSignature = $('#customerSignature')[0].files[0];
+		const customerVoter = $('#customerVoter')[0].files[0];
+		const customerDriving = $('#customerDriving')[0].files[0];
+		
 		if (customerPhoto) formData.append("customerPhoto", customerPhoto);
 		if (customerSignature) formData.append("customerSignature", customerSignature);
+		if (customerVoter) formData.append("customerVoter", customerVoter);
+		if (customerDriving) formData.append("customerDriving", customerDriving);
+		
 
 		// Toggles
 		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
@@ -131,6 +147,44 @@ function signpreview() {
 		reader.onload = function(e) {
 			const previevimg = document.getElementById("bike2imagePreview");
 			document.getElementById("bike2imagePreview").src = e.target.result;
+			previevimg.style.width = "100%";
+			previevimg.style.height = "100%";
+			previevimg.style.objectFit = "cover"
+			previevimg.style.overflow = "hidden"
+			previevimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function voterpreview() {
+	const file = document.getElementById("customerVoter").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previevimg = document.getElementById("bike3imagePreview");
+			document.getElementById("bike3imagePreview").src = e.target.result;
+			previevimg.style.width = "100%";
+			previevimg.style.height = "100%";
+			previevimg.style.objectFit = "cover"
+			previevimg.style.overflow = "hidden"
+			previevimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+function drivingpreview() {
+	const file = document.getElementById("customerDriving").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previevimg = document.getElementById("bike4imagePreview");
+			document.getElementById("bike4imagePreview").src = e.target.result;
 			previevimg.style.width = "100%";
 			previevimg.style.height = "100%";
 			previevimg.style.objectFit = "cover"
@@ -465,3 +519,65 @@ function ifMinor() {
 }
 
 
+$(document).ready(function() {
+    // 1️⃣ Fetch all customers for dropdown
+    $.ajax({
+        url: "api/customersavings/getAllSavingAccountData",
+        method: "GET",
+        success: function(response) {
+            console.log("Fetched Members:", response);
+            
+            const customers = response.data || response;
+
+            // Clear old options except 'No'
+            $('#guardianName').find("option:not([value='No'])").remove();
+
+            // Populate dropdown
+            customers.forEach(function(customer) {
+                const optionText = `${customer.enterCustomerName} - ${customer.selectByCustomer}`;
+                $('#guardianName').append(
+                    $('<option>', {
+                        value: customer.selectByCustomer.trim(),
+                        text: optionText
+                    })
+                );
+            });
+        },
+        error: function(err) {
+            console.error("❌ Error fetching customers:", err);
+        }
+    });
+
+$('#guardianName').on('change', function() {
+    const selectedCode = $(this).val().trim();
+
+    if (selectedCode === "No") {
+        $('#guardianAccount').hide();
+        $('#guardianAccNo').prop('required', false).val('');
+    } else {
+        $('#guardianAccount').show();
+        $('#guardianAccNo').prop('required', true);
+
+        // Fetch account number from backend
+        $.ajax({
+            url: `/api/customersavings/getAccountNumbers?selectByCustomer=${encodeURIComponent(selectedCode)}`,
+            method: "GET",
+            success: function(res) {
+                console.log("Account number response:", res);
+
+                // Access account number using the selected code as key
+                if(res.data && res.data[selectedCode] && res.data[selectedCode].length > 0) {
+                    $('#guardianAccNo').val(res.data[selectedCode][0]); // use first account number
+                } else {
+                    $('#guardianAccNo').val(''); // no account found
+                }
+            },
+            error: function(err) {
+                console.error("❌ Error fetching account number:", err);
+                $('#guardianAccNo').val('');
+            }
+        });
+    }
+}).trigger('change'); // trigger on load
+ // trigger on load
+});
