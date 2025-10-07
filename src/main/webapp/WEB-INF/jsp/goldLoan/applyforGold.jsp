@@ -90,7 +90,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Customer Name</label> <input
+								<label for="custName">Customer Name</label> <input
 									type="text" name="customerName" id="customerName"
 									required="required" placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
@@ -443,6 +443,7 @@ pageEncoding="ISO-8859-1"%> -->
 									id="gurantorIdentity" name="guarantorIdentity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
+									<option value="">Select</option>
 									<option value="Aadhar">Aadhar</option>
 									<option value="PAN">PAN</option>
 									</select>
@@ -517,10 +518,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Co-Applicant Identity</label> <input type="text"
+								<label for="">Co-Applicant Identity</label> <Select 
 									id="coApplicantIdentity" name="coApplicantIdentity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
+									<option value=" ">Please Select</option>
+									<option value="Aadhar">Aadhar</option>
+									<option value="PAN">PAN</option>
+									</Select>
 
 							</div>
 						</div>
@@ -536,9 +541,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Pin Code</label> <input type="text"
-									name="coApplicantPinCode" id="coApplicantPinCode"
-									required="required" placeholder="Enter Pin Code" />
+								<label for="">Age</label> <input type="text"
+									name="coAge" id="coAge"
+									required="required" placeholder="Enter Age" />
 							</div>
 						</div>
 
@@ -554,11 +559,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Security Details</label> <input type="text"
+								<label for="">Security Details</label> <select 
 									id="securityDetails" name="securityDetails" required="required"
 									class="form-control selectField" style="height: 30px;">
+									<option value="Gold">Gold</option>
 
-
+                                 </select>
 							</div>
 						</div>
 
@@ -630,20 +636,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4"
-								style="margin-bottom: 30px">
-								<label> Financial Consultant Id</label>
-								<div class="position-relative">
-									<select id="financialConsultantId" name="financialConsultantId"
-										required="required" class="form-control selectField"
-										style="height: 30px;" placeholder="Enter Financial Code">
-										<option value=""></option>
-
-									</select>
-								</div>
-							</div>
-						</div>
+						
 
 
 						<div class="col-lg-3">
@@ -697,6 +690,21 @@ pageEncoding="ISO-8859-1"%> -->
 									name="collectionCharge" id="collectionCharge"
 									required="required" placeholder="Enter Collection Charge"
 									style="text-transform: uppercase;" />
+							</div>
+						</div>
+						
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4"
+								style="margin-bottom: 30px">
+								<label> Financial Consultant Id</label>
+								<div class="position-relative">
+									<select id="financialConsultantId" name="financialConsultantId"
+										required="required" class="form-control selectField"
+										style="height: 30px;">
+										<option value=""></option>
+
+									</select>
+								</div>
 							</div>
 						</div>
 

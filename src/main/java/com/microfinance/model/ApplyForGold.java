@@ -63,7 +63,7 @@ public class ApplyForGold {
 	private String coApplicantMemberId;
 	private String coApplicantIdentity;
 	private String coApplicantAddress;
-	private String coApplicantPinCode;
+	private String coAge;
 	private String coApplicantContactNo;
 	private String securityDetails;
 	
@@ -347,11 +347,12 @@ public class ApplyForGold {
 	public void setCoApplicantAddress(String coApplicantAddress) {
 		this.coApplicantAddress = coApplicantAddress;
 	}
-	public String getCoApplicantPinCode() {
-		return coApplicantPinCode;
+	
+	public String getCoAge() {
+		return coAge;
 	}
-	public void setCoApplicantPinCode(String coApplicantPinCode) {
-		this.coApplicantPinCode = coApplicantPinCode;
+	public void setCoAge(String coAge) {
+		this.coAge = coAge;
 	}
 	public String getCoApplicantContactNo() {
 		return coApplicantContactNo;
