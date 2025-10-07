@@ -68,9 +68,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="branchName">Branch </label> <select id="branchName" name="branchName"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="branchName">Branch </label> <select id="branchName1"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
 						</div>
@@ -78,11 +78,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Policy </label> <select id="plan" name="plan"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select</option>
-									<option value="Blue">Home</option>
+								<label for="loanPlanName">Plan Name</label> <select
+									id="loanPlanName" name="loanPlanName" required="required"
+									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
 						</div>
@@ -91,17 +89,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="financialCode">Financial Code</label> <input type="text"
-									name="financialCode" id="financialCode" required="required"
-									placeholder="Enter Financial Code"
+								<label for="financialCode">Financial Code</label> <input
+									type="text" name="financialCode" id="financialCode"
+									required="required" placeholder="Enter Financial Code"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">To date</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
+								<label for="toDate">To date</label> <input type="date"
+									name="toDate" id="toDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
