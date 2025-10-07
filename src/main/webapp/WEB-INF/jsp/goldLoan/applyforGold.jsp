@@ -439,10 +439,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Guarantor Identity</label> <input type="text"
+								<label for="">Guarantor Identity</label> <select 
 									id="gurantorIdentity" name="guarantorIdentity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
+									<option value="Aadhar">Aadhar</option>
+									<option value="PAN">PAN</option>
+									</select>
 
 							</div>
 						</div>
