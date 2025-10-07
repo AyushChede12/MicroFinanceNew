@@ -45,11 +45,11 @@ $(document).ready(function () {
 		}
 
 		const filtered = allPaymentData.filter(loan => {
-			const loanDate = loan.loanDate;
+			const paymentDate = loan.paymentDate;
 			return (
 				(!loanId || loan.loanId === loanId) &&
-				loanDate >= fromDate &&
-				loanDate <= toDate
+				paymentDate >= fromDate &&
+				paymentDate <= toDate
 			);
 		});
 

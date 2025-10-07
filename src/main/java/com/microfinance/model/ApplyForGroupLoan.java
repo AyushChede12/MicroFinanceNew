@@ -48,11 +48,15 @@ public class ApplyForGroupLoan {
     private String emiType;
     private String term;
     private String totalAmount;
+    private String groupLoanStatus;
 
     
-    private String approvalStatus;
+    private boolean approvalStatus;
     private String approvalDate;
     private String loanSchemeName;
+    
+    private String photo;
+    private String signature;
     
 	public Long getId() {
 		return id;
@@ -217,10 +221,11 @@ public class ApplyForGroupLoan {
 	public void setTotalAmount(String totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	public String getApprovalStatus() {
+	
+	public boolean isApprovalStatus() {
 		return approvalStatus;
 	}
-	public void setApprovalStatus(String approvalStatus) {
+	public void setApprovalStatus(boolean approvalStatus) {
 		this.approvalStatus = approvalStatus;
 	}
 	public String getApprovalDate() {
@@ -260,6 +265,25 @@ public class ApplyForGroupLoan {
 	public void setMaximumLoanAmount(String maximumLoanAmount) {
 		this.maximumLoanAmount = maximumLoanAmount;
 	}
+	public String getGroupLoanStatus() {
+		return groupLoanStatus;
+	}
+	public void setGroupLoanStatus(String groupLoanStatus) {
+		this.groupLoanStatus = groupLoanStatus;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getSignature() {
+		return signature;
+	}
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
+	
 	
     
 

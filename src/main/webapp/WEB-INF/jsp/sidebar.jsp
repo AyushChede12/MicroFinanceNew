@@ -551,10 +551,10 @@
 
 				<ul id="Goldloan-section" class="nav-content collapse">
 
-					<li><a href="goldSecurePlan"> <i class="bi bi-circle"></i>
+					<!-- <li><a href="goldSecurePlan"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Gold
 								Secure Plan</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="goldDirectory"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Gold
@@ -641,8 +641,8 @@
 					</a></li>
 
 					<li><a href="loanRepaymentPortal"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Loan
-								Repayment Portal</span>
+							<span style="font-family: 'Poppins', sans-serif">Group Loan Payment
+								</span>
 					</a></li>
 
 					<li><a href="installmentRepayment"> <i
@@ -1050,23 +1050,23 @@
 								Transaction Report</span>
 					</a></li>
 
-					<li><a href="investmentSummaryStatement"> <i
+<!-- 					<li><a href="investmentSummaryStatement"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Investment
 								Summary Statement</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="financialAdvisorReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Financial
-								Advisor Report</span>
+								Consultant Report</span>
 					</a></li>
 
-					<li><a href="financialConsultantTeamCollectionReport"> <i
+				<!-- 	<li><a href="financialConsultantTeamCollectionReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Financial
 								Consultant Team Collection Summary</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="chequeTransactionReport"> <i
 							class="bi bi-circle"></i> <span
@@ -1086,20 +1086,20 @@
 								Installment Due Report</span>
 					</a></li>
 
-					<li><a href="unApprovedLoanApplications"> <i
+					<!-- <li><a href="unApprovedLoanApplications"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Unapproved Loan
 								Applications</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="approvedLoanReport"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Approved
+							<span style="font-family: 'Poppins', sans-serif">
 								Loan Report</span>
 					</a></li>
 
 					<li><a href="loanRePaymentReport"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Loan
-								Repayment Report</span>
+								Payment Report</span>
 					</a></li>
 
 					<li><a href="upcomingEMIDueReport"> <i
@@ -1120,53 +1120,65 @@
 								Installment Pending Report</span>
 					</a></li>
 
-					<li><a href="emiCollectionSummary"> <i
+					<!-- <li><a href="emiCollectionSummary"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">EMI Collection
 								Summary</span>
-					</a></li>
+					</a></li> -->
 
-					<li><a href="emiIrregularityStatement"> <i
+					<!-- <li><a href="emiIrregularityStatement"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">EMI
 								Irregularity Statement</span>
-					</a></li>
+					</a></li> -->
 
 					<li><a href="loanConfirmationDocument"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Loan
 								Confirmation Document</span>
 					</a></li>
-
+					
+					<li><a href="loanConfirmationDocument"> <i
+							class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan
+								Document</span>
+					</a></li>
+					
+					<li><a href="loanConfirmationDocument"> <i
+							class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Joint Liability
+								 Document</span>
+					</a></li>
+					
 					<li><a href="maturityStatusReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Maturity Status
 								Report</span>
 					</a></li>
 
-					<li><a href="investmentProjectionReport"> <i
+					<!-- <li><a href="investmentProjectionReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Investment
 								Projection Report</span>
-					</a></li>
+					</a></li> -->
 
-					<li><a href="maturityObligationReport"> <i
+					<!-- <li><a href="maturityObligationReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Maturity
 								Obligation Report</span>
-					</a></li>
+					</a></li> -->
 
-					<li><a href="taxDeductedAtSourceSummary"> <i
+					<!-- <li><a href="taxDeductedAtSourceSummary"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Tax Deducted at
 								Source Summary</span>
-					</a></li>
+					</a></li> -->
 
-					<li><a href="policyPerformanceReport"> <i
+					<!-- <li><a href="policyPerformanceReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Policy
 								Performance Report</span>
-					</a></li>
+					</a></li> -->
 
 				</ul></li>
 

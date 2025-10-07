@@ -33,26 +33,25 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
 <style>
 #img-view {
-    width: 100%;
-    height: 200px;              /* adjust to your preferred box height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed #ccc;    /* optional: border like upload box */
-    border-radius: 10px;
-    overflow: hidden;           /* ensures image stays inside box */
-    background: #f9f9f9;        /* optional light background */
+	width: 100%;
+	height: 200px; /* adjust to your preferred box height */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px dashed #ccc; /* optional: border like upload box */
+	border-radius: 10px;
+	overflow: hidden; /* ensures image stays inside box */
+	background: #f9f9f9; /* optional light background */
 }
 
-#photoPreview,
-#signaturePreview {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;  /* keeps whole image visible */
+#photoPreview, #signaturePreview {
+	max-width: 100%;
+	max-height: 100%;
+	object-fit: contain; /* keeps whole image visible */
 }
-
 </style>
 </head>
 
@@ -84,10 +83,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-4">
 							<div class="d-flex flex-column formFields">
-								<label for="">Select by Code</label> <select id="selectMember"
-									name="selectByCode" required class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Criteria</option>
+								<label for="customerCode" id="customerSelection">Customer
+									Selection </label> <select id="selectByCode" name="selectByCode"
+									class="form-control selectField" style="width: 100%;">
+									<option value="">-- Search Customer Code --</option>
 								</select>
 							</div>
 						</div>
@@ -165,7 +164,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Driving License No.</label> <input type="text"
@@ -178,8 +177,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-3 text-center">
-							<button  type="button" id="saveBtn" class="btnStyle bg-danger" onclick="verifyFetchedData();">Click
-								Here to Authenticate Complete</button>
+							<button type="button" id="saveBtn" class="btnStyle bg-danger"
+								onclick="verifyFetchedData();">Click Here to
+								Authenticate Complete</button>
 						</div>
 					</div>
 
@@ -195,8 +195,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" /><input type="hidden"
-										name="photoHidden" id="photoHidden">
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
 
 								</div>
 							</label> <small id="chksignature" style="color: red;"></small>
@@ -331,8 +331,14 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/customerManagement/addMemberKyc.js"></script>
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<!-- Select2 CSS and JS -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+		rel="stylesheet" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-	
+
 
 </body>
 

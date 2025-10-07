@@ -19,7 +19,7 @@ public class CreateLendingGroup {
     private String branchName;
     private String maximumAge;
     private String minLoanAmt;
-    private String rateOfInterest;
+    private String rateOfInterest; 
     private String emiFrequency;
     private String interestType;
     private String maximumLoanAmount;

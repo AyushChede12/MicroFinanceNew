@@ -14,4 +14,6 @@ public interface LoanPaymentRepo extends JpaRepository<LoanPayment,Long> {
 	List<LoanPayment> findByLoanId(String loanId);
 
 	LoanPayment findByLoanIdAndNoOfInst(String loanId, String remarks);
+
+	List<LoanPayment> findByPaymentMode(String string);
 }

@@ -121,22 +121,6 @@ public class DataCorrectionController {
 	}
 
 	// Ayush
-	@GetMapping("/fetchAllApprovedLoanApplications")
-	public ResponseEntity<ApiResponse<List<LoanApplication>>> getApprovedLoanApplications() {
-		List<LoanApplication> loan = dataCorrectionService.getApprovedLoanApplications();
-
-		if (loan != null && !loan.isEmpty()) {
-			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.FOUND,
-					"Approved Loan Application fetched successfully.", loan);
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
-					"No approved customers found.", null);
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		}
-	}
-
-	// Ayush
 	@PostMapping("/updateDataOfLoanApplication")
 	public ResponseEntity<ApiResponse<String>> updateLoanApplication(@RequestBody LoanApplication loanApplication) {
 
@@ -169,6 +153,22 @@ public class DataCorrectionController {
 		}
 	}
 
+	//Ayush
+	@GetMapping("/fetchAllApprovedLoanApplications")
+	public ResponseEntity<ApiResponse<List<LoanApplication>>> getApprovedLoanApplication() {
+		List<LoanApplication> loan = dataCorrectionService.getApprovedLoan();
+		if (loan != null && !loan.isEmpty()) {
+
+			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.OK,
+					"Loan Application Data fetched successfully.", loan);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<LoanApplication>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved Loan found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+	
 	// Ayush
 	@PostMapping("/deleteLoanApplicationDataById")
 	public ResponseEntity<ApiResponse<String>> deleteLoanApplication(@RequestParam("id") Long id) {
