@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.microfinance.model.ApplyForGold;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.SecuredGoldPlan;
 import com.microfinance.model.addCustomer;
+import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.ApplyForGoldRepo;
 import com.microfinance.repository.GoldDirectoryRepo;
 import com.microfinance.repository.GoldSecurePlanRepo;
@@ -24,6 +26,11 @@ public class SecuredGoldLoanService {
 	
 	@Autowired
 	ApplyForGoldRepo applyForGoldRepo;
+	
+	@Autowired
+	AddCustomerRepo addCustomerRepo;
+	
+
 
 	public SecuredGoldPlan saveLoanManagmentData(SecuredGoldPlan goldLoan) {
 		if (goldLoan.getId() != null && goldSecurePlanRepo.existsById(goldLoan.getId())) {
@@ -116,13 +123,13 @@ public class SecuredGoldLoanService {
 	
 	  public List<addCustomer> getLoanApplicationById(String memberCode) { 
 		  // TODO Auto-generated method stub 
-		  return applyForGoldRepo.findByMemberCode(memberCode);
+		  return addCustomerRepo.findByMemberCode(memberCode);
 		  }
 	 
 
 	public List<addCustomer> getAllCustomers() {
 		// TODO Auto-generated method stub
-		return applyForGoldRepo.findAll();
+		return addCustomerRepo.findAll();
 	}
 
 	public List<GoldDirectory> getLoanPlanNameApplyForGoldByLoanPlan(String loanPlanName) {
@@ -138,6 +145,17 @@ public class SecuredGoldLoanService {
 	public List<GoldDirectory> getByMemberCodeApplyForGoldByLoanPlan(String customerCode) {
 		// TODO Auto-generated method stub
 		return goldDirectoryRepo.findBycustomerCode(customerCode);
+	}
+
+	public boolean saveApplyForGoldData(ApplyForGold applyForGold) {
+		// TODO Auto-generated method stub
+		try {
+			applyForGoldRepo.save(applyForGold);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 	}
 
 	
