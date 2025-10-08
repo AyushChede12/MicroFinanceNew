@@ -265,6 +265,7 @@ $(document).ready(function() {
 	        
 
 	        var applyForGold = {
+				goldID: $('#goldID').val(),
 	            loanDate: $('#loanDate').val(),
 	            memberCode: memberCode,
 	            customerName: $('#customerName').val(),
@@ -336,6 +337,7 @@ $(document).ready(function() {
 	            photo: $('#photoHidden').val(),
 	            signature: $('#signatureHidden').val()
 	        };
+		
 
 	        $.ajax({
 	            url: 'api/securedGoldLoan/saveApplyForGold',
@@ -345,7 +347,7 @@ $(document).ready(function() {
 	            success: function(response) {
 	                console.log('Response:', response);
 	                if (response.status === 'CREATED' || response.status === 'SUCCESS') {
-	                    alert("Gold Application Saved Successfully! ");
+	                    alert("Gold Application Saved Successfully! "+"\n"+"GoldID : "+ applyForGold.goldID );
 	                } else {
 	                    alert('❌ Failed: ' + response.message);
 	                }

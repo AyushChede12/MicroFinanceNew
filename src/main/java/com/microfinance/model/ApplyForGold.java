@@ -11,6 +11,7 @@ public class ApplyForGold {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
+	private String goldID;
 	private String loanDate;
 	private String memberCode;
 	private String customerName;
@@ -449,6 +450,12 @@ public class ApplyForGold {
 	}
 	public void setFinancialConsultantName(String financialConsultantName) {
 		this.financialConsultantName = financialConsultantName;
+	}
+	public String getGoldID() {
+		return goldID;
+	}
+	public void setGoldID(String goldID) {
+		this.goldID = goldID;
 	}
 	
 	
