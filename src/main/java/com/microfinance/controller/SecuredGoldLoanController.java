@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.ApplyForGold;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.SecuredGoldPlan;
@@ -185,6 +186,27 @@ public class SecuredGoldLoanController {
 					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
 		}
 	}
+	
+	@PostMapping("/saveApplyForGold")
+	public ResponseEntity<ApiResponse<ApplyForGold>> saveApplyForGold(@RequestBody ApplyForGold applyForGold) {
+	    boolean isSaved = secureGoldLoanService.saveApplyForGoldData(applyForGold);
+
+	    if (isSaved) {
+	        ApiResponse<ApplyForGold> response = ApiResponse.success(
+	            HttpStatus.CREATED,
+	            "Gold Loan Application saved successfully.",
+	            applyForGold
+	        );
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<ApplyForGold> response = ApiResponse.error(
+	            HttpStatus.BAD_REQUEST,
+	            "Failed to save Gold Loan Application."
+	        );
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	    }
+	}
+
 
 
 }
