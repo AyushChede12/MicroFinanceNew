@@ -47,7 +47,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Relative Module</li>
@@ -87,19 +87,21 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Add Relation <span class="star">*</span></label> <input type="text"
-									name="relation" id="relation" required="required"
+								<label for="">Add Relation <span class="star">*</span></label> <input
+									type="text" name="relation" id="relation"
 									placeholder="Enter Relation" style="text-transform: uppercase;" />
-									<small id="chkrelation" style="color: red;"></small>
+								<small id="chkrelation" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="row" style="margin-top: 15px; margin-left: 10px;">
 							<div class="col-12 text-center">
-								<button id="saveBtn" class="btnStyle bg-warning"
+								<button type="button" id="saveBtn" class="btnStyle bg-warning"
 									onclick="saveRelative()">Add</button>
+								<button type="button" id="updateBtn" class="btnStyle bg-success"
+									onclick="updateRelative()">Update</button>
 							</div>
 						</div>
 
@@ -149,7 +151,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div>
-						</div>
+					</div>
 			</form>
 
 		</div>

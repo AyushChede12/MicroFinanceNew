@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.model.ApplyForGold;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.SecuredGoldPlan;
@@ -91,59 +92,123 @@ public class SecuredGoldLoanController {
 		}
 	}
 
-	// By poonam for GoldDirectory on 11/09/2025
+	
 
-	@PostMapping("/saveGoldDirectory")
-	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestParam(required = false) Long id,
-			@RequestParam String karat, @RequestParam String silverRate, @RequestParam String goldRate,
-			@RequestParam String itemMasterType, @RequestParam String itemName, @RequestParam String lockerLocation,
-			@RequestParam String lockerAddress, @RequestParam String purityName, @RequestParam String purity,
-			@RequestParam String itemPurityType) {
-
-		GoldDirectory saved = secureGoldLoanService.saveOrUpdateGoldDirectory(id, karat, silverRate, goldRate,
-				itemMasterType, itemName, lockerLocation, lockerAddress, purityName, purity, itemPurityType);
+	@GetMapping("/getAllGoldDirectories")
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getAllGoldDirectories() {
+		List<GoldDirectory> list = secureGoldLoanService.getAllGoldDirectories();
 
 		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
-				(id == null ? "Row created successfully" : "Row updated successfully"), saved));
+				list.isEmpty() ? "No records found" : "Records fetched successfully", list));
+	}
+
+	@GetMapping("/getAllMembersForGoldLoan")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllMembersforGold() {
+		List<addCustomer> list = secureGoldLoanService.getAllCustomers();
+		ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK, "All Members Fetched Successfully",
+				list);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("/getByMemberCodeGoldLoan")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getGoldLoanByMemberCode(@RequestParam String memberCode) {
+		try {
+			List<addCustomer> customerList = secureGoldLoanService.getLoanApplicationById(memberCode);
+
+			if (customerList == null || customerList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Customer(s) found", customerList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
 	}
 	
 	
-	@GetMapping("/getAllGoldDirectories")
-    public ResponseEntity<ApiResponse<List<GoldDirectory>>> getAllGoldDirectories() {
-        List<GoldDirectory> list = secureGoldLoanService.getAllGoldDirectories();
+	//fetching data by using loanPlanName 
+	
+	@GetMapping("/getLoanPlanNameApplyForGold")
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getLoanPlanNameApplyForGold(@RequestParam String loanPlanName) {
+		try {
+			List<GoldDirectory> goldLoanList = secureGoldLoanService.getLoanPlanNameApplyForGoldByLoanPlan(loanPlanName);
 
-        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
-                        list.isEmpty() ? "No records found" : "Records fetched successfully",
-                        list));
-    }
+			if (goldLoanList == null || goldLoanList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No Loan Found", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "LoanPlan found", goldLoanList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
 	
-	@GetMapping("/getAllMembersForGoldLoan")
-    public ResponseEntity<ApiResponse<List<addCustomer>>> getAllMembersforGold() {
-        List<addCustomer> list = secureGoldLoanService.getAllCustomers();
-        ApiResponse<List<addCustomer>> response = ApiResponse.success(
-                HttpStatus.OK, "All Members Fetched Successfully", list
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
+	@PostMapping("/saveGoldDirectory")
+	public ResponseEntity<ApiResponse<GoldDirectory>> saveGoldDirectory(@RequestBody GoldDirectory goldDirectory) {
+	    if (goldDirectory.getId() != 0) {
+	        return ResponseEntity.badRequest().body(
+	            ApiResponse.error(HttpStatus.BAD_REQUEST, "Id should not be provided while saving new record")
+	        );
+	    }
+
+	    GoldDirectory saved = secureGoldLoanService.saveGoldDirectory(goldDirectory);
+
+	    return ResponseEntity.ok(
+	        ApiResponse.success(HttpStatus.OK, "Data Saved successfully", saved)
+	    );
+	}
 	
+	@GetMapping("/getAllCustomers")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getAllCustomers() {
+	    List<addCustomer> list = secureGoldLoanService.getAllCustomers();
+
+	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+	            list.isEmpty() ? "No records found" : "Records fetched successfully", list));
+	}
+
+	@GetMapping("/getByMemberCodeApplyForGold")
+	public ResponseEntity<ApiResponse<List<GoldDirectory>>> getByMemberCodeApplyForGold(@RequestParam String customerCode) {
+		try {
+			List<GoldDirectory> goldLoanList = secureGoldLoanService.getByMemberCodeApplyForGoldByLoanPlan(customerCode);
+
+			if (goldLoanList == null || goldLoanList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No Loan Found", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "LoanPlan found", goldLoanList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
+	}
 	
-	/*
-	 * @GetMapping("/getByMemberCodeApplyForGold") public
-	 * ResponseEntity<ApiResponse<List<addCustomer>>>
-	 * getGoldLoanByMemberCode(@RequestParam String memberCode) { try {
-	 * List<addCustomer> customerList =
-	 * secureGoldLoanService.getLoanApplicationById(memberCode);
-	 * 
-	 * if (customerList == null || customerList.isEmpty()) { return
-	 * ResponseEntity.status(HttpStatus.NOT_FOUND) .body(new
-	 * ApiResponse<>(HttpStatus.NOT_FOUND, "No customer found for member code",
-	 * null)); }
-	 * 
-	 * return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
-	 * "Customer(s) found", customerList)); } catch (RuntimeException ex) { return
-	 * ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR) .body(new
-	 * ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null)); } }
-	 */
+	@PostMapping("/saveApplyForGold")
+	public ResponseEntity<ApiResponse<ApplyForGold>> saveApplyForGold(@RequestBody ApplyForGold applyForGold) {
+	    boolean isSaved = secureGoldLoanService.saveApplyForGoldData(applyForGold);
+
+	    if (isSaved) {
+	        ApiResponse<ApplyForGold> response = ApiResponse.success(
+	            HttpStatus.CREATED,
+	            "Gold Loan Application saved successfully.",
+	            applyForGold
+	        );
+	        return ResponseEntity.ok(response);
+	    } else {
+	        ApiResponse<ApplyForGold> response = ApiResponse.error(
+	            HttpStatus.BAD_REQUEST,
+	            "Failed to save Gold Loan Application."
+	        );
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+	    }
+	}
+
+
+
 }
 
 // 1. Save Today's Rate
@@ -189,6 +254,3 @@ public class SecuredGoldLoanController {
 //		GoldDirectory saved = secureGoldLoanService.savePurityMaster(purityName, purity, itemPurityType);
 //		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Purity Master saved successfully", saved));
 //	}
-
-
-

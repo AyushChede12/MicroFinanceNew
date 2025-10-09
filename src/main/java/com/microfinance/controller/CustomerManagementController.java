@@ -47,15 +47,21 @@ public class CustomerManagementController {
 	public ResponseEntity<ApiResponse<addCustomer>> saveOrUpdateCustomer(
 	        @ModelAttribute CustomerDto clientMasterDto,
 	        @RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
-	        @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature) {
+	        @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature,
+	        @RequestParam(value = "customerDriving", required = false) MultipartFile customerDriving,
+            @RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter)
+	
+	{
 
 	    try {
 	        // Debug log
 	        System.out.println("Saving customer: " + clientMasterDto.getCustomerName());
 	        System.out.println("Photo: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "None"));
 	        System.out.println("Signature: " + (customerSignature != null ? customerSignature.getOriginalFilename() : "None"));
+	        System.out.println("Signature: " + (customerDriving != null ? customerDriving.getOriginalFilename() : "None"));
+	        System.out.println("Signature: " + (customerVoter != null ? customerVoter.getOriginalFilename() : "None"));
 
-	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature);
+	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature,customerDriving,customerVoter);
 	        return new ResponseEntity<>(response, response.getStatus());
 
 	    } catch (Exception e) {

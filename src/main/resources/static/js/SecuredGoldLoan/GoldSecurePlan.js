@@ -48,6 +48,7 @@ $(document).ready(function() {
 			dataType: "json",
 			data: JSON.stringify(goldLoanData),
 			success: function(response) {
+				alert("success");
 				// ✅ Check numeric status code instead of "OK"
 				if ((response.status === 200 || response.status === "OK")) {
 					if(mode=="save"){
@@ -133,11 +134,8 @@ function editLoanById(id) {
 				$('#emiType').val(loan.emiType);
 				$('#minAge').val(loan.minAge);
 				$('#maxAge').val(loan.maxAge);
-				$('#minAmt').val(loan.minAmt);
-				$('#maxAmt').val(loan.maxAmt);
-				$('#minTerm').val(loan.minTerm);
-
-				$('#maxTerm').val(loan.maxTerm);
+				$('#loanAmt').val(loan.loanAmt);
+				$('#loanTerm').val(loan.loanTerm);
 				$('#rateInterestType').val(loan.rateInterestType);
 				$('#securityType').val(loan.securityType);
 

@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Preferences</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-gear"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Financial Year</li>
@@ -148,7 +148,6 @@ pageEncoding="ISO-8859-1"%> -->
 													<th scope="col">Date From</th>
 													<th scope="col">Date To</th>
 													<th scope="col">Edit</th>
-													<th scope="col">Delete</th>
 												</tr>
 											</thead>
 											<tbody id="tableBody">

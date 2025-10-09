@@ -214,179 +214,177 @@ public class LoanManagementService {
 		return approvedActiveLoans.stream().map(LoanApplication::getLoanId).collect(Collectors.toList());
 	}
 
+	//Service for paying the payment 
+	@Autowired
+	private CreateSavingAccountRepo savingAccountRepo; // Add repo for savings account
+
 	public boolean processEmiPayment(LoanPayment request, String noOfInst) {
-		String loanId = request.getLoanId();
+	    String loanId = request.getLoanId();
 
-		LoanApplication loanApp = loanApplicationRepo.findByLoanId(loanId);
-		if (loanApp == null) {
-			throw new RuntimeException("Loan ID not found");
-		}
+	    LoanApplication loanApp = loanApplicationRepo.findByLoanId(loanId);
+	    if (loanApp == null) {
+	        throw new RuntimeException("Loan ID not found");
+	    }
 
-		String loanDate = loanApp.getLoanDate();
-		double policyAmount = Double.parseDouble(loanApp.getLoanAmount()); // Principal
-		double emiAmount = Double.parseDouble(loanApp.getEmiPayment());
-		double roi = Double.parseDouble(loanApp.getRateOfInterest()); // Annual ROI
-		double term = Double.parseDouble(loanApp.getLoanTerm());
-		String frequency = loanApp.getLoanMode();
-		String interestType = loanApp.getInterestType(); // "Flat" or "Reducing"
+	    List<CreateSavingsAccount> accounts = createSavingRepo.findBySelectByCustomer(request.getMemberId());
 
-		double periodDivisor;
-		switch (frequency) {
-		case "Daily":
-			periodDivisor = 365;
-			break;
-		case "Weekly":
-			periodDivisor = 52;
-			break;
-		case "Fortnightly":
-			periodDivisor = 26;
-			break;
-		case "Monthly":
-			periodDivisor = 12;
-			break;
-		case "Quarterly":
-			periodDivisor = 4;
-			break;
-		default:
-			throw new IllegalArgumentException("Invalid frequency: " + frequency);
-		}
+	    if (accounts.isEmpty()) {
+	        throw new RuntimeException("Saving account not found for Member ID: " + request.getMemberId());
+	    }
 
-		int numberOfInstallments = Integer.parseInt(noOfInst);
-		List<LoanPayment> allPayments = loanPaymentRepo.findByLoanId(loanId);
+	    CreateSavingsAccount savingAcc = accounts.get(0); // take the first account
 
-		double lastAmountDue;
-		double remainingPrincipal = policyAmount;
+	    double accountBalance = Double.parseDouble(savingAcc.getBalance());
+	    double emiAmount = Double.parseDouble(loanApp.getEmiPayment());
 
-		if (!allPayments.isEmpty()) {
-			LoanPayment lastPayment = allPayments.get(allPayments.size() - 1);
-			lastAmountDue = Double.parseDouble(lastPayment.getAmountDue());
-			if ("Reducing Interest".equalsIgnoreCase(interestType)) {
-				remainingPrincipal = Double.parseDouble(lastPayment.getAmountDue());
-			}
-		} else {
-			if ("Flat Interest".equalsIgnoreCase(interestType)) {
-				double interest = (policyAmount * roi * term) / (100 * periodDivisor);
-				lastAmountDue = policyAmount + interest;
-			} else {
-				lastAmountDue = policyAmount;
-			}
-		}
+	    int numberOfInstallments = Integer.parseInt(noOfInst);
 
-		boolean isLoanClosed = false;
+	    // ✅ Step 2: Check if balance is enough
+	    if (accountBalance < (emiAmount * numberOfInstallments)) {
+	        throw new RuntimeException("Insufficient balance! Available: " + accountBalance + 
+	                                   ", Required: " + (emiAmount * numberOfInstallments));
+	    }
 
-		for (int i = 1; i <= numberOfInstallments; i++) {
-			if (lastAmountDue <= 0)
-				break;
+	    // ✅ Step 3: Deduct balance before EMI processing
+	    accountBalance -= (emiAmount * numberOfInstallments);
+	    savingAcc.setBalance(String.valueOf(accountBalance));
+	    savingAccountRepo.save(savingAcc);
 
-			double interestThisPeriod = 0;
+	    // ✅ Continue your existing EMI processing logic
+	    String loanDate = loanApp.getLoanDate();
+	    double policyAmount = Double.parseDouble(loanApp.getLoanAmount()); // Principal
+	    double roi = Double.parseDouble(loanApp.getRateOfInterest()); // Annual ROI
+	    double term = Double.parseDouble(loanApp.getLoanTerm());
+	    String frequency = loanApp.getLoanMode();
+	    String interestType = loanApp.getInterestType(); // "Flat" or "Reducing"
 
-			if ("Reducing Interest".equalsIgnoreCase(interestType)) {
-				interestThisPeriod = (remainingPrincipal * roi) / (100 * periodDivisor);
-				remainingPrincipal = remainingPrincipal - (emiAmount - interestThisPeriod);
-				if (remainingPrincipal < 0)
-					remainingPrincipal = 0;
+	    double periodDivisor;
+	    switch (frequency) {
+	        case "Daily": periodDivisor = 365; break;
+	        case "Weekly": periodDivisor = 52; break;
+	        case "Fortnightly": periodDivisor = 26; break;
+	        case "Monthly": periodDivisor = 12; break;
+	        case "Quarterly": periodDivisor = 4; break;
+	        default: throw new IllegalArgumentException("Invalid frequency: " + frequency);
+	    }
 
-				lastAmountDue = remainingPrincipal;
-			} else {
-				lastAmountDue -= emiAmount;
-				if (lastAmountDue < 0)
-					lastAmountDue = 0;
-			}
+	    List<LoanPayment> allPayments = loanPaymentRepo.findByLoanId(loanId);
 
-			LoanPayment payment = new LoanPayment();
-			payment.setLoanId(request.getLoanId());
-			payment.setLoanPlanName(request.getLoanPlanName());
-			payment.setLoanMode(request.getLoanMode());
-			payment.setLoanTerm(request.getLoanTerm());
-			payment.setRateOfInterest(request.getRateOfInterest());
-			payment.setLoanAmount(request.getLoanAmount());
-			payment.setInterestType(request.getInterestType());
-			payment.setEmiPayment(String.valueOf(emiAmount));
-			payment.setLoanDate(loanDate);
-			payment.setMemberId(request.getMemberId());
-			payment.setMemberName(request.getMemberName());
+	    double lastAmountDue;
+	    double remainingPrincipal = policyAmount;
 
-			payment.setProcessingFee(request.getProcessingFee());
-			payment.setLegalCharges(request.getLegalCharges());
-			payment.setGst(request.getGst());
-			payment.setInsuranceFee(request.getInsuranceFee());
-			payment.setValuationFees(request.getValuationFees());
-			payment.setStationaryFee(request.getStationaryFee());
+	    if (!allPayments.isEmpty()) {
+	        LoanPayment lastPayment = allPayments.get(allPayments.size() - 1);
+	        lastAmountDue = Double.parseDouble(lastPayment.getAmountDue());
+	        if ("Reducing Interest".equalsIgnoreCase(interestType)) {
+	            remainingPrincipal = Double.parseDouble(lastPayment.getAmountDue());
+	        }
+	    } else {
+	        if ("Flat Interest".equalsIgnoreCase(interestType)) {
+	            double interest = (policyAmount * roi * term) / (100 * periodDivisor);
+	            lastAmountDue = policyAmount + interest;
+	        } else {
+	            lastAmountDue = policyAmount;
+	        }
+	    }
 
-			payment.setPaymentDate(request.getPaymentDate());
-			payment.setPaymentStatus("Paid");
-			payment.setPaymentMode(request.getPaymentMode());
-			payment.setAccountNo(request.getAccountNo());
-			payment.setRef_UpiId(request.getRef_UpiId());
-			payment.setCharges(request.getCharges());
-			payment.setRemarks("Installment " + (allPayments.size() + i));
-			payment.setChequeDate(request.getChequeDate());
-			payment.setChequeNo(request.getChequeNo());
-			payment.setNoOfInst("1");
-			payment.setAmountDue(String.valueOf(lastAmountDue));
+	    boolean isLoanClosed = false;
 
-			loanPaymentRepo.save(payment);
+	    for (int i = 1; i <= numberOfInstallments; i++) {
+	        if (lastAmountDue <= 0)
+	            break;
 
-			double instCount = allPayments.size() + i;
+	        double interestThisPeriod = 0;
 
-			if (term == instCount) {
-				// Last installment → close loan
-				loanApp.setLoanStatus("CLOSED");
-				loanApplicationRepo.save(loanApp);
+	        if ("Reducing Interest".equalsIgnoreCase(interestType)) {
+	            interestThisPeriod = (remainingPrincipal * roi) / (100 * periodDivisor);
+	            remainingPrincipal = remainingPrincipal - (emiAmount - interestThisPeriod);
+	            if (remainingPrincipal < 0)
+	                remainingPrincipal = 0;
 
-				// Save to LoanClosure table
-				LoanClosure closure = new LoanClosure();
-				closure.setLoanId(loanApp.getLoanId());
-				closure.setLoanPlanName(loanApp.getLoanPlanName());
-				closure.setLoanMode(loanApp.getLoanMode());
-				closure.setLoanTerm(loanApp.getLoanTerm());
-				closure.setRateOfInterest(loanApp.getRateOfInterest());
-				closure.setLoanAmount(loanApp.getLoanAmount());
-				closure.setInterestType(loanApp.getInterestType());
-				closure.setLoanDate(loanApp.getLoanDate());
-				closure.setLoanStatus("CLOSED");
-				closure.setFinancialConsultantName(loanApp.getFinancialConsultantName());
-				closure.setMemberId(loanApp.getMemberId());
-				closure.setMemberName(loanApp.getMemberName());
-				closure.setBranchName(loanApp.getBranchName());
-				closure.setContactNo(loanApp.getContactNo());
-				closure.setRelativeDetails(loanApp.getRelativeDetails());
-				closure.setTypeOfLoan(loanApp.getTypeOfLoan());
-				closure.setEmiPayment(loanApp.getEmiPayment());
-				closure.setNoOfInst(payment.getNoOfInst());
+	            lastAmountDue = remainingPrincipal;
+	        } else {
+	            lastAmountDue -= emiAmount;
+	            if (lastAmountDue < 0)
+	                lastAmountDue = 0;
+	        }
 
-				closure.setFinancialConsultantId(loanApp.getFinancialConsultantId());
-				closure.setPaymentDate(loanApp.getPaymentDate());
-				closure.setPaymentMode(loanApp.getPaymentMode());
+	        LoanPayment payment = new LoanPayment();
+	        payment.setLoanId(request.getLoanId());
+	        payment.setLoanPlanName(request.getLoanPlanName());
+	        payment.setLoanMode(request.getLoanMode());
+	        payment.setLoanTerm(request.getLoanTerm());
+	        payment.setRateOfInterest(request.getRateOfInterest());
+	        payment.setLoanAmount(request.getLoanAmount());
+	        payment.setInterestType(request.getInterestType());
+	        payment.setEmiPayment(String.valueOf(emiAmount));
+	        payment.setLoanDate(loanDate);
+	        payment.setMemberId(request.getMemberId());
+	        payment.setMemberName(request.getMemberName());
 
-				// closure.setClosureDate(request.getPaymentDate()); // Set closure date
-				closure.setRemarks("Loan closed after final EMI");
-				closure.setCharges(loanApp.getChequeDate());
-				closure.setChequeNo(loanApp.getChequeNo());
-				closure.setCharges(loanApp.getCharges());
-				closure.setRef_UpiId(loanApp.getRef_UpiId());
-				/*
-				 * 
-				 * private String totalinterestofLoan; private String sanctionedAmount; private
-				 * String totalPayableofLoan;
-				 * 
-				 * private String interestDue; private String principaldue; private String
-				 * amountPaid; private String balanceLoanAmount; private String dueDate; private
-				 * String paymentBranch; private String fine; private String netAmount;
-				 * 
-				 * 
-				 * 
-				 * 
-				 * 
-				 */
-				loanClosurerepo.save(closure);
+	        // Deductions
+	        payment.setProcessingFee(request.getProcessingFee());
+	        payment.setLegalCharges(request.getLegalCharges());
+	        payment.setGst(request.getGst());
+	        payment.setInsuranceFee(request.getInsuranceFee());
+	        payment.setValuationFees(request.getValuationFees());
+	        payment.setStationaryFee(request.getStationaryFee());
 
-				isLoanClosed = true;
-				break;
-			}
-		}
+	        payment.setPaymentDate(request.getPaymentDate());
+	        payment.setPaymentStatus("Paid");
+	        payment.setPaymentMode(request.getPaymentMode());
+	        payment.setAccountNo(request.getAccountNo());
+	        payment.setRef_UpiId(request.getRef_UpiId());
+	        payment.setCharges(request.getCharges());
+	        payment.setRemarks("Installment " + (allPayments.size() + i));
+	        payment.setChequeDate(request.getChequeDate());
+	        payment.setChequeNo(request.getChequeNo());
+	        payment.setNoOfInst("1");
+	        payment.setAmountDue(String.valueOf(lastAmountDue));
 
-		return isLoanClosed;
+	        loanPaymentRepo.save(payment);
+
+	        double instCount = allPayments.size() + i;
+
+	        if (term == instCount) {
+	            loanApp.setLoanStatus("CLOSED");
+	            loanApplicationRepo.save(loanApp);
+
+	            LoanClosure closure = new LoanClosure();
+	            closure.setLoanId(loanApp.getLoanId());
+	            closure.setLoanPlanName(loanApp.getLoanPlanName());
+	            closure.setLoanMode(loanApp.getLoanMode());
+	            closure.setLoanTerm(loanApp.getLoanTerm());
+	            closure.setRateOfInterest(loanApp.getRateOfInterest());
+	            closure.setLoanAmount(loanApp.getLoanAmount());
+	            closure.setInterestType(loanApp.getInterestType());
+	            closure.setLoanDate(loanApp.getLoanDate());
+	            closure.setLoanStatus("CLOSED");
+	            closure.setFinancialConsultantName(loanApp.getFinancialConsultantName());
+	            closure.setMemberId(loanApp.getMemberId());
+	            closure.setMemberName(loanApp.getMemberName());
+	            closure.setBranchName(loanApp.getBranchName());
+	            closure.setContactNo(loanApp.getContactNo());
+	            closure.setRelativeDetails(loanApp.getRelativeDetails());
+	            closure.setTypeOfLoan(loanApp.getTypeOfLoan());
+	            closure.setEmiPayment(loanApp.getEmiPayment());
+	            closure.setNoOfInst(payment.getNoOfInst());
+	            closure.setFinancialConsultantId(loanApp.getFinancialConsultantId());
+	            closure.setPaymentDate(loanApp.getPaymentDate());
+	            closure.setPaymentMode(loanApp.getPaymentMode());
+	            closure.setRemarks("Loan closed after final EMI");
+	            closure.setCharges(loanApp.getCharges());
+	            closure.setChequeNo(loanApp.getChequeNo());
+	            closure.setRef_UpiId(loanApp.getRef_UpiId());
+
+	            loanClosurerepo.save(closure);
+
+	            isLoanClosed = true;
+	            break;
+	        }
+	    }
+
+	    return isLoanClosed;
 	}
 
 	// Service for getting loan id's for loan payment statement(Vaibhav)
