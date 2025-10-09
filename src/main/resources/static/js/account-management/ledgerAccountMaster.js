@@ -1,7 +1,6 @@
 $(document).ready(function() {
 	BranchNameDropdown();
 	GroupNameDropdown();
-	AccountTypeDropdown(); // new: loads account types if needed
 
 	// Form submit
 	$("#formid").submit(function(e) {
@@ -29,8 +28,16 @@ $(document).ready(function() {
 			drcr = "CR";
 		}
 		$("#openingBalanceType").val(drcr); // ✅ just set value
-	});
+		const $accountType = $("#accountType");
+		$accountType.empty().append('<option value="">Select Type</option>');
 
+		if (group && allowedCombinations[group]) {
+			allowedCombinations[group].forEach(type => {
+				$accountType.append('<option value="' + type + '">' + type.replaceAll("_", " ") + '</option>');
+			});
+		}
+
+	});
 });
 
 function showTableData() {
@@ -259,12 +266,11 @@ function GroupNameDropdown() {
 	});
 }
 
-// Account Type Dropdown (optional if not static)
-function AccountTypeDropdown() {
-	const types = ["Cash", "Bank", "Member", "Loan", "Share"];
-	let options = "<option value=''>Select Type</option>";
-	types.forEach(type => {
-		options += `<option value='${type}'>${type}</option>`;
-	});
-	$("#accountType").html(options);
-}
+const allowedCombinations = {
+	"ASSETS": ["CASH", "BANK", "LOAN_TO_MEMBERS", "GOLD_LOANS", "JOINT_LOANS", "RECEIVABLE"],
+	"LIABILITIES": ["MEMBER_SAVINGS", "RD_PAYABLE", "FD_PAYABLE", "DAILY_DEPOSIT_PAYABLE", "MIS_PAYABLE", "LOAN_FROM_BANK", "PAYABLE"],
+	"INCOME": ["SERVICE_FEES", "INTEREST", "DIVIDEND", "MEMBER_CONTRIBUTION", "POLICY_FEES"],
+	"EQUITY": ["SHARE", "CAPITAL"],
+	"EXPENSES": ["SALARY", "RENT", "OFFICE", "UTILITIES", "CONSULTANT_INCENTIVES", "COMMISSIONS", "POLICY_ADMIN"]
+};
+

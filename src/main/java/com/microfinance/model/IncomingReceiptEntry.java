@@ -15,7 +15,7 @@ public class IncomingReceiptEntry {
 	private long id;
 
 	private String branchName;
-	private String ReceiptID;
+	private String voucherID;
 	private String dateOfEntry;
 	private String creditLedger;
 	private String debitLedger;
@@ -39,11 +39,13 @@ public class IncomingReceiptEntry {
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
-	public String getReceiptID() {
-		return ReceiptID;
+	
+	
+	public String getVoucherID() {
+		return voucherID;
 	}
-	public void setReceiptID(String receiptID) {
-		ReceiptID = receiptID;
+	public void setVoucherID(String voucherID) {
+		this.voucherID = voucherID;
 	}
 	public String getDateOfEntry() {
 		return dateOfEntry;

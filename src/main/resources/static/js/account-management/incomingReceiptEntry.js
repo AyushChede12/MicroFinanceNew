@@ -155,7 +155,7 @@ function loadIncomingReceipts() {
 				<tr> 
 					<td>${receipt.id ?? ''}</td>
 					<td>${receipt.branchName ?? ''}</td>
-					<td>${receipt.receiptID ?? ''}</td>
+					<td>${receipt.voucherID ?? ''}</td>
 					<td>${receipt.dateOfEntry ?? ''}</td>
 					<td>${receipt.creditLedger ?? ''}</td>
 					<td>${receipt.debitLedger ?? ''}</td>
@@ -194,7 +194,7 @@ function viewIncomingReceipt(id) {
 			});
 
 
-			$("#receiptID").val(data.receiptID);
+			$("#voucherID").val(data.voucherID);
 			$("#dateOfEntry").val(data.dateOfEntry);
 			$("#transferMode").val(data.transferMode);
 			$("#transactionAmount").val(data.transactionAmount);
@@ -252,7 +252,7 @@ function searchIncomingReceipts() {
                     <tr>
 					<td>${receipt.id || ''}</td>
 					<td>${receipt.branchName || ''}</td>
-					<td>${receipt.receiptID || ''}</td>
+					<td>${receipt.voucherID || ''}</td>
 					<td>${receipt.dateOfEntry || ''}</td>
 					<td>${receipt.creditLedger || ''}</td>
 					<td>${receipt.debitLedger || ''}</td>
@@ -329,7 +329,9 @@ function LedgerDropdown(branchName, selectedCr = "", selectedDr = "") {
 				}
 
 				// Credit Ledger (Source → Liabilities, Equity, Income, OR Loan under Assets)
-				if (g === "liabilities" || g === "equity" || g === "income" || (g === "assets" && t === "loan")) {
+				if (g === "liabilities" || g === "equity" || g === "income" || (g === "assets" && t === "loan_to_members" ||
+					t === "gold_loans" ||
+					t === "joint_loans")) {
 					const selected = title.trim().toLowerCase() === selectedCr.trim().toLowerCase() ? "selected" : "";
 					crOptions += `<option value="${title}" ${selected}>${title}</option>`;
 				}
