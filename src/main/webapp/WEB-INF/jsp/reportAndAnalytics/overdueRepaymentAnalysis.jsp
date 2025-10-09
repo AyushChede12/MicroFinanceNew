@@ -98,8 +98,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">To Date</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
+								<label for="toDate">To Date</label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder="Enter tDate"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>

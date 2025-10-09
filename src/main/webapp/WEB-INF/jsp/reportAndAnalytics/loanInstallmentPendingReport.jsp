@@ -46,7 +46,8 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Loan Installment Pending Report</li>
+					<li class="breadcrumb-item action">Loan Installment Pending
+						Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -65,11 +66,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branch" name="branch"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Umrer</option>
+								<label for="">Branch </label> <select id="branchName1"
+									name="branchName" required="required"
+									class="form-control selectField" style="height: 30px;">
 								</select>
 							</div>
 						</div>
@@ -90,18 +89,18 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Finicial Code</label> <input type="text"
-									name="tDate" id="tDate" required="required"
-									placeholder="Enter Advisor Code"
+								<label for="financialCode">Financial Code</label> <input
+									type="text" name="financialCode" id="financialCode"
+									required="required" placeholder="Enter Financial Code"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">To Date</label> <input type="date" name="tDate"
-									id="tDate" required="required" placeholder="Enter tDate"
-									style="text-transform: uppercase;" />
+								<label for="toDate">To Date</label> <input type="date"
+									name="toDate" id="toDate" required="required"
+									placeholder="Enter tDate" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -117,27 +116,78 @@ pageEncoding="ISO-8859-1"%> -->
 
 			</form>
 
+			<!-- <div class="row mt-5">
+				<div class="col-12">
+					<div class="card recent-sales">
+						<div class="card-body table-responsive">
+							<h5 class="card-title mb-2">Find Result</h5>
+							<h6 class="card-title text-center text-dark">Loan Balance
+								Report</h6>
+
+							Scrollable table wrapper
+							<div class="table-responsive"
+								style="max-height: 500px; overflow-y: auto;">
+								<table class="table table-bordered text-center align-middle"
+									style="table-layout: fixed; width: 100%;">
+									<thead class="table-light"
+										style="position: sticky; top: 0; z-index: 2;">
+										<tr
+											style="font-family: 'Poppins', sans-serif; font-weight: 600;">
+											<th scope="col">Loan ID</th>
+											<th scope="col">Branch Name</th>
+											<th scope="col">Customer Name</th>
+											<th scope="col">Financial Code</th>
+											<th scope="col">Loan Amount</th>
+											<th scope="col">Installment Amount</th>
+											<th scope="col">Total Installments</th>
+											<th scope="col">Paid Installments</th>
+											<th scope="col">Pending Installments</th>
+											<th scope="col">Outstanding Balance</th>
+											<th scope="col">Last Payment Date</th>
+											<th scope="col">Loan Status</th>
+											<th scope="col">Remarks</th>
+										</tr>
+									</thead>
+									<tbody>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			
 			<div class="row mt-5">
 				<div class="col-12">
 					<div class="card recent-sales">
 
 						<div class="card-body table-responsive">
-							<h5 class="card-title">Find Result</h5>
+							<h5 class="card-title">Loan Pending Report</h5>
 
 							<h6 class="card-title" style="text-align: center; color: black;">
-								Loan Balance Report</h6>
+								Loan Installment Pending Report</h6>
 
 
 
 							<div style="overflow-x: auto; white-space: nowrap;">
 								<table class="table table-borderless datatable">
 									<thead class="table-light">
-										<tr style="font-family: 'Poppins', sans-serif;">
-											<th scope="col">ID</th>
-											<th scope="col">Branch Type</th>
-											<th scope="col">Plan</th>
-											<th scope="col">Advisor Code</th>
-											<th scope="col">Date</th>
+										<tr
+											style="font-family: 'Poppins', sans-serif;">
+											<th scope="col">Loan ID</th>
+											<th scope="col">Branch Name</th>
+											<th scope="col">Customer Name</th>
+											<th scope="col">Financial Code</th>
+											<th scope="col">Loan Amount</th>
+											<th scope="col">Installment Amount</th>
+											<th scope="col">Total Installments</th>
+											<th scope="col">Paid Installments</th>
+											<th scope="col">Pending Installments</th>
+											<th scope="col">Outstanding Balance</th>
+											<th scope="col">Last Payment Date</th>
+											<th scope="col">Loan Status</th>
+											<th scope="col">Remarks</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -150,12 +200,14 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 
+
 		</div>
 
 
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/loanInstallmentPending.js"></script>
 </body>
 
 </html>

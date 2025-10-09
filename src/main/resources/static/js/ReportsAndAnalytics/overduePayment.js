@@ -154,11 +154,13 @@ function bindLoanTable(data) {
             <tr>
                 <td>${sn++}</td>
                 <td>${item.loanId || ''}</td>
+				<td>${item.memberId || ''}</td>
                 <td>${item.memberName || ''}</td>
+				<td>${item.loanDate || ''}</td>
                 <td>${item.branchName || ''}</td>
+				<td>${item.contactNo || ''}</td>
                 <td>${item.loanPlanName || ''}</td>
                 <td>${item.loanDate || ''}</td>
-                <td>${loanAmount}</td>
                 <td>${totalPaid}</td>
                 <td>${overdue}</td>
                 <td>${currentDue}</td>
