@@ -86,26 +86,24 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Account Group<span class="star">*</span></label> <select
-									id="groupName" name="groupName"
+								<label for="groupName">Account Group <span class="star">*</span></label>
+								<select id="groupName" name="groupName"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Group</option>
+									<!-- Groups (Assets, Liabilities, Income, Equity, Expenses) 
+			     will be loaded dynamically from JS/backend -->
 								</select> <span id="groupNameError" style="color: red; font-size: 12px;"></span>
-
 							</div>
 						</div>
 
 						<!-- Account Type -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Account Type <span class="star">*</span></label> <select
-									id="accountType" name="accountType"
+								<label for="accountType">Account Type <span class="star">*</span></label>
+								<select id="accountType" name="accountType"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Type</option>
-									<option value="Cash">Cash</option>
-									<option value="Bank">Bank</option>
-									<option value="Member">Member</option>
-									<option value="Loan">Loan</option>
+									<!-- Sub-types will be injected dynamically based on group selection -->
 								</select> <span id="accountTypeError"
 									style="color: red; font-size: 12px;"></span>
 							</div>
