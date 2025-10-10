@@ -5,12 +5,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -23,6 +25,7 @@ import org.springframework.stereotype.Service;
 import com.microfinance.dto.BankCashTransferDto;
 import com.microfinance.dto.IncomingReceiptDto;
 import com.microfinance.dto.LedgerAccountDto;
+import com.microfinance.dto.LedgerSummaryDto;
 import com.microfinance.dto.ManualJournalDto;
 import com.microfinance.dto.OutgoingPaymentDto;
 import com.microfinance.exception.BadRequestException;
@@ -37,6 +40,7 @@ import com.microfinance.repository.BankCashTransferRepo;
 import com.microfinance.repository.BranchModuleRepo;
 import com.microfinance.repository.IncomingReceiptRepo;
 import com.microfinance.repository.LedgerAccountRepository;
+import com.microfinance.repository.LedgerSummaryRepo;
 import com.microfinance.repository.ManualJournalRepo;
 import com.microfinance.repository.OutgoingPaymentRepo;
 
@@ -61,13 +65,16 @@ public class AccountManagementService {
 	@Autowired
 	private ManualJournalRepo manualJournalRepo;
 
+	@Autowired
+	private LedgerSummaryRepo ledgerSummaryRepo;
+
 	/**
 	 * Create a new Ledger Account. Business Logic: - Title must be unique per
 	 * branch - Title must have at least 3 characters
 	 */
 	private static final Pattern ACCOUNT_CODE_PATTERN = Pattern.compile("^[1-5]\\d{2}$"); // 3 digits, 1-5 first digit
 
-    @Transactional
+	@Transactional
 	public LedgerAccountDto createLedger(LedgerAccountDto dto) {
 
 		validateLedgerData(dto);
@@ -92,7 +99,6 @@ public class AccountManagementService {
 		if (titleExists) {
 			throw new BusinessLogicException("Ledger with this title already exists in this branch");
 		}
-		
 
 		// ✅ Auto-assign Dr/Cr based on Group
 		String group = dto.getGroupName().toUpperCase();
@@ -127,29 +133,32 @@ public class AccountManagementService {
 		return mapToDto(saved);
 	}
 
-	 // Minimal guardrail mapping (Java 8 version)
-    private static final Map<String, List<String>> ALLOWED_COMBINATIONS;
-    static {
-        Map<String, List<String>> map = new HashMap<>();
-        map.put("ASSETS", Arrays.asList("CASH", "BANK", "LOAN", "MEMBER"));
-        map.put("LIABILITIES", Arrays.asList("LOAN", "MEMBER", "SHARE"));
-        map.put("INCOME", Arrays.asList("SHARE", "MEMBER", "BANK"));
-        map.put("EQUITY", Arrays.asList("SHARE", "MEMBER"));
-        map.put("EXPENSES", Arrays.asList("CASH", "BANK", "MEMBER"));
-        ALLOWED_COMBINATIONS = Collections.unmodifiableMap(map);
-    }
+	// Minimal guardrail mapping (Java 8 version)
+	private static final Map<String, List<String>> ALLOWED_COMBINATIONS;
+	static {
+		Map<String, List<String>> map = new HashMap<>();
+		map.put("ASSETS", Arrays.asList("CASH", "BANK", "LOAN_TO_MEMBERS", "GOLD_LOANS", "JOINT_LOANS", "RECEIVABLE"));
+		map.put("LIABILITIES", Arrays.asList("MEMBER_SAVINGS", "RD_PAYABLE", "FD_PAYABLE", "DAILY_DEPOSIT_PAYABLE",
+				"MIS_PAYABLE", "LOAN_FROM_BANK", "PAYABLE"));
+		map.put("INCOME", Arrays.asList("SERVICE_FEES", "INTEREST", "DIVIDEND", "MEMBER_CONTRIBUTION", "POLICY_FEES"));
+		map.put("EQUITY", Arrays.asList("SHARE", "CAPITAL"));
+		map.put("EXPENSES", Arrays.asList("SALARY", "RENT", "OFFICE", "UTILITIES", "CONSULTANT_INCENTIVES",
+				"COMMISSIONS", "POLICY_ADMIN"));
 
-    private boolean isValidCombination(String group, String type) {
-        if (group == null || type == null) {
-            return false;
-        }
+		ALLOWED_COMBINATIONS = Collections.unmodifiableMap(map);
+	}
 
-        group = group.trim().toUpperCase();
-        type = type.trim().toUpperCase();
+	private boolean isValidCombination(String group, String type) {
+		if (group == null || type == null) {
+			return false;
+		}
 
-        List<String> allowedTypes = ALLOWED_COMBINATIONS.get(group);
-        return allowedTypes != null && allowedTypes.contains(type);
-    }
+		group = group.trim().toUpperCase();
+		type = type.trim().toUpperCase();
+
+		List<String> allowedTypes = ALLOWED_COMBINATIONS.get(group);
+		return allowedTypes != null && allowedTypes.contains(type);
+	}
 
 	/**
 	 * Fetch all ledger accounts.
@@ -170,7 +179,7 @@ public class AccountManagementService {
 	}
 
 	public List<String> groupNames() {
-		return Arrays.asList("ASSETS", "LIABILITIES", "INCOME", "EXPENSES", "EQUITY");
+		return Arrays.asList("ASSETS", "LIABILITIES", "INCOME", "EQUITY", "EXPENSES");
 	}
 
 	public List<LedgerAccountDto> getLedgersByBranch(String branchName) {
@@ -204,13 +213,13 @@ public class AccountManagementService {
 			if (first != '2')
 				throw new BusinessLogicException("LIABILITIES must have account codes in 2XX range.");
 			break;
-		case "EQUITY":
-			if (first != '3')
-				throw new BusinessLogicException("EQUITY must have account codes in 3XX range.");
-			break;
 		case "INCOME":
+			if (first != '3')
+				throw new BusinessLogicException("INCOME must have account codes in 3XX range.");
+			break;
+		case "EQUITY":
 			if (first != '4')
-				throw new BusinessLogicException("INCOME must have account codes in 4XX range.");
+				throw new BusinessLogicException("EQUITY must have account codes in 4XX range.");
 			break;
 		case "EXPENSES":
 			if (first != '5')
@@ -236,29 +245,29 @@ public class AccountManagementService {
 		return entity;
 	}
 
-    private void updateLedgerBalances(String branchName, String debitLedgerTitle, String creditLedgerTitle,
-            BigDecimal amount) {
+	private void updateLedgerBalances(String branchName, String debitLedgerTitle, String creditLedgerTitle,
+			BigDecimal amount) {
 
-        // Debit Ledger (DR)
-        LedgerAccountMaster debitLedger = ledgerAccountRepository
-                .findByBranchNameAndAccountTitleIgnoreCase(branchName, debitLedgerTitle)
-                .orElseThrow(() -> new BadRequestException("Debit Ledger not found: " + debitLedgerTitle));
+		// Debit Ledger (DR)
+		LedgerAccountMaster debitLedger = ledgerAccountRepository
+				.findByBranchNameAndAccountTitleIgnoreCase(branchName, debitLedgerTitle)
+				.orElseThrow(() -> new BadRequestException("Debit Ledger not found: " + debitLedgerTitle));
 
-        // Credit Ledger (CR)
-        LedgerAccountMaster creditLedger = ledgerAccountRepository
-                .findByBranchNameAndAccountTitleIgnoreCase(branchName, creditLedgerTitle)
-                .orElseThrow(() -> new BadRequestException("Credit Ledger not found: " + creditLedgerTitle));
+		// Credit Ledger (CR)
+		LedgerAccountMaster creditLedger = ledgerAccountRepository
+				.findByBranchNameAndAccountTitleIgnoreCase(branchName, creditLedgerTitle)
+				.orElseThrow(() -> new BadRequestException("Credit Ledger not found: " + creditLedgerTitle));
 
-        // DR Ledger: Increase
-        debitLedger.setCurrentBalance(debitLedger.getCurrentBalance().add(amount));
+		// DR Ledger: Increase
+		debitLedger.setCurrentBalance(debitLedger.getCurrentBalance().add(amount));
 
-        // CR Ledger: Decrease
-        creditLedger.setCurrentBalance(creditLedger.getCurrentBalance().subtract(amount));
+		// CR Ledger: Decrease
+		creditLedger.setCurrentBalance(creditLedger.getCurrentBalance().subtract(amount));
 
-        // Save both ledgers
-        ledgerAccountRepository.save(debitLedger);
-        ledgerAccountRepository.save(creditLedger);
-    }
+		// Save both ledgers
+		ledgerAccountRepository.save(debitLedger);
+		ledgerAccountRepository.save(creditLedger);
+	}
 
 	private LedgerAccountDto mapToDto(LedgerAccountMaster entity) {
 		LedgerAccountDto dto = new LedgerAccountDto();
@@ -343,9 +352,9 @@ public class AccountManagementService {
 		String shortUUID = UUID.randomUUID().toString().substring(0, 8);
 		String voucherId = "PMT-" + branch + "-" + dateStr + "-" + shortUUID;
 		entity.setVoucherID(voucherId);
-		
-		 BigDecimal amount = new BigDecimal(dto.getTransactionAmount());
-		 updateLedgerBalances(dto.getBranchName(), dto.getDebitLedger(), dto.getCreditLedger(), amount);
+
+		BigDecimal amount = new BigDecimal(dto.getTransactionAmount());
+		updateLedgerBalances(dto.getBranchName(), dto.getDebitLedger(), dto.getCreditLedger(), amount);
 		return mapToDto(outgoingPaymentRepo.save(entity));
 	}
 
@@ -403,7 +412,9 @@ public class AccountManagementService {
 				|| debitLedger.getGroupName().equalsIgnoreCase("Expenses")
 				|| debitLedger.getGroupName().equalsIgnoreCase("Equity")
 				|| (debitLedger.getGroupName().equalsIgnoreCase("Assets")
-						&& debitLedger.getAccountType().equalsIgnoreCase("Loan")))) {
+						&& (debitLedger.getAccountType().equalsIgnoreCase("LOAN_TO_MEMBERS")
+								|| debitLedger.getAccountType().equalsIgnoreCase("GOLD_LOANS")
+								|| debitLedger.getAccountType().equalsIgnoreCase("JOINT_LOANS"))))) {
 			throw new BadRequestException("Debit Ledger must belong to Liabilities, Expenses, or Equity.");
 		}
 
@@ -552,7 +563,7 @@ public class AccountManagementService {
 	 * prevented using branch, ledger, date, amount, mode, and remarks - Receipt ID
 	 * is auto-generated in the format: RCPT-{BRANCH}-{DATE}-{UUID}
 	 */
-	
+
 	@Transactional
 	public IncomingReceiptDto createIncomingReceipt(IncomingReceiptDto dto) {
 
@@ -568,26 +579,6 @@ public class AccountManagementService {
 			return branch;
 		}).orElseThrow(() -> new BadRequestException("Invalid branch name: " + dto.getBranchName()));
 
-		/*
-		 * Ledger validation and normalization LedgerAccountMaster matchedLedger =
-		 * ledgerAccountRepository.findByBranchName(dto.getBranchName()).stream()
-		 * .filter(l -> l.getAccountTitle().replaceAll("\\s+", "")
-		 * .equalsIgnoreCase(dto.getLedgerAccount().replaceAll("\\s+", "")))
-		 * .findFirst().orElseThrow( () -> new
-		 * BadRequestException("Ledger account not found for branch: " +
-		 * dto.getBranchName()));
-		 * 
-		 * dto.setLedgerAccount(matchedLedger.getAccountTitle());
-		 * 
-		 * // Duplicate entry check boolean exists = incomingReceiptRepo
-		 * .existsByBranchNameIgnoreCaseAndLedgerAccountIgnoreCaseAndDateOfEntryAndTransactionAmountAndTransferModeIgnoreCaseAndRemarksIgnoreCase(
-		 * dto.getBranchName(), dto.getLedgerAccount(), dto.getDateOfEntry(),
-		 * dto.getTransactionAmount(), dto.getTransferMode(), dto.getRemarks());
-		 * 
-		 * if (exists) { throw new
-		 * BadRequestException("Duplicate entry already exists for the given data."); }
-		 */
-
 		validateIncomingReceipt(dto);
 
 		IncomingReceiptEntry entity = mapToEntity(dto);
@@ -596,14 +587,14 @@ public class AccountManagementService {
 		String branch = dto.getBranchName().toUpperCase();
 		String dateStr = dto.getDateOfEntry().replace("-", "");
 		String shortUUID = UUID.randomUUID().toString().substring(0, 8);
-		String receiptId = "RCPT-" + branch + "-" + dateStr + "-" + shortUUID;
+		String voucherID = "RCPT-" + branch + "-" + dateStr + "-" + shortUUID;
 
-		entity.setReceiptID(receiptId);
-		
+		entity.setVoucherID(voucherID);
+
 		// Update ledger balances
-		 BigDecimal amount = new BigDecimal(dto.getTransactionAmount());
-		 updateLedgerBalances(dto.getBranchName(), dto.getDebitLedger(), dto.getCreditLedger(), amount);
-		
+		BigDecimal amount = new BigDecimal(dto.getTransactionAmount());
+		updateLedgerBalances(dto.getBranchName(), dto.getDebitLedger(), dto.getCreditLedger(), amount);
+
 		return mapToDto(incomingReceiptRepo.save(entity));
 	}
 
@@ -646,7 +637,9 @@ public class AccountManagementService {
 				|| creditLedger.getGroupName().equalsIgnoreCase("Equity")
 				|| creditLedger.getGroupName().equalsIgnoreCase("Income")
 				|| (creditLedger.getGroupName().equalsIgnoreCase("Assets")
-						&& creditLedger.getAccountType().equalsIgnoreCase("Loan")))) {
+						&& (creditLedger.getAccountType().equalsIgnoreCase("LOAN_TO_MEMBERS")
+								|| creditLedger.getAccountType().equalsIgnoreCase("GOLD_LOANS")
+								|| creditLedger.getAccountType().equalsIgnoreCase("JOINT_LOANS"))))) {
 			throw new BadRequestException("Credit Ledger must belong to Liabilities, Equity, or Income.");
 		}
 
@@ -723,7 +716,7 @@ public class AccountManagementService {
 		IncomingReceiptDto dto = new IncomingReceiptDto();
 		dto.setId(entity.getId());
 		dto.setBranchName(entity.getBranchName());
-		dto.setReceiptID(entity.getReceiptID());
+		dto.setVoucherID(entity.getVoucherID());
 		dto.setDateOfEntry(entity.getDateOfEntry());
 		dto.setCreditLedger(entity.getCreditLedger());
 		dto.setDebitLedger(entity.getDebitLedger());
@@ -802,12 +795,11 @@ public class AccountManagementService {
 		String voucherId = "CNTR-" + branch + "-" + dateStr + "-" + shortUUID;
 
 		entity.setVoucherID(voucherId);
-		
 
 		// Update ledger balances
 		BigDecimal amount = new BigDecimal(dto.getTransactionAmount());
 		updateLedgerBalances(dto.getBranchName(), dto.getDebitLedger(), dto.getCreditLedger(), amount);
-		
+
 		return mapToDto(bankCashTransferRepo.save(entity));
 
 	}
@@ -847,7 +839,7 @@ public class AccountManagementService {
 		validateLedgerGroups(dto.getDebitLedger(), dto.getCreditLedger(), dto.getBranchName());
 
 		// E. Validate transfer mode
-		List<String> validModes = Arrays.asList("Cash Deposit","Cash Withdrawal","Cheque","Online Transfer");
+		List<String> validModes = Arrays.asList("Cash Deposit", "Cash Withdrawal", "Cheque", "Online Transfer");
 		if (!validModes.contains(dto.getTransferMode())) {
 			throw new BadRequestException("Invalid transfer mode: " + dto.getTransferMode());
 
@@ -874,30 +866,30 @@ public class AccountManagementService {
 
 	private void validateLedgerGroups(String debitLedger, String creditLedger, String branchName) {
 		LedgerAccountMaster debit = ledgerAccountRepository.findByAccountTitleAndBranchName(debitLedger, branchName)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid debit ledger: " + debitLedger));
+				.orElseThrow(() -> new BadRequestException("Invalid debit ledger: " + debitLedger));
 
 		LedgerAccountMaster credit = ledgerAccountRepository.findByAccountTitleAndBranchName(creditLedger, branchName)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid credit ledger: " + creditLedger));
+				.orElseThrow(() -> new BadRequestException("Invalid credit ledger: " + creditLedger));
 
 		// ✅ Both must be Assets group
 		if (!"Assets".equalsIgnoreCase(debit.getGroupName()) || !("Cash".equalsIgnoreCase(debit.getAccountType())
 				|| "Bank".equalsIgnoreCase(debit.getAccountType()))) {
-			throw new IllegalArgumentException("Debit ledger must be Cash/Bank under Assets group.");
+			throw new BadRequestException("Debit ledger must be Cash/Bank under Assets group.");
 		}
 
 		if (!"Assets".equalsIgnoreCase(credit.getGroupName()) || !("Cash".equalsIgnoreCase(credit.getAccountType())
 				|| "Bank".equalsIgnoreCase(credit.getAccountType()))) {
-			throw new IllegalArgumentException("Credit ledger must be Cash/Bank under Assets group.");
+			throw new BadRequestException("Credit ledger must be Cash/Bank under Assets group.");
 		}
 
 		// ✅ Prevent Cash→Cash or Bank→Bank same ledger
 		if (debitLedger.equalsIgnoreCase(creditLedger)) {
-			throw new IllegalArgumentException("Debit and Credit ledgers cannot be the same.");
+			throw new BadRequestException("Debit and Credit ledgers cannot be the same.");
 		}
 
 		// ✅ Branch consistency
 		if (!debit.getBranchName().equalsIgnoreCase(credit.getBranchName())) {
-			throw new IllegalArgumentException("Both ledgers must belong to the same branch.");
+			throw new BadRequestException("Both ledgers must belong to the same branch.");
 		}
 	}
 
@@ -1047,7 +1039,7 @@ public class AccountManagementService {
 		String voucherId = "JV-" + branch + "-" + dateStr + "-" + shortUUID;
 
 		entity.setVoucherID(voucherId);
-		
+
 		// Update ledger balances
 		BigDecimal amount = new BigDecimal(dto.getTransactionAmount());
 		updateLedgerBalances(dto.getBranchName(), dto.getDebitLedger(), dto.getCreditLedger(), amount);
@@ -1114,49 +1106,49 @@ public class AccountManagementService {
 	 */
 	private void validateLedgerGroupsManual(String debitLedger, String creditLedger, String branchName) {
 
-	    List<String> allowedGroups = Arrays.asList("ASSETS", "LIABILITIES", "INCOME", "EXPENSES", "EQUITY");
+		List<String> allowedGroups = Arrays.asList("ASSETS", "LIABILITIES", "INCOME", "EXPENSES", "EQUITY");
 
-	    String sanitizedDebitLedger = debitLedger.trim();
-	    String sanitizedCreditLedger = creditLedger.trim();
-	    String sanitizedBranch = branchName.trim();
+		String sanitizedDebitLedger = debitLedger.trim();
+		String sanitizedCreditLedger = creditLedger.trim();
+		String sanitizedBranch = branchName.trim();
 
-	    LedgerAccountMaster debit = ledgerAccountRepository
-	            .findByAccountTitleAndBranchName(sanitizedDebitLedger, sanitizedBranch)
-	            .orElseThrow(() -> new IllegalArgumentException("Invalid debit ledger: " + sanitizedDebitLedger));
+		LedgerAccountMaster debit = ledgerAccountRepository
+				.findByAccountTitleAndBranchName(sanitizedDebitLedger, sanitizedBranch)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid debit ledger: " + sanitizedDebitLedger));
 
-	    LedgerAccountMaster credit = ledgerAccountRepository
-	            .findByAccountTitleAndBranchName(sanitizedCreditLedger, sanitizedBranch)
-	            .orElseThrow(() -> new IllegalArgumentException("Invalid credit ledger: " + sanitizedCreditLedger));
+		LedgerAccountMaster credit = ledgerAccountRepository
+				.findByAccountTitleAndBranchName(sanitizedCreditLedger, sanitizedBranch)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid credit ledger: " + sanitizedCreditLedger));
 
-	    // 1. Ledger groups must be valid
-	    if (!allowedGroups.contains(debit.getGroupName())) {
-	    	throw new BadRequestException("Invalid group for Debit Ledger '" 
-	            + debit.getAccountTitle() + "'. Allowed groups: " + allowedGroups);
-	    }
-	    if (!allowedGroups.contains(credit.getGroupName())) {
-	    	throw new BadRequestException("Invalid group for Credit Ledger '" 
-	            + credit.getAccountTitle() + "'. Allowed groups: " + allowedGroups);
-	    }
+		// 1. Ledger groups must be valid
+		if (!allowedGroups.contains(debit.getGroupName())) {
+			throw new BadRequestException("Invalid group for Debit Ledger '" + debit.getAccountTitle()
+					+ "'. Allowed groups: " + allowedGroups);
+		}
+		if (!allowedGroups.contains(credit.getGroupName())) {
+			throw new BadRequestException("Invalid group for Credit Ledger '" + credit.getAccountTitle()
+					+ "'. Allowed groups: " + allowedGroups);
+		}
 
-	    // 2. Debit and Credit ledger cannot be the same
-	    if (sanitizedDebitLedger.equalsIgnoreCase(sanitizedCreditLedger)) {
-	    	throw new BadRequestException("Debit and Credit ledgers cannot be the same.");
-	    }
+		// 2. Debit and Credit ledger cannot be the same
+		if (sanitizedDebitLedger.equalsIgnoreCase(sanitizedCreditLedger)) {
+			throw new BadRequestException("Debit and Credit ledgers cannot be the same.");
+		}
 
-	    // 3. Branch validation
-	    if (!debit.getBranchName().equalsIgnoreCase(credit.getBranchName())) {
-	    	throw new BadRequestException("Debit and Credit Ledgers must belong to the same branch.");
-	    }
+		// 3. Branch validation
+		if (!debit.getBranchName().equalsIgnoreCase(credit.getBranchName())) {
+			throw new BadRequestException("Debit and Credit Ledgers must belong to the same branch.");
+		}
 
-
-	 // 4. JV-specific validation: Do not allow BOTH debit or credit as Cash/Bank
-	    if ("Cash".equalsIgnoreCase(debit.getAccountType()) || "Bank".equalsIgnoreCase(debit.getAccountType())
-	            || "Cash".equalsIgnoreCase(credit.getAccountType()) || "Bank".equalsIgnoreCase(credit.getAccountType())) {
-	        throw new BadRequestException("Cash/Bank ledgers are not allowed in Journal Voucher. Use Payment/Receipt/Contra for such entries.");
-	    }
+		// 4. JV-specific validation: Do not allow BOTH debit or credit as Cash/Bank
+		if ("Cash".equalsIgnoreCase(debit.getAccountType()) || "Bank".equalsIgnoreCase(debit.getAccountType())
+				|| "Cash".equalsIgnoreCase(credit.getAccountType())
+				|| "Bank".equalsIgnoreCase(credit.getAccountType())) {
+			throw new BadRequestException(
+					"Cash/Bank ledgers are not allowed in Journal Voucher. Use Payment/Receipt/Contra for such entries.");
+		}
 
 	}
-
 
 	public List<ManualJournalDto> getAllManualJournal() {
 		return manualJournalRepo.findAll().stream().map(this::mapToDto).collect(Collectors.toList());
@@ -1191,6 +1183,119 @@ public class AccountManagementService {
 		dto.setTransactionAmount(entity.getTransactionAmount());
 		dto.setRemarks(entity.getRemarks());
 		return dto;
+	}
+
+	public List<LedgerSummaryDto> getLedgerSummary(String branch, String ledger, LocalDate startDate,
+			LocalDate endDate) {
+		List<LedgerSummaryDto> summaryList = new ArrayList<>();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String startDateStr = startDate.format(formatter);
+		String endDateStr = endDate.format(formatter);
+
+		// Fetch all types of transactions
+		List<OutgoingPaymentEntry> outgoing = ledgerSummaryRepo.findOutgoingTransactions(branch, ledger, startDateStr,
+				endDateStr);
+		List<IncomingReceiptEntry> incoming = ledgerSummaryRepo.findIncomingTransactions(branch, ledger, startDateStr,
+				endDateStr);
+		List<BankCashTransferEntry> transfer = ledgerSummaryRepo.findTransferTransactions(branch, ledger, startDateStr,
+				endDateStr);
+		List<ManualJournalEntry> journal = ledgerSummaryRepo.findJournalTransactions(branch, ledger, startDateStr,
+				endDateStr);
+
+		String accountCode = "";
+		Optional<LedgerAccountMaster> ledgerMaster = ledgerAccountRepository.findByAccountTitleAndBranchName(ledger,
+				branch);
+		if (ledgerMaster.isPresent()) {
+			accountCode = ledgerMaster.get().getAccountCode();
+		}
+		// Combine all into one list
+		for (OutgoingPaymentEntry o : outgoing) {
+			LedgerSummaryDto dto = new LedgerSummaryDto();
+			dto.setDateOfEntry(o.getDateOfEntry());
+			dto.setVoucherId(o.getVoucherID());
+			dto.setRemarks(o.getRemarks());
+			dto.setAccountCode(accountCode);
+
+			if (ledger.equalsIgnoreCase(o.getCreditLedger())) {
+				dto.setCredit(new BigDecimal(o.getTransactionAmount()).toPlainString());
+				dto.setDebit(BigDecimal.ZERO.toPlainString());
+			} else if (ledger.equalsIgnoreCase(o.getDebitLedger())) {
+				dto.setDebit(new BigDecimal(o.getTransactionAmount()).toPlainString());
+				dto.setCredit(BigDecimal.ZERO.toPlainString());
+			}
+			summaryList.add(dto);
+		}
+
+		for (IncomingReceiptEntry i : incoming) {
+			LedgerSummaryDto dto = new LedgerSummaryDto();
+			dto.setDateOfEntry(i.getDateOfEntry());
+			dto.setVoucherId(i.getVoucherID());
+			dto.setRemarks(i.getRemarks());
+			dto.setAccountCode(accountCode);
+
+			if (ledger.equalsIgnoreCase(i.getCreditLedger())) {
+				dto.setCredit(new BigDecimal(i.getTransactionAmount()).toPlainString());
+				dto.setDebit(BigDecimal.ZERO.toPlainString());
+			} else if (ledger.equalsIgnoreCase(i.getDebitLedger())) {
+				dto.setDebit(new BigDecimal(i.getTransactionAmount()).toPlainString());
+				dto.setCredit(BigDecimal.ZERO.toPlainString());
+			}
+			summaryList.add(dto);
+		}
+
+		for (BankCashTransferEntry t : transfer) {
+			LedgerSummaryDto dto = new LedgerSummaryDto();
+			dto.setDateOfEntry(t.getDateOfEntry());
+			dto.setVoucherId(t.getVoucherID());
+			dto.setRemarks(t.getRemarks());
+			dto.setAccountCode(accountCode);
+			
+			if (ledger.equalsIgnoreCase(t.getCreditLedger())) {
+				dto.setCredit(new BigDecimal(t.getTransactionAmount()).toPlainString());
+				dto.setDebit(BigDecimal.ZERO.toPlainString());
+			} else if (ledger.equalsIgnoreCase(t.getDebitLedger())) {
+				dto.setDebit(new BigDecimal(t.getTransactionAmount()).toPlainString());
+				dto.setCredit(BigDecimal.ZERO.toPlainString());
+			}
+			summaryList.add(dto);
+		}
+
+		for (ManualJournalEntry j : journal) {
+			LedgerSummaryDto dto = new LedgerSummaryDto();
+			dto.setDateOfEntry(j.getDateOfEntry());
+			dto.setVoucherId(j.getVoucherID());
+			dto.setRemarks(j.getRemarks());
+			dto.setAccountCode(accountCode);
+
+			
+
+			if (ledger.equalsIgnoreCase(j.getCreditLedger())) {
+				dto.setCredit(new BigDecimal(j.getTransactionAmount()).toPlainString());
+				dto.setDebit(BigDecimal.ZERO.toPlainString());
+			} else if (ledger.equalsIgnoreCase(j.getDebitLedger())) {
+				dto.setDebit(new BigDecimal(j.getTransactionAmount()).toPlainString());
+				dto.setCredit(BigDecimal.ZERO.toPlainString());
+			}
+			
+			summaryList.add(dto);
+		}
+
+		// Add Opening & Closing Balances
+		// --- Add Opening and Closing Balances ---
+        Optional<LedgerAccountMaster> ledgerAccount = ledgerAccountRepository.findByAccountTitleAndBranchName(ledger,
+				branch);
+		ledgerAccount.ifPresent(account -> {
+			final BigDecimal opening = account.getOpeningBalance();
+			final BigDecimal current = account.getCurrentBalance();
+
+			for (LedgerSummaryDto s : summaryList) {
+				s.setOpeningBalance(opening);
+				s.setClosingBalance(current);
+			}
+		});
+      
+		return summaryList;
 	}
 
 }
