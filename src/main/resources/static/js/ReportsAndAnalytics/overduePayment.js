@@ -160,11 +160,9 @@ function bindLoanTable(data) {
                 <td>${item.branchName || ''}</td>
 				<td>${item.contactNo || ''}</td>
                 <td>${item.loanPlanName || ''}</td>
-                <td>${item.loanDate || ''}</td>
                 <td>${totalPaid}</td>
                 <td>${overdue}</td>
                 <td>${currentDue}</td>
-                <td>${item.approvalDate || ''}</td>
                 <td><button class="btn btn-sm btn-primary">Print</button></td>
             </tr>
         `;
