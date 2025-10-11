@@ -92,9 +92,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Bank Name <span class="star">*</span></label> <input
 									type="text" name="bankName" id="bankName" required="required"
-									placeholder="Enter Bank Name"
-									style="text-transform: uppercase;" /> <small id="chkbankname"
-									style="color: red;"></small>
+									placeholder="Enter Bank Name" /> <small
+									id="chkbankname" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -103,9 +102,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Account No <span class="star">*</span></label> <input
 									type="text" name="accountNo" id="accountNo" required="required"
-									placeholder="Enter Account No"
-									style="text-transform: uppercase;" /> <small id="chkaccountno"
-									style="color: red;"></small>
+									placeholder="Enter Account No" /> <small
+									id="chkaccountno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -114,9 +112,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>IFSC Code <span class="star">*</span></label> <input
 									type="text" name="ifscCode" id="ifscCode" required="required"
-									placeholder="Enter IFSC Code"
-									style="text-transform: uppercase;" /> <small id="chkifsccode"
-									style="color: red;"></small>
+									placeholder="Enter IFSC Code" /> <small
+									id="chkifsccode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -125,9 +122,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>MICR Code <span class="star">*</span></label> <input
 									type="text" name="micrCode" id="micrCode" required="required"
-									placeholder="Enter MICR Code"
-									style="text-transform: uppercase;" /> <small id="chkmicrcode"
-									style="color: red;"></small>
+									placeholder="Enter MICR Code" /> <small
+									id="chkmicrcode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -136,9 +132,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Contact No <span class="star">*</span></label> <input
 									type="text" name="contactNo" id="contactNo" required="required"
-									placeholder="Enter Contact No"
-									style="text-transform: uppercase;" /> <small id="chkcontactno"
-									style="color: red;"></small>
+									placeholder="Enter Contact No" /> <small
+									id="chkcontactno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -147,8 +142,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Account Opening Date <span class="star">*</span></label>
 								<input type="date" name="openingDate" id="openingDate"
-									required="required" style="text-transform: uppercase;" /> <small
-									id="chkopeningdate" style="color: red;"></small>
+									required="required" /> <small id="chkopeningdate"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -157,9 +152,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Opening Balance <span class="star">*</span></label> <input
 									type="text" name="openingBalance" id="openingBalance"
-									required="required" placeholder="Enter Opening Balance"
-									style="text-transform: uppercase;" /> <small
-									id="chkopeningbalance" style="color: red;"></small>
+									required="required" placeholder="Enter Opening Balance" />
+								<small id="chkopeningbalance" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -168,8 +162,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Account Closing Date <span class="star">*</span></label>
 								<input type="date" name="closingDate" id="closingDate"
-									required="required" style="text-transform: uppercase;" /> <small
-									id="chkclosingdate" style="color: red;"></small>
+									required="required" /> <small id="chkclosingdate"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -210,7 +204,9 @@ pageEncoding="ISO-8859-1"%> -->
 									Bank Data <span>| Table View</span>
 								</h5>
 
-								<table class="table table-bordered table-hover text-nowrap datatable" id="tableBody">
+								<table
+									class="table table-bordered table-hover text-nowrap datatable"
+									id="tableBody">
 									<thead class="table-light">
 										<tr
 											style="font-family: 'Poppins', sans-serif; white-space: nowrap;">
