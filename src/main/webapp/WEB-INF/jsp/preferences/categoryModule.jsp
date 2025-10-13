@@ -91,16 +91,16 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Add Category <span class="star">*</span></label> <input
 									type="text" name="category" id="category"
-									placeholder="Enter Category" style="text-transform: uppercase;" />
-								<small id="chkcategory" style="color: red;"></small>
+									placeholder="Enter Category" /> <small id="chkcategory"
+									style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="d-flex flex-column formFields">
 							<label for="">Add Caste <span class="star">*</span></label> <input
 								type="text" name="caste" id="caste" required="required"
-								placeholder="Enter Caste" style="text-transform: uppercase;" />
-							<small id="chkcaste" style="color: red;"></small>
+								placeholder="Enter Caste" /> <small id="chkcaste"
+								style="color: red;"></small>
 						</div>
 
 						<div class="row" style="margin-top: 15px; margin-left: 10px;">
