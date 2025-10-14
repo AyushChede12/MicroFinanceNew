@@ -1130,6 +1130,12 @@ public class PageController {
     	return "goldLoan/goldSecurePlan";
     }
     
+    @GetMapping("/goldLoanClosure")
+    public String getgoldLoanClosure()
+    {
+    	return "goldLoan/goldLoanClosure";
+    }
+    
     @GetMapping("/printNOC")
     public String getprintNOC()
     {
