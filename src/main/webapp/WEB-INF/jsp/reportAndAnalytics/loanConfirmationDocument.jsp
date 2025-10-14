@@ -33,6 +33,9 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 
 
@@ -59,37 +62,36 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Plan :</label> <select id="colour" name="colour"
-							required="required" class="form-control selectField mb-4"
-							style="height: 30px;">
-							<option value="">Select Colour</option>
-							<option value="Blue">All</option>
+						<label for="loanPlanName">Plan Name</label> <select
+							id="loanPlanName" name="loanPlanName" required="required"
+							class="form-control selectField mb-4" style="height: 30px;">
 						</select>
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Finicial Code</label> <input type="text" name="price"
-							id="price" required="required" placeholder="Enter Pincode" />
+						<label for="financialCode">Financial Code</label> <input
+							type="text" name="financialCode" id="financialCode"
+							required="required" placeholder="Enter Financial Code" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="vehicalNo">To Date</label> <input type="date"
-							name="vehicalNo" id="vehicalNo" required="required"
-							placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
+						<label for="toDate">To Date</label> <input type="date"
+							name="toDate" id="toDate" required="required"
+							style="text-transform: uppercase;" />
 					</div>
 				</div>
 
 			</div>
 		</div>
 		<div class="row">
-						<div class="col-4 text-start mt-3">
-							<button id="findBtn" class="btn btn-dark">Find</button>
-						</div>
-					</div>
+			<div class="col-4 text-start mt-3">
+				<button id="findBtn" class="btn btn-dark">Find</button>
+			</div>
+		</div>
 
 		<div class="row mt-5">
 			<div class="col-12">
@@ -112,21 +114,19 @@ pageEncoding="ISO-8859-1"%> -->
 							<table class="table table-borderless datatable">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
+										<th scope="col">SR. NO</th>
 										<th scope="col">LOAN ID</th>
+										<th scope="col">APPLICANT NAME</th>
 										<th scope="col">LOAN TYPE</th>
-										<th scope="col">APP. NAME</th>
-										<th scope="col">ADDRESS</th>
-										<th scope="col">MOBILE LOAN DATE</th>
 										<th scope="col">LOAN AMOUNT</th>
-										<th scope="col">TOTAL RETURN TOTAL PAID</th>
-										<th scope="col">BALANCE</th>
-										<th scope="col">PAY DATE</th>
-										<th scope="col">TERM MODE</th>
-										<th scope="col">OVER DUE</th>
-										<th scope="col">ADVANCE</th>
-										<th scope="col">EMI DUE</th>
-										<th scope="col">REMARK</th>
-										<th scope="col">SIGN</th>
+										<th scope="col">DISBURSED AMOUNT</th>
+										<th scope="col">INTEREST RATE</th>
+										<th scope="col">DURATION</th>
+										<th scope="col">LOAN START DATE</th>
+										<th scope="col">LOAN END DATE</th>
+										<th scope="col">TOTAL PAID AMOUNT</th>
+										<th scope="col">OUTSTANDING BALANCE</th>
+										<th scope="col">CONFIRMATION STATUS</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -141,6 +141,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/loanConfirmationDocument.js"></script>
 </body>
 
 </html>

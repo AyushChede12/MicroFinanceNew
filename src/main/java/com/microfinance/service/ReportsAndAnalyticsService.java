@@ -96,6 +96,11 @@ public class ReportsAndAnalyticsService {
 		return teamMemberRepo.findByModeofpayment("Cheque");
 	}
 
+	public List<LoanApplication> getAllLoanApplication() {
+		// TODO Auto-generated method stub
+		return loanApplicationRepo.findAll();
+	}
+
 	
 	
 

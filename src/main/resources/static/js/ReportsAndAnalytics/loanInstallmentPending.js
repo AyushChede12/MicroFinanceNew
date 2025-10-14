@@ -68,7 +68,6 @@ $(document).ready(function() {
 			alert("Failed to load dropdown data.");
 		}
 	});
-
 });
 
 $(document).ready(function() {
@@ -82,7 +81,7 @@ $(document).ready(function() {
 		let branch = $('#branchName1').val();
 		let policy = $('#loanPlanName').val();
 		let financialCode = $('#financialCode').val().trim().toUpperCase();
-		let toDate = $('#tDate').val();
+		let toDate = $('#toDate').val(); // frontend filter on loanDate
 
 		loadApprovedLoanApplications(branch, policy, financialCode, toDate);
 	});
@@ -91,43 +90,43 @@ $(document).ready(function() {
 // 🟢 Function to fetch & bind data (with optional filters)
 function loadApprovedLoanApplications(branch = '', policy = '', financialCode = '', toDate = '') {
 	$.ajax({
-		url: 'api/datacorrection/fetchAllApprovedLoanApplications',   // adjust path if your backend prefix differs
+		url: 'api/datacorrection/fetchAllApprovedLoanApplications',
 		method: 'GET',
 		dataType: 'json',
 		success: function(response) {
 			if (response && response.data && response.data.length > 0) {
-				let filteredData = response.data;
+				let loans = response.data;
 
 				// 🔹 Apply filters if provided
 				if (branch) {
-					filteredData = filteredData.filter(item => item.branchName === branch);
+					loans = loans.filter(item => item.branchName === branch);
 				}
 				if (policy) {
-					filteredData = filteredData.filter(item => item.loanPlanName === policy);
+					loans = loans.filter(item => item.loanPlanName === policy);
 				}
 				if (financialCode) {
-					filteredData = filteredData.filter(item =>
+					loans = loans.filter(item =>
 						item.financialConsultantId &&
 						item.financialConsultantId.toUpperCase().includes(financialCode)
 					);
 				}
 				if (toDate) {
-					filteredData = filteredData.filter(item => {
-						let approvalDate = parseDate(item.approvalDate);
+					loans = loans.filter(item => {
+						let loanDate = parseDate(item.loanDate); // ❌ loanDate used
 						let tDate = parseDate(toDate);
-						return approvalDate <= tDate;
+						return loanDate <= tDate;
 					});
 				}
 
 				// 🔹 Bind final data to table
-				bindLoanTable(filteredData);
+				bindLoanTable(loans);
 			} else {
 				bindLoanTable([]);
 			}
 		},
 		error: function(xhr) {
 			console.error('Error:', xhr);
-			$('table tbody').html(`<tr><td colspan="12" class="text-center text-danger">Error fetching data.</td></tr>`);
+			$('table tbody').html(`<tr><td colspan="13" class="text-center text-danger">Error fetching data.</td></tr>`);
 		}
 	});
 }
@@ -138,31 +137,44 @@ function bindLoanTable(data) {
 	tbody.empty();
 
 	if (!data || data.length === 0) {
-		tbody.append(`<tr><td colspan="12" class="text-center text-danger">No Records Found</td></tr>`);
+		tbody.append(`<tr><td colspan="13" class="text-center text-danger">No Records Found</td></tr>`);
 		return;
 	}
 
 	let sn = 1;
 	data.forEach(item => {
+		// 🧮 Calculations
 		let loanAmount = parseFloat(item.loanAmount || 0);
-		let totalPaid = parseFloat(item.sanctionedAmount || 0);
-		let emiPayment = parseFloat(item.emiPayment || 0);
-		let overdue = (loanAmount - totalPaid) > 0 ? (loanAmount - totalPaid).toFixed(2) : '0.00';
-		let currentDue = emiPayment.toFixed(2);
+		let roi = parseFloat(item.rateOfInterest || 0);
+		let loanTerm = parseInt(item.loanTerm || 1);
 
+		let monthlyInterest = (loanAmount * roi / 100) / loanTerm;
+		let installmentAmount = (loanAmount / loanTerm) + monthlyInterest;
+
+		let totalInstallments = loanTerm;
+		let paidInstallments = (item.paymentStatus === "Paid") ? totalInstallments : Math.floor(totalInstallments / 2);
+		let pendingInstallments = totalInstallments - paidInstallments;
+		let outstandingBalance = pendingInstallments * installmentAmount;
+
+		let lastPaymentDate = item.paymentDate || "-";
+
+		// 🔹 Table row
 		let row = `
             <tr>
                 <td>${sn++}</td>
                 <td>${item.loanId || ''}</td>
-				<td>${item.memberId || ''}</td>
-                <td>${item.memberName || ''}</td>
-				<td>${item.loanDate || ''}</td>
                 <td>${item.branchName || ''}</td>
-				<td>${item.contactNo || ''}</td>
-                <td>${item.loanPlanName || ''}</td>
-                <td>${totalPaid}</td>
-                <td>${overdue}</td>
-                <td>${currentDue}</td>
+                <td>${item.memberName || ''}</td>
+				<td>${item.financialConsultantId || ''}</td>
+                <td>${item.loanAmount || ''}</td>
+                <td>${installmentAmount.toFixed(2)}</td>
+                <td>${totalInstallments}</td>
+                <td>${paidInstallments}</td>
+                <td>${pendingInstallments}</td>
+                <td>${outstandingBalance.toFixed(2)}</td>
+                <td>${lastPaymentDate}</td>
+                <td>${item.loanStatus || ''}</td>
+                <td>${item.remarks || ''}</td>
                 <td><button class="btn btn-sm btn-primary">Print</button></td>
             </tr>
         `;
@@ -170,12 +182,9 @@ function bindLoanTable(data) {
 	});
 }
 
-// 🟢 Helper for dd/MM/yyyy → JS Date
+// 🟢 Helper: parse date string in yyyy-mm-dd format
 function parseDate(dateStr) {
-	if (!dateStr) return new Date('');
-	let parts = dateStr.split('/');
-	if (parts.length === 3) {
-		return new Date(parts[2], parts[1] - 1, parts[0]);
-	}
-	return new Date(dateStr);
+	if (!dateStr) return new Date(0);
+	let parts = dateStr.split('-');
+	return new Date(parts[0], parts[1] - 1, parts[2]);
 }
