@@ -593,6 +593,13 @@
 							<span style="font-family: 'Poppins', sans-serif">Gold Loan
 								Statement</span>
 					</a></li>
+					
+					
+					<li><a href="goldLoanClosure"> <i class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan
+								Closure</span>
+					</a></li>
+
 
 
 
