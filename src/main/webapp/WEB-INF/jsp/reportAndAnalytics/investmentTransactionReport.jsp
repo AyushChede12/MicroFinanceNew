@@ -36,15 +36,62 @@ pageEncoding="ISO-8859-1"%> -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- In <head> -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
 
 <!-- Before </body> -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 </head>
+<style>
+#bankReportContent {
+	font-family: Arial, sans-serif;
+	padding: 20px;
+	color: #222;
+}
 
+#bankReportContent h2, #bankReportContent h3 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+#bankReportContent .report-section {
+	margin-top: 20px;
+}
+
+#bankReportContent table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+#bankReportContent table th, #bankReportContent table td {
+	padding: 6px 10px;
+	border: 1px solid #ddd;
+}
+
+#bankReportContent table th {
+	background-color: #f2f2f2;
+	text-align: left;
+}
+
+#bankReportContent table td.amount {
+	text-align: right;
+}
+
+/* Remove background on hover and default */
+.no-bg, .no-bg:hover, .no-bg:focus, .no-bg:active {
+	background-color: transparent !important;
+	border-color: green; /* keeps the outline green */
+	box-shadow: none;
+}
+</style>
 
 <body>
 
@@ -76,7 +123,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch Name </label> <select id="branchName1"
 									name="branchName" required="required"
-									class="form-control selectField" >
+									class="form-control selectField">
 									<option value="">Select</option>
 								</select>
 							</div>
@@ -153,30 +200,31 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 
 		</div>
-
-
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="printModal" tabindex="-1" aria-labelledby="printModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="printModalLabel">Policy Details</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modalDataContainer">
-        <!-- Policy details will be populated here -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="printBtn" class="btn btn-primary">Print</button>
-        <button type="button" id="downloadBtn" class="btn btn-success">Download PDF</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+		<!-- Modal for Bank-style Transaction Report -->
+		<div class="modal fade" id="bankReportModal" tabindex="-1"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header bg-primary text-white">
+						<h5 class="modal-title">Microfinance Transaction Report</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body" id="bankReportContent">
+						<!-- Dynamic content goes here -->
+					</div>
+					<div class="modal-footer">
+						<button id="printBankReportBtn" class="btn btn-success">
+							<i class="bi bi-printer"></i> Print
+						</button>
+						<button id="pdfBankReportBtn" class="btn btn-danger">
+							<i class="bi bi-file-earmark-pdf"></i> PDF
+						</button>
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
