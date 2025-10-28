@@ -96,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="searchBtn" class="btn btn-dark" color:black">Search</button>
+							<button type="submit" id="searchBtn" class="btn btn-dark" color:black">Search</button>
 
 						</div>
 					</div>
@@ -121,14 +121,16 @@ pageEncoding="ISO-8859-1"%> -->
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">slno</th>
+											<th scope="col">Branch Name</th>
 											<th scope="col">Policy No.</th>
-											<th scope="col">Application name</th>
-											<th scope="col">Application Branch</th>
-											<th scope="col">Application Date</th>
 											<th scope="col">Maturity Date</th>
-											<th scope="col">App.User</th>
-											<th scope="col">App.Remarks</th>
-											<th scope="col">maturity Amt</th>
+											<th scope="col">Application name</th>
+											<th scope="col">Scheme Name </th>
+											<th scope="col">Scheme Type</th>
+											
+											<th scope="col">Policy Amount</th>
+											<th scope="col">Deposit Amount</th>
+											
 										</tr>
 									</thead>
 									<tbody>

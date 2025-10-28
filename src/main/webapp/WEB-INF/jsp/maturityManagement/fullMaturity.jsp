@@ -81,7 +81,6 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Select">Select</option>
 									<option value="DRD">DRD</option>
 									<option value="RD">RD</option>
-									<option value="FD">FD</option>
 									<option value="MIS">MIS</option>
 								</select>
 							</div>
@@ -358,7 +357,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
+							<button id="saveBtn" class="btn btn-success">Payment</button>
 						</div>
 					</div>
 				</div>
