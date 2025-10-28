@@ -32,6 +32,49 @@ public class GroupDirectory {
     // Uploads
     private String photo;
     private String signature;
+    
+    
+    /*
+
+    // Group Profile
+   
+    private String selectedMember;
+    private String customerName;
+   
+    
+   
+   
+    private String minLoanAmt;
+    private String loanPurpose;
+    private String maximumLoanAmount;
+    
+
+    // Financial Deductions
+    private String planCode;
+    private String processingFee;
+    private String legalCharges;
+    private String gstPercentage;
+    private String insuranceFee;
+    private String valuationFee;
+    private String lateAllowanceDays;
+    private String loanSchemeInformation;
+    private String penaltyMode;
+    private String monthlyPenalty;
+    private String emiFrequency;
+    private String rateOfInterest;
+    private String interestType;
+    private String emiType;
+    private String term;
+    private String totalAmount;
+    private String groupLoanStatus;
+
+    
+    private boolean approvalStatus;
+    private String approvalDate;
+    private String loanSchemeName;
+    
+    private String photo;
+    private String signature;*/
 	
 	public Long getId() {
 		return id;

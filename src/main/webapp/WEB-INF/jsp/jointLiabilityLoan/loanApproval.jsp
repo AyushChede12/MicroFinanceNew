@@ -41,16 +41,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>
-				Joint Liability Loan/h1>
-				<nav>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="home"> <i
-								class="bi bi-person-bounding-box"></i>
-						</a></li>
-						<li class="breadcrumb-item action">Loan Approval</li>
-					</ol>
-				</nav>
+			<h1>Joint Liability Loan</h1>
+			<nav>
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="home"> <i
+							class="bi bi-person-bounding-box"></i>
+					</a></li>
+					<li class="breadcrumb-item action">Loan Approval</li>
+				</ol>
+			</nav>
 		</div>
 
 
@@ -130,13 +129,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3 mb-4">
-							<div class="d-flex flex-column formFields">
-								<label for=""> Payment Mode* </label> <input type="text"
-									name="location" id="location" required="required"
-									placeholder="Enter Location" />
-							</div>
-						</div>
 						<div class="col-lg-3  mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Contact Number* </label> <input type="text"
@@ -187,8 +179,8 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button type="button" id="approveBtn" 
-								class="btnStyle bg-success" style="margin-left: 80%">Approve</button>
+							<button type="button" id="approveBtn" class="btnStyle bg-success"
+								style="margin-left: 80%">Approve</button>
 
 						</div>
 					</div>

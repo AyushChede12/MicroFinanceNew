@@ -162,7 +162,7 @@ $(document).ready(function () {
 						  console.log("Parsed Name:", teamMemberName);
 						  
 						 
-						 let newdeposit=calculateDepositAmount(data);
+						 let newdeposit= parseFloat($('#depositAmount').val()) || 0;
 						 
 						 
 						 
@@ -223,7 +223,7 @@ $(document).ready(function () {
 
 
 //calculate depost amount
-function calculateDepositAmount(){
+/*function calculateDepositAmount(){
 	let amount = parseFloat($('#amount').val()) || 0;
 	let paidAmount = parseFloat($('#depositAmount').val()) || 0;
 	let deposit=0;
@@ -235,14 +235,15 @@ function calculateDepositAmount(){
 		return deposit;
 	
 }
-
+*/
 // update in addinvestment table
 function updateAddNewInvestmentAmount(data)
 {
 	
 	let policyCode = $("#policyCode").val();
 	let depositAmount =  calculateDepositAmount(data);
-	
+	let dueamount=$("#dueAmount").val();
+	let lastinstdate = new Date(document.getElementById("paymentDate").value); 
 	
 	    if (!policyCode || !depositAmount) {
 	        alert("Please enter both Policy Code and Deposit Amount.");
@@ -252,6 +253,9 @@ function updateAddNewInvestmentAmount(data)
 	        policyCode: policyCode,
 	        depositAmount: depositAmount,
 			lastInstPaid:lastInstall, 
+			amountDue:dueamount,
+			lastPaymentDate:lastinstdate
+			
 	    };
 
 	    
@@ -384,10 +388,13 @@ function DueAmount(data)
 	let amount = parseFloat($('#amount').val()) || 0;
 	let paidAmount = parseInt(data.depositAmount);             
 	let policyAmount = parseInt(data.policyAmount);
+	let schemeterm=parseFloat($('#duration').val()) || 0;
 	let dueamount=0;
+	
 	
 	if (!isNaN(amount) && !isNaN(paidAmount) && !isNaN(policyAmount))
 		{
+			policyAmount=policyAmount*schemeterm;
 			dueamount=policyAmount-(amount+paidAmount);
 			alert(dueamount);
 		}

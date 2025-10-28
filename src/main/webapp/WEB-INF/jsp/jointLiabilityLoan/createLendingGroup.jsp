@@ -72,8 +72,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanSchemeInformation"> Loan Scheme
-									Information </label> <input type="text" name="loanSchemeInformation"
-									id="loanSchemeInformation" required
+									Name </label> <input type="text" name="loanSchemeName"
+									id="loanSchemeName" required
 									placeholder="Enter Loan Scheme" />
 							</div>
 
@@ -250,8 +250,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">penalty mode</label> <select id="modePanalty"
-									name="modePanalty" required="required"
+								<label for="">penalty mode</label> <select id="penaltyMode"
+									name="penaltyMode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Penalty Type</option>
 									<option value="Percentage">Percentage</option>
@@ -261,8 +261,8 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Monthly Penalty </label> <input type="numbtexter"
-									name="pennaltyMonthly" id="pennaltyMonthly" required="required"
+								<label for=""> Monthly Penalty </label> <input type="text"
+									name="monthlyPenalty" id="monthlyPenalty" required="required"
 									placeholder="" />
 							</div>
 						</div>

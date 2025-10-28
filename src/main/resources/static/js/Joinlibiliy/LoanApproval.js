@@ -20,46 +20,47 @@ $(document).ready(function() {
 			alert("Failed to fetch group list.");
 		}
 	});
+$('#groupcode').on('change', function() {
+    let selectedCode = $(this).val();
 
-	$('#groupcode').on('change', function() {
-		let selectedCode = $(this).val();
+    if (selectedCode !== "") {
+        $.ajax({
+            url: 'api/joinliability/fetchByGroupCode',  // ✅ no query here
+            type: 'GET', // ✅ Use GET since we are fetching data
+            data: { groupCode: selectedCode }, // ✅ send param properly
+            success: function(response) {
+                if (response.status === "FOUND" && response.data && response.data.length > 0) {
+                    let customer = response.data[0];
 
-		if (selectedCode !== "") {
-			$.ajax({
-				url: 'api/joinliability/fetchByGroupCode?groupCode=' + selectedCode, // ✅ send as query param
-				type: 'POST',
-				success: function(response) {
-					if (response.status === "FOUND") {
-						let customer = response.data[0];
-						$('#openingDate').val(customer.openingDate);
-						$('#communityName').val(customer.communityName);
-						$('#allocatedStaff').val(customer.allocatedStaff);
-						$('#branchName').val(customer.branchName);
-						$('#collectionDays').val(customer.collectionDays);
-						$('#contactNumber').val(customer.contactNumber);
-						$('#purposeOfLoan').val(customer.loanPurpose);
+                    $('#openingDate').val(customer.openingDate || '');
+                    $('#communityName').val(customer.communityName || '');
+                    $('#allocatedStaff').val(customer.allocatedStaff || '');
+                    $('#branchName').val(customer.branchName || '');
+                    $('#collectionDays').val(customer.collectionDays || '');
+                    $('#contactNumber').val(customer.contactNumber || '');
+                    $('#purposeOfLoan').val(customer.loanPurpose || '');
+                    $('#dateOfApproval').val(customer.approvalDate || '');
 
-						$('#dateOfApproval').val(customer.approvalDate);
+                    if (customer.approvalStatus === true || customer.approvalStatus === 1 || customer.approvalStatus === "1") {
+                        $('#approvalStatus').val("Approved").css('color', 'green');
+                    } else {
+                        $('#approvalStatus').val("Not Approved").css('color', 'red');
+                    }
 
-						if (customer.approvalStatus === true || customer.approvalStatus === 1 || customer.approvalStatus === "1") {
-							$('#approvalStatus').val("Approved").css('color', 'red');
-						} else {
-							$('#approvalStatus').val("Not Approved").css('color', 'green');
-						}
+                } else {
+                    alert('No customer data found!');
+                    clearFields();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', xhr.responseText);
+                alert('Error while fetching customer data!');
+                clearFields();
+            }
+        });
+    }
+});
 
-					} else {
-						alert('No customer data found!');
-						$('#openingDate').val('');
-					}
-				},
-				error: function() {
-					alert('Error while fetching customer data!');
-				}
-			});
-		} else {
-			$('#openingDate').val('');
-		}
-	});
 
 
 	$('#approveBtn').click(function(event) {

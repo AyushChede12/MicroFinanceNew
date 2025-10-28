@@ -188,9 +188,9 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanSchemeInformation"> Loan Scheme
-									Information </label> <input type="text" name="loanSchemeInformation"
-									id="loanSchemeInformation" required
+								<label for="loanSchemeName"> Loan Scheme
+									Name </label> <input type="text" name="loanSchemeName"
+									id="loanSchemeName" required
 									placeholder="Enter Loan Scheme" />
 							</div>
 						</div>
@@ -272,7 +272,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minLoanDurationMonths">Term * </label> <input
-									type="text" name="Term" id="Term" required
+									type="text" name="term" id="term" required
 									placeholder="Enter Term" />
 
 
