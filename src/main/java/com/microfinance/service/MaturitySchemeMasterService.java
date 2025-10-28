@@ -72,6 +72,16 @@ public class MaturitySchemeMasterService {
 		return fullmaturityrepo.save(fullmaturity);
 	}
 
+	public List<partialMaturityPayment> getPartialMaturityDetails() {
+		// TODO Auto-generated method stub
+		return partialmaturityrepo.findAll();
+	}
+
+	public List<FullMaturity> getFullMaturityDetails() {
+		// TODO Auto-generated method stub
+		return fullmaturityrepo.findAll();
+	}
+
 	
 
 	

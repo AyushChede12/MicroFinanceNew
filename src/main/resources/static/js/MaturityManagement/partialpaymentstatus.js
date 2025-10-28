@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 function loadedData() {
     $.ajax({
-        url: "/api/Maturitymanagement/getApplymaturitydetails",
+        url: "/api/Maturitymanagement/getPartialmaturitydetails",
         type: "GET",
         success: function (response) {
             console.log("Response received:", response);
@@ -50,15 +50,16 @@ function renderTable(data) {
     data.forEach((item, index) => {
         const row = `
             <tr style="font-family: 'Poppins', sans-serif;">  
-                <td>${index + 1}</td>
-                <td>${item.branchName}</td>
+                
                 <td>${item.policyCode}</td>
+                <td>${item.approveBranch}</td>
                 <td>${item.maturityDate}</td>
                 <td>${item.customerName}</td>
                 <td>${item.schemeName}</td>
                 <td>${item.schemeType}</td>
                 <td>${item.policyAmount}</td>
-                <td>${item.depositAmount}</td>
+                <td>${item.maturityAmount}</td>
+				<td>${item.Comment}</td>
             </tr>
         `;
         tbody.append(row);
@@ -74,10 +75,10 @@ function filterDailyData() {
     const toDate = toDateVal ? new Date(toDateVal) : null;
 
     const filtered = allData.filter(item => {
-        const branchName = item.branchName;
+        const approveBranch = item.approveBranch;
         const maturityDate = item.maturityDate ? new Date(item.maturityDate) : null;
 
-        const matchesBranch = selectedCode ? branchName === selectedCode : true;
+        const matchesBranch = selectedCode ? approveBranch === selectedCode : true;
         const matchesFrom = fromDate && maturityDate ? maturityDate >= fromDate : true;
         const matchesTo = toDate && maturityDate ? maturityDate <= toDate : true;
 

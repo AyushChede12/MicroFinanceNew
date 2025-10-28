@@ -77,7 +77,7 @@ function renderTable(data) {
                 <td>${item.branchName || '-'}</td>
                 <td>${item.dob || '-'}</td>
                 <td>${item.customerAge || '-'}</td>
-/                <td>${item.customerGender || '-'}</td>
+               <td>${item.customerGender || '-'}</td>
                 <td>${item.customerAddress || '-'}</td>
                 <td>${item.academicBackground || '-'}</td>
                 <td>${item.contactNo || '-'}</td>

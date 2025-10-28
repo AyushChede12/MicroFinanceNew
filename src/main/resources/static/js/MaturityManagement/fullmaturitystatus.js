@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 function loadedData() {
     $.ajax({
-        url: "/api/Maturitymanagement/getApplymaturitydetails",
+        url: "/api/Maturitymanagement/getFullmaturitydetails",
         type: "GET",
         success: function (response) {
             console.log("Response received:", response);
@@ -70,17 +70,20 @@ function filterDailyData() {
     const fromDateVal = $('#fromDate').val();
     const toDateVal = $('#toDate').val();
 
-    const fromDate = fromDateVal ? new Date(fromDateVal) : null;
-    const toDate = toDateVal ? new Date(toDateVal) : null;
+    const fromDate = fromDateVal ? fromDateVal : null;
+    const toDate = toDateVal ? toDateVal : null;
 
     const filtered = allData.filter(item => {
         const branchName = item.branchName;
-        const maturityDate = item.maturityDate ? new Date(item.maturityDate) : null;
+        const maturityDate = item.maturityDate ? item.maturityDate : null;
+		alert(maturityDate);
+		
 
         const matchesBranch = selectedCode ? branchName === selectedCode : true;
         const matchesFrom = fromDate && maturityDate ? maturityDate >= fromDate : true;
         const matchesTo = toDate && maturityDate ? maturityDate <= toDate : true;
-
+	
+		
         return matchesBranch && matchesFrom && matchesTo;
     });
 
