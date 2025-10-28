@@ -287,6 +287,20 @@ public class PreferenceController {
 				"Category modules fetched successfully", list);
 		return ResponseEntity.ok(response);
 	}
+	
+	@GetMapping("/getCategoryById") // Ayush
+	public ResponseEntity<ApiResponse<CategoryModule>> findCategoryModuleById(@RequestParam("id") Long id) {
+		Optional<CategoryModule> category = preferenceService.findCategoryModuleById(id);
+		if (category.isPresent()) {
+			ApiResponse<CategoryModule> response = new ApiResponse<>(HttpStatus.FOUND, "Category Module fetched successfully",
+					category.get());
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<CategoryModule> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"Category Module not found for ID: " + id, null);
+			return ResponseEntity.status(404).body(response);
+		}
+	}
 
 	@PostMapping("/deleteCategoryModuleById") // Ayush
 	public ResponseEntity<ApiResponse<String>> deleteCategoryModule(@RequestParam("id") Long id) {

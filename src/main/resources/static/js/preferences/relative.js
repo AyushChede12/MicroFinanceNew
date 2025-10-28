@@ -61,7 +61,13 @@ $(document).ready(function() {
 										<button type="button" class="iconbutton" onclick="viewData(${item.id})" title="View">
 										<i class="fa-solid fa-pen-to-square text-primary"></i>
 										</button>
-									</td>			                    </tr>`;
+									</td>
+									<td>
+										<button type="button" class="iconbutton ms-2" onclick="deleteData(${item.id})" title="Delete">
+											<i class="fa-solid fa-trash text-danger"></i>
+										</button>
+									</td>				                    
+							</tr>`;
 					tableBody.append(row);
 				});
 			} else {
