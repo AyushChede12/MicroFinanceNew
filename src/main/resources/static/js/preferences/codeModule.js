@@ -442,7 +442,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
 			// Inputs in the row
 			let prefixInput = row.querySelector('input[type="text"].ip-center');   // Code Prefix
-			alert(prefixInput.value);
 			let digitInput = row.querySelector('input[type="number"]:nth-of-type(1)'); // No. of digits
 			let lastNoInput = row.querySelector('input[type="number"]:nth-of-type(2)'); // Last no
 			let previewInput = row.querySelectorAll('input[type="text"].ip-center')[1]; // Preview

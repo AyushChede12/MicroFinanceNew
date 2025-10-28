@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$("#updateBtn").hide();
 	$("#saveBtn").click(function() {
 
 		$('#chkcategory').text('');
@@ -64,7 +65,16 @@ $(document).ready(function() {
 					                        <td>${index + 1}</td>
 					                        <td>${item.category}</td>
 											<td>${item.caste}</td>
-											<td><button class="iconbutton" onclick="deleteData(${item.id})" title="Delete"><i class="fa-solid fa-trash text-danger"></i></button></td>
+											<td>
+												<button type="button" class="iconbutton" onclick="viewData(${item.id})" title="View">
+													<i class="fa-solid fa-pen-to-square text-primary"></i>
+												</button>
+											</td>											
+											<td>
+												<button type="button" class="iconbutton ms-2" onclick="deleteData(${item.id})" title="Delete">
+													<i class="fa-solid fa-trash text-danger"></i>
+												</button>
+											</td>
 					                    </tr>`;
 					tableBody.append(row);
 				});
@@ -100,3 +110,27 @@ function deleteData(id) {
 	}
 }
 
+function viewData(id) {
+	$("#updateBtn").show();
+	$("#saveBtn").hide();
+	$.ajax({
+		url: "api/preference/getCategoryById",
+		type: "GET",
+		data: { id: id },
+		success: function(response) {
+			if (response.status == "FOUND") {
+				const category = response.data;
+				$("#id").val(category.id);
+				$("#category").val(category.category);
+				$("#caste").val(category.caste);
+			} else {
+				alert("Branch not found: " + response.message);
+			}
+		},
+		error: function(xhr) {
+			alert("Request failed: " + xhr.responseText);
+		}
+	});
+
+
+}

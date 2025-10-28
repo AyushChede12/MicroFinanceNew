@@ -50,46 +50,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 </head>
 <style>
-#bankReportContent {
-	font-family: Arial, sans-serif;
-	padding: 20px;
-	color: #222;
+.bank-report table th, .bank-report table td {
+	vertical-align: middle;
 }
 
-#bankReportContent h2, #bankReportContent h3 {
-	text-align: center;
-	margin-bottom: 10px;
-}
-
-#bankReportContent .report-section {
-	margin-top: 20px;
-}
-
-#bankReportContent table {
-	width: 100%;
-	border-collapse: collapse;
-	margin-bottom: 10px;
-}
-
-#bankReportContent table th, #bankReportContent table td {
-	padding: 6px 10px;
-	border: 1px solid #ddd;
-}
-
-#bankReportContent table th {
-	background-color: #f2f2f2;
-	text-align: left;
-}
-
-#bankReportContent table td.amount {
-	text-align: right;
-}
-
-/* Remove background on hover and default */
-.no-bg, .no-bg:hover, .no-bg:focus, .no-bg:active {
-	background-color: transparent !important;
-	border-color: green; /* keeps the outline green */
-	box-shadow: none;
+.bank-report table thead th {
+	background-color: #0d6efd !important;
+	color: white;
 }
 </style>
 
@@ -104,7 +71,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Investment Transaction
-						Report</li>
+						Report1</li>
 				</ol>
 			</nav>
 		</div>
@@ -200,24 +167,106 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 
 		</div>
-		<!-- Modal for Bank-style Transaction Report -->
+		<!-- Bank Report Modal -->
 		<div class="modal fade" id="bankReportModal" tabindex="-1"
 			aria-hidden="true">
 			<div class="modal-dialog modal-xl modal-dialog-scrollable">
 				<div class="modal-content">
+					<!-- Header -->
 					<div class="modal-header bg-primary text-white">
 						<h5 class="modal-title">Microfinance Transaction Report</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
 					</div>
+
+					<!-- Body -->
 					<div class="modal-body" id="bankReportContent">
-						<!-- Dynamic content goes here -->
+						<div class="bank-report p-4"
+							style="font-family: Arial, sans-serif; background-color: #f8f9fa;">
+
+							<!-- Bank Header -->
+							<div
+								class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+								<div class="d-flex align-items-center">
+									<img id="bankLogo" src="" alt="Logo"
+										style="height: 50px; margin-right: 10px;">
+									<div>
+										<h4 id="bankName" class="mb-0 fw-bold text-primary"></h4>
+										<small id="reportTitle" class="text-secondary"></small>
+									</div>
+								</div>
+								<div>
+									<p class="mb-0">
+										<strong>ACCOUNT NUMBER:</strong> <span id="accountNumber"></span>
+									</p>
+									<p class="mb-0">
+										<strong>PERIOD COVERED:</strong> <span id="periodCovered"></span>
+									</p>
+								</div>
+							</div>
+
+							<!-- Customer & Summary -->
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="border p-3 bg-white rounded shadow-sm">
+										<h6 class="fw-bold mb-2 text-primary">CUSTOMER</h6>
+										<p id="customerName" class="mb-0 fw-bold"></p>
+										<p id="customerAddress1" class="mb-0"></p>
+										<p id="customerAddress2" class="mb-0"></p>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="border p-3 bg-white rounded shadow-sm">
+										<h6 class="fw-bold mb-2 text-primary">SUMMARY</h6>
+										<table class="w-100">
+											<tr>
+												<td>Starting Balance:</td>
+												<td id="startingBalance" class="text-end fw-bold"></td>
+											</tr>
+											<tr>
+												<td>Income:</td>
+												<td id="incomeAmount" class="text-end fw-bold text-success"></td>
+											</tr>
+											<tr>
+												<td>Expenses:</td>
+												<td id="expensesAmount" class="text-end fw-bold text-danger"></td>
+											</tr>
+											<tr class="border-top">
+												<td><strong>Closing Balance:</strong></td>
+												<td id="closingBalance"
+													class="text-end fw-bold text-primary"></td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+
+							<!-- Transactions Table -->
+							<div class="mt-4">
+								<h6 class="fw-bold text-primary mb-3">TRANSACTIONS:</h6>
+								<table
+									class="table table-bordered table-striped align-middle text-center">
+									<thead class="table-primary">
+										<tr>
+											<th>Date</th>
+											<th>Description</th>
+											<th>Debit</th>
+											<th>Credit</th>
+											<th>Balance</th>
+										</tr>
+									</thead>
+									<tbody id="transactionTableBody">
+										<!-- Dynamic rows will be appended here via JavaScript -->
+									</tbody>
+								</table>
+							</div>
+						</div>
 					</div>
+
+					<!-- Footer -->
 					<div class="modal-footer">
 						<button id="printBankReportBtn" class="btn btn-success">
 							<i class="bi bi-printer"></i> Print
-						</button>
-						<button id="pdfBankReportBtn" class="btn btn-danger">
-							<i class="bi bi-file-earmark-pdf"></i> PDF
 						</button>
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
@@ -225,6 +274,11 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 			</div>
 		</div>
+
+
+
+
+
 
 
 

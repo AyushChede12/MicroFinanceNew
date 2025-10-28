@@ -66,6 +66,11 @@ $(document).ready(function() {
 								<i class="fa-solid fa-trash text-danger"></i>
 							</button>
 						</td>
+						<td>
+							<button type="button" class="iconbutton ms-2" onclick="deleteData(${item.id})" title="Delete">
+								<i class="fa-solid fa-trash text-danger"></i>
+							</button>
+						</td>
 					</tr>`;
 					tableBody.append(row);
 				});
