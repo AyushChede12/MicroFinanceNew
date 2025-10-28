@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.microfinance.repository.AddInvestmentRepo;
+import com.microfinance.repository.ApplyForGoldRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.CustomerRepo;
@@ -71,6 +72,9 @@ public class PageController {
 
 	@Autowired
 	LoanApplicationRepo loanApplicationRepo;
+	
+	@Autowired
+	ApplyForGoldRepo applyForGoldRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -1076,8 +1080,11 @@ public class PageController {
 	
 //Secured Gold Loan by Poonam on 29/08/2025
     @GetMapping("/applyforGold")
-    public String getapplyforGold()
+    public String getapplyforGold(Model model)
     {
+    	long maxId=applyForGoldRepo.getMaxId();
+    	String goldID="GL" + "0000" +(maxId + 1);
+    	model.addAttribute("goldID", goldID);
     	return "goldLoan/applyforGold";
     }
     
@@ -1121,6 +1128,12 @@ public class PageController {
     public String getgoldSecurePlan()
     {
     	return "goldLoan/goldSecurePlan";
+    }
+    
+    @GetMapping("/goldLoanClosure")
+    public String getgoldLoanClosure()
+    {
+    	return "goldLoan/goldLoanClosure";
     }
     
     @GetMapping("/printNOC")

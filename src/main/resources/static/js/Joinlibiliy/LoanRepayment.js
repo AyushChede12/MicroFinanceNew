@@ -88,6 +88,18 @@ $('#groupid').on('change', function() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 // js for hiding the fields (Vaibhav)
 $(document).ready(function() {
 	// Hide all fields initially

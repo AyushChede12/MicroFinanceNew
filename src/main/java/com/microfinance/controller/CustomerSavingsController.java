@@ -586,6 +586,24 @@ public class CustomerSavingsController {
     public double deductSmsCharges(@RequestBody CreateSavingsAccount account) {
         return customersaving.calculateBalanceAfterSmsCharges(account);
     }
-    
+  	
+
+  	@GetMapping("/getAccountNumbers")
+  	public ResponseEntity<ApiResponse<Map<String, List<String>>>> getAccountNumbers(
+  	        @RequestParam List<String> selectByCustomer) {
+
+  	    Map<String, List<String>> accountNumbersMap = customersaving.getAccountNumbersByCustomers(selectByCustomer);
+
+  	    System.out.println("API Response for customers " + selectByCustomer + ": " + accountNumbersMap);
+
+  	    ApiResponse<Map<String, List<String>>> response = new ApiResponse<>(
+  	            HttpStatus.OK,
+  	            "Account numbers fetched successfully",
+  	            accountNumbersMap
+  	    );
+
+  	    return ResponseEntity.ok(response);
+  	}
+
 
 }

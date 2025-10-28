@@ -13,7 +13,7 @@ public class IncomingReceiptDto {
     @NotBlank(message = "Branch name must not be blank")
 	private String branchName;
     
-    private String receiptID; 
+    private String voucherID; 
     
     @NotBlank(message = "Date of entry is required")
     private String dateOfEntry;
@@ -59,12 +59,13 @@ public class IncomingReceiptDto {
 		this.branchName = branchName;
 	}
 
-	public String getReceiptID() {
-		return receiptID;
+
+	public String getVoucherID() {
+		return voucherID;
 	}
 
-	public void setReceiptID(String receiptID) {
-		this.receiptID = receiptID;
+	public void setVoucherID(String voucherID) {
+		this.voucherID = voucherID;
 	}
 
 	public String getDateOfEntry() {
