@@ -902,13 +902,6 @@
 					</a></li>
 
 
-
-					<li><a href="maturityReceiptPrint"> <i
-							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Print Maturity
-								Receipt</span>
-					</a></li>
-
 				</ul></li>
 
 

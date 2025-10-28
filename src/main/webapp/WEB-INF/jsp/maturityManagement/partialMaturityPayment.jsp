@@ -265,7 +265,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-
+ 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
@@ -286,9 +286,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Remark :</label> <input type="text" name="remark"
-									id="remark" required="required" placeholder=""
-									style="text-transform: uppercase;" />
+								<label>Comment :</label> <input type="text" name="Comment"
+									id="Comment" required="required" placeholder=""
+									/>
 							</div>
 						</div>
 					</div>

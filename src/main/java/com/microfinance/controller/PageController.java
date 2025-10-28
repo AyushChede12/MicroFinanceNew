@@ -837,11 +837,6 @@ public class PageController {
 		return "maturityManagement/fullMaturity";
 	}
 
-	@GetMapping("/maturityReceiptPrint")
-	public String getMaturityReceiptPrint() {
-		return "maturityManagement/printMaturityReceipt";
-	}
-
 	// Loan Management
 	@GetMapping("/loanSchemeCatalog")
 	public String getLoanSchemeCatalog(Model model) {
