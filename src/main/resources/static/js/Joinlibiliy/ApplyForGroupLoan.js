@@ -93,7 +93,7 @@ $(document).ready(function() {
 				success: function(response) {
 					if (response.status === "FOUND") {
 						let customer = response.data[0];
-						$('#loanSchemeInformation').val(customer.loanSchemeInformation);
+						$('#loanSchemeName').val(customer.loanSchemeName);
 						$('#processingFee').val(customer.processingFeePercent);
 						$('#legalCharges').val(customer.legalChargesPercent);
 						$('#gstPercentage').val(customer.gstPercent);
@@ -153,7 +153,7 @@ $(document).ready(function() {
 			loanPurpose: $('#loanPurpose').val(),
 			planCode: $('#planCode').val(),
 			totalAmount: $('#totalAmount').val(),
-			loanSchemeInformation: $('#loanSchemeInformation').val(),
+			loanSchemeName: $('#loanSchemeName').val(),
 			processingFee: $('#processingFee').val(),
 			legalCharges: $('#legalCharges').val(),
 			gstPercentage: $('#gstPercentage').val(),
@@ -169,7 +169,8 @@ $(document).ready(function() {
 			approvalStatus: $('#approvalStatus').val(),
 			approvalDate: $('#approvalDate').val(),
 			photo: $('#photoHidden').val(),
-			signature: $('#signatureHidden').val()
+			signature: $('#signatureHidden').val(),
+			term:$("#term").val()
 		};
 
 		console.log("Sending group loan data:", groupLoanData);
@@ -215,7 +216,7 @@ $(document).ready(function() {
 				                               <td>${item.groupCode || ''}</td>
 				                               <td>${item.planCode || ''}</td>
 				                               <td>${item.communityLeader || ''}</td>
-				                               <td>${item.loanSchemeInformation || ''}</td>
+				                               <td>${item.loanSchemeName || ''}</td>
 				                               <td>${item.selectedMember || ''}</td>
 				                               <td>${item.customerName || ''}</td>
 				                               <td>${item.emiType || ''}</td>

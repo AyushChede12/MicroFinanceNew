@@ -17,13 +17,19 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.GroupDirectoryDto;
 import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
+import com.microfinance.model.CreateSavingsAccount;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.GroupInstallmentRepayment;
+import com.microfinance.model.GroupLoanPayment;
 import com.microfinance.model.InstallmentRepayment;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanAprroval;
 import com.microfinance.repository.ApplyForGroupLoanRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
+import com.microfinance.repository.CreateSavingAccountRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
+import com.microfinance.repository.GroupLoanPaymentRepo;
+import com.microfinance.repository.GroupRepaymentRepo;
 import com.microfinance.repository.InstallmentRepymentRepo;
 import com.microfinance.repository.LoanApprovalRepo;
 
@@ -44,6 +50,18 @@ public class JointLiabilityLoanService {
 	@Autowired
 	InstallmentRepymentRepo installmentRepymentRepo;
 
+	@Autowired
+	ApplyForGroupLoanRepo grouploanpaymnt;
+
+	@Autowired
+	GroupLoanPaymentRepo groupLoanpaymentrepo;
+
+	@Autowired
+	CreateSavingAccountRepo createSavingRepo;
+
+	@Autowired
+	GroupRepaymentRepo groupRepaymentRepo;
+	
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
@@ -72,7 +90,7 @@ public class JointLiabilityLoanService {
 		if (existingOpt.isPresent()) {
 			CreateLendingGroup existing = existingOpt.get();
 			existing.setPlanCode(updatedGroup.getPlanCode());
-			existing.setLoanSchemeInformation(updatedGroup.getLoanSchemeInformation());
+			existing.setLoanSchemeName(updatedGroup.getLoanSchemeName());
 			existing.setMinimumAge(updatedGroup.getMinimumAge());
 
 			existing.setTerm(updatedGroup.getTerm());
@@ -264,9 +282,23 @@ public class JointLiabilityLoanService {
 		}
 	}
 
-	// ✅ Fetch Method (list)
 	public List<ApplyForGroupLoan> fetchApplyGroupLoanByGroupcode(String groupCode) {
-		return applyForGroupLoanRepo.findByGroupCode(groupCode);
+		// 1️⃣ Fetch all loans for this group
+		List<ApplyForGroupLoan> loans = applyForGroupLoanRepo.findByGroupCode(groupCode);
+
+		// 2️⃣ Fetch the group directory for this group
+		List<GroupDirectory> directories = groupDirectoryRepo.findByGroupID(groupCode);
+
+		// 3️⃣ If directory exists, set photo/signature in each loan
+		if (directories != null && !directories.isEmpty()) {
+			GroupDirectory dir = directories.get(0); // assuming one directory per group
+			for (ApplyForGroupLoan loan : loans) {
+				loan.setPhoto(dir.getPhoto());
+				loan.setSignature(dir.getSignature());
+			}
+		}
+
+		return loans;
 	}
 
 	public List<ApplyForGroupLoan> fetchBygroupCode(String groupCode) {
@@ -289,12 +321,138 @@ public class JointLiabilityLoanService {
 	}
 
 	// Service for getting Approved & Active loan Ids( Vaibhav)
-
 	public List<String> getApprovedGroupLoanIds() {
 		List<ApplyForGroupLoan> approvedActiveLoans = applyForGroupLoanRepo
 				.findByApprovalStatusTrueAndGroupLoanStatus("ACTIVE");
-
 		return approvedActiveLoans.stream().map(ApplyForGroupLoan::getGroupCode).collect(Collectors.toList());
 	}
+
+	// Service for paying members in the create saving account balance
+	public boolean saveGroupLoanPayment(GroupLoanPayment groupLoan) {
+		try {
+			System.out.println("Received GroupLoanPayment: " + groupLoan);
+
+			if (groupLoan.getGroupID() == null || groupLoan.getGroupID().isEmpty()) {
+				throw new IllegalArgumentException("Group ID is missing in request");
+			}
+
+			double loanAmount = parseDoubleSafe(groupLoan.getLoanAmount());
+			double legalFee = parseDoubleSafe(groupLoan.getLegalCharges());
+			double processingFee = parseDoubleSafe(groupLoan.getProcessingFee());
+			double gst = parseDoubleSafe(groupLoan.getGstPercentage());
+			double valuation = parseDoubleSafe(groupLoan.getValuationFee());
+
+			double totalDeduction = legalFee + processingFee + gst + valuation;
+			double netAmount = loanAmount - totalDeduction;
+			// groupLoan.setSanctionedAmount(netAmount);
+
+			if (netAmount <= 0) {
+				throw new IllegalArgumentException("Net amount is not sufficient to distribute");
+			}
+
+			List<GroupDirectory> groups = groupDirectoryRepo.findByGroupID(groupLoan.getGroupID());
+			if (groups.isEmpty()) {
+				throw new IllegalArgumentException("Group not found with ID: " + groupLoan.getGroupID());
+			}
+
+			GroupDirectory group = groups.get(0);
+			String selectedMembers = group.getSelectedMember();
+
+			if (selectedMembers == null || selectedMembers.trim().isEmpty()) {
+				throw new IllegalArgumentException("No members found in the group");
+			}
+
+			String[] memberIds = selectedMembers.split(",");
+			double sharePerMember = netAmount / memberIds.length;
+
+			// ✅ Update balance in CreateSavingsAccount for each member
+			for (String memberId : memberIds) {
+				memberId = memberId.trim();
+
+				List<CreateSavingsAccount> existingAccounts = createSavingRepo.findBySelectByCustomer(memberId);
+
+				if (!existingAccounts.isEmpty()) {
+					CreateSavingsAccount existingAccount = existingAccounts.get(0);
+
+					double currentBalance = 0.0;
+					try {
+						currentBalance = Double.parseDouble(existingAccount.getBalance());
+					} catch (NumberFormatException e) {
+						currentBalance = 0.0;
+					}
+
+					double newBalance = currentBalance + sharePerMember;
+					existingAccount.setBalance(String.valueOf(newBalance));
+					createSavingRepo.save(existingAccount);
+
+				} else {
+					System.out.println("⚠️ No savings account found for member: " + memberId);
+				}
+			}
+
+			groupLoanpaymentrepo.save(groupLoan);
+			System.out.println("Group loan payment saved successfully.");
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private double parseDoubleSafe(String value) {
+		if (value == null || value.trim().isEmpty()) {
+			return 0.0;
+		}
+		return Double.parseDouble(value.replace("%", "").trim());
+	}
+
+	public List<GroupLoanPayment> fetchGroupLoanPayment(String groupID) {
+		return groupLoanpaymentrepo.findByGroupID(groupID);
+	}
+	
+	
+	public boolean saveLoanRepayment(GroupInstallmentRepayment repayment) {
+	    try {
+	        // --- Step 1: Parse numeric fields safely ---
+	        double loanAmount = parseDoubleSafe(repayment.getTotalPayable());
+	        double emi = parseDoubleSafe(repayment.getLoanEmi());
+	        double prevAmountDue = parseDoubleSafe(repayment.getAmountDue());
+
+	        // --- Step 2: Calculate new amount due ---
+	        double newAmountDue = loanAmount - emi;
+
+	        // --- Step 3: Update repayment object with new amount due ---
+	        repayment.setAmountDue(String.valueOf(newAmountDue));
+	        repayment.setPaymentDate(LocalDate.now().toString()); // Optional: store current date
+
+	        // --- Step 4: Save repayment record ---
+	        groupRepaymentRepo.save(repayment);
+
+	        // --- Step 5: If the loan is fully paid, update loan status ---
+	        if (newAmountDue <= 0) {
+	            // ✅ Get the corresponding loan record
+	            List<ApplyForGroupLoan> loanOpt = applyForGroupLoanRepo.findByGroupCode(repayment.getGroupID());
+	            if (loanOpt.isEmpty()) {
+	                ApplyForGroupLoan loan = loanOpt.get(0);
+	                loan.setGroupLoanStatus(uploadDirectory);
+	                applyForGroupLoanRepo.save(loan);
+	                System.out.println("✅ Loan fully repaid. Status updated to Closed.");
+	            }
+	        } 
+
+	        // --- Step 6: Log details ---
+	        System.out.println("Loan Amount: " + loanAmount);
+	        System.out.println("EMI Paid: " + emi);
+	        System.out.println("New Amount Due: " + newAmountDue);
+
+	        return true;
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
 
 }

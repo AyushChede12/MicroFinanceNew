@@ -10,23 +10,42 @@ public class GoldDirectory {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	//Customer Details
+	private String customerCode;
+	private String customerName;
+	
 	// Today's Rate
     private String karat;
-    private String silverRate;
-    private String goldRate;
+    private String todayRate;
+    private String custgoldRate;
 
     // Item Master
     private String itemMasterType;
     private String itemName;
 
     // Locker Master
-    private String lockerLocation;
-    private String lockerAddress;
+    private String lockerBranch;
+    private String lockerNumber;
 
     // Purity Master
     private String purityName;
     private String purity;
     private String itemPurityType;
+    
+    //Loan Details
+    private String loanPlanName;
+    private String typeOfLoan;
+    private String loanMode;
+    private String loanTerm;
+    private String rateOfInterest;
+    private String loanAmount;
+    private String typeIntrest;
+    private String emiPayment;
+    
+    
+    
+    
 	public long getId() {
 		return id;
 	}
@@ -39,18 +58,7 @@ public class GoldDirectory {
 	public void setKarat(String karat) {
 		this.karat = karat;
 	}
-	public String getSilverRate() {
-		return silverRate;
-	}
-	public void setSilverRate(String silverRate) {
-		this.silverRate = silverRate;
-	}
-	public String getGoldRate() {
-		return goldRate;
-	}
-	public void setGoldRate(String goldRate) {
-		this.goldRate = goldRate;
-	}
+	
 	public String getItemMasterType() {
 		return itemMasterType;
 	}
@@ -63,18 +71,7 @@ public class GoldDirectory {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getLockerLocation() {
-		return lockerLocation;
-	}
-	public void setLockerLocation(String lockerLocation) {
-		this.lockerLocation = lockerLocation;
-	}
-	public String getLockerAddress() {
-		return lockerAddress;
-	}
-	public void setLockerAddress(String lockerAddress) {
-		this.lockerAddress = lockerAddress;
-	}
+	
 	public String getPurityName() {
 		return purityName;
 	}
@@ -92,6 +89,90 @@ public class GoldDirectory {
 	}
 	public void setItemPurityType(String itemPurityType) {
 		this.itemPurityType = itemPurityType;
+	}
+	public String getCustomerCode() {
+		return customerCode;
+	}
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getLoanPlanName() {
+		return loanPlanName;
+	}
+	public void setLoanPlanName(String loanPlanName) {
+		this.loanPlanName = loanPlanName;
+	}
+	public String getTypeOfLoan() {
+		return typeOfLoan;
+	}
+	public void setTypeOfLoan(String typeOfLoan) {
+		this.typeOfLoan = typeOfLoan;
+	}
+	public String getLoanMode() {
+		return loanMode;
+	}
+	public void setLoanMode(String loanMode) {
+		this.loanMode = loanMode;
+	}
+	public String getLoanTerm() {
+		return loanTerm;
+	}
+	public void setLoanTerm(String loanTerm) {
+		this.loanTerm = loanTerm;
+	}
+	public String getRateOfInterest() {
+		return rateOfInterest;
+	}
+	public void setRateOfInterest(String rateOfInterest) {
+		this.rateOfInterest = rateOfInterest;
+	}
+	public String getLoanAmount() {
+		return loanAmount;
+	}
+	public void setLoanAmount(String loanAmount) {
+		this.loanAmount = loanAmount;
+	}
+	public String getTypeIntrest() {
+		return typeIntrest;
+	}
+	public void setTypeIntrest(String typeIntrest) {
+		this.typeIntrest = typeIntrest;
+	}
+	public String getEmiPayment() {
+		return emiPayment;
+	}
+	public void setEmiPayment(String emiPayment) {
+		this.emiPayment = emiPayment;
+	}
+	public String getTodayRate() {
+		return todayRate;
+	}
+	public void setTodayRate(String todayRate) {
+		this.todayRate = todayRate;
+	}
+	public String getCustgoldRate() {
+		return custgoldRate;
+	}
+	public void setCustgoldRate(String custgoldRate) {
+		this.custgoldRate = custgoldRate;
+	}
+	public String getLockerBranch() {
+		return lockerBranch;
+	}
+	public void setLockerBranch(String lockerBranch) {
+		this.lockerBranch = lockerBranch;
+	}
+	public String getLockerNumber() {
+		return lockerNumber;
+	}
+	public void setLockerNumber(String lockerNumber) {
+		this.lockerNumber = lockerNumber;
 	}
     
     
