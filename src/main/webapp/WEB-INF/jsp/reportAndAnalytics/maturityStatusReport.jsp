@@ -33,6 +33,9 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 </head>
 
 
@@ -59,38 +62,36 @@ pageEncoding="ISO-8859-1"%> -->
 			<div class="row">
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="">Branch:</label> <select id="colour" name="colour"
-							required="required" class="form-control selectField mb-4"
-							style="height: 30px;">
-							<option value="">Select Colour</option>
-							<option value="Blue">Blue</option>
+						<label for="branchName">Branch:</label> <select id="branchName"
+							name="branchName" required="required"
+							class="form-control selectField mb-4" style="height: 30px;">
 						</select>
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="vehicalNo">From Date</label> <input type="date"
-							name="vehicalNo" id="vehicalNo" required="required"
-							placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
+						<label for="fromDate">From Date</label> <input type="date"
+							name="fromDate" id="fromDate" required="required"
+							style="text-transform: uppercase;" />
 					</div>
 				</div>
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields">
-						<label for="vehicalNo">To Date</label> <input type="date"
-							name="vehicalNo" id="vehicalNo" required="required"
-							placeholder="Enter Vehicle No" style="text-transform: uppercase;" />
+						<label for="toDate">To Date</label> <input type="date"
+							name="toDate" id="toDate" required="required"
+							style="text-transform: uppercase;" />
 					</div>
 				</div>
 
 			</div>
 		</div>
 		<div class="row">
-						<div class="col-4 text-start mt-3">
-							<button id="findBtn" class="btn btn-dark">Find</button>
-						</div>
-					</div>
+			<div class="col-4 text-start mt-3">
+				<button type="button" id="findBtn" class="btn btn-dark">Find</button>
+			</div>
+		</div>
 
 		<div class="row mt-5">
 			<div class="col-12">
@@ -98,25 +99,23 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="card-body table-responsive">
 						<div class="d-flex justify-content-between align-items-center">
 							<h5 class="card-title">
-								Search Result <span>|Loan EMI OVER DUE REPORT</span>
+								Maturity Status Report <span>| Table View</span>
 							</h5>
 						</div>
 						<div style="overflow-x: auto; white-space: nowrap;">
 							<table class="table table-borderless datatable">
 								<thead class="table-light">
 									<tr style="font-family: 'Poppins', sans-serif;">
-										<th scope="col">POLICY BRANCH</th>
-										<th scope="col">POLICY NO.</th>
-										<th scope="col">APPLICANT NAME</th>
+										<th scope="col">SR NO</th>
+										<th scope="col">CUSTOMER NAME</th>
+										<th scope="col">BRANCH NAME</th>
+										<th scope="col">POLICY CODE</th>
+										<th scope="col">POLICY AMOUNT</th>
 										<th scope="col">MATURITY DATE</th>
-										<th scope="col">APPLICATION DATE</th>
-										<th scope="col">USER NAME</th>
-										<th scope="col">CALCULATE MATURITY</th>
-										<th scope="col">NETPAY</th>
-										<th scope="col">STATUS</th>
-										<th scope="col">DUE MATURITY</th>
-										<th scope="col">PAID MATURITY</th>
-										<th scope="col">PAYBY</th>
+										<th scope="col">MATURITY AMOUNT</th>
+										<th scope="col">TOTAL DEPOSIT</th>
+										<th scope="col">SCHEME NAME</th>
+										<th scope="col">PRINT</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -131,6 +130,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 	</main>
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/ReportsAndAnalytics/maturityStatus.js"></script>
 </body>
 
 </html>

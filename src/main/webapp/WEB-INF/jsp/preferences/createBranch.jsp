@@ -92,9 +92,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch Code <span class="star">*</span></label> <input
 									type="text" name="branchCode" id="branchCode"
-									required="required" placeholder="Enter Branch Code"
-									style="text-transform: uppercase;" /> <small
-									id="chkbranchcode" style="color: red;"></small>
+									required="required" placeholder="Enter Branch Code" />
+								<small id="chkbranchcode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -103,9 +102,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Branch Name <span class="star">*</span></label> <input
 									type="Text" name="branchName" id="branchName"
-									required="required" placeholder="Enter Branch Name"
-									style="text-transform: uppercase;" /> <small
-									id="chkbranchName" style="color: red;"></small>
+									required="required" placeholder="Enter Branch Name" />
+								<small id="chkbranchName" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -115,8 +113,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Opening Date <span class="star">*</span></label> <input
 									type="date" name="openingDate" id="openingDate"
-									required="required" style="text-transform: uppercase;" /> <small
-									id="chkopeningdate" style="color: red;"></small>
+									required="required" /> <small id="chkopeningdate"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -134,8 +132,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">PIN <span class="star">*</span></label> <input
 									type="text" name="pin" id="pin" required="required"
-									placeholder="Enter Pin" style="text-transform: uppercase;" />
-								<small id="chkpin" style="color: red;"></small>
+									placeholder="Enter Pin" /> <small id="chkpin"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -159,9 +157,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Primary Contact <span class="star">*</span></label>
 								<input type="text" name="primaryContact" id="primaryContact"
-									required="required" placeholder="Enter Primary Contact"
-									style="text-transform: uppercase;" /> <small
-									id="chkprimarycontact" style="color: red;"></small>
+									required="required" placeholder="Enter Primary Contact" />
+								<small id="chkprimarycontact" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -169,8 +166,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Contact <span class="star">*</span></label> <input
 									type="text" name="contact" id="contact" required="required"
-									placeholder="Enter Contact" style="text-transform: uppercase;" />
-								<small id="chkcontact" style="color: red;"></small>
+									placeholder="Enter Contact" /> <small id="chkcontact"
+									style="color: red;"></small>
 							</div>
 						</div>
 
