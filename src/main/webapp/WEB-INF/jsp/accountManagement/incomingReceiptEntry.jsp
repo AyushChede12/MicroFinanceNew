@@ -128,9 +128,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Receipt ID <span class="star">*</span></label> <input
-							type="text" name="receiptID" id="receiptID" required="required"
-							placeholder="Enter receipt no." disabled />
+						<label for="">Voucher ID <span class="star">*</span></label> <input
+							type="text" name="voucherID" id="receiptID" required="required"
+							placeholder="Enter Voucher ID" disabled />
 					</div>
 				</div>
 

@@ -73,7 +73,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Branch </label> <select id="branchName1" name="branchName"
+								<label for="branchName1">Branch </label> <select id="branchName1" name="branchName"
 									required="required" class="form-control selectField">
 									<option value="">Select Branch</option>
 								</select>

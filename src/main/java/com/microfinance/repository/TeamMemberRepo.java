@@ -13,6 +13,8 @@ public interface TeamMemberRepo extends JpaRepository<TeamMember, Long> {
 	@Query("select coalesce(max(id), 0) from TeamMember")
 	long getMaxId();
 
+	List<TeamMember> findByModeofpayment(String string);
+
 
 	
 }

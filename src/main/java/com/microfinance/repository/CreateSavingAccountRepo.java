@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.LoanPayment;
 import com.microfinance.model.SavingSchemeCatalog;
 
 public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAccount, Long> {
@@ -28,11 +29,19 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	List<CreateSavingsAccount> findByIsApprovedTrue();
 
+	List<CreateSavingsAccount> findBySelectByCustomerIgnoreCase(String selectByCustomer);
+
+	
 	List<CreateSavingsAccount> findBySelectByCustomer(String selectByCustomer);
 
 	boolean existsBySelectByCustomer(String customerId);
 
 	List<CreateSavingsAccount> findByIsApprovedTrueAndMessageSend(String messageSend);
+
+	List<CreateSavingsAccount> findByModeOfPayment(String string);
+
+
+	
 
 
 	

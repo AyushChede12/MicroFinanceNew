@@ -34,8 +34,15 @@ public class CustomerDto {
 		private String emailId;
 		private String profession;
 		private String academicBackground;
+		private String shareAmount;
+		private String noOfShare;
+		private String lightBill;
+		private String taxBill;
 		private MultipartFile customerPhoto;
 		private MultipartFile customerSignature;
+		private MultipartFile customerDriving;
+		private MultipartFile customerVoter;
+		
 
 	//Nominee Details
 		private String nomineeName;
@@ -46,10 +53,18 @@ public class CustomerDto {
 		private String nomineeKycNo;
 		private String nomineeKycType;
 		private String nomineeMobileNo;
+		private String nomineeDOB;
+		
+		
 
 		
 		//Fees Details
 		private String memberFees;
+		private String buildingFund;
+		private String adminCharge;
+		private String documentCharge;
+		private String otherCharge;
+		private String entryFee;
 		private String chequeNo;
 		private String chequeDate;
 		private String depositAcNo;
@@ -343,6 +358,24 @@ public class CustomerDto {
 		public String getNomineeAddress() {
 			return nomineeAddress;
 		}
+		
+		
+
+		public String getShareAmount() {
+			return shareAmount;
+		}
+
+		public void setShareAmount(String shareAmount) {
+			this.shareAmount = shareAmount;
+		}
+
+		public String getNoOfShare() {
+			return noOfShare;
+		}
+
+		public void setNoOfShare(String noOfShare) {
+			this.noOfShare = noOfShare;
+		}
 
 		public void setNomineeAddress(String nomineeAddress) {
 			this.nomineeAddress = nomineeAddress;
@@ -498,6 +531,86 @@ public class CustomerDto {
 
 		public void setPaymentBy(String paymentBy) {
 			this.paymentBy = paymentBy;
+		}
+
+		public String getLightBill() {
+			return lightBill;
+		}
+
+		public void setLightBill(String lightBill) {
+			this.lightBill = lightBill;
+		}
+
+		public String getTaxBill() {
+			return taxBill;
+		}
+
+		public void setTaxBill(String taxBill) {
+			this.taxBill = taxBill;
+		}
+
+		public MultipartFile getCustomerDriving() {
+			return customerDriving;
+		}
+
+		public void setCustomerDriving(MultipartFile customerDriving) {
+			this.customerDriving = customerDriving;
+		}
+
+		public MultipartFile getCustomerVoter() {
+			return customerVoter;
+		}
+
+		public void setCustomerVoter(MultipartFile customerVoter) {
+			this.customerVoter = customerVoter;
+		}
+
+		public String getNomineeDOB() {
+			return nomineeDOB;
+		}
+
+		public void setNomineeDOB(String nomineeDOB) {
+			this.nomineeDOB = nomineeDOB;
+		}
+
+		public String getBuildingFund() {
+			return buildingFund;
+		}
+
+		public void setBuildingFund(String buildingFund) {
+			this.buildingFund = buildingFund;
+		}
+
+		public String getAdminCharge() {
+			return adminCharge;
+		}
+
+		public void setAdminCharge(String adminCharge) {
+			this.adminCharge = adminCharge;
+		}
+
+		public String getDocumentCharge() {
+			return documentCharge;
+		}
+
+		public void setDocumentCharge(String documentCharge) {
+			this.documentCharge = documentCharge;
+		}
+
+		public String getOtherCharge() {
+			return otherCharge;
+		}
+
+		public void setOtherCharge(String otherCharge) {
+			this.otherCharge = otherCharge;
+		}
+
+		public String getEntryFee() {
+			return entryFee;
+		}
+
+		public void setEntryFee(String entryFee) {
+			this.entryFee = entryFee;
 		}
 		
 		

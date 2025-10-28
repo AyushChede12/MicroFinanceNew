@@ -1,10 +1,12 @@
 package com.microfinance.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import com.microfinance.dto.ApiResponse;
 import com.microfinance.dto.BankCashTransferDto;
 import com.microfinance.dto.IncomingReceiptDto;
 import com.microfinance.dto.LedgerAccountDto;
+import com.microfinance.dto.LedgerSummaryDto;
 import com.microfinance.dto.ManualJournalDto;
 import com.microfinance.dto.OutgoingPaymentDto;
 import com.microfinance.model.LedgerAccountMaster;
@@ -232,6 +235,19 @@ public class AccountManagementController {
 	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Eligible ledgers fetched", ledgers));
 	} 
 	
-	}
+	  @GetMapping("/ledger-summary")
+	    public ResponseEntity<ApiResponse<List<LedgerSummaryDto>>> getLedgerSummary(
+	            @RequestParam String branch,
+	            @RequestParam String ledger,
+	            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
+	            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
+
+	        List<LedgerSummaryDto> result = accountManagementService.getLedgerSummary(branch, ledger, startDate, endDate);
+	        return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK, "Fetched Successfully" , result));
+	    }
+	
+	
+	
+}
 
 
