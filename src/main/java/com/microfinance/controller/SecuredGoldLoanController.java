@@ -3,6 +3,7 @@ package com.microfinance.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -205,6 +206,31 @@ public class SecuredGoldLoanController {
 	        );
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
 	    }
+	}
+	
+	@GetMapping("/getAllGoldLoanCustomer")
+	public ResponseEntity<ApiResponse<List<ApplyForGold>>> getAllGoldLoanCustomer() {
+	    List<ApplyForGold> list = secureGoldLoanService.getAllGoldLoanCustomer();
+
+	    return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+	            list.isEmpty() ? "No records found" : "Records fetched successfully", list));
+	}
+	
+	@GetMapping("/getByGoldIDforApproval")
+	public ResponseEntity<ApiResponse<List<ApplyForGold>>> getByGoldIDforApproval(@RequestParam String goldID) {
+		try {
+			List<ApplyForGold> goldLoanList = secureGoldLoanService.getByGoldIDforApproval(goldID);
+
+			if (goldLoanList == null || goldLoanList.isEmpty()) {
+				return ResponseEntity.status(HttpStatus.NOT_FOUND)
+						.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No Gold Loan Found", null));
+			}
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "GoldLoanPlan found", goldLoanList));
+		} catch (RuntimeException ex) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), null));
+		}
 	}
 
 

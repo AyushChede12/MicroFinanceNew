@@ -107,6 +107,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-12 text-center">
 								<button id="saveBtn" class="btnStyle bg-warning"
 									onclick="saveCategory()">Add</button>
+									<button id="updateBtn" class="btnStyle bg-success"
+									onclick="updateCategory()">Update</button>
 							</div>
 						</div>
 
@@ -146,6 +148,7 @@ pageEncoding="ISO-8859-1"%> -->
 													<th scope="col">Sr No</th>
 													<th scope="col">Category</th>
 													<th scope="col">Caste</th>
+													<th scope="col">Edit</th>
 													<th scope="col">Delete</th>
 												</tr>
 											</thead>

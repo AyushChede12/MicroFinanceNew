@@ -1,215 +1,180 @@
 $(document).ready(function() {
 	let allPolicies = [];
 
-	// ✅ 1. Fetch all approved policies on page load
+	// ✅ 1. Fetch all approved policies on load
 	$.ajax({
 		url: "api/Policymangment/getApprovedPolicies",
 		method: "GET",
+		contentType: "application/json",
 		success: function(response) {
-			console.log("API Response:", response);
-
-			if (response && response.data && Array.isArray(response.data)) {
+			if (response?.data && Array.isArray(response.data)) {
 				allPolicies = response.data;
-
-				// ✅ Fill branch dropdown
-				let branches = new Set();
-				allPolicies.forEach(policy => {
-					if (policy.branchName) branches.add(policy.branchName);
-				});
-				branches.forEach(branch => {
-					$('#branchName1').append(`<option value="${branch}">${branch}</option>`);
-				});
-
-				// ✅ Render full table initially
+				populateBranches(allPolicies);
 				renderTable(allPolicies);
 			} else {
-				$(".datatable tbody").html("<tr><td colspan='10'>No approved policies found.</td></tr>");
+				$(".datatable tbody").html(
+					"<tr><td colspan='10'>No approved policies found.</td></tr>"
+				);
 			}
 		},
 		error: function() {
-			alert("Error while fetching data.");
-		}
+			alert("Error while fetching policies data.");
+		},
 	});
 
-	// ✅ 2. Filter on Find button click
-	$('#findBtn').click(function(e) {
-		e.preventDefault();
+	// ✅ 2. Populate branch dropdown
+	function populateBranches(policies) {
+		let branches = new Set();
+		policies.forEach((p) => {
+			if (p.branchName) branches.add(p.branchName);
+		});
+		branches.forEach((branch) => {
+			$("#branchName1").append(`<option value="${branch}">${branch}</option>`);
+		});
+	}
 
-		const selectedBranch = $('#branchName1').val();
-		const fromDate = $('#fromDate').val();
-		const toDate = $('#toDate').val();
+	// ✅ 3. Filter policies by branch/date
+	$("#findBtn").click(function(e) {
+		e.preventDefault();
+		const selectedBranch = $("#branchName1").val();
+		const fromDate = $("#fromDate").val();
+		const toDate = $("#toDate").val();
 
 		if (!fromDate || !toDate) {
 			alert("Please select both From and To dates.");
 			return;
 		}
 
-		const filtered = allPolicies.filter(policy => {
-			const policyDate = policy.policyStartDate;
+		const filtered = allPolicies.filter((p) => {
+			const date = p.policyStartDate;
 			return (
-				(!selectedBranch || policy.branchName === selectedBranch) &&
-				policyDate >= fromDate &&
-				policyDate <= toDate
+				(!selectedBranch || p.branchName === selectedBranch) &&
+				date >= fromDate &&
+				date <= toDate
 			);
 		});
 
 		renderTable(filtered);
 	});
 
-	// ✅ 3. Render the table with print popup button
+	// ✅ 4. Render Policy Table
 	function renderTable(data) {
-		let tableBody = $(".datatable tbody");
-		tableBody.empty();
+		const tbody = $(".datatable tbody");
+		tbody.empty();
 
 		if (!data.length) {
-			tableBody.append("<tr><td colspan='10'>No matching policies found.</td></tr>");
+			tbody.append("<tr><td colspan='10'>No matching policies found.</td></tr>");
 			return;
 		}
 
-		data.forEach((policy, index) => {
-			let row = `
+		data.forEach((policy, i) => {
+			tbody.append(`
 				<tr>
-					<td>${index + 1}</td>
-					<td>${policy.policyCode || ''}</td>
-					<td>${policy.customerName || ''}</td>
-					<td>${policy.schemeType || ''}</td>
-					<td>${policy.policyStartDate || ''}</td>
-					<td>${policy.policyAmount || ''}</td>
-					<td>${policy.contactNo || ''}</td>
-					<td>${policy.branchName || ''}</td>
-					<td>${policy.approved ? 'Yes' : 'No'}</td>
+					<td>${i + 1}</td>
+					<td>${policy.policyCode || ""}</td>
+					<td>${policy.customerName || ""}</td>
+					<td>${policy.schemeType || ""}</td>
+					<td>${policy.policyStartDate || ""}</td>
+					<td>${policy.policyAmount || ""}</td>
+					<td>${policy.contactNo || ""}</td>
+					<td>${policy.branchName || ""}</td>
+					<td>${policy.approved ? "Yes" : "No"}</td>
 					<td>
-						<button class="iconbutton printPopupBtn" data-id="${policy.id}" data-bs-toggle="modal" data-bs-target="#printModal">
-							<i class="bi bi-printer" style="color: green;"></i>
+						<button class="btn btn-outline-success btn-sm bankReportBtn"
+							data-id="${policy.id}"
+							data-bs-toggle="modal"
+							data-bs-target="#bankReportModal"
+							title="View Report">
+							<i class="bi bi-printer"></i>
 						</button>
 					</td>
 				</tr>
-			`;
-			tableBody.append(row);
+			`);
 		});
 
-		$(".printPopupBtn").click(function() {
+		bindModalEvents();
+	}
+
+	// ✅ 5. Bank Report Modal Handler
+	function bindModalEvents() {
+		$(".bankReportBtn").off("click").on("click", function() {
 			const id = $(this).data("id");
-			const selectedPolicy = allPolicies.find(p => p.id === id);
+			const policy = allPolicies.find((p) => p.id === id);
+			if (!policy) return;
 
-			if (selectedPolicy) {
-				let html = `
-					<div class="report-container">
-						<h3 class="text-center report-title">Investment Policy Report</h3>
-						<hr>
-						<!-- Customer Info -->
-						<h5 class="section-title">Customer Information</h5>
-						<table class="table table-bordered table-sm">
-							<tr><th>Customer Name</th><td>${selectedPolicy.customerName || ''}</td></tr>
-							<tr><th>Date of Birth</th><td>${selectedPolicy.dateofBirth || ''}</td></tr>
-							<tr><th>Relation Details</th><td>${selectedPolicy.relationDetails || ''}</td></tr>
-							<tr><th>Contact No</th><td>${selectedPolicy.contactNo || ''}</td></tr>
-							<tr><th>Address</th><td>${selectedPolicy.address || ''}, ${selectedPolicy.district || ''}, ${selectedPolicy.state || ''} - ${selectedPolicy.pinCode || ''}</td></tr>
-							<tr><th>Suggested Nominee</th><td>${selectedPolicy.suggestedNominee || ''} (Age: ${selectedPolicy.ageOfNominee || ''}, Relation: ${selectedPolicy.relation || ''})</td></tr>
-						</table>
+			// ✅ Fill modal header and bank info
+			$("#bankLogo").attr("src", "https://i.ibb.co/zFSWbkC/banklogo.png");
+			$("#bankName").text("Sterling Bank");
+			$("#reportTitle").text("Microfinance Transaction Report");
 
-						<!-- Policy Info -->
-						<h5 class="section-title">Policy Information</h5>
-						<table class="table table-bordered table-sm">
-							<tr><th>Policy Code</th><td>${selectedPolicy.policyCode || ''}</td></tr>
-							<tr><th>Policy Start Date</th><td>${selectedPolicy.policyStartDate || ''}</td></tr>
-							<tr><th>Branch Name</th><td>${selectedPolicy.branchName || ''}</td></tr>
-							<tr><th>Scheme Name</th><td>${selectedPolicy.schemeName || ''}</td></tr>
-							<tr><th>Scheme Type</th><td>${selectedPolicy.schemeType || ''}</td></tr>
-							<tr><th>Scheme Term</th><td>${selectedPolicy.schemeTerm || ''}</td></tr>
-							<tr><th>Scheme Mode</th><td>${selectedPolicy.schemeMode || ''}</td></tr>
-							<tr><th>ROI</th><td>${selectedPolicy.roi || ''}%</td></tr>
-							<tr><th>Maturity Date</th><td>${selectedPolicy.maturityDate || ''}</td></tr>
-							<tr><th>Maturity Amount</th><td>${selectedPolicy.maturityAmount || ''}</td></tr>
-						</table>
+			$("#accountNumber").text(policy.memberSelection || "N/A");
+			$("#periodCovered").text(`${policy.policyStartDate} - ${policy.maturityDate}`);
 
-						<!-- Payment Info -->
-						<h5 class="section-title">Payment Information</h5>
-						<table class="table table-bordered table-sm">
-							<tr><th>Policy Amount</th><td>${selectedPolicy.policyAmount || ''}</td></tr>
-							<tr><th>Deposit Amount</th><td>${selectedPolicy.depositAmount || ''}</td></tr>
-							<tr><th>Paid Amount</th><td>${selectedPolicy.paidAmount || ''}</td></tr>
-							<tr><th>Amount Due</th><td>${selectedPolicy.amountDue || ''}</td></tr>
-							<tr><th>Last Installment Paid</th><td>${selectedPolicy.lastInstPaid || ''}</td></tr>
-							<tr><th>Last Payment Date</th><td>${selectedPolicy.lastPaymentDate || ''}</td></tr>
-							<tr><th>Due Date</th><td>${selectedPolicy.dueDate || ''}</td></tr>
-							<tr><th>No. of Installments</th><td>${selectedPolicy.noOfInstallments || ''}</td></tr>
-							<tr><th>Mode of Payment</th><td>${selectedPolicy.modeOfPayment || ''}</td></tr>
-							<tr><th>Payment By</th><td>${selectedPolicy.paymentBy || ''}</td></tr>
-						</table>
+			// ✅ Customer and summary details
+			$("#customerName").text(policy.customerName || "");
+			$("#customerAddress1").text(policy.address || "");
+			$("#customerAddress2").text(policy.branchName ? `Branch: ${policy.branchName}` : "");
 
-						<!-- Other Info -->
-						<h5 class="section-title">Additional Details</h5>
-						<table class="table table-bordered table-sm">
-							<tr><th>Joint Member</th><td>${selectedPolicy.jointName || ''} (${selectedPolicy.jointMemCode || ''})</td></tr>
-							<tr><th>Introducer Code</th><td>${selectedPolicy.introMCode || ''}</td></tr>
-							<tr><th>Agent</th><td>${selectedPolicy.agent || ''}</td></tr>
-							<tr><th>SMS Sent</th><td>${selectedPolicy.smsSend || ''}</td></tr>
-							<tr><th>Approved</th><td>${selectedPolicy.approved ? "Yes" : "No"}</td></tr>
-							<tr><th>Remark</th><td>${selectedPolicy.remark || ''}</td></tr>
-						</table>
-					</div>
-				`;
+			$("#startingBalance").html(`&#8377; ${policy.policyAmount || 0}`);
+			$("#incomeAmount").html(`&#8377; ${policy.depositAmount || 0}`);
+			$("#expensesAmount").html(`&#8377; ${policy.amountDue || 0}`);
+			$("#closingBalance").html(`&#8377; ${policy.maturityAmount || 0}`);
 
-				$("#modalDataContainer").html(html);
+			// ✅ Fill Transactions Table
+			const tbody = $("#transactionTableBody");
+			tbody.empty();
+
+			if (policy.transactions && policy.transactions.length > 0) {
+				policy.transactions.forEach((txn) => {
+					tbody.append(`
+						<tr>
+							<td>${txn.date || ""}</td>
+							<td>${txn.description || ""}</td>
+							<td>${txn.debit ? "₹ " + txn.debit : "-"}</td>
+							<td>${txn.credit ? "₹ " + txn.credit : "-"}</td>
+							<td>${txn.balance ? "₹ " + txn.balance : "-"}</td>
+						</tr>
+					`);
+				});
+			} else {
+				tbody.append(`
+					<tr>
+						<td colspan="5" class="text-center text-muted">
+							No transaction data available
+						</td>
+					</tr>
+				`);
 			}
+
+			// ✅ Show modal
+			$("#bankReportModal").modal("show");
 		});
+	}
 
-		// ✅ Print Function
-		$("#printBtn").click(function() {
-			const content = document.getElementById("modalDataContainer").innerHTML;
-			const printWindow = window.open('', '', 'width=900,height=700');
-
-			printWindow.document.write(`
-				<html>
+	// ✅ 6. Print Modal Content
+	$("#printBankReportBtn").click(function() {
+		const content = document.getElementById("bankReportContent").innerHTML;
+		const printWindow = window.open("", "", "width=900,height=700");
+		printWindow.document.write(`
+			<html>
 				<head>
-					<title>Investment Policy Report</title>
-					<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+					<title>Transaction Report</title>
+					<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 					<style>
 						body { font-family: Arial, sans-serif; padding: 20px; }
-						.report-title { font-size: 22px; text-align: center; font-weight: bold; margin-bottom: 20px; }
-						.section-title { font-size: 16px; margin-top: 20px; font-weight: bold; }
+						h4, h5, h6 { color: #0d6efd; }
 						table { width: 100%; border-collapse: collapse; }
-						th { background: #f0f0f0; width: 30%; }
-						th, td { padding: 8px; border: 1px solid #ddd; font-size: 13px; }
+						th, td { padding: 8px; border: 1px solid #ddd; }
+						th { background-color: #f2f2f2; }
+						.text-end { text-align: right; }
+						.text-center { text-align: center; }
 					</style>
 				</head>
-				<body>
-					${content}
-				</body>
-				</html>
-			`);
-
-			printWindow.document.close();
-			printWindow.focus();
-			printWindow.print();
-			printWindow.close();
-		});
-
-		// ✅ Download as PDF
-		$("#downloadBtn").click(function() {
-			const { jsPDF } = window.jspdf;
-
-			const doc = new jsPDF({
-				orientation: "portrait",
-				unit: "pt",
-				format: "a4"
-			});
-
-			const content = document.getElementById("modalDataContainer");
-
-			doc.html(content, {
-				callback: function(doc) {
-					doc.save("InvestmentPolicyReport.pdf");
-				},
-				x: 20,
-				y: 20,
-				autoPaging: 'text',
-				html2canvas: { scale: 0.7 }
-			});
-		});
-	} // ✅ closes renderTable
-
-}); // ✅ closes document.ready
-
-
+				<body>${content}</body>
+			</html>
+		`);
+		printWindow.document.close();
+		printWindow.focus();
+		printWindow.print();
+	});
+});

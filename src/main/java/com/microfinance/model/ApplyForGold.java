@@ -33,6 +33,7 @@ public class ApplyForGold {
 	private String smsSend;
 	private String photo;
 	private String signature;
+	private boolean approvalStatus;
 	
 	
 	//Gold Silver Details
@@ -456,6 +457,12 @@ public class ApplyForGold {
 	}
 	public void setGoldID(String goldID) {
 		this.goldID = goldID;
+	}
+	public boolean isApprovalStatus() {
+		return approvalStatus;
+	}
+	public void setApprovalStatus(boolean approvalStatus) {
+		this.approvalStatus = approvalStatus;
 	}
 	
 	

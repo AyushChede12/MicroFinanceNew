@@ -91,7 +91,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Add Relation <span class="star">*</span></label> <input
 									type="text" name="relation" id="relation"
-									placeholder="Enter Relation" style="text-transform: uppercase;" />
+									placeholder="Enter Relation" />
 								<small id="chkrelation" style="color: red;"></small>
 							</div>
 						</div>
@@ -140,6 +140,7 @@ pageEncoding="ISO-8859-1"%> -->
 												<tr style="font-family: 'Poppins', sans-serif;">
 													<th scope="col">Sr No</th>
 													<th scope="col">Relation</th>
+													<th scope="col">Edit</th>
 													<th scope="col">Delete</th>
 												</tr>
 											</thead>

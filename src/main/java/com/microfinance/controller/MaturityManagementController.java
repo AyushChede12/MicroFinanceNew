@@ -1,6 +1,7 @@
 package com.microfinance.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
-import com.microfinance.model.AddnewinvestmentPM;
+
 import com.microfinance.model.ApplyForMaturity;
-import com.microfinance.model.DailyDepositPM;
+
 import com.microfinance.model.FullMaturity;
-import com.microfinance.model.MaturitySchemeMaster;
+
 import com.microfinance.model.partialMaturityPayment;
 import com.microfinance.service.MaturitySchemeMasterService;
 import com.microfinance.service.PolicyManagementService;
@@ -151,6 +152,24 @@ public class MaturityManagementController {
 
 	}
 	
+	@GetMapping("/getPartialmaturitydetails")
+ 	public ResponseEntity<ApiResponse<List<partialMaturityPayment>>> getPartialMaturityDetails() {
+ 		 List<partialMaturityPayment> invest = maturityservice.getPartialMaturityDetails();
+ 		 
+ 		 if (invest != null && !invest.isEmpty()) {
+ 	            ApiResponse<List<partialMaturityPayment>> response = ApiResponse.success(HttpStatus.OK,
+ 	                "Investment Details fetched successfully.",
+ 	                invest
+ 	            );
+ 	            return new ResponseEntity<>(response, HttpStatus.OK);
+ 	        } else {
+ 	            ApiResponse<List<partialMaturityPayment>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+ 	                "No Details found."
+ 	            );
+ 	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+ 	        }
+ 	}
+	
 	//save and Update Full Maturity Payment
 		//Ashwini
 		@PostMapping("/saveFullmaturity")
@@ -167,6 +186,26 @@ public class MaturityManagementController {
 		    }
 
 		}
+		
+		
 
+		@GetMapping("/getFullmaturitydetails")
+	 	public ResponseEntity<ApiResponse<List<FullMaturity>>> getFullMaturityDetails() {
+	 		 List<FullMaturity> invest = maturityservice.getFullMaturityDetails();
+	 		 
+	 		 if (invest != null && !invest.isEmpty()) {
+	 	            ApiResponse<List<FullMaturity>> response = ApiResponse.success(HttpStatus.OK,
+	 	                "Investment Details fetched successfully.",
+	 	                invest
+	 	            );
+	 	            return new ResponseEntity<>(response, HttpStatus.OK);
+	 	        } else {
+	 	            ApiResponse<List<FullMaturity>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
+	 	                "No Details found."
+	 	            );
+	 	            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+	 	        }
+	 	}
+	
 	
 }

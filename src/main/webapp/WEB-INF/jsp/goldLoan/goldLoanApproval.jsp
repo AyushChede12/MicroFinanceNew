@@ -61,11 +61,12 @@ pageEncoding="ISO-8859-1"%> -->
 							<li class="breadcrumb-item action">Search Details</li>
 						</ol>
 					</nav>
+					
 					<div class="row">
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Find Loan By ID</label> <select id="findByLoanId"
-									name="findByLoanId" class="form-control selectField"
+								<label for="">Find Loan By ID</label> <select id="findByGoldLoanId"
+									name="findByGoldLoanId" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Loan ID</option>
 								</select>
@@ -605,14 +606,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-5">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Approval Status</label> <select id="approvalStatus"
+								<label for="">Approval Status</label> <input type="text" id="approvalStatus"
 									name="approvalStatus" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select </option>
-									<option value="">Approved</option>
-									<option value="">Not Approved</option>
 									
-								</select>
 							</div>
 						</div>
 
@@ -630,7 +627,7 @@ pageEncoding="ISO-8859-1"%> -->
 			</form>
 	</main>
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/LoanManagment/LoanApproval.js"></script>
+	<script src="./js/SecuredGoldLoan/GoldLoanApproval.js"></script>
 </body>
 
 </html>

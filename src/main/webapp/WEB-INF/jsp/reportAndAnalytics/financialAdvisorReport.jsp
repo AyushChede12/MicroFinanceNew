@@ -48,7 +48,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="home"> <i
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Finicial Collection Report</li>
+					<li class="breadcrumb-item action">Financial Collection Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -94,7 +94,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">From Date :</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date" style="text-transform: uppercase;" />
+									placeholder="Enter From Date"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -115,7 +116,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-4 text-start mt-3">
 							<button id="findFinancialAdvisorBtn" class="btnStyle"
-					style="background-color: #FFA500;">Find</button>
+								style="background-color: #FFA500;">Find</button>
 						</div>
 					</div>
 
@@ -143,106 +144,42 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Joining Date</th>
 										<th scope="col">Customer Name</th>
 										<th scope="col">DOB</th>
-										<th scope="col">Contact Number</th>						
+										<th scope="col">Contact Number</th>
 										<th>Print</th>
-										
+
 									</tr>
 								</thead>
-								<tbody class='tablebody' id="fetchFinancialConsultants">									
+								<tbody class='tablebody' id="fetchFinancialConsultants">
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="card recent-sales">
 
-				<div class="card-body table-responsive">
-					<h5 class="card-title">Financial Consultant Report</h5>
-					<div id="bodycontentfrontPage">
-						<div style="height: 700px; overflow: scroll;">
-							<div class="blnk-div"></div>
+		</div>
 
-							<div class="form-div">
-								<!-- <div class="form-header">
-											<h2 style="color: red; margin-top: 0px;">BHOYARNATH
-												URBAN</h2>
-											<p style="margin-top: -10px">Kolkata - WEST BENGAL 700107</p>
-										</div> -->
-								<div class="form-div-main" style="padding: 5px;">
-									<div
-										style="display: flex; text-align: center; justify-item: center; width: 100%;">
-										<h4 style="margin: auto;">NEW RECEIPT</h4>
-									</div>
-									<div style="width: 55%; float: left; padding-top: 20px;">
-										<p style="font-weight: 600;">
-											Member No. : <span id="memberName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Account No. : <span id="accountNo"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Account Holder Name : <span id="accountHolderName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											S/D/W/H/O : <span id="relativeName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Date Of Birth :<span id="dob"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Mobile No. : <span id="mobileNo"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Email ID : <span id="emailid"></span>
-										</p>
-										<p style="font-weight: 600;">
-											MOP : <span id="modeOfOp"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Aadhaar No. : <span id="aadharNo"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Address : <span id="address"></span>
-										</p>
-									</div>
-									<div style="width: 43%; float: right; padding-top: 20px;">
-										<!-- <p style="font-weight: 600;">Print Date : <span></span></p> -->
-
-										<p style="font-weight: 600;">
-											Opening Date : <span id="opDate"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Account type : <span id="accountType"></span>
-										</p>
-										<p style="font-weight: 600;">
-											IFSC Code : <span id="IFSCcode"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Date Of Issue : <span id="dateOfIssue"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Nomination Registered : <span id="nominationStatus"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Nomination Name : <span id="nominationName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Branch and Code : <span id="branch"></span>
-										</p>
-										<p style="font-weight: 600;">
-											UPI : <span id="upi"></span>
-										</p>
-									</div>
-                                    
-								</div>								
-							</div>							
-						</div>
+		<!-- Modal for Bank-style Transaction Report -->
+		<div class="modal fade" id="bankReportModal" tabindex="-1"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header bg-primary text-white">
+						<h5 class="modal-title">Microfinance Transaction Report</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+					<div class="modal-body" id="bankReportContent">
+						<!-- Dynamic content goes here -->
+					</div>
+					<div class="modal-footer">
+						<button id="printBankReportBtn" class="btn btn-success">
+							<i class="bi bi-printer"></i> Print
+						</button>
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
 					</div>
 				</div>
-				<button class="print-btn" onclick="window.print()">Print</button>
 			</div>
-
 		</div>
 
 
@@ -253,7 +190,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<script>
 		$(document).ready(function() {
 			searchFinancialConsultants();
-			
+
 			// Button click filter
 			$('#findFinancialAdvisorBtn').on('click', function(e) {
 				e.preventDefault(); // Prevent form submission

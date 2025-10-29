@@ -12,7 +12,7 @@ public class CreateLendingGroup {
 	// Loan Plan Details
 	private Long id;
 	private String planCode;
-    private String loanSchemeInformation;
+    private String loanSchemeName;
     private String minimumAge;
     private String term;
     
@@ -39,17 +39,20 @@ public class CreateLendingGroup {
     private String lateAllowanceDays;
     private String penaltyMode;
     private String monthlyPenalty;
+    
+    
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getLoanSchemeInformation() {
-		return loanSchemeInformation;
+	
+	public String getLoanSchemeName() {
+		return loanSchemeName;
 	}
-	public void setLoanSchemeInformation(String loanSchemeInformation) {
-		this.loanSchemeInformation = loanSchemeInformation;
+	public void setLoanSchemeName(String loanSchemeName) {
+		this.loanSchemeName = loanSchemeName;
 	}
 	public String getMinimumAge() {
 		return minimumAge;

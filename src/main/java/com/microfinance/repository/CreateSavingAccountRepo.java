@@ -38,15 +38,11 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	List<CreateSavingsAccount> findByIsApprovedTrueAndMessageSend(String messageSend);
 
+
+
 	List<CreateSavingsAccount> findByModeOfPayment(String string);
 
 
-	
-
-
-	
-	
-//	
 
 	
 

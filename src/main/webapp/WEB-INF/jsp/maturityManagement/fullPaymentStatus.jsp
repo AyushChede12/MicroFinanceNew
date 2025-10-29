@@ -30,6 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -64,7 +65,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch <span id="star"> *</span></label> <select id="branch" name="branch"
+								<label for="">Branch <span id="star"> *</span></label> <select value="branchName" id="branchName" name="branchName"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">All Branch</option>
@@ -76,7 +77,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">From Date <span id="star"> *</span> :</label> <input type="date"
-									name="fromDate" id="fromDate" required="required"
+								value="fromDate"	name="fromDate" id="fromDate" required="required"
 									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -86,7 +87,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4"
 								style="margin-bottom: 30px">
 								<label>To Date <span id="star"> *</span> :</label> <input type="date" name="toDate"
-									id="toDate" required="required" placeholder=""
+								value="toDate"	id="toDate" required="required" placeholder=""
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -95,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-dark">Search</button>
+							<button type="submit" id="searchBtn" class="btn btn-dark">Search</button>
 
 						</div>
 					</div>
@@ -116,21 +117,19 @@ pageEncoding="ISO-8859-1"%> -->
 									<span>|</span>
 								</h5>
 
-								<table class="table table-borderless datatable overflow-scroll">
+								<table class="table table-borderless datatable overflow-scroll" id="table">
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">slno</th>
+											<th scope="col">Branch</th>
 											<th scope="col">Policy No.</th>
 											<th scope="col">Application name</th>
-											<th scope="col">Pay Branch</th>
-											<th scope="col">Pay Date</th>
-											<th scope="col">Approval Date</th>
-											<th scope="col">Amount</th>
-											<th scope="col">Principal</th>
-											<th scope="col">Interest</th>
-											<th scope="col">Paymodel</th>
-											<th scope="col">SB Account</th>
-											<th scope="col">Pay Remarks</th>
+											<th scope="col">Maturity Date</th>
+											<th scope="col">Scheme Name</th>
+											<th scope="col">Scheme Type</th>
+											<th scope="col">Policy Amount</th>
+											<th scope="col">Deposit Amount</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -162,6 +161,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/MaturityManagement/fullmaturitystatus.js"></script>
 </body>
 
 </html>

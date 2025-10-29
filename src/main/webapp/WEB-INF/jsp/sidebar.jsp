@@ -593,6 +593,13 @@
 							<span style="font-family: 'Poppins', sans-serif">Gold Loan
 								Statement</span>
 					</a></li>
+					
+					
+					<li><a href="goldLoanClosure"> <i class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan
+								Closure</span>
+					</a></li>
+
 
 
 
@@ -901,13 +908,6 @@
 							style="font-family: 'Poppins', sans-serif">Approved Status</span>
 					</a></li>
 
-
-
-					<li><a href="maturityReceiptPrint"> <i
-							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Print Maturity
-								Receipt</span>
-					</a></li>
 
 				</ul></li>
 
