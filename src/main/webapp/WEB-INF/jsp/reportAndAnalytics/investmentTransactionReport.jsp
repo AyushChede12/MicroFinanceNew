@@ -197,7 +197,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 								<div>
 									<p class="mb-0">
-										<strong>ACCOUNT NUMBER:</strong> <span id="accountNumber"></span>
+										<strong>Customer Code:</strong> <span id="accountNumber"></span>
 									</p>
 									<p class="mb-0">
 										<strong>PERIOD COVERED:</strong> <span id="periodCovered"></span>
@@ -248,11 +248,11 @@ pageEncoding="ISO-8859-1"%> -->
 									class="table table-bordered table-striped align-middle text-center">
 									<thead class="table-primary">
 										<tr>
-											<th>Date</th>
-											<th>Description</th>
-											<th>Debit</th>
-											<th>Credit</th>
-											<th>Balance</th>
+											<th>Policy Code</th>
+											<th>Policy Date</th>
+											<th>Policy Amount</th>
+											<th>Policy Type</th>
+											<th>Policy Mode</th>
 										</tr>
 									</thead>
 									<tbody id="transactionTableBody">

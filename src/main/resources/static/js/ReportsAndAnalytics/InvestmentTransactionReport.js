@@ -112,7 +112,7 @@ $(document).ready(function() {
 
 			// ✅ Customer and summary details
 			$("#customerName").text(policy.customerName || "");
-			$("#customerAddress1").text(policy.address || "");
+			$("#customerAddress1").text(policy.address ? `Address: ${policy.address}` : "");
 			$("#customerAddress2").text(policy.branchName ? `Branch: ${policy.branchName}` : "");
 
 			$("#startingBalance").html(`&#8377; ${policy.policyAmount || 0}`);
@@ -124,18 +124,16 @@ $(document).ready(function() {
 			const tbody = $("#transactionTableBody");
 			tbody.empty();
 
-			if (policy.transactions && policy.transactions.length > 0) {
-				policy.transactions.forEach((txn) => {
-					tbody.append(`
+			if (policy.policyCode != null) {
+				tbody.append(`
 						<tr>
-							<td>${txn.date || ""}</td>
-							<td>${txn.description || ""}</td>
-							<td>${txn.debit ? "₹ " + txn.debit : "-"}</td>
-							<td>${txn.credit ? "₹ " + txn.credit : "-"}</td>
-							<td>${txn.balance ? "₹ " + txn.balance : "-"}</td>
+							<td>${policy.policyCode || ""}</td>
+							<td>${policy.policyStartDate || ""}</td>
+							<td>${policy.policyAmount || ""}</td>
+							<td>${policy.schemeType || ""}</td>
+							<td>${policy.schemeMode || ""}</td>
 						</tr>
 					`);
-				});
 			} else {
 				tbody.append(`
 					<tr>
