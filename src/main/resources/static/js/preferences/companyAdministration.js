@@ -17,16 +17,18 @@ $(document).ready(function() {
 				$("#declaredValue").val(admin.declaredValue);
 				$("#address").val(admin.address);
 				$("#state").val(admin.state);
+				$("#city").val(admin.city);
 				$("#pinCode").val(admin.pinCode);
 				$("#emailId").val(admin.emailId);
 				$("#authorizedShareCapital").val(admin.authorizedShareCapital);
 				$("#paidUpCapital").val(admin.paidUpCapital);
 				$("#nof").val(admin.nof);
-				$("#contactNo").val(admin.contactNo);
+				$("#helplineNo").val(admin.helplineNo);
 				$("#tdsWithPan").val(admin.tdsWithPan);
 				$("#tdsWithoutPan").val(admin.tdsWithoutPan);
 				$("#taxDeduction").val(admin.taxDeduction);
-				$("#seniorCitizenTaxDeduction").val(admin.seniorCitizenTaxDeduction);
+				$("#branchManagerContactNo").val(admin.branchManagerContactNo);
+
 			} else {
 				alert("No company administration data found.");
 			}
@@ -37,34 +39,19 @@ $(document).ready(function() {
 	});
 
 	$('#updateBtn').click(function(event) {
+		event.preventDefault();
+
+		// Convert text to uppercase
 		$("#formid").find("input[type=text], textarea").each(function() {
 			if ($(this).val()) {
 				$(this).val($(this).val().toUpperCase());
 			}
 		});
-		event.preventDefault();
 
-		$('#chkcompanyname').text('');
-		$('#chkshortname').text('');
-		$('#chksignupdate').text('');
-		$('#chkcinno').text('');
-		$('#chkpan').text('');
-		$('#chktan').text('');
-		$('#chkgstin').text('');
-		$('#chkdeclaredvalue').text('');
-		$('#chkaddress').text('');
-		$('#chkstate').text('');
-		$('#chkpincode').text('');
-		$('#chkemailid').text('');
-		$('#chkauthorizedsharecapital').text('');
-		$('#chkpaidupcapital').text('');
-		$('#chknof').text('');
-		$('#chkcontactno').text('');
-		$('#chktdswithpan').text('');
-		$('#chktdswithoutpan').text('');
-		$('#chktaxdeduction').text('');
-		$('#chkseniorcitizentaxdeduction').text('');
+		// Clear all error messages
+		$('#chkcompanyname, #chkshortname, #chksignupdate, #chkcinno, #chkpan, #chktan, #chkgstin, #chkdeclaredvalue, #chkaddress, #chkstate, #chkcity, #chkpincode, #chkemailid, #chkauthorizedsharecapital, #chkpaidupcapital, #chknof, #chkhelplineNo, #chktdswithpan, #chktdswithoutpan, #chktaxdeduction, #chkbranchManagerContactNo').text('');
 
+		// Get field values
 		var companyName = $('#companyName').val().trim();
 		var shortName = $('#shortName').val().trim();
 		var signUpDate = $('#signUpDate').val().trim();
@@ -75,28 +62,25 @@ $(document).ready(function() {
 		var declaredValue = $('#declaredValue').val().trim();
 		var address = $('#address').val().trim();
 		var state = $('#state').val().trim();
+		var city = $('#city').val().trim();
 		var pinCode = $('#pinCode').val().trim();
 		var emailId = $('#emailId').val().trim();
 		var authorizedShareCapital = $('#authorizedShareCapital').val().trim();
 		var paidUpCapital = $('#paidUpCapital').val().trim();
 		var nof = $('#nof').val().trim();
-		var contactNo = $('#contactNo').val().trim();
+		var helplineNo = $('#helplineNo').val().trim();
 		var tdsWithPan = $('#tdsWithPan').val().trim();
 		var tdsWithoutPan = $('#tdsWithoutPan').val().trim();
 		var taxDeduction = $('#taxDeduction').val().trim();
-		var seniorCitizenTaxDeduction = $('#seniorCitizenTaxDeduction').val().trim();
+		var branchManagerContactNo = $('#branchManagerContactNo').val().trim();
 
-		//Mobile Number
+		// Regex patterns
 		var contactPattern = /^[6-9][0-9]{9}$/;
-
-		//Pan Card
 		var panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-
-		//Pin Code
 		var pinPattern = /^[1-9][0-9]{5}$/;
-
-		//Email
 		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		const cinPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/; // Alpha + numeric + special char
+		const tanPattern = /^[A-Za-z0-9]+$/; // Alphanumeric only
 
 		let isValid = true;
 
@@ -119,19 +103,26 @@ $(document).ready(function() {
 			$('#chkcinno').text('* This field is required');
 			$('#cinNo').focus();
 			isValid = false;
+		} else if (!cinPattern.test(cinNo)) {
+			$('#chkcinno').text('CIN No must contain alphabets, numbers, and at least one special character.');
+			$('#cinNo').focus();
+			isValid = false;
 		}
 		if (pan === '') {
 			$('#chkpan').text('* This field is required');
 			$('#pan').focus();
 			isValid = false;
-		}
-		else if (!panPattern.test(pan)) {
+		} else if (!panPattern.test(pan)) {
 			alert("Please enter a valid PAN card number (e.g., ABCDE1234F).");
-			pan.focus();
+			$('#pan').focus();
 			return false;
 		}
 		if (tan === '') {
 			$('#chktan').text('* This field is required');
+			if (isValid) $('#tan').focus();
+			isValid = false;
+		} else if (!tanPattern.test(tan)) {
+			$('#chktan').text('TAN No must contain only alphabets and numbers (no special characters).');
 			$('#tan').focus();
 			isValid = false;
 		}
@@ -155,22 +146,25 @@ $(document).ready(function() {
 			$('#state').focus();
 			isValid = false;
 		}
+		if (city === '') {
+			$('#chkcity').text('* This field is required');
+			$('#city').focus();
+			isValid = false;
+		}
 		if (pinCode === '') {
 			$('#chkpincode').text('* This field is required');
 			$('#pinCode').focus();
 			isValid = false;
-		}
-		else if (!pinPattern.test(pinCode)) {
+		} else if (!pinPattern.test(pinCode)) {
 			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
-			pinCode.focus();
+			$('#pinCode').focus();
 			return false;
 		}
 		if (emailId === '') {
 			$('#chkemailid').text('* This field is required');
 			$('#emailId').focus();
 			isValid = false;
-		}
-		else if (!emailPattern.test(emailId)) {
+		} else if (!emailPattern.test(emailId)) {
 			alert('Please enter a valid email address (e.g., example@domain.com)');
 			$('#emailId').focus();
 			isValid = false;
@@ -190,14 +184,13 @@ $(document).ready(function() {
 			$('#nof').focus();
 			isValid = false;
 		}
-		if (contactNo === '') {
-			$('#chkcontactno').text('* This field is required');
-			$('#contactNo').focus();
+		if (helplineNo === '') {
+			$('#chkhelplineno').text('* This field is required');
+			$('#helplineNo').focus();
 			isValid = false;
-		}
-		else if (!contactPattern.test(contactNo)) {
+		} else if (!contactPattern.test(helplineNo)) {
 			alert("Please enter a valid 10-digit mobile number.");
-			contactNo.focus();
+			$('#helplineNo').focus();
 			return false;
 		}
 		if (tdsWithPan === '') {
@@ -215,19 +208,19 @@ $(document).ready(function() {
 			$('#taxDeduction').focus();
 			isValid = false;
 		}
-		if (seniorCitizenTaxDeduction === '') {
-			$('#chkseniorcitizentaxdeduction').text('* This field is required');
-			$('#seniorCitizenTaxDeduction').focus();
+		if (branchManagerContactNo === '') {
+			$('#chkbranchManagerContactNo').text('* This field is required');
+			$('#branchManagerContactNo').focus();
 			isValid = false;
 		}
 
 		if (!isValid) {
-			return false; // Stop AJAX call
+			return false;
 		}
-		
-		var declaredValue=$("#declaredValue").val();
-		var paidUpCapital=$("#paidUpCapital").val();
-		var noOfShares=paidUpCapital/declaredValue;
+
+		var declaredValue = $("#declaredValue").val();
+		var paidUpCapital = $("#paidUpCapital").val();
+		var noOfShares = paidUpCapital / declaredValue;
 
 		const companyData = {
 			id: $("#id").val(),
@@ -270,26 +263,22 @@ $(document).ready(function() {
 				alert("❌ Error: " + xhr.responseText);
 			}
 		});
-
 	});
-
 });
 
+// Tooltip initialization
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 tooltipTriggerList.map(function(tooltipTriggerEl) {
 	return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 
+// Enable edit mode
 document.addEventListener("DOMContentLoaded", function() {
 	const editBtn = document.getElementById("editBtn");
 	const updateBtn = document.getElementById("updateBtn");
 
 	editBtn.addEventListener("click", function() {
-		updateBtn.removeAttribute("disabled"); // Enable the Update button
-		$("#formid")
-			.find("input, textarea")
-			.prop("readonly", false);
+		updateBtn.removeAttribute("disabled");
+		$("#formid").find("input, textarea").prop("readonly", false);
 	});
 });
-
-

@@ -26,6 +26,8 @@ import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
 import com.microfinance.model.Transactions;
+import com.microfinance.model.UserCreations;
+import com.microfinance.model.UserMenuAccess;
 import com.microfinance.model.states;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
@@ -38,6 +40,8 @@ import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
 import com.microfinance.repository.Staterepo;
 import com.microfinance.repository.TransactionsRepo;
+import com.microfinance.repository.UserCreationRepo;
+import com.microfinance.repository.UserMenuAccessRepo;
 
 @Service
 public class PreferenceService {
@@ -74,6 +78,12 @@ public class PreferenceService {
 
 	@Autowired
 	TransactionsRepo transactionsRepo;
+
+	@Autowired
+	UserCreationRepo userCreationRepo;
+
+	@Autowired
+	UserMenuAccessRepo userMenuAccessRepo;
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
@@ -459,16 +469,17 @@ public class PreferenceService {
 			company.setDeclaredValue(companyAdministration.getDeclaredValue());
 			company.setAddress(companyAdministration.getAddress());
 			company.setState(companyAdministration.getState());
+			company.setCity(companyAdministration.getCity());
 			company.setPinCode(companyAdministration.getPinCode());
 			company.setEmailId(companyAdministration.getEmailId());
 			company.setAuthorizedShareCapital(companyAdministration.getAuthorizedShareCapital());
 			company.setPaidUpCapital(companyAdministration.getPaidUpCapital());
 			company.setNof(companyAdministration.getNof());
-			company.setContactNo(companyAdministration.getContactNo());
+			company.setHelplineNo(companyAdministration.getHelplineNo());
 			company.setTdsWithPan(companyAdministration.getTdsWithPan());
 			company.setTdsWithoutPan(companyAdministration.getTdsWithoutPan());
 			company.setTaxDeduction(companyAdministration.getTaxDeduction());
-			company.setSeniorCitizenTaxDeduction(companyAdministration.getSeniorCitizenTaxDeduction());
+			company.setBranchManagerContactNo(companyAdministration.getBranchManagerContactNo());
 
 			companyAdministrationRepo.save(company);
 			return 1;
@@ -545,6 +556,42 @@ public class PreferenceService {
 	public Optional<CategoryModule> findCategoryModuleById(Long id) {
 		// TODO Auto-generated method stub
 		return categoryModuleRepo.findById(id);
+	}
+
+	// UserCreation
+//	public UserCreations saveUserCreation(UserCreations usercreations) {
+//		// Auto-generate ID and password
+//		return userCreationRepo.save(usercreations);
+//	}
+//
+//	public Object getAllUserCreations() {
+//		// TODO Auto-generated method stub
+//		return userCreationRepo.findAll();
+//	}
+	
+	// Save user + menu access
+    public UserCreations saveUserCreation(UserCreations userCreations, List<UserMenuAccess> accessList) {
+        // link each access to this user
+        for (UserMenuAccess access : accessList) {
+            access.setUserCreations(userCreations);
+        }
+        userCreationRepo.save(userCreations);
+        userMenuAccessRepo.saveAll(accessList);
+        return userCreations;
+    }
+
+    // Fetch Menu Access for user
+    public List<UserMenuAccess> getUserMenuAccess(String customerId) {
+        return userMenuAccessRepo.findByUserCreations_CustomerId(customerId);
+    }
+
+	public Optional<UserCreations> validateLogin(String customerId, String password) {
+		// TODO Auto-generated method stub
+		Optional<UserCreations> user = userCreationRepo.findByCustomerId(customerId);
+        if (user.isPresent() && user.get().getPassword().equals(password)) {
+            return user;
+        }
+        return Optional.empty();
 	}
 
 }

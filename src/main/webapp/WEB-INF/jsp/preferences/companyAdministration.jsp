@@ -212,6 +212,16 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">City <span class="star">*</span></label> <input
+									type="text" readonly="readonly" name="city" id="city"
+									required="required" placeholder="Enter City "
+									style="text-transform: uppercase;" /> <small id="chkcity"
+									style="color: red;"></small>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Pin Code <span class="star">*</span></label> <input
@@ -271,12 +281,12 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Contact No <span class="star">*</span></label> <input
-									type="Terxt" name="contactNo" readonly="readonly"
-									id="contactNo" required="required"
-									placeholder="Enter Contact No"
-									style="text-transform: uppercase;" /> <small id="chkcontactno"
-									style="color: red;"></small>
+								<label>HelpLine No <span class="star">*</span></label> <input
+									type="text" name="helpLine No" readonly="readonly"
+									id="helplineNo" required="required"
+									placeholder="Enter HelpLine No"
+									style="text-transform: uppercase;" /> <small
+									id="chkhelplineno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -318,118 +328,94 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Senior Citizen Tax Deduction <span class="star">*</span></label>
+								<label>Branch Manager Contact No <span class="star">*</span></label>
 								<input type="text" readonly="readonly"
-									name="seniorCitizenTaxDeduction" id="seniorCitizenTaxDeduction"
+									name="branchManagerContactNo" id="branchManagerContactNo"
 									required="required"
-									placeholder="Enter Senior Citizen Tax Deduction"
+									placeholder="Enter Branch Manager Contact No"
 									style="text-transform: uppercase;" /> <small
-									id="chkseniorcitizentaxdeduction" style="color: red;"></small>
+									id="chkbranchManagerContactNo" style="color: red;"></small>
 							</div>
 						</div>
 
 
+					</div>
+
+					<div class="row mt-3">
+						<div class="col-lg-4">
+							<label style="font-weight: 600;">Search Image Field</label> <input
+								type="text" id="imageSearch" class="form-control"
+								placeholder="Type 'logo', 'regn', 'pan', 'gst'..." />
+						</div>
 					</div>
 
 
 					<div class="mt-4">
-
 						<div class="row mt-4">
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Company
-									Logo <span class="star">*</span>
-								</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="photo" id="photo"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+
+							<!-- Company Logo -->
+							<div class="col-lg-3 mb-5 imageField" id="companyLogoField">
+								<label>Company Logo <span class="star">*</span></label> <label
+									for="photo" id="drop-area"> <input type="file"
+									accept="image/*" name="photo" id="photo" hidden="hidden"
+									onchange="bike1Preview();" />
 									<div id="img-view">
 										<img src="../images/upload/upload.png" alt="upload_icon"
 											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
 									</div>
-								</label><small id="chkphoto" style="color: red;"></small>
+								</label> <small id="chkphoto" style="color: red;"></small>
 							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Regn
-									Certificate <span class="star">*</span>
-								</label> <label for="bike2image" id="drop-area"> <input
-									type="file" accept="image/*" name="signature" id="signature"
-									hidden="hidden" onchange="bike2Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+							<!-- Registration Certificate -->
+							<div class="col-lg-3 mb-5 imageField" id="regnCertField">
+								<label>Regn Certificate <span class="star">*</span></label> <label
+									for="signature" id="drop-area"> <input type="file"
+									accept="image/*" name="signature" id="signature"
+									hidden="hidden" onchange="bike2Preview();" />
 									<div id="img-view">
-										<img src="../images/upload/upload.png	" alt="upload_icon"
+										<img src="../images/upload/upload.png" alt="upload_icon"
 											id="bike2imagePreview" />
-										<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
 									</div>
-								</label><small id="chksignature" style="color: red;"></small>
+								</label> <small id="chksignature" style="color: red;"></small>
 							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Pan
-									Card <span class="star">*</span>
-								</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="photo" id="photo"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+							<!-- Pan Card -->
+							<div class="col-lg-3 mb-5 imageField" id="panCardField">
+								<label>Pan Card <span class="star">*</span></label> <label
+									for="panphoto" id="drop-area"> <input type="file"
+									accept="image/*" name="panphoto" id="panphoto" hidden="hidden"
+									onchange="bike1Preview();" />
 									<div id="img-view">
 										<img src="../images/upload/upload.png" alt="upload_icon"
-											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+											id="bike1imagePreview2" />
 									</div>
-								</label><small id="chkphoto" style="color: red;"></small>
+								</label> <small id="chkphoto2" style="color: red;"></small>
 							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">GST
-									Certificate <span class="star">*</span>
-								</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="photo" id="photo"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+							<!-- GST Certificate -->
+							<div class="col-lg-3 mb-5 imageField" id="gstCertField">
+								<label>GST Certificate <span class="star">*</span></label> <label
+									for="gstphoto" id="drop-area"> <input type="file"
+									accept="image/*" name="gstphoto" id="gstphoto" hidden="hidden"
+									onchange="bike1Preview();" />
 									<div id="img-view">
 										<img src="../images/upload/upload.png" alt="upload_icon"
-											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+											id="bike1imagePreview3" />
 									</div>
-								</label><small id="chkphoto" style="color: red;"></small>
+								</label> <small id="chkphoto3" style="color: red;"></small>
 							</div>
-
-
 
 						</div>
 					</div>
 
-					<div class="row" style="margin-top: 30px;">
-						<div class="col-12 text-center">
-							<button type="button" id="updateBtn" class="btn btn-success"
-								disabled>Update</button>
-						</div>
+				</div>
+
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-12 text-center">
+						<button type="button" id="updateBtn" class="btn btn-success"
+							disabled>Update</button>
 					</div>
+				</div>
 			</form>
 
 
@@ -441,6 +427,43 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/companyAdministration.js"></script>
+
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+
+							// Hide all image fields initially (on refresh)
+							$(".imageField").hide();
+
+							// Show the matching image upload field based on search input
+							$("#imageSearch")
+									.on(
+											"keyup",
+											function() {
+												var query = $(this).val()
+														.toLowerCase().trim();
+
+												// Hide all first
+												$(".imageField").hide();
+
+												if (query.indexOf("logo") !== -1) {
+													$("#companyLogoField")
+															.show();
+												} else if (query
+														.indexOf("regn") !== -1
+														|| query
+																.indexOf("registration") !== -1) {
+													$("#regnCertField").show();
+												} else if (query.indexOf("pan") !== -1) {
+													$("#panCardField").show();
+												} else if (query.indexOf("gst") !== -1) {
+													$("#gstCertField").show();
+												}
+											});
+						});
+	</script>
+
 
 
 </body>
