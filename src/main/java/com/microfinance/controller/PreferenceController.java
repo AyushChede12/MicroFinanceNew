@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -507,91 +511,78 @@ public class PreferenceController {
 		return ResponseEntity.ok(response);
 	}
 
-//	@PostMapping("/saveUserCreation")
-//	public ResponseEntity<ApiResponse<UserCreations>> saveCustomer(@RequestBody UserCreations usercreations) {
-//		try {
-//			UserCreations saved = preferenceService.saveUserCreation(usercreations);
-//			ApiResponse<UserCreations> response = new ApiResponse<>(HttpStatus.OK,
-//					"User creation data saved successfully", saved);
-//			return ResponseEntity.ok(response);
-//		} catch (Exception e) {
-//			ApiResponse<UserCreations> response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR,
-//					"Failed to save user creation data: " + e.getMessage(), null);
-//			return ResponseEntity.internalServerError().body(response);
-//		}
-//	}
-//
-//	@GetMapping("/getUserCreations")
-//	public ResponseEntity<ApiResponse<List<UserCreations>>> getAllUserCreations() {
-//		List<UserCreations> usercreations = (List<UserCreations>) preferenceService.getAllUserCreations();
-//		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Fetched all customers", usercreations));
-//	}
-//	
-//	@GetMapping("/getByCustomerId/{customerId}")
-//    public ResponseEntity<?> getCustomerByCustomerId(@PathVariable String customerId) {
-//        return customerService.findByCustomerId(customerId)
-//                .map(ResponseEntity::ok)
-//                .orElse(ResponseEntity.notFound().build());
-//    }
-	
-	 @PostMapping("/saveUserCreation")
-	    public ResponseEntity<?> saveUserCreation(@RequestBody Map<String, Object> payload) {
-	        try {
-	            // Extract user details
-	            Map<String, Object> userMap = (Map<String, Object>) payload.get("user");
-	            List<Map<String, Object>> menuList = (List<Map<String, Object>>) payload.get("menuAccess");
+	@PostMapping("/saveUserCreation")
+	public ResponseEntity<?> saveUserCreation(@RequestBody Map<String, Object> payload) {
+		try {
+			// Extract user details
+			Map<String, Object> userMap = (Map<String, Object>) payload.get("user");
+			List<Map<String, Object>> menuList = (List<Map<String, Object>>) payload.get("menuAccess");
 
-	            // Build UserCreations
-	            UserCreations user = new UserCreations();
-	            user.setCustomerId((String) userMap.get("customerId"));
-	            user.setPassword((String) userMap.get("password"));
-	            user.setFullName((String) userMap.get("fullName"));
-	            user.setEmail((String) userMap.get("email"));
-	            user.setContactNo((String) userMap.get("contactNo"));
-	            user.setBranch((String) userMap.get("branch"));
-	            user.setPastdate((Boolean) userMap.get("pastdate"));
-	            user.setPrint((Boolean) userMap.get("print"));
-	            user.setDeleteAccess((Boolean) userMap.get("deleteAccess"));
-	            user.setUserStatus((Boolean) userMap.get("userStatus"));
+			// Build UserCreations
+			UserCreations user = new UserCreations();
+			user.setCustomerId((String) userMap.get("customerId"));
+			user.setPassword((String) userMap.get("password"));
+			user.setFullName((String) userMap.get("fullName"));
+			user.setEmail((String) userMap.get("email"));
+			user.setContactNo((String) userMap.get("contactNo"));
+			user.setBranchName((String) userMap.get("branchName"));
+			user.setPastDate((Boolean) userMap.get("pastDate"));
+			user.setRePrint((Boolean) userMap.get("rePrint"));
+			user.setDeleteAccess((Boolean) userMap.get("deleteAccess"));
+			user.setUserStatus((Boolean) userMap.get("userStatus"));
 
-	            // Build Menu Access List
-	            List<UserMenuAccess> accessList = new ArrayList<>();
-	            for (Map<String, Object> item : menuList) {
-	                UserMenuAccess access = new UserMenuAccess();
-	                access.setMenuName((String) item.get("menuName"));
-	                access.setHasAccess((Boolean) item.get("hasAccess"));
-	                accessList.add(access);
-	            }
+			// Build Menu Access List
+			List<UserMenuAccess> accessList = new ArrayList<>();
+			for (Map<String, Object> item : menuList) {
+				UserMenuAccess access = new UserMenuAccess();
+				access.setMenuName((String) item.get("menuName"));
+				access.setHasAccess((Boolean) item.get("hasAccess"));
+				accessList.add(access);
+			}
 
-	            UserCreations saved = preferenceService.saveUserCreation(user, accessList);
-	            return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "User created successfully", saved));
+			UserCreations saved = preferenceService.saveUserCreation(user, accessList);
+			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "User created successfully", saved));
 
-	        } catch (Exception e) {
-	            return ResponseEntity.badRequest()
-	                    .body(new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving user: " + e.getMessage(), null));
-	        }
-	    }
+		} catch (Exception e) {
+			return ResponseEntity.badRequest().body(
+					new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving user: " + e.getMessage(), null));
+		}
+	}
 
-	    // 🔹 Login Validation
-	    @PostMapping("/login")
-	    public ResponseEntity<?> login(@RequestBody Map<String, String> credentials) {
-	        String customerId = credentials.get("customerId");
-	        String password = credentials.get("password");
+	// 🔹 Login Validation
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Map<String, String> credentials, HttpSession session) {
+		String customerId = credentials.get("customerId");
+		String password = credentials.get("password");
 
-	        Optional<UserCreations> user = preferenceService.validateLogin(customerId, password);
-	        if (user.isPresent()) {
-	            return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "Login successful", user.get()));
-	        } else {
-	            return ResponseEntity.status(401)
-	                    .body(new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Invalid credentials", null));
-	        }
-	    }
+		Optional<UserCreations> user = preferenceService.validateLogin(customerId, password);
+		session.setAttribute("loggedUser", user.get());
+		session.setAttribute("menuAccess", user);
+		if (user.isPresent()) {
+			List<UserMenuAccess> accessList = preferenceService.getUserMenuAccess(customerId);
+			Map<String, Object> responseData = new HashMap<>();
+			responseData.put("user", user.get());
+			responseData.put("menuAccess", accessList);
+			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "Login successful", responseData));
+		} else {
+			return ResponseEntity.status(401)
+					.body(new ApiResponse(HttpStatus.UNAUTHORIZED, "Invalid credentials", null));
+		}
+	}
 
-	    // 🔹 Get Menu Access
-	    @GetMapping("/menuAccess/{customerId}")
-	    public ResponseEntity<?> getMenuAccess(@PathVariable String customerId) {
-	        List<UserMenuAccess> list = preferenceService.getUserMenuAccess(customerId);
-	        return ResponseEntity.ok(new ApiResponse(HttpStatus.FOUND, "Fetched successfully", list));
-	    }
+	// 🔹 Get Menu Access
+	@GetMapping("/menuAccess/{customerId}")
+	public ResponseEntity<?> getMenuAccess(@PathVariable String customerId) {
+		List<UserMenuAccess> list = preferenceService.getUserMenuAccess(customerId);
+		return ResponseEntity.ok(new ApiResponse(HttpStatus.FOUND, "Fetched successfully", list));
+	}
+
+	@GetMapping("/getAllUserCreations") // Ayush (without DTO)
+	public ResponseEntity<ApiResponse<List<UserCreations>>> fetchAllUserCreations() {
+		List<UserCreations> list = preferenceService.fetchAllUserCreations();
+		ApiResponse<List<UserCreations>> response = new ApiResponse<>(HttpStatus.FOUND,
+				"User Creations fetched successfully", list);
+		return ResponseEntity.ok(response);
+	}
 
 }

@@ -2,15 +2,15 @@ $(document).ready(function() {
 	$("#form1").submit(function(e) {
 		e.preventDefault();
 
-		let username = $("#userName").val().trim();
+		let customerId = $("#customerId").val().trim();
 		let password = $("#password").val().trim();
 
-		if (!username || !password) {
-			$("#errorMsg").text("Username and password are required").show();
+		if (!customerId || !password) {
+			$("#errorMsg").text("Customer ID and password are required").show();
 			return;
 		}
 
-		$.ajax({
+		/*$.ajax({
 			url: 'api/loginPage/loginValidate',  // Make sure endpoint matches Spring Boot
 			type: 'POST',
 			contentType: 'application/json',
@@ -21,7 +21,7 @@ $(document).ready(function() {
 					alert(response.data.username);
 					sessionStorage.setItem("username", response.data.username);
 					window.location.href = 'openDashboard'; // replace with your homepage
-					
+
 				} else {
 					$("#errorMsg").text(response.message).show();
 				}
@@ -33,40 +33,28 @@ $(document).ready(function() {
 					$("#errorMsg").text("Something went wrong. Try again!").show();
 				}
 			}
+		});*/
+
+		$.ajax({
+			url: "api/preference/login",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify({
+				customerId: $("#customerId").val(),
+				password: $("#password").val()
+			}),
+			success: function(response) {
+				if (response.status === "OK") {
+					// Redirect to dashboard.jsp
+					window.location.href = "openDashboard";
+				} else {
+					alert("Invalid credentials");
+				}
+			},
+			error: function() {
+				alert("Login failed!");
+			}
 		});
 	});
-	
-	
 
-	/*$(document).ready(function() {
-		$("#form1").submit(function(e) {
-			e.preventDefault();
-
-			let userData = {
-				username: $("#username").val(),
-				password: $("#password").val()
-			};
-
-			$.ajax({
-				url: "api/loginPage/loginValidate",
-				type: "POST",
-				contentType: "application/json",
-				data: JSON.stringify(userData),
-				success: function(response) {
-					if (response.status === "OK") {
-						// Save username in sessionStorage
-						sessionStorage.setItem("username", response.data.username);
-
-						// Redirect to dashboard
-						window.location.href = "/openDashboard";
-					} else {
-						alert(response.message);
-					}
-				},
-				error: function() {
-					alert("Login failed!");
-				}
-			});
-		});
-	});*/
 });
