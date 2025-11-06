@@ -16,9 +16,9 @@ public class UserCreations {
 	private String fullName;
 	private String email;
 	private String contactNo;
-	private String branch;
-	private Boolean pastdate;
-	private Boolean print;
+	private String branchName;
+	private Boolean pastDate;
+	private Boolean rePrint;
 	private Boolean deleteAccess;
 	private Boolean userStatus;
 
@@ -70,28 +70,28 @@ public class UserCreations {
 		this.contactNo = contactNo;
 	}
 
-	public String getBranch() {
-		return branch;
+	public String getBranchName() {
+		return branchName;
 	}
 
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
 	}
 
-	public Boolean getPastdate() {
-		return pastdate;
+	public Boolean getPastDate() {
+		return pastDate;
 	}
 
-	public void setPastdate(Boolean pastdate) {
-		this.pastdate = pastdate;
+	public void setPastDate(Boolean pastDate) {
+		this.pastDate = pastDate;
 	}
 
-	public Boolean getPrint() {
-		return print;
+	public Boolean getRePrint() {
+		return rePrint;
 	}
 
-	public void setPrint(Boolean print) {
-		this.print = print;
+	public void setRePrint(Boolean rePrint) {
+		this.rePrint = rePrint;
 	}
 
 	public Boolean getDeleteAccess() {

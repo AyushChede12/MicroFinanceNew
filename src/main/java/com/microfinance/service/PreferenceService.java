@@ -594,4 +594,9 @@ public class PreferenceService {
         return Optional.empty();
 	}
 
+	public List<UserCreations> fetchAllUserCreations() {
+		// TODO Auto-generated method stub
+		return userCreationRepo.findAll();
+	}
+
 }
