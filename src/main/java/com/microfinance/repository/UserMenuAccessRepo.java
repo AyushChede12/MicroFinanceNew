@@ -12,5 +12,6 @@ import com.microfinance.model.UserMenuAccess;
 public interface UserMenuAccessRepo extends JpaRepository<UserMenuAccess, Long>{
 	
 	List<UserMenuAccess> findByUserCreations_CustomerId(String customerId);
+    void deleteByUserCreations_CustomerId(String customerId);
 
 }

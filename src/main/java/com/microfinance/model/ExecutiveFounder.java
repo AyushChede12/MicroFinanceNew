@@ -7,203 +7,204 @@ import javax.persistence.Id;
 
 @Entity
 public class ExecutiveFounder {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String type;
-    private String branchName;
-    private String fullName;
-    private String dateOfBirth;
-    private String promoterNo;
-    private String appointmentDate;
-    private String relationName;
-    private String relationToApplicant;
-    private String address;
-    private String district;
-    private String state;
-    private String pinCode;
-    private String aadharNo;
-    private String panNo;
-    private String contactNo;
-    private String emailId;
-    private String baseValue;
-    private String shareCount;
-    private String shareAmount;
-    private String depositAcc;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	private String type;
+	private String branchName;
+	private String fullName;
+	private String dateOfBirth;
+	private String promoterNo;
+	private String appointmentDate;
+	private String relationName;
+	private String relationToApplicant;
+	private String address;
+	private String district;
+	private String state;
+	private String pinCode;
+	private String aadharNo;
+	private String panNo;
+	private String contactNo;
+	private String emailId;
+	private String baseValue;
+	private String shareCount;
+	private String shareAmount;
 
-    private String photo;
-    private String signature;
+	// Images
+	private String photo;
+	private String signature;
+	private String aadharCard;
+	private String panCard;
+	private String cheque;
 
-    // Getters and Setters
+	// Bank Details
+	private String bankName;
+	private String ifscCode;
+	private String micrCode;
+	private String accountNo;
 
-    public long getId() {
-        return id;
-    }
+	// Getters and Setters
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public String getType() {
-        return type;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+	public String getType() {
+		return type;
+	}
 
-    public String getBranchName() {
-        return branchName;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
-    }
+	public String getBranchName() {
+		return branchName;
+	}
 
-    public String getFullName() {
-        return fullName;
-    }
+	public void setBranchName(String branchName) {
+		this.branchName = branchName;
+	}
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+	public String getFullName() {
+		return fullName;
+	}
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
 
-    public String getPromoterNo() {
-        return promoterNo;
-    }
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 
-    public void setPromoterNo(String promoterNo) {
-        this.promoterNo = promoterNo;
-    }
+	public String getPromoterNo() {
+		return promoterNo;
+	}
 
-    public String getAppointmentDate() {
-        return appointmentDate;
-    }
+	public void setPromoterNo(String promoterNo) {
+		this.promoterNo = promoterNo;
+	}
 
-    public void setAppointmentDate(String appointmentDate) {
-        this.appointmentDate = appointmentDate;
-    }
+	public String getAppointmentDate() {
+		return appointmentDate;
+	}
 
-    public String getRelationName() {
-        return relationName;
-    }
+	public void setAppointmentDate(String appointmentDate) {
+		this.appointmentDate = appointmentDate;
+	}
 
-    public void setRelationName(String relationName) {
-        this.relationName = relationName;
-    }
+	public String getRelationName() {
+		return relationName;
+	}
 
-    public String getRelationToApplicant() {
-        return relationToApplicant;
-    }
+	public void setRelationName(String relationName) {
+		this.relationName = relationName;
+	}
 
-    public void setRelationToApplicant(String relationToApplicant) {
-        this.relationToApplicant = relationToApplicant;
-    }
+	public String getRelationToApplicant() {
+		return relationToApplicant;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setRelationToApplicant(String relationToApplicant) {
+		this.relationToApplicant = relationToApplicant;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getAddress() {
+		return address;
+	}
 
-    public String getDistrict() {
-        return district;
-    }
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-    public void setDistrict(String district) {
-        this.district = district;
-    }
+	public String getDistrict() {
+		return district;
+	}
 
-    public String getState() {
-        return state;
-    }
+	public void setDistrict(String district) {
+		this.district = district;
+	}
 
-    public void setState(String state) {
-        this.state = state;
-    }
+	public String getState() {
+		return state;
+	}
 
-    public String getPinCode() {
-        return pinCode;
-    }
+	public void setState(String state) {
+		this.state = state;
+	}
 
-    public void setPinCode(String pinCode) {
-        this.pinCode = pinCode;
-    }
+	public String getPinCode() {
+		return pinCode;
+	}
 
-    public String getAadharNo() {
-        return aadharNo;
-    }
+	public void setPinCode(String pinCode) {
+		this.pinCode = pinCode;
+	}
 
-    public void setAadharNo(String aadharNo) {
-        this.aadharNo = aadharNo;
-    }
+	public String getAadharNo() {
+		return aadharNo;
+	}
 
-    public String getPanNo() {
-        return panNo;
-    }
+	public void setAadharNo(String aadharNo) {
+		this.aadharNo = aadharNo;
+	}
 
-    public void setPanNo(String panNo) {
-        this.panNo = panNo;
-    }
+	public String getPanNo() {
+		return panNo;
+	}
 
-    public String getContactNo() {
-        return contactNo;
-    }
+	public void setPanNo(String panNo) {
+		this.panNo = panNo;
+	}
 
-    public void setContactNo(String contactNo) {
-        this.contactNo = contactNo;
-    }
+	public String getContactNo() {
+		return contactNo;
+	}
 
-    public String getEmailId() {
-        return emailId;
-    }
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
+	public String getEmailId() {
+		return emailId;
+	}
 
-    public String getBaseValue() {
-        return baseValue;
-    }
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
 
-    public void setBaseValue(String baseValue) {
-        this.baseValue = baseValue;
-    }
+	public String getBaseValue() {
+		return baseValue;
+	}
 
-    public String getShareCount() {
-        return shareCount;
-    }
+	public void setBaseValue(String baseValue) {
+		this.baseValue = baseValue;
+	}
 
-    public void setShareCount(String shareCount) {
-        this.shareCount = shareCount;
-    }
+	public String getShareCount() {
+		return shareCount;
+	}
 
-    public String getShareAmount() {
-        return shareAmount;
-    }
+	public void setShareCount(String shareCount) {
+		this.shareCount = shareCount;
+	}
 
-    public void setShareAmount(String shareAmount) {
-        this.shareAmount = shareAmount;
-    }
+	public String getShareAmount() {
+		return shareAmount;
+	}
 
-    public String getDepositAcc() {
-        return depositAcc;
-    }
-
-    public void setDepositAcc(String depositAcc) {
-        this.depositAcc = depositAcc;
-    }
+	public void setShareAmount(String shareAmount) {
+		this.shareAmount = shareAmount;
+	}
 
 	public String getPhoto() {
 		return photo;
@@ -221,6 +222,60 @@ public class ExecutiveFounder {
 		this.signature = signature;
 	}
 
-    
+	public String getAadharCard() {
+		return aadharCard;
+	}
+
+	public void setAadharCard(String aadharCard) {
+		this.aadharCard = aadharCard;
+	}
+
+	public String getPanCard() {
+		return panCard;
+	}
+
+	public void setPanCard(String panCard) {
+		this.panCard = panCard;
+	}
+
+	public String getCheque() {
+		return cheque;
+	}
+
+	public void setCheque(String cheque) {
+		this.cheque = cheque;
+	}
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getIfscCode() {
+		return ifscCode;
+	}
+
+	public void setIfscCode(String ifscCode) {
+		this.ifscCode = ifscCode;
+	}
+
+	public String getMicrCode() {
+		return micrCode;
+	}
+
+	public void setMicrCode(String micrCode) {
+		this.micrCode = micrCode;
+	}
+
+	public String getAccountNo() {
+		return accountNo;
+	}
+
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
 
 }

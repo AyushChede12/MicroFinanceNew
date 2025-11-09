@@ -517,12 +517,6 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 	</main>
 
-	<script>
-		// Retrieve JSON from JSP variable safely
-		const menuAccess = JSON.parse('${menuAccessJson}');
-		sessionStorage.setItem("menuAccess", JSON.stringify(menuAccess));
-	</script>
-
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>

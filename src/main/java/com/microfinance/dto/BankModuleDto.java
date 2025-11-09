@@ -1,12 +1,12 @@
-package com.microfinance.model;
+package com.microfinance.dto;
 
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class BankModule {
+import org.springframework.web.multipart.MultipartFile;
+
+public class BankModuleDto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class BankModule {
 	private String openingDate;
 	private String openingBalance;
 	private String closingDate;
-	private String cancelledCheque;
+	private MultipartFile cancelledCheque;
 
 	public Long getId() {
 		return id;
@@ -102,11 +102,11 @@ public class BankModule {
 		this.closingDate = closingDate;
 	}
 
-	public String getCancelledCheque() {
+	public MultipartFile getCancelledCheque() {
 		return cancelledCheque;
 	}
 
-	public void setCancelledCheque(String cancelledCheque) {
+	public void setCancelledCheque(MultipartFile cancelledCheque) {
 		this.cancelledCheque = cancelledCheque;
 	}
 

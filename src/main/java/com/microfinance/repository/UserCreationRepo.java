@@ -11,5 +11,6 @@ import com.microfinance.model.UserCreations;
 public interface UserCreationRepo extends JpaRepository<UserCreations, Long>{
 	
 	Optional<UserCreations> findByCustomerId(String customerId);
-
+    boolean existsByCustomerId(String customerId);
+    
 }

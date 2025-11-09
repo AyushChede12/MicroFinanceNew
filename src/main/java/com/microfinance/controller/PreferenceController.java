@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
+import com.microfinance.dto.BankModuleDto;
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
-import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CodeModule;
 import com.microfinance.model.CompanyAdministration;
@@ -111,18 +111,34 @@ public class PreferenceController {
 	}
 
 	// Bank Module - Ayush
-	@PostMapping("/saveAndUpdateAllBankModule") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<BankModule>> saveBank(@RequestBody BankModule bankModule) {
-		boolean isCreate = (bankModule.getId() == null); // Check BEFORE saving
-		BankModule savedEntity = preferenceService.saveBankModule(bankModule);
-		ApiResponse<BankModule> response;
-		if (isCreate) {
-			response = new ApiResponse<>(HttpStatus.CREATED, "Bank created successfully", savedEntity);
-			return new ResponseEntity<>(response, HttpStatus.CREATED);
-		} else {
-			response = new ApiResponse<>(HttpStatus.OK, "Bank updated successfully", savedEntity);
-			return new ResponseEntity<>(response, HttpStatus.OK);
+//	@PostMapping("/saveAndUpdateAllBankModule") // Ayush (without DTO)
+//	public ResponseEntity<ApiResponse<BankModule>> saveBank(@RequestBody BankModule bankModule) {
+//		boolean isCreate = (bankModule.getId() == null); // Check BEFORE saving
+//		BankModule savedEntity = preferenceService.saveBankModule(bankModule);
+//		ApiResponse<BankModule> response;
+//		if (isCreate) {
+//			response = new ApiResponse<>(HttpStatus.CREATED, "Bank created successfully", savedEntity);
+//			return new ResponseEntity<>(response, HttpStatus.CREATED);
+//		} else {
+//			response = new ApiResponse<>(HttpStatus.OK, "Bank updated successfully", savedEntity);
+//			return new ResponseEntity<>(response, HttpStatus.OK);
+//		}
+//	}
+	
+	@PostMapping("/saveAndUpdateAllBankModule")
+	public ResponseEntity<ApiResponse<BankModule>> saveBank(
+			@ModelAttribute BankModuleDto bankModuleDto,
+			@RequestParam(value = "cancelledCheque", required = false) MultipartFile cancelledCheque) {
+
+		if (cancelledCheque != null) {
+			System.out.println("Received photo: " + cancelledCheque.getOriginalFilename());
 		}
+
+		ApiResponse<BankModule> response = preferenceService.saveBankModule(bankModuleDto, cancelledCheque);
+		// return new ResponseEntity<>(response, response.getStatus());
+		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
+				bankModuleDto.getId() != null ? "Bank updated successfully" : "Bank saved successfully",
+				response.getData()));
 	}
 
 	@GetMapping("/getAllBankModule") // Ayush (without DTO)
@@ -236,54 +252,17 @@ public class PreferenceController {
 		return response;
 	}
 
-	// Caste Module - Ayush
-	@PostMapping("/saveCasteModule") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<CasteModule>> saveCaste(@RequestBody CasteModule casteModule) {
-		boolean isCreate = (casteModule.getId() == null); // Check BEFORE saving
-		CasteModule savedEntity = preferenceService.saveCasteModule(casteModule);
-		ApiResponse<CasteModule> response;
-		if (isCreate) {
-			response = new ApiResponse<>(HttpStatus.CREATED, "Caste created successfully", savedEntity);
-			return new ResponseEntity<>(response, HttpStatus.CREATED);
-		} else {
-			response = new ApiResponse<>(HttpStatus.OK, "Caste updated successfully", savedEntity);
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		}
-	}
-
-	@GetMapping("/getAllCasteModule") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<List<CasteModule>>> fetchAllCasteModule() {
-		List<CasteModule> list = preferenceService.fetchAllCasteModule();
-		ApiResponse<List<CasteModule>> response = new ApiResponse<>(HttpStatus.FOUND,
-				"Caste modules fetched successfully", list);
-		return ResponseEntity.ok(response);
-	}
-
-	@PostMapping("/deleteCasteModuleById") // Ayush
-	public ResponseEntity<ApiResponse<String>> deleteCasteModule(@RequestParam("id") Long id) {
-		boolean isDeleted = preferenceService.deleteCasteModule(id);
-		if (isDeleted) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK, "Caste module deleted successfully",
-					"success");
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.NOT_FOUND, "Caste module deletion failed",
-					"failure");
-			return ResponseEntity.badRequest().body(response);
-		}
-	}
-
 	// Category Module - Ayush
 	@PostMapping("/saveCategoryModule")
-	public ResponseEntity<ApiResponse<CategoryModule>> saveCaste(@RequestBody CategoryModule categoryModule) {
+	public ResponseEntity<ApiResponse<CategoryModule>> saveCategory(@RequestBody CategoryModule categoryModule) {
 		boolean isCreate = (categoryModule.getId() == null); // Check BEFORE saving
 		CategoryModule savedEntity = preferenceService.saveCategoryModule(categoryModule);
 		ApiResponse<CategoryModule> response;
 		if (isCreate) {
-			response = new ApiResponse<>(HttpStatus.CREATED, "Category created successfully", savedEntity);
+			response = new ApiResponse<>(HttpStatus.CREATED, "Category and Caste created successfully", savedEntity);
 			return new ResponseEntity<>(response, HttpStatus.CREATED);
 		} else {
-			response = new ApiResponse<>(HttpStatus.OK, "Category updated successfully", savedEntity);
+			response = new ApiResponse<>(HttpStatus.OK, "Category and Caste updated successfully", savedEntity);
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 	}
@@ -376,12 +355,14 @@ public class PreferenceController {
 	}
 
 	// Executive Founder(With DTO) - Ayush
-	@ResponseBody
 	@PostMapping("/saveExecutiveFounder")
 	public ResponseEntity<ApiResponse<ExecutiveFounder>> saveExecutiveFounderData(
 			@ModelAttribute ExecutiveFounderDto executiveFounderDto,
 			@RequestParam(value = "photo", required = false) MultipartFile photo,
-			@RequestParam(value = "signature", required = false) MultipartFile signature) {
+			@RequestParam(value = "signature", required = false) MultipartFile signature,
+			@RequestParam(value = "aadharCard", required = false) MultipartFile aadharCard,
+			@RequestParam(value = "panCard", required = false) MultipartFile panCard,
+			@RequestParam(value = "cheque", required = false) MultipartFile cheque) {
 
 		if (photo != null) {
 			System.out.println("Received photo: " + photo.getOriginalFilename());
@@ -389,9 +370,18 @@ public class PreferenceController {
 		if (signature != null) {
 			System.out.println("Received signature: " + signature.getOriginalFilename());
 		}
+		if (aadharCard != null) {
+			System.out.println("Received Aadhar Card: " + aadharCard.getOriginalFilename());
+		}
+		if (panCard != null) {
+			System.out.println("Received Pan Card: " + panCard.getOriginalFilename());
+		}
+		if (cheque != null) {
+			System.out.println("Received Cheque: " + cheque.getOriginalFilename());
+		}
 
 		ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo,
-				signature);
+				signature, aadharCard, panCard, cheque);
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
 				executiveFounderDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
@@ -514,14 +504,12 @@ public class PreferenceController {
 	@PostMapping("/saveUserCreation")
 	public ResponseEntity<?> saveUserCreation(@RequestBody Map<String, Object> payload) {
 		try {
-			// Extract user details
 			Map<String, Object> userMap = (Map<String, Object>) payload.get("user");
 			List<Map<String, Object>> menuList = (List<Map<String, Object>>) payload.get("menuAccess");
 
-			// Build UserCreations
 			UserCreations user = new UserCreations();
 			user.setCustomerId((String) userMap.get("customerId"));
-			user.setPassword((String) userMap.get("password"));
+			user.setPassword((String) userMap.get("password")); // will be hashed in service
 			user.setFullName((String) userMap.get("fullName"));
 			user.setEmail((String) userMap.get("email"));
 			user.setContactNo((String) userMap.get("contactNo"));
@@ -531,58 +519,85 @@ public class PreferenceController {
 			user.setDeleteAccess((Boolean) userMap.get("deleteAccess"));
 			user.setUserStatus((Boolean) userMap.get("userStatus"));
 
-			// Build Menu Access List
 			List<UserMenuAccess> accessList = new ArrayList<>();
-			for (Map<String, Object> item : menuList) {
-				UserMenuAccess access = new UserMenuAccess();
-				access.setMenuName((String) item.get("menuName"));
-				access.setHasAccess((Boolean) item.get("hasAccess"));
-				accessList.add(access);
+			if (menuList != null) {
+				for (Map<String, Object> item : menuList) {
+					UserMenuAccess access = new UserMenuAccess();
+					access.setMenuName((String) item.get("menuName"));
+					access.setHasAccess(
+							item.get("hasAccess") == null ? Boolean.FALSE : (Boolean) item.get("hasAccess"));
+					accessList.add(access);
+				}
 			}
 
 			UserCreations saved = preferenceService.saveUserCreation(user, accessList);
 			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "User created successfully", saved));
-
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
 					new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving user: " + e.getMessage(), null));
 		}
 	}
 
-	// 🔹 Login Validation
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody Map<String, String> credentials, HttpSession session) {
 		String customerId = credentials.get("customerId");
 		String password = credentials.get("password");
 
 		Optional<UserCreations> user = preferenceService.validateLogin(customerId, password);
-		session.setAttribute("loggedUser", user.get());
-		session.setAttribute("menuAccess", user);
 		if (user.isPresent()) {
+			// fetch menu access
 			List<UserMenuAccess> accessList = preferenceService.getUserMenuAccess(customerId);
+
+			// set session attributes
+			session.setAttribute("loggedUser", user.get());
+			session.setAttribute("menuAccess", accessList);
+
+			// return user + access list
 			Map<String, Object> responseData = new HashMap<>();
 			responseData.put("user", user.get());
 			responseData.put("menuAccess", accessList);
+
 			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "Login successful", responseData));
 		} else {
-			return ResponseEntity.status(401)
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
 					.body(new ApiResponse(HttpStatus.UNAUTHORIZED, "Invalid credentials", null));
 		}
 	}
 
-	// 🔹 Get Menu Access
 	@GetMapping("/menuAccess/{customerId}")
 	public ResponseEntity<?> getMenuAccess(@PathVariable String customerId) {
 		List<UserMenuAccess> list = preferenceService.getUserMenuAccess(customerId);
 		return ResponseEntity.ok(new ApiResponse(HttpStatus.FOUND, "Fetched successfully", list));
 	}
 
-	@GetMapping("/getAllUserCreations") // Ayush (without DTO)
-	public ResponseEntity<ApiResponse<List<UserCreations>>> fetchAllUserCreations() {
-		List<UserCreations> list = preferenceService.fetchAllUserCreations();
-		ApiResponse<List<UserCreations>> response = new ApiResponse<>(HttpStatus.FOUND,
-				"User Creations fetched successfully", list);
-		return ResponseEntity.ok(response);
+	// JSP page that opens dashboard and injects menuAccess JSON into model
+	// If you use separate controller for view resolution, use @Controller instead
+	// of @RestController
+	@GetMapping("/openDashboard")
+	public ResponseEntity<?> openDashboard(HttpSession session) {
+		// if using JSP view resolver: return ModelAndView etc.
+		// For API-style, frontend will redirect to a JSP page (you might want to
+		// separate this)
+		// Example returns menuAccess as JSON for SPA/JS to consume:
+		Object menuAccess = session.getAttribute("menuAccess");
+		return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "OK", menuAccess));
+	}
+
+	@GetMapping("/fetchAllCustomerIds")
+	public ResponseEntity<?> fetchAllCustomerIds() {
+		List<UserCreations> all = preferenceService.fetchAllUserCreations();
+		List<String> ids = new ArrayList<>();
+		all.forEach(u -> ids.add(u.getCustomerId()));
+		return ResponseEntity.ok(new ApiResponse(HttpStatus.FOUND, "Fetched", ids));
+	}
+
+	// Upload Company Images
+	@PostMapping(value = "/uploadCompanyImages/{companyId}", consumes = "multipart/form-data;charset=ISO-8859-1")
+	public ResponseEntity<?> uploadImage(@PathVariable Long companyId, @RequestParam("fieldName") String fieldName,
+			@RequestParam("file") MultipartFile file) {
+
+		return preferenceService.uploadCompanyImage(companyId, fieldName, file);
+
 	}
 
 }

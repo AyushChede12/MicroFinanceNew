@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<aside id="sidebar" class="sidebar">
 
 		<ul class="sidebar-nav" id="sidebar-nav">
@@ -1189,6 +1190,7 @@
       </li> -->
 		</ul>
 	</aside>
+
 	<script src="./js/adminscript.js"></script>
 </body>
 </html>

@@ -2,15 +2,15 @@ $(document).ready(function() {
 	$("#form1").submit(function(e) {
 		e.preventDefault();
 
-		let customerId = $("#customerId").val().trim();
+		let username = $("#username").val().trim();
 		let password = $("#password").val().trim();
 
-		if (!customerId || !password) {
-			$("#errorMsg").text("Customer ID and password are required").show();
+		if (!username || !password) {
+			$("#errorMsg").text("UserName and password are required").show();
 			return;
 		}
 
-		/*$.ajax({
+		$.ajax({
 			url: 'api/loginPage/loginValidate',  // Make sure endpoint matches Spring Boot
 			type: 'POST',
 			contentType: 'application/json',
@@ -33,9 +33,9 @@ $(document).ready(function() {
 					$("#errorMsg").text("Something went wrong. Try again!").show();
 				}
 			}
-		});*/
+		});
 
-		$.ajax({
+		/*$.ajax({
 			url: "api/preference/login",
 			type: "POST",
 			contentType: "application/json",
@@ -54,7 +54,7 @@ $(document).ready(function() {
 			error: function() {
 				alert("Login failed!");
 			}
-		});
+		});*/
 	});
 
 });

@@ -1,21 +1,37 @@
+function photoUpload() {
+	const file = document.getElementById("cancelledCheque").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewimg = document.getElementById("photoPreview");
+			document.getElementById("photoPreview").src = e.target.result;
+			previewimg.style.width = "100%";
+			previewimg.style.height = "100%";
+			previewimg.style.objectFit = "cover"
+			previewimg.style.overflow = "hidden"
+			previewimg.style.borderRadius = "20px"
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for photo.");
+	}
+}
+
 $(document).ready(function() {
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
 	$("#prevBtn").hide();
 	$("#nextBtn").hide();
 	$("#pageInfo").hide();
+
 	$("#saveBtn").click(function() {
 
-		$('#chkbankname').text('');
-		$('#chkaccountno').text('');
-		$('#chkifsccode').text('');
-		$('#chkmicrcode').text('');
-		$('#chkcontactno').text('');
-		$('#chkaddress').text('');
-		$('#chkopeningdate').text('');
-		$('#chkopeningbalance').text('');
-		$('#chkclosingdate').text('');
+		convertFormToUpperCase();
 
+		// Clear previous errors
+		$('#chkbankname, #chkaccountno, #chkifsccode, #chkmicrcode, #chkcontactno, #chkaddress, #chkopeningdate, #chkopeningbalance, #chkclosingdate').text('');
+
+		// Collect values
 		var bankName = $('#bankName').val().trim();
 		var accountNo = $('#accountNo').val().trim();
 		var ifscCode = $('#ifscCode').val().trim();
@@ -25,94 +41,67 @@ $(document).ready(function() {
 		var openingDate = $('#openingDate').val().trim();
 		var openingBalance = $('#openingBalance').val().trim();
 		var closingDate = $('#closingDate').val().trim();
+		var cancelledCheque = $('#cancelledCheque')[0].files[0]; // ✅ File input
 
 		var contactPattern = /^[6-9][0-9]{9}$/;
-
+		var accountNoPattern = /^[0-9]+$/
 		let isValid = true;
 
-		if (bankName === '') {
-			$('#chkbankname').text('* This field is required');
-			$('#bankName').focus();
-			isValid = false;
-		}
-
+		// Validation
+		if (bankName === '') { $('#chkbankname').text('* This field is required'); isValid = false; }
 		if (accountNo === '') {
 			$('#chkaccountno').text('* This field is required');
+			isValid = false;
+		} else if (!accountNoPattern.test(accountNo)) {
+			$('#chkaccountno').text('* Account number must contain only digits');
 			$('#accountNo').focus();
 			isValid = false;
 		}
-
-		if (address === '') {
-			$('#chkaddress').text('* This field is required');
-			$('#address').focus();
-			isValid = false;
-		}
-
-		if (ifscCode === '') {
-			$('#chkifsccode').text('* This field is required');
-			$('#ifscCode').focus();
-			isValid = false;
-		}
-
-		if (micrCode === '') {
-			$('#chkmicrcode').text('* This field is required');
-			$('#micrCode').focus();
-			isValid = false;
-		}
-
-		if (openingDate === '') {
-			$('#chkopeningdate').text('* This field is required');
-			$('#openingDate').focus();
-			isValid = false;
-		}
-
-		if (openingBalance === '') {
-			$('#chkopeningbalance').text('* This field is required');
-			$('#openingBalance').focus();
-			isValid = false;
-		}
-
-		if (closingDate === '') {
-			$('#chkclosingdate').text('* This field is required');
-			$('#closingDate').focus();
-			isValid = false;
-		}
-
+		if (address === '') { $('#chkaddress').text('* This field is required'); isValid = false; }
+		if (ifscCode === '') { $('#chkifsccode').text('* This field is required'); isValid = false; }
+		if (micrCode === '') { $('#chkmicrcode').text('* This field is required'); isValid = false; }
+		if (openingDate === '') { $('#chkopeningdate').text('* This field is required'); isValid = false; }
+		if (openingBalance === '') { $('#chkopeningbalance').text('* This field is required'); isValid = false; }
+		if (closingDate === '') { $('#chkclosingdate').text('* This field is required'); isValid = false; }
 		if (contactNo === '') {
-			$('#chkcontactno').text('* This field is required');
-			$('#contactNo').focus();
-			isValid = false;
-		}
-		else if (!contactPattern.test(contactNo)) {
-			alert("Please enter a valid 10-digit mobile number and start from (6-9).");
-			contactNo.focus();
+			$('#chkcontactno').text('* This field is required'); isValid = false;
+		} else if (!contactPattern.test(contactNo)) {
+			alert("Please enter a valid 10-digit mobile number starting from 6 to 9.");
 			isValid = false;
 		}
 
-		if (!isValid) {
-			return false; // Stop AJAX call
+		// Validate file
+		if (!cancelledCheque) {
+			$('#chkphoto').text('* Please upload Cancelled Cheque');
+			isValid = false;
+		} else {
+			$('#chkphoto').text('');
 		}
 
-		const formData = {
-			bankName: $('input[name="bankName"]').val(),
-			accountNo: $('input[name="accountNo"]').val(),
-			ifscCode: $('input[name="ifscCode"]').val(),
-			micrCode: $('input[name="micrCode"]').val(),
-			contactNo: $('input[name="contactNo"]').val(),
-			address: $('textarea[name="address"]').val(),
-			openingDate: $('input[name="openingDate"]').val(),
-			openingBalance: $('input[name="openingBalance"]').val(),
-			closingDate: $('input[name="closingDate"]').val()
-		};
+		if (!isValid) return false; // Stop AJAX call if invalid
+
+		// ✅ Use FormData for file + text
+		let formData = new FormData();
+		formData.append("bankName", bankName);
+		formData.append("accountNo", accountNo);
+		formData.append("ifscCode", ifscCode);
+		formData.append("micrCode", micrCode);
+		formData.append("contactNo", contactNo);
+		formData.append("address", address);
+		formData.append("openingDate", openingDate);
+		formData.append("openingBalance", openingBalance);
+		formData.append("closingDate", closingDate);
+		formData.append("cancelledCheque", cancelledCheque); // ✅ Image file
 
 		$.ajax({
 			url: 'api/preference/saveAndUpdateAllBankModule',
 			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify(formData),
+			data: formData,
+			contentType: false,       // ✅ Important for FormData
+			processData: false,       // ✅ Important for FormData
 			success: function(response) {
-				if (response.status == 'CREATED') {
-					alert("Bank Saved Successfully");
+				if (response.status === 'OK' || response.status === 'CREATED') {
+					alert(response.message || "Bank saved successfully!");
 					location.reload();
 				} else {
 					alert("Unexpected response format");
@@ -125,10 +114,8 @@ $(document).ready(function() {
 			}
 		});
 	});
-
-
-
 });
+
 
 
 
@@ -167,18 +154,26 @@ function renderTable(page) {
 
 	for (let i = startIndex; i < endIndex; i++) {
 		let person = totalDataMISD[i];
+		let chequePath = person.cancelledCheque
+			? person.cancelledCheque
+			: 'images/upload/no-image.png';
 		let row = `<tr>
-				<td><input type="checkbox"></td>
 				<td>${i + 1}</td>
-                <td>${person.bankName}</td>
-                <td>${person.accountNo}</td>
-				<td>${person.ifscCode}</td>
-				<td>${person.micrCode}</td>
-                <td>${person.contactNo}</td>
-                <td>${person.address}</td>
-                <td>${person.openingDate}</td>
-                <td>${person.openingBalance}</td>
-				<td>${person.closingDate}</td>
+                <td>${(person.bankName || '').toUpperCase()}</td>
+                <td>${(person.accountNo || '').toUpperCase()}</td>
+				<td>${(person.ifscCode || '').toUpperCase()}</td>
+				<td>${(person.micrCode || '').toUpperCase()}</td>
+                <td>${(person.contactNo || '').toUpperCase()}</td>
+                <td>${(person.address || '').toUpperCase()}</td>
+                <td>${(person.openingDate || '').toUpperCase()}</td>
+                <td>${(person.openingBalance || '').toUpperCase()}</td>
+				<td>${(person.closingDate || '').toUpperCase()}</td>
+				<td>
+				                <img src="Uploads/${chequePath}" 
+				                     alt="Cheque" 
+				                     class="cheque-thumb" 
+				                     onclick="showChequePreview('Uploads/${chequePath}')">
+				            </td>
                 <td>
                   <button class="iconbutton" onclick="viewData(${person.id})" title="View">
                     <i class="fa-solid fa-pen-to-square text-primary"></i>
@@ -254,14 +249,25 @@ function viewData(id) {
 		data: { id: id },
 		success: function(response) {
 			if (response.status = "FOUND") {
-				const branch = response.data;
-				$("#id").val(branch.id);
-				$("#bankName").val(branch.bankName);
-				$("#accountNo").val(branch.accountNo);
-				$("#contactNo").val(branch.contactNo);
-				$("#address").val(branch.address);
-				$("#openingDate").val(branch.openingDate);
-				$("#openingBalance").val(branch.openingBalance);
+				const bank = response.data;
+				$("#id").val(bank.id);
+				$("#bankName").val(bank.bankName);
+				$("#accountNo").val(bank.accountNo);
+				$("#contactNo").val(bank.contactNo);
+				$("#address").val(bank.address);
+				$("#openingDate").val(bank.openingDate);
+				$("#openingBalance").val(bank.openingBalance);
+				if (bank.cancelledCheque) {
+					const photoPath = `Uploads/${bank.cancelledCheque}`;
+					$("#photoPreview").attr("src", photoPath);
+					$("#photoHidden").val(photoPath);
+					const fakePhotoEvent = { target: { result: photoPath } };
+					photoSizeEdit(fakePhotoEvent);
+
+				} else {
+					$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
+					$("#photoHidden").val("");
+				}
 			} else {
 				alert("Branch not found: " + response.message);
 			}
@@ -296,22 +302,73 @@ function deleteData(id) {
 }
 
 function updateBank() {
-	let payload = {
-		id: $("#id").val(),
-		bankName: $("#bankName").val(),
-		accountNo: $("#accountNo").val(),
-		contactNo: $("#contactNo").val(),
-		address: $("#address").val(),
-		openingDate: $("#openingDate").val(),
-		openingBalance: $("#openingBalance").val()
-	};
+	convertFormToUpperCase();
+
+	$('#chkbankname, #chkaccountno, #chkifsccode, #chkmicrcode, #chkcontactno, #chkaddress, #chkopeningdate, #chkopeningbalance, #chkclosingdate').text('');
+
+	// Collect values
+	var bankName = $('#bankName').val().trim();
+	var accountNo = $('#accountNo').val().trim();
+	var ifscCode = $('#ifscCode').val().trim();
+	var micrCode = $('#micrCode').val().trim();
+	var contactNo = $('#contactNo').val().trim();
+	var address = $('#address').val().trim();
+	var openingDate = $('#openingDate').val().trim();
+	var openingBalance = $('#openingBalance').val().trim();
+	var closingDate = $('#closingDate').val().trim();
+	var cancelledCheque = $('#cancelledCheque')[0].files[0]; // ✅ File input
+
+	var contactPattern = /^[6-9][0-9]{9}$/;
+	let isValid = true;
+
+	// Validation
+	if (bankName === '') { $('#chkbankname').text('* This field is required'); isValid = false; }
+	if (accountNo === '') { $('#chkaccountno').text('* This field is required'); isValid = false; }
+	if (address === '') { $('#chkaddress').text('* This field is required'); isValid = false; }
+	if (ifscCode === '') { $('#chkifsccode').text('* This field is required'); isValid = false; }
+	if (micrCode === '') { $('#chkmicrcode').text('* This field is required'); isValid = false; }
+	if (openingDate === '') { $('#chkopeningdate').text('* This field is required'); isValid = false; }
+	if (openingBalance === '') { $('#chkopeningbalance').text('* This field is required'); isValid = false; }
+	if (closingDate === '') { $('#chkclosingdate').text('* This field is required'); isValid = false; }
+	if (contactNo === '') {
+		$('#chkcontactno').text('* This field is required'); isValid = false;
+	} else if (!contactPattern.test(contactNo)) {
+		alert("Please enter a valid 10-digit mobile number starting from 6–9.");
+		isValid = false;
+	}
+
+	// Validate file
+	if (!cancelledCheque) {
+		$('#chkphoto').text('* Please upload Cancelled Cheque');
+		isValid = false;
+	} else {
+		$('#chkphoto').text('');
+	}
+
+	let formData = new FormData();
+
+	formData.append("id", $("#id").val());
+	formData.append("bankName", $("#bankName").val());
+	formData.append("accountNo", $("#accountNo").val());
+	formData.append("contactNo", $("#contactNo").val());
+	formData.append("address", $("#address").val());
+	formData.append("openingDate", $("#openingDate").val());
+	formData.append("openingBalance", $("#openingBalance").val());
+
+	// 👇 add file if selected
+	let chequeFile = $("#cancelledCheque")[0].files[0];
+	if (chequeFile) {
+		formData.append("cancelledCheque", chequeFile);
+	}
+
 	$.ajax({
 		url: "api/preference/saveAndUpdateAllBankModule",
 		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(payload),
+		data: formData,
+		processData: false,       // important: prevent automatic processing
+		contentType: false,       // important: allow multipart/form-data
 		success: function(response) {
-			if (response.status = "OK") {
+			if (response.status === "OK") {
 				alert("Bank Updated Successfully");
 				location.reload();
 			} else {
@@ -323,6 +380,7 @@ function updateBank() {
 		}
 	});
 }
+
 
 
 $(document).ready(function() {
@@ -370,3 +428,30 @@ $(document).ready(function() {
 	// Initialize the table on page load
 	showPage(currentPage);
 });
+
+function showChequePreview(imageSrc) {
+	document.getElementById("modalChequeImage").src = imageSrc;
+	document.getElementById("imagePreviewModal").style.display = "flex";
+}
+
+function closeChequePreview() {
+	document.getElementById("imagePreviewModal").style.display = "none";
+}
+
+function photoSizeEdit(e) {
+	const previewimg = document.getElementById("photoPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function convertFormToUpperCase() {
+	$("#formid").find("input[type=text], input[type=date], textarea").each(function() {
+		if ($(this).val()) {
+			$(this).val($(this).val().toUpperCase());
+		}
+	});
+}

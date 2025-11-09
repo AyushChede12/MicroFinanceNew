@@ -60,13 +60,13 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Customer Information</li>
+							<li class="breadcrumb-item action">User Information</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Customer ID</label> <input type="text"
+								<label for="">User ID</label> <input type="text"
 									name="customerId" id="customerId" required="required"
 									placeholder="Enter Customer ID" />
 							</div>
