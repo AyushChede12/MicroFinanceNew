@@ -41,6 +41,21 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<style>
+.uploadField {
+	margin-top: 10px;
+}
+
+.uploadField img {
+	width: 100%;
+	height: 150px;
+	object-fit: contain;
+	border: 1px solid #ccc;
+	padding: 4px;
+	border-radius: 8px;
+}
+</style>
+
 </head>
 
 
@@ -117,7 +132,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Short Name <span class="star">*</span></label> <input
 									type="Text" name="shortName" readonly="readonly" id="shortName"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Short Name"
 									style="text-transform: uppercase;" /> <small id="chkshortname"
 									style="color: red;"></small>
 							</div>
@@ -140,7 +155,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>CIN No/Regd No<span class="star">*</span></label> <input
 									type="Text" name="cinNo" readonly="readonly" id="cinNo"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter CIN No"
 									style="text-transform: uppercase;" /> <small id="chkcinno"
 									style="color: red;"></small>
 							</div>
@@ -151,7 +166,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>PAN <span class="star">*</span></label> <input
 									type="Text" name="pan" id="pan" readonly="readonly"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Pan No"
 									style="text-transform: uppercase;" /> <small id="chkpan"
 									style="color: red;"></small>
 							</div>
@@ -161,8 +176,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>TAN <span class="star">*</span></label> <input
-									type="Text" name="tan" id="tan" readonly="readonly"
-									required="required" placeholder="Enter Vehicle No"
+									type="text" name="tan" id="tan" readonly="readonly"
+									required="required" placeholder="Enter Tan No"
 									style="text-transform: uppercase;" /> <small id="chktan"
 									style="color: red;"></small>
 							</div>
@@ -173,7 +188,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>GSTIN <span class="star">*</span></label> <input
 									type="Text" name="gstin" id="gstin" readonly="readonly"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter GSTIN"
 									style="text-transform: uppercase;" /> <small id="chkgstin"
 									style="color: red;"></small>
 							</div>
@@ -226,7 +241,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Pin Code <span class="star">*</span></label> <input
 									type="text" name="pinCode" readonly="readonly" id="pinCode"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Pin Code"
 									style="text-transform: uppercase;" /> <small id="chkpincode"
 									style="color: red;"></small>
 							</div>
@@ -237,7 +252,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Email ID <span class="star">*</span></label> <input
 									type="text" name="emailId" readonly="readonly" id="emailId"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Email ID"
 									style="text-transform: uppercase;" /> <small id="chkemailid"
 									style="color: red;"></small>
 							</div>
@@ -261,7 +276,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Paid Up Capital <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="paidUpCapital"
 									id="paidUpCapital" required="required"
-									placeholder="Enter Vehicle No"
+									placeholder="Enter Paid Up Capital"
 									style="text-transform: uppercase;" /> <small
 									id="chkpaidupcapital" style="color: red;"></small>
 							</div>
@@ -272,7 +287,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>No Of Share <span class="star">*</span></label> <input
 									type="text" name="nof" id="nof" readonly="readonly"
-									required="required" placeholder="Enter NOF "
+									required="required" placeholder="Enter No Of Share "
 									style="text-transform: uppercase;" /> <small id="chknof"
 									style="color: red;"></small>
 							</div>
@@ -307,7 +322,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>TDS (Without PAN) <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="tdsWithoutPan"
 									id="tdsWithoutPan" required="required"
-									placeholder="Enter Vehicle No"
+									placeholder="Enter TDS"
 									style="text-transform: uppercase;" /> <small
 									id="chktdswithoutpan" style="color: red;"></small>
 							</div>
@@ -319,7 +334,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Tax Deduction <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="taxDeduction"
 									id="taxDeduction" required="required"
-									placeholder="Enter Vehicle No"
+									placeholder="Enter Tax Deduction"
 									style="text-transform: uppercase;" /> <small
 									id="chktaxdeduction" style="color: red;"></small>
 							</div>
@@ -341,19 +356,34 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 
-					<div class="row mt-3">
-						<div class="col-lg-4">
-							<label style="font-weight: 600;">Search Image Field</label> <input
-								type="text" id="imageSearch" class="form-control"
-								placeholder="Type 'logo', 'regn', 'pan', 'gst'..." />
+					<div class="container mt-4">
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>Company Image Upload </h4>
+								<div id="fieldContainer">
+									<!-- First field appears automatically -->
+									<div class="textUploadSet mb-4">
+										<input type="text" class="form-control nameField"
+											placeholder="Enter Image Name...">
+										<div class="uploadContainer"></div>
+									</div>
+								</div>
+
+								<button id="addFieldBtn" class="btn btn-primary mt-2">Add
+									+</button>
+								<button id="uploadAllBtn" class="btn btn-success mt-2">Upload
+									All</button>
+							</div>
 						</div>
 					</div>
 
 
-					<div class="mt-4">
+
+
+					<!-- <div class="mt-4">
 						<div class="row mt-4">
 
-							<!-- Company Logo -->
+							Company Logo
 							<div class="col-lg-3 mb-5 imageField" id="companyLogoField">
 								<label>Company Logo <span class="star">*</span></label> <label
 									for="photo" id="drop-area"> <input type="file"
@@ -366,7 +396,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</label> <small id="chkphoto" style="color: red;"></small>
 							</div>
 
-							<!-- Registration Certificate -->
+							Registration Certificate
 							<div class="col-lg-3 mb-5 imageField" id="regnCertField">
 								<label>Regn Certificate <span class="star">*</span></label> <label
 									for="signature" id="drop-area"> <input type="file"
@@ -379,7 +409,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</label> <small id="chksignature" style="color: red;"></small>
 							</div>
 
-							<!-- Pan Card -->
+							Pan Card
 							<div class="col-lg-3 mb-5 imageField" id="panCardField">
 								<label>Pan Card <span class="star">*</span></label> <label
 									for="panphoto" id="drop-area"> <input type="file"
@@ -392,7 +422,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</label> <small id="chkphoto2" style="color: red;"></small>
 							</div>
 
-							<!-- GST Certificate -->
+							GST Certificate
 							<div class="col-lg-3 mb-5 imageField" id="gstCertField">
 								<label>GST Certificate <span class="star">*</span></label> <label
 									for="gstphoto" id="drop-area"> <input type="file"
@@ -406,7 +436,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 
 						</div>
-					</div>
+					</div> -->
 
 				</div>
 
@@ -428,41 +458,105 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/companyAdministration.js"></script>
 
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
+	<script>
+$(document).ready(function() {
+    const companyId = 1; // replace as needed
+    let counter = 1;
 
-							// Hide all image fields initially (on refresh)
-							$(".imageField").hide();
+    // Function: create a new text field + upload placeholder
+    function createNewTextField() {
+        const newField = `
+            <div class="textUploadSet mb-4">
+                <input type="text" class="form-control nameField" placeholder="Enter Name">
+                <div class="uploadContainer"></div>
+            </div>`;
+        $("#fieldContainer").append(newField);
+    }
 
-							// Show the matching image upload field based on search input
-							$("#imageSearch")
-									.on(
-											"keyup",
-											function() {
-												var query = $(this).val()
-														.toLowerCase().trim();
+    // Add new text field on Add + click
+    $("#addFieldBtn").click(function(e) {
+        e.preventDefault();
+        createNewTextField();
+    });
 
-												// Hide all first
-												$(".imageField").hide();
+    // When typing in a text field, show upload below it dynamically
+    $(document).on("input", ".nameField", function() {
+        const nameValue = $(this).val().trim();
+        const uploadDiv = $(this).closest(".textUploadSet").find(".uploadContainer");
 
-												if (query.indexOf("logo") !== -1) {
-													$("#companyLogoField")
-															.show();
-												} else if (query
-														.indexOf("regn") !== -1
-														|| query
-																.indexOf("registration") !== -1) {
-													$("#regnCertField").show();
-												} else if (query.indexOf("pan") !== -1) {
-													$("#panCardField").show();
-												} else if (query.indexOf("gst") !== -1) {
-													$("#gstCertField").show();
-												}
-											});
-						});
-	</script>
+        if (nameValue.length > 0) {
+            // Show upload if not already present
+            if (uploadDiv.find("input[type=file]").length === 0) {
+                const uniqueId = "upload-" + Date.now();
+                const uploadField = `
+                    <div class="uploadField mt-2">
+                        <label>${nameValue} <span class="star">*</span></label>
+                        <label for="${uniqueId}" style="cursor:pointer;">
+                            <input type="file" accept="image/*" id="${uniqueId}" hidden onchange="previewImage('${uniqueId}')">
+                            <div id="img-view-${uniqueId}">
+                                <img src="../images/upload/upload.png" alt="upload_icon" id="preview-${uniqueId}">
+                            </div>
+                        </label>
+                    </div>`;
+                uploadDiv.html(uploadField);
+            } else {
+                // Update label text dynamically as user types
+                uploadDiv.find("label:first").text(nameValue + " *");
+            }
+        } else {
+            uploadDiv.html(""); // clear upload if name is empty
+        }
+    });
+
+    // Upload all images (optional feature)
+    $("#uploadAllBtn").click(function() {
+        $(".uploadField input[type=file]").each(function() {
+            const fileInput = this;
+            const fieldName = $(this).closest(".uploadField").find("label:first").text().replace("*", "").trim();
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please select image for " + fieldName);
+                return;
+            }
+            const formData = new FormData();
+            formData.append("fieldName", fieldName);
+            formData.append("file", file);
+
+            $.ajax({
+                url: "/api/companyImage/upload/" + companyId,
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function() {
+                    $(fileInput).closest(".uploadField").css("border", "2px solid green");
+                },
+                error: function() {
+                    $(fileInput).closest(".uploadField").css("border", "2px solid red");
+                }
+            });
+        });
+        alert("Upload started for all selected images.");
+    });
+});
+
+// Preview selected image
+function previewImage(id) {
+    const input = document.getElementById(id);
+    const preview = document.getElementById("preview-" + id);
+    const file = input.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+</script>
+
+
 
 
 

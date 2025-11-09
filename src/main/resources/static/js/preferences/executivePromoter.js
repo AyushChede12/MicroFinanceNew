@@ -29,41 +29,56 @@ function signatureUpload() {
 	}
 }
 
-function exephotoUpload() {
-	const file = document.getElementById("executivePhoto").files[0];
+function aadharUpload() {
+	const file = document.getElementById("aadharCard").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			exephotoSizeEdit(e);
-			$("#exephotoHidden").val("");
+			aadharSizeEdit(e);
+			$("#aadharHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
-		alert("Please upload a valid image file for photo.");
+		alert("Please upload a valid image file for aadhar.");
 	}
 }
 
-function exesignatureUpload() {
-	alert("hi");
-	const file = document.getElementById("executiveSignature").files[0];
+function panUpload() {
+	const file = document.getElementById("panCard").files[0];
 	if (file && file.type.startsWith("image/")) {
 		const reader = new FileReader();
 		reader.onload = function(e) {
-			exesignatureSizeEdit(e);
-			$("#exesignatureHidden").val("");
+			panSizeEdit(e);
+			$("#panHidden").val("");
 		};
 		reader.readAsDataURL(file);
 	} else {
-		alert("Please upload a valid image file for signature.");
+		alert("Please upload a valid image file for pan.");
+	}
+}
+
+function chequeUpload() {
+	const file = document.getElementById("cheque").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			chequeSizeEdit(e);
+			$("#chequeHidden").val("");
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for cheque.");
 	}
 }
 
 $(document).ready(function() {
+
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
 
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
+		convertFormToUpperCase();
 
 		$('#chkexetype').text('');
 		$('#chkbranchname').text('');
@@ -83,7 +98,13 @@ $(document).ready(function() {
 		$('#chkemailid').text('');
 		$('#chkphoto').text('');
 		$('#chksignature').text('');
-		$('#chkdepositacc').text('');
+		$('#chkaadhar').text('');
+		$('#chkpan').text('');
+		$('#chkcheque').text('');
+		$('#chkbankname').text('');
+		$('#chkifsccode').text('');
+		$('#chkmicrcode').text('');
+		$('#chkaccountno').text('');
 
 		var type = $('#type').val().trim();
 		var branchName = $('#branchName').val().trim();
@@ -101,10 +122,17 @@ $(document).ready(function() {
 		var panNo = $('#panNo').val().trim();
 		var contactNo = $('#contactNo').val().trim();
 		var emailId = $('#emailId').val().trim();
-		var depositAcc = $('#depositAcc').val().trim();
+
+		var bankName = $('#bankName').val().trim();
+		var ifscCode = $('#ifscCode').val().trim();
+		var micrCode = $('#micrCode').val().trim();
+		var accountNo = $('#accountNo').val().trim();
 
 		const photo = $('#photo')[0].files[0];
 		const signature = $('#signature')[0].files[0];
+		const aadharCard = $('#aadharCard')[0].files[0];
+		const panCard = $('#panCard')[0].files[0];
+		const cheque = $('#cheque')[0].files[0];
 
 
 		//Validations
@@ -113,6 +141,7 @@ $(document).ready(function() {
 		var contactPattern = /^[6-9][0-9]{9}$/;
 		var aadharPattern = /^\d{12}$/;
 		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		var accountNoPattern = /^[0-9]+$/
 
 		let isValid = true;
 
@@ -243,10 +272,43 @@ $(document).ready(function() {
 			$('#signature').focus();
 			isValid = false;
 		}
+		if (!aadharCard) {
+			$('#chkaadhar').text('* Aadhar Card is required');
+			$('#aadharCard').focus();
+			isValid = false;
+		}
+		if (!panCard) {
+			$('#chkpan').text('* Pan Card is required');
+			$('#panCard').focus();
+			isValid = false;
+		}
+		if (!cheque) {
+			$('#chkcheque').text('* Cheque is required');
+			$('#cheque').focus();
+			isValid = false;
+		}
 
-		if (depositAcc === '') {
-			$('#chkdepositacc').text('* This field is required');
-			$('#depositAcc').focus();
+		if (bankName === '') {
+			$('#chkbankname').text('* This field is required');
+			$('#bankName').focus();
+			isValid = false;
+		}
+		if (ifscCode === '') {
+			$('#chkifsccode').text('* This field is required');
+			$('#ifscCode').focus();
+			isValid = false;
+		}
+		if (micrCode === '') {
+			$('#chkmicrcode').text('* This field is required');
+			$('#micrCode').focus();
+			isValid = false;
+		}
+		if (accountNo === '') {
+			$('#chkaccountno').text('* This field is required');
+			isValid = false;
+		} else if (!accountNoPattern.test(accountNo)) {
+			$('#chkaccountno').text('* Account number must contain only digits');
+			$('#accountNo').focus();
 			isValid = false;
 		}
 
@@ -471,6 +533,7 @@ function viewData(id) {
 }
 
 function updateBranch() {
+	convertFormToUpperCase();
 	let formData = new FormData();
 
 	// Append all fields from the form
@@ -549,8 +612,8 @@ function signatureSizeEdit(e) {
 	previewimg.style.borderRadius = "20px";
 }
 
-function exephotoSizeEdit(e) {
-	const previewimg = document.getElementById("exephotoPreview");
+function aadharSizeEdit(e) {
+	const previewimg = document.getElementById("aadharPreview");
 	previewimg.src = e.target.result;
 	previewimg.style.width = "100%";
 	previewimg.style.height = "100%";
@@ -559,8 +622,18 @@ function exephotoSizeEdit(e) {
 	previewimg.style.borderRadius = "20px";
 }
 
-function exesignatureSizeEdit(e) {
-	const previewimg = document.getElementById("exesignaturePreview");
+function panSizeEdit(e) {
+	const previewimg = document.getElementById("panPreview");
+	previewimg.src = e.target.result;
+	previewimg.style.width = "100%";
+	previewimg.style.height = "100%";
+	previewimg.style.objectFit = "cover";
+	previewimg.style.overflow = "hidden";
+	previewimg.style.borderRadius = "20px";
+}
+
+function chequeSizeEdit(e) {
+	const previewimg = document.getElementById("chequePreview");
 	previewimg.src = e.target.result;
 	previewimg.style.width = "100%";
 	previewimg.style.height = "100%";
@@ -606,12 +679,12 @@ function renderTable(page) {
 		let person = totalDataExecutive[i];
 		let row = `<tr>
 				<td>${i + 1}</td>
-                <td>${person.fullName}</td>
-                <td>${person.branchName}</td>
-                <td>${person.appointmentDate}</td>
-                <td>${person.address}</td>
-                <td>${person.emailId}</td>
-                <td>${person.contactNo}</td>
+                <td>${(person.fullName || '').toUpperCase()}</td>
+                <td>${(person.branchName || '').toUpperCase()}</td>
+                <td>${(person.appointmentDate || '').toUpperCase()}</td>
+                <td>${(person.address || '').toUpperCase()}</td>
+                <td>${(person.emailId || '').toUpperCase()}</td>
+                <td>${(person.contactNo || '').toUpperCase()}</td>
                 <td>
                   <button class="iconbutton" onclick="viewData(${person.id})" title="View">
                     <i class="fa-solid fa-pen-to-square text-primary"></i>
@@ -676,3 +749,10 @@ function calculateShareAmount() {
 document.getElementById("baseValue").addEventListener("input", calculateShareAmount);
 document.getElementById("shareCount").addEventListener("input", calculateShareAmount);
 
+function convertFormToUpperCase() {
+	$("#formid").find("input[type=text], input[type=date], textarea").each(function() {
+		if ($(this).val()) {
+			$(this).val($(this).val().toUpperCase());
+		}
+	});
+}

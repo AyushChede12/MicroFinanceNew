@@ -2,6 +2,7 @@ $(document).ready(function() {
 	$("#updateBtn").hide();
 
 	$("#saveBtn").click(function() {
+		convertFormToUpperCase();
 
 		$('#chkrelation').text('');
 
@@ -56,7 +57,7 @@ $(document).ready(function() {
 				data.forEach((item, index) => {
 					let row = `<tr>
 			                        <td>${index + 1}</td>
-			                        <td>${item.relation}</td>
+			                        <td>${(item.relation || '').toUpperCase()}</td>
 									<td>
 										<button type="button" class="iconbutton" onclick="viewData(${item.id})" title="View">
 										<i class="fa-solid fa-pen-to-square text-primary"></i>
@@ -129,6 +130,22 @@ function viewData(id) {
 }
 
 function updateRelative() {
+	convertFormToUpperCase();
+	$('#chkrelation').text('');
+
+	var relation = $('#relation').val().trim();
+
+	let isValid = true;
+
+	if (relation === '') {
+		$('#chkrelation').text('* This field is required');
+		$('#relation').focus();
+		isValid = false;
+	}
+
+	if (!isValid) {
+		return false; // Stop AJAX call
+	}
 	let payload = {
 		id: $("#id").val(),
 		relation: $("#relation").val(),
@@ -149,6 +166,14 @@ function updateRelative() {
 		},
 		error: function(xhr) {
 			alert("Update failed: " + xhr.responseText);
+		}
+	});
+}
+
+function convertFormToUpperCase() {
+	$("#formid").find("input[type=text], input[type=date], textarea").each(function() {
+		if ($(this).val()) {
+			$(this).val($(this).val().toUpperCase());
 		}
 	});
 }

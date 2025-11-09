@@ -132,7 +132,7 @@ body {
             <form id="form1">
                 <div style="display:flex; justify-content:space-between; align-items:center;">
                     <div class="textfield">
-                        <input class="inputfield" type="text" id="customerId" name="customerId" required>
+                        <input class="inputfield" type="text" id="username" name="username" required>
                         <span></span>
                         <label class="inputlabels">USERNAME</label>
                     </div>

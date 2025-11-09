@@ -100,8 +100,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date From <span class="star">*</span></label> <input type="date" name="dateFrom"
-									id="dateFrom" required="required" placeholder="Enter Date From"
+								<label>Date From <span class="star">*</span></label> <input type="date" name="fromDate"
+									id="fromDate" required="required" placeholder="Enter Date From"
 									style="text-transform: uppercase;" />
 									<small id="chkdatefrom" style="color: red;"></small>
 							</div>
@@ -110,8 +110,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date To <span class="star">*</span></label> <input type="date" name="dateTo"
-									id="dateTo" required="required" placeholder="Enter Date To"
+								<label>Date To <span class="star">*</span></label> <input type="date" name="toDate"
+									id="toDate" required="required" placeholder="Enter Date To"
 									style="text-transform: uppercase;" />
 									<small id="chkdateto" style="color: red;"></small>
 							</div>

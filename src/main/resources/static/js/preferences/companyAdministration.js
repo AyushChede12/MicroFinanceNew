@@ -80,7 +80,7 @@ $(document).ready(function() {
 		var pinPattern = /^[1-9][0-9]{5}$/;
 		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		const cinPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/; // Alpha + numeric + special char
-		const tanPattern = /^[A-Za-z0-9]+$/; // Alphanumeric only
+		const tanPattern = /^[A-Z]{4}[0-9]{5}[A-Z]{1}$/;
 
 		let isValid = true;
 
@@ -189,7 +189,7 @@ $(document).ready(function() {
 			$('#helplineNo').focus();
 			isValid = false;
 		} else if (!contactPattern.test(helplineNo)) {
-			alert("Please enter a valid 10-digit mobile number.");
+			alert("Please enter a valid 10-digit HelpLine number.");
 			$('#helplineNo').focus();
 			return false;
 		}
@@ -212,6 +212,10 @@ $(document).ready(function() {
 			$('#chkbranchManagerContactNo').text('* This field is required');
 			$('#branchManagerContactNo').focus();
 			isValid = false;
+		} else if (!contactPattern.test(branchManagerContactNo)) {
+			alert("Please enter a valid 10-digit Branch Manager Contact Number.");
+			$('#branchManagerContactNo').focus();
+			return false;
 		}
 
 		if (!isValid) {
@@ -234,16 +238,17 @@ $(document).ready(function() {
 			declaredValue: $("#declaredValue").val(),
 			address: $("#address").val(),
 			state: $("#state").val(),
+			city: $("#city").val(),
 			pinCode: $("#pinCode").val(),
 			emailId: $("#emailId").val(),
 			authorizedShareCapital: $("#authorizedShareCapital").val(),
 			paidUpCapital: $("#paidUpCapital").val(),
 			nof: noOfShares,
-			contactNo: $("#contactNo").val(),
+			helplineNo: $("#helplineNo").val(),
 			tdsWithPan: $("#tdsWithPan").val(),
 			tdsWithoutPan: $("#tdsWithoutPan").val(),
 			taxDeduction: $("#taxDeduction").val(),
-			seniorCitizenTaxDeduction: $("#seniorCitizenTaxDeduction").val()
+			branchManagerContactNo: $("#branchManagerContactNo").val()
 		};
 
 		$.ajax({

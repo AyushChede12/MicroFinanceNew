@@ -87,11 +87,11 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Add Category <span class="star">*</span></label> <input
 									type="text" name="category" id="category"
-									placeholder="Enter Category" /> <small id="chkcategory"
+									placeholder="Enter Category" style="text-transform: uppercase;"/> <small id="chkcategory"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -99,7 +99,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="d-flex flex-column formFields">
 							<label for="">Add Caste <span class="star">*</span></label> <input
 								type="text" name="caste" id="caste" required="required"
-								placeholder="Enter Caste" /> <small id="chkcaste"
+								placeholder="Enter Caste" style="text-transform: uppercase;"/> <small id="chkcaste"
 								style="color: red;"></small>
 						</div>
 
@@ -107,7 +107,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="col-12 text-center">
 								<button id="saveBtn" class="btnStyle bg-warning"
 									onclick="saveCategory()">Add</button>
-									<button id="updateBtn" class="btnStyle bg-success"
+									<button type="button" id="updateBtn" class="btnStyle bg-success"
 									onclick="updateCategory()">Update</button>
 							</div>
 						</div>
