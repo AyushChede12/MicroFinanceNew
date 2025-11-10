@@ -116,7 +116,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Full Name <span class="star">*</span></label> <input
 									type="text" name="fullName" id="fullName" required="required"
-									placeholder="Enter Full Name" style="text-transform: uppercase;"/> <small id="chkfullname"
+									placeholder="Enter Full Name"
+									style="text-transform: uppercase;" /> <small id="chkfullname"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -137,8 +138,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">DIN/Promoter No <span class="star">*</span></label>
 								<input type="text" name="promoterNo" id="promoterNo"
-									required="required" placeholder="Enter Promoter No" style="text-transform: uppercase;"/> <small
-									id="chkpromoterno" style="color: red;"></small>
+									required="required" placeholder="Enter Promoter No"
+									style="text-transform: uppercase;" /> <small id="chkpromoterno"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -156,7 +158,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Nominee Name <span class="star">*</span></label> <input
 									type="text" name="relationName" id="relationName"
-									required="required" placeholder="Enter Relation Name" style="text-transform: uppercase;"/> <small
+									required="required" placeholder="Enter Relation Name"
+									style="text-transform: uppercase;" /> <small
 									id="chkrelationname" style="color: red;"></small>
 							</div>
 						</div>
@@ -187,8 +190,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">District <span class="star">*</span></label> <input
 									type="text" name="district" id="district" required="required"
-									placeholder="Enter District" style="text-transform: uppercase;"/> <small id="chkdistrict"
-									style="color: red;"></small>
+									placeholder="Enter District" style="text-transform: uppercase;" />
+								<small id="chkdistrict" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -223,8 +226,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Pin Code <span class="star">*</span></label> <input
 									type="text" name="pinCode" id="pinCode" required="required"
-									placeholder="Enter Pincode" style="text-transform: uppercase;"/> <small id="chkpincode"
-									style="color: red;"></small>
+									placeholder="Enter Pincode" style="text-transform: uppercase;" />
+								<small id="chkpincode" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -232,7 +235,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Aadhar No <span class="star">*</span></label> <input
 									type="text" name="aadharNo" id="aadharNo" required="required"
-									placeholder="Enter Aadhar No" style="text-transform: uppercase;" /> <small id="chkaadharno"
+									placeholder="Enter Aadhar No"
+									style="text-transform: uppercase;" /> <small id="chkaadharno"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -241,8 +245,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">PAN No <span class="star">*</span></label> <input
 									type="text" name="panNo" id="panNo" required="required"
-									placeholder="Enter PAN No" style="text-transform: uppercase;"/> <small id="chkpanno"
-									style="color: red;"></small>
+									placeholder="Enter PAN No" style="text-transform: uppercase;" />
+								<small id="chkpanno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -253,7 +257,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Contact No <span class="star">*</span></label> <input
 									type="text" name="contactNo" id="contactNo" required="required"
-									placeholder="Enter Contact No" style="text-transform: uppercase;"/> <small id="chkcontactno"
+									placeholder="Enter Contact No"
+									style="text-transform: uppercase;" /> <small id="chkcontactno"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -262,8 +267,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Email ID <span class="star">*</span></label> <input
 									type="text" name="emailId" id="emailId" required="required"
-									placeholder="Enter Email ID" style="text-transform: uppercase;" /> <small id="chkemailid"
-									style="color: red;"></small>
+									placeholder="Enter Email ID" style="text-transform: uppercase;" />
+								<small id="chkemailid" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -273,7 +278,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Base Value</label> <input type="text"
 									name="baseValue" id="baseValue" required="required"
-									placeholder="Enter Base Value" style="text-transform: uppercase;"/>
+									placeholder="Enter Base Value"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -281,7 +287,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Shares Count</label> <input type="text"
 									name="shareCount" id="shareCount" required="required"
-									placeholder="Enter Shares Count" style="text-transform: uppercase;"/>
+									placeholder="Enter Shares Count"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -289,7 +296,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Share Amount</label> <input type="text"
 									readonly="readonly" name="shareAmount" id="shareAmount"
-									required="required" placeholder="Enter Share Amount" style="text-transform: uppercase;"/>
+									required="required" placeholder="Enter Share Amount"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -374,7 +382,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</label> <label for="panCard" id="drop-area"> <input type="file"
 								accept="image/*" name="panCard" id="panCard" hidden="hidden"
 								onchange="panUpload();"
-								style="background-size: cover; background-repeat: no-repeat " />
+								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="panPreview" /><input type="hidden" name="panHidden"
@@ -438,8 +446,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="bankName">Bank Name <span class="star">*</span></label>
 								<input type="text" name="bankName" id="bankName"
-									required="required" placeholder="Enter Bank Name" style="text-transform: uppercase;"/> <small
-									id="chkbankname" style="color: red;"></small>
+									required="required" placeholder="Enter Bank Name"
+									style="text-transform: uppercase;" /> <small id="chkbankname"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -447,8 +456,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="ifscCode">IFSC Code <span class="star">*</span></label>
 								<input type="text" name="ifscCode" id="ifscCode"
-									required="required" placeholder="Enter IFSC Code" style="text-transform: uppercase;"/> <small
-									id="chkifsccode" style="color: red;"></small>
+									required="required" placeholder="Enter IFSC Code"
+									style="text-transform: uppercase;" /> <small id="chkifsccode"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -456,17 +466,19 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="micrCode">MICR Code <span class="star">*</span></label>
 								<input type="text" name="micrCode" id="micrCode"
-									required="required" placeholder="Enter MICR Code" style="text-transform: uppercase;"/> <small
-									id="chkmicrcode" style="color: red;"></small>
+									required="required" placeholder="Enter MICR Code"
+									style="text-transform: uppercase;" /> <small id="chkmicrcode"
+									style="color: red;"></small>
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="accountNo">Account Number <span class="star">*</span></label>
 								<input type="text" name="accountNo" id="accountNo"
-									required="required" placeholder="Enter Account Number" style="text-transform: uppercase;"/> <small
-									id="chkaccountno" style="color: red;"></small>
+									required="required" placeholder="Enter Account Number"
+									style="text-transform: uppercase;" /> <small id="chkaccountno"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -479,8 +491,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<button type="button" id="hideBtn" class="btnStyle bg-success"
 								onclick="hideTableData()">Hide</button>
 							<button type="button" id="saveBtn" class="btnStyle bg-warning">Save</button>
-							<button type="button" id="updateBtn" class="btnStyle bg-success"
-								onclick="updateBranch()">Update</button>
+							<button type="button" id="updateBtn" class="btnStyle bg-success">Update</button>
 						</div>
 					</div>
 			</form>
@@ -500,22 +511,22 @@ pageEncoding="ISO-8859-1"%> -->
 							Executive Founder Data <span>| Table View</span>
 						</h5>
 
-						<table class="table table-borderless datatable overflow-scroll"
-							id="tableBody">
+						<table
+							class="table table-borderless table-hover align-middle text-center text-nowrap datatable overflow-scroll">
 							<thead class="table-light">
 								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Sr No</th>
-									<th scope="col">Name</th>
-									<th scope="col">Branch Name</th>
-									<th scope="col">Appointment Date</th>
-									<th scope="col">Address</th>
-									<th scope="col">Email</th>
-									<th scope="col">Contact</th>
-									<th scope="col">Edit</th>
-									<th scope="col">Delete</th>
+									<th scope="col">SR NO</th>
+									<th scope="col">NAME</th>
+									<th scope="col">BRANCH NAME</th>
+									<th scope="col">APPOINTMENT DATE</th>
+									<th scope="col">ADDRESS</th>
+									<th scope="col">EMAIL</th>
+									<th scope="col">CONTACT</th>
+									<th scope="col">EDIT</th>
+									<th scope="col">DELETE</th>
 								</tr>
 							</thead>
-							<tbody id="tableBody">
+							<tbody>
 
 							</tbody>
 						</table>
