@@ -718,11 +718,6 @@
 							style="font-family: 'Poppins', sans-serif">Approve DD</span>
 					</a></li>
 
-					<li><a href="approveRecurring"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Approve
-								Recurring Deposits</span>
-					</a></li>
-
 					<li><a href="approveSaving"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Approve
 								Saving Transactions</span>

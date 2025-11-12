@@ -91,7 +91,7 @@ $(document).ready(function () {
 //anjali (loan Application)
 $(document).ready(function () {
     $.ajax({
-        url: "api/loanmanegment/getAllLoanIds",  // your API endpoint
+        url: "api/loanmanegment/getStatementLoanId",  // your API endpoint
         type: "GET",
         dataType: "json",
         success: function (response) {
@@ -106,6 +106,28 @@ $(document).ready(function () {
         error: function (xhr, status, error) {
             console.error("Error fetching Loan IDs:", error);
             $("#loanApplication h6").text("0");
+        }
+    });
+});
+
+//anjali ( Share Issues)
+$(document).ready(function () {
+    $.ajax({
+        url: "api/customershareholdingcontroller/getAllTransferShare",  // your API endpoint
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+            if (response && response.data && Array.isArray(response.data)) {
+                let count = response.data.length;
+                console.log("Total Transfer Share:", count);
+                $("#ShareIssueCount h6").text(count); // ✅ fixed selector
+            } else {
+                $("#ShareIssueCount h6").text("0");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching Loan IDs:", error);
+            $("#ShareIssueCount h6").text("0");
         }
     });
 });

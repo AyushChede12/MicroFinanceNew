@@ -118,7 +118,7 @@ pageEncoding="ISO-8859-1"%> -->
 										</div>
 
 										<div class="ps-3" id="ShareIssueCount">
-											<h6>3246</h6>
+											<h6></h6>
 										</div>
 									</div>
 								</div>
