@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -362,7 +363,7 @@ public class PreferenceController {
 			@RequestParam(value = "signature", required = false) MultipartFile signature,
 			@RequestParam(value = "aadharCard", required = false) MultipartFile aadharCard,
 			@RequestParam(value = "panCard", required = false) MultipartFile panCard,
-			@RequestParam(value = "cheque", required = false) MultipartFile cheque) {
+			@RequestParam(value = "cheque", required = false) MultipartFile cheque, Model model) {
 
 		if (photo != null) {
 			System.out.println("Received photo: " + photo.getOriginalFilename());
@@ -382,6 +383,7 @@ public class PreferenceController {
 
 		ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo,
 				signature, aadharCard, panCard, cheque);
+
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
 				executiveFounderDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
@@ -411,11 +413,12 @@ public class PreferenceController {
 	}
 
 	@GetMapping("/fetchExecutiveFounderById") // Ayush
-	public ResponseEntity<ApiResponse<ExecutiveFounder>> findExecutiveFounderById(@RequestParam("id") Long id) {
-		Optional<ExecutiveFounder> exePromoter = preferenceService.findExecutiveFounderById(id);
-		if (exePromoter.isPresent()) {
+	public ResponseEntity<ApiResponse<ExecutiveFounder>> findExecutiveFounderById(@RequestParam("id") Long id, Model model) {
+		Optional<ExecutiveFounder> executive = preferenceService.findExecutiveFounderById(id);
+		model.addAttribute("executive", executive);
+		if (executive.isPresent()) {
 			ApiResponse<ExecutiveFounder> response = new ApiResponse<>(HttpStatus.FOUND,
-					"Executive Founder fetched successfully", exePromoter.get());
+					"Executive Founder fetched successfully", executive.get());
 			return ResponseEntity.ok(response);
 		} else {
 			ApiResponse<ExecutiveFounder> response = new ApiResponse<>(HttpStatus.NOT_FOUND,

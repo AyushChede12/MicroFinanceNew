@@ -91,23 +91,23 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Add Category <span class="star">*</span></label> <input
 									type="text" name="category" id="category"
-									placeholder="Enter Category" style="text-transform: uppercase;"/> <small id="chkcategory"
-									style="color: red;"></small>
+									placeholder="Enter Category" style="text-transform: uppercase;" />
+								<small id="chkcategory" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="d-flex flex-column formFields">
 							<label for="">Add Caste <span class="star">*</span></label> <input
 								type="text" name="caste" id="caste" required="required"
-								placeholder="Enter Caste" style="text-transform: uppercase;"/> <small id="chkcaste"
-								style="color: red;"></small>
+								placeholder="Enter Caste" style="text-transform: uppercase;" />
+							<small id="chkcaste" style="color: red;"></small>
 						</div>
 
 						<div class="row" style="margin-top: 15px; margin-left: 10px;">
 							<div class="col-12 text-center">
 								<button id="saveBtn" class="btnStyle bg-warning"
 									onclick="saveCategory()">Add</button>
-									<button type="button" id="updateBtn" class="btnStyle bg-success"
+								<button type="button" id="updateBtn" class="btnStyle bg-success"
 									onclick="updateCategory()">Update</button>
 							</div>
 						</div>
@@ -135,12 +135,25 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="row mt-5">
 							<div class="col-12">
 								<div class="card recent-sales">
-
 									<div class="card-body table-responsive">
-										<h5 class="card-title">
-											Category Details <span>| Table View</span>
-										</h5>
+										<!-- Title + Search bar in same line -->
+										<div
+											class="d-flex justify-content-between align-items-center mb-3">
+											<h5 class="card-title mb-0"
+												style="font-family: 'Poppins', sans-serif;">
+												Category Details <span>| Table View</span>
+											</h5>
 
+											<!-- Search bar -->
+											<div class="input-group" style="width: 250px;">
+												<span class="input-group-text"><i
+													class="bi bi-search"></i></span> <input type="text"
+													id="searchCategory" class="form-control"
+													placeholder="Search..." />
+											</div>
+										</div>
+
+										<!-- Table -->
 										<table
 											class="table table-borderless datatable overflow-scroll">
 											<thead class="table-light">
@@ -153,7 +166,7 @@ pageEncoding="ISO-8859-1"%> -->
 												</tr>
 											</thead>
 											<tbody id="tableBody">
-
+												<!-- Rows will be dynamically added here -->
 											</tbody>
 										</table>
 									</div>

@@ -106,7 +106,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="toDate">TO Date :</label> <input type="date"
+								<label for="toDate">To Date :</label> <input type="date"
 									name="toDate" id="toDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
