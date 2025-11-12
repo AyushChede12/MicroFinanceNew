@@ -3,6 +3,7 @@ package com.microfinance.controller;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.xmlbeans.impl.store.CharUtil.CharJoin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,8 @@ import com.microfinance.model.ApplyForGroupLoan;
 import com.microfinance.model.CreateLendingGroup;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.GroupDirectory;
+import com.microfinance.model.GroupInstallmentRepayment;
+import com.microfinance.model.GroupLoanPayment;
 import com.microfinance.model.InstallmentRepayment;
 import com.microfinance.model.LoanApplication;
 import com.microfinance.model.LoanAprroval;
@@ -33,15 +36,12 @@ import com.microfinance.service.JointLiabilityLoanService;
 @RestController
 @RequestMapping("/api/joinliability")
 public class JointLiabilityLoanController {
-	
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
-	
 	@Autowired
 	JointLiabilityLoanService jointLiabilityLoanService;
-
 
 	@PostMapping("/createLendingGroupsave")
 	public ResponseEntity<ApiResponse<CreateLendingGroup>> saveLendingGroup(
@@ -124,8 +124,7 @@ public class JointLiabilityLoanController {
 		}
 	}
 
-
-	//Api for Saving Group Directory details
+	// Api for Saving Group Directory details
 	@PostMapping("/savegroupdirectory")
 	public ResponseEntity<ApiResponse<GroupDirectory>> saveGroupDirectory(@RequestBody GroupDirectory groupDirectory) {
 
@@ -223,7 +222,7 @@ public class JointLiabilityLoanController {
 		}
 	}
 
-    // Apply For group loan
+	// Apply For group loan
 	@PostMapping("/saveGroupLoan")
 	public ResponseEntity<ApiResponse<ApplyForGroupLoan>> saveGroupLoan(@RequestBody ApplyForGroupLoan applyGroupLoan) {
 		boolean isSaved = jointLiabilityLoanService.saveGroupLoan(applyGroupLoan);
@@ -302,63 +301,21 @@ public class JointLiabilityLoanController {
 		}
 	}
 
-	// feach Apply loan group
-	@PostMapping("/fetchByGroupCode")
+	// This is the api for fetching the data from apply group loan
+	@GetMapping("/fetchByGroupCode")
 	public ApiResponse<List<ApplyForGroupLoan>> fetchApplyGroupLoanByGroupcode(
 			@RequestParam("groupCode") String groupCode) {
+
 		List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchApplyGroupLoanByGroupcode(groupCode);
+
 		if (list != null && !list.isEmpty()) {
-			return ApiResponse.success(HttpStatus.FOUND, "Group Directory Fetched Successfully", list);
+			return ApiResponse.success(HttpStatus.FOUND, "Group Loan & Directory Fetched Successfully", list);
 		} else {
-			return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Directory Not Found");
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "Group Loan Not Found for this Group Code");
 		}
 	}
 
-	// feath the property form Installment Re-Payment
-	@PostMapping("/fetchBygroupCode")
-	public ApiResponse<List<ApplyForGroupLoan>> fetchBygroupCode(@RequestParam("groupCode") String groupCode) {
-		List<ApplyForGroupLoan> list = jointLiabilityLoanService.fetchBygroupCode(groupCode);
-		if (list != null && !list.isEmpty()) {
-			return ApiResponse.success(HttpStatus.FOUND, "Lending Group Plan Fetched Successfully", list);
-		} else {
-			return ApiResponse.error(HttpStatus.NOT_FOUND, "Lending Group Plan Not Found");
-		}
-
-	}
-
-	// save installment repayments
-	@PostMapping("/saveRepayment")
-	public ResponseEntity<ApiResponse<InstallmentRepayment>> saveRepayment(
-			@RequestBody InstallmentRepayment repayment) {
-		boolean isSaved = jointLiabilityLoanService.saveRepayment(repayment);
-
-		if (isSaved) {
-			ApiResponse<InstallmentRepayment> response = ApiResponse.success(HttpStatus.CREATED,
-					"Repayment saved successfully", repayment);
-			return ResponseEntity.status(HttpStatus.CREATED).body(response);
-		} else {
-			ApiResponse<InstallmentRepayment> response = ApiResponse.error(HttpStatus.BAD_REQUEST,
-					"Failed to save repayment.");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-		}
-	}
-
-	@GetMapping("/view")
-	public ResponseEntity<ApiResponse<List<InstallmentRepayment>>> viewAllRepayments() {
-		List<InstallmentRepayment> all = jointLiabilityLoanService.getAllRepayments();
-
-		if (all != null && !all.isEmpty()) {
-			ApiResponse<List<InstallmentRepayment>> response = ApiResponse.success(HttpStatus.OK,
-					"All repayments fetched successfully.", all);
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<List<InstallmentRepayment>> response = ApiResponse.error(HttpStatus.NOT_FOUND,
-					"No repayment records found.");
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
-		}
-	}
-
-	// ✅ API for fetching Approved & Active Group Loan IDs (Vaibhav)
+	// API for fetching Approved & Active Group Loan IDs (Vaibhav)
 	@GetMapping("/getApprovedGroupLoanIds")
 	public ResponseEntity<ApiResponse<List<String>>> getApprovedGroupLoanIds() {
 		List<String> approvedGroupLoanIds = jointLiabilityLoanService.getApprovedGroupLoanIds();
@@ -369,6 +326,62 @@ public class JointLiabilityLoanController {
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND)
 					.body(new ApiResponse<>(HttpStatus.NOT_FOUND, "No approved and active group loans found", null));
+		}
+	}
+
+	// Api for saving the group loan payment to the group members
+	@PostMapping("/saveloanPayment")
+	public ResponseEntity<ApiResponse<GroupLoanPayment>> saveGroupLoanPayment(@RequestBody GroupLoanPayment groupLoan) {
+		try {
+			boolean isSaved = jointLiabilityLoanService.saveGroupLoanPayment(groupLoan);
+			if (isSaved) {
+				return ResponseEntity.status(HttpStatus.CREATED)
+						.body(ApiResponse.success(HttpStatus.CREATED, "Loan Payment saved successfully", groupLoan));
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error(HttpStatus.BAD_REQUEST,
+						"Failed to save Loan Payment (service returned false)"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error: " + e.getMessage()));
+		}
+	}
+
+	@GetMapping("/fetchGroupLoanPayment")
+	public ApiResponse<List<GroupLoanPayment>> fetchGroupLoanPayment(@RequestParam("groupID") String groupID) {
+
+		List<GroupLoanPayment> list = jointLiabilityLoanService.fetchGroupLoanPayment(groupID);
+
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Group Loan Payments fetched successfully", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "No loan payments found for this Group ID");
+		}
+	}
+//	
+//	@PostMapping("/grpLoanRepayment")
+//    public ResponseEntity<ApiResponse<GroupInstallmentRepayment>> payGroupLoanInstallment(@RequestBody GroupInstallmentRepayment request) {
+//        ApiResponse<GroupInstallmentRepayment> response = jointLiabilityLoanService.payGroupLoanInstallment(request);
+//        return ResponseEntity.ok(response);
+//    }
+
+	@PostMapping("/saveLoanRepayment")
+	public ResponseEntity<ApiResponse<GroupInstallmentRepayment>> saveLoanRepayment(
+			@RequestBody GroupInstallmentRepayment repayment) {
+		try {
+			boolean isSaved = jointLiabilityLoanService.saveLoanRepayment(repayment);
+			if (isSaved) {
+				return ResponseEntity.status(HttpStatus.CREATED)
+						.body(ApiResponse.success(HttpStatus.CREATED, "Loan repayment saved successfully", repayment));
+			} else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ApiResponse.error(HttpStatus.BAD_REQUEST,
+						"Failed to save loan repayment (service returned false)"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error: " + e.getMessage()));
 		}
 	}
 

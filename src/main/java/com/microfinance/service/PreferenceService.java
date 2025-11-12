@@ -542,4 +542,9 @@ public class PreferenceService {
 		return codeModuleRepo.findAll();
 	}
 
+	public Optional<CategoryModule> findCategoryModuleById(Long id) {
+		// TODO Auto-generated method stub
+		return categoryModuleRepo.findById(id);
+	}
+
 }

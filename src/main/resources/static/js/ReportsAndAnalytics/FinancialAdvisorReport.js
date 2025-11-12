@@ -1,10 +1,10 @@
 // janvi : search In The Financial Consultants on Table
 //Fetch Unapproved Financial Consultants
-let allFinancialConsultants = []; 
+let allFinancialConsultants = [];
 
 function searchFinancialConsultants() {
 	$.ajax({
-		url: "/api/reports/getApprovedFinancialConsultant",
+		url: "api/reports/getApprovedFinancialConsultant",
 		type: "get",
 		contentType: "application/json",
 		success: function(response) {
@@ -38,15 +38,17 @@ function renderTable(data) {
 				<td>${item.dob || '-'}</td>
 				<td>${item.contactNo || '-'}</td>				
 			    <td>
-					<button class="iconbutton editBtn" data-id="${item.id}" title="Print">
-						<i class="bi bi-floppy-fill" style="color: green;"></i>
-					</button>
+				<button class="btn btn-outline-success btn-sm bankReportBtn no-bg" data-id="${item.id}" data-bs-toggle="modal" data-bs-target="#bankReportModal" title="Bank Report">
+				    <i class="bi bi-printer" style="color: green;"></i>
+				</button>
 				</td>
             </tr>
         `;
 		tbody.append(row);
 	});
 }
+
+
 //Janvi :09/07/2025
 // Event listener for clicking the VIEW button
 $(document).ready(function() {
@@ -60,79 +62,79 @@ $(document).ready(function() {
 
 //Janvi :09/07/2025
 function ViewDataAdvisor(id) {
-    $.ajax({
-        url: "/api/financialconsultant/getFinancialConsultantById",
-        type: "GET",
-        data: { id: id },
-        success: function(response) {
-            if (response.status === "OK" && response.data) {
-                const data = response.data;
-                console.log("Fetched data:", data);
+	$.ajax({
+		url: "api/financialconsultant/getFinancialConsultantById",
+		type: "GET",
+		data: { id: id },
+		success: function(response) {
+			if (response.status === "OK" && response.data) {
+				const data = response.data;
+				console.log("Fetched data:", data);
 
-                $("#id").val(data.id || '');
-                $("#branchName").text(data.branchName || '');
-                $("#financialCode").text(data.financialCode || '');
-                $("#joiningDate").text(data.joiningDate || '');
-                $("#customerName").text(data.customerName || '');
-                $("#dob").text(data.dob || '');
-                $("#contactNo").text(data.contactNo || '');
-                $("#customerAddress").text(data.customerAddress || '');
-                $("#guardianName").text(data.guardianName || '');
-                $("#relationToApplicant").text(data.relationToApplicant || '');
-                $("#nomineeName").text(data.nomineeName || '');
-                $("#district").text(data.district || '');
-                $("#state").text(data.state || '');
-                $("#pinCode").text(data.pinCode || '');
-                $("#profession").text(data.profession || '');
-                $("#academicBackground").text(data.academicBackground || '');
-                $("#selectPosition").text(data.selectPosition || '');
-                $("#referralCode").text(data.referralCode || '');
-                $("#referralName").text(data.referralName || '');
-            } else {
-                alert("No data found for the selected financial consultant.");
-            }
-        },
-        error: function() {
-            alert("Failed to fetch data.");
-        }
-    });
+				$("#id").val(data.id || '');
+				$("#branchName").text(data.branchName || '');
+				$("#financialCode").text(data.financialCode || '');
+				$("#joiningDate").text(data.joiningDate || '');
+				$("#customerName").text(data.customerName || '');
+				$("#dob").text(data.dob || '');
+				$("#contactNo").text(data.contactNo || '');
+				$("#customerAddress").text(data.customerAddress || '');
+				$("#guardianName").text(data.guardianName || '');
+				$("#relationToApplicant").text(data.relationToApplicant || '');
+				$("#nomineeName").text(data.nomineeName || '');
+				$("#district").text(data.district || '');
+				$("#state").text(data.state || '');
+				$("#pinCode").text(data.pinCode || '');
+				$("#profession").text(data.profession || '');
+				$("#academicBackground").text(data.academicBackground || '');
+				$("#selectPosition").text(data.selectPosition || '');
+				$("#referralCode").text(data.referralCode || '');
+				$("#referralName").text(data.referralName || '');
+			} else {
+				alert("No data found for the selected financial consultant.");
+			}
+		},
+		error: function() {
+			alert("Failed to fetch data.");
+		}
+	});
 }
 
 function goBack() {
-    window.history.back();
+	window.history.back();
 }
 
 
 //Janvi : Apply filter
 function filterDataByBranchName() {
-    const selectedbranchName = $('#branchName').val().trim().toLowerCase();
-    const fromDateVal = $('#fromDate').val();
-    const toDateVal = $('#toDate').val();
+	const selectedbranchName = $('#branchName').val().trim().toLowerCase();
+	const fromDateVal = $('#fromDate').val();
+	const toDateVal = $('#toDate').val();
 
-    const fromDate = fromDateVal ? new Date(fromDateVal) : null;
-    const toDate = toDateVal ? new Date(toDateVal) : null;
+	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
+	const toDate = toDateVal ? new Date(toDateVal) : null;
 
-    const filtered = allFinancialConsultants.filter(item => {
-        const branchName = item.branchName ? item.branchName.trim().toLowerCase() : "";
-        const joiningDate = item.joiningDate ? new Date(item.joiningDate) : null;
+	const filtered = allFinancialConsultants.filter(item => {
+		const branchName = item.branchName ? item.branchName.trim().toLowerCase() : "";
+		const joiningDate = item.joiningDate ? new Date(item.joiningDate) : null;
 
-        const matchesbranch = selectedbranchName ? branchName === selectedbranchName : true;
+		const matchesbranch = selectedbranchName ? branchName === selectedbranchName : true;
 
-        let matchesFrom = true;
-        let matchesTo = true;
+		let matchesFrom = true;
+		let matchesTo = true;
 
-        if (fromDate && joiningDate) {
-            matchesFrom = joiningDate.getTime() >= fromDate.getTime();
-        }
+		if (fromDate && joiningDate) {
+			matchesFrom = joiningDate.getTime() >= fromDate.getTime();
+		}
 
-        if (toDate && joiningDate) {
-            matchesTo = joiningDate.getTime() <= toDate.getTime();
-        }
+		if (toDate && joiningDate) {
+			matchesTo = joiningDate.getTime() <= toDate.getTime();
+		}
 
-        return matchesbranch && matchesFrom && matchesTo;
-    });
+		return matchesbranch && matchesFrom && matchesTo;
+	});
 
-    renderTable(filtered);
+	renderTable(filtered);
 }
 
 

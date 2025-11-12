@@ -1,3 +1,4 @@
+let policyid=0;
 $(document).ready(function () {
     $('#plantype').on('change', function () {
         let plantype = $(this).val();
@@ -61,7 +62,6 @@ $(document).ready(function () {
 
 	                if (response.data) {
 	                    let data = response.data;
-
 	                    $('#planCode').val(data.schemeCode);
 	                    $('#customerName').val(data.customerName);
 	                    $('#policyName').val(data.schemeName);
@@ -75,10 +75,9 @@ $(document).ready(function () {
 						$('#sysPayable').val(sysPayable(data)); //function sysPayable(data)
 						$('#deduction').val(Deduction(data));	//function Deduction(data)					
 						$('#netPayable').val(netPayment(data)); //dunction netpay(data)
-					$('#amount').off('blur').on('blur', function () {
 						$('#dueAmount').val(DueAmount(data));	//function DueAmount(data)
-						
-						});
+						let id=parseInt(data.id);
+						policyid=id;
 						
 						
 
@@ -144,7 +143,6 @@ $(document).ready(function () {
 		  console.log("Parsed Code:", teamMemberCode);
 		  console.log("Parsed Name:", teamMemberName);
 		  
-		 let newdeposit=calculateDepositAmount();
 
 	    var data = {
 	        policyCode: $("#policyCode").val(),
@@ -161,13 +159,10 @@ $(document).ready(function () {
 	        approveBranch: $("#Approvebranch").val(),
 	        teamMemberCode: teamMemberCode,
 	        teamMemberName: teamMemberName,
-	        amount: $("#amount").val(),
-	        depositAmount: newdeposit,
+			closingDate: $("#closingDate").val(),
+	        depositAmount: $("#depositAmount").val(),
 	        dueAmount: $("#dueAmount").val(),
-	        paymentDate: $("#paymentDate").val(),
-	        branchName: $("#branchName").val(),
-	        payComment: $("#payComment").val(),
-	        modeofPayment: $("#modeofPayment").val()
+	        Comment: $("#Comment").val(),
 	    };
 
 		$.ajax({
@@ -197,7 +192,7 @@ $(document).ready(function () {
 });
 
 
-function calculateDepositAmount(){
+/*function calculateDepositAmount(){
 	let amount = parseFloat($('#amount').val()) || 0;
 	let paidAmount = parseFloat($('#depositAmount').val()) || 0;
 	let deposit=0;
@@ -208,40 +203,35 @@ function calculateDepositAmount(){
 		}
 		return deposit;
 	
-}
+}*/
 
 
 function updateAddNewInvestmentAmount(data)
 {
 	
-	let policyCode = $("#policyCode").val();
-	let depositamount =  calculateDepositAmount(data);
+	//let policyCode = $("#policyCode").val();
+	//let policyid=parseInt(data.id);
+	alert(policyid);
 
 	    // Validate before sending (optional)
-	    if (!policyCode || !depositAmount) {
-	        alert("Please enter both Policy Code and Deposit Amount.");
+	    if (!policyid) {
+	        alert("Please enter both Policy Code");
 	        return;
 	    }
-	let details = {
-	        policyCode: policyCode,
-	        depositAmount: depositamount
-	    };
 
 	    // Make the AJAX call
-	    $.ajax({
-	        url: "/api/Policymangment/updateinvestment",  // 👈 adjust this to your actual endpoint
-	        type: "POST",
-	        contentType: "application/json",
-	        data: JSON.stringify(details),
-	        success: function (response) {
-	            alert("Update successful!");
-	            console.log("Updated record:", response);
-	        },
-	        error: function (xhr, status, error) {
-	            console.error("Update failed:", error);
-	            alert("Failed to update installment details.");
-	        }
-	    });
+		$.ajax({
+		    url: "/api/Policymangment/deletePolicyDataById?id=" + policyid,  
+		    type: "POST",
+		    success: function (response) {
+		        alert("Deleted successful!");
+		        console.log("deleted record:", response);
+		    },
+		    error: function (xhr, status, error) {
+		        console.error("delete failed:", error);
+		        alert("Failed to delete installment details.");
+		    }
+		});
 }
 
 function calDuration(data){
@@ -278,40 +268,24 @@ function calDuration(data){
 
 function sysPayable(data){
 	
-	let policyAmount = parseFloat(data.policyAmount);     
-	 let noOfInst = parseInt(data.noOfInstallments);               
-	 let lastInstPaid = parseInt(data.lastInstPaid);       
-	 let rateOfIntrest = parseFloat(data.roi);   
-	let syspayable=0;
-													
-	if (!isNaN(policyAmount) && !isNaN(noOfInst) && !isNaN(lastInstPaid) && !isNaN(rateOfIntrest))
- {
-								                        
-	let paidPrincipal = (policyAmount * lastInstPaid) / noOfInst;
-
-	let interest = (policyAmount * rateOfIntrest * (lastInstPaid / noOfInst)) / 100;
-
-	syspayable = paidPrincipal + interest;
-	alert(syspayable);
-														 
-}
-return syspayable;							
+	let depositAmount = parseFloat(data.depositAmount);                    
+		 let rateOfIntrest = parseFloat(data.roi);   
+		 let syspayable=0;
+		 let intrest=0;
+		
+		
+		 intrest=(depositAmount*rateOfIntrest*1)/100;
+		 syspayable=depositAmount+intrest;
+		
+		return syspayable;						
 							
 }
 
 function Deduction(data){
 	
-	let noOfInst = parseInt(data.noOfInstallments);               // e.g. 12
-	 let lastInstPaid = parseInt(data.lastInstPaid); 
-	let deduction =0;
-
-	if (!isNaN(noOfInst) && !isNaN(lastInstPaid))
-	 {
-		let missedInst = noOfInst - lastInstPaid;
-		deduction = missedInst * 2.0;
-	 }
-	 
-	 return deduction;
+	let deduct=(200*18)/100;
+		
+		return deduct;
 }
 
 function netPayment(data){

@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class ApplyForGroupLoan {
@@ -55,7 +56,9 @@ public class ApplyForGroupLoan {
     private String approvalDate;
     private String loanSchemeName;
     
+    @Transient
     private String photo;
+    @Transient
     private String signature;
     
 	public Long getId() {

@@ -256,17 +256,16 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					
 					<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Panelty (if any):</label> <input type="text" name="panelty"
-									id="panelty" required="required" placeholder=""
-									style="text-transform: uppercase;" />
+							
+							<div class="d-flex flex-column formFields">
+								<label for="">Closing Date: <span id="star"> *</span></label> <input type="date"
+									name="closingDate" id="closingDate" required="required"
+									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-
+ 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
@@ -287,9 +286,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Remark :</label> <input type="text" name="remark"
-									id="remark" required="required" placeholder=""
-									style="text-transform: uppercase;" />
+								<label>Comment :</label> <input type="text" name="Comment"
+									id="Comment" required="required" placeholder=""
+									/>
 							</div>
 						</div>
 					</div>
@@ -300,7 +299,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
+							<button id="saveBtn" class="btn btn-danger">Break</button>
 						</div>
 					</div>
 				</div>

@@ -13,6 +13,7 @@ import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.ApplyForGoldRepo;
 import com.microfinance.repository.GoldDirectoryRepo;
+import com.microfinance.repository.GoldLoanApprovalRepo;
 import com.microfinance.repository.GoldSecurePlanRepo;
 
 @Service
@@ -29,6 +30,9 @@ public class SecuredGoldLoanService {
 	
 	@Autowired
 	AddCustomerRepo addCustomerRepo;
+	
+	@Autowired
+	GoldLoanApprovalRepo goldLoanApprovalRepo;
 	
 
 
@@ -156,6 +160,16 @@ public class SecuredGoldLoanService {
             e.printStackTrace();
             return false;
         }
+	}
+
+	public List<ApplyForGold> getAllGoldLoanCustomer() {
+		// TODO Auto-generated method stub
+		return applyForGoldRepo.findAll();
+	}
+
+	public List<ApplyForGold> getByGoldIDforApproval(String goldID) {
+		// TODO Auto-generated method stub
+		return goldLoanApprovalRepo.findByGoldID(goldID);
 	}
 
 	
