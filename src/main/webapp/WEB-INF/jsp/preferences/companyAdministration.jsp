@@ -54,6 +54,32 @@ pageEncoding="ISO-8859-1"%> -->
 	padding: 4px;
 	border-radius: 8px;
 }
+.img-box {
+    position: relative;
+    display: inline-block;
+}
+
+.img-box .deleteImg {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+}
+
+.img-box:hover .deleteImg {
+    display: block;
+}
+
 </style>
 
 </head>
@@ -321,8 +347,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>TDS (Without PAN) <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="tdsWithoutPan"
-									id="tdsWithoutPan" required="required"
-									placeholder="Enter TDS"
+									id="tdsWithoutPan" required="required" placeholder="Enter TDS"
 									style="text-transform: uppercase;" /> <small
 									id="chktdswithoutpan" style="color: red;"></small>
 							</div>
@@ -356,12 +381,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 					</div>
 
+					<!-- relevant HTML: keep your container as you posted -->
 					<div class="container mt-4">
 						<div class="row">
 							<div class="col-lg-12">
-								<h4>Company Image Upload </h4>
+								<h4>Company Image Upload</h4>
 								<div id="fieldContainer">
-									<!-- First field appears automatically -->
 									<div class="textUploadSet mb-4">
 										<input type="text" class="form-control nameField"
 											placeholder="Enter Image Name...">
@@ -373,9 +398,13 @@ pageEncoding="ISO-8859-1"%> -->
 									+</button>
 								<button id="uploadAllBtn" class="btn btn-success mt-2">Upload
 									All</button>
+								<button id="reloadDataBtn" class="btn btn-info mt-2">Reload</button>
+
+								<div id="storedImages" class="mt-4"></div>
 							</div>
 						</div>
 					</div>
+
 
 
 
@@ -458,103 +487,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/companyAdministration.js"></script>
 
-	<script>
-$(document).ready(function() {
-    const companyId = 1; // replace as needed
-    let counter = 1;
-
-    // Function: create a new text field + upload placeholder
-    function createNewTextField() {
-        const newField = `
-            <div class="textUploadSet mb-4">
-                <input type="text" class="form-control nameField" placeholder="Enter Name">
-                <div class="uploadContainer"></div>
-            </div>`;
-        $("#fieldContainer").append(newField);
-    }
-
-    // Add new text field on Add + click
-    $("#addFieldBtn").click(function(e) {
-        e.preventDefault();
-        createNewTextField();
-    });
-
-    // When typing in a text field, show upload below it dynamically
-    $(document).on("input", ".nameField", function() {
-        const nameValue = $(this).val().trim();
-        const uploadDiv = $(this).closest(".textUploadSet").find(".uploadContainer");
-
-        if (nameValue.length > 0) {
-            // Show upload if not already present
-            if (uploadDiv.find("input[type=file]").length === 0) {
-                const uniqueId = "upload-" + Date.now();
-                const uploadField = `
-                    <div class="uploadField mt-2">
-                        <label>${nameValue} <span class="star">*</span></label>
-                        <label for="${uniqueId}" style="cursor:pointer;">
-                            <input type="file" accept="image/*" id="${uniqueId}" hidden onchange="previewImage('${uniqueId}')">
-                            <div id="img-view-${uniqueId}">
-                                <img src="../images/upload/upload.png" alt="upload_icon" id="preview-${uniqueId}">
-                            </div>
-                        </label>
-                    </div>`;
-                uploadDiv.html(uploadField);
-            } else {
-                // Update label text dynamically as user types
-                uploadDiv.find("label:first").text(nameValue + " *");
-            }
-        } else {
-            uploadDiv.html(""); // clear upload if name is empty
-        }
-    });
-
-    // Upload all images (optional feature)
-    $("#uploadAllBtn").click(function() {
-        $(".uploadField input[type=file]").each(function() {
-            const fileInput = this;
-            const fieldName = $(this).closest(".uploadField").find("label:first").text().replace("*", "").trim();
-            const file = fileInput.files[0];
-            if (!file) {
-                alert("Please select image for " + fieldName);
-                return;
-            }
-            const formData = new FormData();
-            formData.append("fieldName", fieldName);
-            formData.append("file", file);
-
-            $.ajax({
-                url: "/api/companyImage/upload/" + companyId,
-                type: "POST",
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function() {
-                    $(fileInput).closest(".uploadField").css("border", "2px solid green");
-                },
-                error: function() {
-                    $(fileInput).closest(".uploadField").css("border", "2px solid red");
-                }
-            });
-        });
-        alert("Upload started for all selected images.");
-    });
-});
-
-// Preview selected image
-function previewImage(id) {
-    const input = document.getElementById(id);
-    const preview = document.getElementById("preview-" + id);
-    const file = input.files[0];
-
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            preview.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-}
-</script>
+	
 
 
 

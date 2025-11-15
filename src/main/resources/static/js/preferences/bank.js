@@ -47,6 +47,16 @@ $(document).ready(function() {
 		var accountNoPattern = /^[0-9]+$/
 		let isValid = true;
 
+		function validateImageSize(file, labelId, fieldName) {
+			if (file) {
+				let fileSizeKB = file.size / 1024; // Convert to KB
+				if (fileSizeKB < 10 || fileSizeKB > 900) {
+					$('#' + labelId).text(`* ${fieldName} size must be between in KB`);
+					isValid = false;
+				}
+			}
+		}
+
 		// Validation
 		if (bankName === '') { $('#chkbankname').text('* This field is required'); isValid = false; }
 		if (accountNo === '') {
@@ -77,6 +87,7 @@ $(document).ready(function() {
 		} else {
 			$('#chkphoto').text('');
 		}
+		validateImageSize(cancelledCheque, 'chkphoto', 'Cheque');
 
 		if (!isValid) return false; // Stop AJAX call if invalid
 
@@ -253,10 +264,13 @@ function viewData(id) {
 				$("#id").val(bank.id);
 				$("#bankName").val(bank.bankName);
 				$("#accountNo").val(bank.accountNo);
+				$("#ifscCode").val(bank.ifscCode);
+				$("#micrCode").val(bank.micrCode);
 				$("#contactNo").val(bank.contactNo);
 				$("#address").val(bank.address);
 				$("#openingDate").val(bank.openingDate);
 				$("#openingBalance").val(bank.openingBalance);
+				$("#closingDate").val(bank.closingDate);
 				if (bank.cancelledCheque) {
 					const photoPath = `Uploads/${bank.cancelledCheque}`;
 					$("#photoPreview").attr("src", photoPath);
@@ -321,6 +335,16 @@ function updateBank() {
 	var contactPattern = /^[6-9][0-9]{9}$/;
 	let isValid = true;
 
+	function validateImageSize(file, labelId, fieldName) {
+		if (file) {
+			let fileSizeKB = file.size / 1024; // Convert to KB
+			if (fileSizeKB < 10 || fileSizeKB > 900) {
+				$('#' + labelId).text(`* ${fieldName} size must be between in KB`);
+				isValid = false;
+			}
+		}
+	}
+
 	// Validation
 	if (bankName === '') { $('#chkbankname').text('* This field is required'); isValid = false; }
 	if (accountNo === '') { $('#chkaccountno').text('* This field is required'); isValid = false; }
@@ -343,6 +367,11 @@ function updateBank() {
 		isValid = false;
 	} else {
 		$('#chkphoto').text('');
+	}
+	validateImageSize(cancelledCheque, 'chkphoto', 'Cheque');
+
+	if (!isValid) {
+		return false; // Stop AJAX call
 	}
 
 	let formData = new FormData();

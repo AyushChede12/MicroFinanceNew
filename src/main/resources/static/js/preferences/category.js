@@ -52,42 +52,7 @@ $(document).ready(function() {
 		});
 	});
 
-	$.ajax({
-		type: "GET",
-		url: "api/preference/getAllCategoryModule",
-		contentType: "application/json",
-		success: function(response) {
-			console.log("Full Response from API:", response);
-			if (response.status == "FOUND") {
-				let data = response.data;
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
-				data.forEach((item, index) => {
-					let row = `<tr>
-					                        <td>${index + 1}</td>
-					                        <td>${(item.category || '').toUpperCase()}</td>
-											<td>${(item.caste || '').toUpperCase()}</td>
-											<td>
-												<button type="button" class="iconbutton" onclick="viewData(${item.id})" title="View">
-													<i class="fa-solid fa-pen-to-square text-primary"></i>
-												</button>
-											</td>											
-											<td>
-												<button type="button" class="iconbutton ms-2" onclick="deleteData(${item.id})" title="Delete">
-													<i class="fa-solid fa-trash text-danger"></i>
-												</button>
-											</td>
-					                    </tr>`;
-					tableBody.append(row);
-				});
-			} else {
-				alert("Failed to fetch Category data: " + response.message);
-			}
-		},
-		error: function() {
-			alert("Error while calling the API.");
-		}
-	});
+
 });
 
 function deleteData(id) {
@@ -139,7 +104,7 @@ function viewData(id) {
 
 function updateCategory() {
 	convertFormToUpperCase();
-	
+
 	$('#chkcategory').text('');
 	$('#chkcaste').text('');
 
@@ -163,7 +128,7 @@ function updateCategory() {
 	if (!isValid) {
 		return false; // Stop AJAX call
 	}
-	
+
 	let payload = {
 		id: $("#id").val(),
 		category: $("#category").val(),
@@ -196,3 +161,63 @@ function convertFormToUpperCase() {
 		}
 	});
 }
+
+let allCategoryData = []; // store all data globally after AJAX fetch
+
+function loadCategoryData() {
+	$.ajax({
+		type: "GET",
+		url: "api/preference/getAllCategoryModule",
+		contentType: "application/json",
+		success: function(response) {
+			console.log("Full Response from API:", response);
+			if (response.status == "FOUND") {
+				allCategoryData = response.data || [];
+				renderCategoryTable(allCategoryData);
+			} else {
+				alert("Failed to fetch Category data: " + response.message);
+			}
+		},
+		error: function() {
+			alert("Error while calling the API.");
+		}
+	});
+}
+
+function renderCategoryTable(data) {
+	let tableBody = $(".datatable tbody");
+	tableBody.empty();
+	data.forEach((item, index) => {
+		let row = `<tr>
+                        <td>${index + 1}</td>
+                        <td>${(item.category || '').toUpperCase()}</td>
+                        <td>${(item.caste || '').toUpperCase()}</td>
+                        <td>
+                            <button type="button" class="iconbutton" onclick="viewData(${item.id})" title="View">
+                                <i class="fa-solid fa-pen-to-square text-primary"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button" class="iconbutton ms-2" onclick="deleteData(${item.id})" title="Delete">
+                                <i class="fa-solid fa-trash text-danger"></i>
+                            </button>
+                        </td>
+                    </tr>`;
+		tableBody.append(row);
+	});
+}
+
+// Live search
+$('#searchCategory').on('keyup', function() {
+	let searchValue = $(this).val().toLowerCase();
+	let filteredData = allCategoryData.filter(item => {
+		return (item.category || '').toLowerCase().includes(searchValue) ||
+			(item.caste || '').toLowerCase().includes(searchValue);
+	});
+	renderCategoryTable(filteredData);
+});
+
+// Initial load
+$(document).ready(function() {
+	loadCategoryData();
+});

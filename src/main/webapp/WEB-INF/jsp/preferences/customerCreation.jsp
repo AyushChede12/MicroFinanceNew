@@ -66,15 +66,15 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">User ID</label> <input type="text"
-									name="customerId" id="customerId" required="required"
-									placeholder="Enter Customer ID" />
+								<label for="userId">User ID</label> <input type="text"
+									name="userId" id="userId" required="required"
+									placeholder="Enter User ID" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Password</label> <input type="password"
+								<label for="password">Password</label> <input type="password"
 									name="password" id="password" required="required"
 									placeholder="Enter password" style="text-transform: uppercase;" />
 							</div>
@@ -93,16 +93,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Email ID </label> <input type="text" name="email"
-									id="email" required="required" placeholder="Enter email" />
+								<label for="email">Email ID </label> <input type="text" name="email"
+									id="email" required="required" placeholder="Enter Email ID" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Contact No.</label> <input type="text"
-									name="contactNo" id="contactno" required="required"
-									placeholder="Enter Contact no" />
+								<label for="contactNo">Contact No.</label> <input type="text"
+									name="contactNo" id="contactNo" required="required"
+									placeholder="Enter Contact No" />
 							</div>
 						</div>
 
@@ -137,7 +137,6 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Re Print</label> <select id="rePrint" name="rePrint"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select</option>
 									<option value="1">Yes</option>
 									<option value="0">No</option>
 								</select>
@@ -152,7 +151,6 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Delete Access</label> <select id="deleteAccess"
 									name="deleteAccess" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select</option>
 									<option value="1">Yes</option>
 									<option value="0">No</option>
 								</select>

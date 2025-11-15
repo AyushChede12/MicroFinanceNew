@@ -78,34 +78,13 @@ $(document).ready(function() {
 
 	//Save Code - Ayush
 	$('#saveBtn').click(function(event) {
+		event.preventDefault();
 		convertFormToUpperCase();
 
-		$('#chkexetype').text('');
-		$('#chkbranchname').text('');
-		$('#chkfullname').text('');
-		$('#chkdateofbirth').text('');
-		$('#chkpromoterno').text('');
-		$('#chkappointmentdate').text('');
-		$('#chkrelationname').text('');
-		$('#chkrelationtoapplicant').text('');
-		$('#chkaddress').text('');
-		$('#chkdistrict').text('');
-		$('#chkstate').text('');
-		$('#chkpincode').text('');
-		$('#chkaadharno').text('');
-		$('#chkpanno').text('');
-		$('#chkcontactno').text('');
-		$('#chkemailid').text('');
-		$('#chkphoto').text('');
-		$('#chksignature').text('');
-		$('#chkaadhar').text('');
-		$('#chkpan').text('');
-		$('#chkcheque').text('');
-		$('#chkbankname').text('');
-		$('#chkifsccode').text('');
-		$('#chkmicrcode').text('');
-		$('#chkaccountno').text('');
+		// Clear previous error labels
+		$('#chkexetype, #chkbranchname, #chkfullname, #chkdateofbirth, #chkpromoterno, #chkappointmentdate, #chkrelationname, #chkrelationtoapplicant, #chkaddress, #chkdistrict, #chkstate, #chkpincode, #chkaadharno, #chkpanno, #chkcontactno, #chkemailid, #chkphoto, #chksignature, #chkaadhar, #chkpan, #chkcheque, #chkbankname, #chkifsccode, #chkmicrcode, #chkaccountno').text('');
 
+		// Collect form values
 		var type = $('#type').val().trim();
 		var branchName = $('#branchName').val().trim();
 		var fullName = $('#fullName').val().trim();
@@ -122,279 +101,178 @@ $(document).ready(function() {
 		var panNo = $('#panNo').val().trim();
 		var contactNo = $('#contactNo').val().trim();
 		var emailId = $('#emailId').val().trim();
-
 		var bankName = $('#bankName').val().trim();
 		var ifscCode = $('#ifscCode').val().trim();
 		var micrCode = $('#micrCode').val().trim();
 		var accountNo = $('#accountNo').val().trim();
 
+		// File inputs
 		const photo = $('#photo')[0].files[0];
 		const signature = $('#signature')[0].files[0];
 		const aadharCard = $('#aadharCard')[0].files[0];
 		const panCard = $('#panCard')[0].files[0];
 		const cheque = $('#cheque')[0].files[0];
 
-
-		//Validations
+		// Regex patterns
 		var pinPattern = /^[1-9][0-9]{5}$/;
 		var panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
 		var contactPattern = /^[6-9][0-9]{9}$/;
 		var aadharPattern = /^\d{12}$/;
 		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-		var accountNoPattern = /^[0-9]+$/
+		var accountNoPattern = /^[0-9]+$/;
 
 		let isValid = true;
 
-		if (type === '') {
-			$('#chkexetype').text('* This field is required');
-			$('#type').focus();
-			isValid = false;
+		// Helper function to check image size (between 10KB and 500KB)
+		function validateImageSize(file, labelId, fieldName) {
+			if (file) {
+				let fileSizeKB = file.size / 1024; // Convert bytes to KB
+				if (fileSizeKB < 10 || fileSizeKB > 500) {
+					$('#' + labelId).text(`* ${fieldName} size must be in KB`);
+					isValid = false;
+				}
+			}
 		}
 
-		if (branchName === '') {
-			$('#chkbranchname').text('* This field is required');
-			$('#branchName').focus();
-			isValid = false;
-		}
+		// ===== Required field checks =====
+		if (type === '') { $('#chkexetype').text('* This field is required'); isValid = false; }
+		if (branchName === '') { $('#chkbranchname').text('* This field is required'); isValid = false; }
+		if (fullName === '') { $('#chkfullname').text('* This field is required'); isValid = false; }
+		if (dateOfBirth === '') { $('#chkdateofbirth').text('* This field is required'); isValid = false; }
+		if (promoterNo === '') { $('#chkpromoterno').text('* This field is required'); isValid = false; }
+		if (appointmentDate === '') { $('#chkappointmentdate').text('* This field is required'); isValid = false; }
+		if (relationName === '') { $('#chkrelationname').text('* This field is required'); isValid = false; }
+		if (relationToApplicant === '') { $('#chkrelationtoapplicant').text('* This field is required'); isValid = false; }
+		if (address === '') { $('#chkaddress').text('* This field is required'); isValid = false; }
+		if (district === '') { $('#chkdistrict').text('* This field is required'); isValid = false; }
+		if (state === '') { $('#chkstate').text('* This field is required'); isValid = false; }
 
-		if (fullName === '') {
-			$('#chkfullname').text('* This field is required');
-			$('#fullName').focus();
-			isValid = false;
-		}
-
-		if (fullName === '') {
-			$('#chkopeningdate').text('* This field is required');
-			$('#fullName').focus();
-			isValid = false;
-		}
-
-		if (dateOfBirth === '') {
-			$('#chkdateofbirth').text('* This field is required');
-			$('#dateOfBirth').focus();
-			isValid = false;
-		}
-
-		if (promoterNo === '') {
-			$('#chkpromoterno').text('* This field is required');
-			$('#promoterNo').focus();
-			isValid = false;
-		}
-
-		if (appointmentDate === '') {
-			$('#chkappointmentdate').text('* This field is required');
-			$('#appointmentDate').focus();
-			isValid = false;
-		}
-		if (relationName === '') {
-			$('#chkrelationname').text('* This field is required');
-			$('#relationName').focus();
-			isValid = false;
-		}
-		if (relationToApplicant === '') {
-			$('#chkrelationtoapplicant').text('* This field is required');
-			$('#relationToApplicant').focus();
-			isValid = false;
-		}
-		if (address === '') {
-			$('#chkaddress').text('* This field is required');
-			$('#address').focus();
-			isValid = false;
-		}
-		if (district === '') {
-			$('#chkdistrict').text('* This field is required');
-			$('#district').focus();
-			isValid = false;
-		}
-		if (state === '') {
-			$('#chkstate').text('* This field is required');
-			$('#state').focus();
-			isValid = false;
-		}
 		if (pinCode === '') {
 			$('#chkpincode').text('* This field is required');
-			$('#pinCode').focus();
 			isValid = false;
-		}
-		else if (!pinPattern.test(pinCode)) {
+		} else if (!pinPattern.test(pinCode)) {
 			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
-			pinCode.focus();
 			isValid = false;
 		}
+
 		if (aadharNo === '') {
 			$('#chkaadharno').text('* This field is required');
-			$('#aadharNo').focus();
 			isValid = false;
-		}
-		else if (!aadharPattern.test(aadharNo)) {
+		} else if (!aadharPattern.test(aadharNo)) {
 			alert("Please enter a valid 12-digit Aadhar number.");
-			$('#aadharNo').focus();
 			isValid = false;
 		}
+
 		if (panNo === '') {
 			$('#chkpanno').text('* This field is required');
-			$('#panNo').focus();
 			isValid = false;
-		}
-		else if (!panPattern.test(panNo)) {
+		} else if (!panPattern.test(panNo)) {
 			alert("Please enter a valid PAN card number (e.g., ABCDE1234F).");
-			panNo.focus();
 			isValid = false;
 		}
+
 		if (contactNo === '') {
 			$('#chkcontactno').text('* This field is required');
-			$('#contactNo').focus();
 			isValid = false;
-		}
-		else if (!contactPattern.test(contactNo)) {
+		} else if (!contactPattern.test(contactNo)) {
 			alert("Please enter a valid 10-digit mobile number.");
-			contactNo.focus();
 			isValid = false;
 		}
+
 		if (emailId === '') {
 			$('#chkemailid').text('* This field is required');
-			$('#emailId').focus();
 			isValid = false;
-		}
-		else if (!emailPattern.test(emailId)) {
+		} else if (!emailPattern.test(emailId)) {
 			alert('Please enter a valid email address (e.g., example@domain.com)');
-			$('#emailId').focus();
 			isValid = false;
 		}
 
-		if (!photo) {
-			$('#chkphoto').text('* Photo is required');
-			$('#photo').focus();
-			isValid = false;
-		}
-		if (!signature) {
-			$('#chksignature').text('* Signature is required');
-			$('#signature').focus();
-			isValid = false;
-		}
-		if (!aadharCard) {
-			$('#chkaadhar').text('* Aadhar Card is required');
-			$('#aadharCard').focus();
-			isValid = false;
-		}
-		if (!panCard) {
-			$('#chkpan').text('* Pan Card is required');
-			$('#panCard').focus();
-			isValid = false;
-		}
-		if (!cheque) {
-			$('#chkcheque').text('* Cheque is required');
-			$('#cheque').focus();
-			isValid = false;
-		}
+		// ===== Image required checks =====
+		if (!photo) { $('#chkphoto').text('* Photo is required'); isValid = false; }
+		if (!signature) { $('#chksignature').text('* Signature is required'); isValid = false; }
+		if (!aadharCard) { $('#chkaadhar').text('* Aadhar Card is required'); isValid = false; }
+		if (!panCard) { $('#chkpan').text('* PAN Card is required'); isValid = false; }
+		if (!cheque) { $('#chkcheque').text('* Cheque is required'); isValid = false; }
 
-		if (bankName === '') {
-			$('#chkbankname').text('* This field is required');
-			$('#bankName').focus();
-			isValid = false;
-		}
-		if (ifscCode === '') {
-			$('#chkifsccode').text('* This field is required');
-			$('#ifscCode').focus();
-			isValid = false;
-		}
-		if (micrCode === '') {
-			$('#chkmicrcode').text('* This field is required');
-			$('#micrCode').focus();
-			isValid = false;
-		}
+		// ===== Image size checks (10KB–500KB) =====
+		validateImageSize(photo, 'chkphoto', 'Photo');
+		validateImageSize(signature, 'chksignature', 'Signature');
+		validateImageSize(aadharCard, 'chkaadhar', 'Aadhar Card');
+		validateImageSize(panCard, 'chkpan', 'PAN Card');
+		validateImageSize(cheque, 'chkcheque', 'Cheque');
+
+		// ===== Bank details validation =====
+		if (bankName === '') { $('#chkbankname').text('* This field is required'); isValid = false; }
+		if (ifscCode === '') { $('#chkifsccode').text('* This field is required'); isValid = false; }
+		if (micrCode === '') { $('#chkmicrcode').text('* This field is required'); isValid = false; }
+
 		if (accountNo === '') {
 			$('#chkaccountno').text('* This field is required');
 			isValid = false;
 		} else if (!accountNoPattern.test(accountNo)) {
 			$('#chkaccountno').text('* Account number must contain only digits');
-			$('#accountNo').focus();
 			isValid = false;
 		}
 
-		if (!isValid) {
-			return false; // Stop AJAX call
-		}
+		if (!isValid) return false; // ❌ Stop if any validation fails
 
-		event.preventDefault();
-
+		// ===== Prepare FormData =====
 		const formData = new FormData();
+		formData.append("type", type);
+		formData.append("branchName", branchName);
+		formData.append("fullName", fullName);
+		formData.append("dateOfBirth", dateOfBirth);
+		formData.append("promoterNo", promoterNo);
+		formData.append("appointmentDate", appointmentDate);
+		formData.append("relationName", relationName);
+		formData.append("relationToApplicant", relationToApplicant);
+		formData.append("address", address);
+		formData.append("district", district);
+		formData.append("state", state);
+		formData.append("pinCode", pinCode);
+		formData.append("aadharNo", aadharNo);
+		formData.append("panNo", panNo);
+		formData.append("contactNo", contactNo);
+		formData.append("emailId", emailId);
+		formData.append("bankName", bankName);
+		formData.append("ifscCode", ifscCode);
+		formData.append("micrCode", micrCode);
+		formData.append("accountNo", accountNo);
 
-		// Append form fields
-		formData.append("type", $('#type').val());
-		formData.append("branchName", $('#branchName').val());
-		formData.append("fullName", $('#fullName').val());
-		formData.append("dateOfBirth", $('#dateOfBirth').val());
-		formData.append("promoterNo", $('#promoterNo').val());
-		formData.append("appointmentDate", $('#appointmentDate').val());
-		formData.append("relationName", $('#relationName').val());
-		formData.append("relationToApplicant", $('#relationToApplicant').val());
-		formData.append("address", $('#address').val());
-		formData.append("district", $('#district').val());
-		formData.append("state", $('#state').val());
-		formData.append("pinCode", $('#pinCode').val());
-		formData.append("aadharNo", $('#aadharNo').val());
-		formData.append("panNo", $('#panNo').val());
-		formData.append("contactNo", $('#contactNo').val());
-		formData.append("emailId", $('#emailId').val());
-		formData.append("baseValue", $('#baseValue').val());
-		formData.append("shareCount", $('#shareCount').val());
-		formData.append("shareAmount", $('#shareAmount').val());
-		formData.append("bankName", $('#bankName').val());
-		formData.append("ifscCode", $('#ifscCode').val());
-		formData.append("micrCode", $('#micrCode').val());
-		formData.append("accountNo", $('#accountNo').val());
-
-		// File upload: photo
-		if (photo) {
-			formData.append("photo", photo);
-		}
-
-		// File upload: signature
-		if (signature) {
-			formData.append("signature", signature);
-		}
-
-		// File upload: aadhar
-		if (aadharCard) {
-			formData.append("aadharCard", aadharCard);
-		}
-
-		// File upload: pan
-		if (panCard) {
-			formData.append("panCard", panCard);
-		}
-
-		// File upload: cheque
-		if (cheque) {
-			formData.append("cheque", cheque);
-		}
+		if (photo) formData.append("photo", photo);
+		if (signature) formData.append("signature", signature);
+		if (aadharCard) formData.append("aadharCard", aadharCard);
+		if (panCard) formData.append("panCard", panCard);
+		if (cheque) formData.append("cheque", cheque);
 
 		// Debug log
 		for (let pair of formData.entries()) {
 			console.log(pair[0] + ':', pair[1]);
 		}
 
+		// ===== AJAX Call =====
 		$.ajax({
 			type: 'POST',
 			url: 'api/preference/saveExecutiveFounder',
 			data: formData,
-			processData: false,  // Don't process the files
-			contentType: false,  // Let browser set correct content type
+			processData: false,
+			contentType: false,
 			success: function(response) {
-				if (response.status == 'OK') {
+				if (response.status === 'OK') {
 					alert("Executive Founder Saved Successfully");
 					location.reload();
 				} else {
 					alert("Failed to save executive/founder data.");
 				}
 			},
-			error: function(xhr, status, error) {
+			error: function(xhr) {
 				console.error("Error: ", xhr.responseText);
 				alert('An error occurred while saving the data. Please try again.');
 			}
 		});
 	});
+
+
 
 	/*$.ajax({
 		url: "api/preference/fetchAllExecutiveFounder", // Updated path
@@ -593,7 +471,7 @@ function viewData(id) {
 
 $('#updateBtn').click(function(event) {
 	convertFormToUpperCase();
-	
+
 	$('#chkexetype').text('');
 	$('#chkbranchname').text('');
 	$('#chkfullname').text('');
@@ -651,6 +529,16 @@ $('#updateBtn').click(function(event) {
 	var accountNoPattern = /^[0-9]+$/
 
 	let isValid = true;
+
+	function validateImageSize(file, labelId, fieldName) {
+		if (file) {
+			let fileSizeKB = file.size / 1024; // Convert bytes to KB
+			if (fileSizeKB < 10 || fileSizeKB > 500) {
+				$('#' + labelId).text(`* ${fieldName} size must be in KB`);
+				isValid = false;
+			}
+		}
+	}
 
 	if (type === '') {
 		$('#chkexetype').text('* This field is required');
@@ -799,10 +687,22 @@ $('#updateBtn').click(function(event) {
 		isValid = false;
 	}
 
+	const existingPhoto = $('#existingPhoto').val();       // hidden input for already uploaded photo filename
+	const existingSignature = $('#existingSignature').val();
+	const existingAadhar = $('#existingAadhar').val();
+	const existingPan = $('#existingPan').val();
+	const existingCheque = $('#existingCheque').val();
+
+	validateImageSize(photo, 'chkphoto', 'Photo');
+	validateImageSize(signature, 'chksignature', 'Signature');
+	validateImageSize(aadharCard, 'chkaadhar', 'Aadhar Card');
+	validateImageSize(panCard, 'chkpan', 'PAN Card');
+	validateImageSize(cheque, 'chkcheque', 'Cheque');
+
 	if (!isValid) {
 		return false; // Stop AJAX call
 	}
-	
+
 	event.preventDefault();
 
 	let formData = new FormData();
@@ -852,7 +752,7 @@ $('#updateBtn').click(function(event) {
 	if (cheque) {
 		formData.append("cheque", cheque);
 	}
-	
+
 	// Send the data via AJAX
 	$.ajax({
 		url: "api/preference/saveExecutiveFounder",

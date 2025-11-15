@@ -12,7 +12,9 @@ import javax.websocket.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -124,10 +126,9 @@ public class PreferenceController {
 //			return new ResponseEntity<>(response, HttpStatus.OK);
 //		}
 //	}
-	
+
 	@PostMapping("/saveAndUpdateAllBankModule")
-	public ResponseEntity<ApiResponse<BankModule>> saveBank(
-			@ModelAttribute BankModuleDto bankModuleDto,
+	public ResponseEntity<ApiResponse<BankModule>> saveBank(@ModelAttribute BankModuleDto bankModuleDto,
 			@RequestParam(value = "cancelledCheque", required = false) MultipartFile cancelledCheque) {
 
 		if (cancelledCheque != null) {
@@ -362,7 +363,7 @@ public class PreferenceController {
 			@RequestParam(value = "signature", required = false) MultipartFile signature,
 			@RequestParam(value = "aadharCard", required = false) MultipartFile aadharCard,
 			@RequestParam(value = "panCard", required = false) MultipartFile panCard,
-			@RequestParam(value = "cheque", required = false) MultipartFile cheque) {
+			@RequestParam(value = "cheque", required = false) MultipartFile cheque, Model model) {
 
 		if (photo != null) {
 			System.out.println("Received photo: " + photo.getOriginalFilename());
@@ -382,6 +383,7 @@ public class PreferenceController {
 
 		ApiResponse<ExecutiveFounder> response = preferenceService.saveExecutiveFounder(executiveFounderDto, photo,
 				signature, aadharCard, panCard, cheque);
+
 		// return new ResponseEntity<>(response, response.getStatus());
 		return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK,
 				executiveFounderDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
@@ -411,11 +413,13 @@ public class PreferenceController {
 	}
 
 	@GetMapping("/fetchExecutiveFounderById") // Ayush
-	public ResponseEntity<ApiResponse<ExecutiveFounder>> findExecutiveFounderById(@RequestParam("id") Long id) {
-		Optional<ExecutiveFounder> exePromoter = preferenceService.findExecutiveFounderById(id);
-		if (exePromoter.isPresent()) {
+	public ResponseEntity<ApiResponse<ExecutiveFounder>> findExecutiveFounderById(@RequestParam("id") Long id,
+			Model model) {
+		Optional<ExecutiveFounder> executive = preferenceService.findExecutiveFounderById(id);
+		model.addAttribute("executive", executive);
+		if (executive.isPresent()) {
 			ApiResponse<ExecutiveFounder> response = new ApiResponse<>(HttpStatus.FOUND,
-					"Executive Founder fetched successfully", exePromoter.get());
+					"Executive Founder fetched successfully", executive.get());
 			return ResponseEntity.ok(response);
 		} else {
 			ApiResponse<ExecutiveFounder> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
@@ -433,22 +437,22 @@ public class PreferenceController {
 		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping("/updateDataOfCompanyAdministration")
-	public ResponseEntity<ApiResponse<String>> updateCompanyAdministration(
-			@RequestBody CompanyAdministration companyAdministration) {
-
-		int result = preferenceService.updateCompanyAdministration(companyAdministration);
-
-		if (result > 0) {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
-					"Company administration data updated successfully.", "success");
-			return ResponseEntity.ok(response);
-		} else {
-			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
-					"Failed to update company administration data.", "failure");
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-		}
-	}
+//	@PostMapping("/updateDataOfCompanyAdministration")
+//	public ResponseEntity<ApiResponse<String>> updateCompanyAdministration(
+//			@RequestBody CompanyAdministration companyAdministration) {
+//
+//		int result = preferenceService.updateCompanyAdministration(companyAdministration);
+//
+//		if (result > 0) {
+//			ApiResponse<String> response = new ApiResponse<>(HttpStatus.OK,
+//					"Company administration data updated successfully.", "success");
+//			return ResponseEntity.ok(response);
+//		} else {
+//			ApiResponse<String> response = new ApiResponse<>(HttpStatus.BAD_REQUEST,
+//					"Failed to update company administration data.", "failure");
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+//		}
+//	}
 
 	// Ayush
 	@PostMapping("/saveOrUpdateCodeModules")
@@ -501,103 +505,48 @@ public class PreferenceController {
 		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping("/saveUserCreation")
-	public ResponseEntity<?> saveUserCreation(@RequestBody Map<String, Object> payload) {
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getCompany(@PathVariable Long id) {
+		CompanyAdministration c = preferenceService.fetchCompanyById(id);
+		if (c == null)
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company not found");
+		return ResponseEntity.ok(c);
+	}
+
+	// UPDATE COMPANY DETAILS
+	@PostMapping("/update")
+	public ResponseEntity<?> updateCompanyAdministration(@RequestBody CompanyAdministration companyAdministration) {
+		return ResponseEntity.ok(preferenceService.saveOrUpdateCompany(companyAdministration));
+	}
+
+	// UPLOAD IMAGE
+	@PostMapping(value = "/upload/{companyId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<?> uploadCompanyImage(@PathVariable Long companyId, @RequestParam String fieldName,
+			@RequestParam MultipartFile file) {
 		try {
-			Map<String, Object> userMap = (Map<String, Object>) payload.get("user");
-			List<Map<String, Object>> menuList = (List<Map<String, Object>>) payload.get("menuAccess");
-
-			UserCreations user = new UserCreations();
-			user.setCustomerId((String) userMap.get("customerId"));
-			user.setPassword((String) userMap.get("password")); // will be hashed in service
-			user.setFullName((String) userMap.get("fullName"));
-			user.setEmail((String) userMap.get("email"));
-			user.setContactNo((String) userMap.get("contactNo"));
-			user.setBranchName((String) userMap.get("branchName"));
-			user.setPastDate((Boolean) userMap.get("pastDate"));
-			user.setRePrint((Boolean) userMap.get("rePrint"));
-			user.setDeleteAccess((Boolean) userMap.get("deleteAccess"));
-			user.setUserStatus((Boolean) userMap.get("userStatus"));
-
-			List<UserMenuAccess> accessList = new ArrayList<>();
-			if (menuList != null) {
-				for (Map<String, Object> item : menuList) {
-					UserMenuAccess access = new UserMenuAccess();
-					access.setMenuName((String) item.get("menuName"));
-					access.setHasAccess(
-							item.get("hasAccess") == null ? Boolean.FALSE : (Boolean) item.get("hasAccess"));
-					accessList.add(access);
-				}
-			}
-
-			UserCreations saved = preferenceService.saveUserCreation(user, accessList);
-			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "User created successfully", saved));
+			return ResponseEntity.ok(preferenceService.saveOrUpdateCompanyImage(companyId, fieldName, file));
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-					new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving user: " + e.getMessage(), null));
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Upload failed: " + e.getMessage());
 		}
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody Map<String, String> credentials, HttpSession session) {
-		String customerId = credentials.get("customerId");
-		String password = credentials.get("password");
-
-		Optional<UserCreations> user = preferenceService.validateLogin(customerId, password);
-		if (user.isPresent()) {
-			// fetch menu access
-			List<UserMenuAccess> accessList = preferenceService.getUserMenuAccess(customerId);
-
-			// set session attributes
-			session.setAttribute("loggedUser", user.get());
-			session.setAttribute("menuAccess", accessList);
-
-			// return user + access list
-			Map<String, Object> responseData = new HashMap<>();
-			responseData.put("user", user.get());
-			responseData.put("menuAccess", accessList);
-
-			return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "Login successful", responseData));
-		} else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-					.body(new ApiResponse(HttpStatus.UNAUTHORIZED, "Invalid credentials", null));
-		}
+	// GET ALL IMAGES
+	@GetMapping("/images/{companyId}")
+	public ResponseEntity<?> getCompanyImages(@PathVariable Long companyId) {
+		return ResponseEntity.ok(preferenceService.getCompanyImages(companyId));
 	}
+	
+	@PostMapping("/delete/{id}")
+    public ResponseEntity<?> deleteImage(@PathVariable Long id) {
 
-	@GetMapping("/menuAccess/{customerId}")
-	public ResponseEntity<?> getMenuAccess(@PathVariable String customerId) {
-		List<UserMenuAccess> list = preferenceService.getUserMenuAccess(customerId);
-		return ResponseEntity.ok(new ApiResponse(HttpStatus.FOUND, "Fetched successfully", list));
-	}
+        boolean deleted = preferenceService.deleteCompanyImage(id);
 
-	// JSP page that opens dashboard and injects menuAccess JSON into model
-	// If you use separate controller for view resolution, use @Controller instead
-	// of @RestController
-	@GetMapping("/openDashboard")
-	public ResponseEntity<?> openDashboard(HttpSession session) {
-		// if using JSP view resolver: return ModelAndView etc.
-		// For API-style, frontend will redirect to a JSP page (you might want to
-		// separate this)
-		// Example returns menuAccess as JSON for SPA/JS to consume:
-		Object menuAccess = session.getAttribute("menuAccess");
-		return ResponseEntity.ok(new ApiResponse(HttpStatus.OK, "OK", menuAccess));
-	}
+        if (!deleted) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Image not found");
+        }
 
-	@GetMapping("/fetchAllCustomerIds")
-	public ResponseEntity<?> fetchAllCustomerIds() {
-		List<UserCreations> all = preferenceService.fetchAllUserCreations();
-		List<String> ids = new ArrayList<>();
-		all.forEach(u -> ids.add(u.getCustomerId()));
-		return ResponseEntity.ok(new ApiResponse(HttpStatus.FOUND, "Fetched", ids));
-	}
-
-	// Upload Company Images
-	@PostMapping(value = "/uploadCompanyImages/{companyId}", consumes = "multipart/form-data;charset=ISO-8859-1")
-	public ResponseEntity<?> uploadImage(@PathVariable Long companyId, @RequestParam("fieldName") String fieldName,
-			@RequestParam("file") MultipartFile file) {
-
-		return preferenceService.uploadCompanyImage(companyId, fieldName, file);
-
-	}
-
+        return ResponseEntity.ok("Image deleted successfully");
+    }
+	
 }
