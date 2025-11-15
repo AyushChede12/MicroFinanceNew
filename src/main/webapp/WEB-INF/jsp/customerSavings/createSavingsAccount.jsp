@@ -224,15 +224,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Joint Survivor Name</label> <input type="text"
 									name="jointSurvivorCode" id="jointSurvivorCode"
 									required="required" placeholder="Enter joint Survivor Code" />
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Family Relation</label> <select
 									id="familyRelation" name="familyRelation" required="required"
@@ -240,7 +240,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="">Select</option>
 								</select>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -254,14 +254,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Amount</label> <input type="text"
 									name="balance" id="balance" required="required"
 									placeholder="Enter opening Amount" />
 							</div>
 						</div>
-
+ -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Financial Consultant Code</label> <input

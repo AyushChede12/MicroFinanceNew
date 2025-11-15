@@ -48,6 +48,11 @@ public class addCustomer {
 	private String customerSignature;
 	private String customerVoter;
 	private String customerDriving;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+	
+
 
 //Nominee Details
 
@@ -615,6 +620,30 @@ public class addCustomer {
 
 	public void setNoOfShare(String noOfShare) {
 		this.noOfShare = noOfShare;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	

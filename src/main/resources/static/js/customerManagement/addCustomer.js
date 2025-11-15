@@ -1,6 +1,26 @@
 $(document).ready(function() {
 	$("#guardianDetails").hide();
 	$("#guardianAccount").hide();
+	
+	$(document).ready(function () {
+
+	    // Hide Aadhar field initially
+	    $("#aadharNo").closest(".col-lg-3").hide();
+
+	    $("#authenticateFor").on("change", function () {
+	        const val = $(this).val();
+
+	        if (val === "aadhar") {
+	            $("#aadharNo").closest(".col-lg-3").show();
+	            $("#aadharNo").prop("required", true);
+	        } else {
+	            $("#aadharNo").closest(".col-lg-3").hide();
+	            $("#aadharNo").prop("required", false).val("");
+	        }
+	    });
+
+	});
+
 	$('#saveBtn').click(function(event) {
 		event.preventDefault();
 
@@ -11,7 +31,6 @@ $(document).ready(function() {
 		formData.append("authenticateFor", $('#authenticateFor').val());
 		formData.append("signupDate", $('#signupDate').val());
 		formData.append("major", $('#major').val());
-		formData.append("customerName", $('#customerName').val());
 		formData.append("minor", $('#minor').val());
 		formData.append("customerGender", $('#customerGender').val());
 		formData.append("guardianName", $('#guardianName').val());
@@ -34,7 +53,11 @@ $(document).ready(function() {
 		formData.append("emailId", $('#emailId').val());
 		formData.append("profession", $('#profession').val());
 		formData.append("academicBackground", $('#academicBackground').val());
+		formData.append("firstName", $('#firstName').val());
+		formData.append("middleName", $('#middleName').val());
+		formData.append("lastName", $('#lastName').val());
 
+	
 		// Nominee
 		formData.append("nomineeName", $('#nomineeName').val());
 		formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
@@ -63,6 +86,7 @@ $(document).ready(function() {
 		formData.append("entryFee", $('#entryFee').val());
 		formData.append("noOfShare", $('#noOfShare').val());
 		formData.append("shareAmount", $('#shareAmount').val());
+		
 		
 		// File uploads
 		const customerPhoto = $('#customerPhoto')[0].files[0];
@@ -518,6 +542,36 @@ function ifMinor() {
 	}
 }
 
+// Auto-calculate Age and Minor detection
+$(document).ready(function() {
+    $('#dob').on('change', function() {
+        const dobVal = $(this).val();
+        if (!dobVal) return;
+
+        const dob = new Date(dobVal);
+        const today = new Date();
+
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+
+        $('#customerAge').val(age);
+
+        if (age < 18) {
+            $('#minor').val('Yes');
+            $('#guardianDetails').show();
+            $('#guardianAccount').show();
+        } else {
+            $('#minor').val('No');
+            $('#guardianDetails').hide();
+            $('#guardianAccount').hide();
+        }
+    });
+});
+
+
 
 $(document).ready(function() {
     // 1️⃣ Fetch all customers for dropdown
@@ -560,17 +614,17 @@ $('#guardianName').on('change', function() {
 
         // Fetch account number from backend
         $.ajax({
-            url: `/api/customersavings/getAccountNumbers?selectByCustomer=${encodeURIComponent(selectedCode)}`,
+			url: `/api/customersavings/getAccountNumbersByCode?selectByCustomer=${encodeURIComponent(selectedCode)}`,
             method: "GET",
             success: function(res) {
                 console.log("Account number response:", res);
 
                 // Access account number using the selected code as key
-                if(res.data && res.data[selectedCode] && res.data[selectedCode].length > 0) {
-                    $('#guardianAccNo').val(res.data[selectedCode][0]); // use first account number
-                } else {
-                    $('#guardianAccNo').val(''); // no account found
-                }
+				if (res.data && res.data.length > 0) {
+				                   $('#guardianAccNo').val(res.data[0].accountNumber);
+				               } else {
+				                   $('#guardianAccNo').val('');
+				               }
             },
             error: function(err) {
                 console.error("❌ Error fetching account number:", err);
