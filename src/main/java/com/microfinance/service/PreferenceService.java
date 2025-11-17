@@ -3,6 +3,10 @@ package com.microfinance.service;
 import java.io.File;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
@@ -286,7 +291,8 @@ public class PreferenceService {
 //	}
 
 	public ApiResponse<ExecutiveFounder> saveExecutiveFounder(ExecutiveFounderDto executiveFounderDto,
-			MultipartFile photo, MultipartFile signature, MultipartFile aadharCard, MultipartFile panCard, MultipartFile cheque) {
+			MultipartFile photo, MultipartFile signature, MultipartFile aadharCard, MultipartFile panCard,
+			MultipartFile cheque) {
 		// TODO Auto-generated method stub
 		ExecutiveFounder executiveFounder = new ExecutiveFounder();
 		boolean isNew = true;
@@ -319,12 +325,11 @@ public class PreferenceService {
 		executiveFounder.setBaseValue(executiveFounderDto.getBaseValue());
 		executiveFounder.setShareCount(executiveFounderDto.getShareCount());
 		executiveFounder.setShareAmount(executiveFounderDto.getShareAmount());
-		
+
 		executiveFounder.setBankName(executiveFounderDto.getBankName());
 		executiveFounder.setIfscCode(executiveFounderDto.getIfscCode());
 		executiveFounder.setMicrCode(executiveFounderDto.getMicrCode());
 		executiveFounder.setAccountNo(executiveFounderDto.getAccountNo());
-		
 
 		// Handle photo upload
 		if (photo != null && !photo.isEmpty()) {
@@ -345,7 +350,7 @@ public class PreferenceService {
 				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
 			}
 		}
-		
+
 		if (aadharCard != null && !aadharCard.isEmpty()) {
 			try {
 				String fileName1 = saveFile1(aadharCard); // Save the signature
@@ -354,7 +359,7 @@ public class PreferenceService {
 				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
 			}
 		}
-		
+
 		if (panCard != null && !panCard.isEmpty()) {
 			try {
 				String fileName1 = saveFile1(panCard); // Save the signature
@@ -363,7 +368,7 @@ public class PreferenceService {
 				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
 			}
 		}
-		
+
 		if (cheque != null && !cheque.isEmpty()) {
 			try {
 				String fileName1 = saveFile1(cheque); // Save the signature
@@ -601,51 +606,6 @@ public class PreferenceService {
 		return userMenuAccessRepo.findByUserCreations_CustomerId(customerId);
 	}
 
-	public Optional<UserCreations> validateLogin(String customerId, String rawPassword) {
-		Optional<UserCreations> user = userCreationRepo.findByCustomerId(customerId);
-		if (user.isPresent() && passwordEncoder.matches(rawPassword, user.get().getPassword())) {
-			return user;
-		}
-		return Optional.empty();
-	}
-
-	public List<UserCreations> fetchAllUserCreations() {
-		return userCreationRepo.findAll();
-	}
-
-	public ResponseEntity<?> uploadCompanyImage(Long companyId, String fieldName, MultipartFile file) {
-		try {
-			CompanyAdministration company = companyAdministrationRepo.findById(companyId)
-					.orElseThrow(() -> new RuntimeException("Company not found"));
-
-			// Folder to save image
-			File dir = new File(uploadDirectory);
-			if (!dir.exists())
-				dir.mkdirs();
-
-			// Original file name (ISO-8859-1 safe)
-			String originalFileName = new String(file.getOriginalFilename().getBytes("ISO-8859-1"), "ISO-8859-1");
-			String newFileName = System.currentTimeMillis() + "_" + originalFileName;
-
-			// Save file locally
-			File dest = new File(uploadDirectory + newFileName);
-			file.transferTo(dest);
-
-			// Save record in DB
-			CompanyImageUploads upload = new CompanyImageUploads();
-			upload.setCompany(company);
-			upload.setFieldName(fieldName.toUpperCase());
-			upload.setImageName(originalFileName);
-			upload.setImagePath("/" + uploadDirectory + newFileName);
-
-			companyImageUploadsRepo.save(upload);
-
-			return ResponseEntity.ok("✅ File '" + originalFileName + "' uploaded successfully!");
-		} catch (Exception e) {
-			return ResponseEntity.status(500).body("❌ Error: " + e.getMessage());
-		}
-	}
-
 	public ApiResponse<BankModule> saveBankModule(BankModuleDto bankModuleDto, MultipartFile cancelledCheque) {
 		// TODO Auto-generated method stub
 		BankModule bankModule = new BankModule();
@@ -689,6 +649,80 @@ public class PreferenceService {
 			return ApiResponse.success(HttpStatus.OK,
 					"Updated successfully. Director Name: " + savedBankModule.getBankName(), savedBankModule);
 		}
+	}
+
+	public CompanyAdministration fetchCompanyById(Long id) {
+		return companyAdministrationRepo.findById(id).orElse(null);
+	}
+
+	// SAVE/UPDATE COMPANY
+	public CompanyAdministration saveOrUpdateCompany(CompanyAdministration company) {
+		return companyAdministrationRepo.save(company);
+	}
+
+	// SAVE/UPDATE COMPANY IMAGE
+	public CompanyImageUploads saveOrUpdateCompanyImage(Long companyId, String fieldName, MultipartFile file)
+			throws Exception {
+
+		CompanyAdministration company = companyAdministrationRepo.findById(companyId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid Company ID: " + companyId));
+
+		Path companyDir = Paths.get(uploadDirectory, "company", companyId.toString());
+		Files.createDirectories(companyDir);
+
+		String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+		String storedFileName = System.currentTimeMillis() + "_" + originalFilename;
+
+		Path target = companyDir.resolve(storedFileName);
+		Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+
+		// Check existing image for this name
+		Optional<CompanyImageUploads> existingOpt = companyImageUploadsRepo.findByCompanyAndName(company, fieldName);
+
+		CompanyImageUploads img;
+
+		if (existingOpt.isPresent()) {
+			img = existingOpt.get();
+
+			// Delete previous file
+			if (img.getFileName() != null) {
+				Files.deleteIfExists(companyDir.resolve(img.getFileName()));
+			}
+
+			img.setFileName(storedFileName);
+			img.setOriginalFileName(originalFilename);
+		} else {
+			img = new CompanyImageUploads(fieldName, storedFileName, originalFilename, company);
+		}
+
+		return companyImageUploadsRepo.save(img);
+	}
+
+	// FETCH ALL IMAGES OF COMPANY
+	public List<CompanyImageUploads> getCompanyImages(Long companyId) {
+		CompanyAdministration company = companyAdministrationRepo.findById(companyId).orElse(null);
+		return companyImageUploadsRepo.findByCompany(company);
+	}
+
+	public boolean deleteCompanyImage(Long id) {
+
+		Optional<CompanyImageUploads> opt = companyImageUploadsRepo.findById(id);
+
+		if (opt.isEmpty()) {
+			return false;
+		}
+
+		// Delete file from folder
+		CompanyImageUploads img = opt.get();
+		File file = new File(uploadDirectory + img.getFileName());
+		if (file.exists()) {
+			file.delete();
+		}
+
+		// Delete DB record
+		companyImageUploadsRepo.deleteById(id);
+
+		return true;
 	}
 
 }

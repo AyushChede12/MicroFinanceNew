@@ -103,46 +103,49 @@ $(document).ready(function() {
 
 
 	$.ajax({
-		type: "GET",
-		url: "api/preference/getAllFinancialYear",
-		contentType: "application/json",
-		success: function(response) {
-			console.log("Full Response from API:", response);
-			if (response.status == "FOUND") {
-				let data = response.data;
+	    type: "GET",
+	    url: "api/preference/getAllFinancialYear",
+	    contentType: "application/json",
+	    success: function(response) {
+	        console.log("Full Response from API:", response);
 
-				// Sort by first year numerically
-				data.sort((a, b) => {
-					const aYear = parseInt(a.financialYearName.split('-')[0]);
-					const bYear = parseInt(b.financialYearName.split('-')[0]);
-					return aYear - bYear;
-				});
+	        if (response.status == "FOUND") {
+	            let data = response.data;
 
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
+	            // Sort by first year numerically (DESCENDING)
+	            data.sort((a, b) => {
+	                const aYear = parseInt(a.financialYearName.split('-')[0]);
+	                const bYear = parseInt(b.financialYearName.split('-')[0]);
+	                return bYear - aYear;   // DESCENDING
+	            });
 
-				data.forEach((item, index) => {
-					let row = `<tr>
-			                    <td>${index + 1}</td>
-			                    <td>${item.financialYearName}</td>
-			                    <td>${item.dateFrom}</td>
-			                    <td>${item.dateTo}</td>
-			                    <td>
-			                        <button class="iconbutton" onclick="viewData(${item.id})" title="View">
-			                            <i class="fa-solid fa-pen-to-square text-primary"></i>
-			                        </button>
-			                    </td>
-			                </tr>`;
-					tableBody.append(row);
-				});
-			} else {
-				alert("Failed to fetch branch data: " + response.message);
-			}
-		},
-		error: function() {
-			alert("Error while calling the API.");
-		}
+	            let tableBody = $(".datatable tbody");
+	            tableBody.empty();
+
+	            data.forEach((item, index) => {
+	                let row = `<tr>
+	                    <td>${index + 1}</td>
+	                    <td>${item.financialYearName}</td>
+	                    <td>${item.dateFrom}</td>
+	                    <td>${item.dateTo}</td>
+	                    <td>
+	                        <button class="iconbutton" onclick="viewData(${item.id})" title="View">
+	                            <i class="fa-solid fa-pen-to-square text-primary"></i>
+	                        </button>
+	                    </td>
+	                </tr>`;
+	                tableBody.append(row);
+	            });
+
+	        } else {
+	            alert("Failed to fetch branch data: " + response.message);
+	        }
+	    },
+	    error: function() {
+	        alert("Error while calling the API.");
+	    }
 	});
+
 
 });
 

@@ -10,7 +10,7 @@ public class CompanyAdministration {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String companyName;
 	private String shortName;
 	private String signUpDate;
@@ -32,8 +32,6 @@ public class CompanyAdministration {
 	private String tdsWithoutPan;
 	private String taxDeduction;
 	private String branchManagerContactNo;
-	private String photo;
-	private String signature;
 
 	public long getId() {
 		return id;
@@ -209,22 +207,6 @@ public class CompanyAdministration {
 
 	public void setBranchManagerContactNo(String branchManagerContactNo) {
 		this.branchManagerContactNo = branchManagerContactNo;
-	}
-
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	public String getSignature() {
-		return signature;
-	}
-
-	public void setSignature(String signature) {
-		this.signature = signature;
 	}
 
 }
