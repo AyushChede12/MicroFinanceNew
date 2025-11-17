@@ -78,6 +78,10 @@ public class CustomerManagementService {
 		addcustomer.setNoOfShare(clientMasterDto.getNoOfShare());
 		addcustomer.setLightBill(clientMasterDto.getLightBill());
 		addcustomer.setTaxBill(clientMasterDto.getTaxBill());
+		addcustomer.setFirstName(clientMasterDto.getFirstName());
+		addcustomer.setMiddleName(clientMasterDto.getMiddleName());
+		addcustomer.setLastName(clientMasterDto.getLastName());
+		
 		
 
 // Nominee Details

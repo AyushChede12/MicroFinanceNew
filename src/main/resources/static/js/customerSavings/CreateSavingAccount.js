@@ -52,31 +52,39 @@ $('#selectPlan').on('change', function () {
 });
 
 
-//janvi : Customer name list fetch
-$(document).ready(function() {
-	// Fetch all customers and populate the "select by code" dropdown
-	 $.ajax({
-        url: '/api/customermanagement/approved', // Make sure this path is correct
+$(document).ready(function () {
+
+    $.ajax({
+        url: '/api/customermanagement/approved',
         type: 'GET',
         success: function (response) {
             if (response.status === "OK" && Array.isArray(response.data)) {
+
                 const $select = $('#selectByCustomer');
                 const $select1 = $('#jointOperationCode');
+
                 $select.empty().append('<option value="">Select</option>');
                 $select1.empty().append('<option value="">Select</option>');
 
                 response.data.forEach(customer => {
-                    if (customer.customerName && customer.memberCode) {
-                        const optionText = `${customer.customerName} - ${customer.memberCode}`;
-                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
+
+                    // Build customer full name
+                    const fullName = [
+                        customer.firstName,
+                        customer.middleName,
+                        customer.lastName
+                    ].filter(Boolean).join(" ");
+
+                    // Only add if name & code exist
+                    if (fullName && customer.memberCode) {
+                        const optionText = `${fullName} - ${customer.memberCode}`;
+                        const optionValue = customer.memberCode;
+
                         $select.append(`<option value="${optionValue}">${optionText}</option>`);
-                    }
-                    if (customer.customerName && customer.memberCode) {
-                        const optionText = `${customer.memberCode}`;
-                        const optionValue = customer.memberCode; // or use customer.id or full object if needed
-                        $select1.append(`<option value="${optionValue}">${optionText}</option>`);
+                        $select1.append(`<option value="${optionValue}">${customer.memberCode}</option>`);
                     }
                 });
+
             } else {
                 alert("No approved customers found.");
             }
@@ -86,6 +94,7 @@ $(document).ready(function() {
         }
     });
 });
+
 
 
 //Member Code fetch in Customer Name 
@@ -102,7 +111,13 @@ $('#selectByCustomer').on('change', function () {
             success: function (response) {
                 if (response.status === "FOUND") {
                     let customer = response.data[0];
-                    $('#enterCustomerName').val(customer.customerName);
+					// Build full name
+					    const fullName = [
+					        customer.firstName,
+					        customer.middleName,
+					        customer.lastName
+					    ].filter(Boolean).join(" ");
+                    $('#enterCustomerName').val(fullName);
                     $('#familyDetails').val(customer.guardianName);
 					$('#contactNumber').val(customer.contactNo);
 					$('#suggestedNomineeName').val(customer.nomineeName);
@@ -112,6 +127,7 @@ $('#selectByCustomer').on('change', function () {
 					$('#district').val(customer.district);
 					$('#branchName').val(customer.branchName);
 					$('#pinCode').val(customer.pinCode);
+					$('#district').val(customer.district);
 					$('#state').val(customer.state);
 					$('#dateOfBirth').val(customer.dob);
 					$('#emailId').val(customer.emailId);

@@ -58,8 +58,8 @@ public class CustomerManagementController {
 	        System.out.println("Saving customer: " + clientMasterDto.getCustomerName());
 	        System.out.println("Photo: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "None"));
 	        System.out.println("Signature: " + (customerSignature != null ? customerSignature.getOriginalFilename() : "None"));
-	        System.out.println("Signature: " + (customerDriving != null ? customerDriving.getOriginalFilename() : "None"));
-	        System.out.println("Signature: " + (customerVoter != null ? customerVoter.getOriginalFilename() : "None"));
+	        System.out.println("Driving: " + (customerDriving != null ? customerDriving.getOriginalFilename() : "None"));
+	        System.out.println("Voter: " + (customerVoter != null ? customerVoter.getOriginalFilename() : "None"));
 
 	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature,customerDriving,customerVoter);
 	        return new ResponseEntity<>(response, response.getStatus());
