@@ -31,6 +31,7 @@ pageEncoding="ISO-8859-1"%> -->
 	crossorigin="anonymous"></script>
 	<!-- jQuery ajax cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
@@ -83,8 +84,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Full Name</label> <input type="text" name="customerName"
-									id="customerName" required="required"
+								<label>Full Name</label> <input type="text" name="fullName"
+									id="fullName" required="required"
 									placeholder="Enter customer Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -93,7 +94,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Email ID </label> <input type="email"
-									name="email" id="email" required="required"
+									name="emailId" id="emailId" required="required"
 									placeholder="Enter email" />
 							</div>
 						</div>
@@ -101,7 +102,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Contact No.</label> <input type="text"
-									name="Contactno" id="Contactno" required="required"
+									name="contactNumber" id="contactNumber" required="required"
 									placeholder="Enter Contact no" />
 							</div>
 						</div>
@@ -111,7 +112,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Sign In Branch</label>
-								<select id="branchName"
+								<select id=branchName1
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
@@ -125,11 +126,11 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Past date</label>
-								<select id="pastdate"
-									name="pastdate" required="required"
+								<select id="pastDate"
+									name="pastDate" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Yes</option>
-									<option value="">No</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
 								</select>
 							</div>
 						</div>
@@ -139,12 +140,12 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Re Print</label>
-								<select id="print"
-									name="print" required="required"
+								<select id="rePrint"
+									name="rePrint" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="">Yes</option>
-									<option value="">No</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
 								</select>
 							</div>
 						</div>
@@ -155,12 +156,12 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Delete Access</label>
-								<select id="access"
-									name="access" required="required"
+								<select id="deleteAccess"
+									name="deleteAccess" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
-									<option value="">Yes</option>
-									<option value="">No</option>
+									<option value="Yes">Yes</option>
+									<option value="No">No</option>
 								</select>
 							</div>
 						</div>
@@ -171,7 +172,7 @@ pageEncoding="ISO-8859-1"%> -->
 								class=" h-100 d-flex justify-content-start align-items-center">
 								<div
 									class="d-flex justify-content-start align-items-center  formFields">
-									<label style="margin-left: 20px;" class="mb-2">User Status</label>
+									<label style="margin-left: 20px;" class="mb-2" id="toggleStatus">User Status</label>
 									<div class="cont">
 										<div class="toggle">
 											<input type="checkbox" id="toggle-member-status"
@@ -186,7 +187,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="row">
 							<div class="col-12 text-center mt-4" style="margin-left: 300px;">
-								<button id="saveBtn" class="btnStyle bg-warning">Save</button>
+								<button id="saveBtn" class="btnStyle bg-warning" type="button">Save</button>
 
 							</div>
 						</div>
@@ -472,6 +473,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/userCreation.js"></script>
 </body>
 
 </html>

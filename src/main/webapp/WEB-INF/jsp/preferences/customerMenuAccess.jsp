@@ -162,11 +162,9 @@ select {
 		<div>
 			<div class="user-id-section">
 				<div class="user-id-box">
-					<label for="user-id">Select User ID:</label> <select id="user-id"
-						onchange="showSelectedUser()">
-						<option value="admin">admin</option>
-						<option value="user1">user1</option>
-						<option value="user2">user2</option>
+					<label for="user-id">Select User ID:</label> <select id="userName" name="userName"
+						>
+
 					</select>
 				</div>
 			</div>
@@ -1405,7 +1403,12 @@ select {
 			</div>
 
 
+				<div class="row">
+					<div class="col-12 text-center mt-4" style="margin-center: 300px;">
+						<button type="button" id="saveAccessBtn" class="btnStyle bg-warning" onclick="retriveINCheckBox()">Save</button>
 
+					</div>
+				</div>
 
 
 
@@ -1413,7 +1416,8 @@ select {
 
 
 	</main>
-
+	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/userMenuAccess.js"></script>
 
 </body>
 

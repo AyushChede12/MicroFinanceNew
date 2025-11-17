@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	$("#form1").submit(function(e) {
 		e.preventDefault();
 
@@ -37,3 +37,4 @@ $(document).ready(function() {
 	
 	
 });
+*/

@@ -159,7 +159,7 @@ body {
         </div>
     </div>
 
-<script>
+<!-- <script>
 $(document).ready(function() {
     // Password toggle
     $("#eyeicon").click(function() {
@@ -176,6 +176,21 @@ $(document).ready(function() {
 
     // AJAX login
 });
+</script> -->
+
+   <script>
+    let eyeicon = document.getElementById("userName");
+    let password = document.getElementById("password");
+
+    eyeicon.onclick = function(){
+        if (password.type === "password") {
+            password.type = "text";
+            eyeicon.classList.replace("fa-eye-slash", "fa-eye");
+        } else {
+            password.type = "password";
+            eyeicon.classList.replace("fa-eye", "fa-eye-slash");
+        }
+    };
 </script>
 <script src="./js/login.js"></script>
 </body>
