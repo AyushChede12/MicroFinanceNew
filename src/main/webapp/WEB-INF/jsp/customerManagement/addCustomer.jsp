@@ -805,6 +805,36 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 			</form>
+			
+			<!-- SAVE & UPDATE BUTTONS END -->
+
+<!-- ================== TABLE START ================== -->
+<div class="mt-5">
+    <nav>
+        <ol class="breadcrumb breadcrumb-title">
+            <li class="breadcrumb-item action">Customer List</li>
+        </ol>
+    </nav>
+
+    <table class="table table-bordered table-striped">
+        <thead style="background:#f0f0f0;">
+            <tr>
+                <th>#</th>
+                <th>Customer Code</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Aadhar</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="customerTableBody">
+            <!-- Dynamic rows will be added here -->
+        </tbody>
+    </table>
+</div>
+<!-- ================== TABLE END ================== -->
+			
+
 
 
 		</div>

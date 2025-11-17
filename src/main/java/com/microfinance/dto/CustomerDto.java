@@ -59,10 +59,15 @@ public class CustomerDto {
 		private String nomineeKycType;
 		private String nomineeMobileNo;
 		private String nomineeDOB;
+		private MultipartFile nomineSignature;
+		private MultipartFile  nomineAadhar;
+
 		
 		
 
 		
+		
+
 		//Fees Details
 		private String memberFees;
 		private String buildingFund;
@@ -640,6 +645,22 @@ public class CustomerDto {
 
 		public void setLastName(String lastName) {
 			this.lastName = lastName;
+		}
+
+		public MultipartFile getNomineSignature() {
+			return nomineSignature;
+		}
+
+		public void setNomineSignature(MultipartFile nomineSignature) {
+			this.nomineSignature = nomineSignature;
+		}
+
+		public MultipartFile getNomineAadhar() {
+			return nomineAadhar;
+		}
+
+		public void setNomineAadhar(MultipartFile nomineAadhar) {
+			this.nomineAadhar = nomineAadhar;
 		}
 		
 		

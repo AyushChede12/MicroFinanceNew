@@ -187,7 +187,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<!-- Customer Photo -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Customer Photo <span class="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="photo" id="photo"
@@ -205,7 +205,24 @@ pageEncoding="ISO-8859-1"%> -->
 						<!-- Signature -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
+								Signature <span class="star">*</span>
+							</label> <label for="signature" id="drop-area"> <input
+								type="file" accept="image/*" name="signature" id="signature"
+								hidden="hidden" onchange="signatureUpload();"
+								style="background-size: cover; background-repeat: no-repeat" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="signaturePreview" /><input type="hidden"
+										name="signatureHidden" id="signatureHidden">
+
+								</div>
+							</label> <small id="chksignature" style="color: red;"></small>
+						</div>
+						
+						<div class="col-lg-3 mb-5">
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Signature <span class="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
@@ -221,52 +238,39 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<!-- <div class="col-lg-4 mb-5">
-							<label
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Aadhar Front photo</label> <label for="bike2image" id="drop-area">
-								<input type="file" accept="image/*" name="aadharFrontPhoto"
-								id="bike2imagePreview" hidden="hidden"
-								onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+						<!-- Aadhar Front -->
+<div class="col-lg-4 mb-5">
+    <label>Aadhar Front Photo</label>
+    <label id="drop-area">
+        <input type="file" accept="image/*" name="aadharFrontPhoto" id="aadharFrontPhoto" hidden onchange="previewImage('aadharFrontPhoto','aadharFrontPreview')" />
+        <div id="img-view">
+            <img src="../images/upload/upload.png" id="aadharFrontPreview" />
+        </div>
+    </label>
+</div>
 
-								</div>
-							</label>
-						</div>
+<!-- Aadhar Back -->
+<div class="col-lg-4 mb-5">
+    <label>Aadhar Back Photo</label>
+    <label id="drop-area">
+        <input type="file" accept="image/*" name="aadharBackPhoto" id="aadharBackPhoto" hidden onchange="previewImage('aadharBackPhoto','aadharBackPreview')" />
+        <div id="img-view">
+            <img src="../images/upload/upload.png" id="aadharBackPreview" />
+        </div>
+    </label>
+</div>
 
-						<div class="col-lg-4 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Aadhar Back Photo</label> <label for="bike2image" id="drop-area">
-								<input type="file" accept="image/*" name="aadharBackPhoto"
-								id="aadharBackPhoto" hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
+<!-- PAN Photo -->
+<div class="col-lg-4 mb-5">
+    <label>PAN Photo</label>
+    <label id="drop-area">
+        <input type="file" accept="image/*" name="panPhoto" id="panPhoto" hidden onchange="previewImage('panPhoto','panPreview')" />
+        <div id="img-view">
+            <img src="../images/upload/upload.png" id="panPreview" />
+        </div>
+    </label>
+</div>
 
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-4 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								PAN Photo</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="panPhoto" id="panPhoto"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-
-
-								</div>
-							</label>
-						</div> -->
 
 					</div>
 				</div>

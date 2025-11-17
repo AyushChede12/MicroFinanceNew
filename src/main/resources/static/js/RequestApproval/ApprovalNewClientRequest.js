@@ -90,28 +90,38 @@ function renderTable(data) {
 
 //filter table
 function filterKYCData() {
-	const selectedCode = $('#branchName').val();
-	const fromDateVal = $('#fromDate').val();
-	const toDateVal = $('#toDate').val();
+    const selectedCode = $('#branchName').val();
+    const fromDateVal = $('#fromDate').val();
+    const toDateVal = $('#toDate').val();
 
-	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
-	const toDate = toDateVal ? new Date(toDateVal) : null;
+    const fromDate = fromDateVal ? new Date(fromDateVal) : null;
+    const toDate = toDateVal ? new Date(toDateVal) : null;
 
-	const filtered = allKYCData.filter(item => {
+    const filtered = allKYCData.filter(item => {
 
-		const branchName = item.branchName;
-		const dob = item.dob ? new Date(item.dob) : null;
+        const branchName = item.branchName;
+        const dob = item.dob ? new Date(item.dob) : null;
 
-		const matchesCode = selectedCode ? branchName === selectedCode : true;
-		const matchesFrom = fromDate && dob ? dob >= fromDate : true;
-		const matchesTo = toDate && dob ? dob <= toDate : true;
+        // Branch filter
+        const matchesCode = selectedCode ? branchName === selectedCode : true;
 
+        // DOB null ho aur date selected ho → match false
+        if (!dob && (fromDate || toDate)) {
+            return false;
+        }
 
-		return matchesCode && matchesFrom && matchesTo;
-	});
+        // Date From
+        const matchesFrom = fromDate ? dob >= fromDate : true;
 
-	renderTable(filtered);
+        // Date To
+        const matchesTo = toDate ? dob <= toDate : true;
+
+        return matchesCode && matchesFrom && matchesTo;
+    });
+
+    renderTable(filtered);
 }
+
 
 //anjali  approve button code
 

@@ -49,7 +49,9 @@ public class CustomerManagementController {
 	        @RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
 	        @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature,
 	        @RequestParam(value = "customerDriving", required = false) MultipartFile customerDriving,
-            @RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter)
+            @RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter,
+            @RequestParam(value = "nomineSignature", required = false) MultipartFile nomineSignature,
+            @RequestParam(value = "nomineAadhar", required = false) MultipartFile nomineAadhar)
 	
 	{
 
@@ -61,7 +63,7 @@ public class CustomerManagementController {
 	        System.out.println("Driving: " + (customerDriving != null ? customerDriving.getOriginalFilename() : "None"));
 	        System.out.println("Voter: " + (customerVoter != null ? customerVoter.getOriginalFilename() : "None"));
 
-	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature,customerDriving,customerVoter);
+	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature,customerDriving,customerVoter ,nomineAadhar,nomineSignature);
 	        return new ResponseEntity<>(response, response.getStatus());
 
 	    } catch (Exception e) {

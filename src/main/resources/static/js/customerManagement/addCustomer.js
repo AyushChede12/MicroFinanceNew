@@ -2,7 +2,8 @@ $(document).ready(function() {
 	$("#guardianDetails").hide();
 	$("#guardianAccount").hide();
 	
-	$(document).ready(function () {
+	loadCustomerTable();
+	
 
 	    // Hide Aadhar field initially
 	    $("#aadharNo").closest(".col-lg-3").hide();
@@ -19,7 +20,7 @@ $(document).ready(function() {
 	        }
 	    });
 
-	});
+
 
 	$('#saveBtn').click(function(event) {
 		event.preventDefault();
@@ -93,11 +94,15 @@ $(document).ready(function() {
 		const customerSignature = $('#customerSignature')[0].files[0];
 		const customerVoter = $('#customerVoter')[0].files[0];
 		const customerDriving = $('#customerDriving')[0].files[0];
+		const nomineSignature = $('#nomineSignature')[0].files[0];
+		const nomineAadhar = $('#nomineAadhar')[0].files[0];
 		
 		if (customerPhoto) formData.append("customerPhoto", customerPhoto);
 		if (customerSignature) formData.append("customerSignature", customerSignature);
 		if (customerVoter) formData.append("customerVoter", customerVoter);
 		if (customerDriving) formData.append("customerDriving", customerDriving);
+		if (nomineSignature) formData.append("nomineSignature", nomineSignature);
+		if (nomineAadhar) formData.append("nomineAadhar", nomineAadhar);
 		
 
 		// Toggles
@@ -220,6 +225,74 @@ function drivingpreview() {
 		alert("Please upload a valid image file for signature.");
 	}
 }
+
+function loadCustomerTable() {
+    $.ajax({
+        url: "api/customermanagement/getAllCustomer",
+        type: "GET",
+        success: function(data) {
+            let tbody = $("#customerTableBody");
+            tbody.empty();
+
+            data.forEach((cust, idx) => {
+                tbody.append(`
+                    <tr>
+                        <td>${idx + 1}</td>
+                        <td>${cust.memberCode}</td>
+                        <td>${cust.customerName}</td>
+                        <td>${cust.contactNo}</td>
+                        <td>${cust.aadharNo}</td>
+                        <td>${cust.district}</td>
+                        <td>${cust.branchName}</td>
+                        <td>${cust.dob}</td>
+                    </tr>
+                `);
+            });
+        },
+        error: function(err) {
+            console.log("Error loading table:", err);
+        }
+    });
+}
+
+function nomineSignaturePreview() {
+    const file = document.getElementById("nomineSignature").files[0];
+    if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImg = document.getElementById("nomineeSignaturePreviewImg");
+            previewImg.src = e.target.result;
+            previewImg.style.width = "100%";
+            previewImg.style.height = "100%";
+            previewImg.style.objectFit = "cover";
+            previewImg.style.overflow = "hidden";
+            previewImg.style.borderRadius = "20px";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        alert("Please upload a valid image for nominee signature.");
+    }
+}
+
+function nomineAadharPreview() {
+    const file = document.getElementById("nomineAadhar").files[0];
+    if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImg = document.getElementById("nomineeAadharPreviewImg");
+            previewImg.src = e.target.result;
+            previewImg.style.width = "100%";
+            previewImg.style.height = "100%";
+            previewImg.style.objectFit = "cover";
+            previewImg.style.overflow = "hidden";
+            previewImg.style.borderRadius = "20px";
+        };
+        reader.readAsDataURL(file);
+    } else {
+        alert("Please upload a valid image for nominee Aadhar.");
+    }
+}
+
 $(document).ready(function() {
 	// Load States
 	$.ajax({

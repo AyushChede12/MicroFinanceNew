@@ -48,6 +48,43 @@ function fetchBySelectedCustomer() {
 				} else {
 					$("#signaturePreview").attr("src", baseUrl + "default-placeholder.jpg");
 				}
+				
+				// Aadhar Front Photo
+				if (c.aadharFrontPhoto) {
+				    $("#aadharFrontPreview").attr("src", baseUrl + c.aadharFrontPhoto);
+				} else {
+				    $("#aadharFrontPreview").attr("src", baseUrl + "default-placeholder.jpg");
+				}
+
+				// Aadhar Back Photo
+				if (c.aadharBackPhoto) {
+				    $("#aadharBackPreview").attr("src", baseUrl + c.aadharBackPhoto);
+				} else {
+				    $("#aadharBackPreview").attr("src", baseUrl + "default-placeholder.jpg");
+				}
+
+				// PAN Photo
+				if (c.panPhoto) {
+				    $("#panPreview").attr("src", baseUrl + c.panPhoto);
+				} else {
+				    $("#panPreview").attr("src", baseUrl + "default-placeholder.jpg");
+				}
+
+				// ================== KYC Button Status Handling ==================
+				if (c.isVerified) {
+				    $("#saveBtn")
+				        .css("background-color", "green")
+				        .css("color", "white")
+				        .text("Verified")
+				        .prop("disabled", true);
+				} else {
+				    $("#saveBtn")
+				        .css("background-color", "red")
+				        .css("color", "white")
+				        .text("Click Here to Authenticate Complete")
+				        .prop("disabled", false);
+				}
+
 
 			} else {
 				alert("No data found for the selected member.");
@@ -91,7 +128,7 @@ $(document).ready(function() {
 				$('#selectMember').append(
 					$('<option>', {
 						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText
+						text: optionText	
 					})
 				);
 			});
@@ -170,18 +207,25 @@ function verifyFetchedData() {
 			const button = document.getElementById("saveBtn");
 
 			if (data.isVerified) {
-				alert(data.message);
-				verifiedMembers.add(customerCode);
-				button.style.backgroundColor = "green";
-				button.style.color = "white"; // Optional: make text readable
-				button.innerText = "Verified";
-				button.disabled = true;
+			    alert(data.message);
+			    verifiedMembers.add(customerCode);
+
+			    $("#saveBtn")
+			        .css("background-color", "green")
+			        .css("color", "white")
+			        .text("Verified")
+			        .prop("disabled", true);
+
 			} else {
-				alert(data.message);
-				button.style.backgroundColor = "red";
-				button.style.color = "white";
-				button.innerText = "Not Verified";
+			    alert(data.message);
+
+			    $("#saveBtn")
+			        .css("background-color", "red")
+			        .css("color", "white")
+			        .text("Not Verified")
+			        .prop("disabled", false);
 			}
+
 		})
 		.catch(error => {
 			console.error("Error verifying data:", error);

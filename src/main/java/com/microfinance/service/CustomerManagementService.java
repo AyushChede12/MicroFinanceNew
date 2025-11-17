@@ -36,7 +36,7 @@ public class CustomerManagementService {
 	private String uploadDirectory;
 
 	public ApiResponse<addCustomer> saveOrUpdateCustomer(CustomerDto clientMasterDto, MultipartFile customerPhoto,
-			MultipartFile customerSignature,MultipartFile customerVoter,MultipartFile customerDriving) {
+			MultipartFile customerSignature,MultipartFile customerVoter,MultipartFile customerDriving,MultipartFile nomineSignature,MultipartFile nomineAadhar) {
 		addCustomer addcustomer = new addCustomer();
 		boolean isNew = true;
 
@@ -136,6 +136,16 @@ public class CustomerManagementService {
 			if (customerDriving != null && !customerDriving.isEmpty()) {
 				String drivingFileName = saveFile(customerDriving);
 				addcustomer.setCustomerSignature(drivingFileName);
+			}
+			
+			if (nomineAadhar != null && !nomineAadhar.isEmpty()) {
+				String nomineAadharFileName = saveFile(nomineAadhar);
+				addcustomer.setNomineAadhar(nomineAadharFileName);
+			}
+			
+			if (nomineSignature != null && !nomineSignature.isEmpty()) {
+				String nomineSignatureFileName= saveFile(customerDriving);
+				addcustomer.setNomineSignature(nomineSignatureFileName);;
 			}
 		} catch (IOException e) {
 			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed: " + e.getMessage());

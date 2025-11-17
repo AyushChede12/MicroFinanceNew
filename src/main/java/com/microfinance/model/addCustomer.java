@@ -52,6 +52,7 @@ public class addCustomer {
 	private String middleName;
 	private String lastName;
 	
+	
 
 
 //Nominee Details
@@ -65,6 +66,9 @@ public class addCustomer {
 	private String nomineeKycType;
 	private String nomineeMobileNo;
 	private String nomineeDOB;
+	private String nomineSignature;
+	private String nomineAadhar;
+	
 	
 	//Fees Details
 	private String memberFees;
@@ -647,7 +651,22 @@ public class addCustomer {
 	}
 	
 	
-	
+	public String getNomineSignature() {
+		return nomineSignature;
+	}
+
+	public void setNomineSignature(String nomineSignature) {
+		this.nomineSignature = nomineSignature;
+	}
+
+	public String getNomineAadhar() {
+		return nomineAadhar;
+	}
+
+	public void setNomineAadhar(String nomineAadhar) {
+		this.nomineAadhar = nomineAadhar;
+	}
+
 	
 
 }
