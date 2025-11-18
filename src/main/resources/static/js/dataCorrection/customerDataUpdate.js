@@ -38,6 +38,7 @@ $(document).ready(function() {
 
 	$("#customerCode").change(function() {
 		let customerCode = $("#customerCode").val();
+		alert(customerCode);
 		if (customerCode !== "") {
 			$.ajax({
 				type: "POST",
@@ -46,6 +47,7 @@ $(document).ready(function() {
 				success: function(response) {
 					if (response.status == "FOUND") {
 						let data = response.data[0];
+						alert(data.major);
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
 						$("#major").val(data.major);
@@ -289,126 +291,131 @@ $(document).ready(function() {
 	$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
-		var customerCode = $('#customerCode').val();
-		if (customerCode && customerCode !== "") {
+		const customerCode = $("#customerCode").val();
+		if (!customerCode) {
+			alert("Please select a customer first!");
+			return;
+		}
 
-			const $formClone = $("#formid").clone();
+		// Clone form
+		const $clone = $("#formid").clone(true, true);
 
-			// Remove buttons and extra dropdowns
-			$formClone.find("#editmember, #printBtn, #updateBtn, #deleteBtn, #customerCode, #customerSelection").remove();
-			$formClone.find(".text-center").each(function() {
-				if ($(this).find("button").length > 0) {
-					$(this).remove();
-				}
-			});
+		// Remove unwanted buttons & controls
+		const removeIDs = [
+			"#editmember",
+			"#printBtn",
+			"#updateBtn",
+			"#deleteBtn",
+			"#customerCode",
+			"#customerSelection"
+		];
+		removeIDs.forEach(id => $clone.find(id).remove());
 
-			// Convert selects to plain text
-			$formClone.find("select").each(function() {
-				const selectedText = $(this).find("option:selected").text();
-				$(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
-			});
+		/*$clone.find("button, .select2").remove();*/
 
-			// Convert inputs to plain text
-			$formClone.find("input[type='text'], input[type='date'], input[type='number'], input[type='email'], input[type='tel']").each(function() {
-				const value = $(this).val();
-				$(this).replaceWith(`<span class="form-value">${value}</span>`);
-			});
+		$clone.find("select").each(function () {
+		    let selectedText = "";
 
-			// Convert textareas
-			$formClone.find("textarea").each(function() {
-				const value = $(this).val();
-				$(this).replaceWith(`<span class="form-value">${value}</span>`);
-			});
+		    // If Select2 is applied
+		    const originalId = $(this).attr("id");
+		    if (originalId && $("#" + originalId).data('select2')) {
+		        const selData = $("#" + originalId).select2('data');
+		        if (selData && selData.length > 0) {
+		            selectedText = selData[0].text;
+		        }
+		    }
 
-			// Convert checkboxes and radios
-			$formClone.find("input[type='checkbox'], input[type='radio']").each(function() {
-				const isChecked = $(this).is(':checked') ? 'Yes' : 'No';
-				$(this).replaceWith(`<span class="form-value">${isChecked}</span>`);
-			});
+		    // If normal dropdown
+		    if (!selectedText || selectedText === "") {
+		        selectedText = $(this).find("option:selected").text();
+		    }
 
-			// Optional: Resize images if any
-			$formClone.find("img").each(function() {
-				$(this).css({
-					width: "100px",
-					height: "auto",
-					border: "1px solid #ccc",
-					marginBottom: "10px"
-				});
-			});
+		    $(this).replaceWith(`<span class="form-value">${selectedText}</span>`);
+		});
+ 
 
-			// Open print window
-			const printWindow = window.open("", "_blank");
-			if (printWindow) {
-				printWindow.document.open();
-				printWindow.document.write(`
-				<html>
-				<head>
-					<title>Print - Customer Form</title>
-					<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-					<style>
-						body {
-							font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-							padding: 30px;
-							background: #fff;
-							color: #333;
-						}
-						h3 {
-							text-align: center;
-							margin-bottom: 30px;
-							border-bottom: 2px solid #444;
-							padding-bottom: 10px;
-						}
-						.form-group, .form-row {
-							margin-bottom: 20px;
-							display: flex;
-							flex-wrap: wrap;
-							align-items: center;
-						}
-						label {
-							width: 200px;
-							font-weight: 600;
-							margin-bottom: 5px;
-							color: #000;
-						}
-						.form-value {
-							flex: 1;
-							padding: 8px 12px;
-							border: 1px solid #ccc;
-							border-radius: 5px;
-							background-color: #f9f9f9;
-							font-weight: 500;
-							color: #222;
-						}
-						img {
-							display: block;
-							margin-top: 10px;
-						}
-						@media print {
-							body {
-								zoom: 95%;
-							}
-						}
-					</style>
-				</head>
-				<body onload="window.print(); window.close();">
-					<h3>Customer Information</h3>
-					<div class="container">
-						${$formClone[0].outerHTML}
-					</div>
-				</body>
-				</html>
-			`);
-				printWindow.document.close();
-			} else {
-				alert("Popup blocked. Please allow popups for this website.");
+		// Convert input fields to text
+		$clone.find("input").each(function() {
+			const type = $(this).attr("type");
+			let value = $(this).val() || "";
+
+			if (type === "checkbox") {
+				value = $(this).is(":checked") ? "Yes" : "No";
 			}
-		}
-		else {
-			alert("First Select Any One Data Then Proceed to Print");
-		}
+
+			$(this).replaceWith(`<span class="form-value">${value}</span>`);
+		});
+
+		// Convert textarea
+		$clone.find("textarea").each(function() {
+			const value = $(this).val() || "";
+			$(this).replaceWith(`<span class="form-value">${value}</span>`);
+		});
+
+		// Resize images
+		$clone.find("img").each(function() {
+			$(this).css({
+				width: "120px",
+				height: "auto",
+				border: "1px solid #444",
+				padding: "3px",
+				marginTop: "5px"
+			});
+		});
+
+		// Print Window
+		const printWindow = window.open("", "_blank");
+
+		printWindow.document.write(`
+	        <html>
+	        <head>
+	            <title>Customer Details</title>
+				<style>
+					                body {
+					                    font-family: Arial, sans-serif;
+					                    padding: 25px;
+					                }
+					                h2 {
+					                    text-align: center;
+					                    margin-bottom: 20px;
+					                }
+					                .form-value {
+					                    font-weight: 600;
+					                    display: block;
+					                    margin-bottom: 8px;
+					                    padding: 6px 10px;
+					                    border-bottom: 1px solid #ccc;
+					                    font-size: 14px;
+					                }
+					                .row {
+					                    margin-bottom: 10px;
+					                    display: flex;
+					                    flex-wrap: wrap;
+					                }
+					                .col-lg-3, .col-lg-5 {
+					                    width: 48%;
+					                    margin-right: 1%;
+					                    margin-bottom: 12px;
+					                }
+					                img {
+					                    margin-top: 10px;
+					                    border-radius: 4px;
+					                }
+					            </style>
+	        </head>
+	        <body>
+	            ${$clone.prop("outerHTML")}
+	        </body>
+	        </html>
+	    `);
+
+		printWindow.document.close();
+
+		setTimeout(() => {
+			printWindow.focus();
+			printWindow.print();
+		}, 300);
 	});
-
-
 
 });
 
