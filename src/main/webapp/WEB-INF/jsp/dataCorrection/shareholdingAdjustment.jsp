@@ -60,6 +60,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 		<div>
 			<form id="formid">
+
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -90,7 +91,7 @@ pageEncoding="ISO-8859-1"%> -->
                   </div>
                 </div>
               </div> -->
-              <input type="hidden" name="id" id="id">
+							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields">
 								<label for="">Find By Code</label> <select id="findByCode"
 									name="findByCode" required="required"
@@ -103,9 +104,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Customer Name</label> <input type="text"
+								<label for="customerName">Customer Name</label> <input type="text"
 									name="customerName" id="customerName" required="required"
-									placeholder="Enter Member Name"
+									placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -116,15 +117,15 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Start Date</label> <input type="date" name="startDate"
 									id="startDate" required="required"
-									placeholder="Enter Member Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Previous Account Balance</label> <input
-									type="text" name="previousAccountBalance" id="previousAccountBalance" required="required"
+								<label for="previousAccountBalance">Previous Account Balance</label> <input
+									type="text" name="previousAccountBalance"
+									id="previousAccountBalance" required="required"
 									placeholder="Enter Previous Balance"
 									style="text-transform: uppercase;" />
 							</div>
@@ -135,8 +136,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Previous Share Count</label> <input type="text"
-									name="previousShareCount" id="previousShareCount" required="required"
-									placeholder="Enter Previous No Of Share"
+									name="previousShareCount" id="previousShareCount"
+									required="required" placeholder="Enter Previous No Of Share"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -172,8 +173,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Shares Issued By</label> <select id="shareIssuedBy"
-									name="shareIssuedBy" required="required"
+								<label for="">Shares Issued By</label> <select
+									id="shareIssuedBy" name="shareIssuedBy" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Shares Issued By</option>
 									<option value="Tata Motors Ltd.">Tata Motors Ltd.</option>
@@ -192,9 +193,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Transfer Amount</label> <input type="text" name="amountTransferred"
-									id="amountTransferred" required="required"
-									placeholder="Enter Transfer Amount" />
+								<label>Transfer Amount</label> <input type="text"
+									name="amountTransferred" id="amountTransferred"
+									required="required" placeholder="Enter Transfer Amount" />
 							</div>
 						</div>
 
@@ -222,9 +223,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Mode of payment</label> <select id="modeOfPayment" name="modeOfPayment"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label>Mode of payment</label> <select id="modeOfPayment"
+									name="modeOfPayment" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Mode of payment</option>
 									<option value="Cash">Cash</option>
 									<option value="Online">Online</option>
@@ -235,7 +236,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Comments</label>
-								<textarea name="comments" id="comments" placeholder="Enter Comments if any"
+								<textarea name="comments" id="comments"
+									placeholder="Enter Comments if any"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
 							</div>
 						</div>

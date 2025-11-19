@@ -186,7 +186,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Date of Birth </label> <input type="date"
-									name="vehicalNo" id="dob" required="required"
+									name="dob" id="dob" required="required"
 									placeholder="Enter Relative Name"
 									style="text-transform: uppercase;" />
 							</div>
