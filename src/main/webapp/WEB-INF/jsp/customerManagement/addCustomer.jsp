@@ -79,7 +79,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Aadhar No</label> <input type="text"
@@ -108,29 +108,32 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3 mb-4">
-  							<div class="d-flex flex-column formFields">
-   								 <label for="firstName">First Name</label>
-    							<input type="text" name="firstName" id="firstName" placeholder="Enter First Name" required />
-  						   </div>
+							<div class="d-flex flex-column formFields">
+								<label for="firstName">First Name</label> <input type="text"
+									name="firstName" id="firstName" placeholder="Enter First Name"
+									required />
+							</div>
 						</div>
 
 						<div class="col-lg-3 mb-4">
-  							<div class="d-flex flex-column formFields">
-    							<label for="middleName">Middle Name</label>
-    							<input type="text" name="middleName" id="middleName" placeholder="Enter Middle Name" />
-  							</div>
+							<div class="d-flex flex-column formFields">
+								<label for="middleName">Middle Name</label> <input type="text"
+									name="middleName" id="middleName"
+									placeholder="Enter Middle Name" />
+							</div>
 						</div>
 
 						<div class="col-lg-3 mb-4">
- 							 <div class="d-flex flex-column formFields">
-    							<label for="lastName">Last Name</label>
-   								 <input type="text" name="lastName" id="lastName" placeholder="Enter Last Name" required />
- 							 </div>
+							<div class="d-flex flex-column formFields">
+								<label for="lastName">Last Name</label> <input type="text"
+									name="lastName" id="lastName" placeholder="Enter Last Name"
+									required />
+							</div>
 						</div>
 
-						
+
 						<div class="col-lg-3 mb-4">
 							<div class="d-flex flex-column formFields">
 								<label for="">DOB</label> <input type="date" name="dob" id="dob"
@@ -155,7 +158,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="guardianName">Guardian Name(if Minor)</label> <select
 									id="guardianName" name="guardianName" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="No">No(Above 18)</option>
+									<option value="No"></option>
 								</select>
 
 							</div>
@@ -183,7 +186,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -256,7 +259,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -564,50 +567,47 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 
 					</div>
-					
+
 					<!-- Nominee Signature Upload -->
-						<div class="row mt-4">
-							<div class="col-lg-3 mb-5">
-    							<label for=""
-       								 style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-       									 Nominee Signature
-    							</label>
-								<label for="nomineSignature" id="drop-area">
-        							<input type="file" accept="image/*"
-          							  name="nomineSignature" id="nomineSignature"
-            						  hidden="hidden" onchange="nomineeSignaturePreview();" />
+					<div class="row mt-4">
+						<div class="col-lg-3 mb-5">
+							<label
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
+								Nominee Signature </label> <label for="nomineSignature" id="drop-area">
+								<input type="file" accept="image/*" name="nomineSignature"
+								id="nomineSignature" hidden="hidden"
+								onchange="nomineeSignaturePreview();" />
+
 								<div id="img-view">
-            						<img src="../images/upload/upload.png" alt="upload_icon"
-               						 id="nomineeSignaturePreview" />
-        						</div>
-   							   </label>
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="nomineeSignatureImg" />
+								</div>
+							</label>
 						</div>
 
 
 						<!-- Nominee Aadhar Upload -->
 						<div class="col-lg-3 mb-5">
-    						<label for=""
-       							 style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-        							Nominee Aadhar
-    						</label>
+							<label for=""
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
+								Nominee Aadhar </label> <label for="nomineAadhar" id="drop-area">
+								<input type="file" accept="image/*" name="nomineAadhar"
+								id="nomineAadhar" hidden="hidden"
+								onchange="nomineeAadharPreview();" />
 
-    						<label for="nomineAadhar" id="drop-area">
-       						      <input type="file" accept="image/*"
-           					      name="nomineAadhar" id="nomineAadhar"
-            				      hidden="hidden" onchange="nomineeAadharPreview();" />
+								<div id="img-view">
+									<img src="../images/upload/upload.png" alt="upload_icon"
+										id="nomineeAadharImg" />
+								</div>
+							</label>
+						</div>
+						
+					</div>
 
-        					<div id="img-view">
-                              <img src="../images/upload/upload.png" alt="upload_icon"
-                               id="nomineeAadharPreview" />
-                           </div>
-                 		   </label>
-                      </div>
- 					</div>
-					
-	
+
 
 				</div>
 
@@ -805,35 +805,37 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 				</div>
 			</form>
-			
+
 			<!-- SAVE & UPDATE BUTTONS END -->
 
-<!-- ================== TABLE START ================== -->
-<div class="mt-5">
-    <nav>
-        <ol class="breadcrumb breadcrumb-title">
-            <li class="breadcrumb-item action">Customer List</li>
-        </ol>
-    </nav>
+			<!-- ================== TABLE START ================== -->
+			<div class="mt-5">
+				<nav>
+					<ol class="breadcrumb breadcrumb-title">
+						<li class="breadcrumb-item action">Customer List</li>
+					</ol>
+				</nav>
 
-    <table class="table table-bordered table-striped">
-        <thead style="background:#f0f0f0;">
-            <tr>
-                <th>#</th>
-                <th>Customer Code</th>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Aadhar</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="customerTableBody">
-            <!-- Dynamic rows will be added here -->
-        </tbody>
-    </table>
-</div>
-<!-- ================== TABLE END ================== -->
-			
+				<table class="table table-bordered table-striped">
+					<thead style="background: #f0f0f0;">
+						<tr>
+							<th>#</th>
+							<th>Customer Code</th>
+							<th>Name</th>
+							<th>Mobile</th>
+							<th>Aadhar</th>
+							<th>District</th>
+							<th>Branch Name</th>
+							<th>DOB</th>
+						</tr>
+					</thead>
+					<tbody id="customerTableBody">
+						<!-- Dynamic rows will be added here -->
+					</tbody>
+				</table>
+			</div>
+			<!-- ================== TABLE END ================== -->
+
 
 
 
@@ -882,6 +884,9 @@ pageEncoding="ISO-8859-1"%> -->
 	}); 
 	
 	</script>
+	
+	
+	
 
 </body>
 

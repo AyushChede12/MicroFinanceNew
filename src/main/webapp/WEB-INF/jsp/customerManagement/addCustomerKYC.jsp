@@ -160,7 +160,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Voter No.</label> <input type="text"
 									name="voterNo" id="voterNo" required="required"
-									placeholder="Enter Voter No." />
+									placeholder="Enter Voter No." disabled />
 							</div>
 						</div>
 
@@ -169,7 +169,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Driving License No.</label> <input type="text"
 									name="drivingLicenceNo" id="drivingLicenceNo"
-									required="required" placeholder="Enter Driving License No." />
+									required="required" placeholder="Enter Driving License No."
+									disabled />
 							</div>
 						</div>
 					</div>
@@ -177,7 +178,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-3 text-center">
-							<button type="button" id="saveBtn" class="btnStyle bg-danger"
+							<button type="button" id="saveBtn"
+								style="background-color: red; border: none; outline: none; color: #fff; font-weight: bold; border-radius: 5px; padding: 8px 15px; cursor: pointer;"
 								onclick="verifyFetchedData();">Click Here to
 								Authenticate Complete</button>
 						</div>
@@ -219,57 +221,6 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
-						
-						<div class="col-lg-3 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Signature <span class="star">*</span>
-							</label> <label for="signature" id="drop-area"> <input
-								type="file" accept="image/*" name="signature" id="signature"
-								hidden="hidden" onchange="signatureUpload();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="signaturePreview" /><input type="hidden"
-										name="signatureHidden" id="signatureHidden">
-
-								</div>
-							</label> <small id="chksignature" style="color: red;"></small>
-						</div>
-
-
-						<!-- Aadhar Front -->
-<div class="col-lg-4 mb-5">
-    <label>Aadhar Front Photo</label>
-    <label id="drop-area">
-        <input type="file" accept="image/*" name="aadharFrontPhoto" id="aadharFrontPhoto" hidden onchange="previewImage('aadharFrontPhoto','aadharFrontPreview')" />
-        <div id="img-view">
-            <img src="../images/upload/upload.png" id="aadharFrontPreview" />
-        </div>
-    </label>
-</div>
-
-<!-- Aadhar Back -->
-<div class="col-lg-4 mb-5">
-    <label>Aadhar Back Photo</label>
-    <label id="drop-area">
-        <input type="file" accept="image/*" name="aadharBackPhoto" id="aadharBackPhoto" hidden onchange="previewImage('aadharBackPhoto','aadharBackPreview')" />
-        <div id="img-view">
-            <img src="../images/upload/upload.png" id="aadharBackPreview" />
-        </div>
-    </label>
-</div>
-
-<!-- PAN Photo -->
-<div class="col-lg-4 mb-5">
-    <label>PAN Photo</label>
-    <label id="drop-area">
-        <input type="file" accept="image/*" name="panPhoto" id="panPhoto" hidden onchange="previewImage('panPhoto','panPreview')" />
-        <div id="img-view">
-            <img src="../images/upload/upload.png" id="panPreview" />
-        </div>
-    </label>
-</div>
 
 
 					</div>
@@ -334,7 +285,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/customerManagement/addMemberKyc.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- Select2 CSS and JS -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"

@@ -1,24 +1,24 @@
 $(document).ready(function() {
 	$("#guardianDetails").hide();
 	$("#guardianAccount").hide();
-	
+
 	loadCustomerTable();
-	
 
-	    // Hide Aadhar field initially
-	    $("#aadharNo").closest(".col-lg-3").hide();
 
-	    $("#authenticateFor").on("change", function () {
-	        const val = $(this).val();
+	// Hide Aadhar field initially
+	$("#aadharNo").closest(".col-lg-3").hide();
 
-	        if (val === "aadhar") {
-	            $("#aadharNo").closest(".col-lg-3").show();
-	            $("#aadharNo").prop("required", true);
-	        } else {
-	            $("#aadharNo").closest(".col-lg-3").hide();
-	            $("#aadharNo").prop("required", false).val("");
-	        }
-	    });
+	$("#authenticateFor").on("change", function() {
+		const val = $(this).val();
+
+		if (val === "aadhar") {
+			$("#aadharNo").closest(".col-lg-3").show();
+			$("#aadharNo").prop("required", true);
+		} else {
+			$("#aadharNo").closest(".col-lg-3").hide();
+			$("#aadharNo").prop("required", false).val("");
+		}
+	});
 
 
 
@@ -58,7 +58,7 @@ $(document).ready(function() {
 		formData.append("middleName", $('#middleName').val());
 		formData.append("lastName", $('#lastName').val());
 
-	
+
 		// Nominee
 		formData.append("nomineeName", $('#nomineeName').val());
 		formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
@@ -87,8 +87,8 @@ $(document).ready(function() {
 		formData.append("entryFee", $('#entryFee').val());
 		formData.append("noOfShare", $('#noOfShare').val());
 		formData.append("shareAmount", $('#shareAmount').val());
-		
-		
+
+
 		// File uploads
 		const customerPhoto = $('#customerPhoto')[0].files[0];
 		const customerSignature = $('#customerSignature')[0].files[0];
@@ -96,14 +96,14 @@ $(document).ready(function() {
 		const customerDriving = $('#customerDriving')[0].files[0];
 		const nomineSignature = $('#nomineSignature')[0].files[0];
 		const nomineAadhar = $('#nomineAadhar')[0].files[0];
-		
+
 		if (customerPhoto) formData.append("customerPhoto", customerPhoto);
 		if (customerSignature) formData.append("customerSignature", customerSignature);
 		if (customerVoter) formData.append("customerVoter", customerVoter);
 		if (customerDriving) formData.append("customerDriving", customerDriving);
 		if (nomineSignature) formData.append("nomineSignature", nomineSignature);
 		if (nomineAadhar) formData.append("nomineAadhar", nomineAadhar);
-		
+
 
 		// Toggles
 		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
@@ -235,11 +235,19 @@ function loadCustomerTable() {
             tbody.empty();
 
             data.forEach((cust, idx) => {
+
+                // 🔹 Build FULL NAME from first, middle, last
+                const fullName = [
+                    cust.firstName,
+                    cust.middleName,
+                    cust.lastName
+                ].filter(Boolean).join(" ");
+
                 tbody.append(`
                     <tr>
                         <td>${idx + 1}</td>
                         <td>${cust.memberCode}</td>
-                        <td>${cust.customerName}</td>
+                        <td>${fullName}</td>   <!-- 👈 customer full name here -->
                         <td>${cust.contactNo}</td>
                         <td>${cust.aadharNo}</td>
                         <td>${cust.district}</td>
@@ -255,42 +263,44 @@ function loadCustomerTable() {
     });
 }
 
-function nomineSignaturePreview() {
-    const file = document.getElementById("nomineSignature").files[0];
-    if (file && file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const previewImg = document.getElementById("nomineeSignaturePreviewImg");
-            previewImg.src = e.target.result;
-            previewImg.style.width = "100%";
-            previewImg.style.height = "100%";
-            previewImg.style.objectFit = "cover";
-            previewImg.style.overflow = "hidden";
-            previewImg.style.borderRadius = "20px";
-        };
-        reader.readAsDataURL(file);
-    } else {
-        alert("Please upload a valid image for nominee signature.");
-    }
+
+
+function nomineeSignaturePreview() {
+	const file = document.getElementById("nomineSignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewImg = document.getElementById("nomineeSignatureImg");
+			document.getElementById("nomineeSignatureImg").src = e.target.result;
+			previewImg.style.width = "100%";
+			previewImg.style.height = "100%";
+			previewImg.style.objectFit = "cover";
+			previewImg.style.borderRadius = "20px";
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
 }
 
-function nomineAadharPreview() {
-    const file = document.getElementById("nomineAadhar").files[0];
-    if (file && file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const previewImg = document.getElementById("nomineeAadharPreviewImg");
-            previewImg.src = e.target.result;
-            previewImg.style.width = "100%";
-            previewImg.style.height = "100%";
-            previewImg.style.objectFit = "cover";
-            previewImg.style.overflow = "hidden";
-            previewImg.style.borderRadius = "20px";
-        };
-        reader.readAsDataURL(file);
-    } else {
-        alert("Please upload a valid image for nominee Aadhar.");
-    }
+
+function nomineeAadharPreview() {
+	const file = document.getElementById("nomineAadhar").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewImg = document.getElementById("nomineeAadharImg");
+			document.getElementById("nomineeAadharImg").src = e.target.result;
+			previewImg.style.width = "100%";
+			previewImg.style.height = "100%";
+			previewImg.style.objectFit = "cover";
+			previewImg.style.overflow = "hidden";
+			previewImg.style.borderRadius = "20px";
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image for nominee Aadhar.");
+	}
 }
 
 $(document).ready(function() {
@@ -617,94 +627,94 @@ function ifMinor() {
 
 // Auto-calculate Age and Minor detection
 $(document).ready(function() {
-    $('#dob').on('change', function() {
-        const dobVal = $(this).val();
-        if (!dobVal) return;
+	$('#dob').on('change', function() {
+		const dobVal = $(this).val();
+		if (!dobVal) return;
 
-        const dob = new Date(dobVal);
-        const today = new Date();
+		const dob = new Date(dobVal);
+		const today = new Date();
 
-        let age = today.getFullYear() - dob.getFullYear();
-        const m = today.getMonth() - dob.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-            age--;
-        }
+		let age = today.getFullYear() - dob.getFullYear();
+		const m = today.getMonth() - dob.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+			age--;
+		}
 
-        $('#customerAge').val(age);
+		$('#customerAge').val(age);
 
-        if (age < 18) {
-            $('#minor').val('Yes');
-            $('#guardianDetails').show();
-            $('#guardianAccount').show();
-        } else {
-            $('#minor').val('No');
-            $('#guardianDetails').hide();
-            $('#guardianAccount').hide();
-        }
-    });
+		if (age < 18) {
+			$('#minor').val('Yes');
+			$('#guardianDetails').show();
+			$('#guardianAccount').show();
+		} else {
+			$('#minor').val('No');
+			$('#guardianDetails').hide();
+			$('#guardianAccount').hide();
+		}
+	});
 });
 
 
 
 $(document).ready(function() {
-    // 1️⃣ Fetch all customers for dropdown
-    $.ajax({
-        url: "api/customersavings/getAllSavingAccountData",
-        method: "GET",
-        success: function(response) {
-            console.log("Fetched Members:", response);
-            
-            const customers = response.data || response;
+	// 1️⃣ Fetch all customers for dropdown
+	$.ajax({
+		url: "api/customersavings/getAllSavingAccountData",
+		method: "GET",
+		success: function(response) {
+			console.log("Fetched Members:", response);
 
-            // Clear old options except 'No'
-            $('#guardianName').find("option:not([value='No'])").remove();
+			const customers = response.data || response;
 
-            // Populate dropdown
-            customers.forEach(function(customer) {
-                const optionText = `${customer.enterCustomerName} - ${customer.selectByCustomer}`;
-                $('#guardianName').append(
-                    $('<option>', {
-                        value: customer.selectByCustomer.trim(),
-                        text: optionText
-                    })
-                );
-            });
-        },
-        error: function(err) {
-            console.error("❌ Error fetching customers:", err);
-        }
-    });
+			// Clear old options except 'No'
+			$('#guardianName').find("option:not([value='No'])").remove();
 
-$('#guardianName').on('change', function() {
-    const selectedCode = $(this).val().trim();
+			// Populate dropdown
+			customers.forEach(function(customer) {
+				const optionText = `${customer.enterCustomerName} - ${customer.selectByCustomer}`;
+				$('#guardianName').append(
+					$('<option>', {
+						value: customer.selectByCustomer.trim(),
+						text: optionText
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("❌ Error fetching customers:", err);
+		}
+	});
 
-    if (selectedCode === "No") {
-        $('#guardianAccount').hide();
-        $('#guardianAccNo').prop('required', false).val('');
-    } else {
-        $('#guardianAccount').show();
-        $('#guardianAccNo').prop('required', true);
+	$('#guardianName').on('change', function() {
+		const selectedCode = $(this).val().trim();
 
-        // Fetch account number from backend
-        $.ajax({
-			url: `/api/customersavings/getAccountNumbersByCode?selectByCustomer=${encodeURIComponent(selectedCode)}`,
-            method: "GET",
-            success: function(res) {
-                console.log("Account number response:", res);
+		if (selectedCode === "No") {
+			$('#guardianAccount').hide();
+			$('#guardianAccNo').prop('required', false).val('');
+		} else {
+			$('#guardianAccount').show();
+			$('#guardianAccNo').prop('required', true);
 
-                // Access account number using the selected code as key
-				if (res.data && res.data.length > 0) {
-				                   $('#guardianAccNo').val(res.data[0].accountNumber);
-				               } else {
-				                   $('#guardianAccNo').val('');
-				               }
-            },
-            error: function(err) {
-                console.error("❌ Error fetching account number:", err);
-                $('#guardianAccNo').val('');
-            }
-        });
-    }
-}).trigger('change'); // trigger on load
- // trigger on load
+			// Fetch account number from backend
+			$.ajax({
+				url: `/api/customersavings/getAccountNumbersByCode?selectByCustomer=${encodeURIComponent(selectedCode)}`,
+				method: "GET",
+				success: function(res) {
+					console.log("Account number response:", res);
+
+					// Access account number using the selected code as key
+					if (res.data && res.data.length > 0) {
+						$('#guardianAccNo').val(res.data[0].accountNumber);
+					} else {
+						$('#guardianAccNo').val('');
+					}
+				},
+				error: function(err) {
+					console.error("❌ Error fetching account number:", err);
+					$('#guardianAccNo').val('');
+				}
+			});
+		}
+	}).trigger('change'); // trigger on load
+	// trigger on load
 });

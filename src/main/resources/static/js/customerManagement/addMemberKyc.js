@@ -1,100 +1,91 @@
 function fetchBySelectedCustomer() {
-	const memberCode = $("#selectByCode").val();
-	if (!memberCode) return;
+    const memberCode = $("#selectByCode").val();
 
-	const input = { memberCode };
+    if (!memberCode) return;
 
-	$.ajax({
-		type: "POST",
-		contentType: "application/json",
-		data: JSON.stringify(input),
-		url: window.location.origin + "/api/customermanagement/fetchBySelectedCustomer",
-		async: false,
-		success: function(data) {
-			if (data && data.length > 0) {
-				const c = data[0];
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({ memberCode }),
+        url: window.location.origin + "/api/customermanagement/fetchBySelectedCustomer",
+        async: false,
+        success: function(data) {
 
-				// 🔹 Text fields
-				$("#customerName").val(c.customerName || "");
-				$("#memberCode").val(c.memberCode || "");
-				$("#contactNo").val(c.contactNo || "");
-				$("#singupDate").val(c.signupDate || "");
-				$("#aadharNo").val(c.aadharNo || "");
-				$("#pan").val(c.panNo || "");
-				$("#state").val(c.state || "");
-				$("#drivingLicenceNo").val(c.drivingLicenceNo || "");
-				$("#voterNo").val(c.voterNo || "");
-				$("#guardianName").val(c.guardianName || "");
-				$("#customerAddress").val(c.customerAddress || "");
-				$("#pinCode").val(c.pinCode || "");
-				$("#nomineeName").val(c.nomineeName || "");
-				$("#emailId").val(c.emailId || "");
-				$("#dob").val(c.dob || "");
-				$("#customerAge").val(c.customerAge || "");
-				$("#branchName").val(c.branchName || "");
-				$("#customerGender").val(c.customerGender || "");
+            if (data && data.length > 0) {
+                const c = data[0];
 
-				// 🔹 Images (customer photo & signature)
-				const baseUrl = window.location.origin + "/Uploads/";
+                // Fill fields
+				const fullName = [
+				    c.firstName || "",
+				    c.middleName || "",
+				    c.lastName || ""
+				].filter(Boolean).join(" ");
 
-				if (c.customerPhoto) {
-					$("#photoPreview").attr("src", baseUrl + c.customerPhoto);
-				} else {
-					$("#photoPreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
+				$("#customerName").val(fullName);
 
-				if (c.customerSignature) {
-					$("#signaturePreview").attr("src", baseUrl + c.customerSignature);
-				} else {
-					$("#signaturePreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
-				
-				// Aadhar Front Photo
-				if (c.aadharFrontPhoto) {
-				    $("#aadharFrontPreview").attr("src", baseUrl + c.aadharFrontPhoto);
-				} else {
-				    $("#aadharFrontPreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
+                $("#memberCode").val(c.memberCode || "");
+                $("#contactNo").val(c.contactNo || "");
+                $("#singupDate").val(c.signupDate || "");
+                $("#aadharNo").val(c.aadharNo || "");
+                $("#pan").val(c.panNo || "");
+                $("#state").val(c.state || "");
+                $("#drivingLicenceNo").val(c.drivingLicenceNo || "");
+                $("#voterNo").val(c.voterNo || "");
+                $("#guardianName").val(c.guardianName || "");
+                $("#customerAddress").val(c.customerAddress || "");
+                $("#pinCode").val(c.pinCode || "");
+                $("#nomineeName").val(c.nomineeName || "");
+                $("#emailId").val(c.emailId || "");
+                $("#dob").val(c.dob || "");
+                $("#customerAge").val(c.customerAge || "");
+                $("#branchName").val(c.branchName || "");
+                $("#customerGender").val(c.customerGender || "");
 
-				// Aadhar Back Photo
-				if (c.aadharBackPhoto) {
-				    $("#aadharBackPreview").attr("src", baseUrl + c.aadharBackPhoto);
-				} else {
-				    $("#aadharBackPreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
-
-				// PAN Photo
-				if (c.panPhoto) {
-				    $("#panPreview").attr("src", baseUrl + c.panPhoto);
-				} else {
-				    $("#panPreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
-
-				// ================== KYC Button Status Handling ==================
-				if (c.isVerified) {
-				    $("#saveBtn")
-				        .css("background-color", "green")
-				        .css("color", "white")
-				        .text("Verified")
-				        .prop("disabled", true);
-				} else {
-				    $("#saveBtn")
-				        .css("background-color", "red")
-				        .css("color", "white")
-				        .text("Click Here to Authenticate Complete")
-				        .prop("disabled", false);
-				}
+                // Image preview
+                const baseUrl = window.location.origin + "/Uploads/";
+                $("#photoPreview").attr("src", c.customerPhoto ? baseUrl + c.customerPhoto : baseUrl + "default-placeholder.jpg");
+                $("#signaturePreview").attr("src", c.customerSignature ? baseUrl + c.customerSignature : baseUrl + "default-placeholder.jpg");
 
 
-			} else {
-				alert("No data found for the selected member.");
-				clearCustomerFields();
-			}
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
-			alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
-		}
-	});
+                // ⭐ BUTTON STATUS ⭐
+                if (c.verified === true) {
+
+                    $("#saveBtn").css({
+                        "background-color": "green",
+                        "color": "white",
+                        "border": "none",
+                        "outline": "none",
+                        "font-weight": "600",
+                        "padding": "8px 15px",
+                        "border-radius": "6px",
+                        "cursor": "not-allowed"
+                    }).text("Verified")
+                      .prop("disabled", true);
+
+                } else {
+
+                    $("#saveBtn").css({
+                        "background-color": "red",
+                        "color": "white",
+                        "border": "none",
+                        "outline": "none",
+                        "font-weight": "600",
+                        "padding": "8px 15px",
+                        "border-radius": "6px",
+                        "cursor": "pointer"
+                    }).text("Click Here to Authenticate Complete")
+                      .prop("disabled", false);
+                }  // ← THIS CLOSING BRACE WAS MISSING!!
+
+            } else {
+                alert("No data found for the selected member.");
+                clearCustomerFields();
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert("Failed to fetch data: " + textStatus + ", " + errorThrown);
+        }
+    });
 }
 
 
@@ -139,14 +130,20 @@ $(document).ready(function() {
 	});*/
 
 	$.ajax({
-		url: 'api/customermanagement/getAllCustomer',
+		url: 'api/customermanagement/approved',
 		type: 'GET',
 		success: function(response) {
 			// response is a list of addCustomer objects
-			let customerOptions = response.map(function(item) {
+			let customerOptions = response.data.map(function(item) {
+				let fullName = [
+				        item.firstName,
+				        item.middleName,
+				        item.lastName
+				    ].filter(Boolean).join(" ");
+				
 				return {
 					id: item.memberCode,
-					text: item.memberCode + " - " + item.customerName
+					text: item.memberCode + " - " + fullName
 				};
 			});
 
@@ -176,59 +173,65 @@ $(document).ready(function() {
 
 
 
-let verifiedMembers = new Set();
-
 function verifyFetchedData() {
-	const customerCode = document.getElementById("memberCode").value;
+    const customerCode = $("#memberCode").val();
 
-	if (verifiedMembers.has(customerCode)) {
-		alert("This customer is already verified!");
-		return;
-	}
+    const fetchedData = {
+        memberCode: customerCode,
+        customerName: $("#customerName").val(),
+        contactNo: $("#contactNo").val(),
+        signupDate: $("#singupDate").val(),
+        aadharNo: $("#aadharNo").val(),
+        pan: $("#pan").val(),
+        voterNo: $("#voterNo").val(),
+        drivingLicenceNo: $("#drivingLicenceNo").val()
+    };
 
-	const fetchedData = {
-		memberCode: customerCode,
-		customerName: document.getElementById("customerName").value,
-		contactNo: document.getElementById("contactNo").value,
-		signupDate: document.getElementById("singupDate").value,
-		aadharNo: document.getElementById("aadharNo").value,
-		pan: document.getElementById("pan").value,
-		voterNo: document.getElementById("voterNo").value,
-		drivingLicenceNo: document.getElementById("drivingLicenceNo").value
-	};
+    fetch("/api/customermanagement/verifyFetchedData", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fetchedData)
+    })
+    .then(response => response.json())
+    .then(data => {
 
-	fetch("verifyFetchedData", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(fetchedData)
-	})
-		.then(response => response.json())
-		.then(data => {
-			const button = document.getElementById("saveBtn");
+        if (data.isVerified) {
+            alert(data.message);
 
-			if (data.isVerified) {
-			    alert(data.message);
-			    verifiedMembers.add(customerCode);
+            $("#saveBtn").css({
+                "background-color": "green",
+                "color": "white",
+                "border": "none",
+                "outline": "none",
+                "font-weight": "600",
+                "padding": "8px 15px",
+                "border-radius": "6px",
+                "cursor": "not-allowed"
+            })
+            .text("Verified")
+            .prop("disabled", true);
 
-			    $("#saveBtn")
-			        .css("background-color", "green")
-			        .css("color", "white")
-			        .text("Verified")
-			        .prop("disabled", true);
+        } else {
 
-			} else {
-			    alert(data.message);
+            alert(data.message);
 
-			    $("#saveBtn")
-			        .css("background-color", "red")
-			        .css("color", "white")
-			        .text("Not Verified")
-			        .prop("disabled", false);
-			}
+            $("#saveBtn").css({
+                "background-color": "red",
+                "color": "white",
+                "border": "none",
+                "outline": "none",
+                "font-weight": "600",
+                "padding": "8px 15px",
+                "border-radius": "6px",
+                "cursor": "pointer"
+            })
+            .text("Not Verified")
+            .prop("disabled", false);
+        }
 
-		})
-		.catch(error => {
-			console.error("Error verifying data:", error);
-			alert("Something went wrong while verifying.");
-		});
+    })
+    .catch(error => {
+        console.error("Error verifying data:", error);
+        alert("Something went wrong while verifying.");
+    });
 }
