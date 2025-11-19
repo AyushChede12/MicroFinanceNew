@@ -53,65 +53,88 @@ function renderTable(data) {
     tbody.empty();
 
     if (!data || data.length === 0) {
-        const noDataRow = `
+        tbody.append(`
             <tr>
                 <td colspan="12" style="text-align:center; font-family: 'Poppins', sans-serif;">
                     No data found
                 </td>
             </tr>
-        `;
-        tbody.append(noDataRow);
-        return; // Exit the function early
+        `);
+        return;
     }
 
     data.forEach((item, index) => {
+
+        // 🔹 Build FULL NAME
+        const fullName = [
+            item.firstName,
+            item.middleName,
+            item.lastName
+        ].filter(Boolean).join(" ");
+
         const row = `
             <tr style="font-family: 'Poppins', sans-serif;">
                 <td>
                     <input type="checkbox" class="approval-checkbox"
                         data-id="${item.id}" ${item.isApproved ? 'checked' : ''} />
-                </td>   
+                </td>
+
                 <td>${index + 1}</td>
-                <td>${item.customerName || '-'}</td>
+
+                <!-- 👇 now using fullName instead of item.customerName -->
+                <td>${fullName || '-'}</td>
+
                 <td>${item.memberCode || '-'}</td>
                 <td>${item.branchName || '-'}</td>
                 <td>${item.dob || '-'}</td>
                 <td>${item.customerAge || '-'}</td>
-               <td>${item.customerGender || '-'}</td>
+                <td>${item.customerGender || '-'}</td>
                 <td>${item.customerAddress || '-'}</td>
                 <td>${item.academicBackground || '-'}</td>
                 <td>${item.contactNo || '-'}</td>
                 <td>${item.emailId || '-'}</td>
             </tr>
         `;
+
         tbody.append(row);
     });
 }
 
+
 //filter table
 function filterKYCData() {
-	const selectedCode = $('#branchName').val();
-	const fromDateVal = $('#fromDate').val();
-	const toDateVal = $('#toDate').val();
+    const selectedCode = $('#branchName').val();
+    const fromDateVal = $('#fromDate').val();
+    const toDateVal = $('#toDate').val();
 
-	const fromDate = fromDateVal ? new Date(fromDateVal) : null;
-	const toDate = toDateVal ? new Date(toDateVal) : null;
+    const fromDate = fromDateVal ? new Date(fromDateVal) : null;
+    const toDate = toDateVal ? new Date(toDateVal) : null;
 
-	const filtered = allKYCData.filter(item => {
+    const filtered = allKYCData.filter(item => {
 
-		const branchName = item.branchName;
-		const dob = item.dob ? new Date(item.dob) : null;
+        const branchName = item.branchName;
+        const dob = item.dob ? new Date(item.dob) : null;
 
-		const matchesCode = selectedCode ? branchName === selectedCode : true;
-		const matchesFrom = fromDate && dob ? dob >= fromDate : true;
-		const matchesTo = toDate && dob ? dob <= toDate : true;
+        // Branch filter
+        const matchesCode = selectedCode ? branchName === selectedCode : true;
 
+        // DOB null ho aur date selected ho → match false
+        if (!dob && (fromDate || toDate)) {
+            return false;
+        }
 
-		return matchesCode && matchesFrom && matchesTo;
-	});
+        // Date From
+        const matchesFrom = fromDate ? dob >= fromDate : true;
 
-	renderTable(filtered);
+        // Date To
+        const matchesTo = toDate ? dob <= toDate : true;
+
+        return matchesCode && matchesFrom && matchesTo;
+    });
+
+    renderTable(filtered);
 }
+
 
 //anjali  approve button code
 

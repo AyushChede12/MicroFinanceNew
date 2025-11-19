@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class addCustomer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 //Customer Details
 	private String memberCode;
@@ -51,8 +51,6 @@ public class addCustomer {
 	private String firstName;
 	private String middleName;
 	private String lastName;
-	
-
 
 //Nominee Details
 
@@ -65,8 +63,10 @@ public class addCustomer {
 	private String nomineeKycType;
 	private String nomineeMobileNo;
 	private String nomineeDOB;
-	
-	//Fees Details
+	private String nomineSignature;
+	private String nomineAadhar;
+
+	// Fees Details
 	private String memberFees;
 	private String buildingFund;
 	private String adminCharge;
@@ -79,22 +79,18 @@ public class addCustomer {
 	private String referenceNo;
 	private String remarks;
 	private String paymentBy;
-	
-	
+
 	private int memberStatus;
-    private int memberBanking;
-    private int netBanking;
-    private int smsSend;
-    
-    
-    private String fDate;
-    private String tDate;
+	private int memberBanking;
+	private int netBanking;
+	private int smsSend;
 
-   
-    private boolean isVerified;
+	private String fDate;
+	private String tDate;
 
-    private boolean isApproved;
-    
+	private boolean isVerified;
+
+	private boolean isApproved;
 
 	public boolean isApproved() {
 		return isApproved;
@@ -104,11 +100,11 @@ public class addCustomer {
 		this.isApproved = isApproved;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -336,10 +332,6 @@ public class addCustomer {
 		this.customerSignature = customerSignature;
 	}
 
-	
-	
-	
-
 	public String getNomineeName() {
 		return nomineeName;
 	}
@@ -508,8 +500,6 @@ public class addCustomer {
 		this.isVerified = isVerified;
 	}
 
-	
-
 	public String getRemarks() {
 		return remarks;
 	}
@@ -645,9 +635,21 @@ public class addCustomer {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-	
-	
-	
+
+	public String getNomineSignature() {
+		return nomineSignature;
+	}
+
+	public void setNomineSignature(String nomineSignature) {
+		this.nomineSignature = nomineSignature;
+	}
+
+	public String getNomineAadhar() {
+		return nomineAadhar;
+	}
+
+	public void setNomineAadhar(String nomineAadhar) {
+		this.nomineAadhar = nomineAadhar;
+	}
 
 }
