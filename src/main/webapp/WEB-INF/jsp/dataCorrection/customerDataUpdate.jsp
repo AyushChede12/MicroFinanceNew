@@ -118,14 +118,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="major">Select</label> <select
+								<label for="major">Select</label> <!-- <select
 									id="major" name="major" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>
 									<option value="Ms.">Ms.</option>
 									<option value="Other">Other</option>
-								</select>
+								</select> --><input type="text"
+									name="major" id="major" required="required"
+									placeholder="Enter Major"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -153,24 +156,29 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label> <select
+								<label>Relation to Applicant</label> <!-- <select
 									id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
-									style="height: 30px;">
+									style="height: 30px;"> --><input type="text"
+									name="relationToApplicant" id="relationToApplicant"
+									required="required" placeholder="Enter Relation"
+									style="text-transform: uppercase;" />
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Gender</label> <select id="customerGender"
+								<label for="">Gender</label> <!-- <select id="customerGender"
 									name="customerGender" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Gender</option>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 									<option value="Other">Other</option>
-								</select>
+								</select> --><input type="text" name="customerGender"
+									id="customerGender" required="required" placeholder="Enter Gender" />
+								
 							</div>
 						</div>
 
@@ -178,7 +186,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Date of Birth </label> <input type="date"
-									name="vehicalNo" id="dob" required="required"
+									name="dob" id="dob" required="required"
 									placeholder="Enter Relative Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -195,7 +203,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relationship Status</label> <select
+								<label for="">Relationship Status</label> <!-- <select
 									id="relationshipStatus" name="relationshipStatus"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
@@ -204,7 +212,9 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Unmarried">Unmarried</option>
 									<option value="Divorced">Divorced</option>
 									<option value="Single">Single</option>
-								</select>
+								</select> -->
+								<input type="text" name="relationshipStatus"
+									id="relationshipStatus" required="required" placeholder="Enter Relationship Status" />
 							</div>
 						</div>
 
@@ -233,11 +243,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="branchName"
+								<label for="">Branch Name</label> <!-- <select id="branchName"
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 
-								</select>
+								</select> -->
+								<input type="text" name="branchName"
+									id="branchName" required="required" placeholder="Enter Branch" />
 							</div>
 						</div>
 
@@ -322,14 +334,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label>Is Minor</label> <select id="minor" name="minor"
+								<label>Is Minor</label> <!-- <select id="minor" name="minor"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Minor</option>
 									<option value="Yes">Yes</option>
 									<option value="No">No</option>
 
-								</select>
+								</select> -->
+								<input type="text"
+									name="minor" id="minor" required="required"
+									placeholder="Enter Minor" />
 							</div>
 						</div>
 
@@ -407,12 +422,16 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="relationToApplicant">Nominee Relation</label> <select
+								<label for="relationToApplicant">Nominee Relation</label> <!-- <select
 									id="nomineeRelationToApplicant"
 									name="nomineeRelationToApplicant" required="required"
 									class="form-control selectField" style="height: 30px;">
 
-								</select>
+								</select> -->
+								<input type="text"
+									name="nomineeRelationToApplicant" id="nomineeRelationToApplicant" required="required"
+									placeholder="Enter Nominee Relation"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -460,14 +479,18 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Nominee KYC Type </label> <select
+								<label for="">Nominee KYC Type </label> <!-- <select
 									id="nomineeKycType" name="nomineeKycType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Saving">Saving</option>
 									<option value="Current">Current</option>
 
-								</select>
+								</select> -->
+								<input type="text"
+									name="nomineeKycType" id="nomineeKycType" required="required"
+									placeholder="Enter Nominee KYC Type"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
