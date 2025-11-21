@@ -120,17 +120,17 @@ $(document).ready(function() {
 					let data = response.data[0];
 					$("#id").val(data.id);
 					$("#joiningDate").val(data.joiningDate);
-					$("#financialName").val(data.financialName);
+					$("#financialName").val(data.financialName.toUpperCase());
 					$("#dob").val(data.dob);
 					$("#age").val(data.age);
 					$("#contactNo").val(data.contactNo);
-					$("#branchName").val(data.branchName);
-					$("#address").val(data.address);
-					$("#district").val(data.district);
-					$("#state").val(data.state);
+					$("#branchName").val(data.branchName.toUpperCase());
+					$("#address").val(data.address.toUpperCase());
+					$("#district").val(data.district.toUpperCase());
+					$("#state").val(data.state.toUpperCase());
 					$("#pinCode").val(data.pinCode);
-					$("#profession").val(data.profession);
-					$("#academicBackground").val(data.academicBackground);
+					$("#profession").val(data.profession.toUpperCase());
+					$("#academicBackground").val(data.academicBackground.toUpperCase());
 
 					// Image bindings (photo and signature)
 					if (data.financialPhoto) {
@@ -155,14 +155,13 @@ $(document).ready(function() {
 						$("#financialsignatureHidden").val("");
 					}
 
-
-					$("#selectPosition").val(data.selectPosition);
-					$("#referralCode").val(data.referralCode);
-					$("#referralName").val(data.referralName);
+					$("#selectPosition").val(data.selectPosition.toUpperCase());
+					$("#referralCode").val(data.referralCode.toUpperCase());
+					$("#referralName").val(data.referralName.toUpperCase());
 
 					$("#fees").val(data.fees);
 					$("#modeofPayment").val(data.modeofPayment);
-					$("#comments").val(data.comments);
+					$("#comments").val(data.comments.toUpperCase());
 
 					if (parseInt(data.financialStatus) === 1) {
 						$('#toggle-financial-status').prop('checked', true);
@@ -267,7 +266,7 @@ $(document).ready(function() {
 
 
 
-	$("#printBtn").on("click", function(e) {
+	/*$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
 		var financialCode = $('#financialCode').val();
@@ -387,6 +386,119 @@ $(document).ready(function() {
 		else {
 			alert("First Select Any One Data Then Proceed to Print");
 		}
+	});*/
+
+	$("#printBtn").on("click", function() {
+
+		const financialCode = $("#financialCode").val();
+		if (!financialCode) {
+			alert("Please select atleast one data then proceed to print!");
+			return;
+		}
+
+		const c = window.companyData;
+
+		let companyHeader = `
+		        <h1 style="text-align:center; margin-bottom:0;">${c.companyName}</h1>
+		        <h3 style="text-align:center; margin-top:5px;">(${c.shortName})</h3>
+		        <p style="text-align:center;">
+		            ${c.address}, ${c.city}, ${c.state} - ${c.pinCode}<br>
+		            CIN: ${c.cinNo} | Email: ${c.emailId.toLowerCase()} | Helpline: ${c.helplineNo}
+		        </p>
+		        <hr>
+		    `;
+
+		function getVal(id) {
+			let el = $("#" + id);
+			if (el.is("select")) {
+				let txt = el.find("option:selected").text();
+				if (el.data("select2")) {
+					let s2 = el.select2("data");
+					if (s2.length > 0) txt = s2[0].text;
+				}
+				if (id === "financialCode" && txt.includes("-")) {
+					txt = txt.split("-")[0].trim();
+				}
+				return txt;
+			}
+			return el.val() ? el.val() : "";
+		}
+
+		const photo = $("#financialPhotoPreview").attr("src");
+		const sign = $("#financialSignaturePreview").attr("src");
+
+		const printContent = `
+		        ${companyHeader}
+
+		        <h2 style="text-align:center;margin-bottom:20px;">Customer Details</h2>
+
+		        <table class="print-table">
+
+		            <tr><th>Financial Code</th><td>${getVal("financialCode")}</td></tr>
+		            <tr><th>Joining Date</th><td>${getVal("joiningDate")}</td></tr>
+		            <tr><th>Financial Name</th><td>${getVal("financialName")}</td></tr>
+		            <tr><th>Date of Birth</th><td>${getVal("dob")}</td></tr>
+		            <tr><th>Age</th><td>${getVal("age")}</td></tr>
+		            <tr><th>Contact No</th><td>${getVal("contactNo")}</td></tr>
+		            <tr><th>Branch</th><td>${getVal("branchName")}</td></tr>
+		            <tr><th>Address</th><td>${getVal("address")}</td></tr>
+		            <tr><th>District</th><td>${getVal("district")}</td></tr>
+		            <tr><th>State</th><td>${getVal("state")}</td></tr>
+		            <tr><th>Pin Code</th><td>${getVal("pinCode")}</td></tr>
+		            <tr><th>Profession</th><td>${getVal("profession")}</td></tr>
+		            <tr><th>Academic Background</th><td>${getVal("academicBackground")}</td></tr>
+					<tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Financial Images</th></tr>
+
+							            <tr>
+							                <th>Customer Photo</th>
+							                <td><img src="${photo}" style="width:120px;height:120px;object-fit:cover;border-radius:10px;"></td>
+							            </tr>
+
+							            <tr>
+							                <th>Customer Signature</th>
+							                <td><img src="${sign}" style="width:150px;height:70px;object-fit:contain;"></td>
+							            </tr>
+										
+										<tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Introducer Details</th></tr>
+		            <tr><th>Position</th><td>${getVal("selectPosition")}</td></tr>
+		            <tr><th>FReferral Code</th><td>${getVal("referralCode")}</td></tr>
+		            <tr><th>Referral Name</th><td>${getVal("referralName")}</td></tr>
+					
+					<tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Payment Details</th></tr>
+		            <tr><th>Fees</th><td>${getVal("fees")}</td></tr>
+		            <tr><th>Payment Mode</th><td>${getVal("modeofPayment")}</td></tr>
+		            <tr><th>Comments</th><td>${getVal("comments")}</td></tr>
+
+		        </table>
+		    `;
+
+		const printWindow = window.open("", "_blank");
+
+		printWindow.document.write(`
+		        <html>
+		        <head>
+		            <title>Customer Details</title>
+		            <style>
+		                body { font-family: Arial; padding: 25px; }
+		                .print-table { width: 100%; border-collapse: collapse; }
+		                .print-table th, .print-table td {
+		                    padding: 8px; border: 1px solid #ccc; font-size: 14px;
+		                }
+		                .print-table th { background: #f2f2f2; width:30%; }
+		            </style>
+		        </head>
+		        <body>
+		            ${printContent}
+		        </body>
+		        </html>
+		    `);
+
+		printWindow.document.close();
+
+		setTimeout(() => {
+			printWindow.focus();
+			printWindow.print();
+		}, 300);
 	});
 
 	$('#deleteBtn').click(function(event) {
@@ -504,3 +616,32 @@ function signatureSizeEdit(e) {
 	previewimg.style.overflow = "hidden";
 	previewimg.style.borderRadius = "20px";
 }
+
+function loadCompanyAdministration() {
+	$.ajax({
+		type: "GET",
+		url: "/api/preference/fetchAllCompanyAdministration",
+		contentType: "application/json",
+		success: function(response) {
+			if (response.status === "FOUND" && response.data.length > 0) {
+				let c = response.data[0];
+
+				// Save for print use later
+				window.companyData = c;
+
+				// Show on screen (add your own div in JSP)
+				$("#companyNameHeading").text(c.companyName + " (" + c.shortName + ")");
+				$("#companyDetails").html(`
+                        <b>Sign Up Date:</b> ${c.signUpDate} <br>
+                        <b>CIN No:</b> ${c.cinNo} <br>
+                        <b>Address:</b> ${c.address}, ${c.city}, ${c.state} - ${c.pinCode} <br>
+                        <b>Email:</b> ${c.emailId} <br>
+                        <b>Helpline:</b> ${c.helplineNo} <br>
+                        <b>Branch Manager No:</b> ${c.branchManagerContactNo}
+                    `);
+			}
+		}
+	});
+}
+
+loadCompanyAdministration();

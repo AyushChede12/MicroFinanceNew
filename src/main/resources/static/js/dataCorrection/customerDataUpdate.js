@@ -48,30 +48,40 @@ $(document).ready(function() {
 						let data = response.data[0];
 						$("#id").val(data.id);
 						$("#signupDate").val(data.signupDate);
-						$("#major").val(data.major);
-						$("#customerName").val(data.customerName);
-						$("#familyMemberName").val(data.guardianName);
-						$("#relationToApplicant").val(data.relationToApplicant);
+						$("#authenticateFor").val(data.authenticateFor);
+						$("#customerName").val(data.customerName.toUpperCase());
+						$("#familyMemberName").val(data.guardianName.toUpperCase());
+						$("#relationToApplicant").val(data.relationToApplicant.toUpperCase());
 						$("#customerGender").val(data.customerGender);
 						$("#dob").val(data.dob);
 						$("#customerAge").val(data.customerAge);
-						$("#relationshipStatus").val(data.relationshipStatus);
-						$("#customerAddress").val(data.customerAddress);
-						$("#district").val(data.district);
-						$("#state").val(data.state);
-						$("#branchName").val(data.branchName);
+						$("#relationshipStatus").val(data.relationshipStatus.toUpperCase());
+						$("#customerAddress").val(data.customerAddress.toUpperCase());
+						$("#district").val(data.district.toUpperCase());
+						$("#state").val(data.state.toUpperCase());
+						$("#branchName").val(data.branchName.toUpperCase());
 						$("#pinCode").val(data.pinCode);
 						$("#aadharNo").val(data.aadharNo);
-						$("#panNo").val(data.panNo);
-						$("#voterNo").val(data.voterNo);
+						$("#panNo").val(data.panNo.toUpperCase());
+						$("#voterNo").val(data.voterNo.toUpperCase());
 						$("#contactNo").val(data.contactNo);
-						$("#emailId").val(data.emailId);
-						$("#profession").val(data.profession);
-						$("#academicBackground").val(data.academicBackground);
-						$("#referralCode").val(data.referralCode);
-						$("#referralName").val(data.referralName);
+						$("#emailId").val(data.emailId.toUpperCase());
+						$("#profession").val(data.profession.toUpperCase());
+						$("#academicBackground").val(data.academicBackground.toUpperCase());
+						$("#referralCode").val(data.referralCode.toUpperCase());
+						$("#referralName").val(data.referralName.toUpperCase());
 						$("#minor").val(data.minor);
 						//$("#photoPreview").attr("src", data.customerPhoto ? `Uploads/${data.customerPhoto}` : "Uploads/default-placeholder.jpg");
+						
+						//Nominee 
+						$("#nomineeName").val(data.nomineeName.toUpperCase());
+						$("#nomineeRelationToApplicant").val(data.nomineeRelationToApplicant.toUpperCase());
+						$("#nomineeAddress").val(data.nomineeAddress.toUpperCase());
+						$("#nomineeKycNo").val(data.nomineeKycNo.toUpperCase());
+						$("#nomineeMobileNo").val(data.nomineeMobileNo);
+						$("#nomineeAge").val(data.nomineeAge);
+						$("#nomineePanNo").val(data.nomineePanNo.toUpperCase());
+						$("#nomineeKycType").val(data.nomineeKycType.toUpperCase());
 
 						if (data.customerPhoto) {
 							const photoPath = `Uploads/${data.customerPhoto}`;
@@ -98,15 +108,7 @@ $(document).ready(function() {
 							$("#signatureHidden").val("");
 						}
 
-						//Nominee 
-						$("#nomineeName").val(data.nomineeName);
-						$("#nomineeRelationToApplicant").val(data.nomineeRelationToApplicant);
-						$("#nomineeAddress").val(data.nomineeAddress);
-						$("#nomineeKycNo").val(data.nomineeKycNo);
-						$("#nomineeMobileNo").val(data.nomineeMobileNo);
-						$("#nomineeAge").val(data.nomineeAge);
-						$("#nomineePanNo").val(data.nomineePanNo);
-						$("#nomineeKycType").val(data.nomineeKycType);
+
 
 						if (parseInt(data.memberStatus) === 1) {
 							$('#toggle-member-status').prop('checked', true);
@@ -186,7 +188,7 @@ $(document).ready(function() {
 		customerData.append("id", id);
 		customerData.append("memberCode", customerCode);
 		customerData.append("signupDate", $('#signupDate').val());
-		customerData.append("major", $('#major').val());
+		customerData.append("authenticateFor", $('#authenticateFor').val());
 		customerData.append("customerName", $('#customerName').val());
 		customerData.append("customerGender", $('#customerGender').val());
 		customerData.append("guardianName", $('#guardianName').val());
@@ -353,6 +355,7 @@ $(document).ready(function() {
 	            <tr><th>Referral Code</th><td>${getVal("referralCode")}</td></tr>
 	            <tr><th>Referral Name</th><td>${getVal("referralName")}</td></tr>
 
+				<tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Customer Images</th></tr>
 	            <tr>
 	                <th>Customer Photo</th>
 	                <td><img src="${photo}" style="width:120px;height:120px;object-fit:cover;border-radius:10px;"></td>
@@ -364,7 +367,6 @@ $(document).ready(function() {
 	            </tr>
 
 	            <tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Nominee Details</th></tr>
-
 	            <tr><th>Nominee Name</th><td>${getVal("nomineeName")}</td></tr>
 	            <tr><th>Relation</th><td>${getVal("nomineeRelationToApplicant")}</td></tr>
 	            <tr><th>Address</th><td>${getVal("nomineeAddress")}</td></tr>
@@ -505,7 +507,7 @@ function signatureSizeEdit(e) {
 function loadCompanyAdministration() {
 	$.ajax({
 		type: "GET",
-		url: "/api/preference/fetchAllCompanyAdministration",
+		url: "api/preference/fetchAllCompanyAdministration",
 		contentType: "application/json",
 		success: function(response) {
 			if (response.status === "FOUND" && response.data.length > 0) {
