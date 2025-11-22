@@ -263,7 +263,6 @@ $(document).ready(function() {
 
 	        const memberCode = $('#memberCode').val();
 	        
-
 	        var applyForGold = {
 				goldID: $('#goldID').val(),
 	            loanDate: $('#loanDate').val(),
@@ -345,8 +344,8 @@ $(document).ready(function() {
 	            contentType: 'application/json',
 	            data: JSON.stringify(applyForGold),
 	            success: function(response) {
-	                console.log('Response:', response);
-	                if (response.status === 'CREATED' || response.status === 'SUCCESS') {
+					alert("success");
+	                if (response.status === 'CREATED') {
 	                    alert("Gold Application Saved Successfully! "+"\n"+"GoldID : "+ applyForGold.goldID );
 	                } else {
 	                    alert('❌ Failed: ' + response.message);
