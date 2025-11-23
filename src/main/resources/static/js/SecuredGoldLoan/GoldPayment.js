@@ -1,7 +1,7 @@
 $(document).ready(function() {
-
+	
 	$.ajax({
-		url: 'api/securedGoldLoan/getAllGoldLoanCustomer',
+		url: 'api/securedGoldLoan/getchAllApprovedGoldCustomer',
 		type: 'GET',
 		success: function(response) {
 			// Check data
@@ -22,9 +22,9 @@ $(document).ready(function() {
 			});
 
 			// 👉 Step 2: Select2 ke liye data convert
-			let customerOptions = [];
+			let goldOptions = [];
 			distinctMap.forEach((customerName, goldId) => {
-				customerOptions.push({
+				goldOptions.push({
 					id: goldId,
 					text: goldId + " - " + customerName
 				});
@@ -33,7 +33,7 @@ $(document).ready(function() {
 			// 👉 Step 3: Select2 Initialize (distinct data)
 			$('#findByGoldLoanId').select2({
 				placeholder: '-- Search Gold ID or Name --',
-				data: customerOptions,
+				data: goldOptions,
 				matcher: function(params, data) {
 					if ($.trim(params.term) === '') return data;
 					if (typeof data.text === 'undefined') return null;
@@ -63,7 +63,7 @@ $(document).ready(function() {
 				success: function(response) {
 					if (response.status == "OK") {
 						let data = response.data[0];
-						$("#loanDate").val(data.loanDate);
+						$("#goldLoanDate").val(data.loanDate);
 						$("#customerCode").val(data.memberCode);
 						$("#customerName").val(data.customerName.toUpperCase());
 						$("#dateOfBirth").val(data.dateOfBirth);
@@ -146,29 +146,5 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#approveBtn').click(function(event) {
-	    event.preventDefault(); // Prevent the form from submitting
-	    const findByGoldLoanId = $('#findByGoldLoanId').val();
-	    const approvalDate = $('#approvalDate').val();
 
-	    const requestData = {
-	        goldID: findByGoldLoanId,
-	        approvalStatus: true,
-	        approvalDate: approvalDate
-	    };
-
-	    $.ajax({
-	        type: "POST",
-	        url: "api/securedGoldLoan/approveGold",
-	        contentType: "application/json",
-	        data: JSON.stringify(requestData),
-	        success: function(response) {
-	            alert(response.message);
-	            location.reload();
-	        },
-	        error: function(xhr) {
-	            alert("Error: " + xhr.responseText);
-	        }
-	    });
-	});
 });

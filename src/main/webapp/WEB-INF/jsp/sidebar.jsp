@@ -608,7 +608,7 @@
 							style="font-family: 'Poppins', sans-serif">Print NOC</span>
 					</a></li>
 
-					<li><a href="searchGoldLoan"> <i class="bi bi-circle"></i>
+					<li><a href="GoldLoanSearch"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Search
 								Gold Loan</span>
 					</a></li>

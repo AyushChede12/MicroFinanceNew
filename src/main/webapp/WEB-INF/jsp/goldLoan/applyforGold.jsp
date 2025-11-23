@@ -90,25 +90,26 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="custName">Customer Name</label> <input
-									type="text" name="customerName" id="customerName"
-									required="required" placeholder="Enter Customer Name"
-									style="text-transform: uppercase;" readonly="readonly"/>
+								<label for="custName">Customer Name</label> <input type="text"
+									name="customerName" id="customerName" required="required"
+									placeholder="Enter Customer Name"
+									style="text-transform: uppercase;" readonly="readonly" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Date of Birth </label> <input type="date"
+								<label for="dateOfBirth">Date of Birth </label> <input type="date"
 									name="dateOfBirth" id="dateOfBirth" required="required"
-									placeholder="" style="text-transform: uppercase;" readonly="readonly"/>
+									readonly="readonly" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Age </label> <input type="text" name="age"
-									id="age" required="required" placeholder="Age" readonly="readonly"/>
+									id="age" required="required" placeholder="Age"
+									readonly="readonly" />
 							</div>
 						</div>
 
@@ -117,7 +118,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Contact No.</label> <input type="text"
 									name="contactNo" id="contactNo" required="required"
-									placeholder="Enter Contact No." readonly="readonly"/>
+									placeholder="Enter Contact No." readonly="readonly" />
 							</div>
 						</div>
 
@@ -126,7 +127,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Address</label>
 								<textarea name="address" id="address"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;" readonly="readonly"></textarea>
+									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"
+									readonly="readonly"></textarea>
 							</div>
 						</div>
 
@@ -135,7 +137,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Pin Code</label> <input type="number"
 									name="pinCode" id="pinCode" required="required"
-									placeholder="Enter Pin Code" style="text-transform: uppercase;" readonly="readonly"/>
+									placeholder="Enter Pin Code" style="text-transform: uppercase;"
+									readonly="readonly" />
 							</div>
 						</div>
 
@@ -143,7 +146,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">BranchName</label> <input type="text"
 									name="branchName" id="branchName" required="required"
-									placeholder="Branch Name" readonly="readonly"/>
+									placeholder="Branch Name" readonly="readonly" />
 							</div>
 						</div>
 
@@ -151,17 +154,18 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Loan Plan Name</label> <input type="text" id="loanPlanName"
-									name="loanPlanName" required="required"
-									class="form-control selectField"
-									style="height: 30px;" readonly="readonly">
+								<label>Loan Plan Name</label> <input type="text"
+									id="loanPlanName" name="loanPlanName" required="required"
+									class="form-control selectField" style="height: 30px;"
+									readonly="readonly">
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Type of Loan</label> <input type="text"
 									name="typeOfLoan" id="typeOfLoan" required="required"
-									placeholder="Type of Loan" style="text-transform: uppercase;" readonly="readonly"/>
+									placeholder="Type of Loan" style="text-transform: uppercase;"
+									readonly="readonly" />
 
 							</div>
 						</div>
@@ -171,7 +175,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Loan Mode</label> <input type="text"
 									name="loanMode" id="loanMode" required="required"
 									placeholder="Enter Loan Category"
-									style="text-transform: uppercase;" readonly="readonly"/>
+									style="text-transform: uppercase;" readonly="readonly" />
 							</div>
 						</div>
 
@@ -180,7 +184,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Loan Term</label> <input type="text"
 									name="loanTerm" id="loanTerm" required="required"
-									placeholder="Enter Loan Term" style="text-transform: uppercase;" readonly="readonly"/>
+									placeholder="Enter Loan Term"
+									style="text-transform: uppercase;" readonly="readonly" />
 							</div>
 						</div>
 
@@ -189,7 +194,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Rate Of Interest(%)</label> <input type="text"
 									name="rateOfInterest" id="rateOfInterest" required="required"
 									placeholder="Enter Rate Of Interest"
-									style="text-transform: uppercase;" readonly="readonly"/>
+									style="text-transform: uppercase;" readonly="readonly" />
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -197,7 +202,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Amount Of Loan </label> <input type="text"
 									name="loanAmount" id="loanAmount" required="required"
 									placeholder="Enter Amount Of Loan"
-									style="text-transform: uppercase;" readonly="readonly"/>
+									style="text-transform: uppercase;" readonly="readonly" />
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -213,7 +218,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">EMI Payment</label> <input type="text"
 									onclick="calculateEMI()" name="emiPayment" id="emiPayment"
 									required="required" placeholder="Enter EMI Payment"
-									style="text-transform: uppercase;" readonly="readonly"/>
+									style="text-transform: uppercase;" readonly="readonly" />
 							</div>
 						</div>
 						<div class="col-lg-3">
@@ -234,9 +239,8 @@ pageEncoding="ISO-8859-1"%> -->
 										class="mb-2">Message Status</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-sms-send"
-												name="smsSend" class="toggle__input"
-												data-toggle-type="smsSend"> <label
+											<input type="checkbox" id="toggle-sms-send" name="smsSend"
+												class="toggle__input" data-toggle-type="smsSend"> <label
 												for="toggle-sms-send" class="toggle__label"></label>
 										</div>
 									</div>
@@ -256,8 +260,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" /> <input type="hidden"
-										id="photoHidden" name="photoHidden">
+										id="photoPreview" /> <input type="hidden" id="photoHidden"
+										name="photoHidden">
 
 								</div>
 							</label>
@@ -299,8 +303,9 @@ pageEncoding="ISO-8859-1"%> -->
 								<label> Karat </label>
 								<div class="position-relative">
 									<input type="text" id="karat" name="karat" required="required"
-										class="form-control selectField" style="height: 30px;" readonly="readonly">
-										
+										class="form-control selectField" style="height: 30px;"
+										readonly="readonly">
+
 								</div>
 							</div>
 						</div>
@@ -309,8 +314,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Item Type</label> <input type="text" id="itemType"
 									name="itemType" required="required"
-									class="form-control selectField" style="height: 30px;" readonly="readonly">
-									
+									class="form-control selectField" style="height: 30px;"
+									readonly="readonly">
+
 							</div>
 						</div>
 
@@ -327,8 +333,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="itemName">Item Name</label> <input type="text" id="itemName"
-									name="itemName" required="required"
+								<label for="itemName">Item Name</label> <input type="text"
+									id="itemName" name="itemName" required="required"
 									placeholder="Enter Karat Rate" readonly="readonly">
 							</div>
 						</div>
@@ -338,17 +344,19 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Locker Branch</label> <input type="text"
 									id="lockerBranch" name="lockerBranch" required="required"
-									class="form-control selectField" style="height: 30px;" readonly="readonly">
-									
+									class="form-control selectField" style="height: 30px;"
+									readonly="readonly">
+
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Purity</label> <input type="text" id="purity" name="purity"
-									required="required" class="form-control selectField"
-									style="height: 30px;" readonly="readonly">
-									
+								<label for="">Purity</label> <input type="text" id="purity"
+									name="purity" required="required"
+									class="form-control selectField" style="height: 30px;"
+									readonly="readonly">
+
 							</div>
 						</div>
 
@@ -439,14 +447,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Guarantor Identity</label> <select 
+								<label for="">Guarantor Identity</label> <select
 									id="gurantorIdentity" name="guarantorIdentity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Aadhar">Aadhar</option>
 									<option value="PAN">PAN</option>
-									</select>
+								</select>
 
 							</div>
 						</div>
@@ -456,7 +464,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Address</label>
 								<textarea name="guarantorAddress" id="guarantorAddress"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;" readonly="readonly"></textarea>
+									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"
+									readonly="readonly"></textarea>
 							</div>
 						</div>
 
@@ -464,7 +473,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Pin Code</label> <input type="text"
 									name="guarantorPinCode" id="guarantorPinCode"
-									required="required" placeholder="Enter Pin Code" readonly="readonly" />
+									required="required" placeholder="Enter Pin Code"
+									readonly="readonly" />
 							</div>
 						</div>
 
@@ -473,7 +483,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Guarantor Contact No.</label> <input type="text"
 									name="guarantorContactNo" id="guarantorContactNo"
-									required="required" placeholder="Enter  Guarantor Contact No." readonly="readonly"/>
+									required="required" placeholder="Enter  Guarantor Contact No."
+									readonly="readonly" />
 							</div>
 						</div>
 
@@ -518,14 +529,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Co-Applicant Identity</label> <Select 
+								<label for="">Co-Applicant Identity</label> <Select
 									id="coApplicantIdentity" name="coApplicantIdentity"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value=" ">Please Select</option>
 									<option value="Aadhar">Aadhar</option>
 									<option value="PAN">PAN</option>
-									</Select>
+								</Select>
 
 							</div>
 						</div>
@@ -535,15 +546,16 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Address</label>
 								<textarea name="coApplicantAddress" id="coApplicantAddress"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;" readonly="readonly"></textarea>
+									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"
+									readonly="readonly"></textarea>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Age</label> <input type="text"
-									name="coAge" id="coAge"
-									required="required" placeholder="Enter Age" readonly="readonly"/>
+								<label for="">Age</label> <input type="text" name="coAge"
+									id="coAge" required="required" placeholder="Enter Age"
+									readonly="readonly" />
 							</div>
 						</div>
 
@@ -553,18 +565,18 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Co-Applicant Contact No.</label> <input
 									type="text" name="coApplicantContactNo"
 									id="coApplicantContactNo" required="required"
-									placeholder="Enter Gurantor Contact No." readonly="readonly"/>
+									placeholder="Enter Gurantor Contact No." readonly="readonly" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Security Details</label> <select 
+								<label for="">Security Details</label> <select
 									id="securityDetails" name="securityDetails" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="Gold">Gold</option>
 
-                                 </select>
+								</select>
 							</div>
 						</div>
 
@@ -584,7 +596,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Processing Fee </label> <input type="text"
 									name="processingFee" id="processingFee" required="required"
-									style="text-transform: uppercase;" placeholder="Enter Processing Fee"/>
+									style="text-transform: uppercase;"
+									placeholder="Enter Processing Fee" />
 							</div>
 						</div>
 
@@ -592,7 +605,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="loanName">Legal Charges </label> <input type="text"
 									name="legalCharges" id="legalCharges" required="required"
-									style="text-transform: uppercase;" placeholder="Enter Legal Charges" />
+									style="text-transform: uppercase;"
+									placeholder="Enter Legal Charges" />
 							</div>
 						</div>
 
@@ -636,7 +650,7 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						
+
 
 
 						<div class="col-lg-3">
@@ -692,7 +706,7 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4"
 								style="margin-bottom: 30px">
@@ -712,7 +726,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Financial Consultant Name</label> <input
 									type="text" name="financialConsultantName"
-									id="financialConsultantName" required="required" placeholder="Enter Cosultant Name"
+									id="financialConsultantName" required="required"
+									placeholder="Enter Cosultant Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -734,7 +749,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/SecuredGoldLoan/ApplyForGold.js"></script>
-	
+
 </body>
 <script>
 document.addEventListener('DOMContentLoaded', function () {

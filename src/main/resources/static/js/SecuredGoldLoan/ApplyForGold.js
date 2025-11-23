@@ -26,19 +26,19 @@ $(document).ready(function() {
 			console.error("Error fetching members", err);
 		},
 	});
-	
+
 	$.ajax({
-	    url: "api/securedGoldLoan/getAllCustomers",
-	    type: "GET",
-	    success: function(response) {
-	        var select = $("#guarantorcustomerCode,#coApplicantMemberId");
-	        select.empty().append('<option value="">Select Customer Code</option>');
-	        response.data.forEach(function(c) {
-	            select.append('<option value="' + c.memberCode + '">' + c.memberCode + '</option>');
-	        });
-	        // Value set karo yahan par
-	        select.val(cust.memberCode || "");
-	    }
+		url: "api/securedGoldLoan/getAllCustomers",
+		type: "GET",
+		success: function(response) {
+			var select = $("#guarantorcustomerCode,#coApplicantMemberId");
+			select.empty().append('<option value="">Select Customer Code</option>');
+			response.data.forEach(function(c) {
+				select.append('<option value="' + c.memberCode + '">' + c.memberCode + '</option>');
+			});
+			// Value set karo yahan par
+			select.val(cust.memberCode || "");
+		}
 	});
 
 	let goldDirectories = [];
@@ -107,9 +107,9 @@ $(document).ready(function() {
 			$("#coApplicantAddress").val(cust.nomineeAddress || "");
 			$("#coAge").val(cust.nomineeAge || "");
 			$("#coApplicantContactNo").val(cust.nomineeMobileNo || "");
-			
-			
-			
+
+
+
 
 			if (parseInt(cust.smsSend) === 1) {
 				$('#toggle-sms-send').prop('checked', true);
@@ -206,158 +206,158 @@ $(document).ready(function() {
 
 
 	// 75% Loan to Value fixed
-	
+
 	$.ajax({
-	        url: 'api/financialconsultant/getAllFinancialConsultantDetails',
-	        type: 'POST',
-	        success: function(response) {
-	            var select = $('#financialConsultantId');
-	            select.empty(); // Clear existing options
-	            select.append('<option value="">Select Financial Consultant</option>');
+		url: 'api/financialconsultant/getAllFinancialConsultantDetails',
+		type: 'POST',
+		success: function(response) {
+			var select = $('#financialConsultantId');
+			select.empty(); // Clear existing options
+			select.append('<option value="">Select Financial Consultant</option>');
 
-	            if (response && response.data && response.data.length > 0) {
-	                response.data.forEach(function(fc) {
-	                    // Use financialCode as value, financialConsultantName as text
-	                    select.append('<option value="' + fc.financialCode + '">' + fc.financialCode +"-" +fc.financialName + '</option>');
-	                });
-	            } else {
-	                console.log("No financial consultants found");
-	            }
-	        },
-	        error: function(err) {
-	            console.error("Error fetching financial consultants", err);
-	        }
-	    });
-		
-		$("#financialConsultantId").on("change", function() {
-							var financialCode = $(this).val();
-							if (financialCode) {
-								$.ajax({
-									url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
-									type: "GET",
-									data: { financialCode: financialCode },
-									success: function(response) {
-										if (response && response.data && response.data.length > 0) {
-											var code = response.data[0]; // assuming first record
+			if (response && response.data && response.data.length > 0) {
+				response.data.forEach(function(fc) {
+					// Use financialCode as value, financialConsultantName as text
+					select.append('<option value="' + fc.financialCode + '">' + fc.financialCode + "-" + fc.financialName + '</option>');
+				});
+			} else {
+				console.log("No financial consultants found");
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching financial consultants", err);
+		}
+	});
 
-											// Populate form fields
-											$("#financialConsultantName").val(code.financialName || "");
-										} else {
-											alert("No details found for this member");
-										}
-									},
-									error: function(err) {
-										console.error("Error fetching Financial details", err);
-									},
-								});
-							} 
-						});
+	$("#financialConsultantId").on("change", function() {
+		var financialCode = $(this).val();
+		if (financialCode) {
+			$.ajax({
+				url: "api/financialconsultant/getfinancialHierarchyByFinancialCode",
+				type: "GET",
+				data: { financialCode: financialCode },
+				success: function(response) {
+					if (response && response.data && response.data.length > 0) {
+						var code = response.data[0]; // assuming first record
+
+						// Populate form fields
+						$("#financialConsultantName").val(code.financialName || "");
+					} else {
+						alert("No details found for this member");
+					}
+				},
+				error: function(err) {
+					console.error("Error fetching Financial details", err);
+				},
+			});
+		}
+	});
 
 	// Jab bhi user input kare to calculation trigger ho
 	$("#grossWt, #stoneWt, #purity, #custgoldRate").on("input", function() {
 		calculateValuation();
 	});
-	
+
 	//For Saving the data 
 	$('#saveBtn').on('click', function() {
 
-	        const memberCode = $('#memberCode').val();
-	        
-	        var applyForGold = {
-				goldID: $('#goldID').val(),
-	            loanDate: $('#loanDate').val(),
-	            memberCode: memberCode,
-	            customerName: $('#customerName').val(),
-	            dateOfBirth: $('#dateOfBirth').val(),
-	            age: $('#age').val(),
-	            contactNo: $('#contactNo').val(),
-	            address: $('#address').val(),
-	            pinCode: $('#pinCode').val(),
-	            branchName: $('#branchName').val(),
-	            loanPlanName: $('#loanPlanName').val(),
-	            typeOfLoan: $('#typeOfLoan').val(),
-	            loanMode: $('#loanMode').val(),
-	            loanTerm: $('#loanTerm').val(),
-	            rateOfInterest: $('#rateOfInterest').val(),
-	            loanAmount: $('#loanAmount').val(),
-	            interestType: $('#interestType').val(),
-	            emiPayment: $('#emiPayment').val(),
-	            purposeOfLoan: $('#purposeOfLoan').val(),
-	            smsSend: $('#smsSend').val(),
+		const memberCode = $('#memberCode').val();
 
-	            // Gold Details
-	            karat: $('#karat').val(),
-	            itemType: $('#itemType').val(),
-	            custgoldRate: $('#custgoldRate').val(),
-	            itemName: $('#itemName').val(),
-	            lockerBranch: $('#lockerBranch').val(),
-	            purity: $('#purity').val(),
-	            itemQty: $('#itemQty').val(),
-	            itemWt: $('#itemWt').val(),
-	            grossWt: $('#grossWt').val(),
-	            stoneWt: $('#stoneWt').val(),
-	            netWt: $('#netWt').val(),
-	            marketValuation: $('#marketValuation').val(),
-	            eligibleLoan: $('#eligibleLoan').val(),
+		var applyForGold = {
+			goldID: $('#goldID').val(),
+			loanDate: $('#loanDate').val(),
+			memberCode: memberCode,
+			customerName: $('#customerName').val(),
+			dateOfBirth: $('#dateOfBirth').val(),
+			age: $('#age').val(),
+			contactNo: $('#contactNo').val(),
+			address: $('#address').val(),
+			pinCode: $('#pinCode').val(),
+			branchName: $('#branchName').val(),
+			loanPlanName: $('#loanPlanName').val(),
+			typeOfLoan: $('#typeOfLoan').val(),
+			loanMode: $('#loanMode').val(),
+			loanTerm: $('#loanTerm').val(),
+			rateOfInterest: $('#rateOfInterest').val(),
+			loanAmount: $('#loanAmount').val(),
+			interestType: $('#interestType').val(),
+			emiPayment: $('#emiPayment').val(),
+			purposeOfLoan: $('#purposeOfLoan').val(),
+			smsSend: $('#toggle-sms-send').val(),
 
-	            // Guarantor Details
-	            guarantorcustomerCode: $('#guarantorcustomerCode').val(),
-	            guarantorIdentity: $('#gurantorIdentity').val(),
-	            guarantorAddress: $('#guarantorAddress').val(),
-	            guarantorPinCode: $('#guarantorPinCode').val(),
-	            guarantorContactNo: $('#guarantorContactNo').val(),
-	            guarantorSecurityType: $('#guarantorSecurityType').val(),
+			// Gold Details
+			karat: $('#karat').val(),
+			itemType: $('#itemType').val(),
+			custgoldRate: $('#custgoldRate').val(),
+			itemName: $('#itemName').val(),
+			lockerBranch: $('#lockerBranch').val(),
+			purity: $('#purity').val(),
+			itemQty: $('#itemQty').val(),
+			itemWt: $('#itemWt').val(),
+			grossWt: $('#grossWt').val(),
+			stoneWt: $('#stoneWt').val(),
+			netWt: $('#netWt').val(),
+			marketValuation: $('#marketValuation').val(),
+			eligibleLoan: $('#eligibleLoan').val(),
 
-	            // Co-Applicant Details
-	            coApplicantMemberId: $('#coApplicantMemberId').val(),
-	            coApplicantIdentity: $('#coApplicantIdentity').val(),
-	            coApplicantAddress: $('#coApplicantAddress').val(),
-	            coAge: $('#coAge').val(),
-	            coApplicantContactNo: $('#coApplicantContactNo').val(),
-	            securityDetails: $('#securityDetails').val(),
+			// Guarantor Details
+			guarantorcustomerCode: $('#guarantorcustomerCode').val(),
+			guarantorIdentity: $('#gurantorIdentity').val(),
+			guarantorAddress: $('#guarantorAddress').val(),
+			guarantorPinCode: $('#guarantorPinCode').val(),
+			guarantorContactNo: $('#guarantorContactNo').val(),
+			guarantorSecurityType: $('#guarantorSecurityType').val(),
 
-	            // Deduction / Charges
-	            processingFee: $('#processingFee').val(),
-	            legalCharges: $('#legalCharges').val(),
-	            stampDuty: $('#stampDuty').val(),
-	            smsCharges: $('#smsCharges').val(),
-	            mainCharges: $('#mainCharges').val(),
-	            stationaryFee: $('#stationaryFee').val(),
-	            financialConsultantId: $('#financialConsultantId').val(),
-	            gst: $('#gst').val(),
-	            insuFee: $('#insuFee').val(),
-	            penaltyCharge: $('#penaltyCharge').val(),
-	            valuationFees: $('#valuationFees').val(),
-	            overCharge: $('#overCharge').val(),
-	            collectionCharge: $('#collectionCharge').val(),
-	            financialConsultantName: $('#financialConsultantName').val(),
+			// Co-Applicant Details
+			coApplicantMemberId: $('#coApplicantMemberId').val(),
+			coApplicantIdentity: $('#coApplicantIdentity').val(),
+			coApplicantAddress: $('#coApplicantAddress').val(),
+			coAge: $('#coAge').val(),
+			coApplicantContactNo: $('#coApplicantContactNo').val(),
+			securityDetails: $('#securityDetails').val(),
 
-	            // Image Fields
-	            photo: $('#photoHidden').val(),
-	            signature: $('#signatureHidden').val()
-	        };
-		
+			// Deduction / Charges
+			processingFee: $('#processingFee').val(),
+			legalCharges: $('#legalCharges').val(),
+			stampDuty: $('#stampDuty').val(),
+			smsCharges: $('#smsCharges').val(),
+			mainCharges: $('#mainCharges').val(),
+			stationaryFee: $('#stationaryFee').val(),
+			financialConsultantId: $('#financialConsultantId').val(),
+			gst: $('#gst').val(),
+			insuFee: $('#insuFee').val(),
+			penaltyCharge: $('#penaltyCharge').val(),
+			valuationFees: $('#valuationFees').val(),
+			overCharge: $('#overCharge').val(),
+			collectionCharge: $('#collectionCharge').val(),
+			financialConsultantName: $('#financialConsultantName').val(),
 
-	        $.ajax({
-	            url: 'api/securedGoldLoan/saveApplyForGold',
-	            type: 'POST',
-	            contentType: 'application/json',
-	            data: JSON.stringify(applyForGold),
-	            success: function(response) {
-					alert("success");
-	                if (response.status === 'CREATED') {
-	                    alert("Gold Application Saved Successfully! "+"\n"+"GoldID : "+ applyForGold.goldID );
-	                } else {
-	                    alert('❌ Failed: ' + response.message);
-	                }
-	            },
-	            error: function(xhr, status, error) {
-	                console.error('Error:', error);
-	                alert('⚠️ Error while saving Gold Loan Application.');
-	            }
-	        });
+			// Image Fields
+			photo: $('#photoHidden').val(),
+			signature: $('#signatureHidden').val()
+		};
 
-	    });
+
+		$.ajax({
+			url: 'api/securedGoldLoan/saveApplyForGold',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify(applyForGold),
+			success: function(response) {
+				if (response.status === 'CREATED') {
+					alert("Gold Application Saved Successfully! " + "\n" + "GoldID : " + applyForGold.goldID);
+					location.reload();
+				} else {
+					alert('❌ Failed: ' + response.message);
+				}
+			},
+			error: function(xhr, status, error) {
+				console.error('Error:', error);
+				alert('⚠️ Error while saving Gold Loan Application.');
+			}
+		});
+
+	});
 });
 
 function calculateValuation() {

@@ -1,23 +1,27 @@
 package com.microfinance.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.microfinance.model.ApplyForGold;
 
 @Repository
-public interface ApplyForGoldRepo extends JpaRepository<ApplyForGold,Long>{
+public interface ApplyForGoldRepo extends JpaRepository<ApplyForGold, Long> {
 
-	@Transactional
 	@Query("select coalesce(max(id), 0) from ApplyForGold")
-	long getMaxId();
+	Long getMaxId();
 
-	//List<addCustomer> findByMemberCode(String memberCode);
+	@Query("SELECT a FROM ApplyForGold a WHERE a.goldID = :goldID")
+	List<ApplyForGold> findByGoldID(@Param("goldID") String goldID);
 
-	
+	ApplyForGold findSingleByGoldID(String goldID);
+	// List<addCustomer> findByMemberCode(String memberCode);
 
-	
+	List<ApplyForGold> findByApprovalStatusTrue();
 
 }

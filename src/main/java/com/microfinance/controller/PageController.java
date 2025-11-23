@@ -1082,7 +1082,7 @@ public class PageController {
     @GetMapping("/applyforGold")
     public String getapplyforGold(Model model)
     {
-    	long maxId=applyForGoldRepo.getMaxId();
+    	Long maxId=applyForGoldRepo.getMaxId();
     	String goldID="GL" + "0000" +(maxId + 1);
     	model.addAttribute("goldID", goldID);
     	return "goldLoan/applyforGold";
@@ -1145,7 +1145,7 @@ public class PageController {
     	return "goldLoan/printNOC";
     }
     
-    @GetMapping("/searchGoldLoan")
+    @GetMapping("/GoldLoanSearch")
     public String getsearchGoldLoan()
     {
     	return "goldLoan/searchGoldLoan";
