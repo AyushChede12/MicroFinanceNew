@@ -1,6 +1,8 @@
 package com.microfinance.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.ApplyForGold;
 import com.microfinance.model.GoldDirectory;
+import com.microfinance.model.GoldLoanClose;
+import com.microfinance.model.GoldLoanPayment;
 import com.microfinance.model.LoanApplication;
+import com.microfinance.model.LoanClosure;
+import com.microfinance.model.LoanPayment;
 import com.microfinance.model.LoanSchemCatalog;
 import com.microfinance.model.PolicyRenewal;
 import com.microfinance.model.SecuredGoldPlan;
@@ -265,6 +271,71 @@ public class SecuredGoldLoanController {
 					"No approved Policy Renewal found.", null);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
+	}
+
+	@PostMapping("/closeGoldLoan")
+	public ResponseEntity<ApiResponse<GoldLoanClose>> closeLoan(@RequestBody GoldLoanClose goldLoanCloseRequest) {
+
+		try {
+			GoldLoanClose savedData = secureGoldLoanService.closeGoldLoan(goldLoanCloseRequest);
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, "Loan Closed Successfully", savedData));
+
+		} catch (Exception e) {
+
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(
+					HttpStatus.INTERNAL_SERVER_ERROR, "Failed to Close Loan: " + e.getMessage(), null));
+		}
+	}
+
+	@GetMapping("/getAllGoldClosure")
+	public ResponseEntity<ApiResponse<List<GoldLoanClose>>> getAllGoldLoanClosure() {
+		List<GoldLoanClose> list = secureGoldLoanService.getAllGoldClosure();
+
+		return ResponseEntity.ok(ApiResponse.success(HttpStatus.OK,
+				list.isEmpty() ? "No records found" : "Records fetched successfully", list));
+	}
+
+	@GetMapping("/getGoldClosuresByGoldId")
+	public ResponseEntity<ApiResponse<List<GoldLoanClose>>> getGoldLoanClosuresByGoldId(@RequestParam String goldID) {
+		List<GoldLoanClose> closures = secureGoldLoanService.getGoldClosuresByGoldId(goldID);
+
+		if (closures != null && !closures.isEmpty()) {
+			return ResponseEntity
+					.ok(new ApiResponse<>(HttpStatus.OK, "Gold closure records fetched successfully", closures));
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+					new ApiResponse<>(HttpStatus.NO_CONTENT, "No Gold closure records found for this Gold ID", null));
+		}
+	}
+
+	@PostMapping("/payEmi")
+	public ResponseEntity<ApiResponse<Map<String, Object>>> payGoldLoanEmi(@RequestBody GoldLoanPayment request) {
+		try {
+			boolean isClosed = secureGoldLoanService.processGoldLoanEmi(request, 1); // default 1 installment
+
+			Map<String, Object> data = new HashMap<>();
+			data.put("loanStatus", isClosed ? "CLOSED" : "ACTIVE");
+
+			String message = isClosed ? "EMI paid successfully. Gold Loan is now closed."
+					: "EMI paid successfully. Remaining balance updated.";
+
+			return ResponseEntity.ok(new ApiResponse<>(HttpStatus.OK, message, data));
+
+		} catch (RuntimeException e) {
+			Map<String, Object> data = new HashMap<>();
+			data.put("error", e.getMessage());
+			return ResponseEntity.badRequest()
+					.body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage(), data));
+		}
+	}
+
+	@GetMapping("/getAllActive")
+	public ApiResponse<List<ApplyForGold>> getAllActiveLoans() {
+		List<ApplyForGold> activeLoans = secureGoldLoanService.getAllActiveGoldLoans();
+
+		return new ApiResponse<>(HttpStatus.OK,
+				activeLoans.isEmpty() ? "No Active Loans Found" : "Active Loans Loaded Successfully", activeLoans);
 	}
 
 }

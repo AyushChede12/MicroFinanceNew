@@ -1,7 +1,7 @@
 $(document).ready(function() {
-	
+
 	$.ajax({
-		url: 'api/securedGoldLoan/getchAllApprovedGoldCustomer',
+		url: 'api/securedGoldLoan/getAllActive',
 		type: 'GET',
 		success: function(response) {
 			// Check data
@@ -146,5 +146,113 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#paymentBtn").click(function(e) {
+		e.preventDefault();
+
+		let requestData = {
+
+			// ---------- Customer Details ----------
+			goldID: $("#findByGoldLoanId").val(),
+			customerCode: $("#customerCode").val(),
+			customerName: $("#customerName").val(),
+			dateOfBirth: $("#dateOfBirth").val(),
+			age: $("#age").val(),
+			contactNo: $("#contactNo").val(),
+			address: $("#address").val(),
+			pinCode: $("#pinCode").val(),
+			branchName: $("#branchName").val(),
+
+			// ---------- Loan Details ----------
+			goldLoanDate: $("#goldLoanDate").val(),
+			loanPlanName: $("#loanPlanName").val(),
+			typeOfLoan: $("#typeOfLoan").val(),
+			loanTerm: $("#loanTerm").val(),
+			loanMode: $("#loanMode").val(),
+			rateOfInterest: $("#rateOfInterest").val(),
+			loanAmount: $("#loanAmount").val(),
+			interestType: $("#interestType").val(),
+			emiPayment: $("#emiPayment").val(),
+			purposeOfLoan: $("#purposeOfLoan").val(),
+
+			// ---------- Gold/Silver Details ----------
+			karat: $("#karat").val(),
+			itemType: $("#itemType").val(),
+			custgoldRate: $("#custgoldRate").val(),
+			itemName: $("#itemName").val(),
+			lockerBranch: $("#lockerBranch").val(),
+			purity: $("#purity").val(),
+			itemQty: $("#itemQty").val(),
+			itemWt: $("#itemWt").val(),
+			grossWt: $("#grossWt").val(),
+			stoneWt: $("#stoneWeight").val(),
+			netWt: $("#netWt").val(),
+			marketValuation: $("#marketValuation").val(),
+			eligibleLoan: $("#eligibleLoan").val(),
+
+			// ---------- Guarantor Details ----------
+			guarantorcustomerCode: $("#guarantorcustomerCode").val(),
+			guarantorIdentity: $("#guarantorIdentity").val(),
+			guarantorAddress: $("#guarantorAddress").val(),
+			guarantorPinCode: $("#guarantorPinCode").val(),
+			guarantorContactNo: $("#guarantorContactNo").val(),
+			guarantorSecurityType: $("#guarantorSecurityType").val(),
+
+			// ---------- Co-Applicant Details ----------
+			coApplicantMemberId: $("#coApplicantMemberId").val(),
+			coApplicantIdentity: $("#coApplicantIdentity").val(),
+			coApplicantAddress: $("#coApplicantAddress").val(),
+			coAge: $("#coAge").val(),
+			coApplicantContactNo: $("#coApplicantContactNo").val(),
+			securityDetails: $("#securityDetails").val(),
+
+			// ---------- Deduction Details ----------
+			processingFee: $("#processingFee").val(),
+			legalCharges: $("#legalCharges").val(),
+			stampDuty: $("#stampDuty").val(),
+			smsCharges: $("#smsCharges").val(),
+			mainCharges: $("#mainCharges").val(),
+			stationaryFee: $("#stationaryFee").val(),
+			gst: $("#gst").val(),
+			insuFee: $("#insuFee").val(),
+			penaltyCharge: $("#penaltyCharge").val(),
+			valuationFees: $("#valuationFees").val(),
+			overdueInterestCharge: $("#overdueInterestCharge").val(),
+			collectionCharge: $("#collectionCharge").val(),
+			financialCode: $("#financialCode").val(),
+			financialName: $("#financialName").val(),
+
+			// ---------- Payment Details ----------
+			paymentDate: $("#paymentDate").val(),
+			paymentStatus: $("#paymentStatus").val(),
+			modeOfPayment: $("#modeOfPayment").val(),
+			chargeDeductCash: $("#chargeDeductCash").val(),
+			remarks: $("#remarks").val(),
+			amountDue: $("#amountDue").val()
+		};
+
+		// ---- VALIDATION ----
+		if (requestData.goldID === "" || requestData.customerCode === "" || requestData.emiPayment === "") {
+			alert("Please fill required fields!");
+			return;
+		}
+
+		$.ajax({
+			url: "api/securedGoldLoan/payEmi",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(requestData),
+			success: function(response) {
+				if (response.status === "OK") {
+					alert(response.message);   // ✔ Normal alert
+				} else {
+					alert("Warning: " + response.message);  // ✔ Warning message
+				}
+			},
+
+			error: function() {
+				alert("Error: Something went wrong!");  // ✔ Error message
+			}
+		});
+	});
 
 });

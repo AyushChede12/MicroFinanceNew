@@ -1094,10 +1094,10 @@ public class PageController {
     	return "goldLoan/emiInstallmentPayment";
     }
     
-    @GetMapping("/emiStatement")
-    public String getemiStatement()
+    @GetMapping("/goldLoanDocument")
+    public String getGoldLoanDocument()
     {
-    	return "goldLoan/emiStatement";
+    	return "goldLoan/goldLoanDocument";
     }
     
     @GetMapping("/goldDirectory")

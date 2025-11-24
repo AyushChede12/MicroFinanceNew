@@ -47,7 +47,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Secured Gold Plan</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="#"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-coin"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Apply For Gold</li>

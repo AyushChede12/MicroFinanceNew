@@ -582,8 +582,8 @@
 								Payment</span>
 					</a></li>
 
-					<li><a href="emiStatement"> <i class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">EmI Statement</span>
+					<li><a href="goldLoanDocument"> <i class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan Document</span>
 					</a></li>
 
 

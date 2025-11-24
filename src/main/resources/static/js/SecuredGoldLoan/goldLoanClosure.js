@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: 'api/securedGoldLoan/getchAllApprovedGoldCustomer',
+		url: 'api/securedGoldLoan/getAllActive',
 		type: 'GET',
 		success: function(response) {
 			// Check data
@@ -143,4 +143,60 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	$("#closeLoanBtn").click(function (e) {
+	    e.preventDefault();
+
+	    let requestData = {
+	        goldID: $("#findByGoldLoanId").val(),
+	        dateOfLoan: $("#closeLoanDate").val(),
+	        customerCode: $("#customerCode").val(),
+	        customerName: $("#customerName").val(),
+	        contactNo: $("#contactNo").val(),
+	        branchName: $("#branchName").val(),
+	        loanPlanName: $("#loanPlanName").val(),
+	        loanTerm: $("#loanTerm").val(),
+	        loanMode: $("#loanMode").val(),
+	        loanAmount: $("#loanAmount").val(),
+	        rateOfInterest: $("#rateOfInterest").val(),
+	        interestType: $("#interestType").val(),
+	        emiPayment: $("#emiPayment").val(),
+	        totalInterestOfLoan: $("#totalinterestofLoan").val(),
+	        sanctionedAmount: $("#sanctionedAmount").val(),
+	        totalPayableOfLoan: $("#totalPayableofLoan").val(),
+
+	        // Payment Details
+	        noOfInstPaid: $("#noOfInst").val(),
+	        interestDue: $("#interestDue").val(),
+	        principalDue: $("#principaldue").val(),
+	        amountPaidTillDate: $("#amountPaid").val(),
+	        loanBalanceAmount: $("#balanceLoanAmount").val(),
+	        dueDate: $("#dueDate").val(),
+	        paymentBranch: $("#paymentBranch").val(),
+	        paymentDate: $("#paymentDate").val(),
+	        deductFine: $("#deductfine").val(),
+	        deductFineAmount: $("#deductfineamount").val(),
+	        paymentAmount: $("#paymentamount").val(),
+	        netAmount: $("#netamount").val(),
+	        financialCode: $("#financialConsultantId").val(),
+	        financialName: $("#financialConsultantName").val(),
+	        remarks: $("#remark").val(),
+	        goldLoanStatus: "CLOSED"
+	    };
+
+	    $.ajax({
+	        url: "api/securedGoldLoan/closeGoldLoan",
+	        type: "POST",
+	        contentType: "application/json",
+	        data: JSON.stringify(requestData),
+	        success: function (response) {
+	            alert("Loan Closed Successfully!");
+	        },
+	        error: function (err) {
+	            console.log(err);
+	            alert("Something went wrong!");
+	        }
+	    });
+	});
+
 });

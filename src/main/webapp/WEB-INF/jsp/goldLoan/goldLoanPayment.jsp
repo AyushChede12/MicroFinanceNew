@@ -53,7 +53,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Secured Gold Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-coin"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Gold Loan Payment</li>
@@ -471,7 +471,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Gurantor Identity</label> <input type="text"
+								<label for="">CoApplicant Identity</label> <input type="text"
 									name="coApplicantIdentity" id="coApplicantIdentity"
 									readonly="readonly" required="required"
 									placeholder="Enter Guranntor Identity" />
@@ -785,7 +785,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 					<div class="col-12 text-center">
-						<button id="paymentBtn" class="btnStyle"
+						<button type="button" id="paymentBtn" class="btnStyle"
 							style="background-color: #FFA500;">Payment</button>
 
 					</div>

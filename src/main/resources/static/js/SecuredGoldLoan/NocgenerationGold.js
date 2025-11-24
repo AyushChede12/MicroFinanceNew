@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$.ajax({
-		url: 'api/securedGoldLoan/getchAllApprovedGoldCustomer',
+		url: 'api/securedGoldLoan/getAllGoldClosure',
 		type: 'GET',
 		success: function(response) {
 			// Check data
@@ -49,80 +49,88 @@ $(document).ready(function() {
 			alert("Failed to load Gold ID.");
 		}
 	});
-	
+
 	$("#generateNoc").click(function(e) {
-			e.preventDefault();
+		e.preventDefault();
 
-			const goldId = $("#findByGoldLoanId").val();
+		const goldId = $("#findByGoldLoanId").val();
 
-			if (!goldId) {
-				alert("Please select a Gold ID");
-				return;
-			}
+		if (!goldId) {
+			alert("Please select a Gold ID");
+			return;
+		}
 
-			$.ajax({
-				url: "api/loanmanegment/getLoanClosuresByLoanId",
-				method: "GET",
-				data: { loanId: loanId },
-				success: function(result) {
-					if (result && result.data && result.data.length > 0) {
-						const loanData = result.data[0]; // if data is an array
-		let content = `
-	    <div style="padding:30px; font-family:'Times New Roman', serif; border:2px solid #000; background:#fff; line-height:1.6;">
-	        <h2 style="text-align:center; margin:0; color:#FFA500;">Microfinance Cooperative Bank Ltd.</h2>
-	        <h4 style="text-align:center; margin:0;">Branch: ${loanData.branchName || "-"}</h4>
-	        <h3 style="text-align:center; margin:15px 0; text-decoration:underline;">No Objection Certificate (NOC)</h3>
+		$.ajax({
+			url: "api/securedGoldLoan/getGoldClosuresByGoldId",
+			method: "GET",
+			data: { goldID: goldId },
+			success: function(result) {
+				if (result && result.data && result.data.length > 0) {
+					const goldData = result.data[0];
 
-	        <p>Date: <b>${loanData.closureDate || new Date().toLocaleDateString()}</b></p>
+					let content = `
+	        <div style="padding:30px; font-family:'Times New Roman', serif; border:2px solid #000; background:#fff; line-height:1.6;">
+	            
+	            <h2 style="text-align:center; margin:0; color:#FFA500;">Microfinance Cooperative Bank Ltd.</h2>
+	            <h4 style="text-align:center; margin:0;">Branch: ${goldData.branchName || "-"}</h4>
+	            <h3 style="text-align:center; margin:15px 0; text-decoration:underline;">No Objection Certificate (NOC)</h3>
 
-	        <p>To,<br>
-	           <b>${loanData.memberName || "-"}</b><br>
-	           ${loanData.address || "-"}<br>
-	           Contact: ${loanData.contactNo || "-"}
-	        </p>
+	            <p>Date: <b>${goldData.paymentDate || new Date().toLocaleDateString()}</b></p>
 
-	        <p>Subject: <b>No Objection Certificate for Loan Closure</b></p>
+	            <p>To,<br>
+	               <b>${goldData.customerName || "-"}</b><br>
+	               Customer Code: ${goldData.customerCode || "-"}<br>
+	               Contact: ${goldData.contactNo || "-"}
+	            </p>
 
-	        <p>Dear <b>${loanData.memberName || "-"}</b>,</p>
+	            <p>Subject: <b>No Objection Certificate for Gold Loan Closure</b></p>
 
-	        <p>This is to certify that you had availed a loan from <b>Microfinance Cooperative Bank Ltd.</b> For the Loan Plan <b>${loanData.loanPlanName}</b>, 
-	        under Loan Reference Number <b>${loanData.loanId}</b>, sanctioned on <b>${loanData.loanDate || "-"}</b> 
-	        for an amount of <b>${loanData.loanAmount || "-"}</b>.</p>
+	            <p>Dear <b>${goldData.customerName || "-"}</b>,</p>
 
-	        <p>We hereby confirm that you have successfully repaid the entire loan amount along with all 
-	        applicable interest and charges. Your loan account has been duly closed on <b>${loanData.closureDate || "-"}</b>, 
-	        and as of this date, there are no outstanding dues payable to the bank under the said loan account.</p>
+	            <p>This is to certify that you availed a Gold Loan from 
+	            <b>Microfinance Cooperative Bank Ltd.</b> under the loan plan 
+	            <b>${goldData.loanPlanName || "-"}</b>, starting from 
+	            <b>${goldData.dateOfLoan || "-"}</b> for an amount of 
+	            <b>${goldData.loanAmount || "-"}</b>.
+	            </p>
 
-	        <p>Accordingly, we hereby issue this <b>No Objection Certificate (NOC)</b> to declare that 
-	        <b>${loanData.memberName || "-"}</b> is released from all liabilities and obligations related 
-	        to the above-mentioned loan account. The bank has no objection if you choose to avail financial 
-	        facilities from any other institution in the future.</p>
+	            <p>You have repaid your entire loan amount along with all applicable 
+	            interest and charges. Your loan account has been <b>successfully closed</b> on 
+	            <b>${goldData.paymentDate || "-"}</b>. As on today's date, there are 
+	            <b>no outstanding dues</b> payable to the bank for the mentioned loan account.</p>
 
-	        <p style="margin-bottom:40px;">We thank you for your association with <b>Microfinance Cooperative Bank Ltd.</b> and look forward 
-	        to serving you again.</p>
+	            <p>
+	            We hereby issue this <b>No Objection Certificate (NOC)</b> declaring that 
+	            <b>${goldData.customerName || "-"}</b> is fully released from all liabilities 
+	            associated with the above-mentioned gold loan.
+	            </p>
 
-	        <p style="text-align:right; margin-top:20px;">
-	            Authorized Signatory<br>
-	            <b>Microfinance Cooperative Bank Ltd.</b>
-	        </p>
-	    </div>
-	`;
+	            <p style="margin-bottom:40px;">
+	            Thank you for banking with <b>Microfinance Cooperative Bank Ltd.</b>.
+	            We look forward to serving you again.
+	            </p>
 
+	            <p style="text-align:right; margin-top:20px;">
+	                Authorized Signatory<br>
+	                <b>Microfinance Cooperative Bank Ltd.</b>
+	            </p>
+	        </div>
+	        `;
 
-						$("#receiptArea").html(content);
+					$("#receiptArea").html(content);
+					$("#printBtn").show();
 
-						// Show the print button after generating document
-						document.getElementById("printBtn").style.display = "inline-block";
-					} else {
-						alert("No data found for this loan ID.");
-					}
-				},
-				error: function(err) {
-					console.error(err);
-					alert("Error fetching loan data");
+				} else {
+					alert("No data found for this Gold Loan ID.");
 				}
-			});
+			},
+			error: function(err) {
+				console.error(err);
+				alert("Error fetching Gold gold data.");
+			}
 		});
+	});
+
 
 });
 

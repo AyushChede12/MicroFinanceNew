@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
 	$.ajax({
-		url: 'api/securedGoldLoan/getAllGoldLoanCustomer',
+		url: 'api/securedGoldLoan/getAllActive',
 		type: 'GET',
 		success: function(response) {
 			// Check data
