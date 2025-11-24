@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class ApplyForGold {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	private String goldID;
 	private String loanDate;
@@ -34,6 +34,7 @@ public class ApplyForGold {
 	private String photo;
 	private String signature;
 	private boolean approvalStatus;
+	private String approvalDate;
 
 	// Gold Silver Details
 	private String karat;
@@ -81,12 +82,14 @@ public class ApplyForGold {
 	private String overCharge;
 	private String collectionCharge;
 	private String financialConsultantName;
+	private String sanctionedAmount;
+	private String goldLoanStatus;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -584,6 +587,30 @@ public class ApplyForGold {
 
 	public void setApprovalStatus(boolean approvalStatus) {
 		this.approvalStatus = approvalStatus;
+	}
+
+	public String getApprovalDate() {
+		return approvalDate;
+	}
+
+	public void setApprovalDate(String approvalDate) {
+		this.approvalDate = approvalDate;
+	}
+
+	public String getSanctionedAmount() {
+		return sanctionedAmount;
+	}
+
+	public void setSanctionedAmount(String sanctionedAmount) {
+		this.sanctionedAmount = sanctionedAmount;
+	}
+
+	public String getGoldLoanStatus() {
+		return goldLoanStatus;
+	}
+
+	public void setGoldLoanStatus(String goldLoanStatus) {
+		this.goldLoanStatus = goldLoanStatus;
 	}
 
 }
