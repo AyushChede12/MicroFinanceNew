@@ -38,3 +38,31 @@
 	
 });
 */
+$(document).ready(function() {
+	$("#form1").submit(function(e) {
+		e.preventDefault();
+
+		let data = {
+			userId: $("#userName").val(),
+			password: $("#password").val()
+		};
+
+		$.ajax({
+			url: "loginValidate",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			success: function(res) {
+				if (res.status === "success") {
+					window.location.href = "/openDashboard";
+				} else {
+					$("#errorMsg").html(res.message);
+				}
+			},
+			error: function() {
+				$("#errorMsg").html("Something went wrong, try again!");
+			}
+		});
+	});
+
+});

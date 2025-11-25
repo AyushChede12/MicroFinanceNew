@@ -521,19 +521,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Dashboard/DashboardCard.js"></script>
-	<script>
-	var sessionUser = [];
 
-    <%List<String> userList = (List<String>) session.getAttribute("user");
-	if (userList != null) {
-		for (String user : userList) {%>
-             sessionUser.push("<%=user%>
-		");
-	<%
-	}
-}%>
-		
-	</script>
 </body>
 
 </html>

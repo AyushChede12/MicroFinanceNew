@@ -1,6 +1,7 @@
 <!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%> -->
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
 <html>
 
 <head>
@@ -29,7 +30,7 @@ pageEncoding="ISO-8859-1"%> -->
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-	<!-- jQuery ajax cdn -->
+<!-- jQuery ajax cdn -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <title>Admin Dashboard</title>
@@ -39,7 +40,7 @@ pageEncoding="ISO-8859-1"%> -->
 </head>
 
 
-<body>
+<body onload="loadSidebar(sessionUser);">
 
 	<main id="main" class="main">
 		<div class="pagetitle">
@@ -74,8 +75,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Password</label> <input type="password"
 									name="password" id="password" required="required"
-									placeholder="Enter password"
-									style="text-transform: uppercase;" />
+									placeholder="Enter password" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -111,12 +111,11 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Sign In Branch</label>
-								<select id=branchName1
+								<label>Sign In Branch</label> <select id=branchName1
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Branch</option>
-									
+
 								</select>
 							</div>
 						</div>
@@ -125,10 +124,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Past date</label>
-								<select id="pastDate"
-									name="pastDate" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label>Past date</label> <select id="pastDate" name="pastDate"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="Yes">Yes</option>
 									<option value="No">No</option>
 								</select>
@@ -139,10 +137,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Re Print</label>
-								<select id="rePrint"
-									name="rePrint" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label>Re Print</label> <select id="rePrint" name="rePrint"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Yes">Yes</option>
 									<option value="No">No</option>
@@ -155,8 +152,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Delete Access</label>
-								<select id="deleteAccess"
+								<label>Delete Access</label> <select id="deleteAccess"
 									name="deleteAccess" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -172,7 +168,8 @@ pageEncoding="ISO-8859-1"%> -->
 								class=" h-100 d-flex justify-content-start align-items-center">
 								<div
 									class="d-flex justify-content-start align-items-center  formFields">
-									<label style="margin-left: 20px;" class="mb-2" id="toggleStatus">User Status</label>
+									<label style="margin-left: 20px;" class="mb-2"
+										id="toggleStatus">User Status</label>
 									<div class="cont">
 										<div class="toggle">
 											<input type="checkbox" id="toggle-member-status"
@@ -226,7 +223,7 @@ pageEncoding="ISO-8859-1"%> -->
 												</tr>
 											</thead>
 											<tbody>
-												
+
 											</tbody>
 										</table>
 									</div>
@@ -349,121 +346,120 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
+				</div>
 
+				<div class="mt-5">
+					<nav>
+						<ol class="breadcrumb breadcrumb-title">
+							<li class="breadcrumb-item action">Loan Access</li>
+						</ol>
+					</nav>
 
-					<div class="mt-5">
-						<nav>
-							<ol class="breadcrumb breadcrumb-title">
-								<li class="breadcrumb-item action">Loan Access</li>
-							</ol>
-						</nav>
+					<div class="row mt-5">
+						<div class="col-12">
+							<div class="card recent-sales">
 
-						<div class="row mt-5">
-							<div class="col-12">
-								<div class="card recent-sales">
+								<div class="card-body table-responsive">
+									<h5 class="card-title">
+										Recent Sales <span>| Today</span>
+									</h5>
 
-									<div class="card-body table-responsive">
-										<h5 class="card-title">
-											Recent Sales <span>| Today</span>
-										</h5>
+									<table class="table table-borderless datatable overflow-scroll">
+										<thead class="table-light">
+											<tr style="font-family: 'Poppins', sans-serif;">
+												<th scope="col">#</th>
+												<th scope="col">Customer</th>
+												<th scope="col">Product</th>
+												<th scope="col">Price</th>
+												<th scope="col">Status</th>
+												<th scope="col">Action</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr style="font-family: 'Poppins', sans-serif;">
+												<th scope="row"><a href="#">1</a></th>
+												<td>Arun Kumar</td>
+												<td><a href="#" className="text-primary">Milk</a></td>
+												<td>$29</td>
+												<td><span class="badge bg-success text-white">Approved</span>
+												</td>
+												<td class="d-flex" style="gap: .7rem;">
+													<button class="iconbutton">
+														<i class="fa-solid fa-pen-to-square text-success"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-eye text-primary"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-trash text-danger"></i>
+													</button>
+												</td>
+											</tr>
 
-										<table
-											class="table table-borderless datatable overflow-scroll">
-											<thead class="table-light">
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="col">#</th>
-													<th scope="col">Customer</th>
-													<th scope="col">Product</th>
-													<th scope="col">Price</th>
-													<th scope="col">Status</th>
-													<th scope="col">Action</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr style="font-family: 'Poppins', sans-serif;">
-													<th scope="row"><a href="#">1</a></th>
-													<td>Arun Kumar</td>
-													<td><a href="#" className="text-primary">Milk</a></td>
-													<td>$29</td>
-													<td><span class="badge bg-success text-white">Approved</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-												<tr>
-													<th scope="row"><a href="#">2</a></th>
-													<td>Deepak Dalwe</td>
-													<td><a href="#" className="text-primary">Ghee</a></td>
-													<td>$16.5</td>
-													<td><span class="badge bg-danger text-white">Rejected</span>
-													</td>
-													<td class="d-flex" style="gap: .7rem;">
-														<button class="iconbutton">
-															<i class="fa-solid fa-pen-to-square text-success"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-eye text-primary"></i>
-														</button>
-														<button class="iconbutton">
-															<i class="fa-solid fa-trash text-danger"></i>
-														</button>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
+											<tr>
+												<th scope="row"><a href="#">2</a></th>
+												<td>Deepak Dalwe</td>
+												<td><a href="#" className="text-primary">Ghee</a></td>
+												<td>$16.5</td>
+												<td><span class="badge bg-danger text-white">Rejected</span>
+												</td>
+												<td class="d-flex" style="gap: .7rem;">
+													<button class="iconbutton">
+														<i class="fa-solid fa-pen-to-square text-success"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-eye text-primary"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-trash text-danger"></i>
+													</button>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row"><a href="#">2</a></th>
+												<td>Deepak Dalwe</td>
+												<td><a href="#" className="text-primary">Ghee</a></td>
+												<td>$16.5</td>
+												<td><span class="badge bg-danger text-white">Rejected</span>
+												</td>
+												<td class="d-flex" style="gap: .7rem;">
+													<button class="iconbutton">
+														<i class="fa-solid fa-pen-to-square text-success"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-eye text-primary"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-trash text-danger"></i>
+													</button>
+												</td>
+											</tr>
+											<tr>
+												<th scope="row"><a href="#">2</a></th>
+												<td>Deepak Dalwe</td>
+												<td><a href="#" className="text-primary">Ghee</a></td>
+												<td>$16.5</td>
+												<td><span class="badge bg-danger text-white">Rejected</span>
+												</td>
+												<td class="d-flex" style="gap: .7rem;">
+													<button class="iconbutton">
+														<i class="fa-solid fa-pen-to-square text-success"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-eye text-primary"></i>
+													</button>
+													<button class="iconbutton">
+														<i class="fa-solid fa-trash text-danger"></i>
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
 			</form>
 
 
@@ -471,9 +467,27 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 	</main>
+
+	<script type="text/javascript">
+        // Fetch session data from JSP and pass it to JavaScript
+        var sessionUser = [];
+
+        <%List<String> userList = (List<String>) session.getAttribute("user");
+if (userList != null) {
+	for (String user : userList) {%>
+                    sessionUser.push("<%=user%>
+		");
+	<%}
+}%>
+		
+	</script>
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/userCreation.js"></script>
+	<script src="./js/access.js"></script>
+	<script src="./js/loadSidebar.js"></script>
+
 </body>
 
 </html>

@@ -8,6 +8,9 @@
 </head>
 <body>
 	<aside id="sidebar" class="sidebar">
+	<%
+		String userName = (String) session.getAttribute("UserName");
+		%>
 
 		<ul class="sidebar-nav" id="sidebar-nav">
 			<li class="nav-item"><a href="openDashboard" class="nav-link"
@@ -19,7 +22,7 @@
 
 			<!-- Preferences -->
 
-			<li class="nav-item"><a class="nav-link collapsed"
+			<li id="preferences" class="nav-item"><a class="nav-link collapsed"
 				href="#member-section" data-toggle="collapse">
 					<div class="d-flex">
 						<i class="bi bi-gear text-white"></i> <span
@@ -28,13 +31,13 @@
 			</a>
 
 				<ul id="member-section" class="nav-content collapse">
-					<li><a href="companyAdministration"> <i
+					<li id="companyAdministration"><a href="companyAdministration"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Company
 								Administration</span>
 					</a></li>
 
-					<li><a href="financialYear"> <i class="bi bi-circle"></i>
+					<li id="financialYear"><a href="financialYear"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Financial
 								Year</span>
 					</a></li>
@@ -89,7 +92,7 @@
 
 			<!-- Customer Management -->
 
-			<li class="nav-item"><a class="nav-link collapsed"
+			<li id="customerManagement" class="nav-item"><a class="nav-link collapsed"
 				href="#customer-management" data-toggle="collapse">
 					<div class="d-flex">
 						<i class="bi bi-people-fill text-white"></i> <span
@@ -99,11 +102,11 @@
 			</a>
 
 				<ul id="customer-management" class="nav-content collapse">
-					<li><a href="addCustomer"> <i class="bi bi-circle"></i> <span
+					<li id="addCustomer"><a href="addCustomer"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Add Customer</span>
 					</a></li>
 
-					<li><a href="addCustomerKYC"> <i class="bi bi-circle"></i>
+					<li id="addCustomerKyc"><a href="addCustomerKYC"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Add
 								Customer KYC</span>
 					</a></li>
@@ -126,7 +129,7 @@
 
 
 			<!-- Customer Shareholding -->
-			<li class="nav-item"><a class="nav-link collapsed"
+			<li id="customerShareholding" class="nav-item"><a class="nav-link collapsed"
 				href="#member-share" data-toggle="collapse">
 					<div class="d-flex">
 						<i class="bi bi-building-fill-down text-white"></i> <span
@@ -136,12 +139,12 @@
 			</a>
 
 				<ul id="member-share" class="nav-content collapse">
-					<li><a href="transferShares"> <i class="bi bi-circle"></i>
+					<li id="transferShares"><a href="transferShares"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Transfer
 								Shares</span>
 					</a></li>
 
-					<li><a href="unallotedShares"> <i class="bi bi-circle"></i>
+					<li id="unalottedShares"><a href="unallotedShares"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Unallotted
 								Shares</span>
 					</a></li>

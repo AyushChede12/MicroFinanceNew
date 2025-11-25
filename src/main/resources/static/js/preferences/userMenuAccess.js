@@ -24,59 +24,136 @@ $(document).ready(function() {
 
 
 function retriveINCheckBox() {
-	alert("Function called");
 	const userName = document.getElementById("userName").value;
 	alert(userName);
 
 	const obj = {
 		userName: userName
 	};
+	alert(obj.userName);
 
-	$.ajax({
-		type: "POST", // Use POST to send JSON body
-		contentType: "application/json",
-		url: "api/userCreation/findTheUserIdByUserMasterService",
-		data: JSON.stringify(obj),
-		async: false, // fixed typo
-		success: function(data) {
-			if (!data) {
-				alert("No data found for this user");
-				return;
-			}
+	$
+		.ajax({
+			type: "POST",
+			contentType: "application/json",
+			url: 'api/userCreation/findTheUserIdByUserMasterService',
+			data: JSON.stringify(obj),
+			asynch: false,
+			success: function(data) {
+				alert("success");
 
-			alert("Success");
+				// Split the service string into an array
+				var serviceArray = data.service.split(',');
 
-			// Split the service string into an array
-			var serviceArray = data.service ? data.service.split(',') : [];
-
-			// Function to set checkboxes based on serviceArray
-			function setCheckbox(checkboxId, serviceName) {
-				var checkbox = document.getElementById(checkboxId);
-				if (checkbox) {
-					checkbox.checked = serviceArray.includes(serviceName);
+				// Function to set checkboxes based on serviceArray
+				function setCheckbox(checkboxId, serviceName) {
+					var checkbox = document.getElementById(checkboxId);
+					checkbox.checked = serviceArray
+						.includes(serviceName);
 				}
-			}
 
-			// Set checkboxes based on serviceArray
-			alert(setCheckbox("User_Create", "User Create"));
-			setCheckbox("User_Menu_Access", "User Menu Access");
-			setCheckbox("User_Manage", "User Manage");
-			setCheckbox("Company_Master", "Company Master");
-			setCheckbox("Item_Master", "Item Master");
-			setCheckbox("Stock_Entry", "Stock Entry");
-			setCheckbox("Entry_Report", "Entry Report");
-			setCheckbox("Generate_DM_for_Client", "Generate DM for Client");
-			setCheckbox("Client_DM_Report", "Client DM Report");
-			setCheckbox("Generate_DM_for_Factory", "Generate DM for Factory");
-			setCheckbox("Factory_DM_Report", "Factory DM Report");
-			setCheckbox("Stock_Statement", "Stock Statement");
-			setCheckbox("Factory_Stock_Statement", "Factory Stock Statement");
-			setCheckbox("Factory_IN_DMs", "Factory IN DMs");
-			setCheckbox("Generate_Factory_OUT", "Generate Factory OUT");
-			setCheckbox("Factory_OUT_Report", "Factory OUT Report");
+				// Set checkboxes based on serviceArray
+				/*setCheckbox("Company_Administration", "Company Administration");
+				setCheckbox("Financial_Year", "Financial Year");*/
+				setCheckbox("myAddCustomer", "Add Customer");
+				setCheckbox("myAddCustomerKyc", "Add Customer KYC");
+				setCheckbox("myTransferShares", "Transfer Shares");
+				setCheckbox("myUnallotedShares", "Unallotted Shares");
+
+			},
+			error: function() {
+				alert("Device control failed");
+			}
+		});
+}
+
+function setUserName() {
+	const select = document.getElementById("userName");
+	$.ajax({
+		type: "get",
+		contentType: "application/json",
+		url: 'api/userCreation/getAllUsers',
+		asynch: false,
+		success: function(data) {
+			data.forEach(value => {
+				const option = document.createElement('option');
+				option.setAttribute('value', value.userName);
+				option.innerHTML = value.userName;
+				select.appendChild(option);
+			});
 		},
 		error: function() {
 			alert("Device control failed");
 		}
 	});
+}
+
+function submitUserServiceMap() {
+	document.userToServiceMap.submit();
+	return true;
+}
+
+
+function loadSidebar(session) {
+	console.log("Session: ", session);
+
+	// Example sidebar elements
+	const customerManagement = document.getElementById('customerManagement');
+	const customerManagement = document.getElementById('customerManagement');
+
+
+
+	const addCustomer = document.getElementById('addCustomer');
+	const addCustomerKyc = document.getElementById('addCustomerKyc');
+	const transferShares = document.getElementById('transferShares');
+	const unalottedShares = document.getElementById('unalottedShares');
+
+	// Check if session is null or empty
+	if (!session || session.length === 0) {
+		console.log("Session is null or empty.");
+		alert("Session is null or empty.");
+		return;
+	}
+
+	// Initially hide all elements
+	preferences.style.display = 'none';
+	customerManagement.style.display = 'none';
+	customerShareholding.style.display = 'none';
+	companyAdministration.style.display = 'none';
+	financialYear.style.display = 'none';
+	addCustomer.style.display = 'none';
+	addCustomerKyc.style.display = 'none';
+	transferShares.style.display = 'none';
+	unalottedShares.style.display = 'none';
+
+	if (session.includes("Company Administration")) {
+		admin.style.display = 'block';
+		UserCreate.style.display = 'block';
+	}
+
+	if (session.includes("Financial Year")) {
+		admin.style.display = 'block';
+		UserMenuAccess.style.display = 'block';
+	}
+
+	if (session.includes("Add Customer")) {
+		admin.style.display = 'block';
+		UserManage.style.display = 'block';
+	}
+
+	if (session.includes("Add Customer KYC")) {
+		masters.style.display = 'block';
+		itemMaster.style.display = 'block';
+	}
+
+	if (session.includes("Transfer Shares")) {
+		masters.style.display = 'block';
+		companyMaster.style.display = 'block';
+	}
+
+	if (session.includes("Unalloted Shares")) {
+		entry.style.display = 'block';
+		stockEntry.style.display = 'block';
+	}
+
 }

@@ -91,12 +91,15 @@ public class UserCreationController {
 		UserToServiceMap obj = userToServiceMapRepo.findByuserName(userToServiceMap.getUserName());
 
 		if (obj != null) {
+			System.out.println("if");
 			/* obj.setCreatedBy(createdBy); */
 			obj.setService(userToServiceMap.getService());
 			obj.setUserName(userToServiceMap.getUserName());
 			userToServiceMapRepo.save(obj);
 
 		} else {
+			System.out.println("else");
+
 			/* userServiceMap.setCreatedBy(createdBy); */
 			userToServiceMapRepo.save(userToServiceMap);
 		}
