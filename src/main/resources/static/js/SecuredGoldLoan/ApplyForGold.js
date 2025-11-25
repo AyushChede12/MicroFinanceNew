@@ -78,35 +78,35 @@ $(document).ready(function() {
 
 		if (gold && cust) {
 			// Populate fields from addCustomer
-			$("#customerName").val(cust.customerName || "");
-			$("#dateOfBirth").val(cust.dob || "");
-			$("#age").val(cust.customerAge || "");
+			$("#customerName").val(cust.customerName.toUpperCase() || "");
+			$("#dateOfBirth").val(cust.dob.toUpperCase() || "");
+			$("#age").val(cust.customerAge.toUpperCase() || "");
 			$("#contactNo").val(cust.contactNo || "");
-			$("#address").val(cust.customerAddress || "");
-			$("#pinCode").val(cust.pinCode || "");
-			$("#branchName").val(cust.branchName || "");
-			$("#loanPlanName").val(gold.loanPlanName || "");
-			$("#typeOfLoan").val(gold.typeOfLoan || "");
-			$("#loanMode").val(gold.loanMode || "");
-			$("#loanTerm").val(gold.loanTerm || "");
-			$("#rateOfInterest").val(gold.rateOfInterest || "");
-			$("#loanAmount").val(gold.loanAmount || "");
-			$("#interestType").val(gold.typeIntrest || "");
-			$("#emiPayment").val(gold.emiPayment || "");
-			$("#karat").val(gold.karat || "");
-			$("#itemType").val(gold.itemMasterType || "");
-			$("#custgoldRate").val(gold.custgoldRate || "");
-			$("#itemName").val(gold.itemName || "");
-			$("#lockerBranch").val(gold.lockerBranch || "");
-			$("#purity").val(gold.purity || "");
-			$("#guarantorcustomerCode").val(cust.memberCode || "");
-			$("#guarantorAddress").val(cust.customerAddress || "");
-			$("#guarantorPinCode").val(cust.pinCode || "");
-			$("#guarantorContactNo").val(cust.contactNo || "");
-			$("#coApplicantMemberId").val(cust.memberCode || "");
-			$("#coApplicantAddress").val(cust.nomineeAddress || "");
-			$("#coAge").val(cust.nomineeAge || "");
-			$("#coApplicantContactNo").val(cust.nomineeMobileNo || "");
+			$("#address").val(cust.customerAddress.toUpperCase() || "");
+			$("#pinCode").val(cust.pinCode.toUpperCase() || "");
+			$("#branchName").val(cust.branchName.toUpperCase() || "");
+			$("#loanPlanName").val(gold.loanPlanName.toUpperCase() || "");
+			$("#typeOfLoan").val(gold.typeOfLoan.toUpperCase() || "");
+			$("#loanMode").val(gold.loanMode.toUpperCase() || "");
+			$("#loanTerm").val(gold.loanTerm.toUpperCase() || "");
+			$("#rateOfInterest").val(gold.rateOfInterest.toUpperCase() || "");
+			$("#loanAmount").val(gold.loanAmount.toUpperCase() || "");
+			$("#interestType").val(gold.typeIntrest.toUpperCase() || "");
+			$("#emiPayment").val(gold.emiPayment.toUpperCase() || "");
+			$("#karat").val(gold.karat.toUpperCase() || "");
+			$("#itemType").val(gold.itemMasterType.toUpperCase() || "");
+			$("#custgoldRate").val(gold.custgoldRate.toUpperCase() || "");
+			$("#itemName").val(gold.itemName.toUpperCase() || "");
+			$("#lockerBranch").val(gold.lockerBranch.toUpperCase() || "");
+			$("#purity").val(gold.purity.toUpperCase() || "");
+			$("#guarantorcustomerCode").val(cust.memberCode.toUpperCase() || "");
+			$("#guarantorAddress").val(cust.customerAddress.toUpperCase() || "");
+			$("#guarantorPinCode").val(cust.pinCode.toUpperCase() || "");
+			$("#guarantorContactNo").val(cust.contactNo.toUpperCase() || "");
+			$("#coApplicantMemberId").val(cust.memberCode.toUpperCase() || "");
+			$("#coApplicantAddress").val(cust.nomineeAddress.toUpperCase() || "");
+			$("#coAge").val(cust.nomineeAge.toUpperCase() || "");
+			$("#coApplicantContactNo").val(cust.nomineeMobileNo.toUpperCase() || "");
 
 
 

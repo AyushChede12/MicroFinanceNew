@@ -241,7 +241,7 @@ public class SecuredGoldLoanService {
 		return "success";
 	}
 
-	public List<ApplyForGold> getApprovedPolicyRenewal() {
+	public List<ApplyForGold> getApprovedGoldCustomer() {
 		// TODO Auto-generated method stub
 		return applyForGoldRepo.findByApprovalStatusTrue();
 	}
@@ -461,6 +461,16 @@ public class SecuredGoldLoanService {
 	public List<ApplyForGold> getAllActiveGoldLoans() {
 		// TODO Auto-generated method stub
 		return applyForGoldRepo.findByGoldLoanStatus("ACTIVE");
+	}
+
+	public List<ApplyForGold> getNotApprovedGoldCustomer() {
+		// TODO Auto-generated method stub
+		return applyForGoldRepo.findByApprovalStatusFalse();
+	}
+
+	public List<GoldLoanPayment> getGoldPaymentByGoldId(String goldID) {
+		// TODO Auto-generated method stub
+		return goldPaymentRepo.findByGoldID(goldID);
 	}
 
 }

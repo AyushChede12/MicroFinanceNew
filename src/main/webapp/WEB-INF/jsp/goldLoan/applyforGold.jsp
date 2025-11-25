@@ -804,6 +804,11 @@ document.addEventListener('DOMContentLoaded', function () {
             input.addEventListener("input", calculateValues);
         });
     });
+    
+    $("select option").each(function() {
+        $(this).text($(this).text().toUpperCase());
+    });
+
   </script>
 
 </html>
