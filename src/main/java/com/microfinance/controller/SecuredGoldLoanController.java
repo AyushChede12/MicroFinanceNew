@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.ApplyForGold;
+import com.microfinance.model.EmiInstallmentPaymentGold;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.GoldLoanClose;
 import com.microfinance.model.GoldLoanPayment;
@@ -272,7 +273,7 @@ public class SecuredGoldLoanController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 	}
-	
+
 	@GetMapping("/getAllNotApprovedGoldCustomer")
 	public ResponseEntity<ApiResponse<List<ApplyForGold>>> getNotApprovedGoldCustomer() {
 		List<ApplyForGold> gold = secureGoldLoanService.getNotApprovedGoldCustomer();
@@ -352,7 +353,7 @@ public class SecuredGoldLoanController {
 		return new ApiResponse<>(HttpStatus.OK,
 				activeLoans.isEmpty() ? "No Active Loans Found" : "Active Loans Loaded Successfully", activeLoans);
 	}
-	
+
 	@GetMapping("/getGoldPaymentByGoldId")
 	public ResponseEntity<ApiResponse<List<GoldLoanPayment>>> getGoldPaymentByGoldId(@RequestParam String goldID) {
 		List<GoldLoanPayment> closures = secureGoldLoanService.getGoldPaymentByGoldId(goldID);
@@ -364,6 +365,13 @@ public class SecuredGoldLoanController {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
 					new ApiResponse<>(HttpStatus.NO_CONTENT, "No Gold Payment records found for this Gold ID", null));
 		}
+	}
+
+	@PostMapping("/saveEMIInstallmentData")
+	public ResponseEntity<ApiResponse> saveInstallment(@RequestBody EmiInstallmentPaymentGold emiPay) {
+
+		ApiResponse response = secureGoldLoanService.saveInstallmentAndUpdateSavings(emiPay);
+		return ResponseEntity.ok(response);
 	}
 
 }

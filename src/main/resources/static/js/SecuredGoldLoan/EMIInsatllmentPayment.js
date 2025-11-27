@@ -156,6 +156,65 @@ $(document).ready(function() {
 	    $("#pendingPrincipal").val(pendingPrincipal);
 
 	});
+	
+	$("#saveBtn").click(function () {
+
+	    // Collect data from your form fields
+	    let emiData = {
+	        goldID: $("#findByGoldLoanId").val(),
+	        loanDate: $("#loanDate").val(),
+	        customerCode: $("#customerCode").val(),
+	        customerName: $("#customerName").val(),
+	        loanPlanName: $("#loanPlanName").val(),
+			interestType: $("#interestType").val(),
+			loanMode: $("#loanMode").val(),
+			loanTerm: $("#loanTerm").val(),
+			emiPayment: $("#emiPayment").val(),
+			typeOfLoan: $("#typeOfLoan").val(),
+			rateOfInterest: $("#rateOfInterest").val(),
+			contactNo: $("#contactNo").val(),
+			loanAmount: $("#loanAmount").val(),
+			branchName: $("#branchName").val(),
+			
+			//Payment Details
+			installment: $("#installment").val(),
+			registrationDate: $("#registrationDate").val(),
+			dueAmount: $("#dueAmount").val(),
+			pendingInterest: $("#pendingInterest").val(),
+			pendingPrincipal: $("#pendingPrincipal").val(),
+			totalDue: $("#totalDue").val(),
+			paymentAmount: $("#paymentAmount").val(),
+			paymentDate: $("#paymentDate").val(),
+			netAmount: $("#netAmount").val(),
+			paymentMode: $("#paymentMode").val(),
+			financialCode: $("#financialCode").val(),
+			financialName: $("#financialName").val(),
+			remarks: $("#remarks").val(),
+	    };
+
+	    console.log("Sending EMI Data: ", emiData);
+
+	    $.ajax({
+	        url: "api/securedGoldLoan/saveEMIInstallmentData",
+	        type: "POST",
+	        contentType: "application/json",
+	        data: JSON.stringify(emiData),
+	        success: function (res) {
+	            if (res.status === "OK") {
+	                alert(res.data);
+	            } else {
+	                alert(res.data);
+	            }
+	        },
+
+	        error: function (xhr) {
+	            alert(xhr);
+	            console.error(xhr);
+	        }
+	    });
+
+	});
+
 
 
 });
