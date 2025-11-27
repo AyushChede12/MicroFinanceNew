@@ -202,6 +202,7 @@ $(document).ready(function() {
 	        success: function (res) {
 	            if (res.status === "OK") {
 	                alert(res.data);
+					location.reload();
 	            } else {
 	                alert(res.data);
 	            }
