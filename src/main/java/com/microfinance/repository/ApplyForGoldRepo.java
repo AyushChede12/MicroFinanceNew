@@ -26,4 +26,6 @@ public interface ApplyForGoldRepo extends JpaRepository<ApplyForGold, Long> {
 
 	List<ApplyForGold> findByGoldLoanStatus(String string);
 
+	List<ApplyForGold> findByApprovalStatusFalse();
+
 }

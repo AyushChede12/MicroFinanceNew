@@ -75,10 +75,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="findByGoldLoanId" id="goldSelection">Customer
-									Selection </label> <select id="findByGoldLoanId"
-									name="findByGoldLoanId" class="form-control selectField"
-									style="width: 100%;">
+								<label for="findByGoldLoanId" id="goldSelection">Gold ID
+								</label> <select id="findByGoldLoanId" name="findByGoldLoanId"
+									class="form-control selectField" style="width: 100%;">
 									<option value="">-- Search Gold ID --</option>
 								</select>
 							</div>

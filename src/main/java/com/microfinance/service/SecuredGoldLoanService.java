@@ -2,13 +2,17 @@ package com.microfinance.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.ApplyForGold;
 import com.microfinance.model.CreateSavingsAccount;
+import com.microfinance.model.EmiInstallmentPaymentGold;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.GoldLoanClose;
 import com.microfinance.model.GoldLoanPayment;
@@ -17,6 +21,7 @@ import com.microfinance.model.addCustomer;
 import com.microfinance.repository.AddCustomerRepo;
 import com.microfinance.repository.ApplyForGoldRepo;
 import com.microfinance.repository.CreateSavingAccountRepo;
+import com.microfinance.repository.EMIInstallmentRepo;
 import com.microfinance.repository.GoldCloseRepo;
 import com.microfinance.repository.GoldDirectoryRepo;
 import com.microfinance.repository.GoldLoanApprovalRepo;
@@ -49,6 +54,9 @@ public class SecuredGoldLoanService {
 
 	@Autowired
 	GoldPaymentRepo goldPaymentRepo;
+
+	@Autowired
+	EMIInstallmentRepo emiRepo;
 
 	public SecuredGoldPlan saveLoanManagmentData(SecuredGoldPlan goldLoan) {
 		if (goldLoan.getId() != null && goldSecurePlanRepo.existsById(goldLoan.getId())) {
@@ -241,7 +249,7 @@ public class SecuredGoldLoanService {
 		return "success";
 	}
 
-	public List<ApplyForGold> getApprovedPolicyRenewal() {
+	public List<ApplyForGold> getApprovedGoldCustomer() {
 		// TODO Auto-generated method stub
 		return applyForGoldRepo.findByApprovalStatusTrue();
 	}
@@ -438,7 +446,6 @@ public class SecuredGoldLoanService {
 			payment.setRemarks("Installment " + (allPayments.size() + i));
 			payment.setAmountDue(String.valueOf(lastAmountDue));
 
-
 			goldPaymentRepo.save(payment);
 
 			// Close loan if final installment
@@ -461,6 +468,46 @@ public class SecuredGoldLoanService {
 	public List<ApplyForGold> getAllActiveGoldLoans() {
 		// TODO Auto-generated method stub
 		return applyForGoldRepo.findByGoldLoanStatus("ACTIVE");
+	}
+
+	public List<ApplyForGold> getNotApprovedGoldCustomer() {
+		// TODO Auto-generated method stub
+		return applyForGoldRepo.findByApprovalStatusFalse();
+	}
+
+	public List<GoldLoanPayment> getGoldPaymentByGoldId(String goldID) {
+		// TODO Auto-generated method stub
+		return goldPaymentRepo.findByGoldID(goldID);
+	}
+
+	public ApiResponse saveInstallmentAndUpdateSavings(EmiInstallmentPaymentGold emi) {
+
+		// 1. Save EMI installment
+		emiRepo.save(emi);
+
+		// 2. Fetch Savings Account
+		List<CreateSavingsAccount> optionalAcc = createSavingRepo.findBySelectByCustomer(emi.getCustomerCode());
+		System.out.println(optionalAcc);
+		if (optionalAcc == null || optionalAcc.isEmpty()) {
+			return new ApiResponse(HttpStatus.INTERNAL_SERVER_ERROR, "FAILED", "Savings Account Not Found!");
+		}
+
+		// Extract actual entity
+		CreateSavingsAccount acc = optionalAcc.get(0);
+
+		double oldBalance = Double.parseDouble(acc.getBalance());
+		double payAmount = Double.parseDouble(emi.getPaymentAmount());
+
+		if (oldBalance < payAmount) {
+			return new ApiResponse(HttpStatus.BAD_REQUEST, "FAILED", "Insufficient Balance in Savings Account!");
+		}
+
+		double newBalance = oldBalance - payAmount;
+		acc.setBalance(String.valueOf(newBalance));
+
+		createSavingRepo.save(acc);
+
+		return new ApiResponse(HttpStatus.OK, "SUCCESS", "Installment Saved & Balance Updated");
 	}
 
 }

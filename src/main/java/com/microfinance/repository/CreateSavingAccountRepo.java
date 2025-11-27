@@ -18,12 +18,11 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	List<CreateSavingsAccount> findByIsApprovedFalse();
 
-	//List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
+	// List<CreateSavingsAccount> findAllByAccountNumber(String accountNumber);
 
 	Optional<CreateSavingsAccount> findByAccountNumber(String accountNumber);
 
 	List<CreateSavingsAccount> findByTypeofaccountContainingIgnoreCaseAndIsApproved(String keyword, boolean isApproved);
-
 
 	List<CreateSavingsAccount> findAllByAccountNumberAndIsApprovedTrue(String accountNumber);
 
@@ -31,20 +30,13 @@ public interface CreateSavingAccountRepo extends JpaRepository<CreateSavingsAcco
 
 	List<CreateSavingsAccount> findBySelectByCustomerIgnoreCase(String selectByCustomer);
 
-	
 	List<CreateSavingsAccount> findBySelectByCustomer(String selectByCustomer);
 
 	boolean existsBySelectByCustomer(String customerId);
 
 	List<CreateSavingsAccount> findByIsApprovedTrueAndMessageSend(String messageSend);
 
-
-
 	List<CreateSavingsAccount> findByModeOfPayment(String string);
 
-
-
-	
-
-	//CreateSavingsAccount findByaAccountNumber(String accountNumber);
+	// CreateSavingsAccount findByaAccountNumber(String accountNumber);
 }

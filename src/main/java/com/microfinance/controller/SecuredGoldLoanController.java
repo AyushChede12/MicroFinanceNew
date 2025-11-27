@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.microfinance.dto.ApiResponse;
 import com.microfinance.model.ApplyForGold;
+import com.microfinance.model.EmiInstallmentPaymentGold;
 import com.microfinance.model.GoldDirectory;
 import com.microfinance.model.GoldLoanClose;
 import com.microfinance.model.GoldLoanPayment;
@@ -258,9 +259,9 @@ public class SecuredGoldLoanController {
 		}
 	}
 
-	@GetMapping("/getchAllApprovedGoldCustomer")
-	public ResponseEntity<ApiResponse<List<ApplyForGold>>> getApprovedPolicyRenewal() {
-		List<ApplyForGold> gold = secureGoldLoanService.getApprovedPolicyRenewal();
+	@GetMapping("/getAllApprovedGoldCustomer")
+	public ResponseEntity<ApiResponse<List<ApplyForGold>>> getApprovedGoldCustomer() {
+		List<ApplyForGold> gold = secureGoldLoanService.getApprovedGoldCustomer();
 		if (gold != null && !gold.isEmpty()) {
 
 			ApiResponse<List<ApplyForGold>> response = new ApiResponse<>(HttpStatus.OK,
@@ -269,6 +270,21 @@ public class SecuredGoldLoanController {
 		} else {
 			ApiResponse<List<ApplyForGold>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
 					"No approved Policy Renewal found.", null);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+		}
+	}
+
+	@GetMapping("/getAllNotApprovedGoldCustomer")
+	public ResponseEntity<ApiResponse<List<ApplyForGold>>> getNotApprovedGoldCustomer() {
+		List<ApplyForGold> gold = secureGoldLoanService.getNotApprovedGoldCustomer();
+		if (gold != null && !gold.isEmpty()) {
+
+			ApiResponse<List<ApplyForGold>> response = new ApiResponse<>(HttpStatus.OK,
+					"Approved Gold Data fetched successfully.", gold);
+			return ResponseEntity.ok(response);
+		} else {
+			ApiResponse<List<ApplyForGold>> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+					"No approved Gold Customer found.", null);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
 		}
 	}
@@ -336,6 +352,26 @@ public class SecuredGoldLoanController {
 
 		return new ApiResponse<>(HttpStatus.OK,
 				activeLoans.isEmpty() ? "No Active Loans Found" : "Active Loans Loaded Successfully", activeLoans);
+	}
+
+	@GetMapping("/getGoldPaymentByGoldId")
+	public ResponseEntity<ApiResponse<List<GoldLoanPayment>>> getGoldPaymentByGoldId(@RequestParam String goldID) {
+		List<GoldLoanPayment> closures = secureGoldLoanService.getGoldPaymentByGoldId(goldID);
+
+		if (closures != null && !closures.isEmpty()) {
+			return ResponseEntity
+					.ok(new ApiResponse<>(HttpStatus.OK, "Gold Payment records fetched successfully", closures));
+		} else {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).body(
+					new ApiResponse<>(HttpStatus.NO_CONTENT, "No Gold Payment records found for this Gold ID", null));
+		}
+	}
+
+	@PostMapping("/saveEMIInstallmentData")
+	public ResponseEntity<ApiResponse> saveInstallment(@RequestBody EmiInstallmentPaymentGold emiPay) {
+
+		ApiResponse response = secureGoldLoanService.saveInstallmentAndUpdateSavings(emiPay);
+		return ResponseEntity.ok(response);
 	}
 
 }
