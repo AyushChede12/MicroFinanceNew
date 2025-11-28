@@ -53,8 +53,8 @@ function retriveINCheckBox() {
 				}
 
 				// Set checkboxes based on serviceArray
-				/*setCheckbox("Company_Administration", "Company Administration");
-				setCheckbox("Financial_Year", "Financial Year");*/
+				setCheckbox("Company_Administration", "Company Administration");
+				setCheckbox("Financial_Year", "Financial Year");
 				setCheckbox("myAddCustomer", "Add Customer");
 				setCheckbox("myAddCustomerKyc", "Add Customer KYC");
 				setCheckbox("myTransferShares", "Transfer Shares");
@@ -99,9 +99,6 @@ function loadSidebar(session) {
 
 	// Example sidebar elements
 	const customerManagement = document.getElementById('customerManagement');
-	const customerManagement = document.getElementById('customerManagement');
-
-
 
 	const addCustomer = document.getElementById('addCustomer');
 	const addCustomerKyc = document.getElementById('addCustomerKyc');
@@ -155,5 +152,4 @@ function loadSidebar(session) {
 		entry.style.display = 'block';
 		stockEntry.style.display = 'block';
 	}
-
 }
