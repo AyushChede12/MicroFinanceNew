@@ -17,7 +17,7 @@ $(document).ready(function() {
 			response.data.forEach(function(item) {
 				let goldId = item.goldID || item.goldId;
 				if (goldId && goldId.trim() !== "") {
-					distinctMap.set(goldId.trim(), item.customerName);
+					distinctMap.set(goldId.trim(), item.customerName.toUpperCase());
 				}
 			});
 
@@ -81,12 +81,12 @@ $(document).ready(function() {
 						let installmentDropdown = $("#installment");
 
 						   installmentDropdown.empty(); // Clear previous options
-						   installmentDropdown.append(`<option value="">-select installment-</option>`);
+						   installmentDropdown.append(`<option value="">-SELECT INSTALLMENT-</option>`);
 
 						   if (!isNaN(term) && term > 0) {
 						       for (let i = 1; i <= term; i++) {
 						           installmentDropdown.append(
-						               `<option value="${i}">Installment ${i}</option>`
+						               `<option value="${i}">INSTALLMENT ${i}</option>`
 						           );
 						       }
 						   }

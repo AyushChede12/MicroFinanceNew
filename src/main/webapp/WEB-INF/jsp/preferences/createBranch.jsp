@@ -92,8 +92,9 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Branch Code <span class="star">*</span></label> <input
 									type="text" name="branchCode" id="branchCode"
-									required="required" placeholder="Enter Branch Code" style="text-transform: uppercase;"/> <small
-									id="chkbranchcode" style="color: red;"></small>
+									required="required" placeholder="Enter Branch Code"
+									style="text-transform: uppercase;" /> <small id="chkbranchcode"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -102,8 +103,9 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Branch Name <span class="star">*</span></label> <input
 									type="Text" name="branchName" id="branchName"
-									required="required" placeholder="Enter Branch Name" style="text-transform: uppercase;"/> <small
-									id="chkbranchName" style="color: red;"></small>
+									required="required" placeholder="Enter Branch Name"
+									style="text-transform: uppercase;" /> <small id="chkbranchName"
+									style="color: red;"></small>
 							</div>
 						</div>
 
@@ -113,8 +115,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Opening Date <span class="star">*</span></label> <input
 									type="date" name="openingDate" id="openingDate"
-									required="required" style="text-transform: uppercase;"/> <small id="chkopeningdate"
-									style="color: red;"></small>
+									required="required" style="text-transform: uppercase;" /> <small
+									id="chkopeningdate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -132,16 +134,16 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">PIN <span class="star">*</span></label> <input
 									type="text" name="pin" id="pin" required="required"
-									placeholder="Enter Pin" style="text-transform: uppercase;"/> <small id="chkpin"
-									style="color: red;"></small>
+									placeholder="Enter Pin" style="text-transform: uppercase;" /> <small
+									id="chkpin" style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="state">State <span class="star">*</span></label> <select
-									id="state" name="state"
-									class="form-control selectField" style="height: 30px;">
+									id="state" name="state" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select State</option>
 									<option value="MAHARASHTRA">MAHARASHTRA</option>
 									<option value="RAJASTHAN">RAJASTHAN</option>
@@ -247,6 +249,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/branch.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 

@@ -54,32 +54,32 @@ pageEncoding="ISO-8859-1"%> -->
 	padding: 4px;
 	border-radius: 8px;
 }
+
 .img-box {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 }
 
 .img-box .deleteImg {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    font-size: 16px;
-    line-height: 22px;
-    text-align: center;
-    cursor: pointer;
-    display: none;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: center;
+	cursor: pointer;
+	display: none;
 }
 
 .img-box:hover .deleteImg {
-    display: block;
+	display: block;
 }
-
 </style>
 
 </head>
@@ -486,8 +486,29 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/companyAdministration.js"></script>
+	<script>
+		$(document).ready(
+				function() {
 
-	
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
+
+
 
 
 

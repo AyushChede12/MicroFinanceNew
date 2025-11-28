@@ -139,8 +139,8 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">DIN/Promoter No <span class="star">*</span></label>
 								<input type="text" name="promoterNo" id="promoterNo"
 									required="required" placeholder="Enter Promoter No"
-									style="text-transform: uppercase;" /> <small id="chkpromoterno"
-									style="color: red;"></small>
+									style="text-transform: uppercase;" /> <small
+									id="chkpromoterno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -549,6 +549,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/executivePromoter.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

@@ -85,15 +85,16 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 
 							<div class="col-lg-12 mb-4 ">
-							<div class="d-flex flex-column formFields">
-								<label for="">Find by Policy Number*</label> <select
-									id="findByPolicyNumber" name="findByPolicyNumber" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Policy Number</option>
-									
-								</select>
+								<div class="d-flex flex-column formFields">
+									<label for="">Find by Policy Number*</label> <select
+										id="findByPolicyNumber" name="findByPolicyNumber"
+										required="required" class="form-control selectField"
+										style="height: 30px;">
+										<option value="">Select Policy Number</option>
+
+									</select>
+								</div>
 							</div>
-						</div>
 
 
 
@@ -231,6 +232,27 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

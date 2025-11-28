@@ -7,11 +7,12 @@ $(document).ready(function() {
 		success: function(response) {
 			var select = $("#customerCode");
 			select.empty();
-			select.append('<option value="">Select member Code</option>');
+			select.append('<option value="">SELECT CUSTOMER CODE</option>');
 
 			if (response && response.data && response.data.length > 0) {
 				response.data.forEach(function(customer) {
-					var optionText = customer.memberCode + "-" + customer.customerName;
+					var name = (customer.customerName || "").toUpperCase();
+					var optionText = customer.memberCode + "-" + name;
 					var optionValue = customer.memberCode;
 					select.append(
 						'<option value="' + optionValue + '">' + optionText + "</option>"

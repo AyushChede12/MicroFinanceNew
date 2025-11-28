@@ -104,9 +104,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="customerName">Customer Name</label> <input type="text"
-									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name"
+								<label for="customerName">Customer Name</label> <input
+									type="text" name="customerName" id="customerName"
+									required="required" placeholder="Enter Customer Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -123,8 +123,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="previousAccountBalance">Previous Account Balance</label> <input
-									type="text" name="previousAccountBalance"
+								<label for="previousAccountBalance">Previous Account
+									Balance</label> <input type="text" name="previousAccountBalance"
 									id="previousAccountBalance" required="required"
 									placeholder="Enter Previous Balance"
 									style="text-transform: uppercase;" />
@@ -362,6 +362,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/shareHoldingUpdate.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

@@ -118,16 +118,17 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="major">Authenticate For</label> <!-- <select
+								<label for="major">Authenticate For</label>
+								<!-- <select
 									id="major" name="major" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Mr.">Mr.</option>
 									<option value="Ms.">Ms.</option>
 									<option value="Other">Other</option>
-								</select> --><input type="text"
-									name="authenticateFor" id="authenticateFor" required="required"
-									placeholder="Enter Major"
+								</select> -->
+								<input type="text" name="authenticateFor" id="authenticateFor"
+									required="required" placeholder="Enter Major"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -156,38 +157,40 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Relation to Applicant</label> <!-- <select
+								<label>Relation to Applicant</label>
+								<!-- <select
 									id="relationToApplicant" name="relationToApplicant"
 									required="required" class="form-control selectField"
-									style="height: 30px;"> --><input type="text"
-									name="relationToApplicant" id="relationToApplicant"
-									required="required" placeholder="Enter Relation"
-									style="text-transform: uppercase;" />
+									style="height: 30px;"> -->
+								<input type="text" name="relationToApplicant"
+									id="relationToApplicant" required="required"
+									placeholder="Enter Relation" style="text-transform: uppercase;" />
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Gender</label> <!-- <select id="customerGender"
+								<label for="">Gender</label>
+								<!-- <select id="customerGender"
 									name="customerGender" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Gender</option>
 									<option value="Male">Male</option>
 									<option value="Female">Female</option>
 									<option value="Other">Other</option>
-								</select> --><input type="text" name="customerGender"
-									id="customerGender" required="required" placeholder="Enter Gender" />
-								
+								</select> -->
+								<input type="text" name="customerGender" id="customerGender"
+									required="required" placeholder="Enter Gender" />
+
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date of Birth </label> <input type="date"
-									name="dob" id="dob" required="required"
-									placeholder="Enter Relative Name"
+								<label>Date of Birth </label> <input type="date" name="dob"
+									id="dob" required="required" placeholder="Enter Relative Name"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -203,7 +206,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relationship Status</label> <!-- <select
+								<label for="">Relationship Status</label>
+								<!-- <select
 									id="relationshipStatus" name="relationshipStatus"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
@@ -214,7 +218,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Single">Single</option>
 								</select> -->
 								<input type="text" name="relationshipStatus"
-									id="relationshipStatus" required="required" placeholder="Enter Relationship Status" />
+									id="relationshipStatus" required="required"
+									placeholder="Enter Relationship Status" />
 							</div>
 						</div>
 
@@ -243,13 +248,14 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <!-- <select id="branchName"
+								<label for="">Branch Name</label>
+								<!-- <select id="branchName"
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 
 								</select> -->
-								<input type="text" name="branchName"
-									id="branchName" required="required" placeholder="Enter Branch" />
+								<input type="text" name="branchName" id="branchName"
+									required="required" placeholder="Enter Branch" />
 							</div>
 						</div>
 
@@ -334,7 +340,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label>Is Minor</label> <!-- <select id="minor" name="minor"
+								<label>Is Minor</label>
+								<!-- <select id="minor" name="minor"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
 									<option value="">Select Minor</option>
@@ -342,8 +349,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="No">No</option>
 
 								</select> -->
-								<input type="text"
-									name="minor" id="minor" required="required"
+								<input type="text" name="minor" id="minor" required="required"
 									placeholder="Enter Minor" />
 							</div>
 						</div>
@@ -379,8 +385,9 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span class="star">*</span>
 							</label> <label for="customerSignature" id="drop-area"> <input
-								type="file" accept="image/*" name="customerSignature" id="customerSignature"
-								hidden="hidden" onchange="signatureUpload();"
+								type="file" accept="image/*" name="customerSignature"
+								id="customerSignature" hidden="hidden"
+								onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -422,14 +429,15 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="relationToApplicant">Nominee Relation</label> <!-- <select
+								<label for="relationToApplicant">Nominee Relation</label>
+								<!-- <select
 									id="nomineeRelationToApplicant"
 									name="nomineeRelationToApplicant" required="required"
 									class="form-control selectField" style="height: 30px;">
 
 								</select> -->
-								<input type="text"
-									name="nomineeRelationToApplicant" id="nomineeRelationToApplicant" required="required"
+								<input type="text" name="nomineeRelationToApplicant"
+									id="nomineeRelationToApplicant" required="required"
 									placeholder="Enter Nominee Relation"
 									style="text-transform: uppercase;" />
 							</div>
@@ -479,7 +487,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Nominee KYC Type </label> <!-- <select
+								<label for="">Nominee KYC Type </label>
+								<!-- <select
 									id="nomineeKycType" name="nomineeKycType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
@@ -487,9 +496,8 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Current">Current</option>
 
 								</select> -->
-								<input type="text"
-									name="nomineeKycType" id="nomineeKycType" required="required"
-									placeholder="Enter Nominee KYC Type"
+								<input type="text" name="nomineeKycType" id="nomineeKycType"
+									required="required" placeholder="Enter Nominee KYC Type"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -596,6 +604,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/customerDataUpdate.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 
 </body>

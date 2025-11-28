@@ -1,6 +1,28 @@
 const LTV = 0.75;
 
 $(document).ready(function() {
+	
+	$.ajax({
+			url: 'api/financialconsultant/getAllFinancialConsultantDetails',
+			type: 'POST',
+			success: function(response) {
+				console.log("API Response:", response); // ✅ Debug to check!
+
+				const consultantDropdown = $('#financialConsultantId');
+				consultantDropdown.empty();
+				consultantDropdown.append('<option value="">SELECT CONSULTANT</option>');
+
+				response.data.forEach(function(customer) {
+					// ✅ Only the code
+					const option = `<option value="${customer.financialCode}">${customer.financialCode}</option>`;
+					consultantDropdown.append(option);
+				});
+			},
+			error: function(xhr, status, error) {
+				console.error('AJAX Error:', status, error);
+				alert('Failed to fetch consultant data.');
+			}
+		});
 	$.ajax({
 		url: "api/securedGoldLoan/getAllGoldDirectories",
 		type: "GET",
@@ -8,11 +30,12 @@ $(document).ready(function() {
 		success: function(response) {
 			var select = $("#memberCode");
 			select.empty();
-			select.append('<option value="">Select member Code</option>');
+			select.append('<option value="">SELECT CUSTOMER CODE</option>');
 
 			if (response && response.data && response.data.length > 0) {
 				response.data.forEach(function(customer) {
-					var optionText = customer.customerCode + "-" + customer.customerName;
+					var name = (customer.customerName || "").toUpperCase();
+					var optionText = customer.customerCode + "-" + name;
 					var optionValue = customer.customerCode;
 					select.append(
 						'<option value="' + optionValue + '">' + optionText + "</option>"
@@ -32,7 +55,7 @@ $(document).ready(function() {
 		type: "GET",
 		success: function(response) {
 			var select = $("#guarantorcustomerCode,#coApplicantMemberId");
-			select.empty().append('<option value="">Select Customer Code</option>');
+			select.empty().append('<option value="">SELECT CUSTOMER CODE</option>');
 			response.data.forEach(function(c) {
 				select.append('<option value="' + c.memberCode + '">' + c.memberCode + '</option>');
 			});
