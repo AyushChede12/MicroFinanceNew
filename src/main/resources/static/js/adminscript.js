@@ -26,13 +26,14 @@ $(document).ready(function() {
 			if (response.status == "FOUND") {
 				const branchList = response.data;
 				$("#branchName").empty(); // Clear existing options
-				$("#branchName").append("<option value=''>-- Select Branch --</option>");
+				$("#branchName").append("<option value=''>-- SELECT BRANCH --</option>");
 				$("#closingbranchName").empty(); // Clear existing options
-				$("#closingbranchName").append("<option value=''>-- Select Branch --</option>");
+				$("#closingbranchName").append("<option value=''>-- SELECT BRANCH --</option>");
 
 				for (let i = 0; i < branchList.length; i++) {
 					let branch = branchList[i];
-					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
+					let branchNameUpper = branch.branchName.toUpperCase(); 
+					let option = `<option value="${branchNameUpper}">${branchNameUpper}</option>`;
 					$("#branchName").append(option);
 
 					$("#closingbranchName").append(option);

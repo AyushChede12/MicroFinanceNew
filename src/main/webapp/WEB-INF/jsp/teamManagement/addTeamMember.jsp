@@ -39,7 +39,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 <body>
-<script type="text/javascript">
+	<script type="text/javascript">
    function calculateAge() {
 	   const dob = new Date(document.getElementById("dateOfBirth").value); // get DOB from the date input field
 	   const age = Math.floor((Date.now() - dob) / (365.25 * 24 * 60 * 60 * 1000)); // calculate age
@@ -94,8 +94,9 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="">Team Member CODE</label> <input type="text" id="teamMemberCode"
-									name="teamMemberCode" value="${teamMemberUniqueNo}" required="required"
+								<label for="">Team Member CODE</label> <input type="text"
+									id="teamMemberCode" name="teamMemberCode"
+									value="${teamMemberUniqueNo}" required="required"
 									placeholder="Enter Team Member Code">
 							</div>
 						</div>
@@ -130,15 +131,16 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px;">
-								<label for="dob">Date Of Birth</label> <input type="date" name="dateOfBirth" onchange="calculateAge()"
-									id="dateOfBirth" required="required" placeholder="Enter DateOfBirth"
+								<label for="dob">Date Of Birth</label> <input type="date"
+									name="dateOfBirth" onchange="calculateAge()" id="dateOfBirth"
+									required="required" placeholder="Enter DateOfBirth"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Age</label> <input type="text" name="age" id="age" 
+								<label for="">Age</label> <input type="text" name="age" id="age"
 									required="required" placeholder="Enter Age" />
 							</div>
 						</div>
@@ -146,8 +148,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Family Member Name </label> <input type="text"
-									name="familyMemberName" id="familyMemberName" required="required"
-									placeholder="Enter Family Member Name" />
+									name="familyMemberName" id="familyMemberName"
+									required="required" placeholder="Enter Family Member Name" />
 							</div>
 						</div>
 
@@ -190,9 +192,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Relation with Nominee</label> <select id="relationWithNominee"
-									name="relationWithNominee" required="required"
-									class="form-control selectField" style="height: 30px;">
+								<label for="">Relation with Nominee</label> <select
+									id="relationWithNominee" name="relationWithNominee"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Select Relation</option>
 								</select>
 							</div>
@@ -224,23 +227,25 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">IFSC Code</label> <input type="text" name="ifscCode"
-									id="ifscCode" required="required" placeholder="Enter IFSC Code" />
+								<label for="">IFSC Code</label> <input type="text"
+									name="ifscCode" id="ifscCode" required="required"
+									placeholder="Enter IFSC Code" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Exp. Details</label> <input type="text" name="expDetails"
-									id="expDetails" required="required" placeholder="Enter Exp. Details" />
+								<label for="">Exp. Details</label> <input type="text"
+									name="expDetails" id="expDetails" required="required"
+									placeholder="Enter Exp. Details" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Educational Background</label> <input type="text"
-									name="educationalBackground" id="educationalBackground" required="required"
-									placeholder="Enter Educational Background" />
+									name="educationalBackground" id="educationalBackground"
+									required="required" placeholder="Enter Educational Background" />
 							</div>
 						</div>
 
@@ -263,10 +268,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Designation </label> <select id="designation" name="designation"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select</option>									
+								<label for="">Designation </label> <select id="designation"
+									name="designation" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">Select</option>
 								</select>
 							</div>
 						</div>
@@ -275,9 +280,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Department </label> <select id="department" name="department"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
+								<label for="">Department </label> <select id="department"
+									name="department" required="required"
+									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 								</select>
 							</div>
@@ -322,8 +327,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Mode of Payment  </label> <select id="modeofpayment"
-									name="modeofpayment" required="required"
+								<label for="">Mode of Payment </label> <select
+									id="modeofpayment" name="modeofpayment" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option selected="selected" value="">Select</option>
 									<option value="Cash">Cash</option>
@@ -336,8 +341,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Comments </label> <input type="text" name="comments"
-									id="comments" required="required" placeholder="Enter Remarks" />
+								<label for="">Comments </label> <input type="text"
+									name="comments" id="comments" required="required"
+									placeholder="Enter Remarks" />
 							</div>
 						</div>
 
@@ -350,17 +356,18 @@ pageEncoding="ISO-8859-1"%> -->
 										Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="customerStatus" name="customerStatus"
-												class="toggle__input" data-toggle-type="member-status">
-											<label for="customerStatus" class="toggle__label"></label>
-											
-											
+											<input type="checkbox" id="customerStatus"
+												name="customerStatus" class="toggle__input"
+												data-toggle-type="member-status"> <label
+												for="customerStatus" class="toggle__label"></label>
+
+
 										</div>
 									</div>
 								</div>
 							</div>
-						</div> 
-										                      
+						</div>
+
 					</div>
 					<!-- Cheque input fields -->
 					<div id="chequeInputs" style="display: none;">
@@ -373,7 +380,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 							</div>
 						</div>
-						<div class="row" >
+						<div class="row">
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="">Cheque Date </label> <input type="Date"
@@ -392,10 +399,10 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
-					
+
 					<!-- Online input fields -->
 					<div id="onlineInputs" style="display: none;">
-						<div class="row" >
+						<div class="row">
 							<div class="col-lg-3">
 								<div class="d-flex flex-column formFields">
 									<label for="">Deposit A/C </label> <input type="text"
@@ -412,9 +419,9 @@ pageEncoding="ISO-8859-1"%> -->
 										placeholder="Enter Deposite Ref No." />
 								</div>
 							</div>
-						</div>						
+						</div>
 					</div>
-					
+
 					<!-- NEFT input fields -->
 					<div id="neftInputs" style="display: none;">
 						<div class="row">
@@ -434,7 +441,7 @@ pageEncoding="ISO-8859-1"%> -->
 										placeholder="Enter Deposite Ref No." />
 								</div>
 							</div>
-						</div>						
+						</div>
 					</div>
 
 				</div>
@@ -454,7 +461,7 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	<script src="./js/TeamManagement/addTeamMember.js"></script>	
+	<script src="./js/TeamManagement/addTeamMember.js"></script>
 	<script>
 	$(document).ready(function() {
 		DesignationDropdown();
@@ -463,8 +470,8 @@ pageEncoding="ISO-8859-1"%> -->
 		RelationDropdown();
 	});
 	</script>
-	
-<script>
+
+	<script>
 document.addEventListener('DOMContentLoaded', function () {
 	
 	const toggles = document.querySelectorAll('.toggle__input');	
@@ -488,7 +495,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-<script>
+	<script>
     
 document.getElementById('modeofpayment').addEventListener('change', function () {
     // Get the selected payment mode
@@ -516,6 +523,27 @@ document.getElementById('modeofpayment').addEventListener('change', function () 
 
 
 </script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 </html>
