@@ -91,7 +91,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Add Relation <span class="star">*</span></label> <input
 									type="text" name="relation" id="relation"
-									placeholder="Enter Relation" style="text-transform: uppercase;"/>
+									placeholder="Enter Relation" style="text-transform: uppercase;" />
 								<small id="chkrelation" style="color: red;"></small>
 							</div>
 						</div>
@@ -162,6 +162,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/relative.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

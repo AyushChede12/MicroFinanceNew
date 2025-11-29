@@ -141,7 +141,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Bank Name <span class="star">*</span></label> <input
 									type="text" name="bankName" id="bankName" required="required"
-									placeholder="Enter Bank Name" style="text-transform: uppercase;" /> <small id="chkbankname"
+									placeholder="Enter Bank Name"
+									style="text-transform: uppercase;" /> <small id="chkbankname"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -161,7 +162,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>IFSC Code <span class="star">*</span></label> <input
 									type="text" name="ifscCode" id="ifscCode" required="required"
-									placeholder="Enter IFSC Code" style="text-transform: uppercase;"/> <small id="chkifsccode"
+									placeholder="Enter IFSC Code"
+									style="text-transform: uppercase;" /> <small id="chkifsccode"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -171,7 +173,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>MICR Code <span class="star">*</span></label> <input
 									type="text" name="micrCode" id="micrCode" required="required"
-									placeholder="Enter MICR Code" style="text-transform: uppercase;"/> <small id="chkmicrcode"
+									placeholder="Enter MICR Code"
+									style="text-transform: uppercase;" /> <small id="chkmicrcode"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -181,7 +184,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Contact No <span class="star">*</span></label> <input
 									type="text" name="contactNo" id="contactNo" required="required"
-									placeholder="Enter Contact No" style="text-transform: uppercase;"/> <small id="chkcontactno"
+									placeholder="Enter Contact No"
+									style="text-transform: uppercase;" /> <small id="chkcontactno"
 									style="color: red;"></small>
 							</div>
 						</div>
@@ -191,8 +195,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Account Opening Date <span class="star">*</span></label>
 								<input type="date" name="openingDate" id="openingDate"
-									required="required" style="text-transform: uppercase;"/> <small id="chkopeningdate"
-									style="color: red;"></small>
+									required="required" style="text-transform: uppercase;" /> <small
+									id="chkopeningdate" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -221,7 +225,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Address <span class="star">*</span></label>
 								<textarea name="address" id="address"
-									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;" style="text-transform: uppercase;"></textarea>
+									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"
+									style="text-transform: uppercase;"></textarea>
 								<small id="chkaddress" style="color: red;"></small>
 							</div>
 						</div>
@@ -282,7 +287,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 								<table
 									class="table table-bordered table-hover text-nowrap datatable"
-									id="tableBody" style="text-align:center;">
+									id="tableBody" style="text-align: center;">
 									<thead class="table-light">
 										<tr
 											style="font-family: 'Poppins', sans-serif; white-space: nowrap;">
@@ -336,6 +341,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/bank.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 

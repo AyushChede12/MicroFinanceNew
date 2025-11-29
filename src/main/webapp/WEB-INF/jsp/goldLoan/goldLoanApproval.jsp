@@ -50,13 +50,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Secured Gold Loan</h1>
+			<h1>SECURED GOLD LOAN</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-coin"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Gold Loan Approval</li>
+					<li class="breadcrumb-item action">GOLD LOAN APPROVAL</li>
 				</ol>
 			</nav>
 		</div>
@@ -66,7 +66,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Details</li>
+							<li class="breadcrumb-item action">SEARCH DETAILS</li>
 						</ol>
 					</nav>
 
@@ -91,7 +91,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Date of Loan</label> <input type="date"
+								<label for="loanName">DATE OF LOAN</label> <input type="date"
 									name="loanDate" id="loanDate" required="required"
 									readonly="readonly" style="text-transform: uppercase;" />
 							</div>
@@ -690,6 +690,28 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/SecuredGoldLoan/GoldLoanApproval.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
+
 </body>
 
 </html>

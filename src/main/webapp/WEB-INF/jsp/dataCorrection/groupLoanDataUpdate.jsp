@@ -201,8 +201,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3" style="display: none;">
 							<div class="d-flex flex-column formFields">
 								<label>Plan ID*</label> <input type="hidden" id="planCode"
-									name="planCode" class="form-control"
-									required />
+									name="planCode" class="form-control" required />
 							</div>
 						</div>
 
@@ -334,6 +333,27 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/jointLiabiliyUpdate.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 

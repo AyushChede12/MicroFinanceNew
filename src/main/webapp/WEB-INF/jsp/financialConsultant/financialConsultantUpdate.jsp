@@ -145,8 +145,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Age <span id="star">*</span></label> <input type="text"
-									name="age" id="age" required="required"
-									placeholder="Enter Age" style="text-transform: uppercase;" />
+									name="age" id="age" required="required" placeholder="Enter Age"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -179,7 +179,7 @@ pageEncoding="ISO-8859-1"%> -->
 									required="required" placeholder="Enter Contact No" />
 							</div>
 						</div>
-<!-- 
+						<!-- 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="nomineeName">Nominee Name <span class="star">*</span></label>
@@ -278,8 +278,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo <span class="star">*</span>
 							</label> <label for="photo" id="drop-area"> <input type="file"
-								accept="image/*" name="financialPhoto" id="photo" hidden="hidden"
-								onchange="photoUpload();"
+								accept="image/*" name="financialPhoto" id="photo"
+								hidden="hidden" onchange="photoUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -301,8 +301,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature <span class="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
-								type="file" accept="image/*" name="finnacialSignature" id="signature"
-								hidden="hidden" onchange="signatureUpload();"
+								type="file" accept="image/*" name="finnacialSignature"
+								id="signature" hidden="hidden" onchange="signatureUpload();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -646,7 +646,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/FinancialConsultant/consultantDownlineView.js"></script>
 
 
+	<script>
+		$(document).ready(
+				function() {
 
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 
 

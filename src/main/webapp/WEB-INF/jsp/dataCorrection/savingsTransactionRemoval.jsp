@@ -69,9 +69,9 @@ pageEncoding="ISO-8859-1"%> -->
 					</nav>
 
 					<div class="row">
-					<input type="hidden" name="id" id="id">
-					
-					<div class="col-lg-3">
+						<input type="hidden" name="id" id="id">
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Select Account No.</label> <select id="accountNumber"
@@ -81,7 +81,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<!-- <div class="d-flex flex-column formFields" style="margin-bottom: 30px">
                 <label>Verify With</label>
@@ -111,12 +111,12 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Transaction ID</label> <input type="text"
-									name="selectSavingTransactionId" id="selectSavingTransactionId" required="required"
-									placeholder="Enter Transaction ID"
+									name="selectSavingTransactionId" id="selectSavingTransactionId"
+									required="required" placeholder="Enter Transaction ID"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -131,7 +131,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -165,8 +165,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Co-Holder</label> <input type="text" name="jointHolderName"
-									id="jointHolderName" required="required"
+								<label>Co-Holder</label> <input type="text"
+									name="jointHolderName" id="jointHolderName" required="required"
 									placeholder="Joint Co-Holder Name"
 									style="text-transform: uppercase;" />
 							</div>
@@ -225,8 +225,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Transaction Type </label><select id="transactionType"
-									name="transactionType" required="required"
+								<label for="">Transaction Type </label><select
+									id="transactionType" name="transactionType" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select</option>
 									<option value="Deposit">Deposit</option>
@@ -237,8 +237,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="">Amount</label> <input type="text" name="transactionAmount"
-									id="transactionAmount" required="required" placeholder="Enter Amount" />
+								<label for="">Amount</label> <input type="text"
+									name="transactionAmount" id="transactionAmount"
+									required="required" placeholder="Enter Amount" />
 							</div>
 						</div>
 
@@ -269,7 +270,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 			</form>
 
-			
+
 
 		</div>
 
@@ -278,6 +279,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/savingTransactionRemoval.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 

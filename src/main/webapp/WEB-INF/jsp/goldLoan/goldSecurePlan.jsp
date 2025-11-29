@@ -140,23 +140,25 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="minage">Min Age</label> <input type="text" name="minAge"
-									id="minAge" required="required" placeholder="Enter Minimum Age"
+								<label for="minage">Min Age</label> <input type="text"
+									name="minAge" id="minAge" required="required"
+									placeholder="Enter Minimum Age"
 									style="text-transform: uppercase;" /> <span id="message"></span>
 							</div>
 
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="maxage">Max Age</label> <input type="text" name="maxAge"
-									id="maxAge" required="required" placeholder="Enter Maximum Age"
+								<label for="maxage">Max Age</label> <input type="text"
+									name="maxAge" id="maxAge" required="required"
+									placeholder="Enter Maximum Age"
 									style="text-transform: uppercase;" /> <span id="message"></span>
 							</div>
 
 						</div>
 
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -166,9 +168,9 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						
-						
-						
+
+
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="minterm">loanTerm</label> <input type="text"
@@ -177,15 +179,16 @@ pageEncoding="ISO-8859-1"%> -->
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						
-						
+
+
 
 
 
 						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields" style="margin-bottom:30px;">
-								<label for="rateInteresttype">Rate Interest Type(%p.a.)</label> <input
-									type="text" name="rateInterestType" id="rateInterestType"
+							<div class="d-flex flex-column formFields"
+								style="margin-bottom: 30px;">
+								<label for="rateInteresttype">Rate Interest Type(%p.a.)</label>
+								<input type="text" name="rateInterestType" id="rateInterestType"
 									required="required" placeholder="Enter Rate Interest Type" />
 							</div>
 						</div>
@@ -213,11 +216,13 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px;">
 								<div
 									class="d-flex justify-content-start align-items-center  formFields">
-									<label style="margin-left: 20px;" class="mb-2">Plan Status</label>
+									<label style="margin-left: 20px;" class="mb-2">Plan
+										Status</label>
 									<div class="cont">
 										<div class="toggle">
-											<input type="checkbox" id="toggle-plan-status" name="planStatus"
-												class="toggle__input" data-toggle-type="plan-status"> <label
+											<input type="checkbox" id="toggle-plan-status"
+												name="planStatus" class="toggle__input"
+												data-toggle-type="plan-status"> <label
 												for="toggle-plan-status" class="toggle__label"></label>
 										</div>
 									</div>
@@ -239,17 +244,17 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="procfee">Processing Fee(%) </label> <input type="text"
-									name="procFee" id="procFee" required="required"
+								<label for="procfee">Processing Fee(%) </label> <input
+									type="text" name="procFee" id="procFee" required="required"
 									placeholder="Enter Processing Fee" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="legalcharge"> Legal Charges(%)</label> <input type="text"
-									name="legalCharge" id="legalCharge" required="required"
-									placeholder="Enter Legal Charges" />
+								<label for="legalcharge"> Legal Charges(%)</label> <input
+									type="text" name="legalCharge" id="legalCharge"
+									required="required" placeholder="Enter Legal Charges" />
 							</div>
 						</div>
 
@@ -271,8 +276,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="valufee">Valuation Fee(%) </label> <input type="text"
-									name="valuFee" id="valuFee" required="required"
+								<label for="valufee">Valuation Fee(%) </label> <input
+									type="text" name="valuFee" id="valuFee" required="required"
 									placeholder="Enter Valuation Fee" />
 							</div>
 						</div>
@@ -291,15 +296,15 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="lateallowanceDay">Late Allowance Days</label> <input type="text"
-									name="lateAllowanceDay" id="lateAllowanceDay"
+								<label for="lateallowanceDay">Late Allowance Days</label> <input
+									type="text" name="lateAllowanceDay" id="lateAllowanceDay"
 									required="required" placeholder="Enter Late Allowance Days" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="penaltymode">penalty mode</label> <select id="penaltyMode"
-									name="penaltyMode" required="required"
+								<label for="penaltymode">penalty mode</label> <select
+									id="penaltyMode" name="penaltyMode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Penalty Type</option>
 									<option value="Percentage">Percentage</option>
@@ -309,9 +314,9 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="monthlypenalty"> Monthly Penalty </label> <input type="text"
-									name="monthlyPenalty" id="monthlyPenalty" required="required"
-									placeholder="" />
+								<label for="monthlypenalty"> Monthly Penalty </label> <input
+									type="text" name="monthlyPenalty" id="monthlyPenalty"
+									required="required" placeholder="" />
 							</div>
 						</div>
 					</div>
@@ -394,6 +399,24 @@ document.addEventListener('DOMContentLoaded', function () {
 			label.style.backgroundColor = input.checked ? '#28a745' : '#ccc';
 		}
 	}
+});
+</script>
+<script>
+$(document).ready(function () {
+
+    // Convert all labels inside #formid to uppercase
+    $("#formid label").each(function () {
+        $(this).text($(this).text().toUpperCase());
+    });
+
+    // Convert all placeholders inside #formid to uppercase
+    $("#formid input, #formid textarea, #formid select").each(function () {
+        let ph = $(this).attr("placeholder");
+        if (ph) {
+            $(this).attr("placeholder", ph.toUpperCase());
+        }
+    });
+
 });
 </script>
 

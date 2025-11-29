@@ -96,17 +96,17 @@ pageEncoding="ISO-8859-1"%> -->
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="closeLoanDate">Date of Loan</label> <input type="date"
-									name="closeLoanDate" id="closeLoanDate" required="required"
-									style="text-transform: uppercase;" />
+								<label for="closeLoanDate">Date of Loan</label> <input
+									type="date" name="closeLoanDate" id="closeLoanDate"
+									required="required" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="customerCode">Customer Code</label> <input type="text"
-									name="customerCode" id="customerCode" required="required"
-									placeholder="Enter Customer Code"
+								<label for="customerCode">Customer Code</label> <input
+									type="text" name="customerCode" id="customerCode"
+									required="required" placeholder="Enter Customer Code"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -316,8 +316,8 @@ pageEncoding="ISO-8859-1"%> -->
 				</div>
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="deductfineamount">Deduct Fine Amount</label> <input type="text"
-							name="deductfineamount" id="deductfineamount"
+						<label for="deductfineamount">Deduct Fine Amount</label> <input
+							type="text" name="deductfineamount" id="deductfineamount"
 							required="required" Value="0" />
 					</div>
 				</div>
@@ -383,6 +383,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/SecuredGoldLoan/goldLoanClosure.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 
