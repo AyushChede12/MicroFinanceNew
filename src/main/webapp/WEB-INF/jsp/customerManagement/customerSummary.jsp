@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Client Summary</h1>
+			<h1>CUSTOMER MANAGEMENT</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="openDashboard"> <i
-							class="bi bi-house-door"></i>
+							class="bi bi-people-fill"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Client Summary</li>
+					<li class="breadcrumb-item action">CUSTOMER SUMMARY</li>
 				</ol>
 			</nav>
 		</div>

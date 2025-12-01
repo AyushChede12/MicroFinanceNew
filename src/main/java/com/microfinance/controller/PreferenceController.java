@@ -41,6 +41,7 @@ import com.microfinance.model.Transactions;
 import com.microfinance.model.UserCreations;
 import com.microfinance.model.UserMenuAccess;
 import com.microfinance.model.states;
+import com.microfinance.repository.CategoryModuleRepo;
 import com.microfinance.repository.StateDistrictRepo;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.service.PreferenceService;
@@ -245,12 +246,25 @@ public class PreferenceController {
 	}
 
 	@GetMapping("/getAllDistrictsByStateId") // Niraj
-
 	public Map<String, List<Statedistricts>> getAllDistrictsByStateId(@RequestParam("stateId") int stateId) {
 		List<Statedistricts> data = stateDistrictRepo.findBystateId(stateId);
 		Map<String, List<Statedistricts>> response = new HashMap<>();
 		response.put("allDistricts", data);
 		return response;
+	}
+
+	@GetMapping("/getAllCasteByCategory")
+	public ResponseEntity<ApiResponse<List<CategoryModule>>> getAllCasteByCategory(@RequestParam String category) {
+
+		List<CategoryModule> casteList = preferenceService.findCasteByCategory(category);
+		ApiResponse<List<CategoryModule>> response;
+		if (casteList.isEmpty()) {
+			response = new ApiResponse<>(HttpStatus.NOT_FOUND, "No Caste found in this category", null);
+			return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+		} else {
+			response = new ApiResponse<>(HttpStatus.FOUND, "Caste fetched successfully", casteList);
+			return ResponseEntity.ok(response); // or new ResponseEntity<>(response, HttpStatus.FOUND)
+		}
 	}
 
 	// Category Module - Ayush
@@ -535,18 +549,17 @@ public class PreferenceController {
 	public ResponseEntity<?> getCompanyImages(@PathVariable Long companyId) {
 		return ResponseEntity.ok(preferenceService.getCompanyImages(companyId));
 	}
-	
+
 	@PostMapping("/delete/{id}")
-    public ResponseEntity<?> deleteImage(@PathVariable Long id) {
+	public ResponseEntity<?> deleteImage(@PathVariable Long id) {
 
-        boolean deleted = preferenceService.deleteCompanyImage(id);
+		boolean deleted = preferenceService.deleteCompanyImage(id);
 
-        if (!deleted) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body("Image not found");
-        }
+		if (!deleted) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image not found");
+		}
 
-        return ResponseEntity.ok("Image deleted successfully");
-    }
-	
+		return ResponseEntity.ok("Image deleted successfully");
+	}
+
 }

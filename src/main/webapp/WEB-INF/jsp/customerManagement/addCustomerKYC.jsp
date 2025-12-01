@@ -60,13 +60,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Customer Management</h1>
+			<h1>CUSTOMER MANAGEMENT</h1>
 			<nav>
 				<ol class="breadcrumb">
 					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-people-fill"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Add Customer KYC</li>
+					<li class="breadcrumb-item action">ADD CUSTOMER KYC</li>
 				</ol>
 			</nav>
 		</div>
@@ -76,7 +76,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Details</li>
+							<li class="breadcrumb-item action">SEARCH DETAILS</li>
 						</ol>
 					</nav>
 
