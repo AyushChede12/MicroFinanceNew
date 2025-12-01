@@ -12,6 +12,7 @@ public class UserToServiceMap {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String userName;
+	private String module;
 	private String service;
 
 	public Long getId() {
@@ -28,6 +29,14 @@ public class UserToServiceMap {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getModule() {
+		return module;
+	}
+
+	public void setModule(String module) {
+		this.module = module;
 	}
 
 	public String getService() {

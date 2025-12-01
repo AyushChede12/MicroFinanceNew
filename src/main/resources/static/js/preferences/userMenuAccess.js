@@ -1,5 +1,6 @@
-$(document).ready(function() {
-	// Fetch all users on page load
+
+// Fetch all users on page load
+function setUserName() {
 	$.ajax({
 		url: "api/userCreation/getAllUsers", // your GET API
 		type: "GET",
@@ -20,67 +21,46 @@ $(document).ready(function() {
 			alert("Failed to load users!");
 		}
 	});
-});
+
+}
+
+
 
 
 function retriveINCheckBox() {
 	const userName = document.getElementById("userName").value;
-	alert(userName);
 
-	const obj = {
-		userName: userName
-	};
-	alert(obj.userName);
-
-	$
-		.ajax({
-			type: "POST",
-			contentType: "application/json",
-			url: 'api/userCreation/findTheUserIdByUserMasterService',
-			data: JSON.stringify(obj),
-			asynch: false,
-			success: function(data) {
-				alert("success");
-
-				// Split the service string into an array
-				var serviceArray = data.service.split(',');
-
-				// Function to set checkboxes based on serviceArray
-				function setCheckbox(checkboxId, serviceName) {
-					var checkbox = document.getElementById(checkboxId);
-					checkbox.checked = serviceArray
-						.includes(serviceName);
-				}
-
-				// Set checkboxes based on serviceArray
-				setCheckbox("Company_Administration", "Company Administration");
-				setCheckbox("Financial_Year", "Financial Year");
-				setCheckbox("myAddCustomer", "Add Customer");
-				setCheckbox("myAddCustomerKyc", "Add Customer KYC");
-				setCheckbox("myTransferShares", "Transfer Shares");
-				setCheckbox("myUnallotedShares", "Unallotted Shares");
-
-			},
-			error: function() {
-				alert("Device control failed");
-			}
-		});
-}
-
-function setUserName() {
-	const select = document.getElementById("userName");
 	$.ajax({
-		type: "get",
+		type: "POST",
+		url: 'api/userCreation/findTheUserIdByUserMasterService',
 		contentType: "application/json",
-		url: 'api/userCreation/getAllUsers',
-		asynch: false,
+		data: JSON.stringify({ userName: userName }),
 		success: function(data) {
-			data.forEach(value => {
-				const option = document.createElement('option');
-				option.setAttribute('value', value.userName);
-				option.innerHTML = value.userName;
-				select.appendChild(option);
+
+			if (!data || !data.service) {
+				alert("No services found!");
+				return;
+			}
+
+			const serviceArray = data.service.split(",");
+
+			// STEP 1 ➜ Uncheck all checkboxes
+			$("input[type='checkbox'][name='service']").prop("checked", false);
+
+			// STEP 2 ➜ Check allowed services
+			serviceArray.forEach(s => {
+				const id = s.replace(/\s+/g, "_").trim();
+				$("#" + id).prop("checked", true);
 			});
+
+			// STEP 3 ➜ Collect selected services
+			const selectedServices = [];
+			$("input[name='service']:checked").each(function() {
+				selectedServices.push($(this).val());
+			});
+
+			// STEP 4 ➜ Call submit function WITH parameter
+			submitUserServiceMap(selectedServices);
 		},
 		error: function() {
 			alert("Device control failed");
@@ -88,13 +68,34 @@ function setUserName() {
 	});
 }
 
+
 function submitUserServiceMap() {
-	document.userToServiceMap.submit();
-	return true;
+
+	const userName = $("#userName").val();
+	const selectedServices = [];
+	$("input[name='service']:checked").each(function() {
+		selectedServices.push($(this).val());
+	});
+	alert(selectedServices);
+	$.ajax({
+		type: "POST",
+		url: "api/userCreation/userToServiceMap",
+		data: {
+			userName: userName,
+			service: selectedServices.toString()
+		},
+		success: function() {
+			alert("Access Updated Successfully!");
+		},
+		error: function() {
+			alert("Failed To Save Access!");
+		}
+	});
 }
 
 
-function loadSidebar(session) {
+
+/*function loadSidebar(session) {
 	console.log("Session: ", session);
 
 	// Example sidebar elements
@@ -152,4 +153,22 @@ function loadSidebar(session) {
 		entry.style.display = 'block';
 		stockEntry.style.display = 'block';
 	}
+}*/
+
+function loadSidebar(session) {
+
+	if (!session || session.length === 0) {
+		console.log("No Session Data Found");
+		return;
+	}
+
+	// Hide everything first
+	$(".sidebar-nav li, .nav-content li").hide();
+
+	// CUSTOMER MANAGEMENT (NEW)
+	if (session.includes("Add Customer")) $("#myAddCustomerMenu").show();
+	if (session.includes("Add Customer KYC")) $("#myAddCustomerKycMenu").show();
+	if (session.includes("Customer Summary")) $("#myCustomerSummaryMenu").show();
+	if (session.includes("Customer Report")) $("#myCustomerReportMenu").show();
+	if (session.includes("Search Customer")) $("#mySearchCustomerMenu").show();
 }

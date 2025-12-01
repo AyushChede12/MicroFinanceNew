@@ -93,6 +93,7 @@ public class UserCreationController {
 		if (obj != null) {
 			System.out.println("if");
 			/* obj.setCreatedBy(createdBy); */
+			obj.setModule(userToServiceMap.getModule());
 			obj.setService(userToServiceMap.getService());
 			obj.setUserName(userToServiceMap.getUserName());
 			userToServiceMapRepo.save(obj);

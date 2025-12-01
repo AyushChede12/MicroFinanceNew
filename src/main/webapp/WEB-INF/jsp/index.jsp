@@ -133,7 +133,7 @@ body {
 			<h1>Login</h1>
 			<div id="errorMsg"></div>
 
-			<form id="form1">
+			<form  id="loginForm">
 				<div
 					style="display: flex; justify-content: space-between; align-items: center;">
 					<div class="textfield">

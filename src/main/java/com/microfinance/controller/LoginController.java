@@ -149,5 +149,15 @@ public class LoginController {
 		model.addAttribute("customerUser", username); // ✅ pass to JSP
 		return "dashboardPage/dashboard"; // dashboard.jsp
 	}
+	
+	@GetMapping("/getUserServices")
+	@ResponseBody
+	public List<String> getUserServices(HttpSession session) {
+	    List<String> services = (List<String>) session.getAttribute("user");
+	    if (services == null) {
+	        return new ArrayList<>();
+	    }
+	    return services;
+	}
 
 }

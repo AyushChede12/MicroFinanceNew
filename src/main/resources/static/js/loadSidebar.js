@@ -1,4 +1,4 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
 	
 });
 function loadSidebar(session) {
@@ -164,3 +164,4 @@ function loadSidebar(session) {
     
     
 }
+*/

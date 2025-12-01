@@ -154,7 +154,7 @@ select {
 
 
 <body
-	onload="setUserName();  getAllUserToServiceMap(); loadSidebar(sessionUser);">
+	onload="setUserName(); loadSidebar(sessionUser);">
 	<main id="main" class="main">
 		<div class="pagetitle">
 			<h1>User Menu Access</h1>
@@ -165,7 +165,7 @@ select {
 			<div class="user-id-section">
 				<div class="user-id-box">
 					<label for="user-id">Select User ID:</label> <select id="userName"
-						name="userName" onchange="retriveINCheckBox()">
+						name="userName">
 
 					</select>
 				</div>
@@ -180,7 +180,8 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myAddCustomer" name="service" value="Add Customer">
+							<input type="checkbox" id="Add_Customer" name="service"
+								value="Add Customer">
 						</div>
 						<div class="bold-text">Customer Management =></div>
 						<div class="normal-text">Add Customer</div>
@@ -188,23 +189,26 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myAddCustomerKYC" name="service" value="Add Customer KYC">
+							<input type="checkbox" id="Add_Customer_KYC" name="service"
+								value="Add Customer KYC">
 						</div>
 						<div class="bold-text">Customer Management =></div>
-						<div class="normal-text" id="myAddCustomerKyc">Add Customer KYC</div>
+						<div class="normal-text">Add Customer KYC</div>
 					</div>
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myCustomerSummary" name="service" value="Customer Summary">
+							<input type="checkbox" id="Customer_Summary" name="service"
+								value="Customer Summary">
 						</div>
 						<div class="bold-text">Customer Management =></div>
-						<div class="normal-text">Customer Summaryr</div>
+						<div class="normal-text">Customer Summary</div>
 					</div>
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myAddCustomer" name="service" value="Add Customer">
+							<input type="checkbox" id="Customer_Report" name="service"
+								value="Customer Report">
 						</div>
 						<div class="bold-text">Customer Management =></div>
 						<div class="normal-text">Customer Report</div>
@@ -212,20 +216,20 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myAddCustomer" name="service" value="Add Customer">
+							<input type="checkbox" id="Search_Customer" name="service"
+								value="Search Customer">
 						</div>
 						<div class="bold-text">Customer Management =></div>
 						<div class="normal-text">Search Customer</div>
 					</div>
-
-
 				</div>
 
 				<div class="user-box">
 					<label>Customer Shareholding</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myTransferShares" name="service" value="Add Customer">
+							<input type="checkbox" id="myTransferShares" name="service"
+								value="Add Customer">
 						</div>
 						<div class="bold-text">Customer Shareholding =></div>
 						<div class="normal-text">Transfer Shares</div>
@@ -233,7 +237,8 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myUnallotedShares" name="service" value="Unalloted Shares">
+							<input type="checkbox" id="myUnallotedShares" name="service"
+								value="Unalloted Shares">
 						</div>
 						<div class="bold-text">Customer Shareholding =></div>
 						<div class="normal-text">Unallotted Shares</div>
@@ -241,7 +246,8 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myAddCustomer" name="service" value="Add Customer">
+							<input type="checkbox" id="myAddCustomer" name="service"
+								value="Add Customer">
 						</div>
 						<div class="bold-text">Customer Shareholding =></div>
 						<div class="normal-text">Generate Share Certificate</div>
@@ -1410,7 +1416,7 @@ select {
 			<div class="row">
 				<div class="col-12 text-center mt-4" style="margin-center: 300px;">
 					<button type="button" id="saveAccessBtn"
-						class="btnStyle bg-warning" onclick="retriveINCheckBox()">Save</button>
+						class="btnStyle bg-warning" onclick="submitUserServiceMap()">Save</button>
 
 				</div>
 			</div>
@@ -1421,8 +1427,11 @@ select {
 
 
 	</main>
-	<script src="./js/adminscript.js"></script>
+	<script src="./js/access.js"></script>
 	<script src="./js/preferences/userMenuAccess.js"></script>
+	<script src="./js/adminscript.js"></script>
+	<script src="./js/loadSidebar.js"></script>
+	<script src="./js/login.js"></script>
 
 	<script type="text/javascript">
         // Fetch session data from JSP and pass it to JavaScript

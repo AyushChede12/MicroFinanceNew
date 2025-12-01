@@ -39,30 +39,88 @@
 });
 */
 $(document).ready(function() {
-	$("#form1").submit(function(e) {
-		e.preventDefault();
+	$("#loginForm").submit(function(e) {
+		e.preventDefault(); // Prevent normal form submission
 
-		let data = {
-			userId: $("#userName").val(),
-			password: $("#password").val()
-		};
+		const userName = $("#userName").val();
+		const password = $("#password").val();
 
 		$.ajax({
-			url: "loginValidate",
 			type: "POST",
+			url: "loginValidate",
 			contentType: "application/json",
-			data: JSON.stringify(data),
-			success: function(res) {
-				if (res.status === "success") {
-					window.location.href = "/openDashboard";
+			data: JSON.stringify({
+				userId: userName, // match your backend UserCreation field
+				password: password
+			}),
+			success: function(response) {
+				if (response.status === "success") {
+					alert("Login Successful!");
+
+					// Redirect to dashboard
+					window.location.href = response.redirectUrl;
 				} else {
-					$("#errorMsg").html(res.message);
+					alert(response.message);
 				}
 			},
 			error: function() {
-				$("#errorMsg").html("Something went wrong, try again!");
+				alert("Server error during login!");
 			}
 		});
 	});
-
 });
+
+
+$(document).ready(function() {
+	loadSidebar();
+});
+
+function loadSidebar() {
+	$.ajax({
+		type: "GET",
+		url: "getUserServices", // fetch services for logged-in user
+		success: function(services) {
+			if (!services || services.length === 0) return;
+
+			// Hide all parent and child menus initially
+			$(".sidebar-nav > li.nav-item").hide();
+			$(".nav-content li").hide();
+
+			// Store parent modules that have at least one child allowed
+			const parentsToShow = new Set();
+
+			services.forEach(item => {
+				// Check if item contains parent info (assuming format: ModuleName:ChildName)
+				// If your backend stores module separately, use that
+				const childId = item.replace(/\s+/g, "_").trim();
+				const li = $("#" + childId);
+
+				if (li.length) {
+					li.show(); // show child
+
+					// Find parent UL and LI
+					const parentUl = li.closest("ul.collapse");
+					if (parentUl.length) {
+						parentUl.addClass("show"); // expand parent UL
+						parentUl.prev("a").removeClass("collapsed"); // expand arrow
+						parentsToShow.add(parentUl.closest("li.nav-item").attr("id"));
+					}
+				}
+			});
+
+			// Show only parent modules that have visible children
+			parentsToShow.forEach(parentId => {
+				$("#" + parentId).show();
+			});
+		},
+		error: function() {
+			console.log("Failed to load user services");
+		}
+	});
+}
+
+
+
+
+
+
