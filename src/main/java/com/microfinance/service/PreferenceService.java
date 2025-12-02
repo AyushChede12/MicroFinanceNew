@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -97,8 +96,6 @@ public class PreferenceService {
 
 	@Value("${upload.directory}")
 	private String uploadDirectory;
-
-	private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 	// Branch Module
 	public BranchModule saveBranchModule(BranchModule branchModule) {
@@ -585,23 +582,7 @@ public class PreferenceService {
 //		return userCreationRepo.findAll();
 //	}
 
-	@Transactional
-	public UserCreations saveUserCreation(UserCreations userCreations, List<UserMenuAccess> accessList) {
-		// hash password before saving
-		if (userCreations.getPassword() != null) {
-			userCreations.setPassword(passwordEncoder.encode(userCreations.getPassword()));
-		}
-
-		// save user first so it gets an id
-		UserCreations savedUser = userCreationRepo.save(userCreations);
-
-		// link each access to savedUser and save
-		accessList.forEach(a -> a.setUserCreations(savedUser));
-		userMenuAccessRepo.saveAll(accessList);
-
-		return savedUser;
-	}
-
+	
 	public List<UserMenuAccess> getUserMenuAccess(String customerId) {
 		return userMenuAccessRepo.findByUserCreations_CustomerId(customerId);
 	}

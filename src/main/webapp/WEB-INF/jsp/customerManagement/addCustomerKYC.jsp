@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> -->
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> -->
 <!DOCTYPE html>
 <html>
 
@@ -294,26 +294,51 @@ pageEncoding="ISO-8859-1"%> -->
 		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-		$(document).ready(
-				function() {
+$(document).ready(function () {
 
-					// Convert all labels inside #formid to uppercase
-					$("#formid label").each(function() {
-						$(this).text($(this).text().toUpperCase());
-					});
+    // -------------------------------
+    // 1️⃣ LABELS UPPERCASE
+    // -------------------------------
+     $("#formid label").each(function () {
+        // Only proceed if label has no child elements (pure text)
+        if ($(this).children().length === 0) {
+            $(this).text($(this).text().toUpperCase());
+        }
+    });
 
-					// Convert all placeholders inside #formid to uppercase
-					$("#formid input, #formid textarea, #formid select").each(
-							function() {
-								let ph = $(this).attr("placeholder");
-								if (ph) {
-									$(this).attr("placeholder",
-											ph.toUpperCase());
-								}
-							});
+    // -------------------------------
+    // 2️⃣ PLACEHOLDERS UPPERCASE
+    // -------------------------------
+    $("#formid input[type='text'], #formid textarea").each(function () {
+        let ph = $(this).attr("placeholder");
+        if (ph) $(this).attr("placeholder", ph.toUpperCase());
+    });
 
-				});
-	</script>
+    // -------------------------------
+    // 3️⃣ FUNCTION → Convert ALL dropdown options to UPPERCASE
+    // -------------------------------
+    function convertDropdownOptions() {
+        $("#formid select option").each(function () {
+            let text = $(this).text();
+            let value = $(this).val();
+
+            if (text) $(this).text(text.toUpperCase());
+            if (value) $(this).val(value.toUpperCase());
+        });
+    }
+
+    // Run once on page load
+    convertDropdownOptions();
+
+    // -------------------------------
+    // 4️⃣ ON EVERY AJAX SUCCESS → convert again (backend loaded data)
+    // -------------------------------
+    $(document).ajaxSuccess(function () {
+        convertDropdownOptions();
+    });
+
+});
+</script>
 
 </body>
 

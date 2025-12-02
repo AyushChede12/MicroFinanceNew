@@ -9,6 +9,7 @@ import com.microfinance.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    User findByUsername(String username); // fetch by username only
+	User findByUsername(String username); // fetch by username only
 
-    Optional<User> findByUsernameAndPassword(String username, String password);}
+	Optional<User> findByUsernameAndPassword(String username, String password);
+}

@@ -4,40 +4,24 @@ import com.microfinance.model.User;
 import com.microfinance.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.*;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService {
 
-    @Autowired
-    private UserRepository repo;
+	@Autowired
+	private UserRepository repo;
 
-    public User save(User user) {
-        return repo.save(user);
-    }
+	public User save(User user) {
+		return repo.save(user);
+	}
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = repo.findByUsername(username);
-        if (user == null) throw new UsernameNotFoundException("User not found");
+	public User validateUser(String username, String password) {
+		// Fetch user by username & password
+		return repo.findByUsernameAndPassword(username, password).orElse(null);
+	}
 
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        for (String role : user.getRoles()) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
-        }
-
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-    }
-
-    public User validateUser(String username, String password) {
-        // Fetch user by username & password
-        return repo.findByUsernameAndPassword(username, password)
-                .orElse(null);
-    }
-    
-  
 }

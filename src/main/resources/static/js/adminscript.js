@@ -33,7 +33,7 @@ $(document).ready(function() {
 				for (let i = 0; i < branchList.length; i++) {
 					let branch = branchList[i];
 					let branchNameUpper = branch.branchName.toUpperCase(); 
-					let option = `<option value="${branchNameUpper}">${branchNameUpper}</option>`;
+					let option = `<option value="${branch.branchName}">${branch.branchName}</option>`;
 					$("#branchName").append(option);
 
 					$("#closingbranchName").append(option);
