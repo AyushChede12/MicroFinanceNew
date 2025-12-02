@@ -165,10 +165,28 @@ function loadSidebar(session) {
 	// Hide everything first
 	$(".sidebar-nav li, .nav-content li").hide();
 
+	// PREFERENCES (NEW)
+	if (session.includes("Company Administration")) $("#myCompanyAdministration").show();
+	if (session.includes("Financial Year")) $("#myFinancialYear").show();
+	if (session.includes("Create Branch")) $("#myCreateBranch").show();
+	if (session.includes("Relative Module")) $("#myRelativeModule").show();
+	if (session.includes("Category/Cast Module")) $("#myCategoryCastModule").show();
+	if (session.includes("Executive Promoter")) $("#myExecutivePromoter").show();
+	if (session.includes("User Creation")) $("#myUserCreation").show();
+	if (session.includes("User Menu Access")) $("#myUserMenuAccess").show();
+
 	// CUSTOMER MANAGEMENT (NEW)
 	if (session.includes("Add Customer")) $("#myAddCustomerMenu").show();
 	if (session.includes("Add Customer KYC")) $("#myAddCustomerKycMenu").show();
 	if (session.includes("Customer Summary")) $("#myCustomerSummaryMenu").show();
 	if (session.includes("Customer Report")) $("#myCustomerReportMenu").show();
 	if (session.includes("Search Customer")) $("#mySearchCustomerMenu").show();
+
+	// CUSTOMER SHAREHOLDING (NEW)
+	if (session.includes("Transfer Sharesr")) $("#myTransferShares").show();
+	if (session.includes("Unallotted Shares")) $("#myUnallotedShares").show();
+	if (session.includes("Generate Share Certificate ")) $("#myAddCustomer").show();
+	if (session.includes("Regenerate DNO")) $("#myRegenerateDNO").show();
+
+
 }

@@ -43,38 +43,38 @@
 							style="font-family: 'Poppins', sans-serif">Financial Year</span>
 					</a></li>
 
-					<li id="Create_Branch"><a href="CreateBranch"> <i class="bi bi-circle"></i> <span
+					<li id="Create_Branch"><a href="createBranch"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Create Branch</span>
 					</a></li>
 
-					<li id="Bank_Module"><a href="BankModule"> <i class="bi bi-circle"></i> <span
+					<li id="Bank_Module"><a href="bankModule"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Bank Module</span>
 					</a></li>
 
-					<li id="Relative_Module"><a href="RelativeModule"> <i class="bi bi-circle"></i>
+					<li id="Relative_Module"><a href="relativeModule"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Relative
 								Module</span>
 					</a></li>
 
-					<li id="Category/Caste_Module"><a href="Category/Caste_Module"> <i class="bi bi-circle"></i>
+					<li id="Category/Caste_Module"><a href="categoryModule"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Category/Caste
 								Module</span>
 					</a></li>
 
-					<li id="Code_Module"><a href="CodeModule"> <i class="bi bi-circle"></i> <span
+					<li id="Code_Module"><a href="codeModule"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Code Module</span>
 					</a></li>
 
-					<li id="Executive/Founder"><a href="Executive/Founder"> <i class="bi bi-circle"></i>
+					<li id="Executive/Founder"><a href="executivePromoter"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Executive/Founder</span>
 					</a></li>
 
-					<li id="User_Creatio"><a href="UserCreatio"> <i class="bi bi-circle"></i>
+					<li id="User_Creatio"><a href="customerCreation"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">User
 								Creation</span>
 					</a></li>
 
-					<li id="User_Menu_Access"><a href="UserMenuAccess"> <i class="bi bi-circle"></i>
+					<li id="User_Menu_Access"><a href="customerMenuAccess"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">User Menu
 								Access</span>
 					</a></li>

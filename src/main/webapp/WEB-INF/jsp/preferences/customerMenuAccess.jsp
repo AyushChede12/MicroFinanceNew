@@ -176,11 +176,96 @@ select {
 
 				<!-- Member Section -->
 				<div class="user-box">
+					<label>Preferences</label>
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myCompanyAdministration" name="service"
+								value="Company Administration">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Company Administration</div>
+					</div>
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myFinancialYear" name="service"
+								value="Financial Year">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Financial Year</div>
+					</div>
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myCreateBranch" name="service"
+								value="Create Branch">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Create Branch</div>
+					</div>
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myRelativeModule" name="service"
+								value="Relative Module">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Relative Module</div>
+					</div>
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myCategoryCastModule" name="service"
+								value="Category Cast Module">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Category/Cast Module</div>
+					</div>
+					
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="mySearchCustomer" name="service"
+								value="Caste Module">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Caste Module</div>
+					</div>
+					
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myExecutivePromoter" name="service"
+								value="Executive Promoter">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">Executive Promoter</div>
+					</div>
+					
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myUserCreation" name="service"
+								value="User Creation">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">User Creation</div>
+					</div>
+					
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox" id="myUserMenuAccess" name="service"
+								value="User Menu Access">
+						</div>
+						<div class="bold-text">Preferences =></div>
+						<div class="normal-text">User Menu Access</div>
+					</div>
+				</div>
+				
+				<div class="user-box">
 					<label>Customer Management</label>
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="Add_Customer" name="service"
+							<input type="checkbox" id="myAddCustomerMenu" name="service"
 								value="Add Customer">
 						</div>
 						<div class="bold-text">Customer Management =></div>
@@ -189,7 +274,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="Add_Customer_KYC" name="service"
+							<input type="checkbox" id="myAddCustomerKycMenu" name="service"
 								value="Add Customer KYC">
 						</div>
 						<div class="bold-text">Customer Management =></div>
@@ -198,7 +283,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="Customer_Summary" name="service"
+							<input type="checkbox" id="myCustomerSummaryMenu" name="service"
 								value="Customer Summary">
 						</div>
 						<div class="bold-text">Customer Management =></div>
@@ -207,7 +292,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="Customer_Report" name="service"
+							<input type="checkbox" id="myCustomerReportMenu" name="service"
 								value="Customer Report">
 						</div>
 						<div class="bold-text">Customer Management =></div>
@@ -216,7 +301,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="Search_Customer" name="service"
+							<input type="checkbox" id="mySearchCustomerMenu" name="service"
 								value="Search Customer">
 						</div>
 						<div class="bold-text">Customer Management =></div>
@@ -229,7 +314,7 @@ select {
 					<div class="member-row">
 						<div class="checkbox-col">
 							<input type="checkbox" id="myTransferShares" name="service"
-								value="Add Customer">
+								value="Transfer Sharesr">
 						</div>
 						<div class="bold-text">Customer Shareholding =></div>
 						<div class="normal-text">Transfer Shares</div>
@@ -246,8 +331,8 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myAddCustomer" name="service"
-								value="Add Customer">
+							<input type="checkbox" id="myGenerateShareCertificate" name="service"
+								value="Generate Share Certificate">
 						</div>
 						<div class="bold-text">Customer Shareholding =></div>
 						<div class="normal-text">Generate Share Certificate</div>
@@ -255,7 +340,8 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRegenerateDNO" name="service"
+							value="Regenerate DNO">
 						</div>
 						<div class="bold-text">Customer Shareholding =></div>
 						<div class="normal-text">Regenerate DNO</div>
@@ -267,7 +353,7 @@ select {
 				<div class="user-box">
 					<label>Account Management</label>
 					<div class="member-row">
-						<div class="checkbox-col">
+						<div class="checkbox-col" id="myLedgerAccountMaster" name="service">
 							<input type="checkbox">
 						</div>
 						<div class="bold-text">Account Management =></div>
@@ -276,7 +362,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myOutgoingPaymentEntry" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Outgoing Payment Entry</div>
@@ -284,7 +370,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIncomingReceiptEntry" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Incoming Receipt Entry</div>
@@ -292,7 +378,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myBank/CashTransfer" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Bank / Cash Transfer</div>
@@ -300,7 +386,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myManualJournalEntry" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Manual Journal Entry</div>
@@ -308,7 +394,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIncentivePayment" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Incentive Payment</div>
@@ -316,15 +402,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
-						</div>
-						<div class="bold-text">Account Management =></div>
-						<div class="normal-text">Incentive Payment</div>
-					</div>
-
-					<div class="member-row">
-						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myMISInterestPayment" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">MIS Interest Payment</div>
@@ -332,7 +410,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myChequeClearingProcessing" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Cheque Clearing Processing</div>
@@ -340,7 +418,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myMandateDepositToBank" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Mandate Deposit To Bank</div>
@@ -348,7 +426,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myBankStatement" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Bank Statement</div>
@@ -356,7 +434,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myCashBook" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Cash Book</div>
@@ -364,7 +442,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFundsTransferRegister" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Funds Transfer Register</div>
@@ -372,7 +450,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myDailyTransactionBook" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Daily Transaction Book</div>
@@ -380,7 +458,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLedgerSummaryReport" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Ledger Summary Report</div>
@@ -388,7 +466,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myJournalEntryReport" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Journal Entry Report</div>
@@ -396,7 +474,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myTrialBalanceReport" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Trial Balance Report</div>
@@ -404,7 +482,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myP/LStatement" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">P/L Statement</div>
@@ -412,7 +490,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myBalanceSheet" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Balance Sheet</div>
@@ -420,7 +498,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInterBranchCashTransfer" name="service">
 						</div>
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Inter Branch Cash Transfer</div>
@@ -434,7 +512,7 @@ select {
 					<label>Customer Savings</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsSchemeCatalog" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Savings Scheme Catalog</div>
@@ -442,7 +520,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myCreateSavingsAccount" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Create Savings Account</div>
@@ -450,7 +528,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingAccountActivity" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Saving Account Activity</div>
@@ -458,7 +536,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsAccountFundsTransfer" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Savings Account Funds Transfer</div>
@@ -466,7 +544,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsAccountInterestTransfer" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Savings Account Interest Transfer</div>
@@ -474,7 +552,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsRecordBook" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Savings Record Book</div>
@@ -482,7 +560,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myCustomerSavingStatement" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Customer Savings Statement</div>
@@ -490,7 +568,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox"id="mySavingAccountCloser" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Saving Account Closer</div>
@@ -498,7 +576,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsAccountInquiry" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Savings Account Inquiry</div>
@@ -506,7 +584,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox"id="mySMSServiceFee" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">SMS Service Fee</div>
@@ -514,7 +592,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myAccountMaintenanceCharges" name="service">
 						</div>
 						<div class="bold-text">Customer Savings =></div>
 						<div class="normal-text">Account Maintenance Charges</div>
@@ -526,7 +604,7 @@ select {
 					<label>Policy Management</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myPlanManagement" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Plan Management</div>
@@ -534,7 +612,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myAddNewInvestment" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Add New Investment</div>
@@ -542,7 +620,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox"id="myPolicyRenewalFee" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Policy Renewal Fee</div>
@@ -550,7 +628,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="DailyPremiumRenewal" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Daily Premium Renewal</div>
@@ -558,7 +636,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFlexiblePremiumRenewal" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Flexible Premium Renewal</div>
@@ -566,7 +644,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInstallmentRecordBook" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Installment Record Book</div>
@@ -574,7 +652,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInvestmentTransactionSlip" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Investment Transaction Slip</div>
@@ -582,7 +660,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRecurringPaymentReceipt" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Recurring Payment Receipt</div>
@@ -590,7 +668,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIssueCertificate" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Issue Certificate</div>
@@ -598,7 +676,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myReIssueCertificate" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">ReIssue Certificate</div>
@@ -606,7 +684,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox"id="myInterestDetails" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Interest Details</div>
@@ -614,7 +692,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInterestPayable" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Interest Payable</div>
@@ -622,7 +700,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInvestmentDataSearch" name="service">
 						</div>
 						<div class="bold-text">Policy Management =></div>
 						<div class="normal-text">Investment Data Search</div>
@@ -633,7 +711,7 @@ select {
 					<label>Loan Management</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanSchemeCatalog" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Loan Scheme Catalog</div>
@@ -641,7 +719,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myEMI&LoanCalculator" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">EMI & Loan Calculator</div>
@@ -649,7 +727,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myNewLoanApplication" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">New Loan Application</div>
@@ -657,7 +735,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanApproval" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Loan Approval</div>
@@ -665,7 +743,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanPayment" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Loan Payment</div>
@@ -673,7 +751,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRegularInstallmentPayment" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Regular Installment Payment</div>
@@ -681,7 +759,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIrregularInstallmentPayment" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Irregular Installment Payment</div>
@@ -689,7 +767,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRegularLoanStatement" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Regular Loan Statement</div>
@@ -697,7 +775,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIrregularLoanStatement" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Irregular Loan Statement</div>
@@ -705,7 +783,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myGenerateLoanDocuments" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Generate Loan Documents</div>
@@ -713,7 +791,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myEarlyLoanClosure" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Early Loan Closure</div>
@@ -721,7 +799,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySettledLoanRecords" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Settled Loan Records</div>
@@ -729,7 +807,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myGenerateNOCCertificate" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Generate NOC Certificate</div>
@@ -737,7 +815,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySearchLoanAccounts" name="service">
 						</div>
 						<div class="bold-text">Loan Management =></div>
 						<div class="normal-text">Search Loan Accounts</div>
@@ -748,7 +826,7 @@ select {
 					<label>Joint Liability Loan</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanSchemeCatalog" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Loan Scheme Catalog</div>
@@ -756,7 +834,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myEMI&LoanCalculator" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">EMI & Loan Calculator</div>
@@ -764,7 +842,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myNewLoanApplication" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">New Loan Application</div>
@@ -772,7 +850,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanApproval" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Loan Approval</div>
@@ -780,7 +858,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanPayment" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Loan Payment</div>
@@ -788,7 +866,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRegularInstallmentPayment" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Regular Installment Payment</div>
@@ -796,7 +874,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIrregularInstallmentPayment" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Irregular Installment Payment</div>
@@ -804,7 +882,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRegularLoanStatement" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Regular Loan Statement</div>
@@ -812,7 +890,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIrregularLoanStatement" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Irregular Loan Statement</div>
@@ -820,7 +898,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myGenerateLoanDocuments" name="service">
 						</div>
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Generate Loan Documents</div>
@@ -832,7 +910,7 @@ select {
 					<label>Request Approvals</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveNewClientRequest" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve New Client Request</div>
@@ -840,7 +918,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveShareTransactions" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Share Transactions</div>
@@ -848,7 +926,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveFinanceOnboarding" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Finance Onboarding</div>
@@ -856,7 +934,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApprovePolicy" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Policy</div>
@@ -864,7 +942,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveRD" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve RD</div>
@@ -872,7 +950,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveRecurringDeposits" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Recurring Deposits</div>
@@ -880,7 +958,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveSavingTransactions" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Saving Transactions</div>
@@ -888,7 +966,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox"id="myApproveSavingsAccountTransfers" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Savings Account Transfers</div>
@@ -896,7 +974,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveRegularEMIPayments" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Regular EMI Payments</div>
@@ -904,7 +982,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveIrregularEMIPayments" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Irregular EMI Payments</div>
@@ -912,7 +990,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveManualPaymentEntries" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Manual Payment Entries</div>
@@ -920,7 +998,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveMaturityApplications" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Maturity Applications</div>
@@ -928,7 +1006,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myDeleteMaturityApplicationsRequest" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Delete Maturity Applications
@@ -937,7 +1015,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApproveInter-BranchCashTransfer" name="service">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
 						<div class="normal-text">Approve Inter-Branch Cash Transfer</div>
@@ -949,7 +1027,7 @@ select {
 					<label>Data Correction</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myCustomerDataUpdate" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Customer Data Update</div>
@@ -957,7 +1035,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myShareholdingAdjustment" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Shareholding Adjustment</div>
@@ -965,7 +1043,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFinancialEntryCorrection" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Financial Entry Correction</div>
@@ -973,7 +1051,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myPolicyDetailsUpdate" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Policy Details Update</div>
@@ -981,7 +1059,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRenewalDataCorrection" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Renewal Data Correction</div>
@@ -989,7 +1067,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myDailyRenewalUpdate" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Daily Renewal Update</div>
@@ -997,7 +1075,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFlexibleTransactionRemoval" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Flexible Transaction Removal</div>
@@ -1005,7 +1083,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsAccountCorrection" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Savings Account Correction</div>
@@ -1013,7 +1091,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySavingsTransactionRemoval" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Savings Transaction Removal</div>
@@ -1021,7 +1099,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanAccountCorrection" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Loan Account Correction</div>
@@ -1029,7 +1107,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myJointLiabilityUpdate" name="service">
 						</div>
 						<div class="bold-text">Data Correction =></div>
 						<div class="normal-text">Joint Liability Update</div>
@@ -1041,7 +1119,7 @@ select {
 					<label>Maturity Management</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myMaturitySchemeMaster" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Maturity Scheme Master</div>
@@ -1049,7 +1127,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox"   id="myApplyForMaturity" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Apply For Maturity</div>
@@ -1057,7 +1135,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFullMaturityPayment" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Full Maturity Payment</div>
@@ -1065,7 +1143,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myPartialMaturityPayment" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Partial Maturity Payment</div>
@@ -1073,7 +1151,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myMaturityApplicationStatus" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Maturity Application Status</div>
@@ -1081,7 +1159,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApprovedStatus" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Approved Status</div>
@@ -1089,7 +1167,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFullPaymentStatus" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Full Payment Status</div>
@@ -1097,7 +1175,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myPartialPaymentStatus" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Partial Payment Status</div>
@@ -1105,7 +1183,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myPrintMaturityReceipt" name="service">
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Print Maturity Receipt</div>
@@ -1117,7 +1195,7 @@ select {
 					<label>Incentive Management</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIncentiveSchemeMaster" name="service">
 						</div>
 						<div class="bold-text">Incentive Management =></div>
 						<div class="normal-text">Incentive Scheme Master</div>
@@ -1125,7 +1203,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myGenerateIncentivePayments" name="service">
 						</div>
 						<div class="bold-text">Incentive Management =></div>
 						<div class="normal-text">Generate Incentive Payments</div>
@@ -1133,7 +1211,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIncentivePaymentDetails" name="service">
 						</div>
 						<div class="bold-text">Incentive Management =></div>
 						<div class="normal-text">Incentive Payment Details</div>
@@ -1141,7 +1219,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIncentiveSummaryReport" name="service">
 						</div>
 						<div class="bold-text">Incentive Management =></div>
 						<div class="normal-text">Incentive Summary Report</div>
@@ -1153,7 +1231,7 @@ select {
 					<label>Financial Consultant</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myAddFinancialConsultant" name="service">
 						</div>
 						<div class="bold-text">Financial Consultant =></div>
 						<div class="normal-text">Add Financial Consultant</div>
@@ -1161,7 +1239,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFinancialConsultantHierarchy" name="service">
 						</div>
 						<div class="bold-text">Financial Consultant =></div>
 						<div class="normal-text">Financial Consultant Hierarchy</div>
@@ -1169,7 +1247,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myConsultantDownlineView" name="service">
 						</div>
 						<div class="bold-text">Financial Consultant =></div>
 						<div class="normal-text">Consultant Downline View</div>
@@ -1177,7 +1255,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myConsultantPromotionManagement" name="service">
 						</div>
 						<div class="bold-text">Financial Consultant =></div>
 						<div class="normal-text">Consultant Promotion Management</div>
@@ -1185,7 +1263,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myConsultantIDCardGenerator" name="service">
 						</div>
 						<div class="bold-text">Financial Consultant =></div>
 						<div class="normal-text">Consultant ID Card Generator</div>
@@ -1197,7 +1275,7 @@ select {
 					<label>Team Management</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myManageDesignations" name="service">
 						</div>
 						<div class="bold-text">Team Management =></div>
 						<div class="normal-text">Manage Designations</div>
@@ -1205,7 +1283,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myManageDepartments" name="service">
 						</div>
 						<div class="bold-text">Team Management =></div>
 						<div class="normal-text">Manage Departments</div>
@@ -1213,7 +1291,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myAddTeamMember" name="service">
 						</div>
 						<div class="bold-text">Team Management =></div>
 						<div class="normal-text">Add Team Member</div>
@@ -1221,7 +1299,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myGenerateTeamMemberIDCard" name="service">
 						</div>
 						<div class="bold-text">Team Management =></div>
 						<div class="normal-text">Generate Team Member ID Card</div>
@@ -1229,7 +1307,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="mySearchTeamMember" name="service">
 						</div>
 						<div class="bold-text">Team Management =></div>
 						<div class="normal-text">Search Team Member</div>
@@ -1241,7 +1319,7 @@ select {
 					<label>Reports & Analytics</label>
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInvestmentTransactionReport name="service"">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Investment Transaction Report</div>
@@ -1249,7 +1327,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInvestmentSummaryStatement" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Investment Summary Statement</div>
@@ -1257,7 +1335,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFinancialReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Financial Report</div>
@@ -1265,7 +1343,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myFinancialConsultantTeamCollectionSummary" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Financial Consultant Team
@@ -1274,7 +1352,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myChequeTransactionReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Cheque Transaction Report</div>
@@ -1282,7 +1360,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myIncentivePaymentSummary" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Incentive Payment Summary</div>
@@ -1290,7 +1368,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myRecurringInstallmentDueReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Recurring Installment Due Report</div>
@@ -1298,7 +1376,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myUnapprovedLoanApplications" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Unapproved Loan Applications</div>
@@ -1306,7 +1384,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myApprovedLoanReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Approved Loan Report</div>
@@ -1314,7 +1392,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanRepaymentReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Loan Repayment Report</div>
@@ -1322,7 +1400,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myUpcomingEMIDueReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Upcoming EMI Due Report</div>
@@ -1330,7 +1408,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myOverdueRepaymentAnalysis" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Overdue Repayment Analysis</div>
@@ -1338,7 +1416,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanInstallmentPendingReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Loan Installment Pending Report</div>
@@ -1346,7 +1424,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myEMICollectionSummary" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">EMI Collection Summary</div>
@@ -1354,7 +1432,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myEMIIrregularityStatement" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">EMI Irregularity Statement</div>
@@ -1362,7 +1440,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myLoanConfirmationDocument" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Loan Confirmation Document</div>
@@ -1370,7 +1448,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myMaturityStatusReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Maturity Status Report</div>
@@ -1378,7 +1456,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myInvestmentProjectionReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Investment Projection Report</div>
@@ -1386,7 +1464,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myMaturityObligationReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Maturity Obligation Report</div>
@@ -1394,7 +1472,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myTaxDeductedatSourceSummary" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Tax Deducted at Source Summary</div>
@@ -1402,7 +1480,7 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox">
+							<input type="checkbox" id="myPolicyPerformanceReport" name="service">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Policy Performance Report</div>
