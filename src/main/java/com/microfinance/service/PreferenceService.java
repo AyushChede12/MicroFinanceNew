@@ -725,4 +725,9 @@ public class PreferenceService {
 		return true;
 	}
 
+	public List<CategoryModule> findCasteByCategory(String category) {
+		// TODO Auto-generated method stub
+		return categoryModuleRepo.findByCategory(category);
+	}
+
 }

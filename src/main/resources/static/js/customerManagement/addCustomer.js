@@ -227,23 +227,23 @@ function drivingpreview() {
 }
 
 function loadCustomerTable() {
-    $.ajax({
-        url: "api/customermanagement/getAllCustomer",
-        type: "GET",
-        success: function(data) {
-            let tbody = $("#customerTableBody");
-            tbody.empty();
+	$.ajax({
+		url: "api/customermanagement/getAllCustomer",
+		type: "GET",
+		success: function(data) {
+			let tbody = $("#customerTableBody");
+			tbody.empty();
 
-            data.forEach((cust, idx) => {
+			data.forEach((cust, idx) => {
 
-                // 🔹 Build FULL NAME from first, middle, last
-                const fullName = [
-                    cust.firstName,
-                    cust.middleName,
-                    cust.lastName
-                ].filter(Boolean).join(" ");
+				// 🔹 Build FULL NAME from first, middle, last
+				const fullName = [
+					cust.firstName,
+					cust.middleName,
+					cust.lastName
+				].filter(Boolean).join(" ");
 
-                tbody.append(`
+				tbody.append(`
                     <tr>
                         <td>${idx + 1}</td>
                         <td>${cust.memberCode}</td>
@@ -255,12 +255,12 @@ function loadCustomerTable() {
                         <td>${cust.dob}</td>
                     </tr>
                 `);
-            });
-        },
-        error: function(err) {
-            console.log("Error loading table:", err);
-        }
-    });
+			});
+		},
+		error: function(err) {
+			console.log("Error loading table:", err);
+		}
+	});
 }
 
 
@@ -717,4 +717,28 @@ $(document).ready(function() {
 		}
 	}).trigger('change'); // trigger on load
 	// trigger on load
+
+	$.ajax({
+		url: 'api/preference/getAllCategoryModule',
+		method: "GET",
+		success: function(response) {
+			if (response.status==='FOUND') {
+				console.log("Fetched Category:", response.data);
+				response.data.forEach(function(category) {
+					$('#category').append(
+						$('<option>', {
+							value: category.category,  // What will be saved to DB
+							text: category.category,   // What user sees
+							'data-id': category.stateId // Optional: internal use
+						})
+					);
+				});
+			} else {
+				console.warn("No Category data available.");
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching Categories:", err);
+		}
+	});
 });

@@ -46,7 +46,7 @@ pageEncoding="ISO-8859-1"%> -->
 					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-people-fill"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Add Customer</li>
+					<li class="breadcrumb-item action">ADD CUSTOMER</li>
 				</ol>
 			</nav>
 		</div>
@@ -56,7 +56,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Customer Details</li>
+							<li class="breadcrumb-item action">CUSTOMER DETAILS</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -232,6 +232,28 @@ pageEncoding="ISO-8859-1"%> -->
 								<label for="">Address</label>
 								<textarea name="customerAddress" id="customerAddress"
 									style="border: 1px solid rgb(224, 224, 224); border-radius: 5px; outline: none; padding: 5px; font-size: 12px;"></textarea>
+							</div>
+						</div>
+						
+						<div class="col-lg-3 mb-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">CATEGORY</label> <select id="category" name="category"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Category</option>
+
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-lg-3 mb-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">CASTE</label> <select id="caste" name="caste"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
+									<option value="">Select Caste</option>
+
+								</select>
 							</div>
 						</div>
 
@@ -473,7 +495,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Nominee Details</li>
+							<li class="breadcrumb-item action">NOMINEE DETAILS</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -614,7 +636,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div class="mt-5">
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Fees Details</li>
+							<li class="breadcrumb-item action">FEES DETAILS</li>
 						</ol>
 					</nav>
 					<!-- Always Visible Fields -->
