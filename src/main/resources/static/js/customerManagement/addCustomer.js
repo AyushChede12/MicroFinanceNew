@@ -23,6 +23,12 @@ $(document).ready(function() {
 
 
 	$('#saveBtn').click(function(event) {
+		var firstName = $('#firstName').val();
+		alert(firstName);
+		var middleName = $('#middleName').val();
+		alert(middleName);
+		var lastName = $('#lastName').val();
+		alert(lastName);
 		event.preventDefault();
 
 		var formData = new FormData();
@@ -242,18 +248,17 @@ function loadCustomerTable() {
 					cust.middleName,
 					cust.lastName
 				].filter(Boolean).join(" ");
-
 				tbody.append(`
-                    <tr>
-                        <td>${idx + 1}</td>
-                        <td>${cust.memberCode}</td>
-                        <td>${fullName}</td>   <!-- 👈 customer full name here -->
-                        <td>${cust.contactNo}</td>
-                        <td>${cust.aadharNo}</td>
-                        <td>${cust.district}</td>
-                        <td>${cust.branchName}</td>
-                        <td>${cust.dob}</td>
-                    </tr>
+					<tr>
+					                        <td>${(idx + 1).toString().toUpperCase()}</td>
+					                        <td>${(cust.memberCode || "").toUpperCase()}</td>
+					                        <td>${fullName}</td>
+					                        <td>${(cust.contactNo || "").toUpperCase()}</td>
+					                        <td>${(cust.aadharNo || "").toUpperCase()}</td>
+					                        <td>${(cust.district || "").toUpperCase()}</td>
+					                        <td>${(cust.branchName || "").toUpperCase()}</td>
+					                        <td>${(cust.dob || "").toUpperCase()}</td>
+					                    </tr>
                 `);
 			});
 		},
@@ -722,7 +727,7 @@ $(document).ready(function() {
 		url: 'api/preference/getAllCategoryModule',
 		method: "GET",
 		success: function(response) {
-			if (response.status==='FOUND') {
+			if (response.status === 'FOUND') {
 				console.log("Fetched Category:", response.data);
 				response.data.forEach(function(category) {
 					$('#category').append(
@@ -741,4 +746,82 @@ $(document).ready(function() {
 			console.error("Error fetching Categories:", err);
 		}
 	});
+
+	$('#category').on('change', function() {
+		const selectedCategory = $("#category").val();
+		$('#caste').empty().append('<option value="">SELECT CASTE</option>');
+
+		if (selectedCategory) {
+			$.ajax({
+				url: 'api/preference/getAllCasteByCategory',
+				method: 'GET',
+				data: { category: selectedCategory },  // ✅ Now correct ID passed
+				success: function(response) {
+					console.log("Fetched caste:", response);
+					const casteList = response.data;
+					casteList.forEach(function(caste) {
+						$('#caste').append(
+							$('<option>', {
+								value: caste.caste,
+								text: caste.caste
+							})
+						);
+					});
+				},
+				error: function(err) {
+					console.error("Error fetching caste:", err);
+				}
+			});
+		}
+	});
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+	document.getElementById("memberFeesTable").style.display = "none";
+});
+
+document.getElementById("memberFees").addEventListener("click", function(event) {
+	event.stopPropagation();
+
+	let table = document.getElementById("memberFeesTable");
+	table.style.display = (table.style.display === "none" || table.style.display === "")
+		? "block" : "none";
+});
+
+
+document.getElementById("memberFeesTable").addEventListener("click", function(event) {
+	event.stopPropagation();
+});
+
+
+document.addEventListener("click", function() {
+	document.getElementById("memberFeesTable").style.display = "none";
+});
+
+
+
+function calcOpeningFees() {
+
+	let n2000 = (document.getElementById("qty2000").value || 0) * 2000;
+	let n500 = (document.getElementById("qty500").value || 0) * 500;
+	let n200 = (document.getElementById("qty200").value || 0) * 200;
+	let n100 = (document.getElementById("qty100").value || 0) * 100;
+	let n50 = (document.getElementById("qty50").value || 0) * 50;
+	let n20 = (document.getElementById("qty20").value || 0) * 20;
+	let n10 = (document.getElementById("qty10").value || 0) * 10;
+	let n5 = (document.getElementById("qty5").value || 0) * 5;
+
+	document.getElementById("res2000").innerText = n2000;
+	document.getElementById("res500").innerText = n500;
+	document.getElementById("res200").innerText = n200;
+	document.getElementById("res100").innerText = n100;
+	document.getElementById("res50").innerText = n50;
+	document.getElementById("res20").innerText = n20;
+	document.getElementById("res10").innerText = n10;
+	document.getElementById("res5").innerText = n5;
+
+	let total = n2000 + n500 + n200 + n100 + n50 + n20 + n10 + n5;
+
+	document.getElementById("totalFee").innerText = total;
+	document.getElementById("memberFees").value = total;
+}

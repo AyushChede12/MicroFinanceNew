@@ -71,7 +71,7 @@ pageEncoding="ISO-8859-1"%> -->
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Investment Transaction
-						Report1</li>
+						Report</li>
 				</ol>
 			</nav>
 		</div>

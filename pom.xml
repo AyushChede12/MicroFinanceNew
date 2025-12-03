@@ -50,22 +50,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 		<!-- JWT Authentication -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>  <!-- More stable for Java 8 -->
-		</dependency>
-
+		
 
 		<dependency>
 			<groupId>org.apache.taglibs</groupId>
@@ -107,10 +99,7 @@
 		</dependency>
 
 		<!-- BCrypt for Password Encoding -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-crypto</artifactId>
-		</dependency>
+		
 
 		<!-- Testing -->
 		<dependency>
