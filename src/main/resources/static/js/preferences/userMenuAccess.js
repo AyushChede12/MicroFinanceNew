@@ -72,7 +72,6 @@ function retriveINCheckBox() {
 function submitUserServiceMap() {
 
 	const userName = $("#userName").val();
-	alert(userName);
 	const selectedServices = [];
 	$("input[name='service']:checked").each(function() {
 		selectedServices.push($(this).val());
@@ -87,6 +86,7 @@ function submitUserServiceMap() {
 		},
 		success: function() {
 			alert("Access Updated Successfully!");
+			location.reload();
 		},
 		error: function() {
 			alert("Failed To Save Access!");
@@ -171,9 +171,9 @@ function loadSidebar(session) {
 	if (session.includes("Financial Year")) $("#myFinancialYear").show();
 	if (session.includes("Create Branch")) $("#myCreateBranch").show();
 	if (session.includes("Relative Module")) $("#myRelativeModule").show();
-	if (session.includes("Category/Cast Module")) $("#myCategoryCastModule").show();
-	if (session.includes("Caste Module")) $("#myCasteModule").show();
-	if (session.includes("Executive Promoter")) $("#myExecutivePromoter").show();
+	if (session.includes("Category Caste Module")) $("#myCategoryCasteModule").show();
+	if (session.includes("Code Module")) $("#myCode_Module").show();
+	if (session.includes("Executive Founder")) $("#myExecutiveFounder").show();
 	if (session.includes("User Creation")) $("#myUserCreation").show();
 	if (session.includes("User Menu Access")) $("#myUserMenuAccess").show();
 
@@ -185,8 +185,8 @@ function loadSidebar(session) {
 	if (session.includes("Search Customer")) $("#mySearchCustomerMenu").show();
 
 	// CUSTOMER SHAREHOLDING (NEW)
-	if (session.includes("Transfer Sharesr")) $("#myTransferShares").show();
-	if (session.includes("Unallotted Shares")) $("#myUnallotedShares").show();
+	if (session.includes("Transfer Shares")) $("#myTransferShares").show();
+	if (session.includes("Unallotted Shares")) $("#myUnallottedShares").show();
 	if (session.includes("Generate Share Certificate ")) $("#myAddCustomer").show();
 	if (session.includes("Regenerate DNO")) $("#myRegenerateDNO").show();
 
@@ -216,7 +216,7 @@ function loadSidebar(session) {
 	if (session.includes("Savings Scheme Catalog")) $("#mySavingsSchemeCatalog").show();
 	if (session.includes("Create Savings Account ")) $("#myCreateSavingsAccount").show();
 	if (session.includes("Saving Account Activity")) $("#mySavingAccountActivity").show();
-	if (session.includes("Savings Account Funds Transfer")) $("#mySavingsAccountFundsTransfer").show();
+	if (session.includes("Savings Account Fund Transfer")) $("#mySavingsAccountFundTransfer").show();
 	if (session.includes("Savings Account Interest Transfer")) $("#mySavingsAccountInterestTransfer").show();
 	if (session.includes("Savings Record Book")) $("#mySavingsRecordBook").show();
 	if (session.includes("Customer Savings Statement")) $("#myCustomerSavingStatement").show();
@@ -238,7 +238,7 @@ function loadSidebar(session) {
 	if (session.includes("ReIssue Certificate")) $("#myReIssueCertificate").show();
 	if (session.includes("Interest Details")) $("#myInterestDetails").show();
 	if (session.includes("Interest Payable")) $("#myInterestPayable").show();
-	if (session.includes("Investment Data Search")) $("#myInvestmentDataSearch").show();
+	if (session.includes("Search Policy")) $("#mySearchPolicy").show();
 
 	// LOAN MANAGEMENT
 	if (session.includes("Loan Scheme Catalog")) $("#myLoanSchemeCatalog").show();
@@ -257,16 +257,16 @@ function loadSidebar(session) {
 	if (session.includes("Search Loan Accounts")) $("#mySearchLoanAccounts").show();
 
 	// JOIN LIABILITY LOAN
-	if (session.includes("Loan Scheme Catalog")) $("#myLoanSchemeCatalog").show();
-	if (session.includes("EMI & Loan Calculator")) $("#myEMI&LoanCalculator").show();
-	if (session.includes("New Loan Application")) $("#myNewLoanApplication").show();
+	if (session.includes("Create Lending Group")) $("#myCreateLendingGroup").show();
+	if (session.includes("Group Director")) $("#myGroupDirector").show();
+	if (session.includes("Apply For Group Loan")) $("#myApplyForGroupLoan").show();
 	if (session.includes("Loan Approval")) $("#myLoanApproval").show();
-	if (session.includes("Loan Payment")) $("#myLoanPayment").show();
-	if (session.includes("Regular Installment Payment")) $("#myRegularInstallmentPayment").show();
-	if (session.includes("Irregular Installment Payment")) $("#myIrregularInstallmentPayment").show();
-	if (session.includes("Regular Loan Statement")) $("#myRegularLoanStatement").show();
-	if (session.includes("Irregular Loan Statement")) $("#myIrregularLoanStatement").show();
-	if (session.includes("Generate Loan Documents")) $("#myGenerateLoanDocuments").show();
+	if (session.includes("Group Loan Payment ")) $("#myGroupLoanPayment").show();
+	if (session.includes("Installment Re-payment")) $("#myInstallmentRepayment").show();
+	if (session.includes("Statement of Accoun")) $("#myStatementofAccount").show();
+	if (session.includes("Early Loan Closure")) $("#myEarlyLoanClosure").show();
+	if (session.includes("Completed Loan Record")) $("#myCompletedLoanRecord").show();
+	if (session.includes("Find Loan Record")) $("#myGenerateLoanDocuments").show();
 
 	//REQUEST APPROVALS
 	if (session.includes("Approve New Client Request")) $("#myApproveNewClientRequest").show();
@@ -274,7 +274,8 @@ function loadSidebar(session) {
 	if (session.includes("Approve Finance Onboarding")) $("#myApproveFinanceOnboarding").show();
 	if (session.includes("Approve Policy")) $("#myApprovePolicy").show();
 	if (session.includes("Approve RD")) $("#myApproveRD").show();
-	if (session.includes("Approve Recurring Deposits")) $("#myApproveRecurringDeposits").show();
+	if (session.includes("Approve FD")) $("#myApproveFD").show();
+	if (session.includes("Approve DD")) $("#myApproveDD").show();
 	if (session.includes("Approve Saving Transactions")) $("#myApproveSavingTransactions").show();
 	if (session.includes("Approve Savings Account Transfers")) $("#myApproveSavingsAccountTransfers").show();
 	if (session.includes("Approve Regular EMI Payments")) $("#myApproveRegularEMIPayments").show();
@@ -282,7 +283,7 @@ function loadSidebar(session) {
 	if (session.includes("Approve Manual Payment Entries")) $("#myApproveManualPaymentEntries").show();
 	if (session.includes("Approve Maturity Applications")) $("#myApproveMaturityApplications").show();
 	if (session.includes("Delete Maturity Applications Request")) $("#myDeleteMaturityApplicationsRequest").show();
-	if (session.includes("Approve Inter-Branch Cash Transfer")) $("#myApproveInterBranchCashTransfer").show();
+	if (session.includes("Approve Inter Branch Cash Transfer")) $("#myApproveInterBranchCashTransfer").show();
 
 	//DATA CORRECTION
 	if (session.includes("Customer Data Update")) $("#myCustomerDataUpdate").show();
@@ -300,19 +301,19 @@ function loadSidebar(session) {
 	// MATURITY MANAGEMNET
 	if (session.includes("Maturity Scheme Master")) $("#myMaturitySchemeMaster").show();
 	if (session.includes("Apply For Maturity")) $("#myApplyForMaturity").show();
-	if (session.includes("Full Maturity Payment")) $("#myFullMaturityPayment").show();
-	if (session.includes("Partial Maturity Payment")) $("#myPartialMaturityPayment").show();
 	if (session.includes("Maturity Application Status")) $("#myMaturityApplicationStatus").show();
-	if (session.includes("Approved Status")) $("#myApprovedStatus").show();
+	if (session.includes("Full Maturity Payment")) $("#myFullMaturityPayment").show();
 	if (session.includes("Full Payment Status")) $("#myFullPaymentStatus").show();
+	if (session.includes("Partial Maturity Payment")) $("#myPartialMaturityPayment").show();
 	if (session.includes("Partial Payment Status")) $("#myPartialPaymentStatus").show();
-	if (session.includes("Print Maturity Receipt")) $("#myPrintMaturityReceipt").show();
+	if (session.includes("Approved Status")) $("#myApprovedStatus").show();
+
 
 	// INCENTIVE MANAGEMENT
 	if (session.includes("Incentive Scheme Master")) $("#myIncentiveSchemeMaster").show();
 	if (session.includes("Generate Incentive Payments")) $("#myGenerateIncentivePayments").show();
 	if (session.includes("Incentive Payment Details")) $("#myIncentivePaymentDetails").show();
-	if (session.includes("Incentive Summary Report")) $("#myIncentiveSummaryReport").show();
+	if (session.includes("Incentive Summary Report ")) $("#myIncentiveSummaryReport").show();
 
 	// FINANCIAL CONSULTANT
 	if (session.includes("Add Financial Consultant")) $("#myAddFinancialConsultant").show();

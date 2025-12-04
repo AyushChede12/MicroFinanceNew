@@ -56,7 +56,7 @@
 								Module</span>
 					</a></li>
 
-					<li id="Category/Caste_Module"><a href="categoryModule"> <i class="bi bi-circle"></i>
+					<li id="Category_Caste_Module"><a href="categoryModule"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Category/Caste
 								Module</span>
 					</a></li>
@@ -65,11 +65,11 @@
 							style="font-family: 'Poppins', sans-serif">Code Module</span>
 					</a></li>
 
-					<li id="Executive/Founder"><a href="executivePromoter"> <i class="bi bi-circle"></i>
+					<li id="Executive_Founder"><a href="executivePromoter"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Executive/Founder</span>
 					</a></li>
 
-					<li id="User_Creatio"><a href="customerCreation"> <i class="bi bi-circle"></i>
+					<li id="User_Creation"><a href="customerCreation"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">User
 								Creation</span>
 					</a></li>
@@ -198,7 +198,7 @@
 								Receipt Entry</span>
 					</a></li>
 
-					<li id="Bank/Cash_Transfer_Entry"><a href="bankCashTransferEntry"> <i
+					<li id="Bank_Cash_Transfer_Entry"><a href="bankCashTransferEntry"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Bank/Cash
 								Transfer Entry</span>
@@ -268,7 +268,7 @@
 								Balance Report</span>
 					</a></li>
 
-					<li id="P&L_Statement"><a href="pLStatement"> <i class="bi bi-circle"></i> <span
+					<li id="PL_Statement"><a href="pLStatement"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">P&L Statement</span>
 					</a></li>
 
@@ -315,7 +315,7 @@
             </a>
           </li> -->
 
-					<li id="Savings_Account_Activity"><a href="savingsAccountActivity"> <i
+					<li id="Saving_Account_Activity"><a href="savingsAccountActivity"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Savings Account
 								Activity</span>
@@ -408,7 +408,7 @@
 								premium Renewal</span>
 					</a></li>
 
-					<li id=""><a href="flexiblePremiumRenewal"> <i
+					<li id="Flexible_Premium_Renewal"><a href="flexiblePremiumRenewal"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Flexible
 								Premium Renewal</span>
@@ -426,7 +426,7 @@
 								Transaction Slip</span>
 					</a></li>
 
-					<li id="Recurring_Payment_Receip"><a href="recurringPaymentReceipt"> <i
+					<li id="Recurring_Payment_Receipt"><a href="recurringPaymentReceipt"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Recurring
 								Payment Receipt</span>
@@ -437,24 +437,24 @@
 								Certificate</span>
 					</a></li>
 
-					<!-- <li><a href="reissueCertificate"> <i class="bi bi-circle"></i>
+					<li id="ReIssue_Certificate"><a href="reissueCertificate"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">ReIssue
 								Certificate</span>
 					</a></li>
 
-					<li><a href="interestDetails"> <i class="bi bi-circle"></i>
+					<li id="Interest_Details"><a href="interestDetails"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Interest
 								Details</span>
 					</a></li>
 
-					<li><a href="interestPayable"> <i class="bi bi-circle"></i>
+					<li id="Interest_Payable"><a href="interestPayable"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Interest
 								Payable</span>
-					</a></li> -->
+					</a></li> 
 
-					<li id="Search_Policy "><a href="investmentDataSearch"> <i
+					<li id="Search_Policy"><a href="investmentDataSearch"> <i
 							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Search Policy </span>
+							style="font-family: 'Poppins', sans-serif">Search Policy</span>
 					</a></li>
 
 				</ul></li>
@@ -678,7 +678,7 @@
 								Loan Closure</span>
 					</a></li>
 
-					<li id="Completed_Loans_Record<"><a href="completedLoansRecord"> <i
+					<li id="Completed_Loan_Record<"><a href="completedLoansRecord"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Completed Loans
 								Record</span>
@@ -703,12 +703,12 @@
 			</a>
 
 				<ul id="approval-section" class="nav-content collapse">
-					<li id="Approve_New_Client_Request<"><a href="approveNewCustomer"> <i class="bi bi-circle"></i>
+					<li id="Approve_New_Client_Request"><a href="approveNewCustomer"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Approve
 								New Client Request</span>
 					</a></li>
 
-					<li id="Approve_Share_Transactions<"><a href="approveShare"> <i class="bi bi-circle"></i> <span
+					<li id="Approve_Share_Transactions"><a href="approveShare"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Approve Share
 								Transactions</span>
 					</a></li>
@@ -767,7 +767,7 @@
 								Maturity Applications</span>
 					</a></li>
 
-					<li id="Delete_Maturity_Application_Request<"><a href="deleteMaturityApp"> <i class="bi bi-circle"></i>
+					<li id="Delete_Maturity_Application_Request"><a href="deleteMaturityApp"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Delete
 								Maturity Application Request</span>
 					</a></li>
@@ -775,7 +775,7 @@
 					<li id="Approve_Inter_Branch_Cash_Transfer"><a href="approveInterBranchCashTransfer"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Approve
-								Inter-Branch Cash Transfer</span>
+								Inter Branch Cash Transfer</span>
 					</a></li>
 
 				</ul></li>
@@ -791,7 +791,7 @@
 			</a>
 
 				<ul id="rectification-section" class="nav-content collapse">
-					<li  id="customer_Data_Update"><a href="customerDataUpdate"> <i class="bi bi-circle"></i>
+					<li  id="Customer_Data_Update"><a href="customerDataUpdate"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Customer
 								Data Update</span>
 					</a></li>
@@ -819,7 +819,7 @@
 								Correction</span>
 					</a></li>
 
-					<li  id="Dai;y_Renewal_Update"><a href="dailyRenewalUpdate"> <i class="bi bi-circle"></i>
+					<li  id="Daily_Renewal_Update"><a href="dailyRenewalUpdate"> <i class="bi bi-circle"></i>
 						 	<span style="font-family: 'Poppins', sans-serif">Daily
 								Renewal Update</span>
 					</a></li>
@@ -848,7 +848,7 @@
 								Correction</span>
 					</a></li>
 
-					<li  id="Join_Liability_Update"><a href="groupLoanDataUpdate"> <i class="bi bi-circle"></i>
+					<li  id="Joint_Liability_Update"><a href="groupLoanDataUpdate"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Joint
 								Liability Update</span>
 					</a></li>
@@ -946,7 +946,7 @@
 								Payment Details</span>
 					</a></li>
 
-					<li id="Incentive_Summary_Report<"><a href="incentiveSummaryReport"> <i
+					<li id="Incentive_Summary_Report"><a href="incentiveSummaryReport"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Incentive
 								Summary Report</span>
@@ -956,7 +956,7 @@
 
 
 			<!-- Financial Consultant -->
-			<li  id="Financial_Consultant "class="nav-item"><a class="nav-link collapsed"
+			<li  id="Financial_Consultant"class="nav-item"><a class="nav-link collapsed"
 				href="#collector-advisor" data-toggle="collapse">
 					<div class="d-flex">
 						<i class="bi bi-briefcase text-white"></i> <span
@@ -972,7 +972,7 @@
 								Consultant</span>
 					</a></li>
 
-					<li id="Financial_Consultant_Hierarchy<"><a href="financialConsultantHierarchy"> <i
+					<li id="Financial_Consultant_Hierarchy"><a href="financialConsultantHierarchy"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Financial
 								Consultant Hierarchy</span>
@@ -1012,11 +1012,6 @@
 					<li  id="Manage_Designations"><a href="manageDesignations"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Manage
 								Designations</span>
-					</a></li>
-
-					<li id="Manage_Departments"><a href="manageDepartments"> <i class="bi bi-circle"></i>
-							<span style="font-family: 'Poppins', sans-serif">Manage
-								Departments</span>
 					</a></li>
 
 					<li id="Add_Team_Member"><a href="addTeamMember"> <i class="bi bi-circle"></i>
