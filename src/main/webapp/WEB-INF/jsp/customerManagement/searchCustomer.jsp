@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> -->
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> -->
 <!DOCTYPE html>
 <html>
 
@@ -39,57 +39,57 @@ pageEncoding="ISO-8859-1"%> -->
 <body>
 
 	<main id="main" class="main">
-	<form>
-		<div class="pagetitle">
-			<h1>CUSTOMER MANAGEMENT</h1>
-			<nav>
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="openDashboard"> <i
-							class="bi bi-people-fill"></i>
-					</a></li>
-					<li class="breadcrumb-item action">SEARCH CUSTOMER</li>
-				</ol>
-			</nav>
-		</div>
+		<form>
+			<div class="pagetitle">
+				<h1>CUSTOMER MANAGEMENT</h1>
+				<nav>
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="openDashboard"> <i
+								class="bi bi-people-fill"></i>
+						</a></li>
+						<li class="breadcrumb-item action">SEARCH CUSTOMER</li>
+					</ol>
+				</nav>
+			</div>
 
-		<div>
-			<form id="formid">
-				<div>
-					<nav>
-						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Box</li>
-						</ol>
-					</nav>
-					<div class="row">
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch</label> <select id="branchName" name="branchName"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Branch</option>
-									
-								</select>
+			<div>
+				<form id="formid">
+					<div>
+						<nav>
+							<ol class="breadcrumb breadcrumb-title">
+								<li class="breadcrumb-item action">Search Box</li>
+							</ol>
+						</nav>
+						<div class="row">
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields">
+									<label for="">Branch</label> <select id="branchName"
+										name="branchName" required="required"
+										class="form-control selectField" style="height: 30px;">
+										<option value="">Select Branch</option>
+
+									</select>
+								</div>
 							</div>
-						</div>
 
-						
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Customer Name</label> <input type="text"
-									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name"  />
+
+							<div class="col-lg-3">
+								<div class="d-flex flex-column formFields mb-4">
+									<label for="">Customer Name</label> <input type="text"
+										name="customerName" id="customerName" required="required"
+										placeholder="Enter Customer Name" />
+								</div>
 							</div>
+
+
+
+
 						</div>
-
-						
-
-						
 					</div>
-				</div>
-		</div>
+			</div>
 
-		
+
 		</form>
 
 		<div class="row mt-5">
@@ -108,7 +108,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<th scope="col">PAN</th>
 									<th scope="col">Contact No.</th>
 									<th scope="col">Nominee Name</th>
-									
+
 								</tr>
 							</thead>
 							<tbody>
@@ -128,76 +128,110 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/customerManagement/addCustomer.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<script>
-$(document).ready(function () {
-    $.ajax({
-        url: "api/customermanagement/getAllCustomer",
-        type: "GET",
-        success: function (data) {
-            var tbody = $("table tbody");
-            tbody.empty(); // Clear existing rows
-
-            for (var i = 0; i < data.length; i++) {
-                var customer = data[i];
-                var status = customer.approved ? "Approved" : "Pending";
-
-                var row = "<tr>" +
-                    "<td>" + (i + 1) + "</td>" +
-                    "<td>" + (customer.customerName || '') + "</td>" +
-                    "<td>" + (customer.customerGender || '') + "</td>" +
-                    "<td>" + (customer.dob || '') + "</td>" +
-                    "<td>" + (customer.aadharNo || '') + "</td>" +
-                    "<td>" + (customer.panNo || '') + "</td>" +
-                    "<td>" + (customer.contactNo || '') + "</td>" +
-                    "<td>" + (customer.nomineeName || '') + "</td>" +
-                    "</tr>";
-
-                tbody.append(row);
-            }
-        },
-        error: function () {
-            alert("Failed to fetch customer data.");
-        }
-    });
-});
-</script>
-	
-	
 	<script>
-$(document).ready(function () {
-    // Filter table rows as user types in customer name field
-    $("#customerName").on("keyup", function () {
-        var value = $(this).val().toLowerCase();
-
-        $("table tbody tr").filter(function () {
-            var name = $(this).find("td:eq(1)").text().toLowerCase(); // 2nd column = Customer Name
-            $(this).toggle(name.startsWith(value));
-        });
-    });
-});
-</script>
-<script>
 		$(document).ready(
 				function() {
+					$.ajax({
+						url : "api/customermanagement/getAllCustomer",
+						type : "GET",
+						success : function(data) {
+							var tbody = $("table tbody");
+							tbody.empty(); // Clear existing rows
 
-					// Convert all labels inside #formid to uppercase
-					$("#formid label").each(function() {
-						$(this).text($(this).text().toUpperCase());
+							for (var i = 0; i < data.length; i++) {
+								var customer = data[i];
+								var status = customer.approved ? "Approved"
+										: "Pending";
+
+								var row = "<tr>" + "<td>" + (i + 1) + "</td>"
+										+ "<td>"
+										+ (customer.customerName || '')
+										+ "</td>" + "<td>"
+										+ (customer.customerGender || '')
+										+ "</td>" + "<td>"
+										+ (customer.dob || '') + "</td>"
+										+ "<td>" + (customer.aadharNo || '')
+										+ "</td>" + "<td>"
+										+ (customer.panNo || '') + "</td>"
+										+ "<td>" + (customer.contactNo || '')
+										+ "</td>" + "<td>"
+										+ (customer.nomineeName || '')
+										+ "</td>" + "</tr>";
+
+								tbody.append(row);
+							}
+						},
+						error : function() {
+							alert("Failed to fetch customer data.");
+						}
 					});
-
-					// Convert all placeholders inside #formid to uppercase
-					$("#formid input, #formid textarea, #formid select").each(
-							function() {
-								let ph = $(this).attr("placeholder");
-								if (ph) {
-									$(this).attr("placeholder",
-											ph.toUpperCase());
-								}
-							});
-
 				});
 	</script>
-	
+
+
+	<script>
+		$(document).ready(function() {
+			// Filter table rows as user types in customer name field
+			$("#customerName").on("keyup", function() {
+				var value = $(this).val().toLowerCase();
+
+				$("table tbody tr").filter(function() {
+					var name = $(this).find("td:eq(1)").text().toLowerCase(); // 2nd column = Customer Name
+					$(this).toggle(name.startsWith(value));
+				});
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function() {
+
+			// -------------------------------
+			// 1️⃣ LABELS UPPERCASE
+			// -------------------------------
+			$("#formid label").each(function() {
+				// Only proceed if label has no child elements (pure text)
+				if ($(this).children().length === 0) {
+					$(this).text($(this).text().toUpperCase());
+				}
+			});
+
+			// -------------------------------
+			// 2️⃣ PLACEHOLDERS UPPERCASE
+			// -------------------------------
+			$("#formid input[type='text'], #formid textarea").each(function() {
+				let ph = $(this).attr("placeholder");
+				if (ph)
+					$(this).attr("placeholder", ph.toUpperCase());
+			});
+
+			// -------------------------------
+			// 3️⃣ FUNCTION → Convert ALL dropdown options to UPPERCASE
+			// -------------------------------
+			function convertDropdownOptions() {
+				$("#formid select option").each(function() {
+					let text = $(this).text();
+					let value = $(this).val();
+
+					if (text)
+						$(this).text(text.toUpperCase());
+					if (value)
+						$(this).val(value.toUpperCase());
+				});
+			}
+
+			// Run once on page load
+			convertDropdownOptions();
+
+			// -------------------------------
+			// 4️⃣ ON EVERY AJAX SUCCESS → convert again (backend loaded data)
+			// -------------------------------
+			$(document).ajaxSuccess(function() {
+				convertDropdownOptions();
+			});
+
+		});
+	</script>
+
 </body>
 
 </html>

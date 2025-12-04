@@ -527,7 +527,7 @@ pageEncoding="UTF-8"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Nominee Age</label> <input type="text"
-									name="nomineeAge" id="nomineeAge" required="required"
+									name="nomineeAge" id="nomineeAge" required="required" readonly="readonly"
 									placeholder="Enter Age" />
 							</div>
 						</div>
@@ -583,10 +583,6 @@ pageEncoding="UTF-8"%> -->
 									id="nomineeKycType" required="required" style="height: 30px;">
 									<option>Select Type</option>
 									<option>Aadhar Based eKYC</option>
-									<option>Offline Aadhar KYC</option>
-									<option>CKYC(Central KYC)</option>
-									<option>Full KYC / Physical KYC</option>
-									<option>Digital KYC</option>
 								</select>
 							</div>
 						</div>
@@ -789,7 +785,7 @@ pageEncoding="UTF-8"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label>Other Charge</label> <input type="text" id="otherCharge"
-									name="otherCharge" placeholder="Enter Other Charge" />
+									name="otherCharge" placeholder="Enter Other Charge" value="ADARSH UPAVIDHI" readonly="readonly" />
 							</div>
 						</div>
 

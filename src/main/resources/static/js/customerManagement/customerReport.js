@@ -15,47 +15,58 @@ $(document).ready(function() {
 });
 
 function populateTable(data) {
-    const tbody = $("table tbody");
-    tbody.empty();
+	const tbody = $(".datatable tbody");
+	tbody.empty();
 
-    if (data.length === 0) {
-        tbody.append("<tr><td colspan='12' class='text-center'>No matching records</td></tr>");
-        return;
-    }
+	if (!data.length) {
+		tbody.append("<tr><td colspan='10'>No matching found.</td></tr>");
+		return;
+	}
 
-    for (let i = 0; i < data.length; i++) {
-        const c = data[i];
+	data.forEach((customer, i) => {
 
-        const row = `
-        <tr>
-            <td>${i + 1}</td>
-            <td>${(c.customerName || "").toUpperCase()}</td>
-            <td>${(c.profession || "").toUpperCase()}</td>
-            <td>${(c.branchName || "").toUpperCase()}</td>
-            <td>${(c.dob || "").toUpperCase()}</td>
-            <td>${(c.nomineeName || "").toUpperCase()}</td>
-            <td>${(c.customerAddress || "").toUpperCase()}</td>
-            <td>${(c.contactNo || "").toUpperCase()}</td>
-            <td>${(c.aadharNo || "").toUpperCase()}</td>
-            <td>${(c.panNo || "").toUpperCase()}</td>
-            <td>${(c.signupDate || "").toUpperCase()}</td>
+		// Convert all fields to uppercase safely
+		const memberCode = (customer.memberCode || "").toUpperCase();
+		const customerName = (customer.customerName || "").toUpperCase();
+		const branchName = (customer.branchName || "").toUpperCase();
+		const dob = (customer.dob || "").toUpperCase();
+		const nomineeName = (customer.nomineeName || "").toUpperCase();
+		const customerAddress = (customer.customerAddress || "").toUpperCase();
+		const contactNo = (customer.contactNo || "").toUpperCase();
+		const aadharNo = (customer.aadharNo || "").toUpperCase();
+		const panNo = (customer.panNo || "").toUpperCase();
+		const signupDate = (customer.signupDate || "").toUpperCase();
+		const approved = customer.approved ? "YES" : "NO";
 
-            <td>
-                <button class="btn btn-outline-success btn-sm printBankReportBtn"
-                    data-id="${c.id}"
-                    data-bs-toggle="modal"
-                    data-bs-target="#bankReportModal"
-                    title="View Report">
-                    <i class="bi bi-printer"></i>
-                </button>
-            </td>
-        </tr>
-        `;
+		tbody.append(`
+	        <tr>
+	            <td>${(i + 1).toString().toUpperCase()}</td>
+	            <td>${memberCode}</td>
+	            <td>${customerName}</td>
+	            <td>${branchName}</td>
+	            <td>${dob}</td>
+	            <td>${nomineeName}</td>
+	            <td>${customerAddress}</td>
+	            <td>${contactNo}</td>
+	            <td>${aadharNo}</td>
+	            <td>${panNo}</td>
+	            <td>${signupDate}</td>
+	            <td>${approved}</td>
+	            <td>
+	                <button class="btn btn-outline-success btn-sm bankReportBtn"
+	                    data-id="${customer.id}"
+	                    data-bs-toggle="modal"
+	                    data-bs-target="#bankReportModal"
+	                    title="View Report">
+	                    <i class="bi bi-printer"></i>
+	                </button>
+	            </td>
+	        </tr>
+	    `);
+	});
 
-        tbody.append(row);
-    }
 
-    bindModalEvents();
+	bindModalEvents();
 }
 
 
@@ -65,7 +76,7 @@ $(document).ready(function() {
 
 		const selectedBranch = $("#branchName").val();
 		const fromDate = $("#fromDate").val();
-		const toDate = $("#toDate").val();		
+		const toDate = $("#toDate").val();
 
 		if (!selectedBranch || !fromDate || !toDate) {
 			alert("Please select Branch, From Date, and To Date.");
@@ -89,80 +100,100 @@ $(document).ready(function() {
 		populateTable(filtered);
 	});
 
-	// ✅ 6. Print Modal Content
-	$("#printBankReportBtn").click(function () {
-	    const content = document.getElementById("bankReportContent").innerHTML;
-	    const printWindow = window.open("", "", "width=900,height=700");
+});
 
-	    printWindow.document.write(`
-	        <html>
-	            <head>
-	                <title>Transaction Report</title>
-	                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-	                <style>
-	                    body { font-family: Arial, sans-serif; padding: 20px; }
-	                    h4, h5, h6 { color: #0d6efd; }
-	                    table { width: 100%; border-collapse: collapse; }
-	                    th, td { padding: 8px; border: 1px solid #ddd; }
-	                    th { background-color: #f2f2f2; }
-	                </style>
-	            </head>
-	            <body>${content}</body>
-	        </html>
-	    `);
+document.getElementById("downloadPDF").addEventListener("click", function () {
+    alert("pdf");
 
-	    printWindow.document.close();
-	    printWindow.print();
-	});
+    const content = document.getElementById("bankReportContent").cloneNode(true);
 
+    // Remove all images
+    content.querySelectorAll("img").forEach(img => img.remove());
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF("p", "pt", "a4");
+
+    doc.html(content, {
+        callback: function (doc) {
+
+            // OPEN PDF IN NEW TAB (Browser will show Save / Download Dialog)
+            window.open(doc.output("bloburl"), "_blank");
+
+        },
+        x: 20,
+        y: 20,
+        html2canvas: {
+            scale: 0.9
+        }
+    });
 });
 
 function bindModalEvents() {
-    $(".bankReportBtn").off("click").on("click", function () {
-        const id = $(this).data("id");
-        const policy = allCustomers.find(p => p.id === id);
-        if (!policy) return;
+	$(".bankReportBtn").off("click").on("click", function() {
+		const id = $(this).data("id");
 
-        $("#bankLogo").attr("src", "https://i.ibb.co/zFSWbkC/banklogo.png");
-        $("#bankName").text("Sterling Bank");
-        $("#reportTitle").text("Microfinance Transaction Report");
+		// FIND CUSTOMER
+		const customer = allCustomers.find(c => c.id === id);
+		if (!customer) {
+			alert("Customer not found!");
+			return;
+		}
 
-        $("#accountNumber").text(policy.memberSelection || "N/A");
-        $("#periodCovered").text(`${policy.policyStartDate} - ${policy.maturityDate}`);
+		// FULL NAME
+		const fullName = [
+			customer.firstName || '',
+			customer.middleName || '',
+			customer.lastName || ''
+		].filter(Boolean).join(" ");
 
-        $("#customerName").text(policy.customerName || "");
-        $("#customerAddress1").text(policy.address ? `Address: ${policy.address}` : "");
-        $("#customerAddress2").text(policy.branchName ? `Branch: ${policy.branchName}` : "");
+		// HEADER
+		$("#bankLogo").attr("src", "https://i.ibb.co/zFSWbkC/banklogo.png");
+		$("#bankName").text("Sterling Microfinance Bank");
+		$("#reportTitle").text("Customer Profile");
+		$("#customerCode").text(customer.memberCode || "N/A");
+		$("#signupDate").text(customer.signupDate || "N/A");
 
-        $("#startingBalance").html(`₹ ${policy.policyAmount || 0}`);
-        $("#incomeAmount").html(`₹ ${policy.depositAmount || 0}`);
-        $("#expensesAmount").html(`₹ ${policy.amountDue || 0}`);
-        $("#closingBalance").html(`₹ ${policy.maturityAmount || 0}`);
+		// CUSTOMER INFO
+		$("#customerName").text(fullName || "N/A");
+		$("#gender").text(customer.customerGender || "N/A");
+		$("#dob").text(customer.dob || "N/A");
+		$("#age").text(customer.customerAge || "N/A");
+		$("#maritalStatus").text(customer.relationshipStatus || "N/A");
 
-        const tbody = $("#transactionTableBody");
-        tbody.empty();
+		// CONTACT INFO
+		$("#contactNo").text(customer.contactNo || "N/A");
+		$("#email").text(customer.emailId || "N/A");
+		$("#address").text(customer.customerAddress || "N/A");
+		$("#state").text(customer.state || "N/A");
+		$("#district").text(customer.district || "N/A");
+		$("#pincode").text(customer.pinCode || "N/A");
 
-        if (policy.policyCode) {
-            tbody.append(`
-                <tr>
-                    <td>${policy.policyCode}</td>
-                    <td>${policy.policyStartDate}</td>
-                    <td>${policy.policyAmount}</td>
-                    <td>${policy.schemeType}</td>
-                    <td>${policy.schemeMode}</td>
-                </tr>
-            `);
-        } else {
-            tbody.append(`
-                <tr>
-                    <td colspan="5" class="text-center text-muted">No transaction data available</td>
-                </tr>
-            `);
-        }
-    });
+		// KYC
+		$("#aadhar").text(customer.aadharNo || "N/A");
+		$("#pan").text(customer.panNo || "N/A");
+		$("#voter").text(customer.voterNo || "N/A");
+		$("#driving").text(customer.drivingLicenceNo || "N/A");
+
+		// PHOTO & SIGNATURE
+		let basePath = window.location.origin + "/Uploads/";
+		$("#photoPreview").attr("src",
+			customer.customerPhoto ? basePath + customer.customerPhoto : "https://via.placeholder.com/120x120"
+		);
+		$("#signaturePreview").attr("src",
+			customer.customerSignature ? basePath + customer.customerSignature : "https://via.placeholder.com/120x60"
+		);
+
+		// SHOW MODAL
+		$("#bankReportModal").modal("show");
+	});
 }
 
-
-
-
-
+// 🔥 UPPERCASE ENTIRE MODAL CONTENT (EXCLUDE IMAGES)
+$("#bankReportModal").off("shown.bs.modal").on("shown.bs.modal", function() {
+	$(this).find("th, td:not([id^='photo'], [id^='signature']), h6, .text-primary, .text-secondary, p").each(function() {
+		if (this.tagName !== "IMG" && $(this).text().trim()) {
+			let text = $(this).text();
+			$(this).text(text.toUpperCase());
+		}
+	});
+});
