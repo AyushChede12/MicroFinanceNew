@@ -1,41 +1,7 @@
 $(document).ready(function() {
 	alert("vfv");
 	// Fetch all customers and populate the "select by code" dropdown
-	$.ajax({
-	    url: "api/customermanagement/approved",
-	    method: "GET",
-	    success: function(response) {
-alert("success");
-	        if (response.status === "OK") {
-
-	            let dropdown = $("#selectByCode");
-	            dropdown.empty(); // Clear old options
-	            dropdown.append(`<option value="">-- Select Customer --</option>`);
-
-	            response.data.forEach(function(item) {
-
-	                let fullName = [
-	                    item.firstName,
-	                    item.middleName,
-	                    item.lastName
-	                ].filter(Boolean).join(" ");
-
-	                let optionHtml = `
-	                    <option value="${item.memberCode}">
-	                        ${item.memberCode} - ${fullName}
-	                    </option>
-	                `;
-
-	                dropdown.append(optionHtml);
-	            });
-	        } else {
-	            console.warn("Unexpected response:", response);
-	        }
-	    },
-	    error: function(err) {
-	        console.error("Error fetching customers:", err);
-	    }
-	});
+	
 
 });
 

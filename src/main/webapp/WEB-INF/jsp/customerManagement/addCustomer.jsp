@@ -527,8 +527,8 @@ pageEncoding="UTF-8"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for=""> Nominee Age</label> <input type="text"
-									name="nomineeAge" id="nomineeAge" required="required" readonly="readonly"
-									placeholder="Enter Age" />
+									name="nomineeAge" id="nomineeAge" required="required"
+									readonly="readonly" placeholder="Enter Age" />
 							</div>
 						</div>
 
@@ -785,7 +785,8 @@ pageEncoding="UTF-8"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label>Other Charge</label> <input type="text" id="otherCharge"
-									name="otherCharge" placeholder="Enter Other Charge" value="ADARSH UPAVIDHI" readonly="readonly" />
+									name="otherCharge" placeholder="Enter Other Charge"
+									value="ADARSH UPAVIDHI" readonly="readonly" />
 							</div>
 						</div>
 
@@ -921,12 +922,11 @@ pageEncoding="UTF-8"%> -->
 
 
 				</div>
-
+				<br>
+				<br>
 				<div class="row">
 					<div class="col-12 text-center">
 						<button id="saveBtn" name="saveBtn" class="btnStyle bg-success">Save</button>
-						<button id="" class="btnStyle" style="background-color: #FFA500;">Update</button>
-						<button id="saveBtn" class="btnStyle bg-primary">Print</button>
 					</div>
 				</div>
 			</form>

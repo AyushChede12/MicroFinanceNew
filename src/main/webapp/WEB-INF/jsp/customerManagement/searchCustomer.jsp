@@ -97,9 +97,11 @@ pageEncoding="UTF-8"%> -->
 				<div class="card recent-sales">
 
 					<div class="card-body table-responsive">
-						<table class="table table-borderless datatable overflow-scroll">
+						<table class="table table-borderless datatable"
+							style="white-space: nowrap;">
 							<thead class="table-light">
-								<tr style="font-family: 'Poppins', sans-serif;">
+								<tr
+									style="font-family: 'Poppins', sans-serif; white-space: nowrap;">
 									<th scope="col">Sl No.</th>
 									<th scope="col">Customer Name</th>
 									<th scope="col">Gender</th>
@@ -107,8 +109,8 @@ pageEncoding="UTF-8"%> -->
 									<th scope="col">Aadhar No</th>
 									<th scope="col">PAN</th>
 									<th scope="col">Contact No.</th>
+									<th scope="col">Address</th>
 									<th scope="col">Nominee Name</th>
-
 								</tr>
 							</thead>
 							<tbody>
@@ -154,6 +156,8 @@ pageEncoding="UTF-8"%> -->
 										+ "</td>" + "<td>"
 										+ (customer.panNo || '') + "</td>"
 										+ "<td>" + (customer.contactNo || '')
+										+ "</td>" + "</td>" + "<td>"
+										+ (customer.customerAddress || '')
 										+ "</td>" + "<td>"
 										+ (customer.nomineeName || '')
 										+ "</td>" + "</tr>";
