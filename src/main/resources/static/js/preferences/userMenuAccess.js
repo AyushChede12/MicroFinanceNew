@@ -94,68 +94,6 @@ function submitUserServiceMap() {
 	});
 }
 
-
-
-/*function loadSidebar(session) {
-	console.log("Session: ", session);
-
-	// Example sidebar elements
-	const customerManagement = document.getElementById('customerManagement');
-
-	const addCustomer = document.getElementById('addCustomer');
-	const addCustomerKyc = document.getElementById('addCustomerKyc');
-	const transferShares = document.getElementById('transferShares');
-	const unalottedShares = document.getElementById('unalottedShares');
-
-	// Check if session is null or empty
-	if (!session || session.length === 0) {
-		console.log("Session is null or empty.");
-		alert("Session is null or empty.");
-		return;
-	}
-
-	// Initially hide all elements
-	preferences.style.display = 'none';
-	customerManagement.style.display = 'none';
-	customerShareholding.style.display = 'none';
-	companyAdministration.style.display = 'none';
-	financialYear.style.display = 'none';
-	addCustomer.style.display = 'none';
-	addCustomerKyc.style.display = 'none';
-	transferShares.style.display = 'none';
-	unalottedShares.style.display = 'none';
-
-	if (session.includes("Company Administration")) {
-		admin.style.display = 'block';
-		UserCreate.style.display = 'block';
-	}
-
-	if (session.includes("Financial Year")) {
-		admin.style.display = 'block';
-		UserMenuAccess.style.display = 'block';
-	}
-
-	if (session.includes("Add Customer")) {
-		admin.style.display = 'block';
-		UserManage.style.display = 'block';
-	}
-
-	if (session.includes("Add Customer KYC")) {
-		masters.style.display = 'block';
-		itemMaster.style.display = 'block';
-	}
-
-	if (session.includes("Transfer Shares")) {
-		masters.style.display = 'block';
-		companyMaster.style.display = 'block';
-	}
-
-	if (session.includes("Unalloted Shares")) {
-		entry.style.display = 'block';
-		stockEntry.style.display = 'block';
-	}
-}*/
-
 function loadSidebar(session) {
 
 	if (!session || session.length === 0) {
@@ -191,14 +129,15 @@ function loadSidebar(session) {
 	if (session.includes("Regenerate DNO")) $("#myRegenerateDNO").show();
 
 	// ACCOUNT MANAGEMENT (NEW)
+
 	if (session.includes("Ledger Account Master")) $("#myLedgerAccountMaster").show();
-	if (session.includes("Outgoing Payment Entry Year")) $("#myOutgoingPaymentEntry").show();
+	if (session.includes("Outgoing Payment Entry")) $("#myOutgoingPaymentEntry").show();
 	if (session.includes("Incoming Receipt Entry")) $("#myIncomingReceiptEntry").show();
-	if (session.includes("Bank/ Cash Transfer")) $("#myBankCashTransfer").show();
+	if (session.includes("Bank Cash Transfer Entry")) $("#myBankCashTransferEntry").show();
 	if (session.includes("Manual Journal Entry")) $("#myManualJournalEntry").show();
 	if (session.includes("Incentive Payment")) $("#myIncentivePayment").show();
 	if (session.includes("MIS Interest Payment")) $("#myMISInterestPayment").show();
-	if (session.includes("Cheque Clearing Processing")) $("#myChequeClearingProcessing").show();
+	if (session.includes("Cheque Clearance Processing")) $("#myChequeClearanceProcessing").show();
 	if (session.includes("Mandate Deposit To Bank")) $("#myMandateDepositToBank").show();
 	if (session.includes("Bank Statement")) $("#myBankStatement").show();
 	if (session.includes("Cash Book")) $("#myCashBook").show();
@@ -206,11 +145,11 @@ function loadSidebar(session) {
 	if (session.includes("Daily Transaction Book")) $("#myDailyTransactionBook").show();
 	if (session.includes("Ledger Summary Report")) $("#myLedgerSummaryReport").show();
 	if (session.includes("Journal Entry Report")) $("#myJournalEntryReport").show();
-	if (session.includes("Cash Book")) $("#myCashBook").show();
 	if (session.includes("Trial Balance Report")) $("#myTrialBalanceReport").show();
-	if (session.includes("P/L Statement")) $("#myPLStatement").show();
+	if (session.includes("PL Statement")) $("#myPLStatement").closest(".member-row").show();
 	if (session.includes("Balance Sheet")) $("#myBalanceSheet").show();
 	if (session.includes("Inter Branch Cash Transfer")) $("#myInterBranchCashTransfer").show();
+
 
 	// CUSTOMER SAVINGS (NEW)
 	if (session.includes("Savings Scheme Catalog")) $("#mySavingsSchemeCatalog").show();
@@ -242,7 +181,7 @@ function loadSidebar(session) {
 
 	// LOAN MANAGEMENT
 	if (session.includes("Loan Scheme Catalog")) $("#myLoanSchemeCatalog").show();
-	if (session.includes("EMI & Loan Calculator")) $("#myEMI&LoanCalculator").show();
+	if (session.includes("EMI Loan Calculator")) $("#myEMILoanCalculator").show();
 	if (session.includes("New Loan Application")) $("#myNewLoanApplication").show();
 	if (session.includes("Loan Approval")) $("#myLoanApproval").show();
 	if (session.includes("Loan Payment")) $("#myLoanPayment").show();
@@ -258,15 +197,15 @@ function loadSidebar(session) {
 
 	// JOIN LIABILITY LOAN
 	if (session.includes("Create Lending Group")) $("#myCreateLendingGroup").show();
-	if (session.includes("Group Director")) $("#myGroupDirector").show();
+	if (session.includes("Group Directory")) $("#myGroupDirectory").show();
 	if (session.includes("Apply For Group Loan")) $("#myApplyForGroupLoan").show();
 	if (session.includes("Loan Approval")) $("#myLoanApproval").show();
-	if (session.includes("Group Loan Payment ")) $("#myGroupLoanPayment").show();
+	if (session.includes("Group Loan Payment")) $("#myGroupLoanPayment").show();
 	if (session.includes("Installment Re-payment")) $("#myInstallmentRepayment").show();
 	if (session.includes("Statement of Accoun")) $("#myStatementofAccount").show();
 	if (session.includes("Early Loan Closure")) $("#myEarlyLoanClosure").show();
-	if (session.includes("Completed Loan Record")) $("#myCompletedLoanRecord").show();
-	if (session.includes("Find Loan Record")) $("#myGenerateLoanDocuments").show();
+	if (session.includes("Completed Loans Record")) $("#myCompletedLoansRecord").show();
+	if (session.includes("Find Loan Record")) $("#myFindLoanRecord").show();
 
 	//REQUEST APPROVALS
 	if (session.includes("Approve New Client Request")) $("#myApproveNewClientRequest").show();
@@ -332,14 +271,14 @@ function loadSidebar(session) {
 	//REPORTS & ANALYTICS
 	if (session.includes("Investment Transaction Report")) $("#myInvestmentTransactionReport").show();
 	if (session.includes("Investment Summary Statement")) $("#myInvestmentSummaryStatement").show();
-	if (session.includes("Financial Report")) $("#myFinancialReport").show();
+	if (session.includes("Financial Consultant Report")) $("#myFinancialConsultantReport").show();
 	if (session.includes("Financial Consultant Team Collection Summary")) $("#myFinancialConsultantTeamCollectionSummary").show();
 	if (session.includes("Cheque Transaction Report")) $("#myChequeTransactionReport").show();
 	if (session.includes("Incentive Payment Summary")) $("#myIncentivePaymentSummary").show();
 	if (session.includes("Recurring Installment Due Report")) $("#myRecurringInstallmentDueReport").show();
 	if (session.includes("Unapproved Loan Applications")) $("#myUnapprovedLoanApplications").show();
-	if (session.includes("Approved Loan Report")) $("#myApprovedLoanReport").show();
-	if (session.includes("Loan Repayment Report")) $("#myLoanRepaymentReport").show();
+	if (session.includes("Loan Report")) $("#myLoanReport").show();
+	if (session.includes("Loan payment Report")) $("#myLoanpaymentReport").show();
 	if (session.includes("Upcoming EMI Due Report")) $("#myUpcomingEMIDueReport").show();
 	if (session.includes("Overdue Repayment Analysis")) $("#myOverdueRepaymentAnalysis").show();
 	if (session.includes("Loan Installment Pending Report")) $("#myLoanInstallmentPendingReport").show();
