@@ -1,122 +1,88 @@
 $(document).ready(function() {
-	$("#guardianDetails").hide();
-	$("#guardianAccount").hide();
-	$('#saveBtn').click(function(event) {
-		event.preventDefault();
+    $('#saveBtn').click(function(e) {
+        e.preventDefault();
 
-		var formData = new FormData();
+        // ✅ Create FormData
+        var formData = new FormData();
 
-		// Text fields
-		formData.append("memberCode", $('#memberCode').val());
-		formData.append("authenticateFor", $('#authenticateFor').val());
-		formData.append("signupDate", $('#signupDate').val());
-		formData.append("major", $('#major').val());
-		formData.append("customerName", $('#customerName').val());
-		formData.append("minor", $('#minor').val());
-		formData.append("customerGender", $('#customerGender').val());
-		formData.append("guardianName", $('#guardianName').val());
-		formData.append("relationToApplicant", $('#relationToApplicant').val());
-		formData.append("dob", $('#dob').val());
-		formData.append("customerAge", $('#customerAge').val());
-		formData.append("relationshipStatus", $('#relationshipStatus').val());
-		formData.append("customerAddress", $('#customerAddress').val());
-		formData.append("state", $('#state').val());
-		formData.append("district", $('#district').val());
-		formData.append("aadharNo", $('#aadharNo').val());
-		formData.append("pinCode", $('#pinCode').val());
-		formData.append("branchName", $('#branchName').val());
-		formData.append("panNo", $('#panNo').val());
-		formData.append("voterNo", $('#voterNo').val());
-		formData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
-		formData.append("referralCode", $('#referralCode').val());
-		formData.append("referralName", $('#referralName').val());
-		formData.append("contactNo", $('#contactNo').val());
-		formData.append("emailId", $('#emailId').val());
-		formData.append("profession", $('#profession').val());
-		formData.append("academicBackground", $('#academicBackground').val());
+        // 🔹 Append all text fields (from your model)
+        const fields = [
+            // --- Customer Basic Details ---
+            "memberCode", "authenticateFor", "signupDate", "major", "customerName",
+            "minor", "customerGender", "guardianName", "relationToApplicant", "dob",
+            "customerAge", "relationshipStatus", "customerAddress", "state", "district",
+            "aadharNo", "pinCode", "branchName", "panNo", "voterNo", "drivingLicenceNo",
+            "referralCode", "referralName", "contactNo", "emailId", "profession",
+            "lightBill", "shareAmount", "noOfShare", "taxBill", "academicBackground",
 
-		// Nominee
-		formData.append("nomineeName", $('#nomineeName').val());
-		formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
-		formData.append("nomineeAge", $('#nomineeAge').val());
-		formData.append("nomineeAddress", $('#nomineeAddress').val());
-		formData.append("nomineePanNo", $('#nomineePanNo').val());
-		formData.append("nomineeKycNo", $('#nomineeKycNo').val());
-		formData.append("nomineeKycType", $('#nomineeKycType').val());
-		formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
+            // --- Nominee Details ---
+            "nomineeName", "nomineeRelationToApplicant", "nomineeAge", "nomineeAddress",
+            "nomineePanNo", "nomineeKycNo", "nomineeKycType", "nomineeMobileNo", "nomineeDOB",
 
-		// Payment
-		formData.append("memberFees", $('#memberFees').val());
-		formData.append("chequeNo", $('#chequeNo').val());
-		formData.append("chequeDate", $('#chequeDate').val());
-		formData.append("depositAcNo", $('#depositAcNo').val());
-		formData.append("referenceNo", $('#referenceNo').val());
-		formData.append("remarks", $('#remarks').val());
-		formData.append("paymentBy", $('#paymentBy').val());
-		formData.append("lightBill", $('#lightBill').val());
-		formData.append("taxBill", $('#taxBill').val());
-		formData.append("nomineeDOB", $('#nomineeDOB').val());
-		formData.append("buildingFund", $('#buildingFund').val());
-		formData.append("adminCharge", $('#adminCharge').val());
-		formData.append("documentCharge", $('#documentCharge').val());
-		formData.append("otherCharge", $('#otherCharge').val());
-		formData.append("entryFee", $('#entryFee').val());
-		formData.append("noOfShare", $('#noOfShare').val());
-		formData.append("shareAmount", $('#shareAmount').val());
-		
-		// File uploads
-		const customerPhoto = $('#customerPhoto')[0].files[0];
-		const customerSignature = $('#customerSignature')[0].files[0];
-		const customerVoter = $('#customerVoter')[0].files[0];
-		const customerDriving = $('#customerDriving')[0].files[0];
-		
-		if (customerPhoto) formData.append("customerPhoto", customerPhoto);
-		if (customerSignature) formData.append("customerSignature", customerSignature);
-		if (customerVoter) formData.append("customerVoter", customerVoter);
-		if (customerDriving) formData.append("customerDriving", customerDriving);
-		
+            // --- Fees & Payment Details ---
+            "memberFees", "buildingFund", "adminCharge", "documentCharge", "otherCharge",
+            "entryFee", "chequeNo", "chequeDate", "depositAcNo", "referenceNo", "remarks", "paymentBy",
 
-		// Toggles
-		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
-		formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
-		formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
-		formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
+            // --- Optional Filters / Flags ---
+            "fDate", "tDate", "isVerified", "isApproved"
+        ];
 
-		// ✅ Auto domain + context path
-		const fullUrl = window.location.origin + "/api/customermanagement/saveOrUpdateCustomer";
+        // Append all text inputs
+        fields.forEach(id => {
+            const value = $('#' + id).val();
+            if (value !== undefined && value !== null && value !== '') {
+                formData.append(id, value);
+            }
+        });
 
-		console.log("POST to URL: ", fullUrl);
+        // 🔹 Append file fields
+        const files = {
+            "customerPhoto": $('#customerPhoto')[0]?.files[0],
+            "customerSignature": $('#customerSignature')[0]?.files[0],
+            "customerVoter": $('#customerVoter')[0]?.files[0],
+            "customerDriving": $('#customerDriving')[0]?.files[0]
+        };
 
-		// AJAX call
-		$.ajax({
-			type: 'POST',
-			url: fullUrl,
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function(response, textStatus, xhr) {
-				console.log("✅ Response:", response);
+        Object.entries(files).forEach(([key, file]) => {
+            if (file) formData.append(key, file);
+        });
 
-				if (xhr.status === 200 || xhr.status === 201) {
-					alert(response.message || "Customer saved successfully!");
-					location.reload();
-				} else {
-					alert("Unexpected response: " + (response.message || "Unknown error"));
-				}
-			},
-			error: function(xhr) {
-				console.error("❌ Error response: ", xhr);
-				let msg = "Something went wrong while saving.";
-				if (xhr.responseJSON && xhr.responseJSON.message) {
-					msg = xhr.responseJSON.message;
-				} else if (xhr.responseText) {
-					msg = xhr.responseText;
-				}
-				alert(msg);
-			}
-		});
-	});
+        // 🔹 Append toggle switches (boolean flags)
+        formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
+        formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
+        formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
+        formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
+
+        // 🪵 Debug log
+        console.log("📦 FormData prepared:");
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}:`, value);
+        }
+
+        // ✅ AJAX request
+        $.ajax({
+            url: "http://localhost:8090/api/customermanagement/saveOrUpdateCustomer",
+            type: "POST",
+            data: formData,
+            processData: false,  // Don't let jQuery convert FormData
+            contentType: false,  // Let browser set correct Content-Type
+            success: function(response) {
+                console.log("✅ Success:", response);
+                alert(response.message || "Customer saved successfully!");
+                $('#customerForm')[0].reset(); // optional: clear form
+            },
+            error: function(xhr) {
+                console.error("❌ Error:", xhr.responseText);
+                alert("❌ Something went wrong while saving data!");
+            }
+        });
+    });
 });
+
+
+
+
+
 
 
 function photopreview() {
@@ -520,64 +486,64 @@ function ifMinor() {
 
 
 $(document).ready(function() {
-    // 1️⃣ Fetch all customers for dropdown
-    $.ajax({
-        url: "api/customersavings/getAllSavingAccountData",
-        method: "GET",
-        success: function(response) {
-            console.log("Fetched Members:", response);
-            
-            const customers = response.data || response;
+	// 1️⃣ Fetch all customers for dropdown
+	$.ajax({
+		url: "api/customersavings/getAllSavingAccountData",
+		method: "GET",
+		success: function(response) {
+			console.log("Fetched Members:", response);
 
-            // Clear old options except 'No'
-            $('#guardianName').find("option:not([value='No'])").remove();
+			const customers = response.data || response;
 
-            // Populate dropdown
-            customers.forEach(function(customer) {
-                const optionText = `${customer.enterCustomerName} - ${customer.selectByCustomer}`;
-                $('#guardianName').append(
-                    $('<option>', {
-                        value: customer.selectByCustomer.trim(),
-                        text: optionText
-                    })
-                );
-            });
-        },
-        error: function(err) {
-            console.error("❌ Error fetching customers:", err);
-        }
-    });
+			// Clear old options except 'No'
+			$('#guardianName').find("option:not([value='No'])").remove();
 
-$('#guardianName').on('change', function() {
-    const selectedCode = $(this).val().trim();
+			// Populate dropdown
+			customers.forEach(function(customer) {
+				const optionText = `${customer.enterCustomerName} - ${customer.selectByCustomer}`;
+				$('#guardianName').append(
+					$('<option>', {
+						value: customer.selectByCustomer.trim(),
+						text: optionText
+					})
+				);
+			});
+		},
+		error: function(err) {
+			console.error("❌ Error fetching customers:", err);
+		}
+	});
 
-    if (selectedCode === "No") {
-        $('#guardianAccount').hide();
-        $('#guardianAccNo').prop('required', false).val('');
-    } else {
-        $('#guardianAccount').show();
-        $('#guardianAccNo').prop('required', true);
+	$('#guardianName').on('change', function() {
+		const selectedCode = $(this).val().trim();
 
-        // Fetch account number from backend
-        $.ajax({
-            url: `/api/customersavings/getAccountNumbers?selectByCustomer=${encodeURIComponent(selectedCode)}`,
-            method: "GET",
-            success: function(res) {
-                console.log("Account number response:", res);
+		if (selectedCode === "No") {
+			$('#guardianAccount').hide();
+			$('#guardianAccNo').prop('required', false).val('');
+		} else {
+			$('#guardianAccount').show();
+			$('#guardianAccNo').prop('required', true);
 
-                // Access account number using the selected code as key
-                if(res.data && res.data[selectedCode] && res.data[selectedCode].length > 0) {
-                    $('#guardianAccNo').val(res.data[selectedCode][0]); // use first account number
-                } else {
-                    $('#guardianAccNo').val(''); // no account found
-                }
-            },
-            error: function(err) {
-                console.error("❌ Error fetching account number:", err);
-                $('#guardianAccNo').val('');
-            }
-        });
-    }
-}).trigger('change'); // trigger on load
- // trigger on load
+			// Fetch account number from backend
+			$.ajax({
+				url: `/api/customersavings/getAccountNumbers?selectByCustomer=${encodeURIComponent(selectedCode)}`,
+				method: "GET",
+				success: function(res) {
+					console.log("Account number response:", res);
+
+					// Access account number using the selected code as key
+					if (res.data && res.data[selectedCode] && res.data[selectedCode].length > 0) {
+						$('#guardianAccNo').val(res.data[selectedCode][0]); // use first account number
+					} else {
+						$('#guardianAccNo').val(''); // no account found
+					}
+				},
+				error: function(err) {
+					console.error("❌ Error fetching account number:", err);
+					$('#guardianAccNo').val('');
+				}
+			});
+		}
+	}).trigger('change'); // trigger on load
+	// trigger on load
 });

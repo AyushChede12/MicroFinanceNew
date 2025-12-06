@@ -30,166 +30,109 @@ import com.microfinance.service.CustomerManagementService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @RestController
 @RequestMapping("/api/customermanagement")
 public class CustomerManagementController {
 	@Autowired
 	CustomerManagementService customerService;
-	
+
 	@Autowired
 	CustomerRepo customerRepo;
 
-	
-	
-
 	@PostMapping("/saveOrUpdateCustomer")
-	public ResponseEntity<ApiResponse<addCustomer>> saveOrUpdateCustomer(
-	        @ModelAttribute CustomerDto clientMasterDto,
-	        @RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
-	        @RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature,
-	        @RequestParam(value = "customerDriving", required = false) MultipartFile customerDriving,
-            @RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter)
-	
+	public ResponseEntity<ApiResponse<addCustomer>> saveOrUpdateCustomer(@ModelAttribute CustomerDto clientMasterDto,
+			@RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
+			@RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature,
+			@RequestParam(value = "customerDriving", required = false) MultipartFile customerDriving,
+			@RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter)
+
 	{
 
-	    try {
-	        // Debug log
-	        System.out.println("Saving customer: " + clientMasterDto.getCustomerName());
-	        System.out.println("Photo: " + (customerPhoto != null ? customerPhoto.getOriginalFilename() : "None"));
-	        System.out.println("Signature: " + (customerSignature != null ? customerSignature.getOriginalFilename() : "None"));
-	        System.out.println("Signature: " + (customerDriving != null ? customerDriving.getOriginalFilename() : "None"));
-	        System.out.println("Signature: " + (customerVoter != null ? customerVoter.getOriginalFilename() : "None"));
+		try {
+			// Debug log
+			
+			ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto,
+					customerSignature, customerDriving, customerVoter);
+			return new ResponseEntity<>(response, response.getStatus());
 
-	        ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto, customerSignature,customerDriving,customerVoter);
-	        return new ResponseEntity<>(response, response.getStatus());
-
-	    } catch (Exception e) {
-	        e.printStackTrace(); // Log to console
-	        return new ResponseEntity<>(
-	            ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving customer: " + e.getMessage()),
-	            HttpStatus.INTERNAL_SERVER_ERROR
-	        );
-	    }
+		} catch (Exception e) {
+			e.printStackTrace(); // Log to console
+			return new ResponseEntity<>(
+					ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "Error saving customer: " + e.getMessage()),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
-	
-	
-	
-	
-	@GetMapping("/getAllCustomer")               //Niraj
-	public List<addCustomer> getAllCustomer(){
+	@GetMapping("/getAllCustomer")
+	public List<addCustomer> getAllCustomer() {
 		List<addCustomer> list = customerService.getAllCustomer();
 		return list;
 	}
-	
-	
-	// get Data by MemberCode
-		@PostMapping("/fetchBySelectedCustomer")
-		public List<addCustomer> fetchBySelectedMember(@RequestBody addCustomer customer) { 
-			List<addCustomer> list = customerService.fetchBySelectedMember(customer.getMemberCode());
-			return list;
+
+	@PostMapping("/fetchBySelectedCustomer")
+	public List<addCustomer> fetchBySelectedMember(@RequestBody addCustomer customer) {
+		List<addCustomer> list = customerService.fetchBySelectedMember(customer.getMemberCode());
+		return list;
+	}
+
+	@PostMapping("/verifyFetchedData")
+	public ResponseEntity<Map<String, Object>> verifyFetchedData(@RequestBody Map<String, Object> fetchedData) {
+		String customerCode = (String) fetchedData.get("memberCode");
+
+		Map<String, Object> response = new HashMap<>();
+
+		Optional<addCustomer> optionalCustomer = customerRepo.findByMemberCode(customerCode);
+
+		if (!optionalCustomer.isPresent()) {
+			response.put("isVerified", false);
+			response.put("message", "Customer not found!");
+			return ResponseEntity.ok(response);
 		}
-	
-		// Add Member Kyc //
-		
-		/*
-		 * @PostMapping("/saveOrUpdateCustomerKYC") public
-		 * ResponseEntity<ApiResponse<addCustomerKYC>> saveOrUpdateCustomerKYC(
-		 * 
-		 * @ModelAttribute addCustomerKYC kyc,
-		 * 
-		 * @RequestParam(value = "customerPhoto", required = false) MultipartFile
-		 * customerPhoto,
-		 * 
-		 * @RequestParam(value = "customerSignature", required = false) MultipartFile
-		 * customerSignature,
-		 * 
-		 * @RequestParam(value = "aadharFrontPhoto", required = false) MultipartFile
-		 * aadharFrontPhoto,
-		 * 
-		 * @RequestParam(value = "aadharBackPhoto", required = false) MultipartFile
-		 * aadharBackPhoto,
-		 * 
-		 * @RequestParam(value = "panPhoto", required = false) MultipartFile panPhoto) {
-		 * 
-		 * ApiResponse<addCustomerKYC> response =
-		 * customerService.saveOrUpdateCustomerKYC( kyc, customerPhoto,
-		 * customerSignature, aadharFrontPhoto, aadharBackPhoto, panPhoto);
-		 * 
-		 * return new ResponseEntity<>(response, response.getStatus()); }
-		 */
-		
-		 
-		 @PostMapping("/verifyFetchedData")
-		 public ResponseEntity<Map<String, Object>> verifyFetchedData(@RequestBody Map<String, Object> fetchedData) {
-		     String customerCode = (String) fetchedData.get("memberCode");
 
-		     Map<String, Object> response = new HashMap<>();
+		addCustomer customer = optionalCustomer.get();
 
-		     // Fetch customer by code
-		     Optional<addCustomer> optionalCustomer = customerRepo.findByMemberCode(customerCode);
+		if (customer.isVerified()) {
+			response.put("isVerified", true);
+			response.put("message", "This customer is already verified!");
+			return ResponseEntity.ok(response);
+		}
 
-		     if (!optionalCustomer.isPresent()) {
-		         response.put("isVerified", false);
-		         response.put("message", "Customer not found!");
-		         return ResponseEntity.ok(response);
-		     }
+		String[] requiredFields = { "memberCode", "customerName", "contactNo", "signupDate", "aadharNo", "pan",
+				"voterNo", "drivingLicenceNo" };
 
-		     addCustomer customer = optionalCustomer.get();
+		boolean isVerified = true;
+		StringBuilder missingFields = new StringBuilder();
 
-		     if (customer.isVerified()) {
-		         response.put("isVerified", true);
-		         response.put("message", "This customer is already verified!");
-		         return ResponseEntity.ok(response);
-		     }
+		for (String field : requiredFields) {
+			Object value = fetchedData.get(field);
+			if (value == null || value.toString().trim().isEmpty()) {
+				isVerified = false;
+				missingFields.append(field).append(", ");
+			}
+		}
 
-		     // Required fields to validate
-		     String[] requiredFields = {
-		    		    "memberCode", "customerName", "contactNo", "signupDate", 
-		    		    "aadharNo", "pan", "voterNo", "drivingLicenceNo"
-		    		};
+		if (!isVerified) {
+			response.put("isVerified", false);
+			response.put("message", "Verification failed. Missing fields: " + missingFields.toString());
+		} else {
+			customer.setVerified(true);
+			customerRepo.save(customer);
 
+			response.put("isVerified", true);
+			response.put("message", "Verification successful!");
+		}
 
-		     boolean isVerified = true;
-		     StringBuilder missingFields = new StringBuilder();
+		return ResponseEntity.ok(response);
+	}
 
-		     for (String field : requiredFields) {
-		         Object value = fetchedData.get(field);
-		         if (value == null || value.toString().trim().isEmpty()) {
-		             isVerified = false;
-		             missingFields.append(field).append(", ");
-		         }
-		     }
+	@GetMapping("/approved")
+	public ResponseEntity<ApiResponse<List<addCustomer>>> getApprovedCustomers() {
+		List<addCustomer> customers = customerService.getApprovedCustomers();
 
-		     if (!isVerified) {
-		         response.put("isVerified", false);
-		         response.put("message", "Verification failed. Missing fields: " + missingFields.toString());
-		     } else {
-		         customer.setVerified(true);
-		         customerRepo.save(customer);
+		ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK,
+				"Approved customers fetched successfully.", customers);
 
-		         response.put("isVerified", true);
-		         response.put("message", "Verification successful!");
-		     }
-
-		     return ResponseEntity.ok(response);
-		 }
-
-		 @GetMapping("/approved")
-		 public ResponseEntity<ApiResponse<List<addCustomer>>> getApprovedCustomers() {
-		     List<addCustomer> customers = customerService.getApprovedCustomers();
-
-		     ApiResponse<List<addCustomer>> response = ApiResponse.success(
-		         HttpStatus.OK,
-		         "Approved customers fetched successfully.",
-		         customers
-		     );
-
-		     return ResponseEntity.ok(response);
-		 }
-
-		
-		   
+		return ResponseEntity.ok(response);
+	}
 
 }

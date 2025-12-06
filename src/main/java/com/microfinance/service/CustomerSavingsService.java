@@ -438,6 +438,20 @@ public class CustomerSavingsService {
 		        return result;
 		    }
 
+			public List<SavingSchemeCatalog> fetchAllSavingSchemeCatalog() {
+	    try {
+	        List<SavingSchemeCatalog> list = savingSchmeCatalogRepo.findAll();
+	        return list;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
+
+			public CreateSavingsAccount saveSavingAccountDetails(CreateSavingsAccount createSavingsAccount) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 
 
 }

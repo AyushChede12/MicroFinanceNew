@@ -32,7 +32,6 @@ public class CustomerManagementService {
 	AddCustomerKycRepo addCustomerKycRepo;
 
 	@Value("${upload.directory}")
-
 	private String uploadDirectory;
 
 	public ApiResponse<addCustomer> saveOrUpdateCustomer(CustomerDto clientMasterDto, MultipartFile customerPhoto,
@@ -126,12 +125,12 @@ public class CustomerManagementService {
 			
 			if (customerVoter != null && !customerVoter.isEmpty()) {
 				String voterFileName = saveFile(customerVoter);
-				addcustomer.setCustomerSignature(voterFileName);
+				addcustomer.setCustomerVoter(voterFileName);
 			}
 			
 			if (customerDriving != null && !customerDriving.isEmpty()) {
 				String drivingFileName = saveFile(customerDriving);
-				addcustomer.setCustomerSignature(drivingFileName);
+				addcustomer.setCustomerDriving(drivingFileName);
 			}
 		} catch (IOException e) {
 			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed: " + e.getMessage());
