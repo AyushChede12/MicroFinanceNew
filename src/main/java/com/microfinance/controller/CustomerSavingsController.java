@@ -70,6 +70,7 @@ public class CustomerSavingsController {
 	private String uploadDirectory;
 
 	// Save Saving Scheme Catalog
+
 	@PostMapping("/savescheme")
 	public ResponseEntity<ApiResponse<SavingSchemeCatalog>> saveSchemeCatalog(
 			@RequestBody SavingSchemeCatalog savingSchemeCatalog) {
@@ -135,6 +136,84 @@ public class CustomerSavingsController {
 
 	// delete saving scheme catalog by id
 	@PostMapping("/deleteSavingSchemeCatalogDataById")
+
+    @PostMapping("/savescheme")
+    public ResponseEntity<ApiResponse<SavingSchemeCatalog>> saveSchemeCatalog(@RequestBody SavingSchemeCatalog savingSchemeCatalog) {
+        boolean isSaved = customersaving.saveSavingScheme(savingSchemeCatalog);
+
+        if (isSaved) {
+            ApiResponse<SavingSchemeCatalog> response = ApiResponse.success(
+                HttpStatus.OK,
+                "Saving Scheme saved successfully.",
+                savingSchemeCatalog
+            );
+            return ResponseEntity.ok(response);
+        } else {
+            ApiResponse<SavingSchemeCatalog> response = ApiResponse.error(
+                HttpStatus.BAD_REQUEST,
+                "Failed to save scheme."
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+    
+  //Fetching CustomerCode   
+  	@PostMapping("/fetchCustomerCode")
+  	public ApiResponse<List<addCustomer>> fetchByCustomerCode(@RequestBody addCustomer addcustomer) {
+  		List<addCustomer>  list = customersaving.fetchCustomerCode(addcustomer.getMemberCode());
+  		if(list!=null && !list.isEmpty()) {
+  			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  		}else
+  			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  		
+  		
+  	}
+  	
+  	
+  	
+  	
+  	//fetching saving scheme catalog data
+  /*	@GetMapping("/fetchsavingchemecatalog")
+  	public ApiResponse<List<SavingSchemeCatalog>> findBySchemeType() {
+  		List<SavingSchemeCatalog>  list = customersaving.findBySchemeType();
+  		if(list!=null && !list.isEmpty()) {
+  			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  		}else
+  			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  		
+  	}*/
+  	
+  	
+  	
+  	@GetMapping("/fetchsavingchemecatalog")
+  	public ApiResponse<List<String>> findBySchemeType() {
+  	    List<String> list = customersaving.findBySchemeType();
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successful", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "No Data Found");
+  	    }
+  	}
+
+  	
+  	// find saving scheme catalog by id
+  	 @GetMapping("/getSavingSchemeCatalogById")
+ 	public ResponseEntity<ApiResponse<SavingSchemeCatalog>> findSavingSchmeCatalogById(@RequestParam("id") Long id) {
+ 		Optional<SavingSchemeCatalog> savingscheme = customersaving.findSavingSchmeCatalogById(id);
+ 		if (savingscheme.isPresent()) {
+ 			ApiResponse<SavingSchemeCatalog> response = new ApiResponse<>(HttpStatus.FOUND,
+ 					"Saving Scheme Catalog Data fetched successfully", savingscheme.get());
+ 			return ResponseEntity.ok(response);
+ 		} else {
+ 			ApiResponse<SavingSchemeCatalog> response = new ApiResponse<>(HttpStatus.NOT_FOUND,
+ 					"Saving Scheme Catalog Data not found for ID: " + id, null);
+ 			return ResponseEntity.status(404).body(response);
+ 		}
+ 	}
+  	 
+  	 //delete saving scheme catalog by id
+  	@PostMapping("/deleteSavingSchemeCatalogDataById") 
+
 	public ResponseEntity<ApiResponse<String>> deleteSavingSchemeCatalog(@RequestParam("id") Long id) {
 		boolean isDeleted = customersaving.deleteSavingSchemeCatalog(id);
 		if (isDeleted) {
@@ -146,6 +225,7 @@ public class CustomerSavingsController {
 			return ResponseEntity.badRequest().body(response);
 		}
 	}
+
 
 	// fetch policy name
 	@GetMapping("/fetchpolicyname")
@@ -210,6 +290,86 @@ public class CustomerSavingsController {
 
 	// fetch all saving accouunt data
 	@GetMapping("/getAllSavingAccountData")
+
+     
+	//fetch policy name
+  	@GetMapping("/fetchpolicyname")
+  	public ApiResponse<List<SavingSchemeCatalog>> findByPolicyName(@RequestParam String policyName) {
+  	    List<SavingSchemeCatalog> list = customersaving.findByPolicyName(policyName);
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  	    }
+  	}
+
+  	//fetch financial code  
+  	@GetMapping("/fetchfinancialcode")
+  	public ApiResponse<List<addFinancialConsultant>> findByFinancialCode(@RequestParam String financialCode) {
+  	    List<addFinancialConsultant> list = customersaving.findByFinancialCode(financialCode);
+  	    if (list != null && !list.isEmpty()) {
+  	        return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
+  	    } else {
+  	        return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+  	    }
+  	}
+  	
+  	
+  	@PostMapping("/api/customersavings/saveandupdatesavingaccount")
+  	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveOrUpdateSavingAccount(
+  	        @RequestBody CreateSavingsAccount createSavingsAccount) {
+
+  	    CreateSavingsAccount savedEntity = customersaving.saveSavingAccountDetails(createSavingsAccount);
+
+  	    String message = (createSavingsAccount.getId() == null)
+  	            ? "Saving Account Details saved successfully"
+  	            : "Saving Account Details updated successfully";
+
+  	    ApiResponse<CreateSavingsAccount> response =
+  	            new ApiResponse<>(HttpStatus.OK, message, savedEntity);
+
+  	    return ResponseEntity.ok(response);
+  	}
+
+//	@PostMapping("/saveandupdatesavingaccount")
+//	public ResponseEntity<ApiResponse<CreateSavingsAccount>> saveSavingAccountDetails(
+//			@ModelAttribute SavingAccountDto savingAccountDto,
+//			@RequestParam(value = "photo", required = false) String photo,
+//			@RequestParam(value = "signature", required = false) String signature,
+//			@RequestParam(value = "jointPhoto", required = false) String jointPhoto) {
+//
+//		String customerId = savingAccountDto.getSelectByCustomer(); // assuming it's Long
+//
+//	    // Check for existing record before saving (only for new entries)
+//	    if (savingAccountDto.getId() == null && customersaving.existsByCustomerId(customerId)) {
+//	        return ResponseEntity
+//	                .status(HttpStatus.CONFLICT)
+//	                .body(new ApiResponse<>(
+//	                        HttpStatus.CONFLICT,
+//	                        "Customer already exists in saving account",
+//	                        null));
+//	    }
+//		
+//			System.out.println("Received photo: " + photo);
+//
+//			System.out.println("Received signature: " + signature);
+//			
+//			System.out.println("Received jointPhoto: " + jointPhoto);
+//		
+//
+//		ApiResponse<CreateSavingsAccount> response = customersaving.saveSavingAccountDetails(savingAccountDto, photo,
+//				signature, jointPhoto);
+//		// return new ResponseEntity<>(response, response.getStatus());
+//		return ResponseEntity.ok(new ApiResponse<>(
+//                HttpStatus.OK,
+//                savingAccountDto.getId() != null ? "Data updated successfully" : "Data saved successfully",
+//                response.getData()
+//        ));
+//	}
+//    
+    //fetch all saving accouunt data
+    @GetMapping("/getAllSavingAccountData")
+
 	public ResponseEntity<ApiResponse<List<CreateSavingsAccount>>> fetchAllSavingAccountData() {
 		List<CreateSavingsAccount> list = customersaving.fetchAllSavingAccountData();
 		ApiResponse<List<CreateSavingsAccount>> response = new ApiResponse<>(HttpStatus.FOUND,
@@ -559,6 +719,7 @@ public class CustomerSavingsController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
+
 	@PostMapping("/deduct-sms-charges")
 	public double deductSmsCharges(@RequestBody CreateSavingsAccount account) {
 		return customersaving.calculateBalanceAfterSmsCharges(account);
@@ -586,6 +747,17 @@ public class CustomerSavingsController {
 			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
 		} else {
 			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+		}
+	}
+
+
+  	@GetMapping("/fetchalllll")
+	public ApiResponse<List<SavingSchemeCatalog>> fetchSavingSchemeCatalog() {
+		List<SavingSchemeCatalog> list = customersaving.fetchAllSavingSchemeCatalog();
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successful", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "No Data Found");
 		}
 	}
 

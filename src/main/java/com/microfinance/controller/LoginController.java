@@ -45,7 +45,7 @@ public class LoginController {
 			return "redirect:/loginPage"; // not logged in → go back
 		}
 		model.addAttribute("customerUser", username); // ✅ pass to JSP
-		return "dashboard"; // dashboard.jsp
+		return "dashboardPage/dashboard"; // dashboard.jsp
 	}
 
 }

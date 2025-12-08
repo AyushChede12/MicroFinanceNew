@@ -1,13 +1,10 @@
 package com.microfinance.model;
 
-import javax.persistence.Entity;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class addCustomer {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -92,13 +89,95 @@ public class addCustomer {
 
 	private boolean isApproved;
 
-	public boolean isApproved() {
-		return isApproved;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-	public void setApproved(boolean isApproved) {
-		this.isApproved = isApproved;
-	}
+    // ------------------ Customer Details ------------------
+    private String memberCode;
+    private String authenticateFor;
+    private String signupDate;
+    private String major;
+    private String customerName;
+    private String minor;
+    private String customerGender;
+    private String guardianName;
+    private String relationToApplicant;
+    private String dob;
+    private String customerAge;
+    private String relationshipStatus;
+    private String customerAddress;
+    private String state;
+    private String district;
+    private String aadharNo;
+    private String pinCode;
+    private String branchName;
+    private String panNo;
+    private String voterNo;
+    private String drivingLicenceNo;
+    private String referralCode;
+    private String referralName;
+    private String contactNo;
+    private String emailId;
+    private String profession;
+    private String lightBill;
+    private String shareAmount;
+    private String noOfShare;
+    private String taxBill;
+    private String academicBackground;
+    private String customerPhoto;
+    private String customerSignature;
+    private String customerVoter;
+    private String customerDriving;
+
+    // ------------------ Nominee Details ------------------
+    private String nomineeName;
+    private String nomineeRelationToApplicant;
+    private String nomineeAge;
+    private String nomineeAddress;
+    private String nomineePanNo;
+    private String nomineeKycNo;
+    private String nomineeKycType;
+    private String nomineeMobileNo;
+    private String nomineeDOB;
+
+    // ------------------ Fees Details ------------------
+    private String memberFees;
+    private String buildingFund;
+    private String adminCharge;
+    private String documentCharge;
+    private String otherCharge;
+    private String entryFee;
+    private String chequeNo;
+    private String chequeDate;
+    private String depositAcNo;
+    private String referenceNo;
+    private String remarks;
+    private String paymentBy;
+
+    // ------------------ Status Flags ------------------
+    private int memberStatus;
+    private int memberBanking;
+    private int netBanking;
+    private int smsSend;
+
+    private String fDate;
+    private String tDate;
+
+    private boolean isVerified;
+    private boolean isApproved;
+
+
+    // ------------------ Constructors ------------------
+    public addCustomer() {
+    }
+
+    public addCustomer(String memberCode, String customerName, String branchName) {
+        this.memberCode = memberCode;
+        this.customerName = customerName;
+        this.branchName = branchName;
+    }
+
 
 	public Long getId() {
 		return id;
@@ -108,505 +187,533 @@ public class addCustomer {
 		this.id = id;
 	}
 
-	public String getAuthenticateFor() {
-		return authenticateFor;
-	}
+    // ------------------ Getters & Setters ------------------
 
-	public void setAuthenticateFor(String authenticateFor) {
-		this.authenticateFor = authenticateFor;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getSignupDate() {
-		return signupDate;
-	}
 
-	public void setSignupDate(String signupDate) {
-		this.signupDate = signupDate;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public String getMajor() {
-		return major;
-	}
+    public String getMemberCode() {
+        return memberCode;
+    }
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
+    public void setMemberCode(String memberCode) {
+        this.memberCode = memberCode;
+    }
 
-	public String getCustomerName() {
-		return customerName;
-	}
+    public String getAuthenticateFor() {
+        return authenticateFor;
+    }
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
+    public void setAuthenticateFor(String authenticateFor) {
+        this.authenticateFor = authenticateFor;
+    }
 
-	public String getMinor() {
-		return minor;
-	}
+    public String getSignupDate() {
+        return signupDate;
+    }
 
-	public void setMinor(String minor) {
-		this.minor = minor;
-	}
+    public void setSignupDate(String signupDate) {
+        this.signupDate = signupDate;
+    }
 
-	public String getCustomerGender() {
-		return customerGender;
-	}
+    public String getMajor() {
+        return major;
+    }
 
-	public void setCustomerGender(String customerGender) {
-		this.customerGender = customerGender;
-	}
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
-	public String getGuardianName() {
-		return guardianName;
-	}
+    public String getCustomerName() {
+        return customerName;
+    }
 
-	public void setGuardianName(String guardianName) {
-		this.guardianName = guardianName;
-	}
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
-	public String getRelationToApplicant() {
-		return relationToApplicant;
-	}
+    public String getMinor() {
+        return minor;
+    }
 
-	public void setRelationToApplicant(String relationToApplicant) {
-		this.relationToApplicant = relationToApplicant;
-	}
+    public void setMinor(String minor) {
+        this.minor = minor;
+    }
 
-	public String getDob() {
-		return dob;
-	}
+    public String getCustomerGender() {
+        return customerGender;
+    }
 
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
+    public void setCustomerGender(String customerGender) {
+        this.customerGender = customerGender;
+    }
 
-	public String getCustomerAge() {
-		return customerAge;
-	}
+    public String getGuardianName() {
+        return guardianName;
+    }
 
-	public void setCustomerAge(String customerAge) {
-		this.customerAge = customerAge;
-	}
+    public void setGuardianName(String guardianName) {
+        this.guardianName = guardianName;
+    }
 
-	public String getRelationshipStatus() {
-		return relationshipStatus;
-	}
+    public String getRelationToApplicant() {
+        return relationToApplicant;
+    }
 
-	public void setRelationshipStatus(String relationshipStatus) {
-		this.relationshipStatus = relationshipStatus;
-	}
+    public void setRelationToApplicant(String relationToApplicant) {
+        this.relationToApplicant = relationToApplicant;
+    }
 
-	public String getCustomerAddress() {
-		return customerAddress;
-	}
+    public String getDob() {
+        return dob;
+    }
 
-	public void setCustomerAddress(String customerAddress) {
-		this.customerAddress = customerAddress;
-	}
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
 
-	public String getState() {
-		return state;
-	}
+    public String getCustomerAge() {
+        return customerAge;
+    }
 
-	public void setState(String state) {
-		this.state = state;
-	}
+    public void setCustomerAge(String customerAge) {
+        this.customerAge = customerAge;
+    }
 
-	public String getDistrict() {
-		return district;
-	}
+    public String getRelationshipStatus() {
+        return relationshipStatus;
+    }
 
-	public void setDistrict(String district) {
-		this.district = district;
-	}
+    public void setRelationshipStatus(String relationshipStatus) {
+        this.relationshipStatus = relationshipStatus;
+    }
 
-	public String getAadharNo() {
-		return aadharNo;
-	}
+    public String getCustomerAddress() {
+        return customerAddress;
+    }
 
-	public void setAadharNo(String aadharNo) {
-		this.aadharNo = aadharNo;
-	}
+    public void setCustomerAddress(String customerAddress) {
+        this.customerAddress = customerAddress;
+    }
 
-	public String getPinCode() {
-		return pinCode;
-	}
+    public String getState() {
+        return state;
+    }
 
-	public void setPinCode(String pinCode) {
-		this.pinCode = pinCode;
-	}
+    public void setState(String state) {
+        this.state = state;
+    }
 
-	public String getBranchName() {
-		return branchName;
-	}
+    public String getDistrict() {
+        return district;
+    }
 
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 
-	public String getPanNo() {
-		return panNo;
-	}
+    public String getAadharNo() {
+        return aadharNo;
+    }
 
-	public void setPanNo(String panNo) {
-		this.panNo = panNo;
-	}
+    public void setAadharNo(String aadharNo) {
+        this.aadharNo = aadharNo;
+    }
 
-	public String getVoterNo() {
-		return voterNo;
-	}
+    public String getPinCode() {
+        return pinCode;
+    }
 
-	public void setVoterNo(String voterNo) {
-		this.voterNo = voterNo;
-	}
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
 
-	public String getDrivingLicenceNo() {
-		return drivingLicenceNo;
-	}
+    public String getBranchName() {
+        return branchName;
+    }
 
-	public void setDrivingLicenceNo(String drivingLicenceNo) {
-		this.drivingLicenceNo = drivingLicenceNo;
-	}
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
+    }
 
-	public String getReferralCode() {
-		return referralCode;
-	}
+    public String getPanNo() {
+        return panNo;
+    }
 
-	public void setReferralCode(String referralCode) {
-		this.referralCode = referralCode;
-	}
+    public void setPanNo(String panNo) {
+        this.panNo = panNo;
+    }
 
-	public String getReferralName() {
-		return referralName;
-	}
+    public String getVoterNo() {
+        return voterNo;
+    }
 
-	public void setReferralName(String referralName) {
-		this.referralName = referralName;
-	}
+    public void setVoterNo(String voterNo) {
+        this.voterNo = voterNo;
+    }
 
-	public String getContactNo() {
-		return contactNo;
-	}
+    public String getDrivingLicenceNo() {
+        return drivingLicenceNo;
+    }
 
-	public void setContactNo(String contactNo) {
-		this.contactNo = contactNo;
-	}
+    public void setDrivingLicenceNo(String drivingLicenceNo) {
+        this.drivingLicenceNo = drivingLicenceNo;
+    }
 
-	public String getEmailId() {
-		return emailId;
-	}
+    public String getReferralCode() {
+        return referralCode;
+    }
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
-	}
+    public void setReferralCode(String referralCode) {
+        this.referralCode = referralCode;
+    }
 
-	public String getProfession() {
-		return profession;
-	}
+    public String getReferralName() {
+        return referralName;
+    }
 
-	public void setProfession(String profession) {
-		this.profession = profession;
-	}
+    public void setReferralName(String referralName) {
+        this.referralName = referralName;
+    }
 
-	public String getAcademicBackground() {
-		return academicBackground;
-	}
+    public String getContactNo() {
+        return contactNo;
+    }
 
-	public void setAcademicBackground(String academicBackground) {
-		this.academicBackground = academicBackground;
-	}
+    public void setContactNo(String contactNo) {
+        this.contactNo = contactNo;
+    }
 
-	public String getCustomerPhoto() {
-		return customerPhoto;
-	}
+    public String getEmailId() {
+        return emailId;
+    }
 
-	public void setCustomerPhoto(String customerPhoto) {
-		this.customerPhoto = customerPhoto;
-	}
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
 
-	public String getCustomerSignature() {
-		return customerSignature;
-	}
+    public String getProfession() {
+        return profession;
+    }
 
-	public void setCustomerSignature(String customerSignature) {
-		this.customerSignature = customerSignature;
-	}
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getLightBill() {
+        return lightBill;
+    }
+
+    public void setLightBill(String lightBill) {
+        this.lightBill = lightBill;
+    }
+
+    public String getShareAmount() {
+        return shareAmount;
+    }
+
 
 	public String getNomineeName() {
 		return nomineeName;
 	}
 
-	public void setNomineeName(String nomineeName) {
-		this.nomineeName = nomineeName;
-	}
+    public void setShareAmount(String shareAmount) {
+        this.shareAmount = shareAmount;
+    }
 
-	public String getNomineeRelationToApplicant() {
-		return nomineeRelationToApplicant;
-	}
+    public String getNoOfShare() {
+        return noOfShare;
+    }
 
-	public void setNomineeRelationToApplicant(String nomineeRelationToApplicant) {
-		this.nomineeRelationToApplicant = nomineeRelationToApplicant;
-	}
 
-	public String getNomineeAge() {
-		return nomineeAge;
-	}
+    public void setNoOfShare(String noOfShare) {
+        this.noOfShare = noOfShare;
+    }
 
-	public void setNomineeAge(String nomineeAge) {
-		this.nomineeAge = nomineeAge;
-	}
+    public String getTaxBill() {
+        return taxBill;
+    }
 
-	public String getNomineeAddress() {
-		return nomineeAddress;
-	}
+    public void setTaxBill(String taxBill) {
+        this.taxBill = taxBill;
+    }
 
-	public void setNomineeAddress(String nomineeAddress) {
-		this.nomineeAddress = nomineeAddress;
-	}
+    public String getAcademicBackground() {
+        return academicBackground;
+    }
 
-	public String getNomineePanNo() {
-		return nomineePanNo;
-	}
+    public void setAcademicBackground(String academicBackground) {
+        this.academicBackground = academicBackground;
+    }
 
-	public void setNomineePanNo(String nomineePanNo) {
-		this.nomineePanNo = nomineePanNo;
-	}
+    public String getCustomerPhoto() {
+        return customerPhoto;
+    }
 
-	public String getNomineeKycNo() {
-		return nomineeKycNo;
-	}
+    public void setCustomerPhoto(String customerPhoto) {
+        this.customerPhoto = customerPhoto;
+    }
 
-	public void setNomineeKycNo(String nomineeKycNo) {
-		this.nomineeKycNo = nomineeKycNo;
-	}
+    public String getCustomerSignature() {
+        return customerSignature;
+    }
 
-	public String getNomineeKycType() {
-		return nomineeKycType;
-	}
+    public void setCustomerSignature(String customerSignature) {
+        this.customerSignature = customerSignature;
+    }
 
-	public void setNomineeKycType(String nomineeKycType) {
-		this.nomineeKycType = nomineeKycType;
-	}
+    public String getCustomerVoter() {
+        return customerVoter;
+    }
 
-	public String getMemberCode() {
-		return memberCode;
-	}
+    public void setCustomerVoter(String customerVoter) {
+        this.customerVoter = customerVoter;
+    }
 
-	public void setMemberCode(String memberCode) {
-		this.memberCode = memberCode;
-	}
+    public String getCustomerDriving() {
+        return customerDriving;
+    }
 
-	public String getNomineeMobileNo() {
-		return nomineeMobileNo;
-	}
+    public void setCustomerDriving(String customerDriving) {
+        this.customerDriving = customerDriving;
+    }
 
-	public void setNomineeMobileNo(String nomineeMobileNo) {
-		this.nomineeMobileNo = nomineeMobileNo;
-	}
+    public String getNomineeName() {
+        return nomineeName;
+    }
 
-	public String getMemberFees() {
-		return memberFees;
-	}
+    public void setNomineeName(String nomineeName) {
+        this.nomineeName = nomineeName;
+    }
 
-	public void setMemberFees(String memberFees) {
-		this.memberFees = memberFees;
-	}
+    public String getNomineeRelationToApplicant() {
+        return nomineeRelationToApplicant;
+    }
 
-	public String getChequeNo() {
-		return chequeNo;
-	}
+    public void setNomineeRelationToApplicant(String nomineeRelationToApplicant) {
+        this.nomineeRelationToApplicant = nomineeRelationToApplicant;
+    }
 
-	public void setChequeNo(String chequeNo) {
-		this.chequeNo = chequeNo;
-	}
+    public String getNomineeAge() {
+        return nomineeAge;
+    }
 
-	public String getChequeDate() {
-		return chequeDate;
-	}
+    public void setNomineeAge(String nomineeAge) {
+        this.nomineeAge = nomineeAge;
+    }
 
-	public void setChequeDate(String chequeDate) {
-		this.chequeDate = chequeDate;
-	}
+    public String getNomineeAddress() {
+        return nomineeAddress;
+    }
 
-	public String getDepositAcNo() {
-		return depositAcNo;
-	}
+    public void setNomineeAddress(String nomineeAddress) {
+        this.nomineeAddress = nomineeAddress;
+    }
 
-	public void setDepositAcNo(String depositAcNo) {
-		this.depositAcNo = depositAcNo;
-	}
+    public String getNomineePanNo() {
+        return nomineePanNo;
+    }
 
-	public String getReferenceNo() {
-		return referenceNo;
-	}
+    public void setNomineePanNo(String nomineePanNo) {
+        this.nomineePanNo = nomineePanNo;
+    }
 
-	public void setReferenceNo(String referenceNo) {
-		this.referenceNo = referenceNo;
-	}
+    public String getNomineeKycNo() {
+        return nomineeKycNo;
+    }
 
-	public int getMemberStatus() {
-		return memberStatus;
-	}
+    public void setNomineeKycNo(String nomineeKycNo) {
+        this.nomineeKycNo = nomineeKycNo;
+    }
 
-	public void setMemberStatus(int memberStatus) {
-		this.memberStatus = memberStatus;
-	}
+    public String getNomineeKycType() {
+        return nomineeKycType;
+    }
 
-	public int getMemberBanking() {
-		return memberBanking;
-	}
+    public void setNomineeKycType(String nomineeKycType) {
+        this.nomineeKycType = nomineeKycType;
+    }
 
-	public void setMemberBanking(int memberBanking) {
-		this.memberBanking = memberBanking;
-	}
+    public String getNomineeMobileNo() {
+        return nomineeMobileNo;
+    }
 
-	public int getNetBanking() {
-		return netBanking;
-	}
+    public void setNomineeMobileNo(String nomineeMobileNo) {
+        this.nomineeMobileNo = nomineeMobileNo;
+    }
 
-	public void setNetBanking(int netBanking) {
-		this.netBanking = netBanking;
-	}
+    public String getNomineeDOB() {
+        return nomineeDOB;
+    }
 
-	public int getSmsSend() {
-		return smsSend;
-	}
+    public void setNomineeDOB(String nomineeDOB) {
+        this.nomineeDOB = nomineeDOB;
+    }
 
-	public void setSmsSend(int smsSend) {
-		this.smsSend = smsSend;
-	}
+    public String getMemberFees() {
+        return memberFees;
+    }
 
-	public String getfDate() {
-		return fDate;
-	}
+    public void setMemberFees(String memberFees) {
+        this.memberFees = memberFees;
+    }
 
-	public void setfDate(String fDate) {
-		this.fDate = fDate;
-	}
+    public String getBuildingFund() {
+        return buildingFund;
+    }
 
-	public String gettDate() {
-		return tDate;
-	}
+    public void setBuildingFund(String buildingFund) {
+        this.buildingFund = buildingFund;
+    }
 
-	public void settDate(String tDate) {
-		this.tDate = tDate;
-	}
+    public String getAdminCharge() {
+        return adminCharge;
+    }
 
-	public boolean isVerified() {
-		return isVerified;
-	}
+    public void setAdminCharge(String adminCharge) {
+        this.adminCharge = adminCharge;
+    }
 
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
-	}
+    public String getDocumentCharge() {
+        return documentCharge;
+    }
+
+    public void setDocumentCharge(String documentCharge) {
+        this.documentCharge = documentCharge;
+    }
+
+    public String getOtherCharge() {
+        return otherCharge;
+    }
+
+    public void setOtherCharge(String otherCharge) {
+        this.otherCharge = otherCharge;
+    }
+
 
 	public String getRemarks() {
 		return remarks;
 	}
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
+    public String getEntryFee() {
+        return entryFee;
+    }
 
-	public String getPaymentBy() {
-		return paymentBy;
-	}
+    public void setEntryFee(String entryFee) {
+        this.entryFee = entryFee;
+    }
 
-	public void setPaymentBy(String paymentBy) {
-		this.paymentBy = paymentBy;
-	}
 
-	public String getLightBill() {
-		return lightBill;
-	}
+    public String getChequeNo() {
+        return chequeNo;
+    }
 
-	public void setLightBill(String lightBill) {
-		this.lightBill = lightBill;
-	}
+    public void setChequeNo(String chequeNo) {
+        this.chequeNo = chequeNo;
+    }
 
-	public String getTaxBill() {
-		return taxBill;
-	}
+    public String getChequeDate() {
+        return chequeDate;
+    }
 
-	public void setTaxBill(String taxBill) {
-		this.taxBill = taxBill;
-	}
+    public void setChequeDate(String chequeDate) {
+        this.chequeDate = chequeDate;
+    }
 
-	public String getCustomerVoter() {
-		return customerVoter;
-	}
+    public String getDepositAcNo() {
+        return depositAcNo;
+    }
 
-	public void setCustomerVoter(String customerVoter) {
-		this.customerVoter = customerVoter;
-	}
+    public void setDepositAcNo(String depositAcNo) {
+        this.depositAcNo = depositAcNo;
+    }
 
-	public String getCustomerDriving() {
-		return customerDriving;
-	}
+    public String getReferenceNo() {
+        return referenceNo;
+    }
 
-	public void setCustomerDriving(String customerDriving) {
-		this.customerDriving = customerDriving;
-	}
+    public void setReferenceNo(String referenceNo) {
+        this.referenceNo = referenceNo;
+    }
 
-	public String getNomineeDOB() {
-		return nomineeDOB;
-	}
+    public String getRemarks() {
+        return remarks;
+    }
 
-	public void setNomineeDOB(String nomineeDOB) {
-		this.nomineeDOB = nomineeDOB;
-	}
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
 
-	public String getBuildingFund() {
-		return buildingFund;
-	}
+    public String getPaymentBy() {
+        return paymentBy;
+    }
 
-	public void setBuildingFund(String buildingFund) {
-		this.buildingFund = buildingFund;
-	}
+    public void setPaymentBy(String paymentBy) {
+        this.paymentBy = paymentBy;
+    }
 
-	public String getAdminCharge() {
-		return adminCharge;
-	}
+    public int getMemberStatus() {
+        return memberStatus;
+    }
 
-	public void setAdminCharge(String adminCharge) {
-		this.adminCharge = adminCharge;
-	}
+    public void setMemberStatus(int memberStatus) {
+        this.memberStatus = memberStatus;
+    }
 
-	public String getDocumentCharge() {
-		return documentCharge;
-	}
+    public int getMemberBanking() {
+        return memberBanking;
+    }
 
-	public void setDocumentCharge(String documentCharge) {
-		this.documentCharge = documentCharge;
-	}
+    public void setMemberBanking(int memberBanking) {
+        this.memberBanking = memberBanking;
+    }
 
-	public String getOtherCharge() {
-		return otherCharge;
-	}
+    public int getNetBanking() {
+        return netBanking;
+    }
 
-	public void setOtherCharge(String otherCharge) {
-		this.otherCharge = otherCharge;
-	}
+    public void setNetBanking(int netBanking) {
+        this.netBanking = netBanking;
+    }
 
-	public String getEntryFee() {
-		return entryFee;
-	}
+    public int getSmsSend() {
+        return smsSend;
+    }
 
-	public void setEntryFee(String entryFee) {
-		this.entryFee = entryFee;
-	}
+    public void setSmsSend(int smsSend) {
+        this.smsSend = smsSend;
+    }
 
-	public String getShareAmount() {
-		return shareAmount;
-	}
+    public String getfDate() {
+        return fDate;
+    }
 
-	public void setShareAmount(String shareAmount) {
-		this.shareAmount = shareAmount;
-	}
+    public void setfDate(String fDate) {
+        this.fDate = fDate;
+    }
 
-	public String getNoOfShare() {
-		return noOfShare;
-	}
+    public String gettDate() {
+        return tDate;
+    }
+
+    public void settDate(String tDate) {
+        this.tDate = tDate;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
 
 	public void setNoOfShare(String noOfShare) {
 		this.noOfShare = noOfShare;
@@ -652,4 +759,12 @@ public class addCustomer {
 		this.nomineAadhar = nomineAadhar;
 	}
 
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
+    }
 }
