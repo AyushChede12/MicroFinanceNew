@@ -43,7 +43,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Policy Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-piggy-bank"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Add New Investment</li>
@@ -60,7 +60,7 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					<input type="hidden" name="hiddenSchemeCode" id="hiddenSchemeCode">
+						<input type="hidden" name="hiddenSchemeCode" id="hiddenSchemeCode">
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
@@ -344,8 +344,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Photo</label> <label for="image1" id="drop-area"> <input
-								accept="image/*" name="image1" id="image1"
-								hidden="hidden" onchange="photopreview();"
+								accept="image/*" name="image1" id="image1" hidden="hidden"
+								onchange="photopreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
@@ -360,10 +360,10 @@ pageEncoding="ISO-8859-1"%> -->
 							<label for=""
 								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
 								Signature</label> <label for="image2" id="drop-area"> <input
-								accept="image/*" name="image2"
-								id="image2" hidden="hidden" onchange="signpreview();"
+								accept="image/*" name="image2" id="image2" hidden="hidden"
+								onchange="signpreview();"
 								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">								
+								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="signaturePreview" /><input type="hidden"
 										name="signatureHidden" id="signatureHidden">
@@ -449,6 +449,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="./js/PolicyManagment/addInvestment.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

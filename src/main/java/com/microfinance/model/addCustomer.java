@@ -5,6 +5,90 @@ import javax.persistence.*;
 @Entity
 public class addCustomer {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+//Customer Details
+	private String memberCode;
+	private String authenticateFor;
+	private String signupDate;
+	private String major;
+	private String customerName;
+	private String minor;
+	private String customerGender;
+	private String guardianName;
+	private String relationToApplicant;
+	private String dob;
+	private String customerAge;
+	private String relationshipStatus;
+	private String customerAddress;
+	private String state;
+	private String district;
+	private String aadharNo;
+	private String pinCode;
+	private String branchName;
+	private String panNo;
+	private String voterNo;
+	private String drivingLicenceNo;
+	private String referralCode;
+	private String referralName;
+	private String contactNo;
+	private String emailId;
+	private String profession;
+	private String lightBill;
+	private String shareAmount;
+	private String noOfShare;
+	private String taxBill;
+	private String academicBackground;
+	private String customerPhoto;
+	private String customerSignature;
+	private String customerVoter;
+	private String customerDriving;
+	private String firstName;
+	private String middleName;
+	private String lastName;
+
+//Nominee Details
+
+	private String nomineeName;
+	private String nomineeRelationToApplicant;
+	private String nomineeAge;
+	private String nomineeAddress;
+	private String nomineePanNo;
+	private String nomineeKycNo;
+	private String nomineeKycType;
+	private String nomineeMobileNo;
+	private String nomineeDOB;
+	private String nomineSignature;
+	private String nomineAadhar;
+
+	// Fees Details
+	private String memberFees;
+	private String buildingFund;
+	private String adminCharge;
+	private String documentCharge;
+	private String otherCharge;
+	private String entryFee;
+	private String chequeNo;
+	private String chequeDate;
+	private String depositAcNo;
+	private String referenceNo;
+	private String remarks;
+	private String paymentBy;
+
+	private int memberStatus;
+	private int memberBanking;
+	private int netBanking;
+	private int smsSend;
+
+	private String fDate;
+	private String tDate;
+
+	private boolean isVerified;
+
+	private boolean isApproved;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -83,6 +167,7 @@ public class addCustomer {
     private boolean isVerified;
     private boolean isApproved;
 
+
     // ------------------ Constructors ------------------
     public addCustomer() {
     }
@@ -93,11 +178,21 @@ public class addCustomer {
         this.branchName = branchName;
     }
 
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
     // ------------------ Getters & Setters ------------------
 
     public long getId() {
         return id;
     }
+
 
     public void setId(long id) {
         this.id = id;
@@ -323,6 +418,11 @@ public class addCustomer {
         return shareAmount;
     }
 
+
+	public String getNomineeName() {
+		return nomineeName;
+	}
+
     public void setShareAmount(String shareAmount) {
         this.shareAmount = shareAmount;
     }
@@ -330,6 +430,7 @@ public class addCustomer {
     public String getNoOfShare() {
         return noOfShare;
     }
+
 
     public void setNoOfShare(String noOfShare) {
         this.noOfShare = noOfShare;
@@ -495,6 +596,11 @@ public class addCustomer {
         this.otherCharge = otherCharge;
     }
 
+
+	public String getRemarks() {
+		return remarks;
+	}
+
     public String getEntryFee() {
         return entryFee;
     }
@@ -502,6 +608,7 @@ public class addCustomer {
     public void setEntryFee(String entryFee) {
         this.entryFee = entryFee;
     }
+
 
     public String getChequeNo() {
         return chequeNo;
@@ -607,9 +714,55 @@ public class addCustomer {
         isVerified = verified;
     }
 
+
+	public void setNoOfShare(String noOfShare) {
+		this.noOfShare = noOfShare;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getMiddleName() {
+		return middleName;
+	}
+
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getNomineSignature() {
+		return nomineSignature;
+	}
+
+	public void setNomineSignature(String nomineSignature) {
+		this.nomineSignature = nomineSignature;
+	}
+
+	public String getNomineAadhar() {
+		return nomineAadhar;
+	}
+
+	public void setNomineAadhar(String nomineAadhar) {
+		this.nomineAadhar = nomineAadhar;
+	}
+
     public boolean isApproved() {
         return isApproved;
     }
+
 
     public void setApproved(boolean approved) {
         isApproved = approved;

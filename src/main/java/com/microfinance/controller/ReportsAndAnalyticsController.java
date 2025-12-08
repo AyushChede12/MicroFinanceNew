@@ -145,5 +145,18 @@ public class ReportsAndAnalyticsController {
 					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Team Member Cheque Data Not Found"));
 		}
 	}
+	
+	@GetMapping("/getAllLoanApplication")
+	public ResponseEntity<ApiResponse<List<LoanApplication>>> fetchAllLoanApplication() {
+		List<LoanApplication> list = reportsAndAnalyticsService.getAllLoanApplication();
+
+		if (!list.isEmpty()) {
+			return ResponseEntity
+					.ok(ApiResponse.success(HttpStatus.OK, "Loan Application Data fetched Successfully", list));
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body(ApiResponse.error(HttpStatus.NOT_FOUND, "Loan Application Data Not Found"));
+		}
+	}
 
 }

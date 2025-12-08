@@ -33,6 +33,8 @@ pageEncoding="ISO-8859-1"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+!-- jQuery CDN (latest 3.x version) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 
@@ -43,7 +45,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Ledger Summary Report</li>
@@ -52,87 +54,90 @@ pageEncoding="ISO-8859-1"%> -->
 		</div>
 
 		<div>
-			<form id="formid">
-				<div>
-					<nav>
-						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Information</li>
-						</ol>
-					</nav>
-					<div class="row">
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="">Branch Name</label> <select id="branchName"
-									name="branchName" required="required"
-									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									<option value="Blue">Blue</option>
-								</select>
-							</div>
-						</div>
+			<form id="ledgerSummaryForm">
 
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">Start Date</label> <input type="date"
-									name="startDate" id="startDate" required="required"
-									
-									style="text-transform: uppercase;" />
-							</div>
-						</div>
+				<nav>
+					<ol class="breadcrumb breadcrumb-title">
+						<li class="breadcrumb-item action">Search Information</li>
+					</ol>
+				</nav>
+				<div class="row">
+					<div class="col-lg-3">
+						<label>Branch Name</label> <select id="branchName"
+							name="branchName" required class="form-control selectField"
+							style="height: 30px;">
+							<option value="">Select Branch</option>
+						</select>
+					</div>
 
-						<div class="col-lg-4">
-							<div class="d-flex flex-column formFields">
-								<label for="vehicalNo">End Date</label> <input type="date"
-									name="endDate" id="endDate" required="required"
-									 style="text-transform: uppercase;" />
-							</div>
-						</div>
+					<div class="col-lg-3">
+						<label>Ledger Name</label> <select id="ledgerName"
+							name="ledgerName" required class="form-control selectField"
+							style="height: 30px;">
+							<option value="">Select Ledger</option>
+						</select>
+					</div>
+
+					<div class="col-lg-3">
+						<label>Start Date</label> <input type="date" name="startDate"
+							id="startDate" class="form-control"  required />
+					</div>
+
+					<div class="col-lg-3">
+						<label>End Date</label> <input type="date" name="endDate"
+							id="endDate" class="form-control" required />
 					</div>
 				</div>
-		</div>
 
-		<div class="row">
-			<div class="col-12 text-center mt-3">
-				<button id="viewBtn" class="btnStyle"
-					style="background-color: #FFA500;">View</button>
-			</div>
+				<div class="row mt-3">
+					<div class="col text-center">
+						<button type="submit" id="viewBtn"
+							class="btn btn-warning text-white px-4">View</button>
+					</div>
+				</div>
+			</form>
 		</div>
-		</form>
-
+		<!-- Ledger Summary Table -->
 		<div class="row mt-5">
 			<div class="col-12">
-				<label for="vehicalNo"><b>Ledger On</b></label> Cash Account<br>
-				<label for="vehicalNo">Branch</label> : Main Office
+				<div id="summaryInfo" class="mb-3"></div>
+
 				<div class="card recent-sales">
-
 					<div class="card-body table-responsive">
-						<h5 class="card-title"></h5>
-
-						<table class="table table-borderless datatable overflow-scroll">
+						<table class="table table-borderless datatable">
 							<thead class="table-light">
-								<tr style="font-family: 'Poppins', sans-serif;">
-									<th scope="col">Date</th>
-									<th scope="col">Receipt No.</th>
-									<th scope="col">Narration</th>
-									<th scope="col">Code</th>
-									<th scope="col">Debit</th>
-									<th scope="col">Credit</th>
+								<tr>
+									<th>Date</th>
+									<th>Voucher ID</th>
+									<th>Remarks</th>
+									<th>Account Code</th>
+									<th>Debit</th>
+									<th>Credit</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="ledgerSummaryBody">
+								<!-- Data rows will be inserted here -->
 							</tbody>
 						</table>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		</div>
-
-
 	</main>
+
+
+
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
+	<script src="./js/account-management/ledgerSummaryReport.js"></script>
+	<script>
+		$(document).ready(function() {
+			BranchNameDropdown();
+			LedgerDropdown()
+
+		});
+	</script>
+	
 </body>
 
 </html>

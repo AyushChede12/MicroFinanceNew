@@ -45,7 +45,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Maturity Section</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Maturity Application Status</li>
@@ -96,7 +96,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="searchBtn" class="btn btn-dark" color:black">Search</button>
+							<button type="submit" id="searchBtn" class="btn btn-dark" color:black">Search</button>
 
 						</div>
 					</div>
@@ -121,14 +121,16 @@ pageEncoding="ISO-8859-1"%> -->
 									<thead class="table-light">
 										<tr style="font-family: 'Poppins', sans-serif;">
 											<th scope="col">slno</th>
+											<th scope="col">Branch Name</th>
 											<th scope="col">Policy No.</th>
-											<th scope="col">Application name</th>
-											<th scope="col">Application Branch</th>
-											<th scope="col">Application Date</th>
 											<th scope="col">Maturity Date</th>
-											<th scope="col">App.User</th>
-											<th scope="col">App.Remarks</th>
-											<th scope="col">maturity Amt</th>
+											<th scope="col">Application name</th>
+											<th scope="col">Scheme Name </th>
+											<th scope="col">Scheme Type</th>
+											
+											<th scope="col">Policy Amount</th>
+											<th scope="col">Deposit Amount</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -150,6 +152,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/MaturityManagement/maturityapplicationstatus.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

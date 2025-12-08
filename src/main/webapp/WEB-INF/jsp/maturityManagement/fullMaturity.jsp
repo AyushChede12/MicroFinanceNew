@@ -54,7 +54,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Full Maturity Payment</li>
@@ -81,7 +81,6 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="Select">Select</option>
 									<option value="DRD">DRD</option>
 									<option value="RD">RD</option>
-									<option value="FD">FD</option>
 									<option value="MIS">MIS</option>
 								</select>
 							</div>
@@ -358,7 +357,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
+							<button id="saveBtn" class="btn btn-success">Payment</button>
 						</div>
 					</div>
 				</div>
@@ -414,6 +413,27 @@ function totalPayment() {
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/MaturityManagement/maturitypayment.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

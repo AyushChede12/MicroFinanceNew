@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<aside id="sidebar" class="sidebar">
 
 		<ul class="sidebar-nav" id="sidebar-nav">
@@ -581,8 +582,8 @@
 								Payment</span>
 					</a></li>
 
-					<li><a href="emiStatement"> <i class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">EmI Statement</span>
+					<li><a href="goldLoanDocument"> <i class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan Document</span>
 					</a></li>
 
 
@@ -593,6 +594,13 @@
 							<span style="font-family: 'Poppins', sans-serif">Gold Loan
 								Statement</span>
 					</a></li>
+					
+					
+					<li><a href="goldLoanClosure"> <i class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan
+								Closure</span>
+					</a></li>
+
 
 
 
@@ -600,7 +608,7 @@
 							style="font-family: 'Poppins', sans-serif">Print NOC</span>
 					</a></li>
 
-					<li><a href="searchGoldLoan"> <i class="bi bi-circle"></i>
+					<li><a href="GoldLoanSearch"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Search
 								Gold Loan</span>
 					</a></li>
@@ -902,13 +910,6 @@
 					</a></li>
 
 
-
-					<li><a href="maturityReceiptPrint"> <i
-							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Print Maturity
-								Receipt</span>
-					</a></li>
-
 				</ul></li>
 
 
@@ -1189,6 +1190,7 @@
       </li> -->
 		</ul>
 	</aside>
+
 	<script src="./js/adminscript.js"></script>
 </body>
 </html>

@@ -38,7 +38,69 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
 </head>
+<style>
+.report-container {
+	font-family: 'Segoe UI', Arial, sans-serif;
+	color: #222;
+	padding: 30px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
 
+.report-header {
+	text-align: center;
+	border-bottom: 3px solid #007bff;
+	margin-bottom: 20px;
+}
+
+.report-header h2 {
+	font-weight: 700;
+	color: #007bff;
+}
+
+.report-header p {
+	margin: 0;
+	font-size: 14px;
+}
+
+.section-title {
+	font-size: 16px;
+	margin-top: 25px;
+	margin-bottom: 10px;
+	font-weight: bold;
+	border-left: 4px solid #007bff;
+	padding-left: 10px;
+}
+
+.report-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+}
+
+.report-table th, .report-table td {
+	border: 1px solid #ccc;
+	padding: 8px 12px;
+	font-size: 14px;
+}
+
+.report-table th {
+	background: #f7f9fc;
+	width: 30%;
+}
+
+.signature-section {
+	margin-top: 40px;
+	text-align: right;
+}
+
+.signature-section hr {
+	width: 200px;
+	border-top: 2px solid #000;
+	margin-bottom: 5px;
+}
+</style>
 
 <body>
 
@@ -47,7 +109,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Policy Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-piggy-bank"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Investment Transaction Slip</li>
@@ -129,11 +191,11 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 					</div>
-					
+
 					<br> <br> <br> <br> <br> <br> <br>
 
 
-					<div id="transactionSection" class="transaction-section">
+					<!-- <div id="transactionSection" class="transaction-section">
 						<div style="width: 70%; margin: auto">
 							<h1>Microfinance Services</h1>
 							<p>Address : Nagpur(440024) - Maharashtra</p>
@@ -221,15 +283,45 @@ pageEncoding="ISO-8859-1"%> -->
 									Signature</p>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<br> <br> <br> <br> <br> <br> <br>
-					<div class="mb-4" style="display: flex; justify-content: center; margin-top: -55px;">
+					<div class="mb-4"
+						style="display: flex; justify-content: center; margin-top: -55px;">
 						<button id="printBtn" class="btn btn-success">Print</button>
 					</div>
 
 
 				</div>
+
+				<!-- ✅ Modal for Report Preview -->
+				<div class="modal fade" id="printModal" tabindex="-1"
+					aria-labelledby="printModalLabel" aria-hidden="true">
+					<div
+						class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+						<div class="modal-content">
+							<div class="modal-header bg-primary text-white">
+								<h5 class="modal-title" id="printModalLabel">Policy Report
+									Preview</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							</div>
+
+							<div class="modal-body">
+								<div id="modalDataContainer"></div>
+							</div>
+
+							<div class="modal-footer">
+								<button id="printBtn" class="btn btn-success">
+									<i class="bi bi-printer"></i> Print
+								</button>
+								<button id="downloadBtn" class="btn btn-danger">
+									<i class="bi bi-file-earmark-pdf"></i> PDF
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
 			</form>
 		</div>
 	</main>
@@ -277,6 +369,24 @@ pageEncoding="ISO-8859-1"%> -->
             printWindow.close();
         };
     });
+</script>
+	<script>
+$(document).ready(function () {
+
+    // Convert all labels inside #formid to uppercase
+    $("#formid label").each(function () {
+        $(this).text($(this).text().toUpperCase());
+    });
+
+    // Convert all placeholders inside #formid to uppercase
+    $("#formid input, #formid textarea, #formid select").each(function () {
+        let ph = $(this).attr("placeholder");
+        if (ph) {
+            $(this).attr("placeholder", ph.toUpperCase());
+        }
+    });
+
+});
 </script>
 
 

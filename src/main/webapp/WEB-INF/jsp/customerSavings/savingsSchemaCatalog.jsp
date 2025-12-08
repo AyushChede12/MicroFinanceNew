@@ -29,6 +29,37 @@ pageEncoding="ISO-8859-1"%> -->
 
 <body>
 
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Customer Savings</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="openDashboard">
+              <i class="bi bi-bank text-blue"></i>
+            </a>
+          </li>
+          <li class="breadcrumb-item action">Savings Scheme Catalog</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div>
+      <form>
+        <div>
+          <nav>
+            <ol class="breadcrumb breadcrumb-title">
+              <li class="breadcrumb-item action">Saving Plan Details</li>
+            </ol>
+          </nav>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="d-flex flex-column formFields mb-4">
+                <label for="">Plan Name </label> <input type="text" name="policyName" id="policyName" required="required"
+                  placeholder="Enter Plan Name" />
+              </div>
+
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>Customer Savings</h1>
@@ -58,6 +89,7 @@ pageEncoding="ISO-8859-1"%> -->
               <label for="">Plan Name </label>
               <input type="text" name="policyName" id="policyName" required="required"
                 placeholder="Enter Plan Name" />
+
             </div>
           </div>
 
@@ -266,5 +298,26 @@ pageEncoding="ISO-8859-1"%> -->
 
   <script src="./js/adminscript.js"></script>
   <script src="./js/customerSavings/SavingScemeCatalog.js"></script>
+  <script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 </html>

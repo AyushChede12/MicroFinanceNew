@@ -1,4 +1,158 @@
 $(document).ready(function() {
+
+	$("#guardianDetails").hide();
+	$("#guardianAccount").hide();
+
+	loadCustomerTable();
+
+
+	// Hide Aadhar field initially
+	$("#aadharNo").closest(".col-lg-3").hide();
+
+	$("#authenticateFor").on("change", function() {
+		const val = $(this).val();
+
+		if (val === "aadhar") {
+			$("#aadharNo").closest(".col-lg-3").show();
+			$("#aadharNo").prop("required", true);
+		} else {
+			$("#aadharNo").closest(".col-lg-3").hide();
+			$("#aadharNo").prop("required", false).val("");
+		}
+	});
+
+
+
+	$('#saveBtn').click(function(event) {
+		var firstName = $('#firstName').val();
+		alert(firstName);
+		var middleName = $('#middleName').val();
+		alert(middleName);
+		var lastName = $('#lastName').val();
+		alert(lastName);
+		event.preventDefault();
+
+		var formData = new FormData();
+
+		// Text fields
+		formData.append("memberCode", $('#memberCode').val());
+		formData.append("authenticateFor", $('#authenticateFor').val());
+		formData.append("signupDate", $('#signupDate').val());
+		formData.append("major", $('#major').val());
+		formData.append("minor", $('#minor').val());
+		formData.append("customerGender", $('#customerGender').val());
+		formData.append("guardianName", $('#guardianName').val());
+		formData.append("relationToApplicant", $('#relationToApplicant').val());
+		formData.append("dob", $('#dob').val());
+		formData.append("customerAge", $('#customerAge').val());
+		formData.append("relationshipStatus", $('#relationshipStatus').val());
+		formData.append("customerAddress", $('#customerAddress').val());
+		formData.append("state", $('#state').val());
+		formData.append("district", $('#district').val());
+		formData.append("aadharNo", $('#aadharNo').val());
+		formData.append("pinCode", $('#pinCode').val());
+		formData.append("branchName", $('#branchName').val());
+		formData.append("panNo", $('#panNo').val());
+		formData.append("voterNo", $('#voterNo').val());
+		formData.append("drivingLicenceNo", $('#drivingLicenceNo').val());
+		formData.append("referralCode", $('#referralCode').val());
+		formData.append("referralName", $('#referralName').val());
+		formData.append("contactNo", $('#contactNo').val());
+		formData.append("emailId", $('#emailId').val());
+		formData.append("profession", $('#profession').val());
+		formData.append("academicBackground", $('#academicBackground').val());
+		formData.append("firstName", $('#firstName').val());
+		formData.append("middleName", $('#middleName').val());
+		formData.append("lastName", $('#lastName').val());
+
+
+		// Nominee
+		formData.append("nomineeName", $('#nomineeName').val());
+		formData.append("nomineeRelationToApplicant", $('#nomineeRelationToApplicant').val());
+		formData.append("nomineeAge", $('#nomineeAge').val());
+		formData.append("nomineeAddress", $('#nomineeAddress').val());
+		formData.append("nomineePanNo", $('#nomineePanNo').val());
+		formData.append("nomineeKycNo", $('#nomineeKycNo').val());
+		formData.append("nomineeKycType", $('#nomineeKycType').val());
+		formData.append("nomineeMobileNo", $('#nomineeMobileNo').val());
+
+		// Payment
+		formData.append("memberFees", $('#memberFees').val());
+		formData.append("chequeNo", $('#chequeNo').val());
+		formData.append("chequeDate", $('#chequeDate').val());
+		formData.append("depositAcNo", $('#depositAcNo').val());
+		formData.append("referenceNo", $('#referenceNo').val());
+		formData.append("remarks", $('#remarks').val());
+		formData.append("paymentBy", $('#paymentBy').val());
+		formData.append("lightBill", $('#lightBill').val());
+		formData.append("taxBill", $('#taxBill').val());
+		formData.append("nomineeDOB", $('#nomineeDOB').val());
+		formData.append("buildingFund", $('#buildingFund').val());
+		formData.append("adminCharge", $('#adminCharge').val());
+		formData.append("documentCharge", $('#documentCharge').val());
+		formData.append("otherCharge", $('#otherCharge').val());
+		formData.append("entryFee", $('#entryFee').val());
+		formData.append("noOfShare", $('#noOfShare').val());
+		formData.append("shareAmount", $('#shareAmount').val());
+
+
+		// File uploads
+		const customerPhoto = $('#customerPhoto')[0].files[0];
+		const customerSignature = $('#customerSignature')[0].files[0];
+		const customerVoter = $('#customerVoter')[0].files[0];
+		const customerDriving = $('#customerDriving')[0].files[0];
+		const nomineSignature = $('#nomineSignature')[0].files[0];
+		const nomineAadhar = $('#nomineAadhar')[0].files[0];
+
+		if (customerPhoto) formData.append("customerPhoto", customerPhoto);
+		if (customerSignature) formData.append("customerSignature", customerSignature);
+		if (customerVoter) formData.append("customerVoter", customerVoter);
+		if (customerDriving) formData.append("customerDriving", customerDriving);
+		if (nomineSignature) formData.append("nomineSignature", nomineSignature);
+		if (nomineAadhar) formData.append("nomineAadhar", nomineAadhar);
+
+
+		// Toggles
+		formData.append("memberStatus", $('#toggle-member-status').is(":checked") ? "1" : "0");
+		formData.append("memberBanking", $('#toggle-banking-status').is(":checked") ? "1" : "0");
+		formData.append("netBanking", $('#toggle-netbanking-status').is(":checked") ? "1" : "0");
+		formData.append("smsSend", $('#toggle-sms-status').is(":checked") ? "1" : "0");
+
+		// ✅ Auto domain + context path
+		const fullUrl = window.location.origin + "/api/customermanagement/saveOrUpdateCustomer";
+
+		console.log("POST to URL: ", fullUrl);
+
+		// AJAX call
+		$.ajax({
+			type: 'POST',
+			url: fullUrl,
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response, textStatus, xhr) {
+				console.log("✅ Response:", response);
+
+				if (xhr.status === 200 || xhr.status === 201) {
+					alert(response.message || "Customer saved successfully!");
+					location.reload();
+				} else {
+					alert("Unexpected response: " + (response.message || "Unknown error"));
+				}
+			},
+			error: function(xhr) {
+				console.error("❌ Error response: ", xhr);
+				let msg = "Something went wrong while saving.";
+				if (xhr.responseJSON && xhr.responseJSON.message) {
+					msg = xhr.responseJSON.message;
+				} else if (xhr.responseText) {
+					msg = xhr.responseText;
+				}
+				alert(msg);
+			}
+		});
+	});
+
     $('#saveBtn').click(function(e) {
         e.preventDefault();
 
@@ -77,6 +231,7 @@ $(document).ready(function() {
             }
         });
     });
+
 });
 
 
@@ -162,6 +317,83 @@ function drivingpreview() {
 		alert("Please upload a valid image file for signature.");
 	}
 }
+
+function loadCustomerTable() {
+	$.ajax({
+		url: "api/customermanagement/getAllCustomer",
+		type: "GET",
+		success: function(data) {
+			let tbody = $("#customerTableBody");
+			tbody.empty();
+
+			data.forEach((cust, idx) => {
+
+				// 🔹 Build FULL NAME from first, middle, last
+				const fullName = [
+					cust.firstName,
+					cust.middleName,
+					cust.lastName
+				].filter(Boolean).join(" ");
+				tbody.append(`
+					<tr>
+					                        <td>${(idx + 1).toString().toUpperCase()}</td>
+					                        <td>${(cust.memberCode || "").toUpperCase()}</td>
+					                        <td>${fullName}</td>
+					                        <td>${(cust.contactNo || "").toUpperCase()}</td>
+					                        <td>${(cust.aadharNo || "").toUpperCase()}</td>
+					                        <td>${(cust.district || "").toUpperCase()}</td>
+					                        <td>${(cust.branchName || "").toUpperCase()}</td>
+					                        <td>${(cust.dob || "").toUpperCase()}</td>
+					                    </tr>
+                `);
+			});
+		},
+		error: function(err) {
+			console.log("Error loading table:", err);
+		}
+	});
+}
+
+
+
+function nomineeSignaturePreview() {
+	const file = document.getElementById("nomineSignature").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewImg = document.getElementById("nomineeSignatureImg");
+			document.getElementById("nomineeSignatureImg").src = e.target.result;
+			previewImg.style.width = "100%";
+			previewImg.style.height = "100%";
+			previewImg.style.objectFit = "cover";
+			previewImg.style.borderRadius = "20px";
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image file for signature.");
+	}
+}
+
+
+function nomineeAadharPreview() {
+	const file = document.getElementById("nomineAadhar").files[0];
+	if (file && file.type.startsWith("image/")) {
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const previewImg = document.getElementById("nomineeAadharImg");
+			document.getElementById("nomineeAadharImg").src = e.target.result;
+			previewImg.style.width = "100%";
+			previewImg.style.height = "100%";
+			previewImg.style.objectFit = "cover";
+			previewImg.style.overflow = "hidden";
+			previewImg.style.borderRadius = "20px";
+		};
+		reader.readAsDataURL(file);
+	} else {
+		alert("Please upload a valid image for nominee Aadhar.");
+	}
+}
+
 $(document).ready(function() {
 	// Load States
 	$.ajax({
@@ -484,6 +716,36 @@ function ifMinor() {
 	}
 }
 
+// Auto-calculate Age and Minor detection
+$(document).ready(function() {
+	$('#dob').on('change', function() {
+		const dobVal = $(this).val();
+		if (!dobVal) return;
+
+		const dob = new Date(dobVal);
+		const today = new Date();
+
+		let age = today.getFullYear() - dob.getFullYear();
+		const m = today.getMonth() - dob.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+			age--;
+		}
+
+		$('#customerAge').val(age);
+
+		if (age < 18) {
+			$('#minor').val('Yes');
+			$('#guardianDetails').show();
+			$('#guardianAccount').show();
+		} else {
+			$('#minor').val('No');
+			$('#guardianDetails').hide();
+			$('#guardianAccount').hide();
+		}
+	});
+});
+
+
 
 $(document).ready(function() {
 	// 1️⃣ Fetch all customers for dropdown
@@ -526,16 +788,27 @@ $(document).ready(function() {
 
 			// Fetch account number from backend
 			$.ajax({
+
+				url: `/api/customersavings/getAccountNumbersByCode?selectByCustomer=${encodeURIComponent(selectedCode)}`,
+
 				url: `/api/customersavings/getAccountNumbers?selectByCustomer=${encodeURIComponent(selectedCode)}`,
+
 				method: "GET",
 				success: function(res) {
 					console.log("Account number response:", res);
 
 					// Access account number using the selected code as key
+
+					if (res.data && res.data.length > 0) {
+						$('#guardianAccNo').val(res.data[0].accountNumber);
+					} else {
+						$('#guardianAccNo').val('');
+
 					if (res.data && res.data[selectedCode] && res.data[selectedCode].length > 0) {
 						$('#guardianAccNo').val(res.data[selectedCode][0]); // use first account number
 					} else {
 						$('#guardianAccNo').val(''); // no account found
+
 					}
 				},
 				error: function(err) {
@@ -546,4 +819,109 @@ $(document).ready(function() {
 		}
 	}).trigger('change'); // trigger on load
 	// trigger on load
+
+
+	$.ajax({
+		url: 'api/preference/getAllCategoryModule',
+		method: "GET",
+		success: function(response) {
+			if (response.status === 'FOUND') {
+				console.log("Fetched Category:", response.data);
+				response.data.forEach(function(category) {
+					$('#category').append(
+						$('<option>', {
+							value: category.category,  // What will be saved to DB
+							text: category.category,   // What user sees
+							'data-id': category.stateId // Optional: internal use
+						})
+					);
+				});
+			} else {
+				console.warn("No Category data available.");
+			}
+		},
+		error: function(err) {
+			console.error("Error fetching Categories:", err);
+		}
+	});
+
+	$('#category').on('change', function() {
+		const selectedCategory = $("#category").val();
+		$('#caste').empty().append('<option value="">SELECT CASTE</option>');
+
+		if (selectedCategory) {
+			$.ajax({
+				url: 'api/preference/getAllCasteByCategory',
+				method: 'GET',
+				data: { category: selectedCategory },  // ✅ Now correct ID passed
+				success: function(response) {
+					console.log("Fetched caste:", response);
+					const casteList = response.data;
+					casteList.forEach(function(caste) {
+						$('#caste').append(
+							$('<option>', {
+								value: caste.caste,
+								text: caste.caste
+							})
+						);
+					});
+				},
+				error: function(err) {
+					console.error("Error fetching caste:", err);
+				}
+			});
+		}
+	});
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+	document.getElementById("memberFeesTable").style.display = "none";
+
+
+});
+
+document.getElementById("memberFees").addEventListener("click", function(event) {
+	event.stopPropagation();
+
+	let table = document.getElementById("memberFeesTable");
+	table.style.display = (table.style.display === "none" || table.style.display === "")
+		? "block" : "none";
+});
+
+
+document.getElementById("memberFeesTable").addEventListener("click", function(event) {
+	event.stopPropagation();
+});
+
+
+document.addEventListener("click", function() {
+	document.getElementById("memberFeesTable").style.display = "none";
+});
+
+
+
+function calcOpeningFees() {
+
+	let n2000 = (document.getElementById("qty2000").value || 0) * 2000;
+	let n500 = (document.getElementById("qty500").value || 0) * 500;
+	let n200 = (document.getElementById("qty200").value || 0) * 200;
+	let n100 = (document.getElementById("qty100").value || 0) * 100;
+	let n50 = (document.getElementById("qty50").value || 0) * 50;
+	let n20 = (document.getElementById("qty20").value || 0) * 20;
+	let n10 = (document.getElementById("qty10").value || 0) * 10;
+	let n5 = (document.getElementById("qty5").value || 0) * 5;
+
+	document.getElementById("res2000").innerText = n2000;
+	document.getElementById("res500").innerText = n500;
+	document.getElementById("res200").innerText = n200;
+	document.getElementById("res100").innerText = n100;
+	document.getElementById("res50").innerText = n50;
+	document.getElementById("res20").innerText = n20;
+	document.getElementById("res10").innerText = n10;
+	document.getElementById("res5").innerText = n5;
+
+	let total = n2000 + n500 + n200 + n100 + n50 + n20 + n10 + n5;
+
+	document.getElementById("totalFee").innerText = total;
+	document.getElementById("memberFees").value = total;
+}

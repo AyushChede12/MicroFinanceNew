@@ -6,6 +6,10 @@ encoding//src/main/webapp/WEB-INF/jsp/customerManagement/customerReport.jsp=UTF-
 encoding//src/main/webapp/WEB-INF/jsp/policyManagement/InvestmentTransactionSlip.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/policyManagement/addNewInvestment.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/policyManagement/recurringPaymentReceipt.jsp=UTF-8
+
+encoding//src/main/webapp/WEB-INF/jsp/preferences/companyAdministration.jsp=UTF-8
+
+
 encoding//src/test/java=UTF-8
 encoding//src/test/resources=UTF-8
 encoding/<project>=UTF-8

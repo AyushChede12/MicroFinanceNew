@@ -20,6 +20,7 @@ public class BankModule {
 	private String openingDate;
 	private String openingBalance;
 	private String closingDate;
+	private String cancelledCheque;
 
 	public Long getId() {
 		return id;
@@ -99,6 +100,14 @@ public class BankModule {
 
 	public void setClosingDate(String closingDate) {
 		this.closingDate = closingDate;
+	}
+
+	public String getCancelledCheque() {
+		return cancelledCheque;
+	}
+
+	public void setCancelledCheque(String cancelledCheque) {
+		this.cancelledCheque = cancelledCheque;
 	}
 
 }

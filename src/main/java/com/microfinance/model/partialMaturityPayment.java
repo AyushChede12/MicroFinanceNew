@@ -29,14 +29,10 @@ public class partialMaturityPayment {
 	private boolean approveStatus;
 	private String teamMemberCode;
 	private String teamMemberName;
-	private String amount;
 	private String depositAmount;
 	private String dueAmount;
-	private LocalDate paymentDate;
-	private String branchName;
-	private String payComment;
-	private String modeofPayment;
-	
+	private LocalDate closingDate;
+	private String Comment;
 	public long getId() {
 		return id;
 	}
@@ -85,6 +81,12 @@ public class partialMaturityPayment {
 	public void setMaturityAmount(String maturityAmount) {
 		this.maturityAmount = maturityAmount;
 	}
+	public String getMaturityDate() {
+		return maturityDate;
+	}
+	public void setMaturityDate(String maturityDate) {
+		this.maturityDate = maturityDate;
+	}
 	public String getSysPayable() {
 		return sysPayable;
 	}
@@ -127,12 +129,6 @@ public class partialMaturityPayment {
 	public void setTeamMemberName(String teamMemberName) {
 		this.teamMemberName = teamMemberName;
 	}
-	public String getAmount() {
-		return amount;
-	}
-	public void setAmount(String amount) {
-		this.amount = amount;
-	}
 	public String getDepositAmount() {
 		return depositAmount;
 	}
@@ -145,36 +141,20 @@ public class partialMaturityPayment {
 	public void setDueAmount(String dueAmount) {
 		this.dueAmount = dueAmount;
 	}
-	public LocalDate getPaymentDate() {
-		return paymentDate;
+	
+	public String getComment() {
+		return Comment;
 	}
-	public void setPaymentDate(LocalDate paymentDate) {
-		this.paymentDate = paymentDate;
+	public void setComment(String comment) {
+		Comment = comment;
 	}
-	public String getBranchName() {
-		return branchName;
+	public LocalDate getClosingDate() {
+		return closingDate;
 	}
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
+	public void setClosingDate(LocalDate closingDate) {
+		this.closingDate = closingDate;
 	}
-	public String getPayComment() {
-		return payComment;
-	}
-	public void setPayComment(String payComment) {
-		this.payComment = payComment;
-	}
-	public String getModeofPayment() {
-		return modeofPayment;
-	}
-	public void setModeofPayment(String modeofPayment) {
-		this.modeofPayment = modeofPayment;
-	}
-	public String getMaturityDate() {
-		return maturityDate;
-	}
-	public void setMaturityDate(String maturityDate) {
-		this.maturityDate = maturityDate;
-	}
+	
 	
 	
 	

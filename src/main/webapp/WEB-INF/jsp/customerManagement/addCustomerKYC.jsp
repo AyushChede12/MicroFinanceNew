@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> -->
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> -->
 <!DOCTYPE html>
 <html>
 
@@ -60,13 +60,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Customer Management</h1>
+			<h1>CUSTOMER MANAGEMENT</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-people-fill"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Add Customer KYC</li>
+					<li class="breadcrumb-item action">ADD CUSTOMER KYC</li>
 				</ol>
 			</nav>
 		</div>
@@ -76,7 +76,7 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Search Details</li>
+							<li class="breadcrumb-item action">SEARCH DETAILS</li>
 						</ol>
 					</nav>
 
@@ -160,7 +160,7 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Voter No.</label> <input type="text"
 									name="voterNo" id="voterNo" required="required"
-									placeholder="Enter Voter No." />
+									placeholder="Enter Voter No." disabled />
 							</div>
 						</div>
 
@@ -169,7 +169,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">Driving License No.</label> <input type="text"
 									name="drivingLicenceNo" id="drivingLicenceNo"
-									required="required" placeholder="Enter Driving License No." />
+									required="required" placeholder="Enter Driving License No."
+									disabled />
 							</div>
 						</div>
 					</div>
@@ -177,7 +178,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-3 text-center">
-							<button type="button" id="saveBtn" class="btnStyle bg-danger"
+							<button type="button" id="saveBtn"
+								style="background-color: red; border: none; outline: none; color: #fff; font-weight: bold; border-radius: 5px; padding: 8px 15px; cursor: pointer;"
 								onclick="verifyFetchedData();">Click Here to
 								Authenticate Complete</button>
 						</div>
@@ -187,7 +189,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<!-- Customer Photo -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Customer Photo <span class="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="photo" id="photo"
@@ -205,7 +207,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<!-- Signature -->
 						<div class="col-lg-3 mb-5">
 							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Upload
+								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
 								Signature <span class="star">*</span>
 							</label> <label for="signature" id="drop-area"> <input
 								type="file" accept="image/*" name="signature" id="signature"
@@ -220,53 +222,6 @@ pageEncoding="ISO-8859-1"%> -->
 							</label> <small id="chksignature" style="color: red;"></small>
 						</div>
 
-
-						<!-- <div class="col-lg-4 mb-5">
-							<label
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Aadhar Front photo</label> <label for="bike2image" id="drop-area">
-								<input type="file" accept="image/*" name="aadharFrontPhoto"
-								id="bike2imagePreview" hidden="hidden"
-								onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-4 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								Aadhar Back Photo</label> <label for="bike2image" id="drop-area">
-								<input type="file" accept="image/*" name="aadharBackPhoto"
-								id="aadharBackPhoto" hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-
-								</div>
-							</label>
-						</div>
-
-						<div class="col-lg-4 mb-5">
-							<label for=""
-								style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">
-								PAN Photo</label> <label for="bike2image" id="drop-area"> <input
-								type="file" accept="image/*" name="panPhoto" id="panPhoto"
-								hidden="hidden" onchange="bike2Preview();"
-								style="background-size: cover; background-repeat: no-repeat" />
-								<div id="img-view">
-									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="bike2imagePreview" />
-
-
-								</div>
-							</label>
-						</div> -->
 
 					</div>
 				</div>
@@ -330,7 +285,7 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/customerManagement/addMemberKyc.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<!-- Select2 CSS and JS -->
 	<link
 		href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
@@ -338,7 +293,52 @@ pageEncoding="ISO-8859-1"%> -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+<script>
+$(document).ready(function () {
 
+    // -------------------------------
+    // 1️⃣ LABELS UPPERCASE
+    // -------------------------------
+     $("#formid label").each(function () {
+        // Only proceed if label has no child elements (pure text)
+        if ($(this).children().length === 0) {
+            $(this).text($(this).text().toUpperCase());
+        }
+    });
+
+    // -------------------------------
+    // 2️⃣ PLACEHOLDERS UPPERCASE
+    // -------------------------------
+    $("#formid input[type='text'], #formid textarea").each(function () {
+        let ph = $(this).attr("placeholder");
+        if (ph) $(this).attr("placeholder", ph.toUpperCase());
+    });
+
+    // -------------------------------
+    // 3️⃣ FUNCTION → Convert ALL dropdown options to UPPERCASE
+    // -------------------------------
+    function convertDropdownOptions() {
+        $("#formid select option").each(function () {
+            let text = $(this).text();
+            let value = $(this).val();
+
+            if (text) $(this).text(text.toUpperCase());
+            if (value) $(this).val(value.toUpperCase());
+        });
+    }
+
+    // Run once on page load
+    convertDropdownOptions();
+
+    // -------------------------------
+    // 4️⃣ ON EVERY AJAX SUCCESS → convert again (backend loaded data)
+    // -------------------------------
+    $(document).ajaxSuccess(function () {
+        convertDropdownOptions();
+    });
+
+});
+</script>
 
 </body>
 

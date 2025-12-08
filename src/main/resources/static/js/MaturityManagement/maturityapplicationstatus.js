@@ -1,63 +1,89 @@
-$(document).ready(function () {
-    $('#searchBtn').on('click', function (event) {
-        event.preventDefault();
+let allData = [];
 
-        var branchName = $('#branchName').val();
-        var fromDate = $('#fromDate').val();
-        var toDate = $('#toDate').val();
+$(document).ready(function() {
+    loadedData();
 
-        if (!branchName) {
-            alert("Please select a branch.");
-            return;
-        }
-
-        console.log("Searching:", { branchName, fromDate, toDate });
-
-        $.ajax({
-            url: "/api/Maturitymanagement/getMaturityByBranchAndDate",
-            type: "GET",
-            data: {
-                branchName: branchName,
-                fromDate: fromDate,
-                toDate: toDate
-            },
-            success: function (response) {
-                if (response.status === "OK" && response.data.length > 0) {
-                    var tableBody = $("#table tbody");
-                    tableBody.empty();
-
-                    var matchCount = 0;
-
-                    $.each(response.data, function (index, item) {
-                        if (item.remark && item.remark.trim().toUpperCase() === "OK") {
-                            var row = "<tr>" +
-                                "<td>" + item.policyNo + "</td>" +
-                                "<td>" + item.branchName + "</td>" +
-                                "<td>" + item.maturityDate + "</td>" +
-                                "<td>" + item.customerName + "</td>" +
-                                "<td>" + item.schemeName + "</td>" +
-                                "<td>" + item.schemeType + "</td>" +
-                                "<td>" + item.policyAmount + "</td>" +
-                                "<td>" + item.maturityAmount + "</td>" +
-                                "<td>" + item.remark + "</td>" +
-                                "</tr>";
-                            tableBody.append(row);
-                            matchCount++;
-                        }
-                    });
-
-                    if (matchCount === 0) {
-                        alert("No records found with remark 'OK'.");
-                    }
-
-                } else {
-                    alert("No records found for the given filters.");
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Error:", error);
-                alert("Something went wrong while fetching data.");
-            }
-        });
+    $('#searchBtn').on('click', function(e) {
+        e.preventDefault();
+        filterDailyData();
     });
 });
+
+function loadedData() {
+    $.ajax({
+        url: "/api/Maturitymanagement/getApplymaturitydetails",
+        type: "GET",
+        success: function (response) {
+            console.log("Response received:", response);
+
+            if (response.status === "OK" && response.data) {
+                allData = response.data;
+                renderTable(allData);
+            } else {
+                alert("No maturity details found.");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error fetching maturity details:", error);
+            console.log("XHR:", xhr.responseText);
+            alert("Failed to load maturity details.");
+        }
+    });
+}
+
+function renderTable(data) {
+    const tbody = $("#table tbody");
+    tbody.empty();
+
+    if (!data || data.length === 0) {
+        const noDataRow = `
+            <tr>
+                <td colspan="12" style="text-align:center; font-family: 'Poppins', sans-serif;">
+                    No data found
+                </td>
+            </tr>
+        `;
+        tbody.append(noDataRow);
+        return;
+    }
+
+    data.forEach((item, index) => {
+        const row = `
+            <tr style="font-family: 'Poppins', sans-serif;">  
+                <td>${index + 1}</td>
+                <td>${item.branchName}</td>
+                <td>${item.policyCode}</td>
+                <td>${item.maturityDate}</td>
+                <td>${item.customerName}</td>
+                <td>${item.schemeName}</td>
+                <td>${item.schemeType}</td>
+                <td>${item.policyAmount}</td>
+                <td>${item.depositAmount}</td>
+            </tr>
+        `;
+        tbody.append(row);
+    });
+}
+
+function filterDailyData() {
+    const selectedCode = $('#branchName').val();
+    const fromDateVal = $('#fromDate').val();
+    const toDateVal = $('#toDate').val();
+
+    const fromDate = fromDateVal ? new Date(fromDateVal) : null;
+    const toDate = toDateVal ? new Date(toDateVal) : null;
+
+    const filtered = allData.filter(item => {
+        const branchName = item.branchName;
+        const maturityDate = item.maturityDate ? new Date(item.maturityDate) : null;
+
+        const matchesBranch = selectedCode ? branchName === selectedCode : true;
+        const matchesFrom = fromDate && maturityDate ? maturityDate >= fromDate : true;
+        const matchesTo = toDate && maturityDate ? maturityDate <= toDate : true;
+
+        return matchesBranch && matchesFrom && matchesTo;
+    });
+
+    console.log("Filtered Data:", filtered);
+    renderTable(filtered);
+}

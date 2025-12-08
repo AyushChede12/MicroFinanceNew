@@ -45,7 +45,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Loan Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-cash-coin"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Loan Payment</li>
@@ -461,9 +461,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Payment Status</label> <input   type="text" value="Paid"
-									name="paymentStatus" id="paymentStatus" 
-									readonly
+								<label for="loanName">Payment Status</label> <input type="text"
+									value="Paid" name="paymentStatus" id="paymentStatus" readonly
 									style="color: red; font-weight: bold; font-size: 12px; text-transform: uppercase;"
 									required="required" />
 
@@ -473,9 +472,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="referenceCode">Mode of Payment <span
-									id="star">*</span></label> <select id="paymentMode"
-									name="paymentMode" required="required"
-									class="form-control selectField" style="height: 30px;">
+									id="star">*</span></label> <select id="paymentMode" name="paymentMode"
+									required="required" class="form-control selectField"
+									style="height: 30px;">
 									<option value="">Enter Mode of Payment</option>
 									<option value="Cash">CASH</option>
 									<option value="Online">Online</option>
@@ -513,8 +512,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Deposit Account <span id="star">*</span></label> <input
-									type="text" name="accountNo" id="accountNo"
-									required="required" placeholder="Enter Deposit Account"
+									type="text" name="accountNo" id="accountNo" required="required"
+									placeholder="Enter Deposit Account"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -531,8 +530,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Chrg. Deduct Cash</label> <select
-									id="charges" name="charges" required="required"
+								<label for="">Chrg. Deduct Cash</label> <select id="charges"
+									name="charges" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">Select Yes/No</option>
 									<option value="YES">Yes</option>
@@ -540,27 +539,49 @@ pageEncoding="ISO-8859-1"%> -->
 								</select>
 							</div>
 						</div>
+					</div>
 
-						<div class="col-lg-3">
-							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanName">Remarks</label> <input type="text"
-									name="remarks" id="remarks" required="required"
-									style="text-transform: uppercase;" />
-							</div>
+					<div class="col-lg-3">
+						<div class="d-flex flex-column formFields mb-4">
+							<label for="loanName">Remarks</label> <input type="text"
+								name="remarks" id="remarks" required="required"
+								style="text-transform: uppercase;" />
 						</div>
+					</div>
 
-						<div class="col-12 text-center">
-							<button id="paymentBtn" class="btnStyle"
-								style="background-color: #FFA500;">Payment</button>
-
-						</div>
+					<div class="col-12 text-center">
+						<button id="paymentBtn" class="btnStyle"
+							style="background-color: #FFA500;">Payment</button>
 
 					</div>
+
+				</div>
 			</form>
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/LoanManagment/LoanPayment.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

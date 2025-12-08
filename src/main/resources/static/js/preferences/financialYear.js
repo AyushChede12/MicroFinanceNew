@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+	$("#formid").find("input[type=text], input[type=date]").each(function() {
+		if ($(this).val()) {
+			$(this).val($(this).val().toUpperCase());
+		}
+	});
+
 	$('#addBtn').click(function(event) {
 		event.preventDefault();
 
@@ -10,17 +16,35 @@ $(document).ready(function() {
 
 		// Fetch input values
 		var fyName = $('#financialYearName').val().trim();
-		var dateFrom = $('#dateFrom').val().trim();
-		var dateTo = $('#dateTo').val().trim();
+		var dateFrom = $('#fromDate').val().trim();
+		var dateTo = $('#toDate').val().trim();
 
 		let isValid = true;
 
+		// Validation: Financial Year Name
 		// Validation: Financial Year Name
 		if (fyName === '') {
 			$('#chkfyname').text('* This field is required');
 			$('#financialYearName').focus();
 			isValid = false;
+		} else {
+			const fyPattern = /^[0-9]{4}-[0-9]{4}$/;
+			if (!fyPattern.test(fyName)) {
+				$('#chkfyname').text('* Please enter proper financial year (e.g., 2021-2022)');
+				$('#financialYearName').focus();
+				isValid = false;
+			} else {
+				const parts = fyName.split('-');
+				const startYear = parseInt(parts[0]);
+				const endYear = parseInt(parts[1]);
+				if (endYear - startYear !== 1) {
+					$('#chkfyname').text('* Financial year should be consecutive years (e.g., 2021-2022)');
+					$('#financialYearName').focus();
+					isValid = false;
+				}
+			}
 		}
+
 
 		// Validation: Date From
 		if (dateFrom === '') {
@@ -79,33 +103,49 @@ $(document).ready(function() {
 
 
 	$.ajax({
-		type: "GET",
-		url: "api/preference/getAllFinancialYear",
-		contentType: "application/json",
-		success: function(response) {
-			console.log("Full Response from API:", response);
-			if (response.status == "FOUND") {
-				let data = response.data;
-				let tableBody = $(".datatable tbody");
-				tableBody.empty();
-				data.forEach((item, index) => {
-					let row = `<tr>
-		                        <td>${index + 1}</td>
-		                        <td>${item.financialYearName}</td>
-		                        <td>${item.dateFrom}</td>
-		                        <td>${item.dateTo}</td>
-								<td><button class="iconbutton" onclick="viewData(${item.id})" title="View"><i class="fa-solid fa-pen-to-square text-primary"></i></button></td>
-		                    </tr>`;
-					tableBody.append(row);
-				});
-			} else {
-				alert("Failed to fetch branch data: " + response.message);
-			}
-		},
-		error: function() {
-			alert("Error while calling the API.");
-		}
+	    type: "GET",
+	    url: "api/preference/getAllFinancialYear",
+	    contentType: "application/json",
+	    success: function(response) {
+	        console.log("Full Response from API:", response);
+
+	        if (response.status == "FOUND") {
+	            let data = response.data;
+
+	            // Sort by first year numerically (DESCENDING)
+	            data.sort((a, b) => {
+	                const aYear = parseInt(a.financialYearName.split('-')[0]);
+	                const bYear = parseInt(b.financialYearName.split('-')[0]);
+	                return bYear - aYear;   // DESCENDING
+	            });
+
+	            let tableBody = $(".datatable tbody");
+	            tableBody.empty();
+
+	            data.forEach((item, index) => {
+	                let row = `<tr>
+	                    <td>${index + 1}</td>
+	                    <td>${item.financialYearName}</td>
+	                    <td>${item.dateFrom}</td>
+	                    <td>${item.dateTo}</td>
+	                    <td>
+	                        <button class="iconbutton" onclick="viewData(${item.id})" title="View">
+	                            <i class="fa-solid fa-pen-to-square text-primary"></i>
+	                        </button>
+	                    </td>
+	                </tr>`;
+	                tableBody.append(row);
+	            });
+
+	        } else {
+	            alert("Failed to fetch branch data: " + response.message);
+	        }
+	    },
+	    error: function() {
+	        alert("Error while calling the API.");
+	    }
 	});
+
 
 });
 
@@ -120,8 +160,8 @@ function viewData(id) {
 				const branch = response.data;
 				$("#id").val(branch.id);
 				$("#financialYearName").val(branch.financialYearName);
-				$("#dateFrom").val(branch.dateFrom);
-				$("#dateTo").val(branch.dateTo);
+				$("#fromDate").val(branch.dateFrom);
+				$("#toDate").val(branch.dateTo);
 			} else {
 				alert("Branch not found: " + response.message);
 			}
@@ -163,14 +203,45 @@ function updateFY() {
 
 	// Fetch input values
 	var fyName = $('#financialYearName').val().trim();
-	var dateFrom = $('#dateFrom').val().trim();
-	var dateTo = $('#dateTo').val().trim();
+	var dateFrom = $('#fromDate').val().trim();
+	var dateTo = $('#toDate').val().trim();
 
 	let isValid = true;
 
-	// Validation: Financial Year Name
-	if (fyName === '' || dateFrom === '' || dateTo === '') {
-		alert("First Select Any Data then Proceed to Update");
+	if (fyName === '') {
+		$('#chkfyname').text('* This field is required');
+		$('#financialYearName').focus();
+		isValid = false;
+	} else {
+		const fyPattern = /^[0-9]{4}-[0-9]{4}$/;
+		if (!fyPattern.test(fyName)) {
+			$('#chkfyname').text('* Please enter proper financial year (e.g., 2021-2022)');
+			$('#financialYearName').focus();
+			isValid = false;
+		} else {
+			const parts = fyName.split('-');
+			const startYear = parseInt(parts[0]);
+			const endYear = parseInt(parts[1]);
+			if (endYear - startYear !== 1) {
+				$('#chkfyname').text('* Financial year should be consecutive years (e.g., 2021-2022)');
+				$('#financialYearName').focus();
+				isValid = false;
+			}
+		}
+	}
+
+
+	// Validation: Date From
+	if (dateFrom === '') {
+		$('#chkdatefrom').text('* This field is required');
+		if (isValid) $('#dateFrom').focus();
+		isValid = false;
+	}
+
+	// Validation: Date To
+	if (dateTo === '') {
+		$('#chkdateto').text('* This field is required');
+		if (isValid) $('#dateTo').focus();
 		isValid = false;
 	}
 
@@ -190,8 +261,8 @@ function updateFY() {
 	let payload = {
 		id: $("#id").val(),
 		financialYearName: $("#financialYearName").val(),
-		dateFrom: $("#dateFrom").val(),
-		dateTo: $("#dateTo").val(),
+		dateFrom: $("#fromDate").val(),
+		dateTo: $("#toDate").val(),
 	};
 
 	$.ajax({

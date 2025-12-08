@@ -1,5 +1,5 @@
-<!-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%> -->
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%> -->
 <!DOCTYPE html>
 <html>
 
@@ -40,13 +40,13 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Client Summary</h1>
+			<h1>CUSTOMER MANAGEMENT</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
-							class="bi bi-house-door"></i>
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
+							class="bi bi-people-fill"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Client Summary</li>
+					<li class="breadcrumb-item action">CUSTOMER SUMMARY</li>
 				</ol>
 			</nav>
 		</div>
@@ -76,12 +76,12 @@ pageEncoding="ISO-8859-1"%> -->
 
 
 						<div class="col-lg-3">
-								<div class="d-flex flex-column formFields mb-4">
-									<label for="">Customer Code</label> <input type="text"
-										name="customerCode" id="customerCode" required="required"
-										placeholder="Enter Customer Code" disabled />
-								</div>
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">Customer Code</label> <input type="text"
+									name="customerCode" id="customerCode" required="required"
+									placeholder="Enter Customer Code" disabled />
 							</div>
+						</div>
 
 
 						<div class="col-lg-3">
@@ -111,9 +111,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Address</label> <input type="text" name="customerAddress"
-									id="customerAddress" required="required" placeholder="Enter Address"
-									disabled />
+								<label for="">Address</label> <input type="text"
+									name="customerAddress" id="customerAddress" required="required"
+									placeholder="Enter Address" disabled />
 							</div>
 						</div>
 
@@ -181,8 +181,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Age</label> <input type="text" name="customerAge" id="customerAge"
-									required="required" placeholder="Enter Age" disabled />
+								<label for="">Age</label> <input type="text" name="customerAge"
+									id="customerAge" required="required" placeholder="Enter Age"
+									disabled />
 							</div>
 						</div>
 
@@ -196,9 +197,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Gender</label> <input type="text" name="customerGender"
-									id="customerGender" required="required" placeholder="Enter gender"
-									disabled />
+								<label for="">Gender</label> <input type="text"
+									name="customerGender" id="customerGender" required="required"
+									placeholder="Enter gender" disabled />
 							</div>
 						</div>
 
@@ -220,8 +221,8 @@ pageEncoding="ISO-8859-1"%> -->
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
 									<img src="../images/upload/upload.png" alt="upload_icon"
-										id="photoPreview" /><input type="hidden"
-										name="photoHidden" id="photoHidden">
+										id="photoPreview" /><input type="hidden" name="photoHidden"
+										id="photoHidden">
 
 								</div>
 							</label> <small id="chksignature" style="color: red;"></small>
@@ -239,10 +240,59 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
-	
+
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="./js/customerManagement/addMemberKyc.js"></script>
+	<script src="./js/customerManagement/addMemberKyc.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			// -------------------------------
+			// 1️⃣ LABELS UPPERCASE
+			// -------------------------------
+			$("#formid label").each(function() {
+				// Only proceed if label has no child elements (pure text)
+				if ($(this).children().length === 0) {
+					$(this).text($(this).text().toUpperCase());
+				}
+			});
+
+			// -------------------------------
+			// 2️⃣ PLACEHOLDERS UPPERCASE
+			// -------------------------------
+			$("#formid input[type='text'], #formid textarea").each(function() {
+				let ph = $(this).attr("placeholder");
+				if (ph)
+					$(this).attr("placeholder", ph.toUpperCase());
+			});
+
+			// -------------------------------
+			// 3️⃣ FUNCTION → Convert ALL dropdown options to UPPERCASE
+			// -------------------------------
+			function convertDropdownOptions() {
+				$("#formid select option").each(function() {
+					let text = $(this).text();
+					let value = $(this).val();
+
+					if (text)
+						$(this).text(text.toUpperCase());
+					if (value)
+						$(this).val(value.toUpperCase());
+				});
+			}
+
+			// Run once on page load
+			convertDropdownOptions();
+
+			// -------------------------------
+			// 4️⃣ ON EVERY AJAX SUCCESS → convert again (backend loaded data)
+			// -------------------------------
+			$(document).ajaxSuccess(function() {
+				convertDropdownOptions();
+			});
+
+		});
+	</script>
 </body>
 
 </html>

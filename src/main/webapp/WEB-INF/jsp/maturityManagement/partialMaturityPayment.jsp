@@ -53,7 +53,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Maturity Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-calendar-check"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Partial Maturity Payment</li>
@@ -256,17 +256,16 @@ pageEncoding="ISO-8859-1"%> -->
 						</ol>
 					</nav>
 					<div class="row">
-					
 					<div class="col-lg-3">
-							<div class="d-flex flex-column formFields"
-								style="margin-bottom: 30px">
-								<label>Panelty (if any):</label> <input type="text" name="panelty"
-									id="panelty" required="required" placeholder=""
-									style="text-transform: uppercase;" />
+							
+							<div class="d-flex flex-column formFields">
+								<label for="">Closing Date: <span id="star"> *</span></label> <input type="date"
+									name="closingDate" id="closingDate" required="required"
+									placeholder="" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-
+ 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="vehicalNo">Paid Amount: <span id="star"> *</span></label> <input type="text"
@@ -287,9 +286,9 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Remark :</label> <input type="text" name="remark"
-									id="remark" required="required" placeholder=""
-									style="text-transform: uppercase;" />
+								<label>Comment :</label> <input type="text" name="Comment"
+									id="Comment" required="required" placeholder=""
+									/>
 							</div>
 						</div>
 					</div>
@@ -300,7 +299,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-12 text-center">
-							<button id="saveBtn" class="btn btn-success">Update</button>
+							<button id="saveBtn" class="btn btn-danger">Break</button>
 						</div>
 					</div>
 				</div>
@@ -314,6 +313,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/MaturityManagement/partialmaturity.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 	
 </body>
 

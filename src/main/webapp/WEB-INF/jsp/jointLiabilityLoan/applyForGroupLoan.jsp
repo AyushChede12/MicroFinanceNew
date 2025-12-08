@@ -42,7 +42,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Joint Liability Loan</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"><i
+					<li class="breadcrumb-item"><a href="openDashboard"><i
 							class="bi bi-person-bounding-box"></i></a></li>
 					<li class="breadcrumb-item action">Apply For Group Loan</li>
 				</ol>
@@ -188,9 +188,9 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="loanSchemeInformation"> Loan Scheme
-									Information </label> <input type="text" name="loanSchemeInformation"
-									id="loanSchemeInformation" required
+								<label for="loanSchemeName"> Loan Scheme
+									Name </label> <input type="text" name="loanSchemeName"
+									id="loanSchemeName" required
 									placeholder="Enter Loan Scheme" />
 							</div>
 						</div>
@@ -272,7 +272,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="minLoanDurationMonths">Term * </label> <input
-									type="text" name="Term" id="Term" required
+									type="text" name="term" id="term" required
 									placeholder="Enter Term" />
 
 
@@ -346,6 +346,27 @@ pageEncoding="ISO-8859-1"%> -->
 	</main>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/Joinlibiliy/ApplyForGroupLoan.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 
 </body>
 

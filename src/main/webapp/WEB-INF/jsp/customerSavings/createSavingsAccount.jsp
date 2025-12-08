@@ -45,7 +45,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Customer Savings</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-bank text-blue"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Create Account</li>
@@ -224,15 +224,15 @@ pageEncoding="ISO-8859-1"%> -->
 							</div>
 						</div>
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Joint Survivor Name</label> <input type="text"
 									name="jointSurvivorCode" id="jointSurvivorCode"
 									required="required" placeholder="Enter joint Survivor Code" />
 							</div>
-						</div>
+						</div> -->
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Family Relation</label> <select
 									id="familyRelation" name="familyRelation" required="required"
@@ -240,7 +240,7 @@ pageEncoding="ISO-8859-1"%> -->
 									<option value="">Select</option>
 								</select>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
@@ -254,14 +254,14 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 
-						<div class="col-lg-3">
+						<!-- <div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Opening Amount</label> <input type="text"
 									name="balance" id="balance" required="required"
 									placeholder="Enter opening Amount" />
 							</div>
 						</div>
-
+ -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="">Financial Consultant Code</label> <input
@@ -644,6 +644,27 @@ document.getElementById('modeOfPayment').addEventListener('change', function () 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/customerSavings/CreateSavingAccount.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

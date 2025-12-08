@@ -35,7 +35,44 @@ pageEncoding="ISO-8859-1"%> -->
 <jsp:include page="../header.jsp"></jsp:include>
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- In <head> -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
+
+<!-- Before </body> -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
 </head>
+<style>
+body {
+	font-family: 'Segoe UI', Arial, sans-serif;
+	background-color: #f5f6fa;
+}
+
+.modal-content {
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.modal-header {
+	background: linear-gradient(45deg, #0d6efd, #004aad);
+}
+
+.modal-title {
+	font-weight: 600;
+}
+
+.table th, .table td {
+	vertical-align: middle;
+}
+</style>
 
 
 <body>
@@ -45,10 +82,10 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Finicial Collection Report</li>
+					<li class="breadcrumb-item action">Financial Collection Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -94,7 +131,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields">
 								<label for="">From Date :</label> <input type="date"
 									name="fromDate" id="fromDate" required="required"
-									placeholder="Enter From Date" style="text-transform: uppercase;" />
+									placeholder="Enter From Date"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
@@ -114,8 +152,8 @@ pageEncoding="ISO-8859-1"%> -->
 
 					<div class="row">
 						<div class="col-4 text-start mt-3">
-							<button id="findFinancialAdvisorBtn" class="btnStyle"
-					style="background-color: #FFA500;">Find</button>
+							<button type="submit" id="findFinancialAdvisorBtn"
+								class="btnStyle" style="background-color: #FFA500;">Find</button>
 						</div>
 					</div>
 
@@ -143,107 +181,182 @@ pageEncoding="ISO-8859-1"%> -->
 										<th scope="col">Joining Date</th>
 										<th scope="col">Customer Name</th>
 										<th scope="col">DOB</th>
-										<th scope="col">Contact Number</th>						
+										<th scope="col">Contact Number</th>
 										<th>Print</th>
-										
+
 									</tr>
 								</thead>
-								<tbody class='tablebody' id="fetchFinancialConsultants">									
+								<tbody class='tablebody' id="fetchFinancialConsultants">
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="card recent-sales">
-
-				<div class="card-body table-responsive">
-					<h5 class="card-title">Financial Consultant Report</h5>
-					<div id="bodycontentfrontPage">
-						<div style="height: 700px; overflow: scroll;">
-							<div class="blnk-div"></div>
-
-							<div class="form-div">
-								<!-- <div class="form-header">
-											<h2 style="color: red; margin-top: 0px;">BHOYARNATH
-												URBAN</h2>
-											<p style="margin-top: -10px">Kolkata - WEST BENGAL 700107</p>
-										</div> -->
-								<div class="form-div-main" style="padding: 5px;">
-									<div
-										style="display: flex; text-align: center; justify-item: center; width: 100%;">
-										<h4 style="margin: auto;">NEW RECEIPT</h4>
-									</div>
-									<div style="width: 55%; float: left; padding-top: 20px;">
-										<p style="font-weight: 600;">
-											Member No. : <span id="memberName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Account No. : <span id="accountNo"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Account Holder Name : <span id="accountHolderName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											S/D/W/H/O : <span id="relativeName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Date Of Birth :<span id="dob"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Mobile No. : <span id="mobileNo"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Email ID : <span id="emailid"></span>
-										</p>
-										<p style="font-weight: 600;">
-											MOP : <span id="modeOfOp"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Aadhaar No. : <span id="aadharNo"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Address : <span id="address"></span>
-										</p>
-									</div>
-									<div style="width: 43%; float: right; padding-top: 20px;">
-										<!-- <p style="font-weight: 600;">Print Date : <span></span></p> -->
-
-										<p style="font-weight: 600;">
-											Opening Date : <span id="opDate"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Account type : <span id="accountType"></span>
-										</p>
-										<p style="font-weight: 600;">
-											IFSC Code : <span id="IFSCcode"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Date Of Issue : <span id="dateOfIssue"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Nomination Registered : <span id="nominationStatus"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Nomination Name : <span id="nominationName"></span>
-										</p>
-										<p style="font-weight: 600;">
-											Branch and Code : <span id="branch"></span>
-										</p>
-										<p style="font-weight: 600;">
-											UPI : <span id="upi"></span>
-										</p>
-									</div>
-                                    
-								</div>								
-							</div>							
-						</div>
-					</div>
-				</div>
-				<button class="print-btn" onclick="window.print()">Print</button>
-			</div>
 
 		</div>
+
+		<div class="modal fade" id="bankReportModal" tabindex="-1"
+			aria-hidden="true">
+			<div class="modal-dialog modal-xl modal-dialog-scrollable">
+				<div class="modal-content shadow-lg border-0">
+
+					<!-- Header -->
+					<div class="modal-header text-white">
+						<h5 class="modal-title">
+							<i class="bi bi-person-vcard me-2"></i> Financial Consultant
+							Report
+						</h5>
+						<button type="button" class="btn-close btn-close-white"
+							data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+
+					<!-- Body -->
+					<div class="modal-body" id="bankReportContent">
+						<div class="p-4" style="background-color: #f8fafc;">
+
+							<!-- Bank Header -->
+							<div
+								class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+								<div class="d-flex align-items-center">
+									<img id="bankLogo" src="" alt="Logo"
+										style="height: 50px; margin-right: 10px;">
+									<div>
+										<h4 id="bankName" class="mb-0 fw-bold text-primary"></h4>
+										<small id="reportTitle" class="text-secondary"></small>
+									</div>
+								</div>
+								<div>
+									<p class="mb-0">
+										<strong>Consultant Code:</strong> <span id="financialCode"></span>
+									</p>
+									<p class="mb-0">
+										<strong>Joining Date:</strong> <span id="joiningDate"></span>
+									</p>
+								</div>
+							</div>
+
+							<!-- Consultant Info -->
+							<div class="row mb-3">
+								<div class="col-md-6">
+									<div class="border p-3 bg-white rounded shadow-sm">
+										<h6 class="fw-bold mb-3 text-primary">CONSULTANT DETAILS</h6>
+										<p>
+											<strong>Name:</strong> <span id="financialName"></span>
+										</p>
+										<p>
+											<strong>DOB:</strong> <span id="dob"></span> (<span id="age"></span>
+											years)
+										</p>
+										<p>
+											<strong>Contact No:</strong> <span id="contactNo"></span>
+										</p>
+										<p>
+											<strong>Branch:</strong> <span id="branchName"></span>
+										</p>
+										<p>
+											<strong>Position:</strong> <span id="selectPosition"></span>
+										</p>
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="border p-3 bg-white rounded shadow-sm">
+										<h6 class="fw-bold mb-3 text-primary">ADDRESS & OTHER
+											INFO</h6>
+										<p>
+											<strong>Address:</strong> <span id="address"></span>
+										</p>
+										<p>
+											<strong>District:</strong> <span id="district"></span>
+										</p>
+										<p>
+											<strong>State:</strong> <span id="state"></span> - <span
+												id="pinCode"></span>
+										</p>
+										<p>
+											<strong>Profession:</strong> <span id="profession"></span>
+										</p>
+										<p>
+											<strong>Academic Background:</strong> <span
+												id="academicBackground"></span>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Payment Info -->
+							<div class="border p-3 bg-white rounded shadow-sm mb-4">
+								<h6 class="fw-bold text-primary mb-3">PAYMENT INFORMATION</h6>
+								<div class="row">
+									<div class="col-md-6">
+										<p>
+											<strong>Fees:</strong> &#8377;<span id="fees"></span>
+										</p>
+										<p>
+											<strong>Mode of Payment:</strong> <span id="modeofPayment"></span>
+										</p>
+										<p>
+											<strong>Cheque No:</strong> <span id="chequeNo"></span>
+										</p>
+									</div>
+									<div class="col-md-6">
+										<p>
+											<strong>Cheque Date:</strong> <span id="chequeDate"></span>
+										</p>
+										<p>
+											<strong>Deposit Account:</strong> <span id="depositAccount"></span>
+										</p>
+										<p>
+											<strong>Ref No:</strong> <span id="refNo"></span>
+										</p>
+									</div>
+								</div>
+							</div>
+
+							<!-- Referral -->
+							<div class="border p-3 bg-white rounded shadow-sm mb-4">
+								<h6 class="fw-bold text-primary mb-3">REFERRAL DETAILS</h6>
+								<p>
+									<strong>Referral Code:</strong> <span id="referralCode"></span>
+								</p>
+								<p>
+									<strong>Referral Name:</strong> <span id="referralName"></span>
+								</p>
+							</div>
+
+							<!-- Comments & Status -->
+							<div class="border p-3 bg-white rounded shadow-sm">
+								<h6 class="fw-bold text-primary mb-3">STATUS</h6>
+								<p>
+									<strong>Comments:</strong> <span id="comments"></span>
+								</p>
+								<p>
+									<strong>Financial Status:</strong> <span id="financialStatus"></span>
+								</p>
+								<p>
+									<strong>SMS Send:</strong> <span id="smsSend"></span>
+								</p>
+								<p>
+									<strong>Approved:</strong> <span id="isApproved"></span>
+								</p>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Footer -->
+					<div class="modal-footer bg-light">
+						<button id="printBankReportBtn" class="btn btn-success">
+							<i class="bi bi-printer"></i> Print Report
+						</button>
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
 
 
 	</main>
@@ -251,16 +364,37 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/ReportsAndAnalytics/FinancialAdvisorReport.js"></script>
 	<script>
-		$(document).ready(function() {
+		/* $(document).ready(function() {
 			searchFinancialConsultants();
-			
+
 			// Button click filter
 			$('#findFinancialAdvisorBtn').on('click', function(e) {
 				e.preventDefault(); // Prevent form submission
 				filterDataByBranchName();
 			});
 
-		});
+		}); */
+	</script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
 	</script>
 
 </body>

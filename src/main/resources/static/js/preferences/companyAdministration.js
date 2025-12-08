@@ -1,70 +1,61 @@
 $(document).ready(function() {
-	$.ajax({
-		url: "api/preference/fetchAllCompanyAdministration",
-		type: "GET",
-		success: function(response) {
-			if (response.status == "FOUND") {
-				const admin = response.data[0]; // Access the first company record
 
-				$("#id").val(admin.id);
-				$("#companyName").val(admin.companyName);
-				$("#shortName").val(admin.shortName);
-				$("#signUpDate").val(admin.signUpDate);
-				$("#cinNo").val(admin.cinNo);
-				$("#pan").val(admin.pan);
-				$("#tan").val(admin.tan);
-				$("#gstin").val(admin.gstin);
-				$("#declaredValue").val(admin.declaredValue);
-				$("#address").val(admin.address);
-				$("#state").val(admin.state);
-				$("#pinCode").val(admin.pinCode);
-				$("#emailId").val(admin.emailId);
-				$("#authorizedShareCapital").val(admin.authorizedShareCapital);
-				$("#paidUpCapital").val(admin.paidUpCapital);
-				$("#nof").val(admin.nof);
-				$("#contactNo").val(admin.contactNo);
-				$("#tdsWithPan").val(admin.tdsWithPan);
-				$("#tdsWithoutPan").val(admin.tdsWithoutPan);
-				$("#taxDeduction").val(admin.taxDeduction);
-				$("#seniorCitizenTaxDeduction").val(admin.seniorCitizenTaxDeduction);
-			} else {
-				alert("No company administration data found.");
+	const companyId = 1;  // Change if company ID is dynamic
+	loadCompanyDetails();
+	loadCompanyImages();
+
+	// ================================
+	// 1️⃣ LOAD COMPANY DETAILS
+	// ================================
+	function loadCompanyDetails() {
+		$.ajax({
+			url: "api/preference/" + companyId,
+			type: "GET",
+			success: function(data) {
+				$("#id").val(data.id);
+				$("#companyName").val(data.companyName);
+				$("#shortName").val(data.shortName);
+				$("#signUpDate").val(data.signUpDate);
+				$("#cinNo").val(data.cinNo);
+				$("#pan").val(data.pan);
+				$("#tan").val(data.tan);
+				$("#gstin").val(data.gstin);
+				$("#declaredValue").val(data.declaredValue);
+				$("#address").val(data.address);
+				$("#state").val(data.state);
+				$("#city").val(data.city);
+				$("#pinCode").val(data.pinCode);
+				$("#emailId").val(data.emailId);
+				$("#authorizedShareCapital").val(data.authorizedShareCapital);
+				$("#paidUpCapital").val(data.paidUpCapital);
+				$("#nof").val(data.nof);
+				$("#helplineNo").val(data.helplineNo);
+				$("#tdsWithPan").val(data.tdsWithPan);
+				$("#tdsWithoutPan").val(data.tdsWithoutPan);
+				$("#taxDeduction").val(data.taxDeduction);
+				$("#branchManagerContactNo").val(data.branchManagerContactNo);
 			}
-		},
-		error: function() {
-			alert("Error fetching company administration data.");
-		}
-	});
+		});
+	}
 
-	$('#updateBtn').click(function(event) {
+	// ================================
+	// 2️⃣ UPDATE COMPANY DETAILS (TEXT)
+	// ================================
+	$("#updateBtn").click(function(event) {
+
+		event.preventDefault();
+
+		// Convert text to uppercase
 		$("#formid").find("input[type=text], textarea").each(function() {
 			if ($(this).val()) {
 				$(this).val($(this).val().toUpperCase());
 			}
 		});
-		event.preventDefault();
 
-		$('#chkcompanyname').text('');
-		$('#chkshortname').text('');
-		$('#chksignupdate').text('');
-		$('#chkcinno').text('');
-		$('#chkpan').text('');
-		$('#chktan').text('');
-		$('#chkgstin').text('');
-		$('#chkdeclaredvalue').text('');
-		$('#chkaddress').text('');
-		$('#chkstate').text('');
-		$('#chkpincode').text('');
-		$('#chkemailid').text('');
-		$('#chkauthorizedsharecapital').text('');
-		$('#chkpaidupcapital').text('');
-		$('#chknof').text('');
-		$('#chkcontactno').text('');
-		$('#chktdswithpan').text('');
-		$('#chktdswithoutpan').text('');
-		$('#chktaxdeduction').text('');
-		$('#chkseniorcitizentaxdeduction').text('');
+		// Clear all error messages
+		$('#chkcompanyname, #chkshortname, #chksignupdate, #chkcinno, #chkpan, #chktan, #chkgstin, #chkdeclaredvalue, #chkaddress, #chkstate, #chkcity, #chkpincode, #chkemailid, #chkauthorizedsharecapital, #chkpaidupcapital, #chknof, #chkhelplineNo, #chktdswithpan, #chktdswithoutpan, #chktaxdeduction, #chkbranchManagerContactNo').text('');
 
+		// Get field values
 		var companyName = $('#companyName').val().trim();
 		var shortName = $('#shortName').val().trim();
 		var signUpDate = $('#signUpDate').val().trim();
@@ -75,28 +66,25 @@ $(document).ready(function() {
 		var declaredValue = $('#declaredValue').val().trim();
 		var address = $('#address').val().trim();
 		var state = $('#state').val().trim();
+		var city = $('#city').val().trim();
 		var pinCode = $('#pinCode').val().trim();
 		var emailId = $('#emailId').val().trim();
 		var authorizedShareCapital = $('#authorizedShareCapital').val().trim();
 		var paidUpCapital = $('#paidUpCapital').val().trim();
 		var nof = $('#nof').val().trim();
-		var contactNo = $('#contactNo').val().trim();
+		var helplineNo = $('#helplineNo').val().trim();
 		var tdsWithPan = $('#tdsWithPan').val().trim();
 		var tdsWithoutPan = $('#tdsWithoutPan').val().trim();
 		var taxDeduction = $('#taxDeduction').val().trim();
-		var seniorCitizenTaxDeduction = $('#seniorCitizenTaxDeduction').val().trim();
+		var branchManagerContactNo = $('#branchManagerContactNo').val().trim();
 
-		//Mobile Number
+		// Regex patterns
 		var contactPattern = /^[6-9][0-9]{9}$/;
-
-		//Pan Card
 		var panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-
-		//Pin Code
 		var pinPattern = /^[1-9][0-9]{5}$/;
-
-		//Email
 		var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		const cinPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/; // Alpha + numeric + special char
+		const tanPattern = /^[A-Z]{4}[0-9]{5}[A-Z]{1}$/;
 
 		let isValid = true;
 
@@ -119,19 +107,26 @@ $(document).ready(function() {
 			$('#chkcinno').text('* This field is required');
 			$('#cinNo').focus();
 			isValid = false;
+		} else if (!cinPattern.test(cinNo)) {
+			$('#chkcinno').text('CIN No must contain alphabets, numbers, and at least one special character.');
+			$('#cinNo').focus();
+			isValid = false;
 		}
 		if (pan === '') {
 			$('#chkpan').text('* This field is required');
 			$('#pan').focus();
 			isValid = false;
-		}
-		else if (!panPattern.test(pan)) {
+		} else if (!panPattern.test(pan)) {
 			alert("Please enter a valid PAN card number (e.g., ABCDE1234F).");
-			pan.focus();
+			$('#pan').focus();
 			return false;
 		}
 		if (tan === '') {
 			$('#chktan').text('* This field is required');
+			if (isValid) $('#tan').focus();
+			isValid = false;
+		} else if (!tanPattern.test(tan)) {
+			$('#chktan').text('TAN No must contain only alphabets and numbers (no special characters).');
 			$('#tan').focus();
 			isValid = false;
 		}
@@ -155,22 +150,25 @@ $(document).ready(function() {
 			$('#state').focus();
 			isValid = false;
 		}
+		if (city === '') {
+			$('#chkcity').text('* This field is required');
+			$('#city').focus();
+			isValid = false;
+		}
 		if (pinCode === '') {
 			$('#chkpincode').text('* This field is required');
 			$('#pinCode').focus();
 			isValid = false;
-		}
-		else if (!pinPattern.test(pinCode)) {
+		} else if (!pinPattern.test(pinCode)) {
 			alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
-			pinCode.focus();
+			$('#pinCode').focus();
 			return false;
 		}
 		if (emailId === '') {
 			$('#chkemailid').text('* This field is required');
 			$('#emailId').focus();
 			isValid = false;
-		}
-		else if (!emailPattern.test(emailId)) {
+		} else if (!emailPattern.test(emailId)) {
 			alert('Please enter a valid email address (e.g., example@domain.com)');
 			$('#emailId').focus();
 			isValid = false;
@@ -190,14 +188,13 @@ $(document).ready(function() {
 			$('#nof').focus();
 			isValid = false;
 		}
-		if (contactNo === '') {
-			$('#chkcontactno').text('* This field is required');
-			$('#contactNo').focus();
+		if (helplineNo === '') {
+			$('#chkhelplineno').text('* This field is required');
+			$('#helplineNo').focus();
 			isValid = false;
-		}
-		else if (!contactPattern.test(contactNo)) {
-			alert("Please enter a valid 10-digit mobile number.");
-			contactNo.focus();
+		} else if (!contactPattern.test(helplineNo)) {
+			alert("Please enter a valid 10-digit HelpLine number.");
+			$('#helplineNo').focus();
 			return false;
 		}
 		if (tdsWithPan === '') {
@@ -215,21 +212,25 @@ $(document).ready(function() {
 			$('#taxDeduction').focus();
 			isValid = false;
 		}
-		if (seniorCitizenTaxDeduction === '') {
-			$('#chkseniorcitizentaxdeduction').text('* This field is required');
-			$('#seniorCitizenTaxDeduction').focus();
+		if (branchManagerContactNo === '') {
+			$('#chkbranchManagerContactNo').text('* This field is required');
+			$('#branchManagerContactNo').focus();
 			isValid = false;
+		} else if (!contactPattern.test(branchManagerContactNo)) {
+			alert("Please enter a valid 10-digit Branch Manager Contact Number.");
+			$('#branchManagerContactNo').focus();
+			return false;
 		}
 
 		if (!isValid) {
-			return false; // Stop AJAX call
+			return false;
 		}
-		
-		var declaredValue=$("#declaredValue").val();
-		var paidUpCapital=$("#paidUpCapital").val();
-		var noOfShares=paidUpCapital/declaredValue;
 
-		const companyData = {
+		var declaredValue = $("#declaredValue").val();
+		var paidUpCapital = $("#paidUpCapital").val();
+		var noOfShares = paidUpCapital / declaredValue;
+
+		let formData = {
 			id: $("#id").val(),
 			companyName: $("#companyName").val(),
 			shortName: $("#shortName").val(),
@@ -241,55 +242,200 @@ $(document).ready(function() {
 			declaredValue: $("#declaredValue").val(),
 			address: $("#address").val(),
 			state: $("#state").val(),
+			city: $("#city").val(),
 			pinCode: $("#pinCode").val(),
 			emailId: $("#emailId").val(),
 			authorizedShareCapital: $("#authorizedShareCapital").val(),
 			paidUpCapital: $("#paidUpCapital").val(),
-			nof: noOfShares,
-			contactNo: $("#contactNo").val(),
+			nof: $("#nof").val(),
+			helplineNo: $("#helplineNo").val(),
 			tdsWithPan: $("#tdsWithPan").val(),
 			tdsWithoutPan: $("#tdsWithoutPan").val(),
 			taxDeduction: $("#taxDeduction").val(),
-			seniorCitizenTaxDeduction: $("#seniorCitizenTaxDeduction").val()
+			branchManagerContactNo: $("#branchManagerContactNo").val()
 		};
 
 		$.ajax({
-			url: "api/preference/updateDataOfCompanyAdministration",
+			url: "api/preference/update",
 			type: "POST",
 			contentType: "application/json",
-			data: JSON.stringify(companyData),
-			success: function(response) {
-				if (response.status == "OK") {
-					alert(response.message);
-					location.reload();
-				} else {
-					alert(response.message);
-				}
+			data: JSON.stringify(formData),
+			success: function() {
+				alert("Company details updated successfully!");
 			},
-			error: function(xhr, status, error) {
-				alert("❌ Error: " + xhr.responseText);
+			error: function() {
+				alert("Error updating company details");
 			}
 		});
 
 	});
 
+	// =================================================
+	// 3️⃣ ADD TEXT FIELD + AUTO IMAGE PREVIEW FIELD
+	// =================================================
+	$("#addFieldBtn").click(function(e) {
+		e.preventDefault();
+		createNewField();
+	});
+
+	function createNewField() {
+		const fieldHtml = `
+            <div class="textUploadSet mb-4">
+                <input type="text" class="form-control nameField" placeholder="Enter Image Name...">
+                <div class="uploadContainer"></div>
+            </div>`;
+		$("#fieldContainer").append(fieldHtml);
+	}
+
+	// =================================================
+	// 4️⃣ WHEN NAME TYPED → SHOW IMAGE UPLOAD
+	// =================================================
+	$(document).on("input", ".nameField", function() {
+		const val = $(this).val().trim();
+		const box = $(this).closest(".textUploadSet").find(".uploadContainer");
+
+		if (val.length === 0) { box.html(""); return; }
+
+		const uniqueId = "file-" + Date.now();
+
+		const html = `
+            <div class="uploadField mt-2">
+                <label>${val} *</label>
+                <label for="${uniqueId}">
+                    <input type="file" id="${uniqueId}" hidden accept="image/*" onchange="previewImage('${uniqueId}')">
+                    <div>
+                        <img src="../images/upload/upload.png" id="preview-${uniqueId}" style="width:120px;">
+                    </div>
+                </label>
+            </div>
+        `;
+
+		box.html(html);
+	});
+
+	// =================================================
+	// 5️⃣ UPLOAD ALL NEW IMAGES
+	// =================================================
+	$("#uploadAllBtn").click(function() {
+
+		$(".uploadField").each(function() {
+
+			const fieldName = $(this).find("label:first").text().replace("*", "").trim();
+			const input = $(this).find("input[type=file]")[0];
+			const file = input.files[0];
+
+			if (!file) {
+				alert("Select file for " + fieldName);
+				return;
+			}
+
+			let fd = new FormData();
+			fd.append("fieldName", fieldName);
+			fd.append("file", file);
+
+			$.ajax({
+				url: "api/preference/upload/" + companyId,
+				type: "POST",
+				data: fd,
+				processData: false,
+				contentType: false,
+				success: function() {
+					$(input).closest(".uploadField").css("border", "2px solid green");
+				},
+				error: function() {
+					$(input).closest(".uploadField").css("border", "2px solid red");
+				}
+			});
+		});
+
+		alert("Uploading Images...");
+	});
+
+	// =================================================
+	// 6️⃣ RELOAD IMAGES FROM DATABASE
+	// =================================================
+	$("#reloadDataBtn").click(loadCompanyImages);
+
+	function loadCompanyImages() {
+
+		$("#storedImages").html(`<h5>Loading...</h5>`);
+
+		$.ajax({
+			url: "api/preference/images/" + companyId,
+			type: "GET",
+			success: function(data) {
+
+
+				let html = "<h4>Stored Images</h4><div class='row'>";
+
+				data.forEach(img => {
+					html += `
+				        <div class="col-lg-3 text-center mb-4">
+				            <div class="img-box">
+				                <img src="/Uploads/company/${companyId}/${img.fileName}" 
+				                     width="150" height="150" 
+				                     style="object-fit:contain;border:1px solid #ccc">
+
+				                <button class="deleteImg" data-id="${img.id}">&times;</button>
+				            </div>
+
+				            <p>${img.name}</p>
+				        </div>
+				    `;
+				});
+
+				html += "</div>";
+
+				$("#storedImages").html(html);
+			}
+		});
+	}
+
+	// =================================================
+	// 7️⃣ DELETE IMAGE
+	// =================================================
+	$(document).on("click", ".deleteImg", function() {
+		const id = $(this).data("id");
+
+		$.ajax({
+			url: "api/preference/delete/" + id,
+			type: "POST",
+			success: function() {
+				alert("Image deleted!");
+				loadCompanyImages();
+			}
+		});
+	});
+
 });
 
+// =============================
+// 8️⃣ IMAGE PREVIEW FUNCTION
+// =============================
+function previewImage(id) {
+	const file = document.getElementById(id).files[0];
+	const preview = document.getElementById("preview-" + id);
+
+	if (file) {
+		const reader = new FileReader();
+		reader.onload = e => preview.src = e.target.result;
+		reader.readAsDataURL(file);
+	}
+}
+
+// Tooltip initialization
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 tooltipTriggerList.map(function(tooltipTriggerEl) {
 	return new bootstrap.Tooltip(tooltipTriggerEl);
 });
 
+// Enable edit mode
 document.addEventListener("DOMContentLoaded", function() {
 	const editBtn = document.getElementById("editBtn");
 	const updateBtn = document.getElementById("updateBtn");
 
 	editBtn.addEventListener("click", function() {
-		updateBtn.removeAttribute("disabled"); // Enable the Update button
-		$("#formid")
-			.find("input, textarea")
-			.prop("readonly", false);
+		updateBtn.removeAttribute("disabled");
+		$("#formid").find("input, textarea").prop("readonly", false);
 	});
 });
-
-

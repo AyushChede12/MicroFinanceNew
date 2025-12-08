@@ -12,7 +12,6 @@ public class CreateSavingsAccount {
 	private Long id;
 	private String typeofaccount;
 	private String openingDate;
-	@Column(name = "select_by_customer")
 	private String selectByCustomer;
 	private String enterCustomerName;
 	private String dateOfBirth;

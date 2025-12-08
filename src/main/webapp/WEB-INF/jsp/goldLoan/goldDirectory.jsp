@@ -44,58 +44,58 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<main id="main" class="main">
 		<div class="pagetitle">
-			<h1>Secured Gold Loan</h1>
+			<h1>SECURED GOLD LOAN</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-coin"></i></a></li>
-					<li class="breadcrumb-item action">Gold Directory</li>
+					<li class="breadcrumb-item action">GOLD DIRECTORY</li>
 				</ol>
 			</nav>
 		</div>
 
 		<div>
 			<form id="formid">
-			<!-- ================= Customer Details ================= -->
+				<!-- ================= Customer Details ================= -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Customer Details</li>
+							<li class="breadcrumb-item action">CUSTOMER DETAILS</li>
 						</ol>
 					</nav>
 					<div class="row">
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">CustomerCode</label> <select id="customerCode" name="customerCode"
-									required="required" class="form-control selectField"
-									style="height: 30px;">
-									<option value="">Select Customer Code</option>
-									
+								<label for="">CUSTOMER CODE</label> <select id="customerCode"
+									name="customerCode" required="required"
+									class="form-control selectField" style="height: 30px;">
+									<option value="">SELECT CUSTOMER CODE</option>
+
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="customerName">Customer Name</label> <input
-									type="text" name="customerName" id="customerName"
-									required="required" placeholder="Enter Customer Name"
+								<label for="customerName">CUSTOMER NAME</label> <input
+									type="text" name="customerName" id="customerName" readonly="readnoly"
+									required="required" placeholder="ENTER CUSTOMER NAME"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						
-					</div>	
+
+					</div>
 
 				</div>
-			
+
 				<!-- ================= Today's Rate ================= -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Today's Rate</li>
+							<li class="breadcrumb-item action">TODAY'S RATE</li>
 						</ol>
 					</nav>
 					<div class="row">
@@ -103,10 +103,10 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Karat</label> <select id="karat" name="karat"
+								<label for="">KARAT</label> <select id="karat" name="karat"
 									required="required" class="form-control selectField"
 									style="height: 30px;">
-									<option value="">Select Karat</option>
+									<option value="">SELECT KARAT</option>
 									<option value="24K">24K</option>
 									<option value="22K">22K</option>
 									<option value="20K">20K</option>
@@ -117,19 +117,20 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="silverrate">Today's Rate / gm</label> <input
-									type="text" name="todayRate" id="todayRate"
-									required="required" placeholder="Enter Today's Rate"
+								<label for="silverrate">TODAY'S RATE / GM</label> <input
+									type="text" name="todayRate" id="todayRate" required="required"
+									placeholder="ENTER TODAY'S RATE"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="goldrate">Customer Gold Rate / gm</label>
+								<label for="goldrate">CUSTOMER GOLD RATE / GM</label>
 								<div class="d-flex">
 									<input type="text" name="custgoldRate" id="custgoldRate"
-										required="required" placeholder="Enter Rate"
+										required="required" placeholder="ENTER RATE"
+										class="form-control"
 										style="text-transform: uppercase; margin-right: 10px;" />
 									<!-- <button id="saveTodaysRateBtn" class="btnStyle bg-success">Save</button> -->
 								</div>
@@ -138,7 +139,7 @@ pageEncoding="ISO-8859-1"%> -->
 					</div>
 
 
-					
+
 
 				</div>
 
@@ -146,27 +147,41 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Item Master</li>
+							<li class="breadcrumb-item action">ITEM MASTER</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Item Master Type</label> <select
+								<label for="">ITEM MASTER TYPE</label> <select
 									id="itemMasterType" name="itemMasterType" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Item Type</option>
-									<option value="Gold">Gold</option>
+									<option value="">SELECT ITEM TYPE</option>
+									<option value="Gold">GOLD</option>
 								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="itemName">Item Name</label>
+								<label for="itemName">ITEM NAME</label>
 								<div class="d-flex">
 									<input type="text" name="itemName" id="ItemName"
-										required="required" placeholder="Enter Item Name"
+										required="required" placeholder="ENTER ITEM NAME"
+										class="form-control"
+										style="text-transform: uppercase; margin-right: 10px;" />
+									<!-- <button id="saveItemMasterBtn" class="btnStyle bg-success">Save</button> -->
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="itemWeight">ITEM WEIGHT</label>
+								<div class="d-flex">
+									<input type="text" name="itemWeight" id="itemWeight"
+										required="required" placeholder="ENTER ITEM WEIGHT"
+										class="form-control"
 										style="text-transform: uppercase; margin-right: 10px;" />
 									<!-- <button id="saveItemMasterBtn" class="btnStyle bg-success">Save</button> -->
 								</div>
@@ -209,27 +224,29 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Locker Master</li>
+							<li class="breadcrumb-item action">LOCKER MASTER</li>
 						</ol>
 					</nav>
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Locker Branch</label> <select
-									id="lockerBranch" name="lockerBranch" required="required"
+								<label for="">LOCKER BRANCH</label> <select id="lockerBranch"
+									name="lockerBranch" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Branch</option>
-									
+									<option value="">SELECT BRANCH</option>
+
 								</select>
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="lockerAddress">Locker Number</label>
+								<label for="lockerAddress">LOCKER NUMBER</label>
 								<div class="d-flex">
-									<input type="text" name="lockerNumber" id="lockerNumber"
-										required="required" placeholder="Enter Locker Number"
+									<input type="text" name="lockerNo" id="lockerNo"
+										value="${lockerNo }" required="required"
+										placeholder="ENTER LOCKER NUMBER" readonly="readonly"
+										class="form-control"
 										style="text-transform: uppercase; margin-right: 10px;" />
 									<!-- <button id="saveLockerMasterBtn" class="btnStyle bg-success">Save</button> -->
 								</div>
@@ -272,16 +289,16 @@ pageEncoding="ISO-8859-1"%> -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Purity Master</li>
+							<li class="breadcrumb-item action">PURITY MASTER</li>
 						</ol>
 					</nav>
 
 					<div class="row">
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="purityName">Purity Name</label> <input type="text"
+								<label for="purityName">PURITY NAME</label> <input type="text"
 									name="purityName" id="purityName" required="required"
-									placeholder="Enter Purity Name"
+									placeholder="ENTER PURITY NAME"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
@@ -290,19 +307,19 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields mb-4">
 								<label for="purity">Purity (%)</label> <input type="text"
 									name="purity" id="purity" required="required"
-									placeholder="Enter Purity" style="text-transform: uppercase;" />
+									placeholder="ENTER PURITY" style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="itemType">Item Purity Type</label>
+								<label for="itemType">ITEM PURITY TYPE</label>
 								<div class="d-flex">
 									<select id="itemPurityType" name="itemPurityType"
 										required="required" class="form-control selectField"
 										style="height: 30px; margin-right: 10px;">
-										<option value="">Item Type</option>
-										<option value="Gold">Gold</option>
+										<option value="">ITEM TYPE</option>
+										<option value="Gold">GOLD</option>
 									</select>
 									<!-- <button id="saveButtonforGoldDirectory" class="btnStyle bg-success">Save</button> -->
 								</div>
@@ -340,44 +357,44 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 					</div> -->
 					</div>
-					</div>
-					<!-- ================= Loan Details ================= -->
+				</div>
+				<!-- ================= Loan Details ================= -->
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
-							<li class="breadcrumb-item action">Loan Details</li>
+							<li class="breadcrumb-item action">LOAN DETAILS</li>
 						</ol>
 					</nav>
 					<div class="row">
-						
+
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Plan Name</label> <input type="text"
+								<label for="">LOAN PLAN NAME</label> <input type="text"
 									name="loanPlanName" id="loanPlanName" required="required"
-									placeholder="Loan Plan Name" style="text-transform: uppercase;" />
+									placeholder="LOAN PLAN NAME" style="text-transform: uppercase;" />
 
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Type of Loan</label> <select
-									id="typeOfLoan" name="typeOfLoan" required="required"
+								<label for="">TYPE OF LOAN</label> <select id="typeOfLoan"
+									name="typeOfLoan" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Type of Loan</option>
-									<option value="Gold">Gold Loan</option>
+									<option value="">SELECT TYPE OF LOAN</option>
+									<option value="Gold">GOLD LOAN</option>
 								</select>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Mode</label> <select
-									id="loanMode" name="loanMode" required="required"
+								<label for="">LOAN MODE</label> <select id="loanMode"
+									name="loanMode" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select Loan Mode</option>
-									<option value="Monthly">Monthly</option>
+									<option value="">SELECT LOAN MODE</option>
+									<option value="Monthly">MONTHLY</option>
 								</select>
 							</div>
 						</div>
@@ -385,66 +402,66 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Loan Term</label> <input type="text"
+								<label for="">LOAN TERM</label> <input type="text"
 									name="loanTerm" id="loanTerm" required="required"
-									placeholder="Enter Loan Term" style="text-transform: uppercase;" />
+									placeholder="ENTER LOAN TERM"
+									style="text-transform: uppercase;" />
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Rate Of Interest(%)</label> <input type="text"
+								<label for="">RATE OF INTEREST(%)</label> <input type="text"
 									name="rateOfInterest" id="rateOfInterest" required="required"
-									placeholder="Enter Rate Of Interest"
+									placeholder="ENTER RATE OF INTEREST"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for="">Amount Of Loan </label> <input type="text"
+								<label for="">AMOUNT OF LOAN </label> <input type="text"
 									name="loanAmount" id="loanAmount" required="required"
-									placeholder="Enter Amount Of Loan"
+									readonly="readonly" placeholder="ENTER AMOUNT OF LOAN"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields mb-4">
-								<label for=""> Interest Type</label> <select id="typeIntrest"
+								<label for=""> INTEREST TYPE</label> <select id="typeIntrest"
 									name="typeIntrest" required="required"
 									class="form-control selectField" style="height: 30px;">
-									<option value="">Select ROI Type</option>
-									<option value="Flat Interest">Flat Interest</option>
-									<option value="Reducing Interest">Reducing Interest</option>
-									<option value="Rule 78">Rule 78</option>
+									<option value="">SELECT ROI TYPE</option>
+									<option value="Flat Interest">FLAT INTEREST</option>
+									<option value="Reducing Interest">REDUCING INTEREST</option>
+									<option value="Rule 78">RULE 78</option>
 
 								</select>
 							</div>
 						</div>
 						<!-- EMI Payment -->
-<div class="col-lg-3">
-    <div class="d-flex flex-column formFields mb-4">
-        <label for="">EMI Payment</label> 
-        <input type="text"
-            name="emiPayment" id="emiPayment"
-            required="required" placeholder="Auto Calculated"
-            readonly style="text-transform: uppercase; background:#f5f5f5;" />
-    </div>
-</div>
+						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields mb-4">
+								<label for="">EMI PAYMENT</label> <input type="text"
+									name="emiPayment" id="emiPayment" required="required"
+									placeholder="Auto Calculated" readonly="readonly"
+									style="text-transform: uppercase; background: #f5f5f5;" />
+							</div>
+						</div>
 
 
-						
-					</div>	
+
+					</div>
 
 				</div>
 
-					<div class="row">
-						<div class="col-12 text-center">
-							<button id="saveButtonforGoldDirectory"
-								class="btnStyle bg-success">Save</button>
-						</div>
+				<div class="row">
+					<div class="col-12 text-center">
+						<button id="saveButtonforGoldDirectory"
+							class="btnStyle bg-success">SAVE</button>
 					</div>
+				</div>
 
-					<input type="hidden" id="loanId" value="" />
+				<input type="hidden" id="loanId" value="" />
 			</form>
 
 
@@ -453,9 +470,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/SecuredGoldLoan/GoldDirectory.js"></script>
-</body>
 
-<script>
+
+	<script>
 document.addEventListener('DOMContentLoaded', function () {
 	const toggles = document.querySelectorAll('.toggle__input');
 	toggles.forEach((toggle) => {
@@ -473,58 +490,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 });
 </script>
-
-
-<script type="text/javascript">
-function calculateEMI() {
-    var loanMode = document.getElementById("loanMode").value;
-    var loanTerm = parseInt(document.getElementById("loanTerm").value, 10);
-    var rateOfInterest = parseFloat(document.getElementById("rateOfInterest").value);
-    var loanAmount = parseFloat(document.getElementById("loanAmount").value);
-    var interestType = document.getElementById("typeIntrest").value;
-
-    if (!loanMode || isNaN(loanTerm) || isNaN(rateOfInterest) || isNaN(loanAmount) || !interestType) {
-        document.getElementById("emiPayment").value = "";
-        return;
-    }
-
-    // Monthly default
-    var n = loanTerm;  
-    if (loanMode === "Quarterly") { n = loanTerm * 3; }
-    else if (loanMode === "Yearly") { n = loanTerm * 12; }
-
-    var monthlyRate = rateOfInterest / 100 / 12;
-    var emi = 0;
-
-    if (interestType === "Flat Interest") {
-        var total = loanAmount + (loanAmount * rateOfInterest * loanTerm / 100);
-        emi = total / n;
-    } else if (interestType === "Reducing Interest") {
-        emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, n)) /
-              (Math.pow(1 + monthlyRate, n) - 1);
-    } else if (interestType === "Rule 78") {
-        var totalInterest = loanAmount * rateOfInterest * loanTerm / 100;
-        emi = (loanAmount + totalInterest) / n;
-    }
-
-    document.getElementById("emiPayment").value = emi.toFixed(2);
-}
-
-// Auto trigger on change/input
-document.addEventListener("DOMContentLoaded", function() {
-    var fields = ["loanMode", "loanTerm", "rateOfInterest", "loanAmount", "typeIntrest"];
-    for (var i = 0; i < fields.length; i++) {
-        var el = document.getElementById(fields[i]);
-        if (el) {
-            el.addEventListener("input", calculateEMI);
-            el.addEventListener("change", calculateEMI);
-        }
-    }
-});
-</script>
-
-
-
-
+</body>
 
 </html>

@@ -41,13 +41,13 @@ pageEncoding="ISO-8859-1"%> -->
 	<main id="main" class="main">
 	<form>
 		<div class="pagetitle">
-			<h1>Customer Management</h1>
+			<h1>CUSTOMER MANAGEMENT</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-people-fill"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Search Customer</li>
+					<li class="breadcrumb-item action">SEARCH CUSTOMER</li>
 				</ol>
 			</nav>
 		</div>
@@ -176,6 +176,27 @@ $(document).ready(function () {
     });
 });
 </script>
+<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 	
 </body>
 

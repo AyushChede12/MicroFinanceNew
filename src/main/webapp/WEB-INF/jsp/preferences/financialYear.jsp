@@ -88,11 +88,12 @@ pageEncoding="ISO-8859-1"%> -->
               </div> -->
 							<input type="hidden" id="id" name="id">
 							<div class="d-flex flex-column formFields">
-								<label for="">Financial Year Name <span class="star">*</span></label> <input type="text"
-									name="financialYearName" id="financialYearName"
-									required="required" placeholder="Enter Financial Year Name"
-									style="text-transform: uppercase;" />
-									<small id="chkfyname" style="color: red;"></small>
+								<label for="">Financial Year Name <span class="star">*</span></label>
+								<input type="text" name="financialYearName"
+									id="financialYearName" required="required"
+									placeholder="Enter Financial Year Name"
+									style="text-transform: uppercase;" /> <small id="chkfyname"
+									style="color: red;"></small>
 							</div>
 
 						</div>
@@ -100,20 +101,21 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date From <span class="star">*</span></label> <input type="date" name="dateFrom"
-									id="dateFrom" required="required" placeholder="Enter Date From"
-									style="text-transform: uppercase;" />
-									<small id="chkdatefrom" style="color: red;"></small>
+								<label>Date From <span class="star">*</span></label> <input
+									type="date" name="fromDate" id="fromDate" required="required"
+									placeholder="Enter Date From"
+									style="text-transform: uppercase;" /> <small id="chkdatefrom"
+									style="color: red;"></small>
 							</div>
 						</div>
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Date To <span class="star">*</span></label> <input type="date" name="dateTo"
-									id="dateTo" required="required" placeholder="Enter Date To"
-									style="text-transform: uppercase;" />
-									<small id="chkdateto" style="color: red;"></small>
+								<label>Date To <span class="star">*</span></label> <input
+									type="date" name="toDate" id="toDate" required="required"
+									placeholder="Enter Date To" style="text-transform: uppercase;" />
+								<small id="chkdateto" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -174,6 +176,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/financialYear.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

@@ -45,7 +45,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Account Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-wallet2"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Incoming Receipt Entry</li>
@@ -128,9 +128,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 				<div class="col-lg-3">
 					<div class="d-flex flex-column formFields mb-4">
-						<label for="">Receipt ID <span class="star">*</span></label> <input
-							type="text" name="receiptID" id="receiptID" required="required"
-							placeholder="Enter receipt no." disabled />
+						<label for="">Voucher ID <span class="star">*</span></label> <input
+							type="text" name="voucherID" id="receiptID" required="required"
+							placeholder="Enter Voucher ID" disabled />
 					</div>
 				</div>
 

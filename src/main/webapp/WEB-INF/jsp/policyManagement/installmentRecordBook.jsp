@@ -42,7 +42,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Policy Management</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"><i
+					<li class="breadcrumb-item"><a href="openDashboard"><i
 							class="bi bi-piggy-bank"></i></a></li>
 					<li class="breadcrumb-item active">Installment Record Book</li>
 				</ol>
@@ -73,9 +73,10 @@ pageEncoding="ISO-8859-1"%> -->
 					<!-- <div class="col-md-6 text-right"> -->
 					<div class="col-md-6 d-flex justify-content-center">
 
-						
-						<button type="button" class="btn btn-dark mr-2" onclick="toggleTransaction()">Transaction</button>
-						
+
+						<button type="button" class="btn btn-dark mr-2"
+							onclick="toggleTransaction()">Transaction</button>
+
 						<button type="button" class="btn btn-dark"
 							onclick="printTransactionSection()">
 							<i class="bi bi-download"></i>
@@ -218,5 +219,26 @@ pageEncoding="ISO-8859-1"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="./js/PolicyManagment/policyReport.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 </html>

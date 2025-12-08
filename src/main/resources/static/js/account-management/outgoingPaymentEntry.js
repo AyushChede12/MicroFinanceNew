@@ -299,7 +299,9 @@ function LedgerDropdown(branchName, selectedCr = "", selectedDr = "") {
 				}
 
 				// Debit Ledger (Destination → Liabilities, Expenses, Equity, OR Loan under Assets)
-				if (g === "liabilities" || g === "expenses" || g === "equity" || (g === "assets" && t === "loan")) {
+				if (g === "liabilities" || g === "expenses" || g === "equity" || (g === "assets" && t === "loan_to_members" ||
+					t === "gold_loans" ||
+					t === "joint_loans")) {
 					const selected = title.trim().toLowerCase() === selectedDr.trim().toLowerCase() ? "selected" : "";
 					drOptions += `<option value="${title}" ${selected}>${title}</option>`;
 				}
