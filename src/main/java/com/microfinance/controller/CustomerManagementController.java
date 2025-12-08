@@ -44,26 +44,16 @@ public class CustomerManagementController {
 			@RequestParam(value = "customerPhoto", required = false) MultipartFile customerPhoto,
 			@RequestParam(value = "customerSignature", required = false) MultipartFile customerSignature,
 			@RequestParam(value = "customerDriving", required = false) MultipartFile customerDriving,
-      @RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter,
+			@RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter,
 			@RequestParam(value = "nomineAadhar", required = false) MultipartFile nomineAadhar,
 			@RequestParam(value = "nomineSignature", required = false) MultipartFile nomineSignature)
-
-			@RequestParam(value = "customerVoter", required = false) MultipartFile customerVoter)
-
 
 	{
 
 		try {
 
-
 			ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto,
 					customerSignature, customerDriving, customerVoter, nomineAadhar, nomineSignature);
-
-			// Debug log
-			
-			ApiResponse<addCustomer> response = customerService.saveOrUpdateCustomer(clientMasterDto, customerPhoto,
-					customerSignature, customerDriving, customerVoter);
-
 			return new ResponseEntity<>(response, response.getStatus());
 
 		} catch (Exception e) {
@@ -74,26 +64,18 @@ public class CustomerManagementController {
 		}
 	}
 
-
 	@GetMapping("/getAllCustomer") // Niraj
-
-	@GetMapping("/getAllCustomer")
-
 	public List<addCustomer> getAllCustomer() {
 		List<addCustomer> list = customerService.getAllCustomer();
 		return list;
 	}
 
-
 	// get Data by MemberCode
-
-
 	@PostMapping("/fetchBySelectedCustomer")
 	public List<addCustomer> fetchBySelectedMember(@RequestBody addCustomer customer) {
 		List<addCustomer> list = customerService.fetchBySelectedMember(customer.getMemberCode());
 		return list;
 	}
-
 
 	// Add Member Kyc //
 
@@ -124,17 +106,13 @@ public class CustomerManagementController {
 	 * return new ResponseEntity<>(response, response.getStatus()); }
 	 */
 
-
-
 	@PostMapping("/verifyFetchedData")
 	public ResponseEntity<Map<String, Object>> verifyFetchedData(@RequestBody Map<String, Object> fetchedData) {
 		String customerCode = (String) fetchedData.get("memberCode");
 
 		Map<String, Object> response = new HashMap<>();
 
-
 		// Fetch customer by code
-
 		Optional<addCustomer> optionalCustomer = customerRepo.findByMemberCode(customerCode);
 
 		if (!optionalCustomer.isPresent()) {
@@ -151,9 +129,7 @@ public class CustomerManagementController {
 			return ResponseEntity.ok(response);
 		}
 
-
 		// Required fields to validate
-
 		String[] requiredFields = { "memberCode", "customerName", "contactNo", "signupDate", "aadharNo", "pan",
 				"voterNo", "drivingLicenceNo" };
 
@@ -166,7 +142,6 @@ public class CustomerManagementController {
 				isVerified = false;
 				missingFields.append(field).append(", ");
 			}
-
 		}
 
 		if (!isVerified) {
@@ -179,27 +154,11 @@ public class CustomerManagementController {
 			response.put("isVerified", true);
 			response.put("message", "Verification successful!");
 		}
-
-
-		}
-
-		if (!isVerified) {
-			response.put("isVerified", false);
-			response.put("message", "Verification failed. Missing fields: " + missingFields.toString());
-		} else {
-			customer.setVerified(true);
-			customerRepo.save(customer);
-
-			response.put("isVerified", true);
-			response.put("message", "Verification successful!");
-		}
-
 
 		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping("/approved")
-
 	 public ResponseEntity<ApiResponse<List<addCustomer>>> getApprovedCustomers() {
 	     List<addCustomer> customers = customerService.getApprovedCustomers();
 
@@ -212,15 +171,5 @@ public class CustomerManagementController {
 	     return ResponseEntity.ok(response);
 	 }
 	
-
-	public ResponseEntity<ApiResponse<List<addCustomer>>> getApprovedCustomers() {
-		List<addCustomer> customers = customerService.getApprovedCustomers();
-
-		ApiResponse<List<addCustomer>> response = ApiResponse.success(HttpStatus.OK,
-				"Approved customers fetched successfully.", customers);
-
-		return ResponseEntity.ok(response);
-	}
-
 
 }
