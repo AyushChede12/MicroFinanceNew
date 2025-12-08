@@ -33,13 +33,9 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             success: function (response) {
                 alert("Data saved successfully!");
-                $("#id").val(""); // reset hidden id
-                $("form")[0].reset(); // clear form
-                fetchAllData(); // refresh table
-            },
-            error: function (xhr) {
-                console.error(xhr.responseText);
-                alert("Error saving data.");
+                $("#id").val("");
+                $("form")[0].reset();
+                fetchAllData();  // refresh table instantly
             }
         });
     });
@@ -84,13 +80,9 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             success: function (response) {
                 alert(response.message);
-                $("#id").val(""); // reset hidden id
-                $("form")[0].reset(); // clear form
-                fetchAllData(); // refresh table
-            },
-            error: function (xhr) {
-                console.error(xhr.responseText);
-                alert("Error updating data.");
+                $("#id").val("");
+                $("form")[0].reset();
+                fetchAllData();
             }
         });
     });
@@ -100,14 +92,12 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             url: "/api/customersavings/fetchalllll",
-            contentType: "application/json",
             success: function (response) {
-                if (response.status === "FOUND" || response.status === 302) {
-                    let data = response.data;
-                    let tableBody = $(".datatable tbody");
-                    tableBody.empty();
+                let tableBody = $(".datatable tbody");
+                tableBody.empty();
 
-                    data.forEach((item, index) => {
+                if (response.status === "FOUND") {
+                    response.data.forEach((item, index) => {
                         let row = `
                             <tr>
                                 <td>${index + 1}</td>
@@ -118,35 +108,31 @@ $(document).ready(function () {
                                 <td>${item.dailyLimit}</td>
                                 <td>${item.monthlyCardLimit}</td>
                                 <td>${item.yearlyCardLimit}</td>
+
                                 <td>
-                                    <button class="iconbutton" onclick="viewData(${item.id})" title="Edit">
+                                    <button class="iconbutton" onclick="viewData(${item.id})">
                                         <i class="fa-solid fa-pen-to-square text-primary"></i>
                                     </button>
                                 </td>
                                 <td>
-                                    <button class="iconbutton" onclick="deleteData(${item.id})" title="Delete">
+                                    <button class="iconbutton" onclick="deleteData(${item.id})">
                                         <i class="fa-solid fa-trash text-danger"></i>
                                     </button>
                                 </td>
                             </tr>`;
                         tableBody.append(row);
                     });
-                } else {
-                    alert("Failed to fetch data: " + response.message);
                 }
-            },
-            error: function () {
-                alert("Error while calling the API.");
             }
         });
     }
 
-    // Initial fetch
+    // Initial load
     fetchAllData();
-
 });
 
-// ------------------- View/Edit -------------------
+
+// ------------------- View (Edit) -------------------
 function viewData(id) {
     $.ajax({
         url: "/api/customersavings/getSavingSchemeCatalogById",
@@ -154,57 +140,62 @@ function viewData(id) {
         data: { id: id },
         success: function (response) {
             if (response.status === "FOUND") {
-                const data = response.data;
+                const d = response.data;
 
-                $("#id").val(data.id);
-                $("#policyName").val(data.policyName);
-                $("#yearlyROI").val(data.yearlyROI);
-                $("#customerName").val(data.customerName);
-                $("#initialDeposite").val(data.initialDeposite);
-                $("#monthlyMinimumBalance").val(data.monthlyMinimumBalance);
-                $("#reservedFunds").val(data.reservedFunds);
-                $("#messagingFees").val(data.messagingFees);
-                $("#messagingInterval").val(data.messagingInterval);
-                $("#monthlyFreeIFSCTransactions").val(data.monthlyFreeIFSCTransactions);
-                $("#freeMoneyTransfers").val(data.freeMoneyTransfers);
-                $("#limitperTransaction").val(data.limitperTransaction);
-                $("#dailyLimit").val(data.dailyLimit);
-                $("#weeklyLimit").val(data.weeklyLimit);
-                $("#monthlyLimit").val(data.monthlyLimit);
-                $("#serviceFee").val(data.serviceFee);
-                $("#billingCycle").val(data.billingCycle);
-                $("#cardFee").val(data.cardFee);
-                $("#monthlyCardLimit").val(data.monthlyCardLimit);
-                $("#yearlyCardLimit").val(data.yearlyCardLimit);
+                $("#id").val(d.id);
+                $("#policyName").val(d.policyName);
+                $("#yearlyROI").val(d.yearlyROI);
+                $("#customerName").val(d.customerName);
+                $("#initialDeposite").val(d.initialDeposite);
+                $("#monthlyMinimumBalance").val(d.monthlyMinimumBalance);
+                $("#reservedFunds").val(d.reservedFunds);
+                $("#messagingFees").val(d.messagingFees);
+                $("#messagingInterval").val(d.messagingInterval);
+                $("#monthlyFreeIFSCTransactions").val(d.monthlyFreeIFSCTransactions);
+                $("#freeMoneyTransfers").val(d.freeMoneyTransfers);
+                $("#limitperTransaction").val(d.limitperTransaction);
+                $("#dailyLimit").val(d.dailyLimit);
+                $("#weeklyLimit").val(d.weeklyLimit);
+                $("#monthlyLimit").val(d.monthlyLimit);
+                $("#serviceFee").val(d.serviceFee);
+                $("#billingCycle").val(d.billingCycle);
+                $("#cardFee").val(d.cardFee);
+                $("#monthlyCardLimit").val(d.monthlyCardLimit);
+                $("#yearlyCardLimit").val(d.yearlyCardLimit);
             } else {
-                alert("Record not found: " + response.message);
+                alert("Record not found!");
             }
-        },
-        error: function (xhr) {
-            alert("Request failed: " + xhr.responseText);
         }
     });
 }
 
-// ------------------- Delete -------------------
+
 function deleteData(id) {
-    if (confirm("Are you sure you want to delete this Scheme?")) {
-        $.ajax({
-            url: "/api/customersavings/deleteSavingSchemeCatalogDataById",
-            type: "POST",
-            data: { id: id },
-            success: function (response) {
-                if (response.data === "success") {
-                    alert(response.message);
-                    fetchAllData();
-                } else {
-                    alert("Delete failed: " + response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                alert("Failed to delete record.");
-                console.error("Error:", error);
-            }
-        });
+
+    if (!confirm("Are you sure you want to delete this Scheme?")) {
+        return;
     }
+
+    $.ajax({
+        url: "/api/customersavings/deleteSavingSchemeCatalogDataById?id=" + id,
+        type: "POST",
+
+        success: function (response) {
+
+            if (response.data === "success") {
+
+                alert("Deleted successfully!");
+
+                // 🔥 INSTANT RELOAD TABLE
+                fetchAllData();     // <-- BEST & CLEAN
+
+            } else {
+                alert("Delete failed: " + response.message);
+            }
+        },
+
+        error: function () {
+            alert("Failed to delete record.");
+        }
+    });
 }
