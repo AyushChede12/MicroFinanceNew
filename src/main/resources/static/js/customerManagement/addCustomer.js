@@ -743,6 +743,32 @@ $(document).ready(function() {
 			$('#guardianAccount').hide();
 		}
 	});
+	
+	$('#nomineeDOB').on('change', function() {
+			const dobVal = $(this).val();
+			if (!dobVal) return;
+
+			const dob = new Date(dobVal);
+			const today = new Date();
+
+			let age = today.getFullYear() - dob.getFullYear();
+			const m = today.getMonth() - dob.getMonth();
+			if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+				age--;
+			}
+
+			$('#nomineeAge').val(age);
+
+			/*if (age < 18) {
+				$('#minor').val('Yes');
+				$('#guardianDetails').show();
+				$('#guardianAccount').show();
+			} else {
+				$('#minor').val('No');
+				$('#guardianDetails').hide();
+				$('#guardianAccount').hide();
+			}*/
+		});
 });
 
 
