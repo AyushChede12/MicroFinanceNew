@@ -1520,7 +1520,7 @@ select {
 					<div class="member-row">
 						<div class="checkbox-col">
 							<input type="checkbox" id="myLoanPaymentReport" name="service"
-								value="Loan payment Report">
+								value="Loan Payment Report">
 						</div>
 						<div class="bold-text">Reports & Analytics =></div>
 						<div class="normal-text">Loan Payment Report</div>

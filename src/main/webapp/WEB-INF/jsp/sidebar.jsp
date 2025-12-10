@@ -1088,8 +1088,7 @@
 				data-toggle="collapse">
 					<div class="d-flex">
 						<i class="bi bi-file-earmark-text text-white"></i> <span
-							style="font-family: 'Poppins', sans-serif">Reports &
-							Analytics</span>
+							style="font-family: 'Poppins', sans-serif">Reports & Analytics</span>
 					</div> <i class="bi bi-chevron-down"></i>
 			</a>
 
@@ -1117,7 +1116,7 @@
 
 					<li id="Cheque_Transaction_Report"><a
 						href="chequeTransactionReport"> <i class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Cheque Transaction Report</span>
+							style="font-family: 'Poppins', sans-serif">cheque Transaction Report</span>
 					</a></li>
 
 					<li id="Incentive_Payment_summary"><a
@@ -1165,18 +1164,17 @@
 							style="font-family: 'Poppins', sans-serif">EMI Collection Summary</span>
 					</a></li>
 
-					<!-- <li><a href="emiIrregularityStatement"> <i
+					<li id="EMIrregularityStatement"><a href="emiIrregularityStatement"> <i
 							class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">EMI
-								Irregularity Statement</span>
-					</a></li> -->
+							style="font-family: 'Poppins', sans-serif">EMI Irregularity Statement</span>
+					</a></li>
 
 					<li id="Loan_Confirmation_Document"><a
 						href="loanConfirmationDocument"> <i class="bi bi-circle"></i>
 							<span style="font-family: 'Poppins', sans-serif">Loan Confirmation Document</span>
 					</a></li>
 
-					<li id=""><a href="loanConfirmationDocument"> <i
+					<li id="Gold_Loan_Document"><a href="loanConfirmationDocument"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Gold Loan Document</span>
 					</a></li>

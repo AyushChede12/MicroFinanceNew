@@ -278,7 +278,7 @@ function loadSidebar(session) {
 	if (session.includes("Recurring Installment Due Report")) $("#myRecurringInstallmentDueReport").show();
 	if (session.includes("Unapproved Loan Applications")) $("#myUnapprovedLoanApplications").show();
 	if (session.includes("Loan Report")) $("#myLoanReport").show();
-	if (session.includes("Loan payment Report")) $("#myLoanpaymentReport").show();
+	if (session.includes("Loan Payment Report")) $("#myLoanPaymentReport").show();
 	if (session.includes("Upcoming EMI Due Report")) $("#myUpcomingEMIDueReport").show();
 	if (session.includes("Overdue Repayment Analysis")) $("#myOverdueRepaymentAnalysis").show();
 	if (session.includes("Loan Installment Pending Report")) $("#myLoanInstallmentPendingReport").show();
