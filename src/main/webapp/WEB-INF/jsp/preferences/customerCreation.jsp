@@ -186,6 +186,8 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="row">
 							<div class="col-12 text-center mt-4" style="margin-left: 300px;">
 								<button id="saveBtn" class="btnStyle bg-warning" type="button">Save</button>
+								<button id="updateBtn" type="button" class="btnStyle" style="background-color: #FFA500; display:none;">Update</button>
+
 
 							</div>
 						</div>

@@ -126,11 +126,18 @@ public class UserCreationController {
 		}
 	}
 
-	@GetMapping("/editUserManageById")
-	public Optional<UserCreation> editReceivedPoById(@RequestBody UserCreation userCreation) {
-		Optional<UserCreation> list = userCreationRepo.findById(userCreation.getId());
-		return list;
+	@GetMapping("/editUserManageById/{id}")
+	public ResponseEntity<?> editUserManageById(@PathVariable Long id) {
+	    Optional<UserCreation> user = userCreationRepo.findById(id);
+
+	    if (user.isPresent()) {
+	        return ResponseEntity.ok(user.get());
+	    } else {
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+	                .body("User not found");
+	    }
 	}
+	
 
 	@PostMapping("/updateUserManage/{id}")
 	public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody UserCreation user) {
