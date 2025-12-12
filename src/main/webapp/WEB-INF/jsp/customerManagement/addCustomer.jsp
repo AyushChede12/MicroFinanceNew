@@ -53,7 +53,7 @@ pageEncoding="UTF-8"%> -->
 		<div>
 			<form id="formid">
 
-			
+
 				<div>
 					<nav>
 						<ol class="breadcrumb breadcrumb-title">
@@ -141,10 +141,6 @@ pageEncoding="UTF-8"%> -->
 								<label for="">DOB</label> <input type="date" name="dob" id="dob"
 									required="required" placeholder="Enter DOB" />
 
-								<label for="customerName">Customer Name </label> <input type="text"
-									name="customerName" id="customerName" required="required"
-									placeholder="Enter Customer Name" />
-
 							</div>
 						</div>
 
@@ -212,7 +208,7 @@ pageEncoding="UTF-8"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
 								<label for="">Age</label> <input type="text" name="customerAge"
-									id="customerAge" required="required" placeholder="Enter Age" />
+									id="customerAge" required="required" placeholder="Enter Age" readonly="readonly"/>
 							</div>
 						</div>
 
@@ -234,7 +230,7 @@ pageEncoding="UTF-8"%> -->
 
 
 
-						<div class="col-lg-3">
+						<div class="col-lg-3" style="margin-bottom: 30px;">
 							<div class="d-flex flex-column formFields">
 								<label for="">Address</label>
 								<textarea name="customerAddress" id="customerAddress"
@@ -928,15 +924,12 @@ pageEncoding="UTF-8"%> -->
 
 
 				</div>
-				<br>
-				<br>
+				<br> <br>
 				<div class="row">
 					<div class="col-12 text-center">
 
 						<button type="button" id="saveBtn" class="btnStyle bg-success">Save</button>
-						<button type="button" id="updateBtn" class="btnStyle" style="background-color: #FFA500;">Update</button>
-						<button type="button" id="printBtn" class="btnStyle bg-primary">Print</button>
-						<button id="saveBtn" name="saveBtn" class="btnStyle bg-success">Save</button>
+
 					</div>
 				</div>
 			</form>
@@ -1019,7 +1012,7 @@ pageEncoding="UTF-8"%> -->
 	}); 
 	
 	</script>
-	<script>
+	<!-- <script>
 $(document).ready(function () {
 
     // -------------------------------
@@ -1064,7 +1057,7 @@ $(document).ready(function () {
     });
 
 });
-</script>
+</script> -->
 
 
 </body>
