@@ -1439,7 +1439,7 @@ select {
 							<input type="checkbox" id="myInvestmentTransactionReport"
 								name="service" value="Investment Transaction Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Investment Transaction Report</div>
 					</div>
 
@@ -1448,16 +1448,16 @@ select {
 							<input type="checkbox" id="myInvestmentSummaryStatement"
 								name="service" value="Investment Summary Statement">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Investment Summary Statement</div>
 					</div>
 
 					<div class="member-row">
 						<div class="checkbox-col">
-							<input type="checkbox" id="myFinancialConsultantReport" name="service"
-								value="Financial Consultant Report">
+							<input type="checkbox" id="myFinancialConsultantReport"
+								name="service" value="Financial Consultant Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Financial Consultant Report</div>
 					</div>
 
@@ -1467,7 +1467,7 @@ select {
 								id="myFinancialConsultantTeamCollectionSummary" name="service"
 								value="Financial Consultant Team Collection Summary">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Financial Consultant Team
 							Collection Summary</div>
 					</div>
@@ -1477,7 +1477,7 @@ select {
 							<input type="checkbox" id="myChequeTransactionReport"
 								name="service" value="Cheque Transaction Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Cheque Transaction Report</div>
 					</div>
 
@@ -1486,7 +1486,7 @@ select {
 							<input type="checkbox" id="myIncentivePaymentSummary"
 								name="service" value="Incentive Payment Summary">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Incentive Payment Summary</div>
 					</div>
 
@@ -1495,7 +1495,7 @@ select {
 							<input type="checkbox" id="myRecurringInstallmentDueReport"
 								name="service" value="Recurring Installment Due Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Recurring Installment Due Report</div>
 					</div>
 
@@ -1504,7 +1504,7 @@ select {
 							<input type="checkbox" id="myUnapprovedLoanApplications"
 								name="service" value="Unapproved Loan Applications">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Unapproved Loan Applications</div>
 					</div>
 
@@ -1513,7 +1513,7 @@ select {
 							<input type="checkbox" id="myLoanReport" name="service"
 								value="Loan Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Loan Report</div>
 					</div>
 
@@ -1522,16 +1522,17 @@ select {
 							<input type="checkbox" id="myLoanPaymentReport" name="service"
 								value="Loan Payment Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Loan Payment Report</div>
 					</div>
+
 
 					<div class="member-row">
 						<div class="checkbox-col">
 							<input type="checkbox" id="myUpcomingEMIDueReport" name="service"
 								value="Upcoming EMI Due Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Upcoming EMI Due Report</div>
 					</div>
 
@@ -1540,7 +1541,7 @@ select {
 							<input type="checkbox" id="myOverdueRepaymentAnalysis"
 								name="service" value="Overdue Repayment Analysis">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Overdue Repayment Analysis</div>
 					</div>
 
@@ -1549,7 +1550,7 @@ select {
 							<input type="checkbox" id="myLoanInstallmentPendingReport"
 								name="service" value="Loan Installment Pending Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Loan Installment Pending Report</div>
 					</div>
 
@@ -1558,7 +1559,7 @@ select {
 							<input type="checkbox" id="myEMICollectionSummary" name="service"
 								value="EMI Collection Summary">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">EMI Collection Summary</div>
 					</div>
 
@@ -1567,7 +1568,7 @@ select {
 							<input type="checkbox" id="myEMIIrregularityStatement"
 								name="service" value="EMI Irregularity Statement">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">EMI Irregularity Statement</div>
 					</div>
 
@@ -1576,7 +1577,7 @@ select {
 							<input type="checkbox" id="myLoanConfirmationDocument"
 								name="service" value="Loan Confirmation Document">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Loan Confirmation Document</div>
 					</div>
 
@@ -1585,7 +1586,7 @@ select {
 							<input type="checkbox" id="myMaturityStatusReport" name="service"
 								value="Maturity Status Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Maturity Status Report</div>
 					</div>
 
@@ -1594,7 +1595,7 @@ select {
 							<input type="checkbox" id="myInvestmentProjectionReport"
 								name="service" value="Investment Projection Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Investment Projection Report</div>
 					</div>
 
@@ -1603,7 +1604,7 @@ select {
 							<input type="checkbox" id="myMaturityObligationReport"
 								name="service" value="Maturity Obligation Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Maturity Obligation Report</div>
 					</div>
 
@@ -1612,7 +1613,7 @@ select {
 							<input type="checkbox" id="myTaxDeductedatSourceSummary"
 								name="service" value="Tax Deducted at Source Summary">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Tax Deducted at Source Summary</div>
 					</div>
 
@@ -1621,7 +1622,7 @@ select {
 							<input type="checkbox" id="myPolicyPerformanceReport"
 								name="service" value="Policy Performance Report">
 						</div>
-						<div class="bold-text">Reports & Analytics =></div>
+						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Policy Performance Report</div>
 					</div>
 
@@ -1637,9 +1638,6 @@ select {
 
 				</div>
 			</div>
-
-
-
 		</div>
 
 

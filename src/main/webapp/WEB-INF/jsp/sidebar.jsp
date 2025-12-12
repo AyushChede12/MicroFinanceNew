@@ -1083,12 +1083,12 @@
 
 
 			<!--  Reports & Analytics -->
-			<li id="Reports_&_Analytics" class="nav-item"><a
+			<li id="Reports_and_Analytics" class="nav-item"><a
 				class="nav-link collapsed" href="#report-section"
 				data-toggle="collapse">
 					<div class="d-flex">
 						<i class="bi bi-file-earmark-text text-white"></i> <span
-							style="font-family: 'Poppins', sans-serif">Reports & Analytics</span>
+							style="font-family: 'Poppins', sans-serif">Reports and Analytics</span>
 					</div> <i class="bi bi-chevron-down"></i>
 			</a>
 
@@ -1119,7 +1119,7 @@
 							style="font-family: 'Poppins', sans-serif">cheque Transaction Report</span>
 					</a></li>
 
-					<li id="Incentive_Payment_summary"><a
+					<li id="Incentive_Payment_Summary"><a
 						href="incentivePaymentSummary"> <i class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Incentive Payment Summary</span>
 					</a></li>
@@ -1138,11 +1138,12 @@
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Loan Report</span>
 					</a></li>
+					
+                     <li id="Loan_Payment_Report"><a
+                        href="loanRePaymentReport"><i class="bi bi-circle"></i><span 
+                            style="font-family: 'Poppins', sans-serif">Loan Payment Report</span>
+                     </a></li>
 
-					<li id="loan_Payment_Report"><a href="loanRePaymentReport">
-							<i class="bi bi-circle"></i> <span
-							style="font-family: 'Poppins', sans-serif">Loan Payment	Report</span>
-					</a></li>
 
 					<li id="Upcoming_EMI_Due_Report"><a
 						href="upcomingEMIDueReport"> <i class="bi bi-circle"></i> <span
@@ -1159,12 +1160,12 @@
 							<span style="font-family: 'Poppins', sans-serif">Loan Installment Pending Report</span>
 					</a></li>
 
-					<li><a href="emiCollectionSummary"> <i
+					<li id="EMI_Collection_Summary"><a href="emiCollectionSummary"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">EMI Collection Summary</span>
 					</a></li>
 
-					<li id="EMIrregularityStatement"><a href="emiIrregularityStatement"> <i
+					<li id="EMI_Irregularity_Statement"><a href="emiIrregularityStatement"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">EMI Irregularity Statement</span>
 					</a></li>
