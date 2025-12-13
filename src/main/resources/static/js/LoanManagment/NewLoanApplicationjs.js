@@ -2,48 +2,64 @@ $(document).ready(function() {
 	console.log("Document ready");
 
 	$.ajax({
-		url: 'api/customermanagement/approved',
-		type: 'GET',
-		success: function(response) {
-			console.log("API response:", response);
+	    url: '/api/customermanagement/approved',
+	    type: 'GET',
+	    success: function(response) {
 
-			// Extract the actual customer list from response.data
-			const customers = response.data;
+	        console.log("API response:", response);
 
-			if (Array.isArray(customers) && customers.length > 0) {
-				const memberDropdown = $('#memberId');
-				const guarantorDropdown = $('#guarantorMemberId');
-				const coApplicantDropdown = $('#coApplicantMemberId');
+	        const customers = response.data;
 
-				memberDropdown.empty();
-				guarantorDropdown.empty();
-				coApplicantDropdown.empty();
+	        if (Array.isArray(customers) && customers.length > 0) {
 
-				const defaultOption = '<option value="">Select Member</option>';
-				memberDropdown.append(defaultOption);
-				guarantorDropdown.append(defaultOption);
-				coApplicantDropdown.append(defaultOption);
+	            const memberDropdown = $('#memberId');
+	            const guarantorDropdown = $('#guarantorMemberId');
+	            const coApplicantDropdown = $('#coApplicantMemberId');
 
-				customers.forEach(function(customer) {
-				    if (customer.memberCode && customer.customerName) {
-				        const option = `<option value="${customer.memberCode}" data-name="${customer.customerName}">
-				                            ${customer.customerName} - ${customer.memberCode}
-				                        </option>`;
-				        memberDropdown.append(option);
-				        guarantorDropdown.append(option);
-				        coApplicantDropdown.append(option);
-				    }
-				});
-			} else {
-				alert('No member data found');
-			}
-		},
+	            memberDropdown.empty();
+	            guarantorDropdown.empty();
+	            coApplicantDropdown.empty();
 
-		error: function(xhr, status, error) {
-			console.error('AJAX Error:', status, error);
-			alert('Failed to fetch members');
-		}
+	            const defaultOption = '<option value="">Select Member</option>';
+
+	            memberDropdown.append(defaultOption);
+	            guarantorDropdown.append(defaultOption);
+	            coApplicantDropdown.append(defaultOption);
+
+	            customers.forEach(function(customer) {
+
+	                // 👍 Create full name safely
+	                let fullName = [
+	                    customer.firstName,
+	                    customer.middleName,
+	                    customer.lastName
+	                ].filter(Boolean).join(" ");
+	                // Ensure full name or memberCode exists
+	                if (customer.memberCode && fullName) {
+
+	                    const option = `
+	                        <option value="${customer.memberCode}" data-name="${fullName}">
+	                            ${fullName} - ${customer.memberCode}
+	                        </option>
+	                    `;
+
+	                    memberDropdown.append(option);
+	                    guarantorDropdown.append(option);
+	                    coApplicantDropdown.append(option);
+	                }
+	            });
+
+	        } else {
+	            alert('No member data found');
+	        }
+	    },
+
+	    error: function(xhr, status, error) {
+	        console.error('AJAX Error:', status, error);
+	        alert('Failed to fetch members');
+	    }
 	});
+
 });
 
 
@@ -68,7 +84,7 @@ $(document).ready(function() {
 						if (Array.isArray(dataList) && dataList.length > 0) {
 							// ✅ Get the first customer in the list
 							const d = dataList[0];
-
+								
 							if (changedId === 'memberId') {
 								$('#relativeDetails').val(d.relationToApplicant || '');
 								$('#dateOfBirth').val(d.dob || '');
@@ -78,31 +94,25 @@ $(document).ready(function() {
 								$('#address').val(d.customerAddress || '');
 								$('#pinCode').val(d.pinCode || '');
 								$('#branchName').val(d.branchName || '');
-
 								if (d.customerPhoto) {
-									const fileName = d.customerPhoto; // This should be JUST the name
-									const photoPath = `/Uploads/${encodeURIComponent(fileName)}`;
-
+									const photoPath = `Uploads/${d.customerPhoto}`;
 									$("#photoPreview").attr("src", photoPath);
-									$("#photoHidden").val(fileName); // ✅ Only file name!
+									$("#photoHidden").val(photoPath); // ✅ Only file name!
 									photoSizeEdit({ target: { result: photoPath } });
 								} else {
-									$("#photoPreview").attr("src", "/Uploads/default-placeholder.jpg");
+									$("#photoPreview").attr("src", "Uploads/default-placeholder.jpg");
 									$("#photoHidden").val("");
-									photoSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
 								}
 
 								if (d.customerSignature) {
-									const fileName = d.customerSignature;
-									const signPath = `/Uploads/${encodeURIComponent(fileName)}`;
+									const signPath = `Uploads/${d.customerSignature}`;
 
 									$('#signaturePreview').attr('src', signPath);
-									$('#signatureHidden').val(fileName); // ✅ Only file name!
+									$('#signatureHidden').val(signPath); // ✅ Only file name!
 									signatureSizeEdit({ target: { result: signPath } });
 								} else {
-									$('#signaturePreview').attr('src', '/Uploads/default-placeholder.jpg');
+									$('#signaturePreview').attr('src', 'Uploads/default-placeholder.jpg');
 									$('#signatureHidden').val("");
-									signatureSizeEdit({ target: { result: "/Uploads/default-placeholder.jpg" } });
 								}
 
 
@@ -199,19 +209,19 @@ $('#loanPlanName').on('change', function() {
 					$('#loanAmount').val(customer.loanAmount);
 					const loanamount = parseFloat($('#loanAmount').val());
 					const roitype = $('#interestType').val(customer.typeIntrest).val();
-					
+
 					calculateEMI(emicollection, tensure, interestinyear, loanamount, roitype);
-					
-					
+
+
 					const feeProcessing = parseFloat(customer.feeProcessing) || 0;
 					const chargesLegal = parseFloat(customer.chargesLegal) || 0;
 					const gst = parseFloat(customer.gst) || 0;
 					const feeInsurence = parseFloat(customer.feeInsurence) || 0;
-					const feeValuation = parseFloat(customer.feeValuation) || 0;                            
+					const feeValuation = parseFloat(customer.feeValuation) || 0;
 
-					
-					calculateCharges(feeProcessing,chargesLegal,gst,feeInsurence,feeValuation,loanamount);
-					
+
+					calculateCharges(feeProcessing, chargesLegal, gst, feeInsurence, feeValuation, loanamount);
+
 				} else {
 					alert('No data found!');
 					$('#openingAmount').val('');
@@ -284,22 +294,22 @@ function calculateEMI(emicollection, tensure, interestinyear, loanamount, roityp
 	}
 }
 
-function calculateCharges(feeProcessing,chargesLegal,gst,feeInsurence,feeValuation,loanamount){
-	
+function calculateCharges(feeProcessing, chargesLegal, gst, feeInsurence, feeValuation, loanamount) {
+
 	const processingFee = (loanamount * feeProcessing) / 100;
-	 const legalCharges = (loanamount * chargesLegal) / 100;
-	 const feeInsurence1 = (loanamount * feeInsurence) / 100;
-	 const feeValuation1 = (loanamount * feeValuation) / 100;
-	 const statinaryCharges = 50;
-	 const gsst = ((processingFee + legalCharges + feeValuation1) * gst)/ 100;
-	 
-	 $('#processingFee').val(processingFee.toFixed(2));
-	 $('#legalCharges').val(legalCharges.toFixed(2));
-	 $('#gst').val(gsst.toFixed(2));
-	 $('#insuranceFee').val(feeInsurence1.toFixed(2));
-	 $('#valuationFees').val(feeValuation1.toFixed(2));
-	 $('#stationaryFee').val(statinaryCharges.toFixed(2));
-	 
+	const legalCharges = (loanamount * chargesLegal) / 100;
+	const feeInsurence1 = (loanamount * feeInsurence) / 100;
+	const feeValuation1 = (loanamount * feeValuation) / 100;
+	const statinaryCharges = 50;
+	const gsst = ((processingFee + legalCharges + feeValuation1) * gst) / 100;
+
+	$('#processingFee').val(processingFee.toFixed(2));
+	$('#legalCharges').val(legalCharges.toFixed(2));
+	$('#gst').val(gsst.toFixed(2));
+	$('#insuranceFee').val(feeInsurence1.toFixed(2));
+	$('#valuationFees').val(feeValuation1.toFixed(2));
+	$('#stationaryFee').val(statinaryCharges.toFixed(2));
+
 }
 
 //saving loan application details
@@ -346,7 +356,7 @@ $(document).ready(function() {
 			coApplicantPinCode: $('#coApplicantPinCode').val(),
 			coApplicantContactNo: $('#coApplicantContactNo').val(),
 			coApplicantSecurityType: $('#coApplicantSecurityType').val(),
-			loanStatus:"ACTIVE",
+			loanStatus: "ACTIVE",
 
 			// Deduction Details
 			processingFee: $('#processingFee').val(),
