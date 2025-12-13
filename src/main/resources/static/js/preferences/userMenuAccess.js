@@ -76,7 +76,6 @@ function submitUserServiceMap() {
 	$("input[name='service']:checked").each(function() {
 		selectedServices.push($(this).val());
 	});
-	alert(selectedServices);
 	$.ajax({
 		type: "POST",
 		url: "api/userCreation/userToServiceMap",
