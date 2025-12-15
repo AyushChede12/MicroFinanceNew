@@ -257,7 +257,7 @@ pageEncoding="ISO-8859-1"%> -->
 								onchange=""
 								style="background-size: cover; background-repeat: no-repeat" />
 								<div id="img-view">
-									<img src="../upload/upload.png" alt="upload_icon"
+									<img src="../images/upload/upload.png" alt="upload_icon"
 										id="photoPreview" /> <input type="hidden" id="photoHidden"
 										name="photoHidden">
 
@@ -574,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 });
 </script>
-<script>
+<!-- <script>
 		$(document).ready(
 				function() {
 
@@ -594,7 +594,7 @@ document.addEventListener('DOMContentLoaded', function () {
 							});
 
 				});
-	</script>
+	</script> -->
 
 </html>
 

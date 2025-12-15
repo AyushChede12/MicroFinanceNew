@@ -580,12 +580,22 @@ public class CustomerSavingsController {
 
 	@GetMapping("/getAccountNumbersByCode")
 	public ApiResponse<List<CreateSavingsAccount>> getAccountNumbersByCode(@RequestParam String selectByCustomer) {
-		
+
 		List<CreateSavingsAccount> list = customersaving.getAccountNumbersByCustomerCode(selectByCustomer);
 		if (list != null && !list.isEmpty()) {
 			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successfull", list);
 		} else {
 			return ApiResponse.error(HttpStatus.NOT_FOUND, "Not Found fetching Data");
+		}
+	}
+
+	@GetMapping("/fetchalllll")
+	public ApiResponse<List<SavingSchemeCatalog>> fetchSavingSchemeCatalog() {
+		List<SavingSchemeCatalog> list = customersaving.fetchAllSavingSchemeCatalog();
+		if (list != null && !list.isEmpty()) {
+			return ApiResponse.success(HttpStatus.FOUND, "Fetching is Successful", list);
+		} else {
+			return ApiResponse.error(HttpStatus.NOT_FOUND, "No Data Found");
 		}
 	}
 

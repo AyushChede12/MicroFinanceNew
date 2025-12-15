@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$.ajax({
-		url: 'api/datacorrection/fetchAllApprovedLoanApplications',
+		url: 'api/datacorrection/getApprovedLoanIds',
 		type: 'GET',
 		success: function(response) {
 			if (response.status === "OK") {

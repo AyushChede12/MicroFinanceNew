@@ -18,9 +18,6 @@ pageEncoding="UTF-8"%> -->
 	crossorigin="anonymous" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
 	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -33,6 +30,12 @@ pageEncoding="UTF-8"%> -->
 <link rel="stylesheet" href="./css/admin.css" />
 <jsp:include page="../sidebar.jsp"></jsp:include>
 <jsp:include page="../header.jsp"></jsp:include>
+<!-- Select2 CSS and JS -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+		rel="stylesheet" />
+	<script
+		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <style>
 #img-view {
@@ -285,16 +288,47 @@ pageEncoding="UTF-8"%> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/customerManagement/addMemberKyc.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<!-- Select2 CSS and JS -->
-	<link
-		href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-		rel="stylesheet" />
-	<script
-		src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	
 
 <script>
 $(document).ready(function () {
+	$.ajax({
+	    url: "api/customermanagement/approved",
+	    method: "GET",
+	    success: function(response) {
+		alert("success");
+	        if (response.status === "OK") {
+
+	            let dropdown = $("#selectByCode");
+	            dropdown.empty(); // Clear old options
+	            dropdown.append(`<option value="">-- Select Customer --</option>`);
+
+	            response.data.forEach(function(item) {
+	            	alert(item.memberCode);
+	                let fullName = [
+	                    item.firstName,
+	                    item.middleName,
+	                    item.lastName
+	                ].filter(Boolean).join(" ");
+	                
+					alert(fullName);
+	                let optionHtml = `
+	                    <option value="${item.memberCode}">
+	                        ${item.memberCode} - ${fullName}
+	                    </option>
+	                `;
+
+	                dropdown.append(optionHtml);
+	            });
+	        } else {
+	            console.warn("Unexpected response:", response);
+	        }
+	    },
+	    error: function(err) {
+	        console.error("Error fetching customers:", err);
+	    }
+	});
 
     // -------------------------------
     // 1️⃣ LABELS UPPERCASE

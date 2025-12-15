@@ -81,10 +81,9 @@ pageEncoding="ISO-8859-1"%> -->
                                 </h5>
                                 <div class="form-div" id="form-div" style="margin-top: 20px;">
 											<div class="form-header">
-												<h2 style="color: red; margin-top: 0px;">BHOYARNATH
-													URBAN</h2>
-												<p style="margin-top: -10px">Kolkata - WEST BENGAL
-													700107</p>
+												<h2 style="color: red; margin-top: 0px;">MICRODINANCE
+													SOFTWARE</h2>
+												<p style="margin-top: -10px">Nagpur</p>
 											</div>
 											<div class="form-div-main" style="padding: 5px;">
 												<div
