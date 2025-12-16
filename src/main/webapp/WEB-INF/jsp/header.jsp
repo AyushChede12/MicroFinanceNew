@@ -8,6 +8,7 @@
 </head>
 <body>
 	<header id="header" class="header fixed-top d-flex align-items-center">
+		<h1 style="margin-left: 10px; color: white;">${customerUser}</h1>
 		<!-- Logo Section -->
 		<div class="d-flex align-items-center justify-content-between">
 			<a href="/" class="logo d-flex align-items-center">
@@ -31,20 +32,6 @@
 	</header>
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/login.js"></script>
-
-	<script>
-		$(document).ready(function() {
-			// ✅ Get username from sessionStorage
-			let username = sessionStorage.getItem("username");
-
-			if (username) {
-				$("#bindUserName").text(username);
-			} else {
-				// ❌ If user tries to open dashboard without login, go back to login page
-				window.location.href = "index";
-			}
-		});
-	</script>
 
 </body>
 </html>

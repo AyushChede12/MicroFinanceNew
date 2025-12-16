@@ -87,10 +87,12 @@ public class PageController {
 	}
 	
 	//Dashboard Cards
-	@GetMapping("/openDashboard")
-	public String getDashboard() {
-		return "dashboardPage/dashboard";
-	}
+//	@GetMapping("/openDashboard")
+//	public String getDashboard() {
+//		return "dashboardPage/dashboard";
+//	}
+	
+	
 
 	// Financial Consultant
 	@GetMapping("/addFinancialConsultant")

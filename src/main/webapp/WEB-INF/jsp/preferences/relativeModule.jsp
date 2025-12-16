@@ -162,6 +162,9 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/relative.js"></script>
+
+		
+
 	<script>
 		$(document).ready(
 				function() {
@@ -183,6 +186,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 				});
 	</script>
+
 </body>
 
 </html>

@@ -1001,6 +1001,15 @@ li.selected {
     
 }
 
+.toggle__input:checked + .toggle__label {
+    background-color: #28a745 !important;   /* Green */
+}
+
+
+.toggle__input:checked + .toggle__label::after {
+    left: 27px;
+}
+
 .wrapper {
     position: relative;
 }
