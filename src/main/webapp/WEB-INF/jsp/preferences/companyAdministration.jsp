@@ -41,6 +41,47 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<style>
+.uploadField {
+	margin-top: 10px;
+}
+
+.uploadField img {
+	width: 100%;
+	height: 150px;
+	object-fit: contain;
+	border: 1px solid #ccc;
+	padding: 4px;
+	border-radius: 8px;
+}
+
+.img-box {
+	position: relative;
+	display: inline-block;
+}
+
+.img-box .deleteImg {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background: rgba(0, 0, 0, 0.6);
+	color: white;
+	border: none;
+	border-radius: 50%;
+	width: 24px;
+	height: 24px;
+	font-size: 16px;
+	line-height: 22px;
+	text-align: center;
+	cursor: pointer;
+	display: none;
+}
+
+.img-box:hover .deleteImg {
+	display: block;
+}
+</style>
+
 </head>
 
 
@@ -117,7 +158,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Short Name <span class="star">*</span></label> <input
 									type="Text" name="shortName" readonly="readonly" id="shortName"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Short Name"
 									style="text-transform: uppercase;" /> <small id="chkshortname"
 									style="color: red;"></small>
 							</div>
@@ -140,7 +181,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>CIN No/Regd No<span class="star">*</span></label> <input
 									type="Text" name="cinNo" readonly="readonly" id="cinNo"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter CIN No"
 									style="text-transform: uppercase;" /> <small id="chkcinno"
 									style="color: red;"></small>
 							</div>
@@ -151,7 +192,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>PAN <span class="star">*</span></label> <input
 									type="Text" name="pan" id="pan" readonly="readonly"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Pan No"
 									style="text-transform: uppercase;" /> <small id="chkpan"
 									style="color: red;"></small>
 							</div>
@@ -161,8 +202,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>TAN <span class="star">*</span></label> <input
-									type="Text" name="tan" id="tan" readonly="readonly"
-									required="required" placeholder="Enter Vehicle No"
+									type="text" name="tan" id="tan" readonly="readonly"
+									required="required" placeholder="Enter Tan No"
 									style="text-transform: uppercase;" /> <small id="chktan"
 									style="color: red;"></small>
 							</div>
@@ -173,7 +214,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>GSTIN <span class="star">*</span></label> <input
 									type="Text" name="gstin" id="gstin" readonly="readonly"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter GSTIN"
 									style="text-transform: uppercase;" /> <small id="chkgstin"
 									style="color: red;"></small>
 							</div>
@@ -212,11 +253,21 @@ pageEncoding="ISO-8859-1"%> -->
 						</div>
 
 						<div class="col-lg-3">
+							<div class="d-flex flex-column formFields">
+								<label for="">City <span class="star">*</span></label> <input
+									type="text" readonly="readonly" name="city" id="city"
+									required="required" placeholder="Enter City "
+									style="text-transform: uppercase;" /> <small id="chkcity"
+									style="color: red;"></small>
+							</div>
+						</div>
+
+						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
 								<label>Pin Code <span class="star">*</span></label> <input
 									type="text" name="pinCode" readonly="readonly" id="pinCode"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Pin Code"
 									style="text-transform: uppercase;" /> <small id="chkpincode"
 									style="color: red;"></small>
 							</div>
@@ -227,7 +278,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>Email ID <span class="star">*</span></label> <input
 									type="text" name="emailId" readonly="readonly" id="emailId"
-									required="required" placeholder="Enter Vehicle No"
+									required="required" placeholder="Enter Email ID"
 									style="text-transform: uppercase;" /> <small id="chkemailid"
 									style="color: red;"></small>
 							</div>
@@ -251,7 +302,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Paid Up Capital <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="paidUpCapital"
 									id="paidUpCapital" required="required"
-									placeholder="Enter Vehicle No"
+									placeholder="Enter Paid Up Capital"
 									style="text-transform: uppercase;" /> <small
 									id="chkpaidupcapital" style="color: red;"></small>
 							</div>
@@ -262,7 +313,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>No Of Share <span class="star">*</span></label> <input
 									type="text" name="nof" id="nof" readonly="readonly"
-									required="required" placeholder="Enter NOF "
+									required="required" placeholder="Enter No Of Share "
 									style="text-transform: uppercase;" /> <small id="chknof"
 									style="color: red;"></small>
 							</div>
@@ -271,12 +322,12 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Contact No <span class="star">*</span></label> <input
-									type="Terxt" name="contactNo" readonly="readonly"
-									id="contactNo" required="required"
-									placeholder="Enter Contact No"
-									style="text-transform: uppercase;" /> <small id="chkcontactno"
-									style="color: red;"></small>
+								<label>HelpLine No <span class="star">*</span></label> <input
+									type="text" name="helpLine No" readonly="readonly"
+									id="helplineNo" required="required"
+									placeholder="Enter HelpLine No"
+									style="text-transform: uppercase;" /> <small
+									id="chkhelplineno" style="color: red;"></small>
 							</div>
 						</div>
 
@@ -296,8 +347,7 @@ pageEncoding="ISO-8859-1"%> -->
 								style="margin-bottom: 30px">
 								<label>TDS (Without PAN) <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="tdsWithoutPan"
-									id="tdsWithoutPan" required="required"
-									placeholder="Enter Vehicle No"
+									id="tdsWithoutPan" required="required" placeholder="Enter TDS"
 									style="text-transform: uppercase;" /> <small
 									id="chktdswithoutpan" style="color: red;"></small>
 							</div>
@@ -309,7 +359,7 @@ pageEncoding="ISO-8859-1"%> -->
 								<label>Tax Deduction <span class="star">*</span></label> <input
 									type="text" readonly="readonly" name="taxDeduction"
 									id="taxDeduction" required="required"
-									placeholder="Enter Vehicle No"
+									placeholder="Enter Tax Deduction"
 									style="text-transform: uppercase;" /> <small
 									id="chktaxdeduction" style="color: red;"></small>
 							</div>
@@ -318,118 +368,113 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Senior Citizen Tax Deduction <span class="star">*</span></label>
+								<label>Branch Manager Contact No <span class="star">*</span></label>
 								<input type="text" readonly="readonly"
-									name="seniorCitizenTaxDeduction" id="seniorCitizenTaxDeduction"
+									name="branchManagerContactNo" id="branchManagerContactNo"
 									required="required"
-									placeholder="Enter Senior Citizen Tax Deduction"
+									placeholder="Enter Branch Manager Contact No"
 									style="text-transform: uppercase;" /> <small
-									id="chkseniorcitizentaxdeduction" style="color: red;"></small>
+									id="chkbranchManagerContactNo" style="color: red;"></small>
 							</div>
 						</div>
 
 
 					</div>
 
+					<!-- relevant HTML: keep your container as you posted -->
+					<div class="container mt-4">
+						<div class="row">
+							<div class="col-lg-12">
+								<h4>Company Image Upload</h4>
+								<div id="fieldContainer">
+									<div class="textUploadSet mb-4">
+										<input type="text" class="form-control nameField"
+											placeholder="Enter Image Name...">
+										<div class="uploadContainer"></div>
+									</div>
+								</div>
 
-					<div class="mt-4">
+								<button id="addFieldBtn" class="btn btn-primary mt-2">Add
+									+</button>
+								<button id="uploadAllBtn" class="btn btn-success mt-2">Upload
+									All</button>
+								<button id="reloadDataBtn" class="btn btn-info mt-2">Reload</button>
 
+								<div id="storedImages" class="mt-4"></div>
+							</div>
+						</div>
+					</div>
+
+
+
+
+
+					<!-- <div class="mt-4">
 						<div class="row mt-4">
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Company
-									Logo <span class="star">*</span>
-								</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="photo" id="photo"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+
+							Company Logo
+							<div class="col-lg-3 mb-5 imageField" id="companyLogoField">
+								<label>Company Logo <span class="star">*</span></label> <label
+									for="photo" id="drop-area"> <input type="file"
+									accept="image/*" name="photo" id="photo" hidden="hidden"
+									onchange="bike1Preview();" />
 									<div id="img-view">
 										<img src="../images/upload/upload.png" alt="upload_icon"
 											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
 									</div>
-								</label><small id="chkphoto" style="color: red;"></small>
+								</label> <small id="chkphoto" style="color: red;"></small>
 							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Regn
-									Certificate <span class="star">*</span>
-								</label> <label for="bike2image" id="drop-area"> <input
-									type="file" accept="image/*" name="signature" id="signature"
-									hidden="hidden" onchange="bike2Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+							Registration Certificate
+							<div class="col-lg-3 mb-5 imageField" id="regnCertField">
+								<label>Regn Certificate <span class="star">*</span></label> <label
+									for="signature" id="drop-area"> <input type="file"
+									accept="image/*" name="signature" id="signature"
+									hidden="hidden" onchange="bike2Preview();" />
 									<div id="img-view">
-										<img src="../images/upload/upload.png	" alt="upload_icon"
+										<img src="../images/upload/upload.png" alt="upload_icon"
 											id="bike2imagePreview" />
-										<!-- <p
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
 									</div>
-								</label><small id="chksignature" style="color: red;"></small>
+								</label> <small id="chksignature" style="color: red;"></small>
 							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">Pan
-									Card <span class="star">*</span>
-								</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="photo" id="photo"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+							Pan Card
+							<div class="col-lg-3 mb-5 imageField" id="panCardField">
+								<label>Pan Card <span class="star">*</span></label> <label
+									for="panphoto" id="drop-area"> <input type="file"
+									accept="image/*" name="panphoto" id="panphoto" hidden="hidden"
+									onchange="bike1Preview();" />
 									<div id="img-view">
 										<img src="../images/upload/upload.png" alt="upload_icon"
-											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+											id="bike1imagePreview2" />
 									</div>
-								</label><small id="chkphoto" style="color: red;"></small>
+								</label> <small id="chkphoto2" style="color: red;"></small>
 							</div>
 
-							<div class="col-lg-3 mb-5">
-								<label for=""
-									style="font-size: 12px; font-family: 'Poppins', sans-serif; font-weight: 700; margin-bottom: 5px;">GST
-									Certificate <span class="star">*</span>
-								</label> <label for="bike1image" id="drop-area"> <input
-									type="file" accept="image/*" name="photo" id="photo"
-									hidden="hidden" onchange="bike1Preview();"
-									style="background-size: cover; background-repeat: no-repeat" />
+							GST Certificate
+							<div class="col-lg-3 mb-5 imageField" id="gstCertField">
+								<label>GST Certificate <span class="star">*</span></label> <label
+									for="gstphoto" id="drop-area"> <input type="file"
+									accept="image/*" name="gstphoto" id="gstphoto" hidden="hidden"
+									onchange="bike1Preview();" />
 									<div id="img-view">
 										<img src="../images/upload/upload.png" alt="upload_icon"
-											id="bike1imagePreview" />
-										<!-- <p id="upload-text"
-                    style="font-size: 12px; margin-top: 15px"
-                    class="text-muted"
-                  >
-                    Drag and drop or Choose File to upload the image
-                  </p> -->
+											id="bike1imagePreview3" />
 									</div>
-								</label><small id="chkphoto" style="color: red;"></small>
+								</label> <small id="chkphoto3" style="color: red;"></small>
 							</div>
 
-
-
 						</div>
-					</div>
+					</div> -->
 
-					<div class="row" style="margin-top: 30px;">
-						<div class="col-12 text-center">
-							<button type="button" id="updateBtn" class="btn btn-success"
-								disabled>Update</button>
-						</div>
+				</div>
+
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-12 text-center">
+						<button type="button" id="updateBtn" class="btn btn-success"
+							disabled>Update</button>
 					</div>
+				</div>
 			</form>
 
 
@@ -441,6 +486,32 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/preferences/companyAdministration.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
+
+
+
+
+
 
 
 </body>

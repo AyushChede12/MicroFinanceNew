@@ -54,10 +54,10 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Data Correction</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bbi bi-pencil-square"></i>
 					</a></li>
-					<li class="breadcrumb-item action">Finance Entry Correction</li>
+					<li class="breadcrumb-item action">Financial Entry Correction</li>
 				</ol>
 			</nav>
 		</div>
@@ -98,8 +98,8 @@ pageEncoding="ISO-8859-1"%> -->
 							<input type="hidden" name="id" id="id">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 40px;">
-								<label for="financialCode">Choose by Code</label> <select id="financialCode"
-									name="financialCode" required="required"
+								<label for="financialCode">Choose by Code</label> <select
+									id="financialCode" name="financialCode" required="required"
 									class="form-control selectField" style="height: 30px;">
 									<option value="">-- Search Financial Code --</option>
 								</select>
@@ -174,12 +174,12 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Age</label> <input type="text" name="age"
-									id="age" required="required" placeholder="Enter Age"
+								<label>Age</label> <input type="text" name="age" id="age"
+									required="required" placeholder="Enter Age"
 									style="text-transform: uppercase;" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -192,14 +192,17 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Branch Name</label> <select id="branchName"
+								<label>Branch Name</label>
+								<!-- <select id="branchName"
 									name="branchName" required="required"
 									class="form-control selectField" style="height: 30px;">
 
-								</select>
+								</select> -->
+								<input type="text" name="branchName" id="branchName"
+									required="required" placeholder="Enter Branch" />
 							</div>
 						</div>
-						
+
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
@@ -226,8 +229,9 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="pinCode">Pin Code</label> <input type="text" name="pinCode"
-									id="pinCode" required="required" placeholder="Enter Pin Code" />
+								<label for="pinCode">Pin Code</label> <input type="text"
+									name="pinCode" id="pinCode" required="required"
+									placeholder="Enter Pin Code" />
 							</div>
 						</div>
 
@@ -312,7 +316,7 @@ pageEncoding="ISO-8859-1"%> -->
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields"
 								style="margin-bottom: 30px">
-								<label>Select Role</label> <input type="text"
+								<label>Position</label> <input type="text"
 									name="selectPosition" id="selectPosition" required="required"
 									placeholder="Enter Role" style="text-transform: uppercase;" />
 							</div>
@@ -449,6 +453,27 @@ pageEncoding="ISO-8859-1"%> -->
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/dataCorrection/financialUpdate.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

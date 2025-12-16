@@ -38,6 +38,14 @@ pageEncoding="ISO-8859-1"%> -->
 <!-- jQuery CDN (latest 3.x version) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Select2 CSS and JS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+	rel="stylesheet" />
+<script
+	src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
 
 </head>
 
@@ -163,8 +171,15 @@ select {
 		<div>
 			<div class="user-id-section">
 				<div class="user-id-box">
+
 					<label for="user-id">Select User ID:</label> <select id="userName"
 						name="userName">
+
+
+					<label for="customerId" id="customerSelection">Customer
+						Selection </label> <select id="customerId" name="customerId"
+						class="form-control selectField" style="width: 100%;">
+						<option value="">-- Search Customer ID --</option>
 
 					</select>
 				</div>
@@ -404,6 +419,17 @@ select {
 						<div class="bold-text">Account Management =></div>
 						<div class="normal-text">Incentive Payment</div>
 					</div>
+
+
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox">
+						</div>
+						<div class="bold-text">Account Management =></div>
+						<div class="normal-text">Incentive Payment</div>
+					</div>
+
 
 					<div class="member-row">
 						<div class="checkbox-col">
@@ -970,8 +996,6 @@ select {
 						<div class="bold-text">Joint Liability Loan =></div>
 						<div class="normal-text">Find Loan Record</div>
 					</div>
-
-
 				</div>
 
 				<div class="user-box">
@@ -1100,7 +1124,12 @@ select {
 								name="service" value="Delete Maturity Application Request">
 						</div>
 						<div class="bold-text">Request Approvals =></div>
+
 						<div class="normal-text">Delete Maturity Application Request</div>
+
+						<div class="normal-text">Delete Maturity Applications
+							Request</div>
+
 					</div>
 
 					<div class="member-row">
@@ -1249,8 +1278,20 @@ select {
 
 					<div class="member-row">
 						<div class="checkbox-col">
+
 							<input type="checkbox" id="myFullMaturityPayment" name="service"
 								value="Full Maturity Payment">
+
+							<input type="checkbox">
+						</div>
+						<div class="bold-text">Maturity Management =></div>
+						<div class="normal-text">Partial Maturity Payment</div>
+					</div>
+
+					<div class="member-row">
+						<div class="checkbox-col">
+							<input type="checkbox">
+
 						</div>
 						<div class="bold-text">Maturity Management =></div>
 						<div class="normal-text">Full Maturity Payment</div>
@@ -1467,7 +1508,11 @@ select {
 								id="myFinancialConsultantTeamCollectionSummary" name="service"
 								value="Financial Consultant Team Collection Summary">
 						</div>
+
 						<div class="bold-text">Reports and Analytics =></div>
+
+						<div class="bold-text">Reports & Analytics =></div>
+
 						<div class="normal-text">Financial Consultant Team
 							Collection Summary</div>
 					</div>
@@ -1525,7 +1570,6 @@ select {
 						<div class="bold-text">Reports and Analytics =></div>
 						<div class="normal-text">Loan Payment Report</div>
 					</div>
-
 
 					<div class="member-row">
 						<div class="checkbox-col">
@@ -1626,6 +1670,7 @@ select {
 						<div class="normal-text">Policy Performance Report</div>
 					</div>
 
+
 				</div>
 
 			</div>
@@ -1638,10 +1683,24 @@ select {
 
 				</div>
 			</div>
+
+
+				</div>
+				<div class="row">
+					<div class="col-12 text-center mt-4" style="margin-left: 300px;">
+						<button type="button" id="saveAccessBtn" class="btnStyle bg-warning">Save</button>
+
+					</div>
+				</div>
+
+			</div>
+
+
 		</div>
 
 
 	</main>
+
 	<script src="./js/access.js"></script>
 	<script src="./js/preferences/userMenuAccess.js"></script>
 	<script src="./js/adminscript.js"></script>
@@ -1661,6 +1720,11 @@ if (userList != null) {
 }%>
 		
 	</script>
+
+
+
+	<script src="./js/adminscript.js"></script>
+	<script src="./js/preferences/customerMenuAccess.js"></script>
 
 </body>
 

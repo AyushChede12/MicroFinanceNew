@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<aside id="sidebar" class="sidebar">
 		<%
 		String userName = (String) session.getAttribute("UserName");
@@ -598,9 +599,14 @@
 								Payment</span>
 					</a></li>
 
+
 					<li id="EmI_Statement<"><a href="emiStatement"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">EmI Statement</span>
+
+					<li><a href="goldLoanDocument"> <i class="bi bi-circle"></i> <span
+							style="font-family: 'Poppins', sans-serif">Gold Loan Document</span>
+
 					</a></li>
 
 
@@ -628,10 +634,16 @@
 							style="font-family: 'Poppins', sans-serif">Print NOC</span>
 					</a></li>
 
+
 					<li id="Search_Gold_Loan<"><a href="searchGoldLoan"> <i
 							class="bi bi-circle"></i> <span
 							style="font-family: 'Poppins', sans-serif">Search Gold
 								Loan</span>
+
+					<li><a href="GoldLoanSearch"> <i class="bi bi-circle"></i>
+							<span style="font-family: 'Poppins', sans-serif">Search
+								Gold Loan</span>
+
 					</a></li>
 
 
@@ -1219,6 +1231,7 @@
       </li> -->
 		</ul>
 	</aside>
+
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/login.js"></script>
 </body>

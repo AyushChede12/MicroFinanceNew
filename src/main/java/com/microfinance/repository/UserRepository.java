@@ -11,9 +11,16 @@ import com.microfinance.model.User;
 import com.microfinance.model.UserCreation;
 
 @Repository
+
 public interface UserRepository extends JpaRepository<UserCreation, Long> {
 	@Query(value = "select * from user_creation where user_name = ? and password = ?", nativeQuery = true)
 	UserCreation fetchMatchedData(String userName, String password);
 
 	List<UserCreation> findByid(Long id);
+
+public interface UserRepository extends JpaRepository<User, Long> {
+	User findByUsername(String username); // fetch by username only
+
+	Optional<User> findByUsernameAndPassword(String username, String password);
+
 }

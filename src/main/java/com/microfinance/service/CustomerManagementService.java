@@ -36,12 +36,13 @@ public class CustomerManagementService {
 	private String uploadDirectory;
 
 	public ApiResponse<addCustomer> saveOrUpdateCustomer(CustomerDto clientMasterDto, MultipartFile customerPhoto,
-			MultipartFile customerSignature,MultipartFile customerVoter,MultipartFile customerDriving) {
+			MultipartFile customerSignature, MultipartFile customerDriving, MultipartFile customerVoter,
+			MultipartFile nomineAadhar, MultipartFile nomineSignature) {
 		addCustomer addcustomer = new addCustomer();
 		boolean isNew = true;
 
 // Update path
-		if (clientMasterDto.getId() > 0) {
+		if (clientMasterDto.getId() != null) {
 			addcustomer = customerRepo.findById(clientMasterDto.getId()).orElse(new addCustomer());
 			isNew = false;
 		}
@@ -78,7 +79,9 @@ public class CustomerManagementService {
 		addcustomer.setNoOfShare(clientMasterDto.getNoOfShare());
 		addcustomer.setLightBill(clientMasterDto.getLightBill());
 		addcustomer.setTaxBill(clientMasterDto.getTaxBill());
-		
+		addcustomer.setFirstName(clientMasterDto.getFirstName());
+		addcustomer.setMiddleName(clientMasterDto.getMiddleName());
+		addcustomer.setLastName(clientMasterDto.getLastName());
 
 // Nominee Details
 		addcustomer.setNomineeName(clientMasterDto.getNomineeName());
@@ -90,7 +93,6 @@ public class CustomerManagementService {
 		addcustomer.setNomineePanNo(clientMasterDto.getNomineePanNo());
 		addcustomer.setNomineeKycType(clientMasterDto.getNomineeKycType());
 		addcustomer.setNomineeDOB(clientMasterDto.getNomineeDOB());
-		
 
 // Payment details
 		addcustomer.setMemberFees(clientMasterDto.getMemberFees());
@@ -123,15 +125,26 @@ public class CustomerManagementService {
 				String signFileName = saveFile(customerSignature);
 				addcustomer.setCustomerSignature(signFileName);
 			}
-			
+
 			if (customerVoter != null && !customerVoter.isEmpty()) {
 				String voterFileName = saveFile(customerVoter);
-				addcustomer.setCustomerSignature(voterFileName);
+				addcustomer.setCustomerVoter(voterFileName);
 			}
-			
+
 			if (customerDriving != null && !customerDriving.isEmpty()) {
 				String drivingFileName = saveFile(customerDriving);
-				addcustomer.setCustomerSignature(drivingFileName);
+				addcustomer.setCustomerDriving(drivingFileName);
+			}
+
+			if (nomineAadhar != null && !nomineAadhar.isEmpty()) {
+				String nomineAadharFileName = saveFile(nomineAadhar);
+				addcustomer.setNomineAadhar(nomineAadharFileName);
+			}
+
+			if (nomineSignature != null && !nomineSignature.isEmpty()) {
+				String nomineSignatureFileName = saveFile(nomineSignature);
+				addcustomer.setNomineSignature(nomineSignatureFileName);
+				;
 			}
 		} catch (IOException e) {
 			return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed: " + e.getMessage());
@@ -150,16 +163,15 @@ public class CustomerManagementService {
 	}
 
 	private String saveFile(MultipartFile file) throws IOException {
-	    if (file != null && !file.isEmpty()) {
-	        ensureUploadDirectoryExists();
-	        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-	        File destination = new File(uploadDirectory + File.separator + fileName);
-	        file.transferTo(destination);
-	        return fileName;
-	    }
-	    return null;
+		if (file != null && !file.isEmpty()) {
+			ensureUploadDirectoryExists();
+			String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+			File destination = new File(uploadDirectory + File.separator + fileName);
+			file.transferTo(destination);
+			return fileName;
+		}
+		return null;
 	}
-
 
 	private void ensureUploadDirectoryExists() {
 		File uploadDir = new File(uploadDirectory);
@@ -253,5 +265,4 @@ public class CustomerManagementService {
 		return customerRepo.findByIsApprovedTrue();
 	}
 
-	
 }

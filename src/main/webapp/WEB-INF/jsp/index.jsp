@@ -128,6 +128,7 @@ body {
 </head>
 
 <body>
+
 	<div class="container">
 		<div class="form-box">
 			<h1>Login</h1>
@@ -181,5 +182,60 @@ body {
 		/* 🔥 AJAX Login */
 	</script>
 	<script src="./js/login.js"></script>
+
+    <div class="container">
+        <div class="form-box">
+            <h1>Login</h1>
+            <div id="errorMsg"></div>
+            <form id="form1">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div class="textfield">
+                        <input class="inputfield" type="text" id="username" name="username" required>
+                        <span></span>
+                        <label class="inputlabels">USERNAME</label>
+                    </div>
+                    <div style="position: relative; margin-bottom: 10px;">
+                        <i class="fa-solid fa-user iconstyles"></i>
+                    </div>
+                </div>
+
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div class="textfield">
+                        <input class="inputfield" type="password" required id="password" name="password">
+                        <span></span>
+                        <label class="inputlabels">PASSWORD</label>
+                    </div>
+                    <div style="position: relative; margin-bottom: 10px;">
+                        <i class="fa-solid fa-eye-slash iconstyles" id="eyeicon"></i>
+                    </div>
+                </div>
+
+                <div style="margin-top:20px; display:flex; align-items:center; justify-content:center;">
+                    <button type="submit" class="enquirybtn">SUBMIT</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<script>
+$(document).ready(function() {
+    // Password toggle
+    $("#eyeicon").click(function() {
+        let password = $("#password");
+        let icon = $(this);
+        if (password.attr("type") === "password") {
+            password.attr("type", "text");
+            icon.removeClass("fa-eye-slash").addClass("fa-eye");
+        } else {
+            password.attr("type", "password");
+            icon.removeClass("fa-eye").addClass("fa-eye-slash");
+        }
+    });
+
+    // AJAX login
+});
+</script>
+<script src="./js/login.js"></script>
+9
 </body>
 </html>

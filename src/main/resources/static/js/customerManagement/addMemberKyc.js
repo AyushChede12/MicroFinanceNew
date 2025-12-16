@@ -1,21 +1,35 @@
+$(document).ready(function() {
+	alert("vfv");
+	// Fetch all customers and populate the "select by code" dropdown
+	
+
+});
+
 function fetchBySelectedCustomer() {
 	const memberCode = $("#selectByCode").val();
-	if (!memberCode) return;
 
-	const input = { memberCode };
+	if (!memberCode) return;
 
 	$.ajax({
 		type: "POST",
 		contentType: "application/json",
-		data: JSON.stringify(input),
+		data: JSON.stringify({ memberCode }),
 		url: window.location.origin + "/api/customermanagement/fetchBySelectedCustomer",
 		async: false,
 		success: function(data) {
+
 			if (data && data.length > 0) {
 				const c = data[0];
 
-				// 🔹 Text fields
-				$("#customerName").val(c.customerName || "");
+				// Fill fields
+				const fullName = [
+					c.firstName || "",
+					c.middleName || "",
+					c.lastName || ""
+				].filter(Boolean).join(" ");
+
+				$("#customerName").val(fullName);
+
 				$("#memberCode").val(c.memberCode || "");
 				$("#contactNo").val(c.contactNo || "");
 				$("#singupDate").val(c.signupDate || "");
@@ -34,20 +48,41 @@ function fetchBySelectedCustomer() {
 				$("#branchName").val(c.branchName || "");
 				$("#customerGender").val(c.customerGender || "");
 
-				// 🔹 Images (customer photo & signature)
+				// Image preview
 				const baseUrl = window.location.origin + "/Uploads/";
+				$("#photoPreview").attr("src", c.customerPhoto ? baseUrl + c.customerPhoto : baseUrl + "default-placeholder.jpg");
+				$("#signaturePreview").attr("src", c.customerSignature ? baseUrl + c.customerSignature : baseUrl + "default-placeholder.jpg");
 
-				if (c.customerPhoto) {
-					$("#photoPreview").attr("src", baseUrl + c.customerPhoto);
-				} else {
-					$("#photoPreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
 
-				if (c.customerSignature) {
-					$("#signaturePreview").attr("src", baseUrl + c.customerSignature);
+				// ⭐ BUTTON STATUS ⭐
+				if (c.verified === true) {
+
+					$("#saveBtn").css({
+						"background-color": "green",
+						"color": "white",
+						"border": "none",
+						"outline": "none",
+						"font-weight": "600",
+						"padding": "8px 15px",
+						"border-radius": "6px",
+						"cursor": "not-allowed"
+					}).text("Verified")
+						.prop("disabled", true);
+
 				} else {
-					$("#signaturePreview").attr("src", baseUrl + "default-placeholder.jpg");
-				}
+
+					$("#saveBtn").css({
+						"background-color": "red",
+						"color": "white",
+						"border": "none",
+						"outline": "none",
+						"font-weight": "600",
+						"padding": "8px 15px",
+						"border-radius": "6px",
+						"cursor": "pointer"
+					}).text("Click Here to Authenticate Complete")
+						.prop("disabled", false);
+				}  // ← THIS CLOSING BRACE WAS MISSING!!
 
 			} else {
 				alert("No data found for the selected member.");
@@ -63,6 +98,7 @@ function fetchBySelectedCustomer() {
 
 
 $(document).ready(function() {
+
 	// If already selected on load
 	if ($("#selectByCode").val()) {
 		fetchBySelectedCustomer();
@@ -79,109 +115,68 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
-	// Fetch all customers and populate the "select by code" dropdown
-	/*$.ajax({
-		url: "api/customermanagement/getAllCustomer",
-		method: "GET",
-		success: function(data) {
-			console.log("Fetched Members:", data);
-			data.forEach(function(customer) {
-				const optionText = `${customer.memberCode} - ${customer.customerName}`;
-				$('#selectMember').append(
-					$('<option>', {
-						value: customer.memberCode, // You can change this to customer.id or anything else if needed
-						text: optionText
-					})
-				);
-			});
-		},
-		error: function(err) {
-			console.error("Error fetching customers:", err);
-		}
-	});*/
-
-	$.ajax({
-		url: 'api/customermanagement/getAllCustomer',
-		type: 'GET',
-		success: function(response) {
-			// response is a list of addCustomer objects
-			let customerOptions = response.map(function(item) {
-				return {
-					id: item.memberCode,
-					text: item.memberCode + " - " + item.customerName
-				};
-			});
-
-			$('#selectByCode').select2({
-				placeholder: '-- Search Customer Code or Name --',
-				data: customerOptions,
-				matcher: function(params, data) {
-					if ($.trim(params.term) === '') return data;
-					if (typeof data.text === 'undefined') return null;
-
-					const term = params.term.toLowerCase();
-					const text = data.text.toLowerCase();
-					return text.includes(term) ? data : null;
-				}
-			});
-		},
-		error: function(xhr, status, error) {
-			console.error("Error fetching customers:", error);
-			alert("Failed to load customer codes.");
-		}
-	});
-
-
-});
 
 
 
 
 
-let verifiedMembers = new Set();
 
 function verifyFetchedData() {
-	const customerCode = document.getElementById("memberCode").value;
-
-	if (verifiedMembers.has(customerCode)) {
-		alert("This customer is already verified!");
-		return;
-	}
+	const customerCode = $("#memberCode").val();
 
 	const fetchedData = {
 		memberCode: customerCode,
-		customerName: document.getElementById("customerName").value,
-		contactNo: document.getElementById("contactNo").value,
-		signupDate: document.getElementById("singupDate").value,
-		aadharNo: document.getElementById("aadharNo").value,
-		pan: document.getElementById("pan").value,
-		voterNo: document.getElementById("voterNo").value,
-		drivingLicenceNo: document.getElementById("drivingLicenceNo").value
+		customerName: $("#customerName").val(),
+		contactNo: $("#contactNo").val(),
+		signupDate: $("#singupDate").val(),
+		aadharNo: $("#aadharNo").val(),
+		pan: $("#pan").val(),
+		voterNo: $("#voterNo").val(),
+		drivingLicenceNo: $("#drivingLicenceNo").val()
 	};
 
-	fetch("verifyFetchedData", {
+	fetch("/api/customermanagement/verifyFetchedData", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify(fetchedData)
 	})
 		.then(response => response.json())
 		.then(data => {
-			const button = document.getElementById("saveBtn");
 
 			if (data.isVerified) {
 				alert(data.message);
-				verifiedMembers.add(customerCode);
-				button.style.backgroundColor = "green";
-				button.style.color = "white"; // Optional: make text readable
-				button.innerText = "Verified";
-				button.disabled = true;
+
+				$("#saveBtn").css({
+					"background-color": "green",
+					"color": "white",
+					"border": "none",
+					"outline": "none",
+					"font-weight": "600",
+					"padding": "8px 15px",
+					"border-radius": "6px",
+					"cursor": "not-allowed"
+				})
+					.text("Verified")
+					.prop("disabled", true);
+
 			} else {
+
 				alert(data.message);
-				button.style.backgroundColor = "red";
-				button.style.color = "white";
-				button.innerText = "Not Verified";
+
+				$("#saveBtn").css({
+					"background-color": "red",
+					"color": "white",
+					"border": "none",
+					"outline": "none",
+					"font-weight": "600",
+					"padding": "8px 15px",
+					"border-radius": "6px",
+					"cursor": "pointer"
+				})
+					.text("Not Verified")
+					.prop("disabled", false);
 			}
+
 		})
 		.catch(error => {
 			console.error("Error verifying data:", error);

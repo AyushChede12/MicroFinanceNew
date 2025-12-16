@@ -45,7 +45,7 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Dashboard</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-house-door"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Dashboard</li>
@@ -517,6 +517,7 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 		</div>
 	</main>
+
 
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>

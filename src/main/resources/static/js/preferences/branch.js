@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 	$("#tableBody").hide();
 	$("#updateBtn").hide();
 	$("#prevBtn").hide();
@@ -7,6 +8,7 @@ $(document).ready(function() {
 
 	$('#saveBtn').click(function(event) {
 		event.preventDefault();
+		convertFormToUpperCase();
 
 		// Clear all previous messages
 		$('#chkbranchcode').text('');
@@ -15,8 +17,8 @@ $(document).ready(function() {
 		$('#chkaddress').text('');
 		$('#chkpin').text('');
 		$('#chkstate').text('');
-		$('#chkprimarycontact').text('');
-		$('#chkcontact').text('');
+		$('#chkbranchManager').text('');
+		$('#chkaccountDepartment').text('');
 
 		// Fetch input values
 		var branchCode = $('#branchCode').val().trim();
@@ -25,8 +27,8 @@ $(document).ready(function() {
 		var address = $('#address').val().trim();
 		var pin = $('#pin').val().trim();
 		var state = $('#state').val().trim();
-		var primaryContact = $('#primaryContact').val().trim();
-		var contact = $('#contact').val().trim();
+		var branchManagerContactNo = $('#branchManagerContactNo').val().trim();
+		var accountDepartmentContactNo = $('#accountDepartmentContactNo').val().trim();
 
 		var contactPattern = /^[6-9][0-9]{9}$/;
 		var pinPattern = /^[1-9][0-9]{5}$/;
@@ -75,25 +77,25 @@ $(document).ready(function() {
 			isValid = false;
 		}
 
-		if (primaryContact === '') {
-			$('#chkprimarycontact').text('* This field is required');
-			$('#primaryContact').focus();
+		if (branchManagerContactNo === '') {
+			$('#chkbranchManager').text('* This field is required');
+			$('#branchManagerContactNo').focus();
 			isValid = false;
 		}
-		else if (!contactPattern.test(primaryContact)) {
-			alert("Please enter a valid 10-digit mobile number.");
-			primaryContact.focus();
+		else if (!contactPattern.test(branchManagerContactNo)) {
+			alert("Please enter a valid 10-digit Branch Manager Contact Number.");
+			branchManagerContactNo.focus();
 			isValid = false;
 		}
 
-		if (contact === '') {
-			$('#chkcontact').text('* This field is required');
-			$('#contact').focus();
+		if (accountDepartmentContactNo === '') {
+			$('#chkaccountDepartment').text('* This field is required');
+			$('#accountDepartmentContactNo').focus();
 			isValid = false;
 		}
-		else if (!contactPattern.test(contact)) {
-			alert("Please enter a valid 10-digit mobile number.");
-			contact.focus();
+		else if (!contactPattern.test(accountDepartmentContactNo)) {
+			alert("Please enter a valid 10-digit Account Department Contact Number.");
+			accountDepartmentContactNo.focus();
 			isValid = false;
 		}
 
@@ -108,8 +110,8 @@ $(document).ready(function() {
 			address: $('#address').val(),
 			pin: $('#pin').val(),
 			state: $('#state').val(),
-			primaryContact: $('#primaryContact').val(),
-			contact: $('#contact').val()
+			branchManagerContactNo: $('#branchManagerContactNo').val(),
+			accountDepartmentContactNo: $('#accountDepartmentContactNo').val()
 		};
 
 		$.ajax({
@@ -183,14 +185,14 @@ function renderBranchTable(page) {
 		let branch = totalDataBranch[i];
 		let row = `<tr>
 			<td>${i + 1}</td>
-			<td>${branch.branchCode}</td>
-			<td>${branch.branchName}</td>
-			<td>${branch.openingDate}</td>
-			<td>${branch.address}</td>
-			<td>${branch.pin}</td>
-			<td>${branch.state}</td>
-			<td>${branch.primaryContact}</td>
-			<td>${branch.contact}</td>
+		    <td>${(branch.branchCode || '').toUpperCase()}</td>
+		    <td>${(branch.branchName || '').toUpperCase()}</td>
+		    <td>${(branch.openingDate || '').toUpperCase()}</td>
+		    <td>${(branch.address || '').toUpperCase()}</td>
+		    <td>${(branch.pin || '').toUpperCase()}</td>
+		    <td>${(branch.state || '').toUpperCase()}</td>
+		    <td>${(branch.branchManagerContactNo || '').toUpperCase()}</td>
+		    <td>${(branch.accountDepartmentContactNo || '').toUpperCase()}</td>
 			<td>
 				<button class="iconbutton" onclick="viewData(${branch.id})" title="View">
 					<i class="fa-solid fa-pen-to-square text-primary"></i>
@@ -217,7 +219,7 @@ function togglePageNavigationBranch() {
 }
 
 // Previous button click
-$("#prevBtn").click(function () {
+$("#prevBtn").click(function() {
 	if (currentPageBranch > 1) {
 		currentPageBranch--;
 		renderBranchTable(currentPageBranch);
@@ -226,7 +228,7 @@ $("#prevBtn").click(function () {
 });
 
 // Next button click
-$("#nextBtn").click(function () {
+$("#nextBtn").click(function() {
 	let totalPages = Math.ceil(totalDataBranch.length / pageSizeBranch);
 	if (currentPageBranch < totalPages) {
 		currentPageBranch++;
@@ -236,7 +238,7 @@ $("#nextBtn").click(function () {
 });
 
 // Call on page load
-$(document).ready(function () {
+$(document).ready(function() {
 	loadBranchData();
 });
 
@@ -275,8 +277,8 @@ function viewData(id) {
 				$("#address").val(branch.address);
 				$("#pin").val(branch.pin);
 				$("#state").val(branch.state);
-				$("#primaryContact").val(branch.primaryContact);
-				$("#contact").val(branch.contact);
+				$("#branchManagerContactNo").val(branch.branchManagerContactNo);
+				$("#accountDepartmentContactNo").val(branch.accountDepartmentContactNo);
 			} else {
 				alert("Branch not found: " + response.message);
 			}
@@ -315,6 +317,98 @@ function deleteData(id) {
 
 
 function updateBranch() {
+	convertFormToUpperCase();
+	$('#chkbranchcode').text('');
+	$('#chkbranchName').text('');
+	$('#chkopeningdate').text('');
+	$('#chkaddress').text('');
+	$('#chkpin').text('');
+	$('#chkstate').text('');
+	$('#chkbranchManager').text('');
+	$('#chkaccountDepartment').text('');
+
+	var branchCode = $('#branchCode').val().trim();
+	var branchName = $('#branchName').val().trim();
+	var openingDate = $('#openingDate').val().trim();
+	var address = $('#address').val().trim();
+	var pin = $('#pin').val().trim();
+	var state = $('#state').val().trim();
+	var branchManagerContactNo = $('#branchManagerContactNo').val().trim();
+	var accountDepartmentContactNo = $('#accountDepartmentContactNo').val().trim();
+
+	var contactPattern = /^[6-9][0-9]{9}$/;
+	var pinPattern = /^[1-9][0-9]{5}$/;
+
+	let isValid = true;
+
+	// Validation: Financial Year Name
+	if (branchCode === '') {
+		$('#chkbranchcode').text('* This field is required');
+		$('#branchCode').focus();
+		isValid = false;
+	}
+
+	if (branchName === '') {
+		$('#chkbranchName').text('* This field is required');
+		$('#branchName').focus();
+		isValid = false;
+	}
+
+	if (openingDate === '') {
+		$('#chkopeningdate').text('* This field is required');
+		$('#openingDate').focus();
+		isValid = false;
+	}
+
+	if (address === '') {
+		$('#chkaddress').text('* This field is required');
+		$('#address').focus();
+		isValid = false;
+	}
+
+	if (pin === '') {
+		$('#chkpin').text('* This field is required');
+		$('#pin').focus();
+		isValid = false;
+	}
+	else if (!pinPattern.test(pin)) {
+		alert("Please enter a valid 6-digit PIN code (first digit cannot be 0).");
+		pin.focus();
+		isValid = false;
+	}
+
+	if (state === '') {
+		$('#chkstate').text('* This field is required');
+		$('#state').focus();
+		isValid = false;
+	}
+
+	if (branchManagerContactNo === '') {
+		$('#chkbranchManager').text('* This field is required');
+		$('#branchManagerContactNo').focus();
+		isValid = false;
+	}
+	else if (!contactPattern.test(branchManagerContactNo)) {
+		alert("Please enter a valid 10-digit Branch Manager Contact Number.");
+		branchManagerContactNo.focus();
+		isValid = false;
+	}
+
+	if (accountDepartmentContactNo === '') {
+		$('#chkaccountDepartment').text('* This field is required');
+		$('#accountDepartmentContactNo').focus();
+		isValid = false;
+	}
+	else if (!contactPattern.test(accountDepartmentContactNo)) {
+		alert("Please enter a valid 10-digit Account Department Contact Number.");
+		accountDepartmentContactNo.focus();
+		isValid = false;
+	}
+
+	if (!isValid) {
+		return false; // Stop AJAX call
+	}
+
 	let payload = {
 		id: $("#id").val(),
 		branchCode: $("#branchCode").val(),
@@ -323,8 +417,8 @@ function updateBranch() {
 		address: $("#address").val(),
 		pin: $("#pin").val(),
 		state: $("#state").val(),
-		primaryContact: $("#primaryContact").val(),
-		contact: $("#contact").val()
+		branchManagerContactNo: $("#branchManagerContactNo").val(),
+		accountDepartmentContactNo: $("#accountDepartmentContactNo").val()
 	};
 
 	$.ajax({
@@ -368,5 +462,14 @@ $(document).ready(function() {
 		}
 	});
 });
+
+// Convert all form fields to uppercase before sending to backend
+function convertFormToUpperCase() {
+	$("#formid").find("input[type=text], input[type=date], textarea").each(function() {
+		if ($(this).val()) {
+			$(this).val($(this).val().toUpperCase());
+		}
+	});
+}
 
 

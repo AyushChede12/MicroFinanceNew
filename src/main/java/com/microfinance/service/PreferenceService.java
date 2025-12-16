@@ -1,35 +1,45 @@
 package com.microfinance.service;
 
 import java.io.File;
+
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.microfinance.dto.ApiResponse;
-
+import com.microfinance.dto.BankModuleDto;
 import com.microfinance.dto.ExecutiveFounderDto;
 import com.microfinance.exception.BadRequestException;
 import com.microfinance.model.BankModule;
 import com.microfinance.model.BranchModule;
-import com.microfinance.model.CasteModule;
 import com.microfinance.model.CategoryModule;
 import com.microfinance.model.CodeModule;
 import com.microfinance.model.CompanyAdministration;
+import com.microfinance.model.CompanyImageUploads;
 import com.microfinance.model.ExecutiveFounder;
 import com.microfinance.model.FinancialYear;
 import com.microfinance.model.RelativeModule;
 import com.microfinance.model.Transactions;
+import com.microfinance.model.UserCreations;
+import com.microfinance.model.UserMenuAccess;
 import com.microfinance.model.states;
 import com.microfinance.repository.BankModuleRepo;
 import com.microfinance.repository.BranchModuleRepo;
-import com.microfinance.repository.CasteModuleRepo;
 import com.microfinance.repository.CategoryModuleRepo;
 import com.microfinance.repository.CodeModuleRepo;
 import com.microfinance.repository.CompanyAdministrationRepo;
@@ -38,15 +48,15 @@ import com.microfinance.repository.FinancialYearRepo;
 import com.microfinance.repository.RelativeModuleRepo;
 import com.microfinance.repository.Staterepo;
 import com.microfinance.repository.TransactionsRepo;
+import com.microfinance.repository.UserCreationRepo;
+import com.microfinance.repository.UserMenuAccessRepo;
+import com.microfinance.repository.CompanyImageUploadsRepo;
 
 @Service
 public class PreferenceService {
 
 	@Autowired
 	BranchModuleRepo branchModuleRepo;
-
-	@Autowired
-	CasteModuleRepo casteModuleRepo;
 
 	@Autowired
 	BankModuleRepo bankModuleRepo;
@@ -75,6 +85,15 @@ public class PreferenceService {
 	@Autowired
 	TransactionsRepo transactionsRepo;
 
+	@Autowired
+	UserCreationRepo userCreationRepo;
+
+	@Autowired
+	UserMenuAccessRepo userMenuAccessRepo;
+
+	@Autowired
+	CompanyImageUploadsRepo companyImageUploadsRepo;
+
 	@Value("${upload.directory}")
 	private String uploadDirectory;
 
@@ -91,8 +110,8 @@ public class PreferenceService {
 			existing.setAddress(branchModule.getAddress());
 			existing.setPin(branchModule.getPin());
 			existing.setState(branchModule.getState());
-			existing.setPrimaryContact(branchModule.getPrimaryContact());
-			existing.setContact(branchModule.getContact());
+			existing.setBranchManagerContactNo(branchModule.getBranchManagerContactNo());
+			existing.setAccountDepartmentContactNo(branchModule.getAccountDepartmentContactNo());
 
 			return branchModuleRepo.save(existing);
 		} else {
@@ -130,24 +149,24 @@ public class PreferenceService {
 	}
 
 	// Bank Module
-	public BankModule saveBankModule(BankModule bankModule) {
-		// TODO Auto-generated method stub
-		if (bankModule.getId() != null) {
-			BankModule existing = bankModuleRepo.findById(bankModule.getId())
-					.orElseThrow(() -> new RuntimeException("Bank not found with ID: " + bankModule.getId()));
-
-			existing.setBankName(bankModule.getBankName());
-			existing.setAccountNo(bankModule.getAccountNo());
-			existing.setContactNo(bankModule.getContactNo());
-			existing.setAddress(bankModule.getAddress());
-			existing.setOpeningDate(bankModule.getOpeningDate());
-			existing.setOpeningBalance(bankModule.getOpeningBalance());
-
-			return bankModuleRepo.save(existing);
-		} else {
-			return bankModuleRepo.save(bankModule);
-		}
-	}
+//	public BankModule saveBankModule(BankModule bankModule) {
+//		// TODO Auto-generated method stub
+//		if (bankModule.getId() != null) {
+//			BankModule existing = bankModuleRepo.findById(bankModule.getId())
+//					.orElseThrow(() -> new RuntimeException("Bank not found with ID: " + bankModule.getId()));
+//
+//			existing.setBankName(bankModule.getBankName());
+//			existing.setAccountNo(bankModule.getAccountNo());
+//			existing.setContactNo(bankModule.getContactNo());
+//			existing.setAddress(bankModule.getAddress());
+//			existing.setOpeningDate(bankModule.getOpeningDate());
+//			existing.setOpeningBalance(bankModule.getOpeningBalance());
+//
+//			return bankModuleRepo.save(existing);
+//		} else {
+//			return bankModuleRepo.save(bankModule);
+//		}
+//	}
 
 	public List<BankModule> fetchAllBankModule() {
 		// TODO Auto-generated method stub
@@ -196,35 +215,6 @@ public class PreferenceService {
 		return false;
 	}
 
-	// Caste Module
-	public CasteModule saveCasteModule(CasteModule castemodule) {
-		// TODO Auto-generated method stub
-		if (castemodule.getId() != null) {
-			CasteModule existing = casteModuleRepo.findById(castemodule.getId())
-					.orElseThrow(() -> new RuntimeException("Caste not found with ID: " + castemodule.getId()));
-
-			existing.setCaste(castemodule.getCaste());
-
-			return casteModuleRepo.save(existing);
-		} else {
-			return casteModuleRepo.save(castemodule);
-		}
-	}
-
-	public List<CasteModule> fetchAllCasteModule() {
-		// TODO Auto-generated method stub
-		return casteModuleRepo.findAll();
-	}
-
-	public boolean deleteCasteModule(Long id) {
-		// TODO Auto-generated method stub
-		if (casteModuleRepo.existsById(id)) {
-			casteModuleRepo.deleteById(id);
-			return true;
-		}
-		return false;
-	}
-
 	// Category Module
 	public CategoryModule saveCategoryModule(CategoryModule categorymodule) {
 		// TODO Auto-generated method stub
@@ -233,6 +223,7 @@ public class PreferenceService {
 					.orElseThrow(() -> new RuntimeException("Category not found with ID: " + categorymodule.getId()));
 
 			existing.setCategory(categorymodule.getCategory());
+			existing.setCaste(categorymodule.getCaste());
 
 			return categoryModuleRepo.save(existing);
 		} else {
@@ -297,7 +288,8 @@ public class PreferenceService {
 //	}
 
 	public ApiResponse<ExecutiveFounder> saveExecutiveFounder(ExecutiveFounderDto executiveFounderDto,
-			MultipartFile photo, MultipartFile signature) {
+			MultipartFile photo, MultipartFile signature, MultipartFile aadharCard, MultipartFile panCard,
+			MultipartFile cheque) {
 		// TODO Auto-generated method stub
 		ExecutiveFounder executiveFounder = new ExecutiveFounder();
 		boolean isNew = true;
@@ -330,7 +322,11 @@ public class PreferenceService {
 		executiveFounder.setBaseValue(executiveFounderDto.getBaseValue());
 		executiveFounder.setShareCount(executiveFounderDto.getShareCount());
 		executiveFounder.setShareAmount(executiveFounderDto.getShareAmount());
-		executiveFounder.setDepositAcc(executiveFounderDto.getDepositAcc());
+
+		executiveFounder.setBankName(executiveFounderDto.getBankName());
+		executiveFounder.setIfscCode(executiveFounderDto.getIfscCode());
+		executiveFounder.setMicrCode(executiveFounderDto.getMicrCode());
+		executiveFounder.setAccountNo(executiveFounderDto.getAccountNo());
 
 		// Handle photo upload
 		if (photo != null && !photo.isEmpty()) {
@@ -347,6 +343,33 @@ public class PreferenceService {
 			try {
 				String fileName1 = saveFile1(signature); // Save the signature
 				executiveFounder.setSignature(fileName1);
+			} catch (IOException e) {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+			}
+		}
+
+		if (aadharCard != null && !aadharCard.isEmpty()) {
+			try {
+				String fileName1 = saveFile1(aadharCard); // Save the signature
+				executiveFounder.setAadharCard(fileName1);
+			} catch (IOException e) {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+			}
+		}
+
+		if (panCard != null && !panCard.isEmpty()) {
+			try {
+				String fileName1 = saveFile1(panCard); // Save the signature
+				executiveFounder.setPanCard(fileName1);
+			} catch (IOException e) {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+			}
+		}
+
+		if (cheque != null && !cheque.isEmpty()) {
+			try {
+				String fileName1 = saveFile1(cheque); // Save the signature
+				executiveFounder.setCheque(fileName1);
 			} catch (IOException e) {
 				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
 			}
@@ -459,16 +482,17 @@ public class PreferenceService {
 			company.setDeclaredValue(companyAdministration.getDeclaredValue());
 			company.setAddress(companyAdministration.getAddress());
 			company.setState(companyAdministration.getState());
+			company.setCity(companyAdministration.getCity());
 			company.setPinCode(companyAdministration.getPinCode());
 			company.setEmailId(companyAdministration.getEmailId());
 			company.setAuthorizedShareCapital(companyAdministration.getAuthorizedShareCapital());
 			company.setPaidUpCapital(companyAdministration.getPaidUpCapital());
 			company.setNof(companyAdministration.getNof());
-			company.setContactNo(companyAdministration.getContactNo());
+			company.setHelplineNo(companyAdministration.getHelplineNo());
 			company.setTdsWithPan(companyAdministration.getTdsWithPan());
 			company.setTdsWithoutPan(companyAdministration.getTdsWithoutPan());
 			company.setTaxDeduction(companyAdministration.getTaxDeduction());
-			company.setSeniorCitizenTaxDeduction(companyAdministration.getSeniorCitizenTaxDeduction());
+			company.setBranchManagerContactNo(companyAdministration.getBranchManagerContactNo());
 
 			companyAdministrationRepo.save(company);
 			return 1;
@@ -545,6 +569,146 @@ public class PreferenceService {
 	public Optional<CategoryModule> findCategoryModuleById(Long id) {
 		// TODO Auto-generated method stub
 		return categoryModuleRepo.findById(id);
+	}
+
+	// UserCreation
+//	public UserCreations saveUserCreation(UserCreations usercreations) {
+//		// Auto-generate ID and password
+//		return userCreationRepo.save(usercreations);
+//	}
+//
+//	public Object getAllUserCreations() {
+//		// TODO Auto-generated method stub
+//		return userCreationRepo.findAll();
+//	}
+
+	
+	public List<UserMenuAccess> getUserMenuAccess(String customerId) {
+		return userMenuAccessRepo.findByUserCreations_CustomerId(customerId);
+	}
+
+	public ApiResponse<BankModule> saveBankModule(BankModuleDto bankModuleDto, MultipartFile cancelledCheque) {
+		// TODO Auto-generated method stub
+		BankModule bankModule = new BankModule();
+		boolean isNew = true;
+
+		// Check if the ClientMaster is being updated
+		if (bankModuleDto.getId() != null && bankModuleDto.getId() > 0) {
+			bankModule = bankModuleRepo.findById(bankModuleDto.getId()).orElse(new BankModule());
+			isNew = false;
+		}
+
+		// Map fields from DTO to entity
+		bankModule.setBankName(bankModuleDto.getBankName());
+		bankModule.setAccountNo(bankModuleDto.getAccountNo());
+		bankModule.setIfscCode(bankModuleDto.getIfscCode());
+		bankModule.setMicrCode(bankModuleDto.getMicrCode());
+
+		bankModule.setContactNo(bankModuleDto.getContactNo());
+		bankModule.setOpeningDate(bankModuleDto.getOpeningDate());
+		bankModule.setOpeningBalance(bankModuleDto.getOpeningBalance());
+		bankModule.setClosingDate(bankModuleDto.getClosingDate());
+		bankModule.setAddress(bankModuleDto.getAddress());
+
+		// Handle photo upload
+		if (cancelledCheque != null && !cancelledCheque.isEmpty()) {
+			try {
+				String fileName1 = saveFile(cancelledCheque); // Save the signature
+				bankModule.setCancelledCheque(fileName1);
+			} catch (IOException e) {
+				return ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR, "File upload failed");
+			}
+		}
+
+		// Save entity to the database
+		BankModule savedBankModule = bankModuleRepo.save(bankModule);
+
+		if (isNew) {
+			return ApiResponse.success(HttpStatus.CREATED,
+					"Saved successfully. Bank Name: " + savedBankModule.getBankName(), savedBankModule);
+		} else {
+			return ApiResponse.success(HttpStatus.OK,
+					"Updated successfully. Director Name: " + savedBankModule.getBankName(), savedBankModule);
+		}
+	}
+
+	public CompanyAdministration fetchCompanyById(Long id) {
+		return companyAdministrationRepo.findById(id).orElse(null);
+	}
+
+	// SAVE/UPDATE COMPANY
+	public CompanyAdministration saveOrUpdateCompany(CompanyAdministration company) {
+		return companyAdministrationRepo.save(company);
+	}
+
+	// SAVE/UPDATE COMPANY IMAGE
+	public CompanyImageUploads saveOrUpdateCompanyImage(Long companyId, String fieldName, MultipartFile file)
+			throws Exception {
+
+		CompanyAdministration company = companyAdministrationRepo.findById(companyId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid Company ID: " + companyId));
+
+		Path companyDir = Paths.get(uploadDirectory, "company", companyId.toString());
+		Files.createDirectories(companyDir);
+
+		String originalFilename = StringUtils.cleanPath(file.getOriginalFilename());
+		String storedFileName = System.currentTimeMillis() + "_" + originalFilename;
+
+		Path target = companyDir.resolve(storedFileName);
+		Files.copy(file.getInputStream(), target, StandardCopyOption.REPLACE_EXISTING);
+
+		// Check existing image for this name
+		Optional<CompanyImageUploads> existingOpt = companyImageUploadsRepo.findByCompanyAndName(company, fieldName);
+
+		CompanyImageUploads img;
+
+		if (existingOpt.isPresent()) {
+			img = existingOpt.get();
+
+			// Delete previous file
+			if (img.getFileName() != null) {
+				Files.deleteIfExists(companyDir.resolve(img.getFileName()));
+			}
+
+			img.setFileName(storedFileName);
+			img.setOriginalFileName(originalFilename);
+		} else {
+			img = new CompanyImageUploads(fieldName, storedFileName, originalFilename, company);
+		}
+
+		return companyImageUploadsRepo.save(img);
+	}
+
+	// FETCH ALL IMAGES OF COMPANY
+	public List<CompanyImageUploads> getCompanyImages(Long companyId) {
+		CompanyAdministration company = companyAdministrationRepo.findById(companyId).orElse(null);
+		return companyImageUploadsRepo.findByCompany(company);
+	}
+
+	public boolean deleteCompanyImage(Long id) {
+
+		Optional<CompanyImageUploads> opt = companyImageUploadsRepo.findById(id);
+
+		if (opt.isEmpty()) {
+			return false;
+		}
+
+		// Delete file from folder
+		CompanyImageUploads img = opt.get();
+		File file = new File(uploadDirectory + img.getFileName());
+		if (file.exists()) {
+			file.delete();
+		}
+
+		// Delete DB record
+		companyImageUploadsRepo.deleteById(id);
+
+		return true;
+	}
+
+	public List<CategoryModule> findCasteByCategory(String category) {
+		// TODO Auto-generated method stub
+		return categoryModuleRepo.findByCategory(category);
 	}
 
 }

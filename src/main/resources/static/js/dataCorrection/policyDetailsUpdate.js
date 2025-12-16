@@ -212,7 +212,7 @@ $(document).ready(function() {
 
 	});
 
-	$("#printBtn").on("click", function(e) {
+	/*$("#printBtn").on("click", function(e) {
 		e.preventDefault();
 
 		var policyCode = $('#policyCode').val();
@@ -332,6 +332,130 @@ $(document).ready(function() {
 		else {
 			alert("First Select Any One Data Then Proceed to Print");
 		}
+	});*/
+
+	$("#printBtn").on("click", function() {
+
+		const policyCode = $("#policyCode").val();
+		if (!policyCode) {
+			alert("Please select atleast one data then proceed to print!");
+			return;
+		}
+
+		const c = window.companyData;
+
+		let companyHeader = `
+		        <h1 style="text-align:center; margin-bottom:0;">${c.companyName}</h1>
+		        <h3 style="text-align:center; margin-top:5px;">(${c.shortName})</h3>
+		        <p style="text-align:center;">
+		            ${c.address}, ${c.city}, ${c.state} - ${c.pinCode}<br>
+		            CIN: ${c.cinNo} | Email: ${c.emailId.toLowerCase()} | Helpline: ${c.helplineNo}
+		        </p>
+		        <hr>
+		    `;
+
+		function getVal(id) {
+			let el = $("#" + id);
+			if (el.is("select")) {
+				let txt = el.find("option:selected").text();
+				if (el.data("select2")) {
+					let s2 = el.select2("data");
+					if (s2.length > 0) txt = s2[0].text;
+				}
+				if (id === "policyCode" && txt.includes("-")) {
+					txt = txt.split("-")[0].trim();
+				}
+				return txt;
+			}
+			return el.val() ? el.val() : "";
+		}
+
+		const photo = $("#photoPreview").attr("src");
+		const sign = $("#signaturePreview").attr("src");
+
+		const printContent = `
+		        ${companyHeader}
+
+		        <h2 style="text-align:center;margin-bottom:20px;">Customer Details</h2>
+
+		        <table class="print-table">
+
+		            <tr><th>Customer Code</th><td>${getVal("policyCode")}</td></tr>
+		            <tr><th>Customer Name</th><td>${getVal("policyStartDate")}</td></tr>
+		            <tr><th>Gender</th><td>${getVal("memberSelection")}</td></tr>
+		            <tr><th>Date of Birth</th><td>${getVal("customerName")}</td></tr>
+		            <tr><th>Age</th><td>${getVal("dateofBirth")}</td></tr>
+		            <tr><th>Relationship Status</th><td>${getVal("relationDetails")}</td></tr>
+		            <tr><th>Address</th><td>${getVal("contactNo")}</td></tr>
+		            <tr><th>District</th><td>${getVal("suggestedNominee")}</td></tr>
+		            <tr><th>State</th><td>${getVal("relationToApplicant")}</td></tr>
+		            <tr><th>Branch</th><td>${getVal("address")}</td></tr>
+		            <tr><th>Pin Code</th><td>${getVal("district")}</td></tr>
+		            <tr><th>Aadhar No</th><td>${getVal("state")}</td></tr>
+		            <tr><th>PAN No</th><td>${getVal("pinCode")}</td></tr>
+		            <tr><th>Voter ID</th><td>${getVal("branchName")}</td></tr>
+		            <tr><th>Contact No</th><td>${getVal("ModeOfOperation")}</td></tr>
+		            <tr><th>Email ID</th><td>${getVal("maturityDate")}</td></tr>
+		            <tr><th>Profession</th><td>${getVal("schemeType")}</td></tr>
+		            <tr><th>Academic Background</th><td>${getVal("schemeTerm")}</td></tr>
+		            <tr><th>Referral Code</th><td>${getVal("schemeMode")}</td></tr>
+		            <tr><th>Referral Name</th><td>${getVal("policyAmount")}</td></tr>
+					<tr><th>Referral Name</th><td>${getVal("depositAmount")}</td></tr>
+					<tr><th>Referral Name</th><td>${getVal("maturityAmount")}</td></tr>
+					<tr><th>Referral Name</th><td>${getVal("paymentBy")}</td></tr>
+					<tr><th>Referral Name</th><td>${getVal("remark")}</td></tr>
+
+					<tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Customer Images</th></tr>
+		            <tr>
+		                <th>Customer Photo</th>
+		                <td><img src="${photo}" style="width:120px;height:120px;object-fit:cover;border-radius:10px;"></td>
+		            </tr>
+
+		            <tr>
+		                <th>Customer Signature</th>
+		                <td><img src="${sign}" style="width:150px;height:70px;object-fit:contain;"></td>
+		            </tr>
+
+		            <tr><th colspan="2" style="background:#f1f1f1;text-align:center;">Nominee Details</th></tr>
+		            <tr><th>Nominee Name</th><td>${getVal("nomineeName")}</td></tr>
+		            <tr><th>Relation</th><td>${getVal("nomineeRelationToApplicant")}</td></tr>
+		            <tr><th>Address</th><td>${getVal("nomineeAddress")}</td></tr>
+		            <tr><th>KYC No</th><td>${getVal("nomineeKycNo")}</td></tr>
+		            <tr><th>Nominee Mobile</th><td>${getVal("nomineeMobileNo")}</td></tr>
+		            <tr><th>Nominee Age</th><td>${getVal("nomineeAge")}</td></tr>
+		            <tr><th>Nominee PAN</th><td>${getVal("nomineePanNo")}</td></tr>
+		            <tr><th>KYC Type</th><td>${getVal("nomineeKycType")}</td></tr>
+
+		        </table>
+		    `;
+
+		const printWindow = window.open("", "_blank");
+
+		printWindow.document.write(`
+		        <html>
+		        <head>
+		            <title>Customer Details</title>
+		            <style>
+		                body { font-family: Arial; padding: 25px; }
+		                .print-table { width: 100%; border-collapse: collapse; }
+		                .print-table th, .print-table td {
+		                    padding: 8px; border: 1px solid #ccc; font-size: 14px;
+		                }
+		                .print-table th { background: #f2f2f2; width:30%; }
+		            </style>
+		        </head>
+		        <body>
+		            ${printContent}
+		        </body>
+		        </html>
+		    `);
+
+		printWindow.document.close();
+
+		setTimeout(() => {
+			printWindow.focus();
+			printWindow.print();
+		}, 300);
 	});
 
 
@@ -420,3 +544,33 @@ function signatureSizeEdit(e) {
 	previewimg.style.overflow = "hidden";
 	previewimg.style.borderRadius = "20px";
 }
+
+
+function loadCompanyAdministration() {
+	$.ajax({
+		type: "GET",
+		url: "api/preference/fetchAllCompanyAdministration",
+		contentType: "application/json",
+		success: function(response) {
+			if (response.status === "FOUND" && response.data.length > 0) {
+				let c = response.data[0];
+
+				// Save for print use later
+				window.companyData = c;
+
+				// Show on screen (add your own div in JSP)
+				$("#companyNameHeading").text(c.companyName + " (" + c.shortName + ")");
+				$("#companyDetails").html(`
+                        <b>Sign Up Date:</b> ${c.signUpDate} <br>
+                        <b>CIN No:</b> ${c.cinNo} <br>
+                        <b>Address:</b> ${c.address}, ${c.city}, ${c.state} - ${c.pinCode} <br>
+                        <b>Email:</b> ${c.emailId} <br>
+                        <b>Helpline:</b> ${c.helplineNo} <br>
+                        <b>Branch Manager No:</b> ${c.branchManagerContactNo}
+                    `);
+			}
+		}
+	});
+}
+
+loadCompanyAdministration();

@@ -37,7 +37,7 @@ pageEncoding="ISO-8859-1"%> -->
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="home">
+                        <a href="openDashboard">
                             <i class="bi bi-bank text-blue"></i>
                         </a>
                     </li>
@@ -114,6 +114,27 @@ pageEncoding="ISO-8859-1"%> -->
     	searchInThemessageSend();
     });
     </script>
+    <script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

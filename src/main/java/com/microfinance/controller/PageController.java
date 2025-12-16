@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.microfinance.model.GoldDirectory;
 import com.microfinance.repository.AddInvestmentRepo;
 import com.microfinance.repository.ApplyForGoldRepo;
 import com.microfinance.repository.CreateLendingGroupRepo;
@@ -22,6 +23,7 @@ import com.microfinance.repository.LoanMangmentSchemeRepo;
 import com.microfinance.repository.FinancialConsultantRepo;
 import com.microfinance.repository.DailyDepositPMRepo;
 import com.microfinance.repository.FixedDepositPMRepo;
+import com.microfinance.repository.GoldDirectoryRepo;
 import com.microfinance.repository.GroupDirectoryRepo;
 import com.microfinance.repository.LoanApplicationRepo;
 import com.microfinance.repository.MisDepositePMRepo;
@@ -75,6 +77,9 @@ public class PageController {
 	
 	@Autowired
 	ApplyForGoldRepo applyForGoldRepo;
+	
+	@Autowired
+	GoldDirectoryRepo goldDirectoryRepo;
 	
 	@GetMapping("/")
 	public String getIndex() {
@@ -1079,7 +1084,7 @@ public class PageController {
     @GetMapping("/applyforGold")
     public String getapplyforGold(Model model)
     {
-    	long maxId=applyForGoldRepo.getMaxId();
+    	Long maxId=applyForGoldRepo.getMaxId();
     	String goldID="GL" + "0000" +(maxId + 1);
     	model.addAttribute("goldID", goldID);
     	return "goldLoan/applyforGold";
@@ -1091,15 +1096,18 @@ public class PageController {
     	return "goldLoan/emiInstallmentPayment";
     }
     
-    @GetMapping("/emiStatement")
-    public String getemiStatement()
+    @GetMapping("/goldLoanDocument")
+    public String getGoldLoanDocument()
     {
-    	return "goldLoan/emiStatement";
+    	return "goldLoan/goldLoanDocument";
     }
     
     @GetMapping("/goldDirectory")
-    public String getgoldDirectory()
+    public String getgoldDirectory(Model model)
     {
+    	long maxId = goldDirectoryRepo.getMaxId();
+		Long lockerNo = maxId + 1;
+		model.addAttribute("lockerNo", lockerNo);
     	return "goldLoan/goldDirectory";
     }
     
@@ -1139,7 +1147,7 @@ public class PageController {
     	return "goldLoan/printNOC";
     }
     
-    @GetMapping("/searchGoldLoan")
+    @GetMapping("/GoldLoanSearch")
     public String getsearchGoldLoan()
     {
     	return "goldLoan/searchGoldLoan";

@@ -36,7 +36,7 @@ pageEncoding="ISO-8859-1"%> -->
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="home">
+                        <a href="openDashboard">
                             <i class="bi bi-bank text-blue"></i>
                         </a>
                     </li>
@@ -81,10 +81,9 @@ pageEncoding="ISO-8859-1"%> -->
                                 </h5>
                                 <div class="form-div" id="form-div" style="margin-top: 20px;">
 											<div class="form-header">
-												<h2 style="color: red; margin-top: 0px;">BHOYARNATH
-													URBAN</h2>
-												<p style="margin-top: -10px">Kolkata - WEST BENGAL
-													700107</p>
+												<h2 style="color: red; margin-top: 0px;">MICRODINANCE
+													SOFTWARE</h2>
+												<p style="margin-top: -10px">Nagpur</p>
 											</div>
 											<div class="form-div-main" style="padding: 5px;">
 												<div
@@ -179,6 +178,27 @@ pageEncoding="ISO-8859-1"%> -->
     <!-- <script src="js/chartScript.js"></script> -->
     <script src="./js/adminscript.js"></script>
      <script src="./js/customerSavings/savingsAccountStatement.js"></script>
+     <script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

@@ -151,6 +151,7 @@ public class LoginController {
 		}
 		model.addAttribute("customerUser", username); // ✅ pass to JSP
 		return "dashboardPage/dashboard"; // dashboard.jsp
+
 	}
 	
 	@GetMapping("/getUserServices")
@@ -161,6 +162,7 @@ public class LoginController {
 	        return new ArrayList<>();
 	    }
 	    return services;
+
 	}
 
 }

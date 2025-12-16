@@ -40,14 +40,6 @@ pageEncoding="ISO-8859-1"%> -->
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
 
-<!-- Before </body> -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 </head>
 <style>
 .bank-report table th, .bank-report table td {
@@ -67,11 +59,11 @@ pageEncoding="ISO-8859-1"%> -->
 			<h1>Reports & Analytics</h1>
 			<nav>
 				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="home"> <i
+					<li class="breadcrumb-item"><a href="openDashboard"> <i
 							class="bi bi-file-earmark-text"></i>
 					</a></li>
 					<li class="breadcrumb-item action">Investment Transaction
-						Report1</li>
+						Report</li>
 				</ol>
 			</nav>
 		</div>
@@ -106,7 +98,7 @@ pageEncoding="ISO-8859-1"%> -->
 
 						<div class="col-lg-3">
 							<div class="d-flex flex-column formFields">
-								<label for="toDate">TO Date :</label> <input type="date"
+								<label for="toDate">To Date :</label> <input type="date"
 									name="toDate" id="toDate" required="required"
 									style="text-transform: uppercase;" />
 							</div>
@@ -197,7 +189,7 @@ pageEncoding="ISO-8859-1"%> -->
 								</div>
 								<div>
 									<p class="mb-0">
-										<strong>ACCOUNT NUMBER:</strong> <span id="accountNumber"></span>
+										<strong>Customer Code:</strong> <span id="accountNumber"></span>
 									</p>
 									<p class="mb-0">
 										<strong>PERIOD COVERED:</strong> <span id="periodCovered"></span>
@@ -248,11 +240,11 @@ pageEncoding="ISO-8859-1"%> -->
 									class="table table-bordered table-striped align-middle text-center">
 									<thead class="table-primary">
 										<tr>
-											<th>Date</th>
-											<th>Description</th>
-											<th>Debit</th>
-											<th>Credit</th>
-											<th>Balance</th>
+											<th>Policy Code</th>
+											<th>Policy Date</th>
+											<th>Policy Amount</th>
+											<th>Policy Type</th>
+											<th>Policy Mode</th>
 										</tr>
 									</thead>
 									<tbody id="transactionTableBody">
@@ -275,17 +267,34 @@ pageEncoding="ISO-8859-1"%> -->
 			</div>
 		</div>
 
-
-
-
-
-
-
-
 	</main>
 	<!-- <script src="js/chartScript.js"></script> -->
 	<script src="./js/adminscript.js"></script>
 	<script src="./js/ReportsAndAnalytics/InvestmentTransactionReport.js"></script>
+	<!-- Before </body> -->
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script>
+		$(document).ready(
+				function() {
+
+					// Convert all labels inside #formid to uppercase
+					$("#formid label").each(function() {
+						$(this).text($(this).text().toUpperCase());
+					});
+
+					// Convert all placeholders inside #formid to uppercase
+					$("#formid input, #formid textarea, #formid select").each(
+							function() {
+								let ph = $(this).attr("placeholder");
+								if (ph) {
+									$(this).attr("placeholder",
+											ph.toUpperCase());
+								}
+							});
+
+				});
+	</script>
 </body>
 
 </html>

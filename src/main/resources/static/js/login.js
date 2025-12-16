@@ -2,11 +2,11 @@
 	$("#form1").submit(function(e) {
 		e.preventDefault();
 
-		let username = $("#userName").val().trim();
+		let username = $("#username").val().trim();
 		let password = $("#password").val().trim();
 
 		if (!username || !password) {
-			$("#errorMsg").text("Username and password are required").show();
+			$("#errorMsg").text("UserName and password are required").show();
 			return;
 		}
 
@@ -20,7 +20,7 @@
 				if (response.status === 'OK') {
 					sessionStorage.setItem("username", response.data.username);
 					window.location.href = 'openDashboard'; // replace with your homepage
-					
+
 				} else {
 					$("#errorMsg").text(response.message).show();
 				}
@@ -33,6 +33,7 @@
 				}
 			}
 		});
+
 	});
 	
 	
@@ -68,6 +69,30 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+		/*$.ajax({
+			url: "api/preference/login",
+			type: "POST",
+			contentType: "application/json",
+			data: JSON.stringify({
+				customerId: $("#customerId").val(),
+				password: $("#password").val()
+			}),
+			success: function(response) {
+				if (response.status === "OK") {
+					// Redirect to dashboard.jsp
+					window.location.href = "openDashboard";
+				} else {
+					alert("Invalid credentials");
+				}
+			},
+			error: function() {
+				alert("Login failed!");
+			}
+		});*/
+	});
+
+
 });
 
 
