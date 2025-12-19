@@ -17,10 +17,10 @@ public interface UserRepository extends JpaRepository<UserCreation, Long> {
 	UserCreation fetchMatchedData(String userName, String password);
 
 	List<UserCreation> findByid(Long id);
-
-public interface UserRepository extends JpaRepository<User, Long> {
-	User findByUsername(String username); // fetch by username only
-
-	Optional<User> findByUsernameAndPassword(String username, String password);
+//
+//public interface UserRepository extends JpaRepository<User, Long> {
+//	User findByUsername(String username); // fetch by username only
+//
+//	Optional<User> findByUsernameAndPassword(String username, String password);
 
 }
